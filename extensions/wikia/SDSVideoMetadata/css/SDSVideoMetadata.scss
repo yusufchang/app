@@ -1,10 +1,26 @@
 .VMDForm.WikiaForm {
+	width: 500px;
+	fieldset {
+		margin-bottom: 20px;
+	}
 	.input-group {
 		float: none;
 	}
 	input[type="text"],
 	textarea,
 	select {
-		width: 350px;
+		width: 470px;
+	}
+	textarea {
+		height: 100px;
+		resize: none;
+	}
+	button {
+		margin: 0 0 10px 7px;
+	}
+	input[type="submit"] {
+		height: 30px;
+		margin-bottom: 20px;
+		width: 100px;
 	}
 }
