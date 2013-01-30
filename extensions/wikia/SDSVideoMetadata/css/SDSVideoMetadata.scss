@@ -1,0 +1,10 @@
+.VMDForm.WikiaForm {
+	.input-group {
+		float: none;
+	}
+	input[type="text"],
+	textarea,
+	select {
+		width: 350px;
+	}
+}

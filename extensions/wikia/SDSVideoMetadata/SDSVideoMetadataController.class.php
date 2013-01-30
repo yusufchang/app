@@ -12,6 +12,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 	public function index() {
 
+		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/css/SDSVideoMetadata.scss');
 		$file = $this->getVal('video');
 
 
