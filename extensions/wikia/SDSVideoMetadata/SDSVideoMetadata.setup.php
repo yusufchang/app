@@ -16,8 +16,8 @@
 $wgExtensionCredits['specialpage'][] = array(
     'name' => 'Video Metadata',
     'author' => array( 'Adrian \'ADi\' Wieczorek', 'Jacek Jursza', 'Jacek \'mech\' Woźniak', 'Rafał Leszczyński', 'Adam Robak' ),
-    'url' => 'http://callofduty.wikia.com/wiki/Special:VideoMetadata',
-    'descriptionmsg' => 'structureddata-desc',
+    'url' => 'http://callofduty.wikia.com/wiki/Special:VMD',
+    'descriptionmsg' => 'sdsvideometadata-desc',
 );
 
 $app = F::app();
@@ -53,3 +53,4 @@ $app->registerSpecialPage('VMD', 'SDSVideoMetadataController');
 /**
  * message files
  */
+$app->registerExtensionMessageFile('SDSVideoMetadata', $dir . 'SDSVideoMetadata.i18n.php' );
