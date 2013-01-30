@@ -1,4 +1,5 @@
 <?php if ( $isCorrectFile ) { ?>
+<h1>Matadata for: <?= $file ?></h1>
 <form class="WikiaForm VMDForm" method="POST">
 	<fieldset>
 		<legend>Common video clip properties:</legend>
@@ -63,15 +64,3 @@
 <?php } else { ?>
 	THERE IS NO VIDEO FILE
 <?php } ?>
-
-<?= $file ?>
-
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: adam
- * Date: 30.01.13
- * Time: 12:31
- * To change this template use File | Settings | File Templates.
- */
-
