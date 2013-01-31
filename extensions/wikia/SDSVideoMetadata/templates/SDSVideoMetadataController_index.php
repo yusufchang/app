@@ -80,6 +80,10 @@
 				<button class="add secondary">Add more</button>
 			</div>
 		</fieldset>
+		<label for="vcCompleted">
+			This video clip has all metadata set
+			<input type="checkbox" name="vcCompleted" id="vcCompleted">
+		</label>
 		<input type="submit" value="Save">
 	</form>
 <?php } else { ?>
