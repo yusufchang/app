@@ -10,6 +10,6 @@
 $app = F::app();
 $dir = dirname(__FILE__) . '/';
 
-$app->registerClass( 'PandoraSDSElement', $dir . 'PandoraSDSElement.class.php' );
-$app->registerClass( 'PandoraSDSProperty', $dir . 'PandoraSDSProperty.class.php' );
+$app->registerClass( 'PandoraSDSObject', $dir . 'PandoraSDSObject.class.php' );
+$app->registerClass( 'PandoraJsonLD', $dir . 'PandoraJsonLD.class.php' );
 
