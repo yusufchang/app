@@ -29,10 +29,14 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-finished-flag' => 'This video clip has all metadata set',
 
 	// Video clip type specific messages
+	'sdsvideometadata-vc-select-type' => 'Select type of the video clip',
+	'sdsvideometadata-vc-type-gaming' => 'Gaming video',
+	'sdsvideometadata-vc-type-tv' => 'TV video',
+	'sdsvideometadata-vc-type-movie' => 'Movie trailers video',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Add video clip type specific metadata',
 	'sdsvideometadata-vc-game' => 'Game',
 	'sdsvideometadata-vc-kind' => 'Type',
-	'sdsvideometadata-vc-agregate' => 'Agregate',
+	'sdsvideometadata-vc-age-gate' => 'Age gate',
 	'sdsvideometadata-vc-soundtrack' => 'Soundtrack',
 	'sdsvideometadata-vc-setting' => 'Setting',
 	'sdsvideometadata-vc-series' => 'Series',
@@ -69,10 +73,14 @@ $messages['qqq'] = array(
 	clip',
 
 	// Video clip type specific messages
+	'sdsvideometadata-vc-select-type' => 'Label for selecting type of the video clip',
+	'sdsvideometadata-vc-type-gaming' => 'Gaming video option',
+	'sdsvideometadata-vc-type-tv' => 'TV video option',
+	'sdsvideometadata-vc-type-movie' => 'Movie trailers video option',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Header for video clip type specific metadata fieldset',
 	'sdsvideometadata-vc-game' => 'Label for game property',
 	'sdsvideometadata-vc-kind' => 'Label for specific type of video clip property (exp. walkthrough, trailer etc.)',
-	'sdsvideometadata-vc-agregate' => 'Label for agregate property',
+	'sdsvideometadata-vc-age-gate' => 'Label for agregate property',
 	'sdsvideometadata-vc-soundtrack' => 'Label for soundtrack property',
 	'sdsvideometadata-vc-setting' => 'Label for setting property',
 	'sdsvideometadata-vc-series' => 'Label for series property',

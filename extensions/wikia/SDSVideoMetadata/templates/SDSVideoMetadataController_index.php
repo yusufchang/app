@@ -1,6 +1,5 @@
 <?php if ( $isCorrectFile ) { ?>
-	<h1><?= wfMsg('sdsvideometadata-header', array('parseinline'),
-		$file)?></h1>
+	<h1><?= wfMsg('sdsvideometadata-header', $file)?></h1>
 	<form class="WikiaForm VMDForm" id="VMDForm" method="POST">
 		<fieldset>
 			<legend><?= wfMsg('sdsvideometadata-common-metadata-legend')?></legend>
@@ -27,16 +26,16 @@
 		</fieldset>
 
 		<div class="input-group">
-			<label for="vcType">Select type of the video clip</label>
+			<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?></label>
 			<select name="vcType" id="vcType">
 				<option value="">...</option>
-				<option value="gamingVideos">Gaming video</option>
-				<option value="tvVideos">TV videos</option>
-				<option value="movieTrailerVideos">Move Trailer videos</option>
+				<option value="gamingVideos"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
+				<option value="tvVideos"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
+				<option value="movieTrailerVideos"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
 			</select>
 		</div>
 
-		<fieldset>
+		<fieldset id="VMDSpecificMD" class="hidden">
 			<legend><?= wfMsg('sdsvideometadata-type-specific-metadata-legend')?></legend>
 			<div class="input-group gamingVideos">
 				<label for="vcGame"><?= wfMsg('sdsvideometadata-vc-game')?></label>
@@ -93,8 +92,8 @@
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
 			<div class="input-group gamingVideos movieTrailerVideos">
-				<label for="vcAgregate"><?= wfMsg('sdsvideometadata-vc-agregate')?></label>
-				<select name="schema:isFamilyFriendly" id="vcAgregate">
+				<label for="vcAgeGate"><?= wfMsg('sdsvideometadata-vc-age-gate')?></label>
+				<select name="schema:isFamilyFriendly" id="vcAgeGate">
 					<option><?= wfMsg('sdsvideometadata-vc-boolean-not-set')?></option>
 					<option value="true"><?= wfMsg('sdsvideometadata-vc-boolean-true')?></option>
 					<option value="false"><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
