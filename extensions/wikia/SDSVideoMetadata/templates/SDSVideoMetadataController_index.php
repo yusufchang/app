@@ -66,7 +66,7 @@
 						<button class="add secondary remove hidden">Remove</button>
 					</li>
 				</ul>
-				<button class="secondary">Add more</button>
+				<button class="add secondary">Add more</button>
 			</div>
 
 			<div class="input-group gamingVideos">
