@@ -35,6 +35,10 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-agregate' => 'Agregate',
 	'sdsvideometadata-vc-soundtrack' => 'Soundtrack',
 	'sdsvideometadata-vc-setting' => 'Setting',
+	'sdsvideometadata-vc-series' => 'Series',
+	'sdsvideometadata-vc-season' => 'Season',
+	'sdsvideometadata-vc-movie' => 'Movie',
+	'sdsvideometadata-vc-trailer-rating' => 'Trailer rating',
 
 );
 
@@ -71,5 +75,9 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-agregate' => 'Label for agregate property',
 	'sdsvideometadata-vc-soundtrack' => 'Label for soundtrack property',
 	'sdsvideometadata-vc-setting' => 'Label for setting property',
+	'sdsvideometadata-vc-series' => 'Label for series property',
+	'sdsvideometadata-vc-season' => 'Label for season property',
+	'sdsvideometadata-vc-movie' => 'Label for movie property',
+	'sdsvideometadata-vc-trailer-rating' => 'Label for trailer rating property',
 
 );
