@@ -1,26 +1,34 @@
 var VMDFormUI = {
+	cachedSelectors: {},
 	init: function() {
-		var that = this,
-			$VMDForm = $('#VMDForm');
+		var that = this;
+		this.cachedSelectors.form = $('#VMDForm');
+		this.cachedSelectors.typeSelect = $('#vcType');
+		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
 
 		// attach handlers
-		$VMDForm.on('click', 'button.add', function(event) {
+		this.cachedSelectors.form.on('click', 'button.add', function(event) {
 			event.preventDefault();
 			that.addListItem(event);
 		});
-		$VMDForm.on('click', 'button.remove', function(event) {
+		this.cachedSelectors.form.on('click', 'button.remove', function(event) {
 			event.preventDefault();
 			that.removeListItem(event);
 		});
+
 		// TODO: this if prevent some strange behavior when pressing enter on different input filed (triggers other buttons in form). Find the root of this problem, solve and remove this handlers!!!
-		$VMDForm.on('keydown', 'input[type="text"]', function(event) {
+		this.cachedSelectors.form.on('keydown', 'input[type="text"]', function(event) {
 			if (event.which == 13) {
 				event.preventDefault();
 			}
 		});
-		$VMDForm.on('keydown', ' li input[type="text"]', function(event) {
+		this.cachedSelectors.form.on('keydown', ' li input[type="text"]', function(event) {
 			that.listEnterKeyHelper(event);
 		});
+
+		this.cachedSelectors.typeSelect.on('change', function(event) {
+			that.chooseClipType(event);
+		})
 
 	},
 
@@ -50,6 +58,26 @@ var VMDFormUI = {
 			} else {
 				$target.parents('ul').siblings('button.add').click();
 			}
+		}
+	},
+	// show form part for type specific properties
+	chooseClipType: function(event) {
+		var $target = $(event.target),
+			targetValue = $target.val(),
+			targetClass = '.' + targetValue,
+
+			// cache selectors
+			propertiesWrapper = this.cachedSelectors.typeMDProperties,
+			propertiesFormFields = propertiesWrapper.find('input, select, textarea');
+
+		if(targetValue !== '') {
+			propertiesFormFields.attr('disabled', 'disabled');
+			propertiesWrapper.find(targetClass).find('input, select, textarea').removeAttr('disabled');
+			propertiesWrapper.children().addClass('hidden').filter(targetClass).removeClass('hidden');
+			propertiesWrapper.removeClass('hidden');
+		} else {
+			propertiesFormFields.attr('disabled', 'disabled');
+			propertiesWrapper.addClass('hidden');
 		}
 	}
 };
