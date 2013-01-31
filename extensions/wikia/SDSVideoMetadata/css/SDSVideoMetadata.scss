@@ -6,17 +6,24 @@
 	.input-group {
 		float: none;
 	}
+	ul {
+		margin: 0;
+		list-style: none;
+	}
 	input[type="text"],
 	textarea,
 	select {
-		width: 470px;
+		width: 390px;
 	}
 	textarea {
 		height: 100px;
 		resize: none;
 	}
 	button {
-		margin: 0 0 10px 7px;
+		margin-bottom: 10px;
+	}
+	.hidden {
+		display: none;
 	}
 	input[type="submit"] {
 		height: 30px;

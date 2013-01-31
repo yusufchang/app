@@ -1,6 +1,6 @@
 <?php if ( $isCorrectFile ) { ?>
 	<h1>Matadata for: <?= $file ?></h1>
-	<form class="WikiaForm VMDForm" method="POST">
+	<form class="WikiaForm VMDForm" id="VMDForm" method="POST">
 		<fieldset>
 			<legend>Common video clip properties:</legend>
 			<div class="input-group">
@@ -31,14 +31,25 @@
 
 			<div class="input-group gamingVideos">
 				<label for="vcGame">Game</label>
-				<input type="text" name="schema:name[]" id="vcGame">
+				<ul>
+					<li>
+						<input type="text" name="schema:name[]" id="vcGame">
+						<button class="secondary remove hidden">Remove</button>
+					</li>
+				</ul>
+				<button class="add secondary">Add more</button>
 			</div>
-			<button class="secondary">Add more</button>
 			<div class="input-group gamingVideos">
 				<label for="vcSpecType">Type</label>
-				<input type="text" name="?????" id="vcSpecType">
+				<ul>
+					<li>
+						<input type="text" name="?????" id="vcSpecType">
+						<button class="secondary remove hidden">Remove</button>
+					</li>
+				</ul>
+				<button class="add secondary">Add more</button>
 			</div>
-			<button class="secondary">Add more</button>
+
 			<div class="input-group gamingVideos">
 				<label for="vcAgregate">Agregate</label>
 				<select name="schema:isFamilyFriendly" id="vcAgregate">
@@ -49,14 +60,25 @@
 			</div>
 			<div class="input-group gamingVideos">
 				<label for="vcSoundtrack">Soundtrack</label>
-				<input type="text" name="schema:associatedMedia[]" id="vcSoundtrack">
+				<ul>
+					<li>
+						<input type="text" name="schema:associatedMedia[]" id="vcSoundtrack">
+						<button class="add secondary remove hidden">Remove</button>
+					</li>
+				</ul>
+				<button class="secondary">Add more</button>
 			</div>
-			<button class="secondary">Add more</button>
+
 			<div class="input-group gamingVideos">
 				<label for="vcSetting">Setting</label>
-				<input type="text" name="wikia:setting[]" id="vcSetting">
+				<ul>
+					<li>
+						<input type="text" name="wikia:setting[]" id="vcSetting">
+						<button class="secondary remove hidden">Remove</button>
+					</li>
+				</ul>
+				<button class="add secondary">Add more</button>
 			</div>
-			<button class="secondary">Add more</button>
 		</fieldset>
 		<input type="submit" value="Save">
 	</form>
