@@ -32,7 +32,7 @@ class PandoraAPIClient extends WikiaObject {
 	 */
 	public function getObjectUrl( $objectShortId, $collection = null ) {
 		if ( !$collection ) $collection = $this->wg->DBname;
-		return $this->baseUrl . $this->apiPath . $collection . '/' . $objectShortId;
+		return $this->baseUrl . $this->apiPath . $collection . '/' . rawurlencode( $objectShortId );
 	}
 
 	/**
