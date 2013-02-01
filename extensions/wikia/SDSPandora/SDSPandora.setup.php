@@ -1,15 +1,57 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: adam
- * Date: 31.01.13
- * Time: 11:34
- * To change this template use File | Settings | File Templates.
+ * Pandora project
+ *
+ * extension for using external structured data storage
+ *
+ * @author Adam Robak <adamr@wikia-inc.com>
+ * @author Adrian 'ADi' Wieczorek <adi@wikia-inc.com>
+ * @author Jacek Jursza <jacek@wikia-inc.com>
+ * @author Jacek 'mech' Woźniak <mech@wikia-inc.com>
+ * @author Rafał Leszczyński <rafal@wikia-inc.com>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @package MediaWiki
+ *
  */
+
+
+$wgExtensionCredits['other'][] = array(
+	'name' => 'Pandora',
+	'author' => array( 'Adrian \'ADi\' Wieczorek', 'Jacek Jursza', 'Jacek \'mech\' Woźniak', 'Rafał Leszczyński', 'Adam Robak' ),
+	'descriptionmsg' => 'pandora-desc',
+);
 
 $app = F::app();
 $dir = dirname(__FILE__) . '/';
 
+/**
+ * classes
+ */
 $app->registerClass( 'PandoraSDSObject', $dir . 'PandoraSDSObject.class.php' );
 $app->registerClass( 'PandoraJsonLD', $dir . 'PandoraJsonLD.class.php' );
+$app->registerClass( 'PandoraAPIClient', $dir . 'PandoraAPIClient.class.php');
 
+/**
+ * hooks
+ */
+
+/**
+ * controllers
+ */
+
+/**
+ * special pages
+ */
+
+/**
+ * access rights
+ */
+
+/**
+ * DI setup
+ */
+
+/**
+ * message files
+ */
+$app->registerExtensionMessageFile('Pandora', $dir . 'Pandora.i18n.php' );
