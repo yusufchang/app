@@ -32,7 +32,7 @@ class PandoraAPIClient extends WikiaObject {
 	 */
 	public function getObjectUrl( $objectShortId, $collection = null ) {
 		if ( !$collection ) $collection = $this->wg->DBname;
-		return $this->baseUrl . $this->apiPath . $collection . '/' . rawurlencode( $objectShortId );
+		return $this->baseUrl . $this->apiPath . rawurlencode( $collection ) . '/' . rawurlencode( $objectShortId );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class PandoraAPIClient extends WikiaObject {
 	 */
 	public function getCollectionUrl( $collection = null ) {
 		if ( !$collection ) $collection = $this->wg->DBname;
-		return $this->baseUrl . $this->apiPath . $collection;
+		return $this->baseUrl . $this->apiPath . rawurlencode( $collection );
 	}
 
 	/**

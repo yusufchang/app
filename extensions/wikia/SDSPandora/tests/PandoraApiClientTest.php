@@ -18,9 +18,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 	public function testGetObjectUrl() {
 		$apiClient = F::build( 'PandoraAPIClient', array('http://sds.fake.pl', '/api/v0.1/') );
 
-		$this->assertEquals( $apiClient->getCollectionUrl( 'videos' ), 'http://sds.fake.pl/api/v0.1/videos' );
-		$this->assertEquals( $apiClient->getCollectionUrl( ), 'http://sds.fake.pl/api/v0.1/sdsdbmock' );
-		$this->assertEquals( $apiClient->getCollectionUrl( 'aB98+d-c_' ), 'http://sds.fake.pl/api/v0.1/aB98+d-c_' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos', $apiClient->getCollectionUrl( 'videos' ), 'Providing simple collection name' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/sdsdbmock', $apiClient->getCollectionUrl( ), 'Check if collection defaults to current wiki db name' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/aB98%2Bd-c_', $apiClient->getCollectionUrl( 'aB98+d-c_' ), 'Check all characters allowed in dbname' );
 	}
 
 	/**
@@ -29,26 +29,37 @@ class PandoraApiClientTest extends WikiaBaseTest {
 	public function testGetCollectionUrl() {
 		$apiClient = F::build( 'PandoraAPIClient', array('http://sds.fake.pl', '/api/v0.1/') );
 
-		$this->assertEquals( $apiClient->getObjectUrl( '12345', 'videos' ), 'http://sds.fake.pl/api/v0.1/videos/12345' );
-		$this->assertEquals( $apiClient->getObjectUrl( 12345, 'videos' ), 'http://sds.fake.pl/api/v0.1/videos/12345' );
-		$this->assertEquals( $apiClient->getObjectUrl( '4523' ), 'http://sds.fake.pl/api/v0.1/sdsdbmock/4523' );
-		$this->assertEquals( $apiClient->getObjectUrl( '4523', 'aB98+d-c_' ), 'http://sds.fake.pl/api/v0.1/aB98+d-c_/4523' );
-		$this->assertEquals( $apiClient->getObjectUrl( 'aaa bbb', 'videos' ), 'http://sds.fake.pl/api/v0.1/videos/aaa%20bbb' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos/12345', $apiClient->getObjectUrl( '12345', 'videos' ), 'Provide simple collection and object name' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos/12345', $apiClient->getObjectUrl( 12345, 'videos' ), 'Check if object name can be an integer' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/sdsdbmock/4523', $apiClient->getObjectUrl( '4523' ), 'Check if collection defaults to current wiki db name' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/aB98%2Bd-c_/4523', $apiClient->getObjectUrl( '4523', 'aB98+d-c_' ), 'Check all characters allowed in dbname' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos/aaa%20bbb', $apiClient->getObjectUrl( 'aaa bbb', 'videos' ), 'Check if space in object name is properly escaped' );
 	}
 
 	/**
-	 * Test if all object name characters are properly encoded when generating urls
+	 * Test if all object name characters are properly encoded when generating object urls
 	 * @param $character - characted to be encoded
 	 * @param $endodedValue - expected character encoding
 	 * @dataProvider charactersEncodingDataProvider
 	 */
-	public function testCharactersEncoding($character, $endodedValue) {
+	public function testObjectNameEncoding($character, $endodedValue) {
 		$apiClient = F::build( 'PandoraAPIClient', array('http://sds.fake.pl', '/api/v0.1/') );
-		$this->assertEquals( $apiClient->getObjectUrl( $character ), 'http://sds.fake.pl/api/v0.1/sdsdbmock/' . $endodedValue );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/db' . $endodedValue . '/' . $endodedValue, $apiClient->getObjectUrl( $character, 'db' . $character ) );
+	}
+
+	/**
+	 * Test if all object name characters are properly encoded when generating collection urls
+	 * @param $character - characted to be encoded
+	 * @param $endodedValue - expected character encoding
+	 * @dataProvider charactersEncodingDataProvider
+	 */
+	public function testCollectionNameEncoding($character, $endodedValue) {
+		$apiClient = F::build( 'PandoraAPIClient', array('http://sds.fake.pl', '/api/v0.1/') );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/' . $endodedValue, $apiClient->getCollectionUrl( $character ) );
 	}
 
 	/*
-	 * Generates input parameters for testCharactersEncoding test
+	 * Generates input parameters for methods testing url generation
 	 */
 	public function charactersEncodingDataProvider() {
 		return array(
