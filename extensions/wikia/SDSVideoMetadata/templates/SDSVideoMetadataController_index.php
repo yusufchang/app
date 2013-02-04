@@ -41,7 +41,7 @@
 				<label for="vcGame"><?= wfMsg('sdsvideometadata-vc-game')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:name[]" id="vcGame">
+						<input type="text" name="schema:about[]" id="vcGame">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
@@ -71,7 +71,7 @@
 				<label for="vcMovie"><?= wfMsg('sdsvideometadata-vc-movie')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:name[]" id="vcMovie">
+						<input type="text" name="schema:about[]" id="vcMovie">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>

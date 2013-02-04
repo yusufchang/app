@@ -26,6 +26,8 @@ $dir = dirname(__FILE__) . '/';
 /**
  * classes
  */
+$app->registerClass('SDSFormMapping', $dir . 'mappings/SDSFormMapping.php');
+$app->registerClass('VideoClipGamingVideo', $dir . 'mappings/VideoClipGamingVideo.class.php');
 
 /**
  * hooks

@@ -26,6 +26,19 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$this->setVal( 'isCorrectFile', true );
 		}
 
+		if($this->getRequest()->wasPosted()) {
+			$requestParams = $this->getRequest()->getParams();
+			// var_dump( $requestParams );
+			$connector = new VideoClipGamingVideo();
+			$pandorka = $connector->newPandoraSDSObjectFromFormData( $requestParams );
+			echo '<pre>';
+			echo PandoraJsonLD::toJsonLD( $pandorka );
+			print_r( $pandorka );
+			die;
+		}
+
+
+
 
 
 		$this->setVal('file', $file);
