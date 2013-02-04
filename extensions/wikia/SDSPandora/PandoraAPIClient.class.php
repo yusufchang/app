@@ -32,7 +32,7 @@ class PandoraAPIClient extends WikiaObject {
 	 */
 	public function getObjectUrl( $objectShortId, $collection = null ) {
 		if ( !$collection ) $collection = $this->wg->DBname;
-		return $this->baseUrl . $this->apiPath . rawurlencode( $collection ) . '/' . rawurlencode( $objectShortId );
+		return $this->baseUrl . $this->apiPath . rawurlencode( strtolower( $collection ) ) . '/' . rawurlencode( strtolower( $objectShortId ) );
 	}
 
 	/**
@@ -42,7 +42,16 @@ class PandoraAPIClient extends WikiaObject {
 	 */
 	public function getCollectionUrl( $collection = null ) {
 		if ( !$collection ) $collection = $this->wg->DBname;
-		return $this->baseUrl . $this->apiPath . rawurlencode( $collection );
+		return $this->baseUrl . $this->apiPath . rawurlencode( strtolower( $collection ) );
+	}
+
+	private function isValidResponse($response) {
+		if(!isset($response->error)) {
+			return $response;
+		}
+		else {
+			throw new WikiaException('SD API Error: ' . $response->error . ( !empty($response->message) ? ( ' - ' . $response->message ) : '' ) );
+		}
 	}
 
 	/**
@@ -51,7 +60,7 @@ class PandoraAPIClient extends WikiaObject {
 	 * @return SDS response in JSON format
 	 */
 	public function getObject( $url ) {
-		$response = json_decode( $this->call( $url ) );
+		return $this->call( $url );
 		return $this->isValidResponse($response);
 	}
 
@@ -61,7 +70,7 @@ class PandoraAPIClient extends WikiaObject {
 	 * @return SDS response in JSON format
 	 */
 	public function deleteObject( $url ) {
-		$response = json_decode( $this->call( $url, true, HTTP_REQUEST_METHOD_DELETE ) );
+		$response = $this->call( $url, true, 'DELETE' );
 		return $response;
 	}
 
@@ -71,7 +80,7 @@ class PandoraAPIClient extends WikiaObject {
 	 * @return SDS response in JSON format
 	 */
 	public function saveObject( $url, $body ) {
-		$response = json_decode( $this->call( $url, true, HTTP_REQUEST_METHOD_PUT, $body ) );
+		$response = $this->call( $url, true, 'PUT', $body );
 		return $response;
 	}
 
@@ -81,7 +90,31 @@ class PandoraAPIClient extends WikiaObject {
 	 * @return SDS response in JSON format
 	 */
 	public function createObject( $url, $body ) {
-		$response = json_decode( $this->call( $url, true, HTTP_REQUEST_METHOD_POST, $body ) );
+		$response = $this->call( $url, true, 'POST', $body );
+		return $response;
+	}
+
+	protected function call( $url, $nocache = true, $method = null, $body = null ) {
+		// curl -v -H 'Accept: application/json' http://dev-adam:9292/api/v0.1/Callofduty/123
+		$httpRequest = MwHttpRequest::factory( $url, array( 'method' => ( $method ) ? $method : 'GET' ) );
+		if ( $body ) $httpRequest->setData( $body );
+		if ( $nocache ) {
+			$httpRequest->setHeader('Cache-Control', 'no-cache');
+			$httpRequest->setHeader('If-Modified-Since', 'Sat, 29 Oct 1994 19:43:31 GMT'); // probably not needed
+		}
+		$httpRequest->setHeader( 'Accept', 'application/ld+json' );
+		$status = $httpRequest->execute();
+		if ( !$status->isOK() ) {
+			throw new WikiaException('Invalid status ' . $status->getMessage() . ' for url ' . $url);
+		}
+		$response = $httpRequest->getContent();
+		$decodedResponse = json_decode ( $response );
+		if ( empty($decodedResponse) ) {
+			throw new WikiaException('Empty JSON response from url ' . $url);
+		}
+		if ( isset( $response->error ) ) {
+			throw new WikiaException('SD API Error: ' . $response->error . ( !empty($response->message) ? ( ' - ' . $response->message ) : '' ) );
+		}
 		return $response;
 	}
 

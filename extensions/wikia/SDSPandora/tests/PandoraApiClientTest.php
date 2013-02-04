@@ -20,7 +20,8 @@ class PandoraApiClientTest extends WikiaBaseTest {
 
 		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos', $apiClient->getCollectionUrl( 'videos' ), 'Providing simple collection name' );
 		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/sdsdbmock', $apiClient->getCollectionUrl( ), 'Check if collection defaults to current wiki db name' );
-		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/aB98%2Bd-c_', $apiClient->getCollectionUrl( 'aB98+d-c_' ), 'Check all characters allowed in dbname' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/ab98%2Bd-c_', $apiClient->getCollectionUrl( 'ab98+d-c_' ), 'Check all characters allowed in dbname' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/callofduty', $apiClient->getCollectionUrl( 'CallOfDuty' ), 'Only characters in lowcerase can be used for collection name' );
 	}
 
 	/**
@@ -32,8 +33,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos/12345', $apiClient->getObjectUrl( '12345', 'videos' ), 'Provide simple collection and object name' );
 		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos/12345', $apiClient->getObjectUrl( 12345, 'videos' ), 'Check if object name can be an integer' );
 		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/sdsdbmock/4523', $apiClient->getObjectUrl( '4523' ), 'Check if collection defaults to current wiki db name' );
-		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/aB98%2Bd-c_/4523', $apiClient->getObjectUrl( '4523', 'aB98+d-c_' ), 'Check all characters allowed in dbname' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/ab98%2Bd-c_/4523', $apiClient->getObjectUrl( '4523', 'ab98+d-c_' ), 'Check all characters allowed in dbname' );
 		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/videos/aaa%20bbb', $apiClient->getObjectUrl( 'aaa bbb', 'videos' ), 'Check if space in object name is properly escaped' );
+		$this->assertEquals( 'http://sds.fake.pl/api/v0.1/callofduty/lowercased', $apiClient->getObjectUrl( 'LowerCased', 'CallOfDuty' ), 'Only characters in lowcerase can be used for collection and object name' );
 	}
 
 	/**
