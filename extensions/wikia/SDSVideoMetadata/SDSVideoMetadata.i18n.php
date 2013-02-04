@@ -43,6 +43,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-season' => 'Season',
 	'sdsvideometadata-vc-movie' => 'Movie',
 	'sdsvideometadata-vc-trailer-rating' => 'Trailer rating',
+	'sdsvideometadata-special-page-entrypoint' => 'Structured Metadata'
 
 );
 
@@ -87,5 +88,6 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-season' => 'Label for season property',
 	'sdsvideometadata-vc-movie' => 'Label for movie property',
 	'sdsvideometadata-vc-trailer-rating' => 'Label for trailer rating property',
+	'sdsvideometadata-special-page-entrypoint' => 'link to SpecialPage (Label for on Filepage)'
 
 );

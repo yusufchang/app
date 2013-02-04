@@ -28,11 +28,11 @@ $dir = dirname(__FILE__) . '/';
  */
 $app->registerClass('SDSFormMapping', $dir . 'mappings/SDSFormMapping.php');
 $app->registerClass('VideoClipGamingVideo', $dir . 'mappings/VideoClipGamingVideo.class.php');
-
+$app->registerClass('SDSVideoMetadataHooks', $dir . 'SDSVideoMetadataHooks.class.php');
 /**
  * hooks
  */
-
+$app->registerHook( 'ImagePageShowTOC', 'SDSVideoMetadataHooks', 'onImagePageShowTOC' );
 /**
  * controllers
  */
