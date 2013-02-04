@@ -123,7 +123,7 @@
 		</fieldset>
 		<label for="vcCompleted">
 			<?= wfMsg('sdsvideometadata-vc-finished-flag')?>
-			<input type="checkbox" name="vcCompleted" id="vcCompleted">
+			<input type="checkbox" name="vcCompleted" id="vcCompleted" value="1" <?= !empty($isCompleted) ? "checked" : "";?> >
 		</label>
 		<input type="submit" value="<?= wfMsg('sdsvideometadata-save')?>">
 	</form>
