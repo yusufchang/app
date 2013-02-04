@@ -29,15 +29,15 @@
 			<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?></label>
 			<select name="vcType" id="vcType">
 				<option value="">...</option>
-				<option value="gamingVideos"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
-				<option value="tvVideos"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
-				<option value="movieTrailerVideos"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
+				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
+				<option value=""><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
+				<option value=""><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
 			</select>
 		</div>
 
 		<fieldset id="VMDSpecificMD" class="hidden">
 			<legend><?= wfMsg('sdsvideometadata-type-specific-metadata-legend')?></legend>
-			<div class="input-group gamingVideos">
+			<div class="input-group VideoClipGamingVideo">
 				<label for="vcGame"><?= wfMsg('sdsvideometadata-vc-game')?></label>
 				<ul>
 					<li>
@@ -81,7 +81,7 @@
 				<label for="vcTrailerRating"><?= wfMsg('sdsvideometadata-vc-trailer-rating')?></label>
 				<input type="text" name="schema:contentRating" id="vcTrailerRating">
 			</div>
-			<div class="input-group gamingVideos tvVideos">
+			<div class="input-group VideoClipGamingVideo tvVideos">
 				<label for="vcKind"><?= wfMsg('sdsvideometadata-vc-kind')?></label>
 				<ul>
 					<li>
@@ -91,7 +91,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group gamingVideos movieTrailerVideos">
+			<div class="input-group VideoClipGamingVideo movieTrailerVideos">
 				<label for="vcAgeGate"><?= wfMsg('sdsvideometadata-vc-age-gate')?></label>
 				<select name="schema:isFamilyFriendly" id="vcAgeGate">
 					<option><?= wfMsg('sdsvideometadata-vc-boolean-not-set')?></option>
@@ -99,7 +99,7 @@
 					<option value="false"><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
 				</select>
 			</div>
-			<div class="input-group gamingVideos">
+			<div class="input-group VideoClipGamingVideo">
 				<label for="vcSoundtrack"><?= wfMsg('sdsvideometadata-vc-soundtrack')?></label>
 				<ul>
 					<li>
@@ -110,7 +110,7 @@
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
 
-			<div class="input-group gamingVideos tvVideos movieTrailerVideos">
+			<div class="input-group VideoClipGamingVideo tvVideos movieTrailerVideos">
 				<label for="vcSetting"><?= wfMsg('sdsvideometadata-vc-setting')?></label>
 				<ul>
 					<li>

@@ -24,6 +24,7 @@ class VideoClipGamingVideo extends SDSFormMapping {
 
 		$map['wikia:VideoGame'] = array();
 		$map['wikia:VideoGame']['schema:about'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
+		$map['wikia:VideoGame']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 
 
 		return $map[ $mapType ];
@@ -37,6 +38,12 @@ class VideoClipGamingVideo extends SDSFormMapping {
 		if ( $params['type'] === PandoraSDSObject::TYPE_LITERAL ) {
 
 			$item->setType( PandoraSDSObject::TYPE_LITERAL );
+			if ( strcasecmp( $params['subject'], 'id' ) == 0 ) {
+				if ( empty( $formData[ $fieldName ] ) ) {
+					//TODO: generate unique ID for new object
+					$formData[ $fieldName ] = "http://sds.wikia.com/sds/~" . microtime();
+				}
+			}
 			$item->setSubject( $params['subject'] );
 			$item->setValue( $formData[ $fieldName ] );
 		}
@@ -47,21 +54,25 @@ class VideoClipGamingVideo extends SDSFormMapping {
 
 			foreach ( $formData[ $fieldName ] as $i => $field ) {
 
+				$subItem = new PandoraSDSObject();
 				if ( isset( $params['childType'] ) ) {
 
 					$childMap = $this->getMapArray( $params['childType'] );
+					$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
+
+					$subItem->setType( $subItemType );
 
 					foreach ( $childMap as $childMapKey => $childMapValue ) {
-						$item->setValue( $this->getItem( $childMapValue, array( $childMapKey => $field), $childMapKey ) );
+						$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ][ $i ] : '';
+						$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData), $childMapKey ) );
 					}
 
 
 				} else {
-					$subItem = new PandoraSDSObject();
 					$subItem->setType( PandoraSDSObject::TYPE_LITERAL );
 					$subItem->setValue( $field );
-					$item->setValue( $subItem );
 				}
+				$item->setValue( $subItem );
 
 			}
 		}
@@ -76,9 +87,25 @@ class VideoClipGamingVideo extends SDSFormMapping {
 
 		$root = new PandoraSDSObject();
 
+		$titleObj = Title::newFromText( $formData['video'], NS_FILE );
+		$articleId = (int) $titleObj->getArticleID();
+
+		if ( $articleId == 0 ) {
+			throw new Exception('Unknown video');
+		}
+
+		$itemIdObject = new PandoraSDSObject();
+		$itemIdObject->setType( PandoraSDSObject::TYPE_LITERAL );
+		$itemIdObject->setSubject('id');
+
+		//TODO: move to external class
+		$itemIdObject->setValue( 'http://sds.wikia.com/video151/'.$articleId );
+		$root->setValue( $itemIdObject );
+
 		foreach ( $map as $fieldName => $params ) {
 
-			if ( empty( $formData[ $fieldName ] ) ) {
+			if ( empty( $formData[ $fieldName ] ) ||
+			    ( is_array( $formData[ $fieldName ] ) && count($formData[ $fieldName ] )==1 && $formData[ $fieldName ][0]=="" ) ) {
 				continue;
 			}
 

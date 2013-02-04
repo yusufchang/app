@@ -28,12 +28,19 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				$this->setFileCompleted( $fileTitle, $isCompleted );
 
 				$requestParams = $this->getRequest()->getParams();
-				// var_dump( $requestParams );
-				$connector = new VideoClipGamingVideo();
-				$pandorka = $connector->newPandoraSDSObjectFromFormData( $requestParams );
-				echo '<pre>';
-				echo PandoraJsonLD::toJsonLD( $pandorka );
-				print_r( $pandorka );
+				$connectorClassName = $requestParams['vcType'];
+				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
+					$connector = new $connectorClassName(); /* @var $connector SDSFormMapping */
+					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
+					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
+
+					$pandoraApi = new PandoraAPIClient('dev-adam:9292','/api/v0.1/');
+					$urlForCollection = $pandoraApi->getCollectionUrl('videos');
+					echo $json;
+					//echo $pandoraApi->createObject($urlForCollection, $json);
+					die;
+
+				}
 			}
 
 			$this->setVal( 'isCorrectFile', true );
