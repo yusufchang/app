@@ -34,7 +34,6 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				echo '<pre>';
 				echo PandoraJsonLD::toJsonLD( $pandorka );
 				print_r( $pandorka );
-
 			}
 
 			$this->setVal( 'isCorrectFile', true );
