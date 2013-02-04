@@ -95,8 +95,10 @@ class PandoraAPIClient extends WikiaObject {
 	}
 
 	protected function call( $url, $nocache = true, $method = null, $body = null ) {
-		// curl -v -H 'Accept: application/json' http://dev-adam:9292/api/v0.1/Callofduty/123
-		$httpRequest = MwHttpRequest::factory( $url, array( 'method' => ( $method ) ? $method : 'GET' ) );
+		$options = array( 'method' => ( $method ) ? $method : 'GET' );
+		//don't use wgHTTPProxy on devboxes, as cross-devbox calls will return 403
+		if ( !empty( $this->app->wg->develEnvironment ) ) $options['noProxy'] = true;
+		$httpRequest = MwHttpRequest::factory( $url,  $options) ;
 		if ( $body ) $httpRequest->setData( $body );
 		if ( $nocache ) {
 			$httpRequest->setHeader('Cache-Control', 'no-cache');
