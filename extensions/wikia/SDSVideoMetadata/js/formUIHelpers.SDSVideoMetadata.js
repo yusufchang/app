@@ -5,6 +5,7 @@ var VMDFormUI = {
 		this.cachedSelectors.form = $('#VMDForm');
 		this.cachedSelectors.typeSelect = $('#vcType');
 		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
+		this.cachedSelectors.saveButton = $('#VMDFormSave');
 
 		// attach handlers
 		this.cachedSelectors.form.on('click', 'button.add', function(event) {
@@ -68,6 +69,7 @@ var VMDFormUI = {
 
 			// cache selectors
 			propertiesWrapper = this.cachedSelectors.typeMDProperties,
+			saveButton = this.cachedSelectors.saveButton,
 			propertiesFormFields = propertiesWrapper.find('input, select, textarea');
 
 		if(targetValue !== '') {
@@ -75,11 +77,14 @@ var VMDFormUI = {
 			propertiesWrapper.find(targetClass).find('input, select, textarea').removeAttr('disabled');
 			propertiesWrapper.children().addClass('hidden').filter(targetClass).removeClass('hidden');
 			propertiesWrapper.removeClass('hidden');
+			saveButton.removeAttr('disabled');
 		} else {
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.addClass('hidden');
+			saveButton.attr('disabled', 'disabled');
 		}
 	}
+
 };
 
 $(function() {

@@ -124,7 +124,10 @@
 			<?= wfMsg('sdsvideometadata-vc-finished-flag')?>
 			<input type="checkbox" name="vcCompleted" id="vcCompleted" value="1" <?= !empty($isCompleted) ? "checked" : "";?> >
 		</label>
-		<input type="submit" value="<?= wfMsg('sdsvideometadata-save')?>">
+		<?php if (!empty($wasPasted)): ?>
+			<p><?= (isset($success) && $success === true ) ?  wfMsg('sdsvideometadata-vc-save') : $errorMessage ?></p>
+		<?php endif; ?>
+		<input type="submit" id="VMDFormSave" value="<?= wfMsg('sdsvideometadata-save')?>" disabled="disabled">
 	</form>
 <?php } else { ?>
 	<?= wfMsg('sdsvideometadata-error-no-video-file')?>

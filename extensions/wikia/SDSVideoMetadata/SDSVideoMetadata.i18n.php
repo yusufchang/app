@@ -10,6 +10,7 @@ $messages['en'] = array(
 	'vmd' => 'Structured Data Video Metadata',
 	'sdsvideometadata-header' => 'Matadata for: $1',
 	'sdsvideometadata-error-no-video-file' => 'THERE IS NO VIDEO FILE',
+	'sdsvideometadata-vc-save' => 'Object saved',
 
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Remove',
@@ -54,6 +55,7 @@ $messages['qqq'] = array(
 	'vmd' => 'Video Metadata special page name',
 	'sdsvideometadata-header' => 'Header for Video Metadata form. ($1 = File Title)',
 	'sdsvideometadata-error-no-video-file' => 'Error message for no video file',
+	'sdsvideometadata-vc-save' => 'Validation response - object saved',
 
 	// UI messages
 	'sdsvideometadata-vc-remove-item' => 'Button for removing item from the list references',

@@ -23,6 +23,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			return false;
 		} else {
 			if($this->request->wasPosted()) {
+				$this->setVal( 'wasPasted', true );
 				$isCompleted = (bool) $this->request->getVal('vcCompleted', false);
 				$this->setFileCompleted( $fileTitle, $isCompleted );
 
