@@ -30,6 +30,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				$connectorClassName = $requestParams['vcType'];
 				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
 					$connector = new $connectorClassName(); /* @var $connector SDSFormMapping */
+
 					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
 					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
 
