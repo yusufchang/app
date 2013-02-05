@@ -10,6 +10,7 @@
 class PandoraJsonLD {
 
 	/**
+	 * Serialize Pandora object structure into JsonLD string.
 	 * @param PandoraSDSElement $object
 	 * @return string - json-ld formatted
 	 */
@@ -18,6 +19,7 @@ class PandoraJsonLD {
 	}
 
 	/**
+	 * Parse JsonLD string into Pandora objects structure.
 	 * @param $json - string containing text representation of json-ld object
 	 * @return PandoraSDSObject
 	 */

@@ -24,6 +24,7 @@ class PandoraJsonLDTest extends WikiaBaseTest {
 		$serializedInput = json_encode( json_decode( $jsonInput ) );
 		//create pandora class object
 		$pandoraObject = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $jsonInput );
+		print_r($pandoraObject);
 		//deserialize into json
 		$jsonOutput = PandoraJsonLD::toJsonLD( $pandoraObject );
 
@@ -35,12 +36,14 @@ class PandoraJsonLDTest extends WikiaBaseTest {
 			array( '{}' ),
 			array( '{ [] }' ),
 			array( '{ "id" : {} }'),
+			array( '{ "id" : \'cos ", "ops" : "injection", "id" : "tam\' }' ),
 			array( '{ "a" : [ "a", "b" ] }' ),
 			array( '{ "id" : "0" }' ),
 			array( '{ id : "0" }' ),
 			array( 'a' ),
 			array( '{ "id" : "0", "property" : { "id" : 1 } }' ),
-			array( '{ "property" : [], "property1" : [ "1", "2" ], "property3" : [ { "id" : "2" }, { "id" : "3"} ] }' )
+			array( '{ "property" : [], "property1" : [ "1", "2" ], "property3" : [ { "id" : "2" }, { "id" : "3"} ] }' ),
+			array( '{ "id" : "1", "test" : [ { "id_in" : "1" }, { "id_in" : "2" } ] }' )
 		);
 	}
 

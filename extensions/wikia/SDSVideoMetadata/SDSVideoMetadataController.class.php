@@ -11,7 +11,6 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	}
 
 	public function index() {
-
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/css/SDSVideoMetadata.scss');
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/js/formUIHelpers.SDSVideoMetadata.js');
 		$file = $this->getVal('video');
@@ -34,12 +33,16 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
 					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
 
-					$pandoraApi = new PandoraAPIClient('dev-adam:9292','/api/v0.1/');
-					$urlForCollection = $pandoraApi->getCollectionUrl('videos');
-					echo $json;
-					//echo $pandoraApi->createObject($urlForCollection, $json);
-					die;
-
+					$pandoraApi = new PandoraAPIClient('http://dev-adam:9292','/api/v0.1/');
+					$urlForCollection = $pandoraApi->getCollectionUrl('video151');
+					$result = $pandoraApi->createObject( $urlForCollection, $json );
+					if ( !$result->isOK() ) {
+						print_r( $result );
+						$this->setVal( 'errorMessage', $result->getMessage() );
+					} else {
+						//TODO: redirect
+						$this->setVal( 'success', true );
+					}
 				}
 			}
 
