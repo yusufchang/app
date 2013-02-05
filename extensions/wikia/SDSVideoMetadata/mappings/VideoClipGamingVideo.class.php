@@ -1,10 +1,6 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: jacekjursza
- * Date: 01.02.13
- * Time: 16:21
- * To change this template use File | Settings | File Templates.
+ * @author: Jacek Jursza <jacek@wikia-inc.com>
  */
 class VideoClipGamingVideo extends SDSFormMapping {
 
@@ -12,21 +8,24 @@ class VideoClipGamingVideo extends SDSFormMapping {
 
 		$map = array();
 		$map['main'] = array();
-		$map['main']['schema:name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['main']['schema:description'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' );
-		$map['main']['schema:datePublished'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:datePublished' );
-		$map['main']['schema:inLanguage']= array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' );
-		$map['main']['schema:subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
-		$map['main']['schema:about'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'wikia:VideoGame' );
-		$map['main']['schema:contentRating'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentRating' );
-		$map['main']['schema:isFamilyFriendly'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:isFamilyFriendly' );
-//		$map['main'][''] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:associatedMedia', 'childType' => '' );
-		$map['main']['wikia:setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
+		$map['main']['videoObject.name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
+		$map['main']['videoObject.description'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' );
+		$map['main']['videoObject.datePublished'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:datePublished' );
+		$map['main']['videoObject.inLanguage']= array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' );
+		$map['main']['videoObject.subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
+		$map['main']['about.name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'about.name' );
+		$map['main']['videoObject.isFamilyFriendly'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:isFamilyFriendly' );
+		$map['main']['videoObject.associatedMedia'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:associatedMedia', 'childType' => 'schema:MediaObject' );
+		$map['main']['videoObject.keywords'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:keywords' );
+		$map['main']['videoObject.setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
 
 		$map['wikia:VideoGame'] = array();
-		$map['wikia:VideoGame']['schema:about'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
+		$map['wikia:VideoGame']['VideoGame.name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['wikia:VideoGame']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 
+		$map['schema:MediaObject'] = array();
+		$map['schema:MediaObject']['videoObject.associatedMedia'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
+		$map['schema:MediaObject']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 
 		return $map[ $mapType ];
 	}
