@@ -107,7 +107,7 @@ class PandoraAPIClient extends WikiaObject {
 		$httpRequest->setHeader( 'Accept', 'application/ld+json' );
 		$status = $httpRequest->execute();
 		$response = $httpRequest->getContent();
-		return new PandoraStatus($status, $response);
+		return new PandoraResponse($status, $response);
 	}
 
 }
