@@ -6,6 +6,7 @@ var VMDFormUI = {
 		this.cachedSelectors.typeSelect = $('#vcType');
 		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
+		this.cachedSelectors.nameField = $('#vcTitle');
 
 		// attach handlers
 		this.cachedSelectors.form.on('click', 'button.add', function(event) {
@@ -29,7 +30,10 @@ var VMDFormUI = {
 
 		this.cachedSelectors.typeSelect.on('change', function(event) {
 			that.chooseClipType(event);
-		})
+			that.simpleValidation();
+		});
+
+		this.cachedSelectors.nameField.on('blur', $.proxy(this.simpleValidation, this));
 
 	},
 
@@ -69,7 +73,6 @@ var VMDFormUI = {
 
 			// cache selectors
 			propertiesWrapper = this.cachedSelectors.typeMDProperties,
-			saveButton = this.cachedSelectors.saveButton,
 			propertiesFormFields = propertiesWrapper.find('input, select, textarea');
 
 		if(targetValue !== '') {
@@ -77,11 +80,17 @@ var VMDFormUI = {
 			propertiesWrapper.find(targetClass).find('input, select, textarea').removeAttr('disabled');
 			propertiesWrapper.children().addClass('hidden').filter(targetClass).removeClass('hidden');
 			propertiesWrapper.removeClass('hidden');
-			saveButton.removeAttr('disabled');
 		} else {
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.addClass('hidden');
-			saveButton.attr('disabled', 'disabled');
+		}
+	},
+	// Temporary method to prevent errors on PHP side when sending empty form
+	simpleValidation: function() {
+		if (this.cachedSelectors.typeSelect.val() !== '' && this.cachedSelectors.nameField.val() !== '') {
+			this.cachedSelectors.saveButton.removeAttr('disabled');
+		} else {
+			this.cachedSelectors.saveButton.attr('disabled', 'disabled');
 		}
 	}
 

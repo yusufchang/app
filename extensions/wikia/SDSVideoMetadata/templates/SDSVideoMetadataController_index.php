@@ -4,7 +4,8 @@
 		<fieldset>
 			<legend><?= wfMsg('sdsvideometadata-common-metadata-legend')?></legend>
 			<div class="input-group">
-				<label for="vcTitle"><?= wfMsg('sdsvideometadata-vc-title')?></label>
+				<label for="vcTitle"><?= wfMsg('sdsvideometadata-vc-title')?>* <small>(<?= wfMsg
+				('sdsvideometadata-vc-required')?>)</small></label>
 				<input type="text" name="videoObject_name" id="vcTitle">
 			</div>
 			<div class="input-group">

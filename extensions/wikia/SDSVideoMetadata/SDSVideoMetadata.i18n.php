@@ -19,6 +19,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-boolean-not-set' => 'not set',
 	'sdsvideometadata-vc-boolean-false' => 'No',
 	'sdsvideometadata-vc-boolean-true' => 'Yes',
+	'sdsvideometadata-vc-required' => 'This field is required',
 
 	// Common video clip metadata messages
 	'sdsvideometadata-common-metadata-legend' => 'Add common video clip metadata',
@@ -57,13 +58,14 @@ $messages['qqq'] = array(
 	'sdsvideometadata-error-no-video-file' => 'Error message for no video file',
 	'sdsvideometadata-vc-save' => 'Validation response - object saved',
 
-	// UI messages
+	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Button for removing item from the list references',
 	'sdsvideometadata-vc-add-item' => 'Button for adding more items to the list of references',
 	'sdsvideometadata-save' => 'Save metadata button',
 	'sdsvideometadata-vc-boolean-not-set' => 'Boolean value type select not set',
 	'sdsvideometadata-vc-boolean-false' => 'Boolean value type select - No',
 	'sdsvideometadata-vc-boolean-true' => 'Boolean value type - Yes',
+	'sdsvideometadata-vc-required' => 'Information that this field is required',
 
 	// Common video clip metadata messages
 	'sdsvideometadata-common-metadata-legend' => 'Header fo common metadata fieldset',
