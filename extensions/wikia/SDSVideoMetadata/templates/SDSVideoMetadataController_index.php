@@ -30,8 +30,8 @@
 			<select name="vcType" id="vcType">
 				<option value="">...</option>
 				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
-				<option value=""><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
-				<option value=""><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
+				<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
+				<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
 			</select>
 		</div>
 
@@ -47,41 +47,41 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group tvVideos">
+			<div class="input-group VideoClipTVVideo">
 				<label for="vcSeries"><?= wfMsg('sdsvideometadata-vc-series')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:Thing[]" id="vcSeries">
+						<input type="text" name="series_name[]" id="vcSeries">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group tvVideos">
+			<div class="input-group VideoClipTVVideo">
 				<label for="vcSeason"><?= wfMsg('sdsvideometadata-vc-season')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:Season[]" id="vcSeason">
+						<input type="text" name="season_name[]" id="vcSeason">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group movieTrailerVideos">
+			<div class="input-group VideoClipMovieTrailersVideo">
 				<label for="vcMovie"><?= wfMsg('sdsvideometadata-vc-movie')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:about[]" id="vcMovie">
+						<input type="text" name="movie_name[]" id="vcMovie">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group movieTrailerVideos">
+			<div class="input-group VideoClipMovieTrailersVideo">
 				<label for="vcTrailerRating"><?= wfMsg('sdsvideometadata-vc-trailer-rating')?></label>
-				<input type="text" name="schema:contentRating" id="vcTrailerRating">
+				<input type="text" name="videoObject_rating" id="vcTrailerRating">
 			</div>
-			<div class="input-group VideoClipGamingVideo tvVideos">
+			<div class="input-group VideoClipGamingVideo VideoClipTVVideo">
 				<label for="vcKind"><?= wfMsg('sdsvideometadata-vc-kind')?></label>
 				<ul>
 					<li>
@@ -91,7 +91,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipGamingVideo movieTrailerVideos">
+			<div class="input-group VideoClipGamingVideo VideoClipMovieTrailersVideo">
 				<label for="vcAgeGate"><?= wfMsg('sdsvideometadata-vc-age-gate')?></label>
 				<select name="videoObject_isFamilyFriendly" id="vcAgeGate">
 					<option value="true"><?= wfMsg('sdsvideometadata-vc-boolean-true')?></option>
@@ -109,7 +109,7 @@
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
 
-			<div class="input-group VideoClipGamingVideo tvVideos movieTrailerVideos">
+			<div class="input-group VideoClipGamingVideo VideoClipTVVideo VideoClipMovieTrailersVideo">
 				<label for="vcSetting"><?= wfMsg('sdsvideometadata-vc-setting')?></label>
 				<ul>
 					<li>

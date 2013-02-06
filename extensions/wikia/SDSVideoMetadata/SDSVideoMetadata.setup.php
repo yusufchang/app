@@ -28,6 +28,8 @@ $dir = dirname(__FILE__) . '/';
  */
 $app->registerClass('SDSFormMapping', $dir . 'mappings/SDSFormMapping.php');
 $app->registerClass('VideoClipGamingVideo', $dir . 'mappings/VideoClipGamingVideo.class.php');
+$app->registerClass('VideoClipMovieTrailersVideo', $dir . 'mappings/VideoClipMovieTrailersVideo.class.php');
+$app->registerClass('VideoClipTVVideo', $dir . 'mappings/VideoClipTVVideo.class.php');
 $app->registerClass('SDSVideoMetadataHooks', $dir . 'SDSVideoMetadataHooks.class.php');
 /**
  * hooks

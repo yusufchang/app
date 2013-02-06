@@ -39,7 +39,6 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					$urlForCollection = $pandoraApi->getCollectionUrl('video151');
 					$result = $pandoraApi->createObject( $urlForCollection, $json );
 					if ( !$result->isOK() ) {
-						print_r( $result );
 						$this->setVal( 'errorMessage', $result->getMessage() );
 					} else {
 						//TODO: redirect
