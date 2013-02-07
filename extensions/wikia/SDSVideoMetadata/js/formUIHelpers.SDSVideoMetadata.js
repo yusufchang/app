@@ -33,7 +33,10 @@ var VMDFormUI = {
 			that.simpleValidation();
 		});
 
-		this.cachedSelectors.nameField.on('blur', $.proxy(this.simpleValidation, this));
+		this.cachedSelectors.nameField.on({
+			blur: $.proxy(this.simpleValidation, this),
+			keyup: $.proxy(this.simpleValidation, this)
+		});
 
 	},
 
