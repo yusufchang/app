@@ -70,4 +70,18 @@ class PandoraApiClientTest extends WikiaBaseTest {
 			array( ';', '%3B' ), array( ':', '%3A' ), array( '/', '%2F' ), array( ',', '%2C' ), array( '+', '%2B' )
 		);
 	}
+
+	public function testCreateObject() {
+		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
+
+		$mockedClient->expects($this->once())
+			->method('call')
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock' ),
+					$this->equalTo( true ),
+					$this->equalTo( 'POST' ),
+					$this->equalTo( '{"id":"http://fake.id"}' ) )
+			->will( $this->returnValue( new PandoraResponse( Status::newGood(), '{}' ) ) );
+
+		$mockedClient->createObject( $mockedClient->getCollectionUrl(), '{"id":"http://fake.id"}' );
+	}
 }
