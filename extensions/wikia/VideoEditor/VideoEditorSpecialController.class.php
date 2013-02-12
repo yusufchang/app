@@ -11,6 +11,9 @@ class VideoEditorSpecialController extends WikiaSpecialPageController {
 	}
 
 	public function init() {
+		$this->response->addAsset('video_editor_js');
+		$this->response->addAsset('video_editor_css');
+		$this->wg->out->addStyle('http://vjs.zencdn.net/c/video-js.css');
 	}
 
 	/**

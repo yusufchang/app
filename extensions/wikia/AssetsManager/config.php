@@ -1215,3 +1215,19 @@ $config['history_polyfill_js'] = array(
 		'//resources/wikia/polyfills/history/history.js',
 	)
 );
+
+// Video clipping hack
+$config['video_editor_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/VideoEditor/js/videojs.js',
+		'//extensions/wikia/VideoEditor/js/VideoEditor.js',
+	)
+);
+
+$config['video_editor_css'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'assets' => array(
+		'//extensions/wikia/VideoEditor/css/VideoEditor.scss',
+	)
+);
