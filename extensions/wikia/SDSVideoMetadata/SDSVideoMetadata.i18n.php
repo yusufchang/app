@@ -11,6 +11,7 @@ $messages['en'] = array(
 	'sdsvideometadata-header' => 'Matadata for: $1',
 	'sdsvideometadata-error-no-video-file' => 'THERE IS NO VIDEO FILE',
 	'sdsvideometadata-vc-save' => 'Object saved',
+	'sdsvideometadata-special-page-entrypoint' => 'Structured Metadata',
 
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Remove',
@@ -34,6 +35,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-select-type' => 'Select type of the video clip',
 	'sdsvideometadata-vc-type-gaming' => 'Gaming video',
 	'sdsvideometadata-vc-type-tv' => 'TV video',
+	'sdsvideometadata-vc-type-travel' => 'Travel video',
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Add video clip type specific metadata',
 	'sdsvideometadata-vc-game' => 'Game',
@@ -45,8 +47,10 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-season' => 'Season',
 	'sdsvideometadata-vc-movie' => 'Movie',
 	'sdsvideometadata-vc-trailer-rating' => 'Trailer rating',
-	'sdsvideometadata-special-page-entrypoint' => 'Structured Metadata'
-
+	'sdsvideometadata-vc-distributor' => "Distributor",
+	'sdsvideometadata-vc-publisher' => 'Publisher',
+	'sdsvideometadata-vc-genre' => 'Genre',
+	'sdsvideometadata-vc-location' => 'Location',
 );
 
 /** Message documentation (Message documentation) */
@@ -57,6 +61,7 @@ $messages['qqq'] = array(
 	'sdsvideometadata-header' => 'Header for Video Metadata form. ($1 = File Title)',
 	'sdsvideometadata-error-no-video-file' => 'Error message for no video file',
 	'sdsvideometadata-vc-save' => 'Validation response - object saved',
+	'sdsvideometadata-special-page-entrypoint' => 'link to SpecialPage (Label for on Filepage)',
 
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Button for removing item from the list references',
@@ -82,6 +87,7 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-type-gaming' => 'Gaming video option',
 	'sdsvideometadata-vc-type-tv' => 'TV video option',
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video option',
+	'sdsvideometadata-vc-type-travel' => 'Travel videos option',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Header for video clip type specific metadata fieldset',
 	'sdsvideometadata-vc-game' => 'Label for game property',
 	'sdsvideometadata-vc-kind' => 'Label for specific type of video clip property (exp. walkthrough, trailer etc.)',
@@ -92,6 +98,8 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-season' => 'Label for season property',
 	'sdsvideometadata-vc-movie' => 'Label for movie property',
 	'sdsvideometadata-vc-trailer-rating' => 'Label for trailer rating property',
-	'sdsvideometadata-special-page-entrypoint' => 'link to SpecialPage (Label for on Filepage)'
-
+	'sdsvideometadata-vc-distributor' => 'Label for distributor property',
+	'sdsvideometadata-vc-publisher' => 'Label for publisher property',
+	'sdsvideometadata-vc-genre' => 'Label for genre property',
+	'sdsvideometadata-vc-location' => 'Label for location property',
 );

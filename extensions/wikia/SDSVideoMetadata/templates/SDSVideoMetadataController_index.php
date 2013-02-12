@@ -33,11 +33,52 @@
 				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
 				<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
 				<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
+				<option value="VideoClipTravelVideos"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
 			</select>
 		</div>
 
 		<fieldset id="VMDSpecificMD" class="hidden">
 			<legend><?= wfMsg('sdsvideometadata-type-specific-metadata-legend')?></legend>
+			<div class="input-group VideoClipTravelVideos">
+				<label for="vcDistributor"><?= wfMsg('sdsvideometadata-vc-distributor')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:provider[]" id="vcDistributor">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipTravelVideos">
+				<label for="vcPublisher"><?= wfMsg('sdsvideometadata-vc-publisher')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:publisher[]" id="vcPublisher">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipTravelVideos">
+				<label for="vcGenre"><?= wfMsg('sdsvideometadata-vc-genre')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:genre[]" id="vcGenre">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipTravelVideos">
+				<label for="vcLocation"><?= wfMsg('sdsvideometadata-vc-location')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:contentLocation[]" id="vcLocation">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
 			<div class="input-group VideoClipGamingVideo">
 				<label for="vcGame"><?= wfMsg('sdsvideometadata-vc-game')?></label>
 				<ul>
