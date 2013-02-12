@@ -34,12 +34,23 @@
 				<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
 				<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
 				<option value="VideoClipTravelVideos"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
+				<option value="VideoClipCookingVideos"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
 			</select>
 		</div>
 
 		<fieldset id="VMDSpecificMD" class="hidden">
 			<legend><?= wfMsg('sdsvideometadata-type-specific-metadata-legend')?></legend>
-			<div class="input-group VideoClipTravelVideos">
+			<div class="input-group VideoClipCookingVideos">
+				<label for="vcRecipe"><?= wfMsg('sdsvideometadata-vc-recipe')?></label>
+				<ul>
+					<li>
+						<input type="text" name="recipe_name[]" id="vcRecipe">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos">
 				<label for="vcDistributor"><?= wfMsg('sdsvideometadata-vc-distributor')?></label>
 				<ul>
 					<li>
@@ -49,7 +60,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos">
+			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos">
 				<label for="vcPublisher"><?= wfMsg('sdsvideometadata-vc-publisher')?></label>
 				<ul>
 					<li>
@@ -59,7 +70,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos">
+			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos">
 				<label for="vcGenre"><?= wfMsg('sdsvideometadata-vc-genre')?></label>
 				<ul>
 					<li>

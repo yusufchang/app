@@ -37,6 +37,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-type-tv' => 'TV video',
 	'sdsvideometadata-vc-type-travel' => 'Travel video',
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video',
+	'sdsvideometadata-vc-type-cooking' => 'Cooking Video',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Add video clip type specific metadata',
 	'sdsvideometadata-vc-game' => 'Game',
 	'sdsvideometadata-vc-kind' => 'Type',
@@ -51,6 +52,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-publisher' => 'Publisher',
 	'sdsvideometadata-vc-genre' => 'Genre',
 	'sdsvideometadata-vc-location' => 'Location',
+	'sdsvideometadata-vc-recipe' => 'Recipe',
 );
 
 /** Message documentation (Message documentation) */
@@ -88,6 +90,7 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-type-tv' => 'TV video option',
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video option',
 	'sdsvideometadata-vc-type-travel' => 'Travel videos option',
+	'sdsvideometadata-vc-type-cooking' => 'Cooking video option',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Header for video clip type specific metadata fieldset',
 	'sdsvideometadata-vc-game' => 'Label for game property',
 	'sdsvideometadata-vc-kind' => 'Label for specific type of video clip property (exp. walkthrough, trailer etc.)',
@@ -102,4 +105,5 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-publisher' => 'Label for publisher property',
 	'sdsvideometadata-vc-genre' => 'Label for genre property',
 	'sdsvideometadata-vc-location' => 'Label for location property',
+	'sdsvideometadata-vc-recipe' => 'Label for recipe property',
 );
