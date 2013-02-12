@@ -35,6 +35,7 @@
 				<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
 				<option value="VideoClipTravelVideos"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
 				<option value="VideoClipCookingVideos"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
+				<option value="VideoClipCraftVideos"><?= wfMsg('sdsvideometadata-vc-type-craft')?></option>
 			</select>
 		</div>
 
@@ -50,7 +51,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos">
+			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos VideoClipCraftVideos">
 				<label for="vcDistributor"><?= wfMsg('sdsvideometadata-vc-distributor')?></label>
 				<ul>
 					<li>
@@ -60,7 +61,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos">
+			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos VideoClipCraftVideos">
 				<label for="vcPublisher"><?= wfMsg('sdsvideometadata-vc-publisher')?></label>
 				<ul>
 					<li>
@@ -70,7 +71,7 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos">
+			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos VideoClipCraftVideos">
 				<label for="vcGenre"><?= wfMsg('sdsvideometadata-vc-genre')?></label>
 				<ul>
 					<li>
