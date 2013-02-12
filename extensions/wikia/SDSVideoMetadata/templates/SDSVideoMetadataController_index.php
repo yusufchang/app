@@ -36,6 +36,7 @@
 				<option value="VideoClipTravelVideos"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
 				<option value="VideoClipCookingVideos"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
 				<option value="VideoClipCraftVideos"><?= wfMsg('sdsvideometadata-vc-type-craft')?></option>
+				<option value="VideoClipMusicVideos"><?= wfMsg('sdsvideometadata-vc-type-music')?></option>
 			</select>
 		</div>
 
@@ -71,7 +72,38 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos VideoClipCraftVideos">
+			<div class="input-group VideoClipMusicVideos">
+				<label for="vcSong"><?= wfMsg('sdsvideometadata-vc-song')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:track[]" id="vcSong">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipMusicVideos">
+				<label for="vcArtist"><?= wfMsg('sdsvideometadata-vc-artist')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:MusicGroup[]" id="vcArtist">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipMusicVideos">
+				<label for="vcMusicLabel"><?= wfMsg('sdsvideometadata-vc-music-label')?></label>
+				<ul>
+					<li>
+						<input type="text" name="schema:Organization[]" id="vcMusicLabel">
+						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
+					</li>
+				</ul>
+				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
+			</div>
+			<div class="input-group VideoClipTravelVideos VideoClipMusicVideos VideoClipCookingVideos
+			VideoClipCraftVideos">
 				<label for="vcGenre"><?= wfMsg('sdsvideometadata-vc-genre')?></label>
 				<ul>
 					<li>
@@ -152,6 +184,13 @@
 					<option value="false"><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
 				</select>
 			</div>
+			<div class="input-group VideoClipMusicVideos">
+				<label for="vcPAL"><?= wfMsg('sdsvideometadata-vc-pal')?></label>
+				<select name="schema:contentFormat" id="vcPAL">
+					<option value="true"><?= wfMsg('sdsvideometadata-vc-boolean-true')?></option>
+					<option value="false"><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
+				</select>
+			</div>
 			<div class="input-group VideoClipGamingVideo">
 				<label for="vcSoundtrack"><?= wfMsg('sdsvideometadata-vc-soundtrack')?></label>
 				<ul>
@@ -163,7 +202,7 @@
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
 
-			<div class="input-group VideoClipGamingVideo VideoClipTVVideo VideoClipMovieTrailersVideo">
+			<div class="input-group VideoClipGamingVideo VideoClipMusicVideos VideoClipTVVideo VideoClipMovieTrailersVideo">
 				<label for="vcSetting"><?= wfMsg('sdsvideometadata-vc-setting')?></label>
 				<ul>
 					<li>

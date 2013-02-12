@@ -39,6 +39,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video',
 	'sdsvideometadata-vc-type-cooking' => 'Cooking Video',
 	'sdsvideometadata-vc-type-craft' => 'Craft video',
+	'sdsvideometadata-vc-type-music' => 'Music video',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Add video clip type specific metadata',
 	'sdsvideometadata-vc-game' => 'Game',
 	'sdsvideometadata-vc-kind' => 'Type',
@@ -54,6 +55,10 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-genre' => 'Genre',
 	'sdsvideometadata-vc-location' => 'Location',
 	'sdsvideometadata-vc-recipe' => 'Recipe',
+	'sdsvideometadata-vc-song' => 'Song',
+	'sdsvideometadata-vc-artist' => 'Artist',
+	'sdsvideometadata-vc-music-label' => 'Music Label',
+	'sdsvideometadata-vc-pal' => 'PAL'
 );
 
 /** Message documentation (Message documentation) */
@@ -93,10 +98,11 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-type-travel' => 'Travel videos option',
 	'sdsvideometadata-vc-type-cooking' => 'Cooking video option',
 	'sdsvideometadata-vc-type-craft' => 'Craft video option',
+	'sdsvideometadata-vc-type-music' => 'Music video option',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Header for video clip type specific metadata fieldset',
 	'sdsvideometadata-vc-game' => 'Label for game property',
 	'sdsvideometadata-vc-kind' => 'Label for specific type of video clip property (exp. walkthrough, trailer etc.)',
-	'sdsvideometadata-vc-age-gate' => 'Label for agregate property',
+	'sdsvideometadata-vc-age-gate' => 'Label for age gate property',
 	'sdsvideometadata-vc-soundtrack' => 'Label for soundtrack property',
 	'sdsvideometadata-vc-setting' => 'Label for setting property',
 	'sdsvideometadata-vc-series' => 'Label for series property',
@@ -108,4 +114,8 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-genre' => 'Label for genre property',
 	'sdsvideometadata-vc-location' => 'Label for location property',
 	'sdsvideometadata-vc-recipe' => 'Label for recipe property',
+	'sdsvideometadata-vc-song' => 'Label for song property',
+	'sdsvideometadata-vc-artist' => 'Label for artist property',
+	'sdsvideometadata-vc-music-label' => 'Label for music label property',
+	'sdsvideometadata-vc-pal' => 'Label for PAL property'
 );
