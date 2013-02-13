@@ -20,3 +20,8 @@ $app->registerExtensionMessageFile( 'VideoEditor', $dir.'VideoEditor.i18n.php' )
 
 // special pages
 $app->registerSpecialPage( 'VideoEditor', 'VideoEditorSpecialController' );
+
+// rights
+$wgAvailableRights[] = 'videoeditor';
+$wgGroupPermissions['*']['videoeditor'] = false;
+$wgGroupPermissions['staff']['videoeditor'] = true;
