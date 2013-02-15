@@ -26,7 +26,7 @@ class PandoraJsonLD {
 	static public function pandoraSDSObjectFromJsonLD ( $json ) {
 		$jsonObject = json_decode( $json );
 		if ( $jsonObject === null ) {
-			throw new Exception( "Invalid or malformed JSON" );
+			throw new PandoraException( "Invalid or malformed JSON" );
 		}
 		$rootObject = new PandoraSDSObject();
 

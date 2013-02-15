@@ -33,16 +33,16 @@
 				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
 				<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
 				<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
-				<option value="VideoClipTravelVideos"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
-				<option value="VideoClipCookingVideos"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
-				<option value="VideoClipCraftVideos"><?= wfMsg('sdsvideometadata-vc-type-craft')?></option>
-				<option value="VideoClipMusicVideos"><?= wfMsg('sdsvideometadata-vc-type-music')?></option>
+				<option value="VideoClipTravelVideo"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
+				<option value="VideoClipCookingVideo"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
+				<option value="VideoClipCraftVideo"><?= wfMsg('sdsvideometadata-vc-type-craft')?></option>
+				<option value="VideoClipMusicVideo"><?= wfMsg('sdsvideometadata-vc-type-music')?></option>
 			</select>
 		</div>
 
 		<fieldset id="VMDSpecificMD" class="hidden">
 			<legend><?= wfMsg('sdsvideometadata-type-specific-metadata-legend')?></legend>
-			<div class="input-group VideoClipCookingVideos">
+			<div class="input-group VideoClipCookingVideo">
 				<label for="vcRecipe"><?= wfMsg('sdsvideometadata-vc-recipe')?></label>
 				<ul>
 					<li>
@@ -52,72 +52,72 @@
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos VideoClipCraftVideos">
+			<div class="input-group VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo">
 				<label for="vcDistributor"><?= wfMsg('sdsvideometadata-vc-distributor')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:provider[]" id="vcDistributor">
+						<input type="text" name="provider_name[]" id="vcDistributor">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipCookingVideos VideoClipCraftVideos">
+			<div class="input-group VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo">
 				<label for="vcPublisher"><?= wfMsg('sdsvideometadata-vc-publisher')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:publisher[]" id="vcPublisher">
+						<input type="text" name="publisher_name[]" id="vcPublisher">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipMusicVideos">
+			<div class="input-group VideoClipMusicVideo">
 				<label for="vcSong"><?= wfMsg('sdsvideometadata-vc-song')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:track[]" id="vcSong">
+						<input type="text" name="track_name[]" id="vcSong">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipMusicVideos">
+			<div class="input-group VideoClipMusicVideo">
 				<label for="vcArtist"><?= wfMsg('sdsvideometadata-vc-artist')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:MusicGroup[]" id="vcArtist">
+						<input type="text" name="musicGroup_name[]" id="vcArtist">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipMusicVideos">
+			<div class="input-group VideoClipMusicVideo">
 				<label for="vcMusicLabel"><?= wfMsg('sdsvideometadata-vc-music-label')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:Organization[]" id="vcMusicLabel">
+						<input type="text" name="musicRecording_musicLabel[]" id="vcMusicLabel">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos VideoClipMusicVideos VideoClipCookingVideos
-			VideoClipCraftVideos">
+			<div class="input-group VideoClipTravelVideo VideoClipMusicVideo VideoClipCookingVideo
+			VideoClipCraftVideo">
 				<label for="vcGenre"><?= wfMsg('sdsvideometadata-vc-genre')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:genre[]" id="vcGenre">
+						<input type="text" name="videoObject_genre[]" id="vcGenre">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
-			<div class="input-group VideoClipTravelVideos">
+			<div class="input-group VideoClipTravelVideo">
 				<label for="vcLocation"><?= wfMsg('sdsvideometadata-vc-location')?></label>
 				<ul>
 					<li>
-						<input type="text" name="schema:contentLocation[]" id="vcLocation">
+						<input type="text" name="about_location[]" id="vcLocation">
 						<button class="secondary remove hidden"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 					</li>
 				</ul>
@@ -184,11 +184,11 @@
 					<option value="false"><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
 				</select>
 			</div>
-			<div class="input-group VideoClipMusicVideos">
+			<div class="input-group VideoClipMusicVideo">
 				<label for="vcPAL"><?= wfMsg('sdsvideometadata-vc-pal')?></label>
-				<select name="schema:contentFormat" id="vcPAL">
-					<option value="true"><?= wfMsg('sdsvideometadata-vc-boolean-true')?></option>
-					<option value="false"><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
+				<select name="videoObject_contentFormat" id="vcPAL">
+					<option value="PAL"><?= wfMsg('sdsvideometadata-vc-boolean-true')?></option>
+					<option value=""><?= wfMsg('sdsvideometadata-vc-boolean-false')?></option>
 				</select>
 			</div>
 			<div class="input-group VideoClipGamingVideo">
@@ -202,7 +202,7 @@
 				<button class="add secondary"><?= wfMsg('sdsvideometadata-vc-add-item')?></button>
 			</div>
 
-			<div class="input-group VideoClipGamingVideo VideoClipMusicVideos VideoClipTVVideo VideoClipMovieTrailersVideo">
+			<div class="input-group VideoClipGamingVideo VideoClipMusicVideo VideoClipTVVideo VideoClipMovieTrailersVideo">
 				<label for="vcSetting"><?= wfMsg('sdsvideometadata-vc-setting')?></label>
 				<ul>
 					<li>

@@ -25,6 +25,11 @@ $app = F::app();
 $dir = dirname(__FILE__) . '/';
 
 /**
+ * exception class
+ */
+class PandoraException extends WikiaException { }
+
+/**
  * classes
  */
 $app->registerClass( 'PandoraSDSObject', $dir . 'PandoraSDSObject.class.php' );

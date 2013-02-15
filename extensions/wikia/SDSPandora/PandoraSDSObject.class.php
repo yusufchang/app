@@ -52,6 +52,10 @@ class PandoraSDSObject implements JsonSerializable {
 		return $this->value;
 	}
 
+	public function getFlattenData() {
+		return $this->jsonSerialize();
+	}
+
 	/**
 	 * (PHP 5 >= 5.4.0)
 	 * Serializes the object to a value that can be serialized natively by json_encode().

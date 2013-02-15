@@ -1,9 +1,9 @@
 <?php
 abstract class SDSFormMapping {
 
-	abstract protected function getMapArray( $mapType = 'main' );
+	protected abstract function getMapArray( $mapType = 'main' );
 
-	protected function getItem( $params, $formData, $fieldName ) {
+	protected function getItem( $params, $formData, $fieldName, $element = 0 ) {
 
 		$item = new PandoraSDSObject();
 
@@ -11,44 +11,39 @@ abstract class SDSFormMapping {
 
 			$item->setType( PandoraSDSObject::TYPE_LITERAL );
 			if ( strcasecmp( $params['subject'], 'id' ) == 0 ) {
-				if ( empty( $formData[ $fieldName ] ) ) {
+				if ( empty( $formData[ $fieldName ][ $element ] ) ) {
 					//TODO: generate unique ID for new object
-					$formData[ $fieldName ] = "http://sds.wikia.com/sds/~" . base64_encode(microtime(true));
+					$formData[ $fieldName ][ $element ] = "http://sds.wikia.com/sds/~" . base64_encode(microtime(true) . rand());
 				}
 			}
 			$item->setSubject( $params['subject'] );
-			$item->setValue( $formData[ $fieldName ] );
+			//always only one item in array
+			if ( is_array( $formData[ $fieldName ] ) ) {
+				$item->setValue( $formData[ $fieldName ][ $element ] );
+			} else {
+				$item->setValue( $formData[ $fieldName ] );
+			}
 		}
 		elseif ( $params['type'] === PandoraSDSObject::TYPE_COLLECTION ) {
-
 			$item->setType( PandoraSDSObject::TYPE_COLLECTION );
 			$item->setSubject( $params['subject'] );
-
 			foreach ( $formData[ $fieldName ] as $i => $field ) {
-
 				$subItem = new PandoraSDSObject();
 				if ( isset( $params['childType'] ) ) {
-
 					$childMap = $this->getMapArray( $params['childType'] );
 					$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
-
 					$subItem->setType( $subItemType );
-
 					foreach ( $childMap as $childMapKey => $childMapValue ) {
-						$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ][ $i ] : '';
-						$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData), $childMapKey ) );
+						$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : '';
+						$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ) );
 					}
-
-
 				} else {
 					$subItem->setType( PandoraSDSObject::TYPE_LITERAL );
 					$subItem->setValue( $field );
 				}
 				$item->setValue( $subItem );
-
 			}
 		}
-
 		return $item;
 
 	}
