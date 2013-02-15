@@ -33,7 +33,7 @@ class PandoraJsonLDTest extends WikiaBaseTest {
 	/**
 	 * @dataProvider jsonStrWrongDataProvider
 	 * @param $jsonInput: encoded string for testing, should be malformed
-	 * @expectedException PandoraException
+	 * @expectedException WikiaException
 	 */
 	public function testPandoraInvalidJsonException( $jsonInput ) {
 		$pandoraObject = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $jsonInput );
