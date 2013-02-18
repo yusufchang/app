@@ -1,51 +1,88 @@
 <?php
-abstract class SDSFormMapping {
+class SDSFormMapping {
 
-	protected abstract function getMapArray( $mapType = 'main' );
+	protected static $mappings = array(
+		'VideoClipGamingVideo',
+		'VideoClipMovieTrailersVideo',
+		'VideoClipTVVideo',
+		'VideoClipCookingVideo',
+		'VideoClipCraftVideo',
+		'VideoClipMusicVideo',
+		'VideoClipTravelVideo'
+	);
+
+	protected function getMapArray( $mapType = 'main' ) {
+
+		$map = array();
+		$map['main'] = array();
+		$map['main']['videoObject_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
+		$map['main']['videoObject_description'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' );
+		$map['main']['videoObject_datePublished'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:datePublished' );
+		$map['main']['videoObject_inLanguage']= array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' );
+		$map['main']['videoObject_subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
+
+		return $map[ $mapType ];
+	}
+
+	protected function generateId() {
+		//TODO: generate unique ID for new object
+		$generatedId = "http://sds.wikia.com/sds/~" . base64_encode(microtime(true) . rand());
+		return $generatedId;
+	}
+
+	protected function getLiteralValue( $subject, $fieldData, $element = 0, $value = null ) {
+		if ( $value !== null ) {
+			return $value;
+		}
+		$returnValue = ( is_array( $fieldData ) ) ? $fieldData[ $element ] : $fieldData;
+		if ( strcasecmp( $subject, 'id' ) == 0 ) {
+			if ( empty( $returnValue ) ) {
+				return $this->generateId();
+			}
+		}
+		return $returnValue;
+	}
+
+	protected function getCollectionValue( $params, $formData, $fieldName ) {
+		$collection = array();
+		foreach ( $formData[ $fieldName ] as $i => $field ) {
+			$subItem = new PandoraSDSObject();
+			if ( isset( $params['childType'] ) ) {
+				$childMap = $this->getMapArray( $params['childType'] );
+				$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
+				$subItem->setType( $subItemType );
+				foreach ( $childMap as $childMapKey => $childMapValue ) {
+					$defaultValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : '';
+					$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : $defaultValue;
+					$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ) );
+				}
+			} else {
+				$subItem->setType( PandoraSDSObject::TYPE_LITERAL );
+				$subItem->setValue( $field );
+			}
+			$collection[] = $subItem;
+		}
+		return $collection;
+	}
 
 	protected function getItem( $params, $formData, $fieldName, $element = 0 ) {
 
-		$item = new PandoraSDSObject();
+			$item = new PandoraSDSObject();
 
-		if ( $params['type'] === PandoraSDSObject::TYPE_LITERAL ) {
-
-			$item->setType( PandoraSDSObject::TYPE_LITERAL );
-			if ( strcasecmp( $params['subject'], 'id' ) == 0 ) {
-				if ( empty( $formData[ $fieldName ][ $element ] ) ) {
-					//TODO: generate unique ID for new object
-					$formData[ $fieldName ][ $element ] = "http://sds.wikia.com/sds/~" . base64_encode(microtime(true) . rand());
-				}
+			if ( $params['type'] === PandoraSDSObject::TYPE_LITERAL ) {
+				$item->setType( PandoraSDSObject::TYPE_LITERAL );
+				$item->setSubject( $params['subject'] );
+				$mapperValue = (isset( $params[ 'value' ] ) ) ? $params[ 'value' ] : null;
+				$literalValue =  $this->getLiteralValue( $params[ 'subject' ], $formData[ $fieldName ], $element, $mapperValue );
+				$item->setValue( $literalValue );
 			}
-			$item->setSubject( $params['subject'] );
-			//always only one item in array
-			if ( is_array( $formData[ $fieldName ] ) ) {
-				$item->setValue( $formData[ $fieldName ][ $element ] );
-			} else {
-				$item->setValue( $formData[ $fieldName ] );
+			elseif ( $params['type'] === PandoraSDSObject::TYPE_COLLECTION ) {
+				$item->setType( PandoraSDSObject::TYPE_COLLECTION );
+				$item->setSubject( $params['subject'] );
+				$collectionValue = $this->getCollectionValue( $params, $formData, $fieldName );
+				$item->setValue( $collectionValue );
 			}
-		}
-		elseif ( $params['type'] === PandoraSDSObject::TYPE_COLLECTION ) {
-			$item->setType( PandoraSDSObject::TYPE_COLLECTION );
-			$item->setSubject( $params['subject'] );
-			foreach ( $formData[ $fieldName ] as $i => $field ) {
-				$subItem = new PandoraSDSObject();
-				if ( isset( $params['childType'] ) ) {
-					$childMap = $this->getMapArray( $params['childType'] );
-					$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
-					$subItem->setType( $subItemType );
-					foreach ( $childMap as $childMapKey => $childMapValue ) {
-						$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : '';
-						$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ) );
-					}
-				} else {
-					$subItem->setType( PandoraSDSObject::TYPE_LITERAL );
-					$subItem->setValue( $field );
-				}
-				$item->setValue( $subItem );
-			}
-		}
-		return $item;
-
+			return $item;
 	}
 
 	public function newPandoraSDSObjectFromFormData( $formData, $mapName = 'main' ) {
@@ -71,9 +108,13 @@ abstract class SDSFormMapping {
 
 		foreach ( $map as $fieldName => $params ) {
 
+			if ( isset( $params[ 'value' ] ) ) {
+				$formData[ $fieldName ] = $params[ 'value' ];
+			}
+
 			if ( empty( $formData[ $fieldName ] ) ||
 				( is_array( $formData[ $fieldName ] ) && count($formData[ $fieldName ] )==1 && $formData[ $fieldName ][0]=="" ) ) {
-				continue;
+					continue;
 			}
 
 			$item = $this->getItem( $params, $formData, $fieldName );
@@ -85,6 +126,7 @@ abstract class SDSFormMapping {
 	}
 
 	public function newFormDataFromPandoraSDSObject( PandoraSDSObject $object ) {
-		// TODO: Implement newFormDataFromPandoraSDSObject() method.
+		print_r($this->mappings);
+
 	}
 }

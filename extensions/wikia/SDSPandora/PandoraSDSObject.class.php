@@ -17,6 +17,21 @@ class PandoraSDSObject implements JsonSerializable {
 	protected $subject;
 	protected $value;
 
+	public function hasValue( $value = null ) {
+		$value = ($value !== null) ? $value : $this->value;
+		if ( $value instanceof PandoraSDSObject ) return $value->hasValue();
+		if ( ! isset( $value ) ) {
+			return false;
+		}
+		if ( is_array( $value ) && count( $value ) === 0 ) {
+			return false;
+		}
+		if ( !is_array( $value ) && strcasecmp( $value, '' ) == 0 ) {
+			return false;
+		}
+		return true;
+	}
+
 	public function setType( $type ) {
 		if ( $type === static::TYPE_COLLECTION ) {
 			$this->value = array();
@@ -41,10 +56,16 @@ class PandoraSDSObject implements JsonSerializable {
 	}
 
 	public function setValue( $value ) {
-		if ( $this->type === static::TYPE_COLLECTION ) {
-			$this->value[] = $value;
-		} else {
-			$this->value = $value;
+		if ( $this->hasValue( $value ) ) {
+			if ( is_array( $value ) ) {
+				foreach ( $value as $v ) {
+					$this->setValue( $v );
+				}
+			} elseif ( $this->type === static::TYPE_COLLECTION ) {
+				$this->value[] = $value;
+			} else {
+				$this->value = $value;
+			}
 		}
 	}
 
