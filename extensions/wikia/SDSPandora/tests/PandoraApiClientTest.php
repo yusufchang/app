@@ -40,8 +40,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 
 	/**
 	 * Test if all object name characters are properly encoded when generating object urls
-	 * @param $character - characted to be encoded
-	 * @param $endodedValue - expected character encoding
+	 * @param $character - character to be encoded
+	 * @param $encodedValue - expected character encoding
+	- expected character encoding
 	 * @dataProvider charactersEncodingDataProvider
 	 */
 	public function testObjectNameEncoding($character, $endodedValue) {
@@ -51,8 +52,8 @@ class PandoraApiClientTest extends WikiaBaseTest {
 
 	/**
 	 * Test if all object name characters are properly encoded when generating collection urls
-	 * @param $character - characted to be encoded
-	 * @param $endodedValue - expected character encoding
+	 * @param $character - character to be encoded
+	 * @param $encodedValue - expected character encoding
 	 * @dataProvider charactersEncodingDataProvider
 	 */
 	public function testCollectionNameEncoding($character, $endodedValue) {
@@ -80,8 +81,48 @@ class PandoraApiClientTest extends WikiaBaseTest {
 					$this->equalTo( true ),
 					$this->equalTo( 'POST' ),
 					$this->equalTo( '{"id":"http://fake.id"}' ) )
-			->will( $this->returnValue( new PandoraResponse( Status::newGood(), '{}' ) ) );
+			->will( $this->returnValue( new PandoraResponse( Status::newGood(), 200, '{}' ) ) );
 
 		$mockedClient->createObject( $mockedClient->getCollectionUrl(), '{"id":"http://fake.id"}' );
 	}
+
+	/*
+	 * Test if getObjectAsJson returns JSON object in case of the correct response
+	 */
+	public function testGetObjectAsJson() {
+		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
+		$mockedClient->expects($this->once())
+			->method('call')
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid01' ) )
+			->will( $this->returnValue( new PandoraResponse( Status::newGood(), 200, '{"a":"b"}' ) ) );
+	    $return = $mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid01' ) );
+		$this->assertInternalType( 'object', $return );
+		$this->assertAttributeEquals( 'b', 'a', $return );
+	}
+
+	/*
+	 * Test if getObjectAsJson returns null in case server returns "Not found"
+	 */
+	public function testGetObjectAsJsonNotFound() {
+		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
+		$mockedClient->expects($this->once())
+			->method('call')
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid01' ) )
+			->will( $this->returnValue( new PandoraResponse( Status::newFatal( '' ), 404, '{"a":"b"}' ) ) );
+		$this->assertNull( $mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid01' ) ) );
+	}
+
+	/**
+	 * Test if getObjectAsJson throws an exception in case there is a server error
+	 * @expectedException WikiaException
+	 */
+	public function testGetObjectAsJsonError() {
+		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
+		$mockedClient->expects($this->once())
+			->method('call')
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid01' ) )
+			->will( $this->returnValue( new PandoraResponse( Status::newFatal( '' ), 500, '{"a":"b"}' ) ) );
+		$mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid01' ) );
+	}
+
 }

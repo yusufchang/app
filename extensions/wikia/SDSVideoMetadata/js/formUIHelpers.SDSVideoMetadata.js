@@ -8,6 +8,8 @@ var VMDFormUI = {
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
 		this.cachedSelectors.nameField = $('#vcTitle');
 
+
+
 		// attach handlers
 		this.cachedSelectors.form.on('click', 'button.add', function(event) {
 			event.preventDefault();
@@ -38,6 +40,7 @@ var VMDFormUI = {
 			keyup: $.proxy(this.simpleValidation, this)
 		});
 
+		this.setObjTypeForEdit();
 	},
 
 	// add new blank input field for reference list type properties
@@ -95,8 +98,17 @@ var VMDFormUI = {
 		} else {
 			this.cachedSelectors.saveButton.attr('disabled', 'disabled');
 		}
+	},
+	// Temporary method for setting video object type in edit mode
+	setObjTypeForEdit: function() {
+		var type = this.cachedSelectors.typeSelect.data('type');
+		if (type === '') {
+			return false;
+		}
+		var $type = 'option[value="' + type + '"]';
+		this.cachedSelectors.typeSelect.children($type).attr('selected', 'selected');
+		this.cachedSelectors.typeSelect.trigger('change');
 	}
-
 };
 
 $(function() {

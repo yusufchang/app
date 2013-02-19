@@ -55,13 +55,14 @@ class PandoraAPIClient extends WikiaObject {
 	}
 
 	/**
-	 * Make a call to SDS to fetch an object.
+	 * Make a call to SDS to fetch an object. If the object does not exists, it returns null
 	 * @param $url - sds object address (from object's id or generated with  getObjectUrl method)
-	 * @return SDS object JSON representation
+	 * @return SDS object JSON representation or null
 	 */
 	public function getObjectAsJson( $url ) {
 		$response = $this->call( $url );
 		if ( !$response->isOK() ) {
+			if ( $response->getStatusCode() == 404 ) return null;
 			throw new WikiaException('Invalid status ' . $response->getMessage() . ' for url ' . $url);
 		}
 		return $response->asJson();
@@ -106,8 +107,9 @@ class PandoraAPIClient extends WikiaObject {
 		}
 		$httpRequest->setHeader( 'Accept', 'application/ld+json' );
 		$status = $httpRequest->execute();
+		$statusCode = $httpRequest->getStatus();
 		$response = $httpRequest->getContent();
-		return new PandoraResponse( $status, $response );
+		return new PandoraResponse( $status, $statusCode, $response );
 	}
 
 }

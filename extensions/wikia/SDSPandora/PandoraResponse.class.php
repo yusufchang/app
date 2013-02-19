@@ -5,9 +5,14 @@ class PandoraResponse {
 	 * @param $status Status
 	 * @param $response String
 	 */
-	public function __construct($status, $response) {
+	public function __construct($status, $statusCode, $response) {
 		$this->status = $status;
+		$this->statusCode = $statusCode;
 		$this->response = $response;
+	}
+
+	public function getStatusCode() {
+		return $this->statusCode;
 	}
 
 	public function isOK() {

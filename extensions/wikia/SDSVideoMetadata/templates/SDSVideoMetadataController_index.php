@@ -1,3 +1,14 @@
+<?php
+	$vcObj = array(
+		'videoObject_name' => 'test object',
+		'videoObject_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Maecenas faucibus mollis interdum.',
+		'videoObject_datePublished' => '2013.02.19',
+		'videoObject_inLanguage' => 'English',
+		'videoObject_subTitleLanguage' => 'Polish',
+		'vcType' => 'VideoClipCookingVideo'
+	);
+?>
+
 <?php if ( $isCorrectFile ) { ?>
 	<h1><?= wfMsg('sdsvideometadata-header', $file)?></h1>
 	<form class="WikiaForm VMDForm" id="VMDForm" method="POST">
@@ -6,29 +17,30 @@
 			<div class="input-group">
 				<label for="vcTitle"><?= wfMsg('sdsvideometadata-vc-title')?>* <small>(<?= wfMsg
 				('sdsvideometadata-vc-required')?>)</small></label>
-				<input type="text" name="videoObject_name" id="vcTitle">
+				<input type="text" name="videoObject_name" id="vcTitle" value="<?= $vcObj['videoObject_name'] ?>">
 			</div>
 			<div class="input-group">
 				<label for="vcDescription"><?= wfMsg('sdsvideometadata-vc-description')?></label>
-				<textarea name="videoObject_description" id="vcDescription"></textarea>
+				<textarea name="videoObject_description" id="vcDescription"><?= $vcObj['videoObject_description'] ?>
+					</textarea>
 			</div>
 			<div class="input-group">
 				<label for="vcPublishedDate"><?= wfMsg('sdsvideometadata-vc-published-date')?></label>
-				<input type="text" name="videoObject_datePublished" id="vcPublishedDate">
+				<input type="text" name="videoObject_datePublished" id="vcPublishedDate" value="<?= $vcObj['videoObject_datePublished'] ?>">
 			</div>
 			<div class="input-group">
 				<label for="vcLanguage"><?= wfMsg('sdsvideometadata-vc-language')?></label>
-				<input type="text" name="videoObject_inLanguage" id="vcLanguage">
+				<input type="text" name="videoObject_inLanguage" id="vcLanguage" value="<?= $vcObj['videoObject_inLanguage'] ?>">
 			</div>
 			<div class="input-group">
 				<label for="vcSubtitles"><?= wfMsg('sdsvideometadata-vc-subtitles')?></label>
-				<input type="text" name="videoObject_subTitleLanguage" id="vcSubtitles">
+				<input type="text" name="videoObject_subTitleLanguage" id="vcSubtitles" value="<?= $vcObj['videoObject_subTitleLanguage'] ?>">
 			</div>
 		</fieldset>
 
 		<div class="input-group">
 			<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?></label>
-			<select name="vcType" id="vcType">
+			<select name="vcType" id="vcType" data-type="<?= $vcObj['vcType'] ?>">
 				<option value="">...</option>
 				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
 				<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
