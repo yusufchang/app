@@ -40,8 +40,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 
 	/**
 	 * Test if all object name characters are properly encoded when generating object urls
-	 * @param $character - characted to be encoded
-	 * @param $endodedValue - expected character encoding
+	 * @param $character - character to be encoded
+	 * @param 	 * @param $encodedValue - expected character encoding
+	- expected character encoding
 	 * @dataProvider charactersEncodingDataProvider
 	 */
 	public function testObjectNameEncoding($character, $endodedValue) {
@@ -51,8 +52,8 @@ class PandoraApiClientTest extends WikiaBaseTest {
 
 	/**
 	 * Test if all object name characters are properly encoded when generating collection urls
-	 * @param $character - characted to be encoded
-	 * @param $endodedValue - expected character encoding
+	 * @param $character - character to be encoded
+	 * @param $encodedValue - expected character encoding
 	 * @dataProvider charactersEncodingDataProvider
 	 */
 	public function testCollectionNameEncoding($character, $endodedValue) {
@@ -80,7 +81,7 @@ class PandoraApiClientTest extends WikiaBaseTest {
 					$this->equalTo( true ),
 					$this->equalTo( 'POST' ),
 					$this->equalTo( '{"id":"http://fake.id"}' ) )
-			->will( $this->returnValue( new PandoraResponse( Status::newGood(), '{}' ) ) );
+			->will( $this->returnValue( new PandoraResponse( Status::newGood(), 200, '{}' ) ) );
 
 		$mockedClient->createObject( $mockedClient->getCollectionUrl(), '{"id":"http://fake.id"}' );
 	}
