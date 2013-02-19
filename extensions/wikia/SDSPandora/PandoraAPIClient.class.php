@@ -25,6 +25,13 @@ class PandoraAPIClient extends WikiaObject {
 	}
 
 	/**
+	 * Given object's full id (url), return its entry point address
+	 */
+	public function getObjectUrlFromId( $id ) {
+		return $this->baseUrl . $this->apiPath . ltrim( parse_url( $id, PHP_URL_PATH ), '/' );
+	}
+
+	/**
 	 * Generate object address
 	 * @param $objectShortId - object id that's unique in the collection, for articles this should be articleId
 	 * @param null $collection - optional, collection name, defaults to current wiki

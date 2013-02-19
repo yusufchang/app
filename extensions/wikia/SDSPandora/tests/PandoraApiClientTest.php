@@ -125,4 +125,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid01' ) );
 	}
 
+	public function testGetObjectUrlFromId() {
+		$apiClient = new PandoraAPIClient('http://sds.fake.pl', '/api/v0.1/');
+		$this->assertEquals('http://sds.fake.pl/api/v0.1/video151/982734', $apiClient->getObjectUrlFromId( 'http://sds.wikia.com/video151/982734' ) );
+	}
+
 }
