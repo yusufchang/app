@@ -86,6 +86,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$mockedClient->createObject( $mockedClient->getCollectionUrl(), '{"id":"http://fake.id"}' );
 	}
 
+	/*
+	 * Test if getObjectAsJson returns JSON object in case of the correct response
+	 */
 	public function testGetObjectAsJson() {
 		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
 		$mockedClient->expects($this->once())
@@ -97,6 +100,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$this->assertAttributeEquals( 'b', 'a', $return );
 	}
 
+	/*
+	 * Test if getObjectAsJson returns null in case server returns "Not found"
+	 */
 	public function testGetObjectAsJsonNotFound() {
 		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
 		$mockedClient->expects($this->once())
@@ -107,6 +113,7 @@ class PandoraApiClientTest extends WikiaBaseTest {
 	}
 
 	/**
+	 * Test if getObjectAsJson throws an exception in case there is a server error
 	 * @expectedException WikiaException
 	 */
 	public function testGetObjectAsJsonError() {
