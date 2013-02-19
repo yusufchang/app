@@ -2,14 +2,19 @@
 class SDSFormMapping {
 
 	protected static $mappings = array(
+
+		'VideoClipTVVideo',
 		'VideoClipGamingVideo',
 		'VideoClipMovieTrailersVideo',
-		'VideoClipTVVideo',
 		'VideoClipCookingVideo',
 		'VideoClipCraftVideo',
 		'VideoClipMusicVideo',
 		'VideoClipTravelVideo'
 	);
+
+	public static function canHandle( PandoraSDSObject $object ) {
+		return false;
+	}
 
 	protected function getMapArray( $mapType = 'main' ) {
 
@@ -31,6 +36,7 @@ class SDSFormMapping {
 	}
 
 	protected function getLiteralValue( $subject, $fieldData, $element = 0, $value = null ) {
+
 		if ( $value !== null ) {
 			return $value;
 		}
@@ -44,6 +50,7 @@ class SDSFormMapping {
 	}
 
 	protected function getCollectionValue( $params, $formData, $fieldName ) {
+
 		$collection = array();
 		foreach ( $formData[ $fieldName ] as $i => $field ) {
 			$subItem = new PandoraSDSObject();
@@ -125,8 +132,13 @@ class SDSFormMapping {
 		return $root;
 	}
 
-	public function newFormDataFromPandoraSDSObject( PandoraSDSObject $object ) {
-		print_r($this->mappings);
+	public static function newFormDataFromPandoraSDSObject( PandoraSDSObject $object ) {
 
+		foreach ( static::$mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
+
+			if ( $mappingHandler::canHandle( $object ) ) {
+
+			}
+		}
 	}
 }

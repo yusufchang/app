@@ -18,8 +18,18 @@ class PandoraAPIClient extends WikiaObject {
 	protected $baseUrl = null;
 	protected $apiPath = null;
 
-	public function __construct($baseUrl, $apiPath) {
+	public function __construct($baseUrl=null, $apiPath=null) {
+
 		parent::__construct();
+
+		if ( empty( $baseUrl ) ) {
+			$baseUrl = Pandora::$config['endpoint_base'];
+		}
+
+		if ( empty( $apiPath) ) {
+			$apiPath = Pandora::$config['endpoint_api_v'];
+		}
+
 		$this->baseUrl = $baseUrl;
 		$this->apiPath = $apiPath;
 	}

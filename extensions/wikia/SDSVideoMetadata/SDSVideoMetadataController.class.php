@@ -11,6 +11,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	}
 
 	public function index() {
+
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/css/SDSVideoMetadata.scss');
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/js/formUIHelpers.SDSVideoMetadata.js');
 		$file = $this->getVal('video');
@@ -22,7 +23,26 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$this->setVal( 'isCorrectFile', false );
 			return false;
 		} else {
+
+			$pandoraApi = new PandoraAPIClient();
+			$objectUrl = $pandoraApi->getObjectUrl( $fileTitle->getArticleID() );
+			$obj = $pandoraApi->getObject( $objectUrl );
+
+			//var_dump( $objectUrl );
+
+
+			if ( $obj->isOK() ) {
+
+				$pandoraData = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $obj->response );
+				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData );
+				//var_dump( $pandoraData );
+				//die;
+			}
+
 			if($this->request->wasPosted()) {
+
+
+
 				$this->setVal( 'wasPasted', true );
 				$isCompleted = (bool) $this->request->getVal('vcCompleted', false);
 				$this->setFileCompleted( $fileTitle, $isCompleted );
@@ -34,9 +54,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
 					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
-
-					$pandoraApi = new PandoraAPIClient('http://dev-adam:9292','/api/v0.1/');
-					$urlForCollection = $pandoraApi->getCollectionUrl('video151');
+					$urlForCollection = $pandoraApi->getCollectionUrl();
 					$result = $pandoraApi->createObject( $urlForCollection, $json );
 					if ( !$result->isOK() ) {
 						$this->setVal( 'errorMessage', $result->getMessage() );

@@ -33,7 +33,8 @@ class VideoClipGamingVideo extends SDSFormMapping {
 		return $map[ $mapType ];
 	}
 
-	protected static function canHandle( $data ) {
+	public static function canHandle( PandoraSDSObject $data ) {
+
 		foreach ( $data->getValue() as $subItem ) {
 			if ( strcasecmp( $subItem->getSubject(), 'schema:about' ) == 0 ) {
 				if( $subItem->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
