@@ -19,10 +19,12 @@ class VideoClipMovieTrailersVideo extends SDSFormMapping {
 		$map['main']['videoObject_rating'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentRating' );
 		$map['main']['videoObject_isFamilyFriendly'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:isFamilyFriendly' );
 		$map['main']['videoObject_setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
+		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:VideoObject' );
 
 		$map['movie_name'] = array();
 		$map['movie_name']['movie_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['movie_name']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['movie_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:Movie' );
 
 		return $map[ $mapType ];
 	}

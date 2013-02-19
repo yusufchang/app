@@ -18,20 +18,24 @@ class VideoClipMusicVideo extends SDSFormMapping {
 		$map['main']['videoObject_setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
 		$map['main']['videoObject_contentFormat'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:encodingFormat' );
 		$map['main']['track_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType'=>'schema_musicRecording' );
+		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:VideoObject' );
 
 		$map['schema_musicRecording'] = array();
 		$map['schema_musicRecording']['track_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['schema_musicRecording']['musicGroup_name'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:byArtist', 'childType'=>'schema_musicGroup' );
 		$map['schema_musicRecording']['musicRecording_musicLabel'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:sourceOrganization', 'childType'=>'schema_organization' );
 		$map['schema_musicRecording']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['schema_musicRecording']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:MusicRecording' );
 
 		$map['schema_musicGroup'] = array();
 		$map['schema_musicGroup']['musicGroup_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['schema_musicGroup']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['schema_musicGroup']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:MusicGroup' );
 
 		$map['schema_organization'] = array();
 		$map['schema_organization']['musicRecording_musicLabel'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['schema_organization']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['schema_organization']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:Organization' );
 
 		return $map[ $mapType ];
 	}
