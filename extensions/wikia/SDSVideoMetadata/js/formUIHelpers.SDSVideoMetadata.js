@@ -8,8 +8,6 @@ var VMDFormUI = {
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
 		this.cachedSelectors.nameField = $('#vcTitle');
 
-
-
 		// attach handlers
 		this.cachedSelectors.form.on('click', 'button.add', function(event) {
 			event.preventDefault();
@@ -48,7 +46,7 @@ var VMDFormUI = {
 		var lastListElement = $(event.target).prev().children().last();
 
 		lastListElement.clone().insertBefore(lastListElement).find('.remove').removeClass('hidden');
-		lastListElement.find('input').val('').focus();
+		lastListElement.find('input').val('').focus().next().addClass('hidden');
 	},
 	// remove selected reference in the list
 	removeListItem: function(event) {
