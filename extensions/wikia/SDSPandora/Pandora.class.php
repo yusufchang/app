@@ -15,20 +15,21 @@ class Pandora {
 		'common_object_collection_name' => 'sds'
 	);
 
-	public function __construct() {
-
-		$app = F::app();
-		static::$config['current_collection_name'] = $app->wg->DBname;
+	public static function getConfig( $key = null ) {
+		if ( $key ) {
+			return static::$config[ $key ];
+		}
+		return static::$config;
 	}
 
-	public function pandoraIdFromTitle( Title $title ) {
+	public static function pandoraIdFromTitle( Title $title ) {
 
 		// for example: 'http://sds.wikia.com/video151/'.$articleId
 		$id = static::$config['id_base_url'] . static::$config['current_collection_name'] . '/' . $title->getArticleID();
 		return $id;
 	}
 
-	public function generateCommonObjectId() {
+	public static function generateCommonObjectId() {
 
 		// for example: "http://sds.wikia.com/sds/~" . base64_encode(microtime(true) . rand());
 		$id = static::$config['id_base_url'] . static::$config['common_object_collection_name'] . '/~' . base64_encode(microtime(true) . rand());

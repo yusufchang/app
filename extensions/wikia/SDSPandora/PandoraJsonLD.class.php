@@ -24,7 +24,7 @@ class PandoraJsonLD {
 	 * @return PandoraSDSObject
 	 */
 	static public function pandoraSDSObjectFromJsonLD ( $json ) {
-		$jsonObject = json_decode( $json );
+		$jsonObject = ( !$json instanceof stdClass ) ? json_decode( $json ) : $json;
 		if ( $jsonObject === null ) {
 			throw new WikiaException( "Invalid or malformed JSON" );
 		}

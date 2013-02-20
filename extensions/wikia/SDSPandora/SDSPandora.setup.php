@@ -57,3 +57,5 @@ $app->registerClass( 'PandoraResponse', $dir . 'PandoraResponse.class.php' );
  * message files
  */
 $app->registerExtensionMessageFile('Pandora', $dir . 'Pandora.i18n.php' );
+
+Pandora::$config['current_collection_name'] = $app->wg->DBname;

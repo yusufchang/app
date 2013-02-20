@@ -17,6 +17,8 @@ class PandoraSDSObject implements JsonSerializable {
 	protected $subject;
 	protected $value;
 
+	protected static $api;
+
 	public function hasValue( $value = null ) {
 		$value = ($value !== null) ? $value : $this->value;
 		if ( $value instanceof PandoraSDSObject ) return $value->hasValue();
@@ -26,7 +28,7 @@ class PandoraSDSObject implements JsonSerializable {
 		if ( is_array( $value ) && count( $value ) === 0 ) {
 			return false;
 		}
-		if ( !is_array( $value ) && strcasecmp( $value, '' ) == 0 ) {
+		if ( !is_array( $value ) && $value === '' ) {
 			return false;
 		}
 		return true;
@@ -70,30 +72,54 @@ class PandoraSDSObject implements JsonSerializable {
 	}
 
 	public function getValue( $searchFor = null ) {
-
+		if ( $this->getType() === static::TYPE_OBJECT ) {
+			$this->getObjectValue();
+		}
 		if ( $searchFor !== null ) {
-
-			if ( $this->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-
+			if ( $this->getType() === static::TYPE_COLLECTION || $this->getType() === static::TYPE_OBJECT ) {
 				foreach ( $this->getValue() as $subItem ) {
-
-					if ( strcasecmp( $subItem->getSubject(), $searchFor ) == 0 ) { /* @var $subItem PandoraSDSObject */
+					if ( $subItem->getSubject() === $searchFor ) { /* @var $subItem PandoraSDSObject */
 						return $subItem->getValue();
 					}
 				}
-
 			} else {
-
-				if ( strcasecmp( $this->getSubject(), $searchFor) == 0 ) {
+				if ( $this->getSubject() === $searchFor ) {
 					return $this->getValue();
 				}
-
-				return null;
 			}
-
+			return null;
 		}
 
 		return $this->value;
+	}
+
+	public function getObjectValue() {
+		if ( is_array( $this->value ) && count( $this->value ) == 1 ) {
+			//check for id
+			$obj = reset( $this->value );
+			if ( $obj->getSubject() === 'id' ) {
+				$objUrl = $obj->getValue();
+				$realUrl = $this->getApi()->getObjectUrlFromId( $objUrl );
+				$jsonData = $this->getApi()->getObjectAsJson( $realUrl );
+
+				if ( $jsonData ) {
+					$object = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $jsonData );
+					$this->value = $object->getValue();
+				}
+			}
+		}
+		return $this->value;
+	}
+
+
+	/**
+	 * @return PandoraAPIClient
+	 */
+	public function getApi() {
+		if ( !static::$api ) {
+			static::$api = new PandoraAPIClient( Pandora::getConfig( 'endpoint_base' ), Pandora::getConfig( 'endpoint_api_v' ) );
+		}
+		return static::$api;
 	}
 
 	public function getFlattenData() {
