@@ -69,7 +69,30 @@ class PandoraSDSObject implements JsonSerializable {
 		}
 	}
 
-	public function getValue() {
+	public function getValue( $searchFor = null ) {
+
+		if ( $searchFor !== null ) {
+
+			if ( $this->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
+
+				foreach ( $this->getValue() as $subItem ) {
+
+					if ( strcasecmp( $subItem->getSubject(), $searchFor ) == 0 ) { /* @var $subItem PandoraSDSObject */
+						return $subItem->getValue();
+					}
+				}
+
+			} else {
+
+				if ( strcasecmp( $this->getSubject(), $searchFor) == 0 ) {
+					return $this->getValue();
+				}
+
+				return null;
+			}
+
+		}
+
 		return $this->value;
 	}
 

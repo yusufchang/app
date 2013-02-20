@@ -31,6 +31,10 @@ class VideoClipCraftVideo extends SDSFormMapping {
 		$map['schema_organization']['type'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'rdf:type', 'value'=>'schema:Organization' );
 
 		return $map [ $mapType ];
+	}
 
+	public static function canHandle( PandoraSDSObject $data ) {
+
+		return false;
 	}
 }

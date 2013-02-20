@@ -27,6 +27,7 @@ $dir = dirname(__FILE__) . '/';
 /**
  * classes
  */
+$app->registerClass( 'Pandora', $dir . 'Pandora.class.php' );
 $app->registerClass( 'PandoraSDSObject', $dir . 'PandoraSDSObject.class.php' );
 $app->registerClass( 'PandoraJsonLD', $dir . 'PandoraJsonLD.class.php' );
 $app->registerClass( 'PandoraAPIClient', $dir . 'PandoraAPIClient.class.php' );

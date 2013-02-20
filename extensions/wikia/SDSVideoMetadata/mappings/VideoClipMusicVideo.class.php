@@ -40,4 +40,9 @@ class VideoClipMusicVideo extends SDSFormMapping {
 		return $map[ $mapType ];
 	}
 
+	public static function canHandle( PandoraSDSObject $data ) {
+
+		return false;
+	}
+
 }
