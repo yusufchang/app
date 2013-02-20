@@ -41,7 +41,7 @@ class SDSFormMapping {
 			return $value;
 		}
 		$returnValue = ( is_array( $fieldData ) ) ? $fieldData[ $element ] : $fieldData;
-		if ( strcasecmp( $subject, 'id' ) == 0 ) {
+		if ( $subject === 'id' ) {
 			if ( empty( $returnValue ) ) {
 				return $this->generateId();
 			}
@@ -132,13 +132,99 @@ class SDSFormMapping {
 		return $root;
 	}
 
+	public function toFormDataFromPandoraSDSObject( PandoraSDSObject $data, $map = 'main' ) {
+
+		print_r('<pre>');
+		$flatenned = $this->getFlattenData( $data );
+		print_r( $flatenned );
+		die();
+
+		$result = array();
+		$map = $this->getMapArray( $map );
+		print_r($data);
+//		print_r($data);
+
+		foreach( $map as $mapField => $params ) {
+			if ( $params[ 'type' ] === PandoraSDSObject::TYPE_LITERAL ) {
+				$result[ $mapField ] = $data->getValue( $params[ 'subject' ] );
+			} else {
+				if ( isset( $params[ 'childType' ] ) ) {
+
+					$this->getFormDataFromPandoraSDSObject( $result, $data, $mapField, $params );
+//					$result[ $mapField ] =
+				} else {
+
+				}
+			}
+		}
+		print_r( $result );
+		if($map == 'main') die();
+		return $result;
+	}
+
+	protected function getFlattenData( PandoraSDSObject $data, $result = null) {
+		if ( $result === null ) {
+			$result = array();
+		}
+		if ( $data->getType() === PandoraSDSObject::TYPE_LITERAL ) {
+			$this->addToResult( $result, $data->getSubject(), $data->getValue() );
+		} else {
+			foreach ( $data->getValue() as $val ) {
+				if ( is_object( $val ) ) {
+					$this->getFlattenData( $val, $result );
+				} else {
+					$this->addToResult( $result, $data->getSubject(), $val );
+				}
+			}
+		}
+		return $result;
+	}
+
+	protected function addToResult( &$result, $formField, $data ){
+		if ( isset( $result[ $formField ] ) ) {
+			if ( is_array( $result[ $formField ] ) ) {
+				$result[ $formField ][] = $data;
+			} else {
+				$result[ $formField ] = array( $result[ $formField ], $data );
+			}
+		} else {
+			$result[ $formField ] = $data;
+		}
+	}
+
+	protected function getFormDataFromPandoraSDSObject ( &$result, PandoraSDSObject $data, $formField, $formFieldParams ) {
+		$subItems = $data->getValue( $formFieldParams[ 'subject' ] );
+//		$result[ $formField ] = array();
+		$childMap = $this->getMapArray( $formFieldParams[ 'childType' ] );
+		$childParams = $childMap[ $formField ];
+		foreach ( $subItems as $subItem ) {
+			$this->addToResult( $result, $formField, array( 'name' => $subItem->getValue( $childParams[ 'subject' ] ), 'id' => $subItem->getValue( 'id' ) ) );
+			foreach ( $childMap as $childMapField => $childMapParams ) {
+
+			}
+		}
+	}
+
+
 	public static function newFormDataFromPandoraSDSObject( PandoraSDSObject $object ) {
 
 		foreach ( static::$mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
 
 			if ( $mappingHandler::canHandle( $object ) ) {
-
+				$handler = new $mappingHandler();
+				$handler->toFormDataFromPandoraSDSObject( $object );
+				die();
 			}
 		}
+	}
+
+
+	public static function getSubjectType( PandoraSDSObject $data, $subject = 'schema:about' ) {
+		$about = $data->getValue( $subject );
+		if ( is_array( $about ) ) {
+			$first = reset( $about );
+			return $first->getValue( 'type' );
+		}
+		return null;
 	}
 }
