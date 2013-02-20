@@ -13,9 +13,7 @@ class SDSVideoMetadataHooks {
 		$title = $imagePage->getTitle();
 
 		if ( !empty( $title ) && WikiaFileHelper::isTitleVideo( $title ) ) {
-			$a = $title->getDBKey();
-
-			$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.$title->getNsText().':'.htmlspecialchars($title->getDBKey());
+			$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $title->getPrefixedDBkey );
 			$liList[] = '<li><a href="'.($specialPageUrl).'">'.wfMsg('sdsvideometadata-special-page-entrypoint').'</a>';
 		}
 
