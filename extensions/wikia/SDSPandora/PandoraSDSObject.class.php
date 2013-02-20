@@ -33,7 +33,7 @@ class PandoraSDSObject implements JsonSerializable {
 	}
 
 	public function setType( $type ) {
-		if ( $type === static::TYPE_COLLECTION ) {
+		if ( $type === static::TYPE_COLLECTION || $type === static::TYPE_OBJECT ) {
 			$this->value = array();
 		} else {
 			$this->value = '';
@@ -61,7 +61,7 @@ class PandoraSDSObject implements JsonSerializable {
 				foreach ( $value as $v ) {
 					$this->setValue( $v );
 				}
-			} elseif ( $this->type === static::TYPE_COLLECTION ) {
+			} elseif ( $this->type === static::TYPE_COLLECTION || $this->type === static::TYPE_OBJECT ) {
 				$this->value[] = $value;
 			} else {
 				$this->value = $value;
@@ -107,11 +107,12 @@ class PandoraSDSObject implements JsonSerializable {
 				return new stdClass();
 			}
 		} elseif ( $this->type === static::TYPE_OBJECT  ) {
-			if ( is_object( $this->value ) ) {
-				return array ( $this->value->getSubject() => $this->value->getValue() );
-			} else {
-				return new stdClass();
+			$object = new stdClass();
+			foreach( $this->value as $val ) {
+				$subject = $val->getSubject();
+				$object->{$subject} = $val->getValue();
 			}
+			return $object;
 		} elseif ( $this->type === static::TYPE_LITERAL ) {
 			return array( $this->subject => $this->value );
 		}

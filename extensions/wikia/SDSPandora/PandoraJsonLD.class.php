@@ -29,16 +29,17 @@ class PandoraJsonLD {
 			throw new WikiaException( "Invalid or malformed JSON" );
 		}
 		$rootObject = new PandoraSDSObject();
+//		$rootObject->setType( PandoraSDSObject::TYPE_OBJECT );
 
 		foreach ( $jsonObject as $key => $value ) {
 			$node = new PandoraSDSObject();
 			$node->setSubject( $key );
 			if ( is_array( $value ) ) {
 				$node->setType(PandoraSDSObject::TYPE_COLLECTION);
-				static::buildNextNode( $node, $value );
+				$node->setValue( static::buildNextNode( $value ) );
 			} elseif ( is_object( $value ) ) {
 				$node->setType(PandoraSDSObject::TYPE_OBJECT);
-				static::buildNextNode( $node, $value );
+				$node->setValue( static::buildNextNode( $value ) );
 			} else {
 				$node->setType( PandoraSDSObject::TYPE_LITERAL );
 				$node->setValue( $value );
@@ -49,8 +50,8 @@ class PandoraJsonLD {
 		return $rootObject;
 	}
 
-	static protected function buildNextNode ( &$rootObject, $jsonObject ) {
-
+	static protected function buildNextNode ( $jsonObject ) {
+		$collection = array();
 		foreach ( $jsonObject as $key => $value ) {
 			$node = new PandoraSDSObject();
 			if ( !is_numeric( $key ) ) {
@@ -58,16 +59,17 @@ class PandoraJsonLD {
 			}
 			if ( is_array( $value ) ) {
 				$node->setType(PandoraSDSObject::TYPE_COLLECTION);
-				static::buildNextNode( $node, $value );
+				$node->setValue( static::buildNextNode( $value ) );
 			} elseif ( is_object( $value ) ) {
 				$node->setType(PandoraSDSObject::TYPE_OBJECT);
-				static::buildNextNode( $node, $value );
+				$node->setValue( static::buildNextNode( $value ) );
 			} else {
 				$node->setType( PandoraSDSObject::TYPE_LITERAL );
 				$node->setValue( $value );
 			}
-			$rootObject->setValue( $node );
+			$collection[] = $node;
 		}
+		return $collection;
 
 	}
 }
