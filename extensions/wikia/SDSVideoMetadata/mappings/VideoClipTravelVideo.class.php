@@ -19,22 +19,22 @@ class VideoClipTravelVideo extends SDSFormMapping {
 		$map['main']['videoObject_subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
 		$map['main']['videoObject_genre'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:genre' );
 		$map['main']['about_location'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contentLocation', 'childType' => 'schema_about' );
-		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:VideoObject' );
+		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
 
 		$map['schema_provider'] = array();
 		$map['schema_provider']['provider_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['schema_provider']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
-		$map['schema_provider']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:Organization' );
+		$map['schema_provider']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:Organization' );
 
 		$map['schema_organization'] = array();
 		$map['schema_organization']['publisher_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['schema_organization']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
-		$map['schema_organization']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:Organization' );
+		$map['schema_organization']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:Organization' );
 
 		$map['schema_about'] = array();
 		$map['schema_about']['about_location'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['schema_about']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
-		$map['schema_about']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'rdf:type', 'value'=>'schema:Place' );
+		$map['schema_about']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:Place' );
 
 		return $map [ $mapType ];
 	}
@@ -42,6 +42,11 @@ class VideoClipTravelVideo extends SDSFormMapping {
 
 	public static function canHandle( PandoraSDSObject $data ) {
 
+		$type = static::getSubjectType( $data, 'schema:contentLocation' );
+		if ( $type === 'schema:Place' ) {
+			return true;
+		}
 		return false;
+
 	}
 }
