@@ -52,9 +52,9 @@ class SDSFormMapping {
 				$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
 				$subItem->setType( $subItemType );
 				foreach ( $childMap as $childMapKey => $childMapValue ) {
-					$defaultValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : '';
-					$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : $defaultValue;
-					$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ) );
+					$mapperValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : null;
+					$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : '';
+					$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ), $mapperValue );
 				}
 			} else {
 				$subItem->setType( PandoraSDSObject::TYPE_LITERAL );
