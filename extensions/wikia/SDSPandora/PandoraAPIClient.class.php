@@ -68,7 +68,13 @@ class PandoraAPIClient extends WikiaObject {
 	 * @return PandoraResponse
 	 */
 	public function getObject( $url ) {
-		return $this->call( $url );
+		static $cache = array();
+		if ( isset( $cache[ $url ] ) ) return $cache[ $url ];
+		$result = $this->call( $url );
+		if ( $result->isOK() ) {
+			$cache[ $url ] = $result;
+		}
+		return $result;
 	}
 
 	/**
@@ -77,7 +83,7 @@ class PandoraAPIClient extends WikiaObject {
 	 * @return SDS object JSON representation or null
 	 */
 	public function getObjectAsJson( $url ) {
-		$response = $this->call( $url );
+		$response = $this->getObject( $url );
 		if ( !$response->isOK() ) {
 			if ( $response->getStatusCode() == 404 ) return null;
 			throw new WikiaException('Invalid status ' . $response->getMessage() . ' for url ' . $url);
@@ -113,6 +119,7 @@ class PandoraAPIClient extends WikiaObject {
 	}
 
 	protected function call( $url, $nocache = true, $method = null, $body = null ) {
+
 		$options = array( 'method' => ( $method ) ? $method : 'GET' );
 		//don't use wgHTTPProxy on devboxes, as cross-devbox calls will return 403
 		if ( !empty( $this->app->wg->develEnvironment ) ) $options['noProxy'] = true;

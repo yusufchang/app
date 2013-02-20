@@ -107,9 +107,9 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
 		$mockedClient->expects($this->once())
 			->method('call')
-			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid01' ) )
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid02' ) )
 			->will( $this->returnValue( new PandoraResponse( Status::newFatal( '' ), 404, '{"a":"b"}' ) ) );
-		$this->assertNull( $mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid01' ) ) );
+		$this->assertNull( $mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid02' ) ) );
 	}
 
 	/**
@@ -120,14 +120,29 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
 		$mockedClient->expects($this->once())
 			->method('call')
-			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid01' ) )
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid03' ) )
 			->will( $this->returnValue( new PandoraResponse( Status::newFatal( '' ), 500, '{"a":"b"}' ) ) );
-		$mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid01' ) );
+		$mockedClient->getObjectAsJson( $mockedClient->getObjectUrl( 'testid03' ) );
 	}
 
+	/**
+	 * Test if the object url is translated to the correct entry point
+	 */
 	public function testGetObjectUrlFromId() {
 		$apiClient = new PandoraAPIClient('http://sds.fake.pl', '/api/v0.1/');
 		$this->assertEquals('http://sds.fake.pl/api/v0.1/video151/982734', $apiClient->getObjectUrlFromId( 'http://sds.wikia.com/video151/982734' ) );
+	}
+
+	/**
+	 * Test if the request is made only once when getting the same object
+	 */
+	public function testGetObjectCache() {
+		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
+		$mockedClient->expects($this->once())
+			->method('call')
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/sdsdbmock/testid04' ) )
+			->will( $this->returnValue( new PandoraResponse( Status::newGood(), 200, '{"a":"b"}' ) ) );
+		$this->assertEquals( $mockedClient->getObject( $mockedClient->getObjectUrl( 'testid04' ) ), $mockedClient->getObject( $mockedClient->getObjectUrl( 'testid04' ) ) );
 	}
 
 }
