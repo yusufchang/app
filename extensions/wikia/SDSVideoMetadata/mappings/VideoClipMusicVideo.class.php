@@ -19,11 +19,12 @@ class VideoClipMusicVideo extends SDSFormMapping {
 		$map['main']['videoObject_contentFormat'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:encodingFormat' );
 		$map['main']['track_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType'=>'schema_musicRecording' );
 		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
+		$map['main']['contentUrl'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentURL', 'value'=>'http://test.wikia.com' );
+		$map['main']['musicGroup_name'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contributor', 'childType'=>'schema_musicGroup' );
+		$map['main']['musicRecording_musicLabel'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contributor', 'childType'=>'schema_organization' );
 
 		$map['schema_musicRecording'] = array();
 		$map['schema_musicRecording']['track_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['schema_musicRecording']['musicGroup_name'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:byArtist', 'childType'=>'schema_musicGroup' );
-		$map['schema_musicRecording']['musicRecording_musicLabel'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:sourceOrganization', 'childType'=>'schema_organization' );
 		$map['schema_musicRecording']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['schema_musicRecording']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:MusicRecording' );
 
