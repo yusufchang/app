@@ -111,6 +111,18 @@ class PandoraSDSObject implements JsonSerializable {
 		return $this->value;
 	}
 
+	public function  getItem( $searchFor = null ) {
+		if ( $searchFor !== null && $this->getType() !== static::TYPE_LITERAL ) {
+			foreach ( $this->getValue() as $subItem ) {
+				if ( $subItem->getSubject() === $searchFor ) {
+					return $subItem;
+				}
+			}
+		} else {
+			return $this;
+		}
+	}
+
 
 	/**
 	 * @return PandoraAPIClient
