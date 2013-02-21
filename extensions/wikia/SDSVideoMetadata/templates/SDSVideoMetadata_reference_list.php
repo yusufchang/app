@@ -1,7 +1,10 @@
 <div class="input-group <?= $type ?>">
 	<label for="<?= $name ?>"><?= $labelMsg ?></label>
 	<ul>
-		<?php foreach ($list as $item): ?>
+		<?php
+		if ( !is_array( $list ) ) $list = array();
+		  foreach ($list as $item): 
+	    ?>
 			<li>
 				<input type="text" name="<?= $name ?>[]" id="<?= $name ?>" value="<?= $item['name'] ?>">
 				<input type="hidden" name="<?= $id ?>[]" value="<?= $item['id'] ?>">
