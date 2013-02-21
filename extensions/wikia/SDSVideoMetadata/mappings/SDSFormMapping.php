@@ -157,20 +157,24 @@ class SDSFormMapping {
 			} elseif ( $params[ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
 				if ( isset( $params[ 'childType' ] ) ) {
 					//object
-					$childData =  $data->getItem( $params['subject'] );
-					if ( $childData->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-						foreach ( $childData->getValue() as $sub ) {
-							$this->appendFormData( $result, $mapField, $sub, $params );
+					$childData =  $data->getItem( $params[ 'subject' ] );
+					if ( $childData instanceof PandoraSDSObject ) {
+						if ( $childData->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
+							foreach ( $childData->getValue() as $sub ) {
+								$this->appendFormData( $result, $mapField, $sub, $params );
+							}
+						} elseif ( $childData->getType() === PandoraSDSObject::TYPE_OBJECT ) {
+							$this->appendFormData( $result, $mapField, $childData, $params );
 						}
-					} elseif ( $childData->getType() === PandoraSDSObject::TYPE_OBJECT ) {
-						$this->appendFormData( $result, $mapField, $childData, $params );
 					}
 				} else {
 					$stringCollection = $data->getValue( $params[ 'subject' ] );
-					if ( is_array( $stringCollection ) ) {
-						$result[ $mapField ] = $stringCollection;
-					} else {
-						$result[ $mapField ] = array( $stringCollection );
+					if ( !empty( $stringCollection ) ) {
+						if ( is_array( $stringCollection ) ) {
+							$result[ $mapField ] = $stringCollection;
+						} else {
+							$result[ $mapField ] = array( $stringCollection );
+						}
 					}
 				}
 			}
@@ -225,8 +229,11 @@ class SDSFormMapping {
 	public static function getSubjectType( PandoraSDSObject $data, $subject = 'schema:about' ) {
 
 		$about = $data->getItem( $subject );
+		//lazy load about
+		$about->getValue();
 		if ( $about->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-			$first = reset( $about );
+			$first = reset( $about->getValue() );
+			//lazy loading
 			return $first->getValue( 'type' );
 		} else {
 			return $about->getValue( 'type' );
