@@ -95,7 +95,7 @@
 			<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?>* <small>(<?= wfMsg
 				('sdsvideometadata-vc-required') ?>)</small></label>
 			<select name="vcType" id="vcType" data-type="<?= isset( $vcObj['vcType'] ) ? $vcObj['vcType'] : '' ?>">
-				<option value="">...</option>
+				<option value="" selected="selected">...</option>
 				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
 				<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
 				<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
