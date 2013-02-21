@@ -167,7 +167,6 @@ class SDSFormMapping {
 					}
 				} else {
 					$stringCollection = $data->getValue( $params[ 'subject' ] );
-					print_r( $stringCollection );
 					if ( is_array( $stringCollection ) ) {
 						$result[ $mapField ] = $stringCollection;
 					} else {
