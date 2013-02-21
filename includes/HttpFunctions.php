@@ -733,10 +733,12 @@ class CurlHttpRequest extends MWHttpRequest {
 			$this->reqHeaders['Expect'] = '';
 		} else {
 			$this->curlOptions[CURLOPT_CUSTOMREQUEST] = $this->method;
+			if ($this->method == 'PUT') {
+				$this->curlOptions[CURLOPT_POSTFIELDS] = $this->postData;
+			}
 		}
 
 		$this->curlOptions[CURLOPT_HTTPHEADER] = $this->getHeaderList();
-
 		$curlHandle = curl_init( $this->url );
 
 		if ( !curl_setopt_array( $curlHandle, $this->curlOptions ) ) {
