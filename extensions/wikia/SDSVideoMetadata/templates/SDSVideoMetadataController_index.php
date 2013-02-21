@@ -1,5 +1,5 @@
 <?php
-	$vcObj = array(
+//	$vcObj = array(
 		/*
 		'videoObject_name' => 'test object',
 		'videoObject_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Maecenas faucibus mollis interdum.',
@@ -39,7 +39,7 @@
 		'videoObject_isFamilyFriendly' => '',
 		'videoObject_contentFormat' => '',
 		*/
-	);
+//	);
 ?>
 
 <?php if ( $isCorrectFile ) { ?>
@@ -164,7 +164,7 @@
 			)); ?>
 
 			<!-- Genre -->
-			<?= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
+			<?= F::app()->renderPartial('SDSVideoMetadataController', 'literal_list', array(
 				'type' => 'VideoClipTravelVideo VideoClipMusicVideo VideoClipCookingVideo
 			VideoClipCraftVideo',
 				'name' => 'videoObject_genre',
@@ -227,7 +227,7 @@
 			)); ?>
 
 			<!-- Type -->
-			<?= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
+			<?= F::app()->renderPartial('SDSVideoMetadataController', 'literal_list', array(
 				'type' => 'VideoClipGamingVideo VideoClipTVVideo',
 				'name' => 'videoObject_keywords',
 				'id' => 'videoObject_keywords_id',
