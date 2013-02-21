@@ -281,7 +281,7 @@
 			)); ?>
 
 			<!-- Setting -->
-			<?= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
+			<?= F::app()->renderPartial('SDSVideoMetadataController', 'literal_list', array(
 				'type' => 'VideoClipGamingVideo VideoClipMusicVideo VideoClipTVVideo VideoClipMovieTrailersVideo',
 				'name' => 'videoObject_setting',
 				'id' => 'videoObject_setting_id',
