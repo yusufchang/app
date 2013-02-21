@@ -34,9 +34,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			if ( $obj->isOK() ) {
 
 				$pandoraData = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $obj->response );
-				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData );
-				//var_dump( $pandoraData );
-				//die;
+				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData, array( 'contentURL' => urlencode( $fileTitle->getPrefixedDBkey() ) ) );
 			}
 
 			if($this->request->wasPosted()) {
@@ -51,6 +49,8 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				$connectorClassName = $requestParams['vcType'];
 				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
 					$connector = new $connectorClassName(); /* @var $connector SDSFormMapping */
+
+					$connector->setContextValues( array( 'contentURL' => urlencode( $fileTitle->getPrefixedDBkey() ) ) );
 
 					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
 					$json = PandoraJsonLD::toJsonLD( $pandoraObject );

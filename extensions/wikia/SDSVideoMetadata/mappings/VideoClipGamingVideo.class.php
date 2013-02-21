@@ -7,7 +7,7 @@ class VideoClipGamingVideo extends SDSFormMapping {
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();
-		$map['main'] = array();
+		$map['main'] = parent::getMapArray( 'main' );
 		$map['main']['videoObject_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['main']['videoObject_description'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' );
 		$map['main']['videoObject_datePublished'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:datePublished' );

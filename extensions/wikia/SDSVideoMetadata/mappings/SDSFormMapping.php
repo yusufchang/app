@@ -1,6 +1,16 @@
 <?php
 class SDSFormMapping {
 
+	protected $contextValues = array();
+
+	public function setContextValues( $contextValues ) {
+		$this->contextValues = $contextValues;
+	}
+
+	public function getContextValues() {
+		return $this->contextValues;
+	}
+
 	protected static $mappings = array(
 
 		'VideoClipTVVideo',
@@ -19,6 +29,7 @@ class SDSFormMapping {
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();
+
 		$map['main'] = array();
 		$map['main']['videoObject_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['main']['videoObject_description'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' );
@@ -26,7 +37,11 @@ class SDSFormMapping {
 		$map['main']['videoObject_inLanguage']= array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' );
 		$map['main']['videoObject_subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
 
-		return $map[ $mapType ];
+		if ( is_array( $this->contextValues ) && isset( $this->contextValues['contentURL'] ) ) {
+			$map['main']['contentUrl'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentURL', 'value' => $this->contextValues['contentURL'] );
+		}
+
+		return isset( $map[ $mapType ] ) ? $map[ $mapType ] : array();
 	}
 
 	protected function generateId() {
@@ -190,12 +205,17 @@ class SDSFormMapping {
 		}
 	}
 
-	public static function newFormDataFromPandoraSDSObject( PandoraSDSObject $object ) {
+	public static function newFormDataFromPandoraSDSObject( PandoraSDSObject $object, $contextValues=null ) {
 
 		foreach ( static::$mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
 
 			if ( $mappingHandler::canHandle( $object ) ) {
 				$handler = new $mappingHandler();
+
+				if ( $contextValues !== null ) {
+					$handler->setContextValues( $contextValues );
+				}
+
 				$result = $handler->toFormDataFromPandoraSDSObject( $object );
 				$result[ 'vcType' ] = $mappingHandler;
 				return $result;
@@ -204,6 +224,7 @@ class SDSFormMapping {
 	}
 
 	public static function getSubjectType( PandoraSDSObject $data, $subject = 'schema:about' ) {
+
 		$about = $data->getItem( $subject );
 		if ( $about->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
 			$first = reset( $about );
