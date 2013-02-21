@@ -27,20 +27,16 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$pandoraApi = new PandoraAPIClient();
 			$objectUrl = $pandoraApi->getObjectUrl( $fileTitle->getArticleID() );
 			$obj = $pandoraApi->getObject( $objectUrl );
-
-			//var_dump( $objectUrl );
-
+			$objExisted = false;
 
 			if ( $obj->isOK() ) {
-
+				$objExisted = true;
 				$pandoraData = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $obj->response );
-				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData, array( 'contentURL' => urlencode( $fileTitle->getPrefixedDBkey() ) ) );
+				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData );
+				$this->setVal( 'vcObj', $mapper );
 			}
 
 			if($this->request->wasPosted()) {
-
-
-
 				$this->setVal( 'wasPasted', true );
 				$isCompleted = (bool) $this->request->getVal('vcCompleted', false);
 				$this->setFileCompleted( $fileTitle, $isCompleted );
@@ -50,12 +46,19 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
 					$connector = new $connectorClassName(); /* @var $connector SDSFormMapping */
 
-					$connector->setContextValues( array( 'contentURL' => urlencode( $fileTitle->getPrefixedDBkey() ) ) );
+					$connector->setContextValues( array( 'contentURL' => urlencode( $fileTitle->getFullUrl() ) ) );
 
 					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
 					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
+
 					$urlForCollection = $pandoraApi->getCollectionUrl();
-					$result = $pandoraApi->createObject( $urlForCollection, $json );
+
+					if ( $objExisted ) {
+						$result = $pandoraApi->saveObject( $objectUrl, $json );
+					} else {
+						$result = $pandoraApi->createObject( $urlForCollection, $json );
+					}
+
 					if ( !$result->isOK() ) {
 						$this->setVal( 'errorMessage', $result->getMessage() );
 					} else {

@@ -55,7 +55,11 @@ class SDSFormMapping {
 		if ( $value !== null ) {
 			return $value;
 		}
-		$returnValue = ( is_array( $fieldData ) ) ? $fieldData[ $element ] : $fieldData;
+		if ( is_array( $fieldData ) ) {
+			$returnValue = ( isset( $fieldData[ $element ] ) ) ? $fieldData[ $element ] : null;
+		} else {
+			$returnValue = $fieldData;
+		}
 		if ( $subject === 'id' ) {
 			if ( empty( $returnValue ) ) {
 				return $this->generateId();
@@ -76,6 +80,22 @@ class SDSFormMapping {
 				foreach ( $childMap as $childMapKey => $childMapValue ) {
 					$mapperValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : null;
 					$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : '';
+					//find if id is there
+					if ( strpos( $childMapKey, 'id' ) !== false ) {
+						//and has value
+						if ( is_array( $formItemData ) ) {
+							$value = ( isset( $formItemData[ $i ] ) ) ? $formItemData[ $i ] : null;
+						} else {
+							$value = $formItemData;
+						}
+						if ( !empty( $value ) ) {
+							//reset item
+							$subItem->setType( PandoraSDSObject::TYPE_OBJECT );
+							$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ), $mapperValue );
+							//stop processing this node
+							break;
+						}
+					}
 					$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ), $mapperValue );
 				}
 			} else {
@@ -108,7 +128,8 @@ class SDSFormMapping {
 	}
 
 	public function newPandoraSDSObjectFromFormData( $formData, $mapName = 'main' ) {
-
+		print_r('<pre>');
+		$this->sanitizeFormData( $formData );
 		$map = $this->getMapArray( $mapName );
 
 		$root = new PandoraSDSObject();
@@ -147,6 +168,21 @@ class SDSFormMapping {
 		return $root;
 	}
 
+	public function sanitizeFormData( &$formData ) {
+		foreach ( $formData as $key => $field ) {
+			if ( is_array( $field ) && !empty( $field ) ) {
+				$this->sanitizeFormData( $formData[ $key ] );
+				if ( empty ( $formData[ $key ] ) ) {
+					unset ( $formData[ $key ] );
+				}
+			} else {
+				if ( empty( $field ) ) {
+					unset ( $formData[ $key ] );
+				}
+			}
+		}
+	}
+
 	public function toFormDataFromPandoraSDSObject( PandoraSDSObject $data, $map = 'main' ) {
 		$result = array();
 		$map = $this->getMapArray( $map );
@@ -171,7 +207,9 @@ class SDSFormMapping {
 					$stringCollection = $data->getValue( $params[ 'subject' ] );
 					if ( !empty( $stringCollection ) ) {
 						if ( is_array( $stringCollection ) ) {
-							$result[ $mapField ] = $stringCollection;
+							foreach ( $stringCollection as $item ) {
+								$result[ $mapField ][] = $item->getValue();
+							}
 						} else {
 							$result[ $mapField ] = array( $stringCollection );
 						}
@@ -229,14 +267,15 @@ class SDSFormMapping {
 	public static function getSubjectType( PandoraSDSObject $data, $subject = 'schema:about' ) {
 
 		$about = $data->getItem( $subject );
-		//lazy load about
-		$about->getValue();
-		if ( $about->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-			$first = reset( $about->getValue() );
-			//lazy loading
-			return $first->getValue( 'type' );
-		} else {
-			return $about->getValue( 'type' );
+		if ( $about !== null ) {
+			if ( $about->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
+				$first = reset( $about->getValue() );
+				//lazy loading
+				return $first->getValue( 'type' );
+			} else {
+				return $about->getValue( 'type' );
+			}
 		}
+		return null;
 	}
 }

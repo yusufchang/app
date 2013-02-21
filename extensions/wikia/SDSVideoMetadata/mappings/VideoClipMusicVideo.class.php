@@ -24,7 +24,7 @@ class VideoClipMusicVideo extends SDSFormMapping {
 
 		$map['schema_musicRecording'] = array();
 		$map['schema_musicRecording']['track_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['schema_musicRecording']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['schema_musicRecording']['track_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['schema_musicRecording']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:MusicRecording' );
 
 		$map['schema_musicGroup'] = array();
