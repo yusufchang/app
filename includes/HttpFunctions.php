@@ -739,6 +739,7 @@ class CurlHttpRequest extends MWHttpRequest {
 		}
 
 		$this->curlOptions[CURLOPT_HTTPHEADER] = $this->getHeaderList();
+
 		$curlHandle = curl_init( $this->url );
 
 		if ( !curl_setopt_array( $curlHandle, $this->curlOptions ) ) {
