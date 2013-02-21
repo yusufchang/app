@@ -73,7 +73,8 @@
 
 		<!-- Video object type selection -->
 		<div class="input-group">
-			<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?></label>
+			<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?>* <small>(<?= wfMsg
+				('sdsvideometadata-vc-required') ?>)</small></label>
 			<select name="vcType" id="vcType" data-type="<?= $vcObj['vcType'] ?>">
 				<option value="">...</option>
 				<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
