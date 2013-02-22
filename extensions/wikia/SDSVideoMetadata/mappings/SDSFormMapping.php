@@ -17,9 +17,9 @@ class SDSFormMapping {
 		'VideoClipGamingVideo',
 		'VideoClipMovieTrailersVideo',
 		'VideoClipCookingVideo',
-		'VideoClipCraftVideo',
 		'VideoClipMusicVideo',
-		'VideoClipTravelVideo'
+		'VideoClipTravelVideo',
+		'VideoClipCraftVideo'
 	);
 
 	public static function canHandle( PandoraSDSObject $object ) {
@@ -128,7 +128,6 @@ class SDSFormMapping {
 	}
 
 	public function newPandoraSDSObjectFromFormData( $formData, $mapName = 'main' ) {
-		print_r('<pre>');
 		$this->sanitizeFormData( $formData );
 		$map = $this->getMapArray( $mapName );
 

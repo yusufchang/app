@@ -35,6 +35,6 @@ class VideoClipCraftVideo extends SDSFormMapping {
 
 	public static function canHandle( PandoraSDSObject $data ) {
 
-		return false;
+		return true;
 	}
 }
