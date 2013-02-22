@@ -188,7 +188,13 @@ class SDSFormMapping {
 
 		foreach( $map as $mapField => $params ) {
 			if ( $params[ 'type' ] === PandoraSDSObject::TYPE_LITERAL ) {
-				$result[ $mapField ] = $data->getValue( $params[ 'subject' ] );
+				//if is array (incosistent with server) then get value of the first element
+				$value = $data->getValue( $params[ 'subject' ] );
+				if ( is_array( $value ) ) {
+					$parsedValue = reset( $value );
+					$value = $parsedValue->getValue();
+				}
+				$result[ $mapField ] = $value;
 			} elseif ( $params[ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
 				if ( isset( $params[ 'childType' ] ) ) {
 					//object
