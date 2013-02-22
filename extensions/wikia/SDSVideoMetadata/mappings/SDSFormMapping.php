@@ -81,7 +81,7 @@ class SDSFormMapping {
 					$mapperValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : null;
 					$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : '';
 					//find if id is there
-					if ( strpos( $childMapKey, 'id' ) !== false ) {
+					if ( $childMapValue[ 'subject' ] === 'id' ) {
 						//and has value
 						if ( is_array( $formItemData ) ) {
 							$value = ( isset( $formItemData[ $i ] ) ) ? $formItemData[ $i ] : null;
