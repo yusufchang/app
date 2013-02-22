@@ -26,12 +26,12 @@ class VideoClipTVVideo extends SDSFormMapping {
 		$map['series_name'] = array();
 		$map['series_name']['series_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['series_name']['season_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:season', 'childType'=>'season_name' );
-		$map['series_name']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['series_name']['series_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['series_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:TVSeries' );
 
 		$map['season_name'] = array();
 		$map['season_name']['season_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['season_name']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['season_name']['season_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['season_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:TVSeason' );
 
 		return $map[ $mapType ];

@@ -23,7 +23,7 @@ class VideoClipMovieTrailersVideo extends SDSFormMapping {
 
 		$map['movie_name'] = array();
 		$map['movie_name']['movie_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['movie_name']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['movie_name']['movie_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['movie_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:Movie' );
 
 		return $map[ $mapType ];

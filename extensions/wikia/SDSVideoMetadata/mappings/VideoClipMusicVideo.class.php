@@ -29,12 +29,12 @@ class VideoClipMusicVideo extends SDSFormMapping {
 
 		$map['schema_musicGroup'] = array();
 		$map['schema_musicGroup']['musicGroup_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['schema_musicGroup']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['schema_musicGroup']['musicGroup_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['schema_musicGroup']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:MusicGroup' );
 
 		$map['schema_organization'] = array();
 		$map['schema_organization']['musicRecording_musicLabel'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['schema_organization']['id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
+		$map['schema_organization']['musicRecording_musicLabel_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['schema_organization']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:Organization' );
 
 		return $map[ $mapType ];
