@@ -70,7 +70,7 @@ class PandoraAPIClient extends WikiaObject {
 	public function getObject( $url ) {
 		static $cache = array();
 		if ( isset( $cache[ $url ] ) ) return $cache[ $url ];
-		$result = $this->call( $url );
+		$result = $this->call( $url . '?cb=' . time() );    //@todo - resolve cache issues on Ruby server side
 		if ( $result->isOK() ) {
 			$cache[ $url ] = $result;
 		}
