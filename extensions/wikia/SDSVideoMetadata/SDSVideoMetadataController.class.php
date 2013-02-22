@@ -51,11 +51,10 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams );
 					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
 
-					$urlForCollection = $pandoraApi->getCollectionUrl();
-
 					if ( $objExisted ) {
 						$result = $pandoraApi->saveObject( $objectUrl, $json );
 					} else {
+						$urlForCollection = $pandoraApi->getCollectionUrl();
 						$result = $pandoraApi->createObject( $urlForCollection, $json );
 					}
 
