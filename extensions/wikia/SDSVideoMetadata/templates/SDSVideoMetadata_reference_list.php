@@ -6,8 +6,8 @@
 		  foreach ($list as $item): 
 	    ?>
 			<li>
-				<input type="text" name="<?= $name ?>[]" id="<?= $name ?>" value="<?= $item['name'] ?>">
-				<input type="hidden" name="<?= $id ?>[]" value="<?= $item['id'] ?>">
+				<input type="text" name="<?= $name ?>[]" id="<?= $name ?>" value="<?= htmlspecialchars($item['name']) ?>">
+				<input type="hidden" name="<?= $id ?>[]" value="<?= htmlspecialchars($item['id']) ?>">
 				<button class="secondary remove"><?= wfMsg('sdsvideometadata-vc-remove-item')?></button>
 			</li>
 		<?php endforeach; ?>
