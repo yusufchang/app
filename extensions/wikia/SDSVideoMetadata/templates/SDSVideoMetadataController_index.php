@@ -264,12 +264,12 @@
 				'labelMsg' => wfMsg('sdsvideometadata-vc-pal'),
 				'options' => array(
 					array(
-						'value' => 'PAL',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-true')
-					),
-					array(
 						'value' => '',
 						'text' => wfMsg('sdsvideometadata-vc-boolean-not-set')
+					),
+					array(
+						'value' => 'PAL',
+						'text' => wfMsg('sdsvideometadata-vc-boolean-true')
 					)
 				),
 				'selected' => isset( $vcObj['videoObject_contentFormat'] ) ? $vcObj['videoObject_contentFormat'] : null
