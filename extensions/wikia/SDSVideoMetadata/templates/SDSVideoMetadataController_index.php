@@ -242,6 +242,10 @@
 				'labelMsg' => wfMsg('sdsvideometadata-vc-age-gate'),
 				'options' => array(
 					array(
+						'value' => '',
+						'text' => wfMsg('sdsvideometadata-vc-boolean-not-set')
+					),
+					array(
 						'value' => 'true',
 						'text' => wfMsg('sdsvideometadata-vc-boolean-true')
 					),
@@ -265,7 +269,7 @@
 					),
 					array(
 						'value' => '',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-false')
+						'text' => wfMsg('sdsvideometadata-vc-boolean-not-set')
 					)
 				),
 				'selected' => isset( $vcObj['videoObject_contentFormat'] ) ? $vcObj['videoObject_contentFormat'] : null
