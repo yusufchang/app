@@ -2,6 +2,7 @@
 class SDSFormMapping {
 
 	protected $contextValues = array();
+	protected $objects = array();
 
 	public function setContextValues( $contextValues ) {
 		$this->contextValues = $contextValues;
@@ -51,9 +52,14 @@ class SDSFormMapping {
 	}
 
 	protected function getLiteralValue( $subject, $fieldData, $element = 0, $value = null ) {
-
+		$item = new PandoraSDSObject();
+		$item->setType( PandoraSDSObject::TYPE_LITERAL );
+		if ( $subject !== null) {
+			$item->setSubject( $subject );
+		}
 		if ( $value !== null ) {
-			return $value;
+			$item->setValue( $value );
+			return $item;
 		}
 		if ( is_array( $fieldData ) ) {
 			$returnValue = ( isset( $fieldData[ $element ] ) ) ? $fieldData[ $element ] : null;
@@ -62,72 +68,84 @@ class SDSFormMapping {
 		}
 		if ( $subject === 'id' ) {
 			if ( empty( $returnValue ) ) {
-				return $this->generateId();
+				$id = $this->generateId();
+				$item->setValue( $id );
+				return $item;
 			}
 		}
-		return $returnValue;
+		$item->setValue( $returnValue );
+		return $item;
 	}
 
 	protected function getCollectionValue( $params, $formData, $fieldName ) {
-
-		$collection = array();
-		foreach ( $formData[ $fieldName ] as $i => $field ) {
-			$subItem = new PandoraSDSObject();
-			if ( isset( $params['childType'] ) ) {
-				$childMap = $this->getMapArray( $params['childType'] );
-				$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
-				$subItem->setType( $subItemType );
-				foreach ( $childMap as $childMapKey => $childMapValue ) {
-					$mapperValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : null;
-					$formItemData = isset( $formData[ $childMapKey ] ) ? $formData[ $childMapKey ] : '';
-					//find if id is there
-					if ( $childMapValue[ 'subject' ] === 'id' ) {
-						//and has value
-						if ( is_array( $formItemData ) ) {
-							$value = ( isset( $formItemData[ $i ] ) ) ? $formItemData[ $i ] : null;
-						} else {
-							$value = $formItemData;
-						}
-						if ( !empty( $value ) ) {
-							//reset item
-							$subItem->setType( PandoraSDSObject::TYPE_OBJECT );
-							$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ), $mapperValue );
-							//stop processing this node
-							break;
-						}
-					}
-					$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $i ), $mapperValue );
-				}
-			} else {
-				$subItem->setType( PandoraSDSObject::TYPE_LITERAL );
-				$subItem->setValue( $field );
-			}
-			$collection[] = $subItem;
+		$item = new PandoraSDSObject();
+		$item->setType( PandoraSDSObject::TYPE_COLLECTION );
+		if ( isset( $params[ 'subject' ] ) ) {
+			$item->setSubject( $params[ 'subject' ] );
 		}
-		return $collection;
+		foreach ( $formData[ $fieldName ] as $i => $field ) {
+			if ( isset( $params['childType'] ) ) {
+				$subItem = $this->getObjectValue( $params, $formData, $i );
+			} else {
+				$subItem = $this->getLiteralValue( null, $field );
+			}
+			$item->setValue( $subItem );
+		}
+		return $item;
 	}
 
-	protected function getItem( $params, $formData, $fieldName, $element = 0 ) {
+	protected function getObjectValue( $params, $fieldData, $element = 0 ) {
+		$subItem = new PandoraSDSObject();
+		$subItem->setType( PandoraSDSObject::TYPE_OBJECT );
+		$childMap = $this->getMapArray( $params['childType'] );
+//		$subItemType = count( $childMap ) > 1 ? PandoraSDSObject::TYPE_COLLECTION : PandoraSDSObject::TYPE_OBJECT;
+		foreach ( $childMap as $childMapKey => $childMapValue ) {
+			$mapperValue = (isset( $childMapValue[ 'value' ] ) ) ? $childMapValue[ 'value' ] : null;
+			$formItemData = isset( $fieldData[ $childMapKey ] ) ? $fieldData[ $childMapKey ] : '';
+			//find if id is there
+			if ( $childMapValue[ 'subject' ] === 'id' ) {
+				//and has value
+				if ( is_array( $formItemData ) ) {
+					$value = ( isset( $formItemData[ $element ] ) ) ? $formItemData[ $element ] : null;
+				} else {
+					$value = $formItemData;
+				}
+				if ( !empty( $value ) ) {
+					//reset item
+					$subItem->setType( PandoraSDSObject::TYPE_OBJECT );
+					$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $element, $subItem ), $mapperValue );
+					//stop processing this node
+					break;
+				}
+			}
+			$subItem->setValue( $this->getItem( $childMapValue, array( $childMapKey => $formItemData  ), $childMapKey, $element, $subItem ), $mapperValue );
+		}
+		$this->objects[ $params[ 'childType' ] ][] = $subItem;
+		return $subItem;
+	}
 
-			$item = new PandoraSDSObject();
-
+	protected function getItem( $params, $formData, $fieldName, $element = 0, $parent ) {
 			if ( $params['type'] === PandoraSDSObject::TYPE_LITERAL ) {
-				$item->setType( PandoraSDSObject::TYPE_LITERAL );
-				$item->setSubject( $params['subject'] );
 				$mapperValue = (isset( $params[ 'value' ] ) ) ? $params[ 'value' ] : null;
-				$literalValue =  $this->getLiteralValue( $params[ 'subject' ], $formData[ $fieldName ], $element, $mapperValue );
-				$item->setValue( $literalValue );
+				$item = $this->getLiteralValue( $params[ 'subject' ], $formData[ $fieldName ], $element, $mapperValue );
 			}
 			elseif ( $params['type'] === PandoraSDSObject::TYPE_COLLECTION ) {
-				$item->setType( PandoraSDSObject::TYPE_COLLECTION );
-				$item->setSubject( $params['subject'] );
-				$collectionValue = $this->getCollectionValue( $params, $formData, $fieldName );
-				$item->setValue( $collectionValue );
+				$item = $this->getCollectionValue( $params, $formData, $fieldName );
+				//check for parent item looking for subject, if exist continue on adding items to previous one
+				$parentItem = $parent->getItem( $params[ 'subject' ] );
+				if ( $parentItem !== null ) {
+					$parentItem->setValue( $item->getValue() );
+					//return empty string, so the item is not added again
+					return '';
+				}
 			}
 			return $item;
 	}
 
-	public function newPandoraSDSObjectFromFormData( $formData, $mapName = 'main' ) {
+	public function newPandoraSDSObjectFromFormData( $formData, $mapName = 'main', &$objects = false) {
+		//reset objects array
+		$this->objects = array();
+
 		$this->sanitizeFormData( $formData );
 		$map = $this->getMapArray( $mapName );
 
@@ -159,11 +177,14 @@ class SDSFormMapping {
 					continue;
 			}
 
-			$item = $this->getItem( $params, $formData, $fieldName );
+			$item = $this->getItem( $params, $formData, $fieldName, 0, $root );
 
 			$root->setValue( $item );
 		}
-
+		//set objects array if needed
+		if ( $objects !== false ) {
+			$objects = $this->objects;
+		}
 		return $root;
 	}
 
