@@ -254,8 +254,16 @@ class SDSFormMapping {
 
 		//lazy loading for references
 		$childData = $data->getValue();
-		//get "name" and "id" for $formField
-		$result[ $formField ][] = array( 'name' => $data->getValue( $childParams[ 'subject' ] ), 'id' => $data->getValue( 'id' ) );
+		//check for type if set add only correct
+		if ( isset( $childMap[ 'type' ] ) && isset( $childMap[ 'type' ][ 'value' ] ) ) {
+			if ( $childMap[ 'type' ][ 'value' ] === $data->getValue( 'type' ) ) {
+				$result[ $formField ][] = array( 'name' => $data->getValue( $childParams[ 'subject' ] ), 'id' => $data->getValue( 'id' ) );
+			}
+		} else {
+			//if type not set just add data
+			//get "name" and "id" for $formField
+			$result[ $formField ][] = array( 'name' => $data->getValue( $childParams[ 'subject' ] ), 'id' => $data->getValue( 'id' ) );
+		}
 
 		//check childs for deeper connections
 		foreach( $childMap as $childMapField => $childMapParams ) {
