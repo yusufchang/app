@@ -44,7 +44,7 @@ class VideoClipMusicVideo extends SDSFormMapping {
 	public static function canHandle( PandoraSDSObject $data ) {
 
 		$type = static::getSubjectType( $data );
-		if ( $type === 'schema:MusicRecording' ) {
+		if ( in_array( 'schema:MusicRecording', $type, true ) ) {
 			return true;
 		}
 		return false;

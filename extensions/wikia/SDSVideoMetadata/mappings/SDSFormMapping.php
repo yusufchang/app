@@ -303,13 +303,14 @@ class SDSFormMapping {
 		$about = $data->getItem( $subject );
 		if ( $about !== null ) {
 			if ( $about->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-				$first = reset( $about->getValue() );
-				//lazy loading
-				return $first->getValue( 'type' );
+				foreach ( $about->getValue() as $aboutItem ) {
+					$type[] = $aboutItem->getValue( 'type' );
+				}
+				return array_unique( $type );
 			} else {
-				return $about->getValue( 'type' );
+				return array( $about->getValue( 'type' ) );
 			}
 		}
-		return null;
+		return array();
 	}
 }

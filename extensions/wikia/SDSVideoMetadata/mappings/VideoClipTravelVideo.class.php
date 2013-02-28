@@ -43,7 +43,7 @@ class VideoClipTravelVideo extends SDSFormMapping {
 	public static function canHandle( PandoraSDSObject $data ) {
 
 		$type = static::getSubjectType( $data, 'schema:contentLocation' );
-		if ( $type === 'schema:Place' ) {
+		if ( in_array( 'schema:Place', $type, true ) ) {
 			return true;
 		}
 		return false;

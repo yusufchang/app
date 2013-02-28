@@ -19,13 +19,13 @@ class VideoClipTVVideo extends SDSFormMapping {
 		$map['main']['videoObject_inLanguage']= array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' );
 		$map['main']['videoObject_subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
 		$map['main']['series_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' =>'series_name' );
+		$map['main']['season_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType'=>'season_name' );
 		$map['main']['videoObject_keywords'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:keywords' );
 		$map['main']['videoObject_setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
 		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
 
 		$map['series_name'] = array();
 		$map['series_name']['series_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
-		$map['series_name']['season_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:season', 'childType'=>'season_name' );
 		$map['series_name']['series_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['series_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:TVSeries' );
 
@@ -40,7 +40,7 @@ class VideoClipTVVideo extends SDSFormMapping {
 	public static function canHandle( PandoraSDSObject $data ) {
 
 		$type = static::getSubjectType( $data );
-		if ( $type === 'schema:TVSeries' ) {
+		if ( in_array( 'schema:TVSeries', $type, true ) ) {
 			return true;
 		}
 		return false;

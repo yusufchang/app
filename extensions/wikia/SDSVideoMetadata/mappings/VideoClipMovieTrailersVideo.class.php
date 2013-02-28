@@ -32,7 +32,7 @@ class VideoClipMovieTrailersVideo extends SDSFormMapping {
 	public static function canHandle( PandoraSDSObject $data ) {
 
 		$type = static::getSubjectType( $data );
-		if ( $type === 'schema:Movie' ) {
+		if ( in_array( 'schema:Movie', $type, true ) ) {
 			return true;
 		}
 		return false;

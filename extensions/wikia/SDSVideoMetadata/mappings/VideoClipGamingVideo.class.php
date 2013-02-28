@@ -36,7 +36,7 @@ class VideoClipGamingVideo extends SDSFormMapping {
 	public static function canHandle( PandoraSDSObject $data ) {
 
 		$type = static::getSubjectType( $data );
-		if ( $type === 'wikia:Game' ) {
+		if ( in_array( 'wikia:Game', $type, true ) ) {
 			return true;
 		}
 		return false;
