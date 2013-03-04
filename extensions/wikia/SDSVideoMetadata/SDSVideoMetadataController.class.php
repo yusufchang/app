@@ -31,7 +31,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 			if ( $obj->isOK() ) {
 				$objExisted = true;
-				$pandoraData = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $obj->response );
+				$pandoraData = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $obj->response, $fileTitle->getArticleID() );
 				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData );
 				$this->setVal( 'vcObj', $mapper );
 			}
