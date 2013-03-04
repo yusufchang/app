@@ -299,9 +299,10 @@ class SDSFormMapping {
 	}
 
 	public static function getSubjectType( PandoraSDSObject $data, $subject = 'schema:about' ) {
-
 		$about = $data->getItem( $subject );
+		//lazy load
 		if ( $about !== null ) {
+			$about->getValue();
 			if ( $about->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
 				foreach ( $about->getValue() as $aboutItem ) {
 					$type[] = $aboutItem->getValue( 'type' );
