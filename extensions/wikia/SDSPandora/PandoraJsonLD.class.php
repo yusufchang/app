@@ -23,7 +23,7 @@ class PandoraJsonLD {
 	 * @param $json - string containing text representation of json-ld object
 	 * @return PandoraSDSObject
 	 */
-	static public function pandoraSDSObjectFromJsonLD ( $json ) {
+	static public function pandoraSDSObjectFromJsonLD ( $json, $id = null ) {
 		$jsonObject = ( !$json instanceof stdClass ) ? json_decode( $json ) : $json;
 		if ( $jsonObject === null ) {
 			throw new WikiaException( "Invalid or malformed JSON" );
@@ -47,6 +47,9 @@ class PandoraJsonLD {
 			$rootObject->setValue( $node );
 		}
 
+		if ( $rootObject->getValue( '@graph' ) !== null ) {
+			$rootObject = static::buildFromGraph( $rootObject, $id );
+		}
 		return $rootObject;
 	}
 
@@ -70,6 +73,45 @@ class PandoraJsonLD {
 			$collection[] = $node;
 		}
 		return $collection;
+	}
 
+	static protected function buildFromGraph( $root, $id ) {
+		$objects = array();
+		$graph = $root->getValue( '@graph' );
+		foreach ( $graph as $node ) {
+			$uri = $node->getValue( 'id' );
+			$objectId = pathinfo( $uri );
+			if ( $objectId[ 'filename' ] == $id ) {
+				$result = $node;
+			}
+			$objects[ $node->getValue( 'id' ) ] = $node;
+		}
+		//check result node for any objects
+		if ( $result->getType() !== PandoraSDSObject::TYPE_LITERAL ) {
+			$values = $result->getValue();
+			foreach( $values as $val ) {
+				if ( $val->getType() === PandoraSDSObject::TYPE_OBJECT ) {
+					static::getObject( $val, $objects );
+				} elseif ( $val->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
+					foreach ( $val->getValue() as $item ) {
+						if ( $item->getType() === PandoraSDSObject::TYPE_OBJECT ) {
+							static::getObject( $item, $objects );
+						}
+					}
+				}
+			}
+		}
+		return $result;
+	}
+
+	static protected function getObject( &$item, $objects ) {
+		$id = $item->getValue( 'id' );
+		if ( isset( $objects[ $id ] ) ) {
+			foreach ( $objects[ $id ]->getValue() as $objVal ) {
+				if ( $objVal->getSubject() !== 'id' ) {
+					$item->setValue( $objVal );
+				}
+			}
+		}
 	}
 }
