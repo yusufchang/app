@@ -6,6 +6,8 @@
 
 class VideoClipTravelVideo extends SDSFormMapping {
 
+	const type = 'http://sds.wikia.com/vocabs/VideoClipTravelVideo';
+
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();
@@ -20,6 +22,7 @@ class VideoClipTravelVideo extends SDSFormMapping {
 		$map['main']['videoObject_genre'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:genre' );
 		$map['main']['about_location'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contentLocation', 'childType' => 'schema_about' );
 		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
+		$map['main']['additionalType'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=>static::type );
 
 		$map['schema_provider'] = array();
 		$map['schema_provider']['provider_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );

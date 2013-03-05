@@ -6,6 +6,8 @@
 
 class VideoClipMusicVideo extends SDSFormMapping {
 
+	const type = 'http://sds.wikia.com/vocabs/VideoClipMusicVideo';
+
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();
@@ -22,6 +24,7 @@ class VideoClipMusicVideo extends SDSFormMapping {
 		$map['main']['musicGroup_name'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contributor', 'childType'=>'schema_musicGroup' );
 		$map['main']['musicRecording_musicLabel'] = array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contributor', 'childType'=>'schema_organization' );
 		$map['main']['videoObject_genre'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:genre' );
+		$map['main']['additionalType'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=>static::type );
 
 		$map['schema_musicRecording'] = array();
 		$map['schema_musicRecording']['track_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );

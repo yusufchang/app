@@ -6,6 +6,8 @@
 
 class VideoClipMovieTrailersVideo extends SDSFormMapping {
 
+	const type = 'http://sds.wikia.com/vocabs/VideoClipMovieTrailersVideo';
+
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();
@@ -20,6 +22,7 @@ class VideoClipMovieTrailersVideo extends SDSFormMapping {
 		$map['main']['videoObject_isFamilyFriendly'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:isFamilyFriendly' );
 		$map['main']['videoObject_setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
 		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
+		$map['main']['additionalType'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=>static::type );
 
 		$map['movie_name'] = array();
 		$map['movie_name']['movie_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );

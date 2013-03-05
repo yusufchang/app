@@ -1,6 +1,8 @@
 <?php
 class SDSFormMapping {
 
+	const type = null;
+
 	protected $contextValues = array();
 	protected $objects = array();
 
@@ -283,22 +285,38 @@ class SDSFormMapping {
 
 	public static function newFormDataFromPandoraSDSObject( PandoraSDSObject $object, $contextValues=null ) {
 
+		$additionalType = $object->getValue( 'schema:additionalType' );
+
 		$mappings = static::$mappings;
 		//add this class as default fallback
 		$mappings[] = get_class();
-		foreach ( $mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
-
-			if ( $mappingHandler::canHandle( $object ) ) {
-				$handler = new $mappingHandler();
-
-				if ( $contextValues !== null ) {
-					$handler->setContextValues( $contextValues );
+		if ( $additionalType !== null ) {
+			foreach ( $mappings as $mappingHandler ) {
+				if ( $additionalType === $mappingHandler::type ) {
+					$handler = new $mappingHandler();
+					break;
 				}
-
-				$result = $handler->toFormDataFromPandoraSDSObject( $object );
-				$result[ 'vcType' ] = $mappingHandler;
-				return $result;
 			}
+		}
+
+		if ( !isset( $handler ) ) {
+			foreach ( $mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
+
+				if ( $mappingHandler::canHandle( $object ) ) {
+					$handler = new $mappingHandler();
+					break;
+				}
+			}
+		}
+
+		if ( isset( $handler ) ) {
+			if ( $contextValues !== null ) {
+				$handler->setContextValues( $contextValues );
+			}
+
+			$result = $handler->toFormDataFromPandoraSDSObject( $object );
+			$result[ 'vcType' ] = $mappingHandler;
+			return $result;
 		}
 	}
 

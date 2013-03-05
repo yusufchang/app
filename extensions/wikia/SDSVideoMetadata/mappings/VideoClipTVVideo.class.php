@@ -9,6 +9,8 @@
 
 class VideoClipTVVideo extends SDSFormMapping {
 
+	const type = 'http://sds.wikia.com/vocabs/VideoClipTVVideo';
+
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();
@@ -23,6 +25,7 @@ class VideoClipTVVideo extends SDSFormMapping {
 		$map['main']['videoObject_keywords'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:keywords' );
 		$map['main']['videoObject_setting'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'wikia:setting' );
 		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
+		$map['main']['additionalType'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=>static::type );
 
 		$map['series_name'] = array();
 		$map['series_name']['series_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
