@@ -39,6 +39,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video',
 	'sdsvideometadata-vc-type-cooking' => 'Cooking Video',
 	'sdsvideometadata-vc-type-craft' => 'Craft video',
+	'sdsvideometadata-vc-type-how-to' => 'How to video',
 	'sdsvideometadata-vc-type-music' => 'Music video',
 	'sdsvideometadata-type-specific-metadata-legend' => 'Add video clip type specific metadata',
 	'sdsvideometadata-vc-game' => 'Game',

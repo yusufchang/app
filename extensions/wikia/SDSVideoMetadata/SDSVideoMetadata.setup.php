@@ -32,6 +32,7 @@ $app->registerClass('VideoClipMovieTrailersVideo', $dir . 'mappings/VideoClipMov
 $app->registerClass('VideoClipTVVideo', $dir . 'mappings/VideoClipTVVideo.class.php');
 $app->registerClass('VideoClipCookingVideo', $dir . 'mappings/VideoClipCookingVideo.class.php');
 $app->registerClass('VideoClipCraftVideo', $dir . 'mappings/VideoClipCraftVideo.class.php');
+$app->registerClass('VideoClipHowToVideo', $dir . 'mappings/VideoClipHowToVideo.class.php');
 $app->registerClass('VideoClipMusicVideo', $dir . 'mappings/VideoClipMusicVideo.class.php');
 $app->registerClass('VideoClipTravelVideo', $dir . 'mappings/VideoClipTravelVideo.class.php');
 $app->registerClass('SDSVideoMetadataHooks', $dir . 'SDSVideoMetadataHooks.class.php');

@@ -102,6 +102,7 @@
 				<option value="VideoClipTravelVideo"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
 				<option value="VideoClipCookingVideo"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
 				<option value="VideoClipCraftVideo"><?= wfMsg('sdsvideometadata-vc-type-craft')?></option>
+				<option value="VideoClipHowToVideo"><?= wfMsg('sdsvideometadata-vc-type-how-to')?></option>
 				<option value="VideoClipMusicVideo"><?= wfMsg('sdsvideometadata-vc-type-music')?></option>
 			</select>
 		</div>
@@ -120,7 +121,7 @@
 
 			<!-- Distributor -->
 			<?= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
-				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo',
+				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
 				'name' => 'provider_name',
 				'id' => 'provider_id',
 				'labelMsg' => wfMsg('sdsvideometadata-vc-distributor'),
@@ -129,7 +130,7 @@
 
 			<!-- Publisher -->
 			<?= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
-				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo',
+				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
 				'name' => 'publisher_name',
 				'id' => 'publisher_id',
 				'labelMsg' => wfMsg('sdsvideometadata-vc-publisher'),
@@ -166,7 +167,7 @@
 			<!-- Genre -->
 			<?= F::app()->renderPartial('SDSVideoMetadataController', 'literal_list', array(
 				'type' => 'VideoClipTravelVideo VideoClipMusicVideo VideoClipCookingVideo
-			VideoClipCraftVideo',
+			VideoClipCraftVideo VideoClipHowToVideo',
 				'name' => 'videoObject_genre',
 				'id' => 'videoObject_genre_id',
 				'labelMsg' => wfMsg('sdsvideometadata-vc-genre'),

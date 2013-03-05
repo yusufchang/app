@@ -20,11 +20,12 @@ class SDSFormMapping {
 		'VideoClipCookingVideo',
 		'VideoClipMusicVideo',
 		'VideoClipTravelVideo',
-		'VideoClipCraftVideo'
+		'VideoClipCraftVideo',
+		'VideoClipHowToVideo'
 	);
 
 	public static function canHandle( PandoraSDSObject $object ) {
-		return false;
+		return true;
 	}
 
 	protected function getMapArray( $mapType = 'main' ) {
@@ -282,7 +283,10 @@ class SDSFormMapping {
 
 	public static function newFormDataFromPandoraSDSObject( PandoraSDSObject $object, $contextValues=null ) {
 
-		foreach ( static::$mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
+		$mappings = static::$mappings;
+		//add this class as default fallback
+		$mappings[] = get_class();
+		foreach ( $mappings as $mappingHandler ) { /* @var $mappingHandler SDSFormMapping */
 
 			if ( $mappingHandler::canHandle( $object ) ) {
 				$handler = new $mappingHandler();

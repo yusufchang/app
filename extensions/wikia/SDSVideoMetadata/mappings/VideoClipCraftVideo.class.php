@@ -19,6 +19,7 @@ class VideoClipCraftVideo extends SDSFormMapping {
 		$map['main']['videoObject_subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
 		$map['main']['videoObject_genre'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:genre' );
 		$map['main']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'schema:VideoObject' );
+		$map['main']['blank_name'] = array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'value'=> array( '_:craft' ), 'childType' => 'blank_node' );
 
 		$map['schema_provider'] = array();
 		$map['schema_provider']['provider_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
@@ -30,11 +31,20 @@ class VideoClipCraftVideo extends SDSFormMapping {
 		$map['schema_organization']['publisher_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
 		$map['schema_organization']['type'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'type', 'value'=>'schema:Organization' );
 
+		$map['blank_node'] = array();
+		$map['blank_node']['blank_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id', 'value' => '_:crafttest1' );
+		$map['blank_node']['blank_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'schema:name', 'value' => 'Craft Test Blank Node 1' );
+		$map['blank_node']['type'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'type', 'value' => 'wikia:CraftResult' );
+
 		return $map [ $mapType ];
 	}
 
 	public static function canHandle( PandoraSDSObject $data ) {
 
-		return true;
+		$type = static::getSubjectType( $data );
+		if ( in_array( 'wikia:CraftResult', $type, true ) ) {
+			return true;
+		}
+		return false;
 	}
 }
