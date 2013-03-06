@@ -42,7 +42,15 @@
 						replace('%4$d', wgStyleVersion);
 				}
 			},
+			addScript = function (content){
+				var script = doc.createElement('script');
 
+				script.type = 'text/javascript';
+				script.text = content;
+
+				// add it to DOM
+				head.appendChild(script);
+			},
 			// TODO: ease mocking
 			get = function(url, success, failure, type){
 				var element,
@@ -138,14 +146,16 @@
 						return typeof w.FB;
 					},
 					addition: function(callbacks) {
-						// always initialize FB API when SDK is loaded on-demand
-						if (typeof w.onFBloaded === 'function') {
-							w.onFBloaded();
-						}
+						callbacks.success = (function(callback){
+							return function(){
+								// always initialize FB API when SDK is loaded on-demand
+								if (typeof w.onFBloaded === 'function') {
+									w.onFBloaded();
+								}
 
-						if (typeof callbacks.success === 'function') {
-							callbacks.success();
-						}
+								callback();
+							}
+						})(callbacks.success);
 
 						return callbacks;
 					}
@@ -244,7 +254,7 @@
 			/**
 			 *	request - json of key value pairs
 			 *  keys:
-			 *		templates - an array of objects with the following fields: controllerName, methodName and an optional params (parameters for the controller method)
+			 *		templates - an array of objects with the following fields: controller, method and an optional params (parameters for the controller method)
 			 *		styles - comma-separated list of SASS files
 			 *		scripts - comma-separated list of AssetsManager groups
 			 *		messages - comma-separated list of JSMessages packages (messages are registered automagically)
@@ -355,10 +365,11 @@
 						log(remaining + ' remaining...', log.levels.info, 'loader');
 
 						// All files have been downloaded
-						if ( remaining < 1 ) {
+						if ( remaining == 0 ) {
 
 							if(!failed.length) {
 								// Resolve the deferred object
+
 								dfd.resolve(result);
 							}else{
 								dfd.reject({
@@ -399,7 +410,8 @@
 				while (l--) {
 					var resource = arguments[l],
 						files,
-						type;
+						type,
+						params;
 
 					// URI string
 					if (typeof resource === 'string') {
@@ -418,7 +430,8 @@
 					}
 					else {
 						type = resource.type;
-						files  = resource.resources || resource.url
+						files  = resource.resources || resource.url;
+						params = resource.params;
 					}
 
 					func = get;
@@ -432,16 +445,16 @@
 								func = getLibrary;
 								break;
 							case loader.JS:
-								files = getURL(files, 'one');
+								files = getURL(files, 'one', params);
 								break;
 							case loader.AM_GROUPS:
-								files = getURL(files, 'groups');
+								files = getURL(files, 'groups', params);
 								break;
 							case loader.CSS:
-								files = getURL(files, 'one');
+								files = getURL(files, 'one', params);
 								break;
 							case loader.SCSS:
-								files = getURL(files, 'sass');
+								files = getURL(files, 'sass', params);
 								break;
 							case loader.UNKNOWN:
 							default:
@@ -496,13 +509,11 @@
 			 * js - JS code to be evaluated
 			 */
 			loader.processScript = function(js) {
-				var script = doc.createElement('script');
-
-				script.type = 'text/javascript';
-				script.text = js;
-
-				// add it to DOM
-				head.appendChild(script);
+				if(js instanceof Array) {
+					for(var i = 0, l = js.length; i < l; i++) addScript(js[i]);
+				}else{
+					addScript(js);
+				}
 			};
 
 			/**

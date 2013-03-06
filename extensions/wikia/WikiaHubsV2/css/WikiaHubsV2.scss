@@ -2,7 +2,6 @@
 @import "../../../../skins/oasis/css/mixins/clearfix";
 @import "../../../../skins/oasis/css/mixins/gradient";
 @import "../../../../skins/oasis/css/mixins/opacity";
-@import 'NewsTabs';
 @import 'Explore';
 @import 'Pulse';
 @import 'VideoModule';
@@ -12,6 +11,7 @@
 @import 'WikitextModule';
 @import 'CorporateFooter';
 @import 'ColorsPerVertical';
+@import 'SponsoredBox';
 
 $wikiahubs-line-height: 16px;
 
@@ -104,6 +104,9 @@ $wikiahubs-line-height: 16px;
 	.RelatedHubsVideos {
 		height: 170px;
 	}
+	.sponsored-image {
+		margin: 4px 0 0 0;
+	}
 }
 
 .WikiaHubsModal {
@@ -126,7 +129,7 @@ $wikiahubs-line-height: 16px;
 			}
 		}
 	}
-	.close-button {
+	.success-view {
 		display: none;
 	}
 }

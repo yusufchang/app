@@ -12,7 +12,7 @@
 
 class CategorySelect {
 	private static $categories;
-	private static $categoryTypes;
+	private static $categoriesService;
 	private static $data;
 	private static $frame;
 	private static $isEditable;
@@ -97,7 +97,7 @@ class CategorySelect {
 		// disable changes in Preprocessor and Parser
 		$app->wg->CategorySelectEnabled = false;
 
-		// add ecnoding information
+		// add encoding information
 		$xml = '<?xml version="1.0" encoding="UTF-8"?>' . $xml;
 
 		//init variables
@@ -134,10 +134,83 @@ class CategorySelect {
 		return self::$data;
 	}
 
-	public static function getCategoryTypes() {
-		return self::$categoryTypes;
+	/**
+	 * Gets an array of links for the given categories.
+	 */
+	public static function getCategoryLinks( $categories ) {
+		wfProfileIn( __METHOD__ );
+
+		$app = F::app();
+		$categoryLinks = array();
+
+		if ( !empty( $categories ) ) {
+			foreach( $categories as $category ) {
+				// Support array of category names or array of category data objects
+				$name = is_array( $category ) ? $category[ 'name' ] : $category;
+
+				if ( !empty( $name ) ) {
+					$title = Title::makeTitleSafe( NS_CATEGORY, $name );
+
+					if ( !empty( $title ) ) {
+						$text = $app->wg->ContLang->convertHtml( $title->getText() );
+						$categoryLinks[] = Linker::link( $title, $text );
+					}
+				}
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+
+		return $categoryLinks;
 	}
 
+	/**
+	 * Gets the type of a category (either "hidden" or "normal").
+	 */
+	public static function getCategoryType( $category ) {
+		if ( !isset( self::$categoriesService ) ) {
+			self::$categoriesService = new CategoriesService();
+		}
+
+		// Support category name or category data object
+		$name = is_array( $category ) ? $category[ 'name' ] : $category;
+		$type = 'normal';
+
+		$title = Title::makeTitleSafe( NS_CATEGORY, $name );
+
+		if ( !empty( $title ) ) {
+			$text = $title->getDBKey();
+
+			if ( self::$categoriesService->isCategoryHidden( $text ) ) {
+				$type = 'hidden';
+			}
+		}
+
+		return $type;
+	}
+
+	/**
+	 * Gets the default namespaces for a wiki and content language.
+	 */
+	public static function getDefaultNamespaces() {
+		if ( !isset( self::$namespaces ) ) {
+			$namespaces = F::app()->wg->ContLang->getNsText( NS_CATEGORY );
+
+			if ( strpos( $namespaces, 'Category' ) === false ) {
+				$namespaces = 'Category|' . $namespaces;
+			}
+
+			self::$namespaces = $namespaces;
+		}
+
+		return self::$namespaces;
+	}
+
+	/**
+	 * Extracts category tags from wikitext and returns a hash of the categories
+	 * and the wikitext with categories removed. If wikitext is not provided, it will
+	 * attempt to pull it from the current article.
+	 */
 	public static function getExtractedCategoryData( $wikitext = '', $force = false ) {
 		if ( !isset( self::$data ) ) {
 
@@ -158,20 +231,6 @@ class CategorySelect {
 		return self::$data;
 	}
 
-	public static function getDefaultNamespaces() {
-		if ( !isset( self::$namespaces ) ) {
-			$namespaces = F::app()->wg->ContLang->getNsText( NS_CATEGORY );
-
-			if ( strpos( $namespaces, 'Category' ) === false ) {
-				$namespaces = 'Category|' . $namespaces;
-			}
-
-			self::$namespaces = $namespaces;
-		}
-
-		return self::$namespaces;
-	}
-
 	/**
 	 * Removes duplicate categories, optionally converting to/from different formats.
 	 */
@@ -185,17 +244,18 @@ class CategorySelect {
 			$categories = self::changeFormat( $categories, $format, 'array' );
 		}
 
-		foreach( $categories as $category ) {
-			if ( !empty( $category ) ) {
-				$title = Title::newFromText( $category[ 'name' ], NS_CATEGORY );
+		if ( !empty( $categories ) ) {
+			foreach( $categories as $category ) {
+				if ( !empty( $category ) ) {
+					$title = Title::makeTitleSafe( NS_CATEGORY, $category[ 'name' ] );
 
-				// Can return false or null if invalid
-				if ( !empty( $title ) ) {
-					$category[ 'name' ] = $title->getText();
+					if ( !empty( $title ) ) {
+						$text = $title->getText();
 
-					if ( !in_array( $category[ 'name' ], $categoryNames ) ) {
-						$categoryNames[] = $category[ 'name' ];
-						$uniqueCategories[] = $category;
+						if ( !in_array( $text, $categoryNames ) ) {
+							$categoryNames[] = $text;
+							$uniqueCategories[] = $category;
+						}
 					}
 				}
 			}
@@ -263,8 +323,15 @@ class CategorySelect {
 			$undo = $request->getVal( 'undo' );
 			$undoafter = $request->getVal( 'undoafter' );
 
-			$supportedActions = array( 'edit', 'purge', 'submit', 'view' );
+			$viewModeActions = array( 'view', 'purge' );
+			$editModeActions = array( 'edit', 'submit' );
+			$supportedActions = array_merge( $viewModeActions, $editModeActions );
 			$supportedSkins = array( 'SkinAnswers', 'SkinOasis' );
+
+			$isViewMode = in_array( $action, $viewModeActions );
+			$isEditMode = in_array( $action, $editModeActions );
+			$extraNamespacesOnView = array( NS_FILE, NS_CATEGORY, NS_VIDEO );
+			$extraNamespacesOnEdit = array( NS_FILE, NS_CATEGORY, NS_VIDEO, NS_USER, NS_SPECIAL );
 
 			$isEnabled = true;
 
@@ -279,19 +346,18 @@ class CategorySelect {
 				|| !in_array( $action, $supportedActions )
 				// Disabled on CSS or JavaScript pages
 				|| $title->isCssJsSubpage()
-				// Disabled on non-existant article pages
+				// Disabled on non-existent article pages
 				|| ( $action == 'view' && !$title->exists() )
 				// Disabled on 'confirm purge' page for anon users
 				|| ( $action == 'purge' && $user->isAnon() && !$request->wasPosted() )
 				// Disabled for undo edits
 				|| ( $undo > 0 && $undoafter > 0 )
-				// Disabled for unsupported namespace
-				|| ( ( $title->mNamespace != NS_TEMPLATE )
-					&& ( ( $action == 'view' || $action == 'purge' )
-						&& !in_array( $title->mNamespace, array_merge( $app->wg->ContentNamespaces, array( NS_FILE, NS_CATEGORY, NS_VIDEO ) ) ) )
-					&& ( ( $action == 'edit' || $action == 'submit' )
-						&& !in_array( $title->mNamespace, array_merge( $app->wg->ContentNamespaces, array( NS_FILE, NS_USER, NS_CATEGORY, NS_VIDEO, NS_SPECIAL ) ) ) )
-				)
+				// Disabled for unsupported namespaces
+				|| ( $title->mNamespace == NS_TEMPLATE )
+				// Disabled for unsupported namespaces in view mode
+				|| ( $isViewMode && !in_array( $title->mNamespace, array_merge( $app->wg->ContentNamespaces, $extraNamespacesOnView ) ) )
+				// Disabled for unsupported namespaces in edit mode
+				|| ( $isEditMode && !in_array( $title->mNamespace, array_merge( $app->wg->ContentNamespaces, $extraNamespacesOnEdit ) ) )
 			) {
 				$isEnabled = false;
 			}
@@ -302,14 +368,6 @@ class CategorySelect {
 		wfProfileOut( __METHOD__ );
 
 		return self::$isEnabled;
-	}
-
-	/**
-	 * Sets the type associated with categories (either "normal" or "hidden").
-	 * This function is called from a hook for view pages only.
-	 */
-	public static function setCategoryTypes( $categoryTypes ) {
-		self::$categoryTypes = $categoryTypes;
 	}
 
 	private static function parseNode(&$root, $outerTag = '') {
@@ -427,7 +485,13 @@ class CategorySelect {
 							}
 
 							$childOut['text'] = $newNode;
-							$childOut['categories'][] = array('namespace' => $catNamespace, 'name' => $catName, 'outerTag' => $outerTag, 'sortKey' => $sortKey);
+							$childOut['categories'][] = array(
+								'name' => $catName,
+								'namespace' => $catNamespace,
+								'outerTag' => $outerTag,
+								'sortKey' => $sortKey,
+								'type' => self::getCategoryType( $catName ),
+							);
 						}
 						if (count($childOut['categories'])) {
 							$out = array_merge($out, $childOut['categories']);
@@ -484,7 +548,13 @@ class CategorySelect {
 			$catName = $match[2];
 			$sortKey = '';
 		}
-		self::$categories[] = array('namespace' => $match[1], 'name' => $catName, 'outerTag' => self::$outerTag, 'sortKey' => $sortKey);
+		self::$categories[] = array(
+			'name' => $catName,
+			'namespace' => $match[1],
+			'outerTag' => self::$outerTag,
+			'sortKey' => $sortKey,
+			'type' => self::getCategoryType( $catName ),
+		);
 		return '';
 	}
 }

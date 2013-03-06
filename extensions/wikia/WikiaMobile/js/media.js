@@ -4,8 +4,8 @@
  *
  * @author Jakub "Student" Olek
  */
-define('media', ['JSMessages', 'modal', 'throbber', 'wikia.querystring', require.optional('popover'), 'track', 'events', require.optional('share'), require.optional('wikia.cache'), 'wikia.loader', 'wikia.nirvana'],
-	function(msg, modal, throbber, qs, popover, track, events, share, cache, loader, nirvana){
+define('media', ['JSMessages', 'modal', 'throbber', 'wikia.querystring', require.optional('popover'), 'track', require.optional('share'), require.optional('wikia.cache'), 'wikia.loader', 'wikia.nirvana'],
+	function(msg, modal, throbber, qs, popover, track, share, cache, loader, nirvana){
 	'use strict';
 	/** @private **/
 
@@ -22,9 +22,9 @@ define('media', ['JSMessages', 'modal', 'throbber', 'wikia.querystring', require
 		imagesLength = 0,
 		wkMdlImages,
 		current = 0,
-		shrImg = (new qs()).getVal('file'),
+		shrImg = qs().getVal('file'),
 		shareBtn,
-		clickEvent = events.click,
+		clickEvent = 'click',
 		sharePopOver,
 		content = '<div id=wkMdlImages></div>',
 		toolbar = '<div class=wkShr id=wkShrImg></div>',
@@ -179,14 +179,16 @@ define('media', ['JSMessages', 'modal', 'throbber', 'wikia.querystring', require
 						articleId: wgArticleId,
 						fileTitle: imgTitle,
 						width: window.innerWidth - 100
-					},
+					}
+				).done(
 					function(data) {
 						throbber.remove(currentImage);
 
 						if(data.error){
 							handleError(data.error);
 						}else{
-							var video = '<table class=wkVi><tr><td>' + data.embedCode + '</td></tr></table>';
+							//if iframe or object have width and hight andorid 2.3.6 have probles with resizing it
+							var video = '<div class=wkVi>' + data.embedCode.replace(/(width|height)="\d*\"/gi, '') + '</div>';
 
 							videoCache[imgTitle] = video;
 							currentImage.innerHTML = video;
@@ -481,7 +483,7 @@ define('media', ['JSMessages', 'modal', 'throbber', 'wikia.querystring', require
 						}
 					}).done(
 						function(res){
-							var script = res.scripts[0],
+							var script = res.scripts,
 								style = res.styles;
 
 							loader.processStyle(style);

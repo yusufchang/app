@@ -88,6 +88,13 @@ $messages['cs'] = array(
 	'spellchecker-info-spellcheck-suggestions' => 'Pravopisné návrhy pro "$1": $2',
 );
 
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'spellchecker-info-languages' => 'Ieithoedd ar gael ($1)',
+);
+
 /** German (Deutsch)
  * @author Claudia Hattitten
  * @author LWChris
@@ -179,6 +186,7 @@ $messages['gl'] = array(
  * @author TK-999
  */
 $messages['hu'] = array(
+	'spellchecker-desc' => 'Helyesírás ellenőrző felületet biztosít PHP modulhoz',
 	'enablespellchecker' => 'Helyesírás&ndash;ellenőrzés engedélyezése vizuális módban',
 	'spellchecker-info' => 'Helyesírás-ellenőrző információ',
 	'spellchecker-info-languages' => 'Elérhető nyelvek ($1)',
@@ -285,7 +293,7 @@ $messages['my'] = array(
 	'spellchecker-info-spellcheck-languages' => 'ဘာသာ',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -382,10 +390,11 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
+ * @author JM Pessanha
  */
 $messages['pt-br'] = array(
 	'spellchecker-desc' => 'Fornece interface de verificação ortográfica para encantar módulo PHP',
-	'enablespellchecker' => 'Habilitar corretor ortográfico', # Fuzzy
+	'enablespellchecker' => 'Habilitar o corretor ortográfico em modo visual',
 	'spellchecker-info' => 'Informação da verificação ortográfica',
 	'spellchecker-info-languages' => 'Os idiomas disponíveis ($1)',
 	'spellchecker-info-provider' => 'Operadora',
@@ -525,8 +534,16 @@ $messages['wa'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Hydra
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
+	'spellchecker-desc' => '对enchant PHP模块提供拼写检查接口',
+	'enablespellchecker' => '启用拼写检查在可视模式中',
+	'spellchecker-info' => '拼写检查信息',
+	'spellchecker-info-languages' => '可用语言 ($1)',
+	'spellchecker-info-provider' => '提供者',
+	'spellchecker-info-dictionaries' => '可用词典',
+	'spellchecker-info-spellcheck-text' => '文本已检查',
 	'spellchecker-info-spellcheck-languages' => '语言',
 	'spellchecker-info-spellcheck-submit' => '拼写检查',
 );

@@ -45,7 +45,8 @@ $messages['en'] = array(
 	'marketing-toolbox-edithub-file-name' => 'File name',
 	'marketing-toolbox-edithub-video-name' => 'Video name',
 	'marketing-toolbox-edithub-sponsored-image' => 'Add a Sponsored Image',
-	'marketing-toolbox-edithub-sponsored-image-remove' => 'Remove',
+	'marketing-toolbox-edithub-remove' => 'Remove',
+	'marketing-toolbox-edithub-removeall-button' => 'Remove all',
 
 	'marketing-toolbox-edithub-clearall-confirmation' => 'Are you sure you want to clear the entire $1 module?',
 	'marketing-toolbox-edithub-clear-confirmation' => 'Are you sure you want to clear this section?',
@@ -73,6 +74,7 @@ $messages['en'] = array(
 	'marketing-toolbox-hub-module-top10list-title' => 'Title',
 	'marketing-toolbox-hub-module-top10list-desc' => 'Description',
 
+	'marketing-toolbox-hub-module-slider-strapline' => 'Strapline',
 	'marketing-toolbox-hub-module-slider-short-description' => 'Short description',
 	'marketing-toolbox-hub-module-slider-long-description' => 'Long description',
 	'marketing-toolbox-hub-module-slider-url' => 'Wiki URL',
@@ -88,6 +90,10 @@ $messages['en'] = array(
 	'marketing-toolbox-hub-module-polls-option-mandatory' => 'Option $1 *',
 	'marketing-toolbox-hub-module-polls-option-voluntary' => 'Option $1',
 
+	'marketing-toolbox-hub-module-popular-videos-header' => 'Header',
+	'marketing-toolbox-hub-module-popular-videos-clear-confirm' => 'Are you sure you want to clear the entire Popular Videos module?',
+	'marketing-toolbox-hub-module-popular-videos-clear-one-confirm' => 'Are you sure you want to remove this section?',
+
 	'marketing-toolbox-hub-module-from-the-community-title' => 'Title',
 	'marketing-toolbox-hub-module-from-the-community-users-url' => 'User\'s URL',
 	'marketing-toolbox-hub-module-from-the-community-long-quote' => 'Quote',
@@ -95,8 +101,10 @@ $messages['en'] = array(
 
 	'marketing-toolbox-hub-module-wikiaspicks-title' => 'Title',
 	'marketing-toolbox-hub-module-wikiaspicks-text' => 'Text',
+	'marketing-toolbox-hub-module-wikiaspicks-link-url' => 'URL',
 	'marketing-toolbox-hub-module-html-text-tip' => "'''Tip:''' to add a link copy the following and replace the italicized text with your own: <a href=\"''your_url_here''\">''Your Text Here''</a>",
-
+	'marketing-toolbox-hub-module-sponsored-image-tip' => "'''Tip:''' The maximum file size is 85x15 pixels",
+	
 	'marketing-toolbox-hub-module-featured-video-header' => 'Header',
 	'marketing-toolbox-hub-module-featured-video-desc' => 'Description',
 	'marketing-toolbox-hub-module-featured-video-article-url' => 'Article URL',
@@ -104,10 +112,16 @@ $messages['en'] = array(
 	'marketing-toolbox-module-save-error' => 'There was an error while saving, please check what you entered',
 	'marketing-toolbox-module-save-ok' => '$1 module saved successfully!',
 
+	'marketing-toolbox-module-publish-error-read-only' => "We're in read-only mode at this moment. The hub page cannot be published. Please, try again later.",
+	'marketing-toolbox-module-publish-error-modules-not-saved' => 'There are unsaved modules. Please check their content, save them and try publish hub page again.',
+	'marketing-toolbox-module-publish-error-db-error' => 'A database error occured. The hub pages has not been published.',
+	'marketing-toolbox-module-publish-success' => 'Hub page published for $1',
+
 	'marketing-toolbox-validator-string-short' => 'Your text is too short, please write more',
 	'marketing-toolbox-validator-string-long' => 'Your text is too long, please make it shorter',
 	'marketing-toolbox-validator-wrong-url' => 'The URL you entered is not valid, please try again',
 	'marketing-toolbox-validator-wrong-file' => 'The file you chose is not valid, please try again',
+	'marketing-toolbox-validator-wrong-file-size' => 'The file you selected is the wrong size, please use a different file',
 	'marketing-toolbox-validator-wrong-file-size-width' => 'Wrong width of the file you chose, please try again (Max width is: $maxWidthpx)',
 	'marketing-toolbox-validator-wrong-file-size-height' => 'Wrong height of the file you chose, please try again (Max height is: $maxHeightpx)',
 	'marketing-toolbox-validator-wrong-file-not-an-image' => 'The file you chose is not an image, please try again',

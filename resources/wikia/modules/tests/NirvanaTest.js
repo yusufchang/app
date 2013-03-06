@@ -1,5 +1,4 @@
 /*
- @test-framework Jasmine
 \@test-require-asset resources/wikia/libraries/define.mock.js
  @test-require-asset resources/jquery/jquery-1.8.2.js
  @test-require-asset resources/wikia/modules/nirvana.js
@@ -177,6 +176,27 @@ describe("Nirvana", function () {
 				userName: 'Wikia',
 				abc: 'xyz'
 			},
+			function() {
+				done();
+			}
+		);
+	});
+
+	async.it('data can be a string', function(done) {
+		// mock the request
+		var urlParams = 'value=1&abc=xyz'
+			ajaxMock = function(params) {
+				expect(params.data).toBe(urlParams);
+
+				// fire callback
+				params.success();
+			},
+			nirvana = define.getModule(ajaxMock);
+
+		nirvana.getJson(
+			controllerName,
+			methodName,
+			urlParams,
 			function() {
 				done();
 			}

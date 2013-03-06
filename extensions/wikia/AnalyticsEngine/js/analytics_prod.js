@@ -114,7 +114,7 @@
 			}
             abSlot = window.Wikia.AbTest.getGASlot(abExp.name);
             if ( abSlot >= 40 && abSlot <= 49 ) {
-                abGroupName = abExp.group ? abExp.group.name : 'CONTROL';
+                abGroupName = abExp.group ? abExp.group.name : ( abList.nouuid ? 'NOBEACON' : 'CONTROL');
                 _gaqWikiaPush(['_setCustomVar', abSlot, abExp.name, abGroupName, 3]);
 				abCustomVarsForAds.push(['ads._setCustomVar', abSlot, abExp.name, abGroupName, 3]);
             }
@@ -133,6 +133,12 @@
 			} else if ( window.addEventListener ) {
 				window.addEventListener("load", abOnLoadHandler, false);
 			}
+		}
+
+		/**** Back-end A/B test for order of loading test ****/
+		if (window.wgAdsInHeadGroup !== 0) {
+			_gaqWikiaPush(['_setCustomVar', 39, 'ADSINHEAD', 'ADSINHEAD_' + window.wgAdsInHeadGroup, 3]);
+			abCustomVarsForAds.push(['ads._setCustomVar', 39, 'ADSINHEAD', 'ADSINHEAD_' + window.wgAdsInHeadGroup, 3]);
 		}
     }
 

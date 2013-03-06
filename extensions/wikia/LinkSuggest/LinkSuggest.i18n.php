@@ -128,9 +128,11 @@ $messages['hsb'] = array(
 
 /** Hungarian (magyar)
  * @author Glanthor Reviol
+ * @author Misibacsi
  * @author TK-999
  */
 $messages['hu'] = array(
+	'linksuggest-desc' => 'Hivatkozásokat javasol a szerkesztőknek a szerkesztési nézetben',
 	'tog-disablelinksuggest' => 'Ne jelenítse meg a hivatkozás-javaslatot forráskódndash;nézetben',
 	'tog-redirected-from' => '&ndash; Az $1 szócikkből átirányítva',
 );
@@ -230,7 +232,7 @@ $messages['ms'] = array(
 	'tog-redirected-from' => '&ndash; Dilencongkan dari $1',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -248,7 +250,7 @@ $messages['nl'] = array(
 	'tog-redirected-from' => '&ndash; Doorverwezen vanaf $1',
 );
 
-/** Norwegian Nynorsk (norsk (nynorsk)‎)
+/** Norwegian Nynorsk (norsk nynorsk)
  * @author Harald Khan
  */
 $messages['nn'] = array(
@@ -298,10 +300,13 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Daemorris
+ * @author JM Pessanha
  * @author 555
  */
 $messages['pt-br'] = array(
+	'linksuggest-desc' => 'Sugere links para editores na visualização de edição',
 	'tog-disablelinksuggest' => 'Não apresentar sugestões de links no modo de exibição de código',
+	'tog-redirected-from' => '&ndash; redirecionado de $1',
 );
 
 /** tarandíne (tarandíne)
@@ -389,6 +394,7 @@ $messages['uk'] = array(
  * @author Hydra
  */
 $messages['zh-hans'] = array(
+	'linksuggest-desc' => '在编辑视图上提供给编辑者一些连接建议',
 	'tog-disablelinksuggest' => '源代码模式中勿显示链接建议',
 	'tog-redirected-from' => '&ndash;重定向自$1',
 );

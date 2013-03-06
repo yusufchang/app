@@ -46,6 +46,7 @@ $messages['qqq'] = array(
 	'multilookupgo' => '{{Identical|Go}}',
 	'multilookupnext' => '{{Identical|Next}}',
 	'multilookupprevious' => '{{Identical|Previous}}',
+	'multilookupwiki' => '{{Identical|Wiki}}',
 	'right-multilookup' => '{{doc-right|multilookup|ns=Wikia}}',
 	'action-multilookup' => '{{doc-action|multilookup}}',
 );
@@ -200,6 +201,15 @@ $messages['cs'] = array(
 	'multilookupwikioptions' => 'Možnosti',
 	'multilookuplastedithdr' => 'Poslední editace',
 	'multilookuprecordspager' => 'Zobrazeny záznamy $1 až $2 ze $3 záznamů.',
+);
+
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'multilookupnext' => 'nesaf',
+	'multilookupprevious' => 'blaenorol',
+	'multilookupwiki' => 'Wici',
 );
 
 /** German (Deutsch)
@@ -574,7 +584,7 @@ $messages['my'] = array(
 	'multilookupwikioptions' => 'ရွေးပိုင်ခွင့်',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -736,6 +746,7 @@ $messages['ps'] = array(
 	'multilookupwiki' => 'ويکي',
 	'multilookupwikititle' => 'سرليک',
 	'multilookupwikioptions' => 'خوښنې',
+	'multilookuplastedithdr' => 'وروستنی سمون',
 );
 
 /** Portuguese (português)
@@ -771,6 +782,7 @@ $messages['pt'] = array(
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
  * @author Giro720
+ * @author JM Pessanha
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -798,6 +810,7 @@ $messages['pt-br'] = array(
 	'multilookuplastedithdr' => 'Última edição',
 	'multilookuprecordspager' => "Mostrando os registos '''$1''' a '''$2''' de '''$3'''.",
 	'right-multilookup' => 'Procure informação de usuários em várias wikis',
+	'action-multilookup' => 'pesquisar informações sobre usuários em múltiplas wikis',
 );
 
 /** Romanian (română)
@@ -999,8 +1012,10 @@ $messages['yi'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Hydra
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
+	'specialmultiplelookup-desc' => '在多个wiki上提供用户信息查阅',
 	'multilookupgo' => '去',
 	'multilookupnext' => '下一步',
 	'multilookupprevious' => '前一步',

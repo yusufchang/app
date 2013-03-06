@@ -100,6 +100,7 @@ var MiniEditor = {
 		$.nirvana.sendRequest({
 			controller: 'MiniEditorController',
 			method: 'makeGlobalVariables',
+           data: {'useeditor': $.getUrlVar('useeditor')},
 			type: 'POST', //this cann't be cache
 			callback: function(data) {
 				var assets = window.wgMiniEditorAssets;
@@ -253,7 +254,7 @@ var MiniEditor = {
 	},
 
 	// Return the 'convertToFormat' parameter for loading content.
-	// Either 'richtext' or empty string (because it comes to use as wikitext already)
+	// Either 'richtext' or empty string (because it comes to us as wikitext already)
 	getLoadConversionFormat: function(element) {
 		return WikiaEditor.modeToFormat(this.getStartupMode(element)) == 'richtext' ? 'richtext' : '';
 	},

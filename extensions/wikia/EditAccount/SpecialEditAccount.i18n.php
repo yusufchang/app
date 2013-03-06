@@ -237,6 +237,7 @@ $messages['br'] = array(
 	'editaccount-submit-realname' => 'Enrollañ an anv klok',
 	'editaccount-submit-clearunsub' => 'Diverkañ an digoumanantiñ',
 	'editaccount-submit-close' => 'Serriñ ar gont',
+	'editaccount-submit-button' => 'Enrollañ',
 	'editaccount-usage-close' => "Gallout a rit ivez diweredekaat ur gont implijer en ur rinegiñ he ger-tremen hag en ur implijout he chomlec'h postel. Diwallit ! Kollet e vo ar roadennoù ha ne c'hallor ket adtapout anezho.",
 	'editaccount-warning-close' => "<b>Diwallit !</b> Emaoc'h war-nes diweredekaat ar gont implijer <b>$1</b> da vat. Ne c'hallor ket en dizober. Ha c'hoant ho peus d'en ober ?",
 	'editaccount-status' => 'Kemennadenn statud',
@@ -1216,6 +1217,7 @@ $messages['ms'] = array(
 	'editaccount-error-close' => 'Ada masalah dalam cubaan menutup akaun. Cuba lagi atau hubungi Pasukan Teknikal (Tech Team).',
 	'editaccount-invalid-email' => '"$1" bukan alamat e-mel yang sah!',
 	'editaccount-nouser' => 'Akaun "$1" tidak wujud!',
+	'editaccount-not-loaded' => 'Ralat: Data pengguna tidak dapat dimuatkan dengan betul. Sila cuba muatkan semula halaman ini.',
 	'editaccount-remove-avatar-fail' => 'Masalah ketika membuang avatar secara automatik.',
 	'editaccount-requested' => 'Perhatian: Pengguna memohon penutupan akaun',
 	'editaccount-not-requested' => 'AWAS: Pengguna tidak memohon penutupan akaun',
@@ -1238,7 +1240,7 @@ $messages['ms'] = array(
 	'action-editaccount' => 'menyunting keutamaan pengguna lain',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  * @author Wouterkoch
@@ -1582,6 +1584,7 @@ $messages['ps'] = array(
 
 /** Portuguese (português)
  * @author Hamilton Abreu
+ * @author Pttraduc
  * @author SandroHc
  */
 $messages['pt'] = array(
@@ -1599,11 +1602,14 @@ $messages['pt'] = array(
 	'editaccount-label-pass' => 'Definir palavra-chave nova',
 	'editaccount-label-realname' => 'Definir nome verdadeiro novo',
 	'editaccount-label-clearunsub' => 'Não subscrito',
+	'editaccount-label-reason' => 'Motivo:',
 	'editaccount-submit-email' => 'Gravar Correio Electrónico',
 	'editaccount-submit-pass' => 'Gravar Palavra-chave',
 	'editaccount-submit-realname' => 'Gravar Nome Verdadeiro',
 	'editaccount-submit-clearunsub' => 'Limpar indicação de não subscrito',
+	'editaccount-submit-cleardisable' => 'Limpar marca de desativação',
 	'editaccount-submit-close' => 'Fechar Conta',
+	'editaccount-submit-button' => 'Guardar',
 	'editaccount-usage-close' => 'Também pode desactivar uma conta de utilizador misturando a palavra-chave e removendo o endereço electrónico. Note que estes dados serão perdidos e não podem ser recuperados.',
 	'editaccount-warning-close' => '<b>Cuidado!</b> Está prestes a desactivar definitivamente a conta do utilizador <b>$1</b>. Esta operação não pode ser desfeita. Tem a certeza de que pretende fazê-lo?',
 	'editaccount-status' => 'Estado',
@@ -1612,6 +1618,7 @@ $messages['pt'] = array(
 	'editaccount-success-pass' => 'Alterou com sucesso a palavra-chave da conta $1.',
 	'editaccount-success-realname' => 'Alterou com sucesso o nome verdadeiro da conta $1.',
 	'editaccount-success-unsub' => 'O bit de indicação de não subscrito foi removido da conta $1.',
+	'editaccount-success-disable' => 'Removida com sucesso a marca de desativado para a conta $1.',
 	'editaccount-success-close' => 'Desactivou com sucesso a conta $1.',
 	'editaccount-error-email' => 'O endereço electrónico não foi alterado. Tente novamente ou contacte o Suporte Técnico.',
 	'editaccount-error-pass' => 'A palavra-chave não foi alterada. Tente novamente ou contacte o Suporte Técnico.',
@@ -1619,6 +1626,7 @@ $messages['pt'] = array(
 	'editaccount-error-close' => 'Ocorreu um problema ao fechar a conta. Tente novamente ou contacte o Suporte Técnico.',
 	'editaccount-invalid-email' => '"$1" não é um endereço electrónico válido!',
 	'editaccount-nouser' => 'A conta "$1" não existe!',
+	'editaccount-requested' => 'Nota: O usuário solicitou um encerramento de conta',
 	'editaccount-labal-account-status' => 'Estado da Conta',
 	'editaccount-labal-email-status' => 'Estado do E-mail',
 	'editaccount-status-confirmed' => 'Confirmado',
@@ -1637,6 +1645,7 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Giro720
+ * @author JM Pessanha
  * @author Jesielt
  * @author Luckas Blade
  * @author TheGabrielZaum
@@ -1684,6 +1693,7 @@ $messages['pt-br'] = array(
 	'editaccount-error-close' => 'Ocorreu um problema ao fechar a conta. Tente novamente ou contate a equipe de apoio (Tech Team).',
 	'editaccount-invalid-email' => '"$1" não é um endereço de email válido!',
 	'editaccount-nouser' => 'A conta "$1" não existe!',
+	'editaccount-not-loaded' => 'Dados de usuário falharam ao carregar corretamente, por favor, tente recarregar a página.',
 	'editaccount-remove-avatar-fail' => 'Problema durante a auto-remoção do avatar.',
 	'editaccount-requested' => 'Nota: Usuário solicitou o fechamento da conta',
 	'editaccount-not-requested' => 'ATENÇÃO: Usuário não solicitou o fechamento da conta',
@@ -1718,6 +1728,16 @@ $messages['ro'] = array(
 	'editaccount-submit-realname' => 'Salvează numele real',
 	'editaccount-submit-close' => 'Închide contul',
 	'editaccount-status' => 'Mesaj de stare',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'editaccount-frame-usage' => 'Note',
+	'editaccount-submit-account' => "Gestisce 'u cunde",
+	'editaccount-label-reason' => 'Mutive:',
+	'editaccount-submit-button' => 'Reggìstre',
 );
 
 /** Russian (русский)
@@ -2206,6 +2226,7 @@ $messages['vi'] = array(
  * @author Hydra
  * @author Hzy980512
  * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'editaccount' => '编辑账户',
@@ -2222,29 +2243,49 @@ $messages['zh-hans'] = array(
 	'editaccount-label-pass' => '设置新密码',
 	'editaccount-label-realname' => '设置新真实姓名',
 	'editaccount-label-clearunsub' => '已取消关注',
-	'editaccount-submit-email' => '保存电子邮件地址',
+	'editaccount-label-toggleadopt-prevent' => '禁止自动认领',
+	'editaccount-label-toggleadopt-allow' => '允许自动认领',
+	'editaccount-label-reason' => '原因：',
+	'editaccount-submit-email' => '保存和确认电邮地址',
 	'editaccount-submit-pass' => '保存密码',
 	'editaccount-submit-realname' => '保存真名',
 	'editaccount-submit-clearunsub' => '清除未订阅',
+	'editaccount-submit-cleardisable' => '清除禁用标志',
 	'editaccount-submit-close' => '关闭帐户',
 	'editaccount-submit-button' => '保存',
+	'editaccount-usage-close' => '您也可以通过移除电子邮箱地址并随意输入一个错乱的密码来彻底禁用一个帐户。注意，这样此数据将丢失并且无法被恢复。',
+	'editaccount-warning-close' => '<b>警告！</b>您将要永久禁用用户帐户 <b>$1</b>。这将无法被恢复。您确定这是您想要做的吗？',
+	'editaccount-status' => '状态消息',
+	'editaccount-success-email' => '成功将用户$1email地址变更为$2。',
 	'editaccount-success-email-blank' => '成功移除帐户 $1 的电子邮件地址。',
 	'editaccount-success-pass' => '帐户 $1 的密码更改成功。',
 	'editaccount-success-realname' => '帐户 $1 的真实姓名更改成功。',
 	'editaccount-success-close' => '成功禁用了帐户 $1 。',
+	'editaccount-error-email' => '电子邮件地址未改变。请重试或联系技术团队。',
+	'editaccount-error-pass' => '密码未改变。请重试或联系技术团队。',
+	'editaccount-error-realname' => '真实姓名未改变。请重试或联系技术团队。',
+	'editaccount-error-close' => '关闭帐户时发生问题。重试或联系我们的技术团队。',
 	'editaccount-invalid-email' => '"$1"不是有效的电子邮件地址！',
 	'editaccount-nouser' => '帐户“$1”不存在！',
+	'editaccount-not-loaded' => '错误：用户数据无法正确加载，请尝试重新加载页面。',
+	'editaccount-requested' => '注：用户已要求关闭帐户',
+	'editaccount-not-requested' => '注意：用户并没有要求关闭帐户',
 	'editaccount-labal-account-status' => '帐户状态',
 	'editaccount-labal-email-status' => '电子邮件状态',
 	'editaccount-status-confirmed' => '已确认',
 	'editaccount-status-unconfirmed' => '未确认',
 	'editaccount-status-realuser' => '活跃用户',
 	'editaccount-status-tempuser' => '临时用户',
+	'editaccount-error-tempuser-email' => '临时用户不能有空白的电子邮件地址字段，请输入一个电子邮件地址。',
 	'editaccount-log' => '用户帐户日志',
+	'editaccount-log-header' => '本页列出了由Wikia工作人员对用户信息所做出的更改。',
 	'editaccount-log-entry-email' => '用户$2电子邮箱地址已变更',
 	'editaccount-log-entry-pass' => '用户$2密码已变更',
 	'editaccount-log-entry-realname' => '用户$2真实姓名已变更',
+	'editaccount-log-entry-close' => '已禁用的帐户 $2',
+	'edit-account-closed-flag' => '<div class="errorbox" style="padding: 1em;">此帐户已被Wikia全域禁用。</div>',
 	'right-editaccount' => '编辑其他用户的信息',
+	'action-editaccount' => '编辑其他用户的信息',
 );
 
 /** Traditional Chinese (中文（繁體）‎)

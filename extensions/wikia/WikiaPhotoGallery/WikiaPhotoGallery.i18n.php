@@ -195,6 +195,7 @@ Alternatively, you can click "$2" to see the page in its updated form.',
 /** Message documentation (Message documentation)
  * @author EugeneZelenko
  * @author LWChris
+ * @author Shirayuki
  * @author Siebrand
  * @author Umherirrender
  * @author மதனாஹரன்
@@ -219,6 +220,8 @@ $messages['qqq'] = array(
 	'wikiaPhotoGallery-photooptions-done' => '{{Identical|Done}}',
 	'wikiaPhotoGallery-preview-hover-modify' => '{{Identical|Modify}}',
 	'wikiaPhotoGallery-preview-hover-delete' => '{{Identical|Delete}}',
+	'wikiaPhotoGallery-preview-add-link' => '{{Identical|Add link}}',
+	'wikiaPhotoGallery-preview-tab-layout' => '{{Identical|Layout}}',
 	'wikiaPhotoGallery-preview-position-left' => '{{Identical|Left}}',
 	'wikiaPhotoGallery-preview-position-center' => '{{Identical|Center}}',
 	'wikiaPhotoGallery-preview-position-right' => '{{Identical|Right}}',
@@ -236,9 +239,11 @@ $messages['qqq'] = array(
 	'wikiaPhotoGallery-preview-bordersize-small' => '{{Identical|Small}}',
 	'wikiaPhotoGallery-preview-bordersize-medium' => '{{Identical|Medium}}',
 	'wikiaPhotoGallery-preview-bordersize-large' => '{{Identical|Large}}',
+	'wikiaPhotoGallery-preview-captions' => '{{Identical|Caption}}',
 	'wikiaPhotoGallery-preview-captions-left' => '{{Identical|Left}}',
 	'wikiaPhotoGallery-preview-captions-center' => '{{Identical|Center}}',
 	'wikiaPhotoGallery-preview-captions-right' => '{{Identical|Right}}',
+	'wikiaPhotoGallery-slideshow-view-title' => '{{Identical|Slideshow}}',
 	'wikiaPhotoGallery-slideshowpreview-position-left' => '{{Identical|Left}}',
 	'wikiaPhotoGallery-slideshowpreview-position-center' => '{{Identical|Center}}',
 	'wikiaPhotoGallery-slideshowpreview-position-right' => '{{Identical|Right}}',
@@ -770,7 +775,7 @@ Petra hoc'h eus c'hoant da ober ?",
 	'wikiaPhotoGallery-preview-add-link' => 'Ouzhpennañ ul liamm',
 	'wikiaPhotoGallery-preview-placeholder-caption' => "Amañ e vo gwelet an alc'hwez",
 	'wikiaPhotoGallery-preview-link-tooltip' => 'Liammañ a ra ar skeudenn da "$1"',
-	'wikiaPhotoGallery-preview-tab-layout' => "Lec'hiadur",
+	'wikiaPhotoGallery-preview-tab-layout' => 'Pajennaozañ',
 	'wikiaPhotoGallery-preview-px' => 'px',
 	'wikiaPhotoGallery-preview-size-smaller' => 'bihanañ',
 	'wikiaPhotoGallery-preview-size-larger' => 'brasañ',
@@ -1246,6 +1251,22 @@ Místo toho můžete kliknout na "$2" a zobrazit aktualizovanou stránku.',
 	'wikiaPhotoGallery-upload-image-size' => 'Velikost obrázku musí být 670 px na 360 px nebo více.',
 	'wikiaPhotoGallery-not-displayed' => 'Není zobrazeno',
 	'galery-slider-read-more' => 'Číst více >',
+);
+
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'wikiaPhotoGallery-upload-findtitle' => 'Canfod',
+	'wikiaPhotoGallery-upload-findbutton' => 'Canfod',
+	'wikiaPhotoGallery-upload-page-next' => 'Yr 8 nesaf',
+	'wikiaPhotoGallery-upload-page-prev' => 'Yr 8 blaenorol',
+	'wikiaPhotoGallery-preview-spacing-small' => 'Bach',
+	'wikiaPhotoGallery-preview-spacing-large' => 'Mawr',
+	'wikiaPhotoGallery-preview-captionsize-small' => 'Bach',
+	'wikiaPhotoGallery-preview-captionsize-large' => 'Mawr',
+	'wikiaPhotoGallery-upload-existingtext-onarticle' => 'y dudalen hon',
 );
 
 /** German (Deutsch)
@@ -2042,7 +2063,7 @@ Décrivez cette photo.",
 	'wikiaPhotoGallery-photooptions-linkurl' => 'Lien vers (insérez le nom ou l’URL de la page).',
 	'wikiaPhotoGallery-photooptions-description' => 'Détails de l’image',
 	'wikiaPhotoGallery-search-tooltip' => 'Rechercher des photos sur ce wiki',
-	'wikiaPhotoGallery-upload-image-size' => 'Les images doivent être de 670 par 360 px ou plus.', # Fuzzy
+	'wikiaPhotoGallery-upload-image-size' => 'Les images doivent être de 670 par 360 px ou plus.',
 	'wikiaPhotoGallery-not-displayed' => 'Non affiché',
 	'galery-slider-read-more' => 'En savoir plus &gt;',
 );
@@ -2222,7 +2243,7 @@ Describa esta foto.",
 	'wikiaPhotoGallery-photooptions-linkurl' => 'Ligazón cara a (pegue o nome da páxina ou o URL).',
 	'wikiaPhotoGallery-photooptions-description' => 'Detalles da imaxe.',
 	'wikiaPhotoGallery-search-tooltip' => 'Procurar fotos neste wiki',
-	'wikiaPhotoGallery-upload-image-size' => 'As imaxes deben ser de 670px por 360px ou maiores.', # Fuzzy
+	'wikiaPhotoGallery-upload-image-size' => 'As imaxes deben ser de 670px por 360px ou maiores',
 	'wikiaPhotoGallery-not-displayed' => 'Non mostrado',
 	'galery-slider-read-more' => ' Ler máis >',
 );
@@ -3562,7 +3583,7 @@ $messages['mk'] = array(
 	'wikiaPhotoGallery-photooptions-linkurl' => 'Врска до (тука ископирајте назив или URL).',
 	'wikiaPhotoGallery-photooptions-description' => 'Податоци за сликата.',
 	'wikiaPhotoGallery-search-tooltip' => 'Пребарај слики на ова вики',
-	'wikiaPhotoGallery-upload-image-size' => 'Сликите мора да бидат со големина од барем 670 × 360 пиксели.', # Fuzzy
+	'wikiaPhotoGallery-upload-image-size' => 'Сликите мора да бидат со големина од барем 670 × 360 пиксели.',
 	'wikiaPhotoGallery-not-displayed' => 'Неприкажано',
 	'galery-slider-read-more' => 'Прочитајте повеќе >',
 );
@@ -3759,7 +3780,7 @@ $messages['my'] = array(
 	'wikiaPhotoGallery-preview-hover-delete' => 'ဖျက်​ပါ',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -4549,12 +4570,16 @@ $messages['ps'] = array(
 	'wikiaPhotoGallery-photooptions-title' => 'د انځور خوښنې',
 	'wikiaPhotoGallery-photooptions-done' => 'ترسره شو',
 	'wikiaPhotoGallery-preview-title' => 'انځورتون جوړونکی',
+	'wikiaPhotoGallery-preview-hover-modify' => 'بدلول',
 	'wikiaPhotoGallery-preview-hover-delete' => 'ړنګول',
 	'wikiaPhotoGallery-preview-previewtitle' => 'د انځورتون مخليدنه',
 	'wikiaPhotoGallery-preview-add-photo' => 'يو انځور ورګډول',
+	'wikiaPhotoGallery-preview-add-caption' => 'يو انځورمتن ورګډول',
+	'wikiaPhotoGallery-preview-add-description' => 'يوه څرګندونه ورګډول',
 	'wikiaPhotoGallery-preview-add-link' => 'يوه تړنه ورګډول',
 	'wikiaPhotoGallery-preview-tab-layout' => 'ليدنمخ',
 	'wikiaPhotoGallery-preview-position-left' => 'کيڼ',
+	'wikiaPhotoGallery-preview-position-center' => 'منځ',
 	'wikiaPhotoGallery-preview-position-right' => 'ښي',
 	'wikiaPhotoGallery-preview-spacing-small' => 'وړوکی',
 	'wikiaPhotoGallery-preview-spacing-medium' => 'منځوی',
@@ -4930,8 +4955,13 @@ $messages['ro'] = array(
 $messages['roa-tara'] = array(
 	'wikiaPhotoGallery-back' => 'Rrete',
 	'wikiaPhotoGallery-finish' => 'Spicce',
+	'wikiaPhotoGallery-lightbox-caption' => 'Vie $1',
+	'wikiaPhotoGallery-error-caption' => 'Errore',
 	'wikiaPhotoGallery-upload-findtitle' => 'Cirche',
 	'wikiaPhotoGallery-upload-findbutton' => 'Cirche',
+	'wikiaPhotoGallery-upload-page-next' => 'Le prossime 8',
+	'wikiaPhotoGallery-upload-page-prev' => 'Le 8 precedende',
+	'wikiaPhotoGallery-upload-filesinsert' => 'Mitte sta fote',
 	'wikiaPhotoGallery-upload-select-images' => 'Scacchie',
 	'wikiaPhotoGallery-photooptions-done' => 'Fatte',
 	'wikiaPhotoGallery-preview-title' => 'Costruttore de gallerie',
@@ -4942,6 +4972,19 @@ $messages['roa-tara'] = array(
 	'wikiaPhotoGallery-preview-add-caption' => "Aggiunge 'nu titole",
 	'wikiaPhotoGallery-preview-add-description' => "Aggiunge 'na descrizione",
 	'wikiaPhotoGallery-preview-add-link' => "Agigunge 'nu collegamende",
+	'wikiaPhotoGallery-preview-px' => 'px',
+	'wikiaPhotoGallery-preview-position-left' => 'Sinistre',
+	'wikiaPhotoGallery-preview-position-center' => 'Cendre',
+	'wikiaPhotoGallery-preview-position-right' => 'Destre',
+	'wikiaPhotoGallery-preview-spacing-small' => 'Piccinne',
+	'wikiaPhotoGallery-preview-spacing-medium' => 'Medie',
+	'wikiaPhotoGallery-preview-spacing-large' => 'Granne',
+	'wikiaPhotoGallery-preview-captionalignment-left' => 'Sinistre',
+	'wikiaPhotoGallery-preview-captionalignment-center' => 'Cendre',
+	'wikiaPhotoGallery-preview-captionalignment-right' => 'Destre',
+	'wikiaPhotoGallery-preview-captions-left' => 'Sinistre',
+	'wikiaPhotoGallery-preview-captions-center' => 'Cendre',
+	'wikiaPhotoGallery-preview-captions-right' => 'Destre',
 );
 
 /** Russian (русский)
@@ -5124,7 +5167,7 @@ $messages['ru'] = array(
 	'wikiaPhotoGallery-photooptions-linkurl' => 'Перейти на (вставьте название страницы или URL).',
 	'wikiaPhotoGallery-photooptions-description' => 'Детали изображения.',
 	'wikiaPhotoGallery-search-tooltip' => 'Поиск фотографий на этой вики',
-	'wikiaPhotoGallery-upload-image-size' => 'Изображения должны быть 670 пикселей на 360 пикселей или больше.', # Fuzzy
+	'wikiaPhotoGallery-upload-image-size' => 'Изображения должны быть 670 пикселей на 360 пикселей или больше.',
 	'wikiaPhotoGallery-not-displayed' => 'Не отображается',
 	'galery-slider-read-more' => 'Читать подробнее >',
 );
@@ -5501,7 +5544,7 @@ Alternativt kan du klicka på "$2" för att se sidan i sin uppdaterade form.',
 	'wikiaPhotoGallery-photooptions-linkurl' => 'Länk till (klistra in sidans namn eller URL).',
 	'wikiaPhotoGallery-photooptions-description' => 'Bilddetaljer.',
 	'wikiaPhotoGallery-search-tooltip' => 'Sök efter bilder på denna wiki',
-	'wikiaPhotoGallery-upload-image-size' => 'Bilder måste vara 670x360 px eller större.', # Fuzzy
+	'wikiaPhotoGallery-upload-image-size' => 'Foton måste vara 670x360 pixlar eller större.',
 	'wikiaPhotoGallery-not-displayed' => 'Visas inte',
 	'galery-slider-read-more' => ' Läs mer >',
 );
@@ -6115,8 +6158,11 @@ $messages['yi'] = array(
  * @author Dimension
  * @author Hydra
  * @author Hzy980512
+ * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
+	'wikiaphotogallery-desc' => '提供一个界面以供在页面中管理画廊和幻灯片',
 	'wikiaPhotoGallery-back' => '返回',
 	'wikiaPhotoGallery-finish' => '完成',
 	'wikiaPhotoGallery-edit-summary' => '编辑图库',
@@ -6202,6 +6248,14 @@ $messages['zh-hans'] = array(
 	'wikiaPhotoGallery-upload-selectbutton' => '选择',
 	'wikiaPhotoGallery-photooptions-captionsub' => '描述该图片。',
 	'wikiaPhotoGallery-search-tooltip' => '在该维基搜索图片',
+	'wikiaPhotoGallery-upload-image-size' => '图片尺寸必须为长670px宽360px或更大',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'wikiaPhotoGallery-finish' => '完成',
 );
 
 /** Chinese (Taiwan) (中文（台灣）‎)

@@ -1,19 +1,82 @@
+/*global VET_loader, WMU_skipDetails:true, WMU_show, WMU_openedInEditor:true, confirm, alert */
+
 var EditHub = function() {};
 
 EditHub.prototype = {
 	form: undefined,
 	wmuReady: undefined,
-	vetReady: undefined,
 	wmuDeffered: undefined,
-	vetDeffered: undefined,
 	lastActiveWmuButton: undefined,
-	lastActiveVetButton: undefined,
+
+	disableArrow: function() {
+		$('#marketing-toolbox-form').find('.module-box').find('button.navigation').removeAttr('disabled')
+			.end().filter(':first').find('.nav-up').attr('disabled', 'disabled')
+			.end().end().filter(':last').find('.nav-down').attr('disabled', 'disabled');
+	},
 
 	init: function () {
 		var validator;
+		var initThis = this;
+
+		$('#MarketingToolboxPublish').click($.proxy(this.publishHub, this));
 
 		$('.MarketingToolboxMain .wmu-show').click($.proxy(this.wmuInit, this));
-		$('.MarketingToolboxMain .vet-show').click($.proxy(this.vetInit, this));
+		$('.module-popular-videos').on('click', '.remove', $.proxy(this.popularVideosRemove, this));
+		$('.MarketingToolboxMain #marketing-toolbox-removeall').click($.proxy(this.popularVideosRemoveAll, this));
+		$('.MarketingToolboxMain .vet-show').each(function() {
+			var $this = $(this);
+			
+			$this.addVideoButton({
+				callbackAfterSelect: function(url) {
+
+					$.nirvana.sendRequest({
+						controller: 'MarketingToolboxController',
+						method: 'getVideoDetails',
+						type: 'get',
+						data: {
+							'url': url
+						},
+						callback: function(response) {
+							GlobalNotification.hide();
+							if ( response.error ) {
+								GlobalNotification.show( response.error, 'error' );
+							} else {
+								if (wgMarketingToolboxModuleIdSelected == wgMarketingToolboxModuleIdFeaturedVideo) {
+									var box = $this.parents('.module-box:first');
+									if (!box.length) {
+										box = $('.MarketingToolboxMain');
+									}
+
+									box.find('.filename-placeholder').html(response.videoFileName);
+									box.find('.wmu-file-name-input').val(response.videoFileName).valid();
+
+									box.find('.image-placeholder')
+										.empty()
+										.html(response.videoData.videoThumb);
+
+									// Close VET modal
+									VET_loader.modal.closeModal();
+								}
+								else if (wgMarketingToolboxModuleIdSelected == wgMarketingToolboxModuleIdPopularVideos) {
+									$.when(
+										$.loadMustache(),
+										Wikia.getMultiTypePackage({
+											mustache: 'extensions/wikia/SpecialMarketingToolbox/templates/MarketingToolboxVideosController_popularVideoRow.mustache'
+										})
+									).done(function(libData, packagesData) {
+										initThis.popularVideosAdd(packagesData[0].mustache[0], response);
+										VET_loader.modal.closeModal();
+									});
+								}
+							}
+						}
+					});
+					// Don't move on to second VET screen.  We're done.
+					return false;
+				},
+				searchOrder: 'newest'
+			});
+		});
 		$('.remove-sponsored-image').click($.proxy(this.confirmRemoveSponsoredImage, this));
 
 		this.form = $('#marketing-toolbox-form');
@@ -22,7 +85,7 @@ EditHub.prototype = {
 			this.clearSection(
 				this.form,
 				$.msg('marketing-toolbox-edithub-clearall-confirmation',this.form.data('module-name'))
-			)
+			);
 		}, this));
 
 		$(this.form).find('.clear').click($.proxy(function(event){
@@ -31,7 +94,7 @@ EditHub.prototype = {
 			this.clearSection(
 				sectionToReset,
 				$.msg('marketing-toolbox-edithub-clear-confirmation')
-			)
+			);
 		}, this));
 
 		$.validator.addMethod("wikiaUrl", function(value, element) {
@@ -55,7 +118,7 @@ EditHub.prototype = {
 		validator.focusInvalid = function() {
 			if( this.settings.focusInvalid ) {
 				try {
-					var element = $(this.errorList.length && this.errorList[0].element || [])
+					var element = $( (this.errorList.length && this.errorList[0].element) || []);
 
 					if (element.is(":visible")) {
 						element.focus()
@@ -69,10 +132,11 @@ EditHub.prototype = {
 					// ignore IE throwing errors when focusing hidden elements
 				}
 			}
-		}
+		};
 
 		this.wmuReady = false;
-		this.vetReady = false;
+
+		this.disableArrow();
 	},
 
 	wmuInit: function(event) {
@@ -85,7 +149,7 @@ EditHub.prototype = {
 				$.loadJQueryAIM(),
 				$.getResources([
 					wgExtensionsPath + '/wikia/WikiaMiniUpload/js/WMU.js',
-					$.getSassCommonURL( 'extensions/wikia/WikiaMiniUpload/css/WMU.scss'),
+					$.getSassCommonURL( 'extensions/wikia/WikiaMiniUpload/css/WMU.scss')
 				]),
 				$.loadJQueryAIM()
 			).then($.proxy(function() {
@@ -104,37 +168,6 @@ EditHub.prototype = {
 		}
 	},
 
-	vetInit: function(event) {
-		this.lastActiveVetButton = $(event.target);
-		if (!this.vetReady) {
-			this.vetDeffered = $.when(
-				$.loadYUI(),
-				$.loadMustache(),
-				$.getResources([
-					wgExtensionsPath + '/wikia/WikiaStyleGuide/js/Dropdown.js',
-					wgExtensionsPath + '/wikia/VideoEmbedTool/js/VET.js',
-					$.getSassCommonURL('/extensions/wikia/VideoEmbedTool/css/VET.scss'),
-					$.getSassCommonURL('/extensions/wikia/WikiaStyleGuide/css/Dropdown.scss')
-				])
-			).then(
-				$.proxy(function(event) {
-						this.showVet(event);
-					},
-					this
-				)
-			);
-			$(window).bind('VET_addFromSpecialPage', $.proxy(this.addVideo, this));
-			this.vetReady = true;
-		}
-		else {
-			this.showVet(event);
-		}
-	},
-
-	showVet: function(event) {
-		VET_show(event, VET_placeholder, true, true, true, window.wgMarketingToolboxThumbnailSize, undefined, 'newest');
-	},
-
 	addImage: function(wmuData) {
 		var fileName = wmuData.imageTitle;
 		$.nirvana.sendRequest({
@@ -149,7 +182,7 @@ EditHub.prototype = {
 				tempImg.src = response.fileUrl;
 				var box = this.lastActiveWmuButton.parents('.module-box:first');
 				if (!box.hasClass('sponsored-image')) { //define dimensions if it's not sponsored image
-					tempImg.height = response.imageHeight
+					tempImg.height = response.imageHeight;
 					tempImg.width = response.imageWidth;
 				}
 				if (!box.length) {
@@ -161,30 +194,6 @@ EditHub.prototype = {
 				imagePlaceholder.append(tempImg);
 				box.find('.filename-placeholder').html(response.fileTitle);
 				box.find('.wmu-file-name-input').val(response.fileTitle).valid();
-			}, this)
-		});
-	},
-
-	addVideo: function(event, vetData) {
-		$.nirvana.sendRequest({
-			controller: 'MarketingToolbox',
-			method: 'getVideoDetails',
-			type: 'get',
-			data: {
-				'wikiText': vetData.videoWikiText
-			},
-			callback: $.proxy(function(response) {
-				var box = this.lastActiveVetButton.parents('.module-box:first');
-				if (!box.length) {
-					box = $('.MarketingToolboxMain');
-				}
-
-				box.find('.filename-placeholder').html(response.videoFileName);
-				box.find('.wmu-file-name-input').val(response.videoFileName).valid();
-
-				box.find('.image-placeholder')
-					.empty()
-					.html(response.videoFileMarkup);
 			}, this)
 		});
 	},
@@ -204,6 +213,42 @@ EditHub.prototype = {
 		this.removeSponsoredImage();
 	},
 
+	popularVideosAdd: function(template, vetData) {
+		var html = $.mustache(template, {
+			sectionNo: 2,
+			videoTitle: vetData.videoFileName,
+			videoTime: vetData.videoData.videoTime,
+			videoFullUrl: vetData.videoUrl,
+			videoThumbnail: vetData.videoData.videoThumb,
+			removeMsg: $.msg('marketing-toolbox-edithub-remove'),
+			blankImgUrl: window.wgBlankImgUrl
+		});
+		$('#marketing-toolbox-form .popular-videos-list')
+			.prepend(html)
+			.find('.module-box')
+			.each(this.popularVideosResetIndex);
+		this.disableArrow();
+	},
+
+	popularVideosRemove: function(event) {
+		if (confirm($.msg('marketing-toolbox-hub-module-popular-videos-clear-one-confirm')) == true) {
+			var moduleContainer = '.module-box';
+			$(event.target).parents(moduleContainer).remove();
+			$('.popular-videos-list').find(moduleContainer).each(this.popularVideosResetIndex);
+			this.disableArrow();
+		}
+	},
+
+	popularVideosRemoveAll: function(event) {
+		if (confirm($.msg('marketing-toolbox-hub-module-popular-videos-clear-confirm')) == true) {
+			$('.popular-videos-list .module-box').remove();
+		}
+	},
+
+	popularVideosResetIndex: function(index, element) {
+		$(element).find('h3').text(index + 2 + '.');
+	},
+
 	confirmRemoveSponsoredImage: function() {
 		if (confirm($.msg('marketing-toolbox-edithub-clear-sponsored-image')) == true) {
 			this.removeSponsoredImage();
@@ -217,6 +262,38 @@ EditHub.prototype = {
 			.find('.image-placeholder img').remove()
 			.end()
 			.find('span.filename-placeholder').text('');
+	},
+
+	publishHub: function() {
+		var qs = Wikia.Querystring(window.location);
+
+		$.nirvana.sendRequest({
+			controller: 'MarketingToolbox',
+			method: 'publishHub',
+			type: 'post',
+			data: {
+				'date': qs.getVal('date'),
+				'region': qs.getVal('region'),
+				'verticalId': qs.getVal('verticalId'),
+				'sectionId': qs.getVal('sectionId')
+			},
+			callback: function(data){
+				if (data.success) {
+					window.open(data.hubUrl);
+					var container = $('.grid-4.alpha:first');
+					container.find('p.success').remove();
+
+					var info = $('<p />')
+						.addClass('success')
+						.text(data.successText);
+
+					container.prepend(info);
+					info.get(0).scrollIntoView();
+				} else {
+					alert(data.errorMsg);
+				}
+			}
+		});
 	}
 };
 

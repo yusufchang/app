@@ -50,6 +50,7 @@ $messages['en'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Post a comment',
 	'wikiamobile-article-comments-show' => 'Show',
 	'wikiamobile-article-comments-login-post' => 'Please log in to post a comment.',
+	'wikiamobile-article-comments-post-fail' => 'Failed to save comment, please try again later',
 
 	'enotif_subject_article_comment' => '$PAGEEDITOR has commented on "$PAGETITLE" on {{SITENAME}}',
 	'enotif_body_article_comment' => 'Hi $WATCHINGUSERNAME,
@@ -99,9 +100,11 @@ Parameters:
 {{Identical|Anonymous user}}',
 	'article-comments-post' => 'This is the text of a submit button to post a new article comment.',
 	'article-comments-cancel' => 'Cancel/stop editing an article comment.',
-	'article-comments-delete' => 'Click this button to delete the comment. It will take you to a page where you can confirm the deletion.',
+	'article-comments-delete' => 'Click this button to delete the comment. It will take you to a page where you can confirm the deletion.
+{{Identical|Delete}}',
 	'article-comments-edit' => 'Click this button to edit the message.  A box will appear to with the message text for editing.',
 	'article-comments-history' => '{{Identical|History}}',
+	'article-comments-reply' => '{{Identical|Reply}}',
 	'article-comments-next-page' => '{{Identical|Next}}',
 	'wikiamobile-article-comments-header' => "The header of the Comments section shown in Wikia's mobile skin. Parameters:
 * $1 is the number of the comments.",
@@ -524,6 +527,76 @@ Wikia
 </p>', # Fuzzy
 );
 
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'article-comments-file-page' => "<a href='$1'>Sylw gan $2</a> ar <a href='$3'>$4</a>",
+	'article-blog-comments-file-page' => "<a href='$1'>Sylw gan $2</a> ar <a href='$3'>$4</a> bost ar y blog <a href='$5'>$6</a>",
+	'article-comments-anonymous' => 'Defnyddiwr anhysbys',
+	'article-comments-comments' => 'Sylwadau ($1)',
+	'article-comments-post' => 'Postio sylw',
+	'article-comments-cancel' => 'Canslo',
+	'article-comments-delete' => 'dileu',
+	'article-comments-edit' => 'golygu',
+	'article-comments-history' => 'hanes',
+	'article-comments-error' => 'Dydyn ni ddim yn gallu achub y sylw.',
+	'article-comments-undeleted-comment' => 'Sylw ddim yn dileu am tudalen blog $1',
+	'article-comments-rc-comment' => 'Sylw erthygl (<span class="plainlinks">[$1 $2]</span>)',
+	'article-comments-rc-comments' => 'Sylw erthygl ([[$1]])',
+	'article-comments-fblogin' => '<a href="$1" rel="nofollow">Mewngofnodi a chysylltu gyda Facebook</a> os ydych chi eisiau gwneud sylw ar y wici hwn!',
+	'article-comments-fbconnect' => '<a href="$1>Cysylltu y cyfrif hwn gyda Facebook</a> os ydych chi eisiau gwneud sylw!',
+	'article-comments-rc-blog-comment' => 'Sylw blog (<span class="plainlinks">[$1 $2]</span>)',
+	'article-comments-rc-blog-comments' => 'Sylwadau blog ([[$1]])',
+	'article-comments-login' => '<a href="$1">Mewngofnodi</a> os ydych chi eisiau postio sylw ar y wici hwn.',
+	'article-comments-toc-item' => 'Sylwadau',
+	'article-comments-comment-cannot-add' => 'Dydych chi ddim yn gallu creu sylw ar yr erthygl hon.',
+	'article-comments-vote' => "Dw i'n hoffi hwn.",
+	'article-comments-reply' => 'Ateb',
+	'article-comments-show-all' => 'Amlygu pob sylw',
+	'article-comments-prev-page' => 'Cynt',
+	'article-comments-next-page' => 'Nesaf',
+	'article-comments-page-spacer' => '&#160...&#160',
+	'article-comments-delete-reason' => "Mae'r erthygl / sylw wreiddiol wedi bod yn dileu.",
+	'article-comments-empty-comment' => "Dydych chi ddim yn gallu postio sylw gwag. <a href='$1'>Dileu efallai?</a>",
+	'wikiamobile-article-comments-header' => 'Sylwadau <span class=cnt id=wkArtCnt>$1</span>',
+	'wikiamobile-article-comments-more' => 'Darllenwch mwy',
+	'wikiamobile-article-comments-prev' => 'Darllenwch cynt',
+	'wikiamobile-article-comments-none' => 'Nid oes sylwadau',
+	'wikiamobile-article-comments-view' => 'Darllenwch atebion',
+	'wikiamobile-article-comments-replies' => 'Atebion',
+	'wikiamobile-article-comments-post-reply' => 'Postio ateb',
+	'wikiamobile-article-comments-post' => 'Postio',
+	'wikiamobile-article-comments-placeholder' => 'Postio sylw',
+	'wikiamobile-article-comments-show' => 'Amlygu',
+	'wikiamobile-article-comments-login-post' => 'Mewngofnodi i bostio sylw.',
+	'wikiamobile-article-comments-post-fail' => "Ni lwyddwyd rhoi'r sylw ar gadw, ceisiwch eto'n ddiweddarach os gwelwch yn dda.",
+	'enotif_subject_article_comment' => 'Mae $PAGEEDITOR wedi sylw ar "$PAGETITLE" ar {{SITENAME}}',
+	'enotif_body_article_comment' => 'Helo $WATCHINGUSERNAME,
+
+Mae sylw newydd ar $PAGETITLE ar {{SITENAME}}. Defnyddwch y linc hwn i weld pob sylw:
+$PAGETITLE_URL#WikiaArticleComments
+
+- Y Tîm Wikia
+
+___________________________________________
+* Ffeindiwch help a chwnsel ar Community Central: http://community.wikia.com
+* Ydych chi eisiau cael llai neges ohonon ni? Dych chi\'n gallu stopio\'ch tanysgrifiad neu newid eich dewisiadau ebost yma: http://community.wikia.com/Special:Preferences',
+	'enotif_body_article_comment-HTML' => '<p>Helo $WATCHINGUSERNAME,
+<br /><br />
+Mae sylw newydd ar $PAGETITLE ar {{SITENAME}}. Defnyddwch y linc hwn i weld pob sylw: $PAGETITLE_URL#WikiaArticleComments
+<br /><br />
+- Y Tîm Wikia
+<br /><br />
+___________________________________________
+<ul>
+<li>Ffeindiwch help a chwnsel ar Community Central: <a href="http://community.wikia.com">http://community.wikia.com</a><li>
+<li>Ydych chi eisiau cael llai neges ohonon ni? Dych chi\'n gallu stopio\'ch tanysgrifiad neu newid eich dewisiadau ebost yma:  <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+</ul>
+</p>',
+);
+
 /** Danish (dansk)
  * @author Sarrus
  */
@@ -587,6 +660,7 @@ $messages['de'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Kommentieren',
 	'wikiamobile-article-comments-show' => 'Zeigen',
 	'wikiamobile-article-comments-login-post' => 'Bitte melde dich zum Kommentieren an.',
+	'wikiamobile-article-comments-post-fail' => 'Der Kommentar konnte nicht gespeichert werden. Bitte später erneut versuchen.',
 	'enotif_subject_article_comment' => '$PAGEEDITOR hat "$PAGETITLE" auf {{SITENAME}} kommentiert',
 	'enotif_body_article_comment' => 'Hallo $WATCHINGUSERNAME,
 
@@ -682,6 +756,8 @@ Wikia
  * @author Glavkos
  */
 $messages['el'] = array(
+	'article-comments-file-page' => "<a href='$1'>Σχόλιο από $2</a> στο <a href='$3'>$4</a>",
+	'article-blog-comments-file-page' => "<a href='$1'>Σχόλιο από  $2</a> on <a href='$3'>$4</a> αναρτήθηκε στο <a href='$5'>$6's</a> blog",
 	'article-comments-anonymous' => 'Ανώνυμος χρήστης',
 	'article-comments-comments' => 'Σχόλια ($1)',
 	'article-comments-post' => 'Δημοσίευση σχολίου',
@@ -690,15 +766,19 @@ $messages['el'] = array(
 	'article-comments-edit' => 'επεξεργασία',
 	'article-comments-history' => 'ιστορικό',
 	'article-comments-error' => 'Δεν ήταν δυνατή η αποθήκευση του σχολίου',
+	'article-comments-undeleted-comment' => 'Επαναφερμένο σχόλιο για την σελίδα blog $1',
 	'article-comments-rc-comment' => 'Σχόλιο άρθρου (<span class="plainlinks">[$1 $2]</span>)',
 	'article-comments-rc-comments' => 'Σχόλια άρθρου ([[$1]])',
+	'article-comments-fbconnect' => 'Παρακαλούμε <a href="$1">συνδέστε αυτό τον λογαριασμό με το Facebook</a> για να σχολιάσετε!',
+	'article-comments-rc-blog-comment' => 'Σχόλιο σε blog (<span class="plainlinks">[$1 $2]</span>)',
 	'article-comments-rc-blog-comments' => 'Σχόλια blog ([[$1]])',
+	'article-comments-login' => 'Παρακαλώ <a href="$1">συνδεθ</a> για να αναρτήσετε σχόλιο σε αυτό το wiki.',
 	'article-comments-toc-item' => 'Σχόλια',
 	'article-comments-comment-cannot-add' => 'Δεν μπορείτε να προσθέσετε σχόλιο για το άρθρο.',
 	'article-comments-vote' => 'Ψηφοφορία μέχρι',
 	'article-comments-reply' => 'Απάντηση',
 	'article-comments-show-all' => 'Εμφάνιση όλων των σχολίων',
-	'article-comments-prev-page' => 'Προηγ',
+	'article-comments-prev-page' => 'Προηγούμενο',
 	'article-comments-next-page' => 'Επόμενο',
 	'article-comments-page-spacer' => '&#160...&#160',
 	'article-comments-empty-comment' => "Δεν μπορείτε να δημοσιεύσετε ένα κενό σχόλιο. <a href='$1'>Αντ'αυτού να το διαγράψετε;</a>",
@@ -713,6 +793,7 @@ $messages['el'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Δημοσίευση σχολίου',
 	'wikiamobile-article-comments-show' => 'Παρουσίαση',
 	'wikiamobile-article-comments-login-post' => 'Παρακαλώ συνδεθείτε για να αναρτήσετε ένα σχόλιο.',
+	'wikiamobile-article-comments-post-fail' => 'Αποτυχία αποθήκευσης σχολίου, παρακαλώ δοκιμάστε ξανά αργότερα \\',
 	'enotif_subject_article_comment' => '$PAGEEDITOR έχει σχολιάσει στο "$PAGETITLE" στο {{SITENAME}}',
 );
 
@@ -774,6 +855,7 @@ $messages['es'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Dejar un comentario',
 	'wikiamobile-article-comments-show' => 'Mostrar',
 	'wikiamobile-article-comments-login-post' => 'Inicia sesión para publicar un comentario.',
+	'wikiamobile-article-comments-post-fail' => 'Error al guardar el comentario, por favor inténtalo nuevamente',
 	'enotif_subject_article_comment' => '$PAGEEDITOR ha comentado en "$PAGETITLE" en {{SITENAME}}',
 	'enotif_body_article_comment' => 'Hola $WATCHINGUSERNAME,
 
@@ -1021,6 +1103,7 @@ $messages['fr'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Envoyer un commentaire',
 	'wikiamobile-article-comments-show' => 'Afficher',
 	'wikiamobile-article-comments-login-post' => 'Veuillez vous connecter pour poster un commentaire.',
+	'wikiamobile-article-comments-post-fail' => 'Échec de l’enregistrement du commentaire, veuillez réessayer plus tard',
 	'enotif_subject_article_comment' => '$PAGEEDITOR a commenté « $PAGETITLE » sur {{SITENAME}}',
 	'enotif_body_article_comment' => '$WATCHINGUSERNAME,
 
@@ -1090,6 +1173,7 @@ $messages['gl'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Publicar un comentario',
 	'wikiamobile-article-comments-show' => 'Mostrar',
 	'wikiamobile-article-comments-login-post' => 'Acceda ao sistema para publicar un comentario.',
+	'wikiamobile-article-comments-post-fail' => 'Erro ao gardar o comentario; inténteo de novo máis tarde',
 	'enotif_subject_article_comment' => '$PAGEEDITOR fixo un comentario sobre "$PAGETITLE" en {{SITENAME}}',
 	'enotif_body_article_comment' => 'Boas, $WATCHINGUSERNAME:
 
@@ -1132,6 +1216,41 @@ $messages['he'] = array(
 	'article-comments-fblogin' => 'אנא <a href="$1" rel="nofollow">התחבר בעזרת פייסבוק</a> על מנת לפרסם תגובה בוויקי זו!',
 	'article-comments-comment-cannot-add' => 'אינך יכול להוסיף תגובה לערך',
 	'article-comments-show-all' => 'הצגת כל התגובות',
+);
+
+/** Hindi (हिन्दी)
+ * @author Kush rohra
+ */
+$messages['hi'] = array(
+	'article-comments-anonymous' => 'बेनामी उपयोगकर्ता',
+	'article-comments-comments' => 'टिप्पणियाँ ( $1 )',
+	'article-comments-post' => 'टिप्पणी पोस्ट',
+	'article-comments-cancel' => 'रद्द करें',
+	'article-comments-delete' => 'हटाएँ',
+	'article-comments-edit' => 'संपादित करें',
+	'article-comments-history' => 'इतिहास',
+	'article-comments-error' => 'टिप्पणी को सहेजा नहीं जा सका',
+	'article-comments-toc-item' => 'टिप्पणियाँ',
+	'article-comments-comment-cannot-add' => 'आप लेख के लिए एक टिप्पणी जोड़ें नहीं कर सकता।',
+	'article-comments-vote' => 'ऊपर वोट',
+	'article-comments-reply' => 'उत्तर दें',
+	'article-comments-show-all' => 'सभी टिप्पणियाँ दिखाएँ',
+	'article-comments-prev-page' => 'पिछली',
+	'article-comments-next-page' => 'अगला',
+	'article-comments-delete-reason' => 'जनक टिप्पणी नष्ट कर दिया गया है।',
+	'wikiamobile-article-comments-more' => 'भार अधिक',
+	'wikiamobile-article-comments-prev' => 'पिछले लोड',
+	'wikiamobile-article-comments-none' => 'नहीं 
+टिप्पणी',
+	'wikiamobile-article-comments-view' => '
+उत्तरों देखने के',
+	'wikiamobile-article-comments-replies' => 'जवाब',
+	'wikiamobile-article-comments-post-reply' => 'एक उत्तर पोस्ट',
+	'wikiamobile-article-comments-post' => 'पोस्ट',
+	'wikiamobile-article-comments-placeholder' => 'टिप्पणी पोस्ट करें',
+	'wikiamobile-article-comments-show' => 'दिखाएँ',
+	'wikiamobile-article-comments-login-post' => 'कृपया एक टिप्पणी पोस्ट करने में लॉग इन करें।',
+	'wikiamobile-article-comments-post-fail' => 'टिप्पणी को बचाने के लिए, कृपया बाद में पुन: प्रयास करें विफल रहा',
 );
 
 /** Hungarian (magyar)
@@ -1665,6 +1784,7 @@ $messages['mk'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Објави коментар',
 	'wikiamobile-article-comments-show' => 'Прикажи',
 	'wikiamobile-article-comments-login-post' => 'Најавете се за да можете да коментирате.',
+	'wikiamobile-article-comments-post-fail' => 'Не успеав да го зачувам коментарот. Обидете се подоцна.',
 	'enotif_subject_article_comment' => '$PAGEEDITOR коментираше на „$PAGETITLE“ на {{SITENAME}}',
 	'enotif_body_article_comment' => 'Здраво $WATCHINGUSERNAME,
 
@@ -1713,6 +1833,8 @@ $messages['ml'] = array(
  * @author Anakmalaysia
  */
 $messages['ms'] = array(
+	'article-comments-file-page' => "<a href='$1'>Ulasan oleh $2</a> di <a href='$3'>$4</a>",
+	'article-blog-comments-file-page' => "<a href='$1'>Ulasan oleh $2</a> pada pos <a href='$3'>$4</a> di blog <a href='$5'>$6</a>",
 	'article-comments-anonymous' => 'Pengguna tanpa nama',
 	'article-comments-comments' => 'Ulasan ($1)',
 	'article-comments-post' => 'Kirim ulasan',
@@ -1750,6 +1872,7 @@ $messages['ms'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Hantar ulasan',
 	'wikiamobile-article-comments-show' => 'Paparkan',
 	'wikiamobile-article-comments-login-post' => 'Sila log masuk untuk berkomen.',
+	'wikiamobile-article-comments-post-fail' => 'Komen tidak dapat disimpan; sila cuba lagi nanti',
 	'enotif_subject_article_comment' => '$PAGEEDITOR telah mengulas "$PAGETITLE" di {{SITENAME}}',
 	'enotif_body_article_comment' => '$WATCHINGUSERNAME,
 
@@ -1783,7 +1906,7 @@ $messages['mzn'] = array(
 	'article-comments-undeleted-comment' => 'نظر صفحۀ وبلاگ $1 وسّه احیاء بیّه',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -1893,6 +2016,7 @@ $messages['nl'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Opmerking plaatsen',
 	'wikiamobile-article-comments-show' => 'Weergeven',
 	'wikiamobile-article-comments-login-post' => 'Meld u aan om te reageren.',
+	'wikiamobile-article-comments-post-fail' => 'Het opslaan van de reactie is mislukt. Probeer het later opnieuw.',
 	'enotif_subject_article_comment' => '$PAGEEDITOR heeft een opmerking geplaatst bij "$PAGETITLE" op {{SITENAME}}',
 	'enotif_body_article_comment' => 'Hallo $WATCHINGUSERNAME,
 
@@ -2013,6 +2137,7 @@ $messages['pl'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Wyślij komentarz',
 	'wikiamobile-article-comments-show' => 'Pokaż',
 	'wikiamobile-article-comments-login-post' => 'Zaloguj się aby dodać komentarz.',
+	'wikiamobile-article-comments-post-fail' => 'Nie udało się zapisać komentarza, spróbuj ponownie później',
 	'enotif_subject_article_comment' => '$PAGEEDITOR skomentował "$PAGETITLE" na {{SITENAME}}',
 	'enotif_body_article_comment' => 'Witaj $WATCHINGUSERNAME,
 
@@ -2111,10 +2236,12 @@ ___________________________________________
 $messages['ps'] = array(
 	'article-comments-anonymous' => 'ورکنومی کارن',
 	'article-comments-comments' => 'تبصرې ($1)',
+	'article-comments-post' => 'تبصره کول',
 	'article-comments-cancel' => 'ناګارل',
 	'article-comments-delete' => 'ړنګول',
 	'article-comments-edit' => 'سمول',
 	'article-comments-history' => 'پېښليک',
+	'article-comments-rc-comments' => 'د ليکنې تبصرې ([[$1]])',
 	'article-comments-toc-item' => 'تبصرې',
 	'article-comments-reply' => 'ځوابول',
 	'article-comments-show-all' => 'ټولې تبصرې ښکاره کول',
@@ -2129,10 +2256,13 @@ $messages['ps'] = array(
 /** Portuguese (português)
  * @author Hamilton Abreu
  * @author Malafaya
+ * @author Pttraduc
  * @author SandroHc
  * @author Waldir
  */
 $messages['pt'] = array(
+	'article-comments-file-page' => "<a href='$1'>Comentário de  $2  </a> em<a href='$3'>$4</a>",
+	'article-blog-comments-file-page' => "<a href='$1'>Comentar do  $2  </a> na <a href='$3'> $4 </a> post sobre <a href='$5'>  $6 do</a> blog",
 	'article-comments-anonymous' => 'Utilizador anónimo',
 	'article-comments-comments' => 'Comentários ($1)',
 	'article-comments-post' => 'Publicar comentário',
@@ -2170,6 +2300,7 @@ $messages['pt'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Publicar um comentário',
 	'wikiamobile-article-comments-show' => 'Mostrar',
 	'wikiamobile-article-comments-login-post' => 'Inicie sessão antes de publicar um comentário.',
+	'wikiamobile-article-comments-post-fail' => 'Falha ao salvar o comentário, por favor, tente novamente mais tarde',
 	'enotif_subject_article_comment' => '$PAGEEDITOR comentou "$PAGETITLE" na {{SITENAME}}',
 	'enotif_body_article_comment' => 'Olá $WATCHINGUSERNAME,
 
@@ -2180,29 +2311,30 @@ Existe um novo comentário em $PAGETITLE na {{SITENAME}}. Usa este link para ver
 ___________________________________________
 * Encontra ajuda e conselhos na Central da Comunidade: http://community.wikia.com
 * Desejas receber menos mensagens nossas? Podes des-subscrever ou alterar as tuas preferências de e-mail aqui: http://community.wikia.com/Special:Preferences',
-	'enotif_body_article_comment-HTML' => '<p>Caro $WATCHINGUSERNAME,
-<br /><br />
-$PAGEEDITOR fez um comentário em "$PAGETITLE".
-<br /><br />
-Para ver a lista de discussão do comentário, siga este link: <a href="$PAGETITLE_URL">$PAGETITLE</a>
-<br /><br />
-Por favor, visite e edite muitas vezes...
-<br /><br />
-Wikia
-<br /><hr />
+	'enotif_body_article_comment-HTML' => '<p>Oi WATCHINGUSERNAME $,
+<br><br>
+Há um novo comentário no $PAGETITLE em {{SITENAME}}. Use este link para ver todos os comentários: $PAGETITLE_URL #WikiaArticleComments
+<br><br>
+-apoio da Comunidade Wikia
+<br><br>
+___________________________________________
 <ul>
-<li>Quer controlar os e-mails que recebe? <a href="{{fullurl:Special:Preferences}}">Actualize as suas preferências<a>.</li>
-</ul>
+<li>Encontrar ajuda e conselhos na Comunidade Central: <a href="http://community.wikia.com">http://community.wikia.com</a><li>
+<li>Quero receber menos mensagens de nós? Você pode cancelar ou alterar suas preferências de e-mail aqui: <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+</li></li></ul>
 </p>', # Fuzzy
 );
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
  * @author Caio1478
+ * @author JM Pessanha
  * @author Luckas Blade
  * @author TheGabrielZaum
  */
 $messages['pt-br'] = array(
+	'article-comments-file-page' => "<a href='$1'>Comentário de $2</a> em <a href='$3'>$4</a>",
+	'article-blog-comments-file-page' => "<a href='$1'>Comentário de $2</a> na publicação <a href='$3'>$4</a> do blog <a href='$5'> $6's</a>",
 	'article-comments-anonymous' => 'Usuário anônimo',
 	'article-comments-comments' => 'Comentários ($1)',
 	'article-comments-post' => 'Postar comentário',
@@ -2240,6 +2372,7 @@ $messages['pt-br'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Postar um comentário',
 	'wikiamobile-article-comments-show' => 'Mostrar',
 	'wikiamobile-article-comments-login-post' => 'Autentifique-se para postar um comentário.',
+	'wikiamobile-article-comments-post-fail' => 'Falha ao salvar o comentário, por favor, tente novamente mais tarde',
 	'enotif_subject_article_comment' => 'Comentou sobre "$ PAGETITLE" em {{SITENAME}} $PAGEEDITOR',
 	'enotif_body_article_comment' => 'Olá $ WATCHINGUSERNAME,
 
@@ -2286,6 +2419,8 @@ $messages['ro'] = array(
  * @author Reder
  */
 $messages['roa-tara'] = array(
+	'article-comments-file-page' => "<a href='$1'>Commende da $2</a> sus a <a href='$3'>$4</a>",
+	'article-blog-comments-file-page' => "<a href='$1'>Commende da $2</a> sus a <a href='$3'>$4</a> mannate sus a 'u blog <a href='$5'>$6's</a>",
 	'article-comments-anonymous' => 'Utinde anonime',
 	'article-comments-comments' => 'Commende $1',
 	'article-comments-post' => "Mitte 'nu commende",
@@ -2296,7 +2431,9 @@ $messages['roa-tara'] = array(
 	'article-comments-error' => "Non g'è state possibbele ccu salve 'u commende",
 	'article-comments-undeleted-comment' => "Commende no scangellate p'a pàgene $1 d'u blog",
 	'article-comments-rc-comments' => "Commende d'a vôsce ([[$1]])",
+	'article-comments-rc-blog-comments' => "Commende d'u blog ([[$1]])",
 	'article-comments-toc-item' => 'Commende',
+	'article-comments-comment-cannot-add' => "Tu non ge puè aggiungere 'nu commende a 'a vôsce.",
 	'article-comments-vote' => 'Vote',
 	'article-comments-reply' => 'Respunne',
 	'article-comments-show-all' => 'Vide tutte le commènde',
@@ -2360,6 +2497,7 @@ $messages['ru'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Оставить комментарий',
 	'wikiamobile-article-comments-show' => 'Показать',
 	'wikiamobile-article-comments-login-post' => 'Пожалуйста войдите, чтобы оставить комментарий.',
+	'wikiamobile-article-comments-post-fail' => 'Не удалось сохранить комментарий, повторите попытку позже',
 	'enotif_subject_article_comment' => '$PAGEEDITOR прокомментировал "$ PAGETITLE" на {{SITENAME}}',
 	'enotif_body_article_comment' => 'Привет $WATCHINGUSERNAME,
 
@@ -2512,6 +2650,7 @@ $messages['sv'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Skriv en kommentar',
 	'wikiamobile-article-comments-show' => 'Visa',
 	'wikiamobile-article-comments-login-post' => 'Logga in för att skriva en kommentar.',
+	'wikiamobile-article-comments-post-fail' => 'Misslyckades att spara kommentar, var god försök igen senare',
 	'enotif_subject_article_comment' => '$PAGEEDITOR har kommenterat "$PAGETITLE" på {{SITENAME}}',
 	'enotif_body_article_comment' => 'Hej $WATCHINGUSERNAME,
 
@@ -2857,8 +2996,10 @@ Wikia
  * @author Anakmalaysia
  * @author Dimension
  * @author Hydra
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
+	'article-comments-file-page' => "<a href='$1'>评论来自 $2</a> 于 <a href='$3'>$4</a>",
 	'article-comments-anonymous' => '匿名用户',
 	'article-comments-comments' => '评论（$1）',
 	'article-comments-post' => '发表评论',
@@ -2896,6 +3037,7 @@ $messages['zh-hans'] = array(
 	'wikiamobile-article-comments-placeholder' => '发表评论',
 	'wikiamobile-article-comments-show' => '展开',
 	'wikiamobile-article-comments-login-post' => '请登录以发表评论。',
+	'wikiamobile-article-comments-post-fail' => '评论保存失败，请稍后再试',
 	'enotif_subject_article_comment' => '$PAGEEDITOR在{{SITENAME}}上对"$PAGETITLE"发表了评论',
 	'enotif_body_article_comment' => 'Hi~,$WATCHINGUSERNAME，
 
@@ -2957,5 +3099,13 @@ $messages['zh-hant'] = array(
 	'wikiamobile-article-comments-more' => '載入更多',
 	'wikiamobile-article-comments-prev' => '載入前面的',
 	'wikiamobile-article-comments-none' => '沒有評論',
+	'wikiamobile-article-comments-view' => '查看回覆',
+	'wikiamobile-article-comments-replies' => '回覆',
+	'wikiamobile-article-comments-post-reply' => '發表回覆',
+	'wikiamobile-article-comments-post' => '發佈',
+	'wikiamobile-article-comments-placeholder' => '發表評論',
+	'wikiamobile-article-comments-show' => '顯示',
+	'wikiamobile-article-comments-login-post' => '請登錄後發表評論。',
+	'wikiamobile-article-comments-post-fail' => '評論儲存失敗，請稍後再試',
 	'enotif_subject_article_comment' => '$PAGEEDITOR 在 {{SITENAME}}的文章 "$PAGETITLE"中發表評論',
 );

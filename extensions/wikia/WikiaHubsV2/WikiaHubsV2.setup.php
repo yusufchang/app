@@ -30,6 +30,9 @@ $app->registerClass('WikiaHubsV2Hooks', $dir . 'hooks/WikiaHubsV2Hooks.php');
 // model classes
 $app->registerClass('WikiaHubsV2Article', $dir . 'models/WikiaHubsV2Article.class.php');
 $app->registerClass('WikiaHubsV2Model', $dir . 'models/WikiaHubsV2Model.class.php');
+$app->registerClass('WikiaHubsV2HooksModel', $dir . 'models/WikiaHubsV2HooksModel.class.php');
+
+$app->registerClass('WikiaHubsV2SuggestModel', $dir . 'models/WikiaHubsV2SuggestModel.class.php');
 
 $app->registerClass('WikiaHubsV2Module', $dir . 'models/modules/WikiaHubsV2Module.class.php');
 $app->registerClass('WikiaHubsV2PulseModule', $dir . 'models/modules/WikiaHubsV2PulseModule.class.php');
@@ -53,8 +56,26 @@ $app->registerClass('MysqlWikiaHubsV2SliderModuleDataProvider', $dir . 'models/d
 $app->registerSpecialPage('WikiaHubsV2', 'SpecialWikiaHubsV2Controller');
 
 // i18n mapping
-$wgExtensionMessagesFiles['WikiaHubsV2'] = $dir . 'WikiaHubsV2.i18n.php';
+$app->registerExtensionMessageFile('WikiaHubsV2', $dir.'WikiaHubsV2.i18n.php');
 
 // hooks
 $app->registerHook('WikiaMobileAssetsPackages', 'WikiaHubsV2Mobile', 'onWikiaMobileAssetsPackages');
 $app->registerHook('ArticleFromTitle', 'WikiaHubsV2Hooks', 'onArticleFromTitle');
+$app->registerHook('WikiaCanonicalHref', 'WikiaHubsV2Hooks', 'onWikiaCanonicalHref');
+
+// foreign file repo
+$wgForeignFileRepos[] = array(
+	'class'            => 'WikiaForeignDBViaLBRepo',
+	'name'             => 'wikiahubsfiles',
+	'directory'        => $wgWikiaHubsFileRepoDirectory,
+	'url'              => 'http://images.wikia.com/central/images',
+	'hashLevels'       => 2,
+	'thumbScriptUrl'   => '',
+	'transformVia404'  => true,
+	'hasSharedCache'   => true,
+	'descBaseUrl'      => $wgWikiaHubsFileRepoPath . 'wiki/File:',
+	'fetchDescription' => true,
+	'wiki'             => $wgWikiaHubsFileRepoDBName,
+	'checkRedirects'   => false,
+	'checkDuplicates'  => false,
+);

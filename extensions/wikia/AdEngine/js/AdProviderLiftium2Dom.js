@@ -1,5 +1,5 @@
-// TODO: remove WikiaTracker dependency
-var AdProviderLiftium2Dom = function (wikiaTracker, log, document, slotTweaker, Liftium, scriptWriter) {
+// TODO: remove Wikia.Tracker dependency
+var AdProviderLiftium2Dom = function (tracker, log, document, slotTweaker, Liftium, scriptWriter) {
 	'use strict';
 
 	var logGroup = 'AdProviderLiftium2'
@@ -10,8 +10,6 @@ var AdProviderLiftium2Dom = function (wikiaTracker, log, document, slotTweaker, 
 	;
 
 	slotMap = {
-		'CORP_TOP_LEADERBOARD': {'size': '728x90'},
-		'CORP_TOP_RIGHT_BOXAD': {'size': '300x250'},
 		'EXIT_STITIAL_BOXAD_1': {'size':'300x250'},
 		'HOME_TOP_LEADERBOARD':{'size':'728x90'},
 		'HOME_TOP_RIGHT_BOXAD':{'size':'300x250'},
@@ -84,7 +82,7 @@ var AdProviderLiftium2Dom = function (wikiaTracker, log, document, slotTweaker, 
 		;
 
 		// not needed, liftium got its own tracking (but pls keep it for reference)
-		//WikiaTracker.track({
+		//tracker.track({
 		//	eventName: 'liftium.slot2',
 		//	ga_category: 'slot2/' + slotsize.replace(/,.*$/, ''),
 		//	ga_action: slotname,

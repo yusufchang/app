@@ -125,6 +125,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author EugeneZelenko
  * @author Lloffiwr
+ * @author Shirayuki
  * @author Siebrand
  */
 $messages['qqq'] = array(
@@ -133,10 +134,12 @@ $messages['qqq'] = array(
 	'swm-label-preview' => '{{Identical|Preview}}',
 	'swm-label-edit' => '{{Identical|Edit}}',
 	'swm-label-remove' => '{{Identical|Remove}}',
-	'swm-label-sent' => 'Page title after message is sent out.',
+	'swm-label-sent' => 'Page title after message is sent out.
+{{Identical|Sent}}',
 	'swm-label-list' => 'List is a noun here.
 
 {{Identical|List}}',
+	'swm-label-recipient-wikis' => '{{Identical|Wiki}}',
 	'swm-label-recipient-users' => '{{Identical|User}}',
 	'swm-label-mode-wikis-wiki-multi' => 'Option to select if user wants to send message to users on a list of wikis.',
 	'swm-label-mode-wikis-wiki-multi-hint' => 'Message explaining the format of the list of wikis.',
@@ -150,6 +153,7 @@ $messages['qqq'] = array(
 	'swm-button-new' => '{{Identical|New}}',
 	'swm-msg-sent-task' => 'Message to display when a task is created in order to send a message. $1 is a link to the created task.',
 	'swm-expire-info' => '',
+	'swm-list-table-wiki' => '{{Identical|Wiki}}',
 	'swm-list-table-group' => '{{Identical|Group}}',
 	'swm-list-table-removed' => 'Column heading of a table with one message per line. The column contains either yes or no if the message was removed or not.',
 	'swm-list-table-content' => '{{Identical|Content}}',
@@ -1918,7 +1922,7 @@ $messages['mzn'] = array(
 	'swm-list-table-lang' => 'زوون',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -2377,11 +2381,14 @@ $messages['pms'] = array(
 $messages['ps'] = array(
 	'swm-label-preview' => 'مخليدنه',
 	'swm-label-edit' => 'سمول',
+	'swm-label-remove' => 'غورځول',
+	'swm-label-sent' => 'ولېږل شو',
 	'swm-label-list' => 'لړليک',
 	'swm-label-recipient-wikis' => 'ويکي ګانې',
 	'swm-label-recipient-users' => 'کارنان',
 	'swm-label-mode-wikis-all' => 'ټولې ويکي ګانې',
 	'swm-label-mode-wikis-wiki' => 'ټاکلې ويکي',
+	'swm-label-mode-wikis-wiki-multi' => 'د ويکي ګانو لړليک',
 	'swm-label-mode-users-all' => 'ټول کارنان',
 	'swm-label-mode-users-active' => 'فعاله کارنان',
 	'swm-label-mode-users-user' => 'ټاکلی کارن',
@@ -2404,6 +2411,14 @@ $messages['ps'] = array(
 	'swm-list-table-lang' => 'ژبې',
 	'swm-yes' => 'هو',
 	'swm-no' => 'نه',
+	'swm-mode-users-registration-after' => 'وروسته',
+	'swm-mode-users-registration-before' => 'دمخه',
+	'swm-mode-users-registration-between' => 'تر منځ',
+	'swm-mode-users-editcount-more' => 'نور',
+	'swm-mode-users-editcount-between' => 'تر منځ',
+	'swm-mode-wikis-created-after' => 'وروسته',
+	'swm-mode-wikis-created-before' => 'دمخه',
+	'swm-mode-wikis-created-between' => 'تر منځ',
 );
 
 /** Portuguese (português)
@@ -2568,6 +2583,38 @@ $messages['ro'] = array(
 	'swm-no' => 'Nu',
 	'swm-error-no-such-wiki' => 'Nu există un asemenea wiki!',
 	'swm-error-empty-group' => 'Introdu numele grupului.',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'swm-label-preview' => 'Andeprime',
+	'swm-label-edit' => 'Cange',
+	'swm-label-remove' => 'Live',
+	'swm-label-sent' => 'Mannate',
+	'swm-label-list' => 'Elenghe',
+	'swm-label-recipient-wikis' => 'Uicchi',
+	'swm-label-recipient-users' => 'Utinde',
+	'swm-label-mode-wikis-all' => 'tutte le uicchi',
+	'swm-label-mode-users-all' => "Tutte l'utinde",
+	'swm-label-mode-users-active' => 'Utinde attive',
+	'swm-label-mode-users-user-multi' => "Elenghe de l'utinde",
+	'swm-label-mode-users-anon' => "Tutte l'utinde anonime",
+	'swm-label-content' => 'Condenute',
+	'swm-label-comment' => 'Commende',
+	'swm-label-dismissed' => 'Scettate',
+	'swm-label-language' => 'Lènghe',
+	'swm-list-table-id' => 'ID',
+	'swm-list-table-wiki' => 'Uicchi',
+	'swm-list-table-group' => 'Gruppe',
+	'swm-list-table-expire' => 'Scadenze',
+	'swm-list-table-removed' => 'Luate',
+	'swm-list-table-content' => 'Condenute',
+	'swm-list-table-tools' => 'Struminde',
+	'swm-list-table-lang' => 'Lènghe',
+	'swm-yes' => 'Sìne',
+	'swm-no' => 'None',
 );
 
 /** Russian (русский)
@@ -3188,6 +3235,7 @@ $messages['zh-hans'] = array(
 	'swm-mode-users-editcount-more' => '更多',
 	'swm-mode-users-editcount-less' => '更少',
 	'swm-mode-users-editcount-between' => '之间',
+	'swm-label-mode-wikis-created' => '维基创立日期',
 	'swm-mode-wikis-created-after' => '之后',
 	'swm-mode-wikis-created-before' => '之前',
 	'swm-mode-wikis-created-between' => '之间',

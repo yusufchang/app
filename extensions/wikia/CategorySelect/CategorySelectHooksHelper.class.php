@@ -109,11 +109,11 @@ class CategorySelectHooksHelper {
 
 		if ( $app->wg->EnableUserPreferencesV2Ext ) {
 			$section = 'editing/starting-an-edit';
-			$message = $app->wf->Message( 'tog-disablecategoryselect-v2' );
+			$message = $app->wf->Message( 'tog-disablecategoryselect-v2' )->text();
 
 		} else {
 			$section = 'editing/editing-experience';
-			$message = $app->wf->Message( 'tog-disablecategoryselect' );
+			$message = $app->wf->Message( 'tog-disablecategoryselect' )->text();
 		}
 
 		$preferences[ 'disablecategoryselect' ] = array(
@@ -130,17 +130,8 @@ class CategorySelectHooksHelper {
 	 */
 	public static function onMakeGlobalVariablesScript( Array &$vars ) {
 		$app = F::app();
-		$action = $app->wg->Request->getVal( 'action', 'view' );
-		$categories = array();
-
-		// Load categories data for edit page
-		if ( $action == 'edit' || $action == 'submit' ) {
-			$data = CategorySelect::getExtractedCategoryData();
-			$categories = $data[ 'categories' ];
-		}
 
 		$vars[ 'wgCategorySelect' ] = array(
-			'categories' => $categories,
 			'defaultNamespace' => $app->wg->ContLang->getNsText( NS_CATEGORY ),
 			'defaultNamespaces' => CategorySelect::getDefaultNamespaces(),
 			'defaultSeparator' => trim( $app->wf->Message( 'colon-separator' )->escaped() ),
@@ -164,32 +155,17 @@ class CategorySelectHooksHelper {
 
 			$app->registerHook( 'MakeGlobalVariablesScript', 'CategorySelectHooksHelper', 'onMakeGlobalVariablesScript' );
 
-			// Add hooks for view pages
-			if ( $action == 'view' || $action == 'purge' ) {
-				$app->registerHook( 'OutputPageMakeCategoryLinks', 'CategorySelectHooksHelper', 'onOutputPageMakeCategoryLinks' );
-
 			// Add hooks for edit pages
-			} else if ( $action == 'edit' || $action == 'submit' || $force ) {
+			if ( $action == 'edit' || $action == 'submit' || $force ) {
 				$app->registerHook( 'EditForm::MultiEdit:Form', 'CategorySelectHooksHelper', 'onEditFormMultiEditForm' );
 				$app->registerHook( 'EditPage::CategoryBox', 'CategorySelectHooksHelper', 'onEditPageCategoryBox' );
 				$app->registerHook( 'EditPage::getContent::end', 'CategorySelectHooksHelper', 'onEditPageGetContentEnd' );
 				$app->registerHook( 'EditPage::importFormData', 'CategorySelectHooksHelper', 'onEditPageImportFormData' );
 				$app->registerHook( 'EditPage::showEditForm:fields', 'CategorySelectHooksHelper', 'onEditPageShowEditFormFields' );
-				$app->registerHook( 'EditPageGetDiffText', 'CategorySelectHooksHelper', 'onEditPageGetDiffText' );
 			}
 		}
 
 		wfProfileOut( __METHOD__ );
 		return true;
-	}
-
-	/**
-	 * Set category types for view pages (either "normal" or "hidden").
-	 */
-	public static function onOutputPageMakeCategoryLinks( &$out, $categories, &$categoryLinks ) {
-		CategorySelect::setCategoryTypes( $categories );
-
-		// No need to add categories to skin
-		return false;
 	}
 }

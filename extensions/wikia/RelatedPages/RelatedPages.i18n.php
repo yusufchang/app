@@ -205,7 +205,7 @@ $messages['ms'] = array(
 	'wikiarelatedpages-heading' => 'Bacaan lanjut',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -262,6 +262,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'wikiarelatedpages-desc' => 'Adiciona a páginas uma lista de páginas relacionadas',
 	'wikiarelatedpages-heading' => 'Leia mais',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikiarelatedpages-desc' => "Aggiunge 'n'elenghe cu le pàggene collegate a le pàggene",
+	'wikiarelatedpages-heading' => 'Ligge de cchiù',
 );
 
 /** Russian (русский)

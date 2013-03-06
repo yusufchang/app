@@ -76,6 +76,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author PtM
  * @author SPQRobin
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'photopop-setup-category-label' => '{{Identical|Category}}',
@@ -84,7 +85,9 @@ $messages['qqq'] = array(
 	'photopop-game-correct' => 'Message shown if user guesses image correct.',
 	'photopop-game-points' => 'Unit of measurement for score. The default EN version is "points", which is a noun.',
 	'photopop-game-total' => '{{Identical|Total}}',
+	'photopop-game-wiki' => '{{Identical|Wiki}}',
 	'photopop-game-date' => '{{Identical|Date}}',
+	'photopop-game-please-wait' => '{{Identical|Please wait}}',
 );
 
 /** Breton (brezhoneg)
@@ -810,7 +813,7 @@ $messages['ms'] = array(
 	'photopop-game-download-error-text' => 'Berlakunya ralat ketika memuat turun data permainan, sila cuba lagi.',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -1091,6 +1094,7 @@ $messages['ps'] = array(
 	'photopop-setup-category-label' => 'وېشنيزه',
 	'photopop-setup-submit-label' => 'اوسمهالول',
 	'photopop-image-preview' => 'د انځورونو مخليدنه:',
+	'photopop-game-correct' => 'سم',
 	'photopop-game-total' => 'ټولټال',
 	'photopop-game-wiki' => 'ويکي',
 	'photopop-game-date' => 'نېټه',

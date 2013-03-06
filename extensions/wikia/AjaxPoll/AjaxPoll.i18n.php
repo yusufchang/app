@@ -326,6 +326,18 @@ $messages['he'] = array(
 	'ajaxpoll-submitting' => 'אנא המתן, טוען את ההצבעה שלך...',
 );
 
+/** Hindi (हिन्दी)
+ * @author Kush rohra
+ */
+$messages['hi'] = array(
+	'ajaxpoll-thankyou' => 'धनियवद अप्क्के वोते के लिय',
+	'ajaxpoll-error' => 'अपना वोट प्रसंस्करण के साथ एक समस्या थी, कृपया पुनः प्रयास करें।',
+	'ajaxpoll-summary' => 'सर्वेक्षण में बनाया गया था  $१ पर  $२ , और अभी तक  $३  लोगों को वोट दिया।', # Fuzzy
+	'ajaxpoll-submit' => 'वोट!',
+	'ajaxpoll-closed' => 'पोल अब बंद कर दिया है। परिणाम का आनंद लें।',
+	'ajaxpoll-submitting' => 'कृपया इंतज़ार, अपने वोट प्रस्तुत करने...',
+);
+
 /** Hungarian (magyar)
  * @author Dani
  * @author Glanthor Reviol
@@ -478,7 +490,7 @@ $messages['ms'] = array(
 	'ajaxpoll-submitting' => 'Sila tunggu, undian anda sedang diserahkan...',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -518,7 +530,7 @@ Probeer het nog een keer.',
 Bezig met het opslaan van je stem...',
 );
 
-/** Norwegian Nynorsk (norsk (nynorsk)‎)
+/** Norwegian Nynorsk (norsk nynorsk)
  * @author Harald Khan
  */
 $messages['nn'] = array(

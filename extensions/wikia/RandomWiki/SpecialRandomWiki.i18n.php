@@ -218,7 +218,7 @@ $messages['my'] = array(
 	'randomwiki' => 'ကျပန်း ဝီကီ',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -271,6 +271,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'randomwiki-desc' => 'Permite que os usuários explorem uma wiki aleatória',
 	'randomwiki' => 'Wiki Aleatória',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'randomwiki-desc' => "Lasse le utinde a esplorà 'na uicchi a uecchije",
+	'randomwiki' => 'Uicchi a uecchije',
 );
 
 /** Russian (русский)

@@ -26,6 +26,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 
 		if (!$this->wg->User->isLoggedIn() || !$this->wg->User->isAllowed('marketingtoolbox')) {
 			$this->wf->ProfileOut(__METHOD__);
+			$this->app->wg->Out->setStatusCode ( 403 );
 			$this->specialPage->displayRestrictionError();
 			return false;
 		}
@@ -106,8 +107,13 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	 * Main action for editing hub modules
 	 */
 	public function editHubAction() {
-
 		$this->retriveDataFromUrl();
+
+		$this->wg->Out->addJsConfigVars([
+			'wgMarketingToolboxModuleIdSelected' => $this->selectedModuleId,
+			'wgMarketingToolboxModuleIdPopularVideos' => MarketingToolboxModulePopularvideosService::MODULE_ID,
+			'wgMarketingToolboxModuleIdFeaturedVideo' => MarketingToolboxModuleFeaturedvideoService::MODULE_ID
+		]);
 
 		$this->checkDate($this->date);
 
@@ -120,6 +126,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 			$this->date,
 			$this->selectedModuleId
 		);
+		
 		$this->prepareLayoutData($this->selectedModuleId, $modulesData);
 
 		$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/js/EditHub.js');
@@ -157,14 +164,8 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 				);
 
 				$this->putFlashMessage($this->wf->msg('marketing-toolbox-module-save-ok', $modulesData['activeModuleName']));
-				// TODO last module (when we will know what to do after last module, maybe preview?)
-				$nextUrl = $this->toolboxModel->getModuleUrl(
-					$this->langCode,
-					$this->sectionId,
-					$this->verticalId,
-					$this->date,
-					$this->selectedModuleId + 1
-				);
+
+				$nextUrl = $this->getNextModuleUrl();
 				$this->response->redirect($nextUrl);
 			} else {
 				$this->errorMessage = $this->wf->msg('marketing-toolbox-module-save-error');
@@ -175,6 +176,47 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 		$this->moduleContent = $module->renderEditor($selectedModuleData);
 
 		$this->overrideTemplate('editHub');
+	}
+
+	public function publishHub() {
+		if ($this->request->wasPosted()) {
+			$this->retriveDataFromUrl();
+
+			$result = $this->toolboxModel->publish(
+				$this->langCode,
+				$this->sectionId,
+				$this->verticalId,
+				$this->date
+			);
+
+			$this->success = $result->success;
+			if ($this->success) {
+				$date = new DateTime('@' . $this->date);
+
+				$this->hubUrl = $this->toolboxModel->getHubUrl($this->langCode, $this->verticalId)
+					. '/' . $date->format('Y-m-d');
+				$this->successText = $this->wf->msg('marketing-toolbox-module-publish-success', $this->wg->lang->date($this->date));
+			} else {
+				$this->errorMsg = $result->errorMsg;
+			}
+		}
+	}
+
+	private function getNextModuleUrl() {
+		$nextModuleId = $this->selectedModuleId;
+
+		if ($nextModuleId + 1 <= max($this->toolboxModel->getModulesIds())) {
+			$nextModuleId++;
+		}
+
+		$nextUrl = $this->toolboxModel->getModuleUrl(
+			$this->langCode,
+			$this->sectionId,
+			$this->verticalId,
+			$this->date,
+			$nextModuleId
+		);
+		return $nextUrl;
 	}
 
 	protected function retriveDataFromUrl() {
@@ -193,6 +235,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	protected function prepareLayoutData($selectedModuleId, $modulesData) {
 		$this->prepareHeaderData($modulesData, $this->date);
 		$this->prepareLeftMenuData($modulesData, $selectedModuleId);
+		$this->prepareFooterData($this->langCode, $this->verticalId, $this->date);
 	}
 
 	/**
@@ -226,6 +269,12 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 		}
 	}
 
+	protected  function prepareFooterData($langCode, $verticalId, $timestamp) {
+		$this->footerData = array(
+			'allModulesSaved' => $this->toolboxModel->checkModulesSaved($langCode, $verticalId, $timestamp)
+		);
+	}
+
 	/**
 	 * Small routing for this special page
 	 *
@@ -253,7 +302,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 		$verticalId = $this->getVal('verticalId');
 		$beginTimestamp = $this->getVal('beginTimestamp', time());
 		$endTimestamp = $this->getVal('endTimestamp', time());
-		$this->calendarData = $this->toolboxModel->getData($langCode, $verticalId, $beginTimestamp, $endTimestamp);
+		$this->calendarData = $this->toolboxModel->getCalendarData($langCode, $verticalId, $beginTimestamp, $endTimestamp);
 	}
 
 	/**
@@ -289,6 +338,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	 */
 	public function executeFooter($data) {
 		$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/css/MarketingToolbox_Footer.scss');
+		$this->allModulesSaved = $data['allModulesSaved'] ? '' : 'disabled="disabled"' ;
 	}
 
 	/**
@@ -315,12 +365,25 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	}
 
 	public function getVideoDetails() {
-		$fileName = $this->toolboxModel->extractTitleFromVETWikitext(
-			$this->getVal('wikiText')
-		);
+		$url = $this->getVal('url');
 
+		$response = $this->sendRequest('VideosController', 'addVideo', array( 'url' => $url ) );
+
+		$error = $response->getVal('error');
+		if( $error ) {
+			$this->error = $error;
+			return;
+		}
+
+		$videoInfo = $response->getVal('videoInfo');
+		$fileName = $videoInfo[0]->getText();
+
+		$this->videoData = $this->toolboxModel->getVideoData(
+			$fileName,
+			$this->toolboxModel->getThumbnailSize()
+		);
 		$this->videoFileName = $fileName;
-		$this->videoFileMarkup =$this->toolboxModel->getFileMarkup($fileName);
+		$this->videoUrl = $url;
 	}
 
 	// TODO extract this code somewhere
@@ -335,8 +398,19 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	}
 
 	public function executeFormField() {
-		$this->formFieldPrefix = MarketingToolboxModel::FORM_FIELD_PREFIX;
-		$this->inputData = $this->getVal('inputData');
+		$inputData = $this->getVal('inputData');
+
+		if ($inputData['isArray']) {
+			$index = $inputData['index'];
+
+			$inputData['name'] .= '[]';
+			$inputData['id'] .= $index;
+
+			$inputData['value'] = isset($inputData['value'][$index]) ? $inputData['value'][$index] : '';
+			$inputData['errorMessage'] = isset($inputData['errorMessage'][$index]) ? $inputData['errorMessage'][$index] : '';
+		}
+
+		$this->inputData = $inputData;
 	}
 
 	public function sponsoredImage() {

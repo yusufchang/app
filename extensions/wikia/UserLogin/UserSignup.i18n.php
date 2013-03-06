@@ -261,7 +261,8 @@ $messages['qqq'] = array(
 * $1 is an e-mail address;
 * $2 is a link to user's preference page.",
 	'usersignup-facebook-heading' => 'Heading on Facebook signup modal when signing up via Facebook Connect',
-	'usersignup-facebook-create-account' => 'Sub heading on Facebook signup modal.',
+	'usersignup-facebook-create-account' => 'Sub heading on Facebook signup modal.
+{{Identical|Create account}}',
 	'usersignup-facebook-email-tooltip' => 'A hint to the user saying you can changed the email later in preferences.',
 	'usersignup-facebook-have-an-account-heading' => 'Heading to suggest logging in instead.',
 	'usersignup-facebook-have-an-account' => 'Suggestion to connect existing account with FB.',
@@ -327,7 +328,8 @@ Tooltip letting user know they can change their email.  Tooltip is on the same l
 	'usersignup-marketing-benefits' => 'Heading for right side of Special:UserSignup',
 	'usersignup-marketing-community-heading' => 'Subsection heading on right side of Special:UserSignup',
 	'usersignup-marketing-community' => 'Marketing blurb on right side of Special:UserSignup',
-	'usersignup-marketing-global-heading' => 'Second subsection heading on right side of Special:UserSignup',
+	'usersignup-marketing-global-heading' => 'Second subsection heading on right side of Special:UserSignup.
+{{Identical|Create}}',
 	'usersignup-marketing-global' => 'Second marketing blurb on right side of Special:UserSignup.',
 	'usersignup-marketing-creativity-heading' => 'Third subsection heading on right side of Special:UserSignup',
 	'usersignup-marketing-creativity' => 'Third marketing blurb on right side of Special:UserSignup.',
@@ -465,6 +467,27 @@ $messages['cs'] = array(
 	'usersignup-account-creation-email-subject' => 'Účet pro vaši Wikii byl vytvořen!',
 	'usersignup-account-creation-email-greeting' => 'Ahoj,',
 	'usersignup-confirmation-reminder-email-greeting' => 'Ahoj $USERNAME',
+);
+
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'usersignup-page-captcha-label' => 'Gair Aneglur',
+	'usersignup-facebook-create-account' => 'Creu cyfrif',
+	'usersignup-confirm-page-heading-confirmed-user' => 'Llongyfarchion!',
+	'usersignup-confirmation-email-greeting' => 'Helo $USERNAME,',
+	'usersignup-confirmation-email-signature' => 'Y Tîm Wikia',
+	'usersignup-reconfirmation-email-greeting' => 'Helo $USERNAME',
+	'usersignup-reconfirmation-email-signature' => 'Y Tîm Wikia',
+	'usersignup-welcome-email-subject' => 'Croeso i Wikia, $USERNAME!',
+	'usersignup-welcome-email-greeting' => 'Helo $USERNAME',
+	'usersignup-welcome-email-signature' => 'Y Tîm Wikia',
+	'usersignup-account-creation-email-greeting' => 'Helo,',
+	'usersignup-account-creation-email-signature' => 'Y Tîm Wikia',
+	'usersignup-confirmation-reminder-email-greeting' => 'Helo $USERNAME',
+	'usersignup-confirmation-reminder-email-signature' => 'Y Tîm Wikia',
 );
 
 /** German (Deutsch)
@@ -2255,7 +2278,7 @@ Want to control which emails you receive? Go to: {{fullurl:{{ns:special}}:Prefer
 	'usersignup-facebook-problem' => 'Timbulnya masalah ketika berhubung dengan Facebook. Sila cuba lagi nanti.',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -3087,13 +3110,20 @@ It veus-to controlé che eamil it arseive? Và a: {{fullurl:{{ns:special}}:Prefe
  */
 $messages['ps'] = array(
 	'usersignup-page-title' => 'ويکيا سره يوځای شی',
+	'usersignup-page-captcha-label' => 'تته ويکه',
 	'usersignup-facebook-create-account' => 'ګڼون جوړول',
 	'usersignup-confirm-email-change-email' => 'زما برېښليک پته بدله کړه',
 	'usersignup-confirm-email-new-email-label' => 'نوی برېښليک',
 	'usersignup-confirm-email-update' => 'اوسمهالول',
+	'usersignup-resend-email-heading-success' => 'نوی برېښليک ولېږل شو',
 	'usersignup-confirm-page-heading-confirmed-user' => 'بختور مو شه!',
 	'usersignup-confirmation-heading-email-resent' => 'نوی برېښليک ولېږل شو',
 	'usersignup-confirmation-subheading' => 'خپل برېښليک وګورۍ',
+	'usersignup-confirmation-email-signature' => 'د ويکيا ډله',
+	'usersignup-reconfirmation-email-signature' => 'د ويکيا ډله',
+	'usersignup-welcome-email-signature' => 'د ويکيا ډله',
+	'usersignup-heading' => 'ويکيا سره همدا نن يوځای شۍ',
+	'usersignup-marketing-global-heading' => 'جوړول',
 );
 
 /** Portuguese (português)
@@ -4081,4 +4111,18 @@ ___________________________________________
 查看Wikia的最新信息请访问http://community.wikia.com
 想控制接收那些电子邮件？请查看：{{fullurl:{{ns:special}}:Preferences}}',
 	'usersignup-facebook-problem' => '与脸谱链接出错，请稍后再试。',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'usersignup-page-title' => '加入 Wikia',
+	'usersignup-confirm-email-new-email-label' => '新電子郵件',
+	'usersignup-confirm-email-update' => '更新',
+	'usersignup-resend-email-heading-failure' => '電子郵件未重新發送',
+	'usersignup-confirm-page-heading-confirmed-user' => '恭喜 ！',
+	'usersignup-confirmation-heading' => '快完成了。',
+	'usersignup-confirmation-heading-email-resent' => '新電子郵件已發送',
+	'usersignup-confirmation-subheading' => '請檢查您的電子郵件',
 );

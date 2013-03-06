@@ -16,20 +16,27 @@
 	var AbTest,
 		Wikia = window.Wikia = (window.Wikia || {}),
 		config = Wikia.AbTestConfig || {},
+		logCache = {},
 		serverTimeString = window.varnishTime,
 		serverTime = new Date( serverTimeString ).getTime() / 1000;
 
 	// Function to log different things (could not use Wikia.Log because it may not be available yet)
-	var log = function( methodName, message ) {
+	var log = (function( console ) {
+
 		// Internal logging, becomes a no-op if window.console isn't present
-		if ( window.console && window.console.log ) {
+		return console ? function( methodName, message ) {
 			if ( !message ) {
+				message = methodName;
 				methodName = undefined;
-				message = arguments[0];
 			}
-			window.console.log( 'Wikia.AbTest' + ( methodName ? '.' + methodName + '()' : '' ) + ':', message );
-		}
-	};
+
+			// Don't display duplicate messages (BugId:96400)
+			if ( !logCache[ message ] ) {
+				logCache[ message ] = true;
+				console.log.call( console, 'Wikia.AbTest' + ( methodName ? '.' + methodName + '()' : '' ) + ':', message );
+			}
+		} : function() {};
+	})( window.console );
 
 	/* --------------------------- */
 	/* AbTest class implementation */
@@ -87,6 +94,10 @@
 	// and then the "group" property will be missing.
 	AbTest.getExperiments = function( includeAll ) {
 		var expName, exp, group, el, list = [];
+
+		if ( !AbTest.uuid ) {
+			list.nouuid = true;
+		}
 
 		for ( expName in AbTest.experiments ) {
 			exp = AbTest.experiments[expName];
@@ -248,6 +259,11 @@
 			if ( exp.group || !exp.current || slot < 0 ) {
 				continue;
 			}
+			// Skip this experiment if it's Special Wiki experiment only and this is not a special wiki
+			if (exp.flags && exp.flags.limit_to_special_wikis && !window.wgIsGASpecialWiki) {
+				log('init', 'Skipping experiment ' + expName + ' - not a special Wiki');
+				continue;
+			}
 			for ( groupName in exp.current.groups ) {
 				if ( isInRanges( slot, exp.current.groups[groupName].ranges ) ) {
 					setActiveGroup( expName, groupName );
@@ -262,7 +278,7 @@
 		for ( expName in experiments ) {
 			exp = experiments[expName];
 			if ( exp.flags && exp.flags.dw_tracking && exp.group ) {
-				window.WikiaTracker.track({
+				Wikia.Tracker.track({
 					eventName: 'ab_treatment',
 					experiment: exp.name,
 					experimentId: exp.id,

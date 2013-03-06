@@ -190,6 +190,7 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'scavengerhunt-desc' => '{{desc}}',
 	'scavengerhunt-label-general' => '{{Identical|General}}',
+	'scavengerhunt-button-delete' => '{{Identical|Delete}}',
 	'scavengerhunt-editor-tip-entry-form-email' => '{{doc-singularthey}}',
 	'scavengerhunt-editor-tip-entry-form-username' => '{{doc-singularthey}}',
 );
@@ -306,6 +307,14 @@ $messages['cs'] = array(
 	'scavengerhunt-label-entry-form-username' => 'Uživatelské jméno',
 	'scavengerhunt-label-clue-color' => 'Barva písma',
 	'scavengerhunt-label-clue-size' => 'Velikost písma',
+);
+
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'scavengerhunt-list-edit' => 'golygu',
+	'scavengerhunt-label-name' => 'Enw:',
 );
 
 /** German (Deutsch)
@@ -1520,7 +1529,7 @@ Perhatian: Ruangan ini tidak wajib; jika dibiarkan kosong, ia tidak akan dipapar
 	'scavengerhunt-facebook-description' => 'Teks kongsian Facebook',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -1987,9 +1996,16 @@ $messages['pl'] = array(
  * @author Ahmed-Najib-Biabani-Ibrahimkhel
  */
 $messages['ps'] = array(
+	'scavengerhunt-list-header-name' => 'د لوبې نوم',
+	'scavengerhunt-list-header-actions' => 'چارې',
+	'scavengerhunt-list-enabled' => 'چارنول',
+	'scavengerhunt-list-disabled' => 'ناچارنول',
 	'scavengerhunt-list-edit' => 'سمول',
 	'scavengerhunt-label-name' => 'نوم:',
+	'scavengerhunt-button-add' => 'يو نوم ورګډول',
 	'scavengerhunt-button-save' => 'خوندي کول',
+	'scavengerhunt-button-disable' => 'ناچارنول',
+	'scavengerhunt-button-enable' => 'چارنول',
 	'scavengerhunt-button-delete' => 'ړنګول',
 	'scavengerhunt-entry-form-name' => 'ستاسې نوم:',
 	'scavengerhunt-entry-form-email' => 'ستاسې برېښليک پته:',
@@ -2682,13 +2698,24 @@ $messages['uk'] = array(
  * @author Sam Wang
  */
 $messages['zh-hans'] = array(
+	'scavengerhunt-desc' => '允许在一个维基上创建一个清道夫狩猎游戏',
+	'scavengerhunt' => '清道夫狩猎创建器',
+	'scavengerhunt-common-modal-title' => '清道夫狩猎',
 	'scavengerhunt-list-header-name' => '游戏名',
+	'scavengerhunt-list-header-is-enabled' => '启用吗？（单击可切换）',
+	'scavengerhunt-list-header-actions' => '操作',
+	'scavengerhunt-list-enabled' => '启用',
+	'scavengerhunt-list-disabled' => '禁用',
 	'scavengerhunt-list-edit' => '编辑',
+	'scavengerhunt-label-image-check' => '（显示图像）',
 	'scavengerhunt-label-general' => '简单介绍',
 	'scavengerhunt-label-name' => '名：',
 	'scavengerhunt-button-add' => '添加一个游戏',
 	'scavengerhunt-button-save' => '保存',
+	'scavengerhunt-button-disable' => '禁用',
+	'scavengerhunt-button-enable' => '启用',
 	'scavengerhunt-button-delete' => '删除',
+	'scavengerhunt-button-export' => '导出为CSV',
 	'scavengerhunt-entry-form-name' => '您的名字：',
 	'scavengerhunt-entry-form-email' => '您的电子邮件地址：',
 	'scavengerhunt-quit-game-button-quit' => '退出',

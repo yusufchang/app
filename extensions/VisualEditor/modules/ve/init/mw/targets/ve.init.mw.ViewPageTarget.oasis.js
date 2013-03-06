@@ -31,6 +31,7 @@ ve.init.mw.ViewPageTarget = function VeInitMwViewPageTarget() {
 	} );
 
 	// Properties
+	this.track = function() { };
 	this.currentUri = currentUri;
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
@@ -175,7 +176,7 @@ ve.init.mw.ViewPageTarget.prototype.setupEditLinks = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onEditButtonClick = function ( e ) {
 	this.track({
-		action: WikiaTracker.ACTIONS.CLICK,
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		label: 'edit-button'
 	});
 
@@ -192,7 +193,7 @@ ve.init.mw.ViewPageTarget.prototype.onEditButtonClick = function ( e ) {
  */
 ve.init.mw.ViewPageTarget.prototype.onEditSectionLinkClick = function ( e ) {
 	this.track({
-		action: WikiaTracker.ACTIONS.CLICK,
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		label: 'edit-section-button'
 	});
 
@@ -297,7 +298,7 @@ ve.init.mw.ViewPageTarget.prototype.saveScrollPosition = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onLoad = function ( dom ) {
 	this.track({
-		action: WikiaTracker.ACTIONS.IMPRESSION,
+		action: Wikia.Tracker.ACTIONS.IMPRESSION,
 		label: 'on-load'
 	});
 
@@ -318,12 +319,12 @@ ve.init.mw.ViewPageTarget.prototype.onLoad = function ( dom ) {
 			buttonTitle = $button.attr( 'title' );
 		if ( buttonTitle ) {
 			_this.track({
-				action: WikiaTracker.ACTIONS.CLICK,
+				action: Wikia.Tracker.ACTIONS.CLICK,
 				label: 'button-' + buttonTitle
 			});
 		} else {
 			_this.track({
-				action: WikiaTracker.ACTIONS.IMPRESSION,
+				action: Wikia.Tracker.ACTIONS.IMPRESSION,
 				label: 'button-tracking-problem'
 			});
 		}
@@ -462,7 +463,7 @@ ve.init.mw.ViewPageTarget.prototype.enableToolbarSaveButton = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
 	this.track({
-		action: WikiaTracker.ACTIONS.CLICK,
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		label: 'toolbar-save-button'
 	});
 
@@ -479,7 +480,7 @@ ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onToolbarCancelButtonClick = function () {
 	this.track({
-		action: WikiaTracker.ACTIONS.CLICK,
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		label: 'toolbar-cancel-button'
 	});
 
@@ -639,7 +640,7 @@ ve.init.mw.ViewPageTarget.prototype.disableToolbarSaveButton = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveDialogSaveButtonClick = function () {
 	this.track({
-		action: WikiaTracker.ACTIONS.CLICK,
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		label: 'dialog-save-button'
 	});
 
@@ -665,7 +666,7 @@ ve.init.mw.ViewPageTarget.prototype.onSaveDialogSaveButtonClick = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSaveDialogCancelButtonClick = function () {
 	this.track({
-		action: WikiaTracker.ACTIONS.CLICK,
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		label: 'dialog-cancel-button'
 	});
 
@@ -701,7 +702,7 @@ ve.init.mw.ViewPageTarget.prototype.lockSaveDialogSaveButton = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onSave = function ( html ) {
 	this.track({
-		action: WikiaTracker.ACTIONS.IMPRESSION,
+		action: Wikia.Tracker.ACTIONS.IMPRESSION,
 		label: 'on-save'
 	});
 
@@ -936,7 +937,7 @@ ve.init.mw.ViewPageTarget.prototype.restoreScrollPosition = function () {
  */
 ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( response, status ) {
 	this.track({
-		action: WikiaTracker.ACTIONS.IMPRESSION,
+		action: Wikia.Tracker.ACTIONS.IMPRESSION,
 		label: 'on-load-error'
 	});
 
@@ -962,11 +963,6 @@ ve.init.mw.ViewPageTarget.prototype.onLoadError = function ( response, status ) 
 ve.init.mw.ViewPageTarget.prototype.hideSpinner = function () {
 	// Not implemented yet
 };
-
-ve.init.mw.ViewPageTarget.prototype.track = window.WikiaEditor.buildTrackingFunction({
-	category: 'visual-editor',
-	trackingMethod: 'both'
-});
 
 /* Initialization */
 

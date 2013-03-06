@@ -119,74 +119,62 @@ if ( empty( $app->wg->WikiaMobileNavigationBlacklist ) ) {
 }
 
 //black list of JS globals
-if ( empty( $app->wg->WikiaMobileExcludeJSGlobals ) ) {
-	$app->wg->set( 'wgWikiaMobileExcludeJSGlobals',
-		array(
-			'wgCurRevisionId',
-			'wgIsArticle',
-			'wgAction',
-			'wgUserGroups',
-			'wgScriptExtension',
-			'wgAfterContentAndJS',
-			'wgCategories',
-			'wgBreakFrames',
-			'wgSeparatorTransformTable',
-			'wgDigitTransformTable',
-			'wgRestrictionEdit',
-			'wgRestrictionMove',
-			'wgSearchNamespaces',
-			'wgEnableAdMeldAPIClient',
-			'wgEnableAdMeldAPIClientPixels',
-			'wgEnableOpenXSPC',
+if ( empty( $app->wg->WikiaMobileIncludeJSGlobals ) ) {
+	$app->wg->set( 'wgWikiaMobileIncludeJSGlobals',
+		[
+			//analytics
+			'_gaq',
+			'wgEnableKruxTargeting',
+			'wgKruxCategoryId',
 			'cscoreCat',
-			'wgTimeAgoi18n',
-			'sassParams',
+
+			//ads
+			'wgDartCustomKeyValues',
+			'cityShort',
+
+			//server/wiki
+			'wgServer',
+			'wgDBname',
+			'wgCityId',
+			'wgScript',
+			'wgScriptPath',
 			'wgCdnRootUrl',
-			'wgCatId',
-			'wgParentCatId',
-			'wgBlankImgUrl',
-			'wgMWrevId',
-			'wgYUIPackageURL',
-			'wgWikiFactoryTagIds',
-			'wgWikiFactoryTagNames',
-			'ExitstitialOutboundScreen',
-			'wgExitstitialTitle',
-			'wgExitstitialRegister',
-			'wgExitstitialButton',
-			'wgInterstitialPath',
-			'wgNotificationsCount',
-			'wgEnableUserLoginExt',
-			'wgEnableImageLightboxExt',
-			'wgEnableWikiaFollowedPages',
-			'wgFollowedPagesPagerLimit',
-			'wgFollowedPagesPagerLimitAjax',
-			'wgTrackID',
-			'WikiaEnableNewCreatepage',
-			'ContentNamespacesText',
-			'wgCategoryTreePageCategoryOptions',
-			'fbScript',
-			'fbLogo',
-			'fbLogoutURL',
-			'fbReturnToTitle',
-			'fbScriptLangCode',
-			'wgLoadScript',
-			'wgUrlProtocols',
-			'wgVariantArticlePath',
-			'wgActionPaths',
-			'wgVersion',
-			'wgEnableAPI',
-			'wgEnableWriteAPI',
-			'wgDefaultDateFormat',
-			'wgMonthNames',
-			'wgMonthNamesShort',
-			'wgFormattedNamespaces',
+			'wgAssetsManagerQuery',
+			'wgContentLanguage',
+			'wgMedusaSlot',
+			'wgResourceBasePath',
+			'wgMainPageTitle',
+			'wgSitename',
+			'wgCookieDomain',
+			'wgCookiePath',
+			'wgDisableAnonymousEditing',
 			'wgNamespaceIds',
-			'wgResourceLoaderMaxQueryLength',
-			'wgCaseSensitiveNamespaces',
-			'wgMWSuggestTemplate',
-			'wgFileCanRotate',
-			'wgFileExtensions',
-			'wgAvailableSkins',
-			'wgSiteName'
-	) );
+
+			//article
+			'wgArticlePath',
+			'wgArticleId',
+			'wgNamespaceNumber',
+			'wgIsGASpecialWiki',
+			'wgCanonicalSpecialPageName',
+			'wgPageName',
+			'wgTitle',
+			'wgRevisionId',
+
+			//user
+			'wgUserName',
+			'wgUserLanguage',
+
+			//configs
+			'wgSassParams',
+			'wgStyleVersion',
+			'wgMessages',
+			'wgJSMessagesCB',
+			'wgTrackID',
+			'wgCookiePrefix',
+			'JSSnippetsStack',
+
+			//skin
+			'skin'
+		]
+	);
 }

@@ -12,7 +12,7 @@ var RelatedVideos = {
 	isHubExtPage: false,
 	rvItemCount: null,
 
-	track: WikiaTracker.buildTrackingFunction({
+	track: Wikia.Tracker.buildTrackingFunction({
 		category: 'related-videos'
 	}),
 
@@ -23,6 +23,12 @@ var RelatedVideos = {
 	init: function(relatedVideosModule) {
 		// DOM caching
 		this.rvModule = $(relatedVideosModule);
+
+		// Stop execution if there's no RV on this page
+		if(!this.rvModule.length) {
+			return;
+		}
+
 		this.rvContainer = $('.container', this.rvModule);
 		this.rvScrollRight = $('.scrollright', this.rvModule);
 		this.rvScrollLeft = $('.scrollleft', this.rvModule);
@@ -77,8 +83,42 @@ var RelatedVideos = {
 			relatedVideosModule.on( 'click', '.scrollleft', this.scrollleft );
 
 			relatedVideosModule.find('.addVideo').addVideoButton({
-				gaCat: RelatedVideos.gaCat,
-				callback: RelatedVideos.injectCaruselElement
+				callbackAfterSelect: function(url) {
+
+					RelatedVideos.track({
+						action: Wikia.Tracker.ACTIONS.ADD,
+						label: 'add-video-success',
+						trackingMethod: 'both'
+					});
+
+					$.nirvana.postJson(
+						// controller
+						'RelatedVideosController',
+						// method
+						'addVideo',
+						// data
+						{
+							articleId: wgArticleId,
+							url: url
+						},
+						// success callback
+						function( formRes ) {
+							GlobalNotification.hide();
+							if ( formRes.error ) {
+								RelatedVideos.showError( formRes.error );
+							} else {
+								VET_loader.modal.closeModal();
+								RelatedVideos.injectCaruselElement( formRes.html );
+							}
+						},
+						// error callback
+						function() {
+							RelatedVideos.showError( $.msg('vet-error-while-loading') );
+						}
+					);
+					// Don't move on to second VET screen.  We're done.
+					return false;
+				}
 			}).tooltip({
 				delay: { show: 500, hide: 100 }
 			});
@@ -97,7 +137,7 @@ var RelatedVideos = {
 		}
 
 		RelatedVideos.track({
-			action: WikiaTracker.ACTIONS.VIEW,
+			action: Wikia.Tracker.ACTIONS.VIEW,
 			trackingMethod: 'both'
 		});
 	},
@@ -108,7 +148,7 @@ var RelatedVideos = {
 		RelatedVideos.lazyLoad();
 
 		RelatedVideos.track({
-			action: WikiaTracker.ACTIONS.PAGINATE,
+			action: Wikia.Tracker.ACTIONS.PAGINATE,
 			label: 'paginate-next',
 			trackingMethod: 'both',
 			value: RelatedVideos.currentRoom + 1
@@ -119,7 +159,7 @@ var RelatedVideos = {
 
 	scrollleft: function(){
 		RelatedVideos.track({
-			action: WikiaTracker.ACTIONS.PAGINATE,
+			action: Wikia.Tracker.ACTIONS.PAGINATE,
 			label: 'paginate-prev',
 			trackingMethod: 'both',
 			value: RelatedVideos.currentRoom - 1
@@ -178,7 +218,7 @@ var RelatedVideos = {
 
 		if (titles.length) {
 			RelatedVideos.track({
-				action: WikiaTracker.ACTIONS.IMPRESSION,
+				action: Wikia.Tracker.ACTIONS.IMPRESSION,
 				label: 'video',
 				orders: orders.join(','),
 				trackingMethod: 'internal',
@@ -369,13 +409,12 @@ var RelatedVideos = {
 
 	// general helper functions
 
-	showError: function(){
-		GlobalNotification.show( $('.errorWhileLoading').html(), 'error' );
+	showError: function(error){
+		GlobalNotification.show( error || $('.errorWhileLoading').html(), 'error' );
 	},
 
 	// Inject newly added video into carousel - different from lazy loading
 	injectCaruselElement: function( html ){
-		$( '#add-video-modal' ).closest('.modalWrapper').closeModal();
 		var scrollLength = -1 * ( RelatedVideos.currentRoom - 1 );
 		RelatedVideos.scroll(
 			scrollLength,

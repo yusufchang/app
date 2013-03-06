@@ -7,16 +7,69 @@ var SpecialVideos = {
 
 				if(currSort != newSort) {
 					var sort = $target.data('sort');
-					window.location.search = "?sort="+sort;
+					(new Wikia.Querystring()).setVal('sort', sort).goTo();
 				}
 			}
 		});
-		
+
 		$('.addVideo').addVideoButton({
-			gaCat: 'testing',
-			callback: function() {
-				// After adding a video, show the video at the top of the "recent" sort screen
-				window.location.search = "?sort=recent"; 
+			callbackAfterSelect: function(url) {
+				$.nirvana.postJson(
+					// controller
+					'VideosController',
+					// method
+					'addVideo',
+					// data
+					{ url: url },
+					// success callback
+					function( formRes ) {
+						GlobalNotification.hide();
+						if ( formRes.error ) {
+							GlobalNotification.show( formRes.error, 'error' );
+						} else {
+							VET_loader.modal.closeModal();
+							(new Wikia.Querystring()).setVal('sort', 'recent').goTo();
+						}
+					},
+					// error callback
+					function() {
+						GlobalNotification.show( $.msg('vet-error-while-loading'), 'error' );
+					}
+				);
+				// Don't move on to second VET screen.  We're done.
+				return false; 
+			}
+		});
+		
+		$('.VideoGrid').on('click', '.remove', function(e) {
+			var videoElement = $(e.target).parents('.video-element'),
+				videoName = videoElement.find('.video').data('video-name');
+			if(videoName) {
+				$.confirm({
+					title: $.msg('specialvideos-remove-modal-title'),
+					content: $.msg('specialvideos-remove-modal-message'),
+					width: 600,
+					onOk: function() {
+						$.nirvana.sendRequest({
+							controller: 'VideoHandler',
+							method: 'removeVideo',
+							format: 'json',
+							data: {
+								title: videoName
+							},
+							callback: function(json) {
+								// print error message if error
+								if(json.result === 'ok') {
+									(new Wikia.Querystring(window.location)).addCb().goTo();	// reload page with cb
+								} else {
+									GlobalNotification.show(json['msg'], 'error');
+								}
+								
+							}
+						});
+						
+					}
+				});
 			}
 		});
 	}

@@ -32,7 +32,6 @@ class VideoEmbedTool {
 
 		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
 		$tmpl->set_vars(array(
-				'result' => '',
 				'error'  => $error,
 				'vet_premium_videos_search_enabled' => ($wgContLanguageCode == 'en') || $wgVETNonEnglishPremiumSearch
 				)
@@ -65,8 +64,8 @@ class VideoEmbedTool {
 		}
 
 		$embedCode = $file->getEmbedCode(VIDEO_PREVIEW, false, false, true);
+
 		$props['id'] = $file->getVideoId();
-		$props['oname'] = '';
 		$props['vname'] = $file->getTitle()->getText();
 		$props['code'] = is_string($embedCode) ? $embedCode : json_encode($embedCode);
 		$props['metadata'] = '';
@@ -74,8 +73,8 @@ class VideoEmbedTool {
 
 		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
 
-		$tmpl->set_vars(array('props' => $props));
-		return $tmpl->render('edit');
+		$tmpl->set_vars(array('props' => $props, 'screenType' => 'edit'));
+		return $tmpl->render('details');
 	}
 
 	function insertVideo() {
@@ -110,7 +109,6 @@ class VideoEmbedTool {
 			$props['provider'] = $provider;
 
 			$props['code'] = $file->getEmbedCode(VIDEO_PREVIEW, false, false, true);
-			$props['oname'] = '';
 		} else { // if not a partner video try to parse link for File:
 			$file = null;
 			// get the video name
@@ -160,7 +158,7 @@ class VideoEmbedTool {
 			$props['vname'] = $file->getTitle()->getText();
 			$props['code'] = is_string($embedCode) ? $embedCode : json_encode($embedCode);
 			$props['metadata'] = '';
-			$props['oname'] = '';
+			$props['premiumVideo'] = ($wgRequest->getVal( 'searchType' ) == 'premium');		
 		}
 
 		wfProfileOut(__METHOD__);
@@ -170,10 +168,13 @@ class VideoEmbedTool {
 	function detailsPage($props) {
 		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
 
-		$tmpl->set_vars(array('props' => $props));
+		$tmpl->set_vars(array('props' => $props, 'screenType' => 'details'));
 		return $tmpl->render('details');
 	}
 
+	/*
+	 * does the actual uploading.  moves temp file to permanent somehow.
+	 */
 	function insertFinalVideo() {
 		global $wgRequest, $wgContLang;
 
@@ -182,11 +183,7 @@ class VideoEmbedTool {
 		$ns_file = $wgContLang->getFormattedNsText( NS_FILE );
 
 		$name = urldecode( $wgRequest->getVal('name') );
-		$oname = urldecode( $wgRequest->getVal('oname') );
-		if ('' == $name) {
-			$name = $oname;
-		}
-
+		
 		$embed_code = '';
 		$tag = '';
 		$message = '';
@@ -240,6 +237,7 @@ class VideoEmbedTool {
 
 		$size = $wgRequest->getVal('size');
 		$width = $wgRequest->getVal('width');
+		$width = empty($width) ? 335 : $width;
 		$layout = $wgRequest->getVal('layout');
 
 		header('X-screen-type: summary');
@@ -253,8 +251,8 @@ class VideoEmbedTool {
 		$button_message = wfMessage('vet-return');
 
 		// Adding a video from article view page
-		$editingFromView = ($wgRequest->getVal( 'placeholder' ) == -2);
-		if( $editingFromView ) {
+		$editingFromArticle = $wgRequest->getVal( 'placeholder' );
+		if( $editingFromArticle ) {
 			Wikia::setVar('EditFromViewMode', true);
 			
 			$article_title = $wgRequest->getVal( 'article' );
@@ -266,32 +264,42 @@ class VideoEmbedTool {
 			$text = $article_obj->getContent();
 
 			// match [[File:Placeholder|video]]
-			preg_match_all( '/\[\[' . $ns_file . ':Placeholder[^\]]*\|video[^\]]*\]\]/s', $text, $matches, PREG_OFFSET_CAPTURE );
+			$placeholder = MediaPlaceholderMatch( $text, $box, true );
 
-			$placeholder_tag = $matches[0][$box][0];
-			$file = wfFindFile( $title );
-			$thumb = $file->transform( array('width'=>$width) );
-			$embed_code = $thumb->toHtml( array('desc-link' => true) );
-			$html_params = array( 
-				'imageHTML' => $embed_code,
-				'align' => $layout,
-				'width' => $width,
-				'showCaption' => !empty($caption),
-				'caption' => $caption,
-				'showPictureAttribution' => true,
-			);
-			
-			// Get all html to insert into article view page
-			$image_service = F::app()->sendRequest( 'ImageTweaksService', 'getTag', $html_params );
-			$image_data = $image_service->getData();
-			$embed_code = $image_data['tag'];
+			$success = false;
+			if ( $placeholder ) {
 
-			$summary = wfMsg( 'vet-added-from-placeholder' );
+				$placeholder_tag = $placeholder[0];
+				$file = wfFindFile( $title );
+				$thumb = $file->transform( array('width'=>$width) );
+				$embed_code = $thumb->toHtml( array('desc-link' => true) );
+				$html_params = array( 
+					'imageHTML' => $embed_code,
+					'align' => $layout,
+					'width' => $width,
+					'showCaption' => !empty($caption),
+					'caption' => $caption,
+					'showPictureAttribution' => true,
+				);
+				
+				// Get all html to insert into article view page
+				$image_service = F::app()->sendRequest( 'ImageTweaksService', 'getTag', $html_params );
+				$image_data = $image_service->getData();
+				$embed_code = $image_data['tag'];
+	
+				// Make output match what's in a saved article
+				if($layout == 'center') {
+					$embed_code = '<div class="center">'.$embed_code.'</div>';
+				}
 
-			$text = substr_replace( $text, $tag, $matches[0][$box][1], strlen( $placeholder_tag ) );
-			
-			$button_message = wfMessage('vet-placeholder-return');
-			$success = $article_obj->doEdit( $text, $summary);
+				$summary = wfMsg( 'vet-added-from-placeholder' );
+	
+				$text = substr_replace( $text, $tag, $placeholder[1], strlen( $placeholder_tag ) );
+				
+				$button_message = wfMessage('vet-placeholder-return');
+				$success = $article_obj->doEdit( $text, $summary);
+			}
+
 			if ( !$success ) {
 				header('X-screen-type: error');
 				return wfMsg ( 'vet-insert-error' );

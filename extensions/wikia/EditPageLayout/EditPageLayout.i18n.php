@@ -83,6 +83,8 @@ $messages['en'] = array(
 	'restore-edits-diff-notice' => "Welcome back! We've restored some changes you had not published. However, the page has been updated since then. Would you like to: <a class='notice-action restoreeditlink'>Delete my changes and start with the latest text</a> or <a class='notice-action difflink'>View a comparison of changes with the latest page</a>",
 	'mainpagewarning-notice' => "Learn more about [[w:c:community:Help:Main_page|editing the main page]].",
 	'explainconflict-notice' => "'''Warning!''' Someone else has changed this page since you started editing it! [More info]",
+	'wikia-editor-add-file-notice' => 'Your $1 has been added. Drag and drop the $1 anywhere on the page or hover over the thumbnail and click "modify" for embed options.',
+	'wikia-editor-add-file-notice-no-wysiwyg' => 'Your $1 has been added.',
 
 	// "editing" preferences sections
 	'prefs-general' => 'General',
@@ -118,13 +120,18 @@ $messages['qqq'] = array(
 {{Identical|Photo}}',
 	'wikia-editor-media-gallery' => 'Label for edit page button that brings up the Gallery Builder.
 {{Identical|Gallery}}',
-	'wikia-editor-media-slideshow' => 'Label for edit page button that brings up the Slideshow Builder',
+	'wikia-editor-media-slideshow' => 'Label for edit page button that brings up the Slideshow Builder.
+{{Identical|Slideshow}}',
 	'wikia-editor-media-slider' => 'This refers to a special kind of slideshow which is intended for the main page. See http://help.wikia.com/wiki/Help:Galleries_and_slideshows#Creating_a_main_page_slider.',
-	'wikia-editor-media-video' => 'Label for edit page button that brings up the video upload wizard',
+	'wikia-editor-media-video' => 'Label for edit page button that brings up the video upload wizard.
+{{Identical|Video}}',
+	'wikia-editor-media-mut' => '{{Identical|Video}}',
 	'wikia-editor-source-bold-tooltip' => 'Tooltip for the button used to bold text in source mode.',
 	'wikia-editor-source-italic-tooltip' => 'Tooltip for the button used to italicize text in source mode.
 {{Identical|Italic}}',
-	'wikia-editor-source-link-tooltip' => 'Tooltip for the button used to add a link in source mode.',
+	'wikia-editor-source-link-tooltip' => 'Tooltip for the button used to add a link in source mode.
+{{Identical|Add link}}',
+	'wikia-editor-modules-templates-title' => '{{Identical|Template}}',
 	'wikia-editor-modules-license-text' => 'Parameters:
 * $1 is a placeholder for the license logo/image.
 * $2 is a URL.
@@ -1310,7 +1317,7 @@ $messages['ko'] = array(
 	'editpagelayout-pageControls-summaryLabel' => '편집 요약',
 	'editpagelayout-pageControls-newSectionLabel' => '문단 제목 넣기',
 	'editpagelayout-pageControls-back' => '에디터로 돌아가기',
-	'editpagelayout-pageControls-changes' => '차이 보기',
+	'editpagelayout-pageControls-changes' => '차이',
 	'editpagelayout-blocked-user' => '자신의 사용자 이름이나 IP 주소가 차단되어 있습니다.',
 	'editpagelayout-edit-summary-label' => '편집 요약',
 	'editpagelayout-subject-headline-label' => '주제/제목:',
@@ -1577,7 +1584,7 @@ $messages['ms'] = array(
 	'tog-forceeditsummary' => 'Ingatkan saya jika ringkasan suntingan kosong',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author EvenT
  * @author Nghtwlkr
@@ -2111,11 +2118,12 @@ $messages['pt-br'] = array(
 	'userinvalidcssjstitle-notice' => "'''Atenção:''' Não há a pele \"\$1\". [Mais informação]",
 	'semiprotectedpagewarning-notice' => "'''Atenção:''' Esta página foi protegida para que apenas usuários registrados possam editá-la. Autentifique-se para editar. [Mais informação]",
 	'protectedpagewarning-notice' => "'''Atenção:''' Esta página foi protegida para que apenas administradores possam editá-la. Administradores locais podem mudar este estado. [Mais informação]",
-	'titleprotectedwarning-notice' => "'''Atenção:''' Esta página foi protegida para que apenas usuários registrados possam criá-la. Admins locais podem mudar este estado. [Mais informação]", # Fuzzy
+	'titleprotectedwarning-notice' => "'''Nota:''' Esta página foi protegida para que apenas determinados usuários (Administradores ou usuários registrados) possam criá-la. [Mais informações]",
 	'recreate-moveddeleted-warn-notice' => "'''Atenção:''' Você está recriando uma página anteriormente eliminada. [Mais informação]",
 	'restore-edits-notice' => "Bem-vindo(a) de volta! Nós restauramos algumas alterações que você ainda não tinha publicado. <a class='notice-action restoreeditlink'>Excluir minhas alterações e iniciar uma nova edição</a>",
 	'restore-edits-diff-notice' => "Bem-vindo de volta! Nós restauramos algumas mudanças que você não publicou. Apesar disso, a página foi atualizada desde então. Gostaria de: <a class='notice-action restoreeditlink'>Deletar minhas mudanças e começar com o último texto</a> ou <a class='notice-action difflink'>Ver uma comparação das mudanças com a última página</a>",
 	'mainpagewarning-notice' => 'Aprenda mais sobre [[w:c:community:Help:Main_page|editar a página principal.]]',
+	'explainconflict-notice' => "'''Atenção!''' Alguém modificou a página desde que você começou a editá-la! [Mais informações]",
 	'prefs-general' => 'Geral',
 	'prefs-starting-an-edit' => 'Começar uma edição',
 	'prefs-editing-experience' => 'Experiência de edição',
@@ -2125,6 +2133,22 @@ $messages['pt-br'] = array(
 	'tog-editwidth' => 'Ampliar o modo de edição "Fonte" para encher toda a tela',
 	'tog-minordefault' => 'Marcar todas as edições como "menor" por padrão',
 	'tog-forceeditsummary' => 'Avisar-me se eu deixar um sumário em branco',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'editpagelayout-more' => 'de cchiù',
+	'editpagelayout-less' => 'de mene',
+	'editpagelayout-notificationsLink' => '<span>$1</span> {{PLURAL:$1|Notifiche}}',
+	'editpagelayout-pageControls-changes' => 'Cangiaminde',
+	'wikia-editor-media-image' => 'Foto',
+	'wikia-editor-media-gallery' => 'Gallerie',
+	'wikia-editor-media-video' => 'Video',
+	'wikia-editor-media-mut' => 'Video',
+	'wikia-editor-source-bold-tooltip' => 'Grascette',
+	'wikia-editor-source-italic-tooltip' => 'Corsive',
 );
 
 /** Russian (русский)
@@ -2562,8 +2586,11 @@ $messages['vi'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Anakmalaysia
  * @author Dimension
+ * @author Hydra
  * @author Hzy980512
  * @author Sam Wang
+ * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'editpagelayout-more' => '更多',
@@ -2571,8 +2598,11 @@ $messages['zh-hans'] = array(
 	'editpagelayout-helpLink-url' => 'Help:编辑',
 	'editpagelayout-helpLink' => '需要[[{{MediaWiki:Editpagelayout-helpLink-url}}|帮助？]]',
 	'editpagelayout-notificationsLink' => '<span>$1</span>条{{PLURAL:$1|通知|通知}}',
+	'editpagelayout-notificationsLink-none' => '通知',
 	'editpagelayout-edit-title' => '编辑标题',
 	'editpagelayout-edit-info' => '编辑信息',
+	'editpagelayout-diff-header-url' => 'Help:差距',
+	'editpagelayout-diff-header' => '差异（[[{{MediaWiki:Editpagelayout-diff-header-url}}|帮助]]）',
 	'editpagelayout-myedit-header' => '以下是您的编辑。将您的更改复制到上面的编辑框中！',
 	'editpagelayout-captcha-title' => '验证码',
 	'editpagelayout-pageControls-pageLink' => '返回页面',
@@ -2592,6 +2622,7 @@ $messages['zh-hans'] = array(
 	'wikia-editor-media-mut' => '视频',
 	'wikia-editor-media-image-tooltip' => '添加照片',
 	'wikia-editor-media-gallery-tooltip' => '添加图库',
+	'wikia-editor-media-slideshow-tooltip' => '添加幻灯片',
 	'wikia-editor-media-slider-tooltip' => '添加滑块',
 	'wikia-editor-media-video-tooltip' => '添加视频',
 	'wikia-editor-media-mut-tooltip' => '添加视频（测试版）',
@@ -2603,7 +2634,10 @@ $messages['zh-hans'] = array(
 	'wikia-editor-modules-templates-otherTemplates' => '添加其他模板',
 	'wikia-editor-modules-templates-showUsedList' => '显示曾使用的模板列表',
 	'wikia-editor-modules-templates-showUsedList-dialog-title' => '使用过的模板 列表',
+	'wikia-editor-modules-templates-makeLayout' => '从此页面做新布局',
 	'wikia-editor-modules-templates-makeLayout-confirmation-title' => '创建基于此页面的布局',
+	'wikia-editor-modules-license-text' => '$1贡献授权为$3。<a href="$2">更多细节。</a>',
+	'wikia-editor-modules-insert-title' => '添加功能和媒体',
 	'wikia-editor-modules-categories-title' => '分类',
 	'wikia-editor-loadingStates-loading' => '正在载入编辑器',
 	'wikia-editor-loadingStates-toSource' => '切换到源模式...',
@@ -2611,16 +2645,26 @@ $messages['zh-hans'] = array(
 	'wikia-editor-loadingStates-saving' => '发布您的编辑',
 	'wikia-editor-edittools-caption' => '更多',
 	'wikia-editor-notices-dialog-title' => '通知详情',
+	'wikia-editor-preview-editSummary' => '编辑摘要：$1',
+	'wikia-editor-leaveconfirm-message' => '您做的一些编辑还未发布。您确定要离开而不发布它们吗。',
+	'nonunicodebrowser-notice' => "'''警告：您的浏览器不兼容Unicode。'''",
 	'rev-deleted-text-notice' => "警告：本项页面修订已被'''删除'''。[详细内容]",
+	'readonlywarning-notice' => "'''警告：数据库已被锁定以进行维护。'''一旦完成，编辑将会恢复。[更多信息]",
 	'userinvalidcssjstitle-notice' => "'''警告：''' 皮肤\"\$1\"不存在。 [更多信息]",
 	'semiprotectedpagewarning-notice' => "'''注：''' 本页面已被锁定，仅注册用户可以编辑。您可能需要登录以进行编辑。[详细内容]",
 	'protectedpagewarning-notice' => "'''注：''' 本页面已被锁定，只有管理员可以编辑。本地管理员可以更改此状态。[详细内容]",
 	'titleprotectedwarning-notice' => "'''注：''' 本页面已被锁定，只有特定用户（管理员、注册用户）可以创建。[详细内容]",
 	'recreate-moveddeleted-warn-notice' => "'''注：'''您正在重新创建一个已删除页面。[详细内容]",
 	'restore-edits-notice' => "欢迎回来！我们保存了一些您尚未发布的更改。<a class='notice-action restoreeditlink'>删除我的更改，开始新的编辑</a>",
+	'mainpagewarning-notice' => '了解更多关于[[w:c:community:Help:Main_page|编辑主页]]的内容。',
 	'explainconflict-notice' => "'''警告!'''其他用户在您开始编辑后已对此页做出了改动！[详细信息]",
 	'prefs-general' => '简单介绍',
 	'prefs-starting-an-edit' => '开始编辑',
+	'prefs-editing-experience' => '编辑经验',
+	'prefs-monobook-layout' => '仅MonoBook布局',
+	'prefs-editarea-size' => '编辑窗口的大小（仅MonoBook布局）',
+	'tog-editsection' => '显示章节编辑链接',
+	'tog-editwidth' => '扩宽源代码模式的编辑框填满整个屏幕',
 	'tog-minordefault' => '默认将所有编辑标为“小编辑”',
 	'tog-forceeditsummary' => '在我未填写编辑概要时提示我',
 );

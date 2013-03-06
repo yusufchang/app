@@ -147,6 +147,13 @@ $messages['cs'] = array(
 	'wva-thumbnail-upload-failed' => 'Vložení videa selhalo, nelze získat odpovídající miniaturu',
 );
 
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ */
+$messages['cy'] = array(
+	'wva-name' => "Enw'r fideo:",
+);
+
 /** German (Deutsch)
  * @author LWChris
  * @author PtM
@@ -457,6 +464,7 @@ $messages['lb'] = array(
 	'wva-name' => 'Gitt w.e.g. den Numm un:',
 	'wva-url' => "Gitt w.e.g. d'URL an:",
 	'wva-add' => 'Derbäisetzen',
+	'wva-protected' => 'Dëse Video ass gespaart.',
 );
 
 /** Macedonian (македонски)
@@ -507,7 +515,7 @@ $messages['my'] = array(
 	'wva-add' => 'ပေါင်းထည့်ရန်',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -649,6 +657,7 @@ $messages['pt'] = array(
 /** Brazilian Portuguese (português do Brasil)
  * @author Daemorris
  * @author Giro720
+ * @author JM Pessanha
  */
 $messages['pt-br'] = array(
 	'wva-success' => 'Página de vídeo $1 foi adicionada com sucesso.',
@@ -661,6 +670,7 @@ $messages['pt-br'] = array(
 	'wva-notlogged' => 'Você precisa se autenticar ou registrar para inserir vídeos.',
 	'wva-notallowed' => 'Você não pode inserir vídeos nesta wiki.',
 	'wva-protected' => 'Este vídeo está protegido.',
+	'wva-thumbnail-upload-failed' => 'Erro ao adicionar o vídeo. Não foi possível obter uma miniatura adequada',
 );
 
 /** Romanian (română)
@@ -819,9 +829,35 @@ $messages['uk'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Anakmalaysia
  * @author Hydra
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
+	'wva-success' => '已成功添加视频页面[[:$1]]。',
+	'wva-success-replaced' => '已成功替换视频页面[[:$1]]。',
+	'wva-failure' => '请提供有效的参数。',
 	'wva-name' => '输入名字：',
 	'wva-url' => '输入URL：',
 	'wva-add' => '添加',
+	'wva-title' => '从URL快速添加视频',
+	'wva-notlogged' => '您需要登录或注册来插入视频。',
+	'wva-notallowed' => '您不能在此wiki插入视频。',
+	'wva-protected' => '此视频已被保护。',
+	'wva-thumbnail-upload-failed' => '视频嵌入失败，无法得到适合的缩略图',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'wva-success' => '成功增加影片 [[:$1]]',
+	'wva-success-replaced' => '成功替換影片 [[:$1]]',
+	'wva-failure' => '請提供有效的參數。',
+	'wva-name' => '影片名稱',
+	'wva-url' => '影片連結：',
+	'wva-add' => '新增',
+	'wva-title' => '從網路快速新增影片',
+	'wva-notlogged' => '您需要登錄或註冊來插入影片。',
+	'wva-notallowed' => '您不能在這個wiki搜入影片',
+	'wva-protected' => '這咎影片被保護。',
+	'wva-thumbnail-upload-failed' => '影片嵌入失敗，無法獲取適當的縮圖',
 );

@@ -269,7 +269,7 @@ Sila semak ejaan anda.',
 	'log-description-piggyback' => 'Log ini merupakan rekod gendongan akaun.',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -365,6 +365,13 @@ Ch\'a contròla l\'ortografìa.',
 	'log-description-piggyback' => "Ës registr a l'é na lista dj'intrade ant ël sistema con vàire cont.",
 );
 
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'piggyback-otherusername' => 'بل کارن نوم:',
+);
+
 /** Portuguese (português)
  */
 $messages['pt'] = array(
@@ -383,6 +390,7 @@ Verifique a soletração.',
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
+ * @author JM Pessanha
  */
 $messages['pt-br'] = array(
 	'piggybac-desc' => 'Permite a autenticação em nome de outro utilizador',
@@ -396,6 +404,16 @@ Verifique a ortografia.',
 	'piggyback-firstlogout' => 'Saia primeiro de volta à sua conta, por favor.',
 	'piggyback-itisyou' => 'Não se pode personificar a si mesmo.',
 	'piggyback-issysopto' => 'Não pode personificar um utilizador que tem o direito de personificação.',
+	'action-piggyback' => 'Fazer logon como outro usuário',
+	'log-name-piggyback' => 'Registro de sobreposto',
+	'log-description-piggyback' => 'Este log é um registro de conta sobreposta.',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'piggyback-otherusername' => 'Otre nome utende:',
 );
 
 /** Russian (русский)

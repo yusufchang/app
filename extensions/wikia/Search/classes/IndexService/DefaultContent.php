@@ -23,16 +23,20 @@ class DefaultContent extends AbstractService
 		// we still assume the response is the same format as MediaWiki's
 		$response = $this->interface->getParseResponseFromPageId( $pageId ); 
 		$titleStr = $this->interface->getTitleStringFromPageId( $pageId );
-		$html     = $response['parse']['text']['*'];
+		$html     = empty( $response['parse']['text']['*'] ) ? '' : $response['parse']['text']['*'];
 
 		$categories = array();
-		foreach ( $response['parse']['categories'] as $category ) {
-			$categories[] = str_replace( '_', ' ', $category['*'] );
+		if (! empty( $response['parse']['categories'] ) ) {
+			foreach ( $response['parse']['categories'] as $category ) {
+				$categories[] = str_replace( '_', ' ', $category['*'] );
+			}
 		}
 
 		$headings = array();
-		foreach( $response['parse']['sections'] as $section ) {
-			$headings[] = $section['line'];
+		if (! empty( $response['parse']['sections'] ) ) {
+			foreach( $response['parse']['sections'] as $section ) {
+				$headings[] = $section['line'];
+			}
 		}
 
 		if ( $this->interface->getGlobal( 'AppStripsHtml' ) ) {
@@ -63,10 +67,6 @@ class DefaultContent extends AbstractService
 		$result['page_images']	= count( $response['parse']['images'] );
 		$result[$headingsKey]	= $headings;
 		
-		if (! $this->interface->getGlobal( 'AppStripsHtml' ) ) {
-			$result['id'] = $result['wid'] . '_' . $result['pageid'];
-		}
-	
 		# these need to be strictly typed as bool strings since they're passed via http when in the hands of the worker
 		$result['iscontent']	= $this->interface->isPageIdContent( $pageId ) ? 'true' : 'false';
 	    $result['is_main_page'] = 'false';
@@ -119,36 +119,37 @@ class DefaultContent extends AbstractService
     				'sup.reference',
     				'script',
     				'style',
-    				'table',
     				);
     		foreach ( $garbageSelectors as $selector ) {
     			foreach ( $dom->find( $selector ) as $node ) {
     				$node->outertext = ' ';
     			}
     		}
-    
+    		
+    		$plaintext = '';
+    		foreach( $dom->find( 'table' ) as $table ) {
+    			$plaintext .= $table->plaintext;
+    			$table->outertext = ' '; 
+    		}
     		$dom->load( $dom->save() );
     		
     		$paragraphs = array();
     		foreach ( $dom->find( 'p' ) as $pNode ) {
     			$paragraphs[] = $pNode->plaintext;
     		}
-    		
-    		$plaintext = $dom->plaintext;
+    		$plaintext = $dom->plaintext . ' ' . $plaintext;
 		} else {
 			$plaintext = html_entity_decode( strip_tags( $html ), ENT_COMPAT, 'UTF-8' );
 		}
 		$plaintext = preg_replace( '/\s+/', ' ', $plaintext );
-		
 		if (! empty( $paragraphs ) ) {
 			$paragraphString = preg_replace( '/\s+/', ' ', implode( ' ', $paragraphs ) );
 			// regex for grabbing the first 500 words separate by white space
-			$first500 = preg_replace( '/^((\S+ ){0,500}).*$/m', '$1', $paragraphString );
-			if ( empty( $first500 ) ) {
-				preg_replace( '/^((\S+ ){0,500}).*$/m', '$1', $plaintext );
-				$result['nolang_txt'] = $first500;
-			}
-			$result['words'] = substr_count( $paragraphString, ' ' );
+			$words = str_word_count( $paragraphString, 1 );
+			$wordCount = count( $words );
+			
+			$result['nolang_txt'] = implode( ' ', array_slice( $words, 0, min( array( $wordCount, 500 ) ) ) );
+			$result['words'] = $wordCount;
 		} else {
 			$result['words'] = substr_count( $plaintext, ' ' );
 		}

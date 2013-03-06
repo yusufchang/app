@@ -207,7 +207,7 @@ $messages['ms'] = array(
 	'sharedhelp-searchprofile-tooltip' => 'Cari dalam halaman Bantuan',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -246,8 +246,8 @@ $messages['pl'] = array(
 $messages['pms'] = array(
 	'sharedhelp-desc' => "A pija dle pàgine da [[w:c:Help|Help Wikia]] e a j'anseriss ant lë spassi nominal {{ns:help}} dë sta wiki-sì",
 	'sharedhelp-autotalkcreate-summary' => 'Pàgina ëd discussion creà automaticament',
-	'sharedhelp-searchprofile' => "Pagine d'agiut",
-	'sharedhelp-searchprofile-tooltip' => "Sërché pàgine d'agiut",
+	'sharedhelp-searchprofile' => "Pàgine d'agiut",
+	'sharedhelp-searchprofile-tooltip' => "Sërché ant le pàgine d'agiut",
 );
 
 /** Pashto (پښتو)
@@ -267,10 +267,23 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Giro720
+ * @author JM Pessanha
  */
 $messages['pt-br'] = array(
 	'sharedhelp-desc' => 'Insere páginas da [[w:c:Help|Ajuda da Wikia]] no espaço nominal {{ns:help}} desta wiki',
 	'sharedhelp-autotalkcreate-summary' => 'Página de discussão criada automaticamente',
+	'sharedhelp-searchprofile' => 'Páginas de ajuda',
+	'sharedhelp-searchprofile-tooltip' => 'Pesquisar páginas de ajuda',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'sharedhelp-desc' => "Pigghie le pàggene da l'[[w:c:Help|Aijute de Uicchia]] e sckaffele jndr'à 'u namespace {{ns:help}} sus a sta uicchi",
+	'sharedhelp-autotalkcreate-summary' => "Pàgene de le 'ngazzaminde ccrejate automaticamende",
+	'sharedhelp-searchprofile' => "Pàgene d'ajute",
+	'sharedhelp-searchprofile-tooltip' => 'Cirche le pàggene de ajute',
 );
 
 /** Russian (русский)
@@ -316,7 +329,12 @@ $messages['uk'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
+ * @author Hydra
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
+	'sharedhelp-desc' => '将[[w:c:Help|Wikia帮助]]带来并嵌入到此wiki的{{ns:help}}命名空间',
 	'sharedhelp-autotalkcreate-summary' => '讨论页已自动创建',
+	'sharedhelp-searchprofile' => '帮助页面',
+	'sharedhelp-searchprofile-tooltip' => '搜索帮助页面',
 );

@@ -7,15 +7,16 @@
 return array(
 	// AMD library
 	'amd' => array(
-		// modil.js is loaded at the top of the page (using AssetsManager)
-		// this file will make ResourceLoader think that amd module is loaded - via mw.loader.setState
-		'scripts' => 'resources/wikia/libraries/modil/modil.setState.js',
+		'scripts' => 'resources/wikia/libraries/modil/modil.js',
 	),
 
 	// shared AMD modules loaded on each page
 	'amd.shared' => array(
 		'dependencies' => array(
 			'wikia.window',
+			'wikia.location',
+			'wikia.localStorage',
+			'wikia.deferred',
 			'wikia.ajax',
 			'wikia.nirvana',
 			'wikia.mw',
@@ -25,6 +26,7 @@ return array(
 			'wikia.log',
 			'wikia.thumbnailer',
 			'wikia.geo',
+			'wikia.tracker',
 		),
 		'position' => 'top', // needs to be loaded before AssetsManager files
 	),
@@ -33,6 +35,21 @@ return array(
 	'wikia.window' => array(
 		'scripts' => 'resources/wikia/modules/window.js',
 		'dependencies' => 'amd',
+	),
+	'wikia.location' => array(
+		'scripts' => 'resources/wikia/modules/location.js',
+		'dependencies' => 'amd',
+	),
+	'wikia.localStorage' => array(
+		'scripts' => 'resources/wikia/modules/localStorage.js',
+		'dependencies' => 'amd',
+	),
+	'wikia.deferred' => array(
+		'scripts' => 'resources/wikia/modules/deferred.js',
+		'dependencies' => array(
+			'amd',
+			'wikia.window'
+		)
 	),
 	'wikia.ajax' => array(
 		'scripts' => 'resources/wikia/modules/ajax.js',
@@ -88,6 +105,22 @@ return array(
 			'wikia.cookies'
 		)
 	),
+	'wikia.tracker' => array(
+		'scripts' => 'resources/wikia/modules/tracker.js',
+		'dependencies' => array(
+			'amd',
+			'wikia.window',
+			'wikia.log',
+			'wikia.tracker.stub',
+		)
+	),
+	'wikia.tracker.stub' => array(
+		'scripts' => 'resources/wikia/modules/tracker.stub.js',
+		'dependencies' => array(
+			'amd',
+			'wikia.window'
+		)
+	),
 
 	// AMD modules loaded on demand
 	'wikia.aim' => array(
@@ -111,6 +144,11 @@ return array(
 	'wikia.mustache' => array(
 		'scripts' => 'resources/wikia/libraries/mustache/mustache.js',
 		'dependencies' => 'amd'
+	),
+
+	'wikia.stringhelper' => array(
+		'scripts' => 'resources/wikia/modules/stringhelper.js',
+		'dependencies' => 'amd',
 	),
 
 	// module loaded via $.loadjQuery UI and is a wrapper for MediaWiki jQuery UI modules

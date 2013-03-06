@@ -10,9 +10,10 @@
 
 	var CACHE_VALUE_PREFIX = 'wkch_val_',
 		CACHE_TTL_PREFIX = 'wkch_ttl_',
+		storage,
 		undef;
 
-	function cache() {
+	function cache(localStorage) {
 		var moduleStorage = {};
 
 		/**
@@ -30,7 +31,7 @@
 			}
 
 			try {
-				return context.localStorage.getItem(key);
+				return localStorage.getItem(key);
 			} catch (err) {
 				return null;
 			}
@@ -47,7 +48,7 @@
 		function uniSet(key, value) {
 			moduleStorage[key] = value;
 			try {
-				context.localStorage.setItem(key, value);
+				localStorage.setItem(key, value);
 			} catch (err) {}
 		}
 
@@ -61,7 +62,7 @@
 		function uniDel(key) {
 			delete moduleStorage[key];
 			try {
-				context.localStorage.removeItem(key);
+				localStorage.removeItem(key);
 			} catch (err) {}
 		}
 
@@ -138,8 +139,14 @@
 		context.Wikia = {};
 	}
 
+	// Trying to access storage with cookies disabled can throw
+	// security exceptions in some browsers like Firefox (BugId:94924)
+	try {
+		storage = context.localStorage;
+	} catch( e ) {}
+
 	//namespace
-	context.Wikia.Cache = cache(window.localStorage);
+	context.Wikia.Cache = cache(storage);
 
 	if (context.define && context.define.amd) {
 		context.define('wikia.cache', ['wikia.localStorage'], cache);

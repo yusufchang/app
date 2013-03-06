@@ -80,6 +80,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author EugeneZelenko
  * @author Lloffiwr
+ * @author Shirayuki
  * @author Siebrand
  */
 $messages['qqq'] = array(
@@ -105,6 +106,7 @@ $messages['qqq'] = array(
 	'wmu-next' => '{{Identical|Next}}',
 	'wmu-back' => 'Select a different photo from the one already chosen.',
 	'wmu-gallery' => '{{Identical|Gallery}}',
+	'wmu-column' => '{{Identical|Column}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -423,7 +425,7 @@ $messages['br'] = array(
 	'wmu-thumbnail' => 'Munud',
 	'wmu-fullsize' => 'Ment wirion ($1x$2px)',
 	'wmu-width' => 'Ledander',
-	'wmu-layout' => 'Fichañ',
+	'wmu-layout' => 'Pajennaozañ',
 	'wmu-caption' => "Alc'hwez",
 	'wmu-link' => 'Liamm',
 	'wmu-optional' => '(diret)',
@@ -1912,7 +1914,7 @@ $messages['mzn'] = array(
 	'wmu-upload-btn' => 'باربی‌یشتن',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -2293,6 +2295,8 @@ $messages['ps'] = array(
 	'wmu-layout' => 'ليدنمخ',
 	'wmu-link' => 'تړنه',
 	'wmu-insert2' => 'دوتنه ورټومبل',
+	'wmu-insert3' => 'دا انځور ورټومبل',
+	'wmu-back' => 'يو بل انځور ټاکل',
 	'wmu-imagebutton' => 'انځورونه ورګډول',
 	'wmu-gallery' => 'انځورتون',
 	'wmu-gallery-btn1' => 'يو بل انځور ورګډول',
@@ -2383,6 +2387,7 @@ $messages['pt'] = array(
  * @author Aristóbulo
  * @author Caio1478
  * @author Giro720
+ * @author JM Pessanha
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -2424,7 +2429,7 @@ $messages['pt-br'] = array(
 	'wmu-success' => '<h1>Sucesso</h1>A sua imagem foi inserida.',
 	'wmu-success-placeholder' => '<h1>Sucesso</h1>',
 	'wmu-return' => 'Voltar à edição',
-	'wmu-back' => 'voltar', # Fuzzy
+	'wmu-back' => 'Selecionar outra imagem',
 	'wmu-warn1' => 'Antes tem de especificar a consulta!',
 	'wmu-warn2' => 'Antes tem de selecionar o ficheiro!',
 	'wmu-warn3' => 'Você precisa especificar o nome do arquivo antes!',
@@ -2456,6 +2461,8 @@ $messages['pt-br'] = array(
 	'wmu-replace-default-caption' => 'substituir legenda padrão',
 	'wmu-appearance-in-article' => 'Aspecto no Artigo',
 	'wmu-alignment' => 'Alinhamento',
+	'wmu-file-protected' => 'Esta imagem esta protegida',
+	'wmu-file-error' => 'Desculpe, houve um erro no processo de carregamento. Por favor, tente novamente.',
 );
 
 /** Russian (русский)
@@ -2961,6 +2968,7 @@ $messages['zh-hans'] = array(
 	'wmu-more-options' => '更多选项',
 	'wmu-fewer-options' => '更少选项',
 	'wmu-replace-default-caption' => '替换默认标题',
+	'wmu-appearance-in-article' => '在页面上的外观',
 	'wmu-alignment' => '对齐',
 	'wmu-file-protected' => '本图片受到保护',
 	'wmu-file-error' => '抱歉，上传过程中出错了。请再试一次。',

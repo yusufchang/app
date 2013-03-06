@@ -397,15 +397,16 @@ $messages['qqq'] = array(
 	'wall-message-wall' => 'Name of the feature',
 	'wall-message-wall-shorten' => "Name of the feature when it's used with a possessive, as in John's wall",
 	'wall-message-unfollow' => 'stop subscribing to notifications for this thread',
-	'wall-message-undoremove' => 'undo the action that you just took',
+	'wall-message-undoremove' => 'undo the action that you just took.
+{{Identical|Undo}}',
 	'wall-message-edited' => 'Parameters:
 * $1 is the user who edited the message
 * $2 is user page URL
 * $3 is a diff URL.',
 	'wall-message-edited-summary' => 'Parameters:
 * $1 summary of the edit
-* $2 is the user who edited the message
-* $3 is user page URL
+* $2 is user page URL
+* $3 is the user who edited the message
 * $4 is a diff URL.',
 	'wall-message-update-topics-summary' => 'Added as auto summery when editing topics',
 	'wall-message-update-highlight-summary' => 'Added as auto summery when highlighted message',
@@ -437,7 +438,8 @@ $messages['qqq'] = array(
 	'wall-button-to-preview-comment' => 'Link to preview a message',
 	'wall-button-to-cancel-preview' => 'Link to cancel a preview and go back to editing',
 	'wall-button-to-submit-comment' => 'Button to post the first message of a new thread',
-	'wall-button-to-submit-reply' => 'Button to post a reply to a thread',
+	'wall-button-to-submit-reply' => 'Button to post a reply to a thread.
+{{Identical|Reply}}',
 	'wall-button-to-submit-comment-no-topic' => 'Button to post a new thread after getting an error message for not having a title',
 	'wall-button-save-changes' => 'Button to save edits to a message',
 	'wall-button-cancel-changes' => 'Button to cancel an edit to a message',
@@ -445,7 +447,8 @@ $messages['qqq'] = array(
 	'wall-message-edit' => 'Menu item to edit a message',
 	'wall-message-more' => 'Top of the menu for each message.
 {{Identical|More}}',
-	'wall-message-delete' => 'Menu item to delete a message',
+	'wall-message-delete' => 'Menu item to delete a message.
+{{Identical|Delete}}',
 	'wall-message-close-thread' => 'Menu item to close a thread or message',
 	'wall-message-reopen-thread' => 'Menu item to reopen a thread',
 	'wall-message-removed-thread-because' => 'Summary at the top of a removed thread page. Parameters:
@@ -493,7 +496,8 @@ See also:
 	'wall-action-admin-confirm' => 'Asks for summary in the delete modal box',
 	'wall-action-admin-thread-confirm-info' => 'Explanation in the delete modal box that the thread and summary will still appear in the history',
 	'wall-action-admin-reply-confirm-info' => 'Explanation in the delete modal box that the reply and summary will still appear in the history',
-	'wall-action-admin-confirm-ok' => 'Button in the delete modal box',
+	'wall-action-admin-confirm-ok' => 'Button in the delete modal box.
+{{Identical|Delete}}',
 	'wall-action-restore-thread-title' => 'Button to restore a thread',
 	'wall-action-restore-reply-title' => 'Button to restore a reply',
 	'wall-action-restore-confirm' => 'Asks for summary in the restore modal box',
@@ -587,7 +591,8 @@ See also:
 	'wall-sorting-oldest-threads' => 'Sorting option, oldest threads first',
 	'wall-sorting-newest-replies' => 'Sorting option, threads with newest replies first',
 	'wall-sorting-most-active' => 'Sorting option, most active threads first (deprecated)',
-	'wall-sorting-archived' => 'Sorting option, show archived threads (not built yet)',
+	'wall-sorting-archived' => 'Sorting option, show archived threads (not built yet).
+{{Identical|Archive}}',
 	'tog-enotifwallthread' => "Email preference option, checkbox to receive email when there's a reply to a followed thread
 
 This message follows after http://messaging.wikia.com/wiki/MediaWiki:Prefs-email-me-v2/en , look there for your language version.",
@@ -694,10 +699,12 @@ checkbox on Special:Block',
 * $2 is username',
 	'wall-history-sorting-newest-first' => 'sorting option, view newest changes first',
 	'wall-history-sorting-oldest-first' => 'sorting option, view oldest changes first',
-	'wall-history-summary-label' => 'wall history page, heading for summary item',
+	'wall-history-summary-label' => 'wall history page, heading for summary item.
+{{Identical|Summary}}',
 	'wall-history-rail-wall' => "wall history page, who's involved box - link to user's wall",
 	'wall-history-rail-contribs' => "wall history page, who's involved box - link to user's contributions list",
-	'wall-history-rail-block' => "wall history page, who's involved box - link for admins to block user",
+	'wall-history-rail-block' => "wall history page, who's involved box - link for admins to block user.
+{{Identical|Block}}",
 	'wall-history-action-view' => 'wall history page, link to view removed thread',
 	'wall-history-action-restore' => 'wall history page, link to restore removed thread',
 	'wall-history-action-thread-history' => 'wall history page, link to view thread history',
@@ -796,7 +803,8 @@ checkbox on Special:Block',
 	'wall-quote-author' => 'part of quoted text, contain information about author of quoted text',
 	'wall-quote-reply-to' => 'link label to quoted text.  $1 is a number such as "reply to 123"',
 	'wall-preview-modal-title' => 'Title of preview modal',
-	'wall-preview-modal-button-back' => 'buton on preview modal',
+	'wall-preview-modal-button-back' => 'buton on preview modal.
+{{Identical|Back}}',
 	'wall-preview-modal-button-publish' => 'buton on preview modal',
 	'wall-topic-input-heading' => 'Topic input label',
 	'wall-topic-input-placeholder' => 'Adding topic instruction and call to action.  State that it is optional',
@@ -919,10 +927,209 @@ $messages['br'] = array(
 );
 
 /** Catalan (català)
+ * @author BroOk
  * @author Erdemaslancan
  */
 $messages['ca'] = array(
+	'wall-no-title' => 'Sense títol',
+	'wall-message-loadmore' => 'Veure <span class="count">{{PLURAL:$1|$1 resposta|$1 respostes}}</span>',
+	'wall-message-wall' => 'Mur de missatges',
+	'wall-message-wall-shorten' => 'mur',
+	'wall-message-unfollow' => 'Deixar de seguir',
+	'wall-message-undoremove' => 'Desfer',
+	'wall-message-edited' => '<a href="$3" >Editat per</a> <a class="username" href="$1">$2</a>',
+	'wall-message-edited-summary' => '<a href="$4" >$1 per </a><a class="username" href="$2">$3</a>',
+	'wall-message-update-topics-summary' => 'Tema canviat',
+	'wall-message-update-highlight-summary' => 'Destacat',
+	'wall-message-update-removed-highlight-summary' => 'Destacat eliminat',
+	'wall-message-mywall' => 'El meu mur',
+	'wall-toolbar-history' => 'Historial',
+	'wall-message-notify' => 'Notificar a un admin',
+	'wall-message-remove' => 'Treure',
+	'wall-message-rev-delete' => 'Revisió esborrada',
+	'wall-message-fast-admin-delete-message' => 'VSTF borrar',
+	'wall-message-quote-button' => 'Cita',
+	'wall-message-elseswall' => 'mur de $1',
+	'wall-message-no-permission' => 'No tens permisos per a realitzar aquesta acció en el missatge',
+	'wall-thread-removed' => 'Retirat',
+	'wall-thread-isnotifyeveryone' => 'Destacar',
+	'wall-thread-deleted' => 'Esborrat',
+	'wall-thread-closed' => 'Tancat',
+	'wall-default-title' => 'Missatge de $1',
+	'wall-no-title-warning' => '← No has especificat cap títol',
+	'wall-desc' => "Substitució de la pàgina de discussió d'usuari",
+	'wall-disabled-desc' => "Funcionalitat del Mur de Missatges per a wikis sense l'extensió del Mur activada",
+	'wall-placeholder-topic' => 'De què vols parlar?',
+	'wall-placeholder-message' => 'Publicar un missatge nou al mur de $1',
+	'wall-placeholder-message-anon' => 'Publica un missatge nou en aquest mur',
+	'wall-placeholder-reply' => 'Deixar una resposta',
+	'wall-button-to-preview-comment' => 'Previsualitzar',
+	'wall-button-to-cancel-preview' => 'Editar',
+	'wall-button-to-submit-comment' => 'Publicar',
+	'wall-button-to-submit-reply' => 'Respondre',
+	'wall-button-to-submit-comment-no-topic' => 'Publicar sense títol',
+	'wall-button-save-changes' => 'Desar els canvis',
+	'wall-button-cancel-changes' => 'Cancel·lar',
+	'wall-button-done-source' => 'Fet',
+	'wall-message-edit' => 'Editar',
+	'wall-message-more' => 'Més',
+	'wall-message-delete' => 'Eliminar',
+	'wall-message-close-thread' => 'Tancar aquest tema',
+	'wall-message-reopen-thread' => 'Reobrir aquest tema',
+	'wall-message-removed-thread-because' => '$1 ha retirat aquest tema perquè:',
+	'wall-message-deleted-thread-because' => '$1 ha eliminat aquest tema perquè:',
+	'wall-message-restore-thread' => 'Restaurar tema',
+	'wall-message-move-thread' => 'Reanomenar aquest tema',
+	'wall-message-removed-reply-because' => '$1 ha retirat aquesta resposta perquè:',
+	'wall-message-deleted-reply-because' => '$1 ha eliminat aquesta resposta perquè:',
+	'wall-message-closed-by' => '[[$2|$1]] ha tancat aquest tema',
+	'wall-message-restore-reply' => 'Restaurar resposta',
+	'wall-delete-reason' => "Acció d'usuari/admin",
+	'wall-user-talk-page-archive-anchor' => 'Veure la pàgina de discussió arxivada',
+	'wall-user-talk-archive-page-title' => 'Arxiu_de_discussió',
+	'wall-ipb-disableusertalk' => 'Impedeix que aquest usuari pugui publicar en el seu Mur de Missatges mentre duri el bloqueig',
+	'wall-action-all-confirm-cancel' => 'Cancel·lar',
+	'wall-action-all-confirm-notify' => 'Notificar a un admin',
+	'wall-action-remove-reply-title' => 'Retirar aquesta resposta',
+	'wall-action-remove-thread-title' => 'Retirar aquest tema',
+	'wall-delete-error-title' => 'Error',
+	'wall-notifications' => 'Notificacions',
+	'wall-notifications-all' => 'Totes les notificacions',
+	'wall-notifications-markasread' => "Marca'ls tots com a llegits",
+	'wall-notifications-markasread-all-wikis' => 'Tots els wikis',
+	'wall-notifications-markasread-this-wiki' => 'Aquest wiki',
+	'wall-notifications-empty' => 'No hi ha notificacions',
+	'wall-notifications-loading' => 'Carregant notificacions',
+	'wall-notifications-reminder' => 'Tens <span>$1</span> {{PLURAL:$1|notificació|notificacions}} sense llegir',
+	'wall-notifications-wall-disabled' => 'El Mur de Missatges ha estat desactivat en aquest wiki. No es poden carregar les notificacions.',
+	'wn-user1-reply-you-your-wall' => '$1 ha respost el teu missatge al teu Mur',
+	'wn-user2-reply-you-your-wall' => '$1 i $2 han respost al teu missatge al teu Mur',
+	'wn-user3-reply-you-your-wall' => '$1 i altres han respost el teu missatge al teu Mur',
+	'wn-user1-reply-self-your-wall' => '$1 ha respost un missatge al teu Mur',
+	'wn-user2-reply-self-your-wall' => '$1 i $2 han respost un missatge al teu Mur',
+	'wn-user3-reply-self-your-wall' => '$1 i altres han respost un missatge al teu Mur',
+	'wn-user1-reply-other-your-wall' => '$1 ha respost el missatge de $2 al teu Mur',
+	'wn-user2-reply-other-your-wall' => '$1 i $2 han respost el missatge de $3 al teu Mur',
+	'wn-user3-reply-other-your-wall' => '$1 i altres han respost el missatge de $2 al teu Mur',
+	'wn-user1-reply-you-other-wall' => '$1 ha respost el teu missatge al mur de $2',
+	'wn-user2-reply-you-other-wall' => '$1 i $2 han respost el teu missatge al mur de $3',
+	'wn-user3-reply-you-other-wall' => '$1 i altres han respost el teu missatge al mur de $3',
+	'wn-user1-reply-self-other-wall' => '$1 ha respost un missatge al mur de $2',
+	'wn-user2-reply-self-other-wall' => '$1 i $2 han respost un missatge al mur de $3',
+	'wn-user3-reply-self-other-wall' => '$1 i altres han respost un missatge al mur de $2',
+	'wn-user1-reply-other-other-wall' => '$1 ha respost el missatge de $2 al mur de $3',
+	'wn-user2-reply-other-other-wall' => '$1 i $2 han respost el missatge de $3 al mur de $4',
+	'wn-user3-reply-other-other-wall' => '$1 i altres han respost el missatge de $2 al mur de $3',
+	'wn-user1-reply-you-a-wall' => '$1 ha respost el teu missatge',
+	'wn-user2-reply-you-a-wall' => '$1 i $2 han respost el teu missatge',
+	'wn-user3-reply-you-a-wall' => '$1 i altres han respost el teu missatge',
+	'wn-user1-reply-self-a-wall' => '$1 ha respost un missatge',
+	'wn-user2-reply-self-a-wall' => '$1 i $2 han respost un missatge',
+	'wn-user3-reply-self-a-wall' => '$1 i altres han respost un missatge',
+	'wn-user1-reply-other-a-wall' => '$1 ha respost el missatge de $2',
+	'wn-user2-reply-other-a-wall' => '$1 i $2 han respost el missatge de $3',
+	'wn-user3-reply-other-a-wall' => '$1 i altres han respost el missatge de $3',
+	'wn-newmsg-onmywall' => '$1 ha deixat un missatge nou al teu mur',
+	'wn-newmsg' => 'Has deixat un missatge nou al mur de $1',
+	'wn-newmsg-on-followed-wall' => '$1 ha deixat un missatge nou al mur de $2',
+	'wn-admin-thread-deleted' => 'Tema retirat del mur de $1',
+	'wn-admin-reply-deleted' => 'Resposta retirada del tema al mur de $1',
+	'wn-owner-thread-deleted' => 'Tema retirat del teu mur',
+	'wn-owner-reply-deleted' => 'Resposta retirada del tema del teu mur',
+	'wall-sorting-newest-threads' => 'Temes nous',
+	'wall-sorting-oldest-threads' => 'Temes antics',
+	'wall-sorting-newest-replies' => 'Respostes noves',
+	'wall-sorting-most-active' => 'Més actius',
+	'wall-sorting-archived' => 'Arxivat',
+	'tog-enotifwallthread' => '...algú respon a un tema que segueixo.',
+	'tog-enotifmywall' => '......algú deixa un missatge nou al meu mur.',
+	'wall-deleted-msg-pagetitle' => 'Missatge suprimit',
+	'wall-deleted-msg-text' => "S'ha suprimit el missatge que estant intentant veure.",
+	'wall-deleted-msg-return-to' => 'Tornar al Mur de $1.',
+	'wall-deleted-msg-view' => '(Veure/Restaurar)',
+	'wall-recentchanges-wall-thread' => 'Tema del mur',
+	'wall-recentchanges-new-message' => 'al <a href="$1">mur de $2</a>',
+	'wall-recentchanges-edit' => '(missatge editat)',
 	'wall-recentchanges-summary' => '($1)',
+	'wall-recentchanges-removed-thread' => 'retirat el tema "[[$1|$2]]" del mur de [[$3|$4]]',
+	'wall-recentchanges-removed-reply' => 'retirada la resposta "[[$1|$2]]" del mur de [[$3|$4]]',
+	'wall-recentchanges-restored-thread' => 'restaurat el tema "[[$1|$2]]" en el mur de [[$3|$4]]',
+	'wall-recentchanges-restored-reply' => 'restaurada la resposta "[[$1|$2]]" en el mur de [[$3|$4]]',
+	'wall-recentchanges-deleted-thread' => 'eliminat el tema "[[$1|$2]]" del mur de [[$3|$4]]',
+	'wall-recentchanges-deleted-reply' => "ha eliminat en el [[$3|mur de $4]] un missatge del tema ''[[$1|$2]]''",
+	'wall-recentchanges-closed-thread' => 'ha tancat el tema "[[$1|$2]] en el mur de [[$3|$4]]"',
+	'wall-recentchanges-reopened-thread' => 'ha restaurat el tema "[[$1|$2]] en el mur de [[$3|$4]]"',
+	'wall-recentchanges-deleted-reply-title' => 'Una resposta en el mur de missatges',
+	'wall-recentchanges-namespace-selector-message-wall' => 'Mur de missatges',
+	'wall-recentchanges-thread-group' => '$1 en el <a href="$2">Mur de $3</a>',
+	'wall-recentchanges-history-link' => 'Historial del mur',
+	'wall-recentchanges-thread-history-link' => 'Historial del tema',
+	'wall-contributions-wall-line' => '$5 ($6 | $7) $8 <a href="$1">$2</a> en el <a href="$3">Mur de $4</a>',
+	'wall-wiki-activity-on' => 'a $1',
+	'wall-wiki-activity-wall-owner' => 'mur de $1',
+	'wall-removed-thread-undo' => 'Aquest tema ha estat retirat. $1',
+	'wall-removed-reply-undo' => 'Aquesta resposta ha estat retirada. $1',
+	'wall-removed-reply' => 'Aquesta resposta ha estat retirada',
+	'wall-deleted-thread-undo' => 'Aquest tema ha estat suprimit. $1',
+	'wall-deleted-reply-undo' => 'Aquesta resposta ha estat suprimida. $1',
+	'wall-deleted-reply' => 'Aquesta resposta ha estat suprimida',
+	'wall-history' => 'Historial',
+	'wall-history-title' => 'Historial del mur',
+	'wall-history-who-involved-wall-title' => 'Qui ha participat?',
+	'wall-history-who-involved-thread-title' => 'Qui ha participat en aquest tema?',
+	'wall-history-thread-created' => '$1 creat per $2',
+	'wall-history-thread-removed' => '$1 retirat per $2',
+	'wall-history-thread-restored' => '$1 restaurat per $2',
+	'wall-history-thread-admin-deleted' => '$1 suprimit per $2',
+	'wall-history-sorting-newest-first' => 'Més nous primer',
+	'wall-history-sorting-oldest-first' => 'Més antics primer',
+	'wall-history-summary-label' => 'Resum',
+	'wall-history-rail-wall' => 'mur',
+	'wall-history-rail-contribs' => 'contribucions',
+	'wall-history-rail-block' => 'bloquejar',
+	'wall-history-action-view' => 'veure',
+	'wall-history-action-restore' => 'restaurar',
+	'wall-history-action-thread-history' => 'historial del tema',
+	'wall-thread-history-title' => 'historial del tema',
+	'wall-thread-history-thread-created' => '$1 creat per $2',
+	'wall-thread-history-reply-created' => '$1 $2 ha deixat una resposta',
+	'wall-thread-history-thread-removed' => '$1 $2 ha retirat aquest tema',
+	'wall-thread-history-reply-removed' => '$1 $2 ha retirat la resposta $5 de $3',
+	'wall-thread-history-reply-deleted' => '$1 $2 ha suprimit la resposta de $3',
+	'wall-thread-history-thread-restored' => '$1 $2 ha restaurat aquest tema',
+	'wall-thread-history-reply-restored' => '$1 $2 ha restaurat la resposta $5 de $3',
+	'wall-thread-history-thread-deleted' => '$1 $2 ha suprimit aquest tema',
+	'wall-thread-history-thread-edited' => '$1 $2 ha editat el missatge $5 de $3',
+	'wall-thread-history-reply-edited' => '$1 $2 ha editat el missatge $5 de $3',
+	'wall-thread-history-thread-closed' => '$2 ha tancat aquest tema',
+	'wall-thread-history-thread-reopened' => '$2 ha reobert aquest tema',
+	'wall-history-action-restore-reply' => 'restaurar resposta',
+	'wall-history-action-restore-thread' => 'restaurar tema',
+	'prefs-email-wall-v2' => 'Mur de missatges i Fòrum',
+	'wall-notifications-notifyeveryone' => 'Destacat per $1',
+	'wall-message-notifyeveryone' => 'Destacar aquest tema',
+	'wall-message-unnotifyeveryone' => 'Deixar de destacar aquest tema',
+	'wall-message-notifyeveryone-tooltip' => 'Tot usuari que ha iniciat sessió en el wiki serà notificat sobre aquest tema',
+	'wall-votes-modal-showmore' => 'Veure altres que estan a favor',
+	'wall-votes-modal-title' => 'A favor',
+	'wall-votes-modal-title-desc' => '{{PLURAL:$1|Una persona ha donat|$1 persones han donat}} "a favor" a aquest missatge',
+	'wall-votes-number' => '$1 {{PLURAL:$1|a favor}}',
+	'wall-votes-number-tooltip' => 'Veure qui ha donat "a favor" a aquest missatge',
+	'wall-votes-vote-tooltip' => 'Donar "a favor" a aquest missatge',
+	'wall-votes-voted-tooltip' => "Estàs a favor d'aquest missatge!",
+	'wall-quote-author' => '$1 va escriure:',
+	'wall-quote-reply-to' => 'respondre a #$1',
+	'wall-preview-modal-title' => 'Previsualitzar',
+	'wall-preview-modal-button-back' => 'Enrere',
+	'wall-preview-modal-button-publish' => 'Publicar',
+	'wall-topic-input-heading' => 'Tema',
+	'wall-topic-input-placeholder' => 'Afegeix un Tema (opcional)',
+	'wall-topic-input-error' => 'No hi ha cap article anomenat "$1". Si us plau, utilitza un nom d\'un article existent com a Tema.',
+	'wall-topic-input-error-limit' => 'Un fil només pot tenir $1 {{PLURAL:$1|Tema|Temes}} com a màxim.',
+	'wall-topic-heading' => 'Temes per a aquest fil:',
+	'wall-topic-edit' => 'Editar temes',
+	'wall-topic-edit-save' => 'Desa',
+	'wall-topic-edit-cancel' => 'Cancel·lar',
 );
 
 /** Czech (česky)
@@ -1024,6 +1231,28 @@ $messages['cs'] = array(
 	'wall-preview-modal-button-publish' => 'Publikovat',
 	'wall-topic-input-heading' => 'Téma',
 	'wall-topic-edit' => 'Upravit témata',
+);
+
+/** Welsh (Cymraeg)
+ * @author Lloffiwr
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'wall-toolbar-history' => 'Hanes',
+	'wall-message-elseswall' => 'Wal $1',
+	'wall-default-title' => 'Neges oddi wrth $1',
+	'wall-button-to-cancel-preview' => 'Golygu',
+	'wall-message-more' => 'Mwy',
+	'wall-message-delete' => 'Dileu',
+	'wall-action-all-confirm-cancel' => 'Diddymu',
+	'wall-action-admin-confirm-ok' => 'Dileu',
+	'wall-recentchanges-new-message' => 'ar wal <a href="$1">$2</a>',
+	'wall-recentchanges-namespace-selector-message-wall' => 'Wal Neges',
+	'wall-recentchanges-history-link' => 'hanes wal',
+	'wall-wiki-activity-wall-owner' => 'wal $1',
+	'wall-history-title' => 'hanes wal',
+	'wall-history-rail-wall' => 'wal',
+	'wall-topic-edit-cancel' => 'Diddymu',
 );
 
 /** German (Deutsch)
@@ -1478,6 +1707,7 @@ $messages['el'] = array(
  * @author Armando-Martin
  * @author Benfutbol10
  * @author Bola
+ * @author Rubenwap
  * @author VegaDark
  * @author Vivaelcelta
  */
@@ -1777,7 +2007,7 @@ ___________________________________________<br />
 	'wall-topic-input-heading' => 'Tema',
 	'wall-topic-input-placeholder' => 'Añadir un Tema (opcional)',
 	'wall-topic-input-error' => 'No hay ningún artículo llamado "$1". Por favor usa un nombre de artículo existente como un Tema.',
-	'wall-topic-input-error-limit' => 'Un hilo solo puede tener $1 temas como máximo.', # Fuzzy
+	'wall-topic-input-error-limit' => 'Un hilo solo puede tener $1 {{PLURAL:$1|tema|temas}} como máximo.',
 	'wall-topic-heading' => 'Temas para este hilo:',
 	'wall-topic-edit' => 'Editar temas',
 	'wall-topic-edit-save' => 'Guardar',
@@ -3380,6 +3610,7 @@ $messages['ko'] = array(
 	'wall-thread-isnotifyeveryone' => '강조하기',
 	'wall-thread-deleted' => '삭제됨',
 	'wall-thread-closed' => '폐쇄됨',
+	'wall-message-more' => '더 보기',
 	'wall-recentchanges-namespace-selector-message-wall' => '메시지 담벼락',
 	'prefs-email-wall-v2' => '메시지 담벼락과 포럼',
 	'wall-quote-author' => '$1의 말:',
@@ -4074,7 +4305,7 @@ ubah keutamaan e-mel anda di sini: http://community.wikia.com/Special:Preference
 	'wall-votes-modal-showmore' => 'Lihat orang lain yang memberikan Pujian',
 	'wall-votes-modal-title' => 'Pujian',
 	'wall-votes-modal-title-desc' => 'Pesanan ini dipuji oleh {{PLURAL:$1|seorang|$1 orang}} ahli',
-	'wall-votes-number' => '$1 Pujian', # Fuzzy
+	'wall-votes-number' => '$1 Pujian',
 	'wall-votes-number-tooltip' => 'Lihat siapa yang memuji pesanan ini',
 	'wall-votes-vote-tooltip' => 'Puji pesanan ini',
 	'wall-votes-voted-tooltip' => 'Anda telah memuji pesanan ini!',
@@ -4086,14 +4317,14 @@ ubah keutamaan e-mel anda di sini: http://community.wikia.com/Special:Preference
 	'wall-topic-input-heading' => 'Topik',
 	'wall-topic-input-placeholder' => 'Tambahkan Topik (tidak wajib)',
 	'wall-topic-input-error' => 'Tiada rencana bertajuk "$1". Sila gunakan nama rencana yang sedia ada sebagai Topik.',
-	'wall-topic-input-error-limit' => 'Tred tidak boleh melebihi $1 Topik.', # Fuzzy
+	'wall-topic-input-error-limit' => 'Tred tidak boleh melebihi $1 Topik.',
 	'wall-topic-heading' => 'Topik untuk tred ini:',
 	'wall-topic-edit' => 'Ubah Topik',
 	'wall-topic-edit-save' => 'Simpan',
 	'wall-topic-edit-cancel' => 'Batalkan',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author EvenT
  * @author Wouterkoch
@@ -4677,7 +4908,7 @@ e-mailvoorkeuren wijzingen: http://community.wikia.com/Special:Preferences',
 	'wall-topic-edit-cancel' => 'Annuleren',
 );
 
-/** Norwegian Nynorsk (norsk (nynorsk)‎)
+/** Norwegian Nynorsk (norsk nynorsk)
  * @author Erdemaslancan
  */
 $messages['nn'] = array(
@@ -5031,6 +5262,7 @@ $messages['ps'] = array(
 	'wall-message-remove' => 'غورځول',
 	'wall-message-elseswall' => 'د $1 دېوال',
 	'wall-thread-deleted' => 'ړنګ شو',
+	'wall-placeholder-topic' => 'دا د څه په اړه دی؟',
 	'wall-placeholder-reply' => 'يو ځواب ورکول',
 	'wall-button-to-preview-comment' => 'مخليدنه',
 	'wall-button-to-cancel-preview' => 'سمول',
@@ -5072,10 +5304,15 @@ $messages['ps'] = array(
 	'wall-history-action-view' => 'کتل',
 	'wall-history-action-restore' => 'بيازېرمل',
 	'mail-notification-html-greeting' => 'سلامونه $1،',
-	'prefs-email-wall-v2' => 'پيغام دېوال', # Fuzzy
+	'prefs-email-wall-v2' => 'پيغام دېوال او فورم',
 	'tog-enotifwallthread-v2' => 'برېښليک راولېږه…',
+	'wall-quote-author' => '$1 ليکلی:',
+	'wall-quote-reply-to' => '#$1 ته ځواب وييل',
 	'wall-preview-modal-title' => 'مخليدنه',
+	'wall-preview-modal-button-back' => 'پر شا',
 	'wall-preview-modal-button-publish' => 'خپرول',
+	'wall-topic-edit-save' => 'خوندي کول',
+	'wall-topic-edit-cancel' => 'ناګارل',
 );
 
 /** Portuguese (português)
@@ -7061,6 +7298,8 @@ Li messaedje d' oridjinne eyet vosse rascourti seront todi veyåves dins l' istw
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Sam Wang
+ * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'wall-no-title' => '无标题',
@@ -7069,8 +7308,14 @@ $messages['zh-hans'] = array(
 	'wall-message-wall-shorten' => '留言墙',
 	'wall-message-unfollow' => '取消关注',
 	'wall-message-undoremove' => '撤销',
+	'wall-message-edited' => '<a href="$3" >编辑者</a> <a class="username" href="$1">$2</a>',
+	'wall-message-edited-summary' => '<a href="$4" >$1 由 </a><a class="username" href="$2">$3</a>',
+	'wall-message-update-topics-summary' => '更改主题',
 	'wall-toolbar-history' => '历史',
+	'wall-message-notify' => '通知管理员',
 	'wall-message-remove' => '移除',
+	'wall-message-rev-delete' => '修订版本删除',
+	'wall-message-quote-button' => '引用',
 	'wall-message-elseswall' => '$1的留言墙',
 	'wall-default-title' => '来自$1的信息',
 	'wall-placeholder-topic' => '这是什么？',
@@ -7123,8 +7368,17 @@ $messages['zh-hans'] = array(
 	'prefs-email-wall-v2' => '留言墙和论坛',
 	'tog-enotifwallthread-v2' => '邮件通知我…',
 	'tog-enotifmywall-reminder' => '以每日提醒邮件',
-	'tog-enotifmywall-noemail' => '从不。不向我发送任何留言墙邮件', # Fuzzy
+	'tog-enotifmywall-noemail' => '从不。不向我发送任何留言墙或论坛邮件',
 	'wall-preview-modal-title' => '预览',
 	'wall-preview-modal-button-back' => '返回',
 	'wall-topic-edit-cancel' => '取消',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'wall-no-title' => '無標題',
+	'wall-message-wall' => '訊息牆',
+	'wall-message-wall-shorten' => '訊息牆',
 );

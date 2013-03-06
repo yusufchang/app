@@ -7,8 +7,8 @@ jQuery(function($){
 		rHrefDiff = /&diff=\d+/,
 		rHrefHistory = /&action=history/;
 
-	var track = WikiaTracker.buildTrackingFunction({
-		action: WikiaTracker.ACTIONS.CLICK,
+	var track = Wikia.Tracker.buildTrackingFunction({
+		action: Wikia.Tracker.ACTIONS.CLICK,
 		trackingMethod: 'ga'
 	});
 
@@ -87,11 +87,14 @@ jQuery(function($){
 		}, trackWithEventData).on('click', '.editsection a', {
 			category: category,
 			label: 'section-edit'
-		});
+		}, trackWithEventData);
 
 		$('#WikiaArticleCategories').on('click', 'a', {
 			category: category,
 			label: 'category-name'
+		}, trackWithEventData).on('click', '.add', {
+			category: category,
+			label: 'add-category'
 		}, trackWithEventData);
 	})();
 
@@ -172,7 +175,7 @@ jQuery(function($){
 		}
 
 		track({
-			action: WikiaTracker.ACTIONS.VIEW,
+			action: Wikia.Tracker.ACTIONS.VIEW,
 			category: category,
 			label: 'edit-page'
 		});
@@ -284,6 +287,13 @@ jQuery(function($){
 		}
 	});
 
+	/** related-videos-module **/
+
+	$wikiaRail.find('.RelatedVideosModule').on('click', 'a', {
+		category: 'related-videos-module',
+		label: 'video-thumbnail'
+	}, trackWithEventData);
+
 	/** search **/
 
 	(function() {
@@ -311,6 +321,7 @@ jQuery(function($){
 		});
 
 		if ($body.hasClass('page-Special_Search')) {
+			category = 'special-' + category;
 			$wikiaSearch.on('click', '.search-tabs a', function(e) {
 				track({
 					browserEvent: e,
@@ -323,7 +334,8 @@ jQuery(function($){
 				track({
 					browserEvent: e,
 					category: category,
-					label: 'result-' + (el.hasClass('search_click_match') ? 'push-top' : 'item-' + el.data('pos'))
+					label: 'result-' + (el.data('event') === 'search_click_match' ? 'push-top' : 'item-' + el.data('pos')),
+					trackingMethod: 'both'
 				});
 			}).on('click', '.image', function(e) {
 				track({

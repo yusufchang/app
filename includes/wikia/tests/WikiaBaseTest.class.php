@@ -28,16 +28,27 @@ class WikiaBaseTest extends PHPUnit_Framework_TestCase {
 	private $appMock = null;
 	private $mockedClasses = array();
 
-	private static $lastTestClass = '';
+	private static $testRunTime = 0;
+
+	/**
+	 * Print out currently run test
+	 */
+	public static function setUpBeforeClass() {
+		$testClass = get_called_class();
+		echo "\nRunning '{$testClass}'...";
+
+		self::$testRunTime = microtime(true);
+	}
+
+	/**
+	 * Print out time it took to run all tests from current test class
+	 */
+	public static function tearDownAfterClass() {
+		$time = round( (microtime(true) - self::$testRunTime) * 1000 );
+		echo "done in {$time} ms";
+	}
 
 	protected function setUp() {
-		$testClass = get_class($this);
-
-		if (self::$lastTestClass !== $testClass) {
-			echo "\nRunning '{$testClass}'...";
-			self::$lastTestClass = $testClass;
-		}
-
 		$this->app = F::app();
 		$this->appOrig = F::app();
 		$this->appMock = new WikiaAppMock( $this );
@@ -85,6 +96,28 @@ class WikiaBaseTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
+	/**
+	 * Create mocked object of a given class with list of methods and values they return provided
+	 *
+	 * @param string $className name of the class to be mocked
+	 * @param array $methods list of methods and values they should return
+	 * @param string $staticConstructor name of the "static" class constructor (e.g. Title::newFromText) that will return mocked object
+	 * @return object mocked object
+	 */
+	protected function mockClassWithMethods($className, Array $methods = array(), $staticConstructor = '') {
+		$mock = $this->getMock($className, array_keys($methods));
+
+		foreach($methods as $methodName => $retVal) {
+			$mock->expects($this->any())
+				->method($methodName)
+				->will($this->returnValue($retVal));
+		}
+
+		$this->proxyClass($className, $mock, ($staticConstructor !== '') ? $staticConstructor : null);
+
+		return $mock;
+	}
+
 	protected function mockGlobalVariable( $globalName, $returnValue ) {
 		if($this->appMock == null) {
 			$this->markTestSkipped('WikiaBaseTest Error - add parent::setUp() and/or parent::tearDown() to your own setUp/tearDown methods');
@@ -97,6 +130,18 @@ class WikiaBaseTest extends PHPUnit_Framework_TestCase {
 			$this->markTestSkipped('WikiaBaseTest Error - add parent::setUp() and/or parent::tearDown() to your own setUp/tearDown methods');
 		}
 		$this->appMock->mockGlobalFunction( $functionName, $returnValue, $callsNum, $inputParams );
+	}
+
+	/**
+	 * Mock given message
+	 *
+	 * @param $messageName string
+	 * @param $messageContent string
+	 */
+	protected function mockMessage($messageName, $messageContent) {
+		$this->mockGlobalFunction('msg',  $messageContent, 1, array(
+			$this->equalTo($messageName)
+		));
 	}
 
 	// After calling this, any reference to $this->app in a test now uses the mocked object

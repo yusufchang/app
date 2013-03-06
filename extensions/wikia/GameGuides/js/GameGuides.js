@@ -1,19 +1,79 @@
 (function(html, w){
+	var links = document.querySelectorAll('a:not(.external):not(.extiw)'),
+		host = w.wgServer.replace(/^http\:\/\//, ''),
+		i = links.length,
+		namespaces = w.wgNamespaceIds,
+		regExpNamespace = new RegExp(w.wgArticlePath.replace('$1', "([^:]*)")),
+		//not all namespaces in GG should be clickable
+		//there are custom namespaces on wikis therefore black list will be better suited here
+		disabledNs = [-2,-1,1,2,3,5,6,7,10,11,12,13,15,110,111,500,501,700,701,1200,1201,1202],
+		link,
+		path,
+		parent,
+		notAllowed,
+		namespace,
+		pathMatch;
+
+	while(i--) {
+		link = links[i];
+		path = link.pathname;
+		parent = link.parentElement;
+		notAllowed = ((link.host && link.host !== host) || path === '/wikia.php') && !~parent.className.indexOf('thumb');
+
+		if(!notAllowed && ~path.indexOf(':')) {
+			pathMatch = path.match(regExpNamespace);
+
+			if(pathMatch && (namespace = namespaces[pathMatch[1].toLowerCase()])) {
+				notAllowed = !!~disabledNs.indexOf(namespace);
+			}
+		}
+
+		if(notAllowed) {
+			if(~link.className.indexOf('image')) {
+				parent.className = 'thumb';
+				link.firstElementChild.className += ' media';
+			}else {
+				link.className += ' disabled';
+			}
+		}
+	}
+
 	//handling clicking on a link
 	html.addEventListener('click', function(ev){
-		var t = ev.target;
+		var t = ev.target,
+			title,
+			ns = 0;
 
-		if(t.tagName === 'A' && t.hasAttribute('title')) {
+		if(t.tagName === 'A'){
 			ev.preventDefault();
+
+			if(t.hasAttribute('title')) {
+				title = t.title.replace(/ /g, '_');
+			}else{
+				//links in ie. images do not have title attribute
+				title = t.pathname.replace("/wiki/", '')
+			}
+
+			if(~title.indexOf(':')) {
+				var split = title.split(':'),
+					namespace = namespaces[split.shift().toLowerCase()];
+
+				if(namespace) {
+					title = split.join(':');
+					ns = namespace;
+				}
+			}
+
 			Ponto.invoke(
 				'Linker',
 				'goTo',
 				{
-					title: t.title.replace(/ /g, '_')
+					title: title,
+					ns: ns
 				}
 			);
 		}
-	}, true);
+	});
 
 	//handling grabing all links on a page;
 	function Photos(){
@@ -111,11 +171,11 @@
 		function Sections(){
 			this.open = function(id){
 				s.open(id, true);
-			}
+			};
 			this.close = s.close;
 			this.toggle = function(id) {
 				s.toggle(id, true);
-			}
+			};
 		}
 
 		Ponto.PontoBaseHandler.derive(Sections);
@@ -125,6 +185,14 @@
 		};
 
 		w.Sections = Sections;
+
+		s.addEventListener('open', function(){
+			document.documentElement.style.minHeight = document.documentElement.offsetHeight + 'px';
+		});
+
+		s.addEventListener('close', function(){
+			document.documentElement.style.minHeight = 0;
+		});
 	});
 
 	window.addEventListener('DOMContentLoaded', function(){
@@ -143,4 +211,5 @@
 			);
 		});
 	});
+
 })(document.documentElement, this);

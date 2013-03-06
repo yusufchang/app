@@ -255,6 +255,16 @@ Zkontrolujte dané uživatelské jméno pro případné překlepy.</p>',
 	'lookupcontribsall' => 'všechny',
 );
 
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'lookupcontribswiki' => 'Wici',
+	'lookupcontribswikititle' => 'Teitl',
+	'lookupcontribsnext' => 'nesaf',
+	'lookupcontribsprevious' => 'blaenorol',
+);
+
 /** German (Deutsch)
  * @author LWChris
  * @author Metalhead64
@@ -411,7 +421,7 @@ $messages['es'] = array(
 	'right-lookupcontribs' => 'Ver las ediciones globales del usuario',
 	'lookupcontribsshowpages' => 'Todas las páginas ($1 espacios de nombre)',
 	'lookupcontribscontent' => 'contenido',
-	'lookupcontribscontribtitleforuser' => 'Contribuciones para el usuario:',
+	'lookupcontribscontribtitleforuser' => 'Contribuciones del usuario:',
 	'lookupcontribsnormal' => 'reciente',
 	'lookupcontribsfinal' => 'final',
 	'lookupcontribsall' => 'todo',
@@ -959,7 +969,7 @@ $messages['my'] = array(
 	'lookupcontribsall' => 'အားလုံး',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -1306,6 +1316,7 @@ Verifique se se enganou no nome do utilizador.</p>',
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
+ * @author JM Pessanha
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -1358,6 +1369,7 @@ Verifique se se enganou com o nome do utilizador.</p>',
 	'lookupcontribsnormal' => 'recentes',
 	'lookupcontribsfinal' => 'finais',
 	'lookupcontribsall' => 'todas',
+	'action-lookupcontribs' => 'pesquisar as contribuições de um usuário em múltiplas wikis',
 );
 
 /** Romanian (română)
@@ -1663,22 +1675,59 @@ $messages['yi'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Hydra
+ * @author Yfdyh000
+ * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
+	'lookupcontribs' => '查阅维基贡献',
+	'lookupcontribstitle' => '查阅维基贡献',
+	'lookupcontribsrecentcontributions' => '最近$1的贡献',
+	'lookupcontribusernotspecify' => '您还没有指定一个用户',
 	'lookupcontribsselectuser' => '选择用户：',
+	'lookupcontribsselectfor' => '搜索：',
+	'lookupcontribsdisplaymode' => '显示模式：',
+	'lookupcontribsselectmodenormal' => '该用户最近的贡献',
+	'lookupcontribsfullurls' => '完整URL',
+	'lookupcontribslinks' => '贡献链接',
 	'lookupcontribsgo' => '去',
+	'lookupcontribsinvaliduser' => '<p class="error">用户“<b>$1</b>”不存在。
+请检查您提供的用户名。</p>',
+	'lookupcontribsinvalidviewmode' => '<p class="error">“<b>$1</b>”不是有效的视图模式。</p>',
+	'lookupcontribsinvalidmode' => '<p class="error">“<b>$1</b>”不是有效的模式。</p>',
 	'lookupcontribsselectwikis' => '选择维基：',
 	'lookupcontribsnoresultfound' => '未找到结果！',
+	'lookupcontribsinvalidresults' => '无效的结果！',
 	'lookupcontribswiki' => '维基',
+	'lookupcontribswikidbname' => '数据库名称',
 	'lookupcontribswikiurl' => 'URL',
 	'lookupcontribswikititle' => '标题',
 	'lookupcontribswikioptions' => '选择',
+	'lookupcontribsdetails' => '查看详情：',
+	'lookupcontribslastedited' => '最后编辑',
+	'lookupcontribsrecordspager' => "显示'''$1'''至'''$2'''项记录，总共'''$3'''项。",
+	'lookupcontribsnbrresult' => '结果数量：',
 	'lookupcontribsnext' => '下一步',
 	'lookupcontribsprevious' => '前一步',
+	'lookupcontribsrestore' => '恢复',
+	'lookupcontribslog' => '日志',
 	'lookupcontribscontribs' => '贡献',
 	'lookupcontribshist' => '历史',
 	'lookupcontribsdiff' => '不同',
+	'right-lookupcontribs' => '查看用户的全局编辑',
+	'lookupcontribsshowpages' => '所有页面（$1命名空间）',
+	'lookupcontribscontent' => '内容',
 	'lookupcontribsnormal' => '最近',
 	'lookupcontribsfinal' => '最后',
 	'lookupcontribsall' => '全部',
+	'action-lookupcontribs' => '在多个wiki中查询用户的贡献',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'lookupcontribs' => '查詢貢獻',
+	'lookupcontribstitle' => '查詢貢獻',
+	'lookupcontribsrecentcontributions' => '$1最近的貢獻',
+	'lookupcontribsfinalcontributions' => '$1 最近的貢獻',
 );

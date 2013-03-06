@@ -126,6 +126,14 @@ $messages['cs'] = array(
 	'error-no-connection' => 'Připojení k Internetu není k dispozici. \\nProsím, opakujte akci.',
 );
 
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'window-category-load-batch' => 'Mwy',
+	'alert-download-updated-wikis-button-ok' => 'Iawn',
+);
+
 /** German (Deutsch)
  * @author Inkowik
  * @author Kghbln
@@ -383,6 +391,21 @@ $messages['ku-latn'] = array(
 	'window-article-menu-cancel-label' => 'Betal bike',
 );
 
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'activityindicator-message' => 'Lueden...',
+	'window-category-load-batch' => 'Méi',
+	'window-article-button-close' => 'Zoumaachen',
+	'window-article-button-back' => 'Zréck',
+	'window-article-menu-search-label' => 'Sichen',
+	'window-article-menu-cancel-label' => 'Ofbriechen',
+	'searchview-button-back-article' => 'Zréck op den Artikel',
+	'searchbar-hint' => 'No "%s" sichen',
+	'alert-download-updated-wikis-button-ok' => 'OK',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
@@ -433,7 +456,7 @@ $messages['ms'] = array(
 	'error-json-parse' => 'Maaf, ada masalah dengan data yang dipulangkan dari pelayan kami.\\nSila cuba lagi.',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -697,10 +720,11 @@ $messages['tly'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Base
  * @author Steve.rusyn
  */
 $messages['uk'] = array(
-	'activityindicator-message' => 'Завантаження...',
+	'activityindicator-message' => 'Завантаження…',
 	'window-category-load-batch' => 'Більше',
 	'window-article-button-close' => 'Закрити',
 	'window-article-button-back' => 'Назад',
@@ -711,16 +735,30 @@ $messages['uk'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
+ * @author Hydra
  * @author Reasno
  * @author Sam Wang
  */
 $messages['zh-hans'] = array(
 	'activityindicator-message' => '载入中……',
+	'window-wikis-title' => 'Wikia 游戏指南',
+	'window-wikis-wikilist-search-hint' => '搜索我们的顶部游戏⋯',
 	'window-category-load-batch' => '更多',
 	'window-article-button-close' => '关闭',
 	'window-article-button-back' => '返回',
 	'window-article-menu-search-label' => '查找',
+	'window-article-menu-dashboard-label' => '指南内容',
 	'window-article-menu-cancel-label' => '取消',
+	'searchview-no-results' => '"%s"没有结果',
+	'searchview-button-back-list' => '返回到列表',
 	'searchview-button-back-article' => '返回条目',
+	'searchbar-hint' => '搜索 %s ⋯',
 	'alert-download-updated-wikis-button-ok' => '确认',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'window-article-button-close' => '關閉',
 );

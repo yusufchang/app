@@ -69,6 +69,10 @@ Follow the links below to learn more about how to use Wikia, make changes to you
 	'specialcontact-intro-content-issue' => "The content on this wiki is created by the community here, and managed by the [[Special:ListAdmins|local admins]], not Wikia. If you wish to discuss this content, it is best to first contact the [[Special:ListAdmins|wiki's admins here]].
 
 If you feel the content violates our [http://www.wikia.com/Terms_of_Use Terms of Use], you can contact Wikia staff directly [[Special:Contact/general|here]].",
+
+	'specialcontact-intro-content-issue-mobile' => "The content on this wiki is created by the community here and not the admins, not Wikia. If you wish to discuss this content, it is best to first contact the wiki's admins.
+
+If you feel the content violates our Terms of Use, you can contact Wikia staff.",
 	'specialcontact-intro-user-conflict' => "Wikis are community space where each and every person needs to work together with others for it to be successful. While working together conflicts can sometimes arise - and the best way to solve them is to have an open and respectful conversation on your wiki about the issue.
 
 If you need help, first contact your [[Special:ListAdmins|local admins]]. Admins are the local experts on the topic and community, so best to first chat with them further. If the admins are not able to help, or you feel the user is violating Wikia's [http://www.wikia.com/Terms_of_Use Terms of Use], you can contact Wikia staff directly [[Special:Contact/general|here]].
@@ -78,9 +82,7 @@ Happy editing!",
 
 If the local admins are not active, you can submit a request for admin status. Please visit the [[w:c:adopt|adoption wiki]] for more information, including the adoption criteria and the request page. Please remember to always provide a link to the wiki you wish to adopt.
 
-If there's an active user community on the wiki you wish to adopt, please start a discussion on the wiki about who would make the best admins, and why you would like to become one. Please provide a link to this discussion at the [[w:c:adopt|Adoption wiki]]. Best of luck and happy editing!
-
-Happy editing!",
+If there's an active user community on the wiki you wish to adopt, please start a discussion on the wiki about who would make the best admins, and why you would like to become one. Please provide a link to this discussion at the [[w:c:adopt|Adoption wiki]]. Best of luck and happy editing!",
 
 	'specialcontact-intro-account-issue' => "Sorry to hear you are having problems accessing your account. A couple of things to check:
 
@@ -125,7 +127,8 @@ Thanks in advance and happy editing!",
 *Link to your wiki
 *Your browser information including type and version ([[Help:Supported_browsers|click here for our supported browser list]])
 *Screenshot
-*Any and all other details.
+
+For more advice on what to include in your report, please see [[w:c:community:Help:How to report bugs|our help page on bug reports]].
 
 Thanks again for the report and for using Wikia.
 
@@ -175,7 +178,7 @@ If you prefer to use regular e-mail or have attachments, you can contact us at [
 	'specialcontact-noform-footer' => "'''Does this page answer your question?''' If not, please feel free to [[Special:contact/general|contact us]] to discuss your issue further. Remember you can always check out our '''[[w:c:community:Help:Index|help pages]]''', [[w:c:community:Blog:Wikia_Staff_Blog|staff blog]]  or post on our '''[[w:c:community:Forum:Community_Central_Forum|community help forums]]'''. If you are looking for admin help and advice, stop by [[w:c:community:Admin_Central:Main_Page|Founder & Admin Central]].",
 
 	/* form */
-	'specialcontact-username' => 'Please enter your username',
+	'specialcontact-username' => 'Your username',
 	'specialcontact-wikiname' => 'Which wiki',
 	'specialcontact-realname' => 'Your name',
 	'specialcontact-yourmail' => 'Your email',

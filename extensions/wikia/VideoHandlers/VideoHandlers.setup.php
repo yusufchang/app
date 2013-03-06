@@ -106,6 +106,9 @@ $app->registerHook( 'File::checkExtensionCompatibilityResult', 'VideoHandlerHook
 
 $app->registerHook( 'SkinTemplateNavigation', 'VideoHandlerHooks', 'onSkinTemplateNavigation' );
 
+$app->registerHook( 'GlobalUsageFormatItemWikiLink', 'VideoHandlerHooks', 'onGlobalUsageFormatItemWikiLink' );
+$app->registerHook( 'GlobalUsageImagePageWikiLink', 'VideoHandlerHooks', 'onGlobalUsageImagePageWikiLink' );
+
 $app->registerHook( 'FileUpload', 'VideoInfoHooksHelper', 'onFileUpload' );
 $app->registerHook( 'ArticleSaveComplete', 'VideoInfoHooksHelper', 'onArticleSaveComplete' );
 $app->registerHook( 'FileDeleteComplete', 'VideoInfoHooksHelper', 'onFileDeleteComplete' );
@@ -205,6 +208,10 @@ $app->registerClass( 'OoyalaVideoHandler', $dir . '/handlers/OoyalaVideoHandler.
 $app->registerClass( 'OoyalaApiWrapper', $dir . '/apiwrappers/OoyalaApiWrapper.class.php' );
 $wgMediaHandlers['video/ooyala'] = 'OoyalaVideoHandler';
 
+$app->registerClass( 'IvaVideoHandler', $dir . '/handlers/IvaVideoHandler.class.php' );
+$app->registerClass( 'IvaApiWrapper', $dir . '/apiwrappers/IvaApiWrapper.class.php' );
+$wgMediaHandlers['video/iva'] = 'IvaVideoHandler';
+
 /**
  * Feed ingesters
  */
@@ -214,6 +221,7 @@ $app->registerClass('ScreenplayFeedIngester', $dir . '/feedingesters/ScreenplayF
 $app->registerClass('IgnFeedIngester', $dir . '/feedingesters/IgnFeedIngester.class.php');
 $app->registerClass('AnyclipFeedIngester', $dir . '/feedingesters/AnyclipFeedIngester.class.php');
 $app->registerClass('OoyalaFeedIngester', $dir . '/feedingesters/OoyalaFeedIngester.class.php');
+$app->registerClass('IvaFeedIngester', $dir . '/feedingesters/IvaFeedIngester.class.php');
 
 $wgVideoMigrationProviderMap = array(
 	4 => 'Fivemin',
@@ -237,6 +245,7 @@ $wgVideoMigrationProviderMap = array(
 	26 => 'Anyclip',
 	27 => 'Twitchtv',
 	28 => 'Ooyala',
+	29 => 'Iva',
 );
 
 

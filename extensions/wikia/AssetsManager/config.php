@@ -7,11 +7,6 @@ $config['oasis_shared_core_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
 		'#group_oasis_wikia_js',
-		'#group_oasis_tracker_js',
-
-		// The following should go to adengine2_js group later
-		'//extensions/wikia/AdEngine/ghost/gw-12.4.4/lib/gw.min.js',
-		'//extensions/wikia/AdEngine/js/gw.config.js',
 	),
 );
 
@@ -23,10 +18,11 @@ $config['oasis_extensions_js'] = array(
 	)
 );
 
-$config['oasis_tracker_js'] = array(
+$config['tracker_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//extensions/wikia/WikiaTracker/js/WikiaTracker.js',
+		'//resources/wikia/modules/tracker.stub.js',
+		'//resources/wikia/modules/tracker.js',
 	)
 );
 
@@ -47,6 +43,8 @@ $config['adengine2_js'] = array(
 	'assets' => array(
 		// core
 		'//resources/wikia/modules/cache.js',
+		'//extensions/wikia/AdEngine/ghost/gw-12.4.4/lib/gw.min.js',
+		'//extensions/wikia/AdEngine/js/gw.config.js',
 
 		'//extensions/wikia/AdEngine/js/Krux.js',
 		'//extensions/wikia/AdEngine/js/SlotTweaker.js',
@@ -56,15 +54,18 @@ $config['adengine2_js'] = array(
 		// high prio
 		'//extensions/wikia/AdEngine/js/DartUrl.js',
 		'//extensions/wikia/AdEngine/js/WikiaDartHelper.js',
+		'//extensions/wikia/AdEngine/js/WikiaGptHelper.js',
 		'//extensions/wikia/AdEngine/js/EvolveHelper.js',
 		'//extensions/wikia/AdEngine/js/AdProviderAdDriver2.js',
 		'//extensions/wikia/AdEngine/js/AdProviderEvolve.js',
 		'//extensions/wikia/AdEngine/js/AdProviderGamePro.js',
 		'//extensions/wikia/AdEngine/js/AdProviderLater.js',
 		'//extensions/wikia/AdEngine/js/AdProviderNull.js',
-		'//extensions/wikia/AdEngine/js/AdLogicShortPage.js',
-		'//extensions/wikia/AdEngine/js/AdLogicHighValueCountry.js',
 		'//extensions/wikia/AdEngine/js/AdLogicDartSubdomain.js',
+		'//extensions/wikia/AdEngine/js/AdLogicHighValueCountry.js',
+		'//extensions/wikia/AdEngine/js/AdLogicPageLevelParams.js',
+		'//extensions/wikia/AdEngine/js/AdLogicPageLevelParamsLegacy.js',
+		'//extensions/wikia/AdEngine/js/AdLogicShortPage.js',
 		'//extensions/wikia/AdEngine/js/AdConfig2.js',
 		'//extensions/wikia/AdEngine/js/AdEngine2.run.js',
 
@@ -116,6 +117,7 @@ $config['oasis_noads_extensions_js'] = array(
 		'//extensions/wikia/WikiaBar/js/WikiaBar.js', // WikiaBar is enabled sitewide
 		'//extensions/wikia/Chat2/js/ChatEntryPoint.js', // Chat is enabled sitewide
 		'//extensions/wikia/Forum/js/RelatedForumDiscussion.js', // Related Forum Discussion is on all article pages
+		'//extensions/wikia/VideoEmbedTool/js/VET_Loader.js',
 	)
 );
 
@@ -146,7 +148,6 @@ $config['oasis_blocking'] = array(
 	'assets' => array(
 		'//skins/wikia/js/WikiaScriptLoader.js',
 		'//skins/wikia/js/JqueryLoader.js',
-		'//resources/wikia/libraries/modil/modil.js',
 		'//resources/wikia/modules/lazyqueue.js',
 	)
 );
@@ -304,31 +305,34 @@ $config['gameguides_scss'] = array(
 
 
 //this combines couple of WikiaMobile groups to make it possible to load all js via one request
+//also unfortunately loads bit more than needed not to change WikiaMobile assets too much
 $config['gameguides_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => 'wikiamobile',
 	'assets' => array(
+		'//extensions/wikia/GameGuides/js/initGameGuides.js',
 		'#group_wikiamobile_js_head',
 
 		//libraries/frameworks
+		'//resources/wikia/libraries/modil/modil.js',
 		'//resources/wikia/libraries/Ponto/ponto.js',
 		'//extensions/wikia/WikiaMobile/js/Wikia.utils.js',
-		'//resources/wikia/libraries/modil/modil.js',
 
 		// deferred.js - jQuery-free implementation (BugId:34943)
 		'//resources/wikia/libraries/deferred/deferred.js',
 		'//resources/wikia/libraries/deferred/deferred.api.js',
 
 		//core modules
+		'//resources/wikia/modules/deferred.js',
 		'//resources/wikia/modules/window.js',
+		'//resources/wikia/modules/location.js',
 		'//resources/wikia/modules/nirvana.js',
 		'//resources/wikia/modules/loader.js',
 		'//resources/wikia/modules/querystring.js',
-		'//resources/wikia/modules/cookies.js',
-		'//resources/wikia/modules/log.js',//depends on querystring.js and cookies.js
+		'//resources/wikia/modules/log.js',
 
 		//tracker
-		'#group_oasis_tracker_js',
+		'#group_tracker_js',
 
 		//platform components
 		'//extensions/wikia/JSMessages/js/JSMessages.js',
@@ -350,6 +354,7 @@ $config['gameguides_js'] = array(
 		'#group_wikiamobile_mediagallery_js',
 
 		//modules
+		'//resources/wikia/modules/ajax.js',
 		'//extensions/wikia/WikiaMobile/js/toc.js',
 		'//extensions/wikia/WikiaMobile/js/lazyload.js',
 		'//extensions/wikia/WikiaMobile/js/track.js',
@@ -412,6 +417,7 @@ $config['wikiamobile_js_body_minimal'] = array(
 		//libraries/frameworks
 		'//resources/wikia/libraries/modil/modil.js',
 		'//extensions/wikia/WikiaMobile/js/Wikia.utils.js',
+		'//resources/wikia/modules/sloth.js',
 
 		// deferred.js - jQuery-free implementation (BugId:34943)
 		'//resources/wikia/libraries/deferred/deferred.js',
@@ -419,6 +425,8 @@ $config['wikiamobile_js_body_minimal'] = array(
 
 		//core modules
 		'//resources/wikia/modules/window.js',
+		'//resources/wikia/modules/location.js',
+		'//resources/wikia/modules/localStorage.js',
 		'//resources/wikia/modules/querystring.js',
 		'//resources/wikia/modules/cookies.js',
 		'//resources/wikia/modules/log.js',//depends on querystring.js and cookies.js
@@ -428,9 +436,10 @@ $config['wikiamobile_js_body_minimal'] = array(
 		'//extensions/wikia/WikiaMobile/js/feature-detects/positionfixed.wikiamobile.js',
 
 		//tracker
-		'#group_oasis_tracker_js',
+		'#group_tracker_js',
 
 		//modules
+		'//resources/wikia/modules/deferred.js',
 		'//resources/wikia/modules/ajax.js',
 		'//resources/wikia/modules/nirvana.js',
 		'//resources/wikia/modules/loader.js',
@@ -475,6 +484,8 @@ $config['wikiamobile_js_body_full'] = array(
 		'//extensions/wikia/WikiaMobile/js/share.js',
 		'//resources/wikia/modules/thumbnailer.js',
 
+		'//extensions/wikia/RelatedPages/js/RelatedPages.wikiamobile.js',
+
 		//entrypoint
 		'//extensions/wikia/WikiaMobile/js/WikiaMobile.js',
 	)
@@ -496,6 +507,7 @@ $config['wikiamobile_js_ads'] = array(
 		'//resources/wikia/libraries/DOMwriter/domwriter.js',
 
 		//advertisement "core"
+		'//extensions/wikia/AdEngine/js/AdLogicPageLevelParams.js',
 		'//extensions/wikia/AdEngine/js/DartUrl.js',
 		'//extensions/wikia/AdEngine/js/WikiaDartHelper.js',
 		'//extensions/wikia/AdEngine/js/WikiaDartMobileHelper.js',
@@ -595,7 +607,6 @@ $config['monobook_js'] = array(
 		'#group_oasis_wikia_js',
 		'#group_oasis_jquery',
 		'#group_articlecomments_js',
-		'#group_oasis_tracker_js',
 
 		// TODO: remove dependency on YUI (see BugId:3116)
 		'//resources/wikia/libraries/yui/utilities/utilities.js',
@@ -610,8 +621,6 @@ $config['monobook_js'] = array(
 //		'//resources/mediawiki/mediawiki.util.js', # instead of //skins/common/wikibits.js'
 //		'//skins/common/ajax.js',
 
-		'//resources/wikia/libraries/modil/modil.js',//before this there should not be any AMD-dependent code
-
 		'//skins/monobook/main.js',
 		'//resources/wikia/modules/lazyqueue.js',
 		'//extensions/wikia/JSMessages/js/JSMessages.js',
@@ -622,7 +631,6 @@ $config['monobook_js'] = array(
 		'//extensions/wikia/AdEngine/LazyLoadAds.js',
 		'//extensions/wikia/AdEngine/ghost/gw-12.4.4/lib/gw.src.js',
 		'//extensions/wikia/GlobalNotification/GlobalNotification.js',
-		'//extensions/wikia/WikiaStyleGuide/js/Form.js',
 
 		'//resources/wikia/libraries/bootstrap/tooltip.js',
 		'//resources/wikia/libraries/bootstrap/popover.js',
@@ -733,8 +741,6 @@ $config['mini_editor_js'] = array(
 		'//extensions/wikia/EditPageLayout/js/modules/InsertMiniEditor.js',
 		'//extensions/wikia/EditPageLayout/js/modules/ModeSwitch.js',
 		// Photo and Video tools
-		'//extensions/wikia/WikiaStyleGuide/js/Dropdown.js',
-		'//extensions/wikia/VideoEmbedTool/js/VET.js',
 		'//extensions/wikia/WikiaPhotoGallery/js/WikiaPhotoGallery.js',
 		'//extensions/wikia/WikiaMiniUpload/js/WMU.js',
 		// Third Party
@@ -792,7 +798,6 @@ $config['theme_designer_js'] = array(
 	'assets' => array(
 		'#group_oasis_wikia_js',
 		'#group_oasis_jquery',
-		'#group_oasis_tracker_js',
 
 		'//resources/jquery.ui/jquery.ui.widget.js',
 		'//resources/jquery.ui/jquery.ui.mouse.js',
@@ -820,7 +825,7 @@ $config['photopop'] = array(
 		'//extensions/wikia/PhotoPop/shared/lib/classlist.js',
 		'//extensions/wikia/PhotoPop/shared/lib/wikia.js',
 		'//extensions/wikia/PhotoPop/shared/lib/require.js',
-		'#group_oasis_tracker_js',
+		'#group_tracker_js',
 	)
 );
 
@@ -898,7 +903,6 @@ $config['relatedvideos_js'] = array(
 	'skin' => array( 'oasis' ), //we have no support for relatedvideos in wikiamobile and monobook as for now
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//extensions/wikia/VideoHandlers/js/AddVideo.js',
 		'//extensions/wikia/RelatedVideos/js/RelatedVideos.js'
 	)
 );
@@ -908,6 +912,15 @@ $config['relatedvideos_scss'] = array(
 	'skin' => array( 'oasis' ), //we have no support for relatedvideos in wikiamobile and monobook as for now
 	'assets' => array(
 		'//extensions/wikia/RelatedVideos/css/RelatedVideos.scss'
+	)
+);
+
+$config['VET_js'] = array(
+	'skin' => array( 'oasis' ),
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/WikiaStyleGuide/js/Dropdown.js',
+		'//extensions/wikia/VideoEmbedTool/js/VET.js',
 	)
 );
 
@@ -1158,7 +1171,6 @@ $config['special_videos_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => array( 'oasis', 'monobook' ),
 	'assets' => array(
-		'//extensions/wikia/VideoHandlers/js/AddVideo.js',
 		'//extensions/wikia/SpecialVideos/js/SpecialVideos.js',
 		'//extensions/wikia/WikiaStyleGuide/js/Dropdown.js',
 	)
@@ -1200,14 +1212,5 @@ $config['categoryselect_edit_js'] = array(
 		'//resources/jquery.ui/jquery.ui.mouse.js',
 		'//resources/jquery.ui/jquery.ui.sortable.js',
 		'//extensions/wikia/CategorySelect/js/CategorySelect.js',
-	)
-);
-
-$config['history_polyfill_js'] = array(
-	'type' => AssetsManager::TYPE_JS,
-	'assets' => array(
-		'//resources/wikia/polyfills/history/history.adapter.jquery.js',
-		//'//resources/wikia/polyfills/history/history.html4.js', // add this back in when we're ready to support IE
-		'//resources/wikia/polyfills/history/history.js',
 	)
 );

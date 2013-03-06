@@ -73,6 +73,13 @@ $messages['cs'] = array(
 	'landingpage-buttons-learn-more' => 'Zjistit více &gt;',
 );
 
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'landingpage' => 'Croeso i Wikia',
+);
+
 /** German (Deutsch)
  * @author Diebuche
  * @author LWChris
@@ -295,7 +302,7 @@ $messages['ms'] = array(
 	'landingpage-buttons-learn-more' => 'Ketahui lebih lanjut &gt;',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */

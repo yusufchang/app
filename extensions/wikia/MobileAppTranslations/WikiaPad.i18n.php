@@ -99,6 +99,14 @@ $messages['cs'] = array(
 	'browser-loading-message' => 'Načítá se…',
 );
 
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'main-tab-personal' => 'Fy Wikia i',
+	'tab-discover-no-network-dialog-close-button' => 'Iawn',
+);
+
 /** German (Deutsch)
  * @author Claudia Hattitten
  */
@@ -255,6 +263,15 @@ $messages['khw'] = array(
 	'main-tab-offline' => 'آف لاین',
 );
 
+/** Kurdish (Latin script) (Kurdî (latînî)‎)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'main-tab-search' => 'Lêgerîn',
+	'tab-discover-no-network-dialog-close-button' => 'Temam',
+	'tab-search-loading-message' => 'Lê digere...',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
@@ -294,7 +311,7 @@ $messages['ms'] = array(
 	'browser-loading-message' => 'Memuatkan...',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -505,21 +522,28 @@ $messages['ug-arab'] = array(
 $messages['uk'] = array(
 	'main-tab-search' => 'Пошук',
 	'main-tab-offline' => 'Офлайн',
-	'tab-discover-loading-message' => 'Завантаження...',
+	'tab-discover-loading-message' => 'Завантаження…',
 	'tab-discover-no-network-dialog-title' => 'Мережа недоступна',
 	'tab-discover-no-network-dialog-close-button' => 'Гаразд',
 	'tab-search-loading-message' => 'Пошук...',
-	'browser-loading-message' => 'Завантаження...',
+	'browser-loading-message' => 'Завантаження…',
 );
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
+ * @author Hydra
  * @author Reasno
  * @author Sam Wang
  */
 $messages['zh-hans'] = array(
+	'main-tab-discover' => '发现',
 	'main-tab-personal' => '我的Wikia',
 	'main-tab-search' => '搜索',
+	'main-tab-offline' => '离线',
+	'tab-discover-loading-message' => '载入中⋯',
+	'tab-discover-no-network-dialog-title' => '网络不可用',
+	'tab-discover-no-network-dialog-message' => '没有找到网络连接',
 	'tab-discover-no-network-dialog-close-button' => '确认',
+	'tab-search-loading-message' => '搜寻中⋯',
 	'browser-loading-message' => '载入中...',
 );

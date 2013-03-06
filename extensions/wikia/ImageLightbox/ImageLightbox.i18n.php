@@ -38,6 +38,7 @@ $1
  */
 $messages['qqq'] = array(
 	'lightbox-forum' => '{{Identical|Forum}}',
+	'lightbox-send' => '{{Identical|Send}}',
 	'lightbox-share-description' => 'Parameters:
 * $1 is the current page,
 * $2 is the site name.',
@@ -45,6 +46,7 @@ $messages['qqq'] = array(
 * $1 is a username.',
 	'lightbox-share-email-body' => 'Parameters:
 * $1 is a link to the suggested image.',
+	'lightbox-share-button-www' => '{{Identical|Share}}',
 	'lightbox-share-email-error-caption' => '{{Identical|Error}}',
 	'lightbox-share-email-error-content' => 'Parameters:
 * $1 is the numer of sent e-mails
@@ -235,7 +237,7 @@ Alguien quería mostrarte una imagen en Wikia. Mírala:
 $1
 
 -El Equipo de Wikia',
-	'lightbox-share-button-email' => 'Email',
+	'lightbox-share-button-email' => 'Correo',
 	'lightbox-share-button-www' => 'Compartir',
 	'lightbox-share-button-embed' => 'Insertar',
 	'lightbox-share-email-label' => 'Enviar por correo electrónico esta imagen a un amigo',
@@ -550,7 +552,7 @@ Butiran: $2',
 	'lightbox-visit-the-wiki' => 'Lawati wiki:',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  */
 $messages['nb'] = array(
@@ -878,11 +880,15 @@ $messages['uk'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
+ * @author Hydra
  * @author Sam Wang
  */
 $messages['zh-hans'] = array(
 	'lightbox_details_tooltip' => '查看图片细节',
 	'lightbox-forum' => '论坛',
+	'lightbox-standard-link' => '普通链接',
+	'lightbox-blog-link' => '博客链接',
+	'lightbox-send' => '发送',
 	'lightbox-share-button-email' => '电子邮件',
 	'lightbox-share-button-www' => '分享',
 	'lightbox-share-email-error-caption' => '错误',

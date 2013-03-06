@@ -111,6 +111,7 @@ For example, you could:
 $messages['qqq'] = array(
 	'myhome-activity-feed' => 'This the title of the list/summary of recent activity in "My home page" in Wikia. "Feed" here does not refer to an RSS/Atom-type feed.',
 	'myhome-watchlist-feed' => '{{Identical|My watchlist}}',
+	'myhome-user-contributions-feed' => '{{Identical|Contribution}}',
 	'tog-userlandingpage' => 'Label next to selectbox when user can choose her landing page will be one of: Main Page, WikiActivity, RecentChanges',
 	'myhome-feed-newpage' => '{{Identical|New page}}',
 	'myhome-feed-edit' => '{{Identical|Edit}}',
@@ -120,6 +121,8 @@ $messages['qqq'] = array(
 	'myhome-feed-new-blog-comment-details' => '{{Identical|Comment}}',
 	'myhome-feed-new-article-comment-details' => '{{Identical|Comment}}',
 	'myhome-feed-redirect-details' => '{{Identical|Redirect}}',
+	'myhome-hot-spots-number-of-editors' => '{{Identical|Editor}}',
+	'myhome-namespace-blog' => '{{Identical|Blog}}',
 	'myhome-community-corner-edit' => '{{Identical|Edit message}}',
 	'myhome-default-view-checkbox' => "In the list of recent wiki activity (Special:WikiActivity), this is a checkbox button to toggle between viewing a summary of all activity and a summary of activity in pages on the user's watchlist.
 
@@ -636,11 +639,17 @@ Administrátoři do ní mohou psát:
 
 /** Welsh (Cymraeg)
  * @author (vinny)
+ * @author Lloffiwr
+ * @author Thefartydoctor
  */
 $messages['cy'] = array(
 	'myhome' => 'Fy Hafan',
+	'wikiactivity' => 'Gweithgarwch Wici',
 	'myhome-feed-edit' => 'golygu',
 	'myhome-feed-new-page-details' => 'Tudalen newydd',
+	'myhome-feed-new-blog-comment-details' => 'Sylw',
+	'myhome-feed-new-article-comment-details' => 'Sylw',
+	'myhome-namespace-blog' => 'Blog',
 	'myhome-default-view-checkbox' => 'Gwnewch yn $1 fy marn ball',
 );
 
@@ -2179,7 +2188,7 @@ $messages['mzn'] = array(
 	'myhome-feed-edit' => 'دچی‌ین',
 );
 
-/** Norwegian Bokmål (norsk (bokmål)‎)
+/** Norwegian Bokmål (norsk bokmål)
  * @author Audun
  * @author Nghtwlkr
  */
@@ -2801,6 +2810,7 @@ Pode, por exemplo:
  * @author Aristóbulo
  * @author Caio1478
  * @author Giro720
+ * @author JM Pessanha
  * @author Jesielt
  */
 $messages['pt-br'] = array(
@@ -2817,6 +2827,7 @@ Use a lista de páginas vigiadas para monitorar alterações das páginas pelas 
 	'myhome-hot-spots-feed' => 'Mais populares',
 	'myhome-hot-spots-feed-empty' => "Esta wiki está esperando a sua participação. Clique em '''[[Special:CreatePage|nova página]]''' para começar a escrever.",
 	'myhome-hot-spots-newest' => 'Páginas novas na wiki',
+	'tog-userlandingpage' => 'Página inicial:',
 	'prefs-myhome' => 'Minha página inicial',
 	'myhome-feed-newpage' => 'nova página',
 	'myhome-feed-edit' => 'editar',
