@@ -6,7 +6,7 @@ var VMDFormUI = {
 		this.cachedSelectors.typeSelect = $('#vcType');
 		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
-		this.cachedSelectors.nameField = $('#vcTitle');
+		this.cachedSelectors.nameField = $('#videoObject_name');
 
 		// attach handlers
 		this.cachedSelectors.form.on('click', 'button.add', function(event) {
