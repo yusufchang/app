@@ -202,8 +202,9 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 	public function providers() {
 		$this->response->setVal( 'requestType',  $this->request->getVal( 'requestType', '' ) );
 
-		// don't render FBconnect button when the extension is disabled
-		if ( empty( $this->wg->EnableFacebookConnectExt ) ) {
+		$fbAppId = $this->app->getGlobal('fbAppId');
+		// don't render FBconnect button when the extension is disabled or the AppId is missing
+		if ( empty( $this->wg->EnableFacebookConnectExt ) || empty ( $fbAppId ) ) {
 			$this->skipRendering();
 		}
 
