@@ -1,6 +1,6 @@
 <div class="input-group <?= (!empty($type)) ? $type : '' ?>">
-	<label for="<?= $name ?>"><?= $labelMsg ?><?= (!empty($required) && $required === true ) ? '* <small>(' . wfMsg
-	('sdsvideometadata-vc-required') . ')</small>' : '' ?></label>
+	<label for="<?= $name ?>"><?= $labelMsg ?><?= (!empty($required) && $required === true ) ? '* <small>(' . wfMessage
+	('sdsvideometadata-vc-required')->text() . ')</small>' : '' ?></label>
 	<?php if (!empty($textarea) && $textarea === true): ?>
 		<textarea name="<?= $name ?>" id="<?= $name ?>"><?= (!empty($value)) ? htmlspecialchars($value) : '' ?></textarea>
 	<?php else: ?>

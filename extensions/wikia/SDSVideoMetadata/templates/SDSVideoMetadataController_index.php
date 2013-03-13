@@ -4,13 +4,13 @@
 		<form class="WikiaForm VMD-form" id="VMDForm" method="POST">
 
 			<fieldset>
-				<legend class="VMD-header"><?= wfMsg('sdsvideometadata-common-metadata-legend')?></legend>
+				<legend class="VMD-header"><?= wfMessage('sdsvideometadata-common-metadata-legend')->text() ?></legend>
 
 				<!-- Title -->
 	<!--			--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
 	//			'name' => 'videoObject_name',
 	//			'required' => true,
-	//			'labelMsg' => wfMsg('sdsvideometadata-vc-title'),
+	//			'labelMsg' => wfMessage('sdsvideometadata-vc-title'),
 	//			'value' => isset( $vcObj['videoObject_name'] ) ? $vcObj['videoObject_name'] : null
 	//			)); ?>
 
@@ -18,52 +18,53 @@
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
 				'name' => 'videoObject_description',
 				'textarea' => true,
-				'labelMsg' => wfMsg('sdsvideometadata-vc-description'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-description')->text(),
 				'value' => isset( $vcObj['videoObject_description'] ) ? $vcObj['videoObject_description'] : null
 				)); ?>
 
 				<!-- Language -->
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
 				'name' => 'videoObject_inLanguage',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-language'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-language')->text(),
 				'value' => isset( $vcObj['videoObject_inLanguage'] ) ? $vcObj['videoObject_inLanguage'] : null
 				)); ?>
 
 				<!-- Subtitles -->
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
 				'name' => 'videoObject_subTitleLanguage',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-subtitles'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-subtitles')->text(),
 				'value' => isset( $vcObj['videoObject_subTitleLanguage'] ) ? $vcObj['videoObject_subTitleLanguage'] : null
 				)); ?>
 
 				<!-- Video object type selection -->
 				<div class="input-group">
-					<label for="vcType"><?= wfMsg('sdsvideometadata-vc-select-type')?> <small>(<?= wfMsg
+					<label for="vcType"><?= wfMessage('sdsvideometadata-vc-select-type')->text() ?> <small>(<?=
+						wfMessage
 					('sdsvideometadata-vc-required') ?>)</small></label>
 					<select name="vcType" id="vcType" data-type="<?= isset( $vcObj['vcType'] ) ? $vcObj['vcType'] : '' ?>">
 						<option value="" selected="selected">...</option>
-						<option value="VideoClipGamingVideo"><?= wfMsg('sdsvideometadata-vc-type-gaming')?></option>
-						<option value="VideoClipTVVideo"><?= wfMsg('sdsvideometadata-vc-type-tv')?></option>
-						<option value="VideoClipMovieTrailersVideo"><?= wfMsg('sdsvideometadata-vc-type-movie')?></option>
-						<option value="VideoClipTravelVideo"><?= wfMsg('sdsvideometadata-vc-type-travel')?></option>
-						<option value="VideoClipCookingVideo"><?= wfMsg('sdsvideometadata-vc-type-cooking')?></option>
-						<option value="VideoClipCraftVideo"><?= wfMsg('sdsvideometadata-vc-type-craft')?></option>
-						<option value="VideoClipHowToVideo"><?= wfMsg('sdsvideometadata-vc-type-how-to')?></option>
-						<option value="VideoClipMusicVideo"><?= wfMsg('sdsvideometadata-vc-type-music')?></option>
+						<option value="VideoClipGamingVideo"><?= wfMessage('sdsvideometadata-vc-type-gaming')->text() ?></option>
+						<option value="VideoClipTVVideo"><?= wfMessage('sdsvideometadata-vc-type-tv')->text() ?></option>
+						<option value="VideoClipMovieTrailersVideo"><?= wfMessage('sdsvideometadata-vc-type-movie')->text() ?></option>
+						<option value="VideoClipTravelVideo"><?= wfMessage('sdsvideometadata-vc-type-travel')->text() ?></option>
+						<option value="VideoClipCookingVideo"><?= wfMessage('sdsvideometadata-vc-type-cooking')->text() ?></option>
+						<option value="VideoClipCraftVideo"><?= wfMessage('sdsvideometadata-vc-type-craft')->text() ?></option>
+						<option value="VideoClipHowToVideo"><?= wfMessage('sdsvideometadata-vc-type-how-to')->text() ?></option>
+						<option value="VideoClipMusicVideo"><?= wfMessage('sdsvideometadata-vc-type-music')->text() ?></option>
 					</select>
 				</div>
 
 			</fieldset>
 
 			<fieldset id="VMDSpecificMD" class="hidden VMD-details">
-				<legend class="VMD-header"><?= wfMsg('sdsvideometadata-type-specific-metadata-legend')?></legend>
+				<legend class="VMD-header"><?= wfMessage('sdsvideometadata-type-specific-metadata-legend')->text() ?></legend>
 
 				<!-- Recipe -->
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
 				'type' => 'VideoClipCookingVideo',
 				'name' => 'recipe_name',
 				'id' => 'recipe_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-recipe'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-recipe')->text(),
 				'list' => isset( $vcObj['recipe_name'] ) ? $vcObj['recipe_name'] : null
 				)); ?>
 
@@ -72,7 +73,7 @@
 				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
 				'name' => 'provider_name',
 				'id' => 'provider_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-distributor'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-distributor')->text(),
 				'list' => isset( $vcObj['provider_name'] ) ? $vcObj['provider_name'] : null
 				)); ?>
 
@@ -81,7 +82,7 @@
 				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
 				'name' => 'publisher_name',
 				'id' => 'publisher_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-publisher'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-publisher')->text(),
 				'list' => isset( $vcObj['publisher_name'] ) ? $vcObj['publisher_name'] : null
 				)); ?>
 
@@ -90,7 +91,7 @@
 				'type' => 'VideoClipMusicVideo',
 				'name' => 'track_name',
 				'id' => 'track_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-song'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-song')->text(),
 				'list' => isset( $vcObj['track_name'] ) ? $vcObj['track_name'] : null
 				)); ?>
 
@@ -99,7 +100,7 @@
 				'type' => 'VideoClipMusicVideo',
 				'name' => 'musicGroup_name',
 				'id' => 'musicGroup_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-artist'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-artist')->text(),
 				'list' => isset( $vcObj['musicGroup_name'] ) ? $vcObj['musicGroup_name'] : null
 				)); ?>
 
@@ -108,7 +109,7 @@
 				'type' => 'VideoClipMusicVideo',
 				'name' => 'musicRecording_musicLabel',
 				'id' => 'musicRecording_musicLabel_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-music-label'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-music-label')->text(),
 				'list' => isset( $vcObj['musicRecording_musicLabel'] ) ? $vcObj['musicRecording_musicLabel'] : null
 				)); ?>
 
@@ -118,7 +119,7 @@
 						VideoClipCraftVideo VideoClipHowToVideo',
 				'name' => 'videoObject_genre',
 				'id' => 'videoObject_genre_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-genre'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-genre')->text(),
 				'list' => isset( $vcObj['videoObject_genre'] ) ? $vcObj['videoObject_genre'] : null
 				)); ?>
 
@@ -127,7 +128,7 @@
 				'type' => 'VideoClipTravelVideo',
 				'name' => 'about_location',
 				'id' => 'about_location_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-location'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-location')->text(),
 				'list' => isset( $vcObj['about_location'] ) ? $vcObj['about_location'] : null
 				)); ?>
 
@@ -136,7 +137,7 @@
 				'type' => 'VideoClipGamingVideo',
 				'name' => 'about_name',
 				'id' => 'about_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-game'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-game')->text(),
 				'list' => isset( $vcObj['about_name'] ) ? $vcObj['about_name'] : null
 				)); ?>
 
@@ -145,7 +146,7 @@
 				'type' => 'VideoClipTVVideo',
 				'name' => 'series_name',
 				'id' => 'series_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-series'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-series')->text(),
 				'list' => isset( $vcObj['series_name'] ) ? $vcObj['series_name'] : null
 				)); ?>
 
@@ -154,7 +155,7 @@
 				'type' => 'VideoClipTVVideo',
 				'name' => 'season_name',
 				'id' => 'season_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-season'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-season')->text(),
 				'list' => isset( $vcObj['season_name'] ) ? $vcObj['season_name'] : null
 				)); ?>
 
@@ -163,7 +164,7 @@
 				'type' => 'VideoClipMovieTrailersVideo',
 				'name' => 'movie_name',
 				'id' => 'movie_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-movie'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-movie')->text(),
 				'list' => isset( $vcObj['movie_name'] ) ? $vcObj['movie_name'] : null
 				)); ?>
 
@@ -171,7 +172,7 @@
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
 				'type' => 'VideoClipMovieTrailersVideo',
 				'name' => 'videoObject_rating',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-trailer-rating'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-trailer-rating')->text(),
 				'value' => isset( $vcObj['videoObject_rating'] ) ? $vcObj['videoObject_rating'] : null
 				)); ?>
 
@@ -180,7 +181,7 @@
 				'type' => 'VideoClipGamingVideo VideoClipTVVideo',
 				'name' => 'videoObject_keywords',
 				'id' => 'videoObject_keywords_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-kind'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-kind')->text(),
 				'list' => isset( $vcObj['videoObject_keywords'] ) ? $vcObj['videoObject_keywords'] : null
 				)); ?>
 
@@ -188,19 +189,19 @@
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'select', array(
 				'type' => 'VideoClipGamingVideo VideoClipMovieTrailersVideo',
 				'name' => 'videoObject_isFamilyFriendly',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-age-gate'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-age-gate')->text(),
 				'options' => array(
 					array(
 						'value' => '',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-not-set')
+						'text' => wfMessage('sdsvideometadata-vc-boolean-not-set')->text()
 					),
 					array(
 						'value' => 'true',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-true')
+						'text' => wfMessage('sdsvideometadata-vc-boolean-true')->text()
 					),
 					array(
 						'value' => 'false',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-false')
+						'text' => wfMessage('sdsvideometadata-vc-boolean-false')->text()
 					)
 				),
 				'selected' => isset( $vcObj['videoObject_isFamilyFriendly'] ) ? $vcObj['videoObject_isFamilyFriendly'] : null
@@ -210,15 +211,15 @@
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'select', array(
 				'type' => 'VideoClipMusicVideo',
 				'name' => 'videoObject_contentFormat',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-pal'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-pal')->text(),
 				'options' => array(
 					array(
 						'value' => '',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-not-set')
+						'text' => wfMessage('sdsvideometadata-vc-boolean-not-set')->text()
 					),
 					array(
 						'value' => 'PAL',
-						'text' => wfMsg('sdsvideometadata-vc-boolean-true')
+						'text' => wfMessage('sdsvideometadata-vc-boolean-true')->text()
 					)
 				),
 				'selected' => isset( $vcObj['videoObject_contentFormat'] ) ? $vcObj['videoObject_contentFormat'] : null
@@ -229,7 +230,7 @@
 				'type' => 'VideoClipGamingVideo',
 				'name' => 'videoObject_associatedMedia',
 				'id' => 'videoObject_associatedMedia_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-soundtrack'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-soundtrack')->text(),
 				'list' => isset( $vcObj['videoObject_associatedMedia'] ) ? $vcObj['videoObject_associatedMedia'] : null
 				)); ?>
 
@@ -238,7 +239,7 @@
 				'type' => 'VideoClipGamingVideo VideoClipMusicVideo VideoClipTVVideo VideoClipMovieTrailersVideo',
 				'name' => 'videoObject_setting',
 				'id' => 'videoObject_setting_id',
-				'labelMsg' => wfMsg('sdsvideometadata-vc-setting'),
+				'labelMsg' => wfMessage('sdsvideometadata-vc-setting')->text(),
 				'list' => isset( $vcObj['videoObject_setting'] ) ? $vcObj['videoObject_setting'] : null
 				)); ?>
 
@@ -246,16 +247,17 @@
 
 			<div class="input-group">
 				<label for="vcCompleted">
-					<?= wfMsg('sdsvideometadata-vc-finished-flag')?>
+					<?= wfMessage('sdsvideometadata-vc-finished-flag')->text() ?>
 					<input type="checkbox" name="vcCompleted" id="vcCompleted" value="1" <?= !empty($isCompleted) ? "checked" : "";?> >
 				</label>
 			</div>
 
 			<?php if (!empty($wasPasted)): ?>
-				<p><?= (isset($success) && $success === true ) ?  wfMsg('sdsvideometadata-vc-save') : $errorMessage ?></p>
+				<p><?= (isset($success) && $success === true ) ?  wfMessage('sdsvideometadata-vc-save')->text() : $errorMessage ?></p>
 			<?php endif; ?>
 
-			<input type="submit" id="VMDFormSave" value="<?= wfMsg('sdsvideometadata-save')?>" disabled="disabled">
+			<input type="submit" id="VMDFormSave" value="<?= wfMessage('sdsvideometadata-save')->text() ?>"
+			       disabled="disabled">
 			<button id="VMDSkip" class="secondary">Skip</button>
 
 		</form>
@@ -265,7 +267,7 @@
 			</div>
 		</div>
 	<?php } else { ?>
-		<?= wfMsg('sdsvideometadata-error-no-video-file')?>
+		<?= wfMessage('sdsvideometadata-error-no-video-file')->text() ?>
 	<?php } ?>
 </div>
 
