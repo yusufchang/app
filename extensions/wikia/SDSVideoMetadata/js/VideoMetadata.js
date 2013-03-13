@@ -122,7 +122,7 @@ var VideoMetadata = {
 				$player.removeClass('fixed');
 			}
 		});
-	}                             11
+	}
 };
 
 $(function() {
