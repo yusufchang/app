@@ -6,7 +6,6 @@ var VideoMetadata = {
 		this.cachedSelectors.typeSelect = $('#vcType');
 		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
-		this.cachedSelectors.nameField = $('#videoObject_name');
 		this.cachedSelectors.videoPlayer = $('#VMD-player-wrapper > div');
 
 		// attach handlers
@@ -32,11 +31,6 @@ var VideoMetadata = {
 		this.cachedSelectors.typeSelect.on('change', function(event) {
 			that.chooseClipType(event);
 			that.simpleValidation();
-		});
-
-		this.cachedSelectors.nameField.on({
-			blur: $.proxy(this.simpleValidation, this),
-			keyup: $.proxy(this.simpleValidation, this)
 		});
 
 		this.setObjTypeForEdit();
@@ -93,7 +87,7 @@ var VideoMetadata = {
 	},
 	// Temporary method to prevent errors on PHP side when sending empty form
 	simpleValidation: function() {
-		if (this.cachedSelectors.typeSelect.val() !== '' && this.cachedSelectors.nameField.val() !== '') {
+		if (this.cachedSelectors.typeSelect.val() !== '') {
 			this.cachedSelectors.saveButton.removeAttr('disabled');
 		} else {
 			this.cachedSelectors.saveButton.attr('disabled', 'disabled');
