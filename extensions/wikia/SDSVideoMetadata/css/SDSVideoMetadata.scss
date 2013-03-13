@@ -65,6 +65,12 @@
 	.VMD-player-wrapper {
 		float: left;
 		padding-top: 28px;
+		position: relative;
+
+		.fixed {
+			top: 0;
+			position: fixed;
+		}
 	}
 }
 

@@ -1,4 +1,4 @@
-var VMDFormUI = {
+var VideoMetadata = {
 	cachedSelectors: {},
 	init: function() {
 		var that = this;
@@ -7,6 +7,7 @@ var VMDFormUI = {
 		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
 		this.cachedSelectors.nameField = $('#videoObject_name');
+		this.cachedSelectors.videoPlayer = $('#VMD-player-wrapper > div');
 
 		// attach handlers
 		this.cachedSelectors.form.on('click', 'button.add', function(event) {
@@ -39,6 +40,7 @@ var VMDFormUI = {
 		});
 
 		this.setObjTypeForEdit();
+		this.setVideoPlayerPosition();
 	},
 
 	// add new blank input field for reference list type properties
@@ -106,9 +108,23 @@ var VMDFormUI = {
 		var $type = 'option[value="' + type + '"]';
 		this.cachedSelectors.typeSelect.children($type).attr('selected', 'selected');
 		this.cachedSelectors.typeSelect.trigger('change');
-	}
+	},
+	// Method controlling video player position
+	setVideoPlayerPosition: function() {
+		var $player = this.cachedSelectors.videoPlayer,
+			$window = $(window),
+			playerOffsetTop = $player.offset().top;
+
+		$window.scroll(function() {
+			if ($window.scrollTop() >= playerOffsetTop) {
+				$player.addClass('fixed');
+			} else {
+				$player.removeClass('fixed');
+			}
+		});
+	}                             11
 };
 
 $(function() {
-	VMDFormUI.init();
+	VideoMetadata.init();
 });

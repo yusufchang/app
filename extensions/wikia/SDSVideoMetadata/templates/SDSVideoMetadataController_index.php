@@ -259,8 +259,10 @@
 			<button id="VMDSkip" class="secondary">Skip</button>
 
 		</form>
-		<div class="VMD-player-wrapper">
-			<?= isset($embedCode) ? $embedCode : "" ?>
+		<div id="VMD-player-wrapper" class="VMD-player-wrapper">
+			<div>
+				<?= isset($embedCode) ? $embedCode : "" ?>
+			</div>
 		</div>
 	<?php } else { ?>
 		<?= wfMsg('sdsvideometadata-error-no-video-file')?>
