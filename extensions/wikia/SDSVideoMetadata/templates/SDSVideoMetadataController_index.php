@@ -42,7 +42,8 @@
 						wfMessage
 					('sdsvideometadata-vc-required') ?>)</small></label>
 					<select name="vcType" id="vcType" data-type="<?= isset( $vcObj['vcType'] ) ? $vcObj['vcType'] : '' ?>">
-						<option value="" selected="selected">...</option>
+						<option value="" selected="selected"><?= wfMessage('sdsvideometadata-vc-type-select')->text()
+							?></option>
 						<option value="VideoClipGamingVideo"><?= wfMessage('sdsvideometadata-vc-type-gaming')->text() ?></option>
 						<option value="VideoClipTVVideo"><?= wfMessage('sdsvideometadata-vc-type-tv')->text() ?></option>
 						<option value="VideoClipMovieTrailersVideo"><?= wfMessage('sdsvideometadata-vc-type-movie')->text() ?></option>

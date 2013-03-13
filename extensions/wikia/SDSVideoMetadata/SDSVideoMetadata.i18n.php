@@ -27,10 +27,10 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-language' => 'Language',
 	'sdsvideometadata-vc-subtitles' => 'Subtitles',
 	'sdsvideometadata-vc-select-type' => 'Category',
+	'sdsvideometadata-vc-type-select' => 'Select a category',
 	'sdsvideometadata-vc-finished-flag' => 'This video clip has all metadata set',
 
 	// Video clip type specific messages
-
 	'sdsvideometadata-vc-type-gaming' => 'Gaming video',
 	'sdsvideometadata-vc-type-tv' => 'TV video',
 	'sdsvideometadata-vc-type-travel' => 'Travel video',
@@ -83,7 +83,8 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-description' => 'Label for description property',
 	'sdsvideometadata-vc-language' => 'Label for spoken language property',
 	'sdsvideometadata-vc-subtitles' => 'Label for subtitles language property',
-	'sdsvideometadata-vc-select-type' => 'Label for selecting type of the video clip',
+	'sdsvideometadata-vc-select-type' => 'Label for selecting category of the video clip',
+	'sdsvideometadata-vc-type-select' => 'Placeholder for category of the video clip',
 	'sdsvideometadata-vc-finished-flag' => 'Label for checkbox indication that all metadata is set for this video
 	clip',
 
