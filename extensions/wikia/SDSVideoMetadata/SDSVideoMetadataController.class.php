@@ -6,6 +6,9 @@
 
 class SDSVideoMetadataController extends WikiaSpecialPageController {
 
+	// Flash player width
+	const VIDEO_WIDTH = 500;
+
 	public function __construct() {
 		parent::__construct('VMD');
 	}
@@ -13,16 +16,19 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	public function index() {
 
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/css/SDSVideoMetadata.scss');
-		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/js/formUIHelpers.SDSVideoMetadata.js');
+		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/js/VideoMetadata.js');
 		$file = $this->getVal('video');
-
 
 		$fileTitle = Title::newFromText( $file );
 		$fileObject = wfFindFile( $fileTitle );
-		if ( empty( $fileObject ) ) {
+
+		if ( empty( $fileObject ) || !WikiaFileHelper::isFileTypeVideo( $fileObject ) ) {
 			$this->setVal( 'isCorrectFile', false );
 			return false;
 		} else {
+
+			$videoEmbedCode = $fileObject->getEmbedCode( self::VIDEO_WIDTH );
+			$this->setVal( 'embedCode', $videoEmbedCode );
 
 			$pandoraApi = new PandoraAPIClient();
 			$objectUrl = $pandoraApi->getObjectUrl( $fileTitle->getArticleID() );
