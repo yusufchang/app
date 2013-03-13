@@ -62,7 +62,9 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 						$this->setVal( 'errorMessage', $result->getMessage() );
 					} else {
 						//TODO: redirect
-						$this->setVal( 'success', true );
+						$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $fileTitle->getPrefixedDBkey() );
+						$this->wg->out->redirect( $specialPageUrl );
+//						$this->setVal( 'success', true );
 					}
 				}
 			}
