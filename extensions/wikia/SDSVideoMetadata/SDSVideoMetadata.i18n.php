@@ -15,7 +15,7 @@ $messages['en'] = array(
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Remove',
 	'sdsvideometadata-vc-add-item' => 'Add more',
-	'sdsvideometadata-save' => 'Save',
+	'sdsvideometadata-save' => 'Save and Continue',
 	'sdsvideometadata-vc-boolean-not-set' => 'Not set',
 	'sdsvideometadata-vc-boolean-false' => 'No',
 	'sdsvideometadata-vc-boolean-true' => 'Yes',
@@ -23,15 +23,14 @@ $messages['en'] = array(
 
 	// Common video clip metadata messages
 	'sdsvideometadata-common-metadata-legend' => 'Basic information',
-	'sdsvideometadata-vc-title' => 'Title',
 	'sdsvideometadata-vc-description' => 'Description',
-	'sdsvideometadata-vc-published-date' => 'Published date',
 	'sdsvideometadata-vc-language' => 'Language',
 	'sdsvideometadata-vc-subtitles' => 'Subtitles',
+	'sdsvideometadata-vc-select-type' => 'Category',
 	'sdsvideometadata-vc-finished-flag' => 'This video clip has all metadata set',
 
 	// Video clip type specific messages
-	'sdsvideometadata-vc-select-type' => 'Select type of the video clip',
+
 	'sdsvideometadata-vc-type-gaming' => 'Gaming video',
 	'sdsvideometadata-vc-type-tv' => 'TV video',
 	'sdsvideometadata-vc-type-travel' => 'Travel video',
@@ -40,7 +39,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-type-craft' => 'Craft video',
 	'sdsvideometadata-vc-type-how-to' => 'How to video',
 	'sdsvideometadata-vc-type-music' => 'Music video',
-	'sdsvideometadata-type-specific-metadata-legend' => 'Add video clip type specific metadata',
+	'sdsvideometadata-type-specific-metadata-legend' => 'Details',
 	'sdsvideometadata-vc-game' => 'Game',
 	'sdsvideometadata-vc-kind' => 'Type',
 	'sdsvideometadata-vc-age-gate' => 'Age gate',
@@ -73,7 +72,7 @@ $messages['qqq'] = array(
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Button for removing item from the list references',
 	'sdsvideometadata-vc-add-item' => 'Button for adding more items to the list of references',
-	'sdsvideometadata-save' => 'Save metadata button',
+	'sdsvideometadata-save' => 'Save and Continue button',
 	'sdsvideometadata-vc-boolean-not-set' => 'Boolean value type select not set',
 	'sdsvideometadata-vc-boolean-false' => 'Boolean value type select - No',
 	'sdsvideometadata-vc-boolean-true' => 'Boolean value type - Yes',
@@ -81,16 +80,14 @@ $messages['qqq'] = array(
 
 	// Common video clip metadata messages
 	'sdsvideometadata-common-metadata-legend' => 'Header for basic information',
-	'sdsvideometadata-vc-title' => 'Label for title property',
 	'sdsvideometadata-vc-description' => 'Label for description property',
-	'sdsvideometadata-vc-published-date' => 'Label for published date property',
 	'sdsvideometadata-vc-language' => 'Label for spoken language property',
 	'sdsvideometadata-vc-subtitles' => 'Label for subtitles language property',
+	'sdsvideometadata-vc-select-type' => 'Label for selecting type of the video clip',
 	'sdsvideometadata-vc-finished-flag' => 'Label for checkbox indication that all metadata is set for this video
 	clip',
 
 	// Video clip type specific messages
-	'sdsvideometadata-vc-select-type' => 'Label for selecting type of the video clip',
 	'sdsvideometadata-vc-type-gaming' => 'Gaming video option',
 	'sdsvideometadata-vc-type-tv' => 'TV video option',
 	'sdsvideometadata-vc-type-movie' => 'Movie trailers video option',

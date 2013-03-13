@@ -6,7 +6,8 @@
 
 class SDSVideoMetadataController extends WikiaSpecialPageController {
 
-	const VIDEO_WIDTH = 300;
+	// Flash player width
+	const VIDEO_WIDTH = 500;
 
 	public function __construct() {
 		parent::__construct('VMD');

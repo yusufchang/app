@@ -82,7 +82,7 @@ var VMDFormUI = {
 		if(targetValue !== '') {
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.find(targetClass).find('input, select, textarea').removeAttr('disabled');
-			propertiesWrapper.children().addClass('hidden').filter(targetClass).removeClass('hidden');
+			propertiesWrapper.children(':not(legend)').addClass('hidden').filter(targetClass).removeClass('hidden');
 			propertiesWrapper.removeClass('hidden');
 		} else {
 			propertiesFormFields.attr('disabled', 'disabled');
