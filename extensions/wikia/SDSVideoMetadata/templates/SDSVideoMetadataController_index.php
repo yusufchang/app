@@ -43,7 +43,7 @@
 ?>
 
 <?php if ( $isCorrectFile ) { ?>
-
+	<? echo isset($embedCode) ? $embedCode : "" ?>
 	<h1><?= wfMsg('sdsvideometadata-header', $file)?></h1>
 
 	<form class="WikiaForm VMDForm" id="VMDForm" method="POST">
