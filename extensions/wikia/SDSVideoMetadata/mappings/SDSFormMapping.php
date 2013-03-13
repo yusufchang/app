@@ -32,17 +32,24 @@ class SDSFormMapping {
 
 	protected function getMapArray( $mapType = 'main' ) {
 
+		$contextValues = $this->getContextValues();
+
 		$map = array();
 
 		$map['main'] = array();
 		$map['main']['videoObject_name'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
+
+		if ( isset( $contextValues['name'] ) ) {
+			$map['main']['videoObject_name']['value'] = $contextValues['name'];
+		}
+
 		$map['main']['videoObject_description'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' );
 		$map['main']['videoObject_datePublished'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:datePublished' );
 		$map['main']['videoObject_inLanguage']= array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' );
 		$map['main']['videoObject_subTitleLanguage'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' );
 
-		if ( is_array( $this->contextValues ) && isset( $this->contextValues['contentURL'] ) ) {
-			$map['main']['contentUrl'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentURL', 'value' => $this->contextValues['contentURL'] );
+		if ( isset( $contextValues['contentURL'] ) ) {
+			$map['main']['contentUrl'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentURL', 'value' => $contextValues['contentURL'] );
 		}
 
 		return isset( $map[ $mapType ] ) ? $map[ $mapType ] : array();
