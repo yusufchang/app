@@ -8,7 +8,6 @@ $messages = array();
 $messages['en'] = array(
 	'sdsvideometadata-desc' => 'Extension for Video Metadata using structured data storage',
 	'vmd' => 'Structured Data Video Metadata',
-	'sdsvideometadata-header' => 'Metadata for: $1',
 	'sdsvideometadata-error-no-video-file' => 'THERE IS NO VIDEO FILE',
 	'sdsvideometadata-vc-save' => 'Object saved',
 	'sdsvideometadata-special-page-entrypoint' => 'Structured Metadata',
@@ -23,7 +22,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-required' => 'This field is required',
 
 	// Common video clip metadata messages
-	'sdsvideometadata-common-metadata-legend' => 'Add common video clip metadata',
+	'sdsvideometadata-common-metadata-legend' => 'Basic information',
 	'sdsvideometadata-vc-title' => 'Title',
 	'sdsvideometadata-vc-description' => 'Description',
 	'sdsvideometadata-vc-published-date' => 'Published date',
@@ -67,7 +66,6 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'sdsvideometadata-desc' => 'Description of SDSVideoMetadata extension',
 	'vmd' => 'Video Metadata special page name',
-	'sdsvideometadata-header' => 'Header for Video Metadata form. ($1 = File Title)',
 	'sdsvideometadata-error-no-video-file' => 'Error message for no video file',
 	'sdsvideometadata-vc-save' => 'Validation response - object saved',
 	'sdsvideometadata-special-page-entrypoint' => 'link to SpecialPage (Label for on Filepage)',
@@ -82,7 +80,7 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-required' => 'Information that this field is required',
 
 	// Common video clip metadata messages
-	'sdsvideometadata-common-metadata-legend' => 'Header fo common metadata fieldset',
+	'sdsvideometadata-common-metadata-legend' => 'Header for basic information',
 	'sdsvideometadata-vc-title' => 'Label for title property',
 	'sdsvideometadata-vc-description' => 'Label for description property',
 	'sdsvideometadata-vc-published-date' => 'Label for published date property',

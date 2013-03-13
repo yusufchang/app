@@ -1,55 +1,10 @@
-<?php
-//	$vcObj = array(
-		/*
-		'videoObject_name' => 'test object',
-		'videoObject_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Maecenas faucibus mollis interdum.',
-		'videoObject_datePublished' => '2013.02.19',
-		'videoObject_inLanguage' => 'English',
-		'videoObject_subTitleLanguage' => 'Polish',
-		'vcType' => 'VideoClipCookingVideo',
-		'recipe_name' => array(
-			array(
-				'name' => 'Pyry',
-				'id' => '12345'
-			),
-			array(
-				'name' => 'Vegburger',
-				'id' => '12345'
-			),
-			array(
-				'name' => 'aaaa',
-				'id' => '12345'
-			),
-		),
-		'provider_name' => array(),
-		'publisher_name' => array(),
-		'track_name' => array(),
-		'musicGroup_name' => array(),
-		'musicRecording_musicLabel' => array(),
-		'videoObject_genre' => array(),
-		'about_location' => array(),
-		'about_name' => array(),
-		'series_name' => array(),
-		'season_name' => array(),
-		'movie_name' => array(),
-		'videoObject_rating' => array(),
-		'videoObject_keywords' => array(),
-		'videoObject_associatedMedia' => array(),
-		'videoObject_setting' => array(),
-		'videoObject_isFamilyFriendly' => '',
-		'videoObject_contentFormat' => '',
-		*/
-//	);
-?>
-
 <?php if ( $isCorrectFile ) { ?>
 	<? echo isset($embedCode) ? $embedCode : "" ?>
-	<h1><?= wfMsg('sdsvideometadata-header', $file)?></h1>
-
+	<h1 class="VMD-header"><?= $file ?></h1>
 	<form class="WikiaForm VMDForm" id="VMDForm" method="POST">
 
 		<fieldset>
-			<legend><?= wfMsg('sdsvideometadata-common-metadata-legend')?></legend>
+			<legend class="VMD-header"><?= wfMsg('sdsvideometadata-common-metadata-legend')?></legend>
 
 			<!-- Title -->
 			<?= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
