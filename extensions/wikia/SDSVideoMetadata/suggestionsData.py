@@ -5,7 +5,7 @@ import httplib
 import json
 import time
 
-server = 'localhost:9292'
+server = 'dev-adam:9292'
 path = '/api/v0.1/'
 object_url = 'http://sds.wikia.com/'
 collection = 'video151'
