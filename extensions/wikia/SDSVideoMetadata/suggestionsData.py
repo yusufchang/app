@@ -15,70 +15,70 @@ data = {
 		{
 			'shortId': 'ufo_enemy_unknown',
 			'schema:name': 'UFO: Enemy Unknown',
-			'schema:datePublished': '1995-10-25',
+			'schema:datePublished': '1995-10-25T00:00:00Z',
 			'schema:genre': 'Strategy game',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage01'}],
 		},
 		{
 			'shortId': 'the_witcher',
 			'schema:name': 'The Witcher',
-			'schema:datePublished': '2007-10-26',
+			'schema:datePublished': '2007-10-26T00:00:00Z',
 			'schema:genre': 'Action role-playing',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage02'}],
 		},
 		{
 			'shortId': 'morrowind',
 			'schema:name': 'The Elder Scrolls III: Morrowind',
-			'schema:datePublished': '2002-05-01',
+			'schema:datePublished': '2002-05-01T00:00:00Z',
 			'schema:genre': 'Action role-playing',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage03'}],
 		},
 		{
 			'shortId': 'call_of_duty',
 			'schema:name': 'Call of Duty',
-			'schema:datePublished': '2003-10-29',
+			'schema:datePublished': '2003-10-29T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage04'}],
 		},
 		{
 			'shortId': 'call_of_duty_2',
 			'schema:name': 'Call of Duty 2',
-			'schema:datePublished': '2005-10-25',
+			'schema:datePublished': '2005-10-25T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage05'}],
 		},
 		{
 			'shortId': 'call_of_duty_3',
 			'schema:name': 'Call of Duty 3',
-			'schema:datePublished': '2006-11-07',
+			'schema:datePublished': '2006-11-07T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage06'}],
 		},
 		{
 			'shortId': 'call_of_duty_4_modern_warfare',
 			'schema:name': 'Call of Duty 4: Modern Warfare',
-			'schema:datePublished': '2007-11-07',
+			'schema:datePublished': '2007-11-07T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage07'}],
 		},
 		{
 			'shortId': 'call_of_duty_4_modern_warfare_2',
 			'schema:name': 'Call of Duty: Modern Warfare 2',
-			'schema:datePublished': '2009-02-11',
+			'schema:datePublished': '2009-02-11T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage08'}],
 		},
 		{
 			'shortId': 'call_of_duty_world_at_war',
 			'schema:name': 'Call of Duty: World at War',
-			'schema:datePublished': '2008-06-09',
+			'schema:datePublished': '2008-06-09T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage09'}],
 		},
 		{
 			'shortId': 'call_of_duty_black_ops',
 			'schema:name': 'Call of Duty: Black Ops',
-			'schema:datePublished': '2010-11-09',
+			'schema:datePublished': '2010-11-09T00:00:00Z',
 			'schema:genre': 'FPS',
 			'schema:photos': [{'id': object_url + collection + '/sugestionsImage10'}],
 		},
@@ -178,48 +178,48 @@ data = {
 		{
 			'shortId': 'the_big_bang_theory_1',
 			'schema:name': 'The Big Bang Theory Season 1',
-			'schema:startDate': '2007-09-24',
-			'schema:endDate': '2008-05-19',
+			'schema:startDate': '2007-09-24T00:00:00Z',
+			'schema:endDate': '2008-05-19T00:00:00Z',
 			'schema:seasonNumber': 1,
 			'schema:partOfTVSeries': [{'id': object_url + collection + '/the_big_bang_theory'}],
 		},
 		{
 			'shortId': 'the_big_bang_theory_2',
 			'schema:name': 'The Big Bang Theory Season 2',
-			'schema:startDate': '2008-09-22',
-			'schema:endDate': '2009-05-11',
+			'schema:startDate': '2008-09-22T00:00:00Z',
+			'schema:endDate': '2009-05-11T00:00:00Z',
 			'schema:seasonNumber': 2,
 			'schema:partOfTVSeries': [{'id': object_url + collection + '/the_big_bang_theory'}],
 		},
 		{
 			'shortId': 'the_big_bang_theory_3',
 			'schema:name': 'The Big Bang Theory Season 3',
-			'schema:startDate': '2009-09-23',
-			'schema:endDate': '2010-05-24',
+			'schema:startDate': '2009-09-23T00:00:00Z',
+			'schema:endDate': '2010-05-24T00:00:00Z',
 			'schema:seasonNumber': 3,
 			'schema:partOfTVSeries': [{'id': object_url + collection + '/the_big_bang_theory'}],
 		},
 		{
 			'shortId': 'the_big_bang_theory_4',
 			'schema:name': 'The Big Bang Theory Season 4',
-			'schema:startDate': '2010-09-23',
-			'schema:endDate': '2011-05-19',
+			'schema:startDate': '2010-09-23T00:00:00Z',
+			'schema:endDate': '2011-05-19T00:00:00Z',
 			'schema:seasonNumber': 4,
 			'schema:partOfTVSeries': [{'id': object_url + collection + '/the_big_bang_theory'}],
 		},
 		{
 			'shortId': 'the_big_bang_theory_5',
 			'schema:name': 'The Big Bang Theory Season 5',
-			'schema:startDate': '2011-09-22',
-			'schema:endDate': '2012-05-10',
+			'schema:startDate': '2011-09-22T00:00:00Z',
+			'schema:endDate': '2012-05-10T00:00:00Z',
 			'schema:seasonNumber': 5,
 			'schema:partOfTVSeries': [{'id': object_url + collection + '/the_big_bang_theory'}],
 		},
 		{
 			'shortId': 'the_big_bang_theory_6',
 			'schema:name': 'The Big Bang Theory Season 6',
-			'schema:startDate': '2012-09-27',
-			'schema:endDate': '2013-05-19',
+			'schema:startDate': '2012-09-27T00:00:00Z',
+			'schema:endDate': '2013-05-19T00:00:00Z',
 			'schema:seasonNumber': 6,
 			'schema:partOfTVSeries': [{'id': object_url + collection + '/the_big_bang_theory'}],
 		},
@@ -302,7 +302,7 @@ data = {
 			'schema:name': 'Czarne Słońca'
 		},
 		{
-			'shortId': 'her ghost in the fog', 
+			'shortId': 'her_ghost_in_the_fog',
 			'schema:name': 'Her ghost in the fog'
 		},
 		{
@@ -623,9 +623,10 @@ class SDSClient(object):
 			path += '/' + shortId
 		conn.request(method, path + '?cb=' + str(time.time()), body)
 		resp = conn.getresponse()
-		if resp.status not in (200, 201):
+		if resp.status < 200 or resp.status >= 300:
+			print  'delete path ' + path
 			raise Exception('Invalid status code ' + str(resp.status) + ' while calling ' + method + ' ' + path)
-		return resp.read()
+		return resp.status, resp.read()
 		
 	def get(self, shortId):
 		return self.call('GET', shortId)
@@ -638,26 +639,44 @@ class SDSClient(object):
 
 client = SDSClient(server, path, collection)
 
-# remove previously create test data
+# remove previously created test data
+not_removed = []
 for obj_type, objects in data.items():
 	for sds_object in objects:
 		if 'shortId' in sds_object:
-			try:
-				client.delete(sds_object['shortId'])
-				print "Object " + obj_type + ' ' + sds_object['shortId'] + " removed"
-			except:
-				print "Did not delete object " + obj_type + ' ' + sds_object['shortId']
-		
-# do the creation below
+			for attempt in range(5):
+				try:
+					client.delete(sds_object['shortId'])
+					print "Object " + obj_type + ' ' + sds_object['shortId'] + " removed"
+					break
+				except Exception, e:
+					print e
+			else:
+				print "Could not delete object " + obj_type + ' ' + sds_object['shortId'] + ' ('+str(e)+')'
+				not_removed.append(sds_object['shortId'])
+				
+if len(not_removed) > 0:
+	print "Note that those elements were not removed: " + str(not_removed)
+
+# create the test data
+not_created = []
 for obj_type, objects in data.items():
 	for sds_object in objects:
 		if 'shortId' in sds_object:
 			body = sds_object.copy()
 			del(body['shortId'])
 			body['id'] = object_url + collection + '/' + sds_object['shortId']
-			try:
-				client.create(json.dumps(body))
-				print "Created object " + obj_type + ' ' + sds_object['shortId']
-			except Exception, e:
+			for attempt in range(5):
+				try:
+					status, _ = client.create(json.dumps(body))
+					print "Created object " + obj_type + ' ' + sds_object['shortId'] + ' (status code ' + status + ')'
+					break
+				except Exception, e:
+					print e
+			else:
 				print "Did not create object " + obj_type + ' ' + sds_object['shortId'] + ' ('+str(e)+')'
+				not_created.append(sds_object['shortId'])
+
+if len(not_created) > 0:
+	print "Note that those elements were not created: " + str(not_created)
 
