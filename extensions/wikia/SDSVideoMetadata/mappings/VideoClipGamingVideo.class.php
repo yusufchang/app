@@ -2,9 +2,14 @@
 /**
  * @author: Jacek Jursza <jacek@wikia-inc.com>
  */
-class VideoClipGamingVideo extends SDSFormMapping {
+class VideoClipGamingVideo extends VideoObject {
 
 	const type = 'http://sds.wikia.com/vocabs/VideoClipGamingVideo';
+
+	public static $config = array (
+		'about_name' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'Movie' ),
+		'additionalType' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=> 'http://sds.wikia.com/vocabs/VideoClipGamingVideo' )
+	);
 
 	protected function getMapArray( $mapType = 'main' ) {
 
