@@ -110,7 +110,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 						if ( isset( $params[ 'value' ] ) ) {
 							$orm->set( $key, $params[ 'value' ] );
 						}
-						elseif ( isset( $requestParams[ $key ] ) ) {
+					elseif ( isset( $requestParams[ $key ] ) ) {
 							if ( is_array( $requestParams[ $key ] ) ) {
 								foreach ( $requestParams[ $key ] as $values ) {
 									$orm->set( $key, $values );
