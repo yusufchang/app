@@ -88,21 +88,21 @@ class PandoraJsonLD {
 			$objects[ $node->getValue( 'id' ) ] = $node;
 		}
 		//check result node for any objects
-		if ( $result->getType() !== PandoraSDSObject::TYPE_LITERAL ) {
-			$values = $result->getValue();
-			foreach( $values as $val ) {
-				if ( $val->getType() === PandoraSDSObject::TYPE_OBJECT ) {
-					static::getObject( $val, $objects );
-				} elseif ( $val->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-					foreach ( $val->getValue() as $item ) {
-						if ( $item->getType() === PandoraSDSObject::TYPE_OBJECT ) {
-							static::getObject( $item, $objects );
-						}
-					}
-				}
-			}
-		}
-		return $result;
+//		if ( $result->getType() !== PandoraSDSObject::TYPE_LITERAL ) {
+//			$values = $result->getValue();
+//			foreach( $values as $val ) {
+//				if ( $val->getType() === PandoraSDSObject::TYPE_OBJECT ) {
+//					static::getObject( $val, $objects );
+//				} elseif ( $val->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
+//					foreach ( $val->getValue() as $item ) {
+//						if ( $item->getType() === PandoraSDSObject::TYPE_OBJECT ) {
+//							static::getObject( $item, $objects );
+//						}
+//					}
+//				}
+//			}
+//		}
+//		return $result;
 	}
 
 	static protected function getObject( &$item, $objects ) {

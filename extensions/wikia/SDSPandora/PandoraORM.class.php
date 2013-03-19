@@ -121,6 +121,8 @@ class PandoraORM {
 			$urlForCollection = $pandoraApi->getCollectionUrl( $collection );
 			$res = $pandoraApi->createObject( $urlForCollection, $json );
 		}
+		print_r( $json );
+		print_r( $res );
 		return $res;
 	}
 
@@ -157,10 +159,12 @@ class PandoraORM {
 				if ( $existing instanceof PandoraSDSObject ) {
 					$existing->setValue( $value );
 				} else {
-					$node = new PandoraSDSObject();
-					$node->setType( $this->getConfig()[ $key ][ 'type' ] );
-					$node->setSubject( $this->getConfig()[ $key ][ 'subject' ] );
-					$node->setValue( $value );
+					//collection of strings
+					if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
+						$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $value );
+						$value = $collectionNode;
+					}
+					$node = new PandoraSDSObject( $this->getConfig()[ $key ][ 'type' ], $this->getConfig()[ $key ][ 'subject' ], $value );
 					$this->root->setValue( $node );
 				}
 				return true;
@@ -183,6 +187,15 @@ class PandoraORM {
 				}
 				//add if exists
 				if ( $existing instanceof PandoraSDSObject ) {
+					//change this so it adds only literal with id
+					if ( $existing->getType() === PandoraSDSObject::TYPE_OBJECT ) {
+						$node = new PandoraSDSObject();
+						$node->setType( PandoraSDSObject::TYPE_OBJECT );
+						$node->setValue( $existing->getItem( 'id' ) );
+
+						$existing->setType( PandoraSDSObject::TYPE_COLLECTION );
+						$existing->setValue( $node );
+					}
 					$existing->setValue( $orm->getReference() );
 				} else {
 					$node = new PandoraSDSObject();
@@ -210,7 +223,7 @@ class PandoraORM {
 					if ( $item->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
 						$result = array();
 						foreach ( $item->getValue() as $object ) {
-							$id = $object->getValue( 'id' );
+							$id = $object->getValue( 'id', false );
 							$obj = $this->getObject( $id );
 							if ( $obj !== null ) {
 								$result[] = $obj;
@@ -218,7 +231,7 @@ class PandoraORM {
 						}
 						return $result;
 					} else {
-						$id = $item->getValue( 'id' );
+						$id = $item->getValue( 'id', false );
 						$obj = $this->getObject( $id );
 						if ( $obj !== null ) {
 							return $obj;
