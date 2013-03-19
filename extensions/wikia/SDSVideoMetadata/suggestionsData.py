@@ -299,43 +299,53 @@ data = {
 	'schema:MusicRecording': [
 		{
 			'shortId': 'czarne_slonce', 
-			'schema:name': 'Czarne Słońca'
+			'schema:name': 'Czarne Słońca',
+			'schema:byArtist': [{'id': object_url + collection + '/kult'}],
 		},
 		{
 			'shortId': 'her_ghost_in_the_fog',
-			'schema:name': 'Her ghost in the fog'
+			'schema:name': 'Her ghost in the fog',
+			'schema:byArtist': [{'id': object_url + collection + '/cradle_of_filth'}],
 		},
 		{
 			'shortId': 'unforgiven', 
-			'schema:name': 'Unforgiven'
+			'schema:name': 'Unforgiven',
+			'schema:byArtist': [{'id': object_url + collection + '/metallica'}],
 		},
 		{
 			'shortId': 'octavarium', 
-			'schema:name': 'Octavarium'
+			'schema:name': 'Octavarium',
+			'schema:byArtist': [{'id': object_url + collection + '/in_flames'}],
 		},
 		{
 			'shortId': 'jester_race', 
-			'schema:name': 'Jester Race'
+			'schema:name': 'Jester Race',
+			'schema:byArtist': [{'id': object_url + collection + '/dream_theater'}],
 		},
 		{
 			'shortId': 'ashes_to_ashes', 
-			'schema:name': 'Ashes to Ashes'
+			'schema:name': 'Ashes to Ashes',
+			'schema:byArtist': [{'id': object_url + collection + '/faith_no_more'}],
 		},
 		{
 			'shortId': 'bohemian_rapsody', 
-			'schema:name': 'Bohemian Rapsody'
+			'schema:name': 'Bohemian Rapsody',
+			'schema:byArtist': [{'id': object_url + collection + '/queen'}],
 		},
 		{
 			'shortId': 'fugative', 
-			'schema:name': 'Fugative'
+			'schema:name': 'Fugative',
+			'schema:byArtist': [{'id': object_url + collection + '/iron_maiden'}],
 		},
 		{
 			'shortId': 'estranged', 
-			'schema:name': 'Estranged'
+			'schema:name': 'Estranged',
+			'schema:byArtist': [{'id': object_url + collection + '/guns_n_roses'}],
 		},
 		{
 			'shortId': 'in_bloom', 
-			'schema:name': 'In Bloom'
+			'schema:name': 'In Bloom',
+			'schema:byArtist': [{'id': object_url + collection + '/nirvana'}],
 		},
 	],
 	'schema:MusicGroup': [
@@ -636,10 +646,14 @@ class SDSClient(object):
 	
 	def create(self, body):
 		return self.call('POST', None, body)
+		
+	def modify(self, shortId, body):
+		return self.call('PUT', shortId, body)
 
 client = SDSClient(server, path, collection)
 
 # remove previously created test data
+"""
 not_removed = []
 for obj_type, objects in data.items():
 	for sds_object in objects:
@@ -654,9 +668,10 @@ for obj_type, objects in data.items():
 			else:
 				print "Could not delete object " + obj_type + ' ' + sds_object['shortId'] + ' ('+str(e)+')'
 				not_removed.append(sds_object['shortId'])
-				
+		break
 if len(not_removed) > 0:
 	print "Note that those elements were not removed: " + str(not_removed)
+"""
 
 # create the test data
 not_created = []
@@ -668,8 +683,12 @@ for obj_type, objects in data.items():
 			body['id'] = object_url + collection + '/' + sds_object['shortId']
 			for attempt in range(5):
 				try:
-					status, _ = client.create(json.dumps(body))
-					print "Created object " + obj_type + ' ' + sds_object['shortId'] + ' (status code ' + status + ')'
+					if not attempt:
+						status, _ = client.create(json.dumps(body))
+						print "Created object " + obj_type + ' ' + sds_object['shortId'] + ' (status code ' + str(status) + ')'
+					else:
+						status, _ = client.modify(sds_object['shortId'], json.dumps(body))
+						print "Modified object " + obj_type + ' ' + sds_object['shortId'] + ' (status code ' + str(status) + ')'
 					break
 				except Exception, e:
 					print e
