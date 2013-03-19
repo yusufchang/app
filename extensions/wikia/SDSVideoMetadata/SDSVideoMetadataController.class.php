@@ -59,8 +59,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					if ( is_array( $loadedValue ) ) {
 						foreach ( $loadedValue as $val ) {
 							if ( $val instanceof PandoraORM ) {
-								//TODO: change it when frontend refactored
-								$value = $val->get( 'name' );
+								$value = array( 'name' => $val->get( 'name' ), 'id' => $val->getId() );
 							} else {
 								$value = $val;
 							}
@@ -72,8 +71,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 						}
 					} else {
 						if ( $loadedValue instanceof PandoraORM ) {
-							//TODO: change it when frontend refactored
-							$value = $loadedValue->get( 'name' );
+							$value = array( 'name' => $loadedValue->get( 'name' ), 'id' => $loadedValue->getId() );
 						} else {
 							$value = $loadedValue;
 						}
@@ -85,7 +83,6 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					}
 				}
 				$mapper[ 'vcType' ] = get_class( $orm );
-				print_r( $mapper );
 				$this->setVal( 'vcObj', $mapper );
 			}
 
