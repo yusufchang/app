@@ -8,7 +8,12 @@ class VideoClipGamingVideo extends VideoObject {
 
 	public static $config = array (
 		'about_name' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'Movie' ),
-		'additionalType' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=> 'http://sds.wikia.com/vocabs/VideoClipGamingVideo' )
+		'additional_type' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=> 'http://sds.wikia.com/vocabs/VideoClipGamingVideo' )
+//		'videoObject_name' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' ),
+//		'videoObject_description' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:description' ),
+//		'videoObject_datePublished' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:datePublished' ),
+//		'videoObject_inLanguage' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:inLanguage' ),
+//		'videoObject_subTitleLanguage' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:subTitleLanguage' )
 	);
 
 	protected function getMapArray( $mapType = 'main' ) {
