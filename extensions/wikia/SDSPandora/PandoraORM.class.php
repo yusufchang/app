@@ -23,10 +23,7 @@ class PandoraORM {
 	protected $root;
 	protected $id;
 
-	public function __construct( $id, $config = null ) {
-		if ( $config !== null ) {
-			$this->config = $config;
-		}
+	public function __construct( $id ) {
 		$this->id = $id;
 		$root = new PandoraSDSObject();
 		$root->setType( PandoraSDSObject::TYPE_OBJECT );
@@ -60,7 +57,23 @@ class PandoraORM {
 			$orm->exist = false;
 			return $orm;
 		}
-		return null;
+	}
+
+	public static function buildFromField ( $id, $key ) {
+		$pandoraApi = new PandoraAPIClient();
+		$serverUri = $pandoraApi->getObjectUrlFromId( $id );
+		$result = $pandoraApi->getObject( $serverUri );
+		if ( $result->isOK() ) {
+			$obj = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $result->response, $id );
+			$orm = static::buildFromType( pathinfo( $obj->getValue( $key ), PATHINFO_BASENAME ), $id, false );
+			$orm->setRoot( $obj );
+			$orm->exist = true;
+			return $orm;
+		} else {
+			$orm = new PandoraORM( $id );
+			$orm->exist = false;
+			return $orm;
+		}
 	}
 
 	public static function buildFromConfig( $config, $id = null ) {
@@ -75,20 +88,16 @@ class PandoraORM {
 		return $this->id;
 	}
 
-	public function getConfig() {
+	public static function getConfig() {
 		//loaded class config as default
 		$result = static::$config;
 		$parents = class_parents( get_called_class() );
 		if ( $parents ) {
-			while ( $parent = array_pop( $parents ) ) {
+			while ( $parent = array_pop( $parents ) ) { /** @var $parent PandoraORM */
 				$result = array_merge( $parent::$config, $result );
 			}
 		}
 		return $result;
-	}
-
-	public static function getTypeConfig( $type ) {
-
 	}
 
 	public function save( $collection = null ) {
@@ -245,6 +254,7 @@ class PandoraORM {
 			}
 			$this->set( 'name', $this->name );
 		}
+
 		return true;
 	}
 
