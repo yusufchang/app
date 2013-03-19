@@ -47,34 +47,46 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$videoEmbedCode = $fileObject->getEmbedCode( self::VIDEO_WIDTH );
 			$this->setVal( 'embedCode', $videoEmbedCode );
 
-			var_dump( VideoClipGamingVideo::getConfig() );
-			die;
-
-			$orm = PandoraORM::buildFromId( $fileId );
+			$orm = PandoraORM::buildFromField( $fileId, 'schema:additionalType' );
 			if ( $orm->exist ) {
-				print_r( '<pre>' );
-				print_r( $orm );
 				$config = $orm->getConfig();
 				foreach ( $config as $key => $params ) {
-					$value = $orm->get( $key );
-					if ( $value === null ) {
+					$loadedValue = $orm->get( $key );
+					if ( $loadedValue === null ) {
 						//skip if no value
 						continue;
 					}
-					if ( $value instanceof PandoraORM ) {
-
+					if ( is_array( $loadedValue ) ) {
+						foreach ( $loadedValue as $val ) {
+							if ( $val instanceof PandoraORM ) {
+								//TODO: change it when frontend refactored
+								$value = $val->get( 'name' );
+							} else {
+								$value = $val;
+							}
+							if ( $params[ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
+								$mapper[ $key ][] = $value;
+							} else {
+								$mapper[ $key ] = $value;
+							}
+						}
 					} else {
-						$mapper[ $key ] = $value;
+						if ( $loadedValue instanceof PandoraORM ) {
+							//TODO: change it when frontend refactored
+							$value = $loadedValue->get( 'name' );
+						} else {
+							$value = $loadedValue;
+						}
+						if ( $params[ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
+							$mapper[ $key ][] = $value;
+						} else {
+							$mapper[ $key ] = $value;
+						}
 					}
-					print_r( $params );
-					print_r( $key );
-					var_dump( $orm->get( $key ) );
 				}
+				$mapper[ 'vcType' ] = get_class( $orm );
 				print_r( $mapper );
-				die;
-//				$pandoraData = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $obj->response, $fileTitle->getArticleID() );
-//				$mapper = SDSFormMapping::newFormDataFromPandoraSDSObject( $pandoraData );
-//				$this->setVal( 'vcObj', $mapper );
+				$this->setVal( 'vcObj', $mapper );
 			}
 
 			if($this->request->wasPosted()) {
@@ -84,58 +96,36 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 				$requestParams = $this->getRequest()->getParams();
 
-//				if (
-
 				$connectorClassName = $requestParams['vcType'];
+
 				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
-//					$connector = new $connectorClassName(); /* @var $connector SDSFormMapping */
-
-//					$connector->setContextValues( array( 'contentURL' => urlencode( $fileTitle->getFullUrl() ) ) );
-
-					print_r( '<pre>' );
-//					$requestParams['about_name'][0] = array( 'name' => 'Planetside 2', 'id' => 'http://sds.wikia.com/sds/~planetside2' );
-//					$requestParams['about_name'][1] = array( 'name' => 'Planetside 3', 'id' => 'http://sds.wikia.com/sds/~planetside3' );
-//					$requestParams['about_name'][2] = array( 'name' => 'Planetside 4' );
-//					print_r( $requestParams );
-//					$id = $pandoraApi->getObjectUrl( 129740 );
-//
-					$id = Pandora::pandoraIdFromShortId( $fileTitle->getArticleID() );
-					$orm = new VideoClipGamingVideo( $id );
-
-					$orm->load();
-
-					print_r( $orm );
-					$about = $orm->get( 'about_name' );
-					print_r( $about );
-
-					die;
-					foreach ( $requestParams as $key => $value ) {
-						if ( is_array( $value ) ) {
-							//if multiple values
-							foreach ( $value as $val ) {
-								$res = $orm->set( $key, $val );
+					if ( !$orm->exist ) {
+						$orm = new $connectorClassName( $fileId );
+					}
+					foreach ( $orm->getConfig() as $key => $params ) {
+						//TODO: delete this hack, after format changed
+						if ( isset( $params[ 'childType' ] ) ) {
+							foreach ( $requestParams[ $key ] as $data ) {
+								$changedParams[] = array( 'name' => $data );
 							}
-						} else {
-							$res = $orm->set( $key, $value );
+							$requestParams[ $key ] = $changedParams;
 						}
-						var_dump( $res );
+						if ( isset( $params[ 'value' ] ) ) {
+							$orm->set( $key, $params[ 'value' ] );
+						}
+						elseif ( isset( $requestParams[ $key ] ) ) {
+							if ( is_array( $requestParams[ $key ] ) ) {
+								foreach ( $requestParams[ $key ] as $values ) {
+									$orm->set( $key, $values );
+								}
+							} else {
+								$orm->set( $key, $requestParams[ $key ] );
+							}
+						}
 					}
-
+					//add name as video object name
 					$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
-					print_r( $orm );
 					$result = $orm->save();
-					var_dump( $result );
-
-					die();
-					$pandoraObject = $connector->newPandoraSDSObjectFromFormData( $requestParams, 'main', $objectsList );
-					$json = PandoraJsonLD::toJsonLD( $pandoraObject );
-
-					if ( $objExisted ) {
-						$result = $pandoraApi->saveObject( $objectUrl, $json );
-					} else {
-						$urlForCollection = $pandoraApi->getCollectionUrl();
-						$result = $pandoraApi->createObject( $urlForCollection, $json );
-					}
 
 					if ( !$result->isOK() ) {
 						$this->setVal( 'errorMessage', $result->getMessage() );
