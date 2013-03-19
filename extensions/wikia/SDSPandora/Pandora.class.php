@@ -29,6 +29,13 @@ class Pandora {
 		return $id;
 	}
 
+	public static function pandoraIdFromShortId( $shortId ) {
+
+		// for example: 'http://sds.wikia.com/video151/'.$articleId
+		$id = static::$config['id_base_url'] . static::$config['current_collection_name'] . '/' . $shortId;
+		return $id;
+	}
+
 	public static function generateCommonObjectId() {
 
 		// for example: "http://sds.wikia.com/sds/~" . base64_encode(microtime(true) . rand());
