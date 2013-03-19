@@ -82,6 +82,7 @@ class PandoraJsonLD {
 			$uri = $node->getValue( 'id' );
 			$objectId = pathinfo( $uri );
 			if ( $objectId[ 'filename' ] == $id ) {
+				return $node;
 				$result = $node;
 			}
 			$objects[ $node->getValue( 'id' ) ] = $node;

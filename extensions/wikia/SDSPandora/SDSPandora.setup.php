@@ -32,6 +32,8 @@ $app->registerClass( 'PandoraSDSObject', $dir . 'PandoraSDSObject.class.php' );
 $app->registerClass( 'PandoraJsonLD', $dir . 'PandoraJsonLD.class.php' );
 $app->registerClass( 'PandoraAPIClient', $dir . 'PandoraAPIClient.class.php' );
 $app->registerClass( 'PandoraResponse', $dir . 'PandoraResponse.class.php' );
+$app->registerClass( 'PandoraORM', $dir . 'PandoraORM.class.php' );
+$app->registerClass( 'VideoObject', $dir . 'mappers/VideoObject.class.php' );
 
 /**
  * hooks
