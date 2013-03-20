@@ -83,6 +83,9 @@ class PandoraORM {
 	public function setRoot( PandoraSDSObject $root ) {
 		$this->root = $root;
 	}
+	public function getRoot() {
+		return $this->root;
+	}
 
 	public function getId() {
 		return $this->id;
@@ -161,6 +164,8 @@ class PandoraORM {
 					if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
 						$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $value );
 						$value = $collectionNode;
+					} elseif ( is_array( $value ) ) {
+						$value = reset( $value );
 					}
 					$node = new PandoraSDSObject( $this->getConfig()[ $key ][ 'type' ], $this->getConfig()[ $key ][ 'subject' ], $value );
 					$this->root->setValue( $node );
@@ -173,6 +178,9 @@ class PandoraORM {
 				} else {
 					//create new orm
 					//TODO: get id from $value
+					if ( !isset( $value[ 'name' ] ) && !isset( $value[ 'id' ] ) ) {
+						throw new WikiaException( 'Value must be supplied as array( "name" => ..., "id" => ...) or instance of PandoraORM.' );
+					}
 					if ( isset( $value[ 'id' ] ) && !empty( $value[ 'id' ] ) ) {
 						//object already exists
 						$orm = static::buildFromType( $this->getConfig()[ $key ][ 'childType' ], $value[ 'id' ] );
