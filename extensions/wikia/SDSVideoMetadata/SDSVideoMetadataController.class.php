@@ -96,9 +96,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				$connectorClassName = $requestParams['vcType'];
 
 				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
-					if ( !$orm->exist ) {
-						$orm = new $connectorClassName( $fileId );
-					}
+					$orm = new $connectorClassName( $fileId );
 					foreach ( $orm->getConfig() as $key => $params ) {
 						//TODO: delete this hack, after format changed
 						if ( isset( $params[ 'childType' ] ) ) {
@@ -122,6 +120,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					}
 					//add name as video object name
 					$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
+					$orm->set( 'content_url', urlencode( $fileTitle->getFullUrl() ) );
 					$result = $orm->save();
 
 					if ( !$result->isOK() ) {
