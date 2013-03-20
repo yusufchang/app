@@ -116,13 +116,11 @@ class PandoraORM {
 			$this->load();
 		}
 		if ( $this->exist ) {
-			$res =  $pandoraApi->saveObject( $this->id, $json );
+			$res =  $pandoraApi->saveObject( $pandoraApi->getObjectUrlFromId( $this->id ), $json );
 		} else {
 			$urlForCollection = $pandoraApi->getCollectionUrl( $collection );
 			$res = $pandoraApi->createObject( $urlForCollection, $json );
 		}
-		print_r( $json );
-		print_r( $res );
 		return $res;
 	}
 
