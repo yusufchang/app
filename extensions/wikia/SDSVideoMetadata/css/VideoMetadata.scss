@@ -1,5 +1,8 @@
 @import "../../../../skins/oasis/css/core/color";
 @import "../../../../skins/oasis/css/mixins/box-sizing";
+@import "../../../../skins/oasis/css/mixins/gradient";
+@import "../../../../skins/oasis/css/mixins/ellipses";
+@import "../../../../skins/oasis/css/mixins/image-replacement";
 
 .VMD-header {
 	border-bottom: 1px solid $color-page-border;
@@ -75,7 +78,6 @@
 }
 
 .VMD-form.WikiaForm {
-
 	ul {
 		margin: 0;
 		list-style: none;
@@ -85,5 +87,65 @@
 		margin-bottom: 10px;
 	}
 
+	.reference-list {
+		border: 1px dashed $color-page-border;
+		margin-top: 5px;
+		overflow: hidden;
+		padding: 10px 0 0 10px;
+		width: 100%;
+		@include box-sizing();
+	}
+	.reference-item {
+		border: 1px solid $color-page-border;
+		height: 52px;
+		float: left;
+		margin: 0 10px 10px 0;
+		padding: 4px;
+		position: relative;
+		width: 219px;
+		@include linear-gradient($color-secondary-button, top, $color-secondary-button-highlight, 10%, $color-secondary-button, 65%);
+		@include box-sizing();
 
+		img {
+			display: block;
+			float: left;
+			height: 42px;
+			padding-right: 10px;
+			width: 42px;
+		}
+		p,
+		span {
+			width: 133px;
+			@include ellipses();
+		}
+		p {
+			font-size: 12px;
+			font-weight: bold;
+			line-height: 12px;
+			margin: 0;
+			margin-top: 5px;
+		}
+		span {
+			color: $color-alternate-text;
+			display: inline-block;
+			float: left;
+			padding-top: 2px;
+			font-size: 10px;
+		}
+		.remove-item {
+			background-image: url("/extensions/wikia/SDSVideoMetadata/images/remove_icon.png") /* base64 */ ;
+			@if $is-dark-wiki {
+				background-image: url("/extensions/wikia/SDSVideoMetadata/images/remove_icon.png_dark.png") /* base64 */ ;
+			}
+			display: block;
+			height: 10px;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			width: 10px;
+			@include image-replacement();
+		}
+	}
 }
+
+
