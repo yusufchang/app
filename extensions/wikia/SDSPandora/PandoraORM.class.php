@@ -65,7 +65,8 @@ class PandoraORM {
 		$result = $pandoraApi->getObject( $serverUri );
 		if ( $result->isOK() ) {
 			$obj = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $result->response, $id );
-			$orm = static::buildFromType( pathinfo( $obj->getValue( $key ), PATHINFO_BASENAME ), $id, false );
+			$type = pathinfo( $obj->getValue( $key ), PATHINFO_BASENAME );
+			$orm = static::buildFromType( $type, $id, false );
 			$orm->setRoot( $obj );
 			$orm->exist = true;
 			return $orm;
