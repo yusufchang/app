@@ -37,7 +37,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 		$fileTitle = Title::newFromText( $file );
 		$fileObject = wfFindFile( $fileTitle );
-		$fileId = Pandora::pandoraIdFromShortId( $fileTitle->getArticleID() );
+		$fileId = Pandora::pandoraIdFromArticleId( $fileTitle->getArticleID() );
 
 		if ( empty( $fileObject ) || !WikiaFileHelper::isFileTypeVideo( $fileObject ) ) {
 			$this->setVal( 'isCorrectFile', false );
