@@ -96,15 +96,12 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 				$connectorClassName = $requestParams['vcType'];
 
-				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
-					$orm = new $connectorClassName( $pandoraVideoId );
-					foreach ( $orm->getConfig() as $key => $params ) {
-						//TODO: delete this hack, after format changed
-						if ( isset( $params[ 'childType' ] ) ) {
-							foreach ( $requestParams[ $key ] as $data ) {
-								$changedParams[] = array( 'name' => $data );
-							}
-							$requestParams[ $key ] = $changedParams;
+				$orm = PandoraORM::buildFromType( $connectorClassName, $fileId );
+				foreach ( $orm->getConfig() as $key => $params ) {
+					//TODO: delete this hack, after format changed
+					if ( isset( $params[ 'childType' ] ) ) {
+						foreach ( $requestParams[ $key ] as $data ) {
+							$changedParams[] = array( 'name' => $data );
 						}
 						if ( isset( $params[ 'value' ] ) ) {
 							$orm->set( $key, $params[ 'value' ] );

@@ -1,5 +1,6 @@
 var VideoMetadata = {
 	cachedSelectors: {},
+	videoPlayerPosition: null,
 	init: function() {
 		var that = this;
 		this.cachedSelectors.form = $('#VMDForm');
@@ -33,8 +34,11 @@ var VideoMetadata = {
 			that.simpleValidation();
 		});
 
+		this.videoPlayerPosition = this.cachedSelectors.videoPlayer.offset().top;
+		var throttled = $.throttle( 100, $.proxy(this.setVideoPlayerPosition, this));
+		$(window).on('scroll', throttled);
+
 		this.setObjTypeForEdit();
-		this.setVideoPlayerPosition();
 	},
 
 	// add new blank input field for reference list type properties
@@ -105,17 +109,11 @@ var VideoMetadata = {
 	},
 	// Method controlling video player position
 	setVideoPlayerPosition: function() {
-		var $player = this.cachedSelectors.videoPlayer,
-			$window = $(window),
-			playerOffsetTop = $player.offset().top;
-
-		$window.scroll(function() {
-			if ($window.scrollTop() >= playerOffsetTop) {
-				$player.addClass('fixed');
-			} else {
-				$player.removeClass('fixed');
-			}
-		});
+		if ($(window).scrollTop() >= this.videoPlayerPosition) {
+			this.cachedSelectors.videoPlayer.addClass('fixed');
+		} else {
+			this.cachedSelectors.videoPlayer.removeClass('fixed');
+		}
 	}
 };
 
