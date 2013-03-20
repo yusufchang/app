@@ -1,20 +1,23 @@
-<div class="input-group <?= $type ?>">
+<div class="input-group <?= $type ?>" data-type="" data-dependencies="" data-action="">
 	<label for="<?= $name ?>"><?= $labelMsg ?></label>
-	<ul>
+	<input type="text" name="<?= $name ?>" id="<?= $name ?>">
+	<ul class="reference-list <?= (!is_array( $list )) ? 'hidden' : ''; ?>">
 		<?php
-		if ( !is_array( $list ) ) $list = array();
-		  foreach ($list as $item): 
-	    ?>
-			<li>
-				<input type="text" name="<?= $name ?>[]" id="<?= $name ?>" value="<?= htmlspecialchars($item['name']) ?>">
-				<input type="hidden" name="<?= $id ?>[]" value="<?= htmlspecialchars($item['id']) ?>">
-				<button class="secondary remove"><?= wfMessage('sdsvideometadata-vc-remove-item')->text() ?></button>
-			</li>
-		<?php endforeach; ?>
-		<li>
-			<input type="text" name="<?= $name ?>[]" id="<?= $name ?>">
-			<button class="secondary remove hidden"><?= wfMessage('sdsvideometadata-vc-remove-item')->text() ?></button>
-		</li>
+			if ( !is_array( $list ) ) $list = array();
+			$pos = 0;
+			foreach ($list as $item) {
+				echo $app->renderView(
+					'SDSVideoMetadataController',
+					'referenceItem',
+					array(
+						'item' => $item,
+						'pos' => $pos,
+						'propName' => $name,
+						'removeBtnMsg' => wfMessage('sdsvideometadata-vc-remove-item')->text()
+					)
+				);
+				$pos = $pos + 1;
+			}
+		?>
 	</ul>
-	<button class="add secondary"><?= wfMessage('sdsvideometadata-vc-add-item')->text() ?></button>
 </div>
