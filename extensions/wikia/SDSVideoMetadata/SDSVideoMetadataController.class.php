@@ -95,42 +95,40 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 				$connectorClassName = $requestParams['vcType'];
 
-				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
-					$orm = new $connectorClassName( $fileId );
-					foreach ( $orm->getConfig() as $key => $params ) {
-						//TODO: delete this hack, after format changed
-						if ( isset( $params[ 'childType' ] ) ) {
-							foreach ( $requestParams[ $key ] as $data ) {
-								$changedParams[] = array( 'name' => $data );
-							}
-							$requestParams[ $key ] = $changedParams;
+				$orm = PandoraORM::buildFromType( $connectorClassName, $fileId );
+				foreach ( $orm->getConfig() as $key => $params ) {
+					//TODO: delete this hack, after format changed
+					if ( isset( $params[ 'childType' ] ) ) {
+						foreach ( $requestParams[ $key ] as $data ) {
+							$changedParams[] = array( 'name' => $data );
 						}
-						if ( isset( $params[ 'value' ] ) ) {
-							$orm->set( $key, $params[ 'value' ] );
-						}
-					elseif ( isset( $requestParams[ $key ] ) ) {
-							if ( is_array( $requestParams[ $key ] ) ) {
-								foreach ( $requestParams[ $key ] as $values ) {
-									$orm->set( $key, $values );
-								}
-							} else {
-								$orm->set( $key, $requestParams[ $key ] );
+						$requestParams[ $key ] = $changedParams;
+					}
+					if ( isset( $params[ 'value' ] ) ) {
+						$orm->set( $key, $params[ 'value' ] );
+					}
+				elseif ( isset( $requestParams[ $key ] ) ) {
+						if ( is_array( $requestParams[ $key ] ) ) {
+							foreach ( $requestParams[ $key ] as $values ) {
+								$orm->set( $key, $values );
 							}
+						} else {
+							$orm->set( $key, $requestParams[ $key ] );
 						}
 					}
-					//add name as video object name
-					$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
-					$orm->set( 'content_url', urlencode( $fileTitle->getFullUrl() ) );
-					$result = $orm->save();
+				}
+				//add name as video object name
+				$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
+				$orm->set( 'content_url', $fileTitle->getFullUrl() );
+				$result = $orm->save();
 
-					if ( !$result->isOK() ) {
-						$this->setVal( 'errorMessage', $result->getMessage() );
-					} else {
-						//TODO: redirect
-						$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $fileTitle->getPrefixedDBkey() );
-						$this->wg->out->redirect( $specialPageUrl );
+				if ( !$result->isOK() ) {
+					$this->setVal( 'errorMessage', $result->getMessage() );
+				} else {
+					//TODO: redirect
+					$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $fileTitle->getPrefixedDBkey() );
+					$this->wg->out->redirect( $specialPageUrl );
 //						$this->setVal( 'success', true );
-					}
 				}
 			}
 
@@ -139,6 +137,18 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 		}
 
 		$this->setVal('file', $file);
+	}
+
+	public function suggestions() {
+
+		$this->getResponse()->setFormat( 'json' );
+		$requestParams = $this->getRequest();
+
+		$pandoraApi = new PandoraAPIClient();
+		//TODO: ask for suggestions
+		$result = new stdClass();
+
+		$this->getResponse()->setBody( json_encode( $result ) );
 	}
 
 	/**
