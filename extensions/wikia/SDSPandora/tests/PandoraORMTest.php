@@ -22,13 +22,7 @@ class PandoraORMTest extends WikiaBaseTest {
 	 * @param $value
 	 */
 	public function testSet( $key, $value, $setReturn, $expectedValue ) {
-		$orm = new PandoraORM( 'http://sds.fake.wikia.com/fake_parent_id' );
-		$orm::$config = array (
-			'id' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' ),
-			'name' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'name' ),
-			'child' => array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject' => 'sub', 'childType' => 'Test' ),
-			'collection' => array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject' => 'col' )
-		);
+		$orm = $this->getOrm();
 
 		$orm = PandoraORM::buildFromType( 'MapperTest' );
 		$this->assertEquals( $setReturn, $orm->set( $key, $value ) );
@@ -44,6 +38,30 @@ class PandoraORMTest extends WikiaBaseTest {
 	 * @expectedException WikiaException
 	 */
 	public function testSetError( $key, $value ) {
+		$orm = $this->getOrm();
+
+		$orm = PandoraORM::buildFromType( 'MapperTest' );
+		$orm->set( $key, $value );
+	}
+
+	/**
+	 * @dataProvider getProvider
+	 * @param $key
+	 */
+	public function testGet ( $key, $expected ) {
+		$orm = $this->getOrm();
+
+		//set simple data
+		$orm->set( 'name', 'name data' );
+		$orm->set( 'id', 'http://sds.fake.wikia.com/fake_parent_id' );
+		$orm->set( 'child', array( 'id' => 'http://sds.fake.wikia.com/fake_sub' ) );
+		$orm->set( 'child', array( 'id' => 'http://sds.fake.wikia.com/fake_sub_2' ) );
+		$orm->set( 'collection', array( 'one', 'two', 'three' ) );
+
+		$this->assertEquals( $expected, $orm->get( $key ) );
+	}
+
+	public function getOrm() {
 		$orm = new PandoraORM( 'http://sds.fake.wikia.com/fake_parent_id' );
 		$orm::$config = array (
 			'id' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' ),
@@ -51,9 +69,7 @@ class PandoraORMTest extends WikiaBaseTest {
 			'child' => array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject' => 'sub', 'childType' => 'Test' ),
 			'collection' => array( 'type' => PandoraSDSObject::TYPE_COLLECTION, 'subject' => 'col' )
 		);
-
-		$orm = PandoraORM::buildFromType( 'MapperTest' );
-		$orm->set( $key, $value );
+		return $orm;
 	}
 
 	public function typeProvider() {
@@ -78,8 +94,23 @@ class PandoraORMTest extends WikiaBaseTest {
 			array( 'name', array( 'single name in array' ), true, '{"name":"single name in array"}' ),
 			array( 'collection', 'single name for col', true, '{"col":["single name for col"]}' ),
 			array( 'collection', array( 'name for col in array' ), true, '{"col":["name for col in array"]}' ),
+			array( 'collection', array( 'name for col in array', 'second name' ), true, '{"col":["name for col in array","second name"]}' ),
 			array( 'child', array( 'name' => 'child name in array', 'id' => 'http://sds.fake.wikia.com/id' ), true, '{"sub":[{"id":"http://sds.fake.wikia.com/id"}]}' ),
 			array( 'child', $child, true, '{"sub":[{"id":"http://sds.fake.wikia.com/fake_id"}]}')
+		);
+	}
+
+	public function getProvider() {
+		$this->setUp();
+		$orm = new PandoraORM( 'http://sds.fake.wikia.com/fake_sub' );
+		$orm->exist = true;
+		$orm2 = new PandoraORM( 'http://sds.fake.wikia.com/fake_sub_2' );
+		$orm2->exist = true;
+		return array(
+			array( 'name', 'name data' ),
+			array( 'id', 'http://sds.fake.wikia.com/fake_parent_id' ),
+			array( 'child', array( $orm, $orm2 ) ),
+			array( 'collection', array( 'one', 'two', 'three' ) )
 		);
 	}
 
