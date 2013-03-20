@@ -162,7 +162,7 @@ class PandoraSDSObject implements JsonSerializable {
 				$returnValue = array();
 				foreach ( $this->value as $val ) {
 					if ( $val->getType() === static::TYPE_LITERAL ) {
-						if ( $val->getSubject() ) {
+						if ( $val->getSubject() !== null ) {
 							$returnValue[ $val->getSubject() ] = $val->getValue();
 						} else {
 							$returnValue[] = $val->getValue();
@@ -183,7 +183,11 @@ class PandoraSDSObject implements JsonSerializable {
 			$object = new stdClass();
 			foreach( $this->value as $val ) {
 				$subject = $val->getSubject();
-				$object->{$subject} = $val->getValue();
+				if ( $val->getType() === PandoraSDSObject::TYPE_LITERAL ) {
+					$object->{$subject} = $val->getValue();
+				} else {
+					$object->{$subject} = $val->jsonSerialize();
+				}
 			}
 			return $object;
 		} elseif ( $this->type === static::TYPE_LITERAL ) {
