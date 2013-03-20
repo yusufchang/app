@@ -37,17 +37,18 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 		$fileTitle = Title::newFromText( $file );
 		$fileObject = wfFindFile( $fileTitle );
-		$fileId = Pandora::pandoraIdFromArticleId( $fileTitle->getArticleID() );
 
 		if ( empty( $fileObject ) || !WikiaFileHelper::isFileTypeVideo( $fileObject ) ) {
 			$this->setVal( 'isCorrectFile', false );
 			return false;
 		} else {
 
+			$pandoraVideoId = Pandora::pandoraIdFromArticleId( $fileTitle->getArticleID() );
+
 			$videoEmbedCode = $fileObject->getEmbedCode( self::VIDEO_WIDTH );
 			$this->setVal( 'embedCode', $videoEmbedCode );
 
-			$orm = PandoraORM::buildFromField( $fileId, 'schema:additionalType' );
+			$orm = PandoraORM::buildFromField( $pandoraVideoId, 'schema:additionalType' );
 			if ( $orm->exist ) {
 				$config = $orm->getConfig();
 				foreach ( $config as $key => $params ) {
@@ -96,7 +97,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				$connectorClassName = $requestParams['vcType'];
 
 				if ( !empty( $connectorClassName ) && class_exists( $connectorClassName ) ) {
-					$orm = new $connectorClassName( $fileId );
+					$orm = new $connectorClassName( $pandoraVideoId );
 					foreach ( $orm->getConfig() as $key => $params ) {
 						//TODO: delete this hack, after format changed
 						if ( isset( $params[ 'childType' ] ) ) {
