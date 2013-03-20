@@ -8,7 +8,7 @@ import time
 server = 'dev-adam:9292'
 path = '/api/v0.1/'
 object_url = 'http://sds.wikia.com/'
-collection = 'video151'
+collection = 'sds'
 
 data = {
 	'wikia:VideoGame': [
@@ -653,7 +653,7 @@ class SDSClient(object):
 client = SDSClient(server, path, collection)
 
 # remove previously created test data
-"""
+
 not_removed = []
 for obj_type, objects in data.items():
 	for sds_object in objects:
@@ -671,7 +671,6 @@ for obj_type, objects in data.items():
 		break
 if len(not_removed) > 0:
 	print "Note that those elements were not removed: " + str(not_removed)
-"""
 
 # create the test data
 not_created = []
