@@ -161,13 +161,22 @@ class PandoraORM {
 					$existing->setValue( $value );
 				} else {
 					//collection of strings
+					$node = new PandoraSDSObject( $this->getConfig()[ $key ][ 'type' ], $this->getConfig()[ $key ][ 'subject' ] );
 					if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
-						$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $value );
-						$value = $collectionNode;
+						if ( is_array( $value ) ) {
+							foreach ( $value as $val ) {
+								$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $val );
+								$node->setValue( $collectionNode );
+							}
+						} else {
+							$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $value );
+							$node->setValue( $collectionNode );
+						}
 					} elseif ( is_array( $value ) ) {
-						$value = reset( $value );
+						$node->setValue( reset( $value ) );
+					} else {
+						$node->setValue( $value );
 					}
-					$node = new PandoraSDSObject( $this->getConfig()[ $key ][ 'type' ], $this->getConfig()[ $key ][ 'subject' ], $value );
 					$this->root->setValue( $node );
 				}
 				return true;
@@ -223,7 +232,15 @@ class PandoraORM {
 			if ( $item instanceof PandoraSDSObject ) {
 				if ( !isset( $this->getConfig()[ $key ][ 'childType' ] ) ) {
 					//litarals and collections
-					return $item->getValue();
+					$value = $item->getValue();
+					if ( is_array( $value ) ) {
+						foreach ( $value as $val ) {
+							$result[] = $val->getValue();
+						}
+						return $result;
+					} else {
+						return $value;
+					}
 				} else {
 					//objects and object collections
 					if ( $item->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
