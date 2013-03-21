@@ -24,12 +24,31 @@ class PandoraORMTest extends WikiaBaseTest {
 	public function testSet( $key, $value, $setReturn, $expectedValue ) {
 		$orm = $this->getOrm();
 
-		$orm = PandoraORM::buildFromType( 'MapperTest' );
+//		$orm = PandoraORM::buildFromType( 'MapperTest' );
 		$this->assertEquals( $setReturn, $orm->set( $key, $value ) );
 
 		$pandoraObj = $orm->getRoot();
 		$json = PandoraJsonLD::toJsonLD( $pandoraObj );
-		print_r( $json );
+		$this->assertEquals( json_encode( json_decode( $expectedValue ) ) , json_encode( json_decode( $json ) ) );
+	}
+
+	/**
+	 * @dataProvider setProviderExisting
+	 * @param $key
+	 * @param $value
+	 */
+	public function testSetWithExisting( $key, $value, $setReturn, $expectedValue ) {
+		$orm = $this->getOrm();
+		//fill with mockup data
+		$orm->set( 'name', 'mock' );
+		$orm->set( 'collection', array( 'one', 'two', 'three' ) );
+		$orm->set( 'child', array( 'id' => 'http://sds.fake.wikia.com/fake_sub' ) );
+
+//		$orm = PandoraORM::buildFromType( 'MapperTest' );
+		$this->assertEquals( $setReturn, $orm->set( $key, $value ) );
+
+		$pandoraObj = $orm->getRoot();
+		$json = PandoraJsonLD::toJsonLD( $pandoraObj );
 		$this->assertEquals( json_encode( json_decode( $expectedValue ) ) , json_encode( json_decode( $json ) ) );
 	}
 
@@ -97,6 +116,16 @@ class PandoraORMTest extends WikiaBaseTest {
 			array( 'collection', array( 'name for col in array', 'second name' ), true, '{"col":["name for col in array","second name"]}' ),
 			array( 'child', array( 'name' => 'child name in array', 'id' => 'http://sds.fake.wikia.com/id' ), true, '{"sub":[{"id":"http://sds.fake.wikia.com/id"}]}' ),
 			array( 'child', $child, true, '{"sub":[{"id":"http://sds.fake.wikia.com/fake_id"}]}')
+//			array( 'child', array( 'name' => 'child name in array'), true, '{"sub":[{"id":"http://sds.fake.wikia.com/fake_id"}]}')
+		);
+	}
+
+	public function setProviderExisting() {
+		$this->setUp();
+		return array(
+			array( 'name', 'changed', true, '{"name":"changed"}' ),
+			array( 'name', array( 'changed1', 'changed2' ), true, '{"name":"changed1"}' ),
+			array( 'collection', array(), true, '{"')
 		);
 	}
 
