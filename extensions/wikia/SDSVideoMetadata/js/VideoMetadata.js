@@ -1,5 +1,7 @@
 var VideoMetadata = {
 	cachedSelectors: {},
+	cachedTemplates: {},
+	charCountForSuggestions: 3,
 	videoPlayerPosition: null,
 	init: function() {
 		var that = this;
@@ -9,31 +11,53 @@ var VideoMetadata = {
 		this.cachedSelectors.saveButton = $('#VMDFormSave');
 		this.cachedSelectors.videoPlayer = $('#VMD-player-wrapper > div');
 
+		// load Mustache and templates
+		$.when(
+			$.loadMustache(),
+			Wikia.getMultiTypePackage({
+				mustache: 'extensions/wikia/SDSVideoMetadata/templates/suggestions_dropdown.mustache,extensions/wikia/SDSVideoMetadata/templates/SDSVideoMetadataController_referenceItem.mustache'
+			})
+		).done(function(libData, packagesData) {
+			that.cachedTemplates.suggestionsDropdown = packagesData[0].mustache[0];
+			that.cachedTemplates.referenceItem = packagesData[0].mustache[1];
+
+			that.cachedSelectors.form.on('input', '.suggestions', function(event){
+				var $target = $(event.target),
+					targetVal = $target.val()
+					$dropdown = $target.siblings('.suggestions-dropdown');
+
+				if (targetVal.length >= that.charCountForSuggestions) {
+					if ($dropdown.length > 0) {
+						that.loadSuggestions($dropdown);
+						that.showSuggestionsDropdown($dropdown);
+
+					} else {
+						that.renderSuggestions(event.target);
+						that.showSuggestionsDropdown($dropdown);
+					}
+				}
+			});
+			that.cachedSelectors.form.on('blur', '.suggestions', function(event){
+				var $dropdown = $(event.target).siblings('.suggestions-dropdown');
+				if ($dropdown.length > 0) {
+					that.hideSuggestionsDropdown($dropdown);
+				}
+			});
+			that.cachedSelectors.form.on('click', '.suggestions-dropdown .reference-item', function(event){
+				var $target = $(event.target);
+				that.addRefItem($target);
+				that.hideSuggestionsDropdown($target.parents('.suggestions-dropdown'));
+			});
+
+		});
+
 		// attach handlers
-		this.cachedSelectors.form.on('click', 'button.add', function(event) {
-			event.preventDefault();
-			that.addListItem(event);
-		});
-		this.cachedSelectors.form.on('click', 'button.remove', function(event) {
-			event.preventDefault();
-			that.removeListItem(event);
-		});
-
-		// TODO: this if prevent some strange behavior when pressing enter on different input filed (triggers other buttons in form). Find the root of this problem, solve and remove this handlers!!!
-		this.cachedSelectors.form.on('keydown', 'input[type="text"]', function(event) {
-			if (event.which == 13) {
-				event.preventDefault();
-			}
-		});
-		this.cachedSelectors.form.on('keydown', ' li input[type="text"]', function(event) {
-			that.listEnterKeyHelper(event);
-		});
-
 		this.cachedSelectors.typeSelect.on('change', function(event) {
 			that.chooseClipType(event);
 			that.simpleValidation();
 		});
 
+		// lock video position when scrolling
 		this.videoPlayerPosition = this.cachedSelectors.videoPlayer.offset().top;
 		var throttled = $.throttle( 100, $.proxy(this.setVideoPlayerPosition, this));
 		$(window).on('scroll', throttled);
@@ -41,33 +65,82 @@ var VideoMetadata = {
 		this.setObjTypeForEdit();
 	},
 
-	// add new blank input field for reference list type properties
-	addListItem: function(event) {
-		var lastListElement = $(event.target).prev().children().last();
 
-		lastListElement.clone().insertBefore(lastListElement).find('.remove').removeClass('hidden');
-		lastListElement.find('input').val('').focus().next().addClass('hidden');
+
+	// show suggestions dropdown
+	showSuggestionsDropdown: function($dropdown) {
+		$dropdown.removeClass('hidden');
 	},
-	// remove selected reference in the list
-	removeListItem: function(event) {
-		var selectedRefObj = $(event.target).parent(),
-			focusPoint = selectedRefObj.siblings().last().find('input');
-
-		selectedRefObj.remove();
-		focusPoint.focus();
+	// hide suggestions dropdown
+	hideSuggestionsDropdown: function($dropdown) {
+		//$dropdown.addClass('hidden');
+		$dropdown.find('li').remove();
+		//$dropdown.find('.create-new-btn').addClass('hidden');
 	},
-	// use 'enter' key to quickly move through lists or add new list items
-	listEnterKeyHelper: function(event) {
-		if (event.which == 13) {
-			var $target = $(event.target),
-				$nextField = $target.parent().next().find('input');
+	// render suggestions dropdown
+	renderSuggestions: function(eventTarget) {
+		var $target = $(eventTarget).parent(),
+			data = {
+			createNewBtnMsg: 'Create new'
+		},
+			html = $.mustache(this.cachedTemplates.suggestionsDropdown, data);
 
-			if ($nextField.length > 0) {
-				$nextField.focus();
-			} else {
-				$target.parents('ul').siblings('button.add').click();
+		$target.append(html);
+
+		this.loadSuggestions($target.children('.suggestions-dropdown'));
+	},
+	// load suggestions TEMPORARY!!!!
+	loadSuggestions: function($dropdown) {
+		var suggestions = [
+			{
+				objectName: 'Doom',
+				objectParam: '2002.12.01',
+				objectId: '1234567890',
+				imgURL: '#'
+			},
+			{
+				objectName: 'Doom',
+				objectParam: '2002.12.01',
+				objectId: '1234567890',
+				imgURL: '#'
+			},
+			{
+				objectName: 'Doom',
+				objectParam: '2002.12.01',
+				objectId: '1234567890',
+				imgURL: '#'
+			},
+			{
+				objectName: 'Doom',
+				objectParam: '2002.12.01',
+				objectId: '1234567890',
+				imgURL: '#'
+			},
+			{
+				objectName: 'Doom',
+				objectParam: '2002.12.01',
+				objectId: '1234567890',
+				imgURL: '#'
 			}
+		],
+			html = '',
+			i;
+		for (i = 0; i < suggestions.length; i += 1) {
+			suggestions[i].pos = i;
+			suggestions[i].propName = $dropdown.siblings('input').attr('id');
+			suggestions[i].removeMsg = 'Remove';
+
+			html += $.mustache(this.cachedTemplates.referenceItem, suggestions[i]);
 		}
+
+		$dropdown.children('ul').append(html);
+
+	},
+	// add reference item to list
+	addRefItem: function($target) {
+		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list');
+		console.log($list);
+		$list.append($target);
 	},
 	// show form part for type specific properties
 	chooseClipType: function(event) {
