@@ -162,62 +162,27 @@ class PandoraORM {
 					$existing->setValue( $value );
 				} else {
 					//collection of strings
-					$node = new PandoraSDSObject( $this->getConfig()[ $key ][ 'type' ], $this->getConfig()[ $key ][ 'subject' ] );
 					if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
-						if ( is_array( $value ) ) {
-							foreach ( $value as $val ) {
-								$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $val );
-								$node->setValue( $collectionNode );
-							}
-						} else {
-							$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $value );
-							$node->setValue( $collectionNode );
-						}
-					} elseif ( is_array( $value ) ) {
-						$node->setValue( reset( $value ) );
+						$node = $this->buildCollectionNode( $this->getConfig()[ $key ][ 'subject' ], $value );
 					} else {
-						$node->setValue( $value );
+						$node = $this->buildLiteralNode( $this->getConfig()[ $key ][ 'subject' ], $value );
 					}
 					$this->root->setValue( $node );
 				}
 				return true;
 			} else {
-				//reference to another object
-				if ( $value instanceof PandoraORM ) {
-					$orm = $value;
-				} else {
-					//create new orm
-					//TODO: get id from $value
-					if ( !isset( $value[ 'name' ] ) && !isset( $value[ 'id' ] ) ) {
-						throw new WikiaException( 'Value must be supplied as array( "name" => ..., "id" => ...) or instance of PandoraORM.' );
-					}
-					if ( isset( $value[ 'id' ] ) && !empty( $value[ 'id' ] ) ) {
-						//object already exists
-						$orm = static::buildFromType( $this->getConfig()[ $key ][ 'childType' ], $value[ 'id' ] );
-						$orm->exist = true;
-					} else {
-						//create new one
-						$orm = static::buildFromType( $this->getConfig()[ $key ][ 'childType' ] );
-						$orm->name = $value[ 'name' ];
-					}
-				}
+				$orm = $this->buildObjectORM( $this->getConfig()[ $key ][ 'childType' ], $value );
 				//add if exists
 				if ( $existing instanceof PandoraSDSObject ) {
 					//change this so it adds only literal with id
 					if ( $existing->getType() === PandoraSDSObject::TYPE_OBJECT ) {
-						$node = new PandoraSDSObject();
-						$node->setType( PandoraSDSObject::TYPE_OBJECT );
-						$node->setValue( $existing->getItem( 'id' ) );
-
+						$node = new PandoraSDSObject( PandoraSDSObject::TYPE_OBJECT, null, $existing->getItem( 'id' ) );
 						$existing->setType( PandoraSDSObject::TYPE_COLLECTION );
 						$existing->setValue( $node );
 					}
 					$existing->setValue( $orm->getReference() );
 				} else {
-					$node = new PandoraSDSObject();
-					$node->setType( $this->getConfig()[ $key ][ 'type' ] );
-					$node->setSubject( $this->getConfig()[ $key ][ 'subject' ] );
-					$node->setValue( $orm->getReference() );
+					$node = new PandoraSDSObject( $this->getConfig()[ $key ][ 'type' ], $this->getConfig()[ $key ][ 'subject' ], $orm->getReference() );
 					$this->root->setValue( $node );
 				}
 				$this->objects[ $orm->getId() ] = $orm;
@@ -225,6 +190,53 @@ class PandoraORM {
 			}
 		}
 		return false;
+	}
+
+	protected function buildCollectionNode( $subject, $values ) {
+		$node = new PandoraSDSObject( PandoraSDSObject::TYPE_COLLECTION, $subject );
+		if ( is_array( $values ) ) {
+			foreach ( $values as $value ) {
+				$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $value );
+				$node->setValue( $collectionNode );
+			}
+		} else {
+			$collectionNode = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, null, $values );
+			$node->setValue( $collectionNode );
+		}
+		return $node;
+	}
+
+	protected function buildLiteralNode( $subject, $value ) {
+		$node = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, $subject );
+		if ( is_array( $value ) ) {
+			$node->setValue( reset( $value ) );
+		} else {
+			$node->setValue( $value );
+		}
+		return $node;
+	}
+
+	protected function buildObjectORM( $type, $value ) {
+		//reference to another object
+		if ( $value instanceof PandoraORM ) {
+			$orm = $value;
+		} else {
+			//create new orm
+			//TODO: get id from $value
+			if ( !isset( $value[ 'name' ] ) && !isset( $value[ 'id' ] ) ) {
+				throw new WikiaException( 'Value must be supplied as array( "name" => ..., "id" => ...) or instance of PandoraORM.' );
+			}
+			if ( isset( $value[ 'id' ] ) && !empty( $value[ 'id' ] ) ) {
+				//object already exists
+				$orm = static::buildFromType( $type, $value[ 'id' ] );
+				$orm->exist = true;
+			} else {
+				//create new one
+				$orm = static::buildFromType( $type );
+				$orm->name = $value[ 'name' ];
+			}
+		}
+		return $orm;
 	}
 
 	public function get( $key ) {
