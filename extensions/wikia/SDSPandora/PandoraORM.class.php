@@ -172,6 +172,10 @@ class PandoraORM {
 
 	public function set( $key, $value ) {
 		if ( isset( $this->getConfig()[ $key ] ) ) {
+			if ( isset( $this->getConfig()[ $key ][ 'value' ] ) ) {
+				//set default value if provided
+				$value = $this->getConfig()[ $key ][ 'value' ];
+			}
 			$existing = $this->root->getItem( $this->getConfig()[ $key ][ 'subject' ] );
 			if ( !isset( $this->getConfig()[ $key ][ 'childType' ] ) ) {
 				if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
@@ -224,7 +228,6 @@ class PandoraORM {
 	protected function buildLiteralNode( $subject, $value ) {
 		$node = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, $subject );
 		if ( is_array( $value ) ) {
-			print_r( reset( $value ) );
 			$node->setValue( reset( $value ) );
 		} else {
 			$node->setValue( $value );
@@ -309,21 +312,25 @@ class PandoraORM {
 	protected function checkRequiredFields() {
 		if ( $this->root->getItem( 'id' ) === null ) {
 			if ( !isset( $this->id ) ) {
-				return false;
+				throw new WikiaException( 'ID must be set before saving');
+//				return false;
 			}
 			$this->set( 'id', $this->id );
 		}
 		if ( $this->root->getItem( 'type' ) === null ) {
 			if ( !isset( $this->type ) && isset( $this->getConfig()[ 'type' ] ) ) {
 				$this->type = $this->getConfig()[ 'type' ][ 'value' ];
-			} else {
-				return false;
+			}
+			if ( !isset( $this->type ) ) {
+				throw new WikiaException( 'Type must be set before saving');
+//				return false;
 			}
 			$this->set( 'type', $this->type );
 		}
 		if ( $this->root->getItem( 'schema:name' ) === null ) {
 			if ( !isset( $this->name ) ) {
-				return false;
+				throw new WikiaException( 'Name must be set before saving');
+//				return false;
 			}
 			$this->set( 'name', $this->name );
 		}
