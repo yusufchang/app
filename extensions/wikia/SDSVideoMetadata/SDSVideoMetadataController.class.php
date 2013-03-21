@@ -96,39 +96,43 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 				$connectorClassName = $requestParams['vcType'];
 
-				$orm = PandoraORM::buildFromType( $connectorClassName, $fileId );
+				$orm = PandoraORM::buildFromType( $connectorClassName, $pandoraVideoId );
 				foreach ( $orm->getConfig() as $key => $params ) {
 					//TODO: delete this hack, after format changed
+//					if ( isset( $params[ 'childType' ] ) ) {
+//						foreach ( $requestParams[ $key ] as $data ) {
+//							$changedParams[] = array( 'name' => $data );
+//						}
+//						if ( isset( $params[ 'value' ] ) ) {
+//							$orm->set( $key, $params[ 'value' ] );
+//						}
 					if ( isset( $params[ 'childType' ] ) ) {
-						foreach ( $requestParams[ $key ] as $data ) {
-							$changedParams[] = array( 'name' => $data );
-						}
-						if ( isset( $params[ 'value' ] ) ) {
-							$orm->set( $key, $params[ 'value' ] );
-						}
-					elseif ( isset( $requestParams[ $key ] ) ) {
-							if ( is_array( $requestParams[ $key ] ) ) {
-								foreach ( $requestParams[ $key ] as $values ) {
-									$orm->set( $key, $values );
-								}
-							} else {
-								$orm->set( $key, $requestParams[ $key ] );
+						$requestParams[ $key ] = array( array( 'name' => $requestParams[ $key ] ) );
+					}
+					if ( isset( $requestParams[ $key ] ) ) {
+						if ( is_array( $requestParams[ $key ] ) ) {
+							foreach ( $requestParams[ $key ] as $values ) {
+								$orm->set( $key, $values );
 							}
+						} else {
+							$orm->set( $key, $requestParams[ $key ] );
 						}
 					}
-					//add name as video object name
-					$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
-					$orm->set( 'content_url', $fileTitle->getFullUrl() );
-					$result = $orm->save();
+				}
+				//add name as video object name
+				$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
+				$orm->set( 'content_url', $fileTitle->getFullUrl() );
+				//use default
+				$orm->set( 'additional_type', null );
+				$result = $orm->save();
 
-					if ( !$result->isOK() ) {
-						$this->setVal( 'errorMessage', $result->getMessage() );
-					} else {
-						//TODO: redirect
-						$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $fileTitle->getPrefixedDBkey() );
-						$this->wg->out->redirect( $specialPageUrl );
+				if ( !$result->isOK() ) {
+					$this->setVal( 'errorMessage', $result->getMessage() );
+				} else {
+					//TODO: redirect
+//					$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $fileTitle->getPrefixedDBkey() );
+//					$this->wg->out->redirect( $specialPageUrl );
 //						$this->setVal( 'success', true );
-					}
 				}
 			}
 
