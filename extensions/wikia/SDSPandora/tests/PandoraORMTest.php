@@ -123,9 +123,10 @@ class PandoraORMTest extends WikiaBaseTest {
 	public function setProviderExisting() {
 		$this->setUp();
 		return array(
-			array( 'name', 'changed', true, '{"name":"changed"}' ),
-			array( 'name', array( 'changed1', 'changed2' ), true, '{"name":"changed1"}' ),
-			array( 'collection', array(), true, '{"')
+			array( 'name', 'changed', true, '{"name":"changed","col":["one","two","three"],"sub":[{"id":"http:\/\/sds.fake.wikia.com\/fake_sub"}]}' ),
+			array( 'name', array( 'changed1', 'changed2' ), true, '{"name":"changed1","col":["one","two","three"],"sub":[{"id":"http:\/\/sds.fake.wikia.com\/fake_sub"}]}' ),
+			array( 'collection', 'four', true, '{"name":"mock","col":["one","two","three","four"],"sub":[{"id":"http:\/\/sds.fake.wikia.com\/fake_sub"}]}' ),
+			array( 'collection', array( 'four', 'five' ), true, '{"name":"mock","col":["one","two","three","four","five"],"sub":[{"id":"http:\/\/sds.fake.wikia.com\/fake_sub"}]}' )
 		);
 	}
 
