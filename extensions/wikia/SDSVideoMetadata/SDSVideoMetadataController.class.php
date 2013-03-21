@@ -118,7 +118,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 					}
 					//add name as video object name
 					$orm->set( 'videoObject_name', $fileTitle->getBaseText() );
-					$orm->set( 'content_url', urlencode( $fileTitle->getFullUrl() ) );
+					$orm->set( 'content_url', $fileTitle->getFullUrl() );
 					$result = $orm->save();
 
 					if ( !$result->isOK() ) {
