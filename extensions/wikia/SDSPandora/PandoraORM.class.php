@@ -9,7 +9,7 @@ class PandoraORM {
 	public static $config = array(
 		//thing mapping
 		'id' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' ),
-		'type' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type' ),
+		'type' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value' => 'schema:Thing' ),
 		'additional_type' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'schema:additionalType' ),
 		'description' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'schema:description' ),
 		'image' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'schema:image' ),
@@ -17,13 +17,17 @@ class PandoraORM {
 		'url' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'schema:url' )
 	);
 	public $name;
+	public $type;
 	public $exist = null;
 
 	protected $objects = array();
 	protected $root;
 	protected $id;
 
-	public function __construct( $id ) {
+	public function __construct( $id, $type = null ) {
+		if ( $type !== null ) {
+			$this->type = $type;
+		}
 		$this->id = $id;
 		$root = new PandoraSDSObject();
 		$root->setType( PandoraSDSObject::TYPE_OBJECT );
@@ -35,11 +39,23 @@ class PandoraORM {
 			//generate new id
 			$id = Pandora::generateCommonObjectId();
 		}
-		if ( class_exists( $type ) ) {
-			return new $type( $id );
+		if ( strpos( $type, ':' ) !== false ) {
+			$typeParts = explode( ':', strtolower( $type ) );
+			$prefixClassName = ucfirst( $typeParts[ 0 ] ) . ucfirst( $typeParts[ 1 ] );
+			$nonPrefixClassName = ucfirst( $typeParts[ 1 ] );
+			if ( class_exists( $prefixClassName ) ) {
+				return new $prefixClassName( $id );
+			} elseif ( class_exists( $nonPrefixClassName ) ) {
+				return new $nonPrefixClassName( $id );
+			}
+			return new PandoraORM( $id, $type );
+		} else {
+			if ( class_exists( $type ) ) {
+				return new $type( $id );
+			}
+			//use default class with Thing mapping
+			return new PandoraORM( $id );
 		}
-		//use default class with Thing mapping
-		return new PandoraORM( $id );
 	}
 
 	public static function buildFromId ( $id ) {
@@ -158,15 +174,14 @@ class PandoraORM {
 		if ( isset( $this->getConfig()[ $key ] ) ) {
 			$existing = $this->root->getItem( $this->getConfig()[ $key ][ 'subject' ] );
 			if ( !isset( $this->getConfig()[ $key ][ 'childType' ] ) ) {
-				if ( $existing instanceof PandoraSDSObject ) {
-					$existing->setValue( $value );
+				if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
+					$node = $this->buildCollectionNode( $this->getConfig()[ $key ][ 'subject' ], $value );
 				} else {
-					//collection of strings
-					if ( $this->getConfig()[ $key ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
-						$node = $this->buildCollectionNode( $this->getConfig()[ $key ][ 'subject' ], $value );
-					} else {
-						$node = $this->buildLiteralNode( $this->getConfig()[ $key ][ 'subject' ], $value );
-					}
+					$node = $this->buildLiteralNode( $this->getConfig()[ $key ][ 'subject' ], $value );
+				}
+				if ( $existing instanceof PandoraSDSObject ) {
+					$existing->setValue( $node->getValue() );
+				} else {
 					$this->root->setValue( $node );
 				}
 				return true;
@@ -209,6 +224,7 @@ class PandoraORM {
 	protected function buildLiteralNode( $subject, $value ) {
 		$node = new PandoraSDSObject( PandoraSDSObject::TYPE_LITERAL, $subject );
 		if ( is_array( $value ) ) {
+			print_r( reset( $value ) );
 			$node->setValue( reset( $value ) );
 		} else {
 			$node->setValue( $value );
@@ -297,13 +313,20 @@ class PandoraORM {
 			}
 			$this->set( 'id', $this->id );
 		}
+		if ( $this->root->getItem( 'type' ) === null ) {
+			if ( !isset( $this->type ) && isset( $this->getConfig()[ 'type' ] ) ) {
+				$this->type = $this->getConfig()[ 'type' ][ 'value' ];
+			} else {
+				return false;
+			}
+			$this->set( 'type', $this->type );
+		}
 		if ( $this->root->getItem( 'schema:name' ) === null ) {
 			if ( !isset( $this->name ) ) {
 				return false;
 			}
 			$this->set( 'name', $this->name );
 		}
-
 		return true;
 	}
 
