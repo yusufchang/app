@@ -66,6 +66,11 @@ class WikiaAppMock {
 		if(!in_array( 'runFunction', $this->methods )) {
 			$this->methods[] = 'runFunction';
 		}
+		// allows both styles (Foo and wfFoo) but we must chop off the "wf" since WikiaFunctionWrapper does not expect it
+		if (startsWith($functionName, 'wf')) {
+			$functionName = substr($functionName,2);
+		}
+
 		if(!array_key_exists($functionName, $this->mockedFunctions)) {
 			$this->mockedFunctions[$functionName] = array( 'value' => $returnValue, 'calls' => $callsNum, 'params' => $inputParams );
 		}

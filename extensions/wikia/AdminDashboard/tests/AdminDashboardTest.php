@@ -1,11 +1,11 @@
 <?php
 	class AdminDashboardTest extends WikiaBaseTest {
-		
+
 		public function setUp() {
 			$this->setupFile = dirname(__FILE__) . '/../AdminDashboard.setup.php';
 			parent::setUp();
 		}
-		
+
 		const TEST_CITY_ID = 79860;
 		protected static $list = array('pageviews', 'edits', 'photos');
 
@@ -33,7 +33,7 @@
 			$this->mockGlobalVariable('wgCityId', self::TEST_CITY_ID);
 			$this->mockGlobalVariable('wgMemc', $mock_cache, 0);
 
-			$this->mockGlobalFunction('wfMemcKey', null, 0);
+			$this->mockGlobalFunction('wfMemcKey', null);
 
 			$this->mockApp();
 		}

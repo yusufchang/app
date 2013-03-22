@@ -86,11 +86,12 @@ class WikiaBaseTest extends PHPUnit_Framework_TestCase {
 	 * @param $className String
 	 * @param $mock Object instance of Mock
 	 * @param $functionName String name of static constructor
+	 * @param $extend boolean if true, then the Mock class also extends the original class so it passes type checks
 	 * @return void
 	 */
-	protected function proxyClass($className, $mock, $functionName = null) {
+	protected function proxyClass($className, $mock, $functionName = null, $extend = false) {
 		$mockClassName = get_class($mock);
-		WikiaMockProxy::proxy($className, $mockClassName, $mock);
+		WikiaMockProxy::proxy($className, $mockClassName, $mock, $extend);
 		if ($functionName) {
 			WikiaMockProxy::redefineStaticConstructor($className, $functionName);
 		}

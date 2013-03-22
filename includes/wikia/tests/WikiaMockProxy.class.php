@@ -21,9 +21,24 @@ class WikiaMockProxy {
 
 	// proxy takes the name of the class and the mock object classname and the mock object instance
 	// We store a reference by both original class name "Foo" and mocked class name "Mock_Foo_1234asdf" for convenience
-	static public function proxy($className, $mockClassName, $mockInstance) {
+	// if extend = true, then runkit will also ensure that the mocked class extends the original so it type checks
+	// TODO: unfortunately "extend" only works for one class at a time.  this should probably be a MockProxyFactory
+	static public function proxy($className, $mockClassName, $mockInstance, $extend = false) {
 		self::$instances[$className] = $mockInstance;
 		self::$instances[$mockClassName] = $mockInstance;
+
+		// runkit_class_adopt does what we want (makes the MockProxy a descendant of the original object)
+		// but has the side effect of inhertiting methods which must be removed so that it still works as a proxy
+		if ($extend) {
+			$r = new ReflectionClass('WikiaMockProxy');
+			$methods_before = $r->getMethods();
+			runkit_class_adopt('WikiaMockProxy', $className);
+			$methods_after = $r->getMethods();
+			$added_methods = array_diff_assoc($methods_after, $methods_before);
+			foreach ($added_methods as $reflectionMethod ) {
+				runkit_method_remove('WikiaMockProxy', $reflectionMethod->getName());
+			}
+		}
 	}
 
 	// save the old function as _saved_functionName

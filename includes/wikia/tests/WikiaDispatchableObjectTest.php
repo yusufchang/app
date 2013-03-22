@@ -51,11 +51,16 @@ class WikiaDispatchableObjectTest extends WikiaBaseTest {
 			->getMock();
 		$squidMock->expects( $this->exactly( 5 ) )
 			->method( 'doUpdate' );
-		$this->proxyClass( 'SquidUpdate', $squidMock);
+		$this->proxyClass( 'SquidUpdate', $squidMock, null, true);
 
 		$this->mockGlobalVariable( 'wgServer', $serverName );
 		$this->mockGlobalVariable( 'wgScriptPath', $scriptPath );
 		$this->mockApp();
+
+		// this test is for the WikiaMockProxy "extends" feature
+		// $squid is a MockProxy object here but behaves as a SquidUpdate instance
+		$squid = new SquidUpdate();
+		$this->assertTrue($squid instanceof SquidUpdate);
 
 		$this->assertEquals(
 			[$baseURI . 'test'],
