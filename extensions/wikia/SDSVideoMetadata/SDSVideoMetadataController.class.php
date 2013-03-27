@@ -115,7 +115,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 		$this->objectName = htmlspecialchars($item['name']);
 		$this->objectId = htmlspecialchars($item['id']);
 		$this->objectParam = 'Additional info';
-		$this->imgURL = '#';
+		$this->imgURL = '';
 		$this->removeMsg = $removeBtnMsg;
 		$this->pos = $pos;
 		$this->propName = $propName;

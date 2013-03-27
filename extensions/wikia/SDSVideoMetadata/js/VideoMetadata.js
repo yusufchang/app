@@ -80,7 +80,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 			tamplateData = {
 				objectName: $input.val(),
 				pos: $list.children(':last').data('pos') + 1 || 0,
-				imgURL: '#',
+				imgURL: '',
 				propName: $input.attr('name')
 			},
 			html = mustache.render(cachedTemplates.referenceItem, tamplateData);
@@ -99,7 +99,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 				objectParam: $target.children('.object-param').text(),
 				objectId: $target.children('.object-id').val(),
 				pos: $list.children(':last').data('pos') + 1 || 0,
-				imgURL: '#'
+				imgURL: ''
 			},
 			html = mustache(cachedTemplates.referenceItem, tamplateData);
 

@@ -133,6 +133,9 @@
 		@include box-sizing();
 
 		img {
+			background-image: url("/extensions/wikia/SDSVideoMetadata/images/img_placeholder.png") /* base64 */;
+			background-position: left top;
+			background-repeat: no-repeat;
 			display: block;
 			float: left;
 			height: 42px;
