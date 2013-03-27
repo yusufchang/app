@@ -144,6 +144,23 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 		$this->setVal('file', $fileTitle->getBaseText());
 	}
 
+	function getSuggestions() {
+		$params = $this->getRequest()->getParams();
+		$type = $params['type'];
+		$query = $params['query'];
+
+		$client = new PandoraAPIClient();
+		$resp = $client->getSuggestions($type, $query);
+		if ( $resp->isOK() ) {
+			$this->response->setData( array( "data" => $resp->asJson()) );
+		} else {
+			$this->response->setData( array(
+				"message" => "".$resp->getMessage(),
+				"status" =>  $resp->getStatusCode(),
+			) );
+		}
+	}
+
 	/**
 	 * set "completed" flag for given file
 	 *
