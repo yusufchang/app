@@ -63,3 +63,8 @@ $app->registerSpecialPage('VMD', 'SDSVideoMetadataController');
  * message files
  */
 $app->registerExtensionMessageFile('SDSVideoMetadata', $dir . 'SDSVideoMetadata.i18n.php' );
+
+F::build( 'JSMessages' )->registerPackage( 'VMD-messages', array(
+	'sdsvideometadata-vc-remove-item',
+	'sdsvideometadata-vc-create-new-item'
+));

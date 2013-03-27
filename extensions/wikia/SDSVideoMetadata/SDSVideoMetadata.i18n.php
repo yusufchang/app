@@ -14,6 +14,7 @@ $messages['en'] = array(
 
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Remove',
+	'sdsvideometadata-vc-create-new-item' => 'Create new',
 	'sdsvideometadata-vc-add-item' => 'Add more',
 	'sdsvideometadata-save' => 'Save and Continue',
 	'sdsvideometadata-vc-boolean-not-set' => 'Not set',
@@ -71,6 +72,7 @@ $messages['qqq'] = array(
 
 	// UI buttons messages
 	'sdsvideometadata-vc-remove-item' => 'Button for removing item from the list references',
+	'sdsvideometadata-vc-create-new-item' => 'Button for creating new object',
 	'sdsvideometadata-vc-add-item' => 'Button for adding more items to the list of references',
 	'sdsvideometadata-save' => 'Save and Continue button',
 	'sdsvideometadata-vc-boolean-not-set' => 'Boolean value type select not set',

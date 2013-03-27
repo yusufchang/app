@@ -16,6 +16,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	public function index() {
 
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/css/VideoMetadata.scss');
+		$this->response->addAsset('resources/wikia/libraries/mustache/mustache.js');
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/js/VideoMetadata.js');
 		$file = $this->getVal('video');
 
