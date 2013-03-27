@@ -1,7 +1,7 @@
 var VideoMetadata = {
 	cachedSelectors: {},
 	cachedTemplates: {},
-	charCountForSuggestions: 3,
+	charCountForSuggestions: 1,
 	videoPlayerPosition: null,
 	init: function() {
 		var that = this;
@@ -23,38 +23,61 @@ var VideoMetadata = {
 
 			that.cachedSelectors.form.on('input', '.suggestions', function(event){
 				var $target = $(event.target),
-					targetVal = $target.val()
+					targetVal = $target.val(),
 					$dropdown = $target.siblings('.suggestions-dropdown');
 
 				if (targetVal.length >= that.charCountForSuggestions) {
 					if ($dropdown.length > 0) {
-						that.loadSuggestions($dropdown);
+						//that.loadSuggestions($dropdown);
 						that.showSuggestionsDropdown($dropdown);
 
 					} else {
 						that.renderSuggestions(event.target);
 						that.showSuggestionsDropdown($dropdown);
+
 					}
-				}
-			});
-			that.cachedSelectors.form.on('blur', '.suggestions', function(event){
-				var $dropdown = $(event.target).siblings('.suggestions-dropdown');
-				if ($dropdown.length > 0) {
+				} else {
 					that.hideSuggestionsDropdown($dropdown);
 				}
 			});
-			that.cachedSelectors.form.on('click', '.suggestions-dropdown .reference-item', function(event){
-				var $target = $(event.target);
-				that.addRefItem($target);
-				that.hideSuggestionsDropdown($target.parents('.suggestions-dropdown'));
+			that.cachedSelectors.form.on('blur', '.suggestions', function(event){
+				var $target = $(event.target),
+					$dropdown = $target.siblings('.suggestions-dropdown');
+				if ($dropdown.length > 0) {
+					$target.val('');
+					that.hideSuggestionsDropdown($dropdown);
+				}
 			});
-
+			that.cachedSelectors.form.on('mousedown', '.suggestions-dropdown .reference-item', function(event){
+				var $target = $(event.currentTarget),
+					$dropdown = $target.siblings('.suggestions-dropdown');
+				that.addRefItem($target);
+				$target.val('');
+				that.hideSuggestionsDropdown($dropdown);
+			});
+			that.cachedSelectors.form.on('mousedown', '.suggestions-dropdown .create-new-btn', function(event){
+				var $target = $(event.currentTarget),
+					$dropdown = $target.siblings('.suggestions-dropdown');
+				that.createRefItem($target);
+				$target.val('');
+				that.hideSuggestionsDropdown($dropdown);
+			});
+			that.cachedSelectors.form.on('click', '.reference-list .remove-item', function(event){
+				event.preventDefault();
+				that.removeRefItem($(event.target));
+			});
 		});
 
 		// attach handlers
 		this.cachedSelectors.typeSelect.on('change', function(event) {
 			that.chooseClipType(event);
 			that.simpleValidation();
+		});
+		// block accidental submit on enter
+		this.cachedSelectors.form.on('keydown', function(event){
+			if (event.which === 13) {
+				event.preventDefault();
+			}
 		});
 
 		// lock video position when scrolling
@@ -73,9 +96,8 @@ var VideoMetadata = {
 	},
 	// hide suggestions dropdown
 	hideSuggestionsDropdown: function($dropdown) {
-		//$dropdown.addClass('hidden');
-		$dropdown.find('li').remove();
-		//$dropdown.find('.create-new-btn').addClass('hidden');
+		$dropdown.addClass('hidden');
+		//$dropdown.find('li').remove();
 	},
 	// render suggestions dropdown
 	renderSuggestions: function(eventTarget) {
@@ -87,7 +109,7 @@ var VideoMetadata = {
 
 		$target.append(html);
 
-		this.loadSuggestions($target.children('.suggestions-dropdown'));
+		//this.loadSuggestions($target.children('.suggestions-dropdown'));
 	},
 	// load suggestions TEMPORARY!!!!
 	loadSuggestions: function($dropdown) {
@@ -126,7 +148,7 @@ var VideoMetadata = {
 			html = '',
 			i;
 		for (i = 0; i < suggestions.length; i += 1) {
-			suggestions[i].pos = i;
+			suggestions[i].pos = '';
 			suggestions[i].propName = $dropdown.siblings('input').attr('id');
 			suggestions[i].removeMsg = 'Remove';
 
@@ -136,11 +158,52 @@ var VideoMetadata = {
 		$dropdown.children('ul').append(html);
 
 	},
+	// create reference item and add to list
+	createRefItem: function($target) {
+		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list'),
+			$input = $list.siblings('input'),
+			tamplateData = {
+				objectName: $input.val(),
+				objectParam: '',
+				objectId: '',
+				pos: $list.children(':last').data('pos') + 1 || 0,
+				imgURL: '#',
+				propName: $input.attr('name')
+			},
+			html = $.mustache(this.cachedTemplates.referenceItem, tamplateData);
+
+		$list.append(html);
+
+		if ($list.hasClass('hidden')) {
+			$list.removeClass('hidden');
+		}
+	},
 	// add reference item to list
 	addRefItem: function($target) {
-		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list');
-		console.log($list);
-		$list.append($target);
+		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list'),
+			tamplateData = {
+				objectName: $target.children('.object-name').text(),
+				objectParam: $target.children('.object-param').text(),
+				objectId: $target.children('.object-id').val(),
+				pos: $list.children(':last').data('pos') + 1 || 0,
+				imgURL: '#'
+			},
+			html = $.mustache(this.cachedTemplates.referenceItem, tamplateData);
+
+		$list.append(html);
+
+		if ($list.hasClass('hidden')) {
+			$list.removeClass('hidden');
+		}
+	},
+	// remove reference item from list
+	removeRefItem: function($target) {
+		var $list = $target.parents('.reference-list');
+		$target.parent().remove();
+		if ($list.children().length === 0) {
+			$list.addClass('hidden');
+		}
+
 	},
 	// show form part for type specific properties
 	chooseClipType: function(event) {
