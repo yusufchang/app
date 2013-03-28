@@ -11,13 +11,28 @@ class PandoraFormsTest extends WikiaBaseTest {
 		parent::setUp();
 	}
 
-	public function preparePandoraForms( $config, $data ) {
+	public function preparePandoraForms( $config = null, $data = null ) {
 		$forms = new PandoraForms();
 		//set config
-		$forms->setConfig( $config );
+		if ( $config !== null ) {
+			$forms->setConfig( $config );
+		}
 		//set data
-		$forms->load( $data );
+		if ( $data !== null ) {
+			$forms->load( $data );
+		}
 		return $forms;
+	}
+
+	public function prepareOrm( $data ) {
+		$this->setUp();
+		//should return PandoraORM typed object
+		$orm = PandoraORM::buildFromType( 'TestType' );
+		foreach ( $data as $key => $value ) {
+			$orm->set( $key, $value );
+		}
+		var_dump( $orm );
+		return $orm;
 	}
 
 	/**
@@ -33,6 +48,17 @@ class PandoraFormsTest extends WikiaBaseTest {
 			print_r( $renderedField );
 		}
 	}
+
+	/**
+	 * @dataProvider ormDataProvider
+	 * @param $orm
+	 * @param $config
+	 */
+	public function testLoadFromORM( $orm, $config ) {
+		$formsHelper = $this->preparePandoraForms( $config );
+	}
+
+
 
 //	public function testRenderAll() {
 //
@@ -108,6 +134,23 @@ class PandoraFormsTest extends WikiaBaseTest {
 				array(
 					'videoObject_contentFormat' => 'PAL'
 				)
+			)
+		);
+	}
+
+	public function ormDataProvider() {
+		return array(
+			array(
+				//orm
+				$this->prepareOrm( array(
+					'name' => 'testName',
+					'type' => 'schema:VideoObject',
+					'description' => 'simple description'
+				) ),
+				array(
+
+				)
+				//config
 			)
 		);
 	}
