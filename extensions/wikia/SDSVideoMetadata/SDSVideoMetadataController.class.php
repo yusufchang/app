@@ -145,7 +145,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	}
 
 	/**
-	 * ajax suggestions fetch entry point.
+	 * ajax suggestions entry point.
 	 *
 	 * usage: $.nirvana.sendRequest({method: 'getSuggestions', controller: 'SDSVideoMetadataController', data: {type: 'music_recording', query: 'a'}});
 	 */
@@ -158,7 +158,11 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$resp = $client->getSuggestions($type, $query);
 			if ( $resp->isOK() ) {
 				// $this->response->setData( array( "data" => $resp->asJson(), "success" => true ) );
-				$this->response->setData( array( "data" => array(array('objectName' => 'name', 'objectId' => 'id')), "success" => true ) );
+				$suggestions = array();
+				foreach( $resp->asJson() as $i => $sug ) {
+					$suggestions[] = new SuggestionViewModel($sug);
+				}
+				$this->response->setData( array( "data" => $suggestions, "success" => true ) );
 			} else {
 				$this->response->setData( array(
 					"message" => "".$resp->getMessage(),
