@@ -242,7 +242,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 		var throttled = $.throttle( 100, setVideoPlayerPosition);
 		$(window).on('scroll', throttled);
 
-		// set object in edit mode
+		// set object type in edit mode
 		setObjTypeForEdit();
 	};
 
