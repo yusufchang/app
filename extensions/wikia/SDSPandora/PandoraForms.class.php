@@ -71,7 +71,9 @@ class PandoraForms extends WikiaController {
 	}
 
 	protected function extractValue( $item, $config ) {
+		if( $item instanceof PandoraORM ) {
 
+		}
 	}
 
 	public function renderField( $key ) {
