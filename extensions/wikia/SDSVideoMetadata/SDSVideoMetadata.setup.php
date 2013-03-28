@@ -36,7 +36,6 @@ $app->registerClass('VideoClipHowToVideo', $dir . 'mappings/VideoClipHowToVideo.
 $app->registerClass('VideoClipMusicVideo', $dir . 'mappings/VideoClipMusicVideo.class.php');
 $app->registerClass('VideoClipTravelVideo', $dir . 'mappings/VideoClipTravelVideo.class.php');
 $app->registerClass('SDSVideoMetadataHooks', $dir . 'SDSVideoMetadataHooks.class.php');
-$app->registerClass('SuggestionViewModel', $dir . 'viewModels/SuggestionViewModel.php');
 /**
  * hooks
  */

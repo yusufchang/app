@@ -11,7 +11,6 @@ class SuggestionViewModel {
 	public $objectId;
 
 	function __construct($suggestion) {
-		// $this->model = $suggestion;
 		$this->objectName = $suggestion->name;
 		$this->objectId = $suggestion->s;
 	}
