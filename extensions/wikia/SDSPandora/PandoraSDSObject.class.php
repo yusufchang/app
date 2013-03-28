@@ -19,6 +19,18 @@ class PandoraSDSObject implements JsonSerializable {
 
 	protected static $api;
 
+	public function __construct ( $type = null, $subject = null, $value = null ) {
+		if ( $type !== null ) {
+			$this->setType( $type );
+		}
+		if ( $subject !== null ) {
+			$this->setSubject( $subject );
+		}
+		if ( $value !== null ) {
+			$this->setValue( $value );
+		}
+	}
+
 	public function hasValue( $value = null ) {
 		$value = ($value !== null) ? $value : $this->value;
 		if ( $value instanceof PandoraSDSObject ) return $value->hasValue();
@@ -71,20 +83,20 @@ class PandoraSDSObject implements JsonSerializable {
 		}
 	}
 
-	public function getValue( $searchFor = null ) {
-		if ( $this->getType() === static::TYPE_OBJECT ) {
+	public function getValue( $searchFor = null, $lazyLoadObject = true ) {
+		if ( $lazyLoadObject && $this->getType() === static::TYPE_OBJECT ) {
 			$this->getObjectValue();
 		}
 		if ( $searchFor !== null ) {
 			if ( $this->getType() === static::TYPE_COLLECTION || $this->getType() === static::TYPE_OBJECT ) {
-				foreach ( $this->getValue() as $subItem ) {
+				foreach ( $this->getValue( null, $lazyLoadObject ) as $subItem ) {
 					if ( $subItem->getSubject() === $searchFor ) { /* @var $subItem PandoraSDSObject */
-						return $subItem->getValue();
+						return $subItem->getValue( null, $lazyLoadObject );
 					}
 				}
 			} else {
 				if ( $this->getSubject() === $searchFor ) {
-					return $this->getValue();
+					return $this->getValue( null, $lazyLoadObject );
 				}
 			}
 			return null;
@@ -150,7 +162,7 @@ class PandoraSDSObject implements JsonSerializable {
 				$returnValue = array();
 				foreach ( $this->value as $val ) {
 					if ( $val->getType() === static::TYPE_LITERAL ) {
-						if ( $val->getSubject() ) {
+						if ( $val->getSubject() !== null ) {
 							$returnValue[ $val->getSubject() ] = $val->getValue();
 						} else {
 							$returnValue[] = $val->getValue();
@@ -171,7 +183,11 @@ class PandoraSDSObject implements JsonSerializable {
 			$object = new stdClass();
 			foreach( $this->value as $val ) {
 				$subject = $val->getSubject();
-				$object->{$subject} = $val->getValue();
+				if ( $val->getType() === PandoraSDSObject::TYPE_LITERAL ) {
+					$object->{$subject} = $val->getValue();
+				} else {
+					$object->{$subject} = $val->jsonSerialize();
+				}
 			}
 			return $object;
 		} elseif ( $this->type === static::TYPE_LITERAL ) {

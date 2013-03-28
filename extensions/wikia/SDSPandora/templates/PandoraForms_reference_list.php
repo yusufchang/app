@@ -1,6 +1,6 @@
 <div class="input-group <?= $type ?>" data-type="" data-dependencies="" data-action="">
 	<label for="<?= $name ?>"><?= $labelMsg ?></label>
-	<input type="text" name="<?= $name ?>" id="<?= $name ?>" class="suggestions">
+	<input type="text" name="<?= $name ?>" id="<?= $name ?>">
 	<ul class="reference-list <?= (!is_array( $list )) ? 'hidden' : ''; ?>">
 		<?php
 			if ( !is_array( $list ) ) $list = array();

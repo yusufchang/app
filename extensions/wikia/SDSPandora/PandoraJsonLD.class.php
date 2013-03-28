@@ -46,7 +46,6 @@ class PandoraJsonLD {
 			}
 			$rootObject->setValue( $node );
 		}
-
 		if ( $rootObject->getValue( '@graph' ) !== null ) {
 			$rootObject = static::buildFromGraph( $rootObject, $id );
 		}
@@ -76,32 +75,13 @@ class PandoraJsonLD {
 	}
 
 	static protected function buildFromGraph( $root, $id ) {
-		$objects = array();
 		$graph = $root->getValue( '@graph' );
 		foreach ( $graph as $node ) {
-			$uri = $node->getValue( 'id' );
-			$objectId = pathinfo( $uri );
-			if ( $objectId[ 'filename' ] == $id ) {
-				$result = $node;
-			}
-			$objects[ $node->getValue( 'id' ) ] = $node;
-		}
-		//check result node for any objects
-		if ( $result->getType() !== PandoraSDSObject::TYPE_LITERAL ) {
-			$values = $result->getValue();
-			foreach( $values as $val ) {
-				if ( $val->getType() === PandoraSDSObject::TYPE_OBJECT ) {
-					static::getObject( $val, $objects );
-				} elseif ( $val->getType() === PandoraSDSObject::TYPE_COLLECTION ) {
-					foreach ( $val->getValue() as $item ) {
-						if ( $item->getType() === PandoraSDSObject::TYPE_OBJECT ) {
-							static::getObject( $item, $objects );
-						}
-					}
-				}
+			if ( $node->getValue( 'id' ) == $id ) {
+				return $node;
 			}
 		}
-		return $result;
+		return $root;
 	}
 
 	static protected function getObject( &$item, $objects ) {

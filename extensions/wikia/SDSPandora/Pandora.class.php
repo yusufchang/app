@@ -22,6 +22,10 @@ class Pandora {
 		return static::$config;
 	}
 
+	/**
+	 * @param Title $title
+	 * @return string Pandora Id, for example http://sds.wikia.com/video151/183, this is ID that identifies an object in pandora database
+	 */
 	public static function pandoraIdFromTitle( Title $title ) {
 
 		// for example: 'http://sds.wikia.com/video151/'.$articleId
@@ -29,6 +33,20 @@ class Pandora {
 		return $id;
 	}
 
+	/**
+	 * @param $wikiArticleId the id of described object, for example articleId for video (File Page id)
+	 * @return string Pandora Id, for example http://sds.wikia.com/video151/183, this is ID that identifies an object in pandora database
+	 */
+	public static function pandoraIdFromArticleId( $wikiArticleId ) {
+
+		// for example: 'http://sds.wikia.com/video151/'.$articleId
+		$id = static::$config['id_base_url'] . static::$config['current_collection_name'] . '/' . $wikiArticleId;
+		return $id;
+	}
+
+	/**
+	 * @return string $id generates new Id for common object (object that is not direct representation of wiki article, for example: movie object, actor object)
+	 */
 	public static function generateCommonObjectId() {
 
 		// for example: "http://sds.wikia.com/sds/~" . base64_encode(microtime(true) . rand());
