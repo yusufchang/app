@@ -49,6 +49,7 @@
 			margin-bottom: 10px;
 			padding-left: 17px;
 			padding-right: 0;
+			position: relative;
 		}
 		input[type="text"],
 		textarea,
@@ -72,6 +73,7 @@
 
 		.fixed {
 			top: 0;
+			padding-top: 10px;
 			position: fixed;
 		}
 	}
@@ -94,19 +96,46 @@
 		padding: 10px 0 0 10px;
 		width: 100%;
 		@include box-sizing();
+
+		.reference-item {
+			border: 1px solid $color-page-border;
+			float: left;
+			height: 52px;
+			margin: 0 10px 10px 0;
+			padding: 4px;
+			position: relative;
+			width: 219px;
+			@include linear-gradient($color-secondary-button, top, $color-secondary-button-highlight, 10%, $color-secondary-button, 65%);
+
+			p,
+			span {
+				width: 133px;
+			}
+			.remove-item {
+				background-image: url("/extensions/wikia/SDSVideoMetadata/images/remove_icon.png") /* base64 */ ;
+				@if $is-dark-wiki {
+					background-image: url("/extensions/wikia/SDSVideoMetadata/images/remove_icon.png_dark.png") /* base64 */ ;
+				}
+				display: block;
+				height: 10px;
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				width: 10px;
+				@include image-replacement();
+			}
+		}
 	}
 	.reference-item {
-		border: 1px solid $color-page-border;
-		height: 52px;
-		float: left;
-		margin: 0 10px 10px 0;
-		padding: 4px;
-		position: relative;
-		width: 219px;
-		@include linear-gradient($color-secondary-button, top, $color-secondary-button-highlight, 10%, $color-secondary-button, 65%);
+		height: 50px;
+		margin: 0;
+		padding: 4px 10px 4px 4px;
 		@include box-sizing();
 
 		img {
+			background-image: url("/extensions/wikia/SDSVideoMetadata/images/img_placeholder.png") /* base64 */;
+			background-position: left top;
+			background-repeat: no-repeat;
 			display: block;
 			float: left;
 			height: 42px;
@@ -115,7 +144,7 @@
 		}
 		p,
 		span {
-			width: 133px;
+			width: 124px;
 			@include ellipses();
 		}
 		p {
@@ -132,20 +161,41 @@
 			padding-top: 2px;
 			font-size: 10px;
 		}
+	}
+	.suggestions-dropdown {
+		background-color: $color-page;
+		border: 1px solid $color-page-border;;
+		position: absolute;
+		right: 0;
+		top: 57px;
+		width: 192px;
+		z-index: 2;
+		@include box-sizing();
+
+		p {
+			color: $color-alternate-text;
+		}
 		.remove-item {
-			background-image: url("/extensions/wikia/SDSVideoMetadata/images/remove_icon.png") /* base64 */ ;
+			display: none;
+		}
+		.create-new-btn:hover,
+		.reference-item:hover {
+			background-color: darken($color-page, 10%);
 			@if $is-dark-wiki {
-				background-image: url("/extensions/wikia/SDSVideoMetadata/images/remove_icon.png_dark.png") /* base64 */ ;
+				background-color: lighten($color-page, 10%);
 			}
+		}
+		.create-new-btn {
 			display: block;
-			height: 10px;
-			position: absolute;
-			right: 10px;
-			top: 10px;
-			width: 10px;
-			@include image-replacement();
+			font-size: 12px;
+			font-weight: bold;
+			height: 50px;
+			padding: 20px 4px 15px 10px;
+			text-decoration: none;
+			@include box-sizing();
 		}
 	}
+
 }
 
 

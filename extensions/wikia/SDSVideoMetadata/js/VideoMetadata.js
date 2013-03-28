@@ -1,84 +1,134 @@
-var VideoMetadata = {
-	cachedSelectors: {},
-	videoPlayerPosition: null,
-	init: function() {
-		var that = this;
-		this.cachedSelectors.form = $('#VMDForm');
-		this.cachedSelectors.typeSelect = $('#vcType');
-		this.cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
-		this.cachedSelectors.saveButton = $('#VMDFormSave');
-		this.cachedSelectors.videoPlayer = $('#VMD-player-wrapper > div');
+require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, mustache, loader, msg) {
 
-		// attach handlers
-		this.cachedSelectors.form.on('click', 'button.add', function(event) {
-			event.preventDefault();
-			that.addListItem(event);
-		});
-		this.cachedSelectors.form.on('click', 'button.remove', function(event) {
-			event.preventDefault();
-			that.removeListItem(event);
-		});
+	var cachedSelectors = {},
+		cachedTemplates = {},
+		charCountForSuggestions = 1, // minimal number of characters in input field to trigger suggestions dropdown
+		videoPlayerPosition = null;
 
-		// TODO: this if prevent some strange behavior when pressing enter on different input filed (triggers other buttons in form). Find the root of this problem, solve and remove this handlers!!!
-		this.cachedSelectors.form.on('keydown', 'input[type="text"]', function(event) {
-			if (event.which == 13) {
-				event.preventDefault();
-			}
-		});
-		this.cachedSelectors.form.on('keydown', ' li input[type="text"]', function(event) {
-			that.listEnterKeyHelper(event);
-		});
+	function showSuggestionsDropdown($dropdown) {
+		$dropdown.removeClass('hidden');
+	};
 
-		this.cachedSelectors.typeSelect.on('change', function(event) {
-			that.chooseClipType(event);
-			that.simpleValidation();
-		});
+	function hideSuggestionsDropdown($dropdown) {
+		$dropdown.addClass('hidden');
+		// will be needed when suggestion are ready
+		//$dropdown.find('li').remove();
+	};
 
-		this.videoPlayerPosition = this.cachedSelectors.videoPlayer.offset().top;
-		var throttled = $.throttle( 100, $.proxy(this.setVideoPlayerPosition, this));
-		$(window).on('scroll', throttled);
+	function createSuggestionsDropdown(eventTarget) {
+		var $target = $(eventTarget).parent(),
+			data = {
+				createNewBtnMsg: msg('sdsvideometadata-vc-create-new-item')
+			},
+			html = mustache.render(cachedTemplates.suggestionsDropdown, data);
 
-		this.setObjTypeForEdit();
-	},
+		$target.append(html);
 
-	// add new blank input field for reference list type properties
-	addListItem: function(event) {
-		var lastListElement = $(event.target).prev().children().last();
+		// will be needed when suggestion are ready
+		//loadSuggestions($target.children('.suggestions-dropdown'));
+	};
 
-		lastListElement.clone().insertBefore(lastListElement).find('.remove').removeClass('hidden');
-		lastListElement.find('input').val('').focus().next().addClass('hidden');
-	},
-	// remove selected reference in the list
-	removeListItem: function(event) {
-		var selectedRefObj = $(event.target).parent(),
-			focusPoint = selectedRefObj.siblings().last().find('input');
+	function loadSuggestions($dropdown) { // load suggestions TEMPORARY!!!!
+		var suggestions = [
+				{
+					objectName: 'Doom',
+					objectParam: '2002.12.01',
+					objectId: '1234567890',
+					imgURL: '#'
+				},
+				{
+					objectName: 'Doom',
+					objectParam: '2002.12.01',
+					objectId: '1234567890',
+					imgURL: '#'
+				},
+				{
+					objectName: 'Doom',
+					objectParam: '2002.12.01',
+					objectId: '1234567890',
+					imgURL: '#'
+				},
+				{
+					objectName: 'Doom',
+					objectParam: '2002.12.01',
+					objectId: '1234567890',
+					imgURL: '#'
+				},
+				{
+					objectName: 'Doom',
+					objectParam: '2002.12.01',
+					objectId: '1234567890',
+					imgURL: '#'
+				}
+			],
+			html = '',
+			i;
+		for (i = 0; i < suggestions.length; i += 1) {
+			suggestions[i].propName = $dropdown.siblings('input').attr('id');
+			suggestions[i].removeMsg = msg('sdsvideometadata-vc-remove-item');
 
-		selectedRefObj.remove();
-		focusPoint.focus();
-	},
-	// use 'enter' key to quickly move through lists or add new list items
-	listEnterKeyHelper: function(event) {
-		if (event.which == 13) {
-			var $target = $(event.target),
-				$nextField = $target.parent().next().find('input');
-
-			if ($nextField.length > 0) {
-				$nextField.focus();
-			} else {
-				$target.parents('ul').siblings('button.add').click();
-			}
+			html += mustache.render(cachedTemplates.referenceItem, suggestions[i]);
 		}
-	},
-	// show form part for type specific properties
-	chooseClipType: function(event) {
+
+		$dropdown.children('ul').append(html);
+
+	};
+
+	function createRefItem($target) {
+		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list'),
+			$input = $list.siblings('input'),
+			tamplateData = {
+				objectName: $input.val(),
+				pos: $list.children(':last').data('pos') + 1 || 0,
+				imgURL: '',
+				propName: $input.attr('name')
+			},
+			html = mustache.render(cachedTemplates.referenceItem, tamplateData);
+
+		$list.append(html);
+
+		if ($list.hasClass('hidden')) {
+			$list.removeClass('hidden');
+		}
+	};
+
+	function addRefItem($target) {
+		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list'),
+			tamplateData = {
+				objectName: $target.children('.object-name').text(),
+				objectParam: $target.children('.object-param').text(),
+				objectId: $target.children('.object-id').val(),
+				pos: $list.children(':last').data('pos') + 1 || 0,
+				imgURL: ''
+			},
+			html = mustache(cachedTemplates.referenceItem, tamplateData);
+
+		$list.append(html);
+
+		if ($list.hasClass('hidden')) {
+			$list.removeClass('hidden');
+		}
+	};
+
+	function removeRefItem($target) {
+		var $list = $target.parents('.reference-list');
+		$target.parent().remove();
+		if ($list.children().length === 0) {
+			$list.addClass('hidden');
+		}
+
+	};
+
+	function chooseClipType(event) { // show form part for type specific properties
 		var $target = $(event.target),
 			targetValue = $target.val(),
 			targetClass = '.' + targetValue,
 
-			// cache selectors
-			propertiesWrapper = this.cachedSelectors.typeMDProperties,
+		// cache selectors
+			propertiesWrapper = cachedSelectors.typeMDProperties,
 			propertiesFormFields = propertiesWrapper.find('input, select, textarea');
 
+		// show details if type is choosen
 		if(targetValue !== '') {
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.find(targetClass).find('input, select, textarea').removeAttr('disabled');
@@ -88,35 +138,129 @@ var VideoMetadata = {
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.addClass('hidden');
 		}
-	},
-	// Temporary method to prevent errors on PHP side when sending empty form
-	simpleValidation: function() {
-		if (this.cachedSelectors.typeSelect.val() !== '') {
-			this.cachedSelectors.saveButton.removeAttr('disabled');
+	};
+
+	function simpleValidation() { // Temporary method to prevent errors on PHP side when sending empty form
+		if (cachedSelectors.typeSelect.val() !== '') {
+			cachedSelectors.saveButton.removeAttr('disabled');
 		} else {
-			this.cachedSelectors.saveButton.attr('disabled', 'disabled');
+			cachedSelectors.saveButton.attr('disabled', 'disabled');
 		}
-	},
-	// Temporary method for setting video object type in edit mode
-	setObjTypeForEdit: function() {
-		var type = this.cachedSelectors.typeSelect.data('type');
+	};
+
+	function setObjTypeForEdit() { 	// Temporary method for setting video object type in edit mode
+		var type = cachedSelectors.typeSelect.data('type');
 		if (type === '') {
 			return false;
 		}
 		var $type = 'option[value="' + type + '"]';
-		this.cachedSelectors.typeSelect.children($type).attr('selected', 'selected');
-		this.cachedSelectors.typeSelect.trigger('change');
-	},
-	// Method controlling video player position
-	setVideoPlayerPosition: function() {
-		if ($(window).scrollTop() >= this.videoPlayerPosition) {
-			this.cachedSelectors.videoPlayer.addClass('fixed');
-		} else {
-			this.cachedSelectors.videoPlayer.removeClass('fixed');
-		}
-	}
-};
+		cachedSelectors.typeSelect.children($type).attr('selected', 'selected');
+		cachedSelectors.typeSelect.trigger('change');
+	};
 
-$(function() {
-	VideoMetadata.init();
+	function setVideoPlayerPosition() {
+		if ($(window).scrollTop() >= videoPlayerPosition) {
+			cachedSelectors.videoPlayer.addClass('fixed');
+		} else {
+			cachedSelectors.videoPlayer.removeClass('fixed');
+		}
+	};
+
+	/**********************************************************
+	  Initializing Function for Video Metadata form interface
+	**********************************************************/
+
+	function init() {
+
+		// chache selectors
+		cachedSelectors.form = $('#VMDForm');
+		cachedSelectors.typeSelect = $('#vcType');
+		cachedSelectors.typeMDProperties = $('#VMDSpecificMD');
+		cachedSelectors.saveButton = $('#VMDFormSave');
+		cachedSelectors.videoPlayer = $('#VMD-player-wrapper > div');
+
+		// attach handlers
+		cachedSelectors.form.on('input', '.suggestions', function(event){
+			var $target = $(event.target),
+				targetVal = $target.val(),
+				$dropdown = $target.siblings('.suggestions-dropdown');
+
+			if (targetVal.length >= charCountForSuggestions) {
+				if ($dropdown.length > 0) {
+					//loadSuggestions($dropdown);
+					showSuggestionsDropdown($dropdown);
+
+				} else {
+					createSuggestionsDropdown(event.target);
+					showSuggestionsDropdown($dropdown);
+
+				}
+			} else {
+				hideSuggestionsDropdown($dropdown);
+			}
+		});
+		cachedSelectors.form.on('blur', '.suggestions', function(event){
+			var $target = $(event.target),
+				$dropdown = $target.siblings('.suggestions-dropdown');
+			if ($dropdown.length > 0) {
+				$target.val('');
+				hideSuggestionsDropdown($dropdown);
+			}
+		});
+		cachedSelectors.form.on('mousedown', '.suggestions-dropdown .reference-item', function(event){
+			var $target = $(event.currentTarget),
+				$dropdown = $target.siblings('.suggestions-dropdown');
+			addRefItem($target);
+			$target.val('');
+			hideSuggestionsDropdown($dropdown);
+		});
+		cachedSelectors.form.on('mousedown', '.suggestions-dropdown .create-new-btn', function(event){
+			var $target = $(event.currentTarget),
+				$dropdown = $target.siblings('.suggestions-dropdown');
+			createRefItem($target);
+			$target.val('');
+			hideSuggestionsDropdown($dropdown);
+		});
+		cachedSelectors.form.on('click', '.reference-list .remove-item', function(event){
+			event.preventDefault();
+			removeRefItem($(event.target));
+		});
+		cachedSelectors.typeSelect.on('change', function(event) {
+			chooseClipType(event);
+			simpleValidation();
+		});
+
+		// block accidental submit on enter
+		cachedSelectors.form.on('keydown', function(event){
+			if (event.which === 13) {
+				event.preventDefault();
+			}
+		});
+
+		// lock video position when scrolling
+		videoPlayerPosition = cachedSelectors.videoPlayer.offset().top;
+		var throttled = $.throttle( 100, setVideoPlayerPosition);
+		$(window).on('scroll', throttled);
+
+		// set object in edit mode
+		setObjTypeForEdit();
+	};
+
+	/**********************************************
+	  Load templates and and initialize interface
+	**********************************************/
+
+	$(function() {
+		loader({
+			type: loader.MULTI,
+			resources: {
+				mustache: 'extensions/wikia/SDSVideoMetadata/templates/suggestions_dropdown.mustache,extensions/wikia/SDSVideoMetadata/templates/SDSVideoMetadataController_referenceItem.mustache',
+				messages: 'VMD-messages'
+			}
+		}).done(function(packagesData) {
+			cachedTemplates.suggestionsDropdown = packagesData.mustache[0];
+			cachedTemplates.referenceItem = packagesData.mustache[1];
+			init();
+		});
+	});
 });

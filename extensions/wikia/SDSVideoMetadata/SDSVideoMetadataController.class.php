@@ -32,6 +32,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	public function index() {
 
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/css/VideoMetadata.scss');
+		$this->response->addAsset('resources/wikia/libraries/mustache/mustache.js');
 		$this->response->addAsset('extensions/wikia/SDSVideoMetadata/js/VideoMetadata.js');
 		$file = $this->getVal('video');
 
@@ -175,7 +176,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 		$this->objectName = htmlspecialchars($item['name']);
 		$this->objectId = htmlspecialchars($item['id']);
 		$this->objectParam = 'Additional info';
-		$this->imgURL = '#';
+		$this->imgURL = '';
 		$this->removeMsg = $removeBtnMsg;
 		$this->pos = $pos;
 		$this->propName = $propName;
