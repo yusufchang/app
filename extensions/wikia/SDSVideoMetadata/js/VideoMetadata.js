@@ -128,7 +128,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 			propertiesWrapper = cachedSelectors.typeMDProperties,
 			propertiesFormFields = propertiesWrapper.find('input, select, textarea');
 
-		// show details if type is choosen
+		// show details for the chosen type
 		if(targetValue !== '') {
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.find(targetClass).find('input, select, textarea').removeAttr('disabled');
