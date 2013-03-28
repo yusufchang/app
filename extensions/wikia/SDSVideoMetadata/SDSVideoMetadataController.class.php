@@ -141,7 +141,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$this->setVal( 'isCompleted', $this->getFileCompleted( $fileTitle ) );
 		}
 
-		$this->setVal('file', $file);
+		$this->setVal('file', $fileTitle->getBaseText());
 	}
 
 	/**
