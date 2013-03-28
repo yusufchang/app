@@ -157,7 +157,8 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$client = new PandoraAPIClient();
 			$resp = $client->getSuggestions($type, $query);
 			if ( $resp->isOK() ) {
-				$this->response->setData( array( "data" => $resp->asJson(), "success" => true ) );
+				// $this->response->setData( array( "data" => $resp->asJson(), "success" => true ) );
+				$this->response->setData( array( "data" => array(array('objectName' => 'name', 'objectId' => 'id')), "success" => true ) );
 			} else {
 				$this->response->setData( array(
 					"message" => "".$resp->getMessage(),
