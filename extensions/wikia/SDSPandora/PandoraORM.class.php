@@ -196,6 +196,7 @@ class PandoraORM {
 					//change this so it adds only literal with id
 					if ( $existing->getType() === PandoraSDSObject::TYPE_OBJECT ) {
 						$node = new PandoraSDSObject( PandoraSDSObject::TYPE_OBJECT, null, $existing->getItem( 'id' ) );
+						//set type will clear already added values
 						$existing->setType( PandoraSDSObject::TYPE_COLLECTION );
 						$existing->setValue( $node );
 					}
@@ -254,6 +255,12 @@ class PandoraORM {
 				$orm = static::buildFromType( $type );
 				$orm->name = $value[ 'name' ];
 			}
+			//insert data from value passed as 'config_key' => 'value to set'
+			foreach ( $value as $key => $val ) {
+				if ( $key !== 'id' ) {
+					$orm->set( $key, $val );
+				}
+			}
 		}
 		return $orm;
 	}
@@ -267,7 +274,9 @@ class PandoraORM {
 					$value = $item->getValue();
 					if ( is_array( $value ) ) {
 						foreach ( $value as $val ) {
-							$result[] = $val->getValue();
+							if ( $val->getType() === PandoraSDSObject::TYPE_LITERAL ) {
+								$result[] = $val->getValue();
+							}
 						}
 						return $result;
 					} else {
