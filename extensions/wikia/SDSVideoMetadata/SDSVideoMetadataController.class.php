@@ -144,19 +144,32 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 		$this->setVal('file', $fileTitle->getBaseText());
 	}
 
+	/**
+	 * ajax suggestions fetch entry point.
+	 *
+	 * usage: $.nirvana.sendRequest({method: 'getSuggestions', controller: 'SDSVideoMetadataController', data: {type: 'music_recording', query: 'a'}});
+	 */
 	function getSuggestions() {
 		$params = $this->getRequest()->getParams();
-		$type = $params['type'];
-		$query = $params['query'];
-
-		$client = new PandoraAPIClient();
-		$resp = $client->getSuggestions($type, $query);
-		if ( $resp->isOK() ) {
-			$this->response->setData( array( "data" => $resp->asJson()) );
+		if ( isset($params['type']) && isset($params['query']) ) {
+			$type = $params['type'];
+			$query = $params['query'];
+			$client = new PandoraAPIClient();
+			$resp = $client->getSuggestions($type, $query);
+			if ( $resp->isOK() ) {
+				$this->response->setData( array( "data" => $resp->asJson(), "success" => true ) );
+			} else {
+				$this->response->setData( array(
+					"message" => "".$resp->getMessage(),
+					"success" =>  false,
+					"data" => array(),
+				) );
+			}
 		} else {
 			$this->response->setData( array(
-				"message" => "".$resp->getMessage(),
-				"status" =>  $resp->getStatusCode(),
+				"message" => "type and query params Expected.",
+				"success" =>  false,
+				"data" => array(),
 			) );
 		}
 	}
