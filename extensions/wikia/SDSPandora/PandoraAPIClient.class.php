@@ -70,7 +70,7 @@ class PandoraAPIClient extends WikiaObject {
 	public function getObject( $url ) {
 		static $cache = array();
 		if ( isset( $cache[ $url ] ) ) return $cache[ $url ];
-		$result = $this->call( $url . '?cb=' . time() );    //@todo - resolve cache issues on Ruby server side
+		$result = $this->call( $url );
 		if ( $result->isOK() ) {
 			$cache[ $url ] = $result;
 		}
@@ -123,6 +123,9 @@ class PandoraAPIClient extends WikiaObject {
 		$options = array( 'method' => ( $method ) ? $method : 'GET' );
 		//don't use wgHTTPProxy on devboxes, as cross-devbox calls will return 403
 		if ( !empty( $this->app->wg->develEnvironment ) ) $options['noProxy'] = true;
+		if ( $method == 'GET') {
+			$url .= '?cb=' . time();     //@todo - resolve cache issues on Ruby server side
+		}
 		$httpRequest = MwHttpRequest::factory( $url,  $options );
 		if ( $body ) $httpRequest->setData( $body );
 		if ( $nocache ) {
