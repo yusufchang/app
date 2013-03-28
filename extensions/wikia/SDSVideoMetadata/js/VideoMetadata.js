@@ -7,13 +7,13 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 
 	function showSuggestionsDropdown($dropdown) {
 		$dropdown.removeClass('hidden');
-	};
+	}
 
 	function hideSuggestionsDropdown($dropdown) {
 		$dropdown.addClass('hidden');
 		// will be needed when suggestion are ready
 		//$dropdown.find('li').remove();
-	};
+	}
 
 	function createSuggestionsDropdown(eventTarget) {
 		var $target = $(eventTarget).parent(),
@@ -26,7 +26,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 
 		// will be needed when suggestion are ready
 		//loadSuggestions($target.children('.suggestions-dropdown'));
-	};
+	}
 
 	function loadSuggestions($dropdown) { // load suggestions TEMPORARY!!!!
 		var suggestions = [
@@ -72,7 +72,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 
 		$dropdown.children('ul').append(html);
 
-	};
+	}
 
 	function createRefItem($target) {
 		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list'),
@@ -90,7 +90,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 		if ($list.hasClass('hidden')) {
 			$list.removeClass('hidden');
 		}
-	};
+	}
 
 	function addRefItem($target) {
 		var $list = $target.parents('.suggestions-dropdown').siblings('.reference-list'),
@@ -108,7 +108,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 		if ($list.hasClass('hidden')) {
 			$list.removeClass('hidden');
 		}
-	};
+	}
 
 	function removeRefItem($target) {
 		var $list = $target.parents('.reference-list');
@@ -117,7 +117,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 			$list.addClass('hidden');
 		}
 
-	};
+	}
 
 	function chooseClipType(event) { // show form part for type specific properties
 		var $target = $(event.target),
@@ -138,7 +138,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 			propertiesFormFields.attr('disabled', 'disabled');
 			propertiesWrapper.addClass('hidden');
 		}
-	};
+	}
 
 	function simpleValidation() { // Temporary method to prevent errors on PHP side when sending empty form
 		if (cachedSelectors.typeSelect.val() !== '') {
@@ -146,17 +146,16 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 		} else {
 			cachedSelectors.saveButton.attr('disabled', 'disabled');
 		}
-	};
+	}
 
 	function setObjTypeForEdit() { 	// Temporary method for setting video object type in edit mode
 		var type = cachedSelectors.typeSelect.data('type');
-		if (type === '') {
-			return false;
+		if (type !== '') {
+			var typeSelector = 'option[value="' + type + '"]';
+			cachedSelectors.typeSelect.children(typeSelector).attr('selected', 'selected');
+			cachedSelectors.typeSelect.trigger('change');
 		}
-		var $type = 'option[value="' + type + '"]';
-		cachedSelectors.typeSelect.children($type).attr('selected', 'selected');
-		cachedSelectors.typeSelect.trigger('change');
-	};
+	}
 
 	function setVideoPlayerPosition() {
 		if ($(window).scrollTop() >= videoPlayerPosition) {
@@ -164,7 +163,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 		} else {
 			cachedSelectors.videoPlayer.removeClass('fixed');
 		}
-	};
+	}
 
 	/**********************************************************
 	  Initializing Function for Video Metadata form interface
@@ -244,7 +243,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 
 		// set object type in edit mode
 		setObjTypeForEdit();
-	};
+	}
 
 	/**********************************************
 	  Load templates and and initialize interface
