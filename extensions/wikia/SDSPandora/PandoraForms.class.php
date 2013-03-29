@@ -37,16 +37,13 @@ class PandoraForms extends WikiaController {
 		$config = ( $config !== null ) ? $config : $this->getConfig( $key );
 
 		$result = array();
-		if ( isset( $this->data[ $key ] ) ) {
-			//set correct
-			if ( $config[ 'template' ] === 'reference_list' || $config[ 'template' ] === 'literal_list' ) {
-				$result[ 'list' ] = $this->data[ $key ];
-			} elseif ( $config[ 'template' ] === 'select' ) {
-				$result[ 'selected' ] = $this->data[ $key ];
-			} else {
-				$result[ 'value' ] = $this->data[ $key ];
-			}
-		}
+		$mapTemplate = array(
+			'reference_list' => 'list',
+			'literal_list' => 'list',
+			'select' => 'selected',
+			'default' => 'value',
+		);
+		$result[ $mapTemplate[ $config[ 'template' ] ] ] = ( isset( $this->data[ $key ] ) ) ? $this->data[ $key ] : '';
 		return $result;
 	}
 
@@ -93,23 +90,32 @@ class PandoraForms extends WikiaController {
 	 * @param $orm
 	 */
 	public function loadFromORM( $orm ) {
-		foreach ( $this->getConfig() as $params ) {
+		foreach ( $this->getConfig() as $key => $params ) {
 			$data = $orm->get( $params[ 'ormKey' ] );
 			$type = isset( $orm->getConfig()[ $params[ 'ormKey' ] ][ 'childType' ] ) ?
 				$orm->getConfig()[ $params[ 'ormKey' ] ][ 'childType' ] : null;
+
+			$result = array();
 			if ( is_array( $data ) ) {
 				//reset data for that key
-				$this->data[ $params[ 'ormKey' ] ] = array();
 				foreach ( $data as $item ) {
 					$value =  $this->extractValue( $item, $type, $params );
 					if ( $value !== null ) {
-						$this->data[ $params[ 'ormKey' ] ][] = $value;
+						$result[] = $value;
 					}
 				}
 			} else {
 				$value =  $this->extractValue( $data, $type, $params );
 				if ( $value !== null ) {
-					$this->data[ $params[ 'ormKey' ] ] = $value;
+					$result[] = $value;
+				}
+			}
+
+			if ( !empty( $result ) ) {
+				if ( $orm->getConfig()[ $params[ 'ormKey' ] ][ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
+					$this->data[ $key ] = $result;
+				} else {
+					$this->data[ $key ] = $result[ 0 ];
 				}
 			}
 		}
@@ -121,6 +127,7 @@ class PandoraForms extends WikiaController {
 			//dafault name
 			$objectKey = ( isset( $config[ 'childKey' ] ) ) ? $config[ 'childKey' ] : 'name';
 			$result = array( $objectKey => $item->get( $objectKey ), 'id' => $item->getId() );
+			print_r( $result );
 			if ( $item->get( 'type' ) === $type ) {
 				return $result;
 			}
@@ -132,30 +139,34 @@ class PandoraForms extends WikiaController {
 
 	public function renderField( $key ) {
 		$config = $this->getConfig( $key );
-
-		$config = array_merge( $config, $this->getValue( $config[ 'ormKey' ] ) );
-		$config[ 'labelMsg' ] = wfMessage( $config[ 'label' ] )->text();
-
-		//set default controller
-		if ( !isset( $config[ 'controller' ] ) ) {
-			$config[ 'controller' ] = 'PandoraForms';
-		}
-		//set default template
-		if ( !isset( $config[ 'template' ] ) ) {
-			$config[ 'template' ] = 'default';
-		}
-
-		$config[ 'name' ] = $key;
-
-		//get translations for options messages
-		if ( isset( $config[ 'options' ] ) ) {
-			foreach ( $config[ 'options' ] as $key => $options ) {
-				$config[ 'options' ][ $key ][ 'text' ] = wfMessage( $options[ 'text' ] )->text();
+		if ( is_array( $config ) ) {
+			$value = $this->getValue( $key );
+			if ( is_array( $value ) ) {
+				$config = array_merge( $config, $this->getValue( $key ) );
 			}
-		}
+			$config[ 'labelMsg' ] = wfMessage( $config[ 'label' ] )->text();
 
-		$renderedField = F::app()->renderPartial( $config[ 'controller' ], $config[ 'template' ], $config );
-		return $renderedField;
+			//set default controller
+			if ( !isset( $config[ 'controller' ] ) ) {
+				$config[ 'controller' ] = 'PandoraForms';
+			}
+			//set default template
+			if ( !isset( $config[ 'template' ] ) ) {
+				$config[ 'template' ] = 'default';
+			}
+
+			$config[ 'name' ] = $key;
+
+			//get translations for options messages
+			if ( isset( $config[ 'options' ] ) ) {
+				foreach ( $config[ 'options' ] as $key => $options ) {
+					$config[ 'options' ][ $key ][ 'text' ] = wfMessage( $options[ 'text' ] )->text();
+				}
+			}
+
+			$renderedField = F::app()->renderPartial( $config[ 'controller' ], $config[ 'template' ], $config );
+			return $renderedField;
+		}
 	}
 
 	public function referenceItem() {
