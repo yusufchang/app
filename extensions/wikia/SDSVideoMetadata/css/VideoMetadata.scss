@@ -166,13 +166,13 @@
 		background-color: $color-page;
 		border: 1px solid $color-page-border;;
 		position: absolute;
-		right: 0;
-		top: 57px;
+		left: 17px;
+		top: 55px;
 		width: 192px;
 		z-index: 2;
 		@include box-sizing();
 
-		p {
+		.reference-item p {
 			color: $color-alternate-text;
 		}
 		.remove-item {
@@ -185,14 +185,22 @@
 				background-color: lighten($color-page, 10%);
 			}
 		}
+		.no-results,
+		.throbber,
 		.create-new-btn {
-			display: block;
 			font-size: 12px;
 			font-weight: bold;
 			height: 50px;
+			margin: 0;
 			padding: 20px 4px 15px 10px;
 			text-decoration: none;
 			@include box-sizing();
+		}
+		.create-new-btn {
+			display: block;
+		}
+		.throbber {
+			position: relative;
 		}
 	}
 

@@ -21,6 +21,7 @@ $messages['en'] = array(
 	'sdsvideometadata-vc-boolean-false' => 'No',
 	'sdsvideometadata-vc-boolean-true' => 'Yes',
 	'sdsvideometadata-vc-required' => 'This field is required',
+	'sdsvideometadata-no-suggestions-found' => 'No results',
 
 	// Common video clip metadata messages
 	'sdsvideometadata-common-metadata-legend' => 'Basic information',
@@ -79,6 +80,7 @@ $messages['qqq'] = array(
 	'sdsvideometadata-vc-boolean-false' => 'Boolean value type select - No',
 	'sdsvideometadata-vc-boolean-true' => 'Boolean value type - Yes',
 	'sdsvideometadata-vc-required' => 'Information that this field is required',
+	'sdsvideometadata-no-suggestions-found' => 'Information that no suggestions were found for searched query',
 
 	// Common video clip metadata messages
 	'sdsvideometadata-common-metadata-legend' => 'Header for basic information',

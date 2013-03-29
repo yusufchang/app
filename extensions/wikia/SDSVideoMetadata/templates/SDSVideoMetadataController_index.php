@@ -6,14 +6,6 @@
 			<fieldset>
 				<legend class="VMD-header"><?= wfMessage('sdsvideometadata-common-metadata-legend')->text() ?></legend>
 
-				<!-- Title -->
-	<!--			--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
-	//			'name' => 'videoObject_name',
-	//			'required' => true,
-	//			'labelMsg' => wfMessage('sdsvideometadata-vc-title'),
-	//			'value' => isset( $vcObj['videoObject_name'] ) ? $vcObj['videoObject_name'] : null
-	//			)); ?>
-
 				<!-- Description -->
 				<?= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
 				'name' => 'videoObject_description',
@@ -138,6 +130,7 @@
 				'type' => 'VideoClipGamingVideo',
 				'name' => 'about_name',
 				'id' => 'about_id',
+				'suggestionsType' => 'game',
 				'labelMsg' => wfMessage('sdsvideometadata-vc-game')->text(),
 				'list' => isset( $vcObj['about_name'] ) ? $vcObj['about_name'] : null
 				)); ?>
