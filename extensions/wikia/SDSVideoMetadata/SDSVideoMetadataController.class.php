@@ -9,6 +9,179 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 	// Flash player width
 	const VIDEO_WIDTH = 500;
 
+	//Forms config
+	protected $formsConfig = array(
+		'videoObject_description' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'default',
+			'textarea' => true,
+			'label' => 'sdsvideometadata-vc-description',
+			'ormKey' => 'description'
+		),
+		'videoObject_inLanguage' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'default',
+			'label' => 'sdsvideometadata-vc-language',
+			'ormKey' => 'inLanguage'
+		),
+		'videoObject_subTitleLanguage' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'default',
+			'label' => 'sdsvideometadata-vc-subtitles',
+			'ormKey' => 'subTitleLanguage'
+		),
+//		'recipe_name' => array (
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'label' => 'sdsvideometadata-vc-recipe',
+//			'ormKey' => ''
+//		),
+//		'provider_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
+//			'label' => 'sdsvideometadata-vc-distributor',
+//			'ormKey' => ''
+//		),
+//		'publisher_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
+//			'label' => 'sdsvideometadata-vc-publisher',
+//			'ormKey' => ''
+//		),
+//		'track_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipMusicVideo',
+//			'label' => 'sdsvideometadata-vc-song',
+//			'ormKey' => ''
+//		),
+//		'musicGroup_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipMusicVideo',
+//			'label' => 'sdsvideometadata-vc-artist',
+//			'ormKey' => ''
+//		),
+//		'musicRecording_musicLabel' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipMusicVideo',
+//			'label' => 'sdsvideometadata-vc-music-label',
+//			'ormKey' => ''
+//		),
+//		'videoObject_genre' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'literal_list',
+//			'type' => 'VideoClipTravelVideo VideoClipMusicVideo VideoClipCookingVideo
+//						VideoClipCraftVideo VideoClipHowToVideo',
+//			'label' => 'sdsvideometadata-vc-genre',
+//			'ormKey' => ''
+//		),
+//		'about_location' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipTravelVideo',
+//			'label' => 'sdsvideometadata-vc-location',
+//			'ormKey' => ''
+//		),
+		'about_name' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipGamingVideo',
+			'label' => 'sdsvideometadata-vc-game',
+			'ormKey' => 'about_name'
+		),
+//		'series_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipTVVideo',
+//			'label' => 'sdsvideometadata-vc-series',
+//			'ormKey' => ''
+//		),
+//		'season_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipTVVideo',
+//			'label' => 'sdsvideometadata-vc-season',
+//			'ormKey' => ''
+//		),
+//		'movie_name' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'reference_list',
+//			'type' => 'VideoClipMovieTrailersVideo',
+//			'label' => 'sdsvideometadata-vc-movie',
+//			'ormKey' => ''
+//		),
+//		'videoObject_rating' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'default',
+//			'type' => 'VideoClipMovieTrailersVideo',
+//			'label' => 'sdsvideometadata-vc-trailer-rating',
+//			'ormKey' => ''
+//		),
+		'videoObject_keywords' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'literal_list',
+			'type' => 'VideoClipGamingVideo VideoClipTVVideo',
+			'label' => 'sdsvideometadata-vc-kind',
+			'ormKey' => 'keywords'
+		),
+		'videoObject_isFamilyFriendly' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'select',
+			'type' => 'VideoClipGamingVideo VideoClipMovieTrailersVideo',
+			'label' => 'sdsvideometadata-vc-age-gate',
+			'options' => array(
+				array(
+					'value' => '',
+					'text' => 'sdsvideometadata-vc-boolean-not-set'
+				),
+				array(
+					'value' => 'true',
+					'text' => 'sdsvideometadata-vc-boolean-true'
+				),
+				array(
+					'value' => 'false',
+					'text' => 'sdsvideometadata-vc-boolean-false'
+				)
+			),
+			'ormKey' => 'isFamilyFriendly'
+		),
+//		'videoObject_contentFormat' => array(
+//			'controller' => 'PandoraForms',
+//			'template' => 'select',
+//			'type' => 'VideoClipMusicVideo',
+//			'label' => 'sdsvideometadata-vc-pal',
+//			'options' => array(
+//				array(
+//					'value' => '',
+//					'text' => 'sdsvideometadata-vc-boolean-not-set'
+//				),
+//				array(
+//					'value' => 'PAL',
+//					'text' => 'sdsvideometadata-vc-boolean-true'
+//				)
+//			),
+//			'ormKey' => 'isFamilyFriendly'
+//		),
+		'videoObject_associatedMedia' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipGamingVideo',
+			'label' => 'sdsvideometadata-vc-soundtrack',
+			'ormKey' => 'soundtrack'
+		),
+		'videoObject_setting' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'literal_list',
+			'type' => 'VideoClipGamingVideo VideoClipMusicVideo VideoClipTVVideo VideoClipMovieTrailersVideo',
+			'label' => 'sdsvideometadata-vc-setting',
+			'ormKey' => 'setting'
+		),
+	);
+
 	public function __construct() {
 		parent::__construct('VMD');
 	}
@@ -44,46 +217,20 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			return false;
 		} else {
 
+			//prepare pandoraForms
+			$forms = new PandoraForms();
+			$forms->setConfig( $this->formsConfig );
+
 			$pandoraVideoId = Pandora::pandoraIdFromArticleId( $fileTitle->getArticleID() );
 
 			$videoEmbedCode = $fileObject->getEmbedCode( self::VIDEO_WIDTH );
 			$this->setVal( 'embedCode', $videoEmbedCode );
 
-			$orm = PandoraORM::buildFromField( $pandoraVideoId, 'schema:additionalType' );
+			$orm = PandoraORM::buildFromField( $pandoraVideoId, 'schema:additionalType', 'VideoObject' );
 			if ( $orm->exist ) {
-				$config = $orm->getConfig();
-				foreach ( $config as $key => $params ) {
-					$loadedValue = $orm->get( $key );
-					if ( $loadedValue === null ) {
-						//skip if no value
-						continue;
-					}
-					if ( is_array( $loadedValue ) ) {
-						foreach ( $loadedValue as $val ) {
-							if ( $val instanceof PandoraORM ) {
-								$value = array( 'name' => $val->get( 'name' ), 'id' => $val->getId() );
-							} else {
-								$value = $val;
-							}
-							if ( $params[ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
-								$mapper[ $key ][] = $value;
-							} else {
-								$mapper[ $key ] = $value;
-							}
-						}
-					} else {
-						if ( $loadedValue instanceof PandoraORM ) {
-							$value = array( 'name' => $loadedValue->get( 'name' ), 'id' => $loadedValue->getId() );
-						} else {
-							$value = $loadedValue;
-						}
-						if ( $params[ 'type' ] === PandoraSDSObject::TYPE_COLLECTION ) {
-							$mapper[ $key ][] = $value;
-						} else {
-							$mapper[ $key ] = $value;
-						}
-					}
-				}
+				$forms->loadFromORM( $orm );
+				print_r( $forms->getData() );
+				die;
 				$mapper[ 'vcType' ] = get_class( $orm );
 				$this->setVal( 'vcObj', $mapper );
 			}
@@ -95,37 +242,12 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 				$requestParams = $this->getRequest()->getParams();
 
-				$connectorClassName = $requestParams['vcType'];
+				$saveOrm = $forms->getOrmFromRequest( $requestParams, $pandoraVideoId );
+				$saveOrm->set( 'name', $fileTitle->getBaseText() );
+				$saveOrm->set( 'content_url', $fileTitle->getFullUrl() );
+				$saveOrm->set( 'additional_type', null );
 
-				$orm = PandoraORM::buildFromType( $connectorClassName, $pandoraVideoId );
-				foreach ( $orm->getConfig() as $key => $params ) {
-					//TODO: delete this hack, after format changed
-//					if ( isset( $params[ 'childType' ] ) ) {
-//						foreach ( $requestParams[ $key ] as $data ) {
-//							$changedParams[] = array( 'name' => $data );
-//						}
-//						if ( isset( $params[ 'value' ] ) ) {
-//							$orm->set( $key, $params[ 'value' ] );
-//						}
-					if ( isset( $params[ 'childType' ] ) ) {
-						$requestParams[ $key ] = array( array( 'name' => $requestParams[ $key ] ) );
-					}
-					if ( isset( $requestParams[ $key ] ) ) {
-						if ( is_array( $requestParams[ $key ] ) ) {
-							foreach ( $requestParams[ $key ] as $values ) {
-								$orm->set( $key, $values );
-							}
-						} else {
-							$orm->set( $key, $requestParams[ $key ] );
-						}
-					}
-				}
-				//add name as video object name
-				$orm->set( 'name', $fileTitle->getBaseText() );
-				$orm->set( 'content_url', $fileTitle->getFullUrl() );
-				//use default
-				$orm->set( 'additional_type', null );
-				$result = $orm->save();
+				$result = $saveOrm->save();
 
 				if ( !$result->isOK() ) {
 					$this->setVal( 'errorMessage', $result->getMessage() );
@@ -139,6 +261,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 			$this->setVal( 'isCorrectFile', true );
 			$this->setVal( 'isCompleted', $this->getFileCompleted( $fileTitle ) );
+			$this->setVal( 'formBuilder', $forms );
 		}
 
 		$this->setVal('file', $fileTitle->getBaseText());
