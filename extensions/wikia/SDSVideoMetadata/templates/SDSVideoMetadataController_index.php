@@ -140,6 +140,7 @@
 				'type' => 'VideoClipTVVideo',
 				'name' => 'series_name',
 				'id' => 'series_id',
+				'suggestionsType' => 'tv_series',
 				'labelMsg' => wfMessage('sdsvideometadata-vc-series')->text(),
 				'list' => isset( $vcObj['series_name'] ) ? $vcObj['series_name'] : null
 				)); ?>
@@ -149,6 +150,7 @@
 				'type' => 'VideoClipTVVideo',
 				'name' => 'season_name',
 				'id' => 'season_id',
+				'suggestionsType' => 'tv_season',
 				'labelMsg' => wfMessage('sdsvideometadata-vc-season')->text(),
 				'list' => isset( $vcObj['season_name'] ) ? $vcObj['season_name'] : null
 				)); ?>
@@ -224,6 +226,7 @@
 				'type' => 'VideoClipGamingVideo',
 				'name' => 'videoObject_associatedMedia',
 				'id' => 'videoObject_associatedMedia_id',
+				'suggestionsType' => 'music_recording',
 				'labelMsg' => wfMessage('sdsvideometadata-vc-soundtrack')->text(),
 				'list' => isset( $vcObj['videoObject_associatedMedia'] ) ? $vcObj['videoObject_associatedMedia'] : null
 				)); ?>
