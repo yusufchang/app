@@ -99,16 +99,22 @@ class PandoraORM {
 	 * Generates ORM based on value from field based on config[key][subject]
 	 * @param $id
 	 * @param $key config key value
+	 * @param $default if given field doesnt exist use this type
 	 * @return PandoraORM or other type based on found value
 	 */
-	public static function buildFromField ( $id, $key ) {
+	public static function buildFromField ( $id, $key, $default = null ) {
 		$pandoraApi = new PandoraAPIClient();
 		$serverUri = $pandoraApi->getObjectUrlFromId( $id );
 		$result = $pandoraApi->getObject( $serverUri );
 		if ( $result->isOK() ) {
 			$obj = PandoraJsonLD::pandoraSDSObjectFromJsonLD( $result->response, $id );
 			$type = pathinfo( $obj->getValue( $key ), PATHINFO_BASENAME );
-			$orm = static::buildFromType( $type, $id, false );
+			if ( $type !== null && !empty( $type ) ) {
+				$orm = static::buildFromType( $type, $id );
+			} elseif ( $default !== null ) {
+				//use default
+				$orm = static::buildFromType( $default, $id );
+			}
 			$orm->setRoot( $obj );
 			$orm->exist = true;
 			return $orm;
@@ -314,6 +320,8 @@ class PandoraORM {
 				}
 			}
 		}
+		//set type for database
+		$orm->set( 'type', $type );
 		return $orm;
 	}
 
