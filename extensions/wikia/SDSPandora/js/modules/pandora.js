@@ -23,7 +23,7 @@ define('pandora', ['wikia.deferred', 'wikia.nirvana'], function(deferred, nirvan
 		var dfd = new deferred();
 
 		abortRequest();
-		
+
 		xhrRequest = nirvana.getJson('Pandora', 'getSuggestions', {
 			type: type,
 			query: query,
