@@ -6,6 +6,10 @@
 
 class PandoraORM {
 
+	/**
+	 * @var config static field, storing data for actual ORM type, used in saving and loading data
+	 * to and from database
+	 */
 	public static $config = array(
 		//thing mapping
 		'id' => array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' ),
@@ -24,6 +28,11 @@ class PandoraORM {
 	protected $root;
 	protected $id;
 
+	/**
+	 * Generates new PandoraORM object, uses schema:Thing config
+	 * @param $id new or existing id
+	 * @param null $type default type used when saving to db
+	 */
 	public function __construct( $id, $type = null ) {
 		if ( $type !== null ) {
 			$this->type = $type;
@@ -34,6 +43,12 @@ class PandoraORM {
 		$this->root = $root;
 	}
 
+	/**
+	 * Builds object of PandoraORM or child class using type as a class name
+	 * @param $type can be class name or prefix:type, where type will be tratded as class name
+	 * @param null $id if not supplied will be generated using Pandora method
+	 * @return PandoraORM type class as default, or object of type class
+	 */
 	public static function buildFromType( $type, $id = null ) {
 		if ( $id === null ) {
 			//generate new id
@@ -58,6 +73,11 @@ class PandoraORM {
 		}
 	}
 
+	/**
+	 * Method loads object from database using id and API call, try to generate ORM using the type of object
+	 * @param $id
+	 * @return PandoraORM as default, if object found in db, the class is build upon information in object
+	 */
 	public static function buildFromId ( $id ) {
 		$pandoraApi = new PandoraAPIClient();
 		$serverUri = $pandoraApi->getObjectUrlFromId( $id );
@@ -75,6 +95,12 @@ class PandoraORM {
 		}
 	}
 
+	/**
+	 * Generates ORM based on value from field based on config[key][subject]
+	 * @param $id
+	 * @param $key config key value
+	 * @return PandoraORM or other type based on found value
+	 */
 	public static function buildFromField ( $id, $key ) {
 		$pandoraApi = new PandoraAPIClient();
 		$serverUri = $pandoraApi->getObjectUrlFromId( $id );
@@ -97,6 +123,11 @@ class PandoraORM {
 		return new PandoraORM( $id, $config );
 	}
 
+	/**
+	 * Root is a main PandoraStructure object in which all data is stored, by using this function this
+	 * data can be changed entairly
+	 * @param PandoraSDSObject $root
+	 */
 	public function setRoot( PandoraSDSObject $root ) {
 		$this->root = $root;
 	}
@@ -108,6 +139,9 @@ class PandoraORM {
 		return $this->id;
 	}
 
+	/**
+	 * @return array|config contains config for actual class and all parents
+	 */
 	public static function getConfig() {
 		//loaded class config as default
 		$result = static::$config;
@@ -120,6 +154,13 @@ class PandoraORM {
 		return $result;
 	}
 
+	/**
+	 * Saves data to database using Root as a data source and config for mapping,
+	 * also saves the subobjects but only for not existing previously ( this is done to
+	 * maintain correct references to sub objects )
+	 * @param null $collection
+	 * @return bool|PandoraResponse
+	 */
 	public function save( $collection = null ) {
 		if ( !$this->checkRequiredFields() ) {
 			return false;
@@ -157,6 +198,11 @@ class PandoraORM {
 		return false;
 	}
 
+	/**
+	 * Creates a PandoraSDSObject structure containg single object with id property in it,
+	 * used to create reference object in parent object
+	 * @return PandoraSDSObject
+	 */
 	public function getReference() {
 		$node = new PandoraSDSObject();
 		$node->setType( PandoraSDSObject::TYPE_LITERAL );
@@ -170,6 +216,12 @@ class PandoraORM {
 		return $obj;
 	}
 
+	/**
+	 * Set value for given config[key], data is inserted into root object
+	 * @param $key
+	 * @param $value
+	 * @return bool
+	 */
 	public function set( $key, $value ) {
 		if ( isset( $this->getConfig()[ $key ] ) ) {
 			if ( isset( $this->getConfig()[ $key ][ 'value' ] ) ) {
