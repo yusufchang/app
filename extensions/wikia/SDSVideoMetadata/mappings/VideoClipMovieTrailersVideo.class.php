@@ -8,6 +8,18 @@ class VideoClipMovieTrailersVideo extends SDSFormMapping {
 
 	const type = 'http://sds.wikia.com/vocabs/VideoClipMovieTrailersVideo';
 
+	public static $config = array (
+	    'movie' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'schema:Movie' ),
+	    'trailerRating' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:contentRating' ),
+	    'keywords' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:keywords' ),
+	    'isFamilyFriendly' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:isFamilyFriendly' ),
+	    'videoQuality' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:videoQuality' ),
+	    'actors' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contributor', 'childType' => 'schema:Person' ),
+	    'character' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:character', 'childType' => 'wikia:Character' ),
+	    'additional_type' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=> 'http://sds.wikia.com/vocabs/VideoClipMovieTrailersVideo' ),
+	);
+
+
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();

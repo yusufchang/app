@@ -8,6 +8,14 @@ class VideoClipHowToVideo extends SDSFormMapping {
 
 	const type = 'http://sds.wikia.com/vocabs/VideoClipHowToVideo';
 
+	public static $config = array (
+	    'provider' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:provider', 'childType' => 'schema:Organization' ),
+	    'publisher' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:publisher', 'childType' => 'schema:Organization' ),
+	    'genre' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:genre' ),
+	    'celebrity' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:contributor', 'childType' => 'schema:Person' ),
+	    'additional_type' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=> 'http://sds.wikia.com/vocabs/VideoClipHowToVideo' ),
+	);
+
 	protected function getMapArray( $mapType = 'main' ) {
 
 		$map = array();

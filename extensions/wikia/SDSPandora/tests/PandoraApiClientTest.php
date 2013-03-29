@@ -86,6 +86,20 @@ class PandoraApiClientTest extends WikiaBaseTest {
 		$mockedClient->createObject( $mockedClient->getCollectionUrl(), '{"id":"http://fake.id"}' );
 	}
 
+	public function testGetSuggestions() {
+		$mockedClient = $this->getMock('PandoraAPIClient', array('call'), array( 'http://sds.fake.pl', '/api/v0.1/' ) );
+
+		$mockedClient->expects($this->once())
+			->method('call')
+			->with( $this->equalTo( 'http://sds.fake.pl/api/v0.1/suggestions/actor/whatever_user_types' ),
+			$this->equalTo( false ),
+			$this->equalTo( 'GET' ),
+			$this->equalTo( null ) )
+			->will( $this->returnValue( new PandoraResponse( Status::newGood(), 200, '[]' ) ) );
+
+		$mockedClient->getSuggestions( 'actor', 'whatever_user_types' );
+	}
+
 	/*
 	 * Test if getObjectAsJson returns JSON object in case of the correct response
 	 */
