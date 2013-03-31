@@ -127,7 +127,6 @@ class PandoraForms extends WikiaController {
 			//dafault name
 			$objectKey = ( isset( $config[ 'childKey' ] ) ) ? $config[ 'childKey' ] : 'name';
 			$result = array( $objectKey => $item->get( $objectKey ), 'id' => $item->getId() );
-			print_r( $result );
 			if ( $item->get( 'type' ) === $type ) {
 				return $result;
 			}
@@ -142,7 +141,7 @@ class PandoraForms extends WikiaController {
 		if ( is_array( $config ) ) {
 			$value = $this->getValue( $key );
 			if ( is_array( $value ) ) {
-				$config = array_merge( $config, $this->getValue( $key ) );
+				$config = array_merge( $config, $value );
 			}
 			$config[ 'labelMsg' ] = wfMessage( $config[ 'label' ] )->text();
 
@@ -167,24 +166,6 @@ class PandoraForms extends WikiaController {
 			$renderedField = F::app()->renderPartial( $config[ 'controller' ], $config[ 'template' ], $config );
 			return $renderedField;
 		}
-	}
-
-	public function referenceItem() {
-		$item = $this->getVal('item');
-		$pos = $this->getVal('pos');
-		$propName = $this->getVal('propName');
-		$removeBtnMsg = $this->getVal('removeBtnMsg');
-
-		$this->objectName = htmlspecialchars($item['name']);
-		$this->objectId = htmlspecialchars($item['id']);
-		$this->objectParam = 'Additional info';
-		$this->imgURL = '#';
-		$this->removeMsg = $removeBtnMsg;
-		$this->pos = $pos;
-		$this->propName = $propName;
-
-
-		$this->response->setTemplateEngine(WikiaResponse::TEMPLATE_ENGINE_MUSTACHE);
 	}
 
 }

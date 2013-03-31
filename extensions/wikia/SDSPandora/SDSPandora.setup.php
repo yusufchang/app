@@ -43,7 +43,7 @@ $app->registerClass( 'VideoObject', $dir . 'mappers/VideoObject.class.php' );
 /**
  * controllers
  */
-$app->registerController( 'PandoraFormsController', $dir . 'PandoraForms.class.php' );
+$app->registerController( 'PandoraFormsController', $dir . 'PandoraFormsController.class.php' );
 
 /**
  * special pages
