@@ -7,7 +7,7 @@
 			$pos = 0;
 			foreach ($list as $item) {
 				echo $app->renderView(
-					'SDSVideoMetadataController',
+					'PandoraForms',
 					'referenceItem',
 					array(
 						'item' => $item,
