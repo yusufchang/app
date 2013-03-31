@@ -228,10 +228,10 @@ class PandoraORM {
 	 * @param $value
 	 * @return bool
 	 */
-	public function set( $key, $value ) {
+	public function set( $key, $value = null ) {
 		if ( isset( $this->getConfig()[ $key ] ) ) {
-			if ( isset( $this->getConfig()[ $key ][ 'value' ] ) ) {
-				//set default value if provided
+			if ( isset( $this->getConfig()[ $key ][ 'value' ] ) && $value === null ) {
+				//set default value if provided and value is null
 				$value = $this->getConfig()[ $key ][ 'value' ];
 			}
 			$existing = $this->root->getItem( $this->getConfig()[ $key ][ 'subject' ] );
@@ -321,7 +321,6 @@ class PandoraORM {
 			}
 		}
 		//set type for database
-		$orm->set( 'type', $type );
 		return $orm;
 	}
 
