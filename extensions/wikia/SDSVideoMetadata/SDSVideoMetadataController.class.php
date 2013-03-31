@@ -229,8 +229,6 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			$orm = PandoraORM::buildFromField( $pandoraVideoId, 'schema:additionalType', 'VideoObject' );
 			if ( $orm->exist ) {
 				$forms->loadFromORM( $orm );
-				print_r( $forms->getData() );
-				die;
 				$mapper[ 'vcType' ] = get_class( $orm );
 				$this->setVal( 'vcObj', $mapper );
 			}
@@ -245,7 +243,8 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 				$saveOrm = $forms->getOrmFromRequest( $requestParams, $pandoraVideoId );
 				$saveOrm->set( 'name', $fileTitle->getBaseText() );
 				$saveOrm->set( 'content_url', $fileTitle->getFullUrl() );
-				$saveOrm->set( 'additional_type', null );
+				//sets filed with key = 'additional_type' as default (using config 'value' filed)
+				$saveOrm->set( 'additional_type' );
 
 				$result = $saveOrm->save();
 
