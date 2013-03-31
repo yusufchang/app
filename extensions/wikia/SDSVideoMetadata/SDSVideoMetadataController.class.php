@@ -91,7 +91,7 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 			'template' => 'reference_list',
 			'type' => 'VideoClipGamingVideo',
 			'label' => 'sdsvideometadata-vc-game',
-			'ormKey' => 'about_name'
+			'ormKey' => 'game'
 		),
 //		'series_name' => array(
 //			'controller' => 'PandoraForms',
