@@ -29,12 +29,15 @@ $dir = dirname(__FILE__) . '/';
  */
 $app->registerClass( 'Pandora', $dir . 'Pandora.class.php' );
 $app->registerClass( 'PandoraSDSObject', $dir . 'PandoraSDSObject.class.php' );
+$app->registerClass( 'PandoraSDSController', $dir . 'PandoraSDSController.class.php' );
 $app->registerClass( 'PandoraJsonLD', $dir . 'PandoraJsonLD.class.php' );
 $app->registerClass( 'PandoraAPIClient', $dir . 'PandoraAPIClient.class.php' );
 $app->registerClass( 'PandoraResponse', $dir . 'PandoraResponse.class.php' );
 $app->registerClass( 'PandoraORM', $dir . 'PandoraORM.class.php' );
 $app->registerClass( 'PandoraForms', $dir . 'PandoraForms.class.php' );
 $app->registerClass( 'VideoObject', $dir . 'mappers/VideoObject.class.php' );
+$app->registerClass( 'PandoraController', $dir . 'PandoraController.class.php' );
+$app->registerClass( 'SuggestionViewModel', $dir . 'viewModels/SuggestionViewModel.php' );
 
 /**
  * hooks
@@ -48,6 +51,7 @@ $app->registerController( 'PandoraFormsController', $dir . 'PandoraFormsControll
 /**
  * special pages
  */
+$app->registerSpecialPage( 'Pandora', 'PandoraController' );
 
 /**
  * access rights
