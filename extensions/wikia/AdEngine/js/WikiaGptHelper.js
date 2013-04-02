@@ -1,17 +1,27 @@
-
+/*global setTimeout */
 var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams) {
 	'use strict';
 
 	var logGroup = 'WikiaGptHelper',
 		gptLoaded = false,
-		loadGpt,
-		pushAd,
-		convertSizesToGpt,
 		pageLevelParams = adLogicPageLevelParams.getPageLevelParams(),
 		path = '/5441/wka.' + pageLevelParams.s0 + '/' + pageLevelParams.s1 + '/' + pageLevelParams.s2,
+		slotsToDisplay = [],
+		doneCallbacks = {},// key: slot name, value: callback
 		googletag;
 
-	loadGpt = function () {
+	function triggerDone(slotname) {
+		var callback = doneCallbacks[slotname];
+
+		log(['triggerDone', slotname], 3, logGroup);
+
+		if (callback) {
+			delete doneCallbacks[slotname];
+			setTimeout(callback, 0); // escape from GPT's error-catching
+		}
+	}
+
+	function loadGpt() {
 		if (!gptLoaded) {
 			log('loadGpt', 7, logGroup);
 
@@ -31,12 +41,51 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams) {
 			node.parentNode.insertBefore(gads, node);
 			googletag = window.googletag;
 
+			log(['loadGpt', 'googletag.cmd.push', 'bind to GPT events'], 4, logGroup);
+			googletag.cmd.push(function () {
+				var debug_log = googletag.debug_log,
+					oldLog = debug_log.log;
+
+				// We're plugging into the log function in GPT so we get some insight of what
+				// happens in GPT internals. We're looking for logging messages and comparing them
+				// to the pattern that is the most interesting for us. We chose out of those 4
+				// (listed here in the order of appearing for each slot GPT loads):
+				//
+				//  /^Fetching ad/i
+				//  /^Receiving ad/i
+				//  /^Rendering ad/i
+				//  /^Completed rendering ad/i
+				//
+				// Inspiration: https://github.com/mcountis/dfp-events
+
+				googletag.debug_log.log = function (level, message, service, slot) {
+					var domId,
+						donePattern = /^Rendering ad/i;
+
+					// Play extra-safe with this
+					try {
+						domId = slot.getSlotId().getDomId();
+
+						if (typeof message === 'string') {
+							if (message.search(donePattern) === 0) {
+								// If the message is what we look for, trigger the event
+								triggerDone(domId);
+							}
+						}
+					} catch (e) {
+					}
+
+					// Call the original function
+					return oldLog.apply(debug_log, arguments);
+				};
+			});
+
 			// Set page level params
 			log(['loadGpt', 'googletag.cmd.push', 'page level targeting'], 4, logGroup);
 			googletag.cmd.push(function () {
 				var name, value, pubads = googletag.pubads();
 
-				pubads.setTargeting('src', 'driver');
+				pubads.setTargeting('src', 'gpt');
 
 				log(['loadGpt', 'pageLevelParams', pageLevelParams], 9, logGroup);
 
@@ -51,9 +100,9 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams) {
 				}
 			});
 		}
-	};
+	}
 
-	convertSizesToGpt = function (slotsize) {
+	function convertSizesToGpt(slotsize) {
 		log(['convertSizeToGpt', slotsize], 9, logGroup);
 		var tmp1 = slotsize.split(','),
 			sizes = [],
@@ -66,9 +115,9 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams) {
 		}
 
 		return sizes;
-	};
+	}
 
-	pushAd = function (slotParams, done) {
+	function pushAd(slotParams, done) {
 		var slotname = slotParams.slotname,
 			sizes = convertSizesToGpt(slotParams.slotsize),
 			params = {};
@@ -98,16 +147,39 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams) {
 				}
 			}
 
-			googletag.enableServices();
-			googletag.display(slotname);
-
+			slotsToDisplay.push(slotname);
 			if (typeof done === 'function') {
-				done();
+				doneCallbacks[slotname] = done;
 			}
 		});
-	};
+	}
+
+	function flushAds() {
+		log(['googletag.cmd.push', 'enableServices'], 4, logGroup);
+		log(['googletag.cmd.push', 'display', slotsToDisplay], 4, logGroup);
+
+		googletag.cmd.push(function () {
+			var callback, slotname;
+
+			log(['flushAds', 'start'], 4, logGroup);
+
+			googletag.pubads().enableSingleRequest();
+			googletag.enableServices();
+
+			while (slotsToDisplay.length > 0) {
+				slotname = slotsToDisplay.shift();
+
+				log(['flushAds', 'display', slotname], 8, logGroup);
+
+				googletag.display(slotname);
+			}
+
+			log(['flushAds', 'done'], 4, logGroup);
+		});
+	}
 
 	return {
-		pushAd: pushAd
+		pushAd: pushAd,
+		flushAds: flushAds
 	};
 };

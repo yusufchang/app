@@ -19,7 +19,7 @@ $wgExtensionCredits['specialpage'][] = array(
 );
 
 // constroller classes
-$app->registerClass('SpecialWikiaHubsV2Controller', $dir . 'SpecialWikiaHubsV2Controller.class.php');
+$app->registerClass('WikiaHubsV2Controller', $dir . 'WikiaHubsV2Controller.class.php');
 $app->registerClass('WikiaHubsV2SuggestController', $dir . 'WikiaHubsV2SuggestController.class.php');
 
 // hook classes
@@ -33,9 +33,7 @@ $app->registerClass('WikiaHubsV2HooksModel', $dir . 'models/WikiaHubsV2HooksMode
 
 $app->registerClass('WikiaHubsV2SuggestModel', $dir . 'models/WikiaHubsV2SuggestModel.class.php');
 
-
-// pages
-$app->registerSpecialPage('WikiaHubsV2', 'SpecialWikiaHubsV2Controller');
+$app->registerClass('WikiaHubsParserHelper', $dir . 'WikiaHubsParserHelper.class.php');
 
 // i18n mapping
 $app->registerExtensionMessageFile('WikiaHubsV2', $dir.'WikiaHubsV2.i18n.php');
@@ -44,20 +42,39 @@ $app->registerExtensionMessageFile('WikiaHubsV2', $dir.'WikiaHubsV2.i18n.php');
 $app->registerHook('WikiaMobileAssetsPackages', 'WikiaHubsV2Mobile', 'onWikiaMobileAssetsPackages');
 $app->registerHook('ArticleFromTitle', 'WikiaHubsV2Hooks', 'onArticleFromTitle');
 $app->registerHook('WikiaCanonicalHref', 'WikiaHubsV2Hooks', 'onWikiaCanonicalHref');
+$app->registerHook('ParserFirstCallInit', 'WikiaHubsV2Hooks', 'onParserFirstCallInit');
 
 // foreign file repo
-$wgForeignFileRepos[] = array(
-	'class'            => 'WikiaForeignDBViaLBRepo',
-	'name'             => 'wikiahubsfiles',
-	'directory'        => $wgWikiaHubsFileRepoDirectory,
-	'url'              => 'http://images.wikia.com/central/images',
-	'hashLevels'       => 2,
-	'thumbScriptUrl'   => '',
-	'transformVia404'  => true,
-	'hasSharedCache'   => true,
-	'descBaseUrl'      => $wgWikiaHubsFileRepoPath . 'wiki/File:',
-	'fetchDescription' => true,
-	'wiki'             => $wgWikiaHubsFileRepoDBName,
-	'checkRedirects'   => false,
-	'checkDuplicates'  => false,
-);
+if( !empty($app->wg->WikiaHubsFileRepoOnCorpWikiaCom) ) {
+	$wgForeignFileRepos[] = array(
+		'class'            => 'WikiaForeignDBViaLBRepo',
+		'name'             => 'wikiahubsfiles',
+		'directory'        => '/images/c/corp/images',
+		'url'              => 'http://images.wikia.com/corp/images',
+		'hashLevels'       => 2,
+		'thumbScriptUrl'   => '',
+		'transformVia404'  => true,
+		'hasSharedCache'   => true,
+		'descBaseUrl'      => 'http://corp.wikia.com/wiki/File:',
+		'fetchDescription' => true,
+		'wiki'             => 'corp',
+		'checkRedirects'   => false,
+		'checkDuplicates'  => false,
+	);
+} else {
+	$wgForeignFileRepos[] = array(
+		'class'            => 'WikiaForeignDBViaLBRepo',
+		'name'             => 'wikiahubsfiles',
+		'directory'        => $wgWikiaHubsFileRepoDirectory,
+		'url'              => 'http://images.wikia.com/central/images',
+		'hashLevels'       => 2,
+		'thumbScriptUrl'   => '',
+		'transformVia404'  => true,
+		'hasSharedCache'   => true,
+		'descBaseUrl'      => $wgWikiaHubsFileRepoPath . 'wiki/File:',
+		'fetchDescription' => true,
+		'wiki'             => $wgWikiaHubsFileRepoDBName,
+		'checkRedirects'   => false,
+		'checkDuplicates'  => false,
+	);
+}

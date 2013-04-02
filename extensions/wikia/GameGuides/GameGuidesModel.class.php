@@ -207,32 +207,30 @@ class GameGuidesModel{
 			$ret = $this->loadFromCache( $cacheKey );
 
 			if ( empty( $ret ) ) {
-				$wikiaSearch = F::build('WikiaSearch');
-				$wikiaSearchConfig = F::build('WikiaSearchConfig');
+				
+				$wikiaSearchConfig = new Wikia\Search\Config();
 				$wikiaSearchConfig	->setNamespaces	( array( NS_MAIN ) )
 									->setQuery		( $term )
-									->setLength		( $totalLimit )
-									->setCityId		( $this->app->wg->CityId );
+									->setLength		( $totalLimit );
 
-				$resultSet = $wikiaSearch->doSearch( $wikiaSearchConfig );
+				$container = new Wikia\Search\QueryService\DependencyContainer( array( 'config' => $wikiaSearchConfig ) );
+				$wikiaSearch = (new Wikia\Search\QueryService\Factory)->get( $container );
+				$resultSet = $wikiaSearch->search( $wikiaSearchConfig );
 
 				$ret['textResults'] = array();
 				$count = 0;
 
 				if ( $resultSet->hasResults() ) {
 					$textResults = array();
-
-					while ( $result = $resultSet->next() ) {
-						$title = $result->getTitleObject();
-
-						if ( $title instanceof Title ) {
+					$mwService = new Wikia\Search\MediaWikiService;
+					foreach ( $resultSet as $result ) {
+						try {
 							$textResults[] = array(
-								'textForm' => $result->getTitle(),
-								'urlForm' => $title->getLocalUrl( array( 'useskin' => 'wikiaapp') )
-							);
-
+									'textForm' => $result->getTitle(),
+									'urlForm' => $mwService->getLocalUrlForPageId( $result['pageid'], array( 'useskin' => 'wikiaapp' ) )
+									);
 							$count++;
-						}
+						} catch ( Exception $e ) {} // result is probably stale/deleted
 					}
 
 					$ret['textResults'] = $textResults;

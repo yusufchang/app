@@ -1924,8 +1924,8 @@ class Wikia {
 	 * @author macbre
 	 *
 	 * @param UploadBase $upload
-	 * @param $mime
-	 * @param $error
+	 * @param string $mime
+	 * @param array $error
 	 * @return bool
 	 */
 	public static function onUploadVerifyFile(UploadBase $upload, $mime, &$error) {
@@ -1940,29 +1940,24 @@ class Wikia {
 			return true;
 		}
 
-		// validate an image
+		// validate an image using ImageMagick
 		$imageFile = $upload->getTempPath();
-		$img = @imagecreatefromstring( file_get_contents($imageFile) );
-		$isValid = is_resource($img);
+
+		$output = wfShellExec("identify -regard-warnings {$imageFile} 2>&1", $retVal);
+		wfDebug("Exit code #{$retVal}\n{$output}\n");
+
+		$isValid = ($retVal === 0);
 
 		if (!$isValid) {
-			$msg = sprintf(
-				'File "%s" claimed to be "%s"',
-				$upload->getTitle()->getText(),
-				$mime
-			);
-			Wikia::log(__METHOD__, 'failed', $msg, true);
+			Wikia::log(__METHOD__, 'failed',  rtrim($output), true);
 
 			// pass an error to UploadBase class
 			$error = array('verification-error');
 		}
-		else {
-			imagedestroy($img);
-		}
 
-		return $isValid;	
+		return $isValid;
 	}
-	
+
 	/*
 	 * @param $user_name String
 	 * @param $s ResultWrapper
@@ -1976,10 +1971,10 @@ class Wikia {
 				$s = $mExtUser->getLocalUser( false );
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * @param $user User
 	 * @param $s ResultWrapper
@@ -1994,7 +1989,7 @@ class Wikia {
 				$s = $mExtUser->getLocalUser( false );
 			}
 		}
-		
+
 		return true;
 	}
 }

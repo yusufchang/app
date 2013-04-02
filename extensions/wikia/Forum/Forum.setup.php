@@ -39,6 +39,7 @@ $app->registerHook( 'WallContributionsLine', 'ForumHooksHelper', 'onWallContribu
 $app->registerHook( 'getUserPermissionsErrors', 'ForumHooksHelper', 'getUserPermissionsErrors' );
 $app->registerHook( 'WallRecentchangesMessagePrefix', 'ForumHooksHelper', 'onWallRecentchangesMessagePrefix' );
 $app->registerHook( 'WallThreadHeader', 'ForumHooksHelper', 'onWallThreadHeader' );
+$app->registerHook( 'WallMessageGetWallOwnerName', 'ForumHooksHelper', 'onWallMessageGetWallOwnerName' );
 
 $app->registerHook( 'WallHistoryThreadHeader', 'ForumHooksHelper', 'onWallHistoryThreadHeader' );
 $app->registerHook( 'WallHistoryHeader', 'ForumHooksHelper', 'onWallHistoryHeader' );
@@ -75,6 +76,9 @@ $app->registerHook( 'ArticleFromTitle', 'ForumHooksHelper', 'onArticleFromTitle'
 
 // For activity module tag
 $app->registerHook( 'ParserFirstCallInit', 'ForumHooksHelper', 'onParserFirstCallInit' );
+
+// Hook for topic red links
+$app->registerHook( 'LinkBegin', 'ForumHooksHelper', 'onLinkBegin' );
 
 include ($dir . '/Forum.namespace.setup.php');
 

@@ -45,20 +45,19 @@ class CategorySelect {
 
 					$str = "\n[[" . $category[ 'namespace' ] . ':' . $category[ 'name' ];
 
-					if ( !empty( $category[ 'sortKey' ] ) ) {
-						$str .= '|' . $category[ 'sortKey' ];
+					if ( !empty( $category[ 'sortkey' ] ) ) {
+						$str .= '|' . $category[ 'sortkey' ];
 					}
 
 					$str .= ']]';
 
-					if ( !empty( $category[ 'outerTag' ] ) ) {
-						$str = '<' . $category[ 'outerTag' ] . '>' . $str . '</' . $category[ 'outerTag' ] . '>';
+					if ( !empty( $category[ 'outertag' ] ) ) {
+						$str = '<' . $category[ 'outertag' ] . '>' . $str . '</' . $category[ 'outertag' ] . '>';
 					}
 
 					$changed .= $str;
 				}
 			}
-
 		} else if ( $to == 'array' ) {
 			$changed = $categories;
 
@@ -67,7 +66,6 @@ class CategorySelect {
 		}
 
 		wfProfileOut( __METHOD__ );
-
 		return $changed;
 	}
 
@@ -106,6 +104,9 @@ class CategorySelect {
 
 		// we will ignore categories added inside following list of tags (BugId:8208)
 		self::$tagsWhiteList = array_keys( $app->wg->Parser->mTagHooks );
+
+		// and includeonly tags (BugId:99450)
+		self::$tagsWhiteList[] = 'includeonly';
 
 		//create XML DOM document from provided XML
 		$dom = new DOMDocument();
@@ -488,8 +489,8 @@ class CategorySelect {
 							$childOut['categories'][] = array(
 								'name' => $catName,
 								'namespace' => $catNamespace,
-								'outerTag' => $outerTag,
-								'sortKey' => $sortKey,
+								'outertag' => $outerTag,
+								'sortkey' => $sortKey,
 								'type' => self::getCategoryType( $catName ),
 							);
 						}
@@ -551,8 +552,8 @@ class CategorySelect {
 		self::$categories[] = array(
 			'name' => $catName,
 			'namespace' => $match[1],
-			'outerTag' => self::$outerTag,
-			'sortKey' => $sortKey,
+			'outertag' => self::$outerTag,
+			'sortkey' => $sortKey,
 			'type' => self::getCategoryType( $catName ),
 		);
 		return '';

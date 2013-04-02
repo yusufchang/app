@@ -6,9 +6,11 @@
 /*global document, window */
 /*global Geo, Wikia */
 /*global ghostwriter, Krux */
-/*global AdConfig2, AdEngine2, DartUrl, EvolveHelper, SlotTweaker, ScriptWriter, WikiaDartHelper */
+/*global AdConfig2, AdEngine2, DartUrl, EvolveHelper, SlotTweaker, ScriptWriter */
+/*global WikiaDartHelper, WikiaGptHelper */
 /*global AdProviderAdDriver2, AdProviderEvolve, AdProviderGamePro, AdProviderLater, AdProviderNull */
-/*global AdLogicDartSubdomain, AdLogicHighValueCountry, AdLogicShortPage */
+/*global AdLogicDartSubdomain, AdLogicHighValueCountry, AdLogicShortPage, AdLogicPageLevelParams */
+/*global AdLogicPageLevelParamsLegacy */
 /*jslint newcap:true */
 
 (function (log, tracker, window, ghostwriter, document, Geo, LazyQueue, Cookies, Cache, Krux, abTest) {
@@ -54,9 +56,9 @@
 	evolveHelper = EvolveHelper(log, window);
 
 	// Construct Ad Providers
-	adProviderAdDriver2 = AdProviderAdDriver2(wikiaDart, scriptWriter, tracker, log, window, Geo, slotTweaker, Cache, adLogicHighValueCountry, adLogicDartSubdomain, abTest, wikiaGpt);
+	adProviderAdDriver2 = AdProviderAdDriver2(wikiaDart, scriptWriter, tracker, log, window, Geo, slotTweaker, Cache, adLogicHighValueCountry, adLogicDartSubdomain, abTest, wikiaGpt, document);
 	adProviderEvolve = AdProviderEvolve(adLogicPageLevelParamsLegacy, scriptWriter, tracker, log, window, document, Krux, evolveHelper, slotTweaker);
-	adProviderGamePro = AdProviderGamePro(adLogicPageLevelParamsLegacy, scriptWriter, tracker, log, window, document);
+	adProviderGamePro = AdProviderGamePro(adLogicPageLevelParamsLegacy, scriptWriter, tracker, log, window, slotTweaker);
 	adProviderNull = AdProviderNull(log, slotTweaker);
 
 	// Special Ad Provider, to deal with the late ads
@@ -80,7 +82,7 @@
 		adProviderNull
 	);
 
-	window.wgAfterContentAndJS.push(function() {
+	window.wgAfterContentAndJS.push(function () {
 		log('work on window.adslots2 according to AdConfig2', 1, module);
 		tracker.track({
 			eventName: 'liftium.init',
@@ -158,5 +160,8 @@
 			});
 		}
 	};
+
+	// Register window.wikiaDartHelper so jwplayer can use it
+	window.wikiaDartHelper = wikiaDart;
 
 }(Wikia.log, Wikia.Tracker, window, ghostwriter, document, Geo, Wikia.LazyQueue, Wikia.Cookies, Wikia.Cache, Krux, Wikia.AbTest));
