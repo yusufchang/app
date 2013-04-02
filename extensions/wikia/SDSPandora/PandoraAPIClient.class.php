@@ -117,6 +117,11 @@ class PandoraAPIClient extends WikiaObject {
 	 */
 	public function getSuggestions( $type, $query, $params = array() ) {
 		$url = $this->baseUrl . $this->apiPath . "suggestions/" . $type . "/" . $query;
+		$sign = '?';
+		foreach ( $params as $i => $v ) {
+			$url = $url . $sign . $i . "=" . $v;
+			$sign = '&';
+		}
 		return $this->call( $url, false, 'GET', null );
 	}
 
