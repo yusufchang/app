@@ -279,7 +279,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages', 'pandora'], f
 		loader({
 			type: loader.MULTI,
 			resources: {
-				mustache: 'extensions/wikia/SDSVideoMetadata/templates/suggestions_dropdown.mustache,extensions/wikia/SDSVideoMetadata/templates/SDSVideoMetadataController_referenceItem.mustache',
+				mustache: 'extensions/wikia/SDSPandora/templates/suggestions_dropdown.mustache,extensions/wikia/SDSPandora/templates/PandoraFormsController_referenceItem.mustache',
 				messages: 'VMD-messages'
 			}
 		}).done(function(packagesData) {
