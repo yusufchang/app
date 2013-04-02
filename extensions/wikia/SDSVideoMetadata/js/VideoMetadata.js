@@ -42,14 +42,11 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages', 'pandora'], f
 		$noResultsInfo.addClass('hidden');
 		startSuggestionsThrobber($dropdown);
 
-		pandora.getSuggestions(type, query).done(function(data) {
+		pandora.getSuggestions(type, query, numberOfSuggestions).done(function(data) {
 			if (data.length > 0) {
 				var html = '',
 					i;
 				for (i = 0; i < data.length; i += 1) {
-					if (i > 5) { // temporary (results should be limited in request)
-						break;
-					}
 					html += mustache.render(cachedTemplates.referenceItem, data[i]);
 				}
 				stopSuggestionsThrobber($dropdown);
