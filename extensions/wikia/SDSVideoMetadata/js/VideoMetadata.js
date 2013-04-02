@@ -169,6 +169,20 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages', 'pandora'], f
 		}
 	}
 
+	function addLiteralItem($target) { // temporary - literal-lists UI will change
+		var $literalList = $target.siblings('.literal-list'),
+			$lastItem = $literalList.children(':last'),
+			clonned = $lastItem.clone();
+		$lastItem.children('.remove').removeClass('hidden');
+		clonned.children('input').val('');
+		clonned.appendTo($literalList);
+
+	}
+
+	function removeLiteralItem($target) { // temporary - literal-lists UI will change
+		$target.parent().remove();
+	}
+
 	/**********************************************************
 	  Initializing Function for Video Metadata form interface
 	**********************************************************/
@@ -239,6 +253,17 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages', 'pandora'], f
 				event.preventDefault();
 			}
 		});
+
+		// temporary adding and removing item from literal list
+		cachedSelectors.form.on('click', '.add', function(event){
+			event.preventDefault();
+			addLiteralItem($(event.target));
+		});
+		cachedSelectors.form.on('click', '.literal-list .remove', function(event){
+			event.preventDefault();
+			removeLiteralItem($(event.target));
+		});
+
 
 		// lock video position when scrolling
 		videoPlayerPosition = cachedSelectors.videoPlayer.offset().top;
