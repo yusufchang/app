@@ -21,8 +21,12 @@ class PandoraController extends WikiaSpecialPageController {
 		if ( isset($params['type']) && isset($params['query']) ) {
 			$type = $params['type'];
 			$query = $params['query'];
+			$limit = 10;
+			if( isset($params['limit']) && $params['limit'] < 100 && $params['limit'] > 0 ) {
+				$limit = $params['limit'];
+			}
 			$client = new PandoraAPIClient();
-			$resp = $client->getSuggestions($type, $query);
+			$resp = $client->getSuggestions($type, $query, array("limit" => $limit));
 			if ( $resp->isOK() ) {
 				$suggestions = array();
 				foreach( $resp->asJson() as $i => $sug ) {
