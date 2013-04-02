@@ -229,14 +229,18 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 				$result = $saveOrm->save();
 
+				$errorMessage = '';
+
 				if ( !$result->isOK() ) {
-					$this->setVal( 'errorMessage', $result->getMessage() );
+					$errorMessage =  $result->getMessage();
 				} else {
 					//TODO: redirect
 //					$specialPageUrl = SpecialPage::getTitleFor( 'VMD' )->getFullUrl() . '?video='.urlencode( $fileTitle->getPrefixedDBkey() );
 //					$this->wg->out->redirect( $specialPageUrl );
 //						$this->setVal( 'success', true );
 				}
+
+				$this->setVal( 'errorMessage', $errorMessage );
 			}
 
 			$this->setVal( 'isCorrectFile', true );

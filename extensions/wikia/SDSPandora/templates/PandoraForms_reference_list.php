@@ -1,6 +1,6 @@
 <div class="input-group <?= $type ?>">
 	<label for="<?= $name ?>"><?= $labelMsg ?></label>
-	<input type="text" name="<?= $name ?>" id="<?= $name ?>" data-suggestions-type="<?= (isset($suggestionsType)) ?
+	<input type="text" name="<?= $name ?>-reference" id="<?= $name ?>" data-suggestions-type="<?= (isset($suggestionsType)) ?
 		$suggestionsType : '' ?>" class="suggestions" autocomplete="off">
 	<ul class="reference-list <?= (!is_array( $list )) ? 'hidden' : ''; ?>">
 		<?php
