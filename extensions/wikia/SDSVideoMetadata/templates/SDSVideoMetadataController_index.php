@@ -6,41 +6,14 @@
 			<fieldset>
 				<legend class="VMD-header"><?= wfMessage('sdsvideometadata-common-metadata-legend')->text() ?></legend>
 
-				<!-- Title -->
-	<!--			--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
-	//			'name' => 'videoObject_name',
-	//			'required' => true,
-	//			'labelMsg' => wfMessage('sdsvideometadata-vc-title'),
-	//			'value' => isset( $vcObj['videoObject_name'] ) ? $vcObj['videoObject_name'] : null
-	//			)); ?>
-
 				<!-- Description -->
 				<?= $formBuilder->renderField( 'videoObject_description' ); ?>
-
-<!--				--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
-//				'name' => 'videoObject_description',
-//				'textarea' => true,
-//				'labelMsg' => wfMessage('sdsvideometadata-vc-description')->text(),
-//				'value' => isset( $vcObj['videoObject_description'] ) ? $vcObj['videoObject_description'] : null
-//				)); ?>
 
 				<!-- Language -->
 				<?= $formBuilder->renderField( 'videoObject_inLanguage' ); ?>
 
-<!--				--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
-//				'name' => 'videoObject_inLanguage',
-//				'labelMsg' => wfMessage('sdsvideometadata-vc-language')->text(),
-//				'value' => isset( $vcObj['videoObject_inLanguage'] ) ? $vcObj['videoObject_inLanguage'] : null
-//				)); ?>
-
 				<!-- Subtitles -->
 				<?= $formBuilder->renderField( 'videoObject_subTitleLanguage' ); ?>
-
-<!--				--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'default', array(
-//				'name' => 'videoObject_subTitleLanguage',
-//				'labelMsg' => wfMessage('sdsvideometadata-vc-subtitles')->text(),
-//				'value' => isset( $vcObj['videoObject_subTitleLanguage'] ) ? $vcObj['videoObject_subTitleLanguage'] : null
-//				)); ?>
 
 				<!-- Video object type selection -->
 				<div class="input-group">
@@ -68,23 +41,11 @@
 
 				<!-- Recipe -->
 				<?= $formBuilder->renderField( 'recipe_name' ); ?>
-<!--				--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
-//				'type' => 'VideoClipCookingVideo',
-//				'name' => 'recipe_name',
-//				'id' => 'recipe_id',
-//				'labelMsg' => wfMessage('sdsvideometadata-vc-recipe')->text(),
-//				'list' => isset( $vcObj['recipe_name'] ) ? $vcObj['recipe_name'] : null
-//				)); ?>
+
 
 				<!-- Distributor -->
 				<?= $formBuilder->renderField( 'provider_name' ); ?>
-<!--				--><?//= F::app()->renderPartial('SDSVideoMetadataController', 'reference_list', array(
-//				'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
-//				'name' => 'provider_name',
-//				'id' => 'provider_id',
-//				'labelMsg' => wfMessage('sdsvideometadata-vc-distributor')->text(),
-//				'list' => isset( $vcObj['provider_name'] ) ? $vcObj['provider_name'] : null
-//				)); ?>
+
 
 				<!-- Publisher -->
 				<?= $formBuilder->renderField( 'publisher_name' ); ?>

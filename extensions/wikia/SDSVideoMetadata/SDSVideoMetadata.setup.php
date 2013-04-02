@@ -66,5 +66,6 @@ $app->registerExtensionMessageFile('SDSVideoMetadata', $dir . 'SDSVideoMetadata.
 
 F::build( 'JSMessages' )->registerPackage( 'VMD-messages', array(
 	'sdsvideometadata-vc-remove-item',
-	'sdsvideometadata-vc-create-new-item'
+	'sdsvideometadata-vc-create-new-item',
+	'sdsvideometadata-no-suggestions-found'
 ));

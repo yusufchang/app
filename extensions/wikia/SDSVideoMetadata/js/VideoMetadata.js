@@ -1,8 +1,9 @@
-require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, mustache, loader, msg) {
+require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages', 'pandora'], function($, mustache, loader, msg, pandora) {
 
 	var cachedSelectors = {},
 		cachedTemplates = {},
 		charCountForSuggestions = 1, // minimal number of characters in input field to trigger suggestions dropdown
+		numberOfSuggestions = 5,
 		videoPlayerPosition = null;
 
 	function showSuggestionsDropdown($dropdown) {
@@ -11,67 +12,67 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 
 	function hideSuggestionsDropdown($dropdown) {
 		$dropdown.addClass('hidden');
-		// will be needed when suggestion are ready
-		//$dropdown.find('li').remove();
+		$dropdown.children('p').addClass('hidden');
+		clearSuggestionsDropdown($dropdown);
+	}
+
+	function clearSuggestionsDropdown($dropdown) {
+		$dropdown.find('li').remove();
 	}
 
 	function createSuggestionsDropdown(eventTarget) {
 		var $target = $(eventTarget).parent(),
 			data = {
+				noSuggestionsFound: msg('sdsvideometadata-no-suggestions-found'),
 				createNewBtnMsg: msg('sdsvideometadata-vc-create-new-item')
 			},
 			html = mustache.render(cachedTemplates.suggestionsDropdown, data);
-
 		$target.append(html);
-
-		// will be needed when suggestion are ready
-		//loadSuggestions($target.children('.suggestions-dropdown'));
+		loadSuggestions($target.children('.suggestions-dropdown'));
 	}
 
-	function loadSuggestions($dropdown) { // load suggestions TEMPORARY!!!!
-		var suggestions = [
-				{
-					objectName: 'Doom',
-					objectParam: '2002.12.01',
-					objectId: '1234567890',
-					imgURL: '#'
-				},
-				{
-					objectName: 'Doom',
-					objectParam: '2002.12.01',
-					objectId: '1234567890',
-					imgURL: '#'
-				},
-				{
-					objectName: 'Doom',
-					objectParam: '2002.12.01',
-					objectId: '1234567890',
-					imgURL: '#'
-				},
-				{
-					objectName: 'Doom',
-					objectParam: '2002.12.01',
-					objectId: '1234567890',
-					imgURL: '#'
-				},
-				{
-					objectName: 'Doom',
-					objectParam: '2002.12.01',
-					objectId: '1234567890',
-					imgURL: '#'
+	function loadSuggestions($dropdown) {
+		var	$input = $dropdown.siblings('input'),
+			$noResultsInfo = $dropdown.children('p'),
+			type = $input.data('suggestions-type'),
+			query = $input.val();
+
+		// make sure that new suggestions are loaded to empty dropdown
+		clearSuggestionsDropdown($dropdown);
+		$noResultsInfo.addClass('hidden');
+		startSuggestionsThrobber($dropdown);
+
+		pandora.getSuggestions(type, query).done(function(data) {
+			if (data.length > 0) {
+				var html = '',
+					i;
+				for (i = 0; i < data.length; i += 1) {
+					if (i > 5) { // temporary (results should be limited in request)
+						break;
+					}
+					html += mustache.render(cachedTemplates.referenceItem, data[i]);
 				}
-			],
-			html = '',
-			i;
-		for (i = 0; i < suggestions.length; i += 1) {
-			suggestions[i].propName = $dropdown.siblings('input').attr('id');
-			suggestions[i].removeMsg = msg('sdsvideometadata-vc-remove-item');
+				stopSuggestionsThrobber($dropdown);
+				$dropdown.children('ul').append(html);
+			} else {
+				stopSuggestionsThrobber($dropdown);
+				$noResultsInfo.removeClass('hidden');
+			}
+		}).fail(function(errorMessage) {
+			if (errorMessage) {
+				console.log(errorMessage);
+			}
+		});
+	}
 
-			html += mustache.render(cachedTemplates.referenceItem, suggestions[i]);
-		}
+	function startSuggestionsThrobber($dropdown) {
+		var $throbber = $dropdown.children('.throbber');
+		$throbber.removeClass('hidden').startThrobbing();
+	}
 
-		$dropdown.children('ul').append(html);
-
+	function stopSuggestionsThrobber($dropdown) {
+		var $throbber = $dropdown.children('.throbber');
+		$throbber.addClass('hidden').stopThrobbing();
 	}
 
 	function createRefItem($target) {
@@ -81,7 +82,8 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 				objectName: $input.val(),
 				pos: $list.children(':last').data('pos') + 1 || 0,
 				imgURL: '',
-				propName: $input.attr('name')
+				propName: $input.attr('id'),
+				removeMsg: msg('sdsvideometadata-vc-remove-item')
 			},
 			html = mustache.render(cachedTemplates.referenceItem, tamplateData);
 
@@ -98,10 +100,12 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 				objectName: $target.children('.object-name').text(),
 				objectParam: $target.children('.object-param').text(),
 				objectId: $target.children('.object-id').val(),
+				removeMsg: msg('sdsvideometadata-vc-remove-item'),
+				propName: $list.siblings('input').attr('id'),
 				pos: $list.children(':last').data('pos') + 1 || 0,
 				imgURL: ''
 			},
-			html = mustache(cachedTemplates.referenceItem, tamplateData);
+			html = mustache.render(cachedTemplates.referenceItem, tamplateData);
 
 		$list.append(html);
 
@@ -186,7 +190,7 @@ require(['jquery', 'wikia.mustache', 'wikia.loader', 'JSMessages'], function($, 
 
 			if (targetVal.length >= charCountForSuggestions) {
 				if ($dropdown.length > 0) {
-					//loadSuggestions($dropdown);
+					loadSuggestions($dropdown);
 					showSuggestionsDropdown($dropdown);
 
 				} else {
