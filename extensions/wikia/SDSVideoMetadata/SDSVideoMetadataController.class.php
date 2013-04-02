@@ -11,175 +11,155 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 
 	//Forms config
 	protected $formsConfig = array(
-		'videoObject_description' => array(
+
+
+		/* COMMON */
+
+		'description' => array(
 			'controller' => 'PandoraForms',
 			'template' => 'default',
 			'textarea' => true,
 			'label' => 'sdsvideometadata-vc-description',
 			'ormKey' => 'description'
 		),
-		'videoObject_inLanguage' => array(
+		'inLanguage' => array(
 			'controller' => 'PandoraForms',
 			'template' => 'default',
 			'label' => 'sdsvideometadata-vc-language',
 			'ormKey' => 'inLanguage'
 		),
-		'videoObject_subTitleLanguage' => array(
+		'subTitleLanguage' => array(
 			'controller' => 'PandoraForms',
 			'template' => 'default',
 			'label' => 'sdsvideometadata-vc-subtitles',
 			'ormKey' => 'subTitleLanguage'
 		),
-//		'recipe_name' => array (
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'label' => 'sdsvideometadata-vc-recipe',
-//			'ormKey' => ''
-//		),
-//		'provider_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
-//			'label' => 'sdsvideometadata-vc-distributor',
-//			'ormKey' => ''
-//		),
-//		'publisher_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipTravelVideo VideoClipCookingVideo VideoClipCraftVideo VideoClipHowToVideo',
-//			'label' => 'sdsvideometadata-vc-publisher',
-//			'ormKey' => ''
-//		),
-//		'track_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipMusicVideo',
-//			'label' => 'sdsvideometadata-vc-song',
-//			'ormKey' => ''
-//		),
-//		'musicGroup_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipMusicVideo',
-//			'label' => 'sdsvideometadata-vc-artist',
-//			'ormKey' => ''
-//		),
-//		'musicRecording_musicLabel' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipMusicVideo',
-//			'label' => 'sdsvideometadata-vc-music-label',
-//			'ormKey' => ''
-//		),
-//		'videoObject_genre' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'literal_list',
-//			'type' => 'VideoClipTravelVideo VideoClipMusicVideo VideoClipCookingVideo
-//						VideoClipCraftVideo VideoClipHowToVideo',
-//			'label' => 'sdsvideometadata-vc-genre',
-//			'ormKey' => ''
-//		),
-//		'about_location' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipTravelVideo',
-//			'label' => 'sdsvideometadata-vc-location',
-//			'ormKey' => ''
-//		),
-		'about_name' => array(
-			'controller' => 'PandoraForms',
-			'template' => 'reference_list',
-			'type' => 'VideoClipGamingVideo',
-			'label' => 'sdsvideometadata-vc-game',
-			'ormKey' => 'game'
-		),
-//		'series_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipTVVideo',
-//			'label' => 'sdsvideometadata-vc-series',
-//			'ormKey' => ''
-//		),
-//		'season_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipTVVideo',
-//			'label' => 'sdsvideometadata-vc-season',
-//			'ormKey' => ''
-//		),
-//		'movie_name' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'reference_list',
-//			'type' => 'VideoClipMovieTrailersVideo',
-//			'label' => 'sdsvideometadata-vc-movie',
-//			'ormKey' => ''
-//		),
-//		'videoObject_rating' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'default',
-//			'type' => 'VideoClipMovieTrailersVideo',
-//			'label' => 'sdsvideometadata-vc-trailer-rating',
-//			'ormKey' => ''
-//		),
-		'videoObject_keywords' => array(
-			'controller' => 'PandoraForms',
-			'template' => 'literal_list',
-			'type' => 'VideoClipGamingVideo VideoClipTVVideo',
-			'label' => 'sdsvideometadata-vc-kind',
-			'ormKey' => 'keywords'
-		),
-		'videoObject_isFamilyFriendly' => array(
-			'controller' => 'PandoraForms',
-			'template' => 'select',
-			'type' => 'VideoClipGamingVideo VideoClipMovieTrailersVideo',
-			'label' => 'sdsvideometadata-vc-age-gate',
-			'options' => array(
-				array(
-					'value' => '',
-					'text' => 'sdsvideometadata-vc-boolean-not-set'
-				),
-				array(
-					'value' => 'true',
-					'text' => 'sdsvideometadata-vc-boolean-true'
-				),
-				array(
-					'value' => 'false',
-					'text' => 'sdsvideometadata-vc-boolean-false'
-				)
-			),
-			'ormKey' => 'isFamilyFriendly'
-		),
-//		'videoObject_contentFormat' => array(
-//			'controller' => 'PandoraForms',
-//			'template' => 'select',
-//			'type' => 'VideoClipMusicVideo',
-//			'label' => 'sdsvideometadata-vc-pal',
-//			'options' => array(
-//				array(
-//					'value' => '',
-//					'text' => 'sdsvideometadata-vc-boolean-not-set'
-//				),
-//				array(
-//					'value' => 'PAL',
-//					'text' => 'sdsvideometadata-vc-boolean-true'
-//				)
-//			),
-//			'ormKey' => 'isFamilyFriendly'
-//		),
-		'videoObject_associatedMedia' => array(
-			'controller' => 'PandoraForms',
-			'template' => 'reference_list',
-			'type' => 'VideoClipGamingVideo',
-			'label' => 'sdsvideometadata-vc-soundtrack',
-			'ormKey' => 'soundtrack'
-		),
-		'videoObject_setting' => array(
+
+		/* GAME, TV, MUSIC, MOVIE */
+
+		'setting' => array(
 			'controller' => 'PandoraForms',
 			'template' => 'literal_list',
 			'type' => 'VideoClipGamingVideo VideoClipMusicVideo VideoClipTVVideo VideoClipMovieTrailersVideo',
 			'label' => 'sdsvideometadata-vc-setting',
 			'ormKey' => 'setting'
 		),
+
+		'character' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipGamingVideo VideoClipMusicVideo VideoClipTVVideo VideoClipMovieTrailersVideo',
+			'label' => 'sdsvideometadata-vc-game',
+			'ormKey' => 'character',
+			'suggestionsType' => 'character'
+		),
+
+		/* TV, MOVIE */
+		'actors' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipTVVideo VideoClipMovieTrailersVideo',
+			'label' => 'sdsvideometadata-vc-game',
+			'ormKey' => 'actors',
+			'suggestionsType' => 'actor'
+		),
+
+
+		/* GAME, TV */
+
+		'keywords' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'literal_list',
+			'type' => 'VideoClipGamingVideo VideoClipTVVideo',
+			'label' => 'sdsvideometadata-vc-kind',
+			'ormKey' => 'keywords'
+		),
+
+
+		/* GAME VIDEOS */
+
+		'game' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipGamingVideo',
+			'label' => 'sdsvideometadata-vc-game',
+			'ormKey' => 'game',
+			'suggestionsType' => 'game'
+		),
+
+		'soundtrack' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipGamingVideo',
+			'label' => 'sdsvideometadata-vc-soundtrack',
+			'ormKey' => 'soundtrack',
+			'suggestionsType' => 'music_recording'
+		),
+
+		/* TV VIDEOS */
+
+		'tvSeries' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipTVVideo',
+			'label' => 'sdsvideometadata-vc-series',
+			'ormKey' => 'tvSeries',
+			'suggestionsType' => 'tv_series'
+		),
+
+		'tvSeason' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipTVVideo',
+			'label' => 'sdsvideometadata-vc-season',
+			'ormKey' => 'tvSeason',
+			'suggestionsType' => 'tv_season'
+		),
+
+		/* MOVIES */
+
+		'movie' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipMovieTrailersVideo',
+			'label' => 'sdsvideometadata-vc-movie',
+			'ormKey' => 'movie',
+			'suggestionsType' => 'movie'
+		),
+
+		/* MUSIC */
+		'musicRecording' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipMusicVideo',
+			'label' => 'sdsvideometadata-vc-song',
+			'ormKey' => 'musicRecording',
+			'suggestionsType' => 'music_recording'
+		),
+
+		/* TRAVEL */
+
+		'contentLocation' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipTravelVideo',
+			'label' => 'sdsvideometadata-vc-location',
+			'ormKey' => 'contentLocation',
+			'suggestionsType' => 'place'
+		),
+
+		/* COOKING */
+
+		'recipe' => array(
+			'controller' => 'PandoraForms',
+			'template' => 'reference_list',
+			'type' => 'VideoClipCookingVideo',
+			'label' => 'sdsvideometadata-vc-location',
+			'ormKey' => 'recipe',
+			'suggestionsType' => 'recipe'
+		),
+
+
 	);
 
 	public function __construct() {

@@ -7,13 +7,13 @@
 				<legend class="VMD-header"><?= wfMessage('sdsvideometadata-common-metadata-legend')->text() ?></legend>
 
 				<!-- Description -->
-				<?= $formBuilder->renderField( 'videoObject_description' ); ?>
+				<?= $formBuilder->renderField( 'description' ); ?>
 
 				<!-- Language -->
-				<?= $formBuilder->renderField( 'videoObject_inLanguage' ); ?>
+				<?= $formBuilder->renderField( 'inLanguage' ); ?>
 
 				<!-- Subtitles -->
-				<?= $formBuilder->renderField( 'videoObject_subTitleLanguage' ); ?>
+				<?= $formBuilder->renderField( 'subTitleLanguage' ); ?>
 
 				<!-- Video object type selection -->
 				<div class="input-group">
@@ -40,60 +40,38 @@
 				<legend class="VMD-header"><?= wfMessage('sdsvideometadata-type-specific-metadata-legend')->text() ?></legend>
 
 				<!-- Recipe -->
-				<?= $formBuilder->renderField( 'recipe_name' ); ?>
-
-
-				<!-- Distributor -->
-				<?= $formBuilder->renderField( 'provider_name' ); ?>
-
-
-				<!-- Publisher -->
-				<?= $formBuilder->renderField( 'publisher_name' ); ?>
+				<?= $formBuilder->renderField( 'recipe' ); ?>
 
 				<!-- Song -->
-				<?= $formBuilder->renderField( 'track_name' ); ?>
+				<?= $formBuilder->renderField( 'musicRecording' ); ?>
 
-				<!-- Artist -->
-				<?= $formBuilder->renderField( 'musicGroup_name' ); ?>
-
-				<!-- Music Label -->
-				<?= $formBuilder->renderField( 'musicRecording_musicLabel' ); ?>
-
-				<!-- Genre -->
-				<?= $formBuilder->renderField( 'videoObject_genre' ); ?>
 
 				<!-- Location -->
-				<?= $formBuilder->renderField( 'about_location' ); ?>
+				<?= $formBuilder->renderField( 'contentLocation' ); ?>
 
 				<!-- Game -->
-				<?= $formBuilder->renderField( 'about_name' ); ?>
+				<?= $formBuilder->renderField( 'game' ); ?>
 
 				<!-- TV Series -->
-				<?= $formBuilder->renderField( 'series_name' ); ?>
+				<?= $formBuilder->renderField( 'tvSeries' ); ?>
 
 				<!-- Season -->
-				<?= $formBuilder->renderField( 'season_name' ); ?>
+				<?= $formBuilder->renderField( 'tvSeason' ); ?>
 
 				<!-- Movie -->
-				<?= $formBuilder->renderField( 'movie_name' ); ?>
-
-				<!-- Trailer rating  -->
-				<?= $formBuilder->renderField( 'videoObject_rating' ); ?>
+				<?= $formBuilder->renderField( 'movie' ); ?>
 
 				<!-- Type -->
-				<?= $formBuilder->renderField( 'videoObject_keywords' ); ?>
+				<?= $formBuilder->renderField( 'keywords' ); ?>
 
 				<!-- Age gate -->
-				<?= $formBuilder->renderField( 'videoObject_isFamilyFriendly' ); ?>
-
-				<!-- PAL -->
-				<?= $formBuilder->renderField( 'videoObject_contentFormat' ); ?>
+				<?= $formBuilder->renderField( 'isFamilyFriendly' ); ?>
 
 				<!-- Soundtrack -->
-				<?= $formBuilder->renderField( 'videoObject_associatedMedia' ); ?>
+				<?= $formBuilder->renderField( 'soundtrack' ); ?>
 
 				<!-- Setting -->
-				<?= $formBuilder->renderField( 'videoObject_setting' ); ?>
+				<?= $formBuilder->renderField( 'setting' ); ?>
 
 			</fieldset>
 

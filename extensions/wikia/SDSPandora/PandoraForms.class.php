@@ -137,8 +137,11 @@ class PandoraForms extends WikiaController {
 	}
 
 	public function renderField( $key ) {
+
 		$config = $this->getConfig( $key );
+
 		if ( is_array( $config ) ) {
+
 			$value = $this->getValue( $key );
 			if ( is_array( $value ) ) {
 				$config = array_merge( $config, $value );

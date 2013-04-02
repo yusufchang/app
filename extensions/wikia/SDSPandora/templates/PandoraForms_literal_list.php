@@ -9,7 +9,7 @@
 				<input type="text" name="<?= $name ?>[]" id="<?= $name ?>" value="<?= htmlspecialchars($item) ?>">
 				<button class="secondary remove"><?= wfMessage('sdsvideometadata-vc-remove-item')->text() ?></button>
 			</li>
-			<?php endforeach; ?>
+		<?php endforeach; ?>
 		<li>
 			<input type="text" name="<?= $name ?>[]" id="<?= $name ?>">
 			<button class="secondary remove hidden"><?= wfMessage('sdsvideometadata-vc-remove-item')->text()
