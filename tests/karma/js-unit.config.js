@@ -74,6 +74,10 @@ files = [
 	'extensions/wikia/AdEngine/js/WikiaDartHelper.js',
 	'extensions/wikia/AdEngine/js/WikiaDartMobileHelper.js',
 	'extensions/wikia/AdEngine/js/spec/*.spec.js',
+
+	//Pandora
+	'extensions/wikia/SDSPandora/js/modules/pandora.js',
+	'extensions/wikia/SDSPandora/js/spec/pandora.spec.js'
 ];
 
 notCovered = [
