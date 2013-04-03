@@ -12,9 +12,8 @@ describe("pandora", function () {
 		LIMIT = 5,
 		async = new AsyncSpec(this),
 		nirvanaMock = {},
-		resp = {},
 		deferred = jQuery.Deferred,
-		pandora = define.getModule(deferred, nirvanaMock);
+		pandora = modules.pandora(deferred, nirvanaMock);
 
 	it('registers AMD module', function() {
 		expect(typeof pandora).toBe('object');
@@ -32,34 +31,32 @@ describe("pandora", function () {
 		};
 	}
 
-	resp = {
-		data: [],
-		success: true
-	}
-
 	async.it('Returned Suggestions for given type and query', function(done) {
-		var nirvanaMock = mockNirvanaGetSuggestions(resp),
-			pandora = define.getModule(deferred, nirvanaMock);
+		var resp = {
+			data: [],
+			success: true
+		},
+			nirvanaMock = mockNirvanaGetSuggestions(resp),
+			pandora = modules.pandora(deferred, nirvanaMock);
 
-		pandora.getSuggestions(TYPE, QUERY).then(function(resp) {
-			expect(resp.data instanceof Array).toBe(true);
-			expect(resp.success).toBe(true);
+		pandora.getSuggestions(TYPE, QUERY).then(function(data) {
+			expect(data instanceof Array).toBe(true);
 			done();
 		});
 	});
 
-	resp = {
-		success: false,
-		message: 'Error message'
-	}
 
 	async.it('Returned error message', function(done) {
-		var nirvanaMock = mockNirvanaGetSuggestions(resp),
-			pandora = define.getModule(deferred, nirvanaMock);
+		var resp = {
+			success: false,
+			message: 'Error message'
+		},
+			nirvanaMock = mockNirvanaGetSuggestions(resp),
+			pandora = modules.pandora(deferred, nirvanaMock);
 
-		pandora.getSuggestions(TYPE, QUERY).then(function(resp) {
-			expect(resp.success).toBe(false);
-			expect(resp.message instanceof String).toBe(true);
+		pandora.getSuggestions(TYPE, QUERY).fail(function(message) {
+			dump(message);
+			expect(message ).toEqual('Error message');
 			done();
 		});
 	});
@@ -76,19 +73,17 @@ describe("pandora", function () {
 		};
 	}
 
-	resp = {
-		data: [1,2,3,4,5],
-		success: true
-	}
-
 	async.it('Returned Suggestions with limited number of results', function(done) {
-		var nirvanaMock = mockNirvanaGetSuggestionsWithLimit(resp),
-			pandora = define.getModule(deferred, nirvanaMock);
+		var resp = {
+			data: [1,2,3,4,5],
+			success: true
+		},
+			nirvanaMock = mockNirvanaGetSuggestionsWithLimit(resp),
+			pandora = modules.pandora(deferred, nirvanaMock);
 
-		pandora.getSuggestions(TYPE, QUERY, LIMIT).then(function(resp) {
-			expect(resp.data instanceof Array).toBe(true);
-			expect(resp.data.length).toBe(5);
-			expect(resp.success).toBe(true);
+		pandora.getSuggestions(TYPE, QUERY, LIMIT).then(function(data) {
+			expect(data instanceof Array).toBe(true);
+			expect(data.length).toBe(5);
 			done();
 		});
 	});
