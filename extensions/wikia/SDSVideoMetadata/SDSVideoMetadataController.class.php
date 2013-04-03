@@ -274,22 +274,4 @@ class SDSVideoMetadataController extends WikiaSpecialPageController {
 		return wfGetWikiaPageProp( WPP_VIDEO_METADATA_COMPLETED, $fileTitle->getArticleID() );
 	}
 
-	public function referenceItem() {
-		$item = $this->getVal('item');
-		$pos = $this->getVal('pos');
-		$propName = $this->getVal('propName');
-		$removeBtnMsg = $this->getVal('removeBtnMsg');
-
-		$this->objectName = htmlspecialchars($item['name']);
-		$this->objectId = htmlspecialchars($item['id']);
-		$this->objectParam = 'Additional info';
-		$this->imgURL = '';
-		$this->removeMsg = $removeBtnMsg;
-		$this->pos = $pos;
-		$this->propName = $propName;
-
-
-		$this->response->setTemplateEngine(WikiaResponse::TEMPLATE_ENGINE_MUSTACHE);
-	}
-
 }

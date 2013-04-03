@@ -7,7 +7,7 @@ class VideoClipGamingVideo extends VideoObject {
 	const type = 'http://sds.wikia.com/vocabs/VideoClipGamingVideo';
 
 	public static $config = array (
-		'game' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'wikia:Game' ),
+		'game' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:about', 'childType' => 'wikia:VideoGame' ),
 		'additional_type' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:additionalType', 'value'=> 'http://sds.wikia.com/vocabs/VideoClipGamingVideo' ),
 		'isFamilyFriendly' => array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:isFamilyFriendly' ),
 		'keywords' => array( 'type'=>PandoraSDSObject::TYPE_COLLECTION, 'subject'=>'schema:keywords' ),
@@ -38,7 +38,7 @@ class VideoClipGamingVideo extends VideoObject {
 		$map['about_name'] = array();
 		$map['about_name']['about_name'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
 		$map['about_name']['about_id'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject' => 'id' );
-		$map['about_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'wikia:Game' );
+		$map['about_name']['type'] = array( 'type'=>PandoraSDSObject::TYPE_LITERAL, 'subject'=>'type', 'value'=>'wikia:VideoGame' );
 
 		$map['schema:MediaObject'] = array();
 		$map['schema:MediaObject']['videoObject_associatedMedia'] = array( 'type' => PandoraSDSObject::TYPE_LITERAL, 'subject'=>'schema:name' );
@@ -51,7 +51,7 @@ class VideoClipGamingVideo extends VideoObject {
 	public static function canHandle( PandoraSDSObject $data ) {
 
 		$type = static::getSubjectType( $data );
-		if ( in_array( 'wikia:Game', $type, true ) ) {
+		if ( in_array( 'wikia:VideoGame', $type, true ) ) {
 			return true;
 		}
 		return false;
