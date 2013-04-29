@@ -37,7 +37,7 @@ function efLyricWikiGetTextSnippet( &$article, &$content, $length ) {
 	$text = $article->getText();
 
 	// If the page contains lyrics, use that as the summary.
-	if ( !empty( $text ) && preg_match( "/<(gracenotelyric|lyric)s?>(.*?)<\/(gracenotelyric|lyric)/is", $text, $matches ) > 0 ){
+	if ( !empty( $text ) && preg_match( "/<(lyric)s?>(.*?)<\\/(lyric)/is", $text, $matches ) > 0 ){
 		$tmpParser = new Parser();
 		$content = $tmpParser->parse( $matches[2],  $article->getTitle(), new ParserOptions() )->getText();
 	}

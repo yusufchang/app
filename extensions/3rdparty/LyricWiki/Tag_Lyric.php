@@ -74,14 +74,14 @@ function lyricTag()
 	$wgFirstLyricTag = true;
 }
 
-function lyricTag_InstallParser( $parser ) {
+function lyricTag_InstallParser( Parser $parser ) {
 	#install hook on the element <lyric>
 	$parser->setHook("lyric", "renderLyricTag");
 	$parser->setHook("lyrics", "renderLyricTag");
 	return true;
 }
 
-function lyricTagCss($out)
+function lyricTagCss(OutputPage $out)
 {
 	$css = <<<DOC
 .lyricbox
@@ -101,7 +101,7 @@ DOC
 	return true;
 }
 
-function renderLyricTag($input, $argv, $parser)
+function renderLyricTag($input, $argv, Parser $parser)
 {
 	wfProfileIn( __METHOD__ );
 
@@ -139,7 +139,6 @@ function renderLyricTag($input, $argv, $parser)
 		$artistLink = str_replace("_", "+", $artistLink);
 		$songLink = str_replace("_", "+", $songLink);
 		$href = "<a href='http://www.ringtonematcher.com/co/ringtonematcher/02/noc.asp?sid=WILWros&amp;artist=".urlencode($artistLink)."&amp;song=".urlencode($songLink)."' rel='nofollow' target='_blank'>";
-		$ringtoneLink = "";
 		$ringtoneLink = "<div class='rtMatcher'>";
 		$ringtoneLink.= "$href<img src='" . $imgPath . "/phone_left.gif' alt='phone' width='16' height='17'/> ";
 		$ringtoneLink.= "Send \"$songTitle\" Ringtone to your Cell";
@@ -148,32 +147,79 @@ function renderLyricTag($input, $argv, $parser)
 		$wgFirstLyricTag = false;
 	}
 
-	// FogBugz 8675 - if a page is on the Gracenote takedown list, make it not spiderable (because it's not actually good content... more of a placeholder to indicate to the community that we KNOW about the song, but just legally can't display it).
-	if(0 < preg_match("/\{\{gracenote[ _]takedown\}\}/i", $transform)){
-		$parser->mOutput->setIndexPolicy( 'noindex' );
-	}
-
 	#parse embedded wikitext
 	$transform = $parser->parse($transform, $parser->mTitle, $parser->mOptions, false, false)->getText();
 
-	$retVal.= gracenote_getNoscriptTag();
+	$retVal.= lyrictag_getNoscriptTag();
 	$retVal.= "<div class='lyricbox'>";
 	$retVal.= ($isInstrumental?"":$ringtoneLink); // if this is an instrumental, just a ringtone link on the bottom is plenty.
-	$retVal.= gracenote_obfuscateText($transform);
+	$retVal.= lyrictag_obfuscateText($transform);
 	$retVal.= $ringtoneLink;
 	$retVal.= "<div class='lyricsbreak'></div>\n"; // so that we can have stuff in the box (like videos & awards) even if the lyrics are short.
 	$retVal.= "</div>";
-
-	// Tell the Google Analytics code that this view was for non-Gracenote lyrics.
-	$retVal.= gracenote_getAnalyticsHtml(GRACENOTE_VIEW_OTHER_LYRICS);
 
 	wfProfileOut( __METHOD__ );
 	return $retVal;
 }
 
+////
+// Returns the HTML for a noscript  tag which will hide the lyrics if javascript is disabled and give a message to the end-user explaining what happened.
+////
+function lyrictag_getNoscriptTag(){
+    return "<noscript><div class='gracenote-header'>You must enable javascript to view this page.  This is a requirement of our licensing agreement with music LyricFind.</div>".
+        "<style type='text/css'>".
+        ".lyricbox{display:none !important;}".
+        "</style>".
+        "</noscript>\n";
+} // end lyrictag_getNoscriptTag()
+
+function lyrictag_obfuscateText($text){
+    require_once __DIR__ . '/utf8ToUnicode.php';
+
+    // Copy-protection: encode the contents of each line.  Will not encode anything inside of "<" and ">" characters (because that would break any HTML).
+    $LINE_BREAK = "<br />"; // this is the format in which it comes out of the parser.
+    $LT_UNICODE = 60;
+    $GT_UNICODE = 62;
+    $lines = explode($LINE_BREAK, $text);
+    $lyrics = "";
+    $isInsideTag = false;
+    foreach($lines as $oneLine){
+        $charsFromLyrics = utf8ToUnicode($oneLine);
+        foreach($charsFromLyrics as $unicodeValue){
+            if($isInsideTag){
+                $unicodeAsArray = array($unicodeValue); // assigned so it can be passed by reference.
+                $lyrics .= unicodeToUtf8($unicodeAsArray);
+                if($GT_UNICODE == $unicodeValue){
+                    $isInsideTag = false;
+                }
+            } else {
+                if($LT_UNICODE == $unicodeValue){
+                    $lyrics .= "<";
+                    $isInsideTag = true;
+                } else {
+                    $lyrics .= "&#$unicodeValue;";
+                }
+            }
+        }
+        $lyrics .= $LINE_BREAK;
+    }
+
+    # Prevent over-encoding of special HTML-encoded characters.
+    # TODO: Is it safe to just make sure all /&([0-9a-zA-Z]{2,4});/ are put back to normal text?
+    $lyrics = str_replace( "&#38;&#110;&#98;&#115;&#112;&#59;", "&nbsp;", $lyrics );
+    $lyrics = str_replace( "&#38;&#35;&#49;&#54;&#48;&#59;", "&#160;", $lyrics); // fb#42619
+    $lyrics = str_replace( "&#38;&#97;&#109;&#112;&#59;", "&amp;", $lyrics); // rt#35365
+    $lyrics = str_replace( "&#38;&#103;&#116;&#59;", "&gt;", $lyrics ); // fb#16034
+    $lyrics = str_replace( "&#38;&#108;&#116;&#59;", "&lt;", $lyrics );
+
+    return substr($lyrics, 0, strlen($lyrics) - strlen($LINE_BREAK));
+} // end lyrictag_obfuscateText()
+
 /**
  * The parser tag may have set a parser option (which gets cached in the parser-cache) indicating that
  * this page should have a certain index policy.
+ *
+ * @param WikiPage $wikiPage
  */
 function efApplyIndexPolicy($wikiPage){
 	global $wgUser;

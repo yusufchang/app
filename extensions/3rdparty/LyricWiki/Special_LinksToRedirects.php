@@ -43,7 +43,6 @@ class Linkstoredirects extends SpecialPage{
 
 	function execute(){
 		global $wgOut;
-		global $wgRequest, $wgUser;
 
 		GLOBAL $wgMemc;
 		$TABLE_PREFIX = "";
@@ -173,7 +172,7 @@ class Linkstoredirects extends SpecialPage{
 										13 => "Help_talk",
 										14 => ":Category",
 										15 => "Category_talk",
-										NS_GRACENOTE => "Gracenote"
+										NS_LYRICFIND => "LyricFind"
 									);
 						$idToTitle = array();
 						$ids = array_unique($ids);

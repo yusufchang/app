@@ -21,7 +21,7 @@
 // - Some standard way of enabling & displaying debug output for every function and return-format (would be optimal to keep this standard with MediaWiki API and other Wikia APIs (eg: Nirvana)).
 // - Indicate failures with extra fields, (or in REST: with status-codes), rather than hardcoded stuff like "Not Found" for the lyrics.
 // - A good unit-test suite from the start so that we can add edge-cases as we find them so that we never have the same bug-report more than once (we do a good job of no regressions right now... but mostly because we're avoiding sweeping changes... the API would be much more agile if it could make sweeping changes safely).
-// - TODO: Tracklisting format which isn't tied to a master artist or album.  This is needed for parsing list pages, etc. It will require a different structure for song-names since they will have the artist in them.  Should name it differently to avoid confusion (eg: "song" is current, this would be "pageTitle" or "fullTitle" or something - just keep in mind to avoid confusion related to namespaces when naming this return value... eg: 'fullPageTitle' would be wrong since "Gracenote:" wouldn't go in there).
+// - TODO: Tracklisting format which isn't tied to a master artist or album.  This is needed for parsing list pages, etc. It will require a different structure for song-names since they will have the artist in them.  Should name it differently to avoid confusion (eg: "song" is current, this would be "pageTitle" or "fullTitle" or something - just keep in mind to avoid confusion related to namespaces when naming this return value... eg: 'fullPageTitle' would be wrong since "LyricFind:" wouldn't go in there).
 ////
 
 include_once 'extras.php'; // for lw_simpleQuery to start
@@ -531,7 +531,7 @@ function searchArtists($searchString){
 
 	GLOBAL $SHUT_DOWN_API;
 	if(!$SHUT_DOWN_API){
-// TODO: HAVE IT FOLLOW REDIRECTS, FIND CLOSE MATCHES, FALL BACK TO GRACENOTE, ETC.? or just use SimpleSearch now?
+// TODO: HAVE IT FOLLOW REDIRECTS, FIND CLOSE MATCHES, FALL BACK TO LyricFind, ETC.? or just use SimpleSearch now?
 
 		// If the string starts or ends with %'s, trim them off.
 		if(strlen($artist) >= 1){
@@ -697,11 +697,11 @@ function getSOTD(){
 /**
  * The most commonly called function in the API... attempts to find a match for a provided artist/song name and return
  * a fair-use snippet of lyrics along with a link to the page.  Internally handles "fuzzy" title matching to get close matches,
- * fallback to Gracenote pages if those exist and regular pages don't, and follow "implied redirects" (eg: "Prodigy" redirects
+ * fallback to LyricFind pages if those exist and regular pages don't, and follow "implied redirects" (eg: "Prodigy" redirects
  * to "The Prodigy", therefore we can infer that "Prodigy:Firestarter" => "The Prodigy:Firestarter").
  *
  * @params doHyphens is a bool which will be true initially and indicates that the function should try to remove hyphens.  Recursive calls might not do this.
- * @param ns the namespace to use when looking for songs. Will always try the main namespace first, but recursive calls might fall back to NS_GRACENOTE if matches aren't found in the main namespace.
+ * @param ns the namespace to use when looking for songs. Will always try the main namespace first, but recursive calls might fall back to NS_LYRICFIND if matches aren't found in the main namespace.
  * @param isOuterRequest is a bool which represents if this is the actual request from the SOAP or REST APIs.  It will be set to false by all recursive calls.
  * @param lyricsTagFound is a bool which is modified by reference and will indicate whether a lyrics tag (or equivalent formatting including an {{instrumental}} template) of any kind was found to indicate that the resulting wikitext is most likely lyrics.
  * @param allowFullLyrics is a bool which is the default for whether the lyrics need to be truncated. For direct calls this should always be left to 'false' for legal reasons... however, there are currently hacks which want the full text of a page so they can post-process the wikitext.
@@ -733,14 +733,14 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 		print "DECODE: ".utf8_decode($artist)."\n";
 	}
 
-	// If this is explicitly a request for a Gracenote page, change the namespace and continue on.
-	$GRACENOTE_NS_STRING = "Gracenote"; // TODO: FIXME: Is there a more programmatic way to get this string?
+	// If this is explicitly a request for a LyricFind page, change the namespace and continue on.
+	$LYRICFIND_NS_STRING = "LyricFind"; // TODO: FIXME: Is there a more programmatic way to get this string?
 	$LW_NS_STRING = "LyricWiki"; // TODO: FIXME: There MUST be a more programattic way to get this :P
-	if($artist == $GRACENOTE_NS_STRING){
+	if($artist == $LYRICFIND_NS_STRING){
 		$artist = $song; // the name will automatically get split up if we stuff the whole thing into the artist variable.
 		$song = "";
-		$ns = NS_GRACENOTE;
-		print (!$debug?"":"Gracenote page was explicitly requested. Now looking for \"$artist\" in the Gracenote namespace.");
+		$ns = NS_LYRICFIND;
+		print (!$debug?"":"LyricFind page was explicitly requested. Now looking for \"$artist\" in the LyricFind namespace.");
 	} else if($artist == $LW_NS_STRING){
 		$artist = $song;
 		$song = "";
@@ -762,7 +762,7 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 	}
 	$defaultLyrics = "Not found";
 	$defaultUrl = "http://lyrics.wikia.com";
-	$nsString = ($ns == NS_GRACENOTE ? $GRACENOTE_NS_STRING.":" : "");
+	$nsString = ($ns == NS_LYRICFIND ? $LYRICFIND_NS_STRING.":" : "");
 	$nsString = ($ns == NS_PROJECT ? $LW_NS_STRING.":" : "");
 	$urlRoot = "http://lyrics.wikia.com/"; // may differ from default URL, should contain a slash after it.
 	$instrumental = "Instrumental";
@@ -935,7 +935,7 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 
 				// Parse the lyrics from the content.
 				$matches = array();
-				if(0<preg_match("/<(gracenotelyrics|lyrics?)>(.*)<.(gracenotelyrics|lyrics?)>/si", $content, $matches) || (0<preg_match("/<(gracenotelyrics|lyrics?)>(.*)/si", $content, $matches))){
+				if(0<preg_match("/<(lyrics?)>(.*)<.(lyrics?)>/si", $content, $matches) || (0<preg_match("/<(lyrics?)>(.*)/si", $content, $matches))){
 					$content = $matches[2]; // Grabs lyrics if they are inside of lyrics tags.
 					// Sometimes when people convert to the new lyrics tags, they forget to delete the spaces at the beginning of the lines.
 					if(0<preg_match("/(\n [^\n]*)+/si", $content, $matches)){
@@ -944,7 +944,7 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 					}
 
 					// In case the page uses the instrumental template but uses it inside of lyrics tags.
-					if(0<preg_match("/\{\{instrumental\}\}/si", $content, $matches)){
+					if(0<preg_match('/\{\{instrumental\}\}/si', $content, $matches)){
 						$content = $instrumental;
 					}
 
@@ -953,7 +953,7 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 					$content = $matches[0]; // Grabs lyrics if they use the space-at-the-beginning-of-the-line format.
 					$content = str_replace("\n ", "\n", $content);
 					$lyricsTagFound = true;
-				} else if(0<preg_match("/\{\{instrumental\}\}/si", $content, $matches)){
+				} else if(0<preg_match('/\{\{instrumental\}\}/si', $content, $matches)){
 					$content = $instrumental;
 					$lyricsTagFound = true;
 				} else if(strlen(trim($content)) > 0){
@@ -969,7 +969,7 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 				$retVal['lyrics'] = $content;
 				$retVal['url'] = $url;
 
-				// Additional data to help with tracking the hits for royalty payments via Gracenote (among other potential uses).
+				// Additional data to help with tracking the hits for royalty payments via LyricFind (among other potential uses).
 				$retVal['page_namespace'] = $ns;
 				$retVal['page_id'] = $page_id;
 
@@ -1004,15 +1004,15 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 			}
 
 			// If there was no result, give it another try without the hyphen trick.
-			if(($retVal['lyrics'] == $defaultLyrics) && ($lastHyphen !== false)){ // this logic should be kept even if isOuterRequest is false (ie: Gracenote should be tried with and without the hyphen trick
+			if(($retVal['lyrics'] == $defaultLyrics) && ($lastHyphen !== false)){ // this logic should be kept even if isOuterRequest is false (ie: LyricFind should be tried with and without the hyphen trick
 				print (!$debug?"":"Trying again but assuming hyphens are part of the song name...\n");
 				$retVal = getSong($origArtist, $hyphenSong, false, $ns, false, $debug); // the first false stops the hyphen trick from being tried again, the second false indicates that this is a recursive call
 			}
 
-			// If there was no result, give it another try by going through the NS_GRACNOTE (if this is not NS_GRACENOTE already) before trying the fallback search.
-			if(($isOuterRequest) && ($retVal['lyrics'] == $defaultLyrics) && ($ns != NS_GRACENOTE)){
-				print (!$debug?"":"Trying again but using Gracenote namespace this time...\n");
-				$gnRetVal = getSong($artist, $song, true, NS_GRACENOTE, false, $debug); // since we're starting all tricks from scratch, use doHyphens=true
+			// If there was no result, give it another try by going through the NS_GRACNOTE (if this is not NS_LYRICFIND already) before trying the fallback search.
+			if(($isOuterRequest) && ($retVal['lyrics'] == $defaultLyrics) && ($ns != NS_LYRICFIND)){
+				print (!$debug?"":"Trying again but using LyricFind namespace this time...\n");
+				$gnRetVal = getSong($artist, $song, true, NS_LYRICFIND, false, $debug); // since we're starting all tricks from scratch, use doHyphens=true
 
 				// If we found a legit match, overwrite whole result (don't do that normally because it would mess up the URL to use the GN namespace even though song is in neither namespace).
 				if($gnRetVal['lyrics'] != $defaultLyrics){
@@ -1047,9 +1047,9 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 					$expectedSig = md5($wgFullLyricWikiApiToken . "$origArtist$origSong");
 					if($expectedSig == $fullApiAuth){
 						$allowFullLyrics = true;
-					} else if($ns == NS_GRACENOTE){
+					} else if($ns == NS_LYRICFIND){
 						// If the song is in the GN Namespace, then there is one more possibility for the name of the song
-						$expectedSig = md5($wgFullLyricWikiApiToken . "Gracenote$origArtist$origSong");
+						$expectedSig = md5($wgFullLyricWikiApiToken . "LyricFind$origArtist$origSong");
 						if($expectedSig == $fullApiAuth){
 							$allowFullLyrics = true;
 						}
@@ -1070,14 +1070,14 @@ function getSong($artist, $song="", $doHyphens=true, $ns=NS_MAIN, $isOuterReques
 				//}
 
 				// Determine if this result was from the takedown list (must be done before truncating to a snippet, below).
-				$retVal['isOnTakedownList'] = (0 < preg_match("/\{\{gracenote[ _]takedown\}\}/", $retVal['lyrics']));
+				$retVal['isOnTakedownList'] = false;
 
 				// SWC 20090802 - Neuter the actual lyrics :( - return an explanation with a link to the LyricWiki page.
 				// SWC 20091021 - Gil has determined that up to 17% of the lyrics can be returned as fair-use - we'll stick with 1/7th (about 14.3%) of the characters for safety.
 				if($allowFullLyrics){
-					// If the full lyrics are being returned (ie: to our mobile app) and the song is a Gracenote song, add the mobile branding as mentioned in the contract.
-					if($ns == NS_GRACENOTE){
-						$retVal['lyrics'] .= "\n\n&copy; Gracenote's providers";
+					// If the full lyrics are being returned (ie: to our mobile app) and the song is a LyricFind song, add the mobile branding as mentioned in the contract.
+					if($ns == NS_LYRICFIND){
+						$retVal['lyrics'] .= "\n\n&copy; LyricFind's providers";
 					}
 				} else {
 					if(($retVal['lyrics'] != $defaultLyrics) && ($retVal['lyrics'] != $instrumental) && ($retVal['lyrics'] != "")){
@@ -1467,16 +1467,16 @@ function getAlbum($artist, $album, $year){
 
 		// TODO: Link to the LyricWiki page
 		$ns = $songResult['page_namespace'];
-		$GRACENOTE_NS_STRING = "Gracenote"; // FIXME: Is there a more programmatic way to get this string?
+		$LYRICFIND_NS_STRING = "LyricFind"; // FIXME: Is there a more programmatic way to get this string?
 		$LW_NS_STRING = "LyricWiki";
-		$nsString = ($ns == NS_GRACENOTE ? $GRACENOTE_NS_STRING.":" : ""); // TODO: is there a better way to get this?
+		$nsString = ($ns == NS_LYRICFIND ? $LYRICFIND_NS_STRING.":" : ""); // TODO: is there a better way to get this?
 		$nsString = ($ns == NS_PROJECT ? $LW_NS_STRING.":" : ""); // TODO: is there a better way to get this?
 		$urlRoot = "http://lyrics.wikia.com/"; // may differ from default URL, should contain a slash after it. - TODO: This is also defined in getSong()... refactor it to be global or make it a member function of a class.
 		$url = $urlRoot.$nsString.str_replace("%3A", ":", urlencode($finalName)); // %3A as ":" is for readability.
 		$retVal['url'] = $url;
 
 		$content = $songResult['lyrics']; // getSong is used as a temporary hack (until the refactoring) to get the full wikitext of the article.
-		if(0 < preg_match_all("/#[^\n]*\[\[(.*?)(\||\]\])/is", $content, $matches)){
+		if(0 < preg_match_all('/#[^\n]*\[\[(.*?)(\||\]\])/is', $content, $matches)){
 			$fullNames = $matches[1];
 			$songNames = array();
 			foreach($fullNames as $songName){
