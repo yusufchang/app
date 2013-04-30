@@ -114,13 +114,7 @@ class CampfireController extends WikiaController {
 
 		$this->googleAnalytics .= AnalyticsEngine::track('GA_Urchin', 'abtest');
 
-		// Add important Gracenote analytics for reporting needed for licensing on LyricWiki.
-		if (43339 == $wgCityId){
-			$this->googleAnalytics .= AnalyticsEngine::track('GA_Urchin', 'lyrics');
-		}
-
 		// macbre: RT #25697 - hide Comscore & QuantServe tags on edit pages
-
 		if(!in_array($wgRequest->getVal('action'), array('edit', 'submit'))) {
 			$this->comScore = AnalyticsEngine::track('Comscore', AnalyticsEngine::EVENT_PAGEVIEW);
 			$this->quantServe = AnalyticsEngine::track('QuantServe', AnalyticsEngine::EVENT_PAGEVIEW);
