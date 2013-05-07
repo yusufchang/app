@@ -15,6 +15,12 @@ class ProfilerSimple extends Profiler {
 	var $zeroEntry = array('cpu'=> 0.0, 'cpu_sq' => 0.0, 'real' => 0.0, 'real_sq' => 0.0, 'count' => 0);
 	var $errorEntry;
 
+	/**
+	 * @author Władysław Bodzek <wladek@wikia-inc.com>
+	 * @var array
+	 */
+	var $mWorkStackCounts = array();
+
 	function __construct( $params ) {
 		global $wgRequestTime, $wgRUstart;
 		parent::__construct( $params );
@@ -27,6 +33,9 @@ class ProfilerSimple extends Profiler {
 			$this->mWorkStack = array();
 
 			$this->mWorkStack[] = array( '-total', 0, $wgRequestTime,$this->getCpuTime($wgRUstart));
+			// Wikia change - begin - @author: wladek
+			$this->mWorkStackCounts['-total'] = 1;
+			// Wikia change - end
 
 			$elapsedcpu = $this->getCpuTime() - $this->getCpuTime($wgRUstart);
 			$elapsedreal = microtime(true) - $wgRequestTime;
@@ -54,6 +63,9 @@ class ProfilerSimple extends Profiler {
 			$this->debug(str_repeat(' ', count($this->mWorkStack)).'Entering '.$functionname."\n");
 		}
 		$this->mWorkStack[] = array($functionname, count( $this->mWorkStack ), microtime(true), $this->getCpuTime());
+		// Wikia change - begin - @author: wladek
+		@$this->mWorkStackCounts[$functionname]++;
+		// Wikia change - end
 	}
 
 	function profileOut($functionname) {
@@ -86,10 +98,14 @@ class ProfilerSimple extends Profiler {
 				$entry = $this->zeroEntry;
 				$this->mCollated[$functionname] =& $entry;
 			}
-			$entry['cpu'] += $elapsedcpu;
-			$entry['cpu_sq'] += $elapsedcpu*$elapsedcpu;
-			$entry['real'] += $elapsedreal;
-			$entry['real_sq'] += $elapsedreal*$elapsedreal;
+			// Wikia change - begin - @author: wladek
+			if ( @(--$this->mWorkStackCounts[$functionname]) == 0 ) {
+				$entry['cpu'] += $elapsedcpu;
+				$entry['cpu_sq'] += $elapsedcpu*$elapsedcpu;
+				$entry['real'] += $elapsedreal;
+				$entry['real_sq'] += $elapsedreal*$elapsedreal;
+			}
+			// Wikia change - end
 			$entry['count']++;
 
 		}
