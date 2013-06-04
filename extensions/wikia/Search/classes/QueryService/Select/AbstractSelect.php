@@ -242,7 +242,7 @@ abstract class AbstractSelect
 		             ->setFragSize                  ( self::HL_FRAG_SIZE )
 		             ->setSimplePrefix              ( self::HL_MATCH_PREFIX )
 		             ->setSimplePostfix             ( self::HL_MATCH_POSTFIX )
-		             ->setAlternateField            ( 'nolang_txt' )
+		             ->setAlternateField            ( Utilities::field( 'html' ) )
 		             ->setMaxAlternateFieldLength   ( 100 )
 		;
 		return $this;
