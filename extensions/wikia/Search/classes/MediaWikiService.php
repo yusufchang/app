@@ -470,7 +470,15 @@ class MediaWikiService
 	 */
 	public function getWikiMatchByHost( $domain ) {
 		$match = null;
-		if ( $wikiId = $this->getWikiIdByHost( $domain . '.wikia.com' ) ) {
+		$langCode = $this->getLanguageCode();
+
+		if ( $langCode === WIKI_DEFAULT_LANG_CODE ) {
+			$wikiId = $this->getWikiIdByHost( $domain . '.wikia.com' );
+		} else {
+			$wikiId = ( $interWikiComId = $this->getWikiIdByHost( "{$langCode}.{$domain}.wikia.com" ) ) !== null ? $interWikiComId : $this->getWikiIdByHost( "{$domain}.{$langCode}" );
+		}
+		//exclude wikis which lang does not match current one
+		if ( isset( $wikiId ) && $langCode === $this->getGlobalForWiki( 'wgLanguageCode', $wikiId ) ) {
 			$match = new \Wikia\Search\Match\Wiki( $wikiId, $this );
 		}
 		return $match;
