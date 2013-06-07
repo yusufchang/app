@@ -13,6 +13,12 @@ namespace Wikia\Search;
  */
 class MediaWikiService
 {
+
+	/**
+	 * Wiki default lang
+	 */
+	const WIKI_DEFAULT_LANG_CODE = 'en';
+
 	/**
 	 * Application interface
 	 * @var \WikiaApp
@@ -472,7 +478,7 @@ class MediaWikiService
 		$match = null;
 		$langCode = $this->getLanguageCode();
 
-		if ( $langCode === WIKI_DEFAULT_LANG_CODE ) {
+		if ( $langCode === static::WIKI_DEFAULT_LANG_CODE ) {
 			$wikiId = $this->getWikiIdByHost( $domain . '.wikia.com' );
 		} else {
 			$wikiId = ( $interWikiComId = $this->getWikiIdByHost( "{$langCode}.{$domain}.wikia.com" ) ) !== null ? $interWikiComId : $this->getWikiIdByHost( "{$domain}.{$langCode}" );
@@ -639,7 +645,7 @@ class MediaWikiService
 	public function getThumbnailHtmlForPageId(
 			$pageId, 
 			$transformParams = array( 'width' => 160 ), // WikiaGrid 1 column width
-			$htmlParams = array('desc-link'=>true, 'img-class'=>'thumbimage', 'duration'=>true) 
+			$htmlParams = array('desc-link'=>true, 'img-class'=>'thumbimage', 'duration'=>true)
 			) {
 		$html = '';
 		$img = $this->getFileForPageId( $pageId );
