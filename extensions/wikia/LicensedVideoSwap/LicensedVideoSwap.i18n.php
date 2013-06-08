@@ -20,9 +20,9 @@ $messages['en'] = array(
 	'lvs-button-swap' => 'Swap',
 	'lvs-more-suggestions' => '$1 more {{PLURAL:$1|suggestion|suggestions}}',
 	'lvs-best-match-label' => 'Best Match from Wikia Video Library',
-	'lvs-swap-video-success' => 'Congratulation! You have successfully swapped the existing video with the wikia video. You can check it via [[$1| Link]] [[$2|Undo]]',
-	'lvs-skip-video-success' => 'You have chosen to keep your current video. The video will be removed from this list. [[$1|Undo]]',
-	'lvs-restore-skipped-video-success' => 'You have restored the skipped video to this list.',
+	'lvs-swap-video-success' => 'Congratulation! You have successfully swapped the existing video with the wikia video. You can check it via [[$1|Link]] [[$2|Undo]]',
+	'lvs-keep-video-success' => 'You have successfully kept existing $1. The video was removed from this list on this page. [[$2|Undo]]',
+	'lvs-restore-video-success' => 'You have restored the video to this list.',
 	'lvs-error-permission' => 'you cannot swap this video.',
 );
 
@@ -38,8 +38,12 @@ $messages['qqq'] = array(
 	'lvs-button-swap' => 'This is the text that appears on a button that, when clicked, will swap out a non-licensed video for a licensed video suggested from the wikia video library.',
 	'lvs-more-suggestions' => 'This text will appear below a video that is a suggestion for a licensed version of a video that already exists on the wiki.  When clicked, this link will reveal more licensed possible replacements for the non-licensed video.',
 	'lvs-best-match-label' => 'This text appears above the licensed video that is considered the best match for replacing a non-licensed video.',
-	'lvs-swap-video-success' => 'This text appears after the video is successfully swapped.',
-	'lvs-skip-video-success' => 'This text appears after the video is successfully skipped.',
-	'lvs-restore-skipped-video-success' => 'This text appears after the skipped video is successfully restored to the list.',
+	'lvs-swap-video-success' => 'This text appears after swapping out the video.
+* $1 is a link to the file page
+* $2 is a link to reverse the replacement',
+	'lvs-keep-video-success' => 'This text appears after keeping the video.
+* $1 is the title of the video
+* $2 is a link to restore the video to the Special page again',
+	'lvs-restore-video-success' => 'This text appears after restoring the video to the list.',
 	'lvs-error-permission' => 'This text appears if user does not have permission to swap the video.',
 );
