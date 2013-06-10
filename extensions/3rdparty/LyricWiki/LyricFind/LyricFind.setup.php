@@ -59,3 +59,6 @@ $wgResourceModules['ext.lyrics.lyricbox'] = array(
 	'localBasePath' => __DIR__,
 	'remoteExtPath' => '3rdparty/LyricWiki/LyricFind'
 );
+
+// redirect of Gracenote articles to LyricFind
+$wgNamespaceAliases['Gracenote'] = NS_LYRICFIND;
