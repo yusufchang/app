@@ -313,7 +313,8 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 
 		$this->videoList = $this->getRegularVideoList( $selectedSort, $currentPage );
 		$this->result = 'ok';
-		$this->msg = $this->wf->Message( 'lvs-keep-video-success' )->text();
+		// TODO: add url to undo as a parameter for 'lvs-keep-video-success'
+		$this->msg = $this->wf->Message( 'lvs-keep-video-success' )->parse();
 	}
 
 	/**
