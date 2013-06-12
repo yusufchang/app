@@ -192,4 +192,14 @@ class VideoHandlerHooks {
 
 		return true;
 	}
+
+	public function onFindRedirectedFile( $title, $options, &$file ) {
+		$redirectTitle = RepoGroup::singleton()->getLocalRepo()->checkRedirect( $title );
+		if ( $redirectTitle && $redirectTitle->getNamespace() == NS_FILE ) {
+			$file = wfFindFile( $redirectTitle, $options );
+		}
+
+		return true;
+	}
+
 }
