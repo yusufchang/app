@@ -172,7 +172,7 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 	 * swap video
 	 * @requestParam string videoTitle
 	 * @requestParam string newTitle
-	 * @requestParam string selectedSort [recent/popular/trend]
+	 * @requestParam string sort [recent/popular/trend]
 	 * @requestParam integer currentPage
 	 * @responseParam string result [ok/error]
 	 * @responseParam string msg - result message
@@ -263,7 +263,7 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 		// TODO: add log
 		// TODO: send request for tracking
 
-		$selectedSort = $this->getVal( 'selectedSort', 'recent' );
+		$selectedSort = $this->getVal( 'sort', 'recent' );
 		$currentPage = $this->getVal( 'currentPage', 1 );
 
 		$this->videoList = $this->getRegularVideoList( $selectedSort, $currentPage );
@@ -276,7 +276,7 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 	/**
 	 * keep video
 	 * @requestParam string videoTitle
-	 * @requestParam string selectedSort [recent/popular/trend]
+	 * @requestParam string sort [recent/popular/trend]
 	 * @requestParam integer currentPage
 	 * @responseParam string result [ok/error]
 	 * @responseParam string msg - result message
@@ -309,11 +309,12 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 		$articleId = $file->getTitle()->getArticleID();
 		$this->wf->SetWikiaPageProp( WPP_LVS_STATUS, $articleId, LicensedVideoSwapHelper::STATUS_KEEP );
 
-		$selectedSort = $this->getVal( 'selectedSort', 'recent' );
+		$selectedSort = $this->getVal( 'sort', 'recent' );
 		$currentPage = $this->getVal( 'currentPage', 1 );
 
 		$this->videoList = $this->getRegularVideoList( $selectedSort, $currentPage );
 		$this->result = 'ok';
+
 		// TODO: add url to undo as a parameter for 'lvs-keep-video-success'
 		$this->msg = $this->wf->Message( 'lvs-keep-video-success' )->parse();
 	}
@@ -321,7 +322,7 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 	/**
 	 * restore video
 	 * @requestParam string videoTitle
-	 * @requestParam string selectedSort [recent/popular/trend]
+	 * @requestParam string sort [recent/popular/trend]
 	 * @requestParam integer currentPage
 	 * @responseParam string result [ok/error]
 	 * @responseParam string msg - result message
@@ -354,7 +355,7 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 		$articleId = $file->getTitle()->getArticleID();
 		$this->wf->DeleteWikiaPageProp( WPP_LVS_STATUS, $articleId );
 
-		$selectedSort = $this->getVal( 'selectedSort', 'recent' );
+		$selectedSort = $this->getVal( 'sort', 'recent' );
 		$currentPage = $this->getVal( 'currentPage', 1 );
 
 		$this->videoList = $this->getRegularVideoList( $selectedSort, $currentPage );
