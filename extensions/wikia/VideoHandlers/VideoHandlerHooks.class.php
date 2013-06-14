@@ -193,10 +193,25 @@ class VideoHandlerHooks {
 		return true;
 	}
 
-	public function onFindRedirectedFile( $title, $options, &$file ) {
-		$redirectTitle = RepoGroup::singleton()->getLocalRepo()->checkRedirect( $title );
-		if ( $redirectTitle && $redirectTitle->getNamespace() == NS_FILE ) {
-			$file = wfFindFile( $redirectTitle, $options );
+	/**
+	 * Hook: get redirected file from foreign repo
+	 * @param RepoGroup $repo
+	 * @param Title $title
+	 * @param array $options
+	 * @param boolean $useCache
+	 * @param File|false $file
+	 * @param File $cacheEntry
+	 * @return true
+	 */
+	public function onFindRedirectedFile( $repo, $title, $options, $useCache, &$file, &$cacheEntry ) {
+		if ( $title->isRedirect() && $repo->allowRedirect ) {
+			$redirect = RepoGroup::singleton()->getLocalRepo()->checkRedirect( $title );
+			if ( $redirect instanceof Title && $redirect->getNamespace() == NS_FILE && $title->getDBKey() != $redirect->getDBKey() ) {
+				$file = $repo->findfile( $redirect, $options );
+				if ( $file && $useCache ) {
+					$cacheEntry = $file;
+				}
+			}
 		}
 
 		return true;
