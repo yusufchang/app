@@ -424,7 +424,7 @@ class AdEngine2Controller extends WikiaController {
 		$cat = self::getCachedCategory();
 		$vars['cityShort'] = $cat['short'];
 
-		$vars['wgDisableKruxKV'] = (bool) $this->wg->DisableKruxKV;
+		$vars['wgWikiDirectedAtChildren'] = (bool) $this->wg->WikiDirectedAtChildrenByStaff;
 
 		// 3rd party code (eg. dart collapse slot template) can force AdDriver2 to respect unusual slot status
 		$vars['adDriver2ForcedStatus'] = array();
