@@ -1161,6 +1161,29 @@ class ConfigTest extends BaseTest {
 				'limit',
 				$config
 		);
+		//empty value should not be saved, stay with default one
+		$this->assertEquals(
+			$config,
+			$config->setLimit( 0 )
+		);
+
+		$this->assertAttributeEquals(
+			\Wikia\Search\Config::RESULTS_PER_PAGE,
+			'limit',
+			$config
+		);
+		//value less then 0 should not be saved, stay with default one
+		$this->assertEquals(
+			$config,
+			$config->setLimit( -1 )
+		);
+
+		$this->assertAttributeEquals(
+			\Wikia\Search\Config::RESULTS_PER_PAGE,
+			'limit',
+			$config
+		);
+
 		$this->assertEquals(
 				$config,
 				$config->setLimit( 123 )
@@ -1175,14 +1198,25 @@ class ConfigTest extends BaseTest {
 				$config->setLimit( 500 )
 		);
 		$this->assertAttributeEquals(
-				200,
+				\Wikia\Search\Config::DOCUMENT_MAX_NUMBER,
 				'limit',
 				$config,
 				'We restrict the number of results in a search to 200'
 		);
 		$this->assertEquals(
-				200,
+				\Wikia\Search\Config::DOCUMENT_MAX_NUMBER,
 				$config->getLimit()
+		);
+
+		//if value is not accetable, do not set, stay with previous value
+		$this->assertEquals(
+			$config,
+			$config->setLimit( null )
+		);
+
+		$this->assertEquals(
+			\Wikia\Search\Config::DOCUMENT_MAX_NUMBER,
+			$config->getLimit()
 		);
 	}
 	
