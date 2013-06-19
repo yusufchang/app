@@ -22,6 +22,12 @@ class Config
 	 * @var int
 	 */
 	const RESULTS_PER_PAGE = 10;
+
+	/**
+	 * Maximum limit for searching
+	 * @var int
+	 */
+	const DOCUMENT_MAX_NUMBER = 200;
 	
 	/**
 	 * Constants for public filter queries
@@ -347,8 +353,11 @@ class Config
 	 * @return Wikia\Search\Config provides fluent interface
 	 */
 	public function setLimit( $limit ) {
-		$limit = $limit < 200 ? $limit : 200;
-		$this->limit = $limit;
+		//stay with default value if limit is empty value or less then 0
+		if ( !empty( $limit ) && $limit > 0 ) {
+			$limit = $limit < static::DOCUMENT_MAX_NUMBER ? $limit : static::DOCUMENT_MAX_NUMBER;
+			$this->limit = (int) $limit;
+		}
 		return $this;
 	}
 	
