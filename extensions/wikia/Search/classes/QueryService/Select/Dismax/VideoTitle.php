@@ -24,7 +24,7 @@ class VideoTitle extends AbstractDismax
 		       ->setQueryFields( $this->getQueryFieldsString() )
 		       ->setMinimumMatch( $this->config->getMinimumMatch() )
 		;
-		$query->setQuery( "(wid:%1% AND ns:6 AND categories_mv_en:%2%) AND (%3%)", 
+		$query->setQuery( "(wid:%1% AND is_video:true AND categories_mv_en:%2%) AND (%3%)", 
 				[
 						Video::VIDEO_WIKI_ID,
 						$this->service->getHubForWikiId( $this->service->getWikiId() ),
@@ -35,6 +35,6 @@ class VideoTitle extends AbstractDismax
 	}
 	
 	protected function getQueryFieldsString() {
-		return 'title_en^5 nolang_txt';
+		return 'title_en^100';
 	}
 }
