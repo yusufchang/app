@@ -53,7 +53,6 @@ class LicensedVideoSwapSpecialController extends WikiaSpecialPageController {
 		$this->thumbWidth = self::THUMBNAIL_WIDTH;
 		$this->thumbHeight = self::THUMBNAIL_HEIGHT;
 
-
 		// Set up pagination
 		$this->currentPage = $currentPage;
 		$videoHelper = new LicensedVideoSwapHelper();
