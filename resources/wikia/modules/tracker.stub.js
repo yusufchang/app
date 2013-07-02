@@ -39,6 +39,9 @@
 				// Generic close
 				CLOSE: 'close',
 
+				// Clicking okay in a confirmation modal
+				CONFIRM: 'confirm',
+
 				// Generic hover
 				HOVER: 'hover',
 
