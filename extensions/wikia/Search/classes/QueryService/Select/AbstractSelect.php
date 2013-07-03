@@ -205,6 +205,7 @@ abstract class AbstractSelect
 		      ->setStart       ( $this->config->getStart() )
 		      ->setRows        ( $this->config->getLength() )
 		      ->addSort        ( $sort[0], $sort[1] )
+			  ->addSort		   ( 'views', Solarium_Query_Select::SORT_DESC )
 		      ->addParam       ( 'timeAllowed', $this->timeAllowed )
 		;
 		return $this;
@@ -348,7 +349,7 @@ abstract class AbstractSelect
 				->setBoostQuery			( $this->getBoostQueryString() )
 				->setMinimumMatch		( $this->config->getMinimumMatch() )
 				->setPhraseSlop			( 3 )
-				->setTie				( 0.01 )
+				->setTie				( 0 )
 			;
 			if (! $this->config->getSkipBoostFunctions()  ) {
 			    $dismax->setBoostFunctions( implode(' ', $this->boostFunctions ) );
