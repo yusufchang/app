@@ -206,6 +206,7 @@ abstract class AbstractSelect
 		      ->setRows        ( $this->config->getLength() )
 		      ->addSort        ( $sort[0], $sort[1] )
 			  ->addSort		   ( 'views', Solarium_Query_Select::SORT_DESC )
+			  ->addSort		   ( 'created', Solarium_Query_Select::SORT_ASC )
 		      ->addParam       ( 'timeAllowed', $this->timeAllowed )
 		;
 		return $this;
