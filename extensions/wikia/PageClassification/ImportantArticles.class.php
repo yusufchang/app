@@ -163,6 +163,9 @@ class ImportantArticles extends WikiaModel {
 			$domainParts[] = $domainPart;
 		}
 		$domainParts = array_unique($domainParts);
+
+		$topArticles = $this->getTopWikiArticles();
+
 		$matches = [];
 		foreach( $domainParts as $domainPart ) {
 			$foundMatchForDomain = false;
@@ -181,7 +184,18 @@ class ImportantArticles extends WikiaModel {
 				if( $foundMatchForDomain ) { break; }
 			}
 			if ( !$foundMatchForDomain ) {
-				$matches[] = [ "name" => $domainPart, "score" => 15/sizeof($domainParts) ];
+				foreach( $topArticles as $article ) {
+					$match = $this->matchDomainAndTopic($domainPart, $article);
+					if( $match ) {
+						// var_dump($match . " -- " . $domainPart);
+						$matches[] = [ "name" => $match, "score" => 1 + 5/sizeof($domainParts) ];
+						$foundMatchForDomain = true;
+						break;
+					}
+				}
+				if( !$foundMatchForDomain ) {
+					$matches[] = [ "name" => $domainPart, "score" => 15/sizeof($domainParts) ];
+				}
 			}
 		}
 		$this->cachedResult[ __METHOD__ ] = $matches;
