@@ -1,4 +1,21 @@
 <?php
+
+/*
+*** Friendly Error Pages ***
+
+# Extension by Adam Karmiński adam.karminski@wikia-inc.com and Michał Mix Roszka mix@wikia-inc.com
+
+# It is a class that handles 4xx and 5xx HTTP statuses. It provides a small API:
+# public static method getStatusArray()
+# 	returns an associative array with HTTP status codes as keys and header messages as values.
+# public static method shutdownFunction()
+#	errors catching method that is registered as PHP shutdown function.
+# public static method triggerStatus( $iStatus )
+#	this method should be used to trigger 4xx and 5xx headers and errors.
+#	It accepts one argument $iStatus and then sends an appropriate header and displays an error page.
+#	If a code passed in $iStatus is not found in an $aHttpStatus array it displays a 500 Internal Server Error page.
+*/
+
 class FriendlyErrorPages {
 	
 	protected static $aHttpStatus = array(
@@ -20,6 +37,10 @@ class FriendlyErrorPages {
 			504 => '504 Gateaway Timeout',
 			505 => '505 HTTP Version Not Supported'
 		);
+
+	public static function getStatusArray() {
+		return self::$aHttpStatus;
+	}
 
 	public static function shutdownFunction() {
 
@@ -51,7 +72,13 @@ class FriendlyErrorPages {
         	self::triggerStatus(500);
         }
         header( $_SERVER['SERVER_PROTOCOL'] . ' ' . self::$aHttpStatus[$iStatus], true, $iStatus );
-        include '/usr/wikia/source/app/extensions/wikia/FriendlyErrorPages/templates/'. $iStatus .'.html';
+        global $wgLang;
+        if ( is_object( $wgLang ) ) {
+        	include __DIR__ . "/static/$iStatus.{$wgLang->getCode()}.html";	
+        } else {
+        	include __DIR__ . "/static/$iStatus.en.html";
+        }
+        
         ob_flush();
         exit();
 
