@@ -18,16 +18,16 @@ $messages[ 'en' ] = array(
 
         'friendlyerrorpages-errorpage-header-400' => "We are sorry!",
         'friendlyerrorpages-errorpage-explanation-400'
-                => 'Sorry, it seems your browser is not responding properly. <br/>
-Try refreshing this page. If problem persists try Googling for possible solutions: Error 400 bad request <br/>
+                => 'Sorry, it seems your browser is not responding properly.
+Try refreshing this page. If problem persists try Googling for possible solutions: Error 400 bad request.
 You may go to [http://wikia.com our homepage]',
         'friendlyerrorpages-errorpage-technical-explanation-400' => "The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.",
         
         'friendlyerrorpages-errorpage-header-403' => "We are sorry!",
         'friendlyerrorpages-errorpage-explanation-403'
-                => 'Sorry, this directory is off limits to unauthorized users. <br/>
-You are seeing this page as your trying to access a directory that cannot be viewed. <br/>
-<br/>
+                => 'Sorry, this directory is off limits to unauthorized users.
+You are seeing this page as your trying to access a directory that cannot be viewed.
+
 You can:
 * Double check the web address for typos
 * Head back to [http://wikia.com our homepage]',
@@ -70,23 +70,26 @@ You can:
         'friendlyerrorpages-errorpage-technical-explanation-415' => "The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.",
         
         'friendlyerrorpages-errorpage-header-500' => "We are sorry!",
-        'friendlyerrorpages-errorpage-explanation-500' => "This is so embarrassing but there seems to be a small problem with our servers. We expect to be back up and running shortly. <br/> <br/> It is best to be safe than sorry so we have notified the administrator to check it out.",
+        'friendlyerrorpages-errorpage-explanation-500' => "This is so embarrassing but there seems to be a small problem with our servers. We expect to be back up and running shortly. Please try again.
+
+If this keeps happening please [mailto:community@wikia-inc.com contact us].",
         'friendlyerrorpages-errorpage-technical-explanation-500' => "The server encountered an unexpected condition which prevented it from fulfilling the request.",
         
         'friendlyerrorpages-errorpage-header-501' => "We are sorry!",
-        'friendlyerrorpages-errorpage-explanation-501' => 'Sorry, there seems to be a problem with your Internet connection. <br/>
-The problem is usually caused by a third party product interfering with your browser. <br/>
-<br/>
-More information on this error can be found at: <br/> [http://support.microsoft.com/kb/811262 HTTP Error 501 - Microsoft Support]',
-        'friendlyerrorpages-errorpage-technical-explanation-501' => "The server does not support the functionality required to fulfill the request. This is the appropriate response when the server does not recognize the request method and is not capable of supporting it for any resource.",
+        'friendlyerrorpages-errorpage-explanation-501' => 'Sorry, there seems to be a problem with your Internet connection.
+The problem is usually caused by a third party product interfering with your browser.
+
+More information on this error can be found at:
+[http://support.microsoft.com/kb/811262 HTTP Error 501 - Microsoft Support]',
+  'friendlyerrorpages-errorpage-technical-explanation-501' => "The server does not support the functionality required to fulfill the request. This is the appropriate response when the server does not recognize the request method and is not capable of supporting it for any resource.",
         
         'friendlyerrorpages-errorpage-header-502' => "We are sorry!",
         'friendlyerrorpages-errorpage-explanation-502'
-                => "This problem is due to poor IP communication between back-end computers, possibly including the Web server at the site you are trying to visit. Before analysing this problem, you should clear your browser cache completely. <br/>
+                => "This problem is due to poor IP communication between back-end computers, possibly including the Web server at the site you are trying to visit. Before analysing this problem, you should clear your browser cache completely.
 If you are surfing the Web and see this problem for all Web sites you try to visit, then either:
 * your ISP has a major equipment failure/overload
 * there is something wrong with your internal Internet connection e.g. your firewall is not functioning correctly.
-In the first case, only your ISP can help you. In the second case, you need to fix whatever it is that is preventing you reaching the Internet.<br/>",
+In the first case, only your ISP can help you. In the second case, you need to fix whatever it is that is preventing you reaching the Internet.",
         'friendlyerrorpages-errorpage-technical-explanation-502' => "The server, while acting as a gateway or proxy, received an invalid response from the upstream server it accessed in attempting to fulfill the request.",
         
         'friendlyerrorpages-errorpage-header-503' => "We are sorry!",
