@@ -63,7 +63,7 @@ class LinkSuggest {
 			$key = wfMemcKey( __METHOD__, md5( $query.'_'.$request->getText('format').$request->getText('nospecial', '') ) );
 		}
 
-		if (strlen($query) < 3) {
+		if (strlen($query) < 1) {
 			// enforce minimum character limit on server side
 			$out = self::getEmptyResponse($request->getText('format'));
 		} else if (false && $cached = $wgMemc->get($key)) {
