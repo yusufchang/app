@@ -44,6 +44,7 @@ class memcDeleteStressTest extends Maintenance {
 				$this->output( "$key get $value $tvalue: HIT\n" );
 			}
 			$retval = $wgMemc->delete( $key );
+			$this->output( "$key delete $retval\n" );
 			$tvalue = $wgMemc->get( $key );
 			if( $value === $tvalue ) {
 				$this->output( "$key get after delete $value $tvalue: MISS\n" );
@@ -53,6 +54,7 @@ class memcDeleteStressTest extends Maintenance {
 				$this->output( "$key get after delete $value $tvalue: OK\n" );
 			}
 		}
+		print_r( $this->counters )
 	}
 }
 
