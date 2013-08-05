@@ -22,7 +22,7 @@ class memcDeleteStressTest extends Maintenance {
 	 * key must be randomized to hit different servers
 	 */
 	private function getRandomKey() {
-		return wfMemcKey( substr( md5( rand() ), 0, 16) );
+		return wfMemcKey( substr( md5( rand() ), 0, 16 ), substr( md5( rand() ), 0, 16 ) );
 	}
 
 	public function execute() {
