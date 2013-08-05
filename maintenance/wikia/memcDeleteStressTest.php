@@ -49,7 +49,9 @@ class memcDeleteStressTest extends Maintenance {
 				$this->output( "$key get after delete $value $tvalue: MISS\n" );
 				$this->counters[ "delete" ]++;
 			}
-
+			else {
+				$this->output( "$key get after delete $value $tvalue: OK\n" );
+			}
 		}
 	}
 }
