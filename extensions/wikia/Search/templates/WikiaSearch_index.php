@@ -50,14 +50,32 @@
 					<ul class="Results">
 					<?php $pos = 0; ?>
 					<?php foreach( $results as $result ): ?>
-						<?php
+						<?php 
 							$pos++;
-							echo $app->getView( 'WikiaSearch', ( $result->getVar( 'ns' ) === 0 ) ? $resultView : WikiaSearchController::WIKIA_DEFAULT_RESULT, array(
-							  'result' => $result,
-							  'gpos' => 0,
-							  'pos' => $pos + (($currentPage - 1) * $resultsPerPage),
-							  'query' => $query
-							));
+							if ( $result['ns'] === 0 ) {
+								echo $app->getView( 'WikiaSearch', $resultView, array(
+									  'result' => $result,
+									  'gpos' => 0,
+									  'pos' => $pos + (($currentPage - 1) * $resultsPerPage),
+									  'query' => $query
+									));
+							} else if ( $result['ns'] === 14 && empty( $categorySeen ) && !empty( $categoryModule ) ) {
+								$categorySeen = true;
+								echo $app->renderView( 'WikiaSearch', 'categoryTopArticles', array(
+									  'result' => $result,
+									  'gpos' => 0,
+									  'pos' => $pos + (($currentPage - 1) * $resultsPerPage),
+									  'query' => $query,
+									));
+							} else {
+								echo $app->getView( 'WikiaSearch', WikiaSearchController::WIKIA_DEFAULT_RESULT, array(
+									  'result' => $result,
+									  'gpos' => 0,
+									  'pos' => $pos + (($currentPage - 1) * $resultsPerPage),
+									  'query' => $query
+									));
+							}
+							
 						?>
 					<?php endforeach; ?>
 					</ul>
@@ -77,6 +95,7 @@
 			</div>
 			<div class="SearchAdsTopWrapper grid-2 alpha">
 				<?= F::app()->renderView('Ad', 'Index', array('slotname' => 'TOP_RIGHT_BOXAD')); ?>
+				<?= $topWikiArticles ?>
 				<?= F::app()->renderView('Ad', 'Index', array('slotname' => 'LEFT_SKYSCRAPER_2')); ?>
 				<div id="WikiaAdInContentPlaceHolder"></div>
 			</div>
