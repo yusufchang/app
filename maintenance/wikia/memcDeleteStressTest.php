@@ -31,9 +31,13 @@ class memcDeleteStressTest extends Maintenance {
 		$iterations = $this->getOption( 'iterations', 100 );
 		$value = "Test value";
 
+		$keys = array();
+
 		$this->output( "Running $iterations iterations:\n" );
 		foreach( range( 1, $iterations) as $i ) {
 			$key = $this->getRandomKey();
+			$keys[] = $key;
+
 			$wgMemc->set( $key, $value, 3600 );
 			$tvalue = $wgMemc->get( $key );
 			if( $value !== $tvalue ) {
@@ -52,6 +56,26 @@ class memcDeleteStressTest extends Maintenance {
 			}
 			else {
 				$this->output( "$key get after delete $value $tvalue: OK\n" );
+			}
+		}
+
+		# Close all open connections to memcached servers
+		/** @var $memcCli MWMemcached */
+		$memcCli = $wgMemc->getClient();
+		$memcCli->forget_dead_hosts();
+		foreach ($memcCli->_cache_sock as $sock) {
+			$memcCli->_close_sock($sock);
+		}
+
+		# Do an extra run after reconnecting
+		foreach ( $keys as $key ) {
+			$tvalue = $wgMemc->get( $key );
+			if ( $value === $tvalue ) {
+				$this->output( "$key get after delete and reconnect $value $tvalue: MISS\n" );
+				$this->counters[ "delete/reconnect" ]++;
+			}
+			else {
+				$this->output( "$key get after delete and reconnect $value $tvalue: OK\n" );
 			}
 		}
 		print_r( $this->counters );
