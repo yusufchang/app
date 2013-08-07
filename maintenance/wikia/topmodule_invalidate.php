@@ -11,7 +11,7 @@ class TopModuleInvalidate extends Maintenance {
 	public function execute() {
 		global $wgMemc;
 		if ( !empty( $_ENV['SERVER_ID'] ) && $wgMemc ) {
-			$cacheKey = wfMemcKey( __CLASS__, 'WikiaSearch', 'topWikiArticles', $_ENV['SERVER_ID'] );
+			$cacheKey = wfMemcKey( 'WikiaSearchController', 'WikiaSearch', 'topWikiArticles', $_ENV['SERVER_ID'] );
 			$wgMemc->set( $cacheKey, null, 1 );
 		}
 	}
