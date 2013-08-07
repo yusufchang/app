@@ -212,6 +212,12 @@ body > .global-notification,
 	width: $width-outside;
 }
 
+.global-notification {
+	&.float {
+		margin-left: -515px;
+	}
+}
+
 .WikiaArticle,
 .WikiaArticleFooter {
 	padding: 0;
@@ -511,10 +517,6 @@ body > .global-notification,
 		margin: 0 $width-adskin;
 		width: auto;
 	}
-
-	body > .global-notification {
-		margin: 0 $width-adskin;
-	}
 }
 
 @media screen and (min-width: $breakpoint-max) {
@@ -522,7 +524,6 @@ body > .global-notification,
 		@include background-max;
 	}
 
-	body > .global-notification,
 	.WikiaHeader .page-width-container,
 	.WikiaPage {
 		margin: 0 auto;
