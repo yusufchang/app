@@ -61,12 +61,13 @@ function getLinkSuggest() {
 	global $wgRequest, $wgOut;
 	wfProfileIn(__METHOD__);
 
-	$wgOut->mSquidMaxage = WikiaSearchController::VARNISH_CACHE_TIME;
 
 	$out = LinkSuggest::getLinkSuggest($wgRequest);
 
 	$ar = new AjaxResponse($out);
-	$ar->setCacheDuration(60 * 60);
+	$ar->setCacheDuration(60 * 60 * 24);
+	$wgOut->mSquidMaxage = 60 * 60 * 24;
+
 
 	if ($wgRequest->getText('format') == 'json') {
 		$ar->setContentType('application/json; charset=utf-8');
