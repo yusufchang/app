@@ -326,6 +326,7 @@ class WikiaSearchController extends WikiaSpecialPageController {
 		if (! $searchConfig->getInterWiki() && $wgLanguageCode == 'en' ) {
 			$dbname = $this->wg->DBName;
 			$cacheKey = wfMemcKey( __CLASS__, 'WikiaSearch', 'topWikiArticles', $this->wg->CityId );
+			var_dump( $cacheKey );
 			$topWikiArticlesHtml = WikiaDataAccess::cache(
 				$cacheKey,
 				86400 * 5, // 5 days, one business week
