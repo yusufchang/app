@@ -70,7 +70,7 @@ var WikiaSearchApp = {
 					}
 				}, this),
 				appendTo: '#WikiaSearch',
-				deferRequestBy: 0,
+				deferRequestBy: 150,
 				minLength: 1,
 				maxHeight: 1000,
 				selectedClass: 'selected',
