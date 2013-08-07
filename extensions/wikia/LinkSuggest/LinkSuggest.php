@@ -58,8 +58,10 @@ $wgAjaxExportList[] = 'getLinkSuggest';
 $wgAjaxExportList[] = 'getLinkSuggestImage';
 
 function getLinkSuggest() {
-	global $wgRequest;
+	global $wgRequest, $wgOut;
 	wfProfileIn(__METHOD__);
+
+	$wgOut->mSquidMaxage = WikiaSearchController::VARNISH_CACHE_TIME;
 
 	$out = LinkSuggest::getLinkSuggest($wgRequest);
 
