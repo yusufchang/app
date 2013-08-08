@@ -55,7 +55,8 @@
       /* Wikia changes */
       queryParamName: 'query',
       fnPreprocessResults: null,
-      skipBadQueries: false
+      skipBadQueries: false,
+      lookupMaxLengthToDisplay: false
     };
     if (options) {
 		// since we're using an old version of this plugin with minChars instead of minLength,
@@ -213,6 +214,9 @@
 
     getSuggestionsLocal: function(q) {
       var ret, arr, len, val;
+      /* Wikia change */
+      var found = 0, max = this.options.lookupMaxLengthToDisplay;
+      /* Wikia change - end */
       arr = this.options.lookup;
       len = arr.suggestions.length;
       ret = { suggestions:[], data:[] };
@@ -221,6 +225,12 @@
         if(val.toLowerCase().indexOf(q.toLowerCase()) === 0){
           ret.suggestions.push(val);
           ret.data.push(arr.data[i]);
+          /* Wikia change */
+          found++;
+          if ( max != false && found == max ) {
+              return ret;
+          }
+          /* Wikia change - end */
         }
       }
       return ret;

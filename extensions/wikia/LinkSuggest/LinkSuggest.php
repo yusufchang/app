@@ -45,6 +45,7 @@ $wgLinkSuggestLimit = 6;
 // classes
 $wgAutoloadClasses['LinkSuggest'] = __DIR__ . '/LinkSuggest.class.php';
 $wgAutoloadClasses['LinkSuggestHooks'] = __DIR__ . '/LinkSuggestHooks.class.php';
+$wgAutoloadClasses['SuggestionJsonObject'] = __DIR__ . '/SuggestionJsonObject.class.php';
 
 // i18n
 $wgExtensionMessagesFiles['LinkSuggest'] = __DIR__ . '/LinkSuggest.i18n.php';
@@ -61,8 +62,12 @@ function getLinkSuggest() {
 	global $wgRequest, $wgOut;
 	wfProfileIn(__METHOD__);
 
-
-	$out = LinkSuggest::getLinkSuggest($wgRequest);
+	if ( $wgRequest->getVal("fetch") == "all" ) {
+		$sjo = new SuggestionJsonObject();
+		$out = $sjo->getWholeJson();
+	} else {
+		$out = LinkSuggest::getLinkSuggest($wgRequest);
+	}
 
 	$ar = new AjaxResponse($out);
 	$ar->setCacheDuration(60 * 60 * 24);

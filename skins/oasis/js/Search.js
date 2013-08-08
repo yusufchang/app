@@ -39,44 +39,73 @@ var WikiaSearchApp = {
 		});
 	},
 
+    loadDependencies: function() {
+        var t = this;
+        $.get( wgServer + wgScript + '?action=ajax&rs=getLinkSuggest&format=json&fetch=all', {}, function(data){
+            t.predownloaded = data;
+        }, 'json' );
+        return $.loadJQueryAutocomplete();
+    },
+
 	// download necessary dependencies (AutoComplete plugin) and initialize search suggest feature for #search_field
 	initSuggest: function() {
+
 		$.when(
-			$.loadJQueryAutocomplete()
+		    this.loadDependencies()
 		).then($.proxy(function() {
-			this.searchField.autocomplete({
-				serviceUrl: wgServer + wgScript + '?action=ajax&rs=getLinkSuggest&format=json',
-				onSelect: $.proxy(function(value, data, event) {
-					var valueEncoded = encodeURIComponent(value.replace(/ /g, '_')),
-						// slashes can't be urlencoded because they break routing
-						location = wgArticlePath.
-							replace(/\$1/, valueEncoded).
-							replace(encodeURIComponent('/'), '/');
 
-					this.track({
-						eventName: 'search_start_suggest',
-						sterm: valueEncoded,
-						rver: 0
-					});
+            var onSelectFn = function(value, data, event) {
+                var valueEncoded = encodeURIComponent(value.replace(/ /g, '_')),
+                // slashes can't be urlencoded because they break routing
+                    location = wgArticlePath.
+                        replace(/\$1/, valueEncoded).
+                        replace(encodeURIComponent('/'), '/');
 
-					// Respect modifier keys to allow opening in a new window (BugId:29401)
-					if (event.button === 1 || event.metaKey || event.ctrlKey) {
-						window.open(location);
+                this.track({
+                    eventName: 'search_start_suggest',
+                    sterm: valueEncoded,
+                    rver: 0
+                });
 
-						// Prevents hiding the container
-						return false;
-					} else {
-						window.location.href = location;
-					}
-				}, this),
-				appendTo: '#WikiaSearch',
-				deferRequestBy: 150,
-				minLength: 1,
-				maxHeight: 1000,
-				selectedClass: 'selected',
-				width: '270px',
-				skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
-			});
+                // Respect modifier keys to allow opening in a new window (BugId:29401)
+                if (event.button === 1 || event.metaKey || event.ctrlKey) {
+                    window.open(location);
+
+                    // Prevents hiding the container
+                    return false;
+                } else {
+                    window.location.href = location;
+                }
+            };
+
+            if ( typeof(this.predownloaded) == "object" ) {
+                this.searchField.autocomplete({
+                    lookup: this.predownloaded.titles,
+                    lookupMaxLengthToDisplay: 10,
+                    onSelect: $.proxy(onSelectFn, this),
+                    appendTo: '#WikiaSearch',
+                    deferRequestBy: 150,
+                    minLength: 1,
+                    maxHeight: 1000,
+                    selectedClass: 'selected',
+                    width: '270px',
+                    skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
+                });
+            }
+            else {
+                this.searchField.autocomplete({
+                    serviceUrl: wgServer + wgScript + '?action=ajax&rs=getLinkSuggest&format=json',
+                    onSelect: $.proxy(onSelectFn, this),
+                    appendTo: '#WikiaSearch',
+                    deferRequestBy: 150,
+                    minLength: 1,
+                    maxHeight: 1000,
+                    selectedClass: 'selected',
+                    width: '270px',
+                    skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
+                });
+            }
+
 		}, this));
 	}
 };
