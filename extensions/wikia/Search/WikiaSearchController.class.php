@@ -181,14 +181,20 @@ class WikiaSearchController extends WikiaSpecialPageController {
 	public function searchVideosByTitle() {
 		$searchConfig = new Wikia\Search\Config;
 		$title = $this->getVal( 'title' );
+		$mm = $this->getVal( 'mm', '80%' );
 		if ( empty( $title ) ) {
 			throw new Exception( "Please include a value for 'title'." );
 		}
 		$searchConfig
 		    ->setVideoTitleSearch( true )
-		    ->setQuery( $title );
+		    ->setQuery( $title )
+		    ->setMinimumMatch( $mm );
+		$queryService = $this->queryServiceFactory->getFromConfig( $searchConfig );
+		if ( ( $minDuration = $this->getVal( 'minseconds' ) ) && ( $maxDuration = $this->getVal( 'maxseconds' ) ) ) {
+			$queryService->setMinDuration( $minDuration)->setMaxDuration( $maxDuration );
+		} 
 		$this->getResponse()->setFormat( 'json' );
-		$this->getResponse()->setData( $this->queryServiceFactory->getFromConfig( $searchConfig )->searchAsApi() );
+		$this->getResponse()->setData( $queryService->searchAsApi() );
 	}
 	
 	/**
@@ -341,6 +347,7 @@ class WikiaSearchController extends WikiaSpecialPageController {
 				'wikiMatch',
 				$this->getApp()->getView( 'WikiaSearch', 'CrossWiki_result', [ 'result' => $matchResult, 'pos' => -1 ] ) 
 				);
+		$this->resultsFound++;
 	}
 	
 	/**
