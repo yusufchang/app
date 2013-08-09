@@ -9,10 +9,25 @@ class SuggestionJsonObject {
 
 	protected $db = null;
 	protected $app = null;
+	protected $totalSuggestionLimit = 1000; // 1000 is currently max in querycache table
 
 	public function __construct() {
 		$this->db = wfGetDB( DB_SLAVE );
 		$this->app = F::app();
+	}
+
+	/**
+	 * @param int $totalSuggestionLimit
+	 */
+	public function setTotalSuggestionLimit( $totalSuggestionLimit ) {
+		$this->totalSuggestionLimit = $totalSuggestionLimit;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTotalSuggestionLimit() {
+		return $this->totalSuggestionLimit;
 	}
 
 	public function getWholeJson() {
@@ -25,7 +40,7 @@ class SuggestionJsonObject {
 				'qc_namespace' => $this->app->wg->contentNamespaces
 			),
 			__METHOD__,
-			array( 'ORDER BY' => 'qc_value DESC' )
+			array( 'ORDER BY' => 'qc_value DESC', 'LIMIT' => $this->totalSuggestionLimit  )
 		);
 
 		$json = array();
