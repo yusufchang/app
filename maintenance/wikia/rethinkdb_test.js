@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
  * Run:
- * $ sudo aptitude install libprotobuf-dev protobuf-compiler
+ * $ sudo aptitude install libprotobuf-dev protobuf-compiler libmysqlclient-dev
  * $ npm install -g node-gyp
  * $ npm install rethinkdb js-yaml mysql-libmysqlclient
  *
  * When running this script provide DB YAML config file using YAML env variable
  */
-var BATCH_SIZE = 100;
+var BATCH_SIZE = process.env.BATCH || 100,
+    DURABILITY = process.env.DURABILITY  || 'hard'; // hard / soft
 
 function getDBConfig(dbConfigFile) {
     var yaml = require('js-yaml'),
@@ -61,8 +62,7 @@ r.connect({ host: 'dbstore-s1', port: 28015 }, function(err, conn) {
     r.db('test').tableCreate('macbre_categorylinks').run(conn, function(err, res) {
         if(err) throw err;
 
-        console.log('Table created, insterting data');
-        console.log(res);
+        console.log('Table created, insterting data (' + BATCH_SIZE + ' rows per batch with ' + DURABILITY + ' durability)...');
 
         // add data
         function insertBatch() {
@@ -83,7 +83,7 @@ r.connect({ host: 'dbstore-s1', port: 28015 }, function(err, conn) {
 
             var time = Date.now();
 
-            r.table('macbre_categorylinks').insert(batch).run(conn, function(err, res) {
+            r.table('macbre_categorylinks').insert(batch, {durability: DURABILITY}).run(conn, function(err, res) {
                 var t = (Date.now() - time);
 
                 if(err) throw err;
