@@ -66,6 +66,8 @@ class RethinkDBTest extends Maintenance {
 			$this->output( "Read data from categorylinks and page table ...\r\n " );
 			$start = microtime( true );
 			$dbr = wfGetDB( DB_SLAVE );
+
+			// muppet: SELECT page_id,page_title,page_namespace,cl_to,cl_type,cl_timestamp,cl_sortkey  FROM `page` INNER JOIN `categorylinks` ON ((cl_from = page_id))  WHERE page_namespace IN ('0','112')   LIMIT 100000
 			$res = $dbr->select(
 				array( 'page', 'categorylinks' ),
 				array( 'page_id', 'page_title', 'page_namespace', 'cl_to', 'cl_type', 'cl_timestamp', 'cl_sortkey' ),
