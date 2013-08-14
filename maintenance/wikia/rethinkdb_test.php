@@ -43,6 +43,7 @@ class RethinkDBTest extends Maintenance {
 		$this->addOption( 'limit', 'Limit result', false, true );
 		$this->addOption( 'durability', 'Hard or soft durability', false, true );
 		$this->addOption( 'cache_size', 'Size of cache', false, true );
+		$this->addOption( 'host', 'DB host to test', false, true );
 	}
 
 	public function execute() {
@@ -59,6 +60,7 @@ class RethinkDBTest extends Maintenance {
 		$limit = $this->getOption( 'limit', 100000 );
 		$this->cache_size = $this->getOption( 'cache_size', $this->cache_size );
 		$this->durability = $this->getOption( 'durability', 'hard' );
+		$this->host = $this->getOption('host', 'dev-moli');
 		
 		$this->output( "Use " . r\systemInfo() . "\r\n" );
 		
