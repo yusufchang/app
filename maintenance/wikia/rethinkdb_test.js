@@ -54,9 +54,11 @@ var batches = [],
 
 while (row = result.fetchRowSync()) {
   Object.keys(row).forEach(function(key) {
-  	row[key] = row[key].toString();
+     if (row[key] instanceof Buffer) {
+       row[key] = row[key].toString();
+     }
   });
-
+  
   //row.id = id++;
 
   batch.push(row);
@@ -107,7 +109,7 @@ r.connect({ host: 'dbstore-s1', port: 28015 }, function(err, conn) {
 
             var time = Date.now();
 
-            r.table('macbre_categorylinks').insert(batch, {durability: DURABILITY}).run(conn, function(err, res) {
+            r.table('macbre_categorylinks').insert(batch).run({connection: conn, noreply: DURABILITY === 'soft'}, function(err, res) {
                 var t = (Date.now() - time);
 
                 if(err) throw err;
