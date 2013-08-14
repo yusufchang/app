@@ -59,7 +59,7 @@ r.connect({ host: 'dbstore-s1', port: 28015 }, function(err, conn) {
 
     console.log('Connected');
 
-    r.db('test').tableCreate('macbre_categorylinks', {durability: DURABILITY}).run(conn, function(err, res) {
+    r.db('test').tableCreate('macbre_categorylinks', {hardDurability: DURABILITY === 'hard'}).run(conn, function(err, res) {
         if(err) throw err;
 
         console.log('Table created, insterting data (' + BATCH_SIZE + ' rows per batch with ' + DURABILITY + ' durability)...');
@@ -83,7 +83,7 @@ r.connect({ host: 'dbstore-s1', port: 28015 }, function(err, conn) {
 
             var time = Date.now();
 
-            r.table('macbre_categorylinks').insert(batch).run(conn, function(err, res) {
+            r.table('macbre_categorylinks').insert(batch, {durability: DURABILITY}).run(conn, function(err, res) {
                 var t = (Date.now() - time);
 
                 if(err) throw err;
