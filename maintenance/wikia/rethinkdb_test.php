@@ -160,7 +160,7 @@ class RethinkDBTest extends Maintenance {
 		$start = microtime( true );
 		$this->conn->close();
 		$delta = microtime( true ) - $start;
-		$this->output( sprintf( "\tClosed in %0.2f secs\r\n", $delta ) );
+		$this->output( sprintf( "\tClosed in %0.2f secs\r\n\r\n", $delta ) );
 	}
 	
 	private function db_count() {
@@ -192,17 +192,28 @@ class RethinkDBTest extends Maintenance {
 		$this->db_close();
 		
 		# insert the same data to mysql
-		$this->output( sprintf( "\tInsert data to MySQL \n" ) );
+		$this->output( sprintf( "Insert data to MySQL \n" ) );
 		$global_start = microtime( true );
+		$i = 0;
 		$dbw = wfGetDB( DB_MASTER, array(), $this->mysql_db );
-		foreach ( $data as $package ) {
+		foreach ( $data as $packages ) {
 			$start = microtime( true );
-			$dbw->insert( $this->mysql_table, $package, __METHOD__ );
+			foreach ( $packages as $package  ) { 
+				$keys = $values = $duplicate = array();
+				foreach ( $package as $key => $value ) {
+					$keys[] = $key;
+					$values[] = $dbw->addQuotes( $value );
+					$duplicate[] = "$key = values( $key )";
+				}
+				$query = sprintf ( "INSERT INTO %s ( %s ) values ( %s ) ON DUPLICATE KEY UPDATE %s ", $this->mysql_table, implode(",", $keys), implode(",", $values), implode(",", $duplicate) );
+				$dbw->query( $query, __METHOD__ );
+				$i++;
+			}
 			$delta = microtime( true ) - $start;
-			$this->output( sprintf( "\t\t%d records added in %0.2f secs: %s\r\n", count( $package), $delta, $result ) );
+			$this->output( sprintf( "\t\t%d records added in %0.2f secs\r\n", $i, $delta ) );
 		}
 		$global_delta = microtime( true ) - $global_start;
-		$this->output( sprintf( "\tMySQL updated in %0.2f secs\r\n", $global_delta ) ); 
+		$this->output( sprintf( "MySQL updated in %0.2f secs\r\n", $global_delta ) ); 
 	}
 	
 	private function db_delete() {
