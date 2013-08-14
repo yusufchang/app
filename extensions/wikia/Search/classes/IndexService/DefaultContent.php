@@ -29,11 +29,6 @@ class DefaultContent extends AbstractService
 				'style',
 				];
 	
-	/**
-	 * We remove these selectors since they are unreliable indicators of textual content
-	 * @var
-	 */
-	protected $asideSelectors = [ 'table', 'figure', 'div.noprint', 'div.quote', '.dablink' ];
 	
 	/**
 	 * Stores multivalued nolang_txt field as we add stuff to it.
@@ -212,10 +207,10 @@ class DefaultContent extends AbstractService
 				$result = array_merge( $result, $this->extractInfoboxes( $dom, $result ) );
 			}
 			$this->removeGarbageFromDom( $dom );
-			$plaintext = $this->getPlaintextFromDom( $dom );
-			$paragraphs = $this->getParagraphsFromDom( $dom );
+			$paragraphString = $this->extractParagraphsFromDom( $dom );
+			$plaintext = $paragraphString . $this->getPlaintextFromDom( $dom );
+			
 		}
-		$paragraphString = preg_replace( '/\s+/', ' ', implode( ' ', $paragraphs ) ); // can be empty
 		$words = preg_split( '/[[:space:]]+/', $paragraphString?: $plaintext);
 		$wordCount = count( $words );
 		$upTo100Words = implode( ' ', array_slice( $words, 0, min( array( $wordCount, 100 ) ) ) );
@@ -223,7 +218,6 @@ class DefaultContent extends AbstractService
 		
 		return  array_merge( $result,
 				[
-				'nolang_txt'           => $upTo100Words,
 				'words'                => $wordCount,
 				$this->field( 'html' ) => $plaintext
 				]);
@@ -290,6 +284,16 @@ class DefaultContent extends AbstractService
 		return $plaintext;
 	}
 	
+	protected function extractParagraphsFromDom( simple_html_dom $dom ) {
+		$paragraphText = '';
+		foreach ( $dom->find( 'p' ) as $p ) {
+			$paragraphText .= $p->plaintext;
+			$p->outertext = ' ';
+		}
+		$dom->load( $dom->save() );
+		return $paragraphText;
+	}
+	
 	/**
 	 * Returns an array of paragraph text as plaintext
 	 * @param simple_html_dom $dom
@@ -309,7 +313,6 @@ class DefaultContent extends AbstractService
 	 * @return string
 	 */
 	protected function getPlaintextFromDom( simple_html_dom $dom ) {
-		$tables = $this->extractAsidesFromDom( $dom );
-		return preg_replace( '/\s+/', ' ', strip_tags( $dom->plaintext . ' ' . $tables ) );
+		return preg_replace( '/\s+/', ' ', strip_tags( $dom->plaintext ) );
 	}
 }
