@@ -6,6 +6,11 @@
  * $ npm install rethinkdb js-yaml mysql-libmysqlclient
  *
  * When running this script provide DB YAML config file using YAML env variable
+ *
+ * rethinkdb dump
+ *
+ * sudo pip install https://pypi.python.org/packages/source/p/protobuf/protobuf-2.5.0.tar.gz
+ * sudo pip install rethinkdb
  */
 var LIMIT = process.env.LIMIT || 100000,
     BATCH_SIZE = process.env.BATCH || 100,
