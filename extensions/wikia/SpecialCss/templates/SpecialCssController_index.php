@@ -1,19 +1,21 @@
 <form method="post" id="cssEditorForm" class="cssEditorForm">
 	<div class="css-editor">
-		<div class="editor-changes-info-wrapper">
-			<?= $deletedArticle ?>
-				<? if (!empty($diff)): ?>
-				<div class="css-diff">
-					<?= $diff; ?>
-				</div>
-				<? endif ?>
+		<div class="css-editor-wrapper">
+			<div class="editor-changes-info-wrapper">
+				<?= $deletedArticle ?>
+					<? if (!empty($diff)): ?>
+					<div class="css-diff">
+						<?= $diff; ?>
+					</div>
+					<? endif ?>
+			</div>
+			<pre class="css-editor-container" id="cssEditorContainer"><?= htmlspecialchars($cssFileInfo['content']); ?></pre>
 		</div>
-		<pre class="css-editor-container" id="cssEditorContainer"><?= htmlspecialchars($cssFileInfo['content']); ?></pre>
 	</div>
 	<aside class="css-side-bar">
 		<div class="css-edit-box">
 			<input type="hidden" name="lastEditTimestamp" value="<?= $cssFileInfo['lastEditTimestamp'] ?>" />
-			<label for="minorEdit" class="css-minor-label"><input id="minorEdit" type="checkbox" name="minorEdit"/><?= wfMessage('special-css-minor-edit-label')->plain(); ?></label>
+			<label for="minorEdit" class="css-minor-label"><input id="minorEdit" type="checkbox" name="minorEdit" <?= $minorDefault ? ' checked="checked"' : '' ?> /><?= wfMessage('special-css-minor-edit-label')->plain(); ?></label>
 			<label for="editSummary"><?= wfMessage( 'edit-summary' )->plain() ?></label>
 			<textarea id="editSummary" class="edit-summary" name="editSummary" placeholder="<?= wfMessage
 			('special-css-summary-placeholder')->plain(); ?>"></textarea>
@@ -41,7 +43,7 @@
 
 		<?php if( !empty($cssUpdates) ): ?>
 			<div class="community-updates widget-box">
-				<h2><?= wfMessage('special-css-community-update-headline')->text(); ?></h2>
+				<h2><?= wfMessage('special-css-community-update-header')->text(); ?></h2>
 				<ul class="community-updates-list">
 					<?php foreach( $cssUpdates as $cssUpdate ): ?>
 						<li class="community-update-item plainlinks">
@@ -60,7 +62,7 @@
 		<ul class="education-links">
 			<li class="widget-box">
 				<h2>
-					<a href="http://community.wikia.com/wiki/File:Intro_to_CSS_%26_Your_Wiki_Webinar" title="<?= wfMessage('special-css-education-item-webinars-link-title')->text(); ?>">
+					<a href="<?= wfMessage('special-css-education-item-webinars-link-url')->text(); ?>" title="<?= wfMessage('special-css-education-item-webinars-link-title')->text(); ?>">
 						<?= wfMessage('special-css-education-item-webinars-header')->text(); ?>
 					</a>
 				</h2>
@@ -68,7 +70,7 @@
 			</li>
 			<li class="widget-box">
 				<h2>
-					<a href="http://community.wikia.com/wiki/Help:CSS" title="<?= wfMessage('special-css-education-item-help-link-title')->text(); ?>">
+					<a href="<?= wfMessage('special-css-education-item-help-link-url')->text(); ?>" title="<?= wfMessage('special-css-education-item-help-link-title')->text(); ?>">
 						<?= wfMessage('special-css-education-item-help-header')->text(); ?>
 					</a>
 				</h2>
@@ -76,7 +78,7 @@
 			</li>
 			<li class="widget-box">
 				<h2>
-					<a href="http://community.wikia.com/wiki/Board:Support_Requests_-_Designing_Your_Wiki" title="<?= wfMessage('special-css-education-item-com-center-link-title')->text(); ?>">
+					<a href="<?= wfMessage('special-css-education-item-com-center-link-url')->text(); ?>" title="<?= wfMessage('special-css-education-item-com-center-link-title')->text(); ?>">
 						<?= wfMessage('special-css-education-item-com-center-header')->text(); ?>
 					</a>
 				</h2>
