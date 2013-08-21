@@ -21,7 +21,7 @@ class SpecialVideosHelper extends WikiaModel {
 
 		$premiumVideos = $this->premiumVideosExist();
 		if ( !empty($premiumVideos) ) {
-			$options['premium'] = wfMessage( 'specialvideos-sort-featured' )->text();
+			$options['premium'] = wfMsg( 'specialvideos-sort-featured' );
 		}
 
 		return $options;
@@ -47,9 +47,8 @@ class SpecialVideosHelper extends WikiaModel {
 		$videoList = $mediaService->getVideoList( $sort, $filter, self::VIDEOS_PER_PAGE, $page );
 
 		$videos = array();
-		$helper = new VideoHandlerHelper();
 		foreach ( $videoList as $videoInfo ) {
-			$videoDetail = $helper->getVideoDetail( $videoInfo, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT, self::POSTED_IN_ARTICLES );
+			$videoDetail = $this->getVideoDetail( $videoInfo );
 			if ( !empty($videoDetail) ) {
 				$videos[] = $videoDetail;
 			}
@@ -58,6 +57,54 @@ class SpecialVideosHelper extends WikiaModel {
 		wfProfileOut( __METHOD__ );
 
 		return $videos;
+	}
+
+	/**
+	 * get video detail
+	 * @param array $videoInfo [ array( 'title' => title, 'addedAt' => addedAt , 'addedBy' => addedBy ) ]
+	 * @return array $videoDetail
+	 */
+	public function getVideoDetail( $videoInfo ) {
+		wfProfileIn( __METHOD__ );
+
+		$videoDetail = array();
+		$title = Title::newFromText( $videoInfo['title'], NS_FILE );
+		if ( $title instanceof Title ) {
+			$file = wfFindFile( $title );
+			if ( $file instanceof File && $file->exists() && WikiaFileHelper::isFileTypeVideo( $file ) ) {
+				// get thumbnail
+				$thumb = $file->transform( array('width'=>self::THUMBNAIL_WIDTH, 'height'=>self::THUMBNAIL_HEIGHT) );
+				$thumbUrl = $thumb->getUrl();
+
+				// get user
+				$user = User::newFromId( $videoInfo['addedBy'] );
+				$userName = ( User::isIP($user->getName()) ) ? wfMsg( 'oasis-anon-user' ) : $user->getName();
+				$userUrl = $user->getUserPage()->getFullURL();
+
+				// get article list
+				$mediaQuery = new ArticlesUsingMediaQuery( $title );
+				$articleList = $mediaQuery->getArticleList();
+				list( $truncatedList, $isTruncated ) = WikiaFileHelper::truncateArticleList( $articleList, self::POSTED_IN_ARTICLES );
+
+				// video details
+				$videoDetail = array(
+					'title' => $title->getDBKey(),
+					'fileTitle' => $title->getText(),
+					'fileUrl' => $title->getLocalUrl(),
+					'thumbUrl' => $thumbUrl,
+					'userName' => $userName,
+					'userUrl' => $userUrl,
+					'truncatedList' => $truncatedList,
+					'isTruncated' => $isTruncated,
+					'timestamp' => $videoInfo['addedAt'],
+					'embedUrl' => $file->getHandler()->getEmbedUrl(),
+				);
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+
+		return $videoDetail;
 	}
 
 	/**

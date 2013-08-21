@@ -16,11 +16,8 @@ $width-outside-max-half: $width-outside-max / 2;
 $width-padding: $width-gutter / 2;
 
 // Breakpoints
-$breakpoint-content: $width-outside;
 $breakpoint-fluid: $width-outside + $width-adskins;
 $breakpoint-max: $width-outside-max + $width-adskins;
-$breakpoint-min: $width-outside-min;
-$breakpoint-small: 1023px;
 
 // Background
 // TODO: we might want to consider pre-calculating all of the background
@@ -166,9 +163,12 @@ $background-is-wide: if( $background-width > $breakpoint-fluid, true, false );
 	}
 }
 
-body {
+html {
 	min-width: $width-outside-min;
+	overflow-x: auto;
+}
 
+body {
 	@if ( $background-is-dynamic ) {
 		background: $color-body;
 		overflow-x: hidden;
@@ -357,13 +357,7 @@ body > .global-notification,
 }
 // END - main page tag fixes
 
-@media screen and (max-width: $breakpoint-min) {
-	body {
-		overflow-x: auto;
-	}
-}
-
-@media screen and (max-width: $breakpoint-small) {
+@media screen and (max-width: 1023px) {
 	// START - main page tag fixes
 	.home-top-right-ads {
 		display: none;
@@ -468,7 +462,7 @@ body > .global-notification,
 	}
 }
 
-@media screen and (max-width: $breakpoint-content) {
+@media screen and (max-width: $width-outside) {
 	body {
 		background: $color-page;
 

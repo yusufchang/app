@@ -15,7 +15,7 @@ class LightboxController extends WikiaController {
 	static $imageserving;
 
 	/**
-	 * get lightbox modal content mustache template
+	 * Get lightbox modal content
 	 */
 	public function lightboxModalContent() {
 		// TODO: refactor this to AdEngine2Controller.php

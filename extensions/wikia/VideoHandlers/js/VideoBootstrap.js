@@ -1,20 +1,12 @@
 /**
  * Initialize a new video instance
  * Important: If an init function is specified, it must handle it's own tracking
- * This file doesn't require jQuery
  */
 
 define( 'wikia.videoBootstrap', [ 'wikia.loader', 'wikia.nirvana', 'wikia.log', 'wikia.tracker' ], function videoBootstrap( loader, nirvana, log, tracker ) {
 	var trackingTimeout = 0;
 
-
-	/**
-	 *  @param {Element} element DOM element that is the wrapper for the video code
-	 *  @param {Object} json Key/value pair of data sent from a VideoHandler that provides info for video bootstrap
-	 *  @param {String} clickSource For analytics; it's the location on the site where the video was initiated.  Example: lightbox
-	 */
 	function VideoBootstrap ( element, json, clickSource ) {
-
 		var self = this,
 			init = json.init,
 			html = json.html,
@@ -25,48 +17,41 @@ define( 'wikia.videoBootstrap', [ 'wikia.loader', 'wikia.nirvana', 'wikia.log', 
 		this.clickSource = clickSource;
 		this.title = json.title;
 		this.provider = json.provider;
-		this.thumbnailHtml = false;
 
 		// Insert html if it hasn't been inserted already
-		function insertHtml() {
-			if ( html && !json.htmlPreloaded ) {
+		function instertHtml() {
+			if( html && !json.htmlPreloaded ) {
 				element.innerHTML = html;
 			}
 		}
 
-		// After all scripts are loaded
-		function loadFromScriptsCallback() {
-			// wait till all assets are loaded before overriding any loading images
-			insertHtml();
-			// execute the video handler's init function
-			if( init ) {
-				require( [init], function( init ) {
-					self.clearTimeoutTrack();
-					init( jsParams, self );
-				});
-			}
-		}
-
-		// Load all scripts
-		function loadFromScripts() {
+		// Load any scripts needed for the video player
+		if(scripts) {
 			var i,
 				args = [];
 
-			for ( i = 0; i < scripts.length; i++ ) {
+			for( i=0; i<scripts.length; i++ ){
 				args.push({
 					type: loader.JS,
 					resources: scripts[ i ]
 				});
 			}
 
-			loader.apply( loader, args ).done( loadFromScriptsCallback );
-		}
-
-		// Load any scripts needed for the video player
-		if ( scripts ) {
-			loadFromScripts();
+			loader
+			.apply( loader, args )
+			.done( function() {
+				// wait till all assets are loaded before overriding any loading images
+				instertHtml();
+				// execute the init function
+				if( init ) {
+					require( [ init ], function( init ) {
+						self.clearTimeoutTrack();
+						init( jsParams, self );
+					});
+				}
+			});
 		} else {
-			insertHtml();
+			instertHtml();
 		}
 
 		// If there's no init function, just send one tracking call so it counts as a view
@@ -83,10 +68,7 @@ define( 'wikia.videoBootstrap', [ 'wikia.loader', 'wikia.nirvana', 'wikia.log', 
 		 * tracked. Not sure it's worth fixing at this time b/c it's edge-casey.
 		 */
 		reload: function( title, width, autoplay, clickSource ) {
-			var undef,
-				element = this.element,
-				fileTitle = title || this.title,
-				fileClickSource = clickSource || this.clickSource;
+			var element = this.element;
 
 			this.clearTimeoutTrack();
 
@@ -94,12 +76,12 @@ define( 'wikia.videoBootstrap', [ 'wikia.loader', 'wikia.nirvana', 'wikia.log', 
 				'VideoHandler',
 				'getEmbedCode',
 				{
-					fileTitle: fileTitle,
+					fileTitle: title,
 					width: width,
 					autoplay: autoplay ? 1 : 0 // backend needs an integer
 				}
 			).done( function( data ) {
-				new VideoBootstrap( element, data.embedCode, fileClickSource );
+				new VideoBootstrap( element, data.embedCode, clickSource );
 			});
 		},
 		track: function( action ) {
