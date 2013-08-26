@@ -440,12 +440,13 @@ class WikiaSearchController extends WikiaSpecialPageController {
 	 * @param Wikia\Search\Config $searchConfig
 	 */
 	protected function registerWikiMatch( Wikia\Search\Config $searchConfig ) {
+		global $wgExtensionsPath;
 		$matchResult = $searchConfig->getWikiMatch()->getResult();
 		if ( $matchResult !== null ) {
 			$matchResult['onWikiMatch'] = true;
 			$this->setVal(
 					'wikiMatch',
-					$this->getApp()->getView( 'WikiaSearch', 'CrossWiki_result', [ 'result' => $matchResult, 'pos' => -1 ] )
+					$this->getApp()->getView( 'WikiaSearch', 'CrossWiki_result', [ 'result' => $matchResult, 'pos' => -1, 'wgExtensionsPath' => $wgExtensionsPath ] )
 					);
 			$this->resultsFound++;
 		}
