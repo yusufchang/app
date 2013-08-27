@@ -246,3 +246,52 @@ body >a >img[src$="noad.gif"] {
 		display: inline-block;
 	}
 }
+
+// Oasis responsive skins
+body.has-responsive-ad-skin {
+	&:after {
+		background-position: -850px 0;
+		margin-right: -850px;
+	}
+	&:before {
+		margin-left: -850px;
+	}
+}
+
+// 1370px is really $breakpoint-fluid, but we don't have access to it yet
+@media screen and (min-width: 1370px) {
+	body.has-responsive-ad-skin {
+		&:after, &:before {
+			width: 685px;
+		}
+		&:after {
+			background-position: -850px 0;
+			margin-right: 0;
+			right: 0;
+		}
+		&:before {
+			background-position: -165px 0;
+			margin-left: 0;
+			left: 0;
+		}
+	}
+}
+
+// 1940px is really $breakpoint-max, but we don't have access to it yet
+@media screen and (min-width: 1940px) {
+	body.has-responsive-ad-skin {
+		&:after, &:before {
+			width: 850px;
+		}
+		&:after {
+			background-position: -850px 0;
+			margin-right: -1135px;
+			right: 50%;
+		}
+		&:before {
+			background-position: 0;
+			margin-left: -1135px;
+			left: 50%;
+		}
+	}
+}

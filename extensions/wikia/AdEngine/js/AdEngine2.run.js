@@ -178,4 +178,14 @@
 		});
 	};
 
+	/* TRIGGER SKIN WITHOUT ACTUAL SKIN AD:
+	window.loadCustomAd({
+		backgroundColor:"1b0b03",
+		destUrl:"http://adclick.g.doubleclick.net/aclk?sa=L&ai=Bko-3O4AkUuWYJsLo7QbFn4D4A_zOrYUEAAAAEAEgnOnGIDgAWPyEyrlqYLu-qIPQCrIBGGdsZWUucnljaHUud2lraWEtZGV2LmNvbboBCWdmcF9pbWFnZcgBCdoBYmh0dHA6Ly9nbGVlLnJ5Y2h1Lndpa2lhLWRldi5jb20vd2lraS9IZXJvZXM_bG9nX2dyb3VwPWV4dC53aWtpYS5hZGVuZ2luZS50ZW1wbGF0ZS5za2luJmxvZ19sZXZlbD05mALOY8ACAuACAOoCIi81NDQxL3drYS5nYW1pbmcvX0NhbGxvZmR1dHkvL2hvbWX4AoLSHpADyAaYA-ADqAMB4AQB0gUCCAGgBh8&num=0&sig=AOD64_1W4vtVOLrrp4T9J6S_l1ZUaPjwfw&client=ca-pub-2586812665208127&adurl=http://servedby.flashtalking.com/click/1/28731%3B657266%3B50126%3B211%3B0/%3Fft_width%3D1%26ft_height%3D1%26url%3D4329396",
+		pixels:["http://servedby.flashtalking.com/imp/1/28731;657266;201;pixel;Wikia;JumboSkinTrackerROS/?cachebuster=371118496",""],
+		skinImage:"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgMDOv5jR_AEQARgBMggEmTWutOR7ow",
+		type:"skin"
+	});
+	*/
+
 }(Wikia.log, Wikia.Tracker, window, ghostwriter, document, Geo, Wikia.LazyQueue, Wikia.Cookies, Wikia.Cache, Krux, Wikia.AbTest));
