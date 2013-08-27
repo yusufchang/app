@@ -21,7 +21,7 @@ class FriendlyErrorPagesGenerator extends Maintenance {
 		# get a Mustache-HTML template of an error page
 		$sTemplatePath = dirname( __DIR__ ) . '/templates/errorpage.html';
 		# path for generated static HTML files with sprintf variables
-		$sStaticHtmlPath = dirname( __DIR__ ) . '/static/%d.%s.html';
+		$sStaticHtmlPath = dirname( __DIR__ ) . '/static/%d.html.%s';
 
 		# Loop inside loop - generate a HTML file for every language and every HTTP code
 		$aLanguageNames = Language::getLanguageNames();
@@ -36,6 +36,7 @@ class FriendlyErrorPagesGenerator extends Maintenance {
 				$sOut = $oTemplateEngine->render(
 					$sTemplatePath,
 					array(
+						'lang-code' => $sCode,
 		        		'title' => $sMessage,
 		        		'header' => wfMessage( "friendlyerrorpages-errorpage-header-$iNumber" )->inLanguage( $sCode )->parse(),
 		        		'explanation' => wfMessage( "friendlyerrorpages-errorpage-explanation-$iNumber" )->inLanguage( $sCode )->parse(),
@@ -43,9 +44,9 @@ class FriendlyErrorPagesGenerator extends Maintenance {
 		        		'technical-explanation' => wfMessage( "friendlyerrorpages-errorpage-technical-explanation-$iNumber" )->inLanguage( $sCode )->parse()
 		        	)
 				);
-				$sOutFile = sprintf( $sStaticHtmlPath, $iNumber, $sCode);
-				file_put_contents( $sOutFile , $sOut );
-				echo "Wrote {$sOutFile}\n";
+				
+				file_put_contents( sprintf( $sStaticHtmlPath, $iNumber, $sCode), $sOut );
+				print $iNumber . ".html." . $sCode . " generated. \n";
 			}
 		}
 

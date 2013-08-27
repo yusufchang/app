@@ -16,14 +16,14 @@ $messages[ 'en' ] = array(
         'friendlyerrorpages-desc' => "Extension that provides user friendly error pages for 4xx and 5xx HTTP statuses.",
         'friendlyerrorpages-specialpage-click' => "Click on a link to trigger a desired HTTP status and display an error page.",
 
-        'friendlyerrorpages-errorpage-header-400' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-400' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-400'
                 => 'Sorry, it seems your browser is not responding properly.
 Try refreshing this page. If problem persists try Googling for possible solutions: Error 400 bad request.
 You may go to [http://wikia.com our homepage]',
         'friendlyerrorpages-errorpage-technical-explanation-400' => "The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.",
         
-        'friendlyerrorpages-errorpage-header-403' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-403' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-403'
                 => 'Sorry, this directory is off limits to unauthorized users.
 You are seeing this page as your trying to access a directory that cannot be viewed.
@@ -33,39 +33,39 @@ You can:
 * Head back to [http://wikia.com our homepage]',
         'friendlyerrorpages-errorpage-technical-explanation-403' => "The server understood the request, but is refusing to fulfill it.",
         
-        'friendlyerrorpages-errorpage-header-405' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-405' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-405' => "We cannot do what you want us to do. Please check the URL for mistakes.",
         'friendlyerrorpages-errorpage-technical-explanation-405' => "The method specified in the Request-Line is not allowed for the resource identified by the Request-URI. The response MUST include an Allow header containing a list of valid methods for the requested resource.",
         
-        'friendlyerrorpages-errorpage-header-406' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-406' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-406' => "We cannot do what you want us to do. Please check the URL for mistakes.",
         'friendlyerrorpages-errorpage-technical-explanation-406' => "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
         
-        'friendlyerrorpages-errorpage-header-408' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-408' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-408' => "Our servers took too long for your request to complete. Please try again!",
         'friendlyerrorpages-errorpage-technical-explanation-408' => "The client did not produce a request within the time that the server was prepared to wait. The client MAY repeat the request without modifications at any later time.",
         
-        'friendlyerrorpages-errorpage-header-409' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-409' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-409' => "There is some kind of conflict. Please check the URL for mistakes.",
         'friendlyerrorpages-errorpage-technical-explanation-409' => "The request could not be completed due to a conflict with the current state of the resource. This code is only allowed in situations where it is expected that the user might be able to resolve the conflict and resubmit the request.",
         
-        'friendlyerrorpages-errorpage-header-411' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-411' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-411' => "Our servers need the Content-Length parameter to fulfill your request. Please try again!",
         'friendlyerrorpages-errorpage-technical-explanation-411' => "The server refuses to accept the request without a defined Content- Length. The client MAY repeat the request if it adds a valid Content-Length header field containing the length of the message-body in the request message.",
         
-        'friendlyerrorpages-errorpage-header-412' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-412' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-412' => "Your request does not meet all conditions of our servers. Please try again!",
         'friendlyerrorpages-errorpage-technical-explanation-412' => "The precondition given in one or more of the request-header fields evaluated to false when it was tested on the server. This response code allows the client to place preconditions on the current resource metainformation (header field data) and thus prevent the requested method from being applied to a resource other than the one intended.",
         
-        'friendlyerrorpages-errorpage-header-413' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-413' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-413' => "The response to your request is too large. Please try again!",
         'friendlyerrorpages-errorpage-technical-explanation-413' => "The server is refusing to process a request because the request entity is larger than the server is willing or able to process. The server MAY close the connection to prevent the client from continuing the request.",
         
-        'friendlyerrorpages-errorpage-header-414' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-414' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-414' => "The address you gave us is too long. Please check it for mistakes.",
         'friendlyerrorpages-errorpage-technical-explanation-414' => "The server is refusing to service the request because the Request-URI is longer than the server is willing to interpret. This rare condition is only likely to occur when a client has improperly converted a POST request to a GET request with long query information, when the client has descended into a URI black hole of redirection (e.g., a redirected URI prefix that points to a suffix of itself), or when the server is under attack by a client attempting to exploit security holes present in some servers using fixed-length buffers for reading or manipulating the Request-URI.",
         
-        'friendlyerrorpages-errorpage-header-415' => "We are sorry!",
+        'friendlyerrorpages-errorpage-header-415' => "Oops, there appears to be a problem!",
         'friendlyerrorpages-errorpage-explanation-415' => "Our servers do not support this media type.",
         'friendlyerrorpages-errorpage-technical-explanation-415' => "The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.",
         
