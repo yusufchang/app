@@ -420,7 +420,7 @@ $messages['pt'] = array(
 	'spellchecker-info-spellcheck-text' => 'Texto para ser verificado',
 	'spellchecker-info-spellcheck-languages' => 'Língua',
 	'spellchecker-info-spellcheck-submit' => 'Verificar ortografia',
-	'spellchecker-info-spellcheck-is-correct' => 'A palavra "$1" está escrita correctamente',
+	'spellchecker-info-spellcheck-is-correct' => 'A palavra "$1" está escrita corretamente',
 	'spellchecker-info-spellcheck-suggestions' => 'Sugestões de ortografia para "$1": $2',
 );
 
@@ -540,13 +540,22 @@ $messages['tt-cyrl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Andriykopanytsia
  * @author Steve.rusyn
+ * @author SteveR
  */
 $messages['uk'] = array(
+	'spellchecker-desc' => 'РНР модуль забезпечує інтерфейс для перевірки орфографії',
+	'enablespellchecker' => 'Увімкнути перевірку правопису у візуальному режимі',
+	'spellchecker-info' => 'Інформація про перевірку орфографії',
 	'spellchecker-info-languages' => 'Доступні мови ($1)',
 	'spellchecker-info-provider' => 'Постачальник',
+	'spellchecker-info-dictionaries' => 'Доступні словники',
+	'spellchecker-info-spellcheck-text' => 'Текст для перевірки',
 	'spellchecker-info-spellcheck-languages' => 'Мова',
 	'spellchecker-info-spellcheck-submit' => 'Перевірка правопису',
+	'spellchecker-info-spellcheck-is-correct' => 'Слово "$1" написане вірно',
+	'spellchecker-info-spellcheck-suggestions' => 'Варіанти написання для "$1":$2',
 );
 
 /** Vietnamese (Tiếng Việt)

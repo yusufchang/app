@@ -19,7 +19,14 @@ $messages['en'] = array(
 	'dump-database-request-submit' => 'Send request',
 	'dump-database-request-already-submitted' => 'Dump has been requested recently (less than 7 days ago)',
 	'dump-database-request-requested' => 'Request for database dump sent',
-	'dump-database-info-more' => 'Please <a href="http://community.wikia.com/wiki/Help:Database_download">see</a> for more info'
+	'dump-database-info-more' => 'Please <a href="http://community.wikia.com/wiki/Help:Database_download">see</a> for more info',
+	'dump-database-last-unknown' => 'Unknown'
+);
+
+/** Message documentation (Message documentation)
+ */
+$messages['qqq'] = array(
+	'dump-database-last-unknown' => 'Used when the time of the last database dump request is not known, or if there have been no requests',
 );
 
 /** Afrikaans (Afrikaans)
@@ -184,6 +191,7 @@ $messages['da'] = array(
 
 /** German (Deutsch)
  * @author LWChris
+ * @author Metalhead64
  * @author MtaÄ
  * @author The Evil IP address
  */
@@ -200,6 +208,7 @@ $messages['de'] = array(
 	'dump-database-request-already-submitted' => 'Dump wurde kürzlich (weniger als 7 Tagen) angefordert',
 	'dump-database-request-requested' => 'Anfrage nach Datenbank-Dump gesendet',
 	'dump-database-info-more' => 'Bitte siehe <a href="http://community.wikia.com/wiki/Help:Database_download">hier</a> für weitere Infos.',
+	'dump-database-last-unknown' => 'Unbekannt',
 );
 
 /** Zazaki (Zazaki)
@@ -594,6 +603,7 @@ $messages['pl'] = array(
 	'dump-database-request-already-submitted' => 'Zrzut był pobierany niedawno (mniej niż 7 dni temu)',
 	'dump-database-request-requested' => 'Prośba o zrzut bazy danych przesłana',
 	'dump-database-info-more' => 'Zobacz <a href="http://community.wikia.com/wiki/Help:Database_download">tę stronę</a> aby uzyskać więcej informacji.',
+	'dump-database-last-unknown' => 'Brak danych',
 );
 
 /** Piedmontese (Piemontèis)
@@ -631,7 +641,7 @@ $messages['ps'] = array(
 $messages['pt'] = array(
 	'dump-database' => 'Cópias da base de dados em ficheiro',
 	'dump-database-info' => 'Cópias da base de dados em ficheiro podem ser usadas como cópia de segurança pessoal (a Wikia produz automaticamente cópias de segurança separadas, de todas as wikis) ou por robôs de manutenção',
-	'dump-database-curr-pages' => 'páginas actuais',
+	'dump-database-curr-pages' => 'Páginas atuais',
 	'dump-database-curr-pages-info' => '(Normalmente, esta versão é melhor para uso por robôs)',
 	'dump-database-full-pages' => 'Páginas atuais e histórico',
 	'dump-database-full-pages-info' => '(Aviso: este ficheiro pode ser muito grande)',
@@ -793,6 +803,7 @@ $messages['tl'] = array(
 
 /** Ukrainian (українська)
  * @author Alex Khimich
+ * @author Andriykopanytsia
  * @author Prima klasy4na
  * @author Ua2004
  * @author Тест
@@ -810,6 +821,7 @@ $messages['uk'] = array(
 	'dump-database-request-already-submitted' => 'Запит на створення дампа було надіслано недавно (менше 7 днів тому)',
 	'dump-database-request-requested' => 'Запит на створення дампу бази даних надіслано.',
 	'dump-database-info-more' => 'Будь ласка, ознайомтесь з детальнішою інформацією <a href="http://community.wikia.com/wiki/Help:Database_download">тут</a>',
+	'dump-database-last-unknown' => 'Невідомо',
 );
 
 /** Simplified Chinese (中文（简体）‎)
