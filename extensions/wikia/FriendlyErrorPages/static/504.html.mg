@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="mg">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>504 Gateaway Timeout</title>

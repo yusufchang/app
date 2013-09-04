@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="ms">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>400 Bad Request</title>
@@ -83,7 +83,7 @@
 				<div id="content">
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
-						<h1>We are sorry!</h1>
+						<h1>Oops, there appears to be a problem!</h1>
 						<p>Sorry, it seems your browser is not responding properly.
 Try refreshing this page. If problem persists try Googling for possible solutions: Error 400 bad request.
 You may go to <a  class="text" href="http://wikia.com">our homepage</a></p>

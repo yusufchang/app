@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="vo">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>412 Precondition Failed</title>
@@ -83,7 +83,7 @@
 				<div id="content">
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
-						<h1>We are sorry!</h1>
+						<h1>Oops, there appears to be a problem!</h1>
 						<p>Your request does not meet all conditions of our servers. Please try again!</p>
 					</div>
 					<div class="links">

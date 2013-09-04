@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="bcl">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>504 Gateaway Timeout</title>
@@ -84,7 +84,7 @@
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
 						<h1>We are sorry!</h1>
-						<p>There is something wrong with our server. Please visit us later!</p>
+						<p>This is so embarrassing but there seems to be a small problem with our servers or we are carrying out repairs. We expect to be back up and running shortly. If the problem continues, please feel free to <a  class="text" href="http://community.wikia.com/wiki/Special:Contact">contact us</a>.</p>
 					</div>
 					<div class="links">
 						For more info and updates check out our <a href="https://twitter.com/Wikia">Twitter Feed</a>.

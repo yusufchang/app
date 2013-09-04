@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="hak">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>403 Forbidden</title>
@@ -83,7 +83,7 @@
 				<div id="content">
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
-						<h1>We are sorry!</h1>
+						<h1>Oops, there appears to be a problem!</h1>
 						<p><p>Sorry, this directory is off limits to unauthorized users.
 You are seeing this page as your trying to access a directory that cannot be viewed.
 </p><p>You can:

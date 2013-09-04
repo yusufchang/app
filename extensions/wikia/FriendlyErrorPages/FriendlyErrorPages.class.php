@@ -74,9 +74,9 @@ class FriendlyErrorPages {
         header( $_SERVER['SERVER_PROTOCOL'] . ' ' . self::$aHttpStatus[$iStatus], true, $iStatus );
         global $wgLang;
         if ( is_object( $wgLang ) ) {
-        	include __DIR__ . "/static/$iStatus.{$wgLang->getCode()}.html";	
+        	include __DIR__ . "/static/$iStatus.html.{$wgLang->getCode()}";	
         } else {
-        	include __DIR__ . "/static/$iStatus.en.html";
+        	include __DIR__ . "/static/$iStatus.html.en";
         }
         
         ob_flush();

@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="crh-latn">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>505 HTTP Version Not Supported</title>
@@ -84,7 +84,7 @@
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
 						<h1>We are sorry!</h1>
-						<p>Interesting. You seem to be using a version of HTTP we don't support. Please use HTTP 1.1. If this problem persists <a  class="text" href="http://community.wikia.com/wiki/Special:Contact">contact us</a>.</p>
+						<p>Interesting. You seem to be using a version of HTTP we don't support. Please use HTTP 1.1. If this problem persists please <a  class="text" href="http://community.wikia.com/wiki/Special:Contact">contact us</a>.</p>
 					</div>
 					<div class="links">
 						For more info and updates check out our <a href="https://twitter.com/Wikia">Twitter Feed</a>.
@@ -92,7 +92,7 @@
 					<div class="technical">
 						<h2>Technical explanation for geeks and administrators:</h2>
 						<h3>505 HTTP Version Not Supported</h3>
-						<p>The server does not support, or refuses to support, the HTTP protocol version that was used in the request message. The server is indicating that it is unable or unwilling to complete the request using the same major version as the client, as described in section 3.1, other than with this error message.</p>
+						<p>&lt;friendlyerrorpages-errorpage-technical-explanation-505&gt;</p>
 					</div>
 			</div> <!-- #content -->
 		</div> <!-- #wrapper -->

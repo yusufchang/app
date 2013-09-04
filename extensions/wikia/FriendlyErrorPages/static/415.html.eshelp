@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="eshelp">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>415 Unsupported Media Type</title>
@@ -83,7 +83,7 @@
 				<div id="content">
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
-						<h1>We are sorry!</h1>
+						<h1>Oops, there appears to be a problem!</h1>
 						<p>Our servers do not support this media type.</p>
 					</div>
 					<div class="links">
@@ -92,7 +92,7 @@
 					<div class="technical">
 						<h2>Technical explanation for geeks and administrators:</h2>
 						<h3>415 Unsupported Media Type</h3>
-						<p>The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.</p>
+						<p>Our servers do not support this media type, please adjust the form and re-submit. If the problem continues, please feel free to <a  class="text" href="http://community.wikia.com/wiki/Special:Contact">contact us</a>.</p>
 					</div>
 			</div> <!-- #content -->
 		</div> <!-- #wrapper -->

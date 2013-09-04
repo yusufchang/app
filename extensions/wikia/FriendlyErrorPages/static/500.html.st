@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="st">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>500 Internal Server Error</title>

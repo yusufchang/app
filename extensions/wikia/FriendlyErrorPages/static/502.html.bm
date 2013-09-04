@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="bm">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>502 Bad Gateaway</title>
@@ -84,13 +84,8 @@
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
 						<h1>We are sorry!</h1>
-						<p>This problem is due to poor IP communication between back-end computers, possibly including the Web server at the site you are trying to visit. Before analysing this problem, you should clear your browser cache completely.
-If you are surfing the Web and see this problem for all Web sites you try to visit, then either:
-</p>
-<ul><li> your ISP has a major equipment failure/overload
-</li><li> there is something wrong with your internal Internet connection e.g. your firewall is not functioning correctly.
-</li></ul>
-<p>In the first case, only your ISP can help you. In the second case, you need to fix whatever it is that is preventing you reaching the Internet.</p>
+						<p>It appears there is a problem with your IP connection and Wikia. Try clearing your browser cache and reloading the page. 
+If you also see this problem on other websites then either your ISP has a major equipment failure/overload or there is something wrong with your internal Internet connection. We recommend reviewing our internet setup and contacting your ISP.</p>
 					</div>
 					<div class="links">
 						For more info and updates check out our <a href="https://twitter.com/Wikia">Twitter Feed</a>.

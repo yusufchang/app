@@ -1,5 +1,5 @@
 <!doctype html>
-	<html lang="th">
+	<html lang="lang-code">
 		<head>
 			<meta charset="utf-8" />
 			<title>405 Method Not Allowed</title>
@@ -83,7 +83,7 @@
 				<div id="content">
 					<img src="http://upload.wikimedia.org/wikipedia/commons/1/17/Wikia_Logo.svg" id="wikialogo"/>
 					<div class="friendly">
-						<h1>We are sorry!</h1>
+						<h1>Oops, there appears to be a problem!</h1>
 						<p>We cannot do what you want us to do. Please check the URL for mistakes.</p>
 					</div>
 					<div class="links">
