@@ -217,6 +217,8 @@ var WikiaFullGptHelper = function (log, window, document, adLogicPageLevelParams
 					log(['doneCallback', slotname, 'forced status', status], 4, logGroup);
 					if (status === 'success' && typeof success === 'function') {
 						success();
+					} else {
+						error();
 					}
 				} else {
 					height = slotDiv.offsetHeight;
