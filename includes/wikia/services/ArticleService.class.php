@@ -221,14 +221,16 @@ class ArticleService extends WikiaObject {
 		$content = $page->getRawText();
 
 		//preprocess dependacies
-//		$parser = new Parser();
-//		$pre = $parser->preprocess( $content, Title::newFromID( 50 ), $wgOut->parserOptions() );
-		$wparser = new WikiParser();
-		$wparser->setText( $content );
+		$parser = new Parser();
+		$options = $wgOut->parserOptions();
+		$res = $parser->parse( $content, $this->article->getTitle(), $options );
 
-		$result = $wparser->parse();
-		
-		return $result;
+		$wparser = new WikiParser();
+		$result = $wparser->getSectionsFromParser( $res, $content );
+
+		$structure = $wparser->getSectionsStructure( $res );
+
+		return [ 'sections' => $structure, 'data' => $result ];
 	}
 
 	/**

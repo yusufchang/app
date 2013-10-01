@@ -2,35 +2,53 @@
 
 class WikiParser {
 
-	protected $text;
+	public function getSectionsFromParser( $parserOut, $content ) {
+		$info = $parserOut->getSections();
+		$result = [];
 
-	public function setText( $text ) {
-		$this->text = $text;
-	}
+		for( $i = count( $info ) - 1; $i>=0; $i-- ) {
+			$si = $info[ $i ];
+			$offset = $si[ 'byteoffset' ];
+			$sectionContent = substr( $content, $offset );
+			$content = substr( $content, 0, $offset );
 
-	public function getText() {
-		return $this->text;
-	}
+			if ( strpos( $sectionContent, '=' ) !== false ) {
+				$content .= substr( $sectionContent, 0, strpos( $sectionContent, '=' ) );
+			}
 
-	public function parse() {
-//		$str = $this->prepare( $this->text );
-		$text = $this->text;
-		//explode sections
-		preg_match_all( '|==(?<section>.*)==|sU', $text, $sections );
-
-		print_r( $sections );
-		die;
-
-		return $str;
-	}
-
-	protected function prepare( $str ) {
-		$result = strip_tags( $str );
+			$result[ $si[ 'line' ] ] = preg_replace( "|.*={{$si['level']}}.*={{$si['level']}}|s", '', $sectionContent );
+		}
+		$result[ 'noSectionHeading' ] = $content;
 
 		return $result;
 	}
 
-	protected function explodeSections() {
-
+	public function getSectionsStructure( $parserOut ) {
+		$info = $parserOut->getSections();
+		$result = [];
+		$children = [];
+		$oldtoc = 1;
+		for ( $i = count( $info ) - 1; $i >= 0; $i-- ) {
+			$current = $info[ $i ];
+			$el = [ 'name' => $current[ 'line' ] ];
+			if ( $current[ 'toclevel' ] != 1 ) {
+				if ( $current[ 'toclevel' ] < $oldtoc && !empty( $children[ $oldtoc ] ) ) {
+					$el[ 'subsections' ] = $children[ $oldtoc ];
+					$children[ $oldtoc ] = [];
+				}
+				if ( !isset( $children[ $current[ 'toclevel' ] ] ) ) {
+					$children[ $current[ 'toclevel' ] ] = [];
+				}
+				array_unshift( $children[ $current[ 'toclevel' ] ], $el );
+			} else {
+				if ( !empty( $children[ 2 ] ) ) {
+					$el[ 'subsections' ] = $children[ 2 ];
+					$children = [];
+				}
+				array_unshift( $result, $el );
+			}
+			$oldtoc = $current[ 'toclevel' ];
+		}
+		return $result;
 	}
 }
