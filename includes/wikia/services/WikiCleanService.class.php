@@ -6,7 +6,7 @@
  * Time: 14:32
  * To change this template use File | Settings | File Templates.
  */
-
+ini_set('display_errors',0);
 class WikiCleanService extends Service {
 
 	/**
@@ -15,7 +15,7 @@ class WikiCleanService extends Service {
 	 */
 	public function cleanMethod1($text)
 	{
-		$sl = strlen($text);
+		$sl = strlen($text) - 1 ;
 		$out='';
 		$i=-1;
 		$tags_start = array('[['=>'t_tag','{{'=>'t_templ1','{|'=>'t_templ2');
@@ -31,7 +31,13 @@ class WikiCleanService extends Service {
 				continue;
 			}
 
-			$char =$text[$i].$text[$i+1];
+			$char = $text[$i];
+
+			if( $i < $sl   )
+			{
+				$char .= $text[$i+1];
+			}
+
 			//remove font variant attributes
 			if($char==="''")
 			{
@@ -63,11 +69,16 @@ class WikiCleanService extends Service {
 
 
 		$out2 = '';
-		$i = $sl;
-		while($i >= 0){
+		$i = strlen($out);
+		while($i > 0){
 			$i--;
-			$char =$out[$i-1].$out[$i];
-
+			if($i > 0)
+			{
+				$char =$out[$i-1].$out[$i];
+			}
+			else{
+				$char = $out[0];
+			}
 			//conver wikitext tag (end) to xml tag
 			if(isset($tags_stop[$char]))
 			{
@@ -81,10 +92,8 @@ class WikiCleanService extends Service {
 		}
 
 		$out = strrev($out2);
-
 		//parse xml - don't show errors
 		libxml_use_internal_errors(1);
-
 		$doc = new DOMDocument();
 		$doc->loadHTML('<?xml encoding="UTF-8"?>'.$out);
 		//find main body
@@ -99,18 +108,19 @@ class WikiCleanService extends Service {
 			$tag = $mainbody->childNodes->item($i);
 			if(isset($tag->tagName))
 			{
+			//	echo "NAME:{$tag->tagName} value:{$tag->nodeValue}\n";
 				// same as [[ ...... ]]
 				if(in_array($tag->tagName,['t_tag']))
 				{
-					if( preg_match('/^([a-z0-9]+):([^\|]+)(\|?)|$.*/i',$tag->nodeValue,$m))
+					if( preg_match('/^([a-z0-9]+):([^\|]+)(\|?)/i',$tag->nodeValue,$m))
 					{
 						//looking for images
 						if(in_array(substr($m[2],-4), array('.jpg','.png','.gif','.jpe','jpeg')))
 						{
 							$images[$m[2]] = true;
 						}
-
-						$tag->nodeValue='';
+						//echo "REMOVE {$tag->nodeValue}\n";
+						//$tag->nodeValue='';
 						//not needed anymore
 						$todel[] = $tag;
 					}
@@ -119,7 +129,7 @@ class WikiCleanService extends Service {
 				else
 				{
 					//other tags - delete them
-					$tag->nodeValue='';
+					//$tag->nodeValue='';
 					$todel[] = $tag;
 				}
 
@@ -127,7 +137,7 @@ class WikiCleanService extends Service {
 		}
 
 		//execute deletion
-		foreach($todel as $v){
+		 foreach($todel as $v){
 			$mainbody->removeChild($v);
 
 		}
@@ -143,6 +153,7 @@ class WikiCleanService extends Service {
 
 		//now replace tags [[ ... ]] with text content
 		foreach($replace as $tag){
+			//echo "TAG:{$tag->nodeValue}\n";
 			if(preg_match('/^([^:]+)(\|.+)$/',$tag->nodeValue,$m))
 			{
 				$newelement = new  DOMText(substr($m[2],1));
@@ -257,7 +268,7 @@ class WikiCleanService extends Service {
 				else
 				{
 									//tag support - images
-					if(preg_match('/^([a-z0-9]+):([^\|]+)(\|?)|$.*/i',$tag,$m))
+					if(preg_match('/^([a-z0-9]+):([^\|]+)(\|?).*$/i',$tag,$m))
 					{
 						//	var_dump($m);
 						//$tag="+IMAGE_GOES_HERE:$m[2]+";

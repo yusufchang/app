@@ -229,6 +229,11 @@ class ArticleService extends WikiaObject {
 		$result = $wparser->getSectionsFromParser( $res, $content );
 
 		$structure = $wparser->getSectionsStructure( $res );
+		$s = new WikiCleanService();
+		foreach($result as &$r)
+		{
+			$r = $s->cleanMethod1($r);
+		}
 
 		return [ 'sections' => $structure, 'data' => $result ];
 	}
