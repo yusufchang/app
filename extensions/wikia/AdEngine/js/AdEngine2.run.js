@@ -5,7 +5,7 @@
 
 /*global document, window */
 /*global Geo, Wikia */
-/*global ghostwriter, Krux */
+/*global postscribe, Krux */
 /*global AdConfig2, AdEngine2, DartUrl, EvolveHelper, SlotTweaker, ScriptWriter */
 /*global WikiaDartHelper, WikiaFullGptHelper */
 /*global AdProviderEvolve, AdProviderGpt, AdProviderGamePro, AdProviderLater, AdProviderNull */
@@ -14,7 +14,7 @@
 /*global require*/
 /*jslint newcap:true */
 
-(function (log, tracker, window, ghostwriter, document, Geo, LazyQueue, Cookies, Cache, Krux, abTest) {
+(function (log, tracker, window, postscribe, document, Geo, LazyQueue, Cookies, Cache, Krux, abTest) {
 	'use strict';
 
 	var module = 'AdEngine2.run',
@@ -33,7 +33,6 @@
 		adProviderGpt,
 		adProviderEvolve,
 		adProviderGamePro,
-		adProviderSevenOneMedia,
 		adProviderLater,
 		adProviderNull,
 		slotTweaker,
@@ -52,7 +51,7 @@
 	adLogicPageDimensions = AdLogicPageDimensions(window, document, log, slotTweaker, abTest);
 	adLogicPageLevelParams = AdLogicPageLevelParams(log, window, Krux, adLogicPageDimensions, abTest);
 	adLogicPageLevelParamsLegacy = AdLogicPageLevelParamsLegacy(log, window, adLogicPageLevelParams, Krux, dartUrl);
-	scriptWriter = ScriptWriter(log, ghostwriter, document);
+	scriptWriter = ScriptWriter(log, postscribe, document);
 	wikiaDart = WikiaDartHelper(log, adLogicPageLevelParams, dartUrl, adLogicDartSubdomain);
 	wikiaFullGpt = WikiaFullGptHelper(log, window, document, adLogicPageLevelParams);
 	evolveHelper = EvolveHelper(log, window);
@@ -61,7 +60,6 @@
 	adProviderGpt = AdProviderGpt(tracker, log, window, Geo, slotTweaker, Cache, adLogicHighValueCountry, wikiaFullGpt);
 	adProviderEvolve = AdProviderEvolve(adLogicPageLevelParamsLegacy, scriptWriter, tracker, log, window, document, Krux, evolveHelper, slotTweaker);
 	adProviderGamePro = AdProviderGamePro(adLogicPageLevelParamsLegacy, scriptWriter, tracker, log, window, slotTweaker);
-	adProviderSevenOneMedia = AdProviderSevenOneMedia();
 	adProviderNull = AdProviderNull(log, slotTweaker);
 
 	// Special Ad Provider, to deal with the late ads
@@ -82,8 +80,7 @@
 		adProviderEvolve,
 		adProviderGamePro,
 		adProviderLater,
-		adProviderNull,
-		adProviderSevenOneMedia
+		adProviderNull
 	);
 
 	window.wgAfterContentAndJS.push(function () {
@@ -181,4 +178,4 @@
 		});
 	};
 
-}(Wikia.log, Wikia.Tracker, window, ghostwriter, document, Geo, Wikia.LazyQueue, Wikia.Cookies, Wikia.Cache, Krux, Wikia.AbTest));
+}(Wikia.log, Wikia.Tracker, window, postscribe, document, Geo, Wikia.LazyQueue, Wikia.Cookies, Wikia.Cache, Krux, Wikia.AbTest));

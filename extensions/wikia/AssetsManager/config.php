@@ -44,8 +44,7 @@ $config['adengine2_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
 		// core
-		'//extensions/wikia/AdEngine/ghost/gw-12.4.4/lib/gw.min.js',
-		'//extensions/wikia/AdEngine/js/gw.config.js',
+		'//resources/wikia/libraries/postscribe/postscribe.js',
 
 		'//extensions/wikia/AdEngine/js/Krux.js',
 		'//extensions/wikia/AdEngine/js/SlotTweaker.js',
@@ -91,6 +90,7 @@ $config['oasis_ads_js'] = array(
 		// @requires adengine2 core already loaded
 		// @requires liftium loaded later (TODO FIXME)
 		'//extensions/wikia/AdEngine/js/AdProviderLiftium2Dom.js',
+		'//extensions/wikia/AdEngine/js/AdProviderSevenOneMedia.js',
 		'//extensions/wikia/AdEngine/js/AdConfig2Late.js',
 		'//extensions/wikia/AdEngine/js/AdEngine2.configLateAds.js',
 
