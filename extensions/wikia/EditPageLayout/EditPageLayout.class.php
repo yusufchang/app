@@ -79,9 +79,11 @@ class EditPageLayout extends EditPage {
 		$this->out = $this->app->wg->Out;
 		$this->request = $this->app->wg->Request;
 
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		parent::__construct($article);
+
+		$this->helper = EditPageLayoutHelper::getInstance();
 
 		// default setup of summary box
 		$this->mSummaryBox = array(
@@ -89,20 +91,13 @@ class EditPageLayout extends EditPage {
 			'placeholder' => wfMsg('editpagelayout-pageControls-summaryLabel'),
 		);
 
-		$this->mCoreEditNotices = F::build('EditPageNotices');
-		$this->mEditNotices = F::build('EditPageNotices');
+		$this->mCoreEditNotices = new EditPageNotices();
+		$this->mEditNotices = new EditPageNotices();
 
 		// add messages (fetch them using <script> tag)
-		F::build('JSMessages')->enqueuePackage('EditPageLayout', JSMessages::EXTERNAL);
+		JSMessages::enqueuePackage('EditPageLayout', JSMessages::EXTERNAL);
 
-		$this->app->wf->ProfileOut(__METHOD__);
-	}
-
-	/**
-	 * @param EditPageLayoutHelper $helper
-	 */
-	public function setHelper( EditPageLayoutHelper $helper ) {
-		$this->helper = $helper;
+		wfProfileOut(__METHOD__);
 	}
 
 	function edit() {
@@ -148,7 +143,7 @@ class EditPageLayout extends EditPage {
 		// fire a custom hook when an edit from the edit page is successful (BugId:1317)
 		if (in_array($ret->value, array(self::AS_SUCCESS_UPDATE, self::AS_SUCCESS_NEW_ARTICLE, self::AS_OK, self::AS_END))) {
 			wfDebug(__METHOD__ . ": successful save\n");
-			$this->app->wf->RunHooks('EditPageSuccessfulSave', array($this, $ret));
+			wfRunHooks('EditPageSuccessfulSave', array($this, $ret));
 		}
 
 		return $ret;
@@ -167,12 +162,12 @@ class EditPageLayout extends EditPage {
 	 * Get HTML of notices shown above the editor and use show it as custom dismissable notice
 	 */
 	protected function showHeader() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$oldHtml = $this->out->getHTML();
 
 		$this->out->clearHTML();
 
-		$bridge = F::build('EditPageOutputBridge',array($this,$this->mCoreEditNotices)); /* @var $bridge EditPageOutputBridge */
+		$bridge = new EditPageOutputBridge($this,$this->mCoreEditNotices);
 		parent::showHeader();
 
 		// handle notices related to edit undo
@@ -187,7 +182,7 @@ class EditPageLayout extends EditPage {
 		$this->out->clearHTML();
 		$this->out->addHTML($oldHtml);
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -197,11 +192,11 @@ class EditPageLayout extends EditPage {
 		$this->helper->addJsVariable( 'wgEditPageIsReadOnly', true );
 		$first = $this->firsttime || ( !$this->save && $this->textbox1 == '' );
 
-		$bridge = F::build('EditPageOutputBridge',array($this,$this->mCoreEditNotices)); /* @var $bridge EditPageOutputBridge */
+		$bridge = new EditPageOutputBridge($this,$this->mCoreEditNotices);
 		parent::blockedPage();
 		$bridge->close();
 
-		$this->mCoreEditNotices->get( 'blockedtext' )->setSummary( $this->app->wf->msg( 'editpagelayout-blocked-user' ) );
+		$this->mCoreEditNotices->get( 'blockedtext' )->setSummary( wfMsg( 'editpagelayout-blocked-user' ) );
 		$this->mCoreEditNotices->remove( 'blockededitsource' );
 		$this->mCoreEditNotices->remove( false );
 
@@ -209,7 +204,7 @@ class EditPageLayout extends EditPage {
 		$this->out->clearHTML();
 
 		$this->out->addHtml('<div id="myedit">');
-		$this->out->addHtml( '<h2>' . $this->app->wf->msgExt( $first ? 'blockedoriginalsource' : 'blockededitsource', array( 'parseinline' ), $this->mTitle->getPrefixedText() ) . '</h2>' );
+		$this->out->addHtml( '<h2>' . wfmsgExt( $first ? 'blockedoriginalsource' : 'blockededitsource', array( 'parseinline' ), $this->mTitle->getPrefixedText() ) . '</h2>' );
 		$this->showTextbox1();
 		$this->out->addHtml('</div>');
 	}
@@ -242,7 +237,7 @@ class EditPageLayout extends EditPage {
 	public function addEditNotice($text, $id = false) {
 		$this->mEditNotices->add($text, $id);
 
-		$this->app->wf->debug(__METHOD__ . ": \"{$text}\"\n");
+		wfdebug(__METHOD__ . ": \"{$text}\"\n");
 	}
 
 	/**
@@ -282,7 +277,7 @@ class EditPageLayout extends EditPage {
 	 *                      near the top, for captchas and the like.
 	 */
 	function showEditForm($formCallback=null) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		// get HTML from form callback
 		if (is_callable($formCallback)) {
@@ -307,7 +302,7 @@ class EditPageLayout extends EditPage {
 		}
 
 		parent::showEditForm($formCallback);
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -528,6 +523,27 @@ class EditPageLayout extends EditPage {
 
 		parent::showTextbox1($customAttribs, $textoverride );
 	}
+	
+	/**
+	 * Add items to loaded content
+	 */
+	function getContent() {
+		$content = parent::getContent();
+		
+		$addFile = $this->app->getGlobal('wgRequest')->getVal('addFile');
+		
+		if( $addFile ) {
+			$file = wfFindFile( $addFile );
+			
+			if( $file ) {
+				$title = $file->getTitle()->getText();
+				$content = "[[File:" . $title . "|right|thumb|335px]] " . $content;
+				$type = WikiaFileHelper::isFileTypeVideo( $file ) ? 'video' : 'photo';
+				$this->helper->addJsVariable( 'wgEditPageAddFileType', $type );
+			}
+		}
+		return $content;
+	}
 
 	/**
 	 * Render read-only textarea
@@ -655,13 +671,14 @@ class EditPageLayout extends EditPage {
 		// Intro text for talk pages (BugId:7092)
 		if ($this->mTitle->isTalkPage()) {
 			$this->mEditPagePreloads['EditPageTalkPageIntro'] = array(
-				'content' => $this->app->wf->msgExt('talkpagetext', array('parse')),
+				'content' => wfmsgExt('talkpagetext', array('parse')),
 				'class' => 'mw-talkpagetext',
 			);
 		} elseif ( $this->mTitle->isMainPage() && !$this->mTitle->isProtected() && !$this->userDismissedEduNote() ) {
 			//if this is an unprotected main page and user hasn't seen the main page educational notice -- show it :)
 			/** @var $notice EditPageNotice */
-			$notice = F::build( 'EditPageNotice',array($this->app->wf->msgExt('mainpagewarning-notice', array('parse')), 'MainPageEduNote') );
+			$msg = wfMsgExt('mainpagewarning-notice', array('parse') );
+			$notice = new EditPageNotice( $msg, 'MainPageEduNote' );
 			$this->helper->addJsVariable('mainPageEduNoteHash', $notice->getHash());
 			$this->addEditNotice($notice);
 		}
@@ -682,7 +699,7 @@ class EditPageLayout extends EditPage {
 	 * @return bool
 	 */
 	protected function userDismissedEduNote() {
-		$EditorUserPropertiesHandler = F::build('EditorUserPropertiesHandler');  /* @var EditorUserPropertiesHandler $EditorUserPropertiesHandler */
+		$EditorUserPropertiesHandler = new EditorUserPropertiesHandler();
 
 		try {
 			$results = $EditorUserPropertiesHandler->getUserPropertyValue(

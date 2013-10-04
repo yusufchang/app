@@ -1,10 +1,7 @@
 <?php
-
-   /*********************************************************/
-  /*  Original messages associated with search extension   */
- /* See below for V2 extensions, appended to these arrays */
-/*********************************************************/
-
+/**
+ * Wikia Search Internationalization Messages
+ */
 $messages = array();
 
 
@@ -18,10 +15,19 @@ $messages['en'] = array(
 	'wikiasearch2-page-title-no-query-intrawiki' => 'Search $1',
 	'wikiasearch2-search-all-wikia' => 'Search all of Wikia',
 	'wikiasearch2-results' => '$1 {{PLURAL:$1|result|results}}',
-	'wikiasearch2-pages' => '$1 {{PLURAL:$1|page|pages}}',
+	'wikiasearch2-pages' => '$1 {{PLURAL:$2|page|pages}}',
+	'wikiasearch2-images' => '$1 {{PLURAL:$2|image|images}}',
+	'wikiasearch2-videos' => '$1 {{PLURAL:$2|video|videos}}',
+	'wikiasearch2-pages-k' => '$1k {{PLURAL:$2|page|pages}}',
+	'wikiasearch2-images-k' => '$1k {{PLURAL:$2|image|images}}',
+	'wikiasearch2-videos-k' => '$1k {{PLURAL:$2|video|videos}}',
+	'wikiasearch2-pages-M' => '$1M {{PLURAL:$2|page|pages}}',
+	'wikiasearch2-images-M' => '$1M {{PLURAL:$2|image|images}}',
+	'wikiasearch2-videos-M' => '$1M {{PLURAL:$2|video|videos}}',
 	'wikiasearch2-search-on-wiki' => 'Search within this wiki',
 	'wikiasearch2-results-count' => 'About $1 {{PLURAL:$1|result|results}} for $2 from {{SITENAME}}',
 	'wikiasearch2-results-for' => 'Results for $1 from {{SITENAME}}',
+	'wikiasearch2-results-redirected-from' => 'redirected from',
 	'wikiasearch2-global-search-headline' => 'Find wikis on Wikia',
 	'wikiasearch2-wiki-search-headline' => 'Search this wiki',
 	'wikiasearch2-advanced-search' => 'Advanced Search Options',
@@ -47,12 +53,21 @@ $messages['en'] = array(
 	'wikiasearch2-sort-publish-date' => 'Publish Date',
 	'wikiasearch2-sort-duration' => 'Duration',
 	'wikiasearch2-choose-category' => 'Choose Category',
-	
-	
+	'wikiasearch2-crosswiki-description' => '$1 is a community site that anyone can contribute to. Discover, share and add your knowledge!',
+	'wikiasearch2-exact-result' => 'Result for $1 from Wikia',
+
+
+	'wikiasearch2-top-module-title' => 'What\'s hot now',
+	'wikiasearch2-top-module-test-1' => 'Top pages',
+	'wikiasearch2-top-module-test-2' => 'Popular articles',
+	'wikiasearch2-top-module-test-3' => 'What\'s hot now',
+	'wikiasearch2-top-module-edit' => 'Last edited on $1',
 
 	'wikiamobile-wikiasearch2-next' => 'Next',
 	'wikiamobile-wikiasearch2-prev' => 'Previous',
-	'wikiamobile-wikiasearch2-results-count-of' => ' of $1 {{PLURAL:$1|result|results}}'
+	'wikiamobile-wikiasearch2-results-count-of' => ' of $1 {{PLURAL:$1|result|results}}',
+	
+	'wikiasearch2-video-results' => 'Videos for \'$1\''
 );
 
 /** Message documentation (Message documentation)
@@ -66,6 +81,7 @@ $messages['qqq'] = array(
 * $1 is the name of the wiki to be searched; {{SITENAME}} - see: http://www.mediawiki.org/wiki/Manual:$wgSitename.',
 	'wikiasearch2-results-count' => 'Parameters: $1 - a number of items in the search results list; $2 - a keyword or a search term searched for; {{SITENAME}} - see: http://www.mediawiki.org/wiki/Manual:$wgSitename.',
 	'wikiasearch2-results-for' => 'Parameter: $1 - a keyword or a search term searched for.',
+	'wikiasearch2-results-redirected-from' => 'Caption for search results that are from redirects',
 	'wikiasearch2-enable-go-search' => 'Preferences setting next to a checkbox which asks you whether you want to enable Go-Search (going directly to a page title match in search) or not. Default = off',
 	'wikiasearch2-search-ads-header' => 'Heading displayed above search advertisements.',
 	'wikiamobile-wikiasearch2-next' => 'Message is used to go to next result page',
@@ -74,8 +90,21 @@ $messages['qqq'] = array(
 	'wikiasearch2-tabs-articles' => 'Name of a tab with articles. This tab is displayed in the right column on search page',
 	'wikiasearch2-tabs-photos-and-videos' => 'Name of a tab with photos and videos. This tab is displayed in the right column on search page',
 	'wikiasearch2-users' => 'Name of a tab with users. This tab is displayed in the right column on search page',
-	'wikiasearch2-users-tooltip' => 'Search in UsersTooltip displayed on hover on Blogs Tab in the right column on search page'
-
+	'wikiasearch2-users-tooltip' => 'Search in UsersTooltip displayed on hover on Blogs Tab in the right column on
+	search page',
+	'wikiasearch2-pages' => 'Parameters: $1 - number of Pages below 1000',
+	'wikiasearch2-images' => 'Parameters: $1 - number of Images below 1000',
+	'wikiasearch2-videos' => 'Parameters: $1 - number of Videos below 1000',
+	'wikiasearch2-pages-k' => 'Parameters: $1 - number of Pages below 1000000',
+	'wikiasearch2-images-k' => 'Parameters: $1 - number of Images below 1000000',
+	'wikiasearch2-videos-k' => 'Parameters: $1 - number of Videos below 1000000',
+	'wikiasearch2-pages-M' => 'Parameters: $1 - number of Pages above 1000000',
+	'wikiasearch2-images-M' => 'Parameters: $1 - number of Images above 1000000',
+	'wikiasearch2-videos-M' => 'Parameters: $1 - number of Videos above 1000000',
+	'wikiasearch2-crosswiki-description' => 'Used to display a generic description of a wiki for cross-wiki search results',
+	'wikiasearch2-top-module-title' => 'Top module header title on search page',
+	'wikiasearch2-top-module-edit' => 'Article last edit string containing date',
+	'wikiasearch2-video-results' => 'List on-wiki and premium videos in a search'
 );
 
 /** Afrikaans (Afrikaans)
@@ -175,9 +204,18 @@ $messages['de'] = array(
 	'wikiasearch2-search-all-wikia' => 'Durchsuche alle Wikia-Wikis',
 	'wikiasearch2-results' => '$1 {{PLURAL:$1|Ergebnis|Ergebnisse}}',
 	'wikiasearch2-pages' => '$1 {{PLURAL:$1|Seite|Seiten}}',
+	'wikiasearch2-images' => '$1 {{PLURAL:$2|Bild|Bilder}}',
+	'wikiasearch2-videos' => '$1 {{PLURAL:$2|Video|Videos}}',
+	'wikiasearch2-pages-k' => '$1k {{PLURAL:$2|Seite|Seiten}}',
+	'wikiasearch2-images-k' => '$1k {{PLURAL:$2|Bild|Bilder}}',
+	'wikiasearch2-videos-k' => '$1k {{PLURAL:$2|Video|Videos}}',
+	'wikiasearch2-pages-M' => '$1M {{PLURAL:$2|Seite|Seiten}}',
+	'wikiasearch2-images-M' => '$1M {{PLURAL:$2|Bild|Bilder}}',
+	'wikiasearch2-videos-M' => '$1M {{PLURAL:$2|Video|Videos}}',
 	'wikiasearch2-search-on-wiki' => 'Durchsuche dieses Wiki',
 	'wikiasearch2-results-count' => 'Über $1 {{PLURAL:$1|Ergebnis|Ergebnisse}} für $2',
 	'wikiasearch2-results-for' => 'Ergebnisse für $1',
+	'wikiasearch2-results-redirected-from' => 'weitergeleitet von',
 	'wikiasearch2-global-search-headline' => 'Weitere Wikis auf Wikia',
 	'wikiasearch2-wiki-search-headline' => 'Suchergebnisse',
 	'wikiasearch2-advanced-search' => 'Erweiterte Such-Optionen',
@@ -229,6 +267,14 @@ $messages['es'] = array(
 	'wikiasearch2-search-all-wikia' => 'Buscar en todo Wikia',
 	'wikiasearch2-results' => '$1 {{PLURAL:$1|resultado|resultados}}',
 	'wikiasearch2-pages' => '$1 {{PLURAL:$1|página|páginas}}',
+	'wikiasearch2-images' => '$1 {{PLURAL:$2|imagen|imágenes}}',
+	'wikiasearch2-videos' => '$1 {{PLURAL:$2|vídeo|vídeos}}',
+	'wikiasearch2-pages-k' => '$1k {{PLURAL:$2|página|páginas}}',
+	'wikiasearch2-images-k' => '$1k {{PLURAL:$2|imagen|imágenes}}',
+	'wikiasearch2-videos-k' => '$1k {{PLURAL:$2|vídeo|vídeos}}',
+	'wikiasearch2-pages-M' => '$1M {{PLURAL:$2|página|páginas}}',
+	'wikiasearch2-images-M' => '$1M {{PLURAL:$2|imagen|imágenes}}',
+	'wikiasearch2-videos-M' => '$1M {{PLURAL:$2|vídeo|vídeos}}',
 	'wikiasearch2-search-on-wiki' => 'Buscar en este wiki',
 	'wikiasearch2-results-count' => 'Aproximadamente $1 {{PLURAL:$1|resultado|resultados}} para $2',
 	'wikiasearch2-results-for' => 'Resultados de $1',
@@ -293,9 +339,18 @@ $messages['fr'] = array(
 	'wikiasearch2-search-all-wikia' => 'Rechercher sur tout Wikia',
 	'wikiasearch2-results' => '$1 {{PLURAL:$1|résultat|résultats}}',
 	'wikiasearch2-pages' => '$1 {{PLURAL:$1|page|pages}}',
+	'wikiasearch2-images' => '$1 {{PLURAL:$2|image|images}}',
+	'wikiasearch2-videos' => '$1 {{PLURAL:$2|vidéo|vidéos}}',
+	'wikiasearch2-pages-k' => '$1k {{PLURAL:$2|page|pages}}',
+	'wikiasearch2-images-k' => '$1k {{PLURAL:$2|image|images}}',
+	'wikiasearch2-videos-k' => '$1k {{PLURAL:$2|vidéo|vidéos}}',
+	'wikiasearch2-pages-M' => '$1M {{PLURAL:$2|page|pages}}',
+	'wikiasearch2-images-M' => '$1M {{PLURAL:$2|image|images}}',
+	'wikiasearch2-videos-M' => '$1M {{PLURAL:$2|vidéo|vidéos}}',
 	'wikiasearch2-search-on-wiki' => 'Rechercher sur ce wiki',
 	'wikiasearch2-results-count' => 'Environ $1 {{PLURAL:$1|résultat|résultats}} pour $2',
 	'wikiasearch2-results-for' => 'Résultats pour $1',
+	'wikiasearch2-results-redirected-from' => 'redirigé depuis',
 	'wikiasearch2-global-search-headline' => 'Trouver des wikis sur Wikia',
 	'wikiasearch2-wiki-search-headline' => 'Rechercher sur ce wiki',
 	'wikiasearch2-advanced-search' => 'Options de recherche avancée',
@@ -671,6 +726,7 @@ $messages['pl'] = array(
 	'wikiasearch2-search-on-wiki' => 'Szukaj na tej wiki',
 	'wikiasearch2-results-count' => 'Około $1 {{PLURAL:$1|wynik|wyniki|wyników}} dla "$2"',
 	'wikiasearch2-results-for' => 'Wyniki dla $1',
+	'wikiasearch2-results-redirected-from' => 'przekierowanie z',
 	'wikiasearch2-global-search-headline' => 'Wyszukaj wiki na Wikii',
 	'wikiasearch2-wiki-search-headline' => 'Przeszukaj wiki',
 	'wikiasearch2-advanced-search' => 'Zaawansowane Opcje Wyszukiwania',

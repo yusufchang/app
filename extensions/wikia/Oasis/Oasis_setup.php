@@ -65,13 +65,14 @@ function wfOasisSetup() {
 	$wgHooks['ArticlePurge'][] = 'ArticleService::onArticlePurge';
 	$wgHooks['ArticleSaveComplete'][] = 'ArticleService::onArticleSaveComplete';
 	$wgHooks['SkinCopyrightFooter'][] = 'CorporateFooterController::onSkinCopyrightFooter';
+	$wgHooks['MakeGlobalVariablesScript'][] = 'OasisController::onMakeGlobalVariablesScript';
 
 	// support "noexternals" URL param
 	global $wgNoExternals, $wgRequest;
 	$wgNoExternals = $wgRequest->getBool('noexternals', $wgNoExternals);
 
 	//Oasis-navigation-v2 messages
-	$jsMessages = F::build('JSMessages');
+	$jsMessages = new JSMessages();
 	$jsMessages->registerPackage('Oasis-navigation-v2', array(
 		'oasis-navigation-v2-*'
 	));
@@ -79,6 +80,12 @@ function wfOasisSetup() {
 	$jsMessages->registerPackage('Oasis-mobile-switch', array(
 		'oasis-mobile-site'
 	));
+
+	// Generic messages that can be used by all extensions such as error messages
+	$jsMessages->registerPackage('Oasis-generic', array(
+		'oasis-generic-error',
+	));
+	$jsMessages->enqueuePackage('Oasis-generic', JSMessages::EXTERNAL);
 }
 
 // TODO: why do we have this code here? It should be placed in ThemeDesigner

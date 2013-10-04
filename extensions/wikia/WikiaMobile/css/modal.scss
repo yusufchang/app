@@ -6,6 +6,7 @@
 
 .modal {
 	height: 100%;
+	min-height: 0 !important; //if anything set min-height this might brake modal
 
 	body {
 		min-height: 100%;
@@ -30,10 +31,12 @@
 	opacity: 0;
 
 	overflow: hidden;
+
 	color: $modal-text-color;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 
 	pointer-events: none;
+	display: none;
 
 	&.zoomer {
 		-webkit-transition: -webkit-transform .3s ease-out, opacity .3s linear;
@@ -42,10 +45,10 @@
 		transition: transform .3s ease-out, opacity .3s linear;
 	}
 
-	-webkit-transform: translate(0,0) scale(0);
-	-moz-transform: translate(0,0) scale(0);
-	-o-transform: translate(0,0) scale(0);
-	transform: translate(0,0) scale(0);
+	-webkit-transform: none;
+	-moz-transform: none;
+	-o-transform: none;
+	transform: none;
 
 	&.open {
 		pointer-events: auto;
@@ -53,10 +56,10 @@
 		opacity: 1;
 		//this has to override values set in JS
 		//at least open state is in CSS
-		-webkit-transform: translate(0,0) scale(1)  translateZ(0)!important;
-		-moz-transform: translate(0,0) scale(1)  translateZ(0)  !important;
-		-o-transform: translate(0,0) scale(1)  translateZ(0)  !important;
-		transform: translate(0,0) scale(1)  translateZ(0) !important;
+		-webkit-transform: none !important;
+		-moz-transform: none !important;
+		-o-transform: none !important;
+		transform: none !important;
 	}
 }
 
@@ -95,7 +98,7 @@
 	margin: 0;
 	padding: 5px;
 	background-color: rgba(0,0,0,.8);
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	left: 0;
 	color: white;
@@ -107,6 +110,11 @@
 
 	.hdn & {
 		bottom: -100%;
+	}
+
+	//caption is an output from parser
+	p {
+		margin: 0;
 	}
 }
 

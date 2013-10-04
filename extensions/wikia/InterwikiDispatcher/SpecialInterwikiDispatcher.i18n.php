@@ -34,6 +34,14 @@ $messages['af'] = array(
 	'interwikidispatcher-desc' => 'Los interwikiskakels op om Apache-aansture te verminder',
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'interwikidispatcher' => 'مرسل الإنترويكي',
+	'interwikidispatcher-desc' => 'يحل وصلات الإنترويكي للحد من موجهات أباتشي',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author EugeneZelenko
  * @author Wizardist
@@ -50,6 +58,14 @@ $messages['be-tarask'] = array(
 $messages['br'] = array(
 	'interwikidispatcher' => 'Dasparzher etrewiki',
 	'interwikidispatcher-desc' => 'Diskoulmañ a ra al liammoù etrewiki evit bihanaat an adkasoù Apache',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'interwikidispatcher' => 'Despatxador Interwiki',
+	'interwikidispatcher-desc' => 'Resol els enllaços interwiki per reduir els redireccionaments Apache',
 );
 
 /** Czech (česky)
@@ -241,6 +257,14 @@ $messages['pt-br'] = array(
 	'interwikidispatcher-desc' => 'Resolve os links interwikis para reduzir os reencaminhamentos do servidor Apache',
 );
 
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'interwikidispatcher' => 'Smistatore de interuicchi',
+	'interwikidispatcher-desc' => 'Resolve le collegaminde de interuicchi pe diminuì le redirezionaminde de Apache',
+);
+
 /** Russian (русский)
  * @author Александр Сигачёв
  */
@@ -290,4 +314,12 @@ $messages['tt-cyrl'] = array(
 $messages['uk'] = array(
 	'interwikidispatcher' => 'Диспетчер інтервікі',
 	'interwikidispatcher-desc' => 'Виправлення інтервікі з метою зменшення посилань на перенаправлення',
+);
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Yfdyh000
+ */
+$messages['zh-hans'] = array(
+	'interwikidispatcher' => '跨wiki调度程序',
+	'interwikidispatcher-desc' => '解决跨wiki链接，以减少Apache重定向',
 );

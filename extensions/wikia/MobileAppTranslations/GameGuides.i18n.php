@@ -47,6 +47,16 @@ $messages['en'] = array(
 	'error-json-parse' => 'There was a problem with the data returned from our servers, sorry.\\nPlease try again.'
 );
 
+/** Message documentation (Message documentation)
+ * @author Shirayuki
+ */
+$messages['qqq'] = array(
+	'activityindicator-message' => '{{Identical|Loading}}',
+	'window-category-load-batch' => '{{Identical|More}}',
+	'window-article-button-close' => '{{Identical|Close}}',
+	'window-article-menu-search-label' => '{{Identical|Search}}',
+);
+
 /** Arabic (العربية)
  * @author Mutarjem horr
  */
@@ -84,6 +94,7 @@ $messages['az'] = array(
 );
 
 /** Breton (brezhoneg)
+ * @author Fohanno
  * @author Y-M D
  */
 $messages['br'] = array(
@@ -100,6 +111,39 @@ $messages['br'] = array(
 	'searchbar-hint' => 'Klask %s...',
 	'alert-download-updated-wikis-message' => 'Hizivaet e vo roll ar sturlevrioù dieub.',
 	'alert-download-updated-wikis-button-ok' => 'Mat eo',
+	'error-no-connection' => "Ne c'haller ket kevreañ ouzh internet.\\nEsaeit en-dro, mar plij.",
+);
+
+/** Catalan (català)
+ * @author Roxas Nobody 15
+ */
+$messages['ca'] = array(
+	'activityindicator-message' => "S'està carregant…",
+	'window-wikis-title' => 'Wikia VideoJocs',
+	'window-wikis-wikilist-search-hint' => 'Cerca el nostre Top  de Videojocs...',
+	'window-category-load-batch' => 'Més',
+	'window-article-button-close' => 'Tanca',
+	'window-article-button-back' => 'Torna',
+	'window-article-menu-search-label' => 'Cerca',
+	'window-article-menu-dashboard-label' => 'Guia de Continguts',
+	'window-article-menu-cancel-label' => 'Anul·la',
+	'searchview-no-results' => 'No hi ha resultats per a " %s "',
+	'searchview-button-back-list' => 'Tornar a la llista',
+	'searchview-button-back-article' => "Tornar a l'article",
+	'searchbar-hint' => 'Cercant...',
+	'alert-download-updated-wikis-message' => "La llista de guies disponibles s'actualitzaràn.",
+	'alert-download-updated-wikis-button-ok' => "D'acord",
+	'error-update-required' => 'Una actualització per a aquest app està disponible i necessària.',
+	'error-no-connection' => 'No hi ha connexió a internet disponible. torneu-\\nPlease.',
+	'error-server' => 'Els nostres servidors va respondre amb un error, ho sento. torneu-\\nPlease.',
+	'error-json-parse' => 'Hi havia un problema amb les dades que es retornen dels nostres servidors, ho sento. torneu-\\nPlease.',
+);
+
+/** Chechen (нохчийн)
+ * @author Умар
+ */
+$messages['ce'] = array(
+	'window-article-button-close' => 'ДӀачӀагӀа',
 );
 
 /** Czech (česky)
@@ -124,6 +168,14 @@ $messages['cs'] = array(
 	'alert-download-updated-wikis-button-ok' => 'OK',
 	'error-update-required' => 'Aktualizace pro tuto aplikaci je dostupná a vyžadovaná.',
 	'error-no-connection' => 'Připojení k Internetu není k dispozici. \\nProsím, opakujte akci.',
+);
+
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'window-category-load-batch' => 'Mwy',
+	'alert-download-updated-wikis-button-ok' => 'Iawn',
 );
 
 /** German (Deutsch)
@@ -213,6 +265,28 @@ $messages['fi'] = array(
 	'window-article-menu-cancel-label' => 'Peruuta',
 	'searchview-button-back-list' => 'Palaa luetteloon',
 	'alert-download-updated-wikis-button-ok' => 'Ok',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'window-wikis-title' => 'Wikia Spæl Vegleiðing',
+	'window-wikis-wikilist-search-hint' => 'Leita eftir best umtóktu spølum...',
+	'window-category-load-batch' => 'Meira',
+	'window-article-button-close' => 'Lat aftur',
+	'window-article-button-back' => 'Aftur',
+	'window-article-menu-search-label' => 'Leita',
+	'window-article-menu-dashboard-label' => 'Innihald av leiðbeining',
+	'window-article-menu-cancel-label' => 'Ógildað',
+	'searchview-no-results' => 'Ongi úrslit fyri "%s"',
+	'searchview-button-back-list' => 'Aftur til lista',
+	'searchview-button-back-article' => 'Aftur til grein',
+	'searchbar-hint' => 'Leita %s...',
+	'alert-download-updated-wikis-message' => 'Listin yvir tøkar vegleiðingar verður dagførdur.',
+	'alert-download-updated-wikis-button-ok' => 'Í lagi',
+	'error-update-required' => 'Ein dagføring fyri hesa appina er tøk og er eitt krav.',
+	'error-no-connection' => 'Onki internet samband er at finna. \\n Vinarliga royn aftur.',
 );
 
 /** French (français)
@@ -315,6 +389,16 @@ $messages['ia'] = array(
 	'error-json-parse' => 'Un problema occurreva con le datos retornate ab nostre servitores.\\nPer favor reproba.',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
+ */
+$messages['id'] = array(
+	'window-wikis-wikilist-search-hint' => 'Cari Permainan Teratas kami',
+	'searchview-no-results' => 'Tidak ada hasil untuk "%s"',
+	'error-update-required' => 'Pembaruan untuk aplikasi ini telah tersedia dan diperlukan.',
+	'error-json-parse' => 'Ada masalah dengan data yang dikembalikan dari server kami, maaf.\\nSilakan coba lagi.',
+);
+
 /** Italian (italiano)
  * @author Beta16
  * @author Federico "Lox" Lucignano <federico(at)wikia-inc.com>
@@ -367,7 +451,7 @@ $messages['ko'] = array(
 	'searchview-button-back-list' => '목록으로 돌아가기',
 	'searchview-button-back-article' => '문서로 돌아가기',
 	'searchbar-hint' => '%s 찾기...',
-	'alert-download-updated-wikis-message' => '이용 가능한 도움말 리스트는 업데이트 될것입니다.',
+	'alert-download-updated-wikis-message' => '사용 가능한 가이드 목록는 업데이트될 것입니다.',
 	'alert-download-updated-wikis-button-ok' => '확인',
 	'error-update-required' => '이 앱에 필요한 업데이트가 있습니다.',
 	'error-no-connection' => '사용 가능한 인터넷 연결이 없습니다.\\n다시 시도하세요.',
@@ -539,12 +623,13 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
 	'activityindicator-message' => 'A caria ...',
 	'window-wikis-title' => 'Guide dij Gieugh Wikia',
-	'window-wikis-wikilist-search-hint' => 'Serca nòst Mej Gieugh...',
+	'window-wikis-wikilist-search-hint' => 'Sërché nòstri Mej Gieugh...',
 	'window-category-load-batch' => 'Pi',
 	'window-article-button-close' => 'Sara',
 	'window-article-button-back' => 'André',
@@ -557,10 +642,10 @@ $messages['pms'] = array(
 	'searchbar-hint' => 'Sërché %s...',
 	'alert-download-updated-wikis-message' => 'La lista dle guide disponìbij a sarà agiornà.',
 	'alert-download-updated-wikis-button-ok' => 'Va bin',
-	'error-update-required' => "N'agiornament për sta app a l'é disponìbil e obligatòri.",
-	'error-no-connection' => 'Gnun-e conession sla Ragnà dosponìbij.\\nPër piasì preuva torna.',
-	'error-server' => "Ij nòst sërvent a l'han arspondù con n'eror, spiasent.\\nPër piasì preuva torna.",
-	'error-json-parse' => "A l'é stàit-ie un problem con ij dat artornà dai nòst sërvent, spiasent.\\nPër piasì preuva torna.",
+	'error-update-required' => "N'agiornament për costa aplicassion a l'é disponìbil e obligatòri.",
+	'error-no-connection' => "Gnun-e conession sla Ragnà disponìbij.\\nPër piasì, ch'a preuva torna.",
+	'error-server' => "Ij nòstri servent a l'han rëspondù con n'eror, an dëspias spiasent.\\nPër piasì, ch'a preuva torna.",
+	'error-json-parse' => "A-i é staje un problema con ij dat artornà dai nòst servent, an dëspias.\\nPër piasì, ch'a preuva torna.",
 );
 
 /** Pashto (پښتو)
@@ -578,6 +663,7 @@ $messages['ps'] = array(
 
 /** Portuguese (português)
  * @author Hamilton Abreu
+ * @author Luckas
  */
 $messages['pt'] = array(
 	'activityindicator-message' => 'A carregar…',
@@ -593,15 +679,16 @@ $messages['pt'] = array(
 	'searchview-button-back-list' => 'Voltar à lista',
 	'searchview-button-back-article' => 'Voltar ao artigo',
 	'searchbar-hint' => 'Pesquisar %s...',
-	'alert-download-updated-wikis-message' => 'A lista de guias disponíveis será actualizada.',
+	'alert-download-updated-wikis-message' => 'A lista de guias disponíveis será atualizada.',
 	'alert-download-updated-wikis-button-ok' => 'Ok',
-	'error-update-required' => 'Está disponível uma actualização necessária para esta aplicação.',
+	'error-update-required' => 'Está disponível uma atualização necessária para esta aplicação.',
 	'error-no-connection' => 'Não está disponível nenhuma ligação à internet.\\nTente novamente, por favor.',
 	'error-server' => 'Desculpe, os nossos servidores responderam com um erro.\\nTente novamente, por favor.',
 	'error-json-parse' => 'Desculpe, houve um problema com os dados recebidos dos nossos servidores.\\nTente novamente, por favor.',
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -611,7 +698,33 @@ $messages['pt-br'] = array(
 	'window-article-button-back' => 'Voltar',
 	'window-article-menu-search-label' => 'Pesquisar',
 	'window-article-menu-cancel-label' => 'Cancelar',
+	'searchbar-hint' => 'Pesquisar %s...',
 	'alert-download-updated-wikis-button-ok' => 'Ok',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'activityindicator-message' => 'Stoche a scareche…',
+	'window-wikis-title' => 'Guide le le Sciueche de Uicchia',
+	'window-wikis-wikilist-search-hint' => 'Cirche le Sciuche Megghie megghie...',
+	'window-category-load-batch' => 'De cchiù',
+	'window-article-button-close' => 'Achiude',
+	'window-article-button-back' => 'Rrete',
+	'window-article-menu-search-label' => 'Cirche',
+	'window-article-menu-dashboard-label' => "Condenute d'a guide",
+	'window-article-menu-cancel-label' => 'Annulle',
+	'searchview-no-results' => 'Nisciune resultate pe "%s"',
+	'searchview-button-back-list' => "Tuèrne a l'elenghe",
+	'searchview-button-back-article' => "Tuèrne a 'a vôsce",
+	'searchbar-hint' => 'Cirche %s...',
+	'alert-download-updated-wikis-message' => "L'elenghe de le guide disponibbile adda essere aggiornate.",
+	'alert-download-updated-wikis-button-ok' => 'Ok',
+	'error-update-required' => "'N'aggiornamende pe sta applicazione jè disponibbile e richieste.",
+	'error-no-connection' => 'Nisciuna connessione a indernette disponibbile.\\nPe piacere pruève arrete.',
+	'error-server' => "Le nostre server stonne a respondene cu 'n'errore.\\nPe piacere pruève arrete.",
+	'error-json-parse' => "Stè 'nu probbleme cu 'u date ca ha turnate da le server nuèstre.\\nPe piacere pruève arrete.",
 );
 
 /** Russian (русский)
@@ -712,16 +825,31 @@ $messages['tly'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Andriykopanytsia
+ * @author Base
  * @author Steve.rusyn
+ * @author SteveR
  */
 $messages['uk'] = array(
-	'activityindicator-message' => 'Завантаження...',
+	'activityindicator-message' => 'Завантаження…',
+	'window-wikis-title' => 'Посібники ігор Вікія',
+	'window-wikis-wikilist-search-hint' => 'Пошук найпопулярніших ігор…',
 	'window-category-load-batch' => 'Більше',
 	'window-article-button-close' => 'Закрити',
 	'window-article-button-back' => 'Назад',
 	'window-article-menu-search-label' => 'Пошук',
+	'window-article-menu-dashboard-label' => 'Вміст посібника',
 	'window-article-menu-cancel-label' => 'Скасувати',
+	'searchview-no-results' => 'Нічого не знайдено для "%s"',
+	'searchview-button-back-list' => 'Назад до списку',
+	'searchview-button-back-article' => 'Назад до статті',
+	'searchbar-hint' => 'Пошук  %s ...',
+	'alert-download-updated-wikis-message' => 'Перелік доступних посібників буде оновлено.',
 	'alert-download-updated-wikis-button-ok' => 'Гаразд',
+	'error-update-required' => 'Оновлення для цієї програми доступне і необхідне.',
+	'error-no-connection' => 'Немає підключення до Інтернету.\\пбудь ласка спробуйте ще раз.',
+	'error-server' => 'Наші сервери відповіли: помилка, вибачте. \\nСпробуйте ще раз.',
+	'error-json-parse' => 'Виникла проблема з даними, які повертаються з наших серверів, вибачте. \\nБудь ласка, спробуйте ще раз.',
 );
 
 /** Simplified Chinese (中文（简体）‎)
@@ -745,4 +873,11 @@ $messages['zh-hans'] = array(
 	'searchview-button-back-article' => '返回条目',
 	'searchbar-hint' => '搜索 %s ⋯',
 	'alert-download-updated-wikis-button-ok' => '确认',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'window-article-button-close' => '關閉',
 );

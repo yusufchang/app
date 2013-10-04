@@ -24,8 +24,13 @@
 			<?=$moduleContent?>
 
 			<div class="submits">
+				<?php if( $selectedModuleId == MarketingToolboxModulePopularvideosService::MODULE_ID ): ?>
+					<input id="marketing-toolbox-removeall" name="removeall" class="secondary" type="button" value="<?= wfMsg('marketing-toolbox-edithub-removeall-button'); ?>" />
+				<?php else: ?>
+                	<input id="marketing-toolbox-clearall" name="clearall" class="secondary" type="button" value="<?= wfMsg('marketing-toolbox-edithub-clearall-button'); ?>" />
+				<?php endif; ?>
+
 				<input type="submit" value="<?= wfMsg('marketing-toolbox-edithub-save-button'); ?>" />
-				<input id="marketing-toolbox-clearall" name="clearall" class="secondary" type="button" value="<?= $wf->msg('marketing-toolbox-edithub-clearall-button'); ?>" />
 			</div>
 		</form>
 	</div>
@@ -33,5 +38,6 @@
 
 <?= $app->renderView(
 	'MarketingToolbox',
-	'Footer'
+	'Footer',
+	$footerData
 ) ?>

@@ -1,56 +1,69 @@
-var UserLoginFacebook;
+require(['track', 'wikia.querystring', 'toast', 'wikia.nirvana', 'JSMessages', 'wikia.window'],
+	function(track, Qs, toast, nirvana, msg, window){
+	'use strict';
 
-require(['track', 'events', 'wikia.querystring', 'toast', 'wikia.nirvana', 'JSMessages'], function(track, events, qs, toast, nirvana, msg){
-	/** @private **/
+	var btn = document.getElementById('ssoFbBtn'),
+		fbInit = (function () {
+			var initialized = false;
 
-	//init
-	var btn = document.getElementById('ssoFbBtn');
+			return function(){
+				if (!initialized) {
+					//see fbconnect.js
+					window.FB.init({
+						appId : window.fbAppId,
+						status : true, // Check login status
+						cookie : true, // Enable cookies to allow the server to access the session
+						xfbml  : window.fbUseMarkup // Whether XFBML should be automatically parsed
+					});
 
-	btn.addEventListener(events.click, function(){
-		UserLoginFacebook.login();
+					initialized = true;
+				}
+			};
+		})();
+
+	btn.addEventListener('click', function(){
+		fbInit();
+
+		window.FB.login(
+			function(response){
+				if(response && response.status === 'connected'){
+					// now check FB account (is it connected with Wikia account?)
+					nirvana.postJson('FacebookSignup', 'index').done(
+						function(resp){
+							if(resp.loggedIn){
+								track.event('login', track.CLICK, {
+									label: 'facebook',
+									value: 1
+								});
+
+								var reload = new Qs(),
+									returnto = reload.getVal('returnto',
+										(window.wgCanonicalSpecialPageName &&
+										window.wgCanonicalSpecialPageName.match(/Userlogin|Userlogout/)) ?
+											window.wgMainPageTitle :
+											''
+									);
+
+								if(returnto) {
+									reload.setPath(window.wgArticlePath.replace('$1', returnto));
+								}
+
+								reload.removeVal('returnto').removeHash('topbar').addCb().goTo();
+
+							}else{
+								track.event('login', track.CLICK, {
+									label: 'facebook',
+									value: 0
+								});
+								toast.show(msg('wikiamobile-facebook-connect-fail'), {error: true});
+							}
+						}
+					);
+				}
+			},
+			{scope: 'email'}
+		);
 	});
 
 	btn.disabled = false;
-
-	/** @public **/
-
-	UserLoginFacebook = {
-		login: function(){
-			// @see http://developers.facebook.com/docs/reference/javascript/FB.login/
-			FB.login(
-				function(response){
-					if(typeof response === 'object' && response.status == 'connected'){
-						// now check FB account (is it connected with Wikia account?)
-						nirvana.postJson('FacebookSignupController', 'index').done(
-							function(resp){
-								if(resp.loggedIn){
-									track.event('login', track.CLICK, {
-										label: 'facebook',
-										value: 1
-									});
-
-									var reload = new qs(),
-										returnto = reload.getVal('returnto', (wgCanonicalSpecialPageName && (wgCanonicalSpecialPageName.match(/Userlogin|Userlogout/))) ? wgMainPageTitle : '');
-
-									if(returnto) {
-										reload.setPath(wgArticlePath.replace('$1', returnto));
-									}
-
-									reload.removeVal('returnto').removeHash('topbar').addCb().goTo();
-
-								}else{
-									track.event('login', track.CLICK, {
-										label: 'facebook',
-										value: 0
-									});
-									toast.show(msg('wikiamobile-facebook-connect-fail'), {error: true});
-								}
-							}
-						);
-					}
-				},
-				{scope: 'email'}
-			);
-		}
-	};
 });

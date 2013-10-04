@@ -294,7 +294,7 @@ function authConnection(handshakeData, authcallback){
 					client.isChatMod = data.isChatMod;
 					client.editCount = data.editCount;
 					client.wikiaSince = data.since;
-					client.isCanGiveChatMode = data.isCanGiveChatMode;
+					client.isCanGiveChatMod = data.isCanGiveChatMod;
 					client.isStaff = data.isStaff;
 					client.roomId = roomId;
 					client.cityId = data.wgCityId;
@@ -323,14 +323,7 @@ function authConnection(handshakeData, authcallback){
 		}
 	};
 
-        var address = null;
-        if(!handshakeData.address || !handshakeData.address.address) {
-                address = "0.0.0.0";
-        } else {
-                address = handshakeData.address.address;
-        }
-
-	mwBridge.authenticateUser(roomId, name, key, address, callback, function(){
+	mwBridge.authenticateUser(roomId, name, key, handshakeData, callback, function(){
 		logger.error("User failed authentication: Wrong call to media wiki");
 		authcallback(null, false); // error first callback style
 	});
@@ -383,7 +376,7 @@ function finishConnectingUser(client, socket ){
                 	name: client.username,
                         avatarSrc: client.avatarSrc,
                         isModerator: client.isChatMod,
-                        isCanGiveChatMode: client.isCanGiveChatMode,
+                        isCanGiveChatMod: client.isCanGiveChatMod,
                         isStaff: client.isStaff,
                         editCount: client.editCount,
                         since: client.wikiaSince
@@ -469,7 +462,7 @@ function formallyAddClient(client, socket, connectedUser){
 			logger.debug(new Date().getTime());
 			broadcastToRoom(client, socket, {
 				event: 'join',
-				joinData: connectedUser.xport()
+				data: connectedUser.xport()
 			});
 			broadcastUserListToMediaWiki(client, false);
 			//Conenction complted
@@ -521,9 +514,12 @@ function broadcastDisconnectionInfo(client, socket){
 
 	broadcastUserListToMediaWiki(client, true);
 
+	var partEvent = new models.PartEvent({
+		name: client.myUser.get('name')
+	});
 	broadcastToRoom(client, socket, {
         	event: 'part',
-        	data: client.myUser.xport()
+        	data: partEvent.xport()
 	});
 } // end broadcastDisconnectionInfo()
 
@@ -571,6 +567,11 @@ function chatMessage(client, socket, msg){
 		logger.critical(logMsg);
 		return;
 	}
+	var text = chatEntry.get('text');
+	if (typeof(text) !== "string" || text.length === 0) {
+		// skip empty messages
+		return;
+	}
 	//chatEntry.set({ isInlineAlert: false}); // not needed, as we ingore those messages
     monitoring.incrEventCounter('chat_messages');
 	storeAndBroadcastChatEntry(client, socket, chatEntry);
@@ -578,7 +579,7 @@ function chatMessage(client, socket, msg){
 
 function logout(client, socket, msg) {
 	var logoutEvent = new models.LogoutEvent({
-		leavingUserName: client.myUser.get('name')
+		name: client.myUser.get('name')
 	});
 	monitoring.incrEventCounter('logouts');
 	tracker.trackEvent(client, 'logout');
@@ -609,7 +610,7 @@ function kick(client, socket, msg){
 		if (typeof kickedUser !== "undefined") {
 			if ( client.myUser.get('isModerator') !== true) {
 				sendInlineAlertToClient(client, '', 'chat-kick-you-need-permission', []);
-			} else if ( kickedUser.get('isCanGiveChatMode') || ( kickedUser.get('isModerator') === true && client.myUser.get('isCanGiveChatMode') !== true ) ) {
+			} else if ( kickedUser.get('isCanGiveChatMod') || ( kickedUser.get('isModerator') === true && client.myUser.get('isCanGiveChatMod') !== true ) ) {
 				sendInlineAlertToClient(client, '', 'chat-kick-cant-kick-moderator', []);
 			} else {
 				var kickEvent = new models.KickEvent({
@@ -644,7 +645,7 @@ function ban(client, socket, msg){
 	var time = banCommand.get('time');
 	var reason = banCommand.get('reason');
 
-	mwBridge.ban(client.roomId, userToBan, client.handshake.address, time, reason, client.userKey, function(data){
+	mwBridge.ban(client.roomId, userToBan, client.handshake, time, reason, client.userKey, function(data){
     	var kickEvent = new models.KickEvent({
     		kickedUserName: userToBan,
     		time: time,
@@ -675,10 +676,10 @@ function giveChatMod(client, socket, msg){
 
 	var userNameToPromote = giveChatModCommand.get('userToPromote');
 		
-	mwBridge.giveChatMod(client.roomId, userNameToPromote, client.userKey, function(data){
+	mwBridge.giveChatMod(client.roomId, userNameToPromote, client.handshake, client.userKey, function(data){
 		// Build a user that looks like the one that got banned... then kick them!
 			
-		storage.getRoomState(client.roomId, function(nodeChatModel) {	
+		storage.getRoomState(client.roomId, function(nodeChatModel) {
 			// Initial connection of the user (unless they're already connected).
 			var promotedUser = nodeChatModel.users.findByName(userNameToPromote);
 

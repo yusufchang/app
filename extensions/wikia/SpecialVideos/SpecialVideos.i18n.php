@@ -8,6 +8,7 @@
 $messages = array();
 
 $messages['en'] = array(
+	'videos' => 'Videos',
 	'specialvideos-html-title' => 'Videos on this wiki - {{SITENAME}}',
 	'specialvideos-page-title' => 'Videos',
 	'specialvideos-wiki-videos-tally' => '<em>{{FORMATNUM:$1}}</em><span>{{PLURAL:$1|video on<br /> this wiki|videos on<br /> this wiki}}</span>',
@@ -23,10 +24,13 @@ $messages['en'] = array(
 	'specialvideos-meta-description-entertainment' => '$1 has new videos that include the latest TV clips, movie trailers, music videos, actor interviews and episodes. Watch now!',
 	'specialvideos-meta-description-lifestyle' => '$1 has new videos that include how to videos, travel guides, cooking shows, recipe and crafting videos. Watch now!',
 	'specialvideos-meta-description-corporate' => '$1 has new videos that include the latest video clips, video reviews, video interviews and trailers. Watch now!',
+	'specialvideos-remove-modal-title' => 'Delete video',
+	'specialvideos-remove-modal-message' => 'Are you sure you want to delete this video from your wiki?',
 
 );
 
 $messages['qqq'] = array(
+	'videos' => 'This is the feature name that shows up in the Wiki Nav menu bar when the Extension is enabled',
 	'specialvideos-html-title' => 'This is the page title for the Special:Videos page',
 	'specialvideos-page-title' => 'This is the h1 (header) text for the Special:Videos page',
 	'specialvideos-wiki-videos-tally' => 'This text displays the number of videos on a wiki',
@@ -42,6 +46,8 @@ $messages['qqq'] = array(
 	'specialvideos-meta-description-entertainment' => 'Entertainment hub description of videos page placed in the description meta tag for better SEO.  Placeholder is the wiki name',
 	'specialvideos-meta-description-lifestyle' => 'Lifestyle hub description of videos page placed in the description meta tag for better SEO.  Placeholder is the wiki name',
 	'specialvideos-meta-description-corporate' => 'Corporate hub description of videos page placed in the description meta tag for better SEO.  Placeholder is the wiki name',
+	'specialvideos-remove-modal-title' => 'Modal dialog title to delete video',
+	'specialvideos-remove-modal-message' => 'Modal dialog message to confirm whether or not user wants to delete',
 );
 
 $messages['de'] = array(
@@ -89,14 +95,14 @@ $messages['fr'] = array(
 $messages['pl'] = array(
 	'specialvideos-html-title' => 'Filmy na {{SITENAME}}',
 	'specialvideos-page-title' => 'Filmy',
-	'specialvideos-wiki-videos-tally' => '<em>{{FORMATNUM:$1}}</em><span> {{PLURAL:$1|film na<br /> tej wiki|filmÛw na<br /> tej wiki}}</span>',
-	'specialvideos-sort-by' => 'SposÛb sortowania',
+	'specialvideos-wiki-videos-tally' => '<em>{{FORMATNUM:$1}}</em><span> {{PLURAL:$1|film na<br /> tej wiki|filmów na<br /> tej wiki}}</span>',
+	'specialvideos-sort-by' => 'Sposób sortowania',
 	'specialvideos-sort-latest' => 'Najnowsze',
 	'specialvideos-sort-most-popular' => 'Najpopularniejsze',
 	'specialvideos-sort-trending' => 'Na fali',
-	'specialvideos-sort-featured' => 'èrÛd≥o: Wikia Library',
-	'specialvideos-uploadby' => 'doda≥(a) $1',
-	'specialvideos-posted-in' => 'Uøyto w $1',
+	'specialvideos-sort-featured' => 'Źródło: Wikia Library',
+	'specialvideos-uploadby' => 'dodał(a) $1',
+	'specialvideos-posted-in' => 'Użyto w $1',
 	'special-videos-add-video' => 'Dodaj film',
 );
 

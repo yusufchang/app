@@ -21,6 +21,22 @@ Parameters:
 * $1 pulls in the name of the copyright license the wiki uses.',
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'campfire-page-header' => '$1 من $2',
+	'campfire-licensed-under' => 'المرخص لها بموجب $1',
+);
+
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'campfire-page-header' => '$1 de $2',
+	'campfire-licensed-under' => 'Baxo la llicencia $1',
+);
+
 /** Azerbaijani (azərbaycanca)
  * @author AZISS
  */
@@ -29,12 +45,35 @@ $messages['az'] = array(
 	'campfire-licensed-under' => '$1 lisenziyası altındadır',
 );
 
+/** Bikol Central (Bikol Central)
+ * @author Geopoet
+ */
+$messages['bcl'] = array(
+	'campfire-page-header' => '$1 gikan sa $2',
+	'campfire-licensed-under' => 'Lisensiyado sa lindong kan $1',
+);
+
+/** Bulgarian (български)
+ * @author DCLXVI
+ */
+$messages['bg'] = array(
+	'campfire-page-header' => '$1 от $2',
+);
+
 /** Breton (brezhoneg)
  * @author Y-M D
  */
 $messages['br'] = array(
 	'campfire-page-header' => '$1 eus $2',
 	'campfire-licensed-under' => 'Dindan an aotre-implijout $1',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'campfire-page-header' => '$1 de $2',
+	'campfire-licensed-under' => 'Sota la llicència $1',
 );
 
 /** Czech (česky)
@@ -83,6 +122,14 @@ $messages['fi'] = array(
 	'campfire-licensed-under' => 'Lisensoitu $1',
 );
 
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'campfire-page-header' => '$1 frá $2',
+	'campfire-licensed-under' => 'Undir lisensinum $1',
+);
+
 /** French (français)
  * @author Wyz
  */
@@ -113,6 +160,13 @@ $messages['hu'] = array(
 $messages['ia'] = array(
 	'campfire-page-header' => '$1 de $2',
 	'campfire-licensed-under' => 'Sub licentia $1',
+);
+
+/** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
+ */
+$messages['id'] = array(
+	'campfire-page-header' => '$1 dari $2',
 );
 
 /** Italian (italiano)
@@ -163,6 +217,14 @@ $messages['nl'] = array(
 	'campfire-licensed-under' => 'Gelicenseerd onder $1',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'campfire-page-header' => '$1 (de $2)',
+	'campfire-licensed-under' => 'Jos licéncia $1',
+);
+
 /** Polish (polski)
  * @author Sovq
  */
@@ -193,6 +255,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'campfire-page-header' => '$1 de $2',
 	'campfire-licensed-under' => 'Licenciado com a $1',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'campfire-page-header' => '$1 da $2',
+	'campfire-licensed-under' => 'Licenziate sotte a $1',
 );
 
 /** Russian (русский)
@@ -230,9 +300,12 @@ $messages['tt-cyrl'] = array(
 
 /** Ukrainian (українська)
  * @author Steve.rusyn
+ * @author SteveR
+ * @author Ua2004
  */
 $messages['uk'] = array(
 	'campfire-page-header' => '$1 з $2',
+	'campfire-licensed-under' => 'Під ліцензією $1',
 );
 
 /** Vietnamese (Tiếng Việt)

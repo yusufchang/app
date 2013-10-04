@@ -55,6 +55,13 @@ $messages['br'] = array(
 	'healthcheck-desc' => 'Ur [[Special:HealthCheck|bajenn dibar]] evit gwiriañ stad ar servijerien',
 );
 
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'healthcheck-desc' => "Una [[Special:HealthCheck|pàgina especial]] per verificar l'estat del servidor",
+);
+
 /** Czech (česky)
  * @author Mormegil
  */
@@ -95,6 +102,13 @@ $messages['eu'] = array(
  */
 $messages['fi'] = array(
 	'healthcheck-desc' => '[[Special:HealthCheck|Toimintosivu]] palvelimen tilan tarkastukseen',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'healthcheck-desc' => 'Ein [[Special:HealthCheck|serstøk síða]] fyri at kanna status á ambætaranum',
 );
 
 /** French (français)
@@ -199,6 +213,13 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'healthcheck-desc' => 'Een [[Special:HealthCheck|speciale pagina]] voor de controle van de serverstatus',
+);
+
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'healthcheck-desc' => "Una [[Special:HealthCheck|pagina especiala]] per verificar l'estat dels servidors",
 );
 
 /** Polish (polski)

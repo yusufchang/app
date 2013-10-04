@@ -9,6 +9,8 @@ namespace Wikia\Search\IndexService;
  * Responsible for statistics for a given wiki
  * Separated out so we can run this service wiki-wide
  * @author relwell
+ * @package Search
+ * @subpackage IndexService
  */
 class WikiStats extends AbstractWikiService
 {
@@ -23,16 +25,17 @@ class WikiStats extends AbstractWikiService
 	 * @return array containing result data
 	 */
 	public function execute() {
-		wfProfileIn(__METHOD__);
-		$data = $this->interface->getApiStatsForWiki();
-	    $statistics = $data['query']['statistics'];
-		if( is_array($statistics) ) {
-			$this->result['wikipages']      = $statistics['pages'];
-			$this->result['wikiarticles']   = $statistics['articles'];
-			$this->result['activeusers']    = $statistics['activeusers'];
-			$this->result['wiki_images']    = $statistics['images'];
+		$service = $this->getService();
+		if ( $this->result == array() && $service->isOnDbCluster() ) { 
+			$data = $service->getApiStatsForWiki();
+			$statistics = $data['query']['statistics'];
+			if( is_array($statistics) ) {
+				$this->result['wikipages']      = $statistics['pages'];
+				$this->result['wikiarticles']   = $statistics['articles'];
+				$this->result['activeusers']    = $statistics['activeusers'];
+				$this->result['wiki_images']    = $statistics['images'];
+			}
 		}
-		wfProfileOut(__METHOD__);
 		return $this->result;
 	}
 }

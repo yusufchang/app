@@ -8,7 +8,7 @@
 (function (context) {
 	'use strict';
 
-	function querystring(location) {
+	function querystring(location, win) {
 		var l = location,
 			p,
 			u,
@@ -75,7 +75,10 @@
 			this.cache = cache;
 			this.protocol = loc.protocol;
 			this.link = loc.host;
-			this.path = loc.pathname;
+			// found in DAR-744: IE returns bad pathname (no initial '/')
+			// when <a> element is created in javascript
+			this.path = (loc.pathname.charAt(0) != '/' ? '/' : '') + loc.pathname;
+
 			this.hash = loc.hash.substr(1);
 		}
 
@@ -121,6 +124,21 @@
 			return this.cache[name] || defVal;
 		};
 
+		/**
+		 * Get object with all parameters
+		 *
+		 * @public
+		 *
+		 * @return {Object}
+		 */
+		p.getVals = function () {
+			var cacheCopy = {};
+			for( var param in this.cache ) {
+				cacheCopy[param] = this.cache[param];
+			}
+			return cacheCopy;
+		};
+
 
 		/**
 		 * Sets a parameter by name
@@ -131,19 +149,20 @@
 		 *
 		 * @param {String} name The parameter's name
 		 * @param {Mixed} val The parameter's value
+		 * @param {Boolean} safe Val has already been uri encoded
 		 */
-		p.setVal = function (name, val) {
+		p.setVal = function (name, val, safe) {
 			if (name) {
 				if(typeof name === 'object') {
 					val = val || '';
 
 					for(var key in name) {
 						if(name.hasOwnProperty(key)) {
-							this.cache[val + key] = encodeURIComponent(name[key]);
+							this.cache[val + key] = safe ? name[key] : encodeURIComponent(name[key]);
 						}
 					}
 				} else if(val){
-					this.cache[name] = encodeURIComponent(val);
+					this.cache[name] = safe ? val : encodeURIComponent(val);
 				}
 			}
 			return this;
@@ -164,6 +183,17 @@
 			} else {
 				delete this.cache[list];
 			}
+			return this;
+		};
+
+		/**
+		 * Remove all parameters
+		 *
+		 * @public
+		 * @return {Querystring}
+		 */
+		p.clearVals = function() {
+			this.cache = {};
 			return this;
 		};
 
@@ -249,12 +279,47 @@
 			l.href = this.toString();
 		};
 
+		/**
+		 * Updates the URL without navigating away from the page
+		 *
+		 * @public
+		 */
+		p.pushState = function(data) {
+			// Check browser support of HTML5 history api
+			if(!(win.history && win.history.pushState)) {
+				return;
+			}
+			data = data || {};
+			win.history.pushState(data, win.document.title, this.toString());
+		};
+
+		/**
+		 * Updates the URL without navigating away from the page
+		 * Replaces history state instead of adding to it.
+		 *
+		 * @public
+		 */
+		p.replaceState = function(data) {
+			// Check browser support of HTML5 history api
+			if(!(win.history && win.history.replaceState)) {
+				return;
+			}
+			data = data || {};
+			win.history.replaceState(data, win.document.title, this.toString());
+		};
+
 		return Querystring;
 	}
 
-	if (context.define && context.define.amd) {
-		context.define('wikia.querystring', ['wikia.location'], querystring);
+	//UMD inclusive
+	if (!context.Wikia) {
+		context.Wikia = {};
 	}
-	context.Wikia = context.Wikia || {};
-	context.Wikia.Querystring = querystring(context.location);
+
+	//namespace
+	context.Wikia.Querystring = querystring(window.location, context);
+
+	if (context.define && context.define.amd) {
+		context.define('wikia.querystring', ['wikia.location', 'wikia.window'], querystring);
+	}
 }(this));

@@ -85,6 +85,10 @@ $messages['en'] = array(
 	'oasis-button-add-photo' => 'Add image',
 	'oasis-button-edit-wikia-local-menu' => 'Edit local Wikia menu',
 	'oasis-button-edit-wikia-global-menu' => 'Edit global Wikia menu',
+	'oasis-community-social-twitter-link' => 'http://twitter.com/#!/wikia',
+	'oasis-community-social-facebook-link' => 'http://www.facebook.com/wikia',
+	'oasis-community-social-googleplus-link' => 'http://gplus.to/wikia',
+	'oasis-generic-error' => 'We\'re sorry, there was an error processing your request.  Please try again later.',
 
 	# Toolbar customize
 	'oasis-toolbar-edit-title' => 'Customize Toolbar',
@@ -160,7 +164,8 @@ $messages['en'] = array(
 	'oasis-upload-photos-fewer-options' => 'Fewer Options',
 	'oasis-upload-photos-force' => 'Upload anyway',
 	'oasis-upload-photos-caption' => 'Caption',
-	
+	'oasis-upload-photos-overwrite-file' => 'Overwrite File',
+
 	'oasis-corporatefooter-navigation-header' => 'Wikia Inc Navigation',
 	'oasis-corporatefooter-hub-Entertainment-link' => 'http://www.wikia.com/Entertainment',
 	'oasis-corporatefooter-hub-Gaming-link' => 'http://www.wikia.com/Video_Games',
@@ -292,7 +297,9 @@ Example output: deleted by Avatar 3 hours ago',
 	'oasis-on-the-wiki' => 'Name of the first tab of wiki navigation menu',
 	'oasis-global-nav-header' => 'Global Wikia navigation header',
 	'oasis-corporatefooter-navigation-header' => 'Corporate Footer navigation header',
-	'oasis-global-page-header' => 'Global (corporate) header for whole HTML page - first <h1> in <body>'
+	'oasis-global-page-header' => 'Global (corporate) header for whole HTML page - first <h1> in <body>',
+	'oasis-generic-error' => 'This is a generic error message that shows up when something unexpected went wrong in the code.',
+	'oasis-upload-photos-overwrite-file' => 'Label for the option in the image upload modal to overwrite a file, if a file by the same name already exists on the wiki',
 );
 
 /** Afrikaans (Afrikaans)
@@ -889,6 +896,9 @@ $1 hat dir diese Seite von {{SITENAME}} bei Wikia gesendet:
      $2
 Viel Spaß!
 - Das Wikia-Team',
+	'oasis-community-social-twitter-link' => 'http://twitter.com/wikia_de',
+	'oasis-community-social-facebook-link' => 'http://www.facebook.com/wikia.de',
+	'oasis-community-social-googleplus-link' => '',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
@@ -1093,6 +1103,9 @@ $1 te ha enviado esta página de {{SITENAME}} en Wikia:
 	'oasis-corporatefooter-hub-Gaming-link' => 'http://es.wikia.com/Videojuegos',
 	'oasis-corporatefooter-hub-Lifestyle-link' => 'http://es.wikia.com/Estilo_de_vida',
 	'oasis-corporatefooter-hub-Food and Drink-link' => 'http://www.wikia.com/Recipes',
+	'oasis-community-social-twitter-link' => 'https://twitter.com/#!/wikia_es',
+	'oasis-community-social-facebook-link' => 'http://www.facebook.com/wikia.es',
+	'oasis-community-social-googleplus-link' => '',
 );
 
 /** Persian (فارسی)
@@ -1555,6 +1568,9 @@ $3
 Bonne lecture !
 
 — L’équipe Wikia',
+	'oasis-community-social-twitter-link' => 'https://twitter.com/#!/wikia_fr',
+	'oasis-community-social-facebook-link' => 'http://www.facebook.com/wikia.fr',
+	'oasis-community-social-googleplus-link' => '',
 );
 
 /** Galician (Galego)
@@ -3504,6 +3520,9 @@ $1 przesyła Ci stronę {{SITENAME}} z Wikia:
       $2
 Miłej lektury!
 - zespół Wikia',
+	'oasis-community-social-twitter-link' => 'https://twitter.com/wikia_pl',
+	'oasis-community-social-facebook-link' => 'https://www.facebook.com/wikiapl',
+	'oasis-community-social-googleplus-link' => '',
 );
 
 /** Piedmontese (Piemontèis)

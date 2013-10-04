@@ -44,17 +44,17 @@ class BodyController extends WikiaController {
 		return defined('NS_BLOG_LISTING') && $wgTitle->getNamespace() == NS_BLOG_LISTING;
 	}
 
-	public static function isHubPage() {
-		global $wgArticle;
-		return (get_class ($wgArticle) == "AutoHubsPagesArticle");
-	}
-
 	/**
 	 * Returns if current layout should be applying gridlayout
 	 */
 	public static function isGridLayoutEnabled() {
 		$app = F::app();
-		
+
+		// Don't enable when responsive layout is enabled
+		if ( self::isResponsiveLayoutEnabled() ) {
+			return false;
+		}
+
 		if( !empty($app->wg->OasisGrid) ) {
 			return true;
 		}
@@ -68,8 +68,21 @@ class BodyController extends WikiaController {
 		if( defined("NS_WIKIA_FORUM_TOPIC_BOARD") && $ns == NS_WIKIA_FORUM_TOPIC_BOARD ) {
 			return true;
 		}
-		
+
 		return false;
+	}
+
+	/**
+	 * Decide on which pages responsive / liquid layout should be turned on.
+	 * @return Boolean
+	 */
+	public static function isResponsiveLayoutEnabled() {
+		$app = F::app();
+		return !empty( $app->wg->OasisResponsive ) &&
+				// Prevent the responsive layout from being enabled on the
+				// corporate wiki as it will break styling on it.
+				// TODO: remove this check when it's safe to enable there.
+				empty( $app->wg->EnableWikiaHomePageExt );
 	}
 
 	/**
@@ -120,9 +133,7 @@ class BodyController extends WikiaController {
 		wfProfileIn(__METHOD__);
 		global $wgTitle, $wgUser, $wgEnableAchievementsExt, $wgContentNamespaces,
 			$wgExtraNamespaces, $wgExtraNamespacesLocal,
-			$wgEnableCorporatePageExt,
-			$wgEnableWikiAnswers,
-			$wgSalesTitles, $wgEnableHuluVideoPanel,
+			$wgEnableWikiAnswers, $wgEnableHuluVideoPanel,
 			$wgEnableGamingCalendarExt, $wgEnableWallEngine, $wgRequest,
 			$wgEnableForumExt, $wgIsForum;
 
@@ -162,12 +173,6 @@ class BodyController extends WikiaController {
 							$railModuleList[$huluVideoPanelKey] = array('HuluVideoPanel', 'Index', null);
 						}
 					}
-				} elseif ($wgEnableCorporatePageExt) {
-					$railModuleList = array(
-						1490 => array('Ad', 'Index', array('slotname' => 'TOP_RIGHT_BOXAD'))
-					);
-					wfProfileOut(__METHOD__);
-					return $railModuleList;
 				}
 			} else if ($wgTitle->isSpecial('Leaderboard')) {
 				$railModuleList = array (
@@ -256,32 +261,6 @@ class BodyController extends WikiaController {
 			$railModuleList[1250] = array('PopularBlogPosts', 'Index', null);
 		}
 
-		// A/B testing leftovers, leave for now because we will do another one
-		$useTestBoxad = false;
-
-		// Special case rail modules for Corporate Skin
-		if ($wgEnableCorporatePageExt) {
-			$railModuleList = array (
-				1500 => array('Search', 'Index', null),
-			);
-			// No rail on main page or edit page for corporate skin
-			if ( BodyController::isEditPage() || WikiaPageType::isMainPage() ) {
-				$railModuleList = array();
-			}
-			else if (self::isHubPage()) {
-				$railModuleList[1490] = array('Ad', 'Index', array('slotname' => 'CORP_TOP_RIGHT_BOXAD'));
-				$railModuleList[1480] = array('CorporateSite', 'HotSpots', null);
-			//	$railModuleList[1470] = array('CorporateSite', 'PopularHubPosts', null);  // temp disabled - data not updating
-				$railModuleList[1460] = array('CorporateSite', 'TopHubUsers', null);
-			} else if ( is_array( $wgSalesTitles ) && in_array( $wgTitle->getText(), $wgSalesTitles ) ){
-				$railModuleList[1470] = array('CorporateSite', 'SalesSupport', null);
-			} else { // content pages
-				$railModuleList[1470] = array('CorporateSite', 'PopularStaffPosts', null);
-			}
-			wfProfileOut(__METHOD__);
-			return $railModuleList;
-		}
-
 		//  No rail on main page or edit page for oasis skin
 		// except &action=history of wall
 		if( !empty($wgEnableWallEngine) ) {
@@ -307,12 +286,7 @@ class BodyController extends WikiaController {
 			return array();
 		}
 
-		if ($useTestBoxad) {
-			$railModuleList[1440] = array('Ad', 'Index', array('slotname' => 'TEST_TOP_RIGHT_BOXAD'));
-		}
-		else {
-			$railModuleList[1440] = array('Ad', 'Index', array('slotname' => 'TOP_RIGHT_BOXAD'));
-		}
+		$railModuleList[1440] = array('Ad', 'Index', array('slotname' => 'TOP_RIGHT_BOXAD'));
 		$railModuleList[1291] = array('Ad', 'Index', array('slotname' => 'MIDDLE_RIGHT_BOXAD'));
 		$railModuleList[1100] = array('Ad', 'Index', array('slotname' => 'LEFT_SKYSCRAPER_2'));
 
@@ -328,9 +302,6 @@ class BodyController extends WikiaController {
 		if ( !empty( $wgEnableGamingCalendarExt ) ) {
 			$railModuleList[1430] = array( 'GamingCalendarRail', 'Index', array( ) );
 		}
-		else {
-			$railModuleList[1430] = array('Ad', 'Index', array('slotname' => 'TOP_RIGHT_BUTTON'));
-		}
 
 		unset($railModuleList[1450]);
 
@@ -343,7 +314,7 @@ class BodyController extends WikiaController {
 
 
 	public function executeIndex() {
-		global $wgOut, $wgTitle, $wgUser, $wgEnableCorporatePageExt, $wgEnableInfoBoxTest, $wgMaximizeArticleAreaArticleIds, $wgEnableAdminDashboardExt, $wgEnableTopButton, $wgTopButtonPosition, $wgEnableWikiaHomePageExt;
+		global $wgOut, $wgTitle, $wgEnableInfoBoxTest, $wgMaximizeArticleAreaArticleIds, $wgEnableAdminDashboardExt, $wgEnableWikiaHomePageExt;
 
 		wfProfileIn(__METHOD__);
 
@@ -392,42 +363,51 @@ class BodyController extends WikiaController {
 			else if (self::isBlogListing()) {
 				$this->headerModuleAction = 'BlogListing';
 			}
-		} else {
+		// show corporate header on this page?
+		} else if( HubService::isCorporatePage() ) {
 			$this->headerModuleName = 'PageHeader';
-			if (self::isEditPage()) {
+
+			if( self::isEditPage() ) {
 				$this->headerModuleAction = 'EditPage';
+			} else {
+				$this->headerModuleAction = 'Corporate';
 			}
 
 			// FIXME: move to separate module
-			if ( $wgEnableWikiaHomePageExt && WikiaPageType::isMainPage() ) {
+			if( WikiaPageType::isMainPage() ) {
 				$this->wg->SuppressFooter = true;
 				$this->wg->SuppressArticleCategories = true;
 				$this->wg->SuppressPageHeader = true;
 				$this->wg->SuppressWikiHeader = true;
 				$this->wg->SuppressSlider = true;
-			} else if ($wgEnableCorporatePageExt) {
-				// RT:71681 AutoHubsPages extension is skipped when follow is clicked
-
-				$wgOut->addStyle(AssetsManager::getInstance()->getSassCommonURL("extensions/wikia/CorporatePage/css/CorporateSite.scss"));
-
-				global $wgExtensionsPath, $wgJsMimeType;
-				$wgOut->addScript("<script src=\"{$wgExtensionsPath}/wikia/CorporatePage/js/CorporateSlider.js\" type=\"{$wgJsMimeType}\"></script>");
-
-				// $this->wgSuppressFooter = true;
-				$this->wgSuppressArticleCategories = true;
-				if (WikiaPageType::isMainPage()) {
-					$this->wg->SuppressPageHeader = true;
-				} else {
-					$this->headerModuleAction = 'Corporate';
-				}
 			}
+		} else {
+			$this->headerModuleName = 'PageHeader';
+			if( self::isEditPage() ) {
+				$this->headerModuleAction = 'EditPage';
+			}
+		}
+
+		// Display Control Center Header on certain special pages
+		if (!empty($wgEnableAdminDashboardExt) && AdminDashboardLogic::displayAdminDashboard($this->app, $wgTitle)) {
+			$this->headerModuleName = null;
+			$this->wgSuppressAds = true;
+			$this->displayAdminDashboard = true;
+			$this->displayAdminDashboardChromedArticle = ($wgTitle->getText() != SpecialPage::getTitleFor( 'AdminDashboard' )->getText());
+		} else {
+			$this->displayAdminDashboard = false;
+			$this->displayAdminDashboardChromedArticle = false;
 		}
 
 		$this->railModulesExist = true;
 
 		// use one column layout for pages with no right rail modules
 		if( count($this->railModuleList ) == 0 || !empty($this->wg->SuppressRail) ) {
-			OasisController::addBodyClass('oasis-one-column');
+			// Special:AdminDashboard doesn't need this class, but pages chromed with it do
+			if ( !$this->displayAdminDashboard || $this->displayAdminDashboardChromedArticle ) {
+				OasisController::addBodyClass('oasis-one-column');
+			}
+
 			$this->headerModuleParams = array ('showSearchBox' => true);
 			$this->railModulesExist = false;
 		}
@@ -470,17 +450,6 @@ class BodyController extends WikiaController {
 			$wgOut->addStyle(AssetsManager::getInstance()->getSassCommonURL('skins/oasis/css/modules/SpecialAllpages.scss'));
 		}
 
-		// Display Control Center Header on certain special pages
-		if (!empty($wgEnableAdminDashboardExt) && AdminDashboardLogic::displayAdminDashboard($this->app, $wgTitle)) {
-			$this->headerModuleName = null;
-			$this->wgSuppressAds = true;
-			$this->displayAdminDashboard = true;
-			$this->displayAdminDashboardChromedArticle = ($wgTitle->getText() != Title::newFromText("AdminDashboard", NS_SPECIAL)->getText());
-		} else {
-			$this->displayAdminDashboard = false;
-			$this->displayAdminDashboardChromedArticle = false;
-		}
-
 		// Forum Extension
 		if (!empty($this->wg->EnableForumExt) && !empty($this->wg->IsForum)) {
 			$this->wg->SuppressPageHeader = true;
@@ -514,7 +483,7 @@ class BodyController extends WikiaController {
 					break;
 			}
 		}
-		
+
 		// bugid-70243: optionally hide navigation h1s for SEO
 		$this->setVal( 'displayHeader', !$this->wg->HideNavigationHeaders );
 

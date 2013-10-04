@@ -37,7 +37,7 @@ class GameGuidesModel{
 	 * @see wfPaginateArray
 	 */
 	public function getWikisList( $limit = null, $batch = 1 ){
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$cacheKey = $this->generateCacheKey( __METHOD__ );
 		$games = $this->loadFromCache( $cacheKey );
@@ -68,16 +68,16 @@ class GameGuidesModel{
 					);
 				}
 			} else {
-				$this->app->wf->profileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				throw new WikiaException( 'WikiFactory variable \'' . self::WF_WIKI_RECOMMEND_VAR . '\' not found' );
 			}
 
 			$this->storeInCache( $cacheKey , $games );
 		}
 
-		$ret = $this->app->wf->paginateArray( $games, $limit, $batch );
+		$ret = wfPaginateArray( $games, $limit, $batch );
 
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $ret;
 	}
 
@@ -92,21 +92,20 @@ class GameGuidesModel{
 	 * ** string icon the icon ID to use for this category
 	 */
 	public function getWikiContents(){
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$cacheKey = $this->generateCacheKey( __METHOD__ );
 		$ret = $this->loadFromCache( $cacheKey );
 
 		if ( empty( $ret ) ) {
 			$ret = Array();
-			$this->app->wf->loadExtensionMessages( 'GameGuides' );
 
-			$searchTitle = F::build( 'Title', array( 'Search', NS_SPECIAL ), 'newFromText' );
+			$searchTitle = Title::newFromText( 'Search', NS_SPECIAL );
 			$ret[ 'searchURL' ] = $searchTitle->getLocalUrl( array( 'useskin' => GameGuidesController::SKIN_NAME ) );
 			$ret[ 'entries' ] = Array();
 
 			$entries = array_filter(
-				explode( "\n", strip_tags( str_replace( array( '<br>', '<br/>', '<br />' ), "\n" , $this->app->wf->msgForContent( 'wikiagameguides-contents' ) ) ) ),
+				explode( "\n", strip_tags( str_replace( array( '<br>', '<br/>', '<br />' ), "\n" , wfMsgForContent( 'wikiagameguides-contents' ) ) ) ),
 				array( __CLASS__, 'verifyElement')
 			);
 
@@ -124,7 +123,7 @@ class GameGuidesModel{
 			$this->storeInCache($cacheKey , $ret);
 		}
 
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $ret;
 	}
 
@@ -142,10 +141,10 @@ class GameGuidesModel{
 	 * @see wfPaginateArray
 	 */
 	public function getCategoryContents( $categoryName, $limit = null, $batch = 1, $totalLimit = self::CATEGORY_RESULTS_LIMIT ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$categoryName = trim( $categoryName );
-		$category = F::build( 'Category', array( $categoryName ), 'newFromName' );
+		$category = Category::newFromName( $categoryName );
 
 		if ( $category ) {
 			$cacheKey = $this->generateCacheKey(
@@ -162,20 +161,20 @@ class GameGuidesModel{
 				foreach( $titles as $title ) {
 					$contents[] = array(
 						'title' => $title->getText(),
-						'url' => $title->getLocalUrl( array( 'useskin' => 'wikiaapp' ) )
+						'url' => $title->getLocalUrl( array( 'useskin' => GameGuidesController::SKIN_NAME ) )
 					);
 				}
 
 				$this->storeInCache( $cacheKey , $contents );
 			}
 		} else {
-			$this->app->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			throw new WikiaException( "No data for '{$categoryName}'" );
 		}
 
-		$ret = $this->app->wf->paginateArray( $contents, $limit, $batch );
+		$ret = wfpaginateArray( $contents, $limit, $batch );
 
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $ret;
 	}
 
@@ -190,13 +189,13 @@ class GameGuidesModel{
 	 * @see WikiaSearch
 	 */
 	public function getSearchResults( $term, $totalLimit = self::SEARCH_RESULTS_LIMIT ){
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$term = trim( $term );
 		$ret = array();
 
 		if ( !empty( $this->app->wg->EnableWikiaSearchExt ) && !empty( $term ) ) {
-			$this->app->wf->loadExtensionMessages( 'GameGuides' );
+			wfloadExtensionMessages( 'GameGuides' );
 
 			$cacheKey = $this->generateCacheKey(
 				__METHOD__ .
@@ -207,32 +206,23 @@ class GameGuidesModel{
 			$ret = $this->loadFromCache( $cacheKey );
 
 			if ( empty( $ret ) ) {
-				$wikiaSearch = F::build('WikiaSearch');
-				$wikiaSearchConfig = F::build('WikiaSearchConfig');
-				$wikiaSearchConfig	->setNamespaces	( array( NS_MAIN ) )
-									->setQuery		( $term )
-									->setLength		( $totalLimit )
-									->setCityId		( $this->app->wg->CityId );
 
-				$resultSet = $wikiaSearch->doSearch( $wikiaSearchConfig );
+				$resultSet = $this->getResultSet( $term, $totalLimit );
 
 				$ret['textResults'] = array();
 				$count = 0;
 
 				if ( $resultSet->hasResults() ) {
 					$textResults = array();
-
-					while ( $result = $resultSet->next() ) {
-						$title = $result->getTitleObject();
-
-						if ( $title instanceof Title ) {
+					$mwService = new Wikia\Search\MediaWikiService;
+					foreach ( $resultSet as $result ) {
+						try {
 							$textResults[] = array(
-								'textForm' => $result->getTitle(),
-								'urlForm' => $title->getLocalUrl( array( 'useskin' => 'wikiaapp') )
-							);
-
+									'textForm' => $result->getTitle(),
+									'urlForm' => $mwService->getLocalUrlForPageId( $result['pageid'], array( 'useskin' => GameGuidesController::SKIN_NAME ) )
+									);
 							$count++;
-						}
+						} catch ( Exception $e ) {} // result is probably stale/deleted
 					}
 
 					$ret['textResults'] = $textResults;
@@ -247,8 +237,23 @@ class GameGuidesModel{
 		return $ret;
 	}
 
+	/**
+	 * Perform a search query against NS_MAIN given a term and total limit
+	 * @param string $term
+	 * @param int $limit
+	 */
+	public function getResultSet( $term, $totalLimit ) {
+		$wikiaSearchConfig = new Wikia\Search\Config();
+		$wikiaSearchConfig	->setNamespaces	( array( NS_MAIN ) )
+							->setQuery		( $term )
+							->setLimit		( $totalLimit );
+
+		$wikiaSearch = (new Wikia\Search\QueryService\Factory)->getFromConfig( $wikiaSearchConfig );
+		return $wikiaSearch->search( $wikiaSearchConfig );
+	}
+
 	private function generateCacheKey( $token ){
-		return $this->app->wf->memcKey( $token, GameGuidesController::API_VERSION . '.' . GameGuidesController::API_REVISION . '.' . GameGuidesController::API_MINOR_REVISION );
+		return wfMemcKey( $token, GameGuidesController::API_VERSION . '.' . GameGuidesController::API_REVISION . '.' . GameGuidesController::API_MINOR_REVISION );
 	}
 
 	private function loadFromCache( $key ){

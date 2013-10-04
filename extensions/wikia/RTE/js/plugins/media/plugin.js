@@ -76,29 +76,60 @@ CKEDITOR.plugins.add('rte-media',
 		// setup overlay
 		var msgs = RTE.getInstance().lang.media;
 
+		var getTrackingCategory = function( node ) {
+			var type;
+
+			switch( node.attr( 'type' ) ) {
+				case 'image':
+				case 'image-placeholder': {
+					type = node.hasClass( 'video' ) ? 'vet' : 'photo-tool';
+					break;
+				}
+				case 'image-gallery': {
+					type = ( node.hasClass( 'image-slideshow' ) ?
+							'slideshow' : node.hasClass( 'image-gallery-slider' ) ?
+							'slider' : 'gallery' ) + '-tool';
+					break;
+				}
+			}
+
+			return type;
+		};
 
 		var standardButtons = [
 			{
 				label: msgs['edit'],
 				'class': 'RTEMediaOverlayEdit',
 				callback: function(node) {
-					var type = self.getTrackingType(node);
+					var category = getTrackingCategory( node );
+
+					if ( category ) {
+						WikiaEditor.track({
+							category: category,
+							label: 'modify'
+						});
+					}
 
 					node.trigger('edit');
-
-					// tracking
-					RTE.track(type, 'menu', 'edit');
 				}
 			},
 			{
 				label: msgs['delete'],
 				'class': 'RTEMediaOverlayDelete',
 				callback: function(node) {
-					var type = self.getTrackingType(node);
+					var msgMediaType = self.getMediaTypeForMsg(node);
+					var category = getTrackingCategory( node );
+
+					if ( category ) {
+						WikiaEditor.track({
+							category: category,
+							label: 'remove'
+						});
+					}
 
 					// show modal version of confirm()
-					var title = RTE.getInstance().lang[type].confirmDeleteTitle;
-					var msg = RTE.getInstance().lang[type].confirmDelete;
+					var title = RTE.getInstance().lang[msgMediaType].confirmDeleteTitle;
+					var msg = RTE.getInstance().lang[msgMediaType].confirmDelete;
 
 					RTE.tools.confirm(title, msg, function() {
 						RTE.tools.removeElement(node);
@@ -108,10 +139,10 @@ CKEDITOR.plugins.add('rte-media',
 						// Resize editor area
 						wikiaEditor.fire('editorResize');
 						wikiaEditor.editorFocus();
-					});
 
-					// tracking
-					RTE.track(type, 'menu', 'delete');
+					}).data( 'tracking', {
+						category: category
+					});
 				}
 			}
 		];
@@ -121,11 +152,6 @@ CKEDITOR.plugins.add('rte-media',
 
 		// unbind previous events
 		media.unbind('.media');
-
-		// track when drag&drop starts
-		media.bind('dragged.media', function(ev) {
-			 RTE.track(self.getTrackingType($(this)), 'event', 'move');
-		});
 
 		// make media not selecteable
 		RTE.tools.unselectable(media);
@@ -215,24 +241,6 @@ CKEDITOR.plugins.add('rte-media',
 
 			// re-align image in editor
 			target.removeClass('alignNone alignLeft alignRight').addClass(newAlign == 'left' ? 'alignLeft' : 'alignRight');
-
-			// tracking
-			var type = target.attr('type');
-
-			if (type == 'image-placeholder') {
-				type = 'imagePlaceholder';
-			}
-
-			if (type == 'video-placeholder') {
-				type = 'videoPlaceholder';
-			}
-
-			RTE.track(
-				type,
-				'event',
-				'switchSide',
-				(newAlign == 'right') ? 'l2r' : 'r2l'
-			);
 		});
 
 		// update position of image caption ("..." icon)
@@ -240,7 +248,7 @@ CKEDITOR.plugins.add('rte-media',
 		mediaWithCaption.each(function() {
 			$(this).css('backgroundPosition', '5px ' + parseInt($(this).attr('height') + 10)  + 'px');
 		});
-		
+
 		// images / videos / poll specific setup
 		var image = media.filter('img.image');
 		self.setupImage(image);
@@ -255,9 +263,9 @@ CKEDITOR.plugins.add('rte-media',
 		if (RTE.config.disableDragDrop) {
 			RTE.tools.disableDragDrop(media);
 		}
-		
-		// Modifications to the DOM will register as content changes. Reset the dirty state.		
-		editor.resetDirty();		
+
+		// Modifications to the DOM will register as content changes. Reset the dirty state.
+		editor.resetDirty();
 	},
 
 	// image specific setup
@@ -337,7 +345,7 @@ CKEDITOR.plugins.add('rte-media',
 
 			self.setupPlaceholder(target);
 		});
-		
+
 		// setup image / video placeholder separatelly
 		var images = placeholder.filter('.image-placeholder');
 		images.attr('title', RTE.getInstance().lang.imagePlaceholder.tooltip);
@@ -365,8 +373,8 @@ CKEDITOR.plugins.add('rte-media',
 		}
 	},
 
-	// get type name for tracking code
-	getTrackingType: function(media) {
+	// maps media type to messages' group name
+	getMediaTypeForMsg: function(media) {
 		var type;
 
 		switch($(media).attr('type')) {
@@ -419,8 +427,6 @@ RTE.mediaEditor = {
 			wikitext: wikitext
 		};
 
-		RTE.getInstanceEditor().fire('editorAddImage');
-
 		this._add(wikitext, data);
 	},
 
@@ -434,8 +440,6 @@ RTE.mediaEditor = {
 			params: params,
 			wikitext: wikitext
 		};
-
-		RTE.getInstanceEditor().fire('editorAddVideo');
 
 		this._add(wikitext, data);
 	},
@@ -463,16 +467,12 @@ RTE.mediaEditor = {
 			// insert new media (don't reinitialize all placeholders)
 			RTE.tools.insertElement(newMedia, true);
 
-			// for MiniEditor, resize the editor after adding an image.
-			RTE.getInstanceEditor().fire('editorResize');
-
 			// setup added media
 			self.plugin.setupMedia(newMedia);
 
-			editor.focus();
+			RTE.getInstanceEditor().fire('editorAddMedia');
 
-			// tracking
-			RTE.track(self.plugin.getTrackingType(newMedia), 'event', 'add');
+			editor.focus();
 		});
 	},
 
@@ -495,9 +495,6 @@ RTE.mediaEditor = {
 			self.plugin.setupMedia(newMedia);
 
 			editor.focus();
-
-			// tracking
-			RTE.track(self.plugin.getTrackingType(newMedia), 'event', 'modified');
 		});
 	}
 };

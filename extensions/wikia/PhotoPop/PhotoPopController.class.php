@@ -14,7 +14,7 @@ class PhotoPopController extends WikiaController {
 	private $isJSON;
 
 	public function init(){
-		$this->model = F::build( 'PhotoPopModel' );
+		$this->model = (new PhotoPopModel);
 		$this->isJSON = $this->response->getFormat() == WikiaResponse::FORMAT_JSON;
 	}
 
@@ -25,11 +25,11 @@ class PhotoPopController extends WikiaController {
 	 * @see PhotoPop_jsonp.php
 	 */
 	public function jsonp(){
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$this->response->setContentType( 'text/javascript' );
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	public function index() {
@@ -39,15 +39,12 @@ class PhotoPopController extends WikiaController {
 		//$this->response->setVal( 'appCacheManifestPath', self::CACHE_MANIFEST_PATH . "&cb={$this->wg->CacheBuster}" );//$this->wg->StyleVersion
 
 		//Minimize the output size, we don't need all the global variables being exported in MW
-		$jsMsg = F::build('JSMessages');
+		$jsMsg = new JSMessages();
 		$jsMsg->enqueuePackage( self::JS_MESSAGES_PACKAGE, JSMessages::INLINE );
 		$jsVars = array(
 			'wgCacheBuster' => $this->wg->CacheBuster,
 			'wgMessages' => $jsMsg->getPackages( array ( self::JS_MESSAGES_PACKAGE ) )
 		);
-
-		//getting WikiaTracker global JS vars
-		F::build( 'WikiaTrackerController' )->onMakeGlobalVariablesScript( $jsVars );
 
 		$this->response->setVal( 'globalVariablesScript', Skin::makeVariablesScript($jsVars) );
 		$this->response->setVal( 'scripts', AssetsManager::getInstance()->getGroupCommonURL( 'photopop' ) );
@@ -57,13 +54,13 @@ class PhotoPopController extends WikiaController {
 	}
 
 	public function listGames(){
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$callbackName = $this->request->getVal( 'callback' );
 
 
 		if ( empty( $callbackName ) && !$this->isJSON ) {
-			$this->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			throw new WikiaException( 'Missing parameter: callback' );
 		}
 
@@ -79,24 +76,24 @@ class PhotoPopController extends WikiaController {
 		} else {
 			$this->response->setVal( 'data', $result );
 		}
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	public function getData(){
 		$this->checkGameAllowed();
 
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$category = trim( $this->request->getVal( 'category' ) );
 		$callbackName = $this->request->getVal( 'callback' );
 
 		if ( empty( $category ) ) {
-			$this->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			throw new WikiaException( 'Missing parameter: category' );
 		}
 
 		if ( empty( $callbackName ) && !$this->isJSON ) {
-			$this->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			throw new WikiaException( 'Missing parameter: callback' );
 		}
 
@@ -112,7 +109,7 @@ class PhotoPopController extends WikiaController {
 		} else {
 			$this->response->setVal( 'data', $result );
 		}
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	private function checkGameAllowed(){

@@ -38,6 +38,14 @@ $messages['aeb'] = array(
 	'communitymessages-notice-msg' => "[[Special:WikiActivity|el Messages mte3 el communauté ss'artelhom mise-à-jour]].",
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'communitymessages-desc' => 'ملحق مساعد لرسائل المجتمع',
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|تم تحديث رسائل المجتمع]].',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -63,11 +71,12 @@ $messages['bar'] = array(
 );
 
 /** Breton (brezhoneg)
+ * @author Fohanno
  * @author Y-M D
  */
 $messages['br'] = array(
 	'communitymessages-desc' => 'Astenn skoazell evit kemennadennoù ar gumuniezh',
-	'communitymessages-notice-msg' => '[[Special:ActivityFeed|Hizivaet eo bet kemennadennoù ar gumuniezh]].', # Fuzzy
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|Hizivaet eo bet kemennadennoù ar gumuniezh]].',
 );
 
 /** Catalan (català)
@@ -131,6 +140,14 @@ $messages['fi'] = array(
 	'communitymessages-notice-msg' => '[[Special:WikiActivity|Yhteisöviestejä on päivitetty]].',
 );
 
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'communitymessages-desc' => 'Hjálpartól (víðkan) til felagskapsboð',
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|Felagsskapsboðini eru dagførd]].',
+);
+
 /** French (français)
  * @author IAlex
  * @author Wyz
@@ -149,10 +166,11 @@ $messages['gl'] = array(
 );
 
 /** Hebrew (עברית)
+ * @author Inkbug
  */
 $messages['he'] = array(
 	'communitymessages-desc' => 'הרחבת סיוע ל־Community Messages (הודעות קהילה)',
-	'communitymessages-notice-msg' => '[[Special:ActivityFeed|Community Messages עודכנה]].', # Fuzzy
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|הודעות הקהילה עודכנו]].',
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -181,11 +199,12 @@ $messages['ia'] = array(
 );
 
 /** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
  * @author Farras
  */
 $messages['id'] = array(
 	'communitymessages-desc' => 'Ekstensi pembantu untuk Pesan Komunitas',
-	'communitymessages-notice-msg' => '[[Special:WikiActivity|Community Messages has been updated]].', # Fuzzy
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|Pesan komunitas telah diperbarui]].',
 );
 
 /** Italian (italiano)
@@ -244,7 +263,7 @@ $messages['nl'] = array(
  */
 $messages['oc'] = array(
 	'communitymessages-desc' => "Extension d'ajuda pels messatges a la comunautat",
-	'communitymessages-notice-msg' => '[[Special:ActivityFeed|Los messatges a la comunautat son estats meses a jorn]].', # Fuzzy
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|Los messatges a la comunautat son estats meses a jorn]].',
 );
 
 /** Polish (polski)

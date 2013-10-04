@@ -3,17 +3,16 @@
  *
  * @author Artur Klajnerok<arturk(at)wikia-inc.com>
  **/
+require(['throbber', 'topbar', 'track', 'wikia.nirvana', 'wikia.window'], function(throbber, topbar, track, nirvana, window){
 
-require(['throbber', 'events', 'topbar', 'track'], function(throbber, events, topbar, track){
-
-    var d = document,
+    var d = window.document,
         wkSrhInp = d.getElementById('wkSrhInp'),
         wkMainCnt = d.getElementById('wkMainCnt'),
         wkResCntAct = d.getElementById('wkResCntAct'),
         wkResultUl = d.getElementById('wkResultUl'),
         wkResultNext = d.getElementById('wkResultNext'),
         wkResultPrev = d.getElementById('wkResultPrev'),
-        clickEvent = events.click,
+        clickEvent = 'click',
         firstPage;
 
     if(wkResultUl){
@@ -67,7 +66,7 @@ require(['throbber', 'events', 'topbar', 'track'], function(throbber, events, to
 				label: forward ? 'next' : 'previous'
 			});
 
-            $.nirvana.sendRequest({
+            nirvana.sendRequest({
 				controller: 'WikiaSearchAjaxController',
 				method: 'getNextResults',
 				format: 'json',
@@ -76,8 +75,9 @@ require(['throbber', 'events', 'topbar', 'track'], function(throbber, events, to
 					useskin: skin,
 					query: encodeURIComponent(query),
 					page: pageIndex
-				},
-				callback: function(result){
+				}
+            }).done(
+				function(result){
 					var finished;
 
 					currentPage = pageIndex;
@@ -100,7 +100,7 @@ require(['throbber', 'events', 'topbar', 'track'], function(throbber, events, to
 
 					window.scrollTo(0, wkMainCnt.offsetTop);
 				}
-            });
+			);
         }
     }
 

@@ -86,6 +86,10 @@ class Title {
 	// @}
 
 
+	/* Wikia change - begin - @author: wladek */
+	var $mTouchedCached = null;
+	/* Wikia change - end */
+
 	/**
 	 * Constructor
 	 */
@@ -205,12 +209,19 @@ class Title {
 	 * @return Title the new object, or NULL on an error
 	 */
 	public static function newFromID( $id, $flags = 0 ) {
-		$db = ( $flags & self::GAID_FOR_UPDATE ) ? wfGetDB( DB_MASTER ) : wfGetDB( DB_SLAVE );
-		$row = $db->selectRow( 'page', '*', array( 'page_id' => $id ), __METHOD__ );
-		if ( $row !== false ) {
-			$title = Title::newFromRow( $row );
-		} else {
+		/* wikia change here */
+		if ( $id == 0 ) {
 			$title = null;
+		} 
+		/* </wikia> */
+		else {
+			$db = ( $flags & self::GAID_FOR_UPDATE ) ? wfGetDB( DB_MASTER ) : wfGetDB( DB_SLAVE );
+			$row = $db->selectRow( 'page', '*', array( 'page_id' => $id ), __METHOD__ );
+			if ( $row !== false ) {
+				$title = Title::newFromRow( $row );
+			} else {
+				$title = null;
+			}
 		}
 		return $title;
 	}
@@ -273,6 +284,10 @@ class Title {
 				$this->mRedirect = (bool)$row->page_is_redirect;
 			if ( isset( $row->page_latest ) )
 				$this->mLatestID = (int)$row->page_latest;
+			/* Wikia change - begin - @author: wladek */
+			if ( isset( $row->page_touched ) )
+				$this->mTouchedCached = (int)$row->page_touched;
+			/* Wikia change - end */
 		} else { // page not found
 			$this->mArticleID = 0;
 			$this->mLength = 0;
@@ -1991,6 +2006,25 @@ class Title {
 			} else {
 				$blockExpiry = $wgLang->timeanddate( wfTimestamp( TS_MW, $blockExpiry ), true );
 			}
+
+			# Wikia change - begin
+			# @author macbre (BAC-535)
+			$blocker = $block->getBlocker();
+			if ($blocker instanceof User) {
+				// user groups to be displayed instead of user name
+				$groups = [
+					'staff',
+					'vstf',
+				];
+				$blockerGroups = $blocker->getEffectiveGroups();
+
+				foreach($groups as $group) {
+					if (in_array($group, $blockerGroups)) {
+						$link = wfMessage("group-$group")->plain();
+					}
+				}
+			}
+			# Wikia change - end
 
 			$intended = strval( $user->mBlock->getTarget() );
 
@@ -3885,18 +3919,23 @@ class Title {
 	 * @return Array of parents in the form:
 	 *	  $parent => $currentarticle
 	 */
-	public function getParentCategories() {
+	/* Wikia changes start */
+	/* Wikia added possibility to use master */
+	public function getParentCategories( $useMaster = false ) {
+	/* Wikia changes end */
 		global $wgContLang;
 
 		$data = array();
 
 		$titleKey = $this->getArticleId();
-
+		
 		if ( $titleKey === 0 ) {
 			return $data;
 		}
 
-		$dbr = wfGetDB( DB_SLAVE );
+		/* Wikia changes start */
+		$dbr = $useMaster === false ? wfGetDB( DB_SLAVE ) : wfGetDB( DB_MASTER );
+		/* Wikia changes end */
 
 		$res = $dbr->select( 'categorylinks', '*',
 			array(
@@ -4263,7 +4302,9 @@ class Title {
 		}
 
 		list( $name, $lang ) = MessageCache::singleton()->figureMessage( $wgContLang->lcfirst( $this->getText() ) );
-		$message = wfMessage( $name )->inLanguage( $lang )->useDatabase( false );
+		/* Wikia change - skip fixing whitespaces, want to preserve nbsp's */
+		$message = wfMessage( $name )->inLanguage( $lang )->useDatabase( false )->fixWhitespace( false );
+		/* Wikia change end */
 
 		if ( $message->exists() ) {
 			return $message->plain();
@@ -4294,6 +4335,7 @@ class Title {
 		$wgMemc->set( wfMemcKey( "page_touched", implode( "_", $this->pageCond( ) ) ),
 			$dbw->timestamp(),
 			60 );
+		$this->mTouchedCached = null;
 		# end wikia change
 
 		HTMLFileCache::clearFileCache( $this );
@@ -4512,7 +4554,7 @@ class Title {
 	 * $wgLang (such as special pages, which are in the user language).
 	 *
 	 * @since 1.18
-	 * @return object Language
+	 * @return Language
 	 */
 	public function getPageLanguage() {
 		global $wgLang;
@@ -4533,5 +4575,19 @@ class Title {
 		// Hook at the end because we don't want to override the above stuff
 		wfRunHooks( 'PageContentLanguage', array( $this, &$pageLang, $wgLang ) );
 		return wfGetLangObj( $pageLang );
+	}
+
+	/**
+	 * Get the last touched timestamp (uses cache)
+	 *
+	 * @author Władysław Bodzek <wladek@wikia-inc.com>
+	 *
+	 * @return String last-touched timestamp
+	 */
+	public function getTouchedCached() {
+		if ( empty( $this->mTouchedCached ) ) {
+			$this->mTouchedCached = $this->getTouched();
+		}
+		return $this->mTouchedCached;
 	}
 }

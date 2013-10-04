@@ -6,7 +6,7 @@
  *
  * @example
  * //AMD
- * require(['log'], function (log) { log(123, log.levels.info, 'MyLogGroup'); });
+ * require(['wikia.log'], function (log) { log(123, log.levels.info, 'MyLogGroup'); });
  *
  * //JS Namespace
  * Wikia.log(123, Wikia.log.levels.info, 'MyLogGroup');
@@ -14,6 +14,10 @@
  * //To allow the messages to be printed to the console add log_level=X to the
  * //URL querystring, where X is one of the values in the levels hash (either the hash key or it's value)
  * //e.g. http://glee.wikia.com/wiki/Rachel_Berry?log_level=info
+ * //e.g. http://glee.wikia.com/wiki/Rachel_Berry?log_level=info&log_group=MyLogGroup
+ *
+ * // The higher the log_level, the more messages will be logged.  If you want all messages,
+ * // use ?log_level=10 or ?log_level=trace_l3 (they are the same)
  *
  * @see  printMessage for a list of parameters and their description
  */
@@ -29,8 +33,8 @@
 		error: 6,
 		debug: 7,
 		trace: 8,
-		trace_l2: 9,
-		trace_l3: 10
+		trace_l2: 9, // trace level 2
+		trace_l3: 10 // trace level 3
 	};
 
 	function logger() {
@@ -68,7 +72,7 @@
 		 * @param {Integer} level The log level
 		 * @param {String} group The log group
 		 */
-		function printMessage(msg, level, group) {
+		function printMessage(msg, group) {
 			if (console !== undef) {
 				if (group) {
 					//forcing space as IE doesn't
@@ -125,7 +129,7 @@
 				return false;
 			}
 
-			printMessage(msg, level, group);
+			printMessage(msg, group);
 			return true;
 		}
 
@@ -144,7 +148,7 @@
 				y,
 				g;
 
-			outputLevel = qs.getVal('log_level') || cookies.get('log_level') || outputLevel;
+			outputLevel = qs.getVal('log_level') || (cookies && cookies.get('log_level')) || outputLevel;
 
 			if (levels.hasOwnProperty(outputLevel)) {
 				outputLevel = levels[outputLevel];
@@ -152,7 +156,7 @@
 				outputLevel = parseInt(outputLevel, 10);
 			}
 
-			selectedGroups = (qs.getVal('log_group') || cookies.get('log_group') || '').replace(' ', '').replace('|', ',').split(',');
+			selectedGroups = (qs.getVal('log_group') || (cookies && cookies.get('log_group')) || '').replace(' ', '').replace('|', ',').split(',');
 			groupsString = selectedGroups.join(', ');
 
 			for (x = 0, y = selectedGroups.length; x < y; x++) {
@@ -165,14 +169,14 @@
 			}
 
 			if (outputLevel > 0) {
-				printMessage('initialized at level ' + outputLevel + ((groupsCount > 0) ? ' for ' + groupsString : ''), 'info', 'Wikia.log');
+				printMessage('initialized at level ' + outputLevel + ((groupsCount > 0) ? ' for ' + groupsString : ''), 'Wikia.log');
 				enabled = true;
 			}
 		}
 
 		//init
 		if (context.define && context.define.amd) {
-			context.require(['wikia.querystring', 'wikia.cookies'], init);
+			context.require(['wikia.querystring', require.optional('wikia.cookies')], init);
 		} else {
 			init(context.Wikia.Querystring, context.Wikia.Cookies);
 		}

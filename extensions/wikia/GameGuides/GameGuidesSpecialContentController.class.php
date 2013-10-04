@@ -2,7 +2,6 @@
 
 class GameGuidesSpecialContentController extends WikiaSpecialPageController {
 
-	const WIKI_FACTORY_VARIABLE_NAME = 'wgWikiaGameGuidesContent';
 	const TEMPLATE_ENGINE = WikiaResponse::TEMPLATE_ENGINE_MUSTACHE;
 
 	public function __construct() {
@@ -17,7 +16,7 @@ class GameGuidesSpecialContentController extends WikiaSpecialPageController {
 
 		$this->response->setTemplateEngine( self::TEMPLATE_ENGINE );
 
-		$title = $this->wf->Msg( 'wikiagameguides-content-title' );
+		$title = wfMsg( 'wikiagameguides-content-title' );
 		$this->wg->Out->setPageTitle( $title );
 		$this->wg->Out->setHTMLTitle( $title );
 
@@ -48,22 +47,22 @@ class GameGuidesSpecialContentController extends WikiaSpecialPageController {
 			$this->wg->Out->addScriptFile( $s );
 		}
 
-		F::build( 'JSMessages' )->enqueuePackage( 'GameGuidesContentMsg', JSMessages::INLINE );
+		JSMessages::enqueuePackage( 'GameGuidesContentMsg', JSMessages::INLINE );
 
 		$this->response->setVal( 'descriptions', [
-			$this->wf->Msg( 'wikiagameguides-content-description-categories' ),
-			$this->wf->Msg( 'wikiagameguides-content-description-tag' ),
-			$this->wf->Msg( 'wikiagameguides-content-description-organize' ),
-			$this->wf->Msg( 'wikiagameguides-content-description-no-tag' )
+			wfMsg( 'wikiagameguides-content-description-categories' ),
+			wfMsg( 'wikiagameguides-content-description-tag' ),
+			wfMsg( 'wikiagameguides-content-description-organize' ),
+			wfMsg( 'wikiagameguides-content-description-no-tag' )
 		] );
 
-		$this->response->setVal( 'addTag', $this->wf->Msg( 'wikiagameguides-content-add-tag' ) );
-		$this->response->setVal( 'addCategory', $this->wf->Msg( 'wikiagameguides-content-add-category' ) );
-		$this->response->setVal( 'save', $this->wf->Msg( 'wikiagameguides-content-save' ) );
+		$this->response->setVal( 'addTag', wfMsg( 'wikiagameguides-content-add-tag' ) );
+		$this->response->setVal( 'addCategory', wfMsg( 'wikiagameguides-content-add-category' ) );
+		$this->response->setVal( 'save', wfMsg( 'wikiagameguides-content-save' ) );
 
-		$this->response->setVal( 'tag_placeholder', $this->wf->Msg( 'wikiagameguides-content-tag' ) );
-		$this->response->setVal( 'category_placeholder', $this->wf->Msg( 'wikiagameguides-content-category' ) );
-		$this->response->setVal( 'name_placeholder', $this->wf->Msg( 'wikiagameguides-content-name' ) );
+		$this->response->setVal( 'tag_placeholder', wfMsg( 'wikiagameguides-content-tag' ) );
+		$this->response->setVal( 'category_placeholder', wfMsg( 'wikiagameguides-content-category' ) );
+		$this->response->setVal( 'name_placeholder', wfMsg( 'wikiagameguides-content-name' ) );
 
 
 		$categoryTemplate = $this->sendSelfRequest( 'category' )->toString();
@@ -74,7 +73,7 @@ class GameGuidesSpecialContentController extends WikiaSpecialPageController {
 			'tagTemplate' => $tagTemplate
 		]);
 
-		$tags = WikiFactory::getVarValueByName( self::WIKI_FACTORY_VARIABLE_NAME, $this->wg->CityId );
+		$tags = $this->wg->WikiaGameGuidesContent;
 
 		if ( !empty( $tags ) ) {
 			$list = '';
@@ -108,27 +107,42 @@ class GameGuidesSpecialContentController extends WikiaSpecialPageController {
 	public function tag() {
 		$this->response->setTemplateEngine( self::TEMPLATE_ENGINE );
 
-		$id = $this->request->getVal( 'image_id' );
+		$id = $this->request->getVal( 'image_id', 0 );
 
 		$this->response->setVal( 'value', $this->request->getVal( 'value' ), '' );
-		$this->response->setVal( 'image_id', $id, 0 );
+		$this->response->setVal( 'image_id', $id );
 		$this->response->setVal( 'image_url', $this->getImage( $id ) );
+		if ( $id != 0 ) {
+			$this->response->setVal( 'image_set', true );
+		}
 
-		$this->response->setVal( 'tag_placeholder', $this->wf->Msg( 'wikiagameguides-content-tag' ) );
+		$this->response->setVal( 'tag_placeholder', wfMsg( 'wikiagameguides-content-tag' ) );
 	}
 
 	public function category() {
 		$this->response->setTemplateEngine( self::TEMPLATE_ENGINE );
 
-		$id = $this->request->getVal( 'image_id' );
+		$id = $this->request->getVal( 'image_id', 0 );
+		$category = $this->request->getVal( 'category_value', '' );
 
-		$this->response->setVal( 'category_value', $this->request->getVal('category_value'), '');
-		$this->response->setVal( 'name_value', $this->request->getVal('name_value'), '');
-		$this->response->setVal( 'image_id', $id, 0 );
+		$this->response->setVal( 'category_value', $category );
+		$this->response->setVal( 'name_value', $this->request->getVal('name_value'), '' );
+		$this->response->setVal( 'image_id', $id );
+
+
+		if ( $id == 0 && $category != '' ) {
+			$cat = Title::newFromText( $category, NS_CATEGORY );
+
+			if ( $cat instanceof Title ) {
+				$id = $cat->getArticleID();
+			}
+		} else {
+			$this->response->setVal( 'image_set', true );
+		}
+
 		$this->response->setVal( 'image_url', $this->getImage( $id ) );
-
-		$this->response->setVal( 'category_placeholder', $this->wf->Msg( 'wikiagameguides-content-category' ) );
-		$this->response->setVal( 'name_placeholder', $this->wf->Msg( 'wikiagameguides-content-name' ) );
+		$this->response->setVal( 'category_placeholder', wfMsg( 'wikiagameguides-content-category' ) );
+		$this->response->setVal( 'name_placeholder', wfMsg( 'wikiagameguides-content-name' ) );
 	}
 
 	public function save(){
@@ -171,11 +185,11 @@ class GameGuidesSpecialContentController extends WikiaSpecialPageController {
 			}
 		}
 
-		$status = WikiFactory::setVarByName( self::WIKI_FACTORY_VARIABLE_NAME, $this->wg->CityId, $tags );
+		$status = WikiFactory::setVarByName( 'wgWikiaGameGuidesContent', $this->wg->CityId, $tags );
 		$this->response->setVal( 'status', $status );
 
 		if ( $status ) {
-			$this->wf->RunHooks( 'GameGuidesContentSave' );
+			wfRunHooks( 'GameGuidesContentSave' );
 		}
 
 		return true;

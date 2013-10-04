@@ -61,12 +61,17 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation)
  * @author SPQRobin
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
+	'app-loading' => '{{Identical|Loading}}',
+	'app-tab-search' => '{{Identical|Search}}',
 	'app-tab-sotd' => 'SotD = Song of the Day',
+	'app-async-error-title' => '{{Identical|Oops}}',
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author Mutarjem horr
  */
 $messages['ar'] = array(
@@ -89,9 +94,19 @@ $messages['ar'] = array(
 	'login-username-hint' => 'اسم المستخدم',
 	'login-password-hint' => 'كلمة المرور',
 	'login-submit-button' => 'تسجيل الدخول',
+	'about-heading' => 'ويكي الكلمات',
 	'about-credits' => 'من %s',
 	'about-heading-tips' => 'أبحث',
+	'about-tips-0' => 'ابدأ بكتابة اسم فنان، سوف يكتمل الاسم كلما تكتب.',
+	'about-tips-1' => 'الصور على الشاشة الرئيسية هي أفضل 9 أغاني في آي تيونز حاليا.',
+	'about-heading-licensing' => 'حقوق النشر',
+	'about-licensing-0' => 'هذا التطبيق قانوني مئة بالمئة. تدفع الإتاوات إلى أصحاب حقوق الأغاني من خلال غرايسنوت - تماما مثل موقع ويكي الكلمات.',
+	'about-heading-feedback' => 'ملاحظات',
 	'about-feedback-0' => 'تريد أن تقول لنا شيئا عن التطبيق؟ أرسل إلي بريداً إلكترونياً: %s',
+	'about-heading-rate' => 'قيم هذا التطبيق من فضلك!',
+	'about-rate-0-android' => 'إذا عجبك هذا التطبيق، الرجاء تقييمه بخمسة نجون في "سوق اندرويد"!',
+	'about-rate-0-ios' => 'إذا عجبك هذا التطبيق، الرجاء تقييمه بخمسة نجوم في متجر التطبيقات!',
+	'gracenote-takedown' => 'نحن آسفون، لسوء الحظ نحن لسنا مرخصين لعرض الكلمات الكاملة لهذه الأغنية في الوقت الحالي (هذا الأمر يحدث في 1% من الأغاني). الرجاء المحاولة مرة أخرى في الأسبوع القادم.',
 	'lyrics-artist-byline' => 'من %s',
 	'ringtone-matcher-by-song' => 'أرسل %s رنة إلى هاتفك الخلوي',
 );
@@ -158,6 +173,54 @@ $messages['br'] = array(
 	'lyrics-artist-byline' => 'gant %s',
 );
 
+/** Catalan (català)
+ * @author Alvaro Vidal-Abarca
+ * @author Roxas Nobody 15
+ */
+$messages['ca'] = array(
+	'app-loading' => "S'està carregant…",
+	'app-tab-search' => 'Cerca',
+	'app-tab-about' => 'Sobre',
+	'app-tab-browse' => 'A..Z',
+	'app-tab-sotd' => 'SotD',
+	'app-async-error-title' => 'Vaja!',
+	'app-async-error-message' => 'Problema amb la connexió temporal. Si us plau provar una altra vegada més tard.',
+	'app-nonetwork-dialog-title' => 'Xarxa no disponible',
+	'app-nonetwork-dialog-message' => 'No hi ha connexió de xarxa detectada',
+	'app-nonetwork-dialog-close-button' => 'OK',
+	'search-go' => 'Vés-hi!',
+	'search-hint-text' => "per exemple, \"John Lennon: Imagini's '",
+	'search-no-match-found' => "No s'han trobat coincidències.",
+	'search-no-match-found-query' => 'Cercat:%s',
+	'search-results-title' => 'Resultats de la recerca per: %s',
+	'login-label' => 'Inici de sessió a LyricWiki',
+	'login-username-hint' => "Nom d'usuari",
+	'login-password-hint' => 'Contrasenya',
+	'login-submit-button' => 'Inici de sessió',
+	'about-heading' => 'LyricWiki',
+	'about-credits' => 'per%s',
+	'about-heading-tips' => 'Cercant...',
+	'about-tips-0' => "Començar a escriure un nom d'artista per usar l'auto-completar a mesura que escriviu.",
+	'about-tips-1' => 'Les imatges a la pantalla principal, són les primeres 9 cançons a iTunes ara mateix.',
+	'about-heading-licensing' => "Drets d'autor",
+	'about-licensing-0' => "Aquesta aplicació és 100% legal. Drets d'autor són pagats per la cançó als titulars de drets a través de Gracenote - igual que en el LyricWiki lloc web.",
+	'about-heading-feedback' => 'Comentaris',
+	'about-feedback-0' => 'Vols dir-nos alguna cosa sobre l\'aplicació? Envia\'m un correu electrònic: <span class="notranslate" traduir="no">%s</span>',
+	'about-heading-rate' => "Valorar l'app si us plau!",
+	'about-rate-0-android' => "Si t'agrada aquest app, si us plau puntua amb 5 estrelles a l'Android Market!",
+	'about-rate-0-ios' => "Si t'agrada aquest app, si us plau puntua amb 5 estrelles a la Botiga App!",
+	'gracenote-takedown' => "Doh! Malauradament, no ens estan autoritzats per a mostrar la lletra completa d'aquesta cançó en el moment (això passa per menys de 1% de les nostres cançons). Si us plau provar una altra vegada la setmana que ve.",
+	'lyrics-artist-byline' => 'per%s',
+	'ringtone-matcher-by-song' => 'Enviar  %s  to de trucada per mòbil',
+);
+
+/** Chechen (нохчийн)
+ * @author Умар
+ */
+$messages['ce'] = array(
+	'login-username-hint' => 'Декъашхочун цӀе',
+);
+
 /** Czech (česky)
  * @author Reaperman
  */
@@ -196,6 +259,14 @@ $messages['cs'] = array(
 	'gracenote-takedown' => 'Hopla! Bohužel v tuto chívli nejsme licencováni k zobrazení tohoto textu (což se stává méně než 1 % našich písniček). Zkuste to prosím příští týden.',
 	'lyrics-artist-byline' => 'Interpret: %s',
 	'ringtone-matcher-by-song' => 'Nechte si zaslat vyzvánění %s na váš mobil',
+);
+
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'app-async-error-title' => 'Ŵps!',
+	'app-nonetwork-dialog-close-button' => 'Iawn',
 );
 
 /** German (Deutsch)
@@ -289,7 +360,7 @@ $messages['es'] = array(
 	'about-heading-licensing' => 'Copyrights',
 	'about-licensing-0' => 'Esta aplicación es 100% legal. A través de Gracenote se pagan las correspondientes regalías a los titulares de los derechos de las canciones - al igual que en la web de LyricWiki.',
 	'about-heading-feedback' => 'Sugerencias',
-	'about-feedback-0' => '¿Quiere darnos su opinión acerca de la aplicación? Envíenos un email: %s',
+	'about-feedback-0' => '¿Quieres darnos tu opinión sobre la aplicación? Envíanos un correo electrónico a: %s',
 	'about-heading-rate' => '¡Por favor, valore esta aplicación!',
 	'about-rate-0-android' => 'Si le gusta esta aplicación, por favor ¡dale 5 estrellas en el Android Market!',
 	'about-rate-0-ios' => '¡Si te gusta esta aplicación, por favor valórala con 5 estrellas en la Tienda de Aplicaciones!',
@@ -496,6 +567,20 @@ $messages['ia'] = array(
 	'ringtone-matcher-by-song' => 'Inviar le tono de appello %s a tu telephono',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
+ */
+$messages['id'] = array(
+	'app-loading' => 'Memuat...',
+	'app-nonetwork-dialog-title' => 'Jaringan tidak tersedia',
+	'search-results-title' => 'Hasil pencarian untuk: %s',
+	'about-tips-1' => 'Gambar pada layar utama adalah lagu 9 Teratas di iTunes saat ini.',
+	'about-licensing-0' => 'Aplikasi ini adalah 100% sah. Royalti dibayarkan kepada pemegang hak lagu melalui Gracenote - seperti pada situs web LyricWiki.',
+	'about-rate-0-android' => 'Jika Anda menyukai aplikasi ini, silakan menilai ini 5 bintang di Android Market!',
+	'gracenote-takedown' => 'Aduh! Sayang sekali, kami tidak diberi izin untuk menampilkan seluruh lirik untuk lagu ini pada saat ini (ini terjadi pada kurang dari 1% dari lagu-lagu kami). Mohon coba lagi minggu depan.',
+	'ringtone-matcher-by-song' => 'Kirimkan Nada Dering %s ke Ponsel Anda',
+);
+
 /** Ingush (ГӀалгӀай)
  * @author Sapral Mikail
  */
@@ -591,7 +676,7 @@ $messages['ko'] = array(
 	'app-nonetwork-dialog-title' => '네트워크 연결이 안되어있습니다.',
 	'app-nonetwork-dialog-message' => '네트워크 연결이 감지되지 않았습니다.',
 	'app-nonetwork-dialog-close-button' => '확인',
-	'search-go' => '검색',
+	'search-go' => '찾기!',
 	'search-hint-text' => "예 를 들면: 'John Lennon:Imagine'",
 	'search-no-match-found' => '매치가 없습니다',
 	'search-no-match-found-query' => '%s 찾음',
@@ -795,7 +880,7 @@ $messages['nl'] = array(
 	'about-heading-feedback' => 'Terugkoppeling',
 	'about-feedback-0' => 'Wilt u iets vertellen over het programma? E-mail naar %s',
 	'about-heading-rate' => 'Waardeer het programma alstublieft!',
-	'about-rate-0-android' => 'Als u dit programma leuk vindt, geef het dan alstublieft vijf sterren in de Android Market!',
+	'about-rate-0-android' => 'Als u dit programma leuk vindt, geef het dan vijf sterren in de Android Market!',
 	'about-rate-0-ios' => 'Geeft deze app 5 sterren in de App Store als die u bevalt!',
 	'gracenote-takedown' => 'Helaas mogen we de volledige tekst van dit liedje niet weergeven. Dit is het geval voor minder dan 1% van onze liedjes. Probeer het volgende week nog een keer.',
 	'lyrics-artist-byline' => 'door %s',
@@ -807,7 +892,7 @@ $messages['nl'] = array(
  */
 $messages['nl-informal'] = array(
 	'about-tips-0' => 'Voer de naam van een artiest in. Tijdens het typen wordt de naam automatisch aangevuld.',
-	'about-rate-0-android' => 'Als je dit programma leuk vindt, geef het dan alsjeblieft vijf sterren in de Android Market!',
+	'about-rate-0-android' => 'Als je dit programma leuk vindt, geef het dan vijf sterren in de Android Market!',
 	'ringtone-matcher-by-song' => 'De ringtone %s naar je telefoon sturen',
 );
 
@@ -860,6 +945,7 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
@@ -867,14 +953,14 @@ $messages['pms'] = array(
 	'app-tab-search' => 'Sërca',
 	'app-tab-about' => 'A propòsit',
 	'app-tab-browse' => 'A..Z',
-	'app-tab-sotd' => 'SotD (Canson dël Di)',
+	'app-tab-sotd' => 'Canson dël Di',
 	'app-async-error-title' => 'Contacc',
-	'app-async-error-message' => 'Problem temporani con la conession. Për piasì preuva torna pi tard.',
-	'app-nonetwork-dialog-title' => 'Rej pa disponìbila',
+	'app-async-error-message' => "Problema temporani con la conession. Për piasì, ch'a preuva torna pi tard.",
+	'app-nonetwork-dialog-title' => 'Rej nen disponìbil',
 	'app-nonetwork-dialog-message' => 'Gnun-a conession ëd rej trovà.',
 	'app-nonetwork-dialog-close-button' => 'Va bin',
 	'search-go' => 'Va!',
-	'search-hint-text' => "esempi 'John Lennon:Figura'",
+	'search-hint-text' => "për esempi 'John Lennon:Imagine'",
 	'search-no-match-found' => 'Gnun-a corispondensa trovà.',
 	'search-no-match-found-query' => 'Sercà: %s',
 	'search-results-title' => "Arzultà dl'arserca për: %s",
@@ -882,21 +968,21 @@ $messages['pms'] = array(
 	'login-username-hint' => 'Stranòm',
 	'login-password-hint' => 'Ciav',
 	'login-submit-button' => 'Intré ant ël sistema',
-	'about-heading' => 'LyricWiki',
+	'about-heading' => 'WikiParòle',
 	'about-credits' => 'da %s',
 	'about-heading-tips' => 'Sërché',
-	'about-tips-0' => "Ancamin-a a scrive un nòm d'artista për auto-completé comcom it të scrive.",
-	'about-tips-1' => 'Le figure dzor dzr la fnesta prinsipal a son le prime 9 canson dzor iTunes pròpi adess.',
+	'about-tips-0' => "Ch'a ancamin-a a scrive ël nòm ëd n'artista për ch'a sia completà an automàtich antramentre ch'a scriv.",
+	'about-tips-1' => 'Le figure an slë scren prinsipal a son le prime 9 canson dzora iTunes ant ës moment.',
 	'about-heading-licensing' => "Drit d'autor",
-	'about-licensing-0' => "Sta app a l'é legal al 100%. Ij drit a son pagà ai proprietari dij drit dla canson via Gracenote - pròpi com dzor ël sit web LyricWiki.",
-	'about-heading-feedback' => 'Artorn',
-	'about-feedback-0' => 'It veus-to dine quaicòs a propòdit dla app? Scrivme: %s',
-	'about-heading-rate' => 'Vàluta la app për piasì!',
-	'about-rate-0-android' => "S'at pias sta app, për piasì vàlutla 5 stèile ant ël Market Android!",
-	'about-rate-0-ios' => "S'at pias sta app, për piasì vàlutla 5 stèile ant l'App Store!",
-	'gracenote-takedown' => "Contacc! Për maleur, i soma pa licensià për mosté la lìrica completa për sta canson al moment (sòn-sì a càpita për men dl'1% dël nòste canson). Për piasì preuva torna la sman-a ch'a ven.",
+	'about-licensing-0' => "Costa aplicassion a l'é legal al 100%. Ij drit a son pagà ai proprietari dij drit dla canson via Gracenote - pròpi com dzor ël sit dl'aragnà WikiParòle.",
+	'about-heading-feedback' => 'Opinion',
+	'about-feedback-0' => "Veul-lo dine quaicòs a propòsit dl'aplicassion? Ch'a na scriva: %s",
+	'about-heading-rate' => "Ch'a vàluta l'aplicassion, për piasì!",
+	'about-rate-0-android' => "S'a-j pias costa aplicassion, për piasì ch'a la vàluta 5 stèile an sl'Android Market!",
+	'about-rate-0-ios' => "S'a-j pias costa aplicassion, për piasì ch'a la vàluta 5 stèile an sl'App Store!",
+	'gracenote-takedown' => "An dëspias! Për maleur, i l'oma pa ij drit për ësmon-e le paròle complete për costa canson al moment (sòn a-i riva për men dl'1% ëd nòstre canson). Për piasì, ch'a preuva torna la sman-a ch'a-i ven.",
 	'lyrics-artist-byline' => 'da %s',
-	'ringtone-matcher-by-song' => 'Manda %s Ringtone a tò Cell',
+	'ringtone-matcher-by-song' => 'Mandé la sonarìa %s a sò sacociàbil',
 );
 
 /** Pashto (پښتو)
@@ -917,6 +1003,7 @@ $messages['ps'] = array(
 );
 
 /** Portuguese (português)
+ * @author Luckas
  * @author Malafaya
  * @author SandroHc
  * @author Waldir
@@ -929,13 +1016,19 @@ $messages['pt'] = array(
 	'app-tab-sotd' => 'CdD',
 	'app-async-error-title' => 'Ops!',
 	'app-nonetwork-dialog-close-button' => 'OK',
+	'search-go' => 'Ir!',
 	'search-hint-text' => "p.ex. 'John Lennon:Imagine'",
+	'login-username-hint' => 'Nome de usuário',
+	'login-password-hint' => 'Senha',
+	'about-heading' => 'LyricWiki',
 	'about-credits' => 'por %s',
+	'about-heading-licensing' => 'Direitos de autor',
 	'lyrics-artist-byline' => 'por %s',
 );
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Caio1478
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -951,6 +1044,47 @@ $messages['pt-br'] = array(
 	'about-heading' => 'LyricWiki',
 	'about-credits' => 'por %s',
 	'about-heading-tips' => 'Procurando',
+	'about-heading-licensing' => 'Direitos de autor',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'app-loading' => 'Stoche a careche…',
+	'app-tab-search' => 'Cirche',
+	'app-tab-about' => 'Sus a',
+	'app-tab-browse' => 'A..Z',
+	'app-tab-sotd' => 'SotD',
+	'app-async-error-title' => 'Ohhhhh!',
+	'app-async-error-message' => "Probbleme temboranèe cu 'a connessione. Pe piacere pruève cchiù tarde.",
+	'app-nonetwork-dialog-title' => 'Rete indisponibbile',
+	'app-nonetwork-dialog-message' => 'Nisciuna connessione de rete ha state acchiate.',
+	'app-nonetwork-dialog-close-button' => 'OK',
+	'search-go' => 'Veje!',
+	'search-hint-text' => "p.e. 'Fido Guido:Maje nisciune'",
+	'search-no-match-found' => "Non g'agghie acchiate ninde.",
+	'search-no-match-found-query' => 'Cercate: %s',
+	'search-results-title' => "Resultate d'a ricerche pe: %s",
+	'login-label' => "Trase jndr'à LyricUicchi",
+	'login-username-hint' => 'Nome utende',
+	'login-password-hint' => 'Passuord',
+	'login-submit-button' => 'Tràse',
+	'about-heading' => 'LyricUicchi',
+	'about-credits' => 'da %s',
+	'about-heading-tips' => 'Stoche a cerche',
+	'about-tips-0' => "Accuminze a scrivere 'u nome de 'n'artiste da auto combletà cumme tu scrive.",
+	'about-tips-1' => "Lefote sus 'u scherme prengepàle sò 'u Megghie 9 canzune sus a iTunes mò.",
+	'about-heading-licensing' => 'Copyright',
+	'about-licensing-0' => "St'app jè a 'u 100% legale. Le deritte onne state paiate pu titolare d'a canzone cu Gracenote - 'ndruche 'u site LyricUicchi.",
+	'about-heading-feedback' => 'Segnalazione',
+	'about-feedback-0' => "Ne vuè ccu dice quaccheccose sus a l'app? Mannane 'na mail: %s",
+	'about-heading-rate' => "Vote st'app pe piacere!",
+	'about-rate-0-android' => "Ce te piace st'app, pe piacere mitte 5 stelle sus a 'u Mercate de Android!",
+	'about-rate-0-ios' => "Ce te piace st'app, pe piacere mitte 5 stelle sus a 'u Negozie de App!",
+	'gracenote-takedown' => "Naaa! Sfortunatamende, non ge tenime 'a licenze pe fà vedè tutte le teste pe sta canzone jndr'à stu mumende (quiste succede pe mene de l'1% de le canzune nuèstre). Pe piacere pruève 'a sumane prossime.",
+	'lyrics-artist-byline' => 'da %s',
+	'ringtone-matcher-by-song' => "Manne %s suonerie sus a 'u Cellulare tune",
 );
 
 /** Russian (русский)
@@ -1134,25 +1268,49 @@ $messages['tr'] = array(
 /** Ukrainian (українська)
  * @author Base
  * @author Steve.rusyn
+ * @author SteveR
+ * @author Ua2004
  */
 $messages['uk'] = array(
-	'app-loading' => 'Завантаження...',
+	'app-loading' => 'Завантаження…',
 	'app-tab-search' => 'Пошук',
 	'app-tab-about' => 'Про програму',
-	'app-tab-browse' => 'A..Z',
+	'app-tab-browse' => 'А..Я',
+	'app-tab-sotd' => 'SotD',
 	'app-async-error-title' => 'Ой',
+	'app-async-error-message' => 'Тимчасові проблеми з підключенням. Будь ласка, спробуйте ще раз пізніше.',
+	'app-nonetwork-dialog-title' => 'Мережа недоступна',
+	'app-nonetwork-dialog-message' => 'Мережу не виявлено.',
 	'app-nonetwork-dialog-close-button' => 'Гаразд',
+	'search-go' => 'Пошук!',
+	'search-hint-text' => 'напр. "John Lennon:Imagine"',
+	'search-no-match-found' => 'Нічого не знайдено.',
+	'search-no-match-found-query' => 'Ви шукали: %s',
+	'search-results-title' => 'Результати пошуку для: %s',
+	'login-label' => 'Увійти до LyricWiki',
 	'login-username-hint' => "Ім'я користувача",
 	'login-password-hint' => 'Пароль',
 	'login-submit-button' => 'Увійти',
 	'about-heading' => 'LyricWiki',
+	'about-credits' => '%s',
 	'about-heading-tips' => 'Пошук',
+	'about-tips-0' => "Почніть вводити ім'я виконавця, щоб побачити можливі варіанти автозаповнення.",
+	'about-tips-1' => 'Зображення на головному екрані - це поточні Топ 9 пісень в iTunes.',
 	'about-heading-licensing' => 'Авторські права',
-	'about-heading-feedback' => "Зворотний зв'язок",
+	'about-licensing-0' => 'Цей додаток повністю легальний. Роялті правовласникам пісні виплачуються через Gracenote - так як і на сайті LyricWiki.',
+	'about-heading-feedback' => "Зворотній зв'язок",
+	'about-feedback-0' => 'Хочете нам щось сказати про цей додаток? Напишіть нам: %s',
+	'about-heading-rate' => 'Будь ласка, оцініть додаток!',
+	'about-rate-0-android' => 'Якщо вам подобається цей додаток, будь ласка, оцініть його 5 зірками на Android Market!',
+	'about-rate-0-ios' => 'Якщо вам подобається цей додаток, будь ласка, оцініть його 5 зірками в App Store!',
+	'gracenote-takedown' => 'Ой! На жаль, зараз ми не маємо дозволу показувати повний текст цієї пісні (таке буває з 1% наших пісень). Будь ласка, спробуйте ще раз через тиждень.',
+	'lyrics-artist-byline' => '%s',
+	'ringtone-matcher-by-song' => 'Отримати рінгтон %s для вашого мобільного',
 );
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Anakmalaysia
+ * @author Liuxinyu970226
  */
 $messages['zh-hans'] = array(
 	'app-loading' => '正在载入…',
@@ -1175,6 +1333,8 @@ $messages['zh-hans'] = array(
 	'login-password-hint' => '密码',
 	'login-submit-button' => '登录',
 	'about-heading' => '歌词维基',
+	'about-credits' => '由%s',
+	'about-heading-tips' => '搜索',
 	'about-heading-licensing' => '版权',
 	'about-heading-feedback' => '反馈',
 	'about-heading-rate' => '请给此应用程序评一评！',

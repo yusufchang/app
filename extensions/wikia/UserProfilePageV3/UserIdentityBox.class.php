@@ -70,22 +70,22 @@ class UserIdentityBox {
 	 * @author Andrzej 'nAndy' Łukaszewski
 	 */
 	public function getData() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$data = $this->getUserData('getEmptyData');
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $data;
 
 	}
 
 	public function getFullData() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$data = $this->getUserData('getDefaultData');
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
 	protected function getUserData($dataType) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$userName = $this->user->getName();
 		$userId = $this->user->getId();
@@ -103,7 +103,7 @@ class UserIdentityBox {
 
 			if (empty($this->userStats)) {
 				/** @var $userStatsService UserStatsService */
-				$userStatsService = F::build('UserStatsService', array($userId));
+				$userStatsService = new UserStatsService($userId);
 				$this->userStats = $userStatsService->getStats();
 			}
 
@@ -131,12 +131,12 @@ class UserIdentityBox {
 			$data['showZeroStates'] = $this->checkIfDisplayZeroStates($data);
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
 	protected function getInternationalizedRegistrationDate($wikiId, $data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$firstMastheadEditDate = $this->user->getOption(self::USER_FIRST_MASTHEAD_EDIT_DATE_PROPERTY . $wikiId);
 
 		if (is_null($data['registration']) && !is_null($firstMastheadEditDate)) {
@@ -151,21 +151,21 @@ class UserIdentityBox {
 		}
 
 		$data = $this->internationalizeRegistrationDate($data);
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
 	protected function internationalizeRegistrationDate($data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		if (!empty($data['registration'])) {
 			$data['registration'] = $this->app->wg->Lang->date($data['registration']);
 		}
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
 	protected function extractBirthDate($data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$birthdate = isset($data['birthday']) && is_string($data['birthday']) ? $data['birthday'] : '';
 		$birthdate = explode('-', $birthdate);
 		if (!empty($birthdate[0]) && !empty($birthdate[1])) {
@@ -173,29 +173,29 @@ class UserIdentityBox {
 		} else {
 			$data['birthday'] = '';
 		}
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
 	protected function getSharedUserData($userId, $userName) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$data = array();
 		$data['id'] = $userId;
 		$data['name'] = $userName;
-		$data['avatar'] = F::build('AvatarService', array($userName, 150), 'getAvatarUrl');
-		$this->app->wf->ProfileOut(__METHOD__);
+		$data['avatar'] = AvatarService::getAvatarUrl($userName, 150);
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
 	protected function populateAnonData($data, $userName) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$this->getEmptyData($data);
 		//-1 edits means it's an anon user/ip where we don't display editcount at all
 		$data['edits'] = -1;
 		$data['showZeroStates'] = $this->checkIfDisplayZeroStates($data);
 		$data['name'] = $userName;
-		$data['realName'] = $this->app->wf->Msg('user-identity-box-wikia-contributor');
-		$this->app->wf->ProfileOut(__METHOD__);
+		$data['realName'] = wfMsg('user-identity-box-wikia-contributor');
+		wfProfileOut(__METHOD__);
 		return $data;
 	}
 
@@ -290,7 +290,7 @@ class UserIdentityBox {
 	 * @return boolean
 	 */
 	public function saveUserData($data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$changed = false;
 		if (is_object($data)) {
@@ -344,7 +344,7 @@ class UserIdentityBox {
 
 			if (isset($data->name)) {
 				//phalanx filtering; bugId:21358
-				$data->name = $this->doPhalanxFilter($data->name, 'TYPE_USER');
+				$data->name = $this->doPhalanxFilter($data->name, Phalanx::TYPE_USER);
 				//char limit added; bugId:15593
 				$data->name = mb_substr($data->name, 0, self::USER_NAME_CHAR_LIMIT);
 
@@ -368,11 +368,11 @@ class UserIdentityBox {
 			$this->user->saveSettings();
 			$this->saveMemcUserIdentityData($data);
 
-			$this->app->wf->ProfileOut(__METHOD__);
+			wfProfileOut(__METHOD__);
 			return true;
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return false;
 	}
 
@@ -385,31 +385,14 @@ class UserIdentityBox {
 	 * @return string empty string if text was blocked; given text otherwise
 	 * @FIXME this needs to be MOVED to Phalanx and called using hooks
 	 */
-	private function doPhalanxFilter($text, $type = null) {
-		$this->app->wf->ProfileIn(__METHOD__);
+	private function doPhalanxFilter( $text, $type = Phalanx::TYPE_CONTENT ) {
+		wfProfileIn(__METHOD__);
 
-		if (!empty($this->app->wg->EnablePhalanxExt) && !empty($text)) {
-			if (is_null($type)) {
-				$type = Phalanx::TYPE_CONTENT;
-			} else {
-				//fb#23473
-				$type = constant("Phalanx::$type");
-			}
+		$blockData = array();
+		$res = wfRunHooks('SpamFilterCheck', array($text, $type, &$blockData));
 
-			$filters = Phalanx::getFromFilter($type);
-
-			foreach ($filters as $filter) {
-				$result = Phalanx::isBlocked($text, $filter);
-
-				if ($result['blocked']) {
-					$this->app->wf->ProfileOut(__METHOD__);
-					return '';
-				}
-			}
-		}
-
-		$this->app->wf->ProfileOut(__METHOD__);
-		return $text;
+		wfProfileOut(__METHOD__);
+		return $res === true ? $text : '';
 	}
 
 	/**
@@ -474,7 +457,7 @@ class UserIdentityBox {
 	 * @author Andrzej 'nAndy' Łukaszewski
 	 */
 	private function getDb($type = DB_SLAVE) {
-		return $this->app->wf->GetDB($type, array(), $this->app->wg->SharedDB);
+		return wfGetDB($type, array(), $this->app->wg->SharedDB);
 	}
 
 	/**
@@ -486,19 +469,19 @@ class UserIdentityBox {
 	 * @author tor
 	 */
 	protected function getUserTags(&$data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if( !empty($this->app->wg->EnableTwoTagsInMasthead) ) {
 			/** @var $strategy UserTwoTagsStrategy */
-			$strategy = F::build('UserTwoTagsStrategy', array($this->user));
+			$strategy = new UserTwoTagsStrategy($this->user);
 		} else {
 			/** @var $strategy UserOneTagStrategy */
-			$strategy = F::build('UserOneTagStrategy', array($this->user));
+			$strategy = new UserOneTagStrategy($this->user);
 		}
 		$tags = $strategy->getUserTags();
 
 		$data['tags'] = $tags;
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -511,7 +494,7 @@ class UserIdentityBox {
 	 * @return boolean
 	 */
 	public function checkIfDisplayZeroStates($data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$result = true;
 
@@ -524,7 +507,7 @@ class UserIdentityBox {
 			}
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $result;
 	}
 
@@ -534,7 +517,7 @@ class UserIdentityBox {
 	 * @return array
 	 */
 	public function getTopWikisFromDb($limit = null) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if (is_null($limit)) {
 			$limit = $this->topWikisLimit;
@@ -556,7 +539,7 @@ class UserIdentityBox {
 				$where[] = 'wiki_id NOT IN (' . join(',', $hiddenTopWikis) . ')';
 			}
 
-			$dbs = $this->app->wf->GetDB(DB_SLAVE, array(), $this->app->wg->StatsDB);
+			$dbs = wfGetDB(DB_SLAVE, array(), $this->app->wg->StatsDB);
 			$res = $dbs->select(
 				array('specials.events_local_users'),
 				array('wiki_id', 'edits'),
@@ -572,9 +555,8 @@ class UserIdentityBox {
 			while ($row = $dbs->fetchObject($res)) {
 				$wikiId = $row->wiki_id;
 				$editCount = $row->edits;
-				$wikiName = F::build('WikiFactory', array('wgSitename', $wikiId), 'getVarValueByName');
-				/** @var $wikiTitle GlobalTitle */
-				$wikiTitle = F::build('GlobalTitle', array($this->user->getName(), NS_USER_TALK, $wikiId), 'newFromText');
+				$wikiName = WikiFactory::getVarValueByName('wgSitename', $wikiId);
+				$wikiTitle = GlobalTitle::newFromText($this->user->getName(), NS_USER_TALK, $wikiId);
 
 				if ($wikiTitle) {
 					$wikiUrl = $wikiTitle->getFullUrl();
@@ -583,7 +565,7 @@ class UserIdentityBox {
 			}
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $wikis;
 	}
 
@@ -593,7 +575,7 @@ class UserIdentityBox {
 	 * @return array
 	 */
 	public function getTopWikis($refreshHidden = false) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if ($refreshHidden === true) {
 			$this->clearHiddenTopWikis();
@@ -609,7 +591,7 @@ class UserIdentityBox {
 			$ids[] = (int)$wiki['id'];
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 
 		return $this->sortTopWikis($wikis);
 	}
@@ -622,7 +604,7 @@ class UserIdentityBox {
 	 * @return array
 	 */
 	protected function sortTopWikis($topWikis) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if (!empty($topWikis)) {
 			$editcounts = array();
@@ -639,11 +621,11 @@ class UserIdentityBox {
 				array_multisort($editcounts, SORT_DESC, $topWikis);
 			}
 
-			$this->app->wf->ProfileOut(__METHOD__);
+			wfProfileOut(__METHOD__);
 			return array_slice($topWikis, 0, $this->topWikisLimit, true);
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $topWikis;
 	}
 
@@ -655,17 +637,16 @@ class UserIdentityBox {
 	 * @return void
 	 */
 	public function addTopWiki($wikiId) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
-		$wikiName = F::build('WikiFactory', array('wgSitename', $wikiId), 'getVarValueByName');
-		/** @var $wikiTitle GlobalTitle */
-		$wikiTitle = F::build('GlobalTitle', array($this->user->getName(), NS_USER_TALK, $wikiId), 'newFromText');
+		$wikiName = WikiFactory::getVarValueByName('wgSitename', $wikiId);
+		$wikiTitle = GlobalTitle::newFromText($this->user->getName(), NS_USER_TALK, $wikiId);
 
 		if ($wikiTitle instanceof Title) {
 			$wikiUrl = $wikiTitle->getFullUrl();
 
 			/** @var $userStatsService UserStatsService */
-			$userStatsService = F::build('UserStatsService', array($this->app->wg->User->getId()));
+			$userStatsService = new UserStatsService($this->app->wg->User->getId());
 			$userStats = $userStatsService->getStats();
 
 			//adding new wiki to topWikis in cache
@@ -673,11 +654,11 @@ class UserIdentityBox {
 			$this->storeEditsWikis($wikiId, $wiki);
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	private function storeEditsWikis($wikiId, $wiki) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		//getting array of masthead edits wikis
 		$mastheadEditsWikis = $this->app->wg->Memc->get($this->getMemcMastheadEditsWikisKey(), array());
@@ -696,17 +677,17 @@ class UserIdentityBox {
 
 		$this->app->wg->Memc->set($this->getMemcMastheadEditsWikisKey(), $mastheadEditsWikis);
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $mastheadEditsWikis;
 	}
 
 	private function getEditsWikis() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$mastheadEditsWikis = $this->app->wg->Memc->get($this->getMemcMastheadEditsWikisKey(), null);
 		$mastheadEditsWikis = is_array($mastheadEditsWikis) ? $mastheadEditsWikis : array();
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $mastheadEditsWikis;
 	}
 
@@ -716,20 +697,20 @@ class UserIdentityBox {
 	 * @return array
 	 */
 	private function getMemcHiddenWikisId() {
-		return $this->app->wf->SharedMemcKey( 'user-identity-box-data-top-hidden-wikis', $this->user->getId(), self::CACHE_VERSION );
+		return wfSharedMemcKey( 'user-identity-box-data-top-hidden-wikis', $this->user->getId(), self::CACHE_VERSION );
 	}
 
 	/**
 	 * @brief Clears hidden wikis: the field of this class, DB and memcached data
 	 */
 	private function clearHiddenTopWikis() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$hiddenWikis = array();
-		$this->updateHiddenInDb($this->app->wf->GetDB(DB_MASTER, array(), $this->app->wg->ExternalSharedDB), $hiddenWikis);
+		$this->updateHiddenInDb(wfGetDB(DB_MASTER, array(), $this->app->wg->ExternalSharedDB), $hiddenWikis);
 		$this->app->wg->Memc->set($this->getMemcHiddenWikisId(), $hiddenWikis);
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -738,7 +719,7 @@ class UserIdentityBox {
 	 * @return array
 	 */
 	private function getTestData($limit) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$wikis = array(
 			1890 => 5,
@@ -751,9 +732,8 @@ class UserIdentityBox {
 
 		foreach ($wikis as $wikiId => $editCount) {
 			if (!$this->isTopWikiHidden($wikiId) && ($wikiId != $this->app->wg->CityId)) {
-				$wikiName = F::build('WikiFactory', array('wgSitename', $wikiId), 'getVarValueByName');
-				/** @var $wikiTitle GlobalTitle */
-				$wikiTitle = F::build('GlobalTitle', array($this->user->getName(), NS_USER_TALK, $wikiId), 'newFromText');
+				$wikiName = WikiFactory::getVarValueByName('wgSitename', $wikiId);
+				$wikiTitle = GlobalTitle::newFromText($this->user->getName(), NS_USER_TALK, $wikiId);
 
 				if ($wikiTitle) {
 					$wikiUrl = $wikiTitle->getFullUrl();
@@ -766,7 +746,7 @@ class UserIdentityBox {
 			}
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return array_slice($wikis, 0, $limit, true);
 	}
 
@@ -778,17 +758,17 @@ class UserIdentityBox {
 	 * @author Andrzej 'nAndy' Łukaszewski
 	 */
 	private function getHiddenTopWikis() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$hiddenWikis = $this->app->wg->Memc->get($this->getMemcHiddenWikisId());
 
 		if (empty($hiddenWikis) && !is_array($hiddenWikis)) {
-			$dbs = $this->app->wf->GetDB(DB_SLAVE, array(), $this->app->wg->ExternalSharedDB);
+			$dbs = wfGetDB(DB_SLAVE, array(), $this->app->wg->ExternalSharedDB);
 			$hiddenWikis = $this->getHiddenFromDb($dbs);
 			$this->app->wg->Memc->set($this->getMemcHiddenWikisId(), $hiddenWikis);
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $hiddenWikis;
 	}
 
@@ -800,12 +780,12 @@ class UserIdentityBox {
 	 * @author Andrzej 'nAndy' Łukaszewski
 	 */
 	public function hideWiki($wikiId) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if (!$this->isTopWikiHidden($wikiId)) {
 			$hiddenWikis = $this->getHiddenTopWikis();
 			$hiddenWikis[] = $wikiId;
-			$this->updateHiddenInDb($this->app->wf->GetDB(DB_MASTER, array(), $this->app->wg->ExternalSharedDB), $hiddenWikis);
+			$this->updateHiddenInDb(wfGetDB(DB_MASTER, array(), $this->app->wg->ExternalSharedDB), $hiddenWikis);
 			$this->app->wg->Memc->set($this->getMemcHiddenWikisId(), $hiddenWikis);
 
 			$memcData = $this->app->wg->Memc->get($this->getMemcUserIdentityDataKey());
@@ -813,7 +793,7 @@ class UserIdentityBox {
 			$this->saveMemcUserIdentityData($memcData);
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return true;
 	}
 
@@ -823,7 +803,7 @@ class UserIdentityBox {
 	 * @return array
 	 */
 	private function getHiddenFromDb($dbHandler) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$result = false;
 
 		if (!$this->user->isAnon()) {
@@ -842,7 +822,7 @@ class UserIdentityBox {
 			$result = empty($result) ? array() : $result;
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $result;
 	}
 
@@ -851,7 +831,7 @@ class UserIdentityBox {
 	 * @author ADi
 	 */
 	private function updateHiddenInDb($dbHandler, $data) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$dbHandler->replace(
 			'page_wikia_props',
@@ -861,7 +841,7 @@ class UserIdentityBox {
 		);
 		$dbHandler->commit();
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -872,11 +852,11 @@ class UserIdentityBox {
 	 * @return boolean
 	 */
 	public function isTopWikiHidden($wikiId) {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$out = (in_array($wikiId, $this->getHiddenTopWikis()) ? true : false);
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $out;
 	}
 
@@ -888,7 +868,7 @@ class UserIdentityBox {
 		$userId = $this->user->getId();
 		if (empty($this->userStats)) {
 			/** @var $userStatsService UserStatsService */
-			$userStatsService = F::build('UserStatsService', array($userId));
+			$userStatsService = new UserStatsService($userId);
 			$this->userStats = $userStatsService->getStats();
 		}
 

@@ -3,9 +3,13 @@ jQuery(function( $ ) {
 		$header = $( '#WikiHeader' ),
 		$button = $header.find( '.share-button' );
 
-	// Load all required assets for the SharingToolbar, then initialize it
-	$button.one( 'click', function( event ) {
+	function initialize( event ) {
 		$button.addClass('share-enabled');
+
+		var widthType = window.wgOasisGrid ? 3 : 0;
+		if (window.wgOasisResponsive) {
+			widthType = 2;
+		}
 
 		require(['wikia.loader', 'mw'], function(loader, mw) {
 			loader({
@@ -24,7 +28,7 @@ jQuery(function( $ ) {
 				type: loader.SCSS,
 				resources: '/skins/oasis/css/core/SharingToolbar.scss',
 				params: {
-					widthType: window.wgOasisGrid ? 3 : 0
+					widthType: widthType
 				}
 			}).done(
 				function( response ) {
@@ -49,5 +53,14 @@ jQuery(function( $ ) {
 			);
 		})
 
-	});
+	}
+
+	// Load immediately if user is in "ON" group of "SHARE_BUTTON" experiment.
+	if ( Wikia.AbTest && Wikia.AbTest.getGroup( 'SHARE_BUTTON' ) == 'ON' ) {
+		initialize( $.Event() );
+
+	// Load all required assets for the SharingToolbar, then initialize it
+	} else {
+		$button.one( 'click', initialize );
+	}
 });

@@ -31,11 +31,22 @@ $messages['en'] = array(
 	'browser-loading-message' => 'Loading...'
 );
 
+/** Message documentation (Message documentation)
+ * @author Shirayuki
+ */
+$messages['qqq'] = array(
+	'main-tab-search' => '{{Identical|Search}}',
+	'main-tab-offline' => '{{Identical|Offline}}',
+	'tab-discover-loading-message' => '{{Identical|Loading}}',
+);
+
 /** Arabic (العربية)
+ * @author Achraf94
  * @author Mutarjem horr
  */
 $messages['ar'] = array(
 	'main-tab-discover' => 'إكتشف',
+	'main-tab-personal' => 'ويكياتي',
 	'main-tab-search' => 'إبحث',
 	'main-tab-offline' => 'غير متصل',
 	'tab-discover-loading-message' => 'جاري التحميل...',
@@ -84,6 +95,22 @@ $messages['br'] = array(
 	'browser-loading-message' => 'O kargañ...',
 );
 
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'main-tab-discover' => 'Descobrir',
+	'main-tab-personal' => 'La meva Wikia',
+	'main-tab-search' => 'Cercar',
+	'main-tab-offline' => 'Desconnectat',
+	'tab-discover-loading-message' => 'Carregant...',
+	'tab-discover-no-network-dialog-title' => 'Xarxa no disponible',
+	'tab-discover-no-network-dialog-message' => 'No hi ha connexió de xarxa detectada',
+	'tab-discover-no-network-dialog-close-button' => 'Acceptar',
+	'tab-search-loading-message' => 'Cercant...',
+	'browser-loading-message' => 'Carregant...',
+);
+
 /** Czech (česky)
  * @author Chmee2
  */
@@ -97,6 +124,14 @@ $messages['cs'] = array(
 	'tab-discover-no-network-dialog-close-button' => 'Ok',
 	'tab-search-loading-message' => 'Vyhledávám...',
 	'browser-loading-message' => 'Načítá se…',
+);
+
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'main-tab-personal' => 'Fy Wikia i',
+	'tab-discover-no-network-dialog-close-button' => 'Iawn',
 );
 
 /** German (Deutsch)
@@ -226,6 +261,14 @@ $messages['ia'] = array(
 	'browser-loading-message' => 'Cargamento…',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
+ */
+$messages['id'] = array(
+	'tab-discover-no-network-dialog-title' => 'Jaringan tidak tersedia',
+	'tab-search-loading-message' => 'Mencari...',
+);
+
 /** Ingush (ГӀалгӀай)
  * @author Sapral Mikail
  */
@@ -255,11 +298,21 @@ $messages['khw'] = array(
 	'main-tab-offline' => 'آف لاین',
 );
 
+/** Kurdish (Latin script) (Kurdî (latînî)‎)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'main-tab-search' => 'Lêgerîn',
+	'tab-discover-no-network-dialog-close-button' => 'Temam',
+	'tab-search-loading-message' => 'Lê digere...',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
 $messages['lb'] = array(
 	'main-tab-search' => 'Sichen',
+	'tab-discover-no-network-dialog-close-button' => 'OK',
 );
 
 /** Macedonian (македонски)
@@ -344,15 +397,16 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
 	'main-tab-discover' => 'Dëscoaté',
 	'main-tab-personal' => 'Mia Wikia',
 	'main-tab-search' => 'Sërca',
-	'main-tab-offline' => 'Fòra linia',
+	'main-tab-offline' => 'Assent',
 	'tab-discover-loading-message' => 'A caria ...',
-	'tab-discover-no-network-dialog-title' => 'Rej pa disponìbila',
+	'tab-discover-no-network-dialog-title' => 'Rej pa disponìbil',
 	'tab-discover-no-network-dialog-message' => 'Gnun-a conession ëd rej trovà',
 	'tab-discover-no-network-dialog-close-button' => 'Va bin',
 	'tab-search-loading-message' => 'Sërché...',
@@ -390,14 +444,49 @@ $messages['pt'] = array(
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
 	'main-tab-search' => 'Pesquisar',
+	'main-tab-offline' => 'Desconectado',
 	'tab-discover-loading-message' => 'Carregando...',
+	'tab-discover-no-network-dialog-title' => 'Rede não disponível',
 	'tab-discover-no-network-dialog-close-button' => 'OK',
 	'tab-search-loading-message' => 'Pesquisando...',
 	'browser-loading-message' => 'Carregando...',
+);
+
+/** Romanian (română)
+ * @author Minisarm
+ */
+$messages['ro'] = array(
+	'main-tab-discover' => 'Descoperă',
+	'main-tab-personal' => 'My Wikia',
+	'main-tab-search' => 'Căutare',
+	'main-tab-offline' => 'Off-line',
+	'tab-discover-loading-message' => 'Se încarcă...',
+	'tab-discover-no-network-dialog-title' => 'Rețea indisponibilă',
+	'tab-discover-no-network-dialog-message' => 'Nici o conexiune de rețea detectată',
+	'tab-discover-no-network-dialog-close-button' => 'OK',
+	'tab-search-loading-message' => 'Se caută...',
+	'browser-loading-message' => 'Se încarcă...',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'main-tab-discover' => 'Scuèpre',
+	'main-tab-personal' => 'Uicchia meje',
+	'main-tab-search' => 'Cirche',
+	'main-tab-offline' => 'Fore linèe',
+	'tab-discover-loading-message' => 'Stoche a careche…',
+	'tab-discover-no-network-dialog-title' => 'Rete indisponibbile',
+	'tab-discover-no-network-dialog-message' => 'Nisciuna connessione de rete ha state acchiate',
+	'tab-discover-no-network-dialog-close-button' => 'OK',
+	'tab-search-loading-message' => 'Stoche a cerche...',
+	'browser-loading-message' => 'Stoche a careche…',
 );
 
 /** Russian (русский)
@@ -501,15 +590,20 @@ $messages['ug-arab'] = array(
 /** Ukrainian (українська)
  * @author Base
  * @author Steve.rusyn
+ * @author SteveR
+ * @author Ua2004
  */
 $messages['uk'] = array(
+	'main-tab-discover' => 'Відкрити',
+	'main-tab-personal' => 'Моя Wikia',
 	'main-tab-search' => 'Пошук',
 	'main-tab-offline' => 'Офлайн',
-	'tab-discover-loading-message' => 'Завантаження...',
+	'tab-discover-loading-message' => 'Завантаження…',
 	'tab-discover-no-network-dialog-title' => 'Мережа недоступна',
+	'tab-discover-no-network-dialog-message' => 'Підключення до мережі не виявлено',
 	'tab-discover-no-network-dialog-close-button' => 'Гаразд',
 	'tab-search-loading-message' => 'Пошук...',
-	'browser-loading-message' => 'Завантаження...',
+	'browser-loading-message' => 'Завантаження…',
 );
 
 /** Simplified Chinese (中文（简体）‎)

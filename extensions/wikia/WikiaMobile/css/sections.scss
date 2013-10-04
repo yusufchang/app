@@ -19,23 +19,22 @@ h1, h2, h3{
 }
 
 .artSec {
-	position: relative;
-	padding-bottom: 30px;
+	overflow: hidden;
+	width: 100%;
 
 	&.open {
-		overflow: hidden;
 		display: block;
 	}
 
-	ul {
+	ul:not(.wkLst) {
 		//setting to 20px makes it narrower but still nicely indented
 		padding-left: 20px;
 	}
 
 	&::after{
 		content: '';
-		display: block; 
-		height: 0; 
+		display: block;
+		height: 0;
 		font-size:0;
 		clear: both;
 		visibility:hidden;
@@ -43,12 +42,10 @@ h1, h2, h3{
 }
 
 .goBck {
+	display: block;
+
 	color: $page-text-alternate-color;
-	float: right;
-	padding: 5px;
-	position: absolute;
-	bottom: 0;
-	right: 0;
+	text-align: right;
 }
 
 .collSec {
@@ -56,11 +53,12 @@ h1, h2, h3{
 	color: $section-text-color;
 	min-height: $section-title-font-size;
 	padding: $page-padding 27px 0 0;
-	position: relative;
 	//lest make our sections a little bit more sexy
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Roboto, "Lucida Grande", arial, sans-serif;
 
 	word-break: break-word;
+
+	position: relative;
 
     .chev {
 		pointer-events: none;
@@ -71,12 +69,21 @@ h1, h2, h3{
 		background-size: 75%;
 		position: absolute;
 		right: 0;
-		top: 37%;
+		top: 13px;
     }
 
 	//TODO:Find it in core and do not print it out in mobile skin
 	.editsection {
 		display: none;
+	}
+
+	//a nicer way to display images in sections header
+	figure {
+		display: inline-block;
+
+		img {
+			max-height: 1em;
+		}
 	}
 }
 

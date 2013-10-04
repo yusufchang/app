@@ -71,7 +71,7 @@ class NavigationModel extends WikiaModel {
 	 */
 	private function getMemcKey( $messageName, $cityId = false ) {
 		if ( $this->useSharedMemcKey ) {
-			$wikiId = substr( $this->wf->SharedMemcKey(), 0, -1 );
+			$wikiId = substr( wfSharedMemcKey(), 0, -1 );
 
 		} else {
 			$wikiId = ( is_numeric($cityId)) ? $cityId : intval( $this->wg->CityId );
@@ -170,7 +170,7 @@ class NavigationModel extends WikiaModel {
 	 * @return array parsed menu wikitext
 	 */
 	public function parse( $type, $source, Array $maxChildrenAtLevel = array(), $duration = 3600, $forContent = false, $filterInactiveSpecialPages = false ) {
-		$this->wf->ProfileIn( __METHOD__ . ":$type");
+		wfProfileIn( __METHOD__ . ":$type");
 
 		$this->forContent = $forContent;
 
@@ -178,12 +178,12 @@ class NavigationModel extends WikiaModel {
 		$nodes = $this->wg->Memc->get( $cacheKey );
 
 		if ( empty( $nodes ) ) {
-			$this->wf->ProfileIn( __METHOD__  . '::miss' );
+			wfProfileIn( __METHOD__  . '::miss' );
 
 			// get wikitext from given source
 			switch( $type ) {
 				case self::TYPE_MESSAGE:
-					$text = $this->forContent ? $this->wf->MsgForContent( $source ) : $this->wf->Msg( $source );
+					$text = $this->forContent ? wfMsgForContent( $source ) : wfMsg( $source );
 					break;
 
 				case self::TYPE_VARIABLE:
@@ -203,15 +203,15 @@ class NavigationModel extends WikiaModel {
 			$nodes = $this->parseText( $text, $maxChildrenAtLevel, $forContent, $filterInactiveSpecialPages );
 			$this->wg->Memc->set( $cacheKey, $nodes, $duration );
 
-			$this->wf->ProfileOut( __METHOD__  . '::miss');
+			wfProfileOut( __METHOD__  . '::miss');
 		}
 
-		$this->wf->ProfileOut( __METHOD__ . ":$type");
+		wfProfileOut( __METHOD__ . ":$type");
 		return $nodes;
 	}
 
 	public function parseText($text, Array $maxChildrenAtLevel = array(), $forContent = false, $filterInactiveSpecialPages = false) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$lines = explode("\n", $text);
 		$this->forContent = $forContent;
@@ -230,12 +230,12 @@ class NavigationModel extends WikiaModel {
 			$nodes[0][ self::HASH ] = md5( serialize( $nodes ) );
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $nodes;
 	}
 
 	private function stripTags($nodes) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		foreach($nodes as &$node) {
 			$text = !empty($node['text']) ? $node['text'] : null;
@@ -244,7 +244,7 @@ class NavigationModel extends WikiaModel {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $nodes;
 	}
 
@@ -253,7 +253,7 @@ class NavigationModel extends WikiaModel {
 			return $nodes;
 		}
 
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		// filters out every special page that is not defined
 		foreach( $nodes as $key => &$node ){
@@ -278,7 +278,7 @@ class NavigationModel extends WikiaModel {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $nodes;
 	}
 
@@ -287,7 +287,7 @@ class NavigationModel extends WikiaModel {
 	 * @author: Inez Korczyński
 	 */
 	public function parseLines($lines, $maxChildrenAtLevel = array()) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$nodes = array();
 
@@ -356,7 +356,7 @@ class NavigationModel extends WikiaModel {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $nodes;
 	}
 
@@ -364,7 +364,7 @@ class NavigationModel extends WikiaModel {
 	 * @author: Inez Korczyński
 	 */
 	public function parseOneLine($line) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		// trim spaces and asterisks from line and then split it to maximum two chunks
 		$lineArr = explode( '|', trim($line, '* '), 3 );
@@ -381,7 +381,7 @@ class NavigationModel extends WikiaModel {
 
 		if ( count( $lineArr ) == 2 && $lineArr[1] != '' ) {
 			// * Foo|Bar - links with label
-			$link = trim( $this->wf->MsgForContent( $lineArr[0] ) );
+			$link = trim( wfMsgForContent( $lineArr[0] ) );
 			$desc = trim( $lineArr[1] );
 		} else {
 			// * Foo
@@ -398,19 +398,19 @@ class NavigationModel extends WikiaModel {
 		$text = null;
 
 		if ($this->getShouldTranslateContent()) {
-			$text = $this->forContent ? $this->wf->MsgForContent( $desc ) : $this->wf->Msg( $desc );
+			$text = $this->forContent ? wfMsgForContent( $desc ) : wfMsg( $desc );
 		}
 
-		if ( empty($text) || $this->wf->EmptyMsg( $desc, $text ) ) {
+		if ( empty($text) || wfEmptyMsg( $desc, $text ) ) {
 			$text = $desc;
 		}
 
-		if ( $this->wf->EmptyMsg( $lineArr[0], $link ) ) {
+		if ( wfEmptyMsg( $lineArr[0], $link ) ) {
 			$link = $lineArr[0];
 		}
 
 		if ( empty( $doNotLink ) ) {
-			if ( preg_match( '/^(?:' . $this->wf->UrlProtocols() . ')/', $link ) ) {
+			if ( preg_match( '/^(?:' . wfUrlProtocols() . ')/', $link ) ) {
 				$href = $link;
 			} else {
 				if ( empty( $link ) ) {
@@ -441,7 +441,7 @@ class NavigationModel extends WikiaModel {
 			$href = '#';
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return array(
 			self::ORIGINAL => $lineArr[0],
 			self::TEXT => $text,
@@ -456,14 +456,14 @@ class NavigationModel extends WikiaModel {
 	 * Return false when given submenu should not be added in a given place
 	 */
 	private function handleExtraWords( &$node, &$nodes, $depth ) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$originalLower = strtolower( $node[ self::ORIGINAL ] );
 
 		if ( substr( $originalLower, 0, 9 ) == '#category' ) {
 			// ignore magic words in Level 1 (BugId:15240)
 			if ( $depth == 1 ) {
-				$this->wf->ProfileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 
@@ -503,7 +503,7 @@ class NavigationModel extends WikiaModel {
 			if ( isset( $this->extraWordsMap[$extraWord] ) ) {
 
 				if ( $node[ self::TEXT ]{0} == '#' ) {
-					$node[ self::TEXT ] = $this->wf->Msg( trim( $node[ self::ORIGINAL], ' *' ) );
+					$node[ self::TEXT ] = wfMsg( trim( $node[ self::ORIGINAL], ' *' ) );
 				}
 
 				$fname = $this->extraWordsMap[$extraWord];
@@ -512,7 +512,7 @@ class NavigationModel extends WikiaModel {
 				if ( !empty( $data ) ) {
 					// ignore magic words in Level 1 (BugId:15240)
 					if ( $depth == 1 ) {
-						$this->wf->ProfileOut(__METHOD__);
+						wfProfileOut(__METHOD__);
 						return false;
 					}
 
@@ -523,7 +523,7 @@ class NavigationModel extends WikiaModel {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -548,7 +548,7 @@ class NavigationModel extends WikiaModel {
 			$blackList = $this->wg->BiggestCategoriesBlacklist;
 
 			$this->biggestCategories = WikiaDataAccess::cache(
-				$this->wf->MemcKey( 'biggest', $limit ),
+				wfMemcKey( 'biggest', $limit ),
 				604800, // a week
 				function() use ( $blackList, $limit ) {
 					$filterWordsA = array();

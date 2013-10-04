@@ -14,12 +14,18 @@ figure{
 
 	a {
 		display: inline-block;
+		//This will make link as big as images inside and not bigger so we can safly assume that clicks happen only on img tag
+		overflow: hidden;
 	}
 }
 
 .thumb, .link {
 	display: table;
 	margin: 5px auto;
+}
+
+figure.small {
+	display: inline-block;
 }
 
 .thumbcaption {
@@ -75,14 +81,14 @@ noscript img {
 
 img {
 	max-width: 100%;
-	@include transition(opacity .2s);
+	@include transition(opacity .15s);
 
 	&.load {
-		opacity: .1;
+		opacity: 0;
 	}
 
 	&.loaded {
-		background-image: none;
+		background-image: none !important;
 		background-color: transparent;
 		opacity: 1;
 		width: auto;

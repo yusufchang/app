@@ -3,28 +3,27 @@
 class RelatedVideosController extends WikiaController {
 
 	const SURVEY_URL = 'http://www.surveymonkey.com/s/RelatedVideosExperience';
-	public function __construct( WikiaApp $app ) {
+	public function __construct() {
 		global $wgRelatedVideosOnRail;
-		$this->app = $app;
 		if( !empty( $wgRelatedVideosOnRail ) ) {
 			RelatedVideosService::$width = 150;
 			RelatedVideosService::$height = 90;
 		}
 	}
 
-	public function getCaruselRL(){
+	public function getCarouselRL(){
 		// just use different template, logic stays the same
-		return $this->getCarusel();
+		return $this->getCarousel();
 	}
 
-	public function getCaruselElementRL(){
+	public function getCarouselElementRL(){
 		$this->response->setTemplateEngine(WikiaResponse::TEMPLATE_ENGINE_MUSTACHE);
 
 		// just use different template, logic stays the same
-		return $this->getCaruselElement();
+		return $this->getCarouselElement();
 	}
 
-	public function getCarusel(){
+	public function getCarousel(){
 		if( $this->app->checkSkin( 'wikiamobile' ) || Wikia::isMainPage() || ( !$this->app->wg->title instanceof Title ) || !$this->app->wg->title->exists() ) {
 			return false;
 		}
@@ -32,15 +31,15 @@ class RelatedVideosController extends WikiaController {
 		$rvs = new RelatedVideosService();
 		$videos = $rvs->getRVforArticleId( $this->app->wg->title->getArticleId() );
 
-		$this->linkToSeeMore = !empty($this->app->wg->EnableSpecialVideosExt) ? SpecialPage::getTitleFor("Videos")->escapeLocalUrl() : Title::newFromText(WikiaVideoPage::getVideosCategory())->getFullUrl();
+		$this->linkToSeeMore = !empty($this->app->wg->EnableSpecialVideosExt) ? SpecialPage::getTitleFor("Videos")->escapeLocalUrl() : Title::newFromText(WikiaFileHelper::getVideosCategory())->getFullUrl();
 		$this->videos = $videos;
 		$this->totalVideos = $this->getTotalVideos();
 		$this->canAddVideo = $this->wg->User->isAllowed( 'relatedvideosedit' );
 	}
-	
+
 	public function getTotalVideos(){
 		$mediaService = new MediaQueryService();
-		return $this->wg->Lang->formatNum( $mediaService->getTotalVideos() );	
+		return $this->wg->Lang->formatNum( $mediaService->getTotalVideos() );
 	}
 
 	public function getVideo(){
@@ -56,7 +55,7 @@ class RelatedVideosController extends WikiaController {
 		$controlerName = str_replace('Controller', '', $this->getVal('controlerName', 'RelatedVideos'));
 		$wikiLink = $this->getVal('wikiLink', '');
 
-		$oRelatedVideosService = F::build('RelatedVideosService');
+		$oRelatedVideosService = new RelatedVideosService();
 		$result = $oRelatedVideosService->getRelatedVideoDataFromTitle( array( 'title' => $title, 'source' => $external ), RelatedVideosData::DEFAULT_OASIS_VIDEO_WIDTH, $cityShort, $videoHeight );
 		if ( isset( $result['error'] ) ){
 			$this->setVal( 'error', $result['error'] );
@@ -132,25 +131,25 @@ class RelatedVideosController extends WikiaController {
 			$useMaster = ( false || !empty( $useMaster ) );
 		}
 
-		$rvd = F::build('RelatedVideosData'); /* @var $rvd RelatedVideosData */
+		$rvd = new RelatedVideosData();
 		$videoData = $rvd->getVideoData( $videoName, $width, $videoWidth, $autoplay, $useMaster, $cityShort, $videoHeight, $useJWPlayer, $inAjaxReponse );
 		$this->setVal( 'data', $videoData );
 	}
 
-	public function getCaruselElement() {
+	public function getCarouselElement() {
 		wfProfileIn(__METHOD__);
 
 		$video = $this->getVal( 'video' );
 
 		if( empty( $video ) ) {
 			$title = $this->getVal('videoTitle');
-			$rvs = F::build('RelatedVideosService');
+			$rvs = new RelatedVideosService();
 			$video = $rvs->getRelatedVideoDataFromTitle( array( 'title' => $title ) );
 		}
 
  		$preloaded = $this->getVal( 'preloaded' );
 
-		$videoTitle = F::build('Title', array($video['id'], NS_FILE), 'newFromText');
+		$videoTitle = Title::newFromText($video['id'], NS_FILE);
 		$videoFile = wfFindFile($videoTitle);
 
 		if( $videoFile ) {
@@ -158,10 +157,7 @@ class RelatedVideosController extends WikiaController {
 														  'height'=>$video['thumbnailData']['height']) );
 			$videoThumb = $videoThumbObj->toHtml(
 				array(
-					'custom-url-link' => $video['fullUrl'],
 					'linkAttribs' => array(
-						'class' => 'video-thumbnail lightbox',
-						'data-video-name' => $video['title'],
 						'data-external' => $video['external'],
 						'data-ref' => $video['prefixedUrl']
 					),
@@ -183,16 +179,16 @@ class RelatedVideosController extends WikiaController {
 
 			$video['viewsMsg'] = wfMsg('related-videos-video-views', $this->wg->ContLang->formatNum($video['views']));
 
-			$userGroups = $this->wg->User->getEffectiveGroups();
-			$isAdmin = in_array('admin', $userGroups) || in_array('staff', $userGroups);
+			$canDelete = $this->wg->User->isAllowed( 'relatedvideosdelete' );
 
-			$this->removeTooltip = wfMsg('related-videos-tooltip-remove');
+			$this->removeTooltip = wfMessage( 'related-videos-tooltip-remove' );
 			$this->videoThumb = $videoThumb;
 			$this->video = $video;
 			$this->preloaded = $preloaded;
-			$this->isAdmin = $isAdmin;
+			$this->canDelete = $canDelete;
 			$this->totalVideos = $this->getTotalVideos();
-
+			$this->isNew = empty($video['isNew']) ? false : true ;
+			$this->isNewMsg = wfMessage( 'related-videos-video-is-new' );
 		} else {
 			Wikia::log(__METHOD__, false, 'A video file not found. ID: '.$video['id']);
 		}
@@ -207,36 +203,36 @@ class RelatedVideosController extends WikiaController {
 		global $wgRelatedVideosOnRail;
 
 		if ( !$this->wg->User->isLoggedIn() ) {
-			$this->error = $this->wf->Msg( 'videos-error-not-logged-in' );
+			$this->error = wfMsg( 'videos-error-not-logged-in' );
 			return;
 		}
 
 		if ( !$this->wg->User->isAllowed( 'relatedvideosedit' ) ) {
-			$this->error = $this->wf->Msg( 'related-videos-add-video-error-permission-video' );
+			$this->error = wfMsg( 'related-videos-add-video-error-permission-video' );
 			return;
 		}
 
 		$url = urldecode( $this->getVal( 'url', '' ) );
 		if ( empty( $url ) ) {
-			$this->error = $this->wf->Msg( 'videos-error-no-video-url' );
+			$this->error = wfMsg( 'videos-error-no-video-url' );
 			return;
 		}
 
 		if ( $this->wg->User->isBlocked() ) {
-			$this->error = $this->wf->Msg( 'videos-error-blocked-user' );
+			$this->error = wfMsg( 'videos-error-blocked-user' );
 			return;
 		}
 
 		$articleId = $this->getVal( 'articleId', '' );
-		$rvd = F::build( 'RelatedVideosData' ); /** @var $rvd RelatedVideosData */
+		$rvd = new RelatedVideosData();
 		$retval = $rvd->addVideo( $articleId, $url );
 		if ( is_array( $retval ) ) {
-			$rvs = F::build( 'RelatedVideosService' ); /** @var $rvs RelatedVideosService */
+			$rvs = new RelatedVideosService();
 			$data = $rvs->getRelatedVideoDataFromMaster( $retval );
 			if ( empty($wgRelatedVideosOnRail) ) {
-				$this->setVal( 'html', $this->app->renderView( 'RelatedVideos', 'getCaruselElement', array( 'video' => $data, 'preloaded' => 1 ) ));
+				$this->setVal( 'html', $this->app->renderView( 'RelatedVideos', 'getCarouselElement', array( 'video' => $data, 'preloaded' => 1 ) ));
 			} else {
-				$this->setVal( 'html', $this->app->renderView( 'RelatedVideos', 'getCaruselElementRL', array( 'video' => $data, 'preloaded' => 1 ) ));
+				$this->setVal( 'html', $this->app->renderView( 'RelatedVideos', 'getCarouselElementRL', array( 'video' => $data, 'preloaded' => 1 ) ));
 			}
 			$this->setVal( 'error', isset( $data['error'] ) ? $data['error'] : null);
 		} else {
@@ -246,12 +242,11 @@ class RelatedVideosController extends WikiaController {
 	}
 
 	public function removeVideo() {
-
-		$articleId = $this->getVal( 'articleId', '' );
 		$title = urldecode( $this->getVal( 'title', '' ) );
 		$external = $this->getVal( 'external', 0 );
-		$rvd = F::build( 'RelatedVideosData' ); /** @var $rvd RelatedVideosData */
-		$retval = $rvd->removeVideo( $articleId, $title, $external );
+
+		$rvd = new RelatedVideosData();
+		$retval = $rvd->removeVideo( $title, $external );
 		if ( is_string( $retval ) ) {
 			$this->setVal( 'error', $retval );
 		}

@@ -23,10 +23,13 @@ $messages['qqq'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author OsamaK
  */
 $messages['ar'] = array(
 	'userdata' => 'احصل على بيانات المستخدم',
+	'userdata-userid-label' => 'توفير معرف المستخدم:',
+	'userdata-submit' => 'الحصول على البيانات',
 );
 
 /** Breton (brezhoneg)
@@ -34,6 +37,17 @@ $messages['ar'] = array(
  */
 $messages['br'] = array(
 	'userdata-submit' => 'Tapout roadennoù',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'userdata' => "Obtenir dades d'usuari",
+	'userdata-userid-label' => "Proporciona l'ID d'usuari:",
+	'userdata-submit' => 'Obtenir dades',
+	'specialuserdata-desc' => 'Proporciona una interfície per canviar wgUserData per wiki.',
+	'userdata-header' => 'Augmentar wgUserData',
 );
 
 /** Czech (česky)
@@ -81,6 +95,20 @@ $messages['es'] = array(
 	'userdata-not-updated' => 'Error al actualizar wgUserData.',
 	'userdata-wf-reason' => 'Valor actualizado a través de [[Special:UserData|UserData]]',
 	'userdata-no-wf' => 'WikiFactory no está habilitado en esta wiki. No se puede alterar wgUserData.',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'userdata' => 'Heinta brúkaradáta',
+	'userdata-userid-label' => 'Skriva brúkara-ID:',
+	'userdata-submit' => 'Heinta dáta',
+	'specialuserdata-desc' => 'Gevur eitt markamót til at broyta wgUserData per wiki.',
+	'userdata-header' => 'Øk um wgUserData',
+	'userdata-updated' => 'wgUserData dagført til "$1".',
+	'userdata-not-updated' => 'Tað bar ikki til at dagføra wgUserData.',
+	'userdata-wf-reason' => 'Virði er dagført við [[Special:UserData|UserData]]',
 );
 
 /** French (français)
@@ -148,6 +176,22 @@ $messages['ia'] = array(
 	'userdata-not-updated' => 'Actualisation de wgUserData fallite.',
 	'userdata-wf-reason' => 'Valor actualisate via [[Special:UserData|UserData]]',
 	'userdata-no-wf' => 'WikiFactory non es activate in iste wiki. Impossibile alterar wgUserData.',
+);
+
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'userdata' => 'Metmaacherdaate holle',
+	'userdata-userid-label' => 'Däm Metmaacher sing Kännong:',
+	'userdata-submit' => 'Daate holle!',
+	'specialuserdata-desc' => 'Brängk en Schnetschtäll, öm de <code lang="en">wgUserData</code> en enem einzelne Wiki ze verändere.',
+	'userdata-header' => 'De <code lang="en">wgUserData</code> jrüüßer maache',
+	'userdata-value' => 'Dä Wäät vun <code lang="en" xml:lang="en">wgUserData</code> es jiz „$1“. Klegg op dä Kobb omm en op di Zigg vun jraad jäz ze säze.',
+	'userdata-updated' => 'De <code lang="en" xml:lang="en">wgUserData</code> es op „$1“ jesaz',
+	'userdata-not-updated' => 'Mer kunnte de <code lang="en" xml:lang="en">wgUserData</code> nit verändere',
+	'userdata-wf-reason' => 'Dä Wäät wood övver de [[Special:UserData|MetmaacherDaate]] aanjepaß.',
+	'userdata-no-wf' => '<i lang="en" xml:lang="en">WikiFactory</i> es en heh däm Wikki nit aanjeschalldt. Mer künne de <code lang="en" xml:lang="en">wgUserData</code> nit verändere.',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -239,15 +283,16 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'userdata' => 'Oten dat utent',
-	'userdata-userid-label' => 'Dà ID utent:',
+	'userdata' => "Oten-e dij dat d'utent",
+	'userdata-userid-label' => "Fornì l'ID utent:",
 	'userdata-submit' => 'Oten dij dat',
-	'specialuserdata-desc' => "A dà n'antërfacia për cangé wgUserData për na wiki",
-	'userdata-header' => 'Ancrementa wgUserData',
-	'userdata-value' => 'Valor corent ëd wgUserData a l\'é "$1". Sgnaca ël boton për ampostelo al timestamp corent.',
+	'specialuserdata-desc' => "A forniss n'antërfacia për cangé wgUserData për wiki",
+	'userdata-header' => 'Aument wgUserData',
+	'userdata-value' => 'Ël valor corent ëd wgUserData a l\'é "$1". Ch\'a sgnaca an sël boton për ampostelo al timestamp corent.',
 	'userdata-updated' => 'wgUserData agiornà a "$1".',
 	'userdata-not-updated' => 'Falì a agiorné wgUserData.',
 	'userdata-wf-reason' => 'Valor agiornà via [[Special:UserData|UserData]]',
@@ -285,6 +330,22 @@ $messages['pt-br'] = array(
 	'userdata-not-updated' => 'Falha ao atualizar wgUserData.',
 	'userdata-wf-reason' => 'Valor atualizado via [[Special:UserData|UserData]]',
 	'userdata-no-wf' => 'WikiFactory não é permitido nesta wiki. Não é possível alterar wgUserData.',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'userdata' => 'Pigghie le date utende',
+	'userdata-userid-label' => "Dèje l'ID utende:",
+	'userdata-submit' => 'Pigghie le date',
+	'specialuserdata-desc' => "Dèje 'n'inderfacce pe cangià wgUserData pe uicchi.",
+	'userdata-header' => "'Ngremende wgUserData",
+	'userdata-value' => "'U valore de mò de wgUserData jè \"\$1\". Cazze 'u buttone pe 'mbostarle l'orarie de mò.",
+	'userdata-updated' => 'wgUserData aggiornate a "$1".',
+	'userdata-not-updated' => 'Aggiornamende de wgUserData fallite.',
+	'userdata-wf-reason' => 'Valore aggiornate cu [[Special:UserData|UserData]]',
+	'userdata-no-wf' => "UicchiFactory non g'è abbilitate sus a sta uicchi. Non ge pozze cangià wgUserData.",
 );
 
 /** Russian (русский)
@@ -348,19 +409,45 @@ $messages['tl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Andriykopanytsia
  * @author Steve.rusyn
+ * @author SteveR
  */
 $messages['uk'] = array(
 	'userdata' => 'Отримати дані користувача',
+	'userdata-userid-label' => 'Надати ID користувача:',
 	'userdata-submit' => 'Отримати дані',
+	'specialuserdata-desc' => 'Надає інтерфейс для зміни wgUserData у вікі.',
+	'userdata-header' => 'Збільшити wgUserData',
+	'userdata-value' => 'Поточне значення wgUserData є " $1 ". Натисніть кнопку, щоб встановити поточну позначку часу.',
+	'userdata-updated' => 'wgUserData оновлено до "$1".',
+	'userdata-not-updated' => 'Не вдалося оновити wgUserData.',
+	'userdata-wf-reason' => 'Значення оновлені за допомогою [[Special:UserData|UserData]]',
+	'userdata-no-wf' => 'WikiFactory на цій вікі не увімкнено. Не вдається змінити wgUserData.',
 );
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
 	'userdata' => '获取用户档案',
 	'userdata-userid-label' => '提供用户ID：',
 	'userdata-submit' => '获取数据',
+	'specialuserdata-desc' => '为更改每个wiki的wgUserData提供一个接口',
+	'userdata-header' => '增加wgUserData',
+	'userdata-value' => 'wgUserData的当前值是“$1”。按下按钮将其设置为当前的时间戳。',
+	'userdata-updated' => 'wgUserData已更新为“$1”。',
 	'userdata-not-updated' => '更新wgUserData失败',
+	'userdata-wf-reason' => '通过 [[Special:UserData|UserData]] 更新值',
+	'userdata-no-wf' => 'WikiFactory在此wiki上未启用。无法更改wgUserData。',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'userdata' => '獲取使用者資料',
+	'userdata-userid-label' => '提供使用者 ID：',
+	'userdata-submit' => '獲取資料',
 );

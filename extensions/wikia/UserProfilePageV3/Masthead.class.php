@@ -274,15 +274,7 @@ class Masthead {
 			$url = $this->getUrl( '/thumb/' );
 		}
 
-		/**
-		 * returned url is virtual base for thumbnail, so
-		 *
-		 * - get last part of path
-		 * - add it as thumbnail file prefixed with widthpx
-		 */
-		$parts = explode( "/", $url );
-		$file = array_pop( $parts );
-		return sprintf( "%s/%dpx-%s", $url, $width, $file );
+		return ImagesService::getThumbUrlFromFileUrl($url, $width);
 	}
 
 	/**
@@ -536,6 +528,7 @@ class Masthead {
 			wfProfileOut( __METHOD__ );
 			return UPLOAD_ERR_CANT_WRITE;
 		}
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -685,6 +678,7 @@ class Masthead {
 
 			$errorNo = UPLOAD_ERR_OK;
 		}
+		wfProfileOut( __METHOD__ );
 
 		return $errorNo;
 	} // end postProcessImageInternal()
@@ -707,59 +701,6 @@ class Masthead {
 		}
 	}
 
-	static public function getUserStatsData( $userName, $useMasterDb = false ) {
-		global $wgLang, $wgCityId, $wgExternalDatawareDB;
-
-		$result = array( 'editCount' => 0, 'firstDate' => 0 );
-
-		$destionationUser = User::newFromName($userName);
-		$destionationUserId = $destionationUser ? $destionationUser->getId() : 0;
-		if($destionationUserId != 0) {
-			global $wgMemc, $wgEnableAnswers;
-
-			if(!empty($wgEnableAnswers) && class_exists('AttributionCache')) {
-				// use AttributionCache to get edit points and first edit date
-				$attrCache = AttributionCache::getInstance();
-
-				$editCount = $attrCache->getUserEditPoints($destionationUserId);
-				$firstDate = $wgLang->date(wfTimestamp(TS_MW, $attrCache->getUserFirstEditDateFromCache($destionationUserId)));
-			}
-			else {
-				$mastheadDataEditDateKey = wfMemcKey('mmastheadData-editDate-' . $destionationUserId);
-				$mastheadDataEditCountKey = wfMemcKey('mmastheadData-editCount-' . $destionationUserId);
-				$mastheadDataEditDate = $wgMemc->get($mastheadDataEditDateKey);
-				$mastheadDataEditCount = $wgMemc->get($mastheadDataEditCountKey);
-
-				if(empty($mastheadDataEditCount) || empty($mastheadDataEditDate)) {
-					$dbr = wfGetDB( $useMasterDb ? DB_MASTER : DB_SLAVE );
-
-					$dbResult = $dbr->select(
-						'revision',
-						array('min(rev_timestamp) AS date, count(*) AS edits'),
-						array('rev_user_text' => $destionationUser->getName()),
-						__METHOD__
-					);
-
-					if ($row = $dbr->FetchObject($dbResult)) {
-						$firstDate = $wgLang->date(wfTimestamp(TS_MW, $row->date));
-						$editCount = $row->edits;
-					}
-					if ($dbResult !== false) {
-						$dbr->FreeResult($dbResult);
-					}
-					$wgMemc->set($mastheadDataEditDateKey, $firstDate, 60 * 60);
-					$wgMemc->set($mastheadDataEditCountKey, $editCount, 60 * 60);
-				} else {
-					$firstDate = $mastheadDataEditDate;
-					$editCount = $mastheadDataEditCount;
-				}
-			}
-			$result['editCount'] = $editCount;
-			$result['firstDate'] = $firstDate;
-		}
-		return $result;
-	}
-
 	/**
 	 * @param $article
 	 * @param User $user
@@ -774,7 +715,7 @@ class Masthead {
 	 * @param $baseRevId
 	 * @return bool
 	 */
-	public function userMastheadInvalidateCache(&$article, &$user, $text, $summary, $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
+	static public function userMastheadInvalidateCache(&$article, &$user, $text, $summary, $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
 		if (!$user->isAnon()) {
 			if(count($status->errors) == 0) {
 				global $wgMemc;

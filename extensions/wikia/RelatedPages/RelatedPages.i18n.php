@@ -23,9 +23,11 @@ $messages['af'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author OsamaK
  */
 $messages['ar'] = array(
+	'wikiarelatedpages-desc' => 'يضيف قائمة بصفحات ذات صلة لصفحات',
 	'wikiarelatedpages-heading' => 'اقرأ المزيد',
 );
 
@@ -59,6 +61,14 @@ $messages['br'] = array(
 $messages['bs'] = array(
 	'wikiarelatedpages-desc' => 'Dodaje spisak povezanih stranica na određenu stranicu',
 	'wikiarelatedpages-heading' => 'Pročitaj više',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'wikiarelatedpages-desc' => 'Afegir una llista en pàgines de pàgines relacionades',
+	'wikiarelatedpages-heading' => 'Llegir més',
 );
 
 /** Czech (česky)
@@ -221,6 +231,14 @@ $messages['nl'] = array(
 	'wikiarelatedpages-heading' => 'Meer lezen',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'wikiarelatedpages-desc' => 'Apond una lista de paginas ligadas a d’autras paginas',
+	'wikiarelatedpages-heading' => 'Per ne saber mai',
+);
+
 /** Polish (polski)
  * @author Sovq
  * @author Sp5uhe
@@ -262,6 +280,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'wikiarelatedpages-desc' => 'Adiciona a páginas uma lista de páginas relacionadas',
 	'wikiarelatedpages-heading' => 'Leia mais',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikiarelatedpages-desc' => "Aggiunge 'n'elenghe cu le pàggene collegate a le pàggene",
+	'wikiarelatedpages-heading' => 'Ligge de cchiù',
 );
 
 /** Russian (русский)
@@ -315,8 +341,10 @@ $messages['tt-cyrl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Ua2004
  */
 $messages['uk'] = array(
+	'wikiarelatedpages-desc' => "Додає на сторінки список пов'язаних сторінок",
 	'wikiarelatedpages-heading' => 'Читати далі',
 );
 

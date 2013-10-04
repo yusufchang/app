@@ -30,7 +30,14 @@ abstract class WikiaDispatchableObject extends WikiaObject {
 	protected $response = null;
 
 	/**
-	 * wether the class accepts external requests
+	 * Describes object to dispatch to after this one is done
+	 * Used by "forward" function and "after" routing rule
+	 * @var $callNext array
+	 */
+	protected $callNext = array();
+
+	/**
+	 * Whether the class accepts external requests
 	 * @return boolean
 	 */
 	abstract public function allowsExternalRequests();
@@ -42,14 +49,25 @@ abstract class WikiaDispatchableObject extends WikiaObject {
 	 * @param string $methodName
 	 * @param bool $resetData
 	 */
-	protected function forward( $controllerName, $methodName, $resetData = true ) {
-		if( $resetData ) {
-			$this->response->resetData();
-		}
 
-		$this->request->setVal( 'controller', $controllerName );
-		$this->request->setVal( 'method', $methodName );
-		$this->request->setDispatched(false);
+	public function forward( $controllerName, $methodName, $resetData = true ) {
+		$this->callNext[] = array(
+			"controller" => $controllerName,
+			"method" => $methodName,
+			"reset" => $resetData
+		);
+	}
+
+	public function hasNext() {
+		return !empty($this->callNext);
+	}
+
+	public function getNext() {
+		if ($this->hasNext()) {
+			return array_pop($this->callNext);
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -213,7 +231,7 @@ abstract class WikiaDispatchableObject extends WikiaObject {
 	 */
 	public static function getUrl( $method, Array $params = null ) {
 		$app = F::app();
-		$basePath = $app->wf->ExpandUrl( $app->wg->Server . $app->wg->ScriptPath . '/wikia.php' );
+		$basePath = wfExpandUrl( $app->wg->Server . $app->wg->ScriptPath . '/wikia.php' );
 
 		$baseParams = array(
 			'controller' => preg_replace( "/Controller$/", '', get_called_class() ),
@@ -227,7 +245,7 @@ abstract class WikiaDispatchableObject extends WikiaObject {
 			$baseParams = array_merge( $baseParams, $params );
 		}
 
-		return $app->wf->AppendQuery( $basePath, $baseParams );
+		return wfAppendQuery( $basePath, $baseParams );
 	}
 
 	/**

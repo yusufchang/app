@@ -3,7 +3,7 @@
 class RelatedVideosService {
 
 	const memcKeyPrefix = 'RelatedVideosService';
-	const memcVersion = 19;
+	const memcVersion = 20;
 	static public $width = 160;
 	static public $height = 90;
 	const howLongVideoIsNew = 3;
@@ -14,7 +14,7 @@ class RelatedVideosService {
 	 * @param type $title if provided, look up article by text.
 	 * @param string $source if video is on an external wiki, DB name of that wiki. Empty value indicates video is stored locally.
 	 * @param int $videoWidth Width of resulting video player, in pixels
-	 * @return Array 
+	 * @return Array
 	 */
 	public function getRelatedVideoData( $params, $videoWidth = RelatedVideosData::DEFAULT_OASIS_VIDEO_WIDTH, $cityShort='life', $useMaster=0, $videoHeight='', $useJWPlayer=true, $autoplay=true, $inAjaxResponse=false ){
 
@@ -28,7 +28,7 @@ class RelatedVideosService {
 		if ( empty( $result ) ){
 			Wikia::log( __METHOD__, 'RelatedVideos', 'Not from cache' );
 			$result = array();
-			$rvd = F::build('RelatedVideosData'); /* @var $rvd RelatedVideosData */
+			$rvd = new RelatedVideosData();
 			$result['data'] = $rvd->getVideoData(
 				$titleText,
 				self::$width,
@@ -46,7 +46,7 @@ class RelatedVideosService {
 				wfProfileOut( __METHOD__ );
 				return array();
 			}
-				
+
 			// just to be sure and to be able to work cross devbox.
 			if ( !isset( $result['data']['uniqueId'] ) ) {
 				wfProfileOut( __METHOD__ );
@@ -77,21 +77,16 @@ class RelatedVideosService {
 
 
 	/**
-	 * Preload information from memcached about given pages
+	 * Prefetch data from memcached for given pages
 	 *
 	 * @author Władysław Bodzek
 	 * @param $pages array
 	 */
-	protected function preloadDataFromMemcached( $pages, $videoWidth = RelatedVideosData::DEFAULT_OASIS_VIDEO_WIDTH, $cityShort='life' ) {
+	protected function prefetchDataFor( $pages, $videoWidth = RelatedVideosData::DEFAULT_OASIS_VIDEO_WIDTH, $cityShort='life' ) {
 		global $wgMemc;
 		wfProfileIn(__METHOD__);
 
 		if ( empty( $pages ) ) {
-			wfProfileOut(__METHOD__);
-			return;
-		}
-
-		if ( !is_callable( array( $wgMemc, 'getMulti' ) ) ) {
 			wfProfileOut(__METHOD__);
 			return;
 		}
@@ -104,11 +99,9 @@ class RelatedVideosService {
 		}
 
 		$keys = array_unique($keys);
+		$wgMemc->prefetch( $keys );
 
-		$data = $wgMemc->getMulti( $keys );
 		wfProfileOut(__METHOD__);
-
-		return $data;
 	}
 
 	private function extendVideoByLocalParams( $videoData, $localParams ){
@@ -123,7 +116,7 @@ class RelatedVideosService {
 		$videoData['date'] = isset( $localParams['date'] ) ? $localParams['date'] : $videoData['timestamp'];
 
 		if ( isset( $localParams['userName'] ) && !empty( $localParams['userName'] ) ){
-			$oUser = F::build( 'User', array( $localParams['userName'] ), 'newFromName' );
+			$oUser = User::newFromName( $localParams['userName'] );
 			if ( is_object( $oUser ) ) {
 				$oUser->load();
 			}
@@ -140,7 +133,7 @@ class RelatedVideosService {
 		$isStagingServer = Wikia::isStagingServer();
 		$StagingServerSuffix = empty($isStagingServer)?'PRODUCTION':'STAGING';
 
-		return F::app()->wf->memcKey( md5( $title ), F::app()->wg->wikiaVideoRepoDBName, $videoWidth, self::memcKeyPrefix, self::memcVersion, self::$width, $StagingServerSuffix );
+		return wfMemcKey( md5( $title ), F::app()->wg->wikiaVideoRepoDBName, $videoWidth, self::memcKeyPrefix, self::memcVersion, self::$width, $StagingServerSuffix );
 	}
 
 	public function saveToCache( $title, $source, $videoWidth, $cityShort, $data ) {
@@ -148,7 +141,7 @@ class RelatedVideosService {
 		$weekInSeconds = 604800;
 		$oMemc->set(
 			$this->getMemcKey( $title, $source, $videoWidth, $cityShort ),
-			$data, 
+			$data,
 			$weekInSeconds
 		);
 	}
@@ -180,7 +173,7 @@ class RelatedVideosService {
 			$item['relatedVideosDescription'] = isset( $res['comment'] ) ? $res['comment'] : '';
 		}
 		return $item;
-		
+
 	}
 
 	public function createWikiActivityParams($title, $res, $item){
@@ -192,7 +185,7 @@ class RelatedVideosService {
 			$item['relatedVideos'] = true;
 			$item['relatedVideosDescription'] = isset( $res['comment'] ) ? $res['comment'] : '';
 		}
-		return $item;	
+		return $item;
 	}
 
 	private function parseSummary( $text ){
@@ -203,7 +196,7 @@ class RelatedVideosService {
 		return $app->wg->parser->parse(
 			$text,
 			$app->wg->title,
-			F::build('ParserOptions'),
+			(new ParserOptions),
 			false
 		)->getText();
 	}
@@ -228,7 +221,6 @@ class RelatedVideosService {
 
 		$videos = array();
 
-		$oLocalLists = RelatedVideosNamespaceData::newFromTargetTitle( $title );
 		$oEmbededVideosLists = RelatedVideosEmbededData::newFromTitle( $title );
 		$oGlobalLists = RelatedVideosNamespaceData::newFromGeneralMessage();
 
@@ -237,7 +229,7 @@ class RelatedVideosService {
 		global $wgEnableMemcachedBulkMode;
 		if ( !empty( $wgEnableMemcachedBulkMode ) ) {
 			$pages = array();
-			foreach( array( $oGlobalLists, $oEmbededVideosLists, $oLocalLists ) as $oLists ){
+			foreach( array( $oGlobalLists, $oEmbededVideosLists ) as $oLists ) {
 				if ( !empty( $oLists ) && $oLists->exists() ){
 					$data = $oLists->getData();
 					if ( isset(  $data['lists'] ) && isset( $data['lists']['WHITELIST'] ) ) {
@@ -250,12 +242,12 @@ class RelatedVideosService {
 					}
 				}
 			}
-			$this->preloadDataFromMemcached($pages);
+			$this->prefetchDataFor($pages);
 		}
 		// experimental - end
 
 		$blacklist = array();
-		foreach( array( $oGlobalLists, $oEmbededVideosLists, $oLocalLists ) as $oLists ){
+		foreach( array( $oGlobalLists, $oEmbededVideosLists ) as $oLists ) {
 			if ( !empty( $oLists ) && $oLists->exists() ){
 				$data = $oLists->getData();
 				if ( isset(  $data['lists'] ) && isset( $data['lists']['WHITELIST'] ) ) {

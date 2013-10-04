@@ -5,9 +5,12 @@
  */
 
 class ArticlesUsingMediaQuery {
+	/* @var Title */
 	private $fileTitle;
 	private $app;
 	private $memc;
+
+	const IMAGELINKS_LIMIT = 500;
 
 	/*
 	 * @param Title $fileTitle
@@ -15,7 +18,7 @@ class ArticlesUsingMediaQuery {
 	public function __construct($fileTitle) {
 		$this->fileTitle = $fileTitle;
 		$this->app = F::app();
-		$this->memc = $this->app->getGlobal('wgMemc');
+		$this->memc = $this->app->wg->Memc;
 	}
 
 	/*
@@ -41,7 +44,10 @@ class ArticlesUsingMediaQuery {
 			array( 'page_namespace', 'page_title' ),
 			array( 'il_to' => $this->fileTitle->getDBKey(), 'il_from = page_id' ),
 			__METHOD__,
-			array( 'ORDER BY' => 'page_namespace ASC' )
+			[
+				'LIMIT' => self::IMAGELINKS_LIMIT, # BAC-265
+				'ORDER BY' => 'page_namespace ASC'
+			]
 		);
 
 		$data = array() ;
@@ -65,7 +71,7 @@ class ArticlesUsingMediaQuery {
 		$key = '';
 		$key .= $this->app->wg->cityId;
 		$key .= 'ArticlesUsingMediaQuery_v3_';
-		$key .= $this->fileTitle->getDBKey();
+		$key .= md5($this->fileTitle->getDBKey());
 
 		return $key;
 	}
@@ -106,6 +112,13 @@ class ArticlesUsingMediaQuery {
 		return true;
 	}
 
+	/**
+	 * @param $article WikiPage
+	 * @param bool $wgUser
+	 * @param bool $reason
+	 * @param bool $error
+	 * @return bool
+	 */
 	public static function onArticleDelete( &$article, &$wgUser=false, &$reason=false, &$error=false ) {
 		$id = $article->mTitle->getArticleID();
 		$dbr = wfGetDB( DB_SLAVE );

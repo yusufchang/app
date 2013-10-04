@@ -320,6 +320,7 @@ class Article extends Page {
 				$this->mRevision = Revision::newFromId( $oldid );
 				if ( !$this->mRevision ) {
 					wfDebug( __METHOD__ . " failed to retrieve specified revision, id $oldid\n" );
+					Wikia::log(__METHOD__, 1, "failed to retrieve specified revision, title '$t', id $oldid", true); # Wikia change - @author macbre
 					wfProfileOut( __METHOD__ );
 					return false;
 				}
@@ -334,6 +335,7 @@ class Article extends Page {
 			$this->mRevision = $this->mPage->getRevision();
 			if ( !$this->mRevision ) {
 				wfDebug( __METHOD__ . " failed to retrieve current page, rev_id " . $this->mPage->getLatest() . "\n" );
+				Wikia::log(__METHOD__, 3, "failed to retrieve current page, title '$t', rev_id " . $this->mPage->getLatest(), true); # Wikia change - @author macbre
 				wfProfileOut( __METHOD__ );
 				return false;
 			}
@@ -622,6 +624,14 @@ class Article extends Page {
 						$wgOut->setSquidMaxage( 0 );
 						$wgOut->addHTML( "<!-- parser cache is expired, sending anyway due to pool overload-->\n" );
 					}
+
+					# <Wikia>
+					if ( !$poolArticleView->getIsDirty() ) {
+						$this->mParserOutput->setPerformanceStats('wikitextSize',strlen($this->getContent()));
+						$this->mParserOutput->setPerformanceStats('htmlSize',strlen($this->mParserOutput->getText()));
+						wfRunHooks('ArticleViewAfterParser',array( $this, $this->mParserOutput ) );
+					}
+					# </Wikia>
 
 					$outputDone = true;
 					break;
@@ -1334,6 +1344,11 @@ class Article extends Page {
 
 		# Check permissions
 		$permission_errors = $title->getUserPermissionsErrors( 'delete', $user );
+
+		# Wikia change @author nAndy (DAR-1133)
+		wfRunHooks( 'BeforeDeletePermissionErrors', [ &$this, &$title, &$user, &$permission_errors ] );
+		# End of Wikia change
+
 		if ( count( $permission_errors ) ) {
 			throw new PermissionsError( 'delete', $permission_errors );
 		}

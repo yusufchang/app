@@ -8,7 +8,6 @@
 @import "footer";
 @import "navigation";
 @import "search_page";
-@import "related_pages";
 @import "image_stack";
 @import "ad";
 @import "category_page";
@@ -21,6 +20,7 @@
 @import 'image_placeholder';
 @import 'throbber';
 @import "form";
+@import '../../RelatedPages/css/RelatedPages.wikiamobile';
 
 //mixins
 @import "mixins/transition.scss";
@@ -28,7 +28,6 @@
 
 html {
 	border: none;
-	cursor: pointer;
 }
 
 body {
@@ -66,7 +65,7 @@ body {
 
 #wkMainCntHdr {
 	border-bottom: 1px solid $border-color;
-	padding: $page-padding 50px $page-padding $page-padding;
+	padding: $page-padding 50px $page-padding 0;
 	position: relative;
 
 	h1{
@@ -90,25 +89,30 @@ a {
 }
 
 #wkPage {
-	//I want page to be at least 305px long to be able to show share
-	min-height: 305px;
+	//I want page to be at least 405px long to be able to show share and search suggestions
+	min-height: 405px;
 	background-color: white;
 	padding: $page-padding;
 }
-//for browsers that don't know that these should be block
-//all our browsers support these (Removed by Jakub Olek according to: http://caniuse.com/#search=figu)
-//section, article, header, footer, aside, figure, figcaption {
-//	display: block;
-//}
 
+//fixes for fluid content
 #wkMainCnt{
-	//fixes for fluid content
 	.tvetnone {
 		width: 100% !important;
 		text-align: center;
     }
-	//end of fluiding thead content
 }
+
+#mw-content-text {
+	//don't let iframes,objects be wider than a screen (videos)
+	> iframe[width], > object {
+		width: 75% !important;
+		height: auto;
+		margin: 0 auto;
+		display: block;
+	}
+}
+//end of fluiding thead content
 
 blockquote {
 	border-left: 1px solid $border-color;
@@ -213,7 +217,9 @@ blockquote {
 
 #wkTst{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	//for those browsers that don't support fixed
 	position: absolute;
+	position: fixed;
 	margin: 10px auto;
 	padding: 10px 20px;
 	border-radius: 5px;

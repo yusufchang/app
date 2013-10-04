@@ -22,6 +22,14 @@ $messages['af'] = array(
 	'tog-watchlistsubpages' => 'Volg subbladsye',
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'wikia-watchsubpages-desc' => 'تتبع آلي للصفحات الفرعية',
+	'tog-watchlistsubpages' => 'متابعة الصفحات الفرعية',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author EugeneZelenko
  * @author Jim-by
@@ -86,6 +94,14 @@ $messages['es'] = array(
 $messages['fi'] = array(
 	'wikia-watchsubpages-desc' => 'Automaattinen alasivujen seuraaminen',
 	'tog-watchlistsubpages' => 'Seuraa alasivuja',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'wikia-watchsubpages-desc' => 'Fylg undirsíðum sjálvvirkandi',
+	'tog-watchlistsubpages' => 'Fylg undirsíðum',
 );
 
 /** French (français)
@@ -192,6 +208,14 @@ $messages['nl'] = array(
 	'tog-watchlistsubpages' => "Subpagina's volgen",
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'wikia-watchsubpages-desc' => 'Seguiment automatic de las sospaginas',
+	'tog-watchlistsubpages' => 'Seguir las sospaginas',
+);
+
 /** Polish (polski)
  * @author Sovq
  * @author Sp5uhe
@@ -223,6 +247,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'wikia-watchsubpages-desc' => 'Seguimento automático para as subpáginas',
 	'tog-watchlistsubpages' => 'Seguir subpáginas',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'wikia-watchsubpages-desc' => 'Auto seguimende pe le sottopàggene',
+	'tog-watchlistsubpages' => 'Segue le sottopàggene',
 );
 
 /** Russian (русский)
@@ -275,6 +307,7 @@ $messages['tt-cyrl'] = array(
 
 /** Ukrainian (українська)
  * @author Steve.rusyn
+ * @author SteveR
  */
 $messages['uk'] = array(
 	'wikia-watchsubpages-desc' => 'Автоматичний перехід на підсторінки',

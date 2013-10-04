@@ -35,7 +35,7 @@ CKEDITOR.plugins.add('rte-template',
 				this.add('--other--',
 					'<strong>' + editor.lang.templateDropDown.chooseAnotherTpl  + '</strong>',
 					editor.lang.templateDropDown.chooseAnotherTpl);
-				
+
 				// add "List of used templates"
 				this.add('--list--',
 					'<strong>' + editor.lang.templateDropDown.showUsedList  + '</strong>',
@@ -61,8 +61,6 @@ CKEDITOR.plugins.add('rte-template',
 						RTE.templateHelpers.makeLayout(editor);
 						break;
 					default:
-						RTE.track('visualMode', 'template', 'dialog', 'search', 'dropdown', value);
-	
 						// show template editor with selected template
 						RTE.templateEditor.createTemplateEditor(value);
 				}
@@ -74,14 +72,14 @@ CKEDITOR.plugins.add('rte-template',
 				}, 50);
 			}
 		});
-		
+
 		// list of templates to be added to dropdown
 		/*
 		var templates = window.RTETemplatesDropdown;
 
 		for (var t=0; t < templates.length && t < 4; t++) {
 			var name = templates[t].replace(/_/g, ' ');
-			
+
 			editor.ui.addButton('Template_Popular'+t, {
 				label: name,
 				title: name,
@@ -181,7 +179,7 @@ RTE.templateEditor = {
 			currentData = this.placeholder ? this.placeholder.getData() : false,
 			bracketPattern = /\[\[(.*?)\]\]/g;
 
-		// Check for any bracketed syntax and mark the pipes within (BugID: 2264 and 69126)			
+		// Check for any bracketed syntax and mark the pipes within (BugID: 2264 and 69126)
 		if ( bracketPattern.test( currentData.wikitext ) ) {
 			var	results = currentData.wikitext.match( bracketPattern ),
 				i = 0,
@@ -438,7 +436,9 @@ RTE.templateEditor = {
 					html += '<dd><textarea rel="' + key + '" id="templateEditorParameter' + i +'">' + value + '</textarea></dd>';
 				});
 
-				$('#templateParameters').html(html);
+				$('#templateParameters')
+					.html(html)
+					.find('dd > textarea').keydown(this.onTextareaKeyDown);
 
 				// generate preview
 				this.doPreview();
@@ -454,6 +454,21 @@ RTE.templateEditor = {
 					$('#templateAdvPreview').html(html);
 				});
 				break;
+		}
+	},
+
+	// handle keydown event on textarea elements
+	onTextareaKeyDown: function(ev) {
+		// tinymce will not handle tab key correctly.
+		if( ev.which == 9 /* tab */ ) {
+			// select next textarea to focus
+			var next = $(this).parent('dd').next('dt').next('dd').children('textarea').first();
+			if( next.size() == 1 ) {
+				next.focus();
+				// prevent tinymce and browser from handling this event
+				ev.stopPropagation();
+				ev.preventDefault();
+			}
 		}
 	},
 

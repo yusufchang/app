@@ -5,7 +5,7 @@ class QuickStatsController extends WikiaController {
 	public function getStats() {
 
 		// First check memcache for our stats
-		$memKey = $this->wf->MemcKey('quick_stats');
+		$memKey = wfMemcKey('quick_stats');
 		$stats = $this->wg->Memc->get($memKey);
 		if (!is_array($stats)) {
 			$cityID = $this->wg->CityId;
@@ -38,7 +38,7 @@ class QuickStatsController extends WikiaController {
 
 	// This should probably be Unique Users but we don't have that stat
 	protected function getDailyPageViews( Array &$stats ) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$week = date( 'Y-m-d', strtotime('-7 day') );
 
@@ -49,18 +49,18 @@ class QuickStatsController extends WikiaController {
 			$stats['totals']['pageviews'] += $value;
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 
 	public function getDailyEdits (Array &$stats, $cityID) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if ( !empty( $this->wg->StatsDBEnabled ) ) {
 			$today = date( 'Y-m-d', strtotime('-1 day') );
 			$week = date( 'Y-m-d', strtotime('-7 day') );
 
-			$db = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->StatsDB);
+			$db = wfGetDB(DB_SLAVE, array(), $this->wg->StatsDB);
 
 			$oRes = $db->select(
 				array( 'events' ),
@@ -78,14 +78,14 @@ class QuickStatsController extends WikiaController {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 
 	protected function getDailyPhotos(Array &$stats) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
-		$db = $this->wf->GetDB(DB_SLAVE, array());
+		$db = wfGetDB(DB_SLAVE, array());
 
 		$today = date( 'Ymd', strtotime('-1 day') ) . '235959';
 		$week = date( 'Ymd', strtotime('-7 day') ) . '000000';
@@ -105,7 +105,7 @@ class QuickStatsController extends WikiaController {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	protected function getDailyLikes(Array &$stats) {
@@ -116,7 +116,7 @@ class QuickStatsController extends WikiaController {
 		if (!$domain_id)
 			return $result;
 
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$since = strtotime("-7 day 00:00:00");
 		$until = strtotime("-0 day 00:00:00");
@@ -137,7 +137,7 @@ class QuickStatsController extends WikiaController {
 				$result = TRUE;
 			}
 		}
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 
 		return $result;
 	}

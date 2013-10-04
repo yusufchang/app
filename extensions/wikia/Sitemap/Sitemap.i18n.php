@@ -28,9 +28,10 @@ $messages['af'] = array(
 
 /** Arabic (العربية)
  * @author Malhargan
+ * @author ترجمان05
  */
 $messages['ar'] = array(
-	'sitemap-desc' => 'توليد خرائط مواقع ليكي على الطاير',
+	'sitemap-desc' => 'توليد خرائط مواقع الويكي على الطاير',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -45,6 +46,13 @@ $messages['be-tarask'] = array(
  */
 $messages['br'] = array(
 	'sitemap-desc' => 'Genel steuñvennoù eus ar wiki war ar prim.',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'sitemap-desc' => 'Generar mapes del lloc sobre la marxa',
 );
 
 /** Czech (česky)

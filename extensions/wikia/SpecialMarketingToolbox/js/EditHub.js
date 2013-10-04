@@ -1,4 +1,4 @@
-/*global VET_loader, WMU_skipDetails:true, WMU_show, WMU_openedInEditor:true, confirm */
+/*global VET_loader, WMU_skipDetails:true, WMU_show, WMU_openedInEditor:true, confirm, alert */
 
 var EditHub = function() {};
 
@@ -8,16 +8,27 @@ EditHub.prototype = {
 	wmuDeffered: undefined,
 	lastActiveWmuButton: undefined,
 
+	disableArrow: function() {
+		var toolboxForm = $('#marketing-toolbox-form').find('.module-box');
+		toolboxForm.find('button.navigation').removeAttr('disabled');
+		toolboxForm.filter(':first').find('.nav-up').attr('disabled', 'disabled');
+		toolboxForm.filter(':last').find('.nav-down').attr('disabled', 'disabled');
+	},
+
 	init: function () {
 		var validator;
+		var initThis = this;
+
+		$('#MarketingToolboxPublish').click($.proxy(this.publishHub, this));
 
 		$('.MarketingToolboxMain .wmu-show').click($.proxy(this.wmuInit, this));
+		$('.module-popular-videos').on('click', '.remove', $.proxy(this.popularVideosRemove, this));
+		$('.MarketingToolboxMain #marketing-toolbox-removeall').click($.proxy(this.popularVideosRemoveAll, this));
 		$('.MarketingToolboxMain .vet-show').each(function() {
 			var $this = $(this);
-			
-			$this.addVideoButton({
-				callbackAfterSelect: function(url) {
 
+			$this.addVideoButton({
+				callbackAfterSelect: function(url, VET) {
 					$.nirvana.sendRequest({
 						controller: 'MarketingToolboxController',
 						method: 'getVideoDetails',
@@ -30,20 +41,33 @@ EditHub.prototype = {
 							if ( response.error ) {
 								GlobalNotification.show( response.error, 'error' );
 							} else {
-								var box = $this.parents('.module-box:first');
-								if (!box.length) {
-									box = $('.MarketingToolboxMain');
+								if (wgMarketingToolboxModuleIdSelected == wgMarketingToolboxModuleIdFeaturedVideo) {
+									var box = $this.parents('.module-box:first');
+									if (!box.length) {
+										box = $('.MarketingToolboxMain');
+									}
+
+									box.find('.filename-placeholder').html(response.videoFileName);
+									box.find('.wmu-file-name-input').val(response.videoFileName).valid();
+
+									box.find('.image-placeholder')
+										.empty()
+										.html(response.videoData.videoThumb);
+
+									// Close VET modal
+									VET.close();
 								}
-				
-								box.find('.filename-placeholder').html(response.videoFileName);
-								box.find('.wmu-file-name-input').val(response.videoFileName).valid();
-				
-								box.find('.image-placeholder')
-									.empty()
-									.html(response.videoFileMarkup);
-								
-								// Close VET modal
-								VET_loader.modal.closeModal();
+								else if (wgMarketingToolboxModuleIdSelected == wgMarketingToolboxModuleIdPopularVideos) {
+									$.when(
+										$.loadMustache(),
+										Wikia.getMultiTypePackage({
+											mustache: 'extensions/wikia/SpecialMarketingToolbox/templates/MarketingToolboxVideosController_popularVideoRow.mustache'
+										})
+									).done(function(libData, packagesData) {
+										initThis.popularVideosAdd(packagesData[0].mustache[0], response);
+										VET.close();
+									});
+								}
 							}
 						}
 					});
@@ -111,6 +135,8 @@ EditHub.prototype = {
 		};
 
 		this.wmuReady = false;
+
+		this.disableArrow();
 	},
 
 	wmuInit: function(event) {
@@ -123,7 +149,7 @@ EditHub.prototype = {
 				$.loadJQueryAIM(),
 				$.getResources([
 					wgExtensionsPath + '/wikia/WikiaMiniUpload/js/WMU.js',
-					$.getSassCommonURL( 'extensions/wikia/WikiaMiniUpload/css/WMU.scss'),
+					$.getSassCommonURL( 'extensions/wikia/WikiaMiniUpload/css/WMU.scss')
 				]),
 				$.loadJQueryAIM()
 			).then($.proxy(function() {
@@ -156,7 +182,7 @@ EditHub.prototype = {
 				tempImg.src = response.fileUrl;
 				var box = this.lastActiveWmuButton.parents('.module-box:first');
 				if (!box.hasClass('sponsored-image')) { //define dimensions if it's not sponsored image
-					tempImg.height = response.imageHeight
+					tempImg.height = response.imageHeight;
 					tempImg.width = response.imageWidth;
 				}
 				if (!box.length) {
@@ -187,6 +213,42 @@ EditHub.prototype = {
 		this.removeSponsoredImage();
 	},
 
+	popularVideosAdd: function(template, vetData) {
+		var html = $.mustache(template, {
+			sectionNo: 2,
+			videoTitle: vetData.videoFileName,
+			videoTime: vetData.videoData.videoTime,
+			videoFullUrl: vetData.videoUrl,
+			videoThumbnail: vetData.videoData.videoThumb,
+			removeMsg: $.msg('marketing-toolbox-edithub-remove'),
+			blankImgUrl: window.wgBlankImgUrl
+		});
+		$('#marketing-toolbox-form .popular-videos-list')
+			.prepend(html)
+			.find('.module-box')
+			.each(this.popularVideosResetIndex);
+		this.disableArrow();
+	},
+
+	popularVideosRemove: function(event) {
+		if (confirm($.msg('marketing-toolbox-hub-module-popular-videos-clear-one-confirm')) == true) {
+			var moduleContainer = '.module-box';
+			$(event.target).parents(moduleContainer).remove();
+			$('.popular-videos-list').find(moduleContainer).each(this.popularVideosResetIndex);
+			this.disableArrow();
+		}
+	},
+
+	popularVideosRemoveAll: function(event) {
+		if (confirm($.msg('marketing-toolbox-hub-module-popular-videos-clear-confirm')) == true) {
+			$('.popular-videos-list .module-box').remove();
+		}
+	},
+
+	popularVideosResetIndex: function(index, element) {
+		$(element).find('h3').text(index + 2 + '.');
+	},
+
 	confirmRemoveSponsoredImage: function() {
 		if (confirm($.msg('marketing-toolbox-edithub-clear-sponsored-image')) == true) {
 			this.removeSponsoredImage();
@@ -200,6 +262,38 @@ EditHub.prototype = {
 			.find('.image-placeholder img').remove()
 			.end()
 			.find('span.filename-placeholder').text('');
+	},
+
+	publishHub: function() {
+		var qs = Wikia.Querystring(window.location);
+
+		$.nirvana.sendRequest({
+			controller: 'MarketingToolbox',
+			method: 'publishHub',
+			type: 'post',
+			data: {
+				'date': qs.getVal('date'),
+				'region': qs.getVal('region'),
+				'verticalId': qs.getVal('verticalId'),
+				'sectionId': qs.getVal('sectionId')
+			},
+			callback: function(data){
+				if (data.success) {
+					window.open(data.hubUrl);
+					var container = $('.grid-4.alpha:first');
+					container.find('p.success').remove();
+
+					var info = $('<p />')
+						.addClass('success')
+						.text(data.successText);
+
+					container.prepend(info);
+					info.get(0).scrollIntoView();
+				} else {
+					alert(data.errorMsg);
+				}
+			}
+		});
 	}
 };
 

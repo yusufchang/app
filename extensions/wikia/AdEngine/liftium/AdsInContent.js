@@ -17,14 +17,14 @@ AIC2.init = function() {
 
 	if ($('body').hasClass('rtl')) {
 		Liftium.d("AIC2: rtl wiki", 7);
-		//WikiaTracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'rtl', trackingMethod: 'ad'});
+		//Wikia.Tracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'rtl', trackingMethod: 'ad'});
 		AIC2.isRightToLeft = true;
 	}
 
 	// FIXME
 	if ($window.width() < 1010) {
 		Liftium.d("AIC2: window too narrow, bailing out", 3);
-		//WikiaTracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'too narrow', trackingMethod: 'ad'});
+		//Wikia.Tracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'too narrow', trackingMethod: 'ad'});
 		return;
 	}
 
@@ -32,13 +32,16 @@ AIC2.init = function() {
 
 	if (AIC2.startPosition + AIC2.magicNumber < AIC2.stopPosition) {
 		Liftium.d("AIC2: page long enough", 7);
+		// TODO: remove style once SCSS always serves it
+		AIC2.$placeHolder.css('position', 'absolute');
 		AIC2.$placeHolder.append('<div id="INCONTENT_BOXAD_1" class="noprint" style="height: 250px; width: 300px; position: relative;"></div>');
+		// End of TODO
 
 		$window.bind("scroll.AIC2", AIC2.onScroll ); // FIXME: throttle
 		$window.bind("resize.AIC2", AIC2.onScroll ); // FIXME: throttle
 	} else {
 		Liftium.d("AIC2: page too short", 3);
-		//WikiaTracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'too short', trackingMethod: 'ad'});
+		//Wikia.Tracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'too short', trackingMethod: 'ad'});
 	}
 };
 
@@ -52,7 +55,7 @@ AIC2.checkStartStopPosition = function() {
 
 	if (!AIC2.$placeHolder.length) {
 		Liftium.d("AIC2: no rail", 3);
-		//WikiaTracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'no rail', trackingMethod: 'ad'});
+		//Wikia.Tracker.track({eventName:'liftium.varia', 'ga_category':'varia/AIC2', 'ga_action':'no rail', trackingMethod: 'ad'});
 		// No rail, no ads
 		return false;
 	}
@@ -68,7 +71,7 @@ AIC2.checkStartStopPosition = function() {
 		}
 	} catch (e) {
 		Liftium.d("AIC2: catched in start/stop:", 1, e);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/AIC2',
 			ga_action: 'try-catch',
@@ -151,7 +154,7 @@ AIC2.glueAd = function() {
 		var bigSpace = parseInt(AIC2.stopPosition - AIC2.startPosition + 10);
 		// bottom
 		$incontentBoxAd.css({
-			'position': 'relative',
+			'position': 'absolute',
 			'top': bigSpace + 'px'
 		});
 	} else {
@@ -179,6 +182,7 @@ if (Wikia.AbTest && Wikia.AbTest.inGroup('FLOATING_MEDREC_TESTS', 'FLOATER_DISAB
 if (
 	window.top === window.self
 	&& window.wgEnableAdsInContent
+	&& window.wgShowAds
 	&& !window.wgIsMainpage
 	&& (window.wgIsContentNamespace || window.wikiaPageType === 'search')
 ) {

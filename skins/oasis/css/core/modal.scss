@@ -22,7 +22,8 @@ $modal-border-opacity: 80;
 	@include border-opacity($color-body, $modal-border-opacity);
 	color: $color-text;
 	position: absolute;
-	>h1 {
+	// give option to style other header tags like an h1
+	>h1, .main-header {
 		color: $color-links;
 		font-size: 22px;
 		margin: 20px 60px 20px 20px;
@@ -46,7 +47,7 @@ $modal-border-opacity: 80;
 			margin-left: 10px;
 		}
 	}
-	
+
 	#WikiaConfirmOk {
 		margin-left: 2px;
 	}
@@ -57,20 +58,32 @@ $modal-border-opacity: 80;
 	@include bodytext;
 	display: block;
 	margin: 0 20px 20px 20px;
-        .MyToolsConfiguration {
-            .options-list {
-                line-height: 1;
-            }
+	// header tags inside modal content don't need the padding
+	.main-header {
+		margin-left: 0;
+		margin-top: 0;
+	}
+    .MyToolsConfiguration {
+        .options-list {
+            line-height: 1;
         }
+    }
+	b {
+		font-weight: bold;
+	}
+	i {
+		font-style: italic;
+	}
 }
 
 .blackout {
 	background: $color-page;
 	left: 0;
 	opacity: .8;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	width: 100%;
+	height: 100%;
 }
 
 // modify "YUI" extensions (VET / WMU)

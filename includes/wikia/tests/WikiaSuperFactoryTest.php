@@ -24,6 +24,7 @@ class WikiaSuperFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testBuildWithDefaultConstructor() {
 		// call default constructor with all params set
+		/* @var $object WikiaSuperFactoryTestClass */
 		$object = WikiaSuperFactory::build('WikiaSuperFactoryTestClass', array( 'type' => self::TEST_TYPE, 'id' => self::TEST_ID));
 
 		$this->assertInstanceOf('WikiaSuperFactoryTestClass', $object);
@@ -42,6 +43,7 @@ class WikiaSuperFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testBuildWithFactoryConstructor() {
 		// call factory constructor with all params set
+		/* @var $object WikiaSuperFactoryTestClass */
 		$object = WikiaSuperFactory::build('WikiaSuperFactoryTestClass', array( 'type' => self::TEST_TYPE, 'bar' => self::TEST_BAR), 'newFromTypeAndBar');
 
 		$this->assertInstanceOf('WikiaSuperFactoryTestClass', $object);
@@ -63,24 +65,6 @@ class WikiaSuperFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf('WikiaSuperFactoryTestClass', $object);
 		$this->assertEquals(0, $object->id);
 		$this->assertEquals(self::TEST_TYPE, $object->type);
-	}
-
-	public function testBuildWithClassSetters() {
-		WikiaSuperFactory::setClassSetters('WikiaSuperFactoryTestClass', array( 'setId' => self::TEST_ID, 'setBar' => self::TEST_BAR ));
-
-		$object = WikiaSuperFactory::build('WikiaSuperFactoryTestClass', array( self::TEST_TYPE ));
-
-		$this->assertInstanceOf('WikiaSuperFactoryTestClass', $object);
-		$this->assertEquals(self::TEST_ID, $object->id);
-		$this->assertEquals(self::TEST_TYPE, $object->type);
-		$this->assertEquals(self::TEST_BAR, $object->bar);
-
-		$object = 	WikiaSuperFactory::build('WikiaSuperFactoryTestClass', array( 'type' => self::TEST_TYPE, 'bar' => 'anotherBarToOverride'), 'newFromTypeAndBar');
-
-		$this->assertInstanceOf('WikiaSuperFactoryTestClass', $object);
-		$this->assertEquals(self::TEST_ID, $object->id);
-		$this->assertEquals(self::TEST_TYPE, $object->type);
-		$this->assertEquals(self::TEST_BAR, $object->bar);
 	}
 
 	public function testSettingInstance() {

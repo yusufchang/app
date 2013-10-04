@@ -7,6 +7,7 @@ var ChatView = Backbone.View.extend({
 	tagName: 'li',
 	template: _.template( $('#message-template').html() ),
 	inlineTemplate: _.template( $('#inline-alert-template').html() ),
+	meMessageTemplate: _.template( $('#me-message-template').html() ),
 	emoticonMapping: new EmoticonMapping(),
 
 	initialize: function(options) {
@@ -44,9 +45,14 @@ var ChatView = Backbone.View.extend({
 				// Linkify local wiki links (eg: http://thiswiki.wikia.com/wiki/Page_Name ) as shortened links (like bracket links)
 				var match = localWikiLinkReg.exec(link);
 				if (match !== null) {
-					linkName = match[1];
+					linkName = match[1].replace(/_/g, " ");
 				}
-				linkName = decodeURIComponent(linkName);
+
+				// (BugId:97945) Invalid URIs can throw "URIError: URI malformed"
+				try {
+					linkName = decodeURIComponent(linkName);
+				} catch( e ) {}
+
 				linkName = linkName.replace(/</g, "&lt;"); // prevent embedding HTML in urls (to get it to come out as plain HTML in the text of the link)
 				linkName = linkName.replace(/>/g, "&gt;");
 				return '<a href="'+link+'">'+linkName+'</a>';
@@ -106,9 +112,13 @@ var ChatView = Backbone.View.extend({
 
 
 		if(this.model.get('text') == ''){
-			$().log("Found an i18n message with msg name " + this.model.get('wfMsg') + " and params: " + this.model.get('msgParams'));
-			var params = this.model.get('msgParams');
-			params.unshift(this.model.get('wfMsg'));
+			var params = this.model.get('msgParams'),
+				msgId = this.model.get('wfMsg');
+			if (!params || !msgId) {
+				return this;
+			}
+			$().log("Found an i18n message with msg name " + msgId + " and params: " + params);
+			params.unshift(msgId);
 			var i18nText = $.msg.apply(null, params);
 			this.model.set({text: i18nText});
 			$().log("Message translated to: " + i18nText);
@@ -124,7 +134,22 @@ var ChatView = Backbone.View.extend({
 			$(this.el).html(this.template(msg));
 			this.template = originalTemplate;
 		} else {
-			$(this.el).html(this.template(msg));
+			// "/me" command implementation
+			// note - in case of more commands executed on the message receiver side, there should
+			// be a loop here which goes through all commands and executes callbacks
+			if (msg.text.indexOf('/me ') == 0) {
+				msg.text = msg.text.substr(4);
+				var originalTemplate = this.template;
+				this.template = this.meMessageTemplate;
+				$(this.el).html(this.template(msg));
+				this.template = originalTemplate;
+			} else {
+				if (msg.text.indexOf('//me ') == 0) {
+					msg.text = msg.text.substr(1);
+				}
+				// end of /me implementation
+				$(this.el).html(this.template(msg));
+			}
 		}
 
 		$(this.el).attr('id', 'entry-' + this.model.cid );

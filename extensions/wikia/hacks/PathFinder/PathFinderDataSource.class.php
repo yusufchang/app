@@ -17,7 +17,7 @@ class PathFinderDataSource extends WikiaObject{
 	const OPTION_BUCKET_NAME = 'bucketName';
 	const OPTION_CONFIG_FILE_PATH = 'configFilePath';
 
-	private $instance;
+	static private $instance;
 	private $logger;
 	private $options;
 	private $s3Cmd;
@@ -36,14 +36,12 @@ class PathFinderDataSource extends WikiaObject{
 	 */
 	public static function getInstance(){
 		$class = get_called_class();
-		$instance = F::getInstance( $class );
 
-		if ( empty( $instance ) ) {
-			$instance = F::build($class);
-			F::setInstance( $class, $instance );
+		if ( empty( static::$instance ) ) {
+			static::$instance = new $class;
 		}
 
-		return $instance;
+		return static::$instance;
 	}
 
 	/**
@@ -87,7 +85,7 @@ class PathFinderDataSource extends WikiaObject{
 	}
 
 	public function getDataSet( $indexOrName = 0 ){
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$this->load();
 		$item = null;
@@ -103,10 +101,10 @@ class PathFinderDataSource extends WikiaObject{
 			$item = $this->items[$indexOrName];
 		}
 
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		if ( !empty( $item ) ) {
-			return F::build( 'PathFinderDataSet', array( $item ) );
+			return new PathFinderDataSet( $item );
 		} else {
 			throw new PathFinderDataSourceNoDataException( "No dataset corresponding to '{$indexOrName}'" );
 		}
@@ -114,7 +112,7 @@ class PathFinderDataSource extends WikiaObject{
 
 	public function load(){
 		if ( !$this->isLoaded ) {
-			$this->app->wf->profileIn( __METHOD__ );
+			wfProfileIn( __METHOD__ );
 
 			$params = array();
 
@@ -136,11 +134,11 @@ class PathFinderDataSource extends WikiaObject{
 				$this->items = $matches[1];
 				$this->isLoaded = true;
 			} else {
-				$this->app->wf->profileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				throw new PathFinderDataSourceNoDataException();
 			}
 
-			$this->app->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 		}
 	}
 

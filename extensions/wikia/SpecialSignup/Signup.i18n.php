@@ -8,20 +8,24 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'signup-desc' => 'The Special:Userlogin/signup page is displayed if a user chooses login, but is not signed up for the wiki.',
-	'signup' => 'The Special:Userlogin/signup page is displayed if a user chooses login, but is not signed up for the wiki.',
+	'signup' => 'The Special:Userlogin/signup page is displayed if a user chooses login, but is not signed up for the wiki.
+{{Identical|Signup}}',
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author Malhargan
  */
 $messages['ar'] = array(
+	'signup-desc' => 'يضيف اسم مستعار [[{{#Special:Signup}}]] ل[[{{#Special:UserLogin}}/signup]]',
 	'signup' => 'إنشاء حساب',
 );
 
-/** Assamese (অসমীয়া)
+/** Assamese (অসমীয়া)
  * @author Bishnu Saikia
  */
 $messages['as'] = array(
@@ -69,6 +73,13 @@ $messages['cs'] = array(
 $messages['de'] = array(
 	'signup-desc' => 'Fügt einen Alias [[{{#Special:Signup}}]] für die Seite [[{{#Special:UserLogin}}/signup]] hinzu.',
 	'signup' => 'Benutzerkonto erstellen',
+);
+
+/** Zazaki (Zazaki)
+ * @author Mirzali
+ */
+$messages['diq'] = array(
+	'signup' => 'Qeydbiyayış',
 );
 
 /** Divehi (ދިވެހިބަސް)
@@ -150,6 +161,14 @@ $messages['ja'] = array(
 	'signup' => 'Signup',
 );
 
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'signup-desc' => 'Deiht dä zohsäzlejje Name [[{{#Special:Signup}}]] för [[{{#Special:UserLogin}}/signup]] en et Wiki.',
+	'signup' => 'Aanmälde',
+);
+
 /** Macedonian (македонски)
  */
 $messages['mk'] = array(
@@ -179,7 +198,15 @@ $messages['nl'] = array(
 	'signup' => 'Registreren',
 );
 
-/** Oriya (ଓଡ଼ିଆ)
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'signup-desc' => 'Apond l’aliàs [[{{#Special:Signup}}]] per [[{{#Special:UserLogin}}/signup]]',
+	'signup' => 'Connexion',
+);
+
+/** Oriya (ଓଡ଼ିଆ)
  * @author Odisha1
  * @author Psubhashish
  */
@@ -224,6 +251,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'signup-desc' => 'Acrescenta o nome alternativo [[{{#Special:Signup}}]] para [[{{#Special:UserLogin}}/signup]]',
 	'signup' => 'Registar-se',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'signup-desc' => "Aggiunge 'n'alias [[{{#Special:Signup}}]] pe [[{{#Special:UserLogin}}/signup]]",
+	'signup' => 'Reggistrate',
 );
 
 /** Russian (русский)
@@ -289,6 +324,7 @@ $messages['tzm'] = array(
 /** Ukrainian (українська)
  * @author Pig1995z
  * @author Steve.rusyn
+ * @author SteveR
  */
 $messages['uk'] = array(
 	'signup-desc' => 'Додає псевдонім [[{{#Special:Signup}}]] для  [[{{#Special:UserLogin}}/signup]]',
@@ -311,4 +347,13 @@ $messages['vi'] = array(
 $messages['zh-hans'] = array(
 	'signup-desc' => '为[[{{#Special:UserLogin}}/signup]]添加别名[[{{#Special:Signup}}]]',
 	'signup' => '注册',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ * @author Simon Shek
+ */
+$messages['zh-hant'] = array(
+	'signup-desc' => '添加[[{{#Special:Signup}}]]為[[{{#Special:UserLogin}}/signup]]別名',
+	'signup' => '註冊',
 );

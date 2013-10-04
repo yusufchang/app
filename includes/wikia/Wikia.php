@@ -27,16 +27,20 @@ $wgHooks['AllowNotifyOnPageChange']  [] = "Wikia::allowNotifyOnPageChange";
 $wgHooks['AfterInitialize']          [] = "Wikia::onAfterInitialize";
 $wgHooks['UserMailerSend']           [] = "Wikia::onUserMailerSend";
 $wgHooks['ArticleDeleteComplete']    [] = "Wikia::onArticleDeleteComplete";
-$wgHooks['PageHistoryLineEnding']    [] = "Wikia::onPageHistoryLineEnding";
 $wgHooks['ContributionsToolLinks']   [] = 'Wikia::onContributionsToolLinks';
 $wgHooks['AjaxAddScript'][] = 'Wikia::onAjaxAddScript';
 
 # changes in recentchanges (MultiLookup)
 $wgHooks['RecentChange_save']        [] = "Wikia::recentChangesSave";
-$wgHooks['MediaWikiPerformAction']   [] = "Wikia::onPerformActionMemcachePurge";
+$wgHooks['BeforeInitialize']         [] = "Wikia::onBeforeInitializeMemcachePurge";
 //$wgHooks['MediaWikiPerformAction']   [] = "Wikia::onPerformActionNewrelicNameTransaction"; disable to gather different newrelic statistics
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = "Wikia::onSkinTemplateOutputPageBeforeExec";
 $wgHooks['OutputPageCheckLastModified'][] = 'Wikia::onOutputPageCheckLastModified';
+$wgHooks['UploadVerifyFile']         [] = 'Wikia::onUploadVerifyFile';
+
+# User hooks
+$wgHooks['UserNameLoadFromId']       [] = "Wikia::onUserNameLoadFromId";
+$wgHooks['UserLoadFromDatabase']     [] = "Wikia::onUserLoadFromDatabase";
 
 /**
  * This class have only static methods so they can be used anywhere
@@ -45,20 +49,52 @@ $wgHooks['OutputPageCheckLastModified'][] = 'Wikia::onOutputPageCheckLastModifie
 
 class Wikia {
 
+	const VARNISH_STAGING_HEADER = 'X-Staging';
+	const VARNISH_STAGING_PREVIEW = 'preview';
+	const VARNISH_STAGING_VERIFY = 'verify';
+	const REQUIRED_CHARS = '0123456789abcdefG';
+
 	private static $vars = array();
 	private static $cachedLinker;
 
-	public static function isStagingServer() {
-		$headers = function_exists('apache_request_headers') ? apache_request_headers() : array();
+	private static $apacheHeaders = null;
 
-		if(
-				isset( $headers[ "X-Staging" ] )
-				&& ( $headers[ "X-Staging" ] === "preview" || $headers[ "X-Staging" ] === "verify" )
-		) {
-			return true;
-		} else {
-			return false;
+	/**
+	 * Return the name of staging server (or empty string for production/dev envs)
+	 * @return string
+	 */
+	public static function getStagingServerName() {
+		if ( is_null( self::$apacheHeaders ) ) {
+			self::$apacheHeaders = function_exists('apache_request_headers') ? apache_request_headers() : array();
 		}
+		if ( isset( self::$apacheHeaders[ self::VARNISH_STAGING_HEADER ] ) ) {
+			return self::$apacheHeaders[ self::VARNISH_STAGING_HEADER ];
+		}
+		return '';
+	}
+
+	/**
+	 * Check if we're running on preview server
+	 * @return bool
+	 */
+	public static function isPreviewServer() {
+		return self::getStagingServerName() === self::VARNISH_STAGING_PREVIEW;
+	}
+
+	/**
+	 * Check if we're running on verify server
+	 * @return bool
+	 */
+	public static function isVerifyServer() {
+		return self::getStagingServerName() === self::VARNISH_STAGING_VERIFY;
+	}
+
+	/**
+	 * Check if we're running in preview or verify env
+	 * @return bool
+	 */
+	public static function isStagingServer() {
+		return self::isPreviewServer() || self::isVerifyServer();
 	}
 
 	public static function setVar($key, $value) {
@@ -173,7 +209,7 @@ class Wikia {
      */
     static public function linkTag($url, $title, $attribs = null )
     {
-        return XML::element("a", array( "href"=> $url), $title);
+        return Xml::element("a", array( "href"=> $url), $title);
     }
 
     /**
@@ -401,6 +437,11 @@ class Wikia {
 		$backtrace = trim(strip_tags(wfBacktrace()));
 		$message = str_replace("\n", '/', $backtrace);
 
+		// add URL when logging from AJAX requests
+		if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER['REQUEST_METHOD'] === 'GET') && ($_SERVER['SCRIPT_URL'] === '/wikia.php')) {
+			$message .= " URL: {$_SERVER['REQUEST_URI']}";
+		}
+
 		Wikia::log($method, false, $message, true /* $force */);
 	}
 
@@ -410,7 +451,7 @@ class Wikia {
 	 * @example Wikia::debugBacktrace(__METHOD__);
 	 * @author Piotr Molski <moli@wikia-inc.com>
 	 *
-	 * @param String $method - use __METHOD__
+	 * @param String $method - use __METHOD__ as default
 	 */
 	static public function debugBacktrace($method) {
 		$backtrace = wfDebugBacktrace();
@@ -439,7 +480,7 @@ class Wikia {
 		$msg = "***** END *****";
 		Wikia::log($method, false, $msg, true /* $force */);
 	}
-
+	
 	/**
 	 * get staff person responsible for language
 	 *
@@ -1711,7 +1752,7 @@ class Wikia {
 		$key = wfSharedMemcKey('const_values', $name);
 		$value = $wgMemc->get($key);
 
-		if ( is_null($value) ) {
+		if ( !is_numeric($value) ) {
 			$dbr = wfGetDB( DB_SLAVE, array(), 'specials' );
 
 			$oRes = $dbr->select('const_values', array('val'), array( 'name' =>  $name ), __METHOD__ );
@@ -1749,12 +1790,27 @@ class Wikia {
 	 * mcache=readonly disables memcache writes for the duration of the request
 	 * TODO: allow disabling specific keys?
 	 */
-	static public function onPerformActionMemcachePurge($output, $article, $title, $user, WebRequest $request, $wiki ) {
-		global $wgAllowMemcacheDisable, $wgAllowMemcacheReads, $wgAllowMemcacheWrites;
-		$mcachePurge = $request->getVal("mcache", null);
+	static public function onBeforeInitializeMemcachePurge( $title, $unused, $output, $user, WebRequest $request, $wiki ) {
+		self::setUpMemcachePurge( $request, $user );
+		return true;
+	}
 
-		if ($wgAllowMemcacheDisable && $mcachePurge !== null) {
-			switch( $mcachePurge ) {
+	/**
+	 * Control memcache behavior
+	 *
+	 * @param WebRequest $request
+	 */
+	static public function setUpMemcachePurge( WebRequest $request, $user ) {
+		global $wgAllowMemcacheDisable, $wgAllowMemcacheReads, $wgAllowMemcacheWrites, $wgDevelEnvironment;
+
+		if ( !$user->isAllowed( 'mcachepurge' ) && empty( $wgDevelEnvironment ) ) {
+			return true;
+		}
+
+		$mcachePurge = $request->getVal( 'mcache', null );
+
+		if ( $wgAllowMemcacheDisable && $mcachePurge !== null ) {
+			switch ( $mcachePurge ) {
 				case 'writeonly':
 					$wgAllowMemcacheReads = false;
 					$wgAllowMemcacheWrites = true;
@@ -1771,7 +1827,6 @@ class Wikia {
 					break;
 			}
 		}
-		return true;
 	}
 
 	// Hook to Construct a tag for newrelic
@@ -1820,15 +1875,6 @@ class Wikia {
 		if ( $title instanceof Title ) {
 			$title->getArticleID( Title::GAID_FOR_UPDATE );
 		}
-		return true;
-	}
-
-	/**
-	 * Fix for bugid:38093
-	 * Chrome bug: No "Undo" links on Recent Changes
-	 */
-	public static function onPageHistoryLineEnding( $HistoryActionObj, $row , &$s, $classes ) {
-		$s = '<span dir="auto">'.$s.'</span>';
 		return true;
 	}
 
@@ -1910,6 +1956,147 @@ class Wikia {
 	public static function onAjaxAddScript(OutputPage $out) {
 		// because of dependency resolving this module needs to be loaded via JavaScript
 		$out->addModules( 'amd.shared' );
+		return true;
+	}
+
+	/**
+	 * Verifies image being uploaded whether it's not corrupted
+	 *
+	 * @author macbre
+	 *
+	 * @param UploadBase $upload
+	 * @param string $mime
+	 * @param array $error
+	 * @return bool
+	 */
+	public static function onUploadVerifyFile(UploadBase $upload, $mime, &$error) {
+		// only check supported images
+		$mimeTypes = array(
+			'image/gif',
+			'image/jpeg',
+			'image/png',
+		);
+
+		if (!in_array($mime, $mimeTypes)) {
+			return true;
+		}
+
+		// validate an image using ImageMagick
+		$imageFile = $upload->getTempPath();
+
+		$output = wfShellExec("identify -regard-warnings {$imageFile} 2>&1", $retVal);
+		wfDebug("Exit code #{$retVal}\n{$output}\n");
+
+		$isValid = ($retVal === 0);
+
+		if (!$isValid) {
+			Wikia::log(__METHOD__, 'failed',  rtrim($output), true);
+
+			// pass an error to UploadBase class
+			$error = array('verification-error');
+		}
+
+		return $isValid;
+	}
+
+	/*
+	 * @param $user_name String
+	 * @param $s ResultWrapper
+	 * @param $bUserObject boolean Return instance of User if true; StdClass (row) otherwise.
+	 */
+	public static function onUserNameLoadFromId( $user_name, &$s, $bUserObject = false ) {
+		global $wgExternalAuthType;
+		if ( $wgExternalAuthType ) {
+			$mExtUser = ExternalUser::newFromName( $user_name );
+			if ( is_object( $mExtUser ) && ( 0 != $mExtUser->getId() ) ) {
+				$mExtUser->linkToLocal( $mExtUser->getId() );
+				$s = $mExtUser->getLocalUser( $bUserObject );
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param $user User
+	 * @param $s ResultWrapper
+	 */
+	public static function onUserLoadFromDatabase( $user, &$s ) {
+		/* wikia change */
+		global $wgExternalAuthType;
+		if ( $wgExternalAuthType ) {
+			$mExtUser = ExternalUser::newFromId( $user->mId );
+			if ( is_object( $mExtUser ) && ( 0 != $mExtUser->getId() ) ) {
+				$mExtUser->linkToLocal( $mExtUser->getId() );
+				$s = $mExtUser->getLocalUser( false );
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @desc Adds assets to OutputPage depending on asset type
+	 *
+	 * @param mixed $assetName the name of a configured package or path to an asset file or an array of them
+	 * @param bool $local [OPTIONAL] whether to fetch per-wiki local URLs,
+	 * (false by default, i.e. the method returns a shared host URL's for our network);
+	 * please note that this parameter has no effect on SASS assets, those will always produce shared host URL's.
+	 *
+	 * @example Wikia::addAssetsToOutput('path/to/asset/file/assetName.scss')
+	 * @example Wikia::addAssetsToOutput('assetName')
+	 * (assetName should be set in includes/wikia/AssetsManager/config.php)
+	 * @example Wikia::addAssetsToOutput([
+	 * 'path/to/asset/file/assetName.scss',
+	 * 'path/to/other/asset/file/assetJS.js'
+	 * ])
+	 */
+	public static function addAssetsToOutput( $assetName, $local = false ) {
+		$app = F::app();
+
+		$type = false;
+
+		$sources = AssetsManager::getInstance()->getURL( $assetName, $type, $local );
+
+		foreach($sources as $src){
+			switch ( $type ) {
+				case AssetsManager::TYPE_CSS:
+				case AssetsManager::TYPE_SCSS:
+					$app->wg->Out->addStyle( $src );
+					break;
+				case AssetsManager::TYPE_JS:
+					$app->wg->Out->addScript( "<script src=\"{$src}\"></script>" );
+					break;
+			}
+		}
+	}
+
+	/**
+	 * @param $user User
+	 */
+	public static function invalidateUser( $user, $disabled = false, $ajax = false ) {
+		global $wgExternalAuthType;
+
+		if ( $disabled ) {
+			$user->setEmail( '' );
+			$user->setPassword( wfGenerateToken() . self::REQUIRED_CHARS );
+			$user->setOption( 'disabled', 1 );
+			$user->setOption( 'disabled_date', wfTimestamp( TS_DB ) );
+			$user->mToken = null;
+			$user->invalidateEmail();
+			if ( $ajax ) {
+				global $wgRequest;
+				$wgRequest->setVal('action', 'ajax');
+			}
+			$user->saveSettings();
+		}
+		$id = $user->getId();
+		// delete the record from all the secondary clusters
+		if ( $wgExternalAuthType == 'ExternalUser_Wikia' ) {
+			ExternalUser_Wikia::removeFromSecondaryClusters( $id );
+		}
+		$user->invalidateCache();
+
 		return true;
 	}
 }

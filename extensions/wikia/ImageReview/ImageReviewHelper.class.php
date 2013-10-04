@@ -30,7 +30,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 	 * @param string $action
 	 */
 	public function updateImageState( $images, $action = '' ) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$deletionList = array();
 		$statsInsert = array();
@@ -119,7 +119,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 			);
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -192,7 +192,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 	* @return array images
 	*/
 	public function refetchImageListByTimestamp( $timestamp ) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$db = $this->getDatawareDB( DB_SLAVE );
 
@@ -218,6 +218,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 		$imageList = array();
 		while( $row = $db->fetchObject($result) ) {
 			$img = ImagesService::getImageSrc( $row->wiki_id, $row->page_id );
+			$wikiRow = WikiFactory::getWikiByID( $row->wiki_id );
 			$tmp = array(
 				'wikiId' 	=> $row->wiki_id,
 				'pageId' 	=> $row->page_id,
@@ -226,7 +227,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 				'priority' 	=> $row->priority,
 				'url' 		=> $img['page'],
 				'flags' 	=> $row->flags,
-				'wiki_url' 	=> '', // @TODO fill this with wiki url
+				'wiki_url' 	=> isset( $wikiRow->city_url ) ? $wikiRow->city_url : '',
 				'user_page' => '', // @TODO fill this with url to user page
 			);
 
@@ -238,7 +239,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 
 		error_log("ImageReview : refetched " . count($imageList) . " images based on timestamp");
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $imageList;
 	}
@@ -248,7 +249,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 	 * @return array imageList
 	 */
 	public function getImageList( $timestamp, $state = ImageReviewStatuses::STATE_UNREVIEWED, $order = self::ORDER_LATEST ) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		// get images
 		$db = $this->getDatawareDB( DB_MASTER );
@@ -316,17 +317,33 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 
 				$extension = pathinfo( strtolower( $img['page'] ), PATHINFO_EXTENSION ); // this needs to use the page index since src for SVG ends in .svg.png :/
 
-				if ( empty( $img['src'] ) ) {
+				if ( empty( $img['src'] ) && $state != ImageReviewStatuses::STATE_QUESTIONABLE && $state != ImageReviewStatuses::STATE_REJECTED ) {
 					$invalidImages[] = $record;
 				} elseif ( 'ico' == $extension ) {
 					$iconsWhere[] = $record;
 				} else {
 					$isThumb = true;
 
+					if ( empty( $img['src'] ) ) {
+						// if we don't have a thumb by this opint, we still need to display something, fall back to placeholder
+						$globalTitle = GlobalTitle::newFromId( $row->page_id, $row->wiki_id );
+						if ( is_object( $globalTitle ) ) {
+							$img['page'] = $globalTitle->getFullUrl();
+							// @TODO this should be taken from the code instead of being hardcoded
+							$img['src'] = 'http://images.wikia.com/central/images/8/8c/Wikia_image_placeholder.png';
+						} else {
+							// this should never happen
+							$invalidImages[] = $record;
+							continue;
+						}
+					}
+
 					if  ( in_array( $extension, array( 'gif', 'svg' ) ) ) {
 						$img = ImagesService::getImageOriginalUrl( $row->wiki_id, $row->page_id );
 						$isThumb = false;
 					}
+
+					$wikiRow = WikiFactory::getWikiByID( $row->wiki_id );
 
 					$imageList[] = array(
 						'wikiId' => $row->wiki_id,
@@ -337,6 +354,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 						'priority' => $row->priority,
 						'flags' => $row->flags,
 						'isthumb' => $isThumb,
+						'wiki_url' => isset( $wikiRow->city_url ) ? $wikiRow->city_url : '',
 					);
 				}
 			} else {
@@ -385,13 +403,13 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 
 		error_log("ImageReview : fetched new " . count($imageList) . " images");
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $imageList;
 	}
 
 	protected function getWhitelistedWikis() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$topWikis = $this->getTopWikis();
 
@@ -399,19 +417,19 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 
 		$out = array_keys( $whitelistedWikis + $topWikis );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $out;
 	}
 
 	protected function getWhitelistedWikisFromWF() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		$key = wfMemcKey( 'ImageReviewSpecialController', __METHOD__ );
 
 		$data = $this->wg->memc->get($key, null);
 
 		if(!empty($data)) {
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return $data;
 		}
 
@@ -419,53 +437,33 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 		$fromWf = WikiFactory::getListOfWikisWithVar($oVariable->cv_variable_id, 'bool', '=' ,true);
 
 		$this->wg->memc->set($key, $fromWf, 60*10);
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $fromWf;
 	}
 
 	protected function getTopWikis() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		$key = wfMemcKey( 'ImageReviewSpecialController','v2', __METHOD__ );
 		$data = $this->wg->memc->get($key, null);
 		if( !empty($data) ) {
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return $data;
 		}
 
-		$db = $this->getStatsDB( DB_SLAVE );
-		$ids = array();
-		$cnt = 0;
-		if (!$this->wg->DevelEnvironment ) {
-			$result = $db->select(
-				array( 'google_analytics.pageviews' ),
-				array( 'city_id', 'sum(pageviews) as cnt' ),
-				array( 'date > curdate() - interval 31 day' ),
-				__METHOD__,
-				array(
-					'GROUP BY'=> 'city_id',
-					'ORDER BY' => 'cnt desc',
-					'HAVING' => 'cnt > 10000'
-				)
-			);
-
-			while( $cnt < 200 && $row = $db->fetchRow($result) ) {
-				$cnt++;
-				$ids[$row['city_id']] = 1;
-			}
-		}
+		$ids = DataMartService::getTopWikisByPageviews( DataMartService::PERIOD_ID_MONTHLY, 200 );
 
 		$this->wg->memc->set( $key, $ids, 86400 /* 24h */ );
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $ids;
 	}
 
 	public function getImageCount() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$key = wfMemcKey( 'ImageReviewSpecialController', 'v2', __METHOD__);
 		$total = $this->wg->memc->get($key, null);
 		if ( !empty($total) ) {
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return $total;
 		}
 
@@ -515,7 +513,7 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 		}
 		$this->wg->memc->set( $key, $total, 3600 /* 1h */ );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $total;
 	}
 
@@ -606,11 +604,11 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 	}
 
 	public function getUserTsKey() {
-		return $this->wf->MemcKey( 'ImageReviewSpecialController', 'userts', $this->wg->user->getId());
+		return wfMemcKey( 'ImageReviewSpecialController', 'userts', $this->wg->user->getId());
 	}
 
 	private function getImageStatesForStats() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$key = wfMemcKey( 'ImageReviewSpecialController', 'v2', __METHOD__);
 		$states = $this->wg->memc->get($key, null);
@@ -633,12 +631,12 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 			$this->wg->memc->set( $key, $states, 60 * 60 * 8 );
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $states;
 	}
 
 	private function getReviewersForStats() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$key = wfMemcKey( 'ImageReviewSpecialController', 'v2', __METHOD__);
 		$reviewers = $this->wg->memc->get($key, null);
@@ -661,7 +659,51 @@ class ImageReviewHelper extends ImageReviewHelperBase {
 			$this->wg->memc->set( $key, $reviewers, 60 * 60 * 8 );
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $reviewers;
 	}
+
+	public static function onWikiFactoryPublicStatusChange( $city_public, $city_id, $reason ) {
+		global $wgExternalDatawareDB;
+
+		if ( $city_public == 0 || $city_public == -1 ) {
+			// the wiki was disabled, mark all unreviewed images as deleted
+
+			$newState = ImageReviewStatuses::STATE_WIKI_DISABLED;
+			$statesToUpdate = array(
+				ImageReviewStatuses::STATE_UNREVIEWED,
+				ImageReviewStatuses::STATE_REJECTED,
+				ImageReviewStatuses::STATE_QUESTIONABLE,
+				ImageReviewStatuses::STATE_QUESTIONABLE_IN_REVIEW,
+				ImageReviewStatuses::STATE_REJECTED_IN_REVIEW,
+				ImageReviewStatuses::STATE_IN_REVIEW,
+			);
+		} elseif ( $city_public == 1 ) {
+			// the wiki was re-enabled, put all images back into the queue as unreviewed
+
+			$newState = ImageReviewStatuses::STATE_UNREVIEWED;
+			$statesToUpdate = array(
+				ImageReviewStatuses::STATE_WIKI_DISABLED,
+			);
+		} else {
+			// the state change doesn't affect images, we don't need to do anything here
+			return true;
+		}
+
+		$dbw = wfGetDB( DB_MASTER, array(), $wgExternalDatawareDB );
+
+		$dbw->update(
+			'image_review',
+			array(
+				'state' => $newState,
+			),
+			array(
+				'wiki_id' => $city_id,
+				'state' => $dbw->makeList( $statesToUpdate ),
+			)
+		);
+
+		return true;
+	}
 }
+

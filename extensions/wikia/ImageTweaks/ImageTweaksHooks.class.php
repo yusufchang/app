@@ -1,42 +1,50 @@
 <?php
 
-class ImageTweaksHooks extends WikiaObject {
+class ImageTweaksHooks {
 
 	static private $isWikiaMobile = null;
 	static private $isOasis = null;
 
-	function __construct(){
-		parent::__construct();
+	static function init(){
+		$app = F::app();
 
 		if ( self::$isOasis === null )
-			self::$isOasis = $this->app->checkSkin( 'oasis' );
+			self::$isOasis = $app->checkSkin( 'oasis' );
 
 		if ( self::$isWikiaMobile === null )
-			self::$isWikiaMobile = ( !empty( $isOasis ) ) ? false : $this->app->checkSkin( 'wikiamobile' );
+			self::$isWikiaMobile = ( !empty( $isOasis ) ) ? false : $app->checkSkin( 'wikiamobile' );
 	}
 
-	public function onThumbnailAfterProduceHTML( $title, $file, $frameParams, $handlerParams, $outerWidth, $thumb, $thumbParams, $zoomIcon, $url,  $time, $origHTML, &$html ){
-		if ( !empty( $this->app->wg->RTEParserEnabled ) ) {
+	static public function onThumbnailAfterProduceHTML( $title, $file, $frameParams, $handlerParams, $outerWidth, $thumb, $thumbParams, $zoomIcon, $url,  $time, $origHTML, &$html ){
+		global $wgRTEParserEnabled, $wgEnableOasisPictureAttribution;
+		if ( !empty( $wgRTEParserEnabled ) ) {
 			return true;
 		}
 
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
+		if ( is_null(self::$isWikiaMobile) ) {
+			self::init();
+		}
 
 		if ( self::$isWikiaMobile ) {
 			$linked = !empty( $frameParams['link-url'] ) || !empty( $frameParams['link-title'] );
 			$caption = ( !empty( $frameParams['caption'] ) ) ? $frameParams['caption'] : null;
 
-			$html = $this->app->sendRequest(
+			if( is_object( $thumb ) ) {
+				$isSmall = WikiaMobileMediaService::isSmallImage( $thumb->getWidth(), $thumb->getHeight() );
+			} else {
+				$isSmall = false;
+			}
+
+			$html = F::app()->sendRequest(
 				'WikiaMobileMediaService',
 				'renderFigureTag',
 				array(
-					'class' => ( $linked ) ? 'link' : 'thumb',
+					'class' => [( $linked ) ? 'link' : 'thumb'],
 					'content' => $origHTML,
 					//force the caption wrapper to exist if it's a linked image without caption
 					'caption' => ( $linked && empty( $caption ) ) ? '' :  $caption,
-					'showRibbon' => ( is_object( $thumb ) ) ?
-						WikiaMobileMediaService::showRibbon( $thumb->getWidth(), $thumb->getHeight() ) :
-						false
+					'isSmall' => $isSmall
 				),
 				true
 			)->toString();
@@ -50,12 +58,12 @@ class ImageTweaksHooks extends WikiaObject {
 				array(
 					'href' => $url,
 					'class' => "internal sprite details magnify",
-					'title' => $this->wf->Msg( 'thumbnail-more' )
+					'title' => wfMsg( 'thumbnail-more' )
 				),
 				''
 			);
 
-			$html = $this->getTag(
+			$html = self::getTag(
 				$origHTML,
 				$frameParams['align'],
 				$outerWidth,
@@ -64,22 +72,28 @@ class ImageTweaksHooks extends WikiaObject {
 				$zoomIcon,
 				(
 					self::$isOasis &&
-						!empty( $this->wg->EnableOasisPictureAttribution ) &&
-						!empty( $file ) &&
-						//BugId: 3734 Remove picture attribution for thumbnails 99px wide and under
-						$outerWidth >= 102
+					!empty( $wgEnableOasisPictureAttribution ) &&
+					!empty( $file ) &&
+					//BugId: 3734 Remove picture attribution for thumbnails 99px wide and under
+					$outerWidth >= 102
 				),
 				( !empty( $file ) ) ? $file->getUser() : null
 			);
 		}
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
-	public function onImageAfterProduceHTML( $title, $file, $frameParams, $handlerParams, $thumb, $params, $time, $origHTML, &$html ){
-		if ( !empty( $this->app->wg->RTEParserEnabled ) ) {
+	static public function onImageAfterProduceHTML( $title, $file, $frameParams, $handlerParams, $thumb, $params, $time, $origHTML, &$html ){
+		global $wgRTEParserEnabled;
+		if ( !empty( $wgRTEParserEnabled ) ) {
 			return true;
+		}
+
+
+		if ( is_null(self::$isWikiaMobile) ) {
+			self::init();
 		}
 
 		/**
@@ -87,45 +101,53 @@ class ImageTweaksHooks extends WikiaObject {
 		 * @author Federico "Lox" Lucignano <federico@wikia-inc.com>
 		 */
 		if ( self::$isWikiaMobile ) {
-			$this->wf->profileIn( __METHOD__ );
+			wfProfileIn( __METHOD__ );
 
 			$linked = !empty( $frameParams['link-url'] ) || !empty( $frameParams['link-title'] );
 			$caption = ( !empty( $frameParams['caption'] ) ) ? $frameParams['caption'] : null;
 
-			$html = $this->app->sendRequest(
+			if( is_object( $thumb ) ) {
+				$isSmall = WikiaMobileMediaService::isSmallImage( $thumb->getWidth(), $thumb->getHeight() );
+			} else {
+				$isSmall = true;
+			}
+
+			$html = F::app()->sendRequest(
 				'WikiaMobileMediaService',
 				'renderFigureTag',
 				array(
-					'class' => ( $linked ) ? 'link' : 'thumb',
+					'class' => [( $linked ) ? 'link' : 'thumb'],
 					'content' => $origHTML,
 					//force the caption wrapper to exist if it's a linked image without caption
 					'caption' => ( $linked && empty( $caption ) ) ? '' : $caption,
-					'showRibbonwfdebug' => ( is_object( $thumb ) ) ?
-						WikiaMobileMediaService::showRibbon( $thumb->getWidth(), $thumb->getHeight() ) :
-						false
+					'isSmall' => $isSmall
 				),
 				true
 			)->toString();
 
-			$this->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 		}
 
 		return true;
 	}
 
-	public function onThumbnailImageHTML( $options, $linkAttribs, $imageAttribs, File $file, &$html ){
-		if ( !empty( $this->app->wg->RTEParserEnabled ) ) {
+	static public function onThumbnailImageHTML( $options, $linkAttribs, $imageAttribs, File $file, &$html ){
+		global $wgRTEParserEnabled;
+		if ( !empty( $wgRTEParserEnabled ) ) {
 			return true;
 		}
 
-		$this->wf->profileIn( __METHOD__ );
 
+		wfProfileIn( __METHOD__ );
+		if ( is_null(self::$isWikiaMobile) ) {
+			self::init();
+		}
 
 		if (
 			/**
-			* Images SEO project
-			* @author: Marooned
-			*/
+			 * Images SEO project
+			 * @author: Marooned
+			 */
 			(
 				empty( $options['custom-url-link'] ) &&
 				empty( $options['custom-title-link'] ) &&
@@ -143,13 +165,7 @@ class ImageTweaksHooks extends WikiaObject {
 
 			if ( is_array( $linkAttribs ) ) {
 				if ( !empty( $file ) ) {
-					$title = $file->getTitle();
-
-					if ( $title instanceof Title ) {
-						$linkAttribs['data-image-name'] = $title->getText();
-					}
-
-					$linkAttribs['href'] = $this->wf->ReplaceImageServer( $file->getUrl(), $file->getTimestamp() );
+					$linkAttribs['href'] = wfReplaceImageServer( $file->getUrl(), $file->getTimestamp() );
 					$fullImageUrl = $linkAttribs['href'];
 				}
 
@@ -163,7 +179,8 @@ class ImageTweaksHooks extends WikiaObject {
 					$linkAttribs['title'] = $title->getFullText();
 					$link = $title->getLinkUrl();
 				} elseif ( !empty( $options['file-link'] ) && empty( $options['desc-link'] ) ) {
-					$linkAttribs['href'] = $this->wf->ReplaceImageServer( $file->getUrl(), $file->getTimestamp() );
+					$linkAttribs['href'] = wfReplaceImageServer( $file->getUrl(), $file->getTimestamp() );
+					$linkAttribs['class'] = empty($linkAttribs['class']) ? ' lightbox' : $linkAttribs['class'] . ' lightbox';
 				}
 
 				//override any previous value if title is passed as an option
@@ -190,8 +207,8 @@ class ImageTweaksHooks extends WikiaObject {
 					$linkAttribs['class'] = 'image';
 				}
 
-				if ( !empty( $linkAttribs['data-image-name'] ) ) {
-					$imageParams['name'] = $linkAttribs['data-image-name'];
+				if ( !empty( $imageAttribs['data-image-key'] ) ) {
+					$imageParams['name'] = htmlspecialchars( $imageAttribs['data-image-key'] );
 				}
 
 				if ( !empty( $fullImageUrl ) ) {
@@ -201,7 +218,7 @@ class ImageTweaksHooks extends WikiaObject {
 				}
 
 				if ( !empty( $options['caption'] ) ) {
-					$imageParams['capt'] = true;
+					$imageParams['capt'] = 1;
 				}
 
 				//images set to be less than 64px are probably
@@ -211,6 +228,8 @@ class ImageTweaksHooks extends WikiaObject {
 					( (!empty( $imageAttribs['width'] ) && $imageAttribs['width'] > 64 ) || empty( $imageAttribs['width'] ) )
 					&& $file instanceof File
 				) {
+					// TODO: this resizes every image with a width over 64px regardless of where it appears.
+					// We may want to add the ability to allow custom image widths (like on the file page history table for example)
 					$size = WikiaMobileMediaService::calculateMediaSize( $file->getWidth(), $file->getHeight() );
 					$thumb = $file->transform( $size );
 					$imageAttribs['src'] = wfReplaceImageServer( $thumb->getUrl(), $file->getTimestamp() );
@@ -222,16 +241,17 @@ class ImageTweaksHooks extends WikiaObject {
 				 *WikiaMobile: lazy loading images in a SEO-friendly manner
 				 *@author Federico "Lox" Lucignano <federico@wikia-inc.com
 				 */
-				$html = $this->app->sendRequest(
+				$html = F::app()->sendRequest(
 					'WikiaMobileMediaService',
 					'renderImageTag',
-					array(
+					[
 						'attributes' => $imageAttribs,
-						'parameters' => array( $imageParams ),
+						'parameters' => [ $imageParams ],
 						'anchorAttributes' => $linkAttribs,
 						'linked' => !empty( $link ),
-						'noscript' => $contents
-					),
+						'noscript' => $contents,
+						'isSmall' => WikiaMobileMediaService::isSmallImage($imageAttribs['width'],  $imageAttribs['height'])
+					],
 					true
 				)->toString();
 			} else {
@@ -239,16 +259,20 @@ class ImageTweaksHooks extends WikiaObject {
 			}
 		}
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
-	public function onThumbnailVideoHTML( $options, $linkAttribs, $imageAttribs, File $file, &$html ){
-		if ( !empty( $this->app->wg->RTEParserEnabled ) ) {
+	static public function onThumbnailVideoHTML( $options, $linkAttribs, $imageAttribs, File $file, &$html ){
+		global $wgRTEParserEnabled;
+		if ( !empty( $wgRTEParserEnabled ) ) {
 			return true;
 		}
 
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
+		if ( is_null(self::$isWikiaMobile) ) {
+			self::init();
+		}
 
 		if ( self::$isWikiaMobile ) {
 			/**
@@ -262,49 +286,57 @@ class ImageTweaksHooks extends WikiaObject {
 				unset( $imageAttribs['alt'] );
 			}
 
+			//Not all 'files' have getProviderName defined
+			if ( is_callable( [ $file, 'getProviderName' ] ) ) {
+				$provider = $file->getProviderName();
+			} else {
+				$provider = '';
+			}
+
 			$imageParams = array(
 				'type' => 'video',
-				'provider' => $file->getProviderName(),
+				'provider' => $provider,
 				'full' => $imageAttribs['src']
 			);
 
-			if ( !empty($linkAttribs['data-video-name'] ) ) {
-				$imageParams['name'] = $linkAttribs['data-video-name'];
+			if ( !empty($imageAttribs['data-video-key'] ) ) {
+				$imageParams['name'] = htmlspecialchars( $imageAttribs['data-video-key'] );
 			}
 
 			if ( !empty( $options['caption'] ) ) {
-				$imageParams['capt'] = true;
+				$imageParams['capt'] = 1;
 			}
 
-			if ( $file instanceof File ) {
-				$size = WikiaMobileMediaService::calculateMediaSize( $file->getWidth(), $file->getHeight() );
-				$thumb = $file->transform( $size );
-				$imageAttribs['src'] = wfReplaceImageServer( $thumb->getUrl(), $file->getTimestamp() );
-				$imageAttribs['width'] = $size['width'];
-				$imageAttribs['height'] = $size['height'];
-			}
+			// TODO: this resizes every video thumbnail with a width over 64px regardless of where it appears.
+			// We may want to add the ability to allow custom image widths (like on the file page history table for example)
+			$size = WikiaMobileMediaService::calculateMediaSize( $file->getWidth(), $file->getHeight() );
+			$thumb = $file->transform( $size );
+			$imageAttribs['src'] = wfReplaceImageServer( $thumb->getUrl(), $file->getTimestamp() );
+			$imageAttribs['width'] = $size['width'];
+			$imageAttribs['height'] = $size['height'];
 
-			$data = array(
+
+			$data = [
 				'attributes' => $imageAttribs,
-				'parameters' => array( $imageParams ),
+				'parameters' => [ $imageParams ],
 				'anchorAttributes' => $linkAttribs,
-				'noscript' => $origImg
+				'noscript' => $origImg,
+				'isSmall' => WikiaMobileMediaService::isSmallImage($imageAttribs['width'], $imageAttribs['height'])
+			];
+
+			$title = $file->getTitle()->getDBKey();
+			$titleText = $file->getTitle()->getText();
+			$views = MediaQueryService::getTotalVideoViewsByTitle( $title );
+
+			$data['content'] = Xml::element(
+				'span',
+				[ 'class' => 'videoInfo' ],
+				"{$titleText} (" . $file->getHandler()->getFormattedDuration() .
+				", " . wfMessage( 'wikiamobile-video-views-counter', $views )->inContentLanguage()->text() .
+				')'
 			);
 
-			if ( $file instanceof File ) {
-				$title = $file->getTitle()->getDBKey();
-				$titleText = $file->getTitle()->getText();
-
-				$data['content'] = Xml::element(
-					'span',
-					array( 'class' => 'videoInfo' ),
-					"{$titleText} (" . $file->getHandler()->getFormattedDuration() .
-						", " . $this->wf->MsgForContent( 'wikiamobile-video-views-counter', MediaQueryService::getTotalVideoViewsByTitle( $title ) ) .
-						')'
-				);
-			}
-
-			$html = $this->app->sendRequest(
+			$html = F::app()->sendRequest(
 				'WikiaMobileMediaService',
 				'renderImageTag',
 				$data,
@@ -312,16 +344,16 @@ class ImageTweaksHooks extends WikiaObject {
 			)->toString();
 		}
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
-	private function getTag( $imageHTML, $align, $width, $showCaption = false, $caption = '',  $zoomIcon = '', $showPictureAttribution = false, $attributeTo = null ){
+	static private function getTag( $imageHTML, $align, $width, $showCaption = false, $caption = '',  $zoomIcon = '', $showPictureAttribution = false, $attributeTo = null ){
 		/**
 		 * Images SEO
 		 * @author: Marooned, Federico
 		 */
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$html = "<figure class=\"thumb" .
 			( ( !empty( $align ) ) ? " t{$align}" : '' ) .
@@ -333,7 +365,7 @@ class ImageTweaksHooks extends WikiaObject {
 
 		//picture attribution
 		if ( !empty( $showPictureAttribution ) && !empty( $attributeTo ) ) {
-			$this->wf->profileIn( __METHOD__ . '::PictureAttribution' );
+			wfProfileIn( __METHOD__ . '::PictureAttribution' );
 
 			// render avatar and link to user page
 			$avatar = AvatarService::renderAvatar( $attributeTo, 16 );
@@ -341,10 +373,10 @@ class ImageTweaksHooks extends WikiaObject {
 
 			$html .= Xml::openElement( 'div', array( 'class' => 'picture-attribution' ) ) .
 				$avatar .
-				$this->wf->MsgExt('oasis-content-picture-added-by', array( 'parsemag' ), $link, $attributeTo ) .
+				wfMessage('oasis-content-picture-added-by', $link, $attributeTo )->text() .
 				Xml::closeElement( 'div' );
 
-			$this->wf->profileOut( __METHOD__ . '::PictureAttribution' );
+			wfProfileOut( __METHOD__ . '::PictureAttribution' );
 		}
 
 		if ( !empty( $showCaption ) ) {
@@ -353,7 +385,7 @@ class ImageTweaksHooks extends WikiaObject {
 
 		$html .= '</figure>';
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $html;
 	}
 }

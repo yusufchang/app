@@ -23,6 +23,13 @@ $messages['af'] = array(
 	'categorygalleries-desc' => "Wys 'n galery met bladsye op kategoriebladsye",
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'categorygalleries-desc' => 'يظهر معرض صور صفحة في صفحات التصنيف',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -56,6 +63,13 @@ $messages['br'] = array(
  */
 $messages['bs'] = array(
 	'categorygalleries-desc' => 'Prikazuje galeriju na stranici kategorije',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'categorygalleries-desc' => 'Mostra una galeria de pàgines sobre les pàgines de la categoria',
 );
 
 /** Czech (česky)
@@ -107,6 +121,13 @@ $messages['gl'] = array(
 	'categorygalleries-desc' => 'Mostrar unha galería de páxinas nas páxinas das categorías',
 );
 
+/** Hebrew (עברית)
+ * @author Inkbug
+ */
+$messages['he'] = array(
+	'categorygalleries-desc' => 'מציג גלריית דפים בדפי קטגוריה',
+);
+
 /** Hungarian (magyar)
  * @author Dj
  */
@@ -142,7 +163,7 @@ $messages['ksh'] = array(
 	'categorygalleries-desc' => 'Donn en Jalleri vun Sigge op de Sigge vun de Saachjroppe aanzeije.',
 );
 
-/** Kirghiz (Кыргызча)
+/** Kyrgyz (Кыргызча)
  * @author Growingup
  */
 $messages['ky'] = array(
@@ -189,6 +210,13 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'categorygalleries-desc' => "Geeft een galerij met pagina's weer op categoriepagina's",
+);
+
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'categorygalleries-desc' => 'Aficha una galariá de paginas sus las paginas de categoria',
 );
 
 /** Polish (polski)

@@ -10,7 +10,7 @@ class WikiaPollHooks {
 	 * @param $title Title
 	 * @param $article Article
 	 */
-	public static function onArticleFromTitle(&$title, &$article) {
+	public static function onArticleFromTitle($title, &$article) {
 		wfProfileIn(__METHOD__);
 
 		if ($title->getNamespace() == NS_WIKIA_POLL) {
@@ -46,7 +46,6 @@ class WikiaPollHooks {
 	 *
 	 * @param $editPage EditPage
 	 */
-
 	public static function onAlternateEdit( $editPage ) {
 		global $wgOut;
 
@@ -64,11 +63,10 @@ class WikiaPollHooks {
 	/**
 	 * Return HTML to be used when embedding polls from inside parser
 	 * TODO: replace all this with a hook inside parser
-	 * 
+	 *
 	 * @param WikiaPoll $poll
-	 * @param Title $finalTitle 
+	 * @param Title $finalTitle
 	 */
-
 	public static function generate($poll, $finalTitle) {
 		wfProfileIn(__METHOD__);
 
@@ -101,14 +99,14 @@ class WikiaPollHooks {
 						}
 					}
 
-					$js .= F::build( 'JSMessages' )->printPackages( array( 'WikiaMobilePolls' ) );
+					$js .= JSMessages::printPackages( array( 'WikiaMobilePolls' ) );
 
 					$ret = str_replace("\n", ' ', "{$css}{$ret}{$js}");
 				} else {
 					$sassUrl = AssetsManager::getInstance()->getSassCommonURL('/extensions/wikia/WikiaPoll/css/WikiaPoll.scss');
 					$css = '<link rel="stylesheet" type="text/css" href="' . htmlspecialchars($sassUrl) . ' " />';
 
-					$jsFile = F::build('JSSnippets')->addToStack(
+					$jsFile = JSSnippets::addToStack(
 						array( '/extensions/wikia/WikiaPoll/js/WikiaPoll.js' ),
 						array(),
 						'WikiaPoll.init'
@@ -120,8 +118,9 @@ class WikiaPollHooks {
 			wfProfileOut(__METHOD__);
 			return $ret;
 		}
-		
+
 		wfProfileOut(__METHOD__);
+		return '';
 	}
 
 	/**
@@ -157,23 +156,20 @@ class WikiaPollHooks {
 			'_rte_dataidx' => sprintf('%04d', $dataIdx),
 			'class' => "media-placeholder placeholder-poll",
 			'src' => $wgBlankImgUrl,
-			'type' => 'poll'
+			'type' => 'poll',
+			'width' => $poll->getRtePlaceholderWidth(),
+			'height' => $poll->getRtePlaceholderHeight(),
 		));
 		return RTEData::addIdxToTag($dataIdx, $tag);
-
 	}
-
-
 
 	/**
 	 * Purge poll after an edit
 	 *
 	 * @param $article Article
 	 */
-	public static function onArticleSaveComplete(&$article, &$user, $text, $summary, $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
+	public static function onArticleSaveComplete($article, &$user, $text, $summary, $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
 		wfProfileIn(__METHOD__);
-
-		wfDebug(__METHOD__ . "\n");
 
 		$title = $article->getTitle();
 
@@ -183,6 +179,34 @@ class WikiaPollHooks {
 		}
 
 		wfProfileOut(__METHOD__);
+		return true;
+	}
+
+	/**
+	 * Add support for [[:Poll:...]] used to embed polls in articles
+	 *
+	 * @param $s string parsed wikitext
+	 * @param $nt Title
+	 * @param $prefix string
+	 * @param $trail string
+	 * @param $RTE_wikitextIdx string
+	 * @return bool
+	 */
+	public static function onParserReplaceInternalLinks2NoForce(&$s, $nt, $prefix, $trail, $RTE_wikitextIdx) {
+		global $wgRTEParserEnabled;
+
+		if ($nt->getNamespace() === NS_WIKIA_POLL) {
+			$poll = WikiaPoll::newFromTitle($nt);
+			if ($poll instanceof WikiaPoll) {
+				if (!empty($wgRTEParserEnabled)) {
+					$s .= $prefix . WikiaPollHooks::generateRTE($poll, $nt, $RTE_wikitextIdx) . $trail;
+				} else {
+					$s .= $prefix . WikiaPollHooks::generate($poll, $nt) . $trail;
+				}
+				return false;
+			}
+		}
+
 		return true;
 	}
 

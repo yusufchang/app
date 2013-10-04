@@ -1,21 +1,58 @@
-(function(html, w){
+/* global Ponto */
+(function($html, window){
+	'use strict';
+
 	var links = document.querySelectorAll('a:not(.external):not(.extiw)'),
-		host = w.wgServer,
-		i = links.length;
+		host = window.wgServer.replace(/^http\:\/\//, ''),
+		i = links.length,
+		namespaces = window.wgNamespaceIds,
+		regExpNamespace = new RegExp(window.wgArticlePath.replace('$1', '([^:]*)')),
+		//not all namespaces in GG should be clickable
+		//there are custom namespaces on wikis therefore black list will be better suited here
+		disabledNs = [-2,-1,1,2,3,4,5,6,7,10,11,12,13,15,110,111,500,501,700,701,1200,1201,1202],
+		link,
+		path,
+		parent,
+		notAllowed,
+		namespace,
+		pathMatch,
+		serifClass = 'serif',
+		alignmentClass = 'full',
+		lightSkinClass = 'light';
 
 	while(i--) {
-		var link = links[i];
+		link = links[i];
+		path = link.pathname || link.href;
+		parent = link.parentElement;
+		notAllowed = ((link.host && link.host !== host) || path === '/wikia.php') &&
+			parent.className.indexOf('thumb') === -1;
 
-		if(!~link.parentElement.className.indexOf('thumb') && (link.origin != host || link.pathname == '/wikia.php')) {
-			link.className += ' disabled';
+		if(!notAllowed && path.indexOf(':') > -1) {
+			pathMatch = path.match(regExpNamespace);
+
+			if(pathMatch && (namespace = namespaces[pathMatch[1].toLowerCase()])) {
+				notAllowed = disabledNs.indexOf(namespace) > -1;
+			}
 		}
+
+		if(notAllowed) {
+			if(link.className.indexOf('image') > -1) {
+				parent.className = 'thumb';
+				link.firstElementChild.className += ' media';
+			}else {
+				link.className += ' disabled';
+			}
+		}
+
 	}
 
 	//handling clicking on a link
-	html.addEventListener('click', function(ev){
+	$html.on('click', function(ev){
 		var t = ev.target,
 			title,
-			ns = 0;
+			ns = 0,
+			split,
+			namespace;
 
 		if(t.tagName === 'A'){
 			ev.preventDefault();
@@ -23,36 +60,40 @@
 			if(t.hasAttribute('title')) {
 				title = t.title.replace(/ /g, '_');
 			}else{
-				title = t.pathname.replace("/wiki/", '')
+				//links in ie. images do not have title attribute
+				title = t.pathname.replace('/wiki/', '');
 			}
 
-			if(~title.indexOf(':')) {
-				var split = title.split(':');
+			if(title.indexOf(':') > -1) {
+				split = title.split(':');
+				namespace = namespaces[split.shift().toLowerCase()];
 
-				if(split.shift().toLowerCase() == 'category') {
+				if(namespace) {
 					title = split.join(':');
-					ns = 14;
+					ns = namespace;
 				}
 			}
-console.log(title);
+
 			Ponto.invoke(
 				'Linker',
 				'goTo',
 				{
-					ns: ns,
-					title: title
+					title: decodeURIComponent(title),
+					ns: ns
 				}
 			);
 		}
 	});
 
-	//handling grabing all links on a page;
+	//handling grabing all photos on a page;
 	function Photos(){
 		this.getList = function(){
 			var images = Array.prototype.slice.call(document.images),
-				links = [];
+				links = [],
+				i = 0,
+				l = images.length;
 
-			for(var i = 0, l = images.length; i < l; i++){
+			for(; i < l; i++){
 				links[i] = images[i].getAttribute('data-src') || images[i].src;
 			}
 
@@ -66,45 +107,39 @@ console.log(title);
 		return new Photos();
 	};
 
-	w.Photos = Photos;
-
-	function toggle(on, off, force){
-		var hasClass = ~html.className.indexOf(on);
-
-		if(!force || force == on || force == off){
-			if(force == off || hasClass && force != on) {
-				hasClass && (html.className = html.className.replace(' ' + on, ''));
-
-				return off;
-			}else{
-				!hasClass && (html.className += ' ' + on);
-
-				return on;
-			}
-		}
-	}
+	window.Photos = Photos;
 
 	function Font(){
 		this.toggleType = function(type){
-			return toggle('serif', 'sans-serif', type);
+			return $html
+				.toggleClass(serifClass, type && (type === serifClass))
+				.hasClass(serifClass) ? serifClass : 'sans-' + serifClass;
 		};
 
 		this.setSize = function(size){
 			size = Math.max(Math.min(~~size, 200), 50);
-			html.style.fontSize = size + '%';
+			$html.css('font-size', size + '%');
+
+			require(['tables'], function(t){
+				t.check();
+			});
 
 			return size;
 		};
 
 		this.toggleAlignment = function(alignment){
-			return toggle('full', 'left', alignment)
+			return $html
+				.toggleClass(alignmentClass, alignment && (alignment === alignmentClass))
+				.hasClass(alignmentClass) ? alignmentClass : 'left';
 		};
 
-		this.setOptions = function(size, type, alignment){
+		this.setOptions = function(options){
+			options = options || {};
+
 			return {
-				size: size !== undefined && this.setSize(size),
-				type: type && this.toggleType(type),
-				alignment: alignment && this.toggleAlignment(alignment)
+				size: options.size !== undefined && this.setSize(options.size),
+				type: options.type !== undefined && this.toggleType(options.type),
+				alignment: options.alignment !== undefined && this.toggleAlignment(options.alignment)
 			};
 
 		};
@@ -116,14 +151,31 @@ console.log(title);
 		return new Font();
 	};
 
-	w.Font = Font;
+	window.Font = Font;
 
-	require(['modal'], function(m){
+	//Light/Dark skin handling
+	function Skin(){
+		this.toggleMode = function(type){
+			return $html
+				.toggleClass(lightSkinClass, type && (type === lightSkinClass))
+				.hasClass(lightSkinClass) ? lightSkinClass : 'dark';
+		};
+	}
+
+	Ponto.PontoBaseHandler.derive(Skin);
+
+	Skin.getInstance = function(){
+		return new Skin();
+	};
+
+	window.Skin = Skin;
+
+	require(['modal', 'sections'], function(modal, sections){
 		function Modal(){
 			this.close = function(){
-				var open = m.isOpen();
+				var open = modal.isOpen();
 
-				m.close();
+				modal.close();
 
 				return !!open;
 			};
@@ -135,18 +187,16 @@ console.log(title);
 			return new Modal();
 		};
 
-		w.Modal = Modal;
-	});
+		window.Modal = Modal;
 
-	require(['sections'], function(s){
 		function Sections(){
 			this.open = function(id){
-				s.open(id, true);
-			}
-			this.close = s.close;
+				sections.open(id, true);
+			};
+			this.close = sections.close;
 			this.toggle = function(id) {
-				s.toggle(id, true);
-			}
+				sections.toggle(id, true);
+			};
 		}
 
 		Ponto.PontoBaseHandler.derive(Sections);
@@ -155,23 +205,32 @@ console.log(title);
 			return new Sections();
 		};
 
-		w.Sections = Sections;
+		window.Sections = Sections;
+
+		$(window).on({
+			'sections:open': function(){
+				$html.css('min-height', $html.height());
+			},
+			'sections:close': function(){
+				$html.css('min-height', 0);
+			}
+		});
 	});
 
-	window.addEventListener('DOMContentLoaded', function(){
+	$(function(){
 		require(['toc'], function(toc){
 			Ponto.invoke(
 				'Article',
 				'data',
 				{
 					data: {
-						title: wgTitle,
-						articleId: wgArticleId,
-						cityId: wgCityId
+						title: window.wgTitle,
+						articleId: window.wgArticleId,
+						cityId: window.wgCityId
 					},
 					toc: toc.get()
 				}
 			);
 		});
 	});
-})(document.documentElement, this);
+})($(document.documentElement), window);

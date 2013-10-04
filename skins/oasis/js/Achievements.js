@@ -1,91 +1,127 @@
-var AchievementsThing = {
-	init: function() {
-		AchievementsThing.page = 0;
-		AchievementsThing.user = $(".AchievementsModule, .WikiaLatestEarnedBadgesModule").find(".data").attr("data-user");
-		AchievementsThing.badgesCount = ~~$(".AchievementsModule, .WikiaLatestEarnedBadgesModule").find(".data").attr("data-badges-count");
-		AchievementsThing.badgesPerPage = ~~$(".AchievementsModule, .WikiaLatestEarnedBadgesModule").find(".data").attr("data-badges-per-page");
-		AchievementsThing.pageCount = Math.floor(AchievementsThing.badgesCount/AchievementsThing.badgesPerPage);
-		AchievementsThing.badgesUl = $(".AchievementsModule, .WikiaLatestEarnedBadgesModule").find(".badges-icons");
-		AchievementsThing.next = $(".AchievementsModule, .WikiaLatestEarnedBadgesModule").find(".badges-next");
-		AchievementsThing.prev = $(".AchievementsModule, .WikiaLatestEarnedBadgesModule").find(".badges-prev");
+(function( window, $ ) {
+	var AchievementsModule = {
+		init: function() {
+			this.page = 0;
+			this.module = $( '.AchievementsModule, .WikiaLatestEarnedBadgesModule' );
 
-		if(AchievementsThing.next && AchievementsThing.prev){
-			AchievementsThing.next.click(AchievementsThing.loadBadges);
-			AchievementsThing.prev.click(AchievementsThing.loadBadges);
-		}
+			var data = this.module.find( '.data' );
 
-		//Show badge description when hovering over the badge
-		AchievementsThing.showBadgesDescription();
+			this.user = data.attr( 'data-user' );
+			this.badgesCount = ~~data.attr( 'data-badges-count' );
+			this.badgesPerPage = ~~data.attr( 'data-badges-per-page' );
+			this.pageCount = Math.floor( this.badgesCount / this.badgesPerPage );
+			this.badgesUl = this.module.find( '.badges-icons' );
+			this.next = this.module.find( '.badges-next' );
+			this.prev = this.module.find( '.badges-prev' );
 
-		//Track sponsored badges
-		AchievementsThing.trackSponsoredBadges();
-	},
+			// this width is based on bootstrap popover max-width from popover.scss
+			this.badgeDescWidth = 400;
 
-	showBadgesDescription: function(){
-		$('.AchievementsModule, .WikiaLatestEarnedBadgesModule').find('.badges li > img, .badges .sponsored-link').add("#LeaderboardTable .badge-icon").each(function(){
-			var badge = $(this);
-			var html = badge.prevAll(".profile-hover").clone().wrap('<div>').parent().html();
+			if ( this.next && this.prev ) {
+				this.next.click( $.proxy( this.loadBadges, this ) );
+				this.prev.click( $.proxy( this.loadBadges, this ) );
+			}
+
+			// Show badge description when hovering over the badge
+			this.showBadgesDescription();
+
+			// Track sponsored badges
+			this.trackSponsoredBadges();
+
+			if ( wgOasisResponsive ) {
+				$( window ).on( 'resize', this.resizeBadgesDescription );
+			}
+		},
+
+		prepareBadgesDescription: function( badge ) {
+			var placement = 'left';
+			var html = badge.prevAll( '.profile-hover' ).clone().wrap( '<div>' ).parent().html();
+
+			if ( badge.offset().left - this.badgeDescWidth < 0 ) {
+				placement = 'right';
+			}
+
 			badge.popover({
 				content: html,
-				placement: 'left'
+				placement: placement
 			});
-		});
-	},
+		},
 
-	trackSponsoredBadges: function(){
-		$('.AchievementsModule, .WikiaLatestEarnedBadgesModule').find('.sponsored-link img').each(function(){
-			AchievementsThing.trackSponsored($(this).parent().attr('data-badgetrackurl'));
-		});
-	},
+		resizeBadgesDescription: function() {
+			var self = this;
+			self.module.find( '.badges li > img' ).each(function() {
+				var badge = $( this );
+				badge.popover( 'destroy' );
+				self.prepareBadgesDescription( badge );
+			});
+		},
 
-	trackSponsored: function(url){
-		if(typeof url != 'undefined'){
-			var cb = Math.floor(Math.random() * 1000000);
+		showBadgesDescription: function() {
+			var self = this;
+			self.module.find( '.badges li > img, .badges .sponsored-link' ).add( '#LeaderboardTable .badge-icon' ).each(function() {
+				var badge = $( this );
+				self.prepareBadgesDescription( badge );
+			});
+		},
 
-			url = url.replace('[timestamp]', cb);
+		trackSponsoredBadges: function() {
+			var self = this;
+			self.module.find( '.sponsored-link img' ).each(function() {
+				self.trackSponsored( $( this ).parent().attr( 'data-badgetrackurl' ) );
+			});
+		},
 
-			var i = new Image(1, 1);
+		trackSponsored: function( url ) {
+			var cb, i;
 
-			i.src = url;
-		}
-	},
+			if ( typeof url != 'undefined' ) {
+				cb = Math.floor( Math.random() * 1000000 );
+				url = url.replace( '[timestamp]', cb );
+				i = new Image( 1, 1 );
 
-	loadBadges: function(event){
-		AchievementsThing.badgesUl.startThrobbing();
-
-		var element = this;
-		AchievementsThing.page = (element.getAttribute('class') == 'badges-prev') ? AchievementsThing.page - 1 : AchievementsThing.page + 1;
-
-		$.nirvana.sendRequest({
-			controller: 'AchievementsController',
-			method: 'Badges',
-			format: 'html',
-			type: 'GET',
-			data: {
-				user: AchievementsThing.user,
-				page: AchievementsThing.page
-			},
-			callback: function(html){
-				AchievementsThing.badgesUl.html(html);
-				AchievementsThing.showBadgesDescription();
-				AchievementsThing.trackSponsoredBadges();
-
-				if(Math.floor(AchievementsThing.page >= AchievementsThing.pageCount)){
-					AchievementsThing.next.hide();
-				} else if (AchievementsThing.page <= 0){
-					AchievementsThing.prev.hide();
-				} else {
-					AchievementsThing.next.show();
-					AchievementsThing.prev.show();
-				}
-
-				AchievementsThing.badgesUl.stopThrobbing();
+				i.src = url;
 			}
-		});
-	}
-};
+		},
 
-$(function() {
-		AchievementsThing.init();
-});
+		loadBadges: function( event ) {
+			var element = event.currentTarget,
+				self = this;
 
+			self.badgesUl.startThrobbing();
+			self.page = ( element.getAttribute( 'class' ) == 'badges-prev' ) ? self.page - 1 : self.page + 1;
+
+			$.nirvana.sendRequest({
+				controller: 'Achievements',
+				method: 'Badges',
+				format: 'html',
+				type: 'GET',
+				data: {
+					user: self.user,
+					page: self.page
+				},
+				callback: function( html ) {
+					self.badgesUl.html( html );
+					self.showBadgesDescription();
+					self.trackSponsoredBadges();
+
+					if ( self.page >= self.pageCount ) {
+						self.prev.show();
+						self.next.hide();
+					} else if ( self.page <= 0 ) {
+						self.next.show();
+						self.prev.hide();
+					} else {
+						self.next.show();
+						self.prev.show();
+					}
+
+					self.badgesUl.stopThrobbing();
+				}
+			});
+		}
+	};
+
+	$(function() {
+		AchievementsModule.init();
+	});
+})( this, jQuery );

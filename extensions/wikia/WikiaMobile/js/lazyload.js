@@ -4,7 +4,7 @@
  * Image lazy loading
  */
 /*global define*/
-define('lazyload', ['wikia.thumbnailer'], function (thumbnailer) {
+define('lazyload', ['wikia.thumbnailer', 'jquery', 'wikia.window'], function (thumbnailer, $, window) {
 	'use strict';
 
 	var d = document,
@@ -25,9 +25,10 @@ define('lazyload', ['wikia.thumbnailer'], function (thumbnailer) {
 				return function(){
 					var url = this.src;
 					img.className += ' load';
+
 					setTimeout(function(){
 						displayImage(img, url);
-					}, 200);
+					}, 250);
 				};
 			},
 			displayImage = function(img, url){
@@ -35,8 +36,10 @@ define('lazyload', ['wikia.thumbnailer'], function (thumbnailer) {
 				img.className += ' loaded';
 			};
 
+		elements = $.makeArray(elements);
+
 		while(elm = elements[x++]) {
-			img = new Image();
+			img = new window.Image();
 			src = elm.getAttribute('data-src');
 			imageWidth = ~~elm.getAttribute('width');
 
@@ -45,7 +48,7 @@ define('lazyload', ['wikia.thumbnailer'], function (thumbnailer) {
 			}
 
 			if(pageWidth < imageWidth){
-				elm.setAttribute('height', ~~(pageWidth/(imageWidth/~~elm.getAttribute('height'))));
+				elm.setAttribute('height', Math.round(elm.width * (~~elm.getAttribute('height') / imageWidth)));
 			}
 
 			img.src = src;

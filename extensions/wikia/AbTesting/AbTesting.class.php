@@ -3,57 +3,69 @@
  * @author Sean Colombo
  * @author Kyle Florence
  * @author Władysław Bodzek
+ * @author Piotr Bablok
  */
 
 class AbTesting extends WikiaObject {
 
 	const VARNISH_CACHE_TIME = 900; // 15 minutes - depends on Resource Loader settings for non-versioned requests
 	const CACHE_TTL = 300; // 5 minutes (quite short to minimize impact of caching issues)
-	const VERSION = 3;
+	const VERSION = 4;
 
 	const FLAG_GA_TRACKING = 1;
 	const FLAG_DW_TRACKING = 2;
 	const FLAG_FORCED_GA_TRACKING_ON_LOAD = 4;
-	const DEFAULT_FLAGS = 7;
+	const FLAG_LIMIT_TO_SPECIAL_WIKIS = 8;
+	const DEFAULT_FLAGS = 3;
 
 	static public $flags = array(
 		self::FLAG_GA_TRACKING => 'ga_tracking',
 		self::FLAG_DW_TRACKING => 'dw_tracking',
 		self::FLAG_FORCED_GA_TRACKING_ON_LOAD => 'forced_ga_tracking_on_load',
+		self::FLAG_LIMIT_TO_SPECIAL_WIKIS => 'limit_to_special_wikis',
 	);
 
-	static protected $initialized = false;
+	static protected $instance = null;
 
-	function __construct() {
-		parent::__construct();
-
-		if ( !self::$initialized ) {
-			// Nirvana singleton, please use F::build
-			F::setInstance( __CLASS__, $this );
-			self::$initialized = true;
+	static function getInstance() {
+		if( is_null(self::$instance) ) {
+			self::$instance = new AbTesting();
 		}
+		return self::$instance;
 	}
 
 	// Keeping the response size (assets minification) and the number of external requests low (aggregation)
-	public function onWikiaMobileAssetsPackages( Array &$jsHeadPackages, Array &$jsBodyPackages, Array &$scssPackages ) {
-		array_unshift( $jsHeadPackages, 'abtesting' );
+	static public function onWikiaMobileAssetsPackages( Array &$jsStaticPackages, Array &$jsExtensionPackages, Array &$scssPackages ) {
+		array_unshift( $jsStaticPackages, 'abtesting' );
 		return true;
 	}
 
-	public function onOasisSkinAssetGroupsBlocking( &$jsAssetGroups ) {
+	static public function onOasisSkinAssetGroupsBlocking( &$jsAssetGroups ) {
 		array_unshift( $jsAssetGroups, 'abtesting' );
 		return true;
 	}
 
-	public function onWikiaSkinTopModules( &$scriptModules, $skin ) {
-		if ( $this->app->checkSkin( 'oasis', $skin ) ) {
-			array_unshift( $scriptModules, 'wikia.ext.abtesting' );
+	static public function onWikiaSkinTopScripts( &$vars, &$scripts, $skin ) {
+		$app = F::app();
+		$wg = $app->wg;
+
+		if ( $app->checkSkin( 'wikiamobile', $skin ) ) {
+			//Add this mock as wikia.ext.abtesting relies on it and on WikiaMobile there is no mw object
+			//This will need some treatment if we add more abtesting to WikiaMobile
+			$scripts .= '<script>var mw = {loader: {state: function(){}}}</script>';
 		}
+
+		if ( $app->checkSkin( ['oasis', 'wikiamobile'], $skin ) ) {
+			$scripts .= ResourceLoader::makeCustomLink( $wg->out, array( 'wikia.ext.abtesting' ), 'scripts' ) . "\n";
+		}
+
+
+
 		return true;
 	}
 
 	protected function getMemcKey() {
-		return $this->wf->sharedMemcKey('abtesting','config',self::VERSION);
+		return wfSharedMemcKey('abtesting','config',self::VERSION);
 	}
 
 	protected function getFlagsInObject( $flags ) {
@@ -68,8 +80,10 @@ class AbTesting extends WikiaObject {
 		return strtotime($date);
 	}
 
-	protected function generateConfigScript( $data ) {
+	protected function generateConfigScript( $data, &$externalData = array() ) {
 		$config = array();
+
+		$externalData = array();
 
 		foreach ($data as $exp) {
 			$expName = $this->normalizeName($exp['name']);
@@ -81,22 +95,34 @@ class AbTesting extends WikiaObject {
 			);
 			$versions = &$config[$expName]['versions'];
 			foreach ($exp['versions'] as $ver) {
+				$versionId = intval($ver['id']);
 				$version = array(
+					'id' => $versionId,
 					'startTime' => $this->getTimestampForUTCDate($ver['start_time']),
 					'endTime' => $this->getTimestampForUTCDate($ver['end_time']),
 					'gaSlot' => $ver['ga_slot'],
 					'flags' => $this->getFlagsInObject( $ver['flags'] ),
+					'external' => false,
 					'groups' => array(),
 				);
 				$groups = &$version['groups'];
 				foreach ($ver['group_ranges'] as $grn) {
-					$group = $exp['groups'][$grn['group_id']];
+					$groupId = intval($grn['group_id']);
+					$group = $exp['groups'][$groupId];
 					$groupName = $this->normalizeName($group['name']);
 					$groups[$groupName] = array(
 						'id' => intval($group['id']),
 						'name' => $groupName,
 						'ranges' => $this->parseRanges($grn['ranges']),
 					);
+					if ( !empty($grn['styles']) ) {
+						$version['external'] = true;
+						$externalData[$expName][$versionId][$groupId]['styles'] = $grn['styles'];
+					}
+					if ( !empty($grn['scripts']) ) {
+						$version['external'] = true;
+						$externalData[$expName][$versionId][$groupId]['scripts'] = $grn['scripts'];
+					}
 				}
 				$versions[] = $version;
 			}
@@ -110,34 +136,39 @@ class AbTesting extends WikiaObject {
 	}
 
 	protected function getConfig() {
+		return $this->generateConfigObj();
+	}
+
+	protected function generateConfigObj() {
 		$dataClass = new AbTestingData();
 		$memcKey = $this->getMemcKey();
-		$data = $this->wg->memc->get($memcKey);
-		if ( empty( $data ) ) {
-			// find last modification time
-			$lastModified = $dataClass->getLastEffectiveChangeTime(self::VARNISH_CACHE_TIME);
-			$lastModified = $lastModified
-				? $this->getTimestampForUTCDate($lastModified) : null;
+		// find last modification time
+		$lastModified = $dataClass->getLastEffectiveChangeTime(self::VARNISH_CACHE_TIME);
+		$lastModified = $lastModified
+			? $this->getTimestampForUTCDate($lastModified) : null;
 
-			// find time of next config change
-			$nextModification = $dataClass->getNextEffectiveChangeTime(self::VARNISH_CACHE_TIME);
-			$nextModification = $nextModification
-				? $this->getTimestampForUTCDate($nextModification) : null;
+		// find time of next config change
+		$nextModification = $dataClass->getNextEffectiveChangeTime(self::VARNISH_CACHE_TIME);
+		$nextModification = $nextModification
+			? $this->getTimestampForUTCDate($nextModification) : null;
 
-			// calculate proper TTL
-			$ttl = self::CACHE_TTL;
-			if ( $nextModification ) {
-				$ttl = max( 1, min( $ttl, $nextModification - time() + 1 ) );
-			}
-
-			$data = array(
-				'modifiedTime' => $lastModified,
-				'script' => $this->generateConfigScript($dataClass->getCurrent()),
-			);
-			$this->wg->memc->set($memcKey,$data,$ttl);
+		// calculate proper TTL
+		$ttl = self::CACHE_TTL;
+		if ( $nextModification ) {
+			$ttl = max( 1, min( $ttl, $nextModification - time() + 1 ) );
 		}
+
+		$externalData = array();
+		$script = $this->generateConfigScript($dataClass->getCurrent(),$externalData);
+
+		$data = array(
+			'modifiedTime' => $lastModified,
+			'script' => $script,
+			'externalData' => $externalData,
+		);
+		$this->wg->memc->set($memcKey,$data,$ttl);
 		return $data;
-	}
+}
 
 	public function getConfigScript() {
 		$data = $this->getConfig();
@@ -149,8 +180,14 @@ class AbTesting extends WikiaObject {
 		return $data['modifiedTime'] ? $data['modifiedTime'] : 1;
 	}
 
+	public function getConfigExternalData() {
+		$data = $this->getConfig();
+		return $data['externalData'];
+	}
+
 	public function invalidateCache() {
-		$this->wg->memc->delete($this->getMemcKey());
+		//$this->wg->memc->delete($this->getMemcKey());
+		$this->generateConfigObj();
 	}
 
 	/**

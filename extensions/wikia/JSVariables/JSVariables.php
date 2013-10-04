@@ -8,9 +8,10 @@ $wgHooks['WikiaSkinTopScripts'][] = 'wfJSVariablesTopScripts';
 
 /**
  * @param array $vars JS variables to be added at the top of the page
+ * @param array $scripts JS scripts to add to the top of the page
  * @return bool return true - it's a hook
  */
-function wfJSVariablesTopScripts(Array &$vars) {
+function wfJSVariablesTopScripts(Array &$vars, &$scripts) {
 	$wg = F::app()->wg;
 
 	$title = $wg->Title;
@@ -51,6 +52,20 @@ function wfJSVariablesTopScripts(Array &$vars) {
 	$skin = RequestContext::getMain()->getSkin();
 	$vars['skin'] = $skin->getSkinName();
 
+	// for Google Analytics
+	$vars['_gaq'] = array();
+	$vars['wgIsGASpecialWiki'] = $wg->IsGASpecialWiki;
+
+	// PER-58: moved wgStyleVersion to <head>
+	$vars['wgStyleVersion'] = (string)($wg->StyleVersion);
+
+	$wg->NoExternals = $wg->Request->getBool('noexternals', $wg->NoExternals);
+	if (!empty($wg->NoExternals)) {
+		$vars["wgNoExternals"] = $wg->NoExternals;
+	}
+
+	$scripts .= Html::inlineScript("var wgNow = new Date();") .	"\n";
+
 	return true;
 }
 
@@ -62,7 +77,7 @@ function wfJSVariablesTopScripts(Array &$vars) {
 function wfMakeGlobalVariablesScript(Array &$vars, OutputPage $out) {
 	wfProfileIn(__METHOD__);
 	global $wgMemc, $wgEnableAjaxLogin, $wgPrivateTracker, $wgExtensionsPath,
-		$wgArticle, $wgStyleVersion, $wgSitename, $wgDisableAnonymousEditing,
+		$wgArticle, $wgSitename, $wgDisableAnonymousEditing,
 		$wgGroupPermissions, $wgBlankImgUrl, $wgCookieDomain, $wgCookiePath, $wgResourceBasePath;
 
 	$skin = $out->getSkin();
@@ -104,8 +119,6 @@ function wfMakeGlobalVariablesScript(Array &$vars, OutputPage $out) {
 	if (Wikia::isContentNamespace()) {
 		$vars['wgIsContentNamespace'] = true;
 	}
-
-	$vars['wgStyleVersion'] = isset($wgStyleVersion) ? $wgStyleVersion : '' ;
 
 	// TODO: is this one really needed?
 	if(isset($skin->themename)) {

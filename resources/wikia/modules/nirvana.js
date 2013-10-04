@@ -6,7 +6,8 @@
 (function (context) {
 	'use strict';
 
-	function nirvana(ajax) {
+	function nirvana($) {
+
 		function sendRequest(attr) {
 			var type = (attr.type || 'POST').toUpperCase(),
 				format = (attr.format || 'json').toLowerCase(),
@@ -24,7 +25,7 @@
 				throw "Only Json,Jsonp and Html format are allowed";
 			}
 
-			url = attr.scriptPath || context.wgScriptPath;
+			url = attr.scriptPath || context.wgServer + context.wgScriptPath;
 
 			getUrl = {
 				//Iowa strips out POST parameters, Nirvana requires these to be set
@@ -33,7 +34,15 @@
 				method: attr.method
 			};
 
-			(type == 'POST' ? getUrl : data).format = format;
+			if(type === 'POST') {
+				getUrl.format = format;
+			} else {
+				if(typeof data == 'string') {
+					data += '&format=' + format;
+				}else{
+					data.format = format;
+				}
+			}
 
 			// If data is a string just pass it directly along as is.  Otherwise
 			// sort the structured data so that the URL is consistant (for cache
@@ -47,13 +56,13 @@
 					sortedKeys[sortedKeys.length] = key;
 				}
 				sortedKeys.sort();
-				var sortedDict = {};
+				sortedDict = {};
 				for(var i = 0; i < sortedKeys.length; i++) {
 					sortedDict[sortedKeys[i]] = data[sortedKeys[i]];
 				}
 			}
 
-			return ajax({
+			return $.ajax({
 				url: url + '/wikia.php?' + $.param(getUrl), /* JSlint ignore */
 				dataType: format,
 				type: type,
@@ -100,10 +109,10 @@
 	}
 
 	if (context.define && context.define.amd) {
-		context.define('wikia.nirvana', ['wikia.ajax'], nirvana);
+		context.define('wikia.nirvana', ['jquery'], nirvana);
 	}
 
 	if(context.jQuery) {
-		context.jQuery.nirvana = nirvana(context.jQuery.ajax);
+		context.jQuery.nirvana = nirvana(context.jQuery);
 	}
 }(this));

@@ -31,11 +31,6 @@ html, body {
 	padding: 0;
 }
 
-object {
-	width: 100%;
-	height: auto;
-}
-
 // Error Box
 .wkErr {
 	background-color: $error-bg-color;
@@ -158,4 +153,22 @@ object {
 	content:'';
 	background-image: url('/extensions/wikia/WikiaMobile/images/chevron-grey-down.png'); /* base64 */
 	background-repeat: no-repeat;
+}
+
+.wikitable, .sortable{
+	border:1px solid $border-color;
+
+	th{
+		text-align:center;
+	}
+}
+
+.wikitable:not(.infobox), sortable {
+	th, td {
+		white-space:nowrap;
+	}
+
+	td{
+		border:1px solid $border-color;
+	}
 }

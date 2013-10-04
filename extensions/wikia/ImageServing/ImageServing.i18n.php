@@ -18,6 +18,13 @@ $messages['qqq'] = array(
 	'imageserving-desc' => '{{desc}}',
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'imageserving-desc' => 'تختار الصور من مجموعة محددة من الصفحات استناداً على المتطلبات البصرية',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -42,6 +49,13 @@ $messages['br'] = array(
  */
 $messages['bs'] = array(
 	'imageserving-desc' => 'Odabira slike iz određenog niza stranica zasnovanog na vizuelnim zahtjevima',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'imageserving-desc' => "Selecciona les imatges des d'un conjunt especificat de pàgines basat en les exigències visuals",
 );
 
 /** Czech (česky)
@@ -144,9 +158,17 @@ $messages['nb'] = array(
 );
 
 /** Dutch (Nederlands)
+ * @author Siebrand
  */
 $messages['nl'] = array(
-	'imageserving-desc' => "Selecteert afbeeldingen uit een aangegeven verzameling pagina's gebaseerd op visuele eisen",
+	'imageserving-desc' => "Selecteert afbeeldingen uit een opgegeven verzameling pagina's gebaseerd op visuele eisen",
+);
+
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'imageserving-desc' => 'Selecciona los images dins un ensemble definit de paginas, en foncion dels besonhs visuals',
 );
 
 /** Polish (polski)
@@ -213,6 +235,13 @@ $messages['tl'] = array(
  */
 $messages['tt-cyrl'] = array(
 	'imageserving-desc' => 'Күрсәтелгән мәкаләләр массивыннан визуаль таләпләр нигезендә сурәтләр сайлый.',
+);
+
+/** Ukrainian (українська)
+ * @author Ua2004
+ */
+$messages['uk'] = array(
+	'imageserving-desc' => 'Вибір зображень із вказаного масиву сторінок на основі візуальних вимог',
 );
 
 /** Simplified Chinese (中文（简体）‎)

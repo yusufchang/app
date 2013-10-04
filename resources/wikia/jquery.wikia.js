@@ -16,15 +16,27 @@ $.getSassLocalURL = function(scssFilePath, params) {
 	return $.getSassURL(wgServer, scssFilePath, params);
 };
 
+/**
+ *	Get URL for loading asset manager groups
+ *  @param {String|String[]} groups Assets manager group name
+ *  @param {Object} params Extra params for url string. Ex: {minify:0}
+ */
 $.getAssetManagerGroupUrl = function( groups, params ) {
 	if ( typeof groups == 'string' ) {
 		groups = [ groups ];
 	}
 
+	params = params || {};
+
+	// Don't minify asset if we're on devbox
+	if ( window.wgDevelEnvironment ) {
+		params.minify = 0;
+	}
+
 	return wgAssetsManagerQuery .
 		replace( '%1$s', 'groups' ) .
 		replace( '%2$s', groups.join( ',' ) ) .
-		replace( '%3$s', params ? encodeURIComponent( $.param( params ) ) : '-' ) .
+		replace( '%3$s', $.isEmptyObject( params ) ? '-' : encodeURIComponent( $.param( params ) ) ) .
 		replace( '%4$d', wgStyleVersion );
 };
 
@@ -93,8 +105,17 @@ $.showModal = function(title, content, options) {
 	options = (typeof options != 'object') ? {} : options;
 
 	var header = $('<h1>').text(title),
-		dialog = $('<div>').html(content).prepend(header).appendTo('body'),
+		dialog = $('<div>'),
 		wrapper;
+
+	if (typeof options.rawHTML != 'undefined' && options.rawHTML === true) {
+		// Do not use jquery .html() method here, because it breaks code like '<a onlick="<references/>">test</a>' into <a onlick="<references></a>">test</a>
+		dialog.get(0).innerHTML = content;
+	} else {
+		dialog.html(content);
+	}
+
+	dialog.prepend(header).appendTo('body');
 
 	// fire callbackBefore if provided
 	if (typeof options.callbackBefore == 'function') {
@@ -113,6 +134,11 @@ $.showModal = function(title, content, options) {
 };
 
 // show modal version of confirm()
+	/**
+	 *
+	 * @param options Some possible properties of options are: id, title, content, cancelMsg, okMsg,
+	 * callbackBefore, onOk, callback.  Also, anything that is used by $.fn.makeModal
+	 */
 $.confirm = function(options) {
 	// init options
 	options = (typeof options != 'object') ? {} : options;
@@ -126,8 +152,8 @@ $.confirm = function(options) {
 
 	html += '<p>' + (options.content || '') + '</p>' +
 		'<div class="neutral modalToolbar">' +
-		'<button id="WikiaConfirmCancel" class="wikia-button secondary">' + (options.cancelMsg || 'Cancel') + '</button>' +
-		'<button id="WikiaConfirmOk" class="wikia-button">' + (options.okMsg || 'Ok') + '</button>' +
+		'<button id="WikiaConfirmCancel" class="wikia-button secondary">' + (options.cancelMsg || $.msg( 'cancel' )) + '</button>' +
+		'<button id="WikiaConfirmOk" class="wikia-button">' + (options.okMsg || $.msg( 'ok' )) + '</button>' +
 		'</div>';
 
 	var dialog = $('<div>').
@@ -279,9 +305,6 @@ $.fn.startThrobbing = function() {
 $.fn.stopThrobbing = function() {
 	return this.find('.wikiaThrobber').remove();
 };
-$.stopThrobbing = function() {
-	$('.wikiaThrobber').remove();
-}
 $.preloadThrobber = function() {
 	var img = new Image();
 	img.src = stylepath + '/common/images/ajax.gif';
@@ -291,8 +314,7 @@ $.preloadThrobber = function() {
 	Generate URL to thumbnail from different URL to thumbnail :)
 	New URL has different parameters (fixed width and height)
 
-	@TODO: This code has been moved to a "shareable" module by the Mobile team (/resources/wikia/modules/thumbnailer.js,
-	remove this proxy function and replace its calls directly with Wikia.Thumbnailer
+	TODO: Remove it, no code uses this function
  */
 $.thumbUrl2ThumbUrl = function( url, type, width, height ) {
 	return Wikia.Thumbnailer.getThumbURL(url, type, width, height);
@@ -559,11 +581,6 @@ $(function() {
 	if (typeof wgNow != 'undefined') {
 		var loadTime = (new Date()).getTime() - wgNow.getTime();
 		$().log('DOM ready after ' + loadTime + ' ms', window.skin);
-	}
-
-	//beacon_id cookie
-	if ( window.beacon_id ) {
-		$.cookies.set( 'wikia_beacon_id', window.beacon_id, { path: wgCookiePath, domain: wgCookieDomain });
 	}
 
 	// For selenium tests

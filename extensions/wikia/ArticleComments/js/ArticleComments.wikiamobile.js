@@ -5,8 +5,8 @@
  * @author Jakub 'Student' Olek
  **/
 
-require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], function(throbber, toast, modal, events, track, msg){
-	"use strict";
+require(['throbber', 'toast', 'modal', 'track', 'JSMessages', 'lazyload', 'jquery'], function(throbber, toast, modal, track, msg, lazyload, $){
+	'use strict';
 	/** @private **/
 
 	var d = document,
@@ -21,7 +21,7 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 			skin +
 			"&article=" +
 			wgArticleId,
-		clickEvent = events.click,
+		clickEvent = 'click',
 		firstPage,
 		commsUl = d.getElementById('wkComUl'),
 		postReply = msg('wikiamobile-article-comments-post-reply'),
@@ -51,7 +51,7 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 			elm.className += ' active';
 			throbber.show(elm, {size: '30px'});
 
-			Wikia.ajax({
+			$.ajax({
 				url: ajaxUrl + '&page=' + ~~pageIndex,
 				dataType: 'json'
 			}).done(
@@ -74,6 +74,9 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 					((forward) ? loadPrev : loadMore).style.display = 'block';
 
 					wkArtCom.scrollIntoView();
+
+					//load all images that might be on a comments page
+					lazyload(wkArtCom.querySelectorAll('.lazy'));
 				}
 			);
 		}
@@ -104,6 +107,7 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 	function post(ev) {
 		ev.preventDefault();
 		ev.stopPropagation();
+
 		if(!loginRequired(ev)){
 
 			var form = ev.target,
@@ -111,7 +115,7 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 				parentId = (parent) ? parent.id : false,
 				submit = form.getElementsByTagName('input')[0],
 				textArea = form.getElementsByClassName('commText')[0],
-				text = textArea.value;
+				text = textArea.value.trim();
 
 			if(text !== '') {
 				submit.disabled =  true;
@@ -131,16 +135,15 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 					data.parentId = parentId;
 				}
 
-				Wikia.ajax({
+				$.ajax({
 					url: wgScript,
 					data: data,
 					dataType: 'json',
 					type: 'POST'
 				}).done(
 					function(json) {
-						textArea.value = '';
-
 						if(!json.error && json.text){
+							textArea.value = '';
 
 							if(currentPage > 1){
 								commsUl.innerHTML = firstPage;
@@ -241,49 +244,37 @@ require(['throbber', 'toast', 'modal', 'events', 'track', 'JSMessages'], functio
 		});
 	}
 
+	//load all images that might be on a comments page
+	lazyload(wkArtCom.querySelectorAll('.lazy'));
+
 	if(totalPages > 1 && wgArticleId){
 		loadMore.addEventListener(clickEvent, clickHandler, true);
 		loadPrev.addEventListener(clickEvent, clickHandler, true);
 	}
 
-	wkArtCom.addEventListener(clickEvent, function(ev){
-		var t = ev.target,
-			className = t.className;
-
-		if(className.indexOf('viewAll') > -1){
-			openModal(t);
+	$(wkArtCom)
+		.on('click', '.viewAll', function(){
+			openModal(this);
 			track.event('article-comments', track.CLICK, {
 				label: 'open'
 			});
-		}else if(className.indexOf('cmnRpl') > -1){
-			if(!loginRequired(ev)){
-				openModal(t, true);
+		})
+		.on('click', '.cmnRpl', function(event){
+			if(!loginRequired(event)){
+				openModal(this, true);
 				track.event('article-comments', track.CLICK, {
 					label: 'open'
 				});
 			}
-		}else if(className.indexOf('avatar') > -1){
+		})
+		.on('click', '.avatar', function(){
 			track.event('article-comments', track.IMAGE_LINK, {
 				label: 'avatar',
-				href: t.parentElement.href
-			},
-			ev);
-		}
-	});
+				href: this.parentElement.href
+			},ev);
+		});
 
-	d.body.addEventListener('submit', function(ev){
-		var t = ev.target;
-
-		if(t.className.indexOf('commFrm') > -1){
-			post(ev);
-		}
-	});
-
-	d.body.addEventListener(clickEvent, function(ev){
-		var t = ev.target;
-
-		if(t.matchesSelector('.commFrm textarea')){
-			loginRequired(ev);
-		}
-	});
+	$(d.body)
+		.on(clickEvent, '.commFrm textarea', loginRequired)
+		.on('submit', '.commFrm', post);
 });

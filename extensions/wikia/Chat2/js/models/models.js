@@ -111,12 +111,20 @@ var STATUS_STATE_AWAY = 'away';
 		}
 	});
 
+	models.PartEvent = Backbone.Model.extend({
+		initialize: function(options){
+			if(!options) return;
+			this.set({
+				name: options.name
+			});
+		}
+	});
+
 	models.LogoutEvent = Backbone.Model.extend({
 		initialize: function(options){
 			if(!options) return;
 			this.set({
-				command: 'logout',
-				leavingUserName: options.leavingUserName
+				name: options.name
 			});
 		}
 	});
@@ -227,7 +235,7 @@ var STATUS_STATE_AWAY = 'away';
 			'statusState': STATUS_STATE_PRESENT,
 			'isModerator': false,
 			'isStaff': false,
-			'isCanGiveChatMode': false,
+			'isCanGiveChatMod': false,
 			'avatarSrc': "http://placekitten.com/50/50",
 			'editCount': '?',
 			'isPrivate': false,

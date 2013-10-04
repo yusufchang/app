@@ -3,7 +3,7 @@ var WikiaPhotoGallerySlideshow = {
 	log: function(msg) {
 		$().log(msg, 'WikiaPhotoGallery:Slideshow');
 	},
-	
+
 	init: function(params) {
 		var slideshow = $('#' + params.id),
 			hash = slideshow.attr('data-hash'),
@@ -13,16 +13,16 @@ var WikiaPhotoGallerySlideshow = {
 			var item = slideshow.find('li').eq(index),
 				img = item.find('img').first(),
 				src = img.attr('data-src');
-				
+
 			if(src) {
 				if(crop) {
-					src = $.thumbUrl2ThumbUrl(src, 'image', parseInt(params.width), parseInt(params.height));
+					src = Wikia.Thumbnailer.getThumbURL(src, 'image', parseInt(params.width), parseInt(params.height));
 					img.css({width: params.width, height: params.height});
 				}
 				img.attr('src', src).removeAttr('data-src');
 			}
 		};
-		
+
 		// Lazy load first image
 		slideCallback(0);
 
@@ -54,29 +54,22 @@ var WikiaPhotoGallerySlideshow = {
 			lastInView = inView;
 		});
 
-
-		// handle clicks on "Pop Out" button
-		//slideshow.find('.wikia-slideshow-popout').click(this.onPopOutClickFn);
-
-		// handle clicks on slideshow images
-		//slideshow.find('.wikia-slideshow-images a').click(this.onPopOutClickFn);
-
 		// handle clicks on "Add Image"
 		slideshow.find('.wikia-slideshow-addimage').click(function(e) {
-			
+
 			// BugId:7453
 			if (WikiaPhotoGalleryView.forceLogIn()) {
 				return;
 			}
-			
+
 			$.when(
-				WikiaPhotoGalleryView.loadEditorJS(), 
+				WikiaPhotoGalleryView.loadEditorJS(),
 				WikiaPhotoGalleryView.ajax('getGalleryData', {hash:hash, articleId:wgArticleId})
 			).then(function(loadEditorJSScripts,data) {
-				
+
 				//get data stuff from jQuery object passed by promise pattern
 				data = data[0];
-				
+
 				if (data && data.info == 'ok') {
 					data.gallery.id = params.id;
 					WikiaPhotoGallerySlideshow.log(data.gallery);

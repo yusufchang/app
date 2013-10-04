@@ -2,9 +2,11 @@ var SlotTweaker = function(log, document, window) {
 	'use strict';
 
 	var logGroup = 'SlotTweaker'
-		, removeClass, removeDefaultHeight, hide, removeTopButtonIfNeeded
+		, addDefaultHeight, removeClass, removeDefaultHeight, hide, show, removeTopButtonIfNeeded
 		, defaultHeightClass = 'default-height'
 		, rclass = /[\t\r\n]/g
+		, isLeaderboard, isStandardLeaderboardSize, adjustLeaderboardSize
+		, standardLeaderboardSizeClass = 'standard-leaderboard'
 	;
 
 	removeClass = function(element, cls) {
@@ -25,41 +27,97 @@ var SlotTweaker = function(log, document, window) {
 		}
 	};
 
+	isLeaderboard = function (slotname) {
+		return slotname.indexOf('LEADERBOARD') !== -1;
+	};
+
+	isStandardLeaderboardSize = function (slotname) {
+		var slot = document.getElementById(slotname),
+			isStandardSize;
+
+		if (slot) {
+			isStandardSize = slot.offsetHeight >= 90
+				&& slot.offsetHeight <= 95
+				&& slot.offsetWidth <= 728;
+
+			log(
+				['isStandardLeaderboardSize', slotname, slot.offsetWidth + 'x' + slot.offsetHeight, isStandardSize],
+				3,
+				logGroup
+			);
+
+			return isStandardSize;
+		}
+		log('isStandardLeaderboardSize: ' + slotname + ' missing', 3, logGroup);
+	};
+
+	addDefaultHeight = function(slotname) {
+		var slot = document.getElementById(slotname);
+
+		log('addDefaultHeight ' + slotname, 6, logGroup);
+
+		if (slot) {
+			slot.className += ' ' + defaultHeightClass;
+		}
+	};
+
+	// TODO: fix it, it's a hack!
+	adjustLeaderboardSize = function(slotname) {
+		var slot = document.getElementById(slotname);
+
+		if (isLeaderboard(slotname) && isStandardLeaderboardSize(slotname)) {
+			slot.className += ' ' + standardLeaderboardSizeClass;
+		}
+	};
+
 	// TODO: fix it, it's a hack!
 	removeTopButtonIfNeeded = function(slotname) {
-		var slot = document.getElementById(slotname)
-			, topAds = document.getElementById('WikiaTopAds')
-			, isLeaderboard = slot && slotname.indexOf('LEADERBOARD') !== -1
-			, isStandardSize = slot && slot.offsetHeight >= 90 && slot.offsetHeight <= 95
-		;
-
-		if (isLeaderboard && !isStandardSize) {
-			log('#' + slotname + ' height: ' + slot.offsetHeight + ' not standard, removing TOP_BUTTON(_WIDE)', 3, logGroup);
+		if (isLeaderboard(slotname) && !isStandardLeaderboardSize(slotname)) {
+			log('removing TOP_BUTTON(_WIDE)', 3, logGroup);
 			hide('TOP_BUTTON');
 			hide('TOP_BUTTON_WIDE');
-			removeClass(topAds, 'WikiaTopButtonLeft');
-			removeClass(topAds, 'WikiaTopButtonRight');
 		}
-		if (isLeaderboard && isStandardSize) {
-			log('#' + slotname + ' height: ' + slot.offsetHeight + ' is standard, pushing TOP_BUTTON(_WIDE).force to Liftium2 queue', 2, logGroup);
+		if (isLeaderboard(slotname) && isStandardLeaderboardSize(slotname)) {
+			log('pushing TOP_BUTTON(_WIDE).force to Liftium2 queue', 2, logGroup);
 			window.adslots2.push(['TOP_BUTTON.force', null, 'Liftium2']);
 			window.adslots2.push(['TOP_BUTTON_WIDE.force', null, 'Liftium2']);
 		}
 	};
 
-	hide = function(slotname) {
+	hide = function(slotname, usingClass) {
+		log('hide ' + slotname + (usingClass ? ' using class hidden' : ' using display: none'), 6, logGroup);
+
 		var slot = document.getElementById(slotname);
 
-		log('hide ' + slotname, 6, logGroup);
+		if (slot) {
+			if (usingClass) {
+				slot.className += ' hidden';
+			} else {
+				slot.style.display = 'none';
+			}
+		}
+	};
+
+	show = function(slotname, usingClass) {
+		log('hide ' + slotname + (usingClass ? ' using class hidden' : ' using display: none'), 6, logGroup);
+
+		var slot = document.getElementById(slotname);
 
 		if (slot) {
-			slot.style.display = 'none';
+			if (usingClass) {
+				removeClass(slot, 'hidden');
+			} else {
+				throw 'Showing slot not based on hidden class unsupported';
+			}
 		}
 	};
 
 	return {
+		addDefaultHeight: addDefaultHeight,
 		removeDefaultHeight: removeDefaultHeight,
 		removeTopButtonIfNeeded: removeTopButtonIfNeeded,
-		hide: hide
+		adjustLeaderboardSize: adjustLeaderboardSize,
+		hide: hide,
+		show: show
 	};
 };

@@ -16,7 +16,7 @@ class LatestPhotosController extends WikiaController {
 	 * Just a string concatanated with other in creation of Memc Key
 	 * @var String
 	 */
-	const MEMC_KEY_VER = '1.0';
+	const MEMC_KEY_VER = '1.1';
 
 	public function executeIndex() {
 		global $wgUser, $wgMemc;
@@ -24,7 +24,7 @@ class LatestPhotosController extends WikiaController {
 		$this->isUserLoggedIn = $wgUser->isLoggedIn();
 
 		// get the count of images on this wiki
-		$wikiService = F::build( 'WikiService' );
+		$wikiService = (new WikiService);
 		$this->total = $wikiService->getTotalImages();
 
 		// Pull the list of images from memcache first
@@ -87,6 +87,7 @@ class LatestPhotosController extends WikiaController {
 		if (! isset($element['file'])) return array();
 
 		$file = $element['file'];
+		$fileTitle = $file->getTitle();
 		// crop the images correctly using extension:imageservice
 		$is = new ImageServing(array(), self::THUMB_SIZE);
 		$thumb_url = $is->getThumbnails(array($file));
@@ -97,8 +98,10 @@ class LatestPhotosController extends WikiaController {
 		$retval = array (
 			"file_url" => $element['url'],
 			"image_url" => $file->getUrl(),
+			"image_name" => $fileTitle->getText(),
+			"image_key" => $fileTitle->getDBKey(),
+			"image_filename" => $fileTitle->getFullText(),
 			"thumb_url" => $thumb_url,
-			"image_filename" => $file->getTitle()->getFullText(),
 			"user_href" => Wikia::link(Title::newFromText($userName, NS_USER), $userName),
 			"links" => $this->getLinkedFiles($file->name),
 			"isVideoThumb"  => WikiaFileHelper::isFileTypeVideo( $file ),
@@ -193,7 +196,7 @@ class LatestPhotosController extends WikiaController {
 		global $wgMemc;
 
 		wfProfileIn( __METHOD__ );
-		$cacheKey = wfMemcKey( __METHOD__, $name );
+		$cacheKey = wfMemcKey( __METHOD__, md5($name) );
 		$data = $wgMemc->get( $cacheKey );
 		if( !is_array($data) ) {
 			// The ORDER BY ensures we get NS_MAIN pages first
@@ -221,8 +224,6 @@ class LatestPhotosController extends WikiaController {
 
 		$links = array();
 		if ( !empty( $data ) ) {
-			$sk = RequestContext::getMain()->getSkin();
-
 			foreach ( $data as $row ) {
 				$Title = Title::makeTitle( $row['ns'], $row['title'] );
 
@@ -231,7 +232,7 @@ class LatestPhotosController extends WikiaController {
 							'#filelinks" class="wikia-gallery-item-more">' .
 							wfMsg( 'oasis-latest-photos-more-dotdotdot' ) . '</a>';
 				} else {
-					$links[] = $sk->link( $Title, null, array( 'class' => 'wikia-gallery-item-posted' ) );
+					$links[] = Linker::link( $Title, null, array( 'class' => 'wikia-gallery-item-posted' ) );
 				}
 			}
 		}
@@ -298,7 +299,7 @@ class LatestPhotosController extends WikiaController {
 	protected static function invalidateCacheWikiTotalImages( $file, $reupload ) {
 		$title = $file->getTitle();
 		if ( $title instanceof Title && !WikiaFileHelper::isVideoFile($file) && !$reupload ) {
-			$wikiService = F::build( 'WikiService' );
+			$wikiService = (new WikiService);
 			$wikiService->invalidateCacheTotalImages();
 		}
 	}

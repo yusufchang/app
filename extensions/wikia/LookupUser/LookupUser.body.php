@@ -175,6 +175,7 @@ EOT
 		} else {
 			$user = User::newFromName( $targetUserName );
 		}
+		//@TODO get rid of TempUser handling when it will be globally disabled
 		$tempUser = false;
 		if ( is_object( $extUser ) && ( $extUser->getId() != 0 ) ) {
 			$user = $extUser->mapToUser();
@@ -194,7 +195,7 @@ EOT
 			$options = array();
 			if (!empty($aUsers) && is_array($aUsers)) {
 				foreach ($aUsers as $id => $userName) {
-					$options[] = XML::option( $userName, $userName, ($userName == $userTarget) );
+					$options[] = Xml::option( $userName, $userName, ($userName == $userTarget) );
 				}
 			}
 			$selectForm = Xml::openElement( 'select', array( 'id' => 'email_user', 'name' => "email_user" ) );
@@ -268,6 +269,9 @@ EOT
 		$wgOut->addWikiText( '*' . wfMsg( 'lookupuser-touched', $wgLang->timeanddate( $user->mTouched ) ) );
 		$wgOut->addWikiText( '*' . wfMsg( 'lookupuser-info-authenticated', $authenticated ) );
 
+		$allowedAdoption = $user->getOption( 'AllowAdoption', true );
+		$wgOut->addWikiText( '*' . wfMessage( 'lookupuser-user' . ( !$allowedAdoption ? '-not' : '' ) . '-allowed-adoption' )->plain() );
+
 		//Begin: Small Stuff Week - adding table from Special:LookupContribs --nAndy
 		if( !empty($wgEnableLookupContribsExt) ) {
 			$wgOut->addExtensionStyle("{$wgExtensionsPath}/wikia/LookupContribs/css/table.css");
@@ -276,9 +280,7 @@ EOT
 
 			//checking and setting User::mBlockedGlobally if needed
 			//only for this instance of class User
-			if( class_exists('UserBlock') ) {
-				UserBlock::blockCheck($user);
-			}
+			wfRunHooks( 'GetBlockedStatus', array( &$user ) );
 
 			$oTmpl = new EasyTemplate( dirname( __FILE__ ) . "/templates/" );
 			$oTmpl->set_vars(array(

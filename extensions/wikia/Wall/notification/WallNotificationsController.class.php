@@ -13,21 +13,19 @@ class WallNotificationsController extends WikiaController {
 	}
 
 	public function Index() {
-		wfProfileIn(__METHOD__);
+		wfProfileIn( __METHOD__ );
+		$loggedIn = $this->wg->User->isLoggedIn();
+		$suppressWallNotifications = $this->areNotificationsSuppressedByExtensions();
 
-		if($this->wg->User->isLoggedIn()) {
-
-			$this->response->addAsset('extensions/wikia/Wall/js/WallNotifications.js');
-			$this->response->addAsset('extensions/wikia/Wall/css/WallNotifications.scss');
-			$this->response->setVal('prehide', (empty($this->wg->EnableWallExt) && empty($this->wg->EnableForumExt)));
-			
-			$this->response->setVal('user', $this->wg->User);
+		if( $loggedIn && !$suppressWallNotifications ) {
+			$this->response->addAsset( 'extensions/wikia/Wall/js/WallNotifications.js' );
+			$this->response->addAsset( 'extensions/wikia/Wall/css/WallNotifications.scss' );
+			$this->response->setVal( 'prehide', ( empty( $this->wg->EnableWallExt ) && empty( $this->wg->EnableForumExt ) ) );
 		}
 
-		$this->response->setVal('suppressWallNotifications',$this->areNotificationsSuppressedByExtensions());
-		$this->response->setVal('user', $this->wg->User);
-
-		wfProfileOut(__METHOD__);
+		$this->response->setVal( 'loggedIn', $loggedIn );
+		$this->response->setVal( 'suppressWallNotifications', $suppressWallNotifications );
+		wfProfileOut( __METHOD__ );
 	}
 
 	public function Update() {
@@ -38,7 +36,7 @@ class WallNotificationsController extends WikiaController {
 		$this->response->setVal('notificationKey', $this->request->getVal('notificationKey') );
 
 		$notificationCounts = $this->request->getVal('notificationCounts');
-		
+
 		$this->response->setVal('notificationCounts', $notificationCounts);
 
 		$unreadCount = $this->request->getVal('count');
@@ -82,11 +80,11 @@ class WallNotificationsController extends WikiaController {
 			if($authoruser->getId() > 0) {
 				$displayname = $authoruser->getName();
 			} else {
-				$displayname = $this->app->wf->Msg('oasis-anon-user');
+				$displayname = wfMsg('oasis-anon-user');
 			}
 		} else {
 			//annon
-			$displayname = $this->app->wf->Msg('oasis-anon-user');
+			$displayname = wfMsg('oasis-anon-user');
 		}
 
 		$wall_displayname = $walluser->getName();
@@ -119,7 +117,7 @@ class WallNotificationsController extends WikiaController {
 	}
 
 	private function areNotificationsSuppressedByExtensions() {
-		$suppressed = F::app()->wg->atCreateNewWikiPage;
+		$suppressed = $this->app->wg->atCreateNewWikiPage || !$this->app->wg->User->isAllowed( 'read' );
 		return !empty($suppressed);
 	}
 
@@ -192,8 +190,16 @@ class WallNotificationsController extends WikiaController {
 		if(!$unread) $authors = array_slice($authors, 0, 1);
 
 		$this->response->setVal( 'msg', $msg );
-		if ( empty( $data->url ) ) $data->url = '';
-		$this->response->setVal( 'url', $this->fixNotificationURL($data->url) );
+
+		// The instances of `WallNotificationEntity` in the `$notify['grouped']` array are sorted in reverse
+		// chronological order. We want the url to point to the oldest unread item (which is the last element in the
+		// array) instead of the most recent so that they start reading where the left off. See bugid 64560.
+		$oldestEntity = end( $notify['grouped'] );
+		if ( empty( $oldestEntity->data->url ) ) {
+			$oldestEntity->data->url = '';
+		}
+
+		$this->response->setVal( 'url', $this->fixNotificationURL( $oldestEntity->data->url ) );
 		$this->response->setVal( 'authors', array_reverse($authors) );
 		$this->response->setVal( 'title', $data->thread_title );
 		$this->response->setVal( 'iso_timestamp',  wfTimestamp(TS_ISO_8601, $data->timestamp ));
@@ -268,9 +274,11 @@ class WallNotificationsController extends WikiaController {
 		$topic = $this->getRequest()->getVal( 'query' );
 		if( !empty( $topic ) ) {
 			/** @var $title title */
-			$title = F::build( 'Title', array( 'text' => $topic ), 'newFromText' );
+			$title = Title::newFromText( $topic );
 
-			$result = (bool) $title->exists();
+			if ( $title instanceof Title ) {
+				$result = (bool) $title->exists();
+			}
 		}
 
 		$this->response->setVal( 'exists' , $result );

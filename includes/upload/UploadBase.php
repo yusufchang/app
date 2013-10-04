@@ -24,6 +24,8 @@ abstract class UploadBase {
 	protected $mBlackListedExtensions;
 	protected $mJavaDetected;
 
+	protected static $safeXmlEncodings = array( 'UTF-8', 'ISO-8859-1', 'ISO-8859-2', 'UTF-16', 'UTF-32' );
+
 	const SUCCESS = 0;
 	const OK = 0;
 	const EMPTY_FILE = 3;
@@ -299,6 +301,8 @@ abstract class UploadBase {
 	/**
 	 * Verify the mime type
 	 *
+	 * @note Only checks that it is not an evil mime. The does it have
+	 *  correct extension given its mime type check is in verifyFile.
 	 * @param $mime string representing the mime
 	 * @return mixed true if the file is verified, an array otherwise
 	 */
@@ -309,11 +313,6 @@ abstract class UploadBase {
 			global $wgMimeTypeBlacklist;
 			if ( $this->checkFileExtension( $mime, $wgMimeTypeBlacklist ) ) {
 				return array( 'filetype-badmime', $mime );
-			}
-
-			# XXX: Missing extension will be caught by validateName() via getTitle()
-			if ( $this->mFinalExtension != '' && !$this->verifyExtension( $mime, $this->mFinalExtension ) ) {
-				return array( 'filetype-mime-mismatch', $this->mFinalExtension, $mime );
 			}
 
 			# Check IE type
@@ -340,6 +339,56 @@ abstract class UploadBase {
 	 * @return mixed true of the file is verified, array otherwise.
 	 */
 	protected function verifyFile() {
+		global $wgVerifyMimeType;
+		wfProfileIn( __METHOD__ );
+
+		$status = $this->verifyPartialFile();
+		if ( $status !== true ) {
+			wfProfileOut( __METHOD__ );
+			return $status;
+		}
+
+		if ( $wgVerifyMimeType ) {
+			$this->mFileProps = FSFile::getPropsFromPath( $this->mTempPath, $this->mFinalExtension );
+			$mime = $this->mFileProps['file-mime'];
+
+			# XXX: Missing extension will be caught by validateName() via getTitle()
+			if ( $this->mFinalExtension != '' && !$this->verifyExtension( $mime, $this->mFinalExtension ) ) {
+				wfProfileOut( __METHOD__ );
+				return array( 'filetype-mime-mismatch', $this->mFinalExtension, $mime );
+			}
+		}
+
+		$handler = MediaHandler::getHandler( $mime );
+		if ( $handler ) {
+			$handlerStatus = $handler->verifyUpload( $this->mTempPath );
+			if ( !$handlerStatus->isOK() ) {
+				$errors = $handlerStatus->getErrorsArray();
+				wfProfileOut( __METHOD__ );
+				return reset( $errors );
+			}
+		}
+
+		wfRunHooks( 'UploadVerifyFile', array( $this, $mime, &$status ) );
+		if ( $status !== true ) {
+			wfProfileOut( __METHOD__ );
+			return $status;
+		}
+
+		wfDebug( __METHOD__ . ": all clear; passing.\n" );
+		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * A verification routine suitable for partial files
+	 *
+	 * Runs the blacklist checks, but not any checks that may
+	 * assume the entire file is present.
+	 *
+	 * @return Mixed true for valid or array with error message key.
+	 */
+	protected function verifyPartialFile() {
 		global $wgAllowJavaUploads, $wgDisableUploadScriptChecks;
 		# get the title, even though we are doing nothing with it, because
 		# we need to populate mFinalExtension
@@ -390,21 +439,6 @@ abstract class UploadBase {
 			return array( 'uploadvirus', $virus );
 		}
 
-		$handler = MediaHandler::getHandler( $mime );
-		if ( $handler ) {
-			$handlerStatus = $handler->verifyUpload( $this->mTempPath );
-			if ( !$handlerStatus->isOK() ) {
-				$errors = $handlerStatus->getErrorsArray();
-				return reset( $errors );
-			}
-		}
-
-		wfRunHooks( 'UploadVerifyFile', array( $this, $mime, &$status ) );
-		if ( $status !== true ) {
-			return $status;
-		}
-
-		wfDebug( __METHOD__ . ": all clear; passing.\n" );
 		return true;
 	}
 
@@ -911,6 +945,15 @@ abstract class UploadBase {
 			return true;
 		}
 
+		// Some browsers will interpret obscure xml encodings as UTF-8, while
+		// PHP/expat will interpret the given encoding in the xml declaration (bug 47304)
+		if ( $extension == 'svg' || strpos( $mime, 'image/svg' ) === 0 ) {
+			if ( self::checkXMLEncodingMissmatch( $file ) ) {
+				wfProfileOut( __METHOD__ );
+				return true;
+			}
+		}
+
 		/**
 		 * Internet Explorer for Windows performs some really stupid file type
 		 * autodetection which can cause it to interpret valid image files as HTML
@@ -980,6 +1023,62 @@ abstract class UploadBase {
 	protected function detectScriptInSvg( $filename ) {
 		$check = new XmlTypeCheck( $filename, array( $this, 'checkSvgScriptCallback' ) );
 		return $check->filterMatch;
+	}
+
+
+	/**
+	 * Check a whitelist of xml encodings that are known not to be interpreted differently
+	 * by the server's xml parser (expat) and some common browsers.
+	 *
+	 * @param string $file pathname to the temporary upload file
+	 * @return Boolean: true if the file contains an encoding that could be misinterpreted
+	 */
+	public static function checkXMLEncodingMissmatch( $file ) {
+		global $wgSVGMetadataCutoff;
+		$contents = file_get_contents( $file, false, null, -1, $wgSVGMetadataCutoff );
+		$encodingRegex = '!encoding[ \t\n\r]*=[ \t\n\r]*[\'"](.*?)[\'"]!si';
+
+		if ( preg_match( "!<\?xml\b(.*?)\?>!si", $contents, $matches ) ) {
+			if ( preg_match( $encodingRegex, $matches[1], $encMatch )
+				&& !in_array( strtoupper( $encMatch[1] ), self::$safeXmlEncodings )
+			) {
+				wfDebug( __METHOD__ . ": Found unsafe XML encoding '{$encMatch[1]}'\n" );
+				return true;
+			}
+		} elseif ( preg_match( "!<\?xml\b!si", $contents ) ) {
+			// Start of XML declaration without an end in the first $wgSVGMetadataCutoff
+			// bytes. There shouldn't be a legitimate reason for this to happen.
+			wfDebug( __METHOD__ . ": Unmatched XML declaration start\n" );
+			return true;
+		} elseif ( substr( $contents, 0, 4) == "\x4C\x6F\xA7\x94" ) {
+			// EBCDIC encoded XML
+			wfDebug( __METHOD__ . ": EBCDIC Encoded XML\n" );
+			return true;
+		}
+
+		// It's possible the file is encoded with multi-byte encoding, so re-encode attempt to
+		// detect the encoding in case is specifies an encoding not whitelisted in self::$safeXmlEncodings
+		$attemptEncodings = array( 'UTF-16', 'UTF-16BE', 'UTF-32', 'UTF-32BE' );
+		foreach ( $attemptEncodings as $encoding ) {
+			wfSuppressWarnings();
+			$str = iconv( $encoding, 'UTF-8', $contents );
+			wfRestoreWarnings();
+			if ( $str != '' && preg_match( "!<\?xml\b(.*?)\?>!si", $str, $matches )	) {
+				if ( preg_match( $encodingRegex, $matches[1], $encMatch )
+					&& !in_array( strtoupper( $encMatch[1] ), self::$safeXmlEncodings )
+				) {
+					wfDebug( __METHOD__ . ": Found unsafe XML encoding '{$encMatch[1]}'\n" );
+					return true;
+				}
+			} elseif ( $str != '' && preg_match( "!<\?xml\b!si", $str ) ) {
+				// Start of XML declaration without an end in the first $wgSVGMetadataCutoff
+				// bytes. There shouldn't be a legitimate reason for this to happen.
+				wfDebug( __METHOD__ . ": Unmatched XML declaration start\n" );
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

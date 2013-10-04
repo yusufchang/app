@@ -4,7 +4,7 @@
 class WallNotificationsEveryone extends WallNotifications {
 	const queueTimeout = 30;
 	public function __construct() {
-		$this->app = F::App();
+		$this->app = F::app();
 		$this->cityId = $this->app->wg->CityId;
 	}
 
@@ -21,7 +21,6 @@ class WallNotificationsEveryone extends WallNotifications {
 		), __METHOD__);
 
 		$this->setGlobalCacheBuster();
-		$this->clearQueue();
 
 		$this->getDB(true)->commit();
 		wfProfileOut(__METHOD__);
@@ -76,15 +75,14 @@ class WallNotificationsEveryone extends WallNotifications {
 			$rev = Revision::newFromId($entityKeyArray[0]);
 
 			if(!empty($rev)) {
-				$notif = F::build('WallNotificationEntity', array($rev, $this->app->wg->CityId), 'createFromRev');
+				$notif = WallNotificationEntity::createFromRev($rev, $this->app->wg->CityId);
 				if(!empty($notif)) {
-					$wn = F::build('WallNotifications', array());
+					$wn = new WallNotifications();
 					$wn->addNotificationLinks(array($userId), $notif);
 				}
 			}
 
 			$this->setEntityProcessed($userId, $entityKey);
-			$this->clearQueue();
 		}
 
 		wfProfileOut(__METHOD__);
@@ -94,7 +92,7 @@ class WallNotificationsEveryone extends WallNotifications {
 		wfProfileIn(__METHOD__);
 		$cacheKey = $this->getGlobalCacheBusterKey();
 		$val = time();
-		$this->app->getGlobal('wgMemc')->set($cacheKey, $val);
+		$this->app->wg->memc->set($cacheKey, $val);
 		wfProfileOut(__METHOD__);
 		return $val;
 	}
@@ -102,7 +100,7 @@ class WallNotificationsEveryone extends WallNotifications {
 	public function getGlobalCacheBuster() {
 		wfProfileIn(__METHOD__);
 		$cacheKey = $this->getGlobalCacheBusterKey();
-		$val = $this->app->getGlobal('wgMemc')->get($cacheKey);
+		$val = $this->app->wg->memc->get($cacheKey);
 		if (empty($val)) {
 			wfProfileOut(__METHOD__);
 			return $this->setGlobalCacheBuster();
@@ -116,7 +114,7 @@ class WallNotificationsEveryone extends WallNotifications {
 		wfProfileIn(__METHOD__);
 
 		$cacheKey = $this->getEntityProcessedCacheKey($userId, $entityKey);
-		$this->app->getGlobal('wgMemc')->set($cacheKey, true);
+		$this->app->wg->memc->set($cacheKey, true);
 
 		$this->getDB(true)->insert('wall_notification_queue_processed', array(
 			'user_id' => $userId,
@@ -129,7 +127,7 @@ class WallNotificationsEveryone extends WallNotifications {
 	public function getEntityProcessed($userId, $entityKey) {
 		wfProfileIn(__METHOD__);
 		$cacheKey = $this->getEntityProcessedCacheKey($userId, $entityKey);
-		$val = $this->app->getGlobal('wgMemc')->get($cacheKey);
+		$val = $this->app->wg->memc->get($cacheKey);
 
 		if ($val == true) {
 			wfProfileOut(__METHOD__);
@@ -159,7 +157,7 @@ class WallNotificationsEveryone extends WallNotifications {
 		wfProfileIn(__METHOD__);
 
 		$cacheKey = $this->getQueueProcessedCacheKey($userId);
-		$this->app->getGlobal('wgMemc')->set($cacheKey, true);
+		$this->app->wg->memc->set($cacheKey, true);
 
 		wfProfileOut(__METHOD__);
 	}
@@ -168,7 +166,7 @@ class WallNotificationsEveryone extends WallNotifications {
 		wfProfileIn(__METHOD__);
 
 		$cacheKey = $this->getQueueProcessedCacheKey($userId);
-		$out = $this->app->getGlobal('wgMemc')->get($cacheKey);
+		$out = $this->app->wg->memc->get($cacheKey);
 
 		if ($out == true) {
 			wfProfileOut(__METHOD__);
@@ -180,23 +178,25 @@ class WallNotificationsEveryone extends WallNotifications {
 	}
 
 	public function getEntityProcessedCacheKey($userId, $entityKey) {
-		return $this->app->runFunction('wfMemcKey', __CLASS__, 'EntityProcessed', $userId, $entityKey, $this->getGlobalCacheBuster());
+		return wfMemcKey( __CLASS__, 'EntityProcessed', $userId, $entityKey, $this->getGlobalCacheBuster());
 	}
 
 	public function getQueueProcessedCacheKey($userId) {
-		return $this->app->runFunction('wfMemcKey', __CLASS__, 'QueueProcessed', $userId, $this->getGlobalCacheBuster());
+		return wfMemcKey( __CLASS__, 'QueueProcessed', $userId, $this->getGlobalCacheBuster());
 	}
 
 	public function getGlobalCacheBusterKey() {
-		return $this->app->runFunction('wfMemcKey', __CLASS__, 'GlobalCacheKey');
+		return wfMemcKey( __CLASS__, 'GlobalCacheKey');
 	}
 
 	public function clearQueue() {
+		//TODO: it causes db deadlocks - bugid 97359
+		//this should be called at most once a day in a background task
 		wfProfileIn(__METHOD__);
 
 		//TODO: performace of this queris
-		$this->getDB(true)->query('delete from wall_notification_queue where datediff(NOW(), event_date) > ' . self::queueTimeout . ' LIMIT 10');
-		$this->getDB(true)->query('delete from wall_notification_queue_processed where datediff(NOW(), event_date) > ' . self::queueTimeout . ' LIMIT 10');
+		$this->getDB(true)->query('delete from wall_notification_queue where datediff(NOW(), event_date) > ' . self::queueTimeout);
+		$this->getDB(true)->query('delete from wall_notification_queue_processed where datediff(NOW(), event_date) > ' . self::queueTimeout);
 		wfProfileOut(__METHOD__);
 	}
 }

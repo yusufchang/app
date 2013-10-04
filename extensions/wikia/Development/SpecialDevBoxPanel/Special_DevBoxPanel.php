@@ -36,10 +36,12 @@ $wgGroupPermissions['devboxpanel']['devboxpanel'] = true;
 $wgSpecialPageGroups['DevBoxPanel'] = 'wikia';
 
 // Hooks
-$dir = dirname(__FILE__) . '/';
+$dir = __DIR__ . '/';
 $wgExtensionMessagesFiles['DevBoxPanel'] = $dir.'Special_DevBoxPanel.i18n.php';
 $wgHooks['WikiFactory::execute'][] = "wfDevBoxForceWiki";
+$wgHooks['WikiFactory::executeBeforeTransferToGlobals'][] = "wfDevBoxDisableWikiFactory";
 $wgHooks['PageRenderingHash'][] = 'wfDevBoxSeparateParserCache';
+$wgHooks['ResourceLoaderGetConfigVars'][] = 'wfDevBoxResourceLoaderGetConfigVars';
 $wgExceptionHooks['MWExceptionRaw'][] = "wfDevBoxLogExceptions";
 
 $wgExtensionCredits['specialpage'][] = array(
@@ -49,17 +51,13 @@ $wgExtensionCredits['specialpage'][] = array(
 	'version' => '0.0.3',
 );
 
-// Definitions
-define('DEVBOX_DEFAULT_WIKI_DOMAIN', 'devbox.wikia.com');
-
-require_once($IP . '/includes/SpecialPage.php');
 $wgSpecialPages['DevBoxPanel'] = 'DevBoxPanel';
 
 class DevBoxPanel extends SpecialPage {
 	public function __construct(){
 		// macbre: don't run code below when running in command line mode (memcache starts to act strange) - NOTE: This macbre code was in a different spot... this may be fixed implicitly now.
 		if (!empty($wgCommandLineMode)) {
-			return true;
+			return;
 		}
 
 		parent::__construct('DevBoxPanel');
@@ -70,25 +68,22 @@ class DevBoxPanel extends SpecialPage {
 	 * to the wgOut global.
 	 */
 	function execute($par) {
-		global $wgOut,$wgHooks,$wgDevelEnvironment,$wgUser;
+		global $wgOut,$wgExtensionsPath,$wgDevelEnvironment,$wgUser;
 
 		if( !$wgUser->isAllowed( 'devboxpanel' ) ) {
 			throw new PermissionsError( 'devboxpanel' );
 		}
 
-		$wgHooks['BeforePageDisplay'][] = 'devBoxPanelAdditionalScripts';
+		$wgOut->addStyle( "$wgExtensionsPath/wikia/Development/SpecialDevBoxPanel/DevBoxPanel.css" );
+		$wgOut->addScript("<script type='text/javascript' src='$wgExtensionsPath/wikia/Development/SpecialDevBoxPanel/DevBoxPanel.js'></script>");
 
 		$wgOut->setPageTitle(wfMsg("devbox-title"));
 		$wgOut->setRobotpolicy( 'noindex,nofollow' );
 		$wgOut->setArticleRelated( false );
 
 		if($wgDevelEnvironment){
-			if (isset($_REQUEST['switch'])) svnHandleSwitch();
-			if (isset($_REQUEST['update'])) svnHandleUpdate();
-
 			$tmpl = new EasyTemplate( dirname( __FILE__ ) . "/templates/" );
 			$tmpl->set_vars(array(
-								"svnToolHtml"      => getHtmlForSvnTool(),
 								"dbComparisonHtml" => getHtmlForDatabaseComparisonTool(),
 								"infoHtml"         => getHtmlForInfo(),
 								"footer"           => wfMsg("devbox-footer", __FILE__),
@@ -102,38 +97,50 @@ class DevBoxPanel extends SpecialPage {
 
 } // end class DevBoxPanel
 
-
-function devBoxPanelAdditionalScripts( OutputPage &$out, &$sk ){
-	global $wgExtensionsPath;
-	$out->addStyle( "$wgExtensionsPath/wikia/Development/SpecialDevBoxPanel/DevBoxPanel.css" );
-	$out->addScript("<script type='text/javascript' src='$wgExtensionsPath/wikia/Development/SpecialDevBoxPanel/DevBoxPanel.js'></script>");
-	return true;
-}
-
 /**
  * Hooks into WikiFactory to force use of the wiki which the developer
  * has explicitly set using this panel (if applicable).
  *
- * @return true to allow the WikiFactoryLoader to do its other necessary initalization.
+ * @return boolean true to allow the WikiFactoryLoader to do its other necessary initalization.
  */
-function wfDevBoxForceWiki(&$wikiFactoryLoader){
-	global $wgDevelEnvironment, $wgWikiFactoryDB, $wgCommandLineMode;
+function wfDevBoxForceWiki(WikiFactoryLoader $wikiFactoryLoader){
+	global $wgDevelEnvironment, $wgWikiFactoryDB, $wgCommandLineMode, $wgDevboxDefaultWikiDomain;
 	if($wgDevelEnvironment){
 		$forcedWikiDomain = getForcedWikiValue();
 		$cityId = WikiFactory::DomainToID($forcedWikiDomain);
 		if(!$cityId){
 			// If the overridden name doesn't exist AT ALL, use a default just to let the panel run.
-			$forcedWikiDomain = DEVBOX_DEFAULT_WIKI_DOMAIN;
+			$forcedWikiDomain = $wgDevboxDefaultWikiDomain;
 			$cityId = WikiFactory::DomainToID($forcedWikiDomain);
+
+			wfDebug(__METHOD__ . ": domain forced to {$forcedWikiDomain}\n");
 		}
 
 		if($wgCommandLineMode) {
+
 			$cityId = getenv( "SERVER_ID" );
-
-			$wikiFactoryLoader->mCityID = $cityId;
-			$wikiFactoryLoader->mWikiID = $cityId;
+			if( is_numeric( $cityId ) ) {
+				$wikiFactoryLoader->mCityID = $cityId;
+				$wikiFactoryLoader->mWikiID = $cityId;
+			}
+			else {
+				$dbName = getenv( "SERVER_DBNAME" );
+				/**
+				 * find city_id by database name
+				 */
+				$dbr = wfGetDB( DB_SLAVE, "dump", $wgWikiFactoryDB );
+				$cityId = $dbr->selectField(
+					"city_list",
+					array( "city_id" ),
+					array( "city_dbname" => $dbName ),
+					__METHOD__
+				);
+				if( is_numeric( $cityId ) ) {
+					$wikiFactoryLoader->mCityID = $cityId;
+					$wikiFactoryLoader->mWikiID = $cityId;
+				}
+			}
 		}
-
 
 		if($cityId){
 			$wikiFactoryLoader->mServerName = $forcedWikiDomain;
@@ -153,7 +160,7 @@ function wfDevBoxForceWiki(&$wikiFactoryLoader){
 		$wikiFactoryLoader->mVariables["wgDBcluster"] = $row['city_cluster'];
 
 		// Final sanity check to make sure our database exists
-		if ($forcedWikiDomain != DEVBOX_DEFAULT_WIKI_DOMAIN) {
+		if ($forcedWikiDomain != $wgDevboxDefaultWikiDomain) {
 			$dbname = WikiFactory::DomainToDB($forcedWikiDomain);
 			$db1 = wfGetDB( DB_SLAVE, "dump", $wgWikiFactoryDB . '_c1');
 			$db2 = wfGetDB( DB_SLAVE, "dump", $wgWikiFactoryDB . '_c2'); // lame
@@ -172,6 +179,50 @@ function wfDevBoxForceWiki(&$wikiFactoryLoader){
 	}
 	return true;
 } // end wfDevBoxForceWiki()
+
+/**
+ * "Disable" WikiFactory wiki-specific settings when $wgDevboxSkipWikiFactoryVariables = true
+ *
+ * @author macbre
+ *
+ * @param WikiFactoryLoader $wikiFactoryLoader
+ * @return bool true
+ */
+function wfDevBoxDisableWikiFactory(WikiFactoryLoader $wikiFactoryLoader) {
+	global $wgDevboxSkipWikiFactoryVariables;
+
+	if (!empty($wgDevboxSkipWikiFactoryVariables)) {
+		wfDebug(__METHOD__ . ": WikiFactory settings are disabled!\n");
+
+		$whitelist = array(
+			'wgDBcluster',
+			'wgDBname',
+			'wgSitename',
+			'wgArticlePath',
+			'wgUploadPath',
+			'wgUploadDirectory',
+			'wgLogo',
+			'wgFavicon',
+			'wgLanguageCode'
+		);
+
+		foreach($wikiFactoryLoader->mVariables as $key => $value) {
+			if (!in_array($key, $whitelist)) {
+				unset($wikiFactoryLoader->mVariables[$key]);
+			}
+		}
+	}
+
+	return true;
+}
+
+function wfDevBoxResourceLoaderGetConfigVars( &$vars ) {
+	global $wgDevelEnvironment;
+
+	$vars['wgDevelEnvironment'] = $wgDevelEnvironment;
+
+	return true;
+}
 
 /**
  * Modify parser cache key to be different on each devbox (BugId:24647)
@@ -210,11 +261,6 @@ function getHostParts() {
  * Hostname scheme: override.developer.wikia-dev.com
  * Example: muppet.owen.wikia-dev.com -> muppet.wikia.com
  * Example: es.gta.owen.wikia-dev.com -> es.gta.wikia.com
- *
- * TODO: figure out if .poz domains are still used?
- * 	if (array_search('poz', $aHostParts) !== false){
- *		array_pop($aHostParts);  // remove .poz if it exists in the host name
- *	}
  */
 function getForcedWikiValue(){
 	global $wgDevelEnvironmentName;
@@ -241,9 +287,9 @@ function getForcedWikiValue(){
  * @return array - databases which are available on this cluster
  *                 use the writable devbox server instead of the production slaves.
  */
-function getDevBoxOverrideDatabases($db){
+function getDevBoxOverrideDatabases(DatabaseMysql $db){
 
-	$IGNORE_DBS = array('information_schema', 'mysql', '#mysql50#lost+found', 'devbox', 'wikicities_c2');
+	$IGNORE_DBS = array('information_schema', 'mysql', '#mysql50#lost+found', 'wikicities_c2');
 	$retval = array();
 
 	$info = $db->getLBInfo();
@@ -270,66 +316,6 @@ function getDevBoxOverrideDatabases($db){
  *  }
  */
 
-function svnHandleUpdate() {
-	$base_path = dirname(dirname(dirname(dirname(dirname( __FILE__ )))));
-	shell_exec("svn update $base_path 2>&1");
-}
-
-function svnHandleSwitch() {
-	$url = 'https://svn.wikia-code.com/wikia/';
-	$branch = $_REQUEST['branch'];
-	if ($branch == 'trunk') {
-		$url .= $branch;
-	} else {
-		$url .= "branches/$branch";
-	}
-
-	$base_path = dirname(dirname(dirname(dirname(dirname( __FILE__ )))));
-	shell_exec("cd $base_path; svn switch $url");
-}
-
-/**
- * A tool for showing the current status of SVN and for updating the working copy to a new branch
- */
-
-function getHtmlForSvnTool() {
-	global $wgTitle;
-	$errors = array();
-
-	$base_path = dirname(dirname(dirname(dirname(dirname( __FILE__ )))));
-	$stat = stat($base_path);
-	if ($stat['gid'] != posix_getegid()) {
-		$group = posix_getgrgid(posix_getegid());
-		$errors[] = "Incorrect file ownership.  To fix, run:<br><code>sudo chgrp -R ".$group['name']." $base_path</code>";
-	}
-
-	$perms = fileperms($base_path);
-	if (!($perms & 0x0010)) {
-		$errors[] = "Incorrect file permissions. To fix, run:<br><code>sudo chmod -R g+w $base_path</code>";
-	}
-
-	$tmpl = new EasyTemplate( dirname( __FILE__ ) . "/templates/" );
-	$data = shell_exec("svn info ".dirname(dirname(dirname(dirname(dirname( __FILE__ ))))));
-
-	foreach (explode("\n", $data) as $line) {
-		if (empty($line)) continue;
-		list($k, $v) = explode(": ", $line);
-		$info{$k} = $v;
-	}
-
-	$data = shell_exec("svn list https://svn.wikia-code.com/wikia/branches/");
-	$branches = array_map(create_function('$v', 'return rtrim($v, "/");'), explode("\n", $data));
-
-	$tmpl->set_vars(array(
-						"svnUrl"     => $info{'URL'},
-						"svnUpdated" => $info{'Last Changed Date'},
-						"branches"   => array_merge(array('trunk'), $branches),
-						"action"     => $wgTitle->getLocalUrl(),
-						"errors"     => $errors,
-						));
-	return $tmpl->render('svn-tool');
-}
-
 /**
  * A tool which shows what databases are installed
  * locally as well as which are available from
@@ -344,8 +330,7 @@ function getHtmlForDatabaseComparisonTool(){
 	$html = "";
 
 	// Determine what databases are on this dev-box.
-
-	global $wgDBname,$wgExternalSharedDB, $wgWikiFactoryDB;
+	global $wgWikiFactoryDB;
 
 	//$db_dev = wfGetDB( DB_MASTER, "dump", $wgDBname );
 	$db1 = wfGetDB( DB_SLAVE, "dump", $wgWikiFactoryDB );
@@ -410,7 +395,7 @@ function getHtmlForInfo(){
 	$index = 0;
 	foreach($settings as $name => $val){
 		$html .= "<tr".($index%2==1?" class='odd'":"").">";
-		$html .= "<td width=150>$name</td><td width=150>$val</td>";
+		$html .= "<td width=150>$name</td><td><tt>$val</tt></td>";
 		$html .= "</tr>\n";
 		$index++;
 	}

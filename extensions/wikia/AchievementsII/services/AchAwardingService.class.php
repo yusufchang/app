@@ -2,6 +2,9 @@
 
 class AchAwardingService {
 
+	/**
+	 * @var User
+	 */
 	var $mUser;
 	var $mArticle;
 	var $mRevision;
@@ -11,18 +14,18 @@ class AchAwardingService {
 	var $mNewBadges = array();
 	var $mCounters;
 	var $mUserCountersService;
-        private $mCityId;
+	private $mCityId;
 
 	private static $mDone = false;
 
-        public function __construct( $city_id = null ) {
-            if ( is_null( $city_id ) ) {
-                global $wgCityId;
-                $this->mCityId = $wgCityId;
-            } else {
-                $this->mCityId = $city_id;
-            }
-        }
+	public function __construct( $city_id = null ) {
+		if ( is_null( $city_id ) ) {
+			global $wgCityId;
+			$this->mCityId = $wgCityId;
+		} else {
+			$this->mCityId = $city_id;
+		}
+	}
 
 	public function migration($user_id)  {
 		wfProfileIn(__METHOD__);
@@ -260,16 +263,18 @@ class AchAwardingService {
 			$dbw->commit();
 
 			//notify the user only if he wants to be notified
-			if(!($this->mUser->getOption('hidepersonalachievements'))) {
+			if ( !($this->mUser->getOption('hidepersonalachievements')) ) {
 				$_SESSION['achievementsNewBadges'] = true;
+
+				$achNotificationService = new AchNotificationService($this->mUser);
+				$achNotificationService->addBadges($this->mNewBadges);
 
 				// Hook to give backend stuff something to latch onto at award-time rather than notifcation-time.
 				// NOTE: This has the limitation that it is only called for a max of one badge per page.
 				// If the user earned multiple badges on the same page, the hook will only be run on the badge which getBadgeToNotify() determines is more important.
 				global $wgWikiaForceAIAFdebug;
 				Wikia::log(__METHOD__, "", "Saving a new badge. About to run hook if badge can be re-loaded.", $wgWikiaForceAIAFdebug);
-				$achNotificationService = new AchNotificationService();
-				$badge = $achNotificationService->getBadgeToNotify($this->mUser->getId(), false);
+				$badge = $achNotificationService->getBadge( /*markAsNotified*/ false);
 				if($badge !== null) {
 					wfRunHooks('AchievementEarned', array($this->mUser, $badge));
 				}
@@ -392,24 +397,24 @@ class AchAwardingService {
 							$imageUsageCount = 0;
 							$imageUsageLimit = 10;
 							$params = array(
-							        'action' => 'query',
-							        'list' => 'imageusage',
-							        'iutitle' => "File:{$inserted_image['il_to']}",
-							        'iulimit' => $imageUsageLimit,
+								'action' => 'query',
+								'list' => 'imageusage',
+								'iutitle' => "File:{$inserted_image['il_to']}",
+								'iulimit' => $imageUsageLimit,
 							);
 
 							try {
-							        wfProfileIn(__METHOD__ . '::apiCall');
+								wfProfileIn(__METHOD__ . '::apiCall');
 
-							        $api = new ApiMain(new FauxRequest($params));
-							        $api->execute();
-							        $res = $api->getResultData();
+								$api = new ApiMain(new FauxRequest($params));
+								$api->execute();
+								$res = $api->getResultData();
 
-							        wfProfileOut(__METHOD__ . '::apiCall');
+								wfProfileOut(__METHOD__ . '::apiCall');
 
-							        if (is_array($res['query']['imageusage'])) {
-							              $imageUsageCount = count($res['query']['imageusage']);
-							        }
+								if (is_array($res['query']['imageusage'])) {
+									$imageUsageCount = count($res['query']['imageusage']);
+								}
 							}
 							catch(Exception $e) {};
 
@@ -564,7 +569,7 @@ class AchAwardingService {
 
 	private function awardNotInTrackBadge($badge_type_id, $badge_lap = null) {
 		wfProfileIn(__METHOD__);
-		global $wgIP;
+		global $wgRequest;
 
 		// can be platinum or static
 
@@ -594,14 +599,14 @@ class AchAwardingService {
 						$userWikia = User::newFromName('Wikia');
 
 						//#60032: forcing IP for bot since this code is run in a real user session and not from a maintenance script
-						$origIP = $wgIP;
-						$wgIP = '127.0.0.1';
-						
+						$origIP = $wgRequest->getIP();
+						$wgRequest->setIP( '127.0.0.1' );
+
 						//fixme. following functionality is done by HAWelcome extension...
 						$userPageArticle->doEdit( wfMsgForContentNoTrans('welcome-user-page', $userPageTitle->getText() ), '', $userWikia->isAllowed('bot') ? EDIT_FORCE_BOT : 0, false, $userWikia );
 
 						//restore original IP from user session
-						$wgIP = $origIP;
+						$wgRequest->setIP( $origIP );
 					}
 				}
 			}

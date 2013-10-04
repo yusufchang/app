@@ -39,13 +39,16 @@
 	text-align: center;
 }
 
-.wikia-gallery-item .thumb a.image {
+.wikia-gallery-item .thumb .gallery-image-wrapper {
+	overflow: hidden;
+}
+
+.wikia-gallery-item .thumb a.image, .wikia-gallery-item .thumb a.image-no-lightbox {
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
-	display: block;
+	display: table-cell;
 	height: 100%;
 	line-height: 1px;
-	overflow: hidden;
 	text-decoration: none;
 	vertical-align: middle;
 	width: 100%;
@@ -423,7 +426,7 @@ div.gallerybox div.thumb {
 	line-height: 250px;
 }
 
-div.main-page-tag-rcs {
+.main-page-tag-rcs {
 	position: relative;
 	width: 300px;
 	float: right;
@@ -434,13 +437,25 @@ div.main-page-tag-rcs {
     float:right;
 }
 
-div.main-page-tag-lcs-collapsed {
+.main-page-tag-lcs-collapsed {
 	overflow: hidden;
-	height: 1%; 
+	height: 1%;
 }
 
-div.main-page-tag-lcs-exploded {
+.main-page-tag-lcs-exploded {
 	float: left;
 	width: 100%;
 	position: relative;
+}
+
+/* Word wrapping for text in pages and subcategories lists and tables  */
+#mw-subcategories table,
+#mw-pages table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+#mw-subcategories li,
+#mw-pages li {
+    width: 100%;
+    word-wrap: break-word;
 }

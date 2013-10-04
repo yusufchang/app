@@ -133,7 +133,16 @@ class TempUser extends WikiaModel {
 	 * @return string key
 	 */
 	protected static function getMemKeyTempUser( $username ) {
-		return F::app()->wf->SharedMemcKey( 'userlogin', 'temp_user', md5($username) );
+		return wfSharedMemcKey( 'userlogin', 'temp_user', md5($username) );
+	}
+
+	/**
+	 * invalidate memcache for temp user
+	 * @param string $sUserName
+	 * @return void
+	 */
+	public static function invalidateTempUserCache( $sUserName ) {
+		F::app()->wg->Memc->delete( self::getMemKeyTempUser( $sUserName ) );
 	}
 
 	/**
@@ -145,14 +154,14 @@ class TempUser extends WikiaModel {
 		$app = F::app();
 		$tempUser = false;
 
-		$app->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$username = User::getCanonicalName( $username, 'valid' );
 		if ( $username != false ) {
 			$memKey = self::getMemKeyTempUser( $username );
 			$tempUser = $app->wg->Memc->get( $memKey );
 			if ( empty($tempUser) ) {
-				$db = $app->wf->GetDB( DB_MASTER, array(), $app->wg->ExternalSharedDB );
+				$db = wfGetDB( DB_MASTER, array(), $app->wg->ExternalSharedDB );
 				$row = $db->selectRow(
 					array( 'user_temp' ),
 					array( '*' ),
@@ -162,14 +171,15 @@ class TempUser extends WikiaModel {
 
 				if ( $row ) {
 					$rowArr = get_object_vars( $row );
-					$tempUser = F::build( __CLASS__, array($rowArr) );
+					$class = get_class();
+					$tempUser = new $class($rowArr);
 
 					$app->wg->Memc->set( $memKey, $tempUser, 60*60*24 );
 				}
 			}
 		}
 
-		$app->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $tempUser;
 	}
@@ -182,9 +192,9 @@ class TempUser extends WikiaModel {
 	 */
 	public function mapTempUserToUser( $resetUserId=true, $user=null ) {
 		if ( !$user ) {
-			$user = F::build( 'User' , array(self::getDefaultName($this->getId())), 'newFromName' ); /** @var User $user */
+			$user = User::newFromName(self::getDefaultName($this->getId())); /** @var User $user */
 			if ( $user->getId() == 0 ) {
-				$user = F::build( 'User' , array($this->getId()), 'newFromId' );
+				$user = User::newFromId($this->getId());
 				$user->loadFromDatabase();
 			}
 		}
@@ -220,10 +230,10 @@ class TempUser extends WikiaModel {
 	 * add temp user to database
 	 */
 	public function addToDatabase() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
-		if ( !$this->wf->ReadOnly() && !empty($this->user_id) ) {
-			$db = $this->wf->GetDB( DB_MASTER, array(), $this->wg->ExternalSharedDB );
+		if ( !wfReadOnly() && !empty($this->user_id) ) {
+			$db = wfGetDB( DB_MASTER, array(), $this->wg->ExternalSharedDB );
 			$db->insert(
 				'user_temp',
 				array(
@@ -240,17 +250,17 @@ class TempUser extends WikiaModel {
 			);
 			$db->commit(__METHOD__);
 		}
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
 	 * remove temp user from database by user id
 	 */
 	public function removeFromDatabase() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
-		if ( !$this->wf->ReadOnly() && !empty($this->user_id) ) {
-			$db = $this->wf->GetDB( DB_MASTER, array(), $this->wg->ExternalSharedDB );
+		if ( !wfReadOnly() && !empty($this->user_id) ) {
+			$db = wfGetDB( DB_MASTER, array(), $this->wg->ExternalSharedDB );
 			$db->delete(
 				'user_temp',
 				array( 'user_id' => $this->user_id),
@@ -263,17 +273,17 @@ class TempUser extends WikiaModel {
 			$this->wg->Memc->delete( $memKey );
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
 	 * update temp user by user id
 	 */
 	public function updateData() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
-		if ( !$this->wf->ReadOnly() && !empty($this->user_id) && !empty($this->user_email) ) {
-			$db = $this->wf->GetDB( DB_MASTER, array(), $this->wg->ExternalSharedDB );
+		if ( !wfReadOnly() && !empty($this->user_id) && !empty($this->user_email) ) {
+			$db = wfGetDB( DB_MASTER, array(), $this->wg->ExternalSharedDB );
 			$db->update(
 				'user_temp',
 				array(
@@ -290,7 +300,7 @@ class TempUser extends WikiaModel {
 		$memKey = self::getMemKeyTempUser( $this->getName() );
 		$this->wg->Memc->delete( $memKey );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -299,7 +309,7 @@ class TempUser extends WikiaModel {
 	 * @return User object $user
 	 */
 	public function activateUser( User $user ) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		// confirm email
 		$user = $this->mapTempUserToUser( false, $user );
@@ -314,7 +324,7 @@ class TempUser extends WikiaModel {
 			'$EXPLOREWIKISURL' => 'http://www.wikia.com',
 		);
 
-		$userLoginHelper = F::build( 'UserLoginHelper' ); /** @var UserLoginHelper $userLoginHelper */
+		$userLoginHelper = (new UserLoginHelper); /** @var UserLoginHelper $userLoginHelper */
 		$userLoginHelper->sendEmail( $user, 'WelcomeMail', 'usersignup-welcome-email-subject', 'usersignup-welcome-email-body', $emailParams, 'welcome-email', 'WelcomeMail' );
 
 		// remove temp user
@@ -324,12 +334,12 @@ class TempUser extends WikiaModel {
 		$ssUpdate = new SiteStatsUpdate( 0, 0, 0, 0, 1 );
 		$ssUpdate->doUpdate();
 
-		$this->wf->RunHooks( 'AddNewAccount', array( $user, false ) );
+		wfRunHooks( 'AddNewAccount', array( $user, false ) );
 		$userLoginHelper->addNewUserLogEntry( $user );
 
-		$this->wf->RunHooks( 'ConfirmEmailComplete', array( &$user ) );
+		wfRunHooks( 'ConfirmEmailComplete', array( &$user ) );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $user;
 	}

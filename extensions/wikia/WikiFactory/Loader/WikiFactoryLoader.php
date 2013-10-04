@@ -9,7 +9,7 @@
  * @todo change use of mIsWikiaActive to a series of isClosed, isDeleted, etc. methods
  */
 
-ini_set( "include_path", "{$IP}:{$IP}/includes:{$IP}/languages:{$IP}/lib:.:" );
+ini_set( "include_path", "{$IP}:{$IP}/includes:{$IP}/languages:{$IP}/lib/vendor:.:" );
 ini_set( "cgi.fix_pathinfo", 1);
 
 require_once( "$IP/includes/Defines.php" );
@@ -32,7 +32,9 @@ if( !function_exists("wfProfileIn") ) {
  */
 function wfUnserializeHandler( $errno, $errstr ) {
 	global $_variable_key, $_variable_value;
-	error_log( $_SERVER['SERVER_NAME'] . " ($_variable_key=$_variable_value): $errno, $errstr" );
+
+	$serverMame = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
+	error_log("$serverMame ($_variable_key=$_variable_value): $errno, $errstr");
 }
 
 class WikiFactoryLoader {
@@ -59,8 +61,8 @@ class WikiFactoryLoader {
 	 * @access public
 	 * @author Krzysztof Krzyżaniak <eloy@wikia-inc.com>
 	 *
-	 * @param integer $id default null	explicite set wiki id
-	 * @param string $server_name default false	explicite set server name
+	 * @param integer $id default null    explicit set wiki id
+	 * @param bool|string $server_name default false    explicit set server name
 	 *
 	 * @return WikiFactoryLoader object
 	 */
@@ -99,11 +101,17 @@ class WikiFactoryLoader {
 			$this->mServerName = false;
 			$this->mCommandLine = true;
 		}
+		elseif( getenv( "SERVER_DBNAME") ) {
+			$this->mCityDB = getenv( "SERVER_DBNAME" );
+			$this->mServerName = false;
+			$this->mCommandLine = true;
+			$this->mCityID = false;
+		}
 		else {
 			/**
 			 * hardcoded exit, nothing can be done at this point
 			 */
-			echo "Cannot tell which wiki it is (neither SERVER_NAME nor SERVER_ID is defined)\n";
+			echo "Cannot tell which wiki it is (neither SERVER_NAME, SERVER_ID nor SERVER_DBNAME is defined)\n";
 			exit(1);
 		}
 
@@ -188,7 +196,8 @@ class WikiFactoryLoader {
 	 *
 	 * @todo change new Database to LoadBalancer factory
 	 *
-	 * @return Database	database handler
+	 * @param int $type
+	 * @return Database    database handler
 	 */
 	public function getDB( $type = DB_SLAVE ) {
 		global $wgDBserver, $wgDBuser, $wgDBpassword;
@@ -281,24 +290,26 @@ class WikiFactoryLoader {
 			 * interactive/cmdline case. We know city_id so we don't have to
 			 * ask city_domains table
 			 */
-			if( $this->mCityID ) {
+			if( $this->mCityID || $this->mCityDB) {
 				$oRow = $dbr->selectRow(
-					array( "city_list" ),
-					array(
-						"city_id",
-						"city_public",
-						"city_factory_timestamp",
-						"city_url",
-						"city_dbname",
-						"ad_cat"
-					),
-					array( "city_list.city_id" => $this->mCityID ),
-					__METHOD__
-				);
-				if( isset( $oRow->city_id ) && $this->mCityID == $oRow->city_id ) {
+						array( "city_list" ),
+						array(
+							"city_id",
+							"city_public",
+							"city_factory_timestamp",
+							"city_url",
+							"city_dbname",
+							"ad_cat"
+						),
+						($this->mCityID) ? array( "city_list.city_id" => $this->mCityID ) : array( "city_list.city_dbname" => $this->mCityDB ),
+						__METHOD__
+					);
+
+				if( isset( $oRow->city_id ) )  {
 					preg_match( "/http[s]*\:\/\/(.+)$/", $oRow->city_url, $matches );
 					$host = rtrim( $matches[1],  "/" );
 
+					$this->mCityID = $oRow->city_id;
 					$this->mWikiID =  $oRow->city_id;
 					$this->mIsWikiaActive = $oRow->city_public;
 					$this->mCityHost = $host;
@@ -591,6 +602,8 @@ class WikiFactoryLoader {
 			);
 			while( $oRow = $dbr->fetchObject( $oRes ) ) {
 				#--- some magic, rewritting path, etc legacy data
+				global $_variable_key, $_variable_value;
+
 				set_error_handler( "wfUnserializeHandler" );
 				$_variable_key = $oRow->cv_name;
 				$_variable_value = $oRow->cv_value;
@@ -689,11 +702,13 @@ class WikiFactoryLoader {
 			}
 		}
 
+		// @author macbre
+		wfRunHooks( 'WikiFactory::executeBeforeTransferToGlobals', array( &$this ) );
+
 		/**
 		 * transfer configuration variables from database to GLOBALS
 		 */
 		if( is_array($this->mVariables) ) {
-			global $_variable_key, $_variable_value;
 			foreach ($this->mVariables as $key => $value) {
 				$tValue = $value;
 				#--- check, maybe there are variables in variable

@@ -1200,6 +1200,7 @@ class SMWSQLStore2 extends SMWStore {
 #				'smw_id > 50 AND page_id IS NULL GROUP BY smw_title',
 #				'SMW::getWantedPropertiesSpecial', $options );
 
+			$db = wfGetDB( DB_SLAVE, 'smw' );
 			$dbl = wfGetDB( DB_SLAVE ); # local connection
 			$res = $dbl->select(
 				$dbl->tableName( 'page' ),

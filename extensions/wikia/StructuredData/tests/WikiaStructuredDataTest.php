@@ -13,6 +13,13 @@ class WikiaStructuredDataTest extends WikiaBaseTest {
 		parent::setUp();
 	}
 
+	private $mockedConfig = array(
+		'debug' => false,
+		'baseUrl' => 'http://data-stage.wikia.net/',
+		'apiPath' => 'api/v0.1/',
+		'schemaPath' => 'callofduty',
+	);
+
 	private $codCharacterTemplate = '{"@context":"/contexts/cod.jsonld","type":"cod:Character","schema:description":null,"wikia:wikiText":[],"schema:name":null,"schema:url":null,"schema:video":[],"wikia:element":[],"schema:audio":[],"wikia:elementIn":[],"schema:photos":[],"wikia:restriction":null,"wikia:includeWith":[],"wikia:playableIn":[],"wikia:playable":null,"wikia:characterIn":[],"cod:voiceActor":[],"schema:birthDate":null,"wikia:weapon":[],"cod:status":null,"cod:rank":null,"cod:timeline":[]}';
 
 	private $codContext = '{
@@ -103,6 +110,7 @@ class WikiaStructuredDataTest extends WikiaBaseTest {
 	 */
 
 	public function testSDElement() {
+		global $wgStructuredDataConfig;
 		$existingCharacterName = 'Frank Woods';
 		$mock_cache = $this->getMock('stdClass', array('get', 'set'));
 		$mock_cache->expects($this->any())
@@ -111,10 +119,14 @@ class WikiaStructuredDataTest extends WikiaBaseTest {
 		$mock_cache->expects($this->any())
 			->method('set');
 		$this->mockGlobalVariable('wgMemc', $mock_cache, 0);
-		$this->mockApp();
+		$this->mockGlobalVariable('wgStructuredDataConfig', $this->mockedConfig);
 
-		$apiClient = F::build( 'StructuredDataAPIClient' );
-		$structuredData = F::build( 'StructuredData', array( 'apiClient' => $apiClient ));
+		$apiClient = (new StructuredDataAPIClient(
+			$wgStructuredDataConfig['baseUrl'],
+			$wgStructuredDataConfig['apiPath'],
+			$wgStructuredDataConfig['schemaPath']
+		));
+		$structuredData = new StructuredData( $apiClient );
 
 		$sdElement = $structuredData->getSDElementByTypeAndName( 'callofduty:Character', $existingCharacterName );
 
@@ -150,6 +162,7 @@ class WikiaStructuredDataTest extends WikiaBaseTest {
 	 * @group Infrastructure
 	 */
 	public function testCaching() {
+		global $wgStructuredDataConfig;
 		$objName = 'unit test object';
 
 		$mock_cache = $this->getMock('stdClass', array('get', 'set'));
@@ -159,10 +172,14 @@ class WikiaStructuredDataTest extends WikiaBaseTest {
 		$mock_cache->expects($this->any())
 			->method('set');
 		$this->mockGlobalVariable('wgMemc', $mock_cache, 0);
-		$this->mockApp();
+		$this->mockGlobalVariable('wgStructuredDataConfig', $this->mockedConfig);
 
-		$apiClient = F::build( 'StructuredDataAPIClient' );
-		$structuredData = F::build( 'StructuredData', array( 'apiClient' => $apiClient ));
+		$apiClient = (new StructuredDataAPIClient(
+			$wgStructuredDataConfig['baseUrl'],
+			$wgStructuredDataConfig['apiPath'],
+			$wgStructuredDataConfig['schemaPath']
+		));
+		$structuredData = new StructuredData( $apiClient );
 
 		// cleanup - our test object cannot exist before the test, because we want to create it
 		try {

@@ -1,22 +1,25 @@
 <?php
-
+/**
+ * Class definition for WikiaSearchAjaxController
+ */
+use Wikia\Search\QueryService;
+/**
+ * Responsible for handling AJAX requests in search.
+ * @author relwell
+ * @package Search
+ * @subpackage Controller
+ */
 class WikiaSearchAjaxController extends WikiaController {
 
-    const RESULTS_PER_PAGE = 25;
-
-    protected $wikiaSearch = null;
-
-    public function __construct() {
-        $this->wikiaSearch = F::build('WikiaSearch');
-    }
-
+    /**
+     * Handles accessing paginated results via AJAX.
+     */
     public function getNextResults(){
-        $this->wf->ProfileIn(__METHOD__);
+        wfProfileIn(__METHOD__);
 
         $this->response->setVal('status', true);
 
         $query = $this->request->getVal('query', $this->request->getVal('search'));
-        $query = htmlentities( Sanitizer::StripAllTags ( $query ), ENT_COMPAT, 'UTF-8' );
 
         $page = $this->request->getVal('page', 1);
         $rank = $this->request->getVal('rank', 'default');
@@ -29,30 +32,30 @@ class WikiaSearchAjaxController extends WikiaController {
 
         $cityId = $isInterWiki ? 0 : $this->wg->CityId;
 
+        $resultsPerPage = $isInterWiki ? WikiaSearchController::INTERWIKI_RESULTS_PER_PAGE : WikiaSearchController::RESULTS_PER_PAGE;
+        $resultsPerPage = empty( $this->wg->SearchResultsPerPage ) ? $resultsPerPage : $this->wg->SearchResultsPerPage;
         $params = array(
-			'page'			=>	$page,
-			'length'		=>	self::RESULTS_PER_PAGE,
-			'cityId'		=>	$cityId,
-			'groupResults'	=>	$isInterWiki,
-			'rank'			=>	$rank,
-			'hub'			=>	$hub,
-			'query'			=>	$query,
+			'page'   => $page,
+			'limit'  => $resultsPerPage,
+			'cityId' => $cityId,
+			'rank'   => $rank,
+			'hub'    => $hub,
 		);
-
-        $searchConfig = F::build( 'WikiaSearchConfig', array( $params ) );
-
-        $results = $this->wikiaSearch->doSearch( $searchConfig );
+        $config = new Wikia\Search\Config( $params );
+        $config->setInterWiki( $isInterWiki )
+               ->setQuery( $query );
+        $results = (new QueryService\Factory)->getFromConfig( $config )->search();
 
         $text = $this->app->getView('WikiaSearch', 'WikiaMobileResultList', array(
                 'currentPage'=> $page,
                 'isInterWiki' => $isInterWiki,
-                'relevancyFunctionId' => WikiaSearch::RELEVANCY_FUNCTION_ID,
+                'relevancyFunctionId' => 6,
                 'results' => $results,
-                'resultsPerPage' => self::RESULTS_PER_PAGE,
-                'query' => $query)
+                'resultsPerPage' => $resultsPerPage,
+                'query' => $config->getQuery()->getQueryForHtml())
         )->render();
 
         $this->response->setVal('text', $text);
-        $this->wf->ProfileOut(__METHOD__);
+        wfProfileOut(__METHOD__);
     }
 }

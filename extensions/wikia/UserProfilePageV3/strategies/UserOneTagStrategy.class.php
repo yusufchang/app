@@ -4,12 +4,13 @@
  */
 class UserOneTagStrategy extends UserTagsStrategyBase {
 	protected $groupsRank = array(
-		'authenticated' => 8,
-		'sysop' => 7,
-		'staff' => 6,
-		'helper' => 5,
-		'adminmentor' => 4,
-		'vstf' => 3,
+		'authenticated' => 9,
+		'sysop' => 8,
+		'staff' => 7,
+		'helper' => 6,
+		'adminmentor' => 5,
+		'vstf' => 4,
+		'voldev' => 3,
 		'council' => 2,
 		'chatmoderator' => 1,
 	);
@@ -20,18 +21,18 @@ class UserOneTagStrategy extends UserTagsStrategyBase {
 	 * @return array
 	 */
 	public function getUserTags() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if( $this->isBlocked() ) {
-			$tag = $this->app->wf->Msg('user-identity-box-group-blocked');
+			$tag = wfMsg('user-identity-box-group-blocked');
 		} elseif( $this->isFounder() ) {
-			$tag = $this->app->wf->Msg('user-identity-box-group-founder');
+			$tag = wfMsg('user-identity-box-group-founder');
 		} else {
 			$tag = $this->getTagFromGroups();
 		}
 		$tags = !empty($tag) ? array($tag) : array();
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $tags;
 	}
 

@@ -309,7 +309,7 @@ class User {
 			if(!empty($data)) {
 				$_key = wfSharedMemcKey( "user_touched", $this->mId );
 				$_touched = $wgMemc->get( $_key );
-				if($_touched == null){
+				if( empty( $_touched ) ) {
 					$wgMemc->set( $_key, $data['mTouched'] );
 				} else if( $_touched <= $data['mTouched'] ) {
 					$isExpired = false;
@@ -510,18 +510,6 @@ class User {
 		if ( $s === false ) {
 			$user_name = $nt->getText();
 			wfRunHooks( 'UserNameLoadFromId', array( $user_name, &$s ) );
-		}
-
-		/* wikia change */
-		if ( $s === false ) {
-			global $wgExternalAuthType;
-			if ( $wgExternalAuthType ) {
-				$mExtUser = ExternalUser::newFromName( $nt->getText() );
-				if ( is_object( $mExtUser ) && ( 0 != $mExtUser->getId() ) ) {
-					$mExtUser->linkToLocal( $mExtUser->getId() );
-					$s = $mExtUser->getLocalUser( false );
-				}
-			}
 		}
 
 		if ( $s === false ) {
@@ -984,7 +972,6 @@ class User {
 	 */
 	private function loadFromSession() {
 		global $wgExternalAuthType, $wgAutocreatePolicy;
-
 		$result = null;
 		wfRunHooks( 'UserLoadFromSession', array( $this, &$result ) );
 		if ( $result !== null ) {
@@ -1096,7 +1083,6 @@ class User {
 		}
 
 		$s = $dbr->selectRow( 'user', '*', array( 'user_id' => $this->mId ), __METHOD__ );
-
 		wfRunHooks( 'UserLoadFromDatabase', array( $this, &$s ) );
 
 		if ( $s !== false ) {
@@ -2008,7 +1994,10 @@ class User {
 			global $wgMemc, $wgSharedDB; # Wikia
 			$wgMemc->delete( wfMemcKey( 'user', 'id', $this->mId ) );
 			# not uncyclo
-			if( !empty( $wgSharedDB ) ) $wgMemc->delete( wfSharedMemcKey( "user_touched", $this->mId ) ); # Wikia
+			if( !empty( $wgSharedDB ) ) {
+				$memckey = wfSharedMemcKey( "user_touched", $this->mId );
+				$wgMemc->delete( $memckey );
+			}
 		}
 	}
 
@@ -2026,12 +2015,19 @@ class User {
 		if( $this->mId ) {
 			$this->mTouched = self::newTouchedTimestamp();
 
-			$dbw = wfGetDB( DB_MASTER );
-			$dbw->update( 'user',
+			#<Wikia>
+            global $wgExternalSharedDB, $wgSharedDB;
+            if( isset( $wgSharedDB ) ) {
+                    $dbw = wfGetDB( DB_MASTER, array(), $wgExternalSharedDB );
+            }
+            else {
+                    $dbw = wfGetDB( DB_MASTER );
+            }
+			#</Wikia>
+			$dbw->update( '`user`',
 				array( 'user_touched' => $dbw->timestamp( $this->mTouched ) ),
 				array( 'user_id' => $this->mId ),
 				__METHOD__ );
-
 			$this->clearSharedCache();
 		}
 	}
@@ -2557,6 +2553,29 @@ class User {
 	}
 
 	/**
+	 * Wikia. Get number of edits localized for wiki,
+	 *
+	 * NOTE: UserStatsService:getEditCountWiki function retrieves User object inside
+	 * due to this fact localized editcount shouldn't be a field of User class
+	 * to avoid infinite loop
+	 *
+	 * @autor Kamil Koterba
+	 * @since Feb 2013
+	 * @return Int
+	 */
+	public function getEditCountLocal() {
+		if( $this->getId() ) {
+
+			$userStatsService = new UserStatsService( $this->mId );
+			return $userStatsService->getEditCountWiki();
+
+		} else {
+			/* nil */
+			return null;
+		}
+	}
+
+	/**
 	 * Add the user to the given group.
 	 * This takes immediate effect.
 	 * @param $group String Name of the group to add
@@ -3013,14 +3032,6 @@ class User {
 			}
 		}
 
-                /**
-                 * @author Michał Roszka (Mix)
-                 * trap for BugId:17012
-                 */
-                if ( 'Lancer1289' == $this->mName ) {
-                    $oTo = $oFrom = new MailAddress( 'mix@wikia-inc.com' );
-                    UserMailer::send( $oTo, $oFrom, 'BugId:17012 Occurrence Report', serialize( wfDebugBacktrace() ) );
-                }
 		// wikia change end
 
 		$dbw = wfGetDB( DB_MASTER );
@@ -4095,6 +4106,7 @@ class User {
 	 * Will have no effect for anonymous users.
 	 */
 	public function incEditCount() {
+		global $wgMemc, $wgCityId, $wgEnableEditCountLocal;
 		if( !$this->isAnon() ) {
             // wikia change, load always from first cluster when we use
             // shared users database
@@ -4113,45 +4125,30 @@ class User {
 				__METHOD__ );
 			$dbw->commit();
 
-
-			/*
-			 * Wikia Change By Tomek
-			 * at this point we do not want to run
-			 * other logic because is not truth in our system
-			 * (local table of revision on every wiki)
-			 *
-			 *  false && to skip runing this part of code
+			/**
+			 * Wikia change
+			 * Update editcount for wiki
+			 * @since Feb 2013
+			 * @author Kamil Koterba
 			 */
-
-			// Lazy initialization check...
-			if( false && $dbw->affectedRows() == 0 ) {
-				// Pull from a slave to be less cruel to servers
-				// Accuracy isn't the point anyway here
-				$dbr = wfGetDB( DB_SLAVE );
-
-				$count = $dbr->selectField( 'revision',
-					'COUNT(rev_user)',
-					array( 'rev_user' => $this->getId() ),
+			if ( !empty($wgEnableEditCountLocal) ) {
+				$dbw = wfGetDB( DB_MASTER );
+				$dbw->update( 'wikia_user_properties',
+					array( 'wup_value=wup_value+1' ),
+					array( 'wup_user' => $this->getId(),
+						'wup_property' => 'editcount' ),
 					__METHOD__ );
 
-				// Now here's a goddamn hack...
-				if( $dbr !== $dbw ) {
-					// If we actually have a slave server, the count is
-					// at least one behind because the current transaction
-					// has not been committed and replicated.
-					$count++;
+				if ($dbw->affectedRows() == 1) {
+					//increment memcache also
+					$key = wfSharedMemcKey( 'editcount', $wgCityId, $this->getId() );
+					$wgMemc->incr( $key );
 				} else {
-					// But if DB_SLAVE is selecting the master, then the
-					// count we just read includes the revision that was
-					// just added in the working transaction.
+					//initialize editcount skipping memcache
+					$this->getEditCountLocal( 0, true );
 				}
-
-				$dbw->update( '`user`',
-					array( 'user_editcount' => $count ),
-					array( 'user_id' => $this->getId() ),
-					__METHOD__ );
 			}
-
+			/* end of change */
 
 		}
 		// edit count in user cache too

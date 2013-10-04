@@ -143,48 +143,24 @@ class HubService extends Service {
 		$categoryId = null;
 		if (F::app()->wg->EnableWikiaHubsV2Ext) {
 			$categoryId = self::getHubIdForCurrentPageV2();
-		} elseif (F::app()->wg->EnableWikiaHubsExt) {
-			$categoryId = self::getHubIdForCurrentPageV1();
 		}
 		return $categoryId;
 	}
 
-	private static function getHubIdForCurrentPageV1() {
+	private static function getHubIdForCurrentPageV2() {
 		$baseText = F::app()->wg->Title->getBaseText();
 
 		/** @var $tmpTitle Title */
-		$tmpTitle = F::build('Title', array($baseText), 'newFromText');
-		$hubsPages = F::app()->wg->WikiaHubsPages;
+		$tmpTitle = Title::newFromText($baseText);
 
-		if (!empty($hubsPages) && $tmpTitle instanceof Title) {
-			$textTitle = $tmpTitle->getDBKey();
-			if ($textTitle) {
-				foreach ($hubsPages as $hubId => $hubGroup) {
-					if (in_array($textTitle, $hubGroup)) {
-						return $hubId;
-					}
-				}
-			}
-		}
+		$hubsPages = F::app()->wg->WikiaHubsV2Pages;
 
-		return false;
-	}
-
-	private static function getHubIdForCurrentPageV2() {
-		$hubsPages = F::app()->wg->WikiaHubsPages;
-		$vertical = RequestContext::getMain()->getRequest()->getVal('vertical');
-		$title = F::build('Title', array($vertical), 'newFromText');
-
-		if ($title instanceof Title) {
+		if ($tmpTitle instanceof Title) {
 			/* @var $title Title */
-			$hubName = $title->getDbKey();
+			$hubName = $tmpTitle->getDbKey();
 
 			if ($hubName) {
-				foreach ($hubsPages as $hubId => $hubGroup) {
-					if (in_array($hubName, $hubGroup)) {
-						return $hubId;
-					}
-				}
+				return array_search($hubName, $hubsPages);
 			}
 		}
 		return false;

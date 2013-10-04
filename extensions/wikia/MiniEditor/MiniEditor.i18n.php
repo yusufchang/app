@@ -12,14 +12,28 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'minieditor-specialpage-title' => 'Browser title for the page',
 	'minieditor-new-heading' => 'Heading of a form area',
 	'minieditor-placeholder-new' => 'Placeholder text, showin in an input field, disappears when clicked',
 	'minieditor-message-edit' => 'Notification text shown when a message is being edited (as opposed to created)',
-	'minieditor-reply' => 'Button text for replying to a message',
+	'minieditor-reply' => 'Button text for replying to a message.
+{{Identical|Reply}}',
 	'minieditor-placeholder-reply' => 'Placeholder text, showin in an input field, disappears when clicked',
+);
+
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'minieditor-specialpage-title' => 'صفحة عرض المحرر الصغير',
+	'minieditor-new-heading' => 'قم بإنشاء رسالة جديدة',
+	'minieditor-placeholder-new' => 'أدخل رسالتك هنا',
+	'minieditor-message-edit' => 'هذه رسالة موجودة',
+	'minieditor-reply' => 'رُد',
+	'minieditor-placeholder-reply' => 'الرد على الرسالة هنا',
 );
 
 /** Breton (brezhoneg)
@@ -28,7 +42,21 @@ $messages['qqq'] = array(
 $messages['br'] = array(
 	'minieditor-new-heading' => 'Krouiñ ur gemennadenn nevez',
 	'minieditor-placeholder-new' => 'Skrivit ho kemennadenn amañ',
+	'minieditor-message-edit' => 'Homañ zo ur gemennadenn a zo anezhi dija',
 	'minieditor-reply' => 'Respont',
+	'minieditor-placeholder-reply' => "Respont d'ar gemennadenn amañ",
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'minieditor-specialpage-title' => 'Pàgina de demostració del MiniEditor',
+	'minieditor-new-heading' => 'Crear un missatge nou',
+	'minieditor-placeholder-new' => 'Escriu el missatge aquí',
+	'minieditor-message-edit' => 'Aquest és un missatge existent',
+	'minieditor-reply' => 'Respondre',
+	'minieditor-placeholder-reply' => 'Respondre al missatge aquí',
 );
 
 /** Czech (česky)
@@ -76,6 +104,17 @@ $messages['fi'] = array(
 	'minieditor-message-edit' => 'Tämä on olemassa oleva viesti',
 	'minieditor-reply' => 'Vastaus',
 	'minieditor-placeholder-reply' => 'Vastaa viestiin tässä',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'minieditor-specialpage-title' => 'MiniEditor Royndarsíða',
+	'minieditor-new-heading' => 'Upprætta eitt nýtt boð',
+	'minieditor-placeholder-new' => 'Skriva títt boð her',
+	'minieditor-reply' => 'Svara',
+	'minieditor-placeholder-reply' => 'Svara boðnum her',
 );
 
 /** French (français)
@@ -126,6 +165,13 @@ $messages['ia'] = array(
 	'minieditor-placeholder-reply' => 'Responde al message hic',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
+ */
+$messages['id'] = array(
+	'minieditor-reply' => 'Balas',
+);
+
 /** Italian (italiano)
  * @author Minerva Titani
  */
@@ -136,6 +182,25 @@ $messages['it'] = array(
 	'minieditor-message-edit' => 'Questo è un messaggio già esistente',
 	'minieditor-reply' => 'Rispondi',
 	'minieditor-placeholder-reply' => 'Rispondi qui al messaggio',
+);
+
+/** Kurdish (Latin script) (Kurdî (latînî)‎)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'minieditor-specialpage-title' => 'MiniEditor Demo Page',
+	'minieditor-new-heading' => 'Peyama nû binivîse',
+	'minieditor-placeholder-new' => 'Peyama me li vir binivîse',
+	'minieditor-message-edit' => 'Ev peyameke heye',
+	'minieditor-reply' => 'Bersiv bide',
+	'minieditor-placeholder-reply' => 'Peyamê li vir bibersivîne',
+);
+
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'minieditor-reply' => 'Äntwerten',
 );
 
 /** Macedonian (македонски)
@@ -201,15 +266,16 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'minieditor-specialpage-title' => 'Pagina ëd Demo dël MiniEditor',
+	'minieditor-specialpage-title' => 'Pàgina ëd dimostrassion dël MiniEditor',
 	'minieditor-new-heading' => 'Creé un neuv mëssagi',
 	'minieditor-placeholder-new' => 'Anseriss tò mëssagi sì',
 	'minieditor-message-edit' => "Cost a l'é un mëssagi esistent",
-	'minieditor-reply' => 'Arspond',
-	'minieditor-placeholder-reply' => 'Arspond al mëssagi sì',
+	'minieditor-reply' => 'Rësponde',
+	'minieditor-placeholder-reply' => "Ch'a rësponda al mëssagi ambelessì",
 );
 
 /** Pashto (پښتو)
@@ -228,6 +294,7 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author JM Pessanha
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -239,10 +306,26 @@ $messages['pt-br'] = array(
 	'minieditor-placeholder-reply' => 'Responder a mensagem aqui',
 );
 
+/** Romanian (română)
+ * @author Minisarm
+ */
+$messages['ro'] = array(
+	'minieditor-specialpage-title' => 'Pagină demonstrativă a MiniEditorului',
+	'minieditor-new-heading' => 'Creare mesaj nou',
+	'minieditor-placeholder-new' => 'Introduceți mesajul dumneavoastră aici',
+	'minieditor-message-edit' => 'Acesta este un mesaj existent',
+	'minieditor-reply' => 'Răspuns',
+	'minieditor-placeholder-reply' => 'Răspundeți mesajului aici',
+);
+
 /** tarandíne (tarandíne)
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
+	'minieditor-specialpage-title' => 'Pàgene de demo de MiniEditor',
+	'minieditor-new-heading' => "Ccreje 'nu messàgge nuève",
+	'minieditor-placeholder-new' => "Mitte 'u messàgge tune aqquà",
+	'minieditor-message-edit' => "Quiste jè 'nu messàgge esistende",
 	'minieditor-reply' => 'Respunne',
 	'minieditor-placeholder-reply' => "Respunne a 'u messàgge aqquà",
 );
@@ -293,21 +376,28 @@ $messages['tzm'] = array(
 
 /** Ukrainian (українська)
  * @author Steve.rusyn
+ * @author SteveR
+ * @author Ua2004
  */
 $messages['uk'] = array(
+	'minieditor-specialpage-title' => 'Демо-сторінка MiniEditor',
 	'minieditor-new-heading' => 'Створити нове повідомлення',
 	'minieditor-placeholder-new' => 'Введіть ваше повідомлення тут',
+	'minieditor-message-edit' => 'Це існуюче повідомлення',
 	'minieditor-reply' => 'Відповісти',
+	'minieditor-placeholder-reply' => 'Відповідь на повідомлення тут',
 );
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Hydra
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
-	'minieditor-new-heading' => '创造新信息',
-	'minieditor-placeholder-new' => '在此输入您的信息',
-	'minieditor-message-edit' => '该信息已存在',
+	'minieditor-specialpage-title' => '迷你编辑器演示页面',
+	'minieditor-new-heading' => '创建新消息',
+	'minieditor-placeholder-new' => '在此输入您的消息',
+	'minieditor-message-edit' => '该消息已存在',
 	'minieditor-reply' => '回复',
-	'minieditor-placeholder-reply' => '在这里答复信息',
+	'minieditor-placeholder-reply' => '在这里回复消息',
 );

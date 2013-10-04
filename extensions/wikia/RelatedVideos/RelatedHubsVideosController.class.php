@@ -7,7 +7,7 @@ class RelatedHubsVideosController extends RelatedVideosController {
 		parent::__construct($app);
 	}
 	
-	public function getCarusel() {
+	public function getCarousel() {
 		if( Wikia::isMainPage() || ( !$this->app->wg->Title instanceof Title ) || !$this->app->wg->Title->exists() ) {
 			return false;
 		}
@@ -45,7 +45,7 @@ class RelatedHubsVideosController extends RelatedVideosController {
 						
 						//overwrite owner's data (on Hub page we display name of user who suggested the video)
 						if( isset($result['data']['owner']) && $result['data']['owner'] !== $videoUsername ) {
-							$userSuggested = F::build('User', array($videoUsername), 'newFromName');
+							$userSuggested = User::newFromName($videoUsername);
 							if( $userSuggested instanceof User ) {
 								$userPage = $userSuggested->getUserPage();
 								$result['data']['owner'] = Xml::element('a', array(
@@ -83,7 +83,7 @@ class RelatedHubsVideosController extends RelatedVideosController {
 	protected function getMemcHubsVideoKey($videoTitleTxt, $videoUsername) {
 		$videoTitleTxt = urlencode($videoTitleTxt);
 		$videoUsername = urlencode($videoUsername);
-		return F::app()->wf->memcKey($videoTitleTxt, $videoUsername, self::MEMC_KEY_VER);
+		return wfMemcKey($videoTitleTxt, $videoUsername, self::MEMC_KEY_VER);
 	}
 	
 	protected function getMemcHubsVideoData($memcKey) {

@@ -29,13 +29,13 @@ abstract class WikiaSkinMonoBook extends WikiaSkin {
 	}
 
 	function initPage(&$out) {
-		global $wgHooks, $wgShowAds, $wgUseAdServer, $wgRequest, $wgOut;
+		global $wgHooks, $wgShowAds, $wgRequest, $wgOut;
 
 		parent::initPage( $out );
 
 		$diff = $wgRequest->getVal('diff');
 
-		if($wgShowAds == false || $wgUseAdServer == false || isset($diff)) {
+		if($wgShowAds == false || isset($diff)) {
 			$this->ads = false;
 		}
 
@@ -90,6 +90,8 @@ abstract class WikiaSkinMonoBook extends WikiaSkin {
 
 		$packages = array( 'monobook_js' );
 
+		wfRunHooks('MonobookSkinAssetGroups', array(&$packages));
+
 		$srcs = AssetsManager::getInstance()->getURL( $packages );
 
 		foreach($srcs as $src) {
@@ -103,42 +105,11 @@ abstract class WikiaSkinMonoBook extends WikiaSkin {
 	 * Setup ads handling
 	 */
 	protected function setupAds(BaseTemplate &$tpl) {
-		AdEngine::getInstance()->setLoadType('inline');
-
-		// BugId:26735 We want spotlights regardless of whether ads have been enabled.
-		$adsColumn = '<div id="column-google" class="noprint">'."\n".
-			AdEngine::getInstance()->getSetupHtml() .
-			'<div id="wikia_header" style="display:none"></div>'; // Hack because ads have code that referenc    es this. Awful.
-
-		if($this->ads === false) {
-			// FIXME: not used anymore?
-			$tpl->set('ads_top', '');
-			$tpl->set('ads_topleft', '');
-			$tpl->set('ads_topright', '');
-			$tpl->set('ads_bot','');
-
-			$adsColumn .= '<!-- not USING ad server! -->'."\n".'</div>'."\n</div>\n";
-		} else {
-			// FIXME: not used anymore?
-			$tpl->set('ads_top', AdServer::getInstance()->getAd('t'));
-			$tpl->set('ads_topleft', AdServer::getInstance()->getAd('tl'));
-			$tpl->set('ads_topright', AdServer::getInstance()->getAd('tr'));
-			$tpl->set('ads_bot', AdServer::getInstance()->getAd('b'));
-
-			$adsColumn .= '<!-- USING ad server! -->'."\n".
-				'<div id="column-google-right">'.AdEngine::getInstance()->getAd('RIGHT_SKYSCRAPER_1').'</div></div>'."\n";
-		}
-
-		// BugId:26735 We want spotlights regardless of whether ads have been enabled.
-		$adsColumn .= '<table id="spotlight_container"><tr>' .
-			'<td><div>'.AdEngine::getInstance()->getPlaceHolderIframe('SPOTLIGHT_FOOTER_1').'</div></td>' .
-			'<td><div>'.AdEngine::getInstance()->getPlaceHolderIframe('SPOTLIGHT_FOOTER_2').'</div></td>' .
-			'<td><div>'.AdEngine::getInstance()->getPlaceHolderIframe('SPOTLIGHT_FOOTER_3').'</div></td>'.
-			"</tr></table>\n".
-			AdEngine::getInstance()->getDelayedIframeLoadingCode();
-
-		// add ads column after content
-		$tpl->set('ads-column', $adsColumn);
+		$tpl->set('ads-column', '');
+		$tpl->set('ads_top', '');
+		$tpl->set('ads_topleft', '');
+		$tpl->set('ads_topright', '');
+		$tpl->set('ads_bot','');
 	}
 
 	/**
@@ -148,7 +119,7 @@ abstract class WikiaSkinMonoBook extends WikiaSkin {
 		global $wgCityId;
 
 		return AnalyticsEngine::track('GA_Urchin', AnalyticsEngine::EVENT_PAGEVIEW) .
-			AnalyticsEngine::track('GA_Urchin', 'hub', AdEngine::getCachedCategory()) .
+			AnalyticsEngine::track('GA_Urchin', 'hub', AdEngine2Controller::getCachedCategory()) .
 			AnalyticsEngine::track('GA_Urchin', 'onewiki', array($wgCityId)) .
 			AnalyticsEngine::track('QuantServe', AnalyticsEngine::EVENT_PAGEVIEW);
 	}
@@ -178,13 +149,13 @@ abstract class WikiaSkinMonoBook extends WikiaSkin {
 		else {
 			$toolbox = '';
 		}
-
+		$staffBlogLinkText = wfMessage( 'wikia_messages' )->escaped();
 		$html = <<<HTML
 	<div class="portlet" id="p-wikicities-nav">
 		<h5>$toolboxTitle</h5>
 		<div class="pBody">$toolbox
 			<ul>
-				<li><a href="http://community.wikia.com/wiki/Blog:Wikia_Staff_Blog">Wikia messages:</a><br />$wikiaMessages</li>
+				<li><a href="http://community.wikia.com/wiki/Blog:Wikia_Staff_Blog">$staffBlogLinkText:</a><br />$wikiaMessages</li>
 			</ul>
 		</div>
 	</div>
@@ -206,7 +177,7 @@ HTML;
 		}
 
 		if( empty( $ret ) ) {
-			$ret = wfMsgExt( 'shared-News_box', array('parseinline', 'content') );
+			$ret = wfMessage( 'shared-News_box' )->parse();
 			if( $cacheWikiaMessages ) {
 				$wgMemc->set( $memcKey, $ret, 60*60 );
 			}
@@ -216,18 +187,22 @@ HTML;
 	}
 
 	protected function buildWikicitiesNavUrls () {
-		global $wgWikicitiesNavLinks, $wgMemc;
+		global $wgWikicitiesNavLinks, $wgMemc, $wgLang, $wgContLang;
 		wfProfileIn( __METHOD__ );
-
-		$result = $wgMemc->get( wfMemcKey( 'wikiaNavUrls' ) );
-		if ( empty ( $result ) ) {
+		$cacheWikicitiesNavUrls = $wgLang->getCode() == $wgContLang->getCode();
+		if( $cacheWikicitiesNavUrls ) {
+			$memcKey = wfMemcKey( 'wikiaNavUrls', $wgLang->getCode() );
+			$result = $wgMemc->get( $memcKey );
+		}
+		
+		if( empty( $result ) ) {
 			$result = array();
 			if(isset($wgWikicitiesNavLinks) && is_array($wgWikicitiesNavLinks)) {
 				foreach ( $wgWikicitiesNavLinks as $link ) {
-					$text = wfMsg( $link['text'] );
+					$text = wfMessage( $link['text'] )->text();
 					wfProfileIn( __METHOD__.'::'.$link['text'] );
 					if ($text != '-') {
-						$dest = wfMsgForContent( $link['href'] );
+						$dest = wfMessage( $link['href'] )->text();
 						wfProfileIn( __METHOD__.'::'.$link['text'].'::2' );
 						$result[] = array(
 						'text' => $text,
@@ -239,9 +214,11 @@ HTML;
 					wfProfileOut( __METHOD__.'::'.$link['text'] );
 				}
 			}
-			$wgMemc->set( wfMemcKey( 'wikiaNavUrls' ), $result, 60*60 );
+			if( $cacheWikicitiesNavUrls ) {
+				$wgMemc->set( $memcKey, $result, 60*60 );
+			}
 		}
-
+		
 		wfProfileOut( __METHOD__ );
 		return $result;
 	}
@@ -288,35 +265,3 @@ HTML;
 	}
 
 } // end of class
-
-abstract class WikiaMonoBookTemplate extends WikiaBaseTemplate{
-	public function set( $name, $value ) {
-		if ( $name == 'headelement' ) {
-			$this->wf->profileIn( __METHOD__ );
-
-			//filter out assets specifically registered for other skins
-			$skin = $this->wg->user->getSkin();
-			$styleTags = $skin->getStyles();
-			$scriptTags = $skin->getScripts();
-			$out = $this->wg->out;
-			$allowedScripts = '';
-			$allowedStyles = '';
-			$allowedHeadItems = $skin->getHeadItems();
-
-			foreach ( $styleTags as $s ) {
-				$allowedStyles .= "{$s['tag']}\n";
-			}
-
-			foreach ( $scriptTags as $s ) {
-				$allowedScripts .= "{$s['tag']}\n";
-			}
-
-			//headitems need to be replaced BEFORE csslinks and scripts as it might be a subset of those!!!
-			$value = str_replace( array( $out->getHeadItems(), $out->buildCssLinks(), $out->getScriptsOnly()  ), array( $allowedHeadItems, $allowedStyles, $allowedScripts ), $value );
-
-			$this->wf->profileOut( __METHOD__ );
-		}
-
-		parent::set( $name, $value );
-	}
-}

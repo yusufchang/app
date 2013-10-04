@@ -16,9 +16,20 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation)
  * @author Purodha
+ * @author Shirayuki
  */
 $messages['qqq'] = array(
 	'scribe-desc' => '{{desc}}',
+	'scribeeventsrecords' => '{{Identical|Record}}',
+);
+
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'scribe-desc' => '[[Special:Scribeevents|أداة]] للبحث عن عنوان صفحة محددة عبر الويكيات',
+	'scribeevents' => 'الأحداث الأخيرة',
+	'scribeeventsrecords' => 'سجلات',
 );
 
 /** Breton (brezhoneg)
@@ -27,6 +38,15 @@ $messages['br'] = array(
 	'scribe-desc' => '[[Special:Scribeevents|Ostilh]] da glask titl ur bajenn resis e-touez wikioù',
 	'scribeevents' => 'Darvoudoù diwezhañ',
 	'scribeeventsrecords' => 'Enrolladennoù',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'scribe-desc' => "[[Special:Scribeevents|Eines]] per buscar el títul d'una pàgina específica a través dels wikis",
+	'scribeevents' => 'Esdeveniments recents',
+	'scribeeventsrecords' => 'Registres',
 );
 
 /** Czech (česky)
@@ -68,6 +88,14 @@ $messages['fi'] = array(
 	'scribe-desc' => '[[Special:Scribeevents|Työkalu]] jolla etsiä tietyn sivun otsikkoa kaikista wikeistä',
 	'scribeevents' => 'Viimeisimmät tapahtumat',
 	'scribeeventsrecords' => 'Tiedotteet',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'scribe-desc' => '[[Special:Scribeevents|Tól]] til at leita eftir einum serstakum síðuheiti tvørtur um wikiir',
+	'scribeevents' => 'Nýligar hendingar',
 );
 
 /** French (français)
@@ -164,6 +192,15 @@ $messages['nl'] = array(
 	'scribeeventsrecords' => 'Regels',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'scribe-desc' => '[[Special:Scribeevents|Aisina]] per cercar un títol de pagina especific a travèrs los wikis',
+	'scribeevents' => 'Eveniments recents',
+	'scribeeventsrecords' => 'Enregistraments',
+);
+
 /** Polish (polski)
  * @author BeginaFelicysym
  * @author Sovq
@@ -197,6 +234,15 @@ $messages['pt-br'] = array(
 	'scribe-desc' => '[[Special:Scribeevents|Ferramenta]] para procurar um título específico de página em todas as wikis',
 	'scribeevents' => 'Acontecimentos recentes',
 	'scribeeventsrecords' => 'Registros',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'scribe-desc' => "[[Special:Scribeevents|Strumende]] pe cercà 'nu titole de ìna pàgene specifiche sus a tutte le uicchi",
+	'scribeevents' => 'Avveneminde recende',
+	'scribeeventsrecords' => 'Righe',
 );
 
 /** Russian (русский)
@@ -252,8 +298,11 @@ $messages['tt-cyrl'] = array(
 
 /** Ukrainian (українська)
  * @author Steve.rusyn
+ * @author SteveR
+ * @author Ua2004
  */
 $messages['uk'] = array(
+	'scribe-desc' => '[[Special:Scribeevents|Інструмент]] для пошуку конкретної назви сторінки у вікі',
 	'scribeevents' => 'Останні події',
 	'scribeeventsrecords' => 'Записи',
 );

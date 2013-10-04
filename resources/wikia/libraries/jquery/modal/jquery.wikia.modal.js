@@ -55,11 +55,11 @@ $.fn.extend({
 
 		// needed here for getModalTopOffset()
 		wrapper.data('settings', settings);
-		
+
 		if(!settings.noHeadline) {
 			//set up headline
 			var headline = wrapper.find("h1:first");
-			
+
 			if (headline.exists()) {
 				headline.remove();
 			} else {
@@ -78,14 +78,14 @@ $.fn.extend({
 			if (modalTabs.exists()) {
 				modalTabs.insertBefore(wrapper.find('.modalContent'));
 			}
-			
+
 			if(options.width != 'auto') {
 				//set up dimensions and position
 				var modalWidth = $("#WikiaMainContent").width();
-	
+
 				// or use width provided
 				if (typeof options.width != 'undefined') {
-					modalWidth = options.width + 30 /* padding */;
+					modalWidth = options.width + 40 /* padding */;
 				}
 			} else {
 				modalWidth = 'auto';
@@ -109,7 +109,7 @@ $.fn.extend({
 				})
 				.fadeIn("fast");
 		}
-		
+
 		//add close button
 		if (settings.showCloseButton) {
 			wrapper.prepend('<button class="close wikia-chiclet-button"><img src="' + stylepath + '/oasis/images/icon_close.png"></button>');
@@ -185,8 +185,6 @@ $.fn.extend({
 		var blackout = $('<div>').addClass('blackout').attr('data-opacity', blackoutOpacity);
 
 		blackout
-			.height($(document).height())
-			.width($(document).width())
 			.css({zIndex: zIndex})
 			.fadeTo("fast", blackoutOpacity)
 			.bind("click", function() {
@@ -241,10 +239,10 @@ $.fn.extend({
 		// removed associated blackout
 		var blackout = $(this).data('blackout'),
 			settings = $(this).data('settings');
-			
+
 		blackout.fadeOut("fast", function() {
 			$(this).remove();
-			var callback = settings && settings.onAfterClose ? settings.onAfterClose : false;
+			var callback = settings && settings.onAfterClose;
 			if($.isFunction(callback)) {
 				callback();
 			}
@@ -259,7 +257,7 @@ $.fn.extend({
 		// hide associated blackout
 		var blackout = $(this).data('blackout'),
 			settings = $(this).data('settings');
-			
+
 		blackout.fadeOut("fast").addClass('blackoutHidden');
 
 		this.animate({
@@ -267,7 +265,7 @@ $.fn.extend({
 			opacity: 0
 		}, "fast", function() {
 			$(this).hide();
-			var callback = settings && settings.onAfterClose ? settings.onAfterClose : false;
+			var callback = settings && settings.onAfterClose;
 			if($.isFunction(callback)) {
 				callback();
 			}
@@ -290,8 +288,6 @@ $.fn.extend({
 			blackoutOpacity = 0.65;
 		}
 		blackout
-			.height($(document).height())
-			.width($(document).width())
 			.css({
 				display: 'block',
 				opacity: blackoutOpacity,

@@ -17,10 +17,11 @@ $wgExtensionCredits['other'][] = array(
 // users immune to Phalanx
 $wgAvailableRights[] = 'phalanxexempt';
 
+define( "PHALANX_VERSION",  1 );
+
 $dir = dirname(__FILE__) . '/';
 
 $wgAutoloadClasses['Phalanx'] = $dir.'Phalanx.class.php';
-
 $wgAutoloadClasses['UserBlock'] = $dir.'blocks/UserBlock.class.php';
 $wgAutoloadClasses['UserCookieBlock'] = $dir.'blocks/UserCookieBlock.class.php';
 $wgAutoloadClasses['ContentBlock'] = $dir.'blocks/ContentBlock.class.php';
@@ -32,6 +33,10 @@ $wgAutoloadClasses['WikiCreationBlock'] = $dir.'blocks/WikiCreationBlock.class.p
 $wgExtensionMessagesFiles['Phalanx'] = $dir . 'Phalanx.i18n.php';
 
 $wgExtensionFunctions[] = 'efPhalanxInit';
+
+// Phalanx traffic shoadowing
+$wgAutoloadClasses['PhalanxShadowing'] = $dir.'PhalanxShadowing.class.php';
+$wgAutoloadClasses['PhalanxService'] = $dir.'services/PhalanxService.class.php';
 
 // log type
 global $wgLogTypes, $wgLogNames, $wgLogHeaders, $wgLogActions;
@@ -58,7 +63,9 @@ function efPhalanxInit() {
 	// former RegexBlock (TYPE_USER)
 	$wgHooks['GetBlockedStatus'][] = 'UserBlock::blockCheck';
 	$wgHooks['GetBlockedStatus'][] = 'UserCookieBlock::blockCheck';
-
+	$wgHooks['EditPhalanxBlock'][] = 'ContentBlock::onEditPhalanxBlock';
+	$wgHooks['DeletePhalanxBlock'][] = 'ContentBlock::onDeletePhalanxBlock';
+	
 	// don't bother initializing hooks if user is immune to Phalanx
 	if ( $wgUser->isAllowed( 'phalanxexempt' ) ) {
 		wfDebug(__METHOD__.": user has 'phalanxexempt' right - no block will be applied\n");
@@ -99,6 +106,10 @@ function efPhalanxInit() {
 	// fb#5311 - prevent a phalanx blocked name from being created.
 	$wgHooks['AbortNewAccount'][] = 'UserBlock::onAbortNewAccount';
 	$wgHooks['cxValidateUserName'][] = 'UserBlock::onValidateUserName';
+	
+	// new PhalanxII hooks
+	$wgHooks['CheckContent'][] = 'ContentBlock::onCheckContent';
+	$wgHooks['SpamFilterCheck'][] = 'ContentBlock::onSpamFilterCheck';
 }
 
 

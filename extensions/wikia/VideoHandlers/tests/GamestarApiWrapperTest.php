@@ -1,8 +1,5 @@
 <?php
 
-	/**
-	 * @group Broken
-	 */
 	class GamestarApiWrapperTest extends WikiaBaseTest {
 		const TEST_CITY_ID = 79860;
 
@@ -23,8 +20,6 @@
 
 			$this->mockGlobalVariable( 'wgMemc', $mock_cache );
 			$this->mockGlobalVariable( 'wgCityId', self::TEST_CITY_ID );
-
-			$this->mockApp();
 		}
 
 		/**
@@ -38,9 +33,9 @@
 			$this->setUpMock();
 
 			// test
-			$url = 'http://www.gamestar.de/index.cfm?pid=1589&pk=66620';
+			$url = 'http://www.gamestar.de/videos/previews,18/arma-3,66620.html';
 
-			$apiWrapper = F::build( 'GamestarApiWrapper', array($url), 'newFromUrl' );
+			$apiWrapper = GamestarApiWrapper::newFromUrl($url);
 			$metaData = $apiWrapper->getMetadata();
 
 			// Video Id
@@ -50,8 +45,11 @@
 			$this->assertEquals( $exp_data, $response_data );
 			$this->assertEquals( $exp_data, $metaData['videoId'] );
 
-			if ( preg_match('/pk\=(\d+)/', $url, $parsed) ) {
-				$exp_data = $parsed[1];
+			$url = trim( $url, ".html" );
+			$parsed = explode( "/", $url );
+			if( is_array( $parsed ) ) {
+				$last = explode( ",", array_pop( $parsed ), 2 );
+				$exp_data = array_pop( $last );
 			} else {
 				$exp_data = '';
 			}

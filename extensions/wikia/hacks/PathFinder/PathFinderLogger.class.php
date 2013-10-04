@@ -9,6 +9,9 @@
  */
 
 class PathFinderLogger extends WikiaObject{
+
+	static private $instance;
+
 	/**
 	 * paths
 	 */
@@ -34,14 +37,12 @@ class PathFinderLogger extends WikiaObject{
 	 */
 	public static function getInstance(){
 		$class = get_called_class();
-		$instance = F::getInstance( $class );
-		
-		if ( empty( $instance ) ) {
-			$instance = F::build($class);
-			F::setInstance( $class, $instance );
+
+		if ( empty( static::$instance ) ) {
+			static::$instance = new $class;
 		}
-		
-		return $instance;
+
+		return static::$instance;
 	}
 	
 	/**
@@ -69,7 +70,7 @@ class PathFinderLogger extends WikiaObject{
 	 * @param string $type the log type, one of LOG_TYPE_INFO, LOG_TYPE_WARNING, LOG_TYPE_ERROR
 	 */
 	public function log( $msg, $type = self::LOG_TYPE_INFO ) {
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		if ( $this->wg->DevelEnvironment ) {
 			if ( isset( $msg ) ) {
@@ -77,6 +78,6 @@ class PathFinderLogger extends WikiaObject{
 			}
 		}
 		
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 }

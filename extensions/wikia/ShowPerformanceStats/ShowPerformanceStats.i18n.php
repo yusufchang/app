@@ -18,6 +18,16 @@ $messages['qqq'] = array(
 	'performancestat-cpu' => 'CPU time (in seconds).',
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'showperformancestats-desc' => 'تقوم بإرجاع إحصائيات أداء يمكن للأشخاص قرائتها',
+	'performancestat-total' => 'المجموع: $1 ثانية',
+	'performancestat-apache' => 'أباتشي: $1 ثانية',
+	'performancestat-cpu' => 'وحدة المعالجة المركزية (CPU): $1 ثانية',
+);
+
 /** Azerbaijani (azərbaycanca)
  * @author Cekli829
  */
@@ -40,6 +50,16 @@ $messages['br'] = array(
 	'performancestat-total' => 'Hollad : $1s',
 	'performancestat-apache' => 'Apache: $1s',
 	'performancestat-cpu' => 'CPU: $1s',
+);
+
+/** Catalan (català)
+ * @author Alvaro Vidal-Abarca
+ */
+$messages['ca'] = array(
+	'showperformancestats-desc' => 'Retorna estadístiques de rendiment en format llegible per persones',
+	'performancestat-total' => 'Total: $1 s',
+	'performancestat-apache' => 'Apache: $1 s',
+	'performancestat-cpu' => 'CPU: $1 s',
 );
 
 /** Czech (česky)
@@ -78,6 +98,16 @@ $messages['es'] = array(
  */
 $messages['fi'] = array(
 	'performancestat-total' => 'Yhteensä: $1 s',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'showperformancestats-desc' => 'Veitir menniskja-lesbar hagtøl um úrslit',
+	'performancestat-total' => 'Tilsamans: $1s',
+	'performancestat-apache' => 'Apache: $1s',
+	'performancestat-cpu' => 'CPU: $1s',
 );
 
 /** French (français)
@@ -129,6 +159,16 @@ $messages['it'] = array(
 	'performancestat-total' => 'Totale: $1',
 	'performancestat-apache' => 'Apache: $1',
 	'performancestat-cpu' => 'CPU: $1',
+);
+
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'showperformancestats-desc' => 'Zeisch en Zosammefassong von dem ßööver singe Leistonge.',
+	'performancestat-total' => 'Jesamp: $1s',
+	'performancestat-apache' => 'der Wäbßööver: $1s',
+	'performancestat-cpu' => 'dä Prozässor: $1s',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -186,6 +226,16 @@ $messages['nl'] = array(
 	'performancestat-cpu' => 'CPU: $1s',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'showperformancestats-desc' => "Tòrna d'estatisticas de performància legiblas per l’òme",
+	'performancestat-total' => 'Total : $1s',
+	'performancestat-apache' => 'Apache : $1s',
+	'performancestat-cpu' => 'Processor : $1s',
+);
+
 /** Polish (polski)
  * @author BeginaFelicysym
  */
@@ -232,6 +282,16 @@ $messages['pt-br'] = array(
 	'performancestat-total' => 'Total: $1s',
 	'performancestat-apache' => 'Apache: $1s',
 	'performancestat-cpu' => 'CPU: $1s',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'showperformancestats-desc' => "Tuèrne a le statisteche de performance jndr'à 'nu formate leggibbile",
+	'performancestat-total' => 'Totale: $1 s',
+	'performancestat-apache' => 'Apache: $1 s',
+	'performancestat-cpu' => 'CPU: $1 s',
 );
 
 /** Russian (русский)
@@ -284,8 +344,11 @@ $messages['tl'] = array(
 
 /** Ukrainian (українська)
  * @author Steve.rusyn
+ * @author SteveR
+ * @author Ua2004
  */
 $messages['uk'] = array(
+	'showperformancestats-desc' => 'Повертає читабельну статистику продуктивності',
 	'performancestat-total' => 'Всього: $1s',
 	'performancestat-apache' => 'Apache: $1s',
 	'performancestat-cpu' => 'ЦП: $1s',

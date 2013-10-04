@@ -9,10 +9,11 @@ $messages['en'] = array(
 	'preferences-v2-password' => 'My password:',
 	'preferences-v2-oldsig' => 'Existing signature:',
 	'preferences-v2-nickname' => 'Custom signature:',
-	'preferences-v2-fancysig' => 'I want to use wikitext in my signature<br />[[Help:Signature|What are signatures?]]',
+	'preferences-v2-fancysig' => 'I want to use wikitext in my signature<br />[[{{ MediaWiki:preferences-v2-fancysig-help-page-name }} | What are signatures? ]]',
+	'preferences-v2-fancysig-help-page-name' => 'Help:Signature',
 	'prefs-appearance' => 'Appearance',
-	'preferences-v2-date' => 'Date:',
-	'preferences-v2-time' => 'Time:',
+	'preferences-v2-date' => 'Date format:',
+	'preferences-v2-time' => 'Time zone:',
 	'preferences-v2-skin' => 'Layout:',
 	
 	'prefs-emailv2' => 'Email',
@@ -34,7 +35,7 @@ $messages['en'] = array(
 	'preferences-v2-redirect-wiki-activity' => 'Wiki Activity',
 	'preferences-v2-redirect-main-page' => 'Main Page',
 	'preferences-v2-redirect-recent-changes' => 'Recent Changes',
-	'preferences-v2-redirect-explanation' => 'This option allows you to go directly to Wiki Activity or Recent Changes the first time you access a wikis main page.',
+	'preferences-v2-redirect-explanation' => 'The Landing page option allows you to choose where you go when you type $1 into your browser.',
 	'prefs-monobookv2' => 'Monobook',
 	'prefs-under-the-hood' => 'Under the Hood',
 	'prefs-recent-changesv2' => 'Recent changes, histories, and logs',
@@ -60,4 +61,10 @@ $messages['en'] = array(
 	'tog-editsectiononrightclick-v2' => 'Edit sections by right clicking on section titles',
 	'tog-editondblclick-v2' => 'Edit pages on double click',
 	'tog-hidefollowedpages-v2' => 'Hide my followed pages list from everybody',
+);
+
+$messages['qqq'] = array(
+	'preferences-v2-redirect-explanation' => '$1 is the URL of the site, e.g. www.wikia.com',
+	'preferences-v2-fancysig' => 'Message text for checkbox for enabling wikitext in signature. Includes localized message with link to Help:Signature (or equivalent). This link needs to be in the content language (language of the wiki) hence the MediaWiki namespace transclusion.',
+	'preferences-v2-fancysig-help-page-name' => 'The translated version of the namespace based on local wiki language: Help:Signature for wikis in English'
 );

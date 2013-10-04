@@ -1,6 +1,7 @@
 (function(window,$){
 
 	var WE = window.WikiaEditor = window.WikiaEditor || (new Observable());
+	var isWebkit = navigator.userAgent.toLowerCase().indexOf( ' applewebkit/' ) > -1;
 
 	// Returns the width of the browsers scrollbar
 	function getScrollbarWidth() {
@@ -71,6 +72,10 @@
 			// pressing enter on minor edit checkbox should not save the edition
 			this.minorEditCheck.bind('keypress', this.proxy(this.onMinorEditKeypress));
 
+			this.minorEditCheck.bind('change', this.proxy(function() {
+				this.editor.track( 'minor-edit' );
+			}));
+
 			// attach events
 			$('#wpPreview').bind('click', this.proxy(this.onPreview));
 
@@ -86,7 +91,7 @@
 			$('#wpDiff').bind('click', this.proxy(this.onDiff));
 
 			// remove placeholder text when user submits the form without providing the summary
-			$('#editform').bind('submit', this.proxy(this.onSave));
+			this.editform = $('#editform').bind('submit', this.proxy(this.onSave));
 
 			// hidden form fields / page title in the header
 			this.hiddenFields = $('#EditPageHiddenFields');
@@ -99,7 +104,6 @@
 					// show it only when hovering over #EditPageHeader
 					addClass('enabled').
 					bind('click', this.proxy(function(ev) {
-						this.editor.track('title', 'edit');
 						this.renderHiddenFieldsDialog();
 					}));
 
@@ -122,15 +126,6 @@
 				this.updateEditedTitle();
 			}
 
-			// track clicks on page title and help link
-			this.titleNode.children('a').bind('click', this.proxy(function(ev) {
-				this.editor.track('title', 'pagename');
-			}));
-
-			$('#HelpLink').bind('click', this.proxy(function(ev) {
-				this.editor.track('title', 'help');
-			}));
-
 			// show form rendered by edit form callback (e.g. captcha)
 			if (this.callbackFields.exists()) {
 				this.renderCallbackFieldsDialog();
@@ -152,7 +147,7 @@
 		// handle "Preview" button
 		onPreview: function(ev) {
 			this.renderPreview({});
-			this.editor.track(this.editor.getTrackerInitialMode(), 'pageControls', 'preview', this.editor.getTrackerMode());
+			this.editor.track( 'preview' );
 
 			ev.preventDefault();
 		},
@@ -160,20 +155,30 @@
 		// handle "Show changes" button
 		onDiff: function(ev) {
 			this.renderChanges({});
-			this.editor.track(this.editor.getTrackerInitialMode(), 'pageControls', 'diff', this.editor.getTrackerMode());
+			this.editor.track( 'diff' );
 
 			ev.preventDefault();
 		},
 
 		// handle "Save" button
-		onSave: function() {
+		onSave: function( event ) {
 			if (this.textarea.val() == this.textarea.attr('placeholder')) {
 				this.textarea.val('');
 			}
 
 			this.editor.setState(this.editor.states.SAVING);
 
-			this.editor.track('visualMode', 'pageControls', 'save', this.editor.getTrackerMode(), 'button');
+			this.editor.track({
+				action: Wikia.Tracker.ACTIONS.SUBMIT,
+				label: 'publish'
+			});
+
+			// prevent submitting immediately so we can track this event
+			event.preventDefault();
+			this.editform.unbind( 'submit' );
+			setTimeout(this.proxy(function() {
+				this.editform.submit();
+			}), 100 );
 
 			// block "Publish" button
 			$('#wpSave').attr('disabled', true);
@@ -182,11 +187,12 @@
 		// handle keypressing in "Edit summary" field
 		onSummaryKeypress: function(ev) {
 			if (ev.keyCode == 13 /* enter */) {
-				this.editor.track('visualMode', 'pageControls', 'save', this.editor.getTrackerMode(), 'enter');
+				this.editor.track({
+					action: Wikia.Tracker.ACTIONS.SUBMIT,
+					label: 'summary-enter'
+				});
 
-				// submit the form
-				var form = this.textarea.closest('form');
-				form.submit();
+				this.editform.submit();
 			}
 		},
 
@@ -358,167 +364,153 @@
 			});
 		},
 
-		// show dialog for preview / show changes and scale it to fit viewport's height
-		renderDialog: function(title, options, callback) {
-			options = $.extend({
-				callback: function() {
-					var contentNode = $('#EditPageDialog .ArticlePreview');
+		// internal method, based on the editor content and some extraData, prepare a preview markup for the
+		// preview dialog and pass it to the callback
+		getPreviewContent: function(content, extraData, callback) {
+			// add section name when adding new section (BugId:7658)
+			if (window.wgEditPageSection === 'new') {
+				content = '== ' + this.getSummary() + ' ==\n\n' + content;
+			} else {
+				extraData.summary = this.getSummary();
+			}
 
-					// block all clicks
-					contentNode.
-						bind('click', function(ev) {
-							var target = $(ev.target),
-                                isCtrlPressed = ev.ctrlKey;
+			extraData.content = content;
 
-							// don't block links opening in new tab
-							if (target.attr('target') !== '_blank' && !isCtrlPressed) {
-								ev.preventDefault();
-							}
-						}).
-						css({
-							'height': options.height || ($(window).height() - 250),
-							'overflow': 'auto'
-						});
+			if (window.wgEditPageSection !== null) {
+				extraData.section = window.wgEditPageSection;
+			}
 
-					if (typeof callback == 'function') {
-						callback(contentNode);
-					}
-				},
-				id: 'EditPageDialog',
-				width: 680
-			}, options);
+			if (this.categories.length) {
+				extraData.categories = this.categories.val();
+			}
 
-			// use loading indicator before real content will be fetched
-			var content = '<div class="ArticlePreview"><img src="' + stylepath + '/common/images/ajax.gif" class="loading"></div>';
-
-			$.showCustomModal(title, content, options);
+			this.ajax('preview', extraData, function(data) {
+				callback(data.html + data.catbox + data.interlanglinks, data.summary);
+			});
 		},
 
 		// render "Preview" modal
+		// TODO: it would be nice if there weren't any hardcoded values in here.
+		// Any changes to the article page or modal will break here. Also, get rid
+		// of any widthType/gridLayout settings when the responsive layout goes out
+		// for a global release.
 		renderPreview: function(extraData) {
 			var self = this,
+				previewPadding = 22, // + 2px for borders
 				articleWidth = mw.config.values.sassParams.widthType == 1 ? 850 : 660,
-				width = articleWidth + 32 /* modal padding */ + (this.isGridLayout ? 30 : 0),
+				width = articleWidth + (this.isGridLayout ? 30 : 0),
 				config = this.editor.config;
 
 			if (config.isWidePage) {
 				// 980 px of content width on main pages / pages without right rail
 				width += 320 + (this.isGridLayout ? 20 : 0);
 			}
+
 			if (config.extraPageWidth) {
 				// wide wikis
 				width += config.extraPageWidth;
 			}
 
+			if ( wgOasisResponsive ) {
+				var pageWidth = $('#WikiaPage').width(),
+					widthArticlePadding = 20,
+					railWidth = 310,
+					railBreakPoint = 1023,
+					minWidth = 768;
+
+				// don't go below minimum width
+				if (pageWidth <= minWidth) {
+					pageWidth = minWidth;
+				}
+
+				// subtract rail width only in certain criteria
+				width = (config.isWidePage || pageWidth <= railBreakPoint) ? pageWidth : pageWidth - railWidth;
+
+				width -= widthArticlePadding;
+
+				// For Webkit browsers, when the responsive layout kicks in
+				// we have to subtract the width of the scrollbar. For more
+				// information, read: http://bit.ly/hhJpJg
+				// PS: this doesn't work between 1370-1384px because at that point
+				// the article page has a scrollbar and the edit page doesn't.
+				// Luckily, those screen resolutions are kind of an edge case.
+				// PSS: fuck scrollbars.
+				// TODO: we should have access to breakpoints and such in JavaScript
+				// as variables instead of hardcoded values.
+				if ( isWebkit && pageWidth >= 1370 || pageWidth <= railBreakPoint) {
+					width -= this.scrollbarWidth;
+				}
+			}
+
+			// add article preview padding width
+			width += previewPadding;
+
 			// add width of scrollbar (BugId:35767)
 			width += this.scrollbarWidth;
 
-			var options = {
-				buttons: [
-					{
-						id: 'close',
-						message: $.msg('back'),
-						handler: function() {
-							$('#EditPageDialog').closeModal();
-						}
-					},
-					{
-						id: 'publish',
-						defaultButton: true,
-						message: $.msg('savearticle'),
-						handler: function() {
-							// click "Publish" button
-							$('#wpSave').click();
-						}
-					}
-				],
+			var previewOptions = {
 				width: width,
-				className: 'preview',
-				onClose: function() {
-					$(window).trigger('EditPagePreviewClosed');
+				scrollbarWidth: this.scrollbarWidth,
+				onPublishButton: function() {
+					$('#wpSave').click();
+				},
+				getPreviewContent: function(callback) {
+					self.getContent(function(content) {
+						self.getPreviewContent(content, extraData, callback);
+					});
 				}
 			};
 
-			// allow extension to modify the preview dialog
-			$(window).trigger('EditPageRenderPreview', [options]);
+			// pass info about dropped rail to preview module
+			if (wgOasisResponsive && pageWidth <= railBreakPoint) {
+				previewOptions.isRailDropped = true;
+			}
 
-			this.renderDialog($.msg('preview'), options, function(contentNode) {
-				self.getContent(function(content) {
-					var summary = $('#wpSummary').val();
-
-					// bugid-93498: IE fakes placeholder functionality by setting a real val
-					if ( summary === $('#wpSummary').attr('placeholder') ) {
-						summary = '';
-					}
-
-					// add section name when adding new section (BugId:7658)
-					if (window.wgEditPageSection == 'new') {
-						content = '== ' + summary + ' ==\n\n' + content;
-					}
-					else {
-						extraData.summary = summary;
-					}
-
-					extraData.content = content;
-
-					if (window.wgEditPageSection !== null) {
-						extraData.section = window.wgEditPageSection;
-					}
-
-					if (self.categories.length) {
-						extraData.categories = self.categories.val();
-					}
-
-					self.ajax('preview',
-						extraData,
-						function(data) {
-							contentNode.html(data.html + data.catbox);
-
-							// move "edit" link to the right side of heading names
-							contentNode.find('.editsection').each(function() {
-								$(this).appendTo($(this).next());
-							});
-
-							// add summary
-							if (typeof data.summary != 'undefined') {
-								$('<div>', {id: "EditPagePreviewEditSummary"}).
-									width(width - 150).
-									appendTo(contentNode.parent()).
-									html(data.summary);
-							}
-
-							// fire an event once preview is rendered
-							$(window).trigger('EditPageAfterRenderPreview', [contentNode]);
-						});
-				});
+			require(['wikia.preview'], function(preview) {
+				preview.renderPreview(previewOptions);
 			});
+
 		},
 
 		// render "show diff" modal
 		renderChanges: function(extraData) {
 			var self = this;
-			this.renderDialog($.msg('editpagelayout-pageControls-changes'), {}, function(contentNode) {
-				self.getContent(function(content) {
-					extraData.content = extraData.content || content;
-					extraData.section = parseInt($.getUrlVar('section') || 0);
+			require(['wikia.preview'], function(preview) {
+				preview.renderDialog($.msg('editpagelayout-pageControls-changes'), {}, function(contentNode) {
+					self.getContent(function(content) {
+						extraData.content = extraData.content || content;
+						extraData.section = parseInt($.getUrlVar('section') || 0);
 
-					if (self.categories.length) {
-						extraData.categories = self.categories.val();
-					}
+						if (self.categories.length) {
+							extraData.categories = self.categories.val();
+						}
 
-					$.when(
-						// get wikitext diff
-						self.ajax('diff', extraData),
-						// load CSS for diff
-						mw.loader.use('mediawiki.action.history.diff')
-					).done(function(ajaxData) {
-						var data = ajaxData[0],
-							html = '<h1 class="pagetitle">' + window.wgEditedTitle + '</h1>' + data.html;
+						$.when(
+								// get wikitext diff
+								self.ajax('diff', extraData),
+								// load CSS for diff
+								mw.loader.use('mediawiki.action.history.diff')
+							).done(function(ajaxData) {
+								var data = ajaxData[0],
+									html = '<h1 class="pagetitle">' + window.wgEditedTitle + '</h1>' + data.html;
 
-						contentNode.html(html);
+								contentNode.html(html);
+							});
 					});
 				});
 			});
+		},
+
+		getSummary: function() {
+			var summary = $('#wpSummary').val();
+
+			// bugid-93498: IE fakes placeholder functionality by setting a real val
+			if ( summary === $('#wpSummary').attr('placeholder') ) {
+				summary = '';
+			}
+
+			return summary;
+
 		},
 
 		// get editor's content (either wikitext or HTML)

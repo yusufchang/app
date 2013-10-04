@@ -13,7 +13,6 @@ class RelatedPages {
 	static protected $instance = null;
 
 	protected function __construct( ) {
-		$this->categories = array();
 	}
 
 	protected function __clone() {
@@ -34,12 +33,46 @@ class RelatedPages {
 		$this->categories = $categories;
 	}
 
-	public function getCategories() {
-		return array_keys( $this->categories );
+	private static function followRedirect( &$title ) {
+		$redirect = (new WikiPage( $title ))->getRedirectTarget();
+
+		if ( !empty( $redirect ) ) {
+			$title = $redirect;
+		}
+	}
+
+	/**
+	 * @param $titleOrId Title|int Title object or article ID
+	 * @return array|null
+	 */
+	public function getCategories( $titleOrId ) {
+		if ( is_null( $this->categories ) ) {
+			$title = $titleOrId instanceof Title ? $titleOrId : Title::newFromID( $titleOrId );
+
+			if( !empty( $title ) ) {
+				$categories = [];
+
+				self::followRedirect( $title );
+
+				foreach( $title->getParentCategories() as $category => $title ) {
+					$titleObj = Title::newFromText( $category, NS_CATEGORY );
+
+					//User might add category like [[Category: ]] and from that I could not create proper Title object
+					if ( $titleObj instanceof Title ) {
+						$categories[] = $titleObj->getDBkey();
+					}
+				}
+
+				$this->categories = $categories;
+			}
+		}
+
+		return $this->categories;
 	}
 
 	public function reset() {
 		$this->pages = null;
+		$this->categories = null;
 	}
 
 	public function setData( $data ){
@@ -72,9 +105,7 @@ class RelatedPages {
 	 * @param int $limit limit
 	 */
 	public function get( $articleId, $limit = 3 ) {
-		global $wgContentNamespaces, $wgEnableRelatedPagesUnionSelectQueries, $wgUser;
 		wfProfileIn( __METHOD__ );
-		$cs = new CategoriesService();
 
 		// prevent from calling this function more than one, use reset() to omit
 		if( is_array( $this->getData() ) ) {
@@ -83,7 +114,8 @@ class RelatedPages {
 		}
 
 		$this->setData( array() );
-		$categories = $this->getCategories();
+		$categories = $this->getCategories( $articleId );
+
 		if ( count($categories) > 0 ) {
 			//RT#80681/RT#139837: apply category blacklist
 			$categories = CategoriesService::filterOutBlacklistedCategories($categories);
@@ -105,8 +137,6 @@ class RelatedPages {
 	}
 
 	protected function afterGet( $pages, $limit ){
-
-		global $wgContentNamespaces, $wgEnableRelatedPagesUnionSelectQueries, $wgUser;
 		wfProfileIn( __METHOD__ );
 
 		// ImageServing extension enabled, get images
@@ -149,7 +179,6 @@ class RelatedPages {
 		global $wgMemc;
 		wfProfileIn( __METHOD__ );
 
-		$cacheKey = wfMemcKey( $this->memcKeyPrefix, __METHOD__, $category );
 		if ( empty( $this->memcKeyPrefix ) ){
 			$cacheKey = wfMemcKey( __METHOD__, $category);
 		} else {
@@ -190,17 +219,17 @@ class RelatedPages {
 	* @author Owen
 	*/
 	protected function getPagesForCategories($articleId, $limit, Array $categories) {
-		global $wgMemc, $wgContentNamespaces;
+		global $wgMemc;
 
 		wfProfileIn(__METHOD__);
-		if ( empty( $this->memcKeyPrefix ) ){
+		if ( empty( $this->memcKeyPrefix ) ) {
 			$cacheKey = wfMemcKey( __METHOD__, $articleId);
 		} else {
 			$cacheKey = wfMemcKey( $this->memcKeyPrefix, __METHOD__, $articleId);
 		}
-		$cache =  $wgMemc->get($cacheKey);
+		$cache = $wgMemc->get($cacheKey);
 
-		if (is_array($cache)) {
+		if ( is_array( $cache ) ) {
 			wfProfileOut(__METHOD__);
 			return $cache;
 		}
@@ -238,6 +267,7 @@ class RelatedPages {
 				$pages[$pageId] = array(
 					'url' => $title->getLocalUrl(),
 					'title' => $prefixedTitle,
+					'id' => (int) $pageId
 				);
 			}
 		}
@@ -347,22 +377,61 @@ class RelatedPages {
 	 * @param int $articleId Article ID
 	 * @param int $length snippet length (in characters)
 	 */
-	public function getArticleSnippet( $articleId, $length = 100 ) {
+	public function getArticleSnippet( $articleId ) {
 		$service = new ArticleService( $articleId );
 		return $service->getTextSnippet();
 	}
 
-	public static function onOutputPageMakeCategoryLinks( $outputPage, $categories, $categoryLinks ) {
-		self::getInstance()->setCategories( $categories );
-		return true;
-	}
-
+	/**
+	 * @param OutputPage $out
+	 * @param            $text
+	 *
+	 * Add needed messages to page and add JS assets
+	 *
+	 * @return bool
+	 */
 	public static function onOutputPageBeforeHTML( OutputPage $out, &$text ) {
-		global $wgRequest;
-		if ( $out->isArticle() && $wgRequest->getVal( 'diff' ) === null && !( F::app()->checkSkin( 'wikiamobile' ) ) ) {
-			$text .= F::app()->renderView( 'RelatedPages', 'Index' );
+		$app = F::app();
+		$wg = $app->wg;
+		$request = $app->wg->Request;
+		$title = $wg->Title;
+
+		if ( $out->isArticle() && $request->getVal( 'action', 'view') == 'view' ) {
+			JSMessages::enqueuePackage( 'RelatedPages', JSMessages::INLINE );
+
+			if(
+				!(Wikia::isMainPage() || !empty( $title ) && !in_array( $title->getNamespace(), $wg->ContentNamespaces )) &&
+				!$app->checkSkin( 'wikiamobile' )
+			) {
+				$scripts = AssetsManager::getInstance()->getURL( 'relatedpages_js' );
+
+				foreach( $scripts as $script ){
+					$wg->Out->addScript( "<script src='{$script}'></script>" );
+				}
+			}
 		}
+
 		return true;
 	}
 
+	/**
+	 * @param $jsStaticPackages
+	 * @param $jsExtensionPackages
+	 * @param $scssPackages
+	 *
+	 * Adds assets for RelatedPages on wikiamobile
+	 *
+	 * @return bool
+	 */
+	public static function onWikiaMobileAssetsPackages( &$jsStaticPackages, &$jsExtensionPackages, &$scssPackages) {
+		$jsStaticPackages[] = 'relatedpages_js';
+		//css is in WikiaMobile.scss as AM can't concatanate scss files currently
+
+		return true;
+	}
+
+	public static function onSkinAfterContent( &$text ){
+		$text = '<!-- RelatedPages -->';
+		return true;
+	}
 }

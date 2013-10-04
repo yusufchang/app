@@ -39,6 +39,21 @@ Artikel '''$1''' kon nie gevind word nie.
 * Om na die tuisblad van hierdie webwerf te gaan: [{{SERVER}} {{SITENAME}}]",
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'our404handler' => 'خطأ 404: الصفحة غير موجودة!',
+	'our404handler-oops' => 'هذه ليست الصفحات التي كنت تبحث عنها. الرجاء المواصلة.',
+	'message404' => "'' 'نحن آسفون حقاً، لكن لسبب ما الصفحة التي طلبتها غير موجودة. '''
+
+المقالة '''$1''' لم يتم العثور عليها.
+
+* يمكنك أن تجرب المقالة [[$2]]
+* يمكنك استخدام مربع البحث على الجانب الأيسر من الصفحة
+* للانتقال إلى الصفحة الرئيسية لهذا الموقع، انقر على الرابط: [{{SERVER}} {{SITENAME}}]",
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
@@ -108,6 +123,21 @@ N'eo ket bet kavet ar pennad '''$1'''.
 * Evit distreiñ da bajenn degemer al lec'hienn, klikit amañ : [{{SERVER}} {{SITENAME}}]",
 );
 
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'our404handler' => 'Error 404: Pàgina no trobada!',
+	'our404handler-oops' => "Aquestes no són les pàgines que estàs buscant. Surt d'aquí, si us plau.",
+	'message404' => "'''Ho sentim molt, però per alguna raó la pàgina que busques no existeix.'''
+
+L'article '''$1''' no s'ha trobat.
+
+* Pots intentar-ho amb l'article [[$2]]
+* Pots utilitzar el quadre de cerca de la part esquerra de la pàgina
+* Per anar a la portada d'aquest lloc, fes clic a l'enllaç: [{{SERVER}} {{SITENAME}}]",
+);
+
 /** Czech (česky)
  * @author Mormegil
  */
@@ -175,15 +205,15 @@ $messages['el'] = array(
  * @author Fitoschido
  */
 $messages['es'] = array(
-	'our404handler' => 'Error 404: ¡Página no encontrada!',
-	'our404handler-oops' => 'Este no es el tipo de páginas que estás buscando. Sal de aquí, por favor.',
+	'our404handler' => 'Error 404: No se encontró la página.',
+	'our404handler-oops' => 'Aquí no están las páginas que buscas. Puedes seguir tu camino.',
 	'message404' => "'''Lo sentimos mucho, pero por alguna razón la página que buscas no existe.'''
 
-El artículo '''$1''' no pudo ser encontrado.
+No se encontró el artículo '''$1'''.
 
 * Puedes intentarlo con el artículo [[$2]]
-* Puedes usar el cajón de búsqueda en el lado izquierdo de la página
-* Para ir a la portada de este sitio, haz clic en el vínculo: [{{SERVER}} {{SITENAME}}]",
+* Puedes usar el cuadro de búsqueda en el lado izquierdo de la página
+* Para ir a la portada de este sitio, pulsa en el vínculo: [{{SERVER}} {{SITENAME}}]",
 );
 
 /** Estonian (eesti)
@@ -223,6 +253,14 @@ Artikkelia '''$1''' ei löytynyt.
 * Voit yrittää artikkelia [[$2]]
 * Voit käyttää sivun vasemmalla puolella olevaa hakulaatikkoa
 * Mennäksesi tämän sivuston etusivulle, napsauta linkkiä: [{{SERVER}} {{SITENAME}}]",
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'our404handler' => 'Feilur 404: Síðan varð ikki funnin!',
+	'our404handler-oops' => 'Hetta eru ikki síðurnar, ið tú leitar eftir. Vinarliga far víðari.',
 );
 
 /** French (français)
@@ -483,6 +521,14 @@ Rencana '''$1''' tidak dapat dijumpai.
 * Untuk ke laman utama tapak ini, klik pautan ini: [{{SERVER}} {{SITENAME}}]",
 );
 
+/** Neapolitan (Napulitano)
+ * @author Chelin
+ */
+$messages['nap'] = array(
+	'our404handler' => 'Errore 404: Paggena nun truovata!',
+	'our404handler-oops' => "Chiste nun song 'e paggene cca stavi circando. Prosegue, ppe favore.",
+);
+
 /** Norwegian Bokmål (norsk bokmål)
  * @author Nghtwlkr
  */
@@ -653,6 +699,13 @@ $messages['rm'] = array(
 $messages['roa-tara'] = array(
 	'our404handler' => 'Errore 404: Pàgene none acchiate!',
 	'our404handler-oops' => 'Non ge stonne le pàggene ca ste cirche. Spuèstete sus, pe piacere.',
+	'message404' => "'''Nuje sime avveramende dispiaciute, ma pe quacche mutive 'a pàgene ca tu è cercate non g'esiste.'''
+
+Vôsce '''$1''' non ge se pò acchià.
+
+* Tu puè pruvà 'a vôsce [[$2]]
+* Tu puè ausà 'a sckatele de ricerche sus a 'u late sinistre d'a pàgene
+* Vèje sus a Pàgene Prengepàle de stu site, cazze 'u collegamende: [{{SERVER}} {{SITENAME}}]",
 );
 
 /** Russian (русский)
@@ -802,6 +855,7 @@ Bài viết '''$1''' không tìm thấy.
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Liuxinyu970226
  * @author Wilsonmess
  */
 $messages['zh-hans'] = array(
@@ -811,7 +865,7 @@ $messages['zh-hans'] = array(
 
 找不到名为'''$1'''的页面。
 
-*或许这些页面会对您有所帮助：[[$2]]；
+*您可以尝试标题[[$2]]
 *或许您可以使用左上方的搜索框进行搜索；
 *若您想访问本站主页，点击这个链接：[{{SERVER}} {{SITENAME}}]",
 );

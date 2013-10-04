@@ -19,14 +19,14 @@ class PathFinderModel {
 	
 	function __construct() {
 		$this->app = F::app();
-		$this->logger = F::build( 'PathFinderLogger' );
+		$this->logger = (new PathFinderLogger);
 		
 		//singleton
 		F::setInstance( __CLASS__, $this );
 	}
 	
 	public function retrieveDataFromArchive( $timestr, $extraParams = array(), &$commandOutput = null ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		$params = '';
 		$s3directory = self::S3_ARCHIVE . "{$timestr}/";
@@ -49,11 +49,11 @@ class PathFinderModel {
 			//skip . and ..
 			$this->files = array_slice( $tmpFiles, 2 );
 			
-			$this->app->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return false;
 	}
 	
@@ -73,7 +73,7 @@ class PathFinderModel {
 	}
 	
 	public function storeAnalyzedData( &$data ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		$dbw = $this->getDBConnection( DB_MASTER );
 		$logSQL = true;
 		$this->logger->log("Running SQL queries...");
@@ -100,7 +100,7 @@ class PathFinderModel {
 				$exception = new PathFinderDBException( $dbw->lastError() );
 				$this->logger->log( $exception->getMessage(), PathFinderLogger::LOG_TYPE_ERROR );
 				
-				$this->app->wf->profileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				
 				throw new $exception;
 			}
@@ -111,16 +111,15 @@ class PathFinderModel {
 		$dbw->close();
 		$this->logger->log( "Committing done." );
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 	
 	public function getWikis() {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		if ( empty( $this->wikis ) ) {
 			$this->wikis = array();
-			$data;
-			
+
 			if ( $this->app->wg->DevelEnvironment ) {
 				$data = array(
 					array( 'city_id' => '490', 'domain_name' => 'www.wowwiki.com' ),
@@ -144,7 +143,7 @@ class PathFinderModel {
 			}
 		}
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $this->wikis;
 	}
 	
@@ -154,7 +153,7 @@ class PathFinderModel {
 	}
 	
 	public function getPath( $cityId, $articleId, $dateSpan = 30, $maxNodesCount = 10 , $count = 1, $minVisitsCount = 1) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		$resultArray = array();
 		
@@ -170,7 +169,7 @@ class PathFinderModel {
 				//no memcache for the time being, it will come when this will be ready for production
 				$nextNode = $this->getEntryPoints( $cityId, $articleId, 1, $dateSpan, $minVisitsCount, array( 'target_id NOT IN (' . implode( ',', $prevTargetIds ) . ')' ) );
 				
-				if ( is_array( $res ) && !empty( $nextNode[0] ) > 0 ) {
+				if ( !empty( $nextNode[0] ) > 0 ) {
 					$node = $nextNode[0];
 					$articleId = $node->target_id;
 					$prevTargetIds[] = $node->referrer_id;
@@ -181,27 +180,25 @@ class PathFinderModel {
 			$resultArray[] = $path;
 		}
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $resultArray;
 	}
 	
 	public function getRelated( $cityId, $articleId, $dateSpan = 30 ,$count = 3 , $minVisitsCount = 1 ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		//no memcache for the time being, it will come when this will be ready for production
 		$entryPoints = $this->getEntryPoints( $cityId, $articleId, $count, $dateSpan, $minVisitsCount );
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $entryPoints;
 	}
 	
 	private function getEntryPoints( $cityId, $articleId, $count, $dateSpan, $minVisitsCount, $whereParams = null ){
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		$dateString = "-" . $dateSpan . " day";
 		$date = date( "Ymd", strtotime( $dateString ) );
 		$dbr =$this->getDBConnection();
-		$prevTargetId;
-		$firstTargetId;
 		$result = array();
 		$where = array(
 			"LIMIT" => $count,
@@ -232,12 +229,12 @@ class PathFinderModel {
 		
 		$dbr->freeResult( $entryPoints );
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $result;
 	}
 	
 	private function getDBConnection( $mode = DB_SLAVE ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		//TODO: replace with wfGetDB as soon as we stop using local DB for devboxes and get production storage
 		$dbServer = $this->app->wg->PathFinderDBserver;
@@ -254,39 +251,35 @@ class PathFinderModel {
 			$exception = new PathFinderMissingDBSettingsException();
 			$this->logger->log( $exception->getMessage(), PathFinderLogger::LOG_TYPE_ERROR );
 			
-			$this->app->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			
 			throw $exception;
 		}
 		
-		$db = F::build(
-			'Database',
-			array(
+		$db = Database::newFromParams(
 				$dbServer,
 				$dbUser,
 				$dbPassword,
 				$dbName
-			),
-			'newFromParams'
-		);
+			);
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $db;
 	}
 	
 	private function createDir( $folder ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		if ( !is_dir( $folder ) ) {
 			$this->logger->log( "Creating {$folder} ...");
 			return mkdir( $folder, 0777, true );
 		}
 		
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 	
 	private function removePath( $path ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		/*if ( is_dir( $path ) ) {
 			$this->logger->log( "Removing {$path} ...");
@@ -305,10 +298,10 @@ class PathFinderModel {
 			}
 			
 			reset( $objects );
-			$this->app->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return rmdir( $path );
 		} elseif ( is_file( $path ) ) {
-			$this->app->wf->profileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return unlink ( $path );
 		}*/
 		

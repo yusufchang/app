@@ -14,7 +14,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 	const MEMC_VERSION = '00001';
 
 	public function updateImageState($images, $action = '') {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$approvalList = array();
 		$rejectionList = array();
@@ -33,7 +33,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 				$sqlWhere[ImageReviewStatuses::STATE_APPROVED][] = "( city_id = $image[wikiId] AND page_id = $image[pageId]) ";
 				$approvalList [] = $image;
 
-				$visualization = F::build('CityVisualization');
+				$visualization = new CityVisualization();
 				$targetWikiId = $visualization->getTargetWikiId($image['lang']);
 
 				if( empty($taskAdditionList[$targetWikiId]) ) {
@@ -68,7 +68,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 
 		foreach ($sqlWhere as $state => $where) {
 			if (!empty($where)) {
-				$db = $this->wf->GetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
+				$db = wfGetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
 
 				$db->update(
 					'city_visualization_images',
@@ -87,7 +87,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 
 		$this->createUploadTask($taskAdditionList);
 		$this->saveStats($statsInsert, $sqlWhere, $action);
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	protected function createUploadTask($taskAdditionList) {
@@ -103,7 +103,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 	}
 
 	protected function saveStats($statsInsert, $sqlWhere, $action) {
-		$db = $this->wf->GetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
+		$db = wfGetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
 
 		$db->insert(
 			'city_visualization_image_review_stats',
@@ -143,8 +143,8 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 	 * reset state in abandoned work
 	 */
 	public function resetAbandonedWork() {
-		$this->wf->ProfileIn(__METHOD__);
-		$db = $this->wf->GetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
+		wfProfileIn(__METHOD__);
+		$db = wfGetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
 
 		$timeLimit = ($this->wg->DevelEnvironment) ? 1 : 3600; // 1 sec
 
@@ -175,7 +175,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 
 		$db->commit();
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -185,11 +185,11 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 	 * @return array images
 	 */
 	public function refetchImageListByTimestamp($timestamp) {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$imageList = array();
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 
 		return $imageList;
 	}
@@ -199,9 +199,9 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 	 * @return array imageList
 	 */
 	public function getImageList($timestamp, $state = ImageReviewStatuses::STATE_UNREVIEWED, $order = self::ORDER_LATEST) {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
-		$db = $this->wf->GetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
+		$db = wfGetDB(DB_MASTER, array(), $this->wg->ExternalSharedDB);
 
 		// for testing
 		$this->resetAbandonedWork();
@@ -312,13 +312,13 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 
 		error_log("PromoteImageReview : fetched new " . count($imageList) . " images");
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 
 		return $imageList;
 	}
 
 	protected function getWhitelistedWikis() {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$topWikis = $this->getTopWikis();
 
@@ -326,19 +326,19 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 
 		$out = array_keys($whitelistedWikis + $topWikis);
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 
 		return $out;
 	}
 
 	protected function getWhitelistedWikisFromWF() {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$key = wfMemcKey(__CLASS__, __METHOD__);
 
 		$data = $this->wg->memc->get($key, null);
 
 		if (!empty($data)) {
-			$this->wf->ProfileOut(__METHOD__);
+			wfProfileOut(__METHOD__);
 			return $data;
 		}
 
@@ -346,56 +346,36 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 		$fromWf = WikiFactory::getListOfWikisWithVar($oVariable->cv_variable_id, 'bool', '=', true);
 
 		$this->wg->memc->set($key, $fromWf, 60 * 10);
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $fromWf;
 	}
 
 	protected function getTopWikis() {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$key = wfMemcKey(__CLASS__, self::MEMC_VERSION, __METHOD__);
 		$data = $this->wg->memc->get($key, null);
 		if (!empty($data)) {
-			$this->wf->ProfileOut(__METHOD__);
+			wfProfileOut(__METHOD__);
 			return $data;
 		}
 
-		$db = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->StatsDB);
-		$ids = array();
-		$cnt = 0;
-		if (!$this->wg->DevelEnvironment) {
-			$result = $db->select(
-				array('google_analytics.pageviews'),
-				array('city_id', 'sum(pageviews) as cnt'),
-				array('date > curdate() - interval 31 day'),
-				__METHOD__,
-				array(
-					'GROUP BY' => 'city_id',
-					'ORDER BY' => 'cnt desc',
-					'HAVING' => 'cnt > 10000'
-				)
-			);
-
-			while ($cnt < 200 && $row = $db->fetchRow($result)) {
-				$cnt++;
-				$ids[$row['city_id']] = 1;
-			}
-		}
+		$ids = DataMartService::getTopWikisByPageviews( DataMartService::PERIOD_ID_MONTHLY, 200 );
 
 		$this->wg->memc->set($key, $ids, 86400 /* 24h */);
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $ids;
 	}
 
 	public function getImageCount() {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$key = wfMemcKey(__CLASS__, self::MEMC_VERSION, __METHOD__);
 		$total = $this->wg->memc->get($key, null);
 		if (!empty($total)) {
-			$this->wf->ProfileOut(__METHOD__);
+			wfProfileOut(__METHOD__);
 			return $total;
 		}
-		$db = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
+		$db = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
 
 		$where = array();
 
@@ -417,7 +397,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 		$total['questionable'] = $this->wg->Lang->formatNum($total['questionable']);
 		$this->wg->memc->set($key, $total, 3600 /* 1h */);
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $total;
 
 	}
@@ -437,7 +417,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 		$data = array();
 		$userCount = 0;
 
-		$dbr = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
+		$dbr = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
 
 		$res = $dbr->query("
 				select review_state, reviewer_id, count( page_id ) as count
@@ -482,7 +462,7 @@ class PromoteImageReviewHelper extends ImageReviewHelperBase {
 	}
 
 	public function getUserTsKey() {
-		return $this->wf->MemcKey('PromoteImageReviewHelper', 'userts', $this->wg->user->getId());
+		return wfMemcKey('PromoteImageReviewHelper', 'userts', $this->wg->user->getId());
 	}
 
 	public function getImageUrl($wikiId, $pageId, $imgSize) {

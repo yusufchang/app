@@ -6,13 +6,15 @@
  */
 class ArticleService extends WikiaObject {
 	const MAX_LENGTH = 500;
-	const CACHE_VERSION = 7;
+	const CACHE_VERSION = 8;
 
+	/** @var Article $article */
 	private $article = null;
 	private $tags = array(
 			'script',
 			'style',
 			'noscript',
+			'div',
 			'table',
 			'figure',
 			'figcaption',
@@ -36,9 +38,15 @@ class ArticleService extends WikiaObject {
 	private static $localCache = array();
 
 	/**
+	 * Using SolrDocumentService to access preprocessed article content
+	 * @var SolrDocumentService
+	 */
+	protected $solrDocumentService;
+
+	/**
 	 * ArticleService constructor
 	 *
-	 * @param mixed $articleOrId [OPTIONAL] An Article instance or a valid article ID
+	 * @param Article|Title|int $articleOrId [OPTIONAL] An Article or Title instance or a valid article ID (lower performance)
 	 */
 	public function __construct( $articleOrId = null ) {
 		parent::__construct();
@@ -48,6 +56,8 @@ class ArticleService extends WikiaObject {
 				$this->setArticleById( $articleOrId );
 			} elseif ( $articleOrId instanceof Article ) {
 				$this->setArticle( $articleOrId );
+			} elseif ( $articleOrId instanceof Title ) {
+				$this->setArticleByTitle( $articleOrId );
 			}
 		}
 	}
@@ -56,9 +66,11 @@ class ArticleService extends WikiaObject {
 	 * Sets the Article instance
 	 * @param Article $article An instance of the Article
 	 * class to use as a source of content
+	 * @return ArticleService fluent interface
 	 */
 	public function setArticle( Article $article ) {
 		$this->article = $article;
+		return $this;
 	}
 
 	/**
@@ -68,7 +80,19 @@ class ArticleService extends WikiaObject {
 	 * source of content
 	 */
 	public function setArticleById( $articleId ) {
-		$this->article = F::build('Article',array($articleId), 'newFromID');
+		$this->article = Article::newFromID($articleId);
+		return $this;
+	}
+
+	/**
+	 * Sets the Article instance via Title object
+	 * @param Title $article Title object
+	 * class to use as a source of content
+	 * @return ArticleService fluent interface
+	 */
+	public function setArticleByTitle( Title $title ) {
+		$this->article = new Article($title);
+		return $this;
 	}
 
 	/**
@@ -104,9 +128,14 @@ class ArticleService extends WikiaObject {
 		}
 
 		$fname = __METHOD__;
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		$id = $this->article->getID();
+		// in case the article is missing just return empty string
+		if ( $id <= 0 ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
 
 		//memoize to avoid Memcache access overhead
 		//when the same article needs to be processed
@@ -115,59 +144,95 @@ class ArticleService extends WikiaObject {
 			$text = self::$localCache[$id];
 		} else {
 			$key = self::getCacheKey( $id );
-			$app = $this->app;
-			$article = $this->article;
-			$tags = $this->tags;
-			$pats = $this->patterns;
+			$service = $this;
 			$text = self::$localCache[$id] = WikiaDataAccess::cache(
 				$key,
 				86400 /*24h*/,
-				function() use ( $app, $article, $tags, $pats, $fname ){
-					$app->wf->profileIn( $fname . '::CacheMiss' );
+				function() use ( $service, $fname ){
+					wfProfileIn( $fname . '::CacheMiss' );
 
-					//get standard parser cache for anons,
-					//99% of the times it will be available but
-					//generate it in case is not
-					$page = $article->getPage();
-					$opts = $page->makeParserOptions( new User() );
-					$content = $page->getParserOutput( $opts )->getText();
-
-					//Run hook to allow wikis to modify the content (ie: customize their snippets) before the stripping and length limitations are done.
-					wfRunHooks( 'ArticleService::getTextSnippet::beforeStripping', array( &$article, &$content, ArticleService::MAX_LENGTH ) );
-
-					if ( mb_strlen( $content ) > 0 ) {
-						//remove all unwanted tag pairs and their contents
-						foreach ( $tags as $tag ) {
-							$content = preg_replace( "/<{$tag}\b[^>]*>.*<\/{$tag}>/imsU", '', $content );
-						}
-
-						//cleanup remaining tags
-						$content = strip_tags( $content );
-
-						//apply some replacements
-						foreach ( $pats as $reg => $rep ) {
-							$content = preg_replace( $reg, $rep, $content );
-						}
-
-						//decode entities
-						$content = html_entity_decode( $content );
-						$content = trim( $content );
-
-						if ( mb_strlen( $content ) > ArticleService::MAX_LENGTH ) {
-							$content = mb_substr( $content, 0, ArticleService::MAX_LENGTH );
-						}
+					$content = '';
+					if ( !empty( $this->wg->SolrMaster ) ) {
+						$content = $service->getTextFromSolr();
 					}
 
-					$app->wf->profileOut( $fname . '::CacheMiss' );
+					if ( $content === '' ) {
+						// back-off is to use mediawiki
+						$content = $service->getUncachedSnippetFromArticle();
+					}
+
+					wfProfileOut( $fname . '::CacheMiss' );
 					return $content;
 				}
 			);
 		}
 
-		$snippet = $this->wf->ShortenText( $text, $length, true /*use content language*/ );
+		$snippet = wfShortenText( $text, $length, true /*use content language*/ );
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $snippet;
+	}
+
+	/**
+	 * Accesses a snippet from MediaWiki.
+	 * @return string
+	 */
+	public function getUncachedSnippetFromArticle() {
+		//get standard parser cache for anons,
+		//99% of the times it will be available but
+		//generate it in case is not
+		$page = $this->article->getPage();
+		$opts = $page->makeParserOptions( new User() );
+		$content = $page->getParserOutput( $opts )->getText();
+
+		//Run hook to allow wikis to modify the content (ie: customize their snippets) before the stripping and length limitations are done.
+		wfRunHooks( 'ArticleService::getTextSnippet::beforeStripping', array( &$this->article, &$content, ArticleService::MAX_LENGTH ) );
+
+		if ( mb_strlen( $content ) > 0 ) {
+			//remove all unwanted tag pairs and their contents
+			foreach ( $this->tags as $tag ) {
+				$content = preg_replace( "/<{$tag}\b[^>]*>.*<\/{$tag}>/imsU", '', $content );
+			}
+
+			//cleanup remaining tags
+			$content = strip_tags( $content );
+
+			//apply some replacements
+			foreach ( $this->patterns as $reg => $rep ) {
+				$content = preg_replace( $reg, $rep, $content );
+			}
+
+			//decode entities
+			$content = html_entity_decode( $content );
+			$content = trim( $content );
+
+			if ( mb_strlen( $content ) > ArticleService::MAX_LENGTH ) {
+				$content = mb_substr( $content, 0, ArticleService::MAX_LENGTH );
+			}
+		}
+		return $content;
+	}
+
+	/**
+	 * Gets a plain text of an article using Solr.
+	 *
+	 * @return string The plain text as stored in solr. Will be empty if we don't have a result.
+	 */
+	public function getTextFromSolr() {
+		$service = new SolrDocumentService();
+		// note that this will use wgArticleId without an article
+		if ( $this->article ) {
+			$service->setArticleId( $this->article->getId() );
+		}
+		$htmlField = Wikia\Search\Utilities::field( 'html' );
+
+		$document = $service->getResult();
+
+		$text = '';
+		if ( ( $document !== null ) && ( isset( $document[$htmlField] ) ) ) {
+			$text = $document[$htmlField];
+		}
+		return $text;
 	}
 
 	/**
@@ -178,7 +243,7 @@ class ArticleService extends WikiaObject {
 	 * @return string The cache key associated to the article
 	 */
 	static public function getCacheKey( $articleId ) {
-		return F::app()->wf->MemcKey(
+		return wfMemcKey(
 			__CLASS__,
 			self::CACHE_VERSION,
 			$articleId

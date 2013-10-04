@@ -11,7 +11,7 @@ var WikiBuilder = {
 	retryGoto: 0,
 	nameAjax: false,
 	domainAjax: false,
-	init: function() {
+	init: function(stringHelper) {
 		// pre-cache
 		this.wb = $('#CreateNewWiki');
 		this.steps = $('#CreateNewWiki .steps .step');
@@ -27,6 +27,7 @@ var WikiBuilder = {
 		this.nameWikiSubmitError = $('#NameWiki .submit-error');
 		this.wikiLanguage = $('#NameWiki select[name=wiki-language]');
 		this.wikiCategory = $('#DescWiki select[name=wiki-category]');
+		this.wikiAllAges = $('#DescWiki input[name=all-ages]');
 		this.descWikiSubmitError = $('#DescWiki .submit-error');
 		this.nextButtons = this.wb.find('nav .next');
 		this.finishSpinner = $('#CreateNewWiki .finish-status');
@@ -95,7 +96,7 @@ var WikiBuilder = {
 			that.nameAjax = true;
 			that.checkNextButtonStep1();
 			var name = $(this).val();
-			name = $.trim(name.replace(/[^a-zA-Z0-9 ]+/g, '')).replace(/ +/g, '-');
+			name = $.trim(stringHelper.latinise(name).replace(/[^a-zA-Z0-9 ]+/g, '')).replace(/ +/g, '-');
 			that.wikiDomain.val(name.toLowerCase()).trigger('keyup');
 			if(that.wntimer) {
 				clearTimeout(that.wntimer);
@@ -193,6 +194,8 @@ var WikiBuilder = {
 			pane.show();
 		}
 
+		$('.tooltip-icon').tooltip();
+
 		// onload stuff
 		this.wikiName.focus();
 		if(this.wikiName.val() || this.wikiDomain.val()) {
@@ -226,7 +229,9 @@ var WikiBuilder = {
 					});
 			});
 		}
-		$('#Auth, #CreateNewWiki').width(700);
+		if ( !window.wgOasisResponsive ) {
+			$('#Auth, #CreateNewWiki').width(700);
+		}
 		this.signupEntities.hide();
 		this.loginEntities.show();
 	},
@@ -234,7 +239,9 @@ var WikiBuilder = {
 	handleLogin: function() {
 		AjaxLogin.showLogin();
 		AjaxLogin.init($('#AjaxLoginLoginForm form:first'));
-		$('#Auth, #CreateNewWiki').width(600);
+		if ( !window.wgOasisResponsive ) {
+			$('#Auth, #CreateNewWiki').width(600);
+		}
 		this.signupEntities.show();
 		this.loginEntities.hide();
 	},
@@ -429,6 +436,7 @@ var WikiBuilder = {
 					wDomain: that.wikiDomain.val(),
 					wLanguage: that.wikiLanguage.find('option:selected').val(),
 					wCategory: that.wikiCategory.find('option:selected').val(),
+					wAllAges: that.wikiAllAges.is(':checked') ? that.wikiAllAges.val() : null,
 					wAnswer: Math.floor(that.answer)
 				}
 			},
@@ -478,11 +486,22 @@ function sendToConnectOnLogin() {
 
 $(function() {
 	wgAjaxPath = wgScriptPath + wgScript;
-	WikiBuilder.init();
+
+	mw.loader.use('wikia.stringhelper')
+		.done(function(){
+			require(['wikia.stringhelper'], function(stringHelper) { WikiBuilder.init(stringHelper);});
+		});
 	$('#AjaxLoginButtons').hide();
 	$('#AjaxLoginLoginForm').show();
 
-	ThemeDesigner.slideByDefaultWidth = 608;
-	ThemeDesigner.slideByItems = 4;
+	if ( window.wgOasisResponsive )
+	{
+		ThemeDesigner.slideByDefaultWidth = 500;
+		ThemeDesigner.slideByItems = 3;
+
+	} else {
+		ThemeDesigner.slideByDefaultWidth = 608;   
+		ThemeDesigner.slideByItems = 4;
+	}
 	ThemeDesigner.themeTabInit();
 });

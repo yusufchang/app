@@ -12,7 +12,7 @@ var RelatedVideos = {
 	isHubExtPage: false,
 	rvItemCount: null,
 
-	track: WikiaTracker.buildTrackingFunction({
+	track: Wikia.Tracker.buildTrackingFunction({
 		category: 'related-videos'
 	}),
 
@@ -28,7 +28,7 @@ var RelatedVideos = {
 		if(!this.rvModule.length) {
 			return;
 		}
-		
+
 		this.rvContainer = $('.container', this.rvModule);
 		this.rvScrollRight = $('.scrollright', this.rvModule);
 		this.rvScrollLeft = $('.scrollleft', this.rvModule);
@@ -83,14 +83,13 @@ var RelatedVideos = {
 			relatedVideosModule.on( 'click', '.scrollleft', this.scrollleft );
 
 			relatedVideosModule.find('.addVideo').addVideoButton({
-				callbackAfterSelect: function(url) {
-
+				callbackAfterSelect: function(url, VET) {
 					RelatedVideos.track({
-						action: WikiaTracker.ACTIONS.ADD,
+						action: Wikia.Tracker.ACTIONS.ADD,
 						label: 'add-video-success',
 						trackingMethod: 'both'
 					});
-					
+
 					$.nirvana.postJson(
 						// controller
 						'RelatedVideosController',
@@ -107,8 +106,8 @@ var RelatedVideos = {
 							if ( formRes.error ) {
 								RelatedVideos.showError( formRes.error );
 							} else {
-								VET_loader.modal.closeModal();
-								RelatedVideos.injectCaruselElement( formRes.html );
+								VET.close();
+								RelatedVideos.injectCarouselElement( formRes.html );
 							}
 						},
 						// error callback
@@ -137,7 +136,7 @@ var RelatedVideos = {
 		}
 
 		RelatedVideos.track({
-			action: WikiaTracker.ACTIONS.VIEW,
+			action: Wikia.Tracker.ACTIONS.VIEW,
 			trackingMethod: 'both'
 		});
 	},
@@ -148,7 +147,7 @@ var RelatedVideos = {
 		RelatedVideos.lazyLoad();
 
 		RelatedVideos.track({
-			action: WikiaTracker.ACTIONS.PAGINATE,
+			action: Wikia.Tracker.ACTIONS.PAGINATE,
 			label: 'paginate-next',
 			trackingMethod: 'both',
 			value: RelatedVideos.currentRoom + 1
@@ -159,7 +158,7 @@ var RelatedVideos = {
 
 	scrollleft: function(){
 		RelatedVideos.track({
-			action: WikiaTracker.ACTIONS.PAGINATE,
+			action: Wikia.Tracker.ACTIONS.PAGINATE,
 			label: 'paginate-prev',
 			trackingMethod: 'both',
 			value: RelatedVideos.currentRoom - 1
@@ -210,7 +209,7 @@ var RelatedVideos = {
 		var titles = [];
 		var orders = [];
 		var group = this.rvContainer.find('.group').eq(room-1);
-		var itemLinks = group.find('a.video-thumbnail');
+		var itemLinks = group.find('a.video');
 		itemLinks.each( function(i) {
 			titles.push( $(this).data('ref') );
 			orders.push( (room-1)*RelatedVideos.videosPerPage + i+1 );
@@ -218,7 +217,7 @@ var RelatedVideos = {
 
 		if (titles.length) {
 			RelatedVideos.track({
-				action: WikiaTracker.ACTIONS.IMPRESSION,
+				action: Wikia.Tracker.ACTIONS.IMPRESSION,
 				label: 'video',
 				orders: orders.join(','),
 				trackingMethod: 'internal',
@@ -274,7 +273,7 @@ var RelatedVideos = {
 	// Only for hubs
 	showImages: function(){
 		var rl = this;
-		$('div.item a.video-thumbnail img', this.rvModule).each( function (i) {
+		$('div.item a.video img', this.rvModule).each( function (i) {
 			if ( i < ( ( RelatedVideos.currentRoom + (rl.videosPerPage-1) ) * rl.videosPerPage ) ){
 				var $thisJquery = $(this);
 				if ( $thisJquery.attr( 'data-src' ) != "" ){
@@ -312,7 +311,7 @@ var RelatedVideos = {
 				// Load new videos
 				$.nirvana.sendRequest({
 					controller: 'RelatedVideos',
-					method: 'getCaruselElementRL',
+					method: 'getCarouselElementRL',
 					type: 'GET',
 					format: 'json',
 					data: {
@@ -336,7 +335,7 @@ var RelatedVideos = {
 			$.when(
 				$.loadMustache(),
 				Wikia.getMultiTypePackage({
-					mustache: 'extensions/wikia/RelatedVideos/templates/RelatedVideosController_getCaruselElementRL.mustache'
+					mustache: 'extensions/wikia/RelatedVideos/templates/RelatedVideosController_getCarouselElementRL.mustache'
 				})
 			).done(function(libData, packagesData) {
 				// cache mustache template for carousel item
@@ -414,7 +413,7 @@ var RelatedVideos = {
 	},
 
 	// Inject newly added video into carousel - different from lazy loading
-	injectCaruselElement: function( html ){
+	injectCarouselElement: function( html ){
 		var scrollLength = -1 * ( RelatedVideos.currentRoom - 1 );
 		RelatedVideos.scroll(
 			scrollLength,
@@ -470,20 +469,23 @@ var RelatedVideos = {
 
 	removeVideoClick: function(target) {
 		var parentItem = $(target).parents('.item');
+
 		$.confirm({
 			title: $( '.deleteConfirmTitle', RelatedVideos.rvModule ).html(),
 			content: $( '.deleteConfirm', RelatedVideos.rvModule ).html(),
 			onOk: function(){
 				RelatedVideos.removeVideoItem( parentItem );
-			}
+			},
+			className: 'rv-delete-confirm'
 		});
 	},
 
 	removeVideoItem: function(parentItem) {
 		$( parentItem ).fadeTo( 'slow', 0 );
-		var item = $(parentItem).find('a.video-thumbnail');
+		var item = $(parentItem).find('a.video');
+		var deleteFromWiki = $('input[name=delete-from-wiki]:checked').val();
 		$.nirvana.sendRequest({
-			controller: 'RelatedVideos',
+			controller: ( deleteFromWiki ? 'VideoHandlerController' : 'RelatedVideos' ),
 			method: 'removeVideo',
 			format: 'json',
 			data: {

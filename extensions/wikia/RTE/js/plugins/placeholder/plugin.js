@@ -7,7 +7,10 @@ CKEDITOR.plugins.add('rte-placeholder',
 
 		editor.on('instanceReady', function() {
 			// add node in which template previews will be stored
-			self.previews = $('<div>', {id: 'RTEPlaceholderPreviews'}).appendTo(RTE.overlayNode);
+			self.previews = $('<div>', {
+				id: 'RTEPlaceholderPreviews',
+				'class': 'rte-placeholder-previews'
+			}).appendTo(RTE.overlayNode);
 		});
 
 		editor.on('wysiwygModeReady', function() {
@@ -174,13 +177,16 @@ CKEDITOR.plugins.add('rte-placeholder',
 
 				// handle clicks on [delete] button
 				preview.find('.RTEPlaceholderPreviewToolsDelete').bind('click', function(ev) {
-					RTE.track('visualMode', self.getTrackingType($(placeholder)), 'hover', 'delete');
+					self.track( 'button-delete' );
 
 					RTE.tools.confirm(title, lang.confirmDelete, function() {
 						RTE.tools.removeElement(placeholder);
 
 						// remove preview
 						preview.remove();
+
+					}).data( 'tracking', {
+						category: 'placeholder'
 					});
 				});
 
@@ -190,8 +196,7 @@ CKEDITOR.plugins.add('rte-placeholder',
 						// hide preview
 						preview.hide();
 
-						// tracking code
-						RTE.track('visualMode', self.getTrackingType($(placeholder)), 'hover', 'edit');
+						self.track( 'button-edit' );
 
 						// call editor for this type of placeholder
 						$(placeholder).trigger('edit');
@@ -205,8 +210,7 @@ CKEDITOR.plugins.add('rte-placeholder',
 
 				// close button
 				preview.find('.RTEPlaceholderPreviewTitleBar').children('span').bind('click', function(ev) {
-					RTE.track('visualMode', self.getTrackingType($(placeholder)), 'hover', 'close');
-
+					self.track( 'button-close' );
 					self.hidePreview(placeholder, true);
 				});
 
@@ -263,14 +267,16 @@ CKEDITOR.plugins.add('rte-placeholder',
 		// hover preview popup delay: 150ms (cursor should be kept over an placeholder for 150ms for preview to show up)
 		var self = this;
 		placeholder.data('showTimeout', setTimeout(function() {
-			// trigger custom event only when preview is about to be shown (used for tracking)
-			var visible = preview.css('display') == 'block';
-			if (!visible) {
-				placeholder.trigger('hover');
-			}
 
 			// show preview pop-up
-			preview.fadeIn();
+			if (!preview.is(':visible')) {
+				preview.fadeIn();
+
+				self.track({
+					action: Wikia.Tracker.ACTIONS.HOVER,
+					label: 'show'
+				});
+			}
 
 			// try to remove scrollbars (RT #34048)
 			self.expandPlaceholder(placeholder);
@@ -354,14 +360,9 @@ CKEDITOR.plugins.add('rte-placeholder',
 			}
 		});
 
-		// tracking code when hovered
-		placeholder.bind('hover.placeholder', function(ev) {
-			RTE.track('visualMode', self.getTrackingType($(this)), 'hover', 'init');
-		});
-
 		// setup events once more on each drag&drop
 		RTE.getEditor().unbind('dropped.placeholder').bind('dropped.placeholder', function(ev) {
-                        var target = $(ev.target);
+			var target = $(ev.target);
 
 			// filter out non placeholders
 			target = target.filter('img.placeholder');
@@ -373,27 +374,6 @@ CKEDITOR.plugins.add('rte-placeholder',
 		if (RTE.config.disableDragDrop) {
 			RTE.tools.disableDragDrop(placeholder);
 		}
-	},
-
-	// get type name for tracking code
-	getTrackingType: function(placeholder) {
-		var type;
-		var data = $(placeholder).getData();
-
-		switch(data.type) {
-			case 'double-brackets':
-				type = 'template';
-				break;
-
-			case 'comment':
-				type = 'comment';
-				break;
-
-			default:
-				type = 'advancedCode';
-		}
-
-		return type;
 	},
 
 	// expand placeholder preview (RT #34048)
@@ -453,5 +433,17 @@ CKEDITOR.plugins.add('rte-placeholder',
 				previewArea.removeClass('RTEPlaceholderPreviewExpanded');
 			}
 		}
-	}
+	},
+
+	track: (function() {
+		var	config = {
+				category: 'placeholder'
+			},
+			slice = [].slice,
+			track = WikiaEditor.track;
+
+		return function() {
+			track.apply( track, [ config ].concat( slice.call( arguments ) ) );
+		};
+	})()
 });

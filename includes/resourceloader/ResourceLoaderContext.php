@@ -40,8 +40,10 @@ class ResourceLoaderContext {
 	protected $version;
 	protected $hash;
 
-	/* Added by Wikia */
+	// Wikia change - begin
 	protected $sassParams;
+	protected $skipMessages;
+	// Wikia change - end
 
 	/* Methods */
 
@@ -104,7 +106,7 @@ class ResourceLoaderContext {
 				$pos = strrpos( $group, '.' );
 				if ( $pos === false ) {
 					// Prefixless modules, i.e. without dots
-					$retval = explode( ',', $group );
+					$retval = array_merge( $retval, explode( ',', $group ) );
 				} else {
 					// We have a prefix and a bunch of suffixes
 					$prefix = substr( $group, 0, $pos ); // 'foo'
@@ -228,6 +230,11 @@ class ResourceLoaderContext {
 	 * @return bool
 	 */
 	public function shouldIncludeMessages() {
+		// Wikia change - begin - @author: wladek
+		if ( !empty( $this->skipMessages ) ) {
+			return false;
+		}
+		// Wikia change - end
 		return is_null( $this->only ) || $this->only === 'messages';
 	}
 
@@ -245,5 +252,18 @@ class ResourceLoaderContext {
 			) );
 		}
 		return $this->hash;
+	}
+
+	/**
+	 * Allows to prevent including messages when generating modules response.
+	 * It's known to be costly when multiple instances are run in parallel
+	 * is some circumstances.
+	 *
+	 * @author Włądysłąw Bodzek
+	 * @see PER-25
+	 * @param $skipMessages bool If true prevents processing messages during response generation (default: false)
+	 */
+	public function setSkipMessages( $skipMessages ) {
+		$this->skipMessages = $skipMessages;
 	}
 }

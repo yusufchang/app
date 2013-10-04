@@ -151,7 +151,7 @@ class DataFeedProvider {
 						} elseif (!$hideimages) { // image
 							if (!isset(self::$images[$imageName])) {
 								wfProfileIn(__METHOD__ . "-imagelinks-count");
-								$memcKey = wfMemcKey('ac_image_cnt', $imageName);
+								$memcKey = wfMemcKey('ac_image_cnt', md5($imageName));
 								self::$images[$imageName] = $wgMemc->get($memcKey);
 
 								// Note that memcache returns null if record does not exists in cache
@@ -209,7 +209,7 @@ class DataFeedProvider {
 
 			if( class_exists('Wall') && !empty($item['wall']) ) {
 
-				$wh = F::build('WallHelper', array());
+				$wh = new WallHelper();
 				if( !empty($item['parent-id']) ) {
 					$data = $wh->getWallComments($item['parent-id']);
 					$item['comments'] = $data['comments'];
@@ -348,7 +348,7 @@ class DataFeedProvider {
 
 		} elseif (defined('NS_RELATED_VIDEOS') && $res['ns'] == NS_RELATED_VIDEOS ) {
 			if ( class_exists( 'RelatedVideosService' ) ){
-				$oRVService = F::build( 'RelatedVideosService' );
+				$oRVService = (new RelatedVideosService);
 				$item = $oRVService->editWikiActivityParams( $title, $res, $item );
 
 			}
@@ -420,10 +420,10 @@ class DataFeedProvider {
 				$res['rc_params'] = '';
 			}
 		} elseif ( !empty($wgWallNS) && in_array(MWNamespace::getSubject($res['ns']), $wgWallNS) && $this->proxyType == self::AF ) {
-			$wh = F::build( 'WallHelper' );
+			$wh = (new WallHelper);
 			$item = $wh->wikiActivityFilterMessageWall($title, $res);
 		} elseif ( defined('NS_RELATED_VIDEOS') && $res['ns'] == NS_RELATED_VIDEOS ){
-			$oRVService = F::build( 'RelatedVideosService' );
+			$oRVService = (new RelatedVideosService);
 			$item = $oRVService->createWikiActivityParams($title, $res, $item);
 		}
 
@@ -449,6 +449,7 @@ class DataFeedProvider {
 			if( isset($res['move'], $res['move']['new_title'], $res['move']['new_ns']) ) { //FB#35775
 				//RT#27870
 				if (!empty($this->parameters['type']) && $this->parameters['type'] == 'widget') {
+					wfProfileOut(__METHOD__);
 					return;
 				}
 				$newTitle = Title::newFromText($res['move']['new_title'], $res['move']['new_ns']);

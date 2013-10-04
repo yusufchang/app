@@ -297,8 +297,6 @@ tabberObj.prototype.init = function(e)
 		this.onLoad({tabber:this});
 	}
 
-	$(".wikiahubs-newstabs").click(this.clickTrackingHandler);
-
 	return this;
 };
 
@@ -440,7 +438,7 @@ tabberObj.prototype.navClearActive = function(tabberIndex)
 	return this;
 };
 
-var track = window.WikiaTracker.buildTrackingFunction({
+var track = Wikia.Tracker.buildTrackingFunction({
 	category: 'Tabber',
 	trackingMethod: 'internal'
 });
@@ -455,7 +453,7 @@ tabberObj.prototype.clickTrackingHandler = function(event) {
 		var allLiNode = node.closest('.tabbernav').find('li');
 		var tabIndex = allLiNode.index(liNode) + 1;
 		track({
-			action: WikiaTracker.ACTIONS.CLICK,
+			action: Wikia.Tracker.ACTIONS.CLICK,
 			browserEvent: event,
 			label: 'tab',
 			value: tabIndex
@@ -463,7 +461,7 @@ tabberObj.prototype.clickTrackingHandler = function(event) {
 	} else if (node.is('img') && node.hasParent('a')) {
 		var url = node.closest('a').attr('href');
 		track({
-			action: WikiaTracker.ACTIONS.CLICK_LINK_IMAGE,
+			action: Wikia.Tracker.ACTIONS.CLICK_LINK_IMAGE,
 			browserEvent: event,
 			href: url,
 			label: 'image',
@@ -472,7 +470,7 @@ tabberObj.prototype.clickTrackingHandler = function(event) {
 	} else if (node.is('a') || node.hasParent('a')) {
 		var url = node.closest('a').attr('href');
 		track({
-			action: WikiaTracker.ACTIONS.CLICK_LINK_TEXT,
+			action: Wikia.Tracker.ACTIONS.CLICK_LINK_TEXT,
 			browserEvent: event,
 			href: url,
 			label: 'content'

@@ -49,7 +49,15 @@ $messages['ang'] = array(
  */
 $messages['ar'] = array(
 	'ircgate-username' => 'اسم المستخدم:',
-	'ircgate-channel' => 'لقناة :',
+	'ircgate-channel' => 'القناة :',
+);
+
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'ircgate-username' => "Nome d'usuariu:",
+	'ircgate-channel' => 'Canal:',
 );
 
 /** Azerbaijani (azərbaycanca)

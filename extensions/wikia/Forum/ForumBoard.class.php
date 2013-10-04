@@ -17,16 +17,16 @@ class ForumBoard extends Wall {
 	 * @return array $info
 	 */
 	public function getBoardInfo($db = DB_SLAVE) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
-		$memKey = $this->wf->MemcKey( 'forum_board_info', $this->getId() );
+		$memKey = wfMemcKey( 'forum_board_info', $this->getId() );
 
 		if ( $db == DB_SLAVE ) {
 			$info = $this->wg->Memc->get( $memKey );
 		}
 
 		if ( empty( $info ) ) {
-			$db = $this->wf->GetDB( $db );
+			$db = wfGetDB( $db );
 
 			$row = $db->selectRow(
 				array( 'comments_index' ),
@@ -45,10 +45,10 @@ class ForumBoard extends Wall {
 				$info = array( 'postCount' => $row->posts, 'threadCount' => $row->threads, );
 
 				// get last post info
-				$revision = F::build( 'Revision', array( $row->rev_id ), 'newFromId' );
+				$revision = Revision::newFromId( $row->rev_id );
 				if ( $revision instanceof Revision ) {
 					if ( $revision->getRawUser() == 0 ) {
-						$username = $this->wf->Msg( 'oasis-anon-user' );
+						$username = wfMsg( 'oasis-anon-user' );
 					} else {
 						$username = $revision->getRawUserText();
 					}
@@ -65,7 +65,7 @@ class ForumBoard extends Wall {
 			$this->wg->Memc->set( $memKey, $info, 60 * 60 * 12 );
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $info;
 	}
@@ -75,10 +75,10 @@ class ForumBoard extends Wall {
 	 * @return integer activeThreads
 	 */
 	public function getTotalActiveThreads($relatedPageId = 0, $db = DB_SLAVE) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if(empty($relatedPageId)) {
-			$memKey = $this->wf->MemcKey( 'forum_board_active_threads', $this->getId() );
+			$memKey = wfMemcKey( 'forum_board_active_threads', $this->getId() );
 
 			if ( $db == DB_SLAVE ) {
 				$activeThreads = $this->wg->Memc->get( $memKey );
@@ -86,7 +86,7 @@ class ForumBoard extends Wall {
 		}
 
 		if ( !empty( $relatedPageId ) || $activeThreads === false ) {
-			$db = $this->wf->GetDB( $db );
+			$db = wfGetDB( $db );
 
 			if ( !empty( $relatedPageId ) ) {
 				$filter = "comment_id in (select comment_id from wall_related_pages where page_id = {$relatedPageId})";
@@ -112,7 +112,7 @@ class ForumBoard extends Wall {
 			}
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $activeThreads;
 	}
@@ -125,7 +125,7 @@ class ForumBoard extends Wall {
 		$this->getBoardInfo( DB_MASTER );
 		$this->getTotalActiveThreads( DB_MASTER );
 
-		$title = F::build( 'Title', array( $this->getId() ), 'newFromID' );
+		$title = Title::newFromID( $this->getId() );
 		if ( $title instanceof Title ) {
 			$title->purgeSquid();
 		}

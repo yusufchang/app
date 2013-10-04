@@ -12,7 +12,7 @@ class FounderProgressBarHooks {
 	 *
 	 * @param Article $article
 	 */
-	function onArticleSaveComplete (&$article, &$user, $text, $summary, $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
+	public static function onArticleSaveComplete (&$article, &$user, $text, $summary, $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId) {
 
 		// Quick exit if we are already done with Founder Progress Bar (memcache key set for 30 days)
 		if (self::allTasksComplete()) {
@@ -111,7 +111,7 @@ class FounderProgressBarHooks {
 	 * Adding a photo
 	 *
 	 */
-	function onUploadComplete (&$image) {
+	public static function onUploadComplete (&$image) {
 		// Quick exit if tasks are all completed
 		if (self::allTasksComplete()) {
 			return true;
@@ -137,7 +137,7 @@ class FounderProgressBarHooks {
 	 * uploading a new wordmark
 	 *
 	 */
-	function onUploadWordmarkComplete(&$image) {
+	public static function onUploadWordmarkComplete(&$image) {
 		// Quick exit if tasks are all completed
 		if (self::allTasksComplete()) {
 			return true;
@@ -148,7 +148,7 @@ class FounderProgressBarHooks {
 		return true;
 	}
 
-	function onAddNewAccount ($user) {
+	public static function onAddNewAccount ($user) {
 
 		// Quick exit if tasks are all completed
 		if (self::allTasksComplete()) {
@@ -160,7 +160,7 @@ class FounderProgressBarHooks {
 	}
 
 	// Initialize schema for a new wiki
-	function onWikiCreation ( $params ) {
+	public static function onWikiCreation ( $params ) {
 
 		// Always initialize for new wikis
 		if (isset($params['city_id'])) {
@@ -175,7 +175,7 @@ class FounderProgressBarHooks {
 	 *
 	 * @return bool true because it's a hook
 	 */
-	public function onFacebookConnect() {
+	public static function onFacebookConnect() {
 		// Quick exit if tasks are all completed
 		if( self::allTasksComplete() ) {
 			return true;
@@ -190,7 +190,7 @@ class FounderProgressBarHooks {
 	 *
 	 * @return bool true because it's a hook
 	 */
-	public function onAfterVideoFileUploaderUpload(File $file, FileRepoStatus $result) {
+	public static function onAfterVideoFileUploaderUpload(File $file, FileRepoStatus $result) {
 		// Quick exit if tasks are all completed
 		if( self::allTasksComplete() ) {
 			return true;
@@ -216,7 +216,7 @@ class FounderProgressBarHooks {
 
 		// Records go into global wikicites table
 		$app = F::app();
-		$dbw = $app->wf->GetDB(DB_MASTER, array(), $app->wg->ExternalSharedDB);
+		$dbw = wfGetDB(DB_MASTER, array(), $app->wg->ExternalSharedDB);
 
 		foreach(FounderProgressBarController::$tasks as $task_id) {
 			if($task_id < FounderProgressBarController::REGULAR_TASK_MAX_ID) {
@@ -226,8 +226,10 @@ class FounderProgressBarHooks {
 		}
 		$dbw->commit();
 
-		$memKey = $app->wf->MemcKey('FounderLongTaskList');
-		$app->wg->Memc->delete($memKey);
+		// also clear out any lingering memcache keys
+		$memc = $app->wg->Memc;
+		$memc->delete(wfMemcKey('FounderLongTaskList'));
+		$memc->delete(wfMemcKey('FounderTasksComplete'));
 
 		wfProfileOut(__METHOD__);
 	}
@@ -240,7 +242,7 @@ class FounderProgressBarHooks {
 		wfProfileIn(__METHOD__);
 
 		$app = F::app();
-		$memKey = $app->wf->MemcKey('FounderTasksCompleted');
+		$memKey = wfMemcKey('FounderTasksCompleted');
 		$task_complete = $app->wg->Memc->get($memKey);
 		if (empty($task_complete)) {
 			$response = $app->sendRequest('FounderProgressBar',"isTaskComplete", array("task_id" => FounderProgressBarController::$tasks['FT_COMPLETION']));

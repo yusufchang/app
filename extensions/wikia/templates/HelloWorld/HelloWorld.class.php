@@ -22,13 +22,13 @@ class HelloWorld {
 	 * @return array
 	 */
 	public function getWikiData( $wikiId ) {
-		$this->app->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
 		if( empty( $wikiId ) ) {
 			throw new WikiaException("Unknown wikiId");
 		}
 
-		$dbr = $this->app->wf->GetDB( DB_SLAVE, array(), $this->app->wg->ExternalSharedDB );
+		$dbr = wfGetDB( DB_SLAVE, array(), $this->app->wg->ExternalSharedDB );
 		$row = $dbr->selectRow( 'city_list', array('city_url', 'city_title'), array( 'city_id' => $wikiId ), __METHOD__ );
 
 		if( !empty($row) ) {
@@ -38,7 +38,7 @@ class HelloWorld {
 			throw new WikiaException("Unknown wikiId: $wikiId");
 		}
 
-		$this->app->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $wiki;
 	}
 

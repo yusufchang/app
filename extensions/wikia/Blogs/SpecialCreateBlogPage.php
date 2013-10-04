@@ -26,8 +26,7 @@ class CreateBlogPage extends SpecialCustomEditPage {
 		}
 
 		if( $this->user->isBlocked() ) {
-			$this->out->blockedPage();
-			return;
+			throw new UserBlockedError( $this->user->mBlock );
 		}
 
 		if( wfReadOnly() ) {
@@ -42,6 +41,8 @@ class CreateBlogPage extends SpecialCustomEditPage {
 	}
 
 	protected function afterArticleInitialize($mode, $title, $article) {
+		wfRunHooks('BlogArticleInitialized', array($this, $mode));
+
 		if( $mode == self::MODE_EDIT ) {
 			$aPageProps = BlogArticle::getProps($article->getId());
 			$this->mFormData['isCommentingEnabled'] = empty($aPageProps['commenting']) ? 0 :$aPageProps['commenting'];

@@ -8,10 +8,11 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 	 * @var array
 	 */
 	protected $groupsRank = array(
-		'sysop' => 6,
-		'helper' => 5,
-		'adminmentor' => 4,
-		'vstf' => 3,
+		'sysop' => 7,
+		'helper' => 6,
+		'adminmentor' => 5,
+		'vstf' => 4,
+		'voldev' => 3,
 		'council' => 2,
 		'chatmoderator' => 1,
 	);
@@ -22,19 +23,19 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 	 * @return array
 	 */
 	public function getUserTags() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$tags = array();
 		if( $this->isBlocked() ) {
 		//blocked user has only one tag displayed "Blocked"
-			$tags[] = $this->app->wf->Msg('user-identity-box-group-blocked');
+			$tags[] = wfMsg('user-identity-box-group-blocked');
 		} else {
 			$firstTag = $this->getFirstTag();
 			$secondTag = $this->getSecondTag();
 			$tags = $this->getMergedTags($firstTag, $secondTag);
 		}
 
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $tags;
 	}
 
@@ -44,7 +45,7 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 	 * @return string
 	 */
 	protected function getFirstTag() {
-		$this->app->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 		$tag = '';
 		$groupNameSuffix = null;
 		if( $this->isUserInGroup(self::WIKIA_GROUP_STAFF_NAME) ) {
@@ -56,9 +57,9 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 		}
 
 		if( !is_null($groupNameSuffix) ) {
-			$tag = $this->app->wf->Msg('user-identity-box-group-' . $groupNameSuffix);
+			$tag = wfMsg('user-identity-box-group-' . $groupNameSuffix);
 		}
-		$this->app->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 
 		return $tag;
 	}
@@ -70,7 +71,7 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 	 */
 	protected function getSecondTag() {
 		if( $this->isFounder() ) {
-			$tag = $this->app->wf->Msg('user-identity-box-group-founder');
+			$tag = wfMsg('user-identity-box-group-founder');
 		} else {
 			$tag = $this->getTagFromGroups();
 		}

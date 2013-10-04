@@ -3,6 +3,7 @@
  * Model for Wikia-specific information about wikis
  *
  * @author Federico "Lox" Lucignano <federico@wikia-inc.com>
+ * @author Artur Klajnerok <arturk@wikia-inc.com>
  */
 
 class WikisModel extends WikiaModel {
@@ -62,15 +63,15 @@ class WikisModel extends WikiaModel {
 	 *
 	 * @return array A collection of results with id, name, hub, language, topic and domain
 	 */
-	public function getTop( $lang = null, $hub = null ) {
-		$this->wf->profileIn( __METHOD__ );
+	public function getTop( Array $langs = null, $hub = null ) {
+		wfProfileIn( __METHOD__ );
 
-		$cacheKey = $this->wf->SharedMemcKey( __METHOD__, self::CACHE_VERSION, $lang, $hub );
+		$cacheKey = wfSharedMemcKey( __METHOD__, self::CACHE_VERSION, implode( ',', $langs ), $hub );
 		$results = $this->wg->Memc->get( $cacheKey );
 
 		if ( !is_array( $results ) ) {
 			$results = array();
-			$wikis = DataMartService::getTopWikisByPageviews( DataMartService::PERIOD_ID_WEEKLY, self::MAX_RESULTS, $lang, $hub, 1 /* only pubic */ );
+			$wikis = DataMartService::getTopWikisByPageviews( DataMartService::PERIOD_ID_WEEKLY, self::MAX_RESULTS, $langs, $hub, 1 /* only pubic */ );
 
 			foreach ( $wikis as $wikiId => $wiki ) {
 				//fetching data from WikiFactory
@@ -98,7 +99,7 @@ class WikisModel extends WikiaModel {
 			$this->wg->Memc->set( $cacheKey, $results, 86400 /* 24h */ );
 		}
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $results;
 	}
 
@@ -113,10 +114,10 @@ class WikisModel extends WikiaModel {
 	 *
 	 * @return array A collection of results with id, name, hub, language, topic, domain
 	 */
-	public function getByString( $string, $lang = null, $hub = null, $includeDomain = false ) {
-		$this->wf->profileIn( __METHOD__ );
+	public function getByString( $string, Array $langs = null, $hub = null, $includeDomain = false ) {
+		wfProfileIn( __METHOD__ );
 
-		$wikis = array();
+		$wikis = [];
 
 		if ( !empty( $string ) ) {
 			$hubId = null;
@@ -135,7 +136,7 @@ class WikisModel extends WikiaModel {
 			}
 
 			if ( empty( $hub ) || ( !empty( $hub ) && is_integer( $hubId ) ) ) {
-				$cacheKey = $this->wf->SharedMemcKey( __METHOD__, self::CACHE_VERSION,  md5( strtolower( $string ) ), $hubId, $lang, ( ( !empty( $includeDomain ) ? 'includeDomain' : null ) ) );
+				$cacheKey = wfSharedMemcKey( __METHOD__, self::CACHE_VERSION,  md5( strtolower( $string ) ), $hubId, implode( ',', $langs ), ( ( !empty( $includeDomain ) ? 'includeDomain' : null ) ) );
 				$wikis = $this->app->wg->Memc->get( $cacheKey );
 
 				if ( !is_array( $wikis ) ) {
@@ -168,8 +169,9 @@ class WikisModel extends WikiaModel {
 						)
 					);
 
-					if ( !empty( $lang ) ) {
-						$where['city_list.city_lang'] = $lang;
+					if ( !empty( $langs ) ) {
+						$langs = $db->makeList($langs);
+						$where[] = 'city_list.city_lang IN (' . $langs . ')';
 					}
 
 					if ( is_integer( $hubId ) ) {
@@ -220,7 +222,7 @@ class WikisModel extends WikiaModel {
 			}
 		}
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $wikis;
 	}
 
@@ -233,7 +235,7 @@ class WikisModel extends WikiaModel {
 	 * url, lang, hubId, headline, desc, image and flags index.
 	 */
 	public function getDetails( Array $wikiIds = null ) {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$results = array();
 
@@ -244,7 +246,7 @@ class WikisModel extends WikiaModel {
 				$val = (int) $val;
 
 				if ( !empty( $val ) ) {
-					$cacheKey = $this->wf->SharedMemcKey( __METHOD__, self::CACHE_VERSION, $val );
+					$cacheKey = wfSharedMemcKey( __METHOD__, self::CACHE_VERSION, $val );
 					$item = $this->wg->Memc->get( $cacheKey );
 
 					if ( is_array( $item ) ) {
@@ -301,7 +303,7 @@ class WikisModel extends WikiaModel {
 					'headline' => $row->city_headline,
 					'desc' => $row->city_description,
 					//this is stored in a pretty peculiar format,
-					//see extensions/wikia/WikiaHomePage/CityVisualization.class.php
+					//see extensions/wikia/CityVisualization/models/CityVisualization.class.php
 					'image' => $row->city_main_image,
 					'flags' => array(
 						'new' => ( ( $row->city_flags & self::FLAG_NEW ) == self::FLAG_NEW ),
@@ -311,13 +313,13 @@ class WikisModel extends WikiaModel {
 					)
 				);
 
-				$cacheKey = $this->wf->SharedMemcKey( __METHOD__, self::CACHE_VERSION, $row->city_id );
+				$cacheKey = wfSharedMemcKey( __METHOD__, self::CACHE_VERSION, $row->city_id );
 				$this->wg->Memc->set( $cacheKey, $item, 43200 /* 12h */ );
 				$results[$row->city_id] = $item;
 			}
 		}
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return $results;
 	}
 }

@@ -28,7 +28,6 @@
 				// set up the trigger
 				this.trigger = this.editor.element.find('.'+this.triggerClassName);
 				this.trigger.click(this.proxy(this.toggle));
-				this.trigger.css('display','');
 
 				// set up the editor body
 				this.editor.element.addClass(this.className);
@@ -36,16 +35,11 @@
 				// load the saved state (if any)
 				this.loadState(true);
 
-				// adjust the height when changing modes
-				this.editor.on('mode',function() {
-					// give some time for toolbar to be fully switched (BugId:5328)
-					setTimeout($.proxy(this.modeChanged, this), 100);
-				},this);
-			}
-		},
+				this.editor.on('ck-sourceModeReady', this.modeChanged, this);
 
-		init: function() {
-			this.track(this.wide ? 'initOn' : 'initOff');
+				// needed on initial load
+				this.editor.on('toolbarsRendered', this.modeChanged, this);
+			}
 		},
 
 		modeChanged: function() {
@@ -67,8 +61,6 @@
 		toggle: function() {
 			this.setState(!this.getState());
 			this.saveState();
-
-			this.track(this.wide ? 'switchOn' : 'switchOff');
 
 			// toolbar height can change - resize the editor (BugId:5694)
 			this.modeChanged();
@@ -101,10 +93,6 @@
 
 		getState: function() {
 			return this.editor.element.hasClass(this.wideClassName);
-		},
-
-		track: function(ev) {
-			this.editor.track('widescreenSource', ev);
 		}
 	});
 

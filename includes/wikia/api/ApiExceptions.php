@@ -16,7 +16,17 @@ class MissingParameterApiException extends BadRequestException {
 
 class InvalidParameterApiException extends BadRequestException {
 	function __construct( $paramName ) {
-		parent::__construct( "Parameter '{$paramName}' is invalid" );
+		parent::__construct( self::getDetailsMsg($paramName) );
+	}
+	
+	public static function getDetailsMsg($paramName) {
+		return "Parameter '{$paramName}' is invalid";
+	}
+}
+
+class LimitExceededApiException extends BadRequestException {
+	function __construct( $paramName, $limit ) {
+		parent::__construct( "Parameter '{$paramName}' exceeds limit of {$limit}" );
 	}
 }
 

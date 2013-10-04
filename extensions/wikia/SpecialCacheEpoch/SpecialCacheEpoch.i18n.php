@@ -201,6 +201,21 @@ $messages['nl'] = array(
 	'cacheepoch-no-wf' => 'WikiFactory is niet ingeschakeld voor deze wiki. Het is niet mogelijk wgCacheEpoch aan te passen.',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'cacheepoch-desc' => 'Provesís una interfàcia que permet de cambiar wgCacheEpoch per un wiki.',
+	'cacheepoch' => "Interfàcia d'escondedor Epoch",
+	'cacheepoch-header' => 'Aumentar wgCacheEpoch',
+	'cacheepoch-value' => 'La valor actuala de wgCacheEpoch es « $1 ». Quichatz sul boton per la definir a la valor del timestamp actual.',
+	'cacheepoch-submit' => 'Metre a jorn la valor',
+	'cacheepoch-updated' => 'wgCacheEpoch mes a jorn amb « $1 ».',
+	'cacheepoch-not-updated' => 'Fracàs de la mesa a jorn de wgCacheEpoch.',
+	'cacheepoch-wf-reason' => 'Valor mesa a jorn via Special:CacheEpoch',
+	'cacheepoch-no-wf' => 'WikiFactory es pas activat sus aqueste wiki. Impossible de modificar wgCacheEpoch.',
+);
+
 /** Polish (polski)
  * @author BeginaFelicysym
  * @author Sovq
@@ -251,6 +266,7 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
+ * @author Luckas
  */
 $messages['pt-br'] = array(
 	'cacheepoch-desc' => 'Fornece uma interface para alterar a wgCacheEpoch por wiki',
@@ -259,9 +275,24 @@ $messages['pt-br'] = array(
 	'cacheepoch-value' => 'O valor atual da wgCacheEpoch é "$1". Pressione o botão para configurá-lo para a timestamp atual.',
 	'cacheepoch-submit' => 'Atualizar o valor',
 	'cacheepoch-updated' => 'wgCacheEpoch atualizada para "$1".',
-	'cacheepoch-not-updated' => 'Erro ao actualizar a wgCacheEpoch.',
+	'cacheepoch-not-updated' => 'Erro ao atualizar wgCacheEpoch.',
 	'cacheepoch-wf-reason' => 'Valor atualizado via Especial:CacheEpoch',
 	'cacheepoch-no-wf' => 'O WikiFactory não está ativado nesta wiki. Não é possível alterar a wgCacheEpoch.',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'cacheepoch-desc' => "Dèje 'n'inderfacce pe cangià wgCacheEpoch pe uicchi",
+	'cacheepoch' => 'Inderfacce Cache Epoch',
+	'cacheepoch-header' => "'Ngremende wgCacheEpoch",
+	'cacheepoch-value' => "'U valore de mò de wgCacheEpoch jè \"\$1\". Cazze 'u buttone pe 'mbostarle a l'orarie de mò.",
+	'cacheepoch-submit' => "Aggiorne 'u valore",
+	'cacheepoch-updated' => 'wgCacheEpoch aggiornate a "$1".',
+	'cacheepoch-not-updated' => "Fallite l'aggiornamende de wgCacheEpoch.",
+	'cacheepoch-wf-reason' => 'Valore aggiornate cu Special:CacheEpoch',
+	'cacheepoch-no-wf' => "UicchiFactory non g'è abbilitate sus a sta uicchi. Non g'è possibbile cangià wgCacheEpoch.",
 );
 
 /** Russian (русский)
@@ -311,12 +342,19 @@ $messages['tl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Andriykopanytsia
  * @author Тест
  */
 $messages['uk'] = array(
 	'cacheepoch-desc' => 'Надає інтерфейс для зміни wgCacheEpoch у вікі',
+	'cacheepoch' => 'Інтерфейс кешу Epoch',
+	'cacheepoch-header' => 'Збільшити wgCacheEpoch',
+	'cacheepoch-value' => 'Поточне значення wgCacheEpoch "$1". Натисніть кнопку, щоб задати його згідно поточного часу.',
 	'cacheepoch-submit' => 'Оновити значення',
+	'cacheepoch-updated' => 'wgCacheEpoch оновлено до "$1".',
+	'cacheepoch-not-updated' => 'Не вдалося оновити wgCacheEpoch.',
 	'cacheepoch-wf-reason' => 'Значення оновлене за допомогою Special:CacheEpoch',
+	'cacheepoch-no-wf' => 'WikiFactory на цій вікі не увімкнено. Не вдається змінити wgUserData.',
 );
 
 /** Vietnamese (Tiếng Việt)
@@ -332,4 +370,19 @@ $messages['vi'] = array(
 	'cacheepoch-not-updated' => 'Thất bại khi cập nhật lưu trữ bộ đệm.',
 	'cacheepoch-wf-reason' => 'Cập nhật giá trị thông qua Special:CacheEpoch',
 	'cacheepoch-no-wf' => 'WikiFactory không được kích hoạt trên wiki này. Không thể thay đổi lưu trữ bộ đệm.',
+);
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Yfdyh000
+ */
+$messages['zh-hans'] = array(
+	'cacheepoch-desc' => '为更改每个wiki的wgCacheEpoch提供一个接口',
+	'cacheepoch' => 'Cache Epoch接口',
+	'cacheepoch-header' => '增加wgCacheEpoch',
+	'cacheepoch-value' => 'wgCacheEpoch的当前值是“$1”。按下按钮将其设置为当前的时间戳。',
+	'cacheepoch-submit' => '更新该值',
+	'cacheepoch-updated' => 'wgCacheEpoch已更新为“$1”',
+	'cacheepoch-not-updated' => '更新wgCacheEpoch失败。',
+	'cacheepoch-wf-reason' => '通过 Special:CacheEpoch 更新数值',
+	'cacheepoch-no-wf' => 'WikiFactory在此wiki上未启用。无法更改wgCacheEpoch。',
 );

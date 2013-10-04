@@ -14,7 +14,7 @@
 
 	<!-- JS -->
 	<?php
-		$srcs = F::build('AssetsManager',array(),'getInstance')->getGroupCommonURL('oasis_blocking', array());
+		$srcs = AssetsManager::getInstance()->getGroupCommonURL('oasis_blocking', array());
 	?>
 	<?php foreach($srcs as $src): ?>
 		<script src="<?php echo $src ?>"></script>
@@ -77,6 +77,12 @@
 		<span class="username"><%= name %></span>
 		<span class="message"><%= text %></span>
 	</script>
+	<script type='text/template' id='me-message-template'>
+		<img width="<?= ChatAjax::CHAT_AVATAR_DIMENSION ?>" height="<?= ChatAjax::CHAT_AVATAR_DIMENSION ?>" class="avatar" src="<%= avatarSrc %>"/>
+		<span class="time"><%= timeStamp %></span>
+		<span class="username"><%= name %></span>
+		<span class="message me-message">* <%= name %> <%= text %></span>
+	</script>
 	<script type='text/template' id='inline-alert-template'>
 		<%= text %>
 	</script>
@@ -119,7 +125,7 @@
 	</script>
 	<!-- Load these after the DOM is built -->
 	<?php
-		$srcs = F::build('AssetsManager',array(),'getInstance')->getGroupCommonURL('chat_js2', array());
+		$srcs = AssetsManager::getInstance()->getGroupCommonURL('chat_js2', array());
 	?>
 	<?php foreach($srcs as $src): ?>
 		<script src="<?php echo $src ?>"></script>

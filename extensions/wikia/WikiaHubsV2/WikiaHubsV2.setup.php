@@ -9,7 +9,6 @@
  */
 
 $dir = dirname(__FILE__) . '/';
-$app = F::app();
 
 $wgExtensionCredits['specialpage'][] = array(
 	'name' => 'WikiaHubs V2',
@@ -18,43 +17,49 @@ $wgExtensionCredits['specialpage'][] = array(
 	'version' => 1.0
 );
 
+$wgAutoloadClasses['WikiaHubsV2Page'] =  $dir . 'WikiaHubsV2Page.class.php';
+
 // constroller classes
-$app->registerClass('SpecialWikiaHubsV2Controller', $dir . 'SpecialWikiaHubsV2Controller.class.php');
-$app->registerClass('WikiaHubsV2SuggestController', $dir . 'WikiaHubsV2SuggestController.class.php');
+$wgAutoloadClasses['WikiaHubsV2Controller'] =  $dir . 'WikiaHubsV2Controller.class.php';
+$wgAutoloadClasses['WikiaHubsV2SuggestController'] =  $dir . 'WikiaHubsV2SuggestController.class.php';
 
 // hook classes
-
-$app->registerClass('WikiaHubsV2Mobile', $dir . 'hooks/WikiaHubsV2MobileHooks.php');
-$app->registerClass('WikiaHubsV2Hooks', $dir . 'hooks/WikiaHubsV2Hooks.php');
+$wgAutoloadClasses['WikiaHubsV2Hooks'] =  $dir . 'hooks/WikiaHubsV2Hooks.php';
 
 // model classes
-$app->registerClass('WikiaHubsV2Article', $dir . 'models/WikiaHubsV2Article.class.php');
-$app->registerClass('WikiaHubsV2Model', $dir . 'models/WikiaHubsV2Model.class.php');
+$wgAutoloadClasses['WikiaHubsV2Article'] =  $dir . 'models/WikiaHubsV2Article.class.php';
+$wgAutoloadClasses['WikiaHubsV2Model'] =  $dir . 'models/WikiaHubsV2Model.class.php';
+$wgAutoloadClasses['WikiaHubsV2HooksModel'] =  $dir . 'models/WikiaHubsV2HooksModel.class.php';
 
-$app->registerClass('WikiaHubsV2Module', $dir . 'models/modules/WikiaHubsV2Module.class.php');
-$app->registerClass('WikiaHubsV2PulseModule', $dir . 'models/modules/WikiaHubsV2PulseModule.class.php');
-$app->registerClass('WikiaHubsV2SliderModule', $dir . 'models/modules/WikiaHubsV2SliderModule.class.php');
+$wgAutoloadClasses['WikiaHubsV2SuggestModel'] =  $dir . 'models/WikiaHubsV2SuggestModel.class.php';
 
-$app->registerClass('MysqlWikiaHubsV2ModuleDataProvider', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2ModuleDataProvider.class.php');
-$app->registerClass('MysqlWikiaHubsV2PulseModuleDataProvider', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2PulseModuleDataProvider.class.php');
-$app->registerClass('MysqlWikiaHubsV2SliderModuleDataProvider', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2SliderModuleDataProvider.class.php');
-
-$app->registerClass('StaticWikiaHubsV2ModuleDataProvider', $dir . 'models/dataproviders/static/StaticWikiaHubsV2ModuleDataProvider.class.php');
-$app->registerClass('StaticWikiaHubsV2PulseModuleDataProvider', $dir . 'models/dataproviders/static/StaticWikiaHubsV2PulseModuleDataProvider.class.php');
-$app->registerClass('StaticWikiaHubsV2SliderModuleDataProvider', $dir . 'models/dataproviders/static/StaticWikiaHubsV2SliderModuleDataProvider.class.php');
-
-$app->registerClass('WikiaHubsV2ModuleDataProvider', $dir . 'models/dataproviders/WikiaHubsV2ModuleDataProvider.class.php');
-$app->registerClass('MysqlWikiaHubsV2Connector', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2Connector.class.php');
-$app->registerClass('MysqlWikiaHubsV2ModuleDataProvider', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2ModuleDataProvider.class.php');
-$app->registerClass('MysqlWikiaHubsV2PulseModuleDataProvider', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2PulseModuleDataProvider.class.php');
-$app->registerClass('MysqlWikiaHubsV2SliderModuleDataProvider', $dir . 'models/dataproviders/mysql/MysqlWikiaHubsV2SliderModuleDataProvider.class.php');
-
-// pages
-$app->registerSpecialPage('WikiaHubsV2', 'SpecialWikiaHubsV2Controller');
+$wgAutoloadClasses['WikiaHubsParserHelper'] =  $dir . 'WikiaHubsParserHelper.class.php';
+$wgAutoloadClasses['WikiaHubsApiController'] = $dir . 'api/WikiaHubsApiController.class.php';
 
 // i18n mapping
-$wgExtensionMessagesFiles['WikiaHubsV2'] = $dir . 'WikiaHubsV2.i18n.php';
+$wgExtensionMessagesFiles['WikiaHubsV2'] = $dir.'WikiaHubsV2.i18n.php';
 
 // hooks
-$app->registerHook('WikiaMobileAssetsPackages', 'WikiaHubsV2Mobile', 'onWikiaMobileAssetsPackages');
-$app->registerHook('ArticleFromTitle', 'WikiaHubsV2Hooks', 'onArticleFromTitle');
+$wgHooks['ArticleFromTitle'][] = 'WikiaHubsV2Hooks::onArticleFromTitle';
+$wgHooks['WikiaCanonicalHref'][] = 'WikiaHubsV2Hooks::onWikiaCanonicalHref';
+$wgHooks['ParserFirstCallInit'][] = 'WikiaHubsV2Hooks::onParserFirstCallInit';
+
+$wgWikiaApiControllers['WikiaHubsApiController'] = "{$IP}/includes/wikia/api/WikiaHubsApiController.class.php";
+
+// foreign file repo
+$wgForeignFileRepos[] = array(
+	'class'            => 'WikiaForeignDBViaLBRepo',
+	'name'             => 'wikiahubsfiles',
+	'directory'        => $wgWikiaHubsFileRepoDirectory,
+	'url'              => 'http://images.wikia.com/' . $wgWikiaHubsFileRepoDBName . '/images',
+	'hashLevels'       => 2,
+	'thumbScriptUrl'   => '',
+	'transformVia404'  => true,
+	'hasSharedCache'   => true,
+	'descBaseUrl'      => $wgWikiaHubsFileRepoPath . 'wiki/File:',
+	'fetchDescription' => true,
+	'wiki'             => $wgWikiaHubsFileRepoDBName,
+	'checkRedirects'   => false,
+	'checkDuplicates'  => false,
+);
+

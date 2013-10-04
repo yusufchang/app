@@ -1,10 +1,10 @@
 <?php
-
 class ArticleCommentInit {
 	const ERROR_READONLY = 1;
 	const ERROR_USER_CANNOT_EDIT = 2;
 
 	public static $enable = null;
+	public static $commentByAnonMsg = null;
 
 	static public function ArticleCommentCheck( $title=null ) {
 		global $wgRequest, $wgUser;
@@ -355,58 +355,84 @@ class ArticleCommentInit {
 
 	//when comments are enabled on the current namespace make the WikiaMobile skin enriched assets
 	//while keeping the response size (assets minification) and the number of external requests low (aggregation)
-	static public function onWikiaMobileAssetsPackages( Array &$jsHeadPackages, Array &$jsBodyPackages, Array &$scssPackages ){
+	static public function onWikiaMobileAssetsPackages( Array &$jsStaticPackages, Array &$jsExtensionPackages, Array &$scssPackages ){
 		if ( self::ArticleCommentCheck() ) {
-			$jsBodyPackages[] = 'articlecomments_init_js_wikiamobile';
+			$jsExtensionPackages[] = 'articlecomments_init_js_wikiamobile';
 		}
 
 		return true;
 	}
 
+	/**
+	 * formats links in the "File usage" section of file pages
+	 * @author Jakub Olek
+	 */
 	public static function onFilePageImageUsageSingleLink( &$link, &$element ) {
 		$app = F::app();
-
 		$ns = $element->page_namespace;
 
-		//comments and talk pages
-		if ( $ns == NS_TALK ) {
-			$title = Title::newFromText( $element->page_title, $ns );
+		$title = Title::newFromText( $element->page_title, $ns );
 
-			if( !empty( $title ) ) {
-				$parentTitle = reset( explode( '/', $element->page_title) ); // getBaseText returns me parent comment for subcomment
+		if ( empty( $title ) ) {
+			// sanity check
+			return true;
+		}
 
-				$link = $app->wf->MsgExt(
-					'article-comments-file-page',
-					array ('parsemag'),
-					$title->getLocalURL(),
-					User::newFromId( Revision::newFromId( $title->getLatestRevID() )->getUser() )->getName(),
-					Title::newFromText( $parentTitle )->getLocalURL(),
-					$parentTitle
-				);
-			}
+		// format links to comment pages
+		if ( $ns == NS_TALK && ArticleComment::isTitleComment( $title ) ) {
+			$parentTitle = reset( explode( '/', $element->page_title) ); // getBaseText returns me parent comment for subcomment
 
-		//comments on blog posts
-		} else if ( $ns == NS_BLOG_ARTICLE_TALK ) {
-			$blogPostComment = Title::newFromText( $element->page_title, $ns );
+			$link = wfMsgExt(
+				'article-comments-file-page',
+				array ('parsemag'),
+				$title->getLocalURL(),
+				self::getUserNameFromRevision($title),
+				Title::newFromText( $parentTitle )->getLocalURL(),
+				$parentTitle
+			);
 
-			if( !empty( $blogPostComment ) ) {
-				$baseText = $blogPostComment->getBaseText();
-				$titleNames = explode( '/', $baseText );
-				$userBlog = Title::newFromText( $titleNames[0], NS_BLOG_ARTICLE );
+		// format links to blog posts
+		} else if ( defined('NS_BLOG_ARTICLE_TALK') && $ns == NS_BLOG_ARTICLE_TALK ) {
+			$baseText = $title->getBaseText();
+			$titleNames = explode( '/', $baseText );
+			$userBlog = Title::newFromText( $titleNames[0], NS_BLOG_ARTICLE );
 
-				$link = $app->wf->MsgExt(
-					'article-blog-comments-file-page',
-					array ('parsemag'),
-					$blogPostComment->getLocalURL(),
-					User::newFromId( Revision::newFromId( $blogPostComment->getLatestRevID() )->getUser() )->getName(),
-					Title::newFromText( $baseText, NS_BLOG_ARTICLE )->getLocalURL(),
-					$titleNames[1],
-					$userBlog->getLocalURL(),
-					$userBlog->getBaseText()
-				);
-			}
+			$link = wfMsgExt(
+				'article-blog-comments-file-page',
+				array ('parsemag'),
+				$title->getLocalURL(),
+				self::getUserNameFromRevision($title),
+				Title::newFromText( $baseText, NS_BLOG_ARTICLE )->getLocalURL(),
+				$titleNames[1],
+				$userBlog->getLocalURL(),
+				$userBlog->getBaseText()
+			);
 		}
 
 		return true;
+	}
+
+	public static function getUserNameFromRevision(Title $title) {
+		$rev = Revision::newFromId( $title->getLatestRevID() );
+		
+		if ( !empty( $rev ) ) {
+			$user = User::newFromId( $rev->getUser() );
+
+			if ( !empty( $user ) ) {
+				$userName = $user->getName();
+			} else {
+				$userName = self::getCommentByAnonMsg();
+			}
+		}
+		
+		return $userName;
+	}
+	
+	public static function getCommentByAnonMsg() {
+		if( is_null(self::$commentByAnonMsg) ) {
+			self::$commentByAnonMsg = wfMessage( 'article-comments-anonymous' )->text();
+		}
+		
+		return self::$commentByAnonMsg;
 	}
 }

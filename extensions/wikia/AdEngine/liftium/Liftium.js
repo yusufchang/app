@@ -125,7 +125,7 @@ Liftium.buildChain = function(slotname) {
 
 	if (Liftium.e(Liftium.config) || Liftium.e(Liftium.config.sizes)){
 		Liftium.d('Error, config is empty in buildChain(' + slotname + ')', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/no_config',
 			ga_action: 'buildChain',
@@ -138,7 +138,7 @@ Liftium.buildChain = function(slotname) {
 	if (Liftium.e(Liftium.config.sizes) || Liftium.e(Liftium.config.sizes[size])){
 		//Liftium.reportError("Unrecognized size in Liftium: " + size, "publisher");
 		Liftium.d('Error, unrecognized size ' + size + ' (' + slotname + ')', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/unrecognized_size',
 			ga_action: size,
@@ -196,7 +196,7 @@ Liftium.buildChain = function(slotname) {
 	if (Liftium.chain[slotname].length === 0){
 		//Liftium.reportError("Error building chain for " + slotname + ".  No matching tags?");
 		Liftium.d('Error building chain for ' + slotname + '. No matching tags?', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/no_matching_tags',
 			ga_action: slotname,
@@ -268,7 +268,7 @@ Liftium.callAd = function (sizeOrSlot, slotPlacement) {
 	if (Liftium.e(Liftium.config)){
 		//Liftium.reportError("Error downloading config");
 		Liftium.d('Error downloading config (' + sizeOrSlot + ')', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/error_downloading_config',
 			ga_action: sizeOrSlot,
@@ -280,7 +280,7 @@ Liftium.callAd = function (sizeOrSlot, slotPlacement) {
 	} else if (Liftium.config.error){
 		//Liftium.reportError("Config error " + Liftium.config.error);
 		Liftium.d('Config error ' + Liftium.config.error + ' (' + sizeOrSlot + ')', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/config_error',
 			ga_action: sizeOrSlot,
@@ -300,7 +300,7 @@ Liftium.callAd = function (sizeOrSlot, slotPlacement) {
 		Liftium.slotPlacements[slotname] = slotPlacement;
 	}
 
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.slot',
 		ga_category: 'slot/' + sizeOrSlot,
 		ga_action: slotPlacement,
@@ -323,7 +323,6 @@ Liftium._callAd = function (slotname, iframe) {
 		t = Liftium.fillerAd(slotname, "getNextTag returned false");
 		if (iframe) {
 			Liftium.clearPreviousIframes(slotname);
-			// TODO write PSA in iframe
 		} else {
 			document.write("<!-- Liftium Tag #" + t.tag_id + "-->\n");
 			document.write(t.tag);
@@ -355,7 +354,7 @@ Liftium._callAd = function (slotname, iframe) {
 		// This is probably never called, because the document.write hides it...
 		//Liftium.reportError("Error loading tag #" + t.tag_id + ": " + Liftium.print_r(e), "tag");
 		Liftium.d('Error loading tag #' + t.tag_id + ' (' + slotname + ')', 1, e);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/_callAd',
 			ga_action: slotname,
@@ -446,7 +445,7 @@ Liftium.callInjectedIframeAd = function (sizeOrSlot, iframeElement, slotPlacemen
 
 	// this is a(n ugly?) shortcut, the right name would be slotname's parent div
 	var placement = iframeElement.id.replace(/_iframe$/, "");
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.slot',
 		ga_category: 'slot/' + sizeOrSlot,
 		ga_action: placement,
@@ -723,31 +722,35 @@ Liftium.empty = function ( v ) {
 Liftium.e = Liftium.empty; // Shortcut to make the Javascript smaller
 
 
-/* Filler ad when we don't have anything better to display. Usually means an error, either with the code
- * or the chain
- * http://www.peacecorps.gov/index.cfm?shell=resources.media.psa.webbanners
+/**
+ * Filler ad when we don't have anything better to display. Usually means an error,
+ * either with the code or the chain
  */
-Liftium.fillerAd = function(size, message){
+Liftium.fillerAd = function(slotname, message){
 	// Pull the height/width out of size
-	size = size || "300x250"; // TODO/FIXME: figure out size by looking at containing div
+	var size, tag = '', tagId = -1;
 
-	var tag = '';
+	try {
+		size = slotname.split('_')[1];
+	} catch (e) {
+		size = '300x250';
+	}
+
 	if (!Liftium.e(message)){
 		tag += '<div class="LiftiumError" style="display:none">Liftium message: ' + message + "</div>";
 	}
 
 	if (size.match(/300x250/)){
-		tag += '<a href="http://www.peacecorps.gov/psa/webbanners/click?cid=psa15" target="_blank"><img src="http://www.peacecorps.gov/images/webbanners/full/300x250_legacy.gif" width="300" height="250" border="0" alt="Public Service Announcement"/></a>';
+		tagId = 2198;
 	} else if (size.match(/728x90/)){
-		tag += '<a href="http://www.peacecorps.gov/psa/webbanners/click?cid=psa1" target="_blank"><img src="http://www.peacecorps.gov/images/webbanners/full/728x90_thinklocal.gif" width="728" height="90" border="0" alt="Public Service Announcement"/></a>';
+		tagId = 2197;
 	} else if (size.match(/160x600/)){
-		tag += '<a href="http://www.peacecorps.gov/psa/webbanners/click?cid=psa14" target="_blank"><img src="http://www.peacecorps.gov/images/webbanners/full/160x600_legacy.gif" width="160" height="600" border="0" alt="Public Service Announcement"/></a>';
+		tagId = 2199;
 	} else {
-		// No PSA to display for this size.
 		// Note that this text is specifically referenced in unit tests
 		tag += '<span style="display: none">No available ads</span>';
 	}
-	return {tag_id: 'psa', network_name: "Internal Error PSA", tag: tag, size: size};
+	return {tag_id: tagId, network_name: "Internal Error", tag: tag, size: size};
 };
 
 
@@ -801,7 +804,7 @@ Liftium.getCookieDomain = function () {
 	if (!Liftium.e(d)) {
 		domain = d[0];
 	} else {
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.varia',
 			ga_category: 'varia/cookie_domain',
 			ga_action: domain,
@@ -840,7 +843,7 @@ Liftium.getAlwaysFillAd = function(size, slotname){
 
 	if (Liftium.e(Liftium.config) || Liftium.e(Liftium.config.sizes)){
 		Liftium.d('Error, config is empty in getAlwaysFillAd(' + size + ', ' + slotname + ')', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/no_config',
 			ga_action: 'getAlwaysFillAd',
@@ -983,7 +986,7 @@ Liftium.getNextTag = function(slotname){
 		Liftium.d("Liftium.maxHopTime=" + Liftium.maxHopTime, 5);
 		Liftium.d("Hop Time of " + Liftium.maxHopTime + " exceeded, it's " + diff + " now. Using the always_fill for " + slotname, 2);
 		var sec = diff / 1000;
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/hop_timeout',
 			ga_action: 'slot ' + slotname + ', net ' + Liftium.chain[slotname][current].network_id + ', tag ' + Liftium.chain[slotname][current].tag_id,
@@ -1013,16 +1016,13 @@ Liftium.getNextTag = function(slotname){
 
 	// Rut roh.
 	Liftium.reportError("No more tags left in the chain - " + slotname + " Last ad in the chain marked as always fill but actually hopped? :" + Liftium.print_r(Liftium.chain[slotname][Liftium.chain[slotname].length-1]), "chain");
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.errors',
 		ga_category: 'errors/last_hopped',
 		ga_action: slotname,
 		trackingMethod: 'ad'
 	});
-	// Return a PSA. Note: Do NOT insert the garaunteed fill here.
-	// If it happens to hop due to a misconfiguration, you'll create a
-	// never ending loop. Or so I've been told. ;)
-	// -Nick
+	// Return a default ad here (don't hop there!)
 	return Liftium.fillerAd(slotname, "No more tags left in the chain");
 };
 
@@ -1119,7 +1119,7 @@ Liftium.getRequestVal = function(varName, defaultVal, qstring){
 Liftium.getSampledAd = function(size){
 	if (Liftium.e(Liftium.config) || Liftium.e(Liftium.config.sizes)){
 		Liftium.d('Error, config is empty in getSampledAd(' + size + ')', 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/no_config',
 			ga_action: 'getSampledAd',
@@ -1303,7 +1303,7 @@ Liftium.iframeHop = function(iframeUrl){
 
 	if (Liftium.in_array(iframeUrl, Liftium.hopRegister)) {
 		Liftium.d("Hop from " + iframeUrl + " already registered. Bailing out.", 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/last_hopped_2',
 			ga_action: 'last_hopped_2',
@@ -1435,7 +1435,7 @@ Liftium.init = function (callback) {
 		return false;
 	}
 
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.init',
 		ga_category: 'init/init',
 		ga_action: 'init',
@@ -1732,7 +1732,7 @@ Liftium.markLastAdAsRejected = function (slotname){
 	var i = Liftium.currents[slotname];
 	if (typeof i == "undefined") {
 		Liftium.d("No chain for " + slotname + " found. Bailing out.", 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/no_chain',
 			ga_action: slotname,
@@ -1750,7 +1750,7 @@ Liftium.markLastAdAsRejected = function (slotname){
 	var time = Liftium.debugTime() - Liftium.slotTimer2[slotname + "-" + tag_id];
 	Liftium.d("slotTimer2 end for #" + tag_id + " in " + slotname + " after " + time + " ms", 3);
 	var net_id = Liftium.chain[slotname][i].network_id;
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.hop',
 		ga_category: 'hop/net ' + net_id,
 		ga_action: 'tag ' + tag_id,
@@ -1806,7 +1806,7 @@ Liftium.onLoadHandler = function () {
 	} else {
 		var config_status = Liftium.e(Liftium.config) ? 'no config' : 'config loaded';
 		Liftium.d("Gave up waiting for ads to load (" + config_status + "), sending beacon now", 1);
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/gave_up_waiting_for_ads',
 			ga_action: config_status,
@@ -1905,7 +1905,11 @@ Liftium.pullGeo = function (){
 	Liftium.d("Loading geo data from cookie", 3);
 	var cookie = decodeURIComponent(Liftium.cookie("Geo"));
 	if (!Liftium.e(cookie)) {
-		Liftium.geo = eval("(" + cookie + ")");
+		try {
+			Liftium.geo = JSON.parse(cookie) || {};
+		} catch (e) {
+			Liftium.geo = {};
+		}
 		Liftium.d("Geo data loaded:", 7, Liftium.geo);
 		return;
 	}
@@ -2034,7 +2038,7 @@ Liftium.reportError = function (msg, type) {
 
 	if(type == 'onerror') {
 
-		WikiaTracker.track({
+		Wikia.Tracker.track({
 			eventName: 'liftium.errors',
 			ga_category: 'errors/js',
 			ga_action: msg,
@@ -2058,7 +2062,7 @@ Liftium.reportError = function (msg, type) {
 
   } catch (e) {
 	Liftium.d("Yikes. Liftium.reportError has an error");
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.errors',
 		ga_category: 'errors/reportError',
 		ga_action: 'reportError',
@@ -2147,7 +2151,7 @@ Liftium.sendBeacon = function (){
 
 	// Track the beacons with GA
 
-	WikiaTracker.track({
+	Wikia.Tracker.track({
 		eventName: 'liftium.init',
 		ga_category: 'init/beacon',
 		ga_action: 'beacon',
@@ -2389,12 +2393,12 @@ Liftium.trackQcseg = function() {
 			}
 			if (Liftium.e(qcseg.segments[i].id)) {
 				//FIXME: this tracking call needs to be updated before it is uncommented
-				//WikiaTracker.track(Liftium.buildTrackUrl([LiftiumOptions.pubid, "quantcast", "segments", "broken", c]), 'liftium.errors');
+				//Wikia.Tracker.track(Liftium.buildTrackUrl([LiftiumOptions.pubid, "quantcast", "segments", "broken", c]), 'liftium.errors');
 				continue;
 			}
 			Liftium.d("Quantcast segment: " + qcseg.segments[i].id, 5);
 			//FIXME: this tracking call needs to be updated before it is uncommented
-			//WikiaTracker.track(Liftium.buildTrackUrl([LiftiumOptions.pubid, "quantcast", "segments", qcseg.segments[i].id]), 'liftium.quantcast');
+			//Wikia.Tracker.track(Liftium.buildTrackUrl([LiftiumOptions.pubid, "quantcast", "segments", qcseg.segments[i].id]), 'liftium.quantcast');
 
 			empty = false;
 		}
@@ -2406,7 +2410,7 @@ Liftium.trackQcseg = function() {
 	} catch (e) {
 		Liftium.d("Quantcast cookie parse error:", 7, e);
 		//FIXME: this tracking call needs to be updated before it is uncommented
-		//WikiaTracker.track(Liftium.buildTrackUrl([LiftiumOptions.pubid, "quantcast", "broken"]), 'liftium.errors');
+		//Wikia.Tracker.track(Liftium.buildTrackUrl([LiftiumOptions.pubid, "quantcast", "broken"]), 'liftium.errors');
 		return;
 	}
 };
@@ -2757,15 +2761,26 @@ Liftium.maxHopTime = Liftium.getRequestVal('liftium_timeout', 0) || Liftium.cook
 
 LiftiumOptions.error_beacon = !Liftium.debugLevel && !Liftium.getRequestVal('liftium_onerror', 0) && !Liftium.cookie("liftium_onerror");
 if (LiftiumOptions.error_beacon !== false ){
-	window.onerror = Liftium.catchError;
+	(function () {
+		var originalOnError = window.onerror;
+		window.onerror = function(m, l, e) {
+			originalOnError && originalOnError(m, l, e);
+			return Liftium.catchError(m, l, e);
+		}
+	}());
 }
 
 } // \if (typeof Liftium == "undefined" )
 
 
 // Gentlemen, Start your optimization!
-if (Liftium.empty(LiftiumOptions.offline)){
-	Liftium.init();
+
+if (window.wgAdDriverStartLiftiumOnLoad) {
+	Liftium.addEventListener(window, 'load', Liftium.init);
+} else {
+	if (Liftium.empty(LiftiumOptions.offline)){
+		Liftium.init();
+	}
 }
 
 Liftium.addEventListener(window, 'load', Liftium.onLoadHandler);

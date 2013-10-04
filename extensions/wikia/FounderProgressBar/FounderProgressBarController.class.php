@@ -230,14 +230,15 @@ class FounderProgressBarController extends WikiaController {
 	 * @return Database
 	 */
 	public function getDb($db_type=DB_SLAVE) {
-		return $this->app->runFunction( 'wfGetDB', $db_type, array(), $this->wg->ExternalSharedDB);
+		return wfGetDB($db_type, array(), $this->wg->ExternalSharedDB);
 	}
 
 	/**
 	 * @return Memcache
 	 */
 	public function getMCache() {
-		return $this->app->getGlobal('wgMemc');
+		global $wgMemc;
+		return $wgMemc;
 	}
 
 	/**
@@ -253,7 +254,7 @@ class FounderProgressBarController extends WikiaController {
 		$use_master = $this->request->getval("use_master", false);
 		$list = null;
 		$db_type = DB_SLAVE;
-		$memKey = $this->wf->MemcKey('FounderLongTaskList');
+		$memKey = wfMemcKey('FounderLongTaskList');
 		// try to get cached data, also use slave
 		if ($use_master == true) {
 			$db_type = DB_MASTER;
@@ -261,7 +262,7 @@ class FounderProgressBarController extends WikiaController {
 			$list = $this->getMCache()->get($memKey);
 		}
 		if (empty($list)) {
-			$this->wf->ProfileIn(__METHOD__ . '::miss');
+			wfProfileIn(__METHOD__ . '::miss');
 			$list = array();
 
 			$dbr = $this->getDB($db_type);
@@ -280,7 +281,7 @@ class FounderProgressBarController extends WikiaController {
 					"task_count" => $row->task_count,
 					"task_completed" => $row->task_completed,
 					"task_skipped" => $row->task_skipped,
-					"task_timestamp" => $this->wf->TimeFormatAgo($row->task_timestamp),
+					"task_timestamp" => wfTimeFormatAgo($row->task_timestamp),
 					);
 			}
 
@@ -288,7 +289,7 @@ class FounderProgressBarController extends WikiaController {
 				$this->getMCache()->set($memKey, $list, 60*60); // 1 hour
 			}
 
-			$this->wf->ProfileOut(__METHOD__ . '::miss');
+			wfProfileOut(__METHOD__ . '::miss');
 		}
 		$this->buildURLs($list);  // must build urls after getting data from memcache because we can't cache them
 		$this->response->setVal("list", $list);
@@ -325,7 +326,7 @@ class FounderProgressBarController extends WikiaController {
 				"task_count" => $row['task_count'],
 				"task_completed" => $row['task_completed'],
 				"task_skipped" => $row['task_skipped'],
-				"task_timestamp" => $this->wf->TimeFormatAgo($row['task_timestamp']),
+				"task_timestamp" => wfTimeFormatAgo($row['task_timestamp']),
 			);
 			$this->setVal("list", $list);
 		} else {
@@ -505,7 +506,7 @@ class FounderProgressBarController extends WikiaController {
 				if(!is_int($activityFull['list'][$task_id]["task_timestamp"])) {
 					$activityFull['list'][$task_id]["task_timestamp"] = strtotime($activityFull['list'][$task_id]["task_timestamp"]);
 				}
-				$bonusTask["task_timestamp"] = $this->wf->TimeFormatAgo($activityFull['list'][$task_id]["task_timestamp"]);
+				$bonusTask["task_timestamp"] = wfTimeFormatAgo($activityFull['list'][$task_id]["task_timestamp"]);
 				$bonusTask["task_locked"] = 0;
 			} else {
 				$bonusTask["task_completed"] = 0;

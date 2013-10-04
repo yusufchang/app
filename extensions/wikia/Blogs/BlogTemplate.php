@@ -375,13 +375,12 @@ class BlogTemplateClass {
 		if (!empty($username)) {
 			$oUser = User::newFromName($username);
 			if ( $oUser instanceof User ) {
-				$sk = RequestContext::getMain()->getSkin();
 				$oUserPage = $oUser->getUserPage();
 				$oUserTalkPage = $oUser->getTalkPage();
 				$aResult = array(
-					"userpage" => ($oUserPage instanceof Title) ? $sk->link($oUserPage, $oUser->getName(), $attribs) : "",
-					"talkpage" => ($oUserTalkPage instanceof Title) ? $sk->link($oUserTalkPage, wfMsg( 'sp-contributions-talk' ), $attribs) : "",
-					"contribs" => $sk->link(
+					"userpage" => ($oUserPage instanceof Title) ? Linker::link($oUserPage, $oUser->getName(), $attribs) : "",
+					"talkpage" => ($oUserTalkPage instanceof Title) ? Linker::link($oUserTalkPage, wfMsg( 'sp-contributions-talk' ), $attribs) : "",
+					"contribs" => Linker::link(
 						SpecialPage::getTitleFor( 'Contributions' ),
 						wfMsg( 'contribslink' ),
 						$attribs,
@@ -528,7 +527,9 @@ class BlogTemplateClass {
 		}
 		/* see more */
 		if ( !isset(self::$aOptions['seemore']) ) {
-			self::__makeStringOption('seemore', Title::newFromText(wfMsgForContent('blogs-recent-url'))->getFullURL());
+			$recentUrlTitle = Title::newFromText(wfMsgForContent('blogs-recent-url'));
+			$recentUrl = $recentUrlTitle ? $recentUrlTitle->getFullURL() : '';
+			self::__makeStringOption('seemore', $recentUrl);
 		}
     	wfProfileOut( __METHOD__ );
 	}
@@ -802,7 +803,6 @@ class BlogTemplateClass {
 		wfProfileOut(__METHOD__);
 		return $sResult;
 	}
-
 
 	private static function __getRevisionText($iPage, $oRev) {
 		global $wgLang, $wgUser;
@@ -1358,5 +1358,38 @@ class BlogTemplateClass {
 			return $result[0];
 		}
 		return $result;
+	}
+
+	/**
+	 * Retrieve short text from provided article
+	 *
+	 * This is a way to access a functionality of private __getRevisionText method
+	 *
+	 * @author Kamil Koterba
+	 * @since June 2013
+	 *
+	 * @param integer $iPage Page id
+	 * @param Revision $oRev Revision of article to get text from
+	 * @return mixed|string
+	 */
+	public static function getShortText($iPage, Revision $oRev) {
+		wfProfileIn( __METHOD__ );
+		//backup current value
+		$aOptions_bck = self::$aOptions;
+
+		//set options required to retrieve short text
+		self::$aOptions = array(
+			'type' => 'plain',
+			'summary' => 'true'
+		);
+
+		//get short text
+		$shortText = self::__getRevisionText($iPage, $oRev);
+
+		//restore options
+		self::$aOptions = $aOptions_bck;
+
+		wfProfileOut( __METHOD__ );
+		return $shortText;
 	}
 }

@@ -91,10 +91,11 @@
                       !!window.wgUserName ? 'user' : 'anon', 3]);
 
     /**** Medium-Priority CVs ****/
-    _gaqWikiaPush(['_setCustomVar', 8, 'PageType',
-                      window.wikiaPageType, 3],
+    _gaqWikiaPush(['_setCustomVar', 8, 'PageType', window.wikiaPageType, 3],
                   ['_setCustomVar', 9, 'CityId', window.wgCityId, 3],
-                  ['_setCustomVar', 12, 'MedusaSlot', window.wgMedusaSlot, 3]);
+                  ['_setCustomVar', 12, 'MedusaSlot', window.wgMedusaSlot, 3],
+                  ['_setCustomVar', 14, 'HasAds', window.wgAdsShowableOnPage ? 'Yes' : 'No', 3]
+    );
 
     /**** Include A/B testing status ****/
     if ( window.Wikia && window.Wikia.AbTest ) {
@@ -134,6 +135,12 @@
 				window.addEventListener("load", abOnLoadHandler, false);
 			}
 		}
+
+		/**** Back-end A/B test for order of loading test ****/
+		if (window.wgAdsInHeadGroup !== 0) {
+			_gaqWikiaPush(['_setCustomVar', 39, 'ADSINHEAD', 'ADSINHEAD_' + window.wgAdsInHeadGroup, 3]);
+			abCustomVarsForAds.push(['ads._setCustomVar', 39, 'ADSINHEAD', 'ADSINHEAD_' + window.wgAdsInHeadGroup, 3]);
+		}
     }
 
     // Unleash
@@ -162,10 +169,11 @@
                   !!window.wgUserName ? 'user' : 'anon', 3]);
 
     /**** Medium-Priority CVs ****/
-    window._gaq.push(['ads._setCustomVar', 8, 'PageType',
-                  window.wikiaPageType, 3],
+    window._gaq.push(['ads._setCustomVar', 8, 'PageType', window.wikiaPageType, 3],
               ['ads._setCustomVar', 9, 'CityId', window.wgCityId, 3],
-              ['ads._setCustomVar', 12, 'MedusaSlot', window.wgMedusaSlot, 3]);
+              ['ads._setCustomVar', 12, 'MedusaSlot', window.wgMedusaSlot, 3],
+              ['ads._setCustomVar', 14, 'HasAds', window.wgAdsShowableOnPage ? 'Yes' : 'No', 3]
+    );
 
 	/**** Include A/B testing status ****/
 	if ( window.Wikia && window.Wikia.AbTest ) {
@@ -230,7 +238,9 @@
 }(window));
 
 (function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	if ( !window.wgNoExternals ) {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	}
 })();

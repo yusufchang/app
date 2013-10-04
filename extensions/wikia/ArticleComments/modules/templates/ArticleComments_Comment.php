@@ -6,13 +6,13 @@
 		</a>
 	</div>
 	<blockquote class="speech-bubble-message">
-		<div class="WikiaArticle article-comm-text" id="comm-text-<?= $comment['articleId'] ?>">
+		<div class="WikiaArticle article-comm-text" id="comm-text-<?= $comment['id'] ?>">
 		<?= $comment['text'] ?>
 		</div>
 
 		<div class="edited-by">
 		<?= wfMsg('oasis-comments-added-by', $comment['timestamp'], $comment['sig']) ?>
-		<?php if (!empty($comment['isStaff'])) { print "<span class=\"stafflogo\"><img src=\"{$wf->ReplaceImageServer('/extensions/wikia/StaffSig/images/WikiaStaff.png')}\" title=\"This user is a member of Wikia staff\" alt=\"@wikia\" /></span>\n"; } ?>
+		<?php if (!empty($comment['isStaff'])) { print "<span class=\"stafflogo\"><img src=\"".wfReplaceImageServer('/extensions/wikia/StaffSig/images/WikiaStaff.png')."\" title=\"This user is a member of Wikia staff\" alt=\"@wikia\" /></span>\n"; } ?>
 		<?php if (count($comment['buttons']) || $comment['replyButton']) { ?>
 			<div class="buttons">
 				<?php echo $comment['replyButton']; ?>

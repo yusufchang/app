@@ -15,6 +15,13 @@ $messages['en'] = array(
 	'category-exhibition-display-new'		=> 'Category Exhibition view'
 );
 
+/** Message documentation (Message documentation)
+ * @author Shirayuki
+ */
+$messages['qqq'] = array(
+	'category-exhibition-subcategories-header' => '{{Identical|Subcategory}}',
+);
+
 /** Afrikaans (Afrikaans)
  * @author Naudefj
  */
@@ -32,15 +39,36 @@ $messages['af'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author Mutarjem horr
+ * @author زكريا
  */
 $messages['ar'] = array(
+	'category-exhibition-sorttype' => 'نوع الفرز:',
 	'category-exhibition-alphabetical' => 'أبجديأّ',
 	'category-exhibition-mostvisited' => 'الأكثر مشاهدة',
 	'category-exhibition-recentedits' => 'تحرير مؤخراّ',
-	'category-exhibition-page-header' => 'الصفحات في التصنيف " $1 "',
+	'category-exhibition-page-header' => 'صفحات تصنيف "$1"',
 	'category-exhibition-subcategories-header' => 'التصنيفات الفرعية',
-	'category-exhibition-media-header' => 'الوسائل في الفئة "$1"',
+	'category-exhibition-media-header' => 'ملفات تصنيف "$1"',
+	'category-exhibition-blogs-header' => 'المشاركات في المدونة',
+	'category-exhibition-display-old' => 'عرض قائمة التصنيف',
+	'category-exhibition-display-new' => 'عرض معرض التصنيف',
+);
+
+/** Bikol Central (Bikol Central)
+ * @author Geopoet
+ */
+$messages['bcl'] = array(
+	'category-exhibition-sorttype' => 'Tipo nin pagsasalansan:',
+	'category-exhibition-alphabetical' => 'Alpabitikal',
+	'category-exhibition-mostvisited' => 'Mas na pinagbibisita',
+	'category-exhibition-recentedits' => 'Pinakabaguhon na pinagliwat',
+	'category-exhibition-page-header' => 'Mga pahina sa laog kan kategoriya na "$1"',
+	'category-exhibition-subcategories-header' => 'Mga sub-kategoriya',
+	'category-exhibition-media-header' => 'Midya na yaon sa kategoriya na "$1"',
+	'category-exhibition-blogs-header' => 'Mga paskil sa Blog',
+	'category-exhibition-display-old' => 'Pagtanaw sa Listahan nin Kategorya',
 );
 
 /** Bulgarian (български)
@@ -65,6 +93,22 @@ $messages['br'] = array(
 	'category-exhibition-blogs-header' => 'Pennad ar blog',
 	'category-exhibition-display-old' => 'Gwelet Roll rummadoù',
 	'category-exhibition-display-new' => 'Gwel diskouez ar rummad',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'category-exhibition-sorttype' => 'Classificant tipus:',
+	'category-exhibition-alphabetical' => 'Alfabètic',
+	'category-exhibition-mostvisited' => 'Més visitat',
+	'category-exhibition-recentedits' => 'Editades recentement',
+	'category-exhibition-page-header' => 'Pàgines en la categoraa "$1"',
+	'category-exhibition-subcategories-header' => 'Subcategories',
+	'category-exhibition-media-header' => 'Multimèdia en la categoria "$1"',
+	'category-exhibition-blogs-header' => 'Entrades de bloc',
+	'category-exhibition-display-old' => 'Visualització de la llista de categories',
+	'category-exhibition-display-new' => "Visualització d'exposició de la categoria",
 );
 
 /** Czech (česky)
@@ -176,6 +220,19 @@ $messages['fi'] = array(
 	'category-exhibition-blogs-header' => 'Blogiartikkelit',
 	'category-exhibition-display-old' => 'Luokkaluettelonäkymä',
 	'category-exhibition-display-new' => 'Luokkanäyttelynäkymä',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'category-exhibition-alphabetical' => 'Í bókstavarøð',
+	'category-exhibition-mostvisited' => 'Mest vitjað',
+	'category-exhibition-recentedits' => 'Nýliga rættað',
+	'category-exhibition-page-header' => 'Síður í bólkinum "$1"',
+	'category-exhibition-subcategories-header' => 'Undirbólkar',
+	'category-exhibition-media-header' => 'Miðlar í bólkinum "$1"',
+	'category-exhibition-blogs-header' => 'Blogginnsløg',
 );
 
 /** French (français)
@@ -398,6 +455,22 @@ $messages['nl'] = array(
 	'category-exhibition-display-new' => 'Categoriepresentatieweergave',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'category-exhibition-sorttype' => 'Tipe de triada :',
+	'category-exhibition-alphabetical' => 'Alfabetic',
+	'category-exhibition-mostvisited' => 'Los mai visitats',
+	'category-exhibition-recentedits' => 'Modificats recentament',
+	'category-exhibition-page-header' => 'Paginas dins la categoria « $1 »',
+	'category-exhibition-subcategories-header' => 'Soscategorias',
+	'category-exhibition-media-header' => 'Mèdia dins la categoria « $1 »',
+	'category-exhibition-blogs-header' => 'Article de blog',
+	'category-exhibition-display-old' => 'Afichatge de la categoria en lista',
+	'category-exhibition-display-new' => 'Afichatge de la categoria en exposicion',
+);
+
 /** Polish (polski)
  * @author Sovq
  */
@@ -415,28 +488,35 @@ $messages['pl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'category-exhibition-sorttype' => 'Sòrt ordinament:',
+	'category-exhibition-sorttype' => "Sòrt d'ordinament:",
 	'category-exhibition-alphabetical' => 'Alfabétich',
 	'category-exhibition-mostvisited' => 'Pi visità',
 	'category-exhibition-recentedits' => 'Modificà ëd recent',
 	'category-exhibition-page-header' => 'Artìcoj ant la categorìa "$1"',
-	'category-exhibition-subcategories-header' => 'Sotacategorìe',
+	'category-exhibition-subcategories-header' => 'Sot-categorìe',
 	'category-exhibition-media-header' => 'Archivi ant la categorìa "$1"',
 	'category-exhibition-blogs-header' => 'Mëssagi dë Scartari',
-	'category-exhibition-display-old' => 'Varda Lista Categorìe',
-	'category-exhibition-display-new' => 'Vista Esibission Categorìe',
+	'category-exhibition-display-old' => 'Visualisassion dla categorìa an lista',
+	'category-exhibition-display-new' => 'Visualisassion dla categorìa an esposission',
 );
 
 /** Pashto (پښتو)
  * @author Ahmed-Najib-Biabani-Ibrahimkhel
  */
 $messages['ps'] = array(
+	'category-exhibition-sorttype' => 'اوډون ډول:',
 	'category-exhibition-alphabetical' => 'د ابېڅو له مخې',
 	'category-exhibition-mostvisited' => 'ډېر کتل شوی',
+	'category-exhibition-recentedits' => 'وروستي سم شوي',
+	'category-exhibition-page-header' => 'د "$1" وېشنيزې مخونه',
 	'category-exhibition-subcategories-header' => 'څېرمه وېشنيزې',
+	'category-exhibition-media-header' => 'د "$1" وېشنيزې رسنۍ',
+	'category-exhibition-blogs-header' => 'د بلاګ پوستونه',
+	'category-exhibition-display-old' => 'د وېشنيزې لړليک کتل',
 );
 
 /** Portuguese (português)
@@ -482,6 +562,22 @@ $messages['ro'] = array(
 	'category-exhibition-page-header' => 'Pagini din categoria „$1”',
 	'category-exhibition-subcategories-header' => 'Subcategorii',
 	'category-exhibition-blogs-header' => 'Postări pe blog',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'category-exhibition-sorttype' => 'Tipe de ordinamende:',
+	'category-exhibition-alphabetical' => 'Alfabbetiche',
+	'category-exhibition-mostvisited' => 'Cchiù visitate',
+	'category-exhibition-recentedits' => 'Cangiate de recende',
+	'category-exhibition-page-header' => 'Pàggene jndr\'à categorije "$1"',
+	'category-exhibition-subcategories-header' => 'Sottocategorije',
+	'category-exhibition-media-header' => 'Media jndr\'à categorije "$1"',
+	'category-exhibition-blogs-header' => "Messàgge d'u blog",
+	'category-exhibition-display-old' => "Viste de l'elenghe de le categorije",
+	'category-exhibition-display-new' => 'Viste de le Esibbiziune de le Categorije',
 );
 
 /** Russian (русский)
@@ -559,12 +655,19 @@ $messages['tr'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Ua2004
  */
 $messages['uk'] = array(
 	'category-exhibition-sorttype' => 'Тип сортування:',
 	'category-exhibition-alphabetical' => 'Алфавітний',
+	'category-exhibition-mostvisited' => 'Популярні',
+	'category-exhibition-recentedits' => 'Нещодавно відредаговані',
 	'category-exhibition-page-header' => 'Сторінки в категорії "$1"',
 	'category-exhibition-subcategories-header' => 'Підкатегорії',
+	'category-exhibition-media-header' => 'Файли в категорії "$1"',
+	'category-exhibition-blogs-header' => 'Записи у блозі',
+	'category-exhibition-display-old' => 'Подання категорії списком',
+	'category-exhibition-display-new' => 'Подання категорії піктограмами',
 );
 
 /** Simplified Chinese (中文（简体）‎)
@@ -582,4 +685,11 @@ $messages['zh-hans'] = array(
 	'category-exhibition-blogs-header' => '博客帖子',
 	'category-exhibition-display-old' => '分类（列表视图）',
 	'category-exhibition-display-new' => '分类展示视图',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'category-exhibition-display-new' => '分類展示',
 );

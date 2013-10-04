@@ -23,11 +23,7 @@ class HelloWorldTest extends WikiaBaseTest {
 		       ->will( $this->returnValue( $testRow ) );
 
 		$this->mockGlobalVariable( 'wgExternalSharedDB', '' );
-		$this->mockGlobalFunction( 'getDB', $dbMock );
-		$this->mockGlobalFunction( 'profileIn', null );
-		$this->mockGlobalFunction( 'profileOut', null );
-
-		$this->mockApp();
+		$this->mockGlobalFunction( 'wfGetDB', $dbMock );
 
 		$object = new HelloWorld;
 		$result = $object->getWikiData( self::TEST_WIKI_ID );

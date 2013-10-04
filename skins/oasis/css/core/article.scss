@@ -7,9 +7,12 @@
 
 .WikiaArticle {
 	@include bodytext;
+	// Prevent content from escaping the article area
+	overflow: hidden;
 	padding: 0 $width-gutter;
 	position: relative;
 	min-height: 250px;
+	word-wrap: break-word;
 	z-index: 1;
 
 	//whatever article has we should clear it so it won't collapse into comments or other features underneeth it
@@ -352,8 +355,14 @@
 	table.diff, td.diff-otitle, td.diff-ntitle {
 		background-color: $color-page;
 	}
+
+  	// BugId:9262
 	.diff-article-content {
 		margin-right: 340px;
+
+		body.mainpage & {
+			margin-right: 0;
+		}
 	}
 
 	.fbconnect-synced-profile {
@@ -376,19 +385,19 @@
 
 	.wikiaPlaceholder {
 		vertical-align: bottom;
-		
+
 		> div {
 			margin: 0.5em 1.4em 1.2em 0;
 			text-align: center;
-			
+
 			&.tright {
 				margin: 0.5em 0 1.2em 1.4em;
 			}
-			
+
 			&.tcenter {
 				margin: 0.5em auto 1.2em;
 			}
-			
+
 			a {
 				position:relative;
 			}
@@ -396,6 +405,23 @@
 	}
 	.fullMedia {
 		word-wrap: break-word;
+	}
+	// Used in Lightbox - style videos that play on the page
+	// instead of in the lightbox
+	.inline-video {
+		display: inline-block;
+	}
+}
+
+// Exceptions to the rule (MAIN-939)
+// Wall and Forum have dropdowns that escape the article area. This prevents
+// them from getting chopped off with the downside that large tables won't be
+// controlled properly until the JavaScript loads.
+.ns-1200,
+.ns-1201,
+.ns-2000 {
+	.WikiaArticle {
+		overflow: visible;
 	}
 }
 
@@ -461,33 +487,6 @@
 		font-size: 12px;
 		text-align: center;
 	}
-
-	.wikia-infobox-caption { padding-bottom /*\**/: 10px\9 } // /** dirty IE hack, affects all versions till 8**/
-}
-
-// RT #70017: wikitable class for skinning normal tables
-table.wikitable {
-	background: darken($color-page, 2%);
-	border-collapse: collapse;
-	border: 1px $color-page-border solid;
-	color: $color-text;
-	margin: 1em 1em 1em 0;
-
-	th, td {
-		border: 1px darken($color-page, 35%) solid;
-		padding: 0.2em;
-	}
-	> tr > th,  > * > tr > th {
-		background: darken($color-page, 5%);
-		text-align: center;
-	}
-	caption {
-		font-weight: bold;
-	}
-}
-
-.article-table { // This parallels WikiaTable in _table.scss
-	@extend .WikiaTable;
 }
 
 // /** Interlang Links **/
@@ -502,6 +501,7 @@ table.wikitable {
 	}
 
 	ul {
+		list-style: none;
 		li {
 			border-left: 1px solid $color-page-border;
 			float: left;
@@ -514,9 +514,6 @@ table.wikitable {
 				border: none;
 				padding-left: 0px;
 			}
-			/*&:last-child {
-				border: none;
-			}*/
 			&.more-link {
 				border: none;
 			}
@@ -527,30 +524,9 @@ table.wikitable {
 	}
 }
 
+
 .TOC_hide #toctitle + ul {
 	display: none;
-}
-
-// /** WikiaWideTables **/
-.WikiaWideTablesWrapper {
-	position: relative;
-	&.border {
-		border-right: 1px dashed $color-page-border;
-	}
-	>.table {
-		overflow: hidden;
-	}
-	>.popout {
-		cursor: pointer;
-		position: absolute;
-		right: -12px;
-		top: 0;
-		&.float {
-			position: fixed;
-			left: 50%;
-			right: auto;
-		}
-	}
 }
 
 // Needed for article comments lazy loading

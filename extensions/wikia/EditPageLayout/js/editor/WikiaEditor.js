@@ -1,5 +1,6 @@
 (function(window,$){
-	var WE = window.WikiaEditor = window.WikiaEditor || (new Observable());
+	var WE = window.WikiaEditor = window.WikiaEditor || (new Observable()),
+		slice = [].slice;
 
 	// config defaults
 	WE.config = {};
@@ -30,7 +31,7 @@
 				requires: [
 					$.loadYUI,
 					$.loadJQueryAIM,
-					$.getSassCommonURL( 'extensions/wikia/WikiaMiniUpload/css/WMU.scss'),
+					$.getSassCommonURL( 'extensions/wikia/WikiaMiniUpload/css/WMU.scss' ),
 					wgResourceBasePath + '/extensions/wikia/WikiaMiniUpload/js/WMU.js'
 				]
 			}
@@ -435,6 +436,7 @@
 
 			if (config.forceLogin && wgUserName == null && typeof UserLogin != 'undefined') {
 				config.click = function() {
+					WE.track( 'force-login-' + config.ckcommand );
 					UserLogin.rteForceLogin();
 				}
 
@@ -780,7 +782,8 @@
 			this.textarea
 				.focus(this.proxy(this.editorFocused))
 				.blur(this.proxy(this.editorBlurred))
-				.click(this.proxy(this.editorClicked));
+				.click(this.proxy(this.editorClicked))
+				.keyup(this.proxy(this.editorKeyUp));
 
 			// Editor is ready now
 			this.editor.markAsReady();
@@ -853,6 +856,10 @@
 
 		editorClicked: function() {
 			this.editor.fire('editorClick', this.editor);
+		},
+
+		editorKeyUp: function() {
+			this.editor.fire('editorKeyUp', this.editor);
 		}
 	});
 
@@ -864,10 +871,29 @@
 		requires: ['ui'],
 
 		// These events are proxied from ck and fired on the editor with the 'ck' prefix
-		proxyEvents: ['blur', 'focus', 'instanceReady', 'mode', 'modeSwitch', 'modeSwitchCancelled', 'themeLoaded', 'wysiwygModeReady'],
+		proxyEvents: [
+			'blur',
+			'focus',
+			'instanceReady',
+			'keyUp',
+			'mode',
+			'modeSwitch',
+			'modeSwitchCancelled',
+			'sourceModeReady',
+			'themeLoaded',
+			'wysiwygModeReady'
+		],
 
 		// These methods will be publicly available on the editor instance
-		proxyMethods: ['getContent', 'setContent', 'getEditbox', 'getEditboxWrapper', 'getEditorElement', 'editorFocus', 'editorBlur'],
+		proxyMethods: [
+			'getContent',
+			'setContent',
+			'getEditbox',
+			'getEditboxWrapper',
+			'getEditorElement',
+			'editorFocus',
+			'editorBlur'
+		],
 
 		beforeInit: function() {
 			var i = 0,
@@ -889,6 +915,7 @@
 			this.editor.on('ck-themeLoaded', this.proxy(this.themeLoaded));
 			this.editor.on('ck-focus', this.proxy(this.editorFocused));
 			this.editor.on('ck-blur', this.proxy(this.editorBlurred));
+			this.editor.on('ck-keyUp', this.proxy(this.editorKeyUp));
 
 			// This one can't be proxied because we need access to it before the proxies are set up
 			this.editor.on('ckInstanceCreated', this.proxy(this.ckInstanceCreated));
@@ -920,7 +947,7 @@
 			for (var i = 0, l = this.proxyEvents.length; i < l; i++) {
 				(function(eventName) {
 					this.editor.ck.on(eventName, function() {
-						this.editor.fire.apply(this.editor, ['ck-' + eventName, this.editor].concat(arguments));
+						this.editor.fire.apply(this.editor, ['ck-' + eventName, this.editor].concat(slice.call(arguments)));
 					}, this);
 				}).call(this, this.proxyEvents[i]);
 			}
@@ -1013,6 +1040,10 @@
 
 		editorClicked: function() {
 			this.editor.fire('editorClick', this.editor);
+		},
+
+		editorKeyUp: function() {
+			this.editor.fire('editorKeyUp', this.editor);
 		}
 	});
 

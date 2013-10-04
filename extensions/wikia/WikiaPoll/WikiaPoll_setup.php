@@ -52,6 +52,7 @@ $wgHooks['ArticleFromTitle'][] = 'WikiaPollHooks::onArticleFromTitle';
 $wgHooks['ArticleSaveComplete'][] = 'WikiaPollHooks::onArticleSaveComplete';
 $wgHooks['AlternateEdit'][] = 'WikiaPollHooks::onAlternateEdit';
 $wgHooks['MenuButtonIndexAfterExecute'][] = 'WikiaPollHooks::onMenuButtonAfterExecute';
+$wgHooks['ParserReplaceInternalLinks2NoForce'][] = 'WikiaPollHooks::onParserReplaceInternalLinks2NoForce';
 
 // Ajax dispatcher
 $wgAjaxExportList[] = 'WikiaPollAjax';
@@ -84,7 +85,7 @@ function CreatePollSetup($editform) {
 
 //WikiaMobile
 
-F::build('JSMessages')->registerPackage( 'WikiaMobilePolls', array(
+JSMessages::registerPackage( 'WikiaMobilePolls', array(
 	'wikiamobile-wikiapoll-thanks-voting',
 	'wikiamobile-wikiapoll-poll',
 	'wikiapoll-vote'

@@ -709,13 +709,8 @@ class CurlHttpRequest extends MWHttpRequest {
 		}
 		$this->curlOptions[CURLOPT_USERAGENT] = $this->reqHeaders['User-Agent'];
 
-		if ( isset( $this->sslVerifyHost ) ) {
-			$this->curlOptions[CURLOPT_SSL_VERIFYHOST] = $this->sslVerifyHost;
-		}
-
-		if ( isset( $this->sslVerifyCert ) ) {
-			$this->curlOptions[CURLOPT_SSL_VERIFYPEER] = $this->sslVerifyCert;
-		}
+		$this->curlOptions[CURLOPT_SSL_VERIFYHOST] = $this->sslVerifyHost ? 2 : 0;
+		$this->curlOptions[CURLOPT_SSL_VERIFYPEER] = $this->sslVerifyCert;
 
 		if ( $this->caInfo ) {
 			$this->curlOptions[CURLOPT_CAINFO] = $this->caInfo;
@@ -733,6 +728,12 @@ class CurlHttpRequest extends MWHttpRequest {
 			$this->reqHeaders['Expect'] = '';
 		} else {
 			$this->curlOptions[CURLOPT_CUSTOMREQUEST] = $this->method;
+			// Wikia change - @author: mech - begin
+			// allow sending body for PUT, PATCH requests
+			if ( $this->method == 'PUT' || $this->method == 'PATCH' ) {
+				$this->curlOptions[CURLOPT_POSTFIELDS] = $this->postData;
+			}
+			// Wikia change - end
 		}
 
 		$this->curlOptions[CURLOPT_HTTPHEADER] = $this->getHeaderList();

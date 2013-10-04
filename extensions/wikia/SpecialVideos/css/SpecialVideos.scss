@@ -1,10 +1,11 @@
-@import "../../../../skins/oasis/css/core/color";
-@import "../../../../skins/oasis/css/mixins/bodytext";
-@import "../../../../skins/oasis/css/mixins/border-radius";
-@import "../../../../skins/oasis/css/mixins/box-shadow";
-@import "../../../../skins/oasis/css/mixins/clearfix";
-@import "../../../../skins/oasis/css/mixins/gradient";
-@import "../../../../skins/oasis/css/mixins/opacity";
+@import "skins/oasis/css/core/layout";
+@import "skins/oasis/css/core/color";
+@import "skins/oasis/css/mixins/bodytext";
+@import "skins/oasis/css/mixins/border-radius";
+@import "skins/oasis/css/mixins/box-shadow";
+@import "skins/oasis/css/mixins/clearfix";
+@import "skins/oasis/css/mixins/gradient";
+@import "skins/oasis/css/mixins/opacity";
 
 $placeholder-bg-img: url(/extensions/wikia/SpecialVideos/images/AddVideoIcons_Dark.png);  /* base64 */
 $placeholder-bg-color: darken($color-page, 10%);
@@ -34,7 +35,7 @@ $placeholder-bg-color: darken($color-page, 10%);
 	border-bottom: 1px solid $color-page-border;
 	padding: 8px 0 18px;
 	margin-bottom: 18px;
-	
+
 	> label {
 		display: block;
 		float: left;
@@ -42,7 +43,7 @@ $placeholder-bg-color: darken($color-page, 10%);
 		line-height: 21px;
 		margin-right: 8px;
 	}
-	
+
 	.WikiaDropdown {
 		float:left;
 		.dropdown {
@@ -58,10 +59,13 @@ $placeholder-bg-color: darken($color-page, 10%);
 .VideoGrid {
 	@include clearfix;
 	border-bottom: 1px solid $color-page-border;
-	margin-bottom: 18px;	
+	margin-bottom: 18px;
 	// Override article p styles
 	p, p + p {
 		margin: 0;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 	.video {
 		margin-bottom: 8px;
@@ -69,6 +73,19 @@ $placeholder-bg-color: darken($color-page, 10%);
 	.grid-2, .grid-2.alpha {
 		margin-bottom: 18px;
 	}
+
+	//TODO: Special videos layout needs redesign for liquid layout (liquid layout no longer support WikiaGrid)
+	//      This is temporary solution that should be removed after redesing
+	@if ( $responsive-layout-enabled ) {
+		.grid-2 {
+			margin-left: 10px;
+			width: 330px;
+			&.alpha {
+				margin-left: 0;
+			}
+		}
+	}
+
 	.alpha {
 		clear: both;
 	}
@@ -83,7 +100,7 @@ $placeholder-bg-color: darken($color-page, 10%);
 		height: 205px;
 		margin-bottom: 8px;
 		width: 100%;
-		
+
 		&:hover {
 			@include opacity(65);
 		}
@@ -93,6 +110,22 @@ $placeholder-bg-color: darken($color-page, 10%);
 		padding-right: 5px;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+	.video-element {
+		position: relative;
+		&:hover .remove {
+			display: block;
+		}
+		.remove {
+			background-color: #ddd;	/* hardcoded because this is admin only feature */
+			cursor: pointer;
+			display: none;
+			padding: 0px 2px 4px 5px;
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: 101;
+		}
 	}
 }
 

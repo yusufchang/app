@@ -5,6 +5,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	const FLASH_MESSAGE_SESSION_KEY = 'flash_message';
 
 	protected $toolboxModel;
+	private $hubsServicesHelper;
 
 	public function __construct() {
 		parent::__construct('MarketingToolbox', 'marketingtoolbox', true);
@@ -22,15 +23,16 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	 * Check access to this page
 	 */
 	protected function checkAccess() {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		if (!$this->wg->User->isLoggedIn() || !$this->wg->User->isAllowed('marketingtoolbox')) {
-			$this->wf->ProfileOut(__METHOD__);
+			wfProfileOut(__METHOD__);
+			$this->app->wg->Out->setStatusCode ( 403 );
 			$this->specialPage->displayRestrictionError();
 			return false;
 		}
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 		return true;
 	}
 
@@ -38,9 +40,9 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	 * Main action for this special page
 	 */
 	public function index() {
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
-		$this->wg->Out->setPageTitle($this->wf->msg('marketing-toolbox-title'));
+		$this->wg->Out->setPageTitle(wfMsg('marketing-toolbox-title'));
 
 		if ($this->checkAccess()) {
 			$this->wg->SuppressSpotlights = true;
@@ -48,10 +50,11 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 			$this->wg->SuppressPageHeader = true;
 			$this->wg->SuppressFooter = true;
 			$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/css/MarketingToolbox.scss');
+			$this->response->addAsset('/skins/oasis/css/modules/CorporateDatepicker.scss');
 
 			$action = $this->getRequestedAction();
 
-			F::build('JSMessages')->enqueuePackage('MarketingToolbox', JSMessages::EXTERNAL);
+			JSMessages::enqueuePackage('MarketingToolbox', JSMessages::EXTERNAL);
 
 			switch ($action) {
 				case 'editHub':
@@ -64,7 +67,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 			}
 		}
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	/**
@@ -106,8 +109,13 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	 * Main action for editing hub modules
 	 */
 	public function editHubAction() {
-
 		$this->retriveDataFromUrl();
+
+		$this->wg->Out->addJsConfigVars([
+			'wgMarketingToolboxModuleIdSelected' => $this->selectedModuleId,
+			'wgMarketingToolboxModuleIdPopularVideos' => MarketingToolboxModulePopularvideosService::MODULE_ID,
+			'wgMarketingToolboxModuleIdFeaturedVideo' => MarketingToolboxModuleFeaturedvideoService::MODULE_ID
+		]);
 
 		$this->checkDate($this->date);
 
@@ -120,16 +128,15 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 			$this->date,
 			$this->selectedModuleId
 		);
+
 		$this->prepareLayoutData($this->selectedModuleId, $modulesData);
 
 		$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/js/EditHub.js');
 		$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/js/EditHubNavigation.js');
-		$this->response->addAsset('/resources/jquery/jquery.validate.js');
+		$this->response->addAsset('resources/jquery/jquery.validate.js');
 		$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/js/jquery.MetaData.js');
 
-		$selectedModuleData = array(
-			'values' => $modulesData['moduleList'][$this->selectedModuleId]['data']
-		);
+		$selectedModuleValues = $modulesData['moduleList'][$this->selectedModuleId]['data'];
 
 		$module = MarketingToolboxModuleService::getModuleByName(
 			$this->toolboxModel->getNotTranslatedModuleName($this->selectedModuleId),
@@ -138,43 +145,93 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 			$this->verticalId
 		);
 
-		$selectedModuleData['validationErrors'] = array();
+		$form = new FormBuilderService(MarketingToolboxModel::FORM_FIELD_PREFIX);
+		$form->setFields($module->getFormFields());
 
 		if ($this->request->wasPosted()) {
-			$selectedModuleData['values'] = $this->request->getParams();
+			$selectedModuleValues = $this->request->getParams();
+			$selectedModuleValues = $module->filterData($selectedModuleValues);
 
-			$selectedModuleData['values'] = $module->filterData($selectedModuleData['values']);
-			$selectedModuleData['validationErrors'] = $module->validate($selectedModuleData['values']);
-			if (empty($selectedModuleData['validationErrors'])) {
+			$isValid = $form->validate($selectedModuleValues);
+			if ($isValid) {
 				$this->toolboxModel->saveModule(
 					$this->langCode,
 					$this->sectionId,
 					$this->verticalId,
 					$this->date,
 					$this->selectedModuleId,
-					$selectedModuleData['values'],
+					$selectedModuleValues,
 					$this->wg->user->getId()
 				);
 
-				$this->putFlashMessage($this->wf->msg('marketing-toolbox-module-save-ok', $modulesData['activeModuleName']));
-				// TODO last module (when we will know what to do after last module, maybe preview?)
-				$nextUrl = $this->toolboxModel->getModuleUrl(
-					$this->langCode,
-					$this->sectionId,
-					$this->verticalId,
-					$this->date,
-					$this->selectedModuleId + 1
-				);
+				$this->purgeCache( $module );
+
+				$this->putFlashMessage(wfMsg('marketing-toolbox-module-save-ok', $modulesData['activeModuleName']));
+
+				// send request to add popular/featured videos
+				if ( $module->isVideoModule() ) {
+					$response = WikiaHubsServicesHelper::addVideoToHubsV2Wikis( $module, $selectedModuleValues  );
+				}
+
+				$nextUrl = $this->getNextModuleUrl();
 				$this->response->redirect($nextUrl);
 			} else {
-				$this->errorMessage = $this->wf->msg('marketing-toolbox-module-save-error');
+				$this->errorMessage = wfMsg('marketing-toolbox-module-save-error');
 			}
 		}
-
+		$form->setFieldsValues($selectedModuleValues);
 		$this->moduleName = $modulesData['activeModuleName'];
-		$this->moduleContent = $module->renderEditor($selectedModuleData);
+		$this->moduleContent = $module->renderEditor(['form' => $form]);
 
 		$this->overrideTemplate('editHub');
+	}
+
+	public function publishHub() {
+		if ($this->request->wasPosted()) {
+			$this->retriveDataFromUrl();
+
+			$result = $this->toolboxModel->publish(
+				$this->langCode,
+				$this->sectionId,
+				$this->verticalId,
+				$this->date
+			);
+
+			$this->success = $result->success;
+			if ($this->success) {
+				$date = new DateTime('@' . $this->date);
+
+				$this->hubUrl = $this->toolboxModel->getHubUrl($this->langCode, $this->verticalId)
+					. '/' . $date->format('Y-m-d');
+				$this->successText = wfMsg('marketing-toolbox-module-publish-success', $this->wg->lang->date($this->date));
+				if( $this->date == $this->toolboxModel->getLastPublishedTimestamp( $this->langCode, $this->sectionId, $this->verticalId, null, true)) {
+					$this->purgeWikiaHomepageHubs();
+				}
+			} else {
+				$this->errorMsg = $result->errorMsg;
+			}
+		}
+	}
+
+	private function getNextModuleUrl() {
+		$moduleIds = $this->toolboxModel->getEditableModulesIds();
+
+		$actualModuleIndex = array_search($this->selectedModuleId, $moduleIds);
+
+		if (isset($moduleIds[$actualModuleIndex + 1])) {
+			$nextModuleId = $moduleIds[$actualModuleIndex + 1];
+		} else {
+			$nextModuleId = $moduleIds[$actualModuleIndex];
+		}
+
+		$nextUrl = $this->toolboxModel->getModuleUrl(
+			$this->langCode,
+			$this->sectionId,
+			$this->verticalId,
+			$this->date,
+			$nextModuleId
+		);
+		return $nextUrl;
 	}
 
 	protected function retriveDataFromUrl() {
@@ -193,6 +250,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	protected function prepareLayoutData($selectedModuleId, $modulesData) {
 		$this->prepareHeaderData($modulesData, $this->date);
 		$this->prepareLeftMenuData($modulesData, $selectedModuleId);
+		$this->prepareFooterData($this->langCode, $this->verticalId, $this->date);
 	}
 
 	/**
@@ -224,6 +282,12 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 				'anchor' => $moduleData['name'],
 			);
 		}
+	}
+
+	protected  function prepareFooterData($langCode, $verticalId, $timestamp) {
+		$this->footerData = array(
+			'allModulesSaved' => $this->toolboxModel->checkModulesSaved($langCode, $verticalId, $timestamp)
+		);
 	}
 
 	/**
@@ -289,6 +353,7 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 	 */
 	public function executeFooter($data) {
 		$this->response->addAsset('/extensions/wikia/SpecialMarketingToolbox/css/MarketingToolbox_Footer.scss');
+		$this->allModulesSaved = $data['allModulesSaved'] ? '' : 'disabled="disabled"' ;
 	}
 
 	/**
@@ -300,18 +365,18 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 			return false;
 		}
 
-		$this->wf->ProfileIn(__METHOD__);
+		wfProfileIn(__METHOD__);
 
 		$fileName = $this->getVal('fileHandler', false);
 		if ($fileName) {
-			$imageData = ImagesService::getLocalFileThumbUrlAndSizes($fileName, $this->toolboxModel->getThumbnailSize());
+			$imageData = ImagesService::getLocalFileThumbUrlAndSizes($fileName, $this->toolboxModel->getThumbnailSize(), ImagesService::EXT_JPG);
 			$this->fileUrl = $imageData->url;
 			$this->imageWidth = $imageData->width;
 			$this->imageHeight = $imageData->height;
 			$this->fileTitle = $imageData->title;
 		}
 
-		$this->wf->ProfileOut(__METHOD__);
+		wfProfileOut(__METHOD__);
 	}
 
 	public function getVideoDetails() {
@@ -328,19 +393,12 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 		$videoInfo = $response->getVal('videoInfo');
 		$fileName = $videoInfo[0]->getText();
 
-		$file = wfFindFile( $fileName );
-		if( !empty($file) ) {
-			$thumbSize = $this->toolboxModel->getThumbnailSize();
-			$htmlParams = array(
-				'file-link' => true,
-				'duration' => true,
-				'linkAttribs' => array( 'class' => 'video-thumbnail lightbox' )
-			);
-			$thumb = $file->transform( array('width'=>$thumbSize ) )->toHtml( $htmlParams );
-		}
-
+		$this->videoData = $this->toolboxModel->getVideoData(
+			$fileName,
+			$this->toolboxModel->getThumbnailSize()
+		);
 		$this->videoFileName = $fileName;
-		$this->videoFileMarkup = $thumb;
+		$this->videoUrl = $url;
 	}
 
 	// TODO extract this code somewhere
@@ -354,15 +412,33 @@ class MarketingToolboxController extends WikiaSpecialPageController {
 		$this->request->setSessionData(self::FLASH_MESSAGE_SESSION_KEY, $message);
 	}
 
-	public function executeFormField() {
-		$this->formFieldPrefix = MarketingToolboxModel::FORM_FIELD_PREFIX;
-		$this->inputData = $this->getVal('inputData');
-	}
-
 	public function sponsoredImage() {
-		$this->inputData = $this->request->getVal('inputData');
+		$this->form = $this->request->getVal('form');
+		$this->fieldName = $this->request->getVal('fieldName');
 		$this->fileUrl = $this->request->getVal('fileUrl', '');
 		$this->imageWidth = $this->request->getVal('imageWidth', '');
 		$this->imageHeight = $this->request->getVal('imageHeight', '');
+	}
+
+	private function purgeCache($module) {
+		$module->purgeMemcache($this->date);
+		$this->getHubsServicesHelper()->purgeHubVarnish($this->langCode, $this->verticalId);
+
+		if( $this->selectedModuleId == MarketingToolboxModuleSliderService::MODULE_ID
+			&& $this->date == $this->toolboxModel->getLastPublishedTimestamp( $this->langCode, $this->sectionId, $this->verticalId, null )) {
+				$this->purgeWikiaHomepageHubs();
+		}
+	}
+
+	private function purgeWikiaHomepageHubs() {
+		WikiaDataAccess::cachePurge( WikiaHubsServicesHelper::getWikiaHomepageHubsMemcacheKey($this->langCode) );
+		$this->getHubsServicesHelper()->purgeHomePageVarnish($this->langCode);
+	}
+
+	private function getHubsServicesHelper() {
+		if(empty($this->hubsServicesHelper)) {
+			$this->hubsServicesHelper = new WikiaHubsServicesHelper();
+		}
+		return $this->hubsServicesHelper;
 	}
 }

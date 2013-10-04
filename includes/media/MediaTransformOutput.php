@@ -195,7 +195,8 @@ class ThumbnailImage extends MediaTransformOutput {
 		$this->file = $file;
 		$this->url = $url;
 		# start wikia change
-		$this->url = wfReplaceImageServer( $this->url, $file->getTimestamp() );
+		$timestamp = !empty( $file ) ? $file->getTimestamp() : false;
+		$this->url = wfReplaceImageServer( $this->url, $timestamp );
 		# end wikia change
 
 		# These should be integers when they get here.
@@ -278,7 +279,14 @@ class ThumbnailImage extends MediaTransformOutput {
 		/**
 		 * Wikia change begin
 		 * @author Federico "Lox" Lucignano <federico@wikia-inc.com>
+		 * @author Liz Lee
 		 */
+		$fileTitle = $this->file->getTitle();
+		if ( $fileTitle instanceof Title ) {
+			$attribs['data-image-name'] = htmlspecialchars($fileTitle->getText());
+			$attribs['data-image-key'] = htmlspecialchars(urlencode($fileTitle->getDBKey()));
+		}
+
 		$html = $this->linkWrap( $linkAttribs, Xml::element( 'img', $attribs ) );
 
 		//give extensions a chance to modify the markup

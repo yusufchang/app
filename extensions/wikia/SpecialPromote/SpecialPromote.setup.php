@@ -17,51 +17,30 @@ $wgExtensionCredits['other'][] = array(
 );
 
 $dir = dirname(__FILE__) . '/';
-$wikiaHomePageExtDir = dirname(dirname(__FILE__)) . '/WikiaHomePage/';
 $promoteImageReviewExtDir = dirname(dirname(__FILE__)) . '/ImageReview/modules/PromoteImage/';
-$app = F::app();
 
 // classes
-$app->registerClass('SpecialPromoteController', $dir . 'SpecialPromoteController.class.php');
-$app->registerClass('SpecialPromoteHelper', $dir . 'SpecialPromoteHelper.class.php');
-$app->registerClass('UploadVisualizationImageFromFile', $dir . 'UploadVisualizationImageFromFile.class.php');
+$wgAutoloadClasses['SpecialPromoteController'] =  $dir . 'SpecialPromoteController.class.php';
+$wgAutoloadClasses['SpecialPromoteHelper'] =  $dir . 'SpecialPromoteHelper.class.php';
+$wgAutoloadClasses['SpecialPromoteHooks'] =  $dir . 'SpecialPromoteHooks.class.php';
+$wgAutoloadClasses['UploadVisualizationImageFromFile'] =  $dir . 'UploadVisualizationImageFromFile.class.php';
 
 // needed task
-$app->registerClass('PromoteImageReviewTask', $promoteImageReviewExtDir  . 'PromoteImageReviewTask.php');
-
-// Needed Wikia Home Page classes
-
-// helper hierarchy
-// row assigners
-
-$app->registerClass('WikiImageRowAssigner',$wikiaHomePageExtDir.'classes/WikiImageRowAssigner.class.php');
-$app->registerClass('WikiImageRowHelper',$wikiaHomePageExtDir.'classes/WikiImageRowHelper.class.php');
-$app->registerClass('WikiImageNameRowHelper',$wikiaHomePageExtDir.'classes/WikiImageNameRowHelper.class.php');
-$app->registerClass('WikiImageReviewStatusRowHelper',$wikiaHomePageExtDir.'classes/WikiImageReviewStatusRowHelper.class.php');
-
-// getdata helpers
-$app->registerClass('WikiGetDataHelper',$wikiaHomePageExtDir.'classes/WikiGetDataHelper.class.php');
-$app->registerClass('WikiGetDataForVisualizationHelper',$wikiaHomePageExtDir.'classes/WikiGetDataForVisualizationHelper.class.php');
-$app->registerClass('WikiGetDataForPromoteHelper',$wikiaHomePageExtDir.'classes/WikiGetDataForPromoteHelper.class.php');
-$app->registerClass('WikiDataGetter',$wikiaHomePageExtDir.'classes/WikiDataGetter.class.php');
-$app->registerClass('WikiDataGetterForSpecialPromote',$wikiaHomePageExtDir.'classes/WikiDataGetterForSpecialPromote.class.php');
-$app->registerClass('WikiDataGetterForVisualization',$wikiaHomePageExtDir.'classes/WikiDataGetterForVisualization.class.php');
-
-$app->registerClass('WikiaHomePageHelper', $wikiaHomePageExtDir . 'WikiaHomePageHelper.class.php');
-$app->registerClass('CityVisualization', $wikiaHomePageExtDir . 'CityVisualization.class.php');
+$wgAutoloadClasses['PromoteImageReviewTask'] = $promoteImageReviewExtDir  . 'PromoteImageReviewTask.php';
 
 // hooks
-$app->registerHook('UploadVerification', 'UploadVisualizationImageFromFile', 'UploadVerification');
-$app->registerHook('CityVisualization::wikiDataInserted', 'CityVisualization', 'onWikiDataUpdated');
+$wgHooks['UploadVerification'][] = 'UploadVisualizationImageFromFile::UploadVerification';
+$wgHooks['CityVisualization::wikiDataInserted'][] = 'CityVisualization::onWikiDataUpdated';
+$wgHooks['FileDeleteComplete'][] = 'SpecialPromoteHooks::onFileDeleteComplete';
 
 // i18n mapping
-$app->registerExtensionMessageFile('SpecialPromote', $dir.'SpecialPromote.i18n.php');
-$app->registerExtensionMessageFile('SpecialPromoteAliases', $dir . 'SpecialPromote.alias.php') ;
+$wgExtensionMessagesFiles['SpecialPromote'] = $dir.'SpecialPromote.i18n.php';
+$wgExtensionMessagesFiles['SpecialPromoteAliases'] = $dir . 'SpecialPromote.alias.php';
 
-F::build('JSMessages')->registerPackage('SpecialPromote', array('promote-*'));
+JSMessages::registerPackage('SpecialPromote', array('promote-*'));
 
 // special pages
-$app->registerSpecialPage('Promote', 'SpecialPromoteController');
+$wgSpecialPages['Promote'] = 'SpecialPromoteController';
 
 $wgAvailableRights[] = 'promote';
 $wgGroupPermissions['*']['promote'] = false;

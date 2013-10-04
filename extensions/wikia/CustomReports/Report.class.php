@@ -50,11 +50,11 @@ class Report extends WikiaModel {
 	 * );
 	 */
 	public function get_data() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		// get data
 		$curdate = date('Ymd');
-		$memKey = $this->wf->SharedMemcKey('customreport', $this->code, $curdate, $this->days);
+		$memKey = wfSharedMemcKey('customreport', $this->code, $curdate, $this->days);
 		$this->data = $this->wg->Memc->get($memKey);
 		if ( !is_array($this->data) ) {
 			$this->data = $this->{'get_'.$this->code}();
@@ -70,15 +70,15 @@ class Report extends WikiaModel {
 			$xml[] = $this->convertDataToXML($key, $value);
 		}
 		
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		
 		return $xml;
 	}
 
 	protected function get_new_wikis() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
-		$db = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
+		$db = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
 
 		$sql =<<<SQL
 			select date_format(city_created, '%Y-%m-%d') day, if(city_public=1,'active wikis','deleted wikis') type, count(*) cnt 
@@ -94,15 +94,15 @@ SQL;
 			$data['new_wikis'][$row['type']][$row['day']] = $row['cnt'];
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $data;
 	}
 	
 	protected function get_new_users() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
-		$db = $this->wf->GetDB( DB_SLAVE, array(), $this->wg->ExternalSharedDB );
+		$db = wfGetDB( DB_SLAVE, array(), $this->wg->ExternalSharedDB );
 
 		// get total users and confirmed users
 		$result = $db->select(
@@ -158,15 +158,15 @@ SQL;
 
 		$db->freeResult( $result );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $data;
 	}
 
 	protected function get_founderemails() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
-		$db = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->ExternalDatawareDB);
+		$db = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalDatawareDB);
 
 		$sql =<<<SQL
 			select date_format(created, '%Y-%m-%d') day, if(category is null,'unknown',category) type, 
@@ -187,15 +187,15 @@ SQL;
 			$data['founderemails_opens_per_sent'][$row['type']][$row['day']] = self::percentage($row['opens'],$row['sent']);
 		}
 		
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $data;
 	}
 	
 	protected function get_allemails() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
-		$db = $this->wf->GetDB(DB_SLAVE, array(), $this->wg->ExternalDatawareDB);
+		$db = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalDatawareDB);
 
 		$sql =<<<SQL
 			select date_format(created, '%Y-%m-%d') day, if(category is null,'unknown',category) type, 
@@ -216,16 +216,16 @@ SQL;
 			$data['allemails_opens_per_sent'][$row['type']][$row['day']] = self::percentage($row['opens'],$row['sent']);
 		}
 		
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 
 		return $data;
 	}
 	
 	protected function convertDataToXML($code, $data=array()) {
 		// header
-		$xml = "<graph caption='".$this->wf->Msg('report-name-'.$code).
-				"' xAxisName='".$this->wf->Msg('report-xaxis').
-				"' yAxisName='".$this->wf->Msg('report-yaxis-'.$code).
+		$xml = "<graph caption='".wfMsg('report-name-'.$code).
+				"' xAxisName='".wfMsg('report-xaxis').
+				"' yAxisName='".wfMsg('report-yaxis-'.$code).
 				"' showValues='0' decimalPrecision='0' formatNumberScale='0' showShadow='0' ".
 				$this->graph_set_legend().
 				$this->graph_set_rotate_name().

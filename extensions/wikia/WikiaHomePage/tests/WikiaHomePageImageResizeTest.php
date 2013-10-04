@@ -3,6 +3,7 @@
 class WikiaHomePageImageResizeTest extends WikiaBaseTest {
 
 	public function setUp() {
+		require_once( dirname(__FILE__) . '/../../CityVisualization/CityVisualization.setup.php' );
 		$this->setupFile = dirname(__FILE__) . '/../WikiaHomePage.setup.php';
 		parent::setUp();
 	}
@@ -17,7 +18,7 @@ class WikiaHomePageImageResizeTest extends WikiaBaseTest {
 	 */
 	public function testGetImageResizeParams($originalWidth, $originalHeight, $requestedWidth, $requestedHeight, $expParams) {
 		/* @var $helper WikiaHomePageHelper */
-		$helper = F::build('WikiaHomePageHelper');
+		$helper = new WikiaHomePageHelper();
 		$params = $helper->getImageServingParamsForResize($requestedWidth, $requestedHeight, $originalWidth, $originalHeight);
 		$this->assertEquals($expParams, $params);
 	}

@@ -2,10 +2,11 @@ var WikiHeader = {
 	lastSubnavClicked: -1,
 	isDisplayed: false,
 	activeL1: null,
+	isTouchScreen: $().isTouchscreen(),
 
 	settings: {
-		mouseoverDelay: 200,
-		mouseoutDelay: 350
+		mouseoverDelay: this.isTouchScreen ? 0 : 200,
+		mouseoutDelay: this.isTouchScreen ? 0 : 350
 	},
 
 	log: function(msg) {
@@ -22,6 +23,9 @@ var WikiHeader = {
 
 		this.positionNav();
 
+		this.navLI.hover($.proxy(this.mouseoverL1,this), $.proxy(this.mouseoutL1,this));
+		this.subnav2LI.hover($.proxy(this.mouseoverL2,this), $.proxy(this.mouseoutL2,this));
+
 		//Events
 		this.navLI
 			.click($.proxy(this.mouseclickL1,this))
@@ -35,12 +39,6 @@ var WikiHeader = {
 				this.hideNavL3();
 				this.showSubNavL3($(event.target).parent('li'));
 			},this));
-
-		//Apply a hover state if the device is not touch enabled
-		if(!$().isTouchscreen()) {
-			this.navLI.hover($.proxy(this.mouseoverL1,this), $.proxy(this.mouseoutL1,this));
-			this.subnav2LI.hover($.proxy(this.mouseoverL2,this), $.proxy(this.mouseoutL2,this));
-		}
 
 		// BugID: 64318 - hiding publish button on nav edit
 		if ( (window.wgIsWikiNavMessage) && (wgAction == "edit") ) {
@@ -147,7 +145,7 @@ var WikiHeader = {
 		var node = $(event.target);
 		if (node.is('a') && node.attr('data-canonical') == 'chat') {
 			event.preventDefault();
-			ChatEntryPoint.onClickChatButton(wgUserName !== null, node.attr('href'));
+			ChatEntryPoint.onClickChatButton(node.attr('href'));
 		}
 	},
 
@@ -334,7 +332,11 @@ jQuery(function($) {
 	// modify preview dialog
 	if (window.wgIsWikiNavMessage) {
 		// preload messages
-		$.getMessages('Oasis-navigation-v2');
+		$.getMessages('Oasis-navigation-v2').done(function() {
+			$('#EditPageRail .module_page_controls .module_content').append(
+				'<div class="preview-validator-desc">' + $.msg('oasis-navigation-v2-validation-caption') + '</div>'
+			);
+		});
 
 		// modify size of preview modal
 		$(window).bind('EditPageRenderPreview', function(ev, options) {
@@ -371,7 +373,7 @@ jQuery(function($) {
                 var notifications =
                     '<div class="global-notification error">'
                     + '<div class="msg">' + errorMessages.join("</br>") + '</div>'
-                    + '</div>'
+                    + '</div>';
 
                 $('.modalContent .ArticlePreview').prepend(notifications);
 			}
@@ -383,14 +385,11 @@ jQuery(function($) {
 
             previewNode.find('.msg > a').click(function() {
                 window.location = this.href;
-            })
+            });
 
 		});
 
 		$('#wpPreview').parent().removeClass('secondary');
-		$('#EditPageRail .module_page_controls .module_content').append(
-			'<div class="preview-validator-desc">' + $.msg('oasis-navigation-v2-validation-caption') + '</div>'
-		);
 		$('#EditPageMain').addClass('editpage-wikianavmode');	// to set the toolbar height in wide mode (so the preview-validator-desc div fits)
 	}
 });

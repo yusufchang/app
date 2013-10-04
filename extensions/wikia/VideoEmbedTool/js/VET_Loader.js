@@ -2,7 +2,7 @@
  *
  * @author Hyun Lim, Liz Lee
  *
- * Final callback should include VET_loader.modal.closeModal() in success case.
+ * Final callback should include vet.close() in success case.
  * Sample input json for options:
  *	{
  *		callbackAfterSelect: function() {}, // callback after video is selected (first screen).  If it returns false, second screen will not show.
@@ -13,7 +13,7 @@
  *			thumb: true
  *			width: 335
  *		},
- *		insertFinalVideoParams: [], // tell the back end anything extra when inserting the video at the end 
+ *		insertFinalVideoParams: [], // tell the back end anything extra when inserting the video at the end
  *		startPoint: 1 | 2, // display first or second screen when VET opens
  *		searchOrder: "newest" // Used in MarketingToolbox
  *	}
@@ -30,33 +30,42 @@
 		templateHtml = '',
 		VET_loader = {};
 
-	VET_loader.load = function(options) {
-
+	/*
+	 * @param {Object} options Control options sent to VET from extensions
+	 * @param {jQuery} elem Element that was clicked on to open the VET modal
+	 */
+	VET_loader.load = function(options, elem) {
 		if (wgUserName == null && wgAction == 'edit') {
 			// handle login on edit page
 			UserLogin.rteForceLogin();
-			$.stopThrobbing();
+			elem && elem.stopThrobbing();
 			return;
-		} else if (UserLogin.isForceLogIn()) {
-			$.stopThrobbing();
+		} else if (wgUserName == null) {
+			UserLoginModal.show({
+				callback: function() {
+					UserLogin.forceLoggedIn = true;
+					window.VET_loader.load(options);
+				}
+			});
+			elem && elem.stopThrobbing();
 			// handle login on article page
 			return;
 		}
-		
+
 		// if modal is already on screen or is about to be, don't do anything
 		if(modalOnScreen) {
-			$.stopThrobbing();
+			elem && elem.stopThrobbing();
 			return;
 		}
-		
+
 		modalOnScreen = true;	// modal is now loading
 
 		var deferredList = [];
-		
+
 		if(!resourcesLoaded) {
 			var templateDeferred = $.Deferred(),
 				deferredMessages = $.Deferred();
-				
+
 			// Get modal template HTML
 			$.nirvana.sendRequest({
 				controller: 'VideoEmbedToolController',
@@ -78,53 +87,51 @@
 			]);
 			deferredList.push(resourcePromise);
 		}
-		
-		$.when.apply(this, deferredList).done(function() {
-			$.stopThrobbing();
 
-			VET_loader.modal = $(templateHtml).makeModal({
-				width: 939,
-				onClose: function() {
-					VET_close();
-				},
-				onAfterClose: function() {
-					modalOnScreen = false;	// release modal lock
-				}
+		$.when.apply(this, deferredList).done(function() {
+			elem && elem.stopThrobbing();
+
+			require(['wikia.vet'], function(vet) {
+
+				VET_loader.modal = $(templateHtml).makeModal({
+					width: 939,
+					onClose: function() {
+						vet.close();
+					},
+					onAfterClose: function() {
+						modalOnScreen = false;	// release modal lock
+					}
+				});
+
+				vet.show(options);
+
+				resourcesLoaded = true;
 			});
-			
-			VET_show(options);
-			resourcesLoaded = true;
-		});			
+
+		});
 	};
 
 	/* Extends jQuery to make any element an add video button
 	 *
 	 * @param object options - options to be passed to VET_loader.load(). See above for example.
-	 */ 
+	 */
 	$.fn.addVideoButton = function(options) {
 		$.preloadThrobber();
 
 		return this.each(function() {
 			var $this = $(this);
-			
-			$this.on('click.VETLoader', function(e) {
+
+			$this.off('click.VETLoader').on('click.VETLoader', function(e) {
 				e.preventDefault();
-				
+
 				// Provide immediate feedback once button is clicked
 				$this.startThrobbing();
 
-				VET_loader.load(options);
+				VET_loader.load(options, $this);
 			});
 		});
-	
 	};
-	
-	$.fn.removeAddVideoButton = function() {
-		return this.each(function() {
-			$(this).off('click.VETLoader');
-		});
-	}
-	
+
 	window.VET_loader = VET_loader;
-	
+
 })(window, jQuery);

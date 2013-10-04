@@ -9,7 +9,6 @@
  */
 
 $dir = dirname(__FILE__) . '/';
-$app = F::app();
 
 $wgExtensionCredits['specialpage'][] = array(
 	'name' => 'Wikia Home Staff Tool',
@@ -18,19 +17,28 @@ $wgExtensionCredits['specialpage'][] = array(
 		'Andrzej "nAndy" Łukaszewski',
 		'Marcin Maciejewski',
 		'Sebastian Marzjan',
+		'Damian Jóźwiak',
+		'Łukasz Konieczny'
 	),
 	'version' => 1.0
 );
 
 //classes
-$app->registerController('ManageWikiaHomeController', $dir.'ManageWikiaHomeController.class.php');
+$wgAutoloadClasses['ManageWikiaHomeController'] = $dir.'ManageWikiaHomeController.class.php';
+
+// models
+$wgAutoloadClasses['SpecialManageWikiaHomeModel'] = $dir . '/models/SpecialManageWikiaHomeModel.class.php';
+
+// forms
+$wgAutoloadClasses['CollectionsForm'] = $dir.'/forms/CollectionsForm.class.php';
 
 //special page
-$app->registerSpecialPage('ManageWikiaHome', 'ManageWikiaHomeController', 'wikia');
+$wgSpecialPages['ManageWikiaHome'] = 'ManageWikiaHomeController';
+$wgSpecialPageGroups['ManageWikiaHome'] = 'wikia';
 
 //message files
-$app->registerExtensionMessageFile('ManageWikiaHome', $dir.'ManageWikiaHome.i18n.php');
-F::build('JSMessages')->registerPackage('ManageWikiaHome', array('manage-wikia-home-*'));
+$wgExtensionMessagesFiles['ManageWikiaHome'] = $dir.'ManageWikiaHome.i18n.php';
+JSMessages::registerPackage('ManageWikiaHome', array('manage-wikia-home-*'));
 
 //add wikia staff tool rights to staff users
 $wgGroupPermissions['*']['managewikiahome'] = false;

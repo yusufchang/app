@@ -33,17 +33,10 @@ class WikiaView {
 	 * @param string $format
 	 */
 	public static function newFromControllerAndMethodName( $controllerName, $methodName, Array $data = array(), $format = WikiaResponse::FORMAT_HTML ) {
-		$response = F::build( 'WikiaResponse', array( $format ) );
+		$response = new WikiaResponse( $format );
 		$response->setControllerName( $controllerName );
 		$response->setMethodName( $methodName );
 		$response->setData( $data );
-		$app = F::app();
-
-		if ( $app->wg->EnableSkinTemplateOverride ) {
-			if ( $app->isSkinInitialized() ) {
-				$response->setSkinName( $app->wg->User->getSkin()->getSkinName() );
-			}
-		}
 
 		return $response->getView();
 	}
@@ -99,8 +92,8 @@ class WikiaView {
 	protected function buildTemplatePath( $controllerClass, $methodName, $forceRebuild = false ) {
 		wfProfileIn(__METHOD__);
 		if( ( $this->templatePath == null ) || $forceRebuild ) {
+			global $wgAutoloadClasses;
 			$app = F::app();
-			$autoloadClasses = $app->wg->AutoloadClasses;
 
 			if ( !empty( $this->response ) ) {
 				$extension = $this->response->getTemplateEngine();
@@ -116,37 +109,16 @@ class WikiaView {
 				$controllerClass = $app->getControllerClassName( $controllerBaseName );
 			}
 
-			if( empty( $autoloadClasses[$controllerClass] ) ) {
+			if( empty( $wgAutoloadClasses[$controllerClass] ) ) {
 				throw new WikiaException( "Invalid controller or service name: {$controllerClass}" );
 			}
 
 			// First we look for BaseName_MethodName
-			$dirName = dirname( $autoloadClasses[$controllerClass] );
+			$dirName = dirname( $wgAutoloadClasses[$controllerClass] );
 			$basePath = "{$dirName}/templates/{$controllerBaseName}_{$methodName}";
-			$templatePath = null;
-
-			/**
-			 * per-skin template override (experimental)
-			 * @see $wgEnableSkinTemplateOverride
-			 */
-			if ( !empty( $this->response ) ) {
-				$requestedSkinName = $this->response->getSkinName();
-
-				if ( !empty( $requestedSkinName ) ) {
-					$skinSpecificPath = "{$basePath}_{$requestedSkinName}.$extension";
-
-					if ( file_exists( $skinSpecificPath ) ) {
-						$templatePath = $skinSpecificPath;
-					}
-				}
-			}
-
-			if ( empty( $templatePath ) ) {
-				$templatePath = "{$basePath}.$extension";
-			}
-
-			// First we look for BaseName_MethodName
+			$templatePath = "{$basePath}.$extension";
 			$templateExists = file_exists( $templatePath );
+
 			// Fall back to ControllerClass_MethodName
 			if( !$templateExists ) {
 				$templatePath = "{$dirName}/templates/{$controllerClass}_{$methodName}.$extension";
@@ -210,8 +182,8 @@ class WikiaView {
 
 		switch($this->response->getTemplateEngine()) {
 			case WikiaResponse::TEMPLATE_ENGINE_MUSTACHE:
-				$m = new Mustache;
-				$result = $m->render(file_get_contents( $this->getTemplatePath() ), $data);
+				$m = MustacheService::getInstance();
+				$result = $m->render( $this->getTemplatePath(), $data );
 				wfProfileOut(__METHOD__);
 
 				return $result;

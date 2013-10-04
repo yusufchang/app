@@ -467,6 +467,11 @@ class Parser {
 				"Template argument size: {$this->mIncludeSizes['arg']}/$max bytes\n".
 				$PFreport;
 			wfRunHooks( 'ParserLimitReport', array( $this, &$limitReport ) );
+
+			// Sanitize for comment. Note '‐' in the replacement is U+2010,
+			// which looks much like the problematic '-'.
+			$limitReport = str_replace( array( '-', '&' ), array( '‐', '&amp;' ), $limitReport );
+
 			$text .= "\n<!-- \n$limitReport-->\n";
 		}
 		$this->mOutput->setText( $text );
@@ -2096,7 +2101,6 @@ class Parser {
 				if ( $ns == NS_CATEGORY ) {
 					wfProfileIn( __METHOD__."-category" );
 
-
 					# RTE (Rich Text Editor) - begin
 					# @author: Inez Korczyński
 					# Category handling
@@ -2127,24 +2131,13 @@ class Parser {
 					continue;
 				}
 
-				/* Wikia change begin - @author: Owen Davis */
-				/* Support for [[Poll:...]] */
-				if (defined ( "NS_WIKIA_POLL" ) && ($ns == NS_WIKIA_POLL)) {
-					$poll = WikiaPoll::newFromTitle($nt);
-					if ($poll instanceof WikiaPoll) {
-						# RTE (Rich Text Editor) - begin
-						# @author: Owen Davis
-						if (!empty($wgRTEParserEnabled)) {
-							$s .= $prefix . WikiaPollHooks::generateRTE($poll, $nt, $RTE_wikitextIdx) . $trail;
-						} else {
-							$s .= $prefix . WikiaPollHooks::generate($poll, $nt) . $trail;
-						}
-						# RTE - end
-						continue;
-					}
+				# Wikia change begin
+				# @author macbre
+				$hookRet = wfRunHooks('ParserReplaceInternalLinks2NoForce', array(&$s, $nt, $prefix, $trail, isset($RTE_wikitextIdx) ? $RTE_wikitextIdx : null));
+				if ($hookRet === false) {
+					continue;
 				}
-				/* Wikia change end */
-
+				# Wikia change end
 			}
 
 			# RTE (Rich Text Editor) - begin
@@ -3955,6 +3948,12 @@ class Parser {
 		if ( strlen( $url ) > 255 ) {
 			return wfMsgForContent( 'scarytranscludetoolong' );
 		}
+		/* Wikia change begin - Stop w::c: style interwiki links (BugID: 97023) */
+		$actionQuery = "?action=$action";
+		if ( substr_compare( $url, $actionQuery, -strlen( $actionQuery ), strlen( $actionQuery ) ) !== 0 ) {
+			return wfMessage( 'scarytranscludebadinterwiki' )->inContentLanguage()->text();
+		}
+		/* Wikia change end */
 		return $this->fetchScaryTemplateMaybeFromCache( $url );
 	}
 

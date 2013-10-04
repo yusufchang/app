@@ -1,5 +1,5 @@
 <?php
-class ImageServingTest extends WikiaBaseTest {
+class ImageServingCroppingTest extends WikiaBaseTest {
 
 	public function setUp() {
 		$this->setupFile = __DIR__ . "/../imageServing.setup.php";
@@ -18,5 +18,17 @@ class ImageServingTest extends WikiaBaseTest {
 		$is = new ImageServing(array(1), 200, array("w" => 2, "h" => 1));
 		$this->assertEquals( '200px-0,314,65,222', $is->getCut( 314, 654 ) );
 		$this->assertEquals( '200px-0,572,36,322', $is->getCut( 572, 355 ) );
+	}
+
+	function testWidthAndHeightGetters() {
+		$is = new ImageServing(null, 200, 100);
+
+		$this->assertEquals(200, $is->getRequestedWidth());
+		$this->assertEquals(100, $is->getRequestedHeight());
+
+		$is = new ImageServing(null, 300, ['w' => 2, 'h' => 1]);
+
+		$this->assertEquals(300, $is->getRequestedWidth());
+		$this->assertEquals(150, $is->getRequestedHeight());
 	}
 }

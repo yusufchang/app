@@ -35,6 +35,8 @@ class S3Command extends WikiaObject{
 	private $parameters;
 	private $options;
 
+	private static $instance;
+
 	function __construct(){
 		$this->resetCommonOptions();
 	}
@@ -46,14 +48,12 @@ class S3Command extends WikiaObject{
 	 */
 	public static function getInstance(){
 		$class = get_called_class();
-		$instance = F::getInstance( $class );
-		
-		if ( empty( $instance ) ) {
-			$instance = F::build($class);
-			F::setInstance( $class, $instance );
+
+		if ( empty( static::$instance ) ) {
+			static::$instance = new $class;
 		}
 		
-		return $instance;
+		return static::$instance;
 	}
 
 	/**
@@ -120,13 +120,13 @@ class S3Command extends WikiaObject{
 	 * @throws S3CommandException
 	 */
 	public function run( $action, Array $params = array(), Array $options = array() ){
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		
 		$output = shell_exec( $this->getCommandLine( $action, $params, $options ) );
 		$matches = array();
 		$errorFound = preg_match( self::REGEX_ERROR, $output, $matches );
 		
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		
 		if ( !empty( $errorFound ) ) {
 			throw new S3CommandException( $matches[1] );

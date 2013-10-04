@@ -4,7 +4,7 @@
  * Main Category Gallery class
  */
 class CategoryExhibitionSection {
-	const CACHE_VERSION = 2;
+	const CACHE_VERSION = 3;
 
 	protected $thumbWidth = 130;
 	protected $thumbHeight = 115;
@@ -310,7 +310,7 @@ class CategoryExhibitionSection {
 		}
 
 		$oMemCache = F::App()->wg->memc;
-		$sKey = F::App()->wf->sharedMemcKey(
+		$sKey = wfSharedMemcKey(
 			'category_exhibition_category_cache_1',
 			$pageId,
 			F::App()->wg->cityId,
@@ -329,7 +329,7 @@ class CategoryExhibitionSection {
 		$imageUrl = $this->getImageFromPageId( $pageId );
 
 		if ( empty( $imageUrl ) ){
-			$snippetService = new ArticleService ( $pageId );
+			$snippetService = new ArticleService ( $oTitle );
 			$snippetText = $snippetService->getTextSnippet();
 		}
 
@@ -422,7 +422,7 @@ class CategoryExhibitionSection {
 	protected function getTouchedKey($title) {
 		//fb#24914
 		if( $title instanceof Title ) {
-			$key = wfMemcKey( 'category_touched', $title->getDBKey(), self::CACHE_VERSION );
+			$key = wfMemcKey( 'category_touched', md5($title->getDBKey()), self::CACHE_VERSION );
 			return $key;
 		} else {
 			Wikia::log(__METHOD__, '', '$title not an instance of Title');

@@ -45,7 +45,7 @@ class CategoryExhibitionSectionSubcategories extends CategoryExhibitionSection {
 		$oTitle = Title::newFromID( $pageId );
 				
 		$oMemCache = F::App()->wg->memc;
-		$sKey = F::App()->wf->sharedMemcKey(
+		$sKey = wfSharedMemcKey(
 			'category_exhibition_article_cache_0',
 			$pageId,
 			F::App()->wg->cityId,
@@ -69,7 +69,7 @@ class CategoryExhibitionSectionSubcategories extends CategoryExhibitionSection {
 			$snippetText = $resultArray['snippetText'];
 			$imageUrl = $resultArray['imageUrl'];
 			if ( empty($snippetText) && empty($imageUrl) ){
-				$snippetService = new ArticleService ( $pageId );
+				$snippetService = new ArticleService ( $oTitle );
 				$snippetText = $snippetService->getTextSnippet();
 			}
 		}

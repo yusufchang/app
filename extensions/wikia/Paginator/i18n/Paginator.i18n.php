@@ -55,6 +55,13 @@ $messages['ca'] = array(
 	'paginator-back' => 'Enrere',
 );
 
+/** Chechen (нохчийн)
+ * @author Умар
+ */
+$messages['ce'] = array(
+	'paginator-next' => 'Кхин дӀа',
+);
+
 /** Czech (česky)
  * @author Dontlietome7
  */
@@ -210,6 +217,14 @@ $messages['nl'] = array(
 	'paginator-back' => 'Vorige',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'paginator-next' => 'Seguent',
+	'paginator-back' => 'Precedent',
+);
+
 /** Pälzisch (Pälzisch)
  * @author Manuae
  */
@@ -233,6 +248,14 @@ $messages['pms'] = array(
 	'paginator-back' => 'André',
 );
 
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'paginator-next' => 'راتلونکی',
+	'paginator-back' => 'پر شا کېدل',
+);
+
 /** Portuguese (português)
  */
 $messages['pt'] = array(
@@ -245,6 +268,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'paginator-next' => 'Seguinte',
 	'paginator-back' => 'Voltar',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'paginator-next' => 'Prossime',
+	'paginator-back' => 'Rrete',
 );
 
 /** Russian (русский)

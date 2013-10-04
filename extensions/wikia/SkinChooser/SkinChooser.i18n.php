@@ -13,19 +13,30 @@ $messages['en'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author Malhargan
  */
 $messages['ar'] = array(
 	'skinchooser-desc' => 'يسمح للمستخدمين باختيار skins في التفضيلات الخاصة بهم',
-	'new-look' => 'شكل جديدة للويكي', # Fuzzy
+	'new-look' => 'ويكيا',
 	'site-layout' => 'موقع تخطيطات',
 );
 
 /** Breton (brezhoneg)
+ * @author Fohanno
  * @author Y-M D
  */
 $messages['br'] = array(
-	'new-look' => 'Neuz nevez Wikia', # Fuzzy
+	'new-look' => 'Wikia',
+);
+
+/** Catalan (català)
+ * @author Marcmpujol
+ */
+$messages['ca'] = array(
+	'skinchooser-desc' => "Permet als usuaris triar l'aparença del wiki en les seves preferències",
+	'new-look' => 'Wikia',
+	'site-layout' => 'Dissenys del lloc',
 );
 
 /** Czech (česky)
@@ -167,6 +178,15 @@ $messages['nl'] = array(
 	'site-layout' => 'Sitevormgevingen',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'skinchooser-desc' => "Permet als utilizaires de causir d'abilhatges dins lors preferéncias",
+	'new-look' => 'Wikia',
+	'site-layout' => 'Aparéncias del site',
+);
+
 /** Polish (polski)
  * @author Cloudissimo
  * @author Sovq
@@ -206,12 +226,22 @@ $messages['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
 	'skinchooser-desc' => 'Permite que os utilizadores escolham temas nas suas preferências',
 	'new-look' => 'Wikia',
 	'site-layout' => 'Composições do Site',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'skinchooser-desc' => "Permette a l'utinde de scacchià le teme jndr'à sezione Me piace accussì",
+	'new-look' => 'Uicchia',
+	'site-layout' => "Disposiziune d'u site",
 );
 
 /** Russian (русский)
@@ -248,6 +278,15 @@ $messages['tl'] = array(
 	'skinchooser-desc' => 'Nagpapahintulot sa mga tagagamit na pumili ng mga pabalat sa loob ng kanilang mga nais',
 	'new-look' => 'Wikia',
 	'site-layout' => 'Mga Latag ng Pook',
+);
+
+/** Ukrainian (українська)
+ * @author Ua2004
+ */
+$messages['uk'] = array(
+	'skinchooser-desc' => 'Дозволяє користувачам вибирати скіни в налаштуваннях',
+	'new-look' => 'Wikia',
+	'site-layout' => 'Оформлення сайту',
 );
 
 /** Uzbek (oʻzbekcha)

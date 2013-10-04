@@ -380,6 +380,7 @@ function SharedHelpLinkBegin( $skin, $target, &$text, &$customAttribs, &$query, 
 /**
  * does $title article exist @help.wikia?
  *
+ * @param Title $title
  * @see SharedHelpHook
  */
 function SharedHelpArticleExists($title) {
@@ -389,14 +390,14 @@ function SharedHelpArticleExists($title) {
 	$exists = false;
 
 	$sharedLinkKey = $wgSharedDB . ':sharedLinks:' . $wgHelpWikiId . ':' .
-		MWNamespace::getCanonicalName( $title->getNamespace() ) .  ':' . $title->getDBkey();
+		md5(MWNamespace::getCanonicalName( $title->getNamespace() ) .  ':' . $title->getDBkey());
 	$sharedLink = $wgMemc->get($sharedLinkKey);
 
 	if ( $sharedLink ) {
 		$exists =  true;
 	} else {
 		$sharedArticleKey = $wgSharedDB . ':sharedArticles:' . $wgHelpWikiId . ':' .
-			MWNamespace::getCanonicalName( $title->getNamespace() ) .  ':' . $title->getDBkey() . ':' . SHAREDHELP_CACHE_VERSION;
+			md5(MWNamespace::getCanonicalName( $title->getNamespace() ) .  ':' . $title->getDBkey()) . ':' . SHAREDHELP_CACHE_VERSION;
 		$sharedArticle = $wgMemc->get($sharedArticleKey);
 
 		if ( !empty($sharedArticle['timestamp']) ) {
@@ -434,13 +435,9 @@ function SharedHelpArticleExists($title) {
 }
 
 // basically modify the Wantedpages query to exclude pages that appear on the help wiki, as per #5866
-function SharedHelpWantedPagesSql( $page, $sql ) {
-	global $wgWantedPagesThreshold ;
+function SharedHelpWantedPagesSql( &$page, &$sql ) {
 	global $wgHelpWikiId, $wgMemc;
 	wfProfileIn( __METHOD__ );
-
-	$count = $wgWantedPagesThreshold - 1;
-	$type = 'Wantedpages';
 
 	$helpPages = "";
 	$helpdb = WikiFactory::IDtoDB( $wgHelpWikiId  );
@@ -455,8 +452,7 @@ function SharedHelpWantedPagesSql( $page, $sql ) {
 				'page',
 				'page_title, page_namespace',
 				array(
-					'page_namespace' => NS_HELP,
-					'page_is_redirect' => 0,
+					'page_namespace' => NS_HELP
 				),
 				__METHOD__
 			);
@@ -472,14 +468,18 @@ function SharedHelpWantedPagesSql( $page, $sql ) {
 		}
 	}
 
-	$notInHelpPages = ""; if ( !empty($helpPages) ) {
+	$notInHelpPages = '';
+	if ( !empty( $helpPages ) ) {
 		$notInHelpPages = " OR pl_title NOT IN (" . $helpPages . ") ";
 	}
 
-	$blogNamespaces = "";
+	$excludedNamespaces = array( NS_MEDIAWIKI );
 	if ( defined('NS_BLOG_ARTICLE') ) {
-		$blogNamespaces = implode(",", array(NS_BLOG_ARTICLE, NS_BLOG_ARTICLE_TALK));
-		$sql['conds'][] = " pl_namespace NOT IN ( {$blogNamespaces} ) ";
+		$excludedNamespaces[] = NS_BLOG_ARTICLE;
+		$excludedNamespaces[] = NS_BLOG_ARTICLE_TALK;
+	}
+	if ( !empty( $excludedNamespaces ) ) {
+		$sql['conds'][] = ' pl_namespace NOT IN ( ' . implode( ',', $excludedNamespaces ) . ' ) ';
 	}
 
 	$sql['conds'][] = " ( pl_namespace != 12 {$notInHelpPages} ) ";

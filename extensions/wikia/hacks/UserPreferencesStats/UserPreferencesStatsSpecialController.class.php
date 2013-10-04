@@ -14,7 +14,7 @@ class UserPreferencesStatsSpecialController extends WikiaSpecialPageController {
 	}
 
 	public function init() {
-		$this->businessLogic = F::build( 'UserPreferencesStats', array( $this->app->wg->Title ) );
+		$this->businessLogic = new UserPreferencesStats( $this->app->wg->Title );
 	}
 
 	/**
@@ -22,16 +22,16 @@ class UserPreferencesStatsSpecialController extends WikiaSpecialPageController {
 	 * @author Marooned
 	 */
 	public function index() {
-		$this->wf->profileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 
-		$this->wg->Out->setPageTitle( $this->wf->msg( 'userpreferencesstats-specialpage-title' ) );
+		$this->wg->Out->setPageTitle( wfMsg( 'userpreferencesstats-specialpage-title' ) );
 		$this->response->addAsset( 'extensions/wikia/hacks/UserPreferencesStats/css/UserPreferencesStats_Oasis.scss' );
 		$this->response->addAsset( 'extensions/wikia/hacks/UserPreferencesStats/js/UserPreferencesStats.js' );
 		$this->response->addAsset( 'resources/wikia/libraries/jquery/flot/jquery.flot.js' );
 		$this->response->addAsset( 'resources/wikia/libraries/jquery/flot/jquery.flot.pie.js' );
 
 		// setting response data
-		$this->setVal( 'header', $this->wf->msg('userpreferencesstats-hello-msg') );
+		$this->setVal( 'header', wfMsg('userpreferencesstats-hello-msg') );
 		$this->setVal( 'wikiData', $this->businessLogic->getProperties() );
 
 		$props = $this->wg->Request->getArray( 'prop' );
@@ -41,6 +41,6 @@ class UserPreferencesStatsSpecialController extends WikiaSpecialPageController {
 			$this->setVal( 'data', $data );
 		}
 
-		$this->wf->profileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 	}
 }

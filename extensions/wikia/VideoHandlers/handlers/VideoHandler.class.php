@@ -1,12 +1,10 @@
 <?php
-
-/*
- * Handler layer between specyfic video handler and the rest of BitmapHandlers
- * Used mainly for identyfication of Video hanlders
+/**
+ * Handler layer between specific video handler and the rest of BitmapHandlers
+ * Used mainly for identification of Video handlers
  *
  * In future common handler logic will be migrated here
- * If you are using public video handler specyfic function write them down here
- *
+ * If you are using public video handler specific function write them down here
  */
 
 abstract class VideoHandler extends BitmapHandler {
@@ -25,6 +23,19 @@ abstract class VideoHandler extends BitmapHandler {
 	protected static $autoplayParam = "";
 	protected static $autoplayValue = "";
 
+	//WikiaMobile Handles video in fluid way it does not need any width and height
+	function getSizeString( $width, $height, $type = '' ) {
+		if ( !F::app()->checkSkin( 'wikiamobile' ) ) {
+			if ( $type == 'inline' ) {
+				return "style='width: {$width}px; height: {$height}px;'";
+			} else {
+				return "width='$width' height='$height'";
+			}
+		}
+
+		return '';
+	}
+
 	/**
 	 * @param $image File
 	 * @return array|bool
@@ -41,7 +52,7 @@ abstract class VideoHandler extends BitmapHandler {
 	}
 
 	function normaliseParams( $image, &$params ) {
-		global $wgMaxImageArea, $wgMaxThumbnailArea;
+		global $wgMaxThumbnailArea;
 		wfProfileIn( __METHOD__ );
 		if ( !ImageHandler::normaliseParams( $image, $params ) ) {
 			wfProfileOut( __METHOD__ );
@@ -77,14 +88,22 @@ abstract class VideoHandler extends BitmapHandler {
 
 	/**
 	 * Returns embed code for a provider
+	 * @param $articleId
+	 * @param $width
+	 * @param bool $autoplay
+	 * @param bool $isAjax
+	 * @param bool $postOnload
 	 * @return string Embed HTML
 	 */
 	abstract function getEmbed( $articleId, $width, $autoplay = false, $isAjax = false, $postOnload = false );
 
-	/*
+	/**
 	 * Returns embed data
-	 * autoplayParam
-	 * srcParam
+	 *
+	 * @return array An array of embed data including:
+	 * - autoplayParam
+	 * - srcParam
+	 * - srcType
 	 */
 	public function getEmbedSrcData() {
 		$data = array();
@@ -111,7 +130,7 @@ abstract class VideoHandler extends BitmapHandler {
 	}
 
 
-	function setVideoId( $videoId ){
+	function setVideoId( $videoId ) {
 		$this->videoId = $videoId;
 	}
 
@@ -127,13 +146,13 @@ abstract class VideoHandler extends BitmapHandler {
 		return $this->title;
 	}
 
-	function getAspectRatio(){
+	function getAspectRatio() {
 		global $wgCityId;
 		wfProfileIn( __METHOD__ );
 		$metadata = $this->getMetadata(true);
 		$ratio = static::$aspectRatio;
-		if (!empty($metadata['aspectRatio'])) {
-			if (floatval($metadata['aspectRatio']) == 0) {
+		if ( !empty($metadata['aspectRatio']) ) {
+			if ( floatval($metadata['aspectRatio']) == 0 ) {
 				error_log("VideoHandler aspectRatio warning: ". $wgCityId . ", ". $this->title);
 			} else {
 				$ratio = $metadata['aspectRatio'];
@@ -144,7 +163,7 @@ abstract class VideoHandler extends BitmapHandler {
 		return $ratio;
 	}
 
-	function getHeight( &$width ){
+	function getHeight( &$width ) {
 
 		$finalHeight =  (
 			( $width / $this->getAspectRatio() ) +
@@ -168,11 +187,12 @@ abstract class VideoHandler extends BitmapHandler {
 
 	/**
 	 * Get metadata. Connects with Api if metadata is not in database.
+	 * @param bool $unserialize
 	 * @return mixed array of data, or serialized version
 	 */
 	function getMetadata( $unserialize = false ) {
 		wfProfileIn( __METHOD__ );
-		if ( empty($this->metadata)) {
+		if ( empty($this->metadata) ) {
 			$this->metadata = $this->getApi() instanceof ApiWrapper
 				? serialize( $this->getApi()->getMetadata() )
 				: null;
@@ -203,8 +223,8 @@ abstract class VideoHandler extends BitmapHandler {
 	 */
 	function getApi() {
 		wfProfileIn( __METHOD__ );
-		if ( !empty( $this->videoId ) && empty( $this->api ) ){
-			$this->api = F::build ( $this->apiName, array( $this->videoId ) );
+		if ( !empty( $this->videoId ) && empty( $this->api ) ) {
+			$this->api = new $this->apiName( $this->videoId );
 		}
 		wfProfileOut( __METHOD__ );
 		return $this->api;
@@ -237,6 +257,15 @@ abstract class VideoHandler extends BitmapHandler {
 	}
 
 	/**
+	 * get expiration date
+	 * @return integer|null
+	 */
+	public function getExpirationDate() {
+		$metadata = $this->getMetadata(true);
+		return (!empty($metadata['expirationDate']) ? $metadata['expirationDate'] : null);
+	}
+
+	/**
 	 *
 	 * @return int duration in seconds, or null
 	 */
@@ -245,35 +274,32 @@ abstract class VideoHandler extends BitmapHandler {
 		return (!empty($metadata['duration']) ? $metadata['duration'] : null);
 	}
 
+	/**
+	 * get formatted duration
+	 * @return string
+	 */
 	public function getFormattedDuration() {
-
-		$metadata = $this->getMetadata(true);
-		if (!empty($metadata['duration'])) {
-
+		$metadata = $this->getMetadata( true );
+		if ( !empty( $metadata['duration'] ) ) {
 			$sec = $metadata['duration'];
-
-			if ( (int)$sec == $sec ) {
-
-				$hms = F::build( 'WikiaFileHelper', array($sec), 'formatDuration' );
-
-				return $hms;
-
+			if ( is_numeric( $sec ) ) {
+				$formattedDuration = WikiaFileHelper::formatDuration( $sec );
+				return $formattedDuration;
 			} else {
-
 				return $metadata['duration'];
 			}
 		}
 
 		return '';
 	}
-	
+
 	/**
 	 * Get the video id that is used for embed code
 	 * @return string
 	 */
 	protected function getEmbedVideoId() {
 		$metadata = $this->getMetadata(true);
-		if (!empty($metadata['altVideoId'])) {
+		if ( !empty($metadata['altVideoId']) ) {
 			return $metadata['altVideoId'];
 		}
 		return $this->videoId;
@@ -288,7 +314,10 @@ abstract class VideoHandler extends BitmapHandler {
 	}
 
 	/**
-	 * Returns fedault thumbnail mime type
+	 * Returns default thumbnail mime type
+	 * @param string $ext File extension
+	 * @param string $mime Mime type of the thumbnail
+	 * @param array $params Additional video handler specific parameters
 	 * @return array thumbnail extension and MIME type
 	 */
 	function getThumbType( $ext, $mime, $params = null ) {
@@ -297,10 +326,14 @@ abstract class VideoHandler extends BitmapHandler {
 
 	/**
 	 * Get the thumbnail code for videos
+	 * @param File $image
+	 * @param String $dstPath
+	 * @param String $dstUrl
+	 * @param Array $params
+	 * @param int $flags
 	 * @return object ThumbnailVideo object or error object
 	 */
 	function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 ) {
-		global $wgOut, $wgExtensionsPath;
 
 		$oThumbnailImage = parent::doTransform( $image, $dstPath, $dstUrl, $params, $flags );
 
@@ -317,7 +350,7 @@ abstract class VideoHandler extends BitmapHandler {
 		);
 	}
 
-	public function addExtraBorder( $width ){
+	public function addExtraBorder( $width ) {
 		return 0;
 	}
 

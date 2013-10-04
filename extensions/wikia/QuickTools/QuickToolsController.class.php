@@ -23,11 +23,11 @@ class QuickToolsController extends WikiaController  {
 	 * Block the target user account
 	 */
 	public function blockUser() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		if ( !$this->wg->User->isAllowed( 'quicktools' ) ) {
 			$this->response->setVal( 'success', false );
 			$this->response->setVal( 'error', wfMessage( 'quicktools-permissionerror' )->plain() );
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 		$target = $this->request->getVal( 'target' );
@@ -56,13 +56,13 @@ class QuickToolsController extends WikiaController  {
 		if ( $retval !== true ) {
 			$this->response->setVal( 'success', false );
 			$this->response->setVal( 'error', wfMessage( $retval )->escaped() );
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 		$this->response->setVal( 'success', true );
 		$this->response->setVal( 'message', wfMessage( 'quicktools-success-block', $target )->escaped() );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -70,11 +70,11 @@ class QuickToolsController extends WikiaController  {
 	 * Revert and/or delete all the target user's edits on a wiki
 	 */
 	public function revertAll() {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		if ( !$this->wg->User->isAllowed( 'quicktools' ) ) {
 			$this->response->setVal( 'success', false );
 			$this->response->setVal( 'error', wfMessage( 'quicktools-permissionerror' )->plain() );
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -88,15 +88,15 @@ class QuickToolsController extends WikiaController  {
 		if ( !$time ) {
 			$time = '';
 		} else {
-			$time = $this->wf->Timestamp( TS_UNIX, $time );
+			$time = wfTimestamp( TS_UNIX, $time );
 			if ( !$time ) {
 				$this->response->setVal( 'success', false );
 				$this->response->setVal( 'error', wfMessage( 'quicktools-invalidtime' )->plain() );
-				$this->wf->ProfileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return true;
 			}
 
-			$time = $this->wf->Timestamp( TS_MW, $time );
+			$time = wfTimestamp( TS_MW, $time );
 		}
 
 		$titles = $this->getRollbackTitles( $target, $time );
@@ -104,7 +104,7 @@ class QuickToolsController extends WikiaController  {
 		if( empty( $titles ) ) {
 			$this->response->setVal( 'success', false );
 			$this->response->setVal( 'error', wfMessage( 'quicktools-notitles' )->plain() );
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
@@ -115,7 +115,7 @@ class QuickToolsController extends WikiaController  {
 		$successMessage = 'quicktools-success' . ( $rollback ? '-rollback' : '' ) . ( $delete ? '-delete' : '' );
 		$this->response->setVal( 'message', wfMessage( $successMessage, $target )->escaped() );
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -127,8 +127,8 @@ class QuickToolsController extends WikiaController  {
 	 * @return Array of page titles to revert
 	 */
 	private function getRollbackTitles( $user, $time ) {
-		$this->wf->ProfileIn( __METHOD__ );
-		$dbr = $this->wf->GetDB( DB_SLAVE );
+		wfProfileIn( __METHOD__ );
+		$dbr = wfGetDB( DB_SLAVE );
 		$titles = array();
 		$where = array(
 			'page_latest = rev_id',
@@ -152,7 +152,7 @@ class QuickToolsController extends WikiaController  {
 			$titles[] = Title::makeTitle( $row->page_namespace, $row->page_title );
 		}
 
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $titles;
 	}
 
@@ -172,19 +172,19 @@ class QuickToolsController extends WikiaController  {
 	private function rollbackTitle(
 		$title, $user, $time, $summary, $rollback = true, $delete = true, $markBot = false
 	) {
-		$this->wf->ProfileIn( __METHOD__ );
+		wfProfileIn( __METHOD__ );
 		// build article object and find article id
 		$article = new Article( $title );
 		$pageId = $article->getID();
 
 		// check if article exists
 		if ( $pageId <= 0 ) {
-			$this->wf->ProfileOut( __METHOD__ );
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		// fetch revisions from this article
-		$dbr = $this->wf->GetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_SLAVE );
 		$res = $dbr->select(
 			'revision',
 			array( 'rev_id', 'rev_user_text', 'rev_timestamp' ),
@@ -216,10 +216,10 @@ class QuickToolsController extends WikiaController  {
 			}
 			$status = $article->doEdit( $text, $summary, $flags );
 			if ( $status->isOK() ) {
-				$this->wf->ProfileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return true;
 			} else {
-				$this->wf->ProfileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		} elseif ( !$revertRevId && $delete ) { // no edits by other users - deleting page
@@ -232,11 +232,11 @@ class QuickToolsController extends WikiaController  {
 				$status = $article->doDeleteArticle( $summary );
 			}
 			if ( $status ) {
-				$this->wf->ProfileOut( __METHOD__ );
+				wfProfileOut( __METHOD__ );
 				return true;
 			}
 		}
-		$this->wf->ProfileOut( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return false;
 	}
 }

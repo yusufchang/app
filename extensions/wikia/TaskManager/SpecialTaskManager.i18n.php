@@ -19,9 +19,12 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Shirayuki
  * @author Siebrand
  */
 $messages['qqq'] = array(
+	'right-taskmanager' => '{{doc-right|taskmanager}}',
+	'right-taskmanager-action' => '{{doc-right|taskmanager-action}}',
 	'action-taskmanager' => '{{doc-action|taskmanager}}',
 );
 
@@ -32,6 +35,19 @@ $messages['af'] = array(
 	'taskmanager' => 'Wys en bestuur agtergrondtake',
 	'taskmanager_title' => 'Wys en bestuur agtergrondtake',
 	'taskmanager_tasklist' => 'Keer terug na taaklys',
+);
+
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'taskmanager' => 'عرض وإدارة مهام في الخلفية',
+	'taskmanager_title' => 'عرض وإدارة مهام في الخلفية',
+	'taskmanager_tasklist' => 'العودة إلى قائمة المهام',
+	'right-taskmanager' => 'يمكنه عرض المهام في الخلفية',
+	'right-taskmanager-action' => 'يمكن إدارة المهام في الخلفية',
+	'taskmanager-invert' => 'اعكس الاختيار',
+	'action-taskmanager' => 'عرض وإدارة المهام في الخلفية',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -54,6 +70,7 @@ $messages['br'] = array(
 );
 
 /** Catalan (català)
+ * @author Marcmpujol
  * @author Paucabot
  * @author SMP
  */
@@ -63,6 +80,8 @@ $messages['ca'] = array(
 	'taskmanager_tasklist' => 'Torna a la Llista de Tasques',
 	'right-taskmanager' => 'Poder mostrar les tasques en segon pla',
 	'right-taskmanager-action' => 'Poder gestionar les tasques en segon pla',
+	'taskmanager-invert' => 'Invertir',
+	'action-taskmanager' => 'Mostra i gestiona les tasques en segon pla',
 );
 
 /** Czech (česky)
@@ -302,6 +321,10 @@ $messages['oc'] = array(
 	'taskmanager' => 'Afichar e gerir los prètzfaches de rèire plan',
 	'taskmanager_title' => 'Afichar e gerir los prètzfaches de rèire plan',
 	'taskmanager_tasklist' => 'Tornar a la lista dels prètzfaches',
+	'right-taskmanager' => 'Pòt afichar los prètzfaches en rèire plan',
+	'right-taskmanager-action' => 'Pòt gerir los prètzfaches en rèire plan',
+	'taskmanager-invert' => 'Inversar la seleccion',
+	'action-taskmanager' => 'afichar e gerir los prètzfaches de rèire plan',
 );
 
 /** Polish (polski)
@@ -349,6 +372,7 @@ $messages['pt'] = array(
  * @author Aristóbulo
  * @author Giro720
  * @author JM Pessanha
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -359,6 +383,19 @@ $messages['pt-br'] = array(
 	'right-taskmanager-action' => 'Pode administrar tarefas de segundo plano',
 	'taskmanager-invert' => 'Inverter seleção',
 	'action-taskmanager' => 'exibir e gerenciar tarefas em segundo plano',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'taskmanager' => "Fà vedè e gestisce le combite sus a 'u sfonde",
+	'taskmanager_title' => "Fà vedè e gestisce le combite sus a 'u sfonde",
+	'taskmanager_tasklist' => "Tuèrne a l'elenghe de le combite",
+	'right-taskmanager' => 'Puà fà vedè le combite de sfonde',
+	'right-taskmanager-action' => 'Puè gestì le combite de sfonde',
+	'taskmanager-invert' => 'Selezione a smerse',
+	'action-taskmanager' => "fà vedè e gestisce le combite sus a 'u sfonde",
 );
 
 /** Russian (русский)
@@ -441,9 +478,29 @@ $messages['tr'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Andriykopanytsia
  * @author Steve.rusyn
+ * @author SteveR
  */
 $messages['uk'] = array(
+	'taskmanager' => 'Показ і управління фоновими завданнями',
+	'taskmanager_title' => 'Показ і управління фоновими завданнями',
 	'taskmanager_tasklist' => 'Повернутися до списку завдань',
+	'right-taskmanager' => 'Можна відображати фонові завдання',
+	'right-taskmanager-action' => 'Можна управляти фоновими завданнями',
 	'taskmanager-invert' => 'Інвертувати виділення',
+	'action-taskmanager' => 'показ і управління фоновими завданнями',
+);
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Yfdyh000
+ */
+$messages['zh-hans'] = array(
+	'taskmanager' => '显示和管理后台任务',
+	'taskmanager_title' => '显示和管理后台任务',
+	'taskmanager_tasklist' => '返回任务列表',
+	'right-taskmanager' => '可以显示后台任务',
+	'right-taskmanager-action' => '可以管理后台任务',
+	'taskmanager-invert' => '反向选择',
+	'action-taskmanager' => '显示和管理后台任务',
 );

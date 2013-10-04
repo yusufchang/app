@@ -76,10 +76,9 @@ class ContactForm extends SpecialPage {
 
 		if( $wgRequest->wasPosted() ) {
 
-			if( $wgUser->isAnon() && class_exists( $wgCaptchaClass ) ){
+			if( $wgUser->isAnon() && class_exists( $wgCaptchaClass ) ) {
 				$captchaObj = new $wgCaptchaClass();
-				//$captchaObj->retrieveCaptcha();
-				$info = $captchaObj->retrieveCaptcha();
+				$info = $captchaObj->passCaptcha();
 			}
 
 			#ubrfzy note: these were moved inside to (lazy) prevent some stupid bots
@@ -136,11 +135,9 @@ class ContactForm extends SpecialPage {
 			}
 
 			#captcha
-			if($wgUser->isAnon()){ // logged in users don't need the captcha (RT#139647)
-				if( class_exists( $wgCaptchaClass ) && !( !empty($info) &&  $captchaObj->keyMatch( $wgRequest->getVal('wpCaptchaWord'), $info )))  {
-					$this->err[] = wfMsg('specialcontact-captchafail');
-					$this->errInputs['wpCaptchaWord'] = true;
-				}
+			if( $wgUser->isAnon() && class_exists( $wgCaptchaClass ) && !$info ) { // logged in users don't need the captcha (RT#139647)
+				$this->err[] = wfMsg('specialcontact-captchafail');
+				$this->errInputs['wpCaptchaWord'] = true;
 			}
 
 			#no errors?
@@ -245,9 +242,13 @@ class ContactForm extends SpecialPage {
 		}
 
 		//smush it all together
-		$info = $this->mBrowser . "\n";
-		$info .= "A/B Tests: " . $this->mAbTestInfo . "\n"; // giving it its own line so that it stands out more
-		$info .= implode("; ", $items) . "\n";
+		$info = $this->mBrowser . "\n\n";
+		if ( !empty($uid) ) {
+		$info .= 'http://community.wikia.com/wiki/Special:LookUpUser/'. urlencode(str_replace(" ", "_", $this->mUserName)) . "\n";
+		}
+		$info .= 'http://community.wikia.com/wiki/Special:LookUpUser/'. $this->mEmail . "\n\n";
+		$info .= "A/B Tests: " . $this->mAbTestInfo . "\n\n"; // giving it its own line so that it stands out more
+		$info .= implode("; ", $items) . "\n\n";
 		//end wikia debug data
 
 		$body = "\n{$this->mProblemDesc}\n\n----\n" . $m_shared . $info;
@@ -638,6 +639,7 @@ class ContactForm extends SpecialPage {
 		}
 
 		// check if exist in tempUser
+		// @TODO get rid of TempUser handling when it will be globally disabled
 		if ( TempUser::getTempUserFromName( $userName ) ) {
 			$this->err[] = wfMsg( 'userlogin-error-userexists' );
 			$this->errInputs['wpUserNameNew'] = true;

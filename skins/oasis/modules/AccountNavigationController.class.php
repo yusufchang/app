@@ -65,16 +65,21 @@ class AccountNavigationController extends WikiaController {
 			//$skin = RequestContext::getMain()->getSkin();
 
 			// where to redirect after login
-			$returnto = wfGetReturntoParam();
-
-			if(empty($wgComboAjaxLogin)) {
-				$signUpHref = Skin::makeSpecialUrl('UserLogin', $returnto);
+			$query = F::app()->wg->Request->getValues();
+			if ( isset($query['title']) ) {
+				if ( !self::isBlacklisted( $query['title'] ) ) {
+					$returnto = $query['title'] ;
+				} else {
+					$returnto = Title::newMainPage()->getPartialURL();
+				}
 			} else {
-				$signUpHref = Skin::makeSpecialUrl('Signup', $returnto);
+				$returnto = Title::newMainPage()->getPartialURL();
 			}
+			$returnto = wfGetReturntoParam($returnto);
+
 			$this->personal_urls['login'] = array(
 				'text' => wfMsg('login'),
-				'href' => $signUpHref . "&type=login",
+				'href' => Skin::makeSpecialUrl('UserLogin', $returnto),
 				'class' => 'ajaxLogin',
 				'afterText' => Xml::element('img', array(
 					'src' => $this->wg->BlankImgUrl,
@@ -86,7 +91,7 @@ class AccountNavigationController extends WikiaController {
 
 			$this->personal_urls['register'] = array(
 				'text' => wfMsg('oasis-signup'),
-				'href' => $signUpHref . "&type=signup",
+				'href' => Skin::makeSpecialUrl('UserSignup', $returnto),
 				'class' => 'ajaxRegister'
 			);
 		}
@@ -131,7 +136,7 @@ class AccountNavigationController extends WikiaController {
 			$dropdownItems = array();
 
 			// Allow hooks to modify the dropdown items.
-			$this->wf->RunHooks( 'AccountNavigationModuleAfterDropdownItems', array(&$possibleItems, &$this->personal_urls) );
+			wfRunHooks( 'AccountNavigationModuleAfterDropdownItems', array(&$possibleItems, &$this->personal_urls) );
 
 			foreach($possibleItems as $item) {
 				if (isset($this->personal_urls[$item])) {
@@ -155,5 +160,21 @@ class AccountNavigationController extends WikiaController {
 		}
 
 		wfProfileOut(__METHOD__);
+	}
+
+	/**
+	 * Checks whether provided string is on blacklist.
+	 *
+	 * @param $haystack String Redirectto page name to be checked against blacklist
+	 * @return bool
+	 */
+	public static function isBlacklisted( $haystack ){
+		$returntoBlacklist = array('Special:UserLogout', 'Special:UserSignup', 'Special:WikiaConfirmEmail', 'Special:Badtitle');
+		foreach ( $returntoBlacklist as $blackItem ) {
+			if ( strpos( $haystack, $blackItem ) === 0 ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

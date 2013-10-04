@@ -68,10 +68,18 @@ Check given username for possible typos.</p>',
  */
 $messages['qqq'] = array(
 	'lookupcontribsgo' => '{{Identical|Go}}',
+	'lookupcontribswiki' => '{{Identical|Wiki}}',
+	'lookupcontribswikiurl' => '{{Identical|URL}}',
+	'lookupcontribswikititle' => '{{Identical|Title}}',
 	'lookupcontribsnext' => '{{Identical|Next}}',
+	'lookupcontribsprevious' => '{{Identical|Previous}}',
+	'lookupcontribspageremoved' => '{{Identical|Removed}}',
+	'lookupcontribsrestore' => '{{Identical|Restore}}',
 	'right-lookupcontribs' => '{{doc-right|lookupcontribs|ns=Wikia}}',
 	'lookupcontribsshowpages' => '',
 	'lookupcontribscontent' => '{{Identical|Content}}',
+	'lookupcontribsnormal' => '{{Identical|Recent}}',
+	'lookupcontribsall' => '{{Identical|All}}',
 	'action-lookupcontribs' => '{{doc-action|lookupcontribs}}',
 );
 
@@ -111,11 +119,60 @@ $messages['af'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author ترجمان05
  */
 $messages['ar'] = array(
+	'lookupcontribs' => 'البحث عن المساهمات',
+	'lookupcontribstitle' => 'البحث عن المساهمات',
+	'lookupcontribsrecentcontributions' => 'مساهمات $1 الحديثة',
+	'lookupcontribsfinalcontributions' => 'مساهمات $1 النهائية',
+	'lookupcontribshelp' => 'يمكن استخدام هذه الصفحة الخاصة لأجل عرض مساهمات أي مستخدم في ويكيات متعددة.
+لعرض القائمة، اكتب اسم المستخدم أدناه.',
+	'lookupcontribusernotspecify' => 'أنت لم تقم بتحديد أي مستخدم.',
 	'lookupcontribsselectuser' => 'اختر مستخدما:',
+	'lookupcontribsselectfor' => 'إختر ل:',
+	'lookupcontribsdisplaymode' => 'كيفية العرض:',
+	'lookupcontribsselectmodenormal' => 'المساهمات الحديثة لذلك المستخدم',
+	'lookupcontribsselectmodefinal' => 'المساهمات النهائية لذلك المستخدم',
+	'lookupcontribsselectmodeall' => 'كل مساهمات ذلك المستخدم',
+	'lookupcontribsfullurls' => 'عناوين URL كاملة',
+	'lookupcontribslinks' => 'روابط المساهمات',
+	'lookupcontribsgo' => 'عرض',
+	'lookupcontribsinvaliduser' => '<p class="error">المستخدم "<b>$1</b>" غير موجود.
+الرجاء التحقق من الاسم المقدم لأي أخطاء ممكنة.</p>',
+	'lookupcontribsinvalidviewmode' => '<p class="error">"<b>$1</b>" ليست طريقة عرض صحيحة.</p>',
+	'lookupcontribsinvalidmode' => '<p class="error">"<b>$1</b>" ليست وضعا صحيحا.</p>',
+	'lookupcontribsselectwikis' => 'حدد الويكيات:',
+	'lookupcontribslistwikiainfo' => 'قائمة الويكيات التي تم تعديل مقالات فيها من قبل <b>$1</b>',
+	'lookupcontribsnoresultfound' => 'لا توجد نتائج',
+	'lookupcontribsinvalidresults' => 'نتائج غير صحيحة!',
+	'lookupcontribswiki' => 'ويكي',
+	'lookupcontribswikidbname' => 'اسم قاعدة البيانات',
+	'lookupcontribswikiurl' => 'عنوان URL',
+	'lookupcontribswikititle' => 'العنوان',
+	'lookupcontribswikioptions' => 'الخيارات',
+	'lookupcontribscontribslink' => 'رابط المساهمات',
+	'lookupcontribsdetails' => 'راجع تفاصيل عن:',
+	'lookupcontribslastedited' => 'آخر تعديل',
+	'lookupcontribsrecordspager' => "عرض من '''$1''' إلى '''$2''' من مجموع '''$3''' سجلا.",
+	'lookupcontribsnbrresult' => 'عدد النتائج:',
+	'lookupcontribsnext' => 'التالي',
+	'lookupcontribsprevious' => 'سابق',
+	'lookupcontribspageremoved' => 'تمت إزالتها:',
+	'lookupcontribsrestore' => 'استرجاع',
+	'lookupcontribslog' => 'سجلات',
+	'lookupcontribscontribs' => 'مساهمات',
+	'lookupcontribshist' => 'تاريخ',
+	'lookupcontribsdiff' => 'فرق',
+	'right-lookupcontribs' => 'عرض عمليات التحرير العامة للمستخدم',
+	'lookupcontribsshowpages' => 'كل الصفحات (في نطاق $1)',
+	'lookupcontribscontent' => 'محتوى',
+	'lookupcontribscontribtitleforuser' => 'مساهمات المستخدم:',
+	'lookupcontribsnormal' => 'الأخيرة',
+	'lookupcontribsfinal' => 'نهائي',
 	'lookupcontribsall' => 'الكل',
+	'action-lookupcontribs' => 'البحث عن مساهمات المستخدم في ويكيات متعددة',
 );
 
 /** Azerbaijani (azərbaycanca)
@@ -201,12 +258,73 @@ $messages['br'] = array(
 	'lookupcontribsall' => 'pep tra',
 );
 
+/** Catalan (català)
+ * @author Alvaro Vidal-Abarca
+ * @author Roxas Nobody 15
+ */
+$messages['ca'] = array(
+	'lookupcontribs' => 'Cerca contribucions',
+	'lookupcontribstitle' => 'Cerca contribucions',
+	'lookupcontribsrecentcontributions' => "Contribucions de l'usuari $1",
+	'lookupcontribsfinalcontributions' => 'Contribucions finals de $1',
+	'lookupcontribshelp' => "Aquesta pàgina especial pot ser utilitzat per mostrar les contribucions dels usuaris en múltiples Wikias.
+Per visualitzar la llista, posa un nom d'usuari sota.",
+	'lookupcontribusernotspecify' => 'No he especificat un usuari encara',
+	'lookupcontribsselectuser' => "Seleccioneu l'usuari:",
+	'lookupcontribsselectfor' => 'Seleccioneu per a:',
+	'lookupcontribsdisplaymode' => "Mode d'exhibició:",
+	'lookupcontribsselectmodenormal' => 'Contribucions recents per aquells usuari',
+	'lookupcontribsselectmodefinal' => "Contribucions finals per a l'usuari",
+	'lookupcontribsselectmodeall' => "Totes les contribucions per a l'usuari",
+	'lookupcontribsfullurls' => 'Enllaços Complets',
+	'lookupcontribslinks' => 'Enllaços de contribucions',
+	'lookupcontribsgo' => 'Anar',
+	'lookupcontribsinvaliduser' => '<p class="error">L\'usuari "<b> $1 </b>" no existeix.
+Registre d\'entrada donat nom d\'usuari per possibles errors tipogràfics.</p>',
+	'lookupcontribsinvalidviewmode' => '<p class="error">"<b> $1 </b>" no és un mode de vista vàlid.</p>',
+	'lookupcontribsinvalidmode' => '<p class="error">"<b> $1 </b>" no és una manera vàlida.</p>',
+	'lookupcontribsselectwikis' => 'Seleccioneu wikis:',
+	'lookupcontribslistwikiainfo' => 'Llista dels wikis on els articles van ser editats per<b>$1</b>',
+	'lookupcontribsnoresultfound' => 'Cap resultat',
+	'lookupcontribsinvalidresults' => 'Resultats no vàlids!',
+	'lookupcontribswiki' => 'Wiki',
+	'lookupcontribswikidbname' => 'Nom de DB',
+	'lookupcontribswikiurl' => 'URL',
+	'lookupcontribswikititle' => 'Títol',
+	'lookupcontribswikioptions' => 'Opcions',
+	'lookupcontribscontribslink' => 'Enllaços de contribucions',
+	'lookupcontribsdetails' => 'Veure detalls a:',
+	'lookupcontribslastedited' => 'Última edició',
+	'lookupcontribsrecordspager' => "S'estan mostrant ' ' $1 ' ' per ' ' $2 ' ' de ' ' $3 ' ' records.",
+	'lookupcontribsnbrresult' => 'Nombre de resultat:',
+	'lookupcontribsnext' => 'Següent',
+	'lookupcontribsprevious' => 'anterior',
+	'lookupcontribspageremoved' => 'Eliminat',
+	'lookupcontribsrestore' => 'Restaurar',
+	'lookupcontribslog' => 'Registre',
+	'lookupcontribscontribs' => 'Contribucions',
+	'lookupcontribshist' => 'Llista',
+	'lookupcontribsdiff' => 'diff',
+	'right-lookupcontribs' => "Veure edicions global de l'usuari",
+	'lookupcontribsshowpages' => "Totes les pàgines (de l'espai de noms $1)",
+	'lookupcontribscontent' => 'Contingut',
+	'lookupcontribscontribtitleforuser' => "Contribucions de l'usuari:",
+	'lookupcontribsnormal' => 'Recents',
+	'lookupcontribsfinal' => 'final',
+	'lookupcontribsall' => 'Tot',
+	'action-lookupcontribs' => "Cerca les aportacions d'un usuari en múltiples wikis",
+);
+
 /** Chechen (нохчийн)
  * @author Sasan700
+ * @author Умар
  */
 $messages['ce'] = array(
 	'lookupcontribs' => 'Къинхьегаме хьажа',
 	'lookupcontribslinks' => 'къинхьегаме хьажориг',
+	'lookupcontribsnoresultfound' => 'ХӀума ца карийна!',
+	'lookupcontribswikititle' => 'ЦӀе',
+	'lookupcontribswikioptions' => 'Параметраш',
 	'lookupcontribscontribslink' => 'Къинхьегаме хьажориг',
 	'lookupcontribscontribs' => 'къинхьегам',
 );
@@ -253,6 +371,16 @@ Zkontrolujte dané uživatelské jméno pro případné překlepy.</p>',
 	'lookupcontribscontribtitleforuser' => 'Příspěvky uživatele:',
 	'lookupcontribsnormal' => 'nedávné',
 	'lookupcontribsall' => 'všechny',
+);
+
+/** Welsh (Cymraeg)
+ * @author Thefartydoctor
+ */
+$messages['cy'] = array(
+	'lookupcontribswiki' => 'Wici',
+	'lookupcontribswikititle' => 'Teitl',
+	'lookupcontribsnext' => 'nesaf',
+	'lookupcontribsprevious' => 'blaenorol',
 );
 
 /** German (Deutsch)
@@ -465,6 +593,29 @@ $messages['fi'] = array(
 	'lookupcontribsnormal' => 'äskettäinen',
 	'lookupcontribsfinal' => 'lopullinen',
 	'lookupcontribsall' => 'kaikki',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'lookupcontribsrecentcontributions' => 'Nýggjastu íkøst hjá $1',
+	'lookupcontribsselectuser' => 'Vel brúkara:',
+	'lookupcontribsgo' => 'Far',
+	'lookupcontribsselectwikis' => 'Vel wikiir:',
+	'lookupcontribslistwikiainfo' => 'Listi yvir wikiir har greinar vóru rættaðar av <b>$1</b>',
+	'lookupcontribsnoresultfound' => 'Ongi úrslit funnin!',
+	'lookupcontribswiki' => 'Wiki',
+	'lookupcontribswikidbname' => 'DB navn',
+	'lookupcontribswikititle' => 'Heiti',
+	'lookupcontribswikioptions' => 'Møguleikar',
+	'lookupcontribslastedited' => 'Seinast rættað',
+	'lookupcontribsnext' => 'næsta',
+	'lookupcontribsprevious' => 'fyrra',
+	'lookupcontribshist' => 'søga',
+	'lookupcontribsdiff' => 'munur',
+	'lookupcontribsshowpages' => 'Allar síður ($1 navnarúm)',
+	'lookupcontribscontent' => 'innihald',
 );
 
 /** French (français)
@@ -687,11 +838,18 @@ $messages['ia'] = array(
 );
 
 /** Indonesian (Bahasa Indonesia)
+ * @author C5st4wr6ch
  * @author Irwangatot
  */
 $messages['id'] = array(
+	'lookupcontribshelp' => 'Halaman khusus ini dapat digunakan untuk menampilkan kontribusi pengguna pada beberapa Wikia. Untuk menampilkan daftar, berikan nama pengguna di bawah ini.',
+	'lookupcontribsselectmodefinal' => 'kontribusi terakhir dari pengguna tersebut',
+	'lookupcontribsinvaliduser' => '<p class="error">Pengguna "<b>$1</b>" tidak ada. Periksa nama pengguna tersebut untuk kemungkinan kesalahan ketik.</p>',
+	'lookupcontribslistwikiainfo' => 'Daftar wiki yang artikelnya telah disunting oleh <b>$1</b>',
 	'lookupcontribswiki' => 'Wiki',
+	'lookupcontribswikiurl' => 'URL',
 	'lookupcontribswikititle' => 'Judul',
+	'lookupcontribsrecordspager' => "Menampilkan '''$1''' sampai '''$2''' dari '''$3''' catatan.",
 	'lookupcontribsnext' => 'selanjutnya',
 	'lookupcontribsdiff' => 'beda',
 	'lookupcontribscontent' => 'isi',
@@ -795,6 +953,7 @@ Vergewëssert Iech datt Dir Iech beim Benotzernumm net vertippt hutt.</p>',
 	'right-lookupcontribs' => 'Déi global Ännerunge vu Benotzer weisen',
 	'lookupcontribsshowpages' => 'All Säiten ($1 Nummraim)',
 	'lookupcontribscontent' => 'Inhalt',
+	'lookupcontribsall' => 'All',
 );
 
 /** Macedonian (македонски)
@@ -1013,6 +1172,7 @@ Sjekk oppgitt brukernavn for mulige skrivefeil.</p>',
 	'lookupcontribsnormal' => 'siste',
 	'lookupcontribsfinal' => 'siste',
 	'lookupcontribsall' => 'alle',
+	'action-lookupcontribs' => 'slå opp en brukers bidrag på flere wikier',
 );
 
 /** Dutch (Nederlands)
@@ -1225,7 +1385,7 @@ $messages['pms'] = array(
 	'lookupcontribsnormal' => 'recent',
 	'lookupcontribsfinal' => 'final',
 	'lookupcontribsall' => 'tuti',
-	'action-lookupcontribs' => "serca le contribussion ëd n'utent dzor wiki mùltiple",
+	'action-lookupcontribs' => "serca le contribussion ëd n'utent dzora vàire wiki",
 );
 
 /** Pashto (پښتو)
@@ -1234,6 +1394,7 @@ $messages['pms'] = array(
 $messages['ps'] = array(
 	'lookupcontribsselectuser' => 'کارن ټاکل:',
 	'lookupcontribsgo' => 'ورځه',
+	'lookupcontribsselectwikis' => 'ويکي ګانې ټاکل:',
 	'lookupcontribswiki' => 'ويکي',
 	'lookupcontribswikititle' => 'سرليک',
 	'lookupcontribswikioptions' => 'خوښنې',
@@ -1244,6 +1405,7 @@ $messages['ps'] = array(
 	'lookupcontribscontribs' => 'ونډې',
 	'lookupcontribshist' => 'پېښليک',
 	'lookupcontribsdiff' => 'توپير',
+	'lookupcontribsshowpages' => 'ټول مخونه ($1 نومتشيالونه)',
 	'lookupcontribscontent' => 'منځپانګه',
 	'lookupcontribscontribtitleforuser' => 'د کارن لپاره ونډې:',
 	'lookupcontribsall' => 'ټول',
@@ -1251,6 +1413,7 @@ $messages['ps'] = array(
 
 /** Portuguese (português)
  * @author Hamilton Abreu
+ * @author Luckas
  */
 $messages['pt'] = array(
 	'lookupcontribs' => 'Procurar Contribuições',
@@ -1260,8 +1423,8 @@ $messages['pt'] = array(
 	'lookupcontribshelp' => 'Esta página especial pode ser usada para apresentar as contribuições de um utilizador em várias Wikias.
 Para apresentar a lista, forneça abaixo o nome do utilizador.',
 	'lookupcontribusernotspecify' => 'Ainda não especificou um utilizador',
-	'lookupcontribsselectuser' => 'Seleccionar o utilizador:',
-	'lookupcontribsselectfor' => 'Seleccionar:',
+	'lookupcontribsselectuser' => 'Selecionar utilizador:',
+	'lookupcontribsselectfor' => 'Selecionar para:',
 	'lookupcontribsdisplaymode' => 'Modo de visionamento:',
 	'lookupcontribsselectmodenormal' => 'contribuições recentes do utilizador',
 	'lookupcontribsselectmodefinal' => 'contribuições finais do utilizador',
@@ -1273,7 +1436,7 @@ Para apresentar a lista, forneça abaixo o nome do utilizador.',
 Verifique se se enganou no nome do utilizador.</p>',
 	'lookupcontribsinvalidviewmode' => '<p class="error">"<b>$1</b>" não é um modo de visionamento válido.</p>',
 	'lookupcontribsinvalidmode' => '<p class="error">"<b>$1</b>" não é um modo válido.</p>',
-	'lookupcontribsselectwikis' => 'Seleccionar wikis:',
+	'lookupcontribsselectwikis' => 'Selecionar wikis:',
 	'lookupcontribslistwikiainfo' => 'Lista de wikis com páginas editadas por <b>$1</b>',
 	'lookupcontribsnoresultfound' => 'Não foi encontrado nenhum resultado!',
 	'lookupcontribsinvalidresults' => 'Resultados são inválidos!',
@@ -1307,6 +1470,7 @@ Verifique se se enganou no nome do utilizador.</p>',
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
  * @author JM Pessanha
+ * @author Luckas
  * @author Luckas Blade
  */
 $messages['pt-br'] = array(
@@ -1322,7 +1486,7 @@ Para apresentar a lista, forneça abaixo o nome do utilizador.',
 	'lookupcontribsdisplaymode' => 'Modo de visionamento:',
 	'lookupcontribsselectmodenormal' => 'contribuições recentes do utilizador',
 	'lookupcontribsselectmodefinal' => 'contribuições finais do utilizador',
-	'lookupcontribsselectmodeall' => 'todas as contribuições do utilizador',
+	'lookupcontribsselectmodeall' => 'todas as contribuições do usuário',
 	'lookupcontribsfullurls' => 'URLs completas',
 	'lookupcontribslinks' => 'links para as contribuições',
 	'lookupcontribsgo' => 'Mostrar',
@@ -1348,14 +1512,14 @@ Verifique se se enganou com o nome do utilizador.</p>',
 	'lookupcontribsprevious' => 'anteriores',
 	'lookupcontribspageremoved' => 'Removidas:',
 	'lookupcontribsrestore' => 'recuperar',
-	'lookupcontribslog' => 'registo',
+	'lookupcontribslog' => 'registro',
 	'lookupcontribscontribs' => 'contribuições',
 	'lookupcontribshist' => 'histórico',
 	'lookupcontribsdiff' => 'diferenças',
-	'right-lookupcontribs' => 'Ver as edições globais do utilizador',
+	'right-lookupcontribs' => 'Ver as edições globais do usuário',
 	'lookupcontribsshowpages' => 'Todas as páginas ($1 espaços nominais)',
 	'lookupcontribscontent' => 'conteúdo',
-	'lookupcontribscontribtitleforuser' => 'Contribuições do utilizador:',
+	'lookupcontribscontribtitleforuser' => 'Contribuições do usuário:',
 	'lookupcontribsnormal' => 'recentes',
 	'lookupcontribsfinal' => 'finais',
 	'lookupcontribsall' => 'todas',
@@ -1381,6 +1545,13 @@ $messages['ro'] = array(
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
+	'lookupcontribs' => 'Cirche Condrebbute',
+	'lookupcontribstitle' => 'Cirche Condrebbute',
+	'lookupcontribsrecentcontributions' => 'Condrebbute recende pe $1',
+	'lookupcontribsfinalcontributions' => 'Condrebbute finale pe $1',
+	'lookupcontribsselectuser' => "Scacchie l'utende:",
+	'lookupcontribsselectfor' => 'Scacchie pe:',
+	'lookupcontribsfullurls' => 'URL comblete',
 	'lookupcontribsgo' => 'Veje',
 	'lookupcontribspageremoved' => 'Luate:',
 );
@@ -1445,6 +1616,7 @@ $messages['ru'] = array(
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * @author Milicevic01
  * @author Rancher
  * @author Verlor
  */
@@ -1457,6 +1629,7 @@ $messages['sr-ec'] = array(
 	'lookupcontribswikidbname' => 'Име базе',
 	'lookupcontribswikiurl' => 'Адреса',
 	'lookupcontribswikititle' => 'Наслов',
+	'lookupcontribswikioptions' => 'Опције',
 	'lookupcontribsdetails' => 'Погледајте детаље за:',
 	'lookupcontribsnbrresult' => 'Број резултата:',
 	'lookupcontribsnext' => 'следеће',
@@ -1640,19 +1813,62 @@ $messages['tt-cyrl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Andriykopanytsia
  * @author Steve.rusyn
+ * @author SteveR
  * @author Тест
  */
 $messages['uk'] = array(
+	'lookupcontribs' => 'Перегляд внесків',
+	'lookupcontribstitle' => 'Перегляд внесків',
+	'lookupcontribsrecentcontributions' => 'Останні внески $1',
+	'lookupcontribsfinalcontributions' => 'Остаточні внески $1',
+	'lookupcontribshelp' => "Цю спеціальну сторінку можна використовувати, щоб відобразити внески користувача на декілька вікій.
+ Для відображення списку вкажіть нижче ім'я користувача.",
+	'lookupcontribusernotspecify' => 'Ви не вказали користувача',
 	'lookupcontribsselectuser' => 'Виберіть користувача:',
+	'lookupcontribsselectfor' => 'Виберіть для:',
+	'lookupcontribsdisplaymode' => 'Режим відображення:',
+	'lookupcontribsselectmodenormal' => 'останні внески цього користувача',
+	'lookupcontribsselectmodefinal' => 'остаточний внесок цього користувача',
+	'lookupcontribsselectmodeall' => 'всі внески цього користувача',
+	'lookupcontribsfullurls' => 'повні URL-адреси',
+	'lookupcontribslinks' => 'посилання на внески',
 	'lookupcontribsgo' => 'Перейти',
+	'lookupcontribsinvaliduser' => '<p class="error">Користувач <b>$1</b> не існує.
+Перевірте, чи немає помилок у вказаному імені користувача.</p>',
+	'lookupcontribsinvalidviewmode' => '<p class="error">"<b> $1 </b>" не є допустимим режимом перегляду.</p>',
+	'lookupcontribsinvalidmode' => '<p class="error">"<b> $1 </b>" не є допустимим режимом.</p>',
+	'lookupcontribsselectwikis' => 'Виберіть вікі:',
+	'lookupcontribslistwikiainfo' => 'Перелік вікі, де статті відредаговані <b>$1</b>',
+	'lookupcontribsnoresultfound' => 'Нічого не знайдено!',
+	'lookupcontribsinvalidresults' => 'Неприпустимі результати!',
+	'lookupcontribswiki' => 'Вікі',
+	'lookupcontribswikidbname' => 'Назва БД',
 	'lookupcontribswikiurl' => 'URL',
+	'lookupcontribswikititle' => 'Заголовок',
 	'lookupcontribswikioptions' => 'Параметри',
+	'lookupcontribscontribslink' => 'Посилання на внески',
+	'lookupcontribsdetails' => 'Подробиці див. на:',
+	'lookupcontribslastedited' => 'Останнє редагування',
+	'lookupcontribsrecordspager' => "Показано від '''$1''' до '''$2''' із '''$3''' записів.",
+	'lookupcontribsnbrresult' => 'Число результатів:',
+	'lookupcontribsnext' => 'наступний',
+	'lookupcontribsprevious' => 'попередній',
+	'lookupcontribspageremoved' => 'Вилучено:',
 	'lookupcontribsrestore' => 'відновити',
 	'lookupcontribslog' => 'журнал',
+	'lookupcontribscontribs' => 'внесок',
 	'lookupcontribshist' => 'історія',
 	'lookupcontribsdiff' => 'різн.',
+	'right-lookupcontribs' => 'Переглянути глобальні зміни користувача',
+	'lookupcontribsshowpages' => 'Усі сторінки ($1  простори імен)',
 	'lookupcontribscontent' => 'вміст',
+	'lookupcontribscontribtitleforuser' => 'Внески користувача:',
+	'lookupcontribsnormal' => 'недавні',
+	'lookupcontribsfinal' => 'остаточні',
+	'lookupcontribsall' => 'усі',
+	'action-lookupcontribs' => 'пошук внесків користувача на декількох вікі',
 );
 
 /** Yiddish (ייִדיש)
@@ -1665,27 +1881,62 @@ $messages['yi'] = array(
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Hydra
+ * @author Liuxinyu970226
+ * @author Yfdyh000
  * @author 乌拉跨氪
  */
 $messages['zh-hans'] = array(
 	'lookupcontribs' => '查阅维基贡献',
 	'lookupcontribstitle' => '查阅维基贡献',
 	'lookupcontribsrecentcontributions' => '最近$1的贡献',
+	'lookupcontribusernotspecify' => '您还没有指定一个用户',
 	'lookupcontribsselectuser' => '选择用户：',
+	'lookupcontribsselectfor' => '搜索：',
+	'lookupcontribsdisplaymode' => '显示模式：',
+	'lookupcontribsselectmodenormal' => '该用户最近的贡献',
+	'lookupcontribsfullurls' => '完整URL',
+	'lookupcontribslinks' => '贡献链接',
 	'lookupcontribsgo' => '去',
+	'lookupcontribsinvaliduser' => '<p class="error">用户“<b>$1</b>”不存在。
+请检查您提供的用户名。</p>',
+	'lookupcontribsinvalidviewmode' => '<p class="error">“<b>$1</b>”不是有效的视图模式。</p>',
+	'lookupcontribsinvalidmode' => '<p class="error">“<b>$1</b>”不是有效的模式。</p>',
 	'lookupcontribsselectwikis' => '选择维基：',
 	'lookupcontribsnoresultfound' => '未找到结果！',
+	'lookupcontribsinvalidresults' => '无效的结果！',
 	'lookupcontribswiki' => '维基',
+	'lookupcontribswikidbname' => '数据库名称',
 	'lookupcontribswikiurl' => 'URL',
 	'lookupcontribswikititle' => '标题',
 	'lookupcontribswikioptions' => '选择',
+	'lookupcontribscontribslink' => '贡献链接',
+	'lookupcontribsdetails' => '查看详情：',
+	'lookupcontribslastedited' => '最后编辑',
+	'lookupcontribsrecordspager' => "显示'''$1'''至'''$2'''项记录，总共'''$3'''项。",
+	'lookupcontribsnbrresult' => '结果数量：',
 	'lookupcontribsnext' => '下一步',
 	'lookupcontribsprevious' => '前一步',
+	'lookupcontribspageremoved' => '移除：',
+	'lookupcontribsrestore' => '恢复',
+	'lookupcontribslog' => '日志',
 	'lookupcontribscontribs' => '贡献',
 	'lookupcontribshist' => '历史',
 	'lookupcontribsdiff' => '不同',
+	'right-lookupcontribs' => '查看用户的全局编辑',
+	'lookupcontribsshowpages' => '所有页面（$1命名空间）',
+	'lookupcontribscontent' => '内容',
 	'lookupcontribsnormal' => '最近',
 	'lookupcontribsfinal' => '最后',
 	'lookupcontribsall' => '全部',
 	'action-lookupcontribs' => '在多个wiki中查询用户的贡献',
+);
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
+ */
+$messages['zh-hant'] = array(
+	'lookupcontribs' => '查詢貢獻',
+	'lookupcontribstitle' => '查詢貢獻',
+	'lookupcontribsrecentcontributions' => '$1最近的貢獻',
+	'lookupcontribsfinalcontributions' => '$1 最近的貢獻',
 );

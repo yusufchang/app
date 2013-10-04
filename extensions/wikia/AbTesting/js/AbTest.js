@@ -16,20 +16,27 @@
 	var AbTest,
 		Wikia = window.Wikia = (window.Wikia || {}),
 		config = Wikia.AbTestConfig || {},
+		logCache = {},
 		serverTimeString = window.varnishTime,
 		serverTime = new Date( serverTimeString ).getTime() / 1000;
 
 	// Function to log different things (could not use Wikia.Log because it may not be available yet)
-	var log = function( methodName, message ) {
+	var log = (function( console ) {
+
 		// Internal logging, becomes a no-op if window.console isn't present
-		if ( window.console && window.console.log ) {
+		return (console && console.log) ? function( methodName, message ) {
 			if ( !message ) {
+				message = methodName;
 				methodName = undefined;
-				message = arguments[0];
 			}
-			window.console.log( 'Wikia.AbTest' + ( methodName ? '.' + methodName + '()' : '' ) + ':', message );
-		}
-	};
+
+			// Don't display duplicate messages (BugId:96400)
+			if ( !logCache[ message ] ) {
+				logCache[ message ] = true;
+				console.log( 'Wikia.AbTest' + ( methodName ? '.' + methodName + '()' : '' ) + ':', message );
+			}
+		} : function() {};
+	})( window.console );
 
 	/* --------------------------- */
 	/* AbTest class implementation */
@@ -113,6 +120,23 @@
 		}
 
 		return list;
+	};
+
+	AbTest.loadExternalData = function( data ) {
+		var index, groupData, html = '';
+		log('init', 'Received external configuration');
+		for ( index in data ) {
+			groupData = data[index];
+			if ( groupData.styles ) {
+				html += '<style>'+groupData.styles+'</style>';
+			}
+			if ( groupData.scripts ) {
+				html += '<script>'+groupData.scripts+'</script>';
+			}
+		}
+		if ( html != '' ) {
+			document.write(html);
+		}
 	};
 
 	// Set up instance methods for AbTest. Allows you to call any of the listed methods
@@ -230,7 +254,8 @@
 		var matches,
 			rTreatmentGroups = /AbTest\.([^=]+)=([^?&]+)/gi,
 			queryString = window.location.search,
-			expName, groupName, exp, slot;
+			expName, groupName, exp, slot,
+			externalIds = [];
 
 		if ( queryString ) {
 			while ( ( matches = rTreatmentGroups.exec( queryString ) ) != null ) {
@@ -252,11 +277,30 @@
 			if ( exp.group || !exp.current || slot < 0 ) {
 				continue;
 			}
+			// Skip this experiment if it's Special Wiki experiment only and this is not a special wiki
+			if (exp.flags && exp.flags.limit_to_special_wikis && !window.wgIsGASpecialWiki) {
+				log('init', 'Skipping experiment ' + expName + ' - not a special Wiki');
+				continue;
+			}
 			for ( groupName in exp.current.groups ) {
 				if ( isInRanges( slot, exp.current.groups[groupName].ranges ) ) {
 					setActiveGroup( expName, groupName );
 				}
 			}
+		}
+
+		// Handle fetching external data
+		for ( expName in experiments ) {
+			exp = experiments[expName];
+			if ( exp.current.external && exp.group ) {
+				externalIds.push(exp.name+'.'+exp.current.id+'.'+exp.group.id);
+			}
+		}
+		if ( externalIds.length > 0 ) {
+			log('init', 'Loading external configuration');
+			var url = '/wikia.php?controller=AbTesting&method=externalData&callback=Wikia.AbTest.loadExternalData&ids=';
+			url += externalIds.join(',');
+			document.write('<scr'+'ipt src="'+encodeURI(url)+'"></script>');
 		}
 	})( AbTest.experiments );
 
@@ -265,8 +309,8 @@
 		var expName, exp;
 		for ( expName in experiments ) {
 			exp = experiments[expName];
-			if ( exp.flags && exp.flags.dw_tracking && exp.group ) {
-				window.WikiaTracker.track({
+			if ( Wikia.Tracker && exp.flags && exp.flags.dw_tracking && exp.group ) {
+				Wikia.Tracker.track({
 					eventName: 'ab_treatment',
 					experiment: exp.name,
 					experimentId: exp.id,

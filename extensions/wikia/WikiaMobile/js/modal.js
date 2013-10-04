@@ -1,11 +1,13 @@
-/*global define, WikiaMobile */
+/*global Features, WikiaMobile */
 /**
  * Full screen modal in Wikia Mobile
  *
  * @author Jakub "Student" Olek
  */
 
-define('modal', ['throbber', 'events', require.optional('ads')], function modal(throbber, events, ads){
+define('modal', ['throbber', 'jquery'], function modal(throbber, $){
+	'use strict';
+
 	var d = document,
 		w = window,
 		html = d.documentElement,
@@ -15,6 +17,7 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 		content,
 		caption,
 		wrapper,
+		$wrapper,
 		closeButton,
 		topBar,
 		position,
@@ -27,6 +30,7 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 	/* private */
 	function setup(){
 		wrapper = d.getElementById('wkMdlWrp');
+		$wrapper = $(wrapper);
 		content = d.getElementById('wkMdlCnt');
 		topBar = d.getElementById('wkMdlTB');
 		toolbar = d.getElementById('wkMdlTlBar');
@@ -37,13 +41,7 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 	}
 
 	function onContentClick(){
-		if(!stopHiding){
-			if(wrapper.className.indexOf('hdn') > -1){
-				showUI();
-			}else{
-				hideUI();
-			}
-		}
+		if(!stopHiding) $wrapper.toggleClass('hdn');
 	}
 
 	function onCloseClick(ev){
@@ -54,27 +52,35 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 	}
 
 	function onHashChange(ev){
-		if(isOpen() && w.location.hash === ''){
+		if(opened && w.location.hash === ''){
 			ev.preventDefault();
 			close();
 		}
 	}
 
 	function onOrientationChange(ev){
-		wrapper.style.minHeight = ev.height + 'px';
-		!w.pageYOffset && w.scrollTo(0, 1);
+		//Setting minHeight is essential to hide url bar in a browser
+		//in GameGuides though there is nothing to hide
 
-		if(typeof onResize == 'function') onResize(ev);
-	}
+		if(!Features.gameguides) {
+			wrapper.style.minHeight = ev.height + 'px';
+		}
 
-	function hideUI(){
-		if(wrapper.className.indexOf('hdn') == -1){
-			wrapper.className += ' hdn';
+		if(!w.pageYOffset) {
+			w.scrollTo(0, 1);
+		}
+
+		if(typeof onResize === 'function') {
+			onResize(ev);
 		}
 	}
 
+	function hideUI(){
+		$wrapper.addClass('hdn');
+	}
+
 	function showUI(){
-		wrapper.className = wrapper.className.replace(' hdn', '');
+		$wrapper.removeClass('hdn');
 	}
 
 	function fixTopBar(){
@@ -86,6 +92,8 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 		options = options || {};
 
 		!created && setup();
+
+		$.event.trigger('ads:unfix');
 
 		var con = options.content,
 			tool = options.toolbar,
@@ -104,6 +112,7 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 				wd = ~~(ev && ev.x - (screen.width / 2)) || 0;
 
 			wrapper.className = '';
+			wrapper.style.display = 'block';
 			wrapper.style.webkitTransform = 'translate(' + wd + 'px,' + ht + 'px) scale(.1)';
 
 			//browser needs time to move whole modal around
@@ -121,7 +130,7 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 			},50);
 
 			//needed for closing modal on back button
-			w.location.hash = "Modal";
+			w.location.hash = 'Modal';
 
 			//hide adress bar on orientation change
 			w.addEventListener('viewportsize', onOrientationChange);
@@ -184,6 +193,7 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 				wrapper.className = 'zoomer';
 
 				setTimeout(function(){
+					wrapper.style.display = 'none';
 					wrapper.style.top = 0;
 
 					content.innerHTML = '';
@@ -207,15 +217,11 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 					}
 				},310);
 
-				ads && ads.fix();
+				$.event.trigger('ads:fix');
 			},10);
 
 			opened = false;
 		}
-	}
-
-	function isOpen(){
-		return opened;
 	}
 
 	function setContent(con){
@@ -249,22 +255,22 @@ define('modal', ['throbber', 'events', require.optional('ads')], function modal(
 		setContent: setContent,
 		open: open,
 		close: close,
-		isOpen: isOpen,
-		getWrapper: function(){
+		isOpen: function () {
+			return opened;
+		},
+		getWrapper: function () {
 			return wrapper;
 		},
 		hideUI: hideUI,
 		showUI: showUI,
-		setStopHiding: function(val){
-			stopHiding = (val) ? true : false;
+		setStopHiding: function (val) {
+			stopHiding = Boolean(val);
 		},
-		addClass: function(classes){
-			if(classes && wrapper.className.indexOf(classes) == -1){
-				wrapper.className += ' ' + classes;
-			}
+		addClass: function (classes) {
+			$wrapper.addClass(classes);
 		},
-		removeClass: function(classes){
-			classes && (wrapper.className = wrapper.className.replace(' ' + classes,''));
+		removeClass: function (classes) {
+			$wrapper.removeClass(classes);
 		}
 	}
 });

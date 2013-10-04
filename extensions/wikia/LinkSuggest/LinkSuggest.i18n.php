@@ -15,6 +15,15 @@ $messages['af'] = array(
 	'tog-disablelinksuggest' => 'Moenie skakel-voorstelle in bron-modus wys nie',
 );
 
+/** Arabic (العربية)
+ * @author Achraf94
+ */
+$messages['ar'] = array(
+	'linksuggest-desc' => 'يقوم باقتراح وصلات للمحررين أثناء التحرير',
+	'tog-disablelinksuggest' => 'عدم إظهار إقتراح الوصلات في وضع المصدر',
+	'tog-redirected-from' => '&ndash; إعادة توجيه من $1',
+);
+
 /** Azerbaijani (azərbaycanca)
  * @author PPerviz
  * @author Wertuose
@@ -31,17 +40,23 @@ $messages['be-tarask'] = array(
 );
 
 /** Breton (brezhoneg)
+ * @author Fohanno
  * @author Gwenn-Ael
  */
 $messages['br'] = array(
-	'tog-disablelinksuggest' => 'Chomp hep diskouez al liammoù kinniget', # Fuzzy
+	'linksuggest-desc' => "Kinnig a ra liammoù d'ar skridaozerien, er prenestr skridaozañ.",
+	'tog-disablelinksuggest' => 'Chomp hep diskouez al liammoù kinniget er mod tarzh',
+	'tog-redirected-from' => '&ndash; adkaset adalek $1',
 );
 
 /** Catalan (català)
+ * @author Marcmpujol
  * @author Paucabot
  */
 $messages['ca'] = array(
-	'tog-disablelinksuggest' => "No mostris suggeriments d'enllaços", # Fuzzy
+	'linksuggest-desc' => "Suggereix enllaços als editors en mode d'edició",
+	'tog-disablelinksuggest' => "No mostris suggeriments d'enllaços en mode font",
+	'tog-redirected-from' => '&ndash; redirigit des de $1',
 );
 
 /** Czech (česky)
@@ -128,9 +143,11 @@ $messages['hsb'] = array(
 
 /** Hungarian (magyar)
  * @author Glanthor Reviol
+ * @author Misibacsi
  * @author TK-999
  */
 $messages['hu'] = array(
+	'linksuggest-desc' => 'Hivatkozásokat javasol a szerkesztőknek a szerkesztési nézetben',
 	'tog-disablelinksuggest' => 'Ne jelenítse meg a hivatkozás-javaslatot forráskódndash;nézetben',
 	'tog-redirected-from' => '&ndash; Az $1 szócikkből átirányítva',
 );
@@ -146,9 +163,11 @@ $messages['ia'] = array(
 /** Indonesian (Bahasa Indonesia)
  * @author Aldnonymous
  * @author Bennylin
+ * @author C5st4wr6ch
  */
 $messages['id'] = array(
 	'tog-disablelinksuggest' => 'Jangan menampilkan saran pranala',
+	'tog-redirected-from' => '&ndash; dialihkan dari $1',
 );
 
 /** Italian (italiano)
@@ -185,7 +204,7 @@ $messages['ksh'] = array(
 	'tog-redirected-from' => '&ndash; ömjeleidt vun $1',
 );
 
-/** Kirghiz (Кыргызча)
+/** Kyrgyz (Кыргызча)
  * @author Growingup
  */
 $messages['ky'] = array(
@@ -206,10 +225,11 @@ $messages['lb'] = array(
 );
 
 /** Latvian (latviešu)
+ * @author Papuass
  * @author Xil
  */
 $messages['lv'] = array(
-	'tog-disablelinksuggest' => 'Neradīt saišu ieteikumus', # Fuzzy
+	'tog-disablelinksuggest' => 'Neradīt saišu ieteikumus izejas koda režīmā',
 );
 
 /** Macedonian (македонски)
@@ -232,8 +252,10 @@ $messages['ms'] = array(
 
 /** Norwegian Bokmål (norsk bokmål)
  * @author Audun
+ * @author Nghtwlkr
  */
 $messages['nb'] = array(
+	'linksuggest-desc' => 'Foreslår lenker til bidragsytere på redigeringsvisningen',
 	'tog-disablelinksuggest' => 'Ikke vis lenkeforslag i kildemodus',
 	'tog-redirected-from' => '&ndash; Omdirigert fra $1',
 );
@@ -259,7 +281,9 @@ $messages['nn'] = array(
  * @author Cedric31
  */
 $messages['oc'] = array(
-	'tog-disablelinksuggest' => 'Far pas veire los ligams suggerits', # Fuzzy
+	'linksuggest-desc' => 'Prepausa de ligams als contributors en edicion',
+	'tog-disablelinksuggest' => 'Afichar pas la suggestion de ligam en mòde font',
+	'tog-redirected-from' => '&ndash; Redirigit dempuèi $1',
 );
 
 /** Polish (polski)
@@ -381,9 +405,12 @@ $messages['tt-cyrl'] = array(
 );
 
 /** Ukrainian (українська)
+ * @author Ua2004
  */
 $messages['uk'] = array(
-	'tog-disablelinksuggest' => 'Не показувати пропозиції посилань', # Fuzzy
+	'linksuggest-desc' => 'Пропонує редакторам посилання в режимі редагування',
+	'tog-disablelinksuggest' => 'Не показувати пропозицій посилань у режимі Вихідного коду',
+	'tog-redirected-from' => '&ndash; перенаправлено з $1',
 );
 
 /** Simplified Chinese (中文（简体）‎)

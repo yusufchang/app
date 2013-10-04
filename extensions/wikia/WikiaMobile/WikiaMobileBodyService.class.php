@@ -15,25 +15,20 @@ class WikiaMobileBodyService extends WikiaService {
 		// this hook allows adding extra HTML just after <body> opening tag
 		// append your content to $html variable instead of echoing
 		// (taken from Monaco skin)
-		$this->wf->RunHooks( 'GetHTMLAfterBody', array ( RequestContext::getMain()->getSkin(), &$afterBodyHtml ) );
+		wfRunHooks( 'GetHTMLAfterBody', array ( RequestContext::getMain()->getSkin(), &$afterBodyHtml ) );
 
 		// this hook is needed for SMW's factbox
-		if ( !$this->wf->RunHooks('SkinAfterContent', array( &$afterContentHookText ) ) ) {
+		if ( !wfRunHooks('SkinAfterContent', array( &$afterContentHookText ) ) ) {
 			$afterContentHookText = '';
 		}
 
 		/* Dont show header if user profile page */
-		if( $this->wg->Title->getNamespace() !== NS_USER ){
+		if( !$this->wg->Title->inNamespace( NS_USER ) ){
 			$this->response->setVal( 'pageHeaderContent', $this->app->renderView( 'WikiaMobilePageHeaderService', 'index' ));
 		}else{
 			$this->response->setVal( 'pageHeaderContent', '');
 		}
 		$this->response->setVal('bodyContent', $bodyContent);
-		$this->response->setVal(
-			'relatedPages',
-			(	!empty( $this->wg->EnableRelatedPagesExt ) &&
-				empty( $this->wg->MakeWikiWebsite ) &&
-				empty( $this->wg->EnableAnswers ) ) ? $this->app->renderView( 'RelatedPagesController', 'index' ) : null);
 
 		$this->response->setVal(
 			'categoryLinks',
@@ -41,14 +36,6 @@ class WikiaMobileBodyService extends WikiaService {
 				'WikiaMobileCategoryService',
 				'index',
 				array( 'categoryLinks' => $categoryLinks )
-			)
-		);
-
-		$this->response->setVal(
-			'navMenu',
-			$this->app->renderView(
-				'WikiaMobileNavigationService',
-				'navMenu'
 			)
 		);
 

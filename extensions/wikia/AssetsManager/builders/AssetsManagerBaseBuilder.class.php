@@ -77,11 +77,12 @@ class AssetsManagerBaseBuilder {
 	}
 
 	public function getCacheDuration() {
-		global $wgStyleVersion;
+		global $wgResourceLoaderMaxage, $wgStyleVersion;
 		if($this->mCb > $wgStyleVersion) {
-			return 10 * 60; // 10 minutes
+			Wikia::log(__METHOD__, false, "shorter TTL set for {$this->mOid}", true);
+			return $wgResourceLoaderMaxage['unversioned'];
 		} else {
-			return 7 * 24 * 60 * 60; // 7 days
+			return $wgResourceLoaderMaxage['versioned'];
 		}
 	}
 
@@ -106,11 +107,11 @@ class AssetsManagerBaseBuilder {
 
 		if($useYUI) {
 			$tempOutFile = tempnam(sys_get_temp_dir(), 'AMOut');
-			shell_exec("nice -n 15 java -jar {$IP}/lib/yuicompressor-2.4.2.jar --type js -o {$tempOutFile} {$tempInFile}");
+			shell_exec("nice -n 15 java -jar {$IP}/lib/vendor/yuicompressor-2.4.2.jar --type js -o {$tempOutFile} {$tempInFile}");
 			$out = file_get_contents($tempOutFile);
 			unlink($tempOutFile);
 		} else {
-			$jsmin = "{$IP}/lib/jsmin";
+			$jsmin = "{$IP}/lib/vendor/jsmin";
 			$out = shell_exec("cat $tempInFile | $jsmin");
 		}
 

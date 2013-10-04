@@ -7,7 +7,9 @@ var mw = ( function ( $, undefined ) {
 
 	/* Private Members */
 
-	var hasOwn = Object.prototype.hasOwnProperty;
+	var hasOwn = Object.prototype.hasOwnProperty,
+		slice = Array.prototype.slice;
+	
 	/* Object constructors */
 
 	/**
@@ -769,7 +771,7 @@ var mw = ( function ( $, undefined ) {
 					// This needs to NOT use mw.log because these errors are common in production mode
 					// and not in debug mode, such as when a symbol that should be global isn't exported
 					if ( window.console && typeof window.console.log === 'function' ) {
-						console.log( 'mw.loader::execute> Exception thrown by ' + module + ': ' + e.message );
+						console.log( 'mw.loader::execute> Exception thrown by ' + module + ': ' + e.message, e );
 					}
 					registry[module].state = 'error';
 				}
@@ -972,6 +974,12 @@ var mw = ( function ( $, undefined ) {
 							}
 		
 							currReqBase = $.extend( { 'version': formatVersionNumber( maxVersion ) }, reqBase );
+							// Wikia change - begin - @author: wladek
+							// PER-58: add style version
+							currReqBase.version = (window.wgStyleVersion ? window.wgStyleVersion + '-' : '')
+								+ currReqBase.version;
+							// Wikia change - end
+
 							currReqBaseLength = $.param( currReqBase ).length;
 							async = true;
 							// We may need to split up the request to honor the query string length limit,
@@ -1488,7 +1496,84 @@ var mw = ( function ( $, undefined ) {
 		user: {
 			options: new Map(),
 			tokens: new Map()
-		}
+		},
+
+		/**
+		 * Registry and firing of events.
+		 *
+		 * MediaWiki has various interface components that are extended, enhanced
+		 * or manipulated in some other way by extensions, gadgets and even
+		 * in core itself.
+		 *
+		 * This framework helps streamlining the timing of when these other
+		 * code paths fire their plugins (instead of using document-ready,
+		 * which can and should be limited to firing only once).
+		 *
+		 * Features like navigating to other wiki pages, previewing an edit
+		 * and editing itself – without a refresh – can then retrigger these
+		 * hooks accordingly to ensure everything still works as expected.
+		 *
+		 * Example usage:
+		 *
+		 *     mw.hook( 'wikipage.content' ).add( fn ).remove( fn );
+		 *     mw.hook( 'wikipage.content' ).fire( $content );
+		 *
+		 * Handlers can be added and fired for arbitrary event names at any time. The same
+		 * event can be fired multiple times. The last run of an event is memorized
+		 * (similar to `$(document).ready` and `$.Deferred().done`).
+		 * This means if an event is fired, and a handler added afterwards, the added
+		 * function will be fired right away with the last given event data.
+		 *
+		 * Like Deferreds and Promises, the mw.hook object is both detachable and chainable.
+		 * Thus allowing flexible use and optimal maintainability and authority control.
+		 * You can pass around the `add` and/or `fire` method to another piece of code
+		 * without it having to know the event name (or `mw.hook` for that matter).
+		 *
+		 *     var h = mw.hook( 'bar.ready' );
+		 *     new mw.Foo( .. ).fetch( { callback: h.fire } );
+		 *
+		 * @class mw.hook
+		 */
+		hook: ( function () {
+			var lists = {};
+
+			/**
+			 * @method hook
+			 * @member mw
+			 * @param {string} name Name of hook.
+			 * @return {mw.hook}
+			 */
+			return function ( name ) {
+				var list = lists[name] || ( lists[name] = $.Callbacks( 'memory' ) );
+
+				return {
+					/**
+					 * Register a hook handler
+					 * @param {Function...} handler Function to bind.
+					 * @chainable
+					 */
+					add: list.add,
+
+					/**
+					 * Unregister a hook handler
+					 * @param {Function...} handler Function to unbind.
+					 * @chainable
+					 */
+					remove: list.remove,
+
+					/**
+					 * Run a hook.
+					 * @param {Mixed...} data
+					 * @chainable
+					 */
+					fire: function () {
+						return list.fireWith( null, slice.call( arguments ) );
+					}
+				};
+			};
+		}() )
+
+
 	};
 	
 })( jQuery );

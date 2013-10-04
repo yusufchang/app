@@ -7,27 +7,28 @@ namespace Wikia\Search\IndexService;
 /**
  * Returns additioanl data about images and videos 
  * @author relwell
+ * @package Search
+ * @subpackage IndexService
  */
 class MediaData extends AbstractService
 {
 	/**
 	 * Extracts data from images and videos
-	 * @see WikiaSearchIndexServiceAbstract::execute()
+	 * @see Wikia\Search\IndexService\AbstractService::execute()
 	 * @return array
 	 */
 	public function execute() {
 		$results = array();
-		
-		if (! ( $this->interface->getNamespaceFromPageId( $this->currentPageId ) == NS_FILE
-			    && $this->interface->pageIdHasFile( $this->currentPageId ) ) ) {
+		$service = $this->getService();
+		if (! ( $service->getNamespaceFromPageId( $this->currentPageId ) == NS_FILE
+			    && $service->pageIdHasFile( $this->currentPageId ) ) ) {
 			return $results;
 		}
 	
-		$fileHelper = new \WikiaFileHelper();
-		$detail     = $this->interface->getMediaDetailFromPageId( $this->currentPageId );
-		$metadata   = $this->interface->getMediaDataFromPageId( $this->currentPageId );
+		$detail     = $service->getMediaDetailFromPageId( $this->currentPageId );
+		$metadata   = $service->getMediaDataFromPageId( $this->currentPageId );
 
-		$results['is_video'] = $this->interface->pageIdIsVideoFile( $this->currentPageId ) ? 'true' : 'false';
+		$results['is_video'] = $service->pageIdIsVideoFile( $this->currentPageId ) ? 'true' : 'false';
 		$results['is_image'] = ( ($detail['mediaType'] == 'image') && $results['is_video'] == 'false' ) ? 'true' : 'false';
 
 		if (! empty( $metadata ) ) {
@@ -40,7 +41,6 @@ class MediaData extends AbstractService
 				 * This maps video metadata field keys to dynamic fields
 				 */
 				$videoMetadataMapper = array(
-						'duration'		=>	'video_duration_i',
 						'provider'		=>	'video_provider_s',
 						'videoId'		=>	'video_id_s',
 						'altVideoId'	=>	'video_altid_s',
@@ -53,6 +53,9 @@ class MediaData extends AbstractService
 					}
 				}
 				// special cases
+				if ( isset( $metadata['duration'] ) ) {
+					$results['video_duration_i'] = (int) $metadata['duration'];
+				}
 				if ( isset( $metadata['hd'] ) ) {
 					$results['video_hd_b'] = empty( $metadata['hd'] ) ? 'false' : 'true';
 				}
@@ -61,6 +64,15 @@ class MediaData extends AbstractService
 				}
 				if ( isset( $metadata['actors'] ) ) {
 					$results['video_actors_txt'] = preg_split( '/, ?/', $metadata['actors'] );
+				}
+				if ( isset( $metadata['keywords'] ) ) {
+					$results['video_keywords_txt'] = explode( ', ', $metadata['keywords'] );
+				}
+				if ( isset( $metadata['tags'] ) ) {
+					$results['video_tags_txt'] = explode( ', ', str_replace( '-', ' ', $metadata['tags'] ) );
+				}
+				if ( isset( $metadata['description'] ) ) {
+					$results['video_description_txt'] = $metadata['description'];
 				}
 			}
 			

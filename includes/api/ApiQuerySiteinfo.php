@@ -93,9 +93,12 @@ class ApiQuerySiteinfo extends ApiQueryBase {
 				case 'showhooks':
 					$fit = $this->appendSubscribedHooks( $p );
 					break;
+				case 'protocols':
+					$fit = $this->appendProtocols( $p );
+					break;
 				default:
 					wfRunHooks( 'UseExternalQuerySiteInfo', array(&$this) );
-					if ( !isset($this->noErrors) ) { 
+					if ( !isset($this->noErrors) ) {
 						ApiBase :: dieDebug( __METHOD__, "Unknown prop=$p" );
 					}
 			}
@@ -355,6 +358,12 @@ class ApiQuerySiteinfo extends ApiQueryBase {
 		$data['activeusers'] = intval( SiteStats::activeUsers() );
 		$data['admins'] = intval( SiteStats::numberingroup( 'sysop' ) );
 		$data['jobs'] = intval( SiteStats::jobs() );
+
+		// Wikia change begin
+		// @author macbre
+		wfRunHooks( 'APIQuerySiteInfoStatistics', array( $this, &$data ) );
+		// Wikia change end
+
 		return $this->getResult()->addValue( 'query', $property, $data );
 	}
 
@@ -525,6 +534,14 @@ class ApiQuerySiteinfo extends ApiQueryBase {
 		return $this->getResult()->addValue( 'query', $property, $hooks );
 	}
 
+	public function appendProtocols( $property ) {
+		global $wgUrlProtocols;
+		// Make a copy of the global so we don't try to set the _element key of it - bug 45130
+		$protocols = array_values( $wgUrlProtocols );
+		$this->getResult()->setIndexedTagName( $protocols, 'p' );
+		return $this->getResult()->addValue( 'query', $property, $protocols );
+	}
+
 	private function formatParserTags( $item ) {
 		return "<{$item}>";
 	}
@@ -576,6 +593,7 @@ class ApiQuerySiteinfo extends ApiQueryBase {
 					'extensiontags',
 					'functionhooks',
 					'showhooks',
+					'protocols'
 				)
 			),
 			'filteriw' => array(
@@ -611,7 +629,8 @@ class ApiQuerySiteinfo extends ApiQueryBase {
 				' skins                 - Returns a list of all enabled skins',
 				' extensiontags         - Returns a list of parser extension tags',
 				' functionhooks         - Returns a list of parser function hooks',
-				' showhooks             - Returns a list of all subscribed hooks (contents of $wgHooks)'
+				' showhooks             - Returns a list of all subscribed hooks (contents of $wgHooks)',
+				' protocols             - Returns a list of protocols that are allowed in external links.',
 			),
 			'filteriw' =>  'Return only local or only nonlocal entries of the interwiki map',
 			'showalldb' => 'List all database servers, not just the one lagging the most',

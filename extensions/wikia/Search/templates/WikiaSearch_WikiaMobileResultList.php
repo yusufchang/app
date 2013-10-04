@@ -8,12 +8,11 @@ if ( count( $results ) ) {
 			'pos' => $pos + (($currentPage - 1) * $resultsPerPage),
 			'query' => $query,
 			'isInterWiki' => $isInterWiki,
-			'relevancyFunctionId' => $relevancyFunctionId
 		);
 
-        if($result instanceof WikiaSearchResultSet) {
-			$props['resultSet'] = $result;
-            echo $app->getView( 'WikiaSearch', 'WikiaMobileResultSet', $props);
+        if( $isInterWiki || $result['exactWikiMatch'] ) {
+			$props['result'] = $result;
+            echo $app->getView( 'WikiaSearch', 'CrossWiki_WikiaMobileResult', $props);
         }
         else {
 			$props['result'] = $result;

@@ -32,7 +32,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 		$actions[] = array(
 			'cmd' => 'add-experiment',
 			'class' => 'add sprite-small',
-			'text' => $this->wf->msg('abtesting-create-experiment'),
+			'text' => wfMsg('abtesting-create-experiment'),
 		);
 		$this->setVal( 'actions', $actions );
 	}
@@ -62,7 +62,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 		$fields['name'] = array(
 			'type' => $hasStarted ? 'display' : 'text',
 			'name' => 'name',
-			'label' => $this->wf->msg('abtesting-heading-name'),
+			'label' => wfMsg('abtesting-heading-name'),
 			'value' => $experiment['name'],
 		);
 
@@ -70,7 +70,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			'type' => 'textarea',
 			'class' => 'fullwidth',
 			'name' => 'description',
-			'label' => $this->wf->msg('abtesting-heading-description'),
+			'label' => wfMsg('abtesting-heading-description'),
 			'value' => $experiment['description'],
 		);
 
@@ -84,7 +84,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			'type' => 'text',
 			'name' => 'start_time',
 			'class' => 'datepicker',
-			'label' => $this->wf->msg('abtesting-heading-start-time'),
+			'label' => wfMsg('abtesting-heading-start-time'),
 			'value' => $lastVersion ? $lastVersion['start_time'] : '',
 		);
 
@@ -92,14 +92,14 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			'type' => 'text',
 			'name' => 'end_time',
 			'class' => 'datepicker',
-			'label' => $this->wf->msg('abtesting-heading-end-time'),
+			'label' => wfMsg('abtesting-heading-end-time'),
 			'value' => $lastVersion ? $lastVersion['end_time'] : '',
 		);
 
 		$fields['ga_slot'] = array(
 			'type' => 'text',
 			'name' => 'ga_slot',
-			'label' => $this->wf->msg('abtesting-heading-ga-slot'),
+			'label' => wfMsg('abtesting-heading-ga-slot'),
 			'value' => $lastVersion ? $lastVersion['ga_slot'] : '',
 		);
 
@@ -112,7 +112,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			$flagFieldConf = array(
 				'type' => 'checkbox',
 				'name' => self::FLAG_FIELD_PREFIX.$name,
-				'label' => $this->wf->msg('abtesting-heading-long-flag-'.$name),
+				'label' => wfMsg('abtesting-heading-long-flag-'.$name),
 			);
 			if ( $abTesting->getFlagState($lastFlags,$flag) ) {
 				$flagFieldConf['attributes']['checked'] = 'checked';
@@ -129,10 +129,14 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 		$rangesInfo = wfMsg( 'abtesting-ranges-info' );
 		foreach ($experiment['groups'] as $group) {
 			$ranges = '';
+			$styles = '';
+			$scripts = '';
 			$groupId = $group['id'];
 
 			if ($lastVersion && !empty($lastVersion['group_ranges'][$groupId])) {
 				$ranges = $lastVersion['group_ranges'][$groupId]['ranges'];
+				$styles = $lastVersion['group_ranges'][$groupId]['styles'];
+				$scripts = $lastVersion['group_ranges'][$groupId]['scripts'];
 			}
 
 			$groups[] = array(
@@ -147,16 +151,20 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			$groups[] = array(
 				'type' => 'text',
 				'name' => 'ranges[]',
+				'class' => 'ranges',
 				'label' => $group['name'] . ' ' . $rangesInfo,
 				'value' => $ranges,
 			);
+
+			$groups[] = $this->getPopupButtonField('Styles','group-styles','styles[]',$styles);
+			$groups[] = $this->getPopupButtonField('Scripts','group-scripts','scripts[]',$scripts);
 
 		}
 
 		$groups[] = array(
 			'type' => 'button',
 			'name' => 'addTreatmentGroup',
-			'content' => $this->wf->msg('abtesting-add-treatment-group'),
+			'content' => wfMsg('abtesting-add-treatment-group'),
 		);
 
 		$fields[] = array(
@@ -167,7 +175,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			'params' => array(
 				'form' => array(
 					'inputs' => $groups,
-					'legend' => $this->wf->msg('abtesting-heading-treatment-groups')
+					'legend' => wfMsg('abtesting-heading-treatment-groups')
 				)
 			),
 		);
@@ -178,7 +186,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			'inputs' => $fields,
 			'submits' => array(
 				array(
-					'value' => F::app()->wf->msg('abtesting-save-button'),
+					'value' => wfMsg('abtesting-save-button'),
 				)
 			)
 		);
@@ -221,7 +229,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 		$exp['actions'][] = array(
 			'cmd' => 'edit-experiment',
 			'class' => 'edit-pencil sprite',
-			'text' => $this->wf->msg('abtesting-edit-button'),
+			'text' => wfMsg('abtesting-edit-button'),
 		);
 	}
 
@@ -299,8 +307,10 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 		$groups = array();
 		foreach ($data['groups'] as $i => $groupName) {
 			$ranges = $data['ranges'][$i];
+			$styles = $data['styles'][$i];
+			$scripts = $data['scripts'][$i];
 
-			if ( empty( $groupName ) && empty( $ranges ) ) {
+			if ( empty( $groupName ) && empty( $ranges ) && empty( $styles ) && empty( $scripts ) ) {
 				continue;
 			}
 
@@ -321,6 +331,8 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 
 			// save group-to-range assignment in a more helpful way
 			$groups[$normalizedName]['ranges'] = $ranges;
+			$groups[$normalizedName]['styles'] = $styles;
+			$groups[$normalizedName]['scripts'] = $scripts;
 
 			// if group doesn't exist schedule it for adding
 			if ( !isset($existingGroups[$normalizedName] ) ) {
@@ -332,6 +344,8 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 			} else {
 				$grpId = $existingGroups[$normalizedName];
 				$this->checkValueChanged(@$info['lastVersion']['group_ranges'][$grpId]['ranges'],$ranges,$versionChanged);
+				$this->checkValueChanged(@$info['lastVersion']['group_ranges'][$grpId]['styles'],$styles,$versionChanged);
+				$this->checkValueChanged(@$info['lastVersion']['group_ranges'][$grpId]['scripts'],$scripts,$versionChanged);
 			}
 
 		}
@@ -413,11 +427,15 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 				// save group ranges
 				foreach ($groups as $normalizedName => $info) {
 					$ranges = $info['ranges'];
+					$styles = $info['styles'];
+					$scripts = $info['scripts'];
 					$grpId = $existingGroups[$normalizedName];
 					$grn = array(
 						'group_id' => $grpId,
 						'version_id' => $verId,
 						'ranges' => $ranges,
+						'styles' => $styles ? $styles : null,
+						'scripts' => $scripts ? $scripts : null,
 					);
 					$abData->saveGroupRange($grn);
 				}
@@ -449,7 +467,7 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 	 */
 	protected function getAbTesting() {
 		if ( !$this->abTesting ) {
-			$this->abTesting = new AbTesting();
+			$this->abTesting = AbTesting::getInstance();
 		}
 		return $this->abTesting;
 	}
@@ -488,4 +506,15 @@ class SpecialAbTestingController extends WikiaSpecialPageController {
 
 		return $info;
 	}
+
+	protected function getPopupButtonField( $caption, $class, $name, $value ) {
+		return array(
+			'type' => 'custom',
+			'class' => 'value-dialog ' . $class . (!empty( $value ) ? ' value-active' : ''),
+			'output' =>
+				"<input name=\"".htmlspecialchars($name)."\" type=\"hidden\" value=\"".htmlspecialchars($value)."\" />".
+				"<span>$caption: <span class=\"value-empty-text\">(none)</span><span class=\"value-present-text\">(present)</span> <a class=\"wikia-button value-edit\">Edit</a></span>",
+		);
+	}
+
 }

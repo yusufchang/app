@@ -6,34 +6,17 @@
 
 class VideoEmbedTool {
 
-	function getMsgVars() {
-	
-	
-		$vars = array(
-			'vet-back', 
-			'vet-imagebutton',
-			'vet-close',
-			'vet-warn1',
-			'vet-warn2',
-			'vet-warn3',
-		);
-		
-		$ret = array();
-		
-		foreach($vars as $var) {
-			$ret[$var] = wfMsg($var);
-		}
-
-		return json_encode($ret);
-	}
-
 	function loadMain( $error = false ) {
-		global $wgContLanguageCode, $wgVETNonEnglishPremiumSearch;
+		global $wgContLanguageCode, $wgVETNonEnglishPremiumSearch, $wgUser;
+
+
+		$showAddVideoBtn = $wgUser->isAllowed('videoupload');
 
 		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
 		$tmpl->set_vars(array(
 				'error'  => $error,
-				'vet_premium_videos_search_enabled' => ($wgContLanguageCode == 'en') || $wgVETNonEnglishPremiumSearch
+				'vet_premium_videos_search_enabled' => ($wgContLanguageCode == 'en') || $wgVETNonEnglishPremiumSearch,
+				'showAddVideoBtn' => $showAddVideoBtn
 				)
 		);
 		return $tmpl->render("main");
@@ -65,10 +48,14 @@ class VideoEmbedTool {
 
 		$embedCode = $file->getEmbedCode(VIDEO_PREVIEW, false, false, true);
 
+		// Loading this to deal with video descriptions
+		$vHelper = new VideoHandlerHelper();
+
 		$props['id'] = $file->getVideoId();
 		$props['vname'] = $file->getTitle()->getText();
-		$props['code'] = is_string($embedCode) ? $embedCode : json_encode($embedCode);
+		$props['code'] = json_encode($embedCode);
 		$props['metadata'] = '';
+		$props['description'] = $vHelper->getVideoDescription($file, false);
 		$props['href'] = $title->getPrefixedText();
 
 		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
@@ -80,6 +67,18 @@ class VideoEmbedTool {
 	function insertVideo() {
 		global $wgRequest, $wgUser, $wgContLang;
 		wfProfileIn(__METHOD__);
+
+		if ( $wgUser->isBlocked() ) {
+			header('X-screen-type: error');
+			wfProfileOut( __METHOD__ );
+			return wfMessage( 'videos-error-blocked-user' );
+		}
+
+		if ( !$wgUser->isAllowed('videoupload') ) {
+			header('X-screen-type: error');
+			wfProfileOut( __METHOD__ );
+			return wfMessage( 'videos-error-admin-only' )->plain();
+		}
 
 		$url = $wgRequest->getVal( 'url' );
 
@@ -103,12 +102,17 @@ class VideoEmbedTool {
 			$file->setVideoId( $apiwrapper->getVideoId() );
 			$file->setProps(array('mime'=>$provider ));
 
+			// Loading this to deal with video descriptions
+			$vHelper = new VideoHandlerHelper();
+
 			$props['id'] = $apiwrapper->getVideoId();
 			$props['vname'] = $apiwrapper->getTitle();
 			$props['metadata'] = '';
+			$props['description'] = $vHelper->getVideoDescription($file);
 			$props['provider'] = $provider;
 
-			$props['code'] = $file->getEmbedCode(VIDEO_PREVIEW, false, false, true);
+			$embed_code = $file->getEmbedCode(VIDEO_PREVIEW, false, false, true);
+			$props['code'] = json_encode($embed_code);
 		} else { // if not a partner video try to parse link for File:
 			$file = null;
 			// get the video name
@@ -151,14 +155,18 @@ class VideoEmbedTool {
 				return wfMsg( 'vet-non-existing' );
 			}
 
+			// Loading this to deal with video descriptions
+			$vHelper = new VideoHandlerHelper();
+
 			$embedCode = $file->getEmbedCode(VIDEO_PREVIEW, false, false, true);
 
 			$props['provider'] = 'FILE';
 			$props['id'] = $file->getHandler()->getVideoId();
 			$props['vname'] = $file->getTitle()->getText();
-			$props['code'] = is_string($embedCode) ? $embedCode : json_encode($embedCode);
+			$props['code'] = json_encode($embedCode);
 			$props['metadata'] = '';
-			$props['premiumVideo'] = ($wgRequest->getVal( 'searchType' ) == 'premium');		
+			$props['description'] = $vHelper->getVideoDescription( $file );
+			$props['premiumVideo'] = ($wgRequest->getVal( 'searchType' ) == 'premium');
 		}
 
 		wfProfileOut(__METHOD__);
@@ -166,9 +174,19 @@ class VideoEmbedTool {
 	}
 
 	function detailsPage($props) {
+		global $wgUser;
+
+
 		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
 
-		$tmpl->set_vars(array('props' => $props, 'screenType' => 'details'));
+		$showAddVideoBtn = $wgUser->isAllowed('videoupload');
+
+		$tmpl->set_vars(
+			array('props' => $props,
+			'screenType' => 'details',
+			'showAddVideoBtn' => $showAddVideoBtn
+		));
+
 		return $tmpl->render('details');
 	}
 
@@ -183,7 +201,7 @@ class VideoEmbedTool {
 		$ns_file = $wgContLang->getFormattedNsText( NS_FILE );
 
 		$name = urldecode( $wgRequest->getVal('name') );
-		
+
 		$embed_code = '';
 		$tag = '';
 		$message = '';
@@ -230,7 +248,13 @@ class VideoEmbedTool {
 				return wfMsg( 'wva-thumbnail-upload-failed' );
 			}
 		}
-		
+
+		$description = urldecode( $wgRequest->getVal('description') );
+
+		// Set the video descriptions
+		$vHelper = new VideoHandlerHelper();
+		$vHelper->setVideoDescription($oTitle, $description);
+
 		$message = wfMsg( 'vet-single-success' );
 		$ns_file = $wgContLang->getFormattedNsText( $title->getNamespace() );
 		$caption = $wgRequest->getVal('caption');
@@ -254,7 +278,7 @@ class VideoEmbedTool {
 		$editingFromArticle = $wgRequest->getVal( 'placeholder' );
 		if( $editingFromArticle ) {
 			Wikia::setVar('EditFromViewMode', true);
-			
+
 			$article_title = $wgRequest->getVal( 'article' );
 			$ns = $wgRequest->getVal( 'ns' );
 			$box = $wgRequest->getVal( 'box' );
@@ -271,9 +295,8 @@ class VideoEmbedTool {
 
 				$placeholder_tag = $placeholder[0];
 				$file = wfFindFile( $title );
-				$thumb = $file->transform( array('width'=>$width) );
-				$embed_code = $thumb->toHtml( array('desc-link' => true) );
-				$html_params = array( 
+				$embed_code = $file->transform( array('width'=>$width) )->toHtml();
+				$html_params = array(
 					'imageHTML' => $embed_code,
 					'align' => $layout,
 					'width' => $width,
@@ -281,21 +304,21 @@ class VideoEmbedTool {
 					'caption' => $caption,
 					'showPictureAttribution' => true,
 				);
-				
+
 				// Get all html to insert into article view page
 				$image_service = F::app()->sendRequest( 'ImageTweaksService', 'getTag', $html_params );
 				$image_data = $image_service->getData();
 				$embed_code = $image_data['tag'];
-	
+
 				// Make output match what's in a saved article
 				if($layout == 'center') {
 					$embed_code = '<div class="center">'.$embed_code.'</div>';
 				}
 
 				$summary = wfMsg( 'vet-added-from-placeholder' );
-	
+
 				$text = substr_replace( $text, $tag, $placeholder[1], strlen( $placeholder_tag ) );
-				
+
 				$button_message = wfMessage('vet-placeholder-return');
 				$success = $article_obj->doEdit( $text, $summary);
 			}
@@ -321,9 +344,9 @@ class VideoEmbedTool {
 	 * @param mixed $provider string or int from $wgVideoMigrationProviderMap
 	 * @param string $videoId
 	 * @param string $videoName
+	 * @param $oTitle
 	 * @return mixed FileRepoStatus or FALSE on error
 	 */
-
 	private function uploadVideoAsFile( $provider, $videoId, $videoName, &$oTitle ) {
 		$oUploader = new VideoFileUploader();
 		$oUploader->setProvider( $provider );
@@ -332,5 +355,4 @@ class VideoEmbedTool {
 		return $oUploader->upload( $oTitle );
 
 	}
-
 }

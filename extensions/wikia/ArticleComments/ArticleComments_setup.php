@@ -93,19 +93,24 @@ if (!empty($wgEnableWallEngine) || !empty($wgEnableArticleCommentsExt) || !empty
 	$wgHooks['BeforePageDisplay'][] = 'ArticleCommentsController::onBeforePageDisplay';
 	$wgHooks['SkinAfterContent'][] = 'ArticleCommentsController::onSkinAfterContent';
 
+	// adding comment_index rows for articles
+	$wgHooks['ArticleDoEdit'][] = 'CommentsIndex::onArticleDoEdit';
+
 	// comments_index table
 	$wgHooks['LoadExtensionSchemaUpdates'][] = 'CommentsIndex::onLoadExtensionSchemaUpdates';
 
 	$wgHooks['FilePageImageUsageSingleLink'][] = 'ArticleCommentInit::onFilePageImageUsageSingleLink';
 }
 
+$wgHooks['BeforeDeletePermissionErrors'][] = 'ArticleComment::onBeforeDeletePermissionErrors';
+
 //JSMEssages setup
-F::build('JSMessages')->registerPackage( 'ArticleCommentsCounter', array(
+JSMessages::registerPackage( 'ArticleCommentsCounter', array(
 	'oasis-comments-header',
 	'oasis-comments-showing-most-recent'
 ));
 
-F::build('JSMessages')->registerPackage( 'WikiaMobileComments', array(
+JSMessages::registerPackage( 'WikiaMobileComments', array(
 	'wikiamobile-article-comments-replies',
 	'wikiamobile-article-comments-view',
 	'wikiamobile-article-comments-post',

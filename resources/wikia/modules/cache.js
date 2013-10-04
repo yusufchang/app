@@ -3,16 +3,20 @@
  *
  * @author Federico "Lox" Lucignano
  * @author Piotr "Rychu" Gabryjeluk
+ * @author Jakub "Gordon" Olek
  */
 
 (function (context) {
 	'use strict';
 
-	var CACHE_VALUE_PREFIX = 'wkch_val_',
-		CACHE_TTL_PREFIX = 'wkch_ttl_',
+	var CACHE_PREFIX = 'wkch_',
+		CACHE_VALUE_PREFIX = CACHE_PREFIX + 'val_',
+		CACHE_TTL_PREFIX = CACHE_PREFIX + 'ttl_',
+		CACHE_VARY_PREFIX = CACHE_PREFIX + 'vary_',
+		storage,
 		undef;
 
-	function cache() {
+	function cache(localStorage, window) {
 		var moduleStorage = {};
 
 		/**
@@ -30,7 +34,7 @@
 			}
 
 			try {
-				return context.localStorage.getItem(key);
+				return localStorage.getItem(key);
 			} catch (err) {
 				return null;
 			}
@@ -47,7 +51,7 @@
 		function uniSet(key, value) {
 			moduleStorage[key] = value;
 			try {
-				context.localStorage.setItem(key, value);
+				localStorage.setItem(key, value);
 			} catch (err) {}
 		}
 
@@ -61,7 +65,7 @@
 		function uniDel(key) {
 			delete moduleStorage[key];
 			try {
-				context.localStorage.removeItem(key);
+				localStorage.removeItem(key);
 			} catch (err) {}
 		}
 
@@ -77,6 +81,7 @@
 		 */
 		function set(key, value, ttl, customNow) {
 			var now = customNow || new Date();
+
 			ttl = parseInt(ttl, 10);
 
 			if (ttl) {
@@ -89,7 +94,7 @@
 		}
 
 		/**
-		 * Delete the value under given key
+		 * Delete the value under given key along with a cachebuster value associated with it
 		 *
 		 * @public
 		 *
@@ -98,6 +103,7 @@
 		function del(key) {
 			uniDel(CACHE_TTL_PREFIX + key);
 			uniDel(CACHE_VALUE_PREFIX + key);
+			uniDel(CACHE_VARY_PREFIX + key);
 		}
 
 		/**
@@ -126,10 +132,49 @@
 			return null;
 		}
 
+		/**
+		 * Set a value under given name that will be vaild as long cachebuster don't get changed
+		 *
+		 * @public
+		 *
+		 * @param {String}  key       Key to save the value at
+		 * @param {Mixed}   value     Any serializable object to store under the key
+		 * @param {Integer} ttl       [OPTIONAL] TTL in seconds.
+		 * @param {Date}    customNow [OPTIONAL] Custom now (date object) for computing TTL
+		 */
+		function setVersioned(key, value, ttl, customNow){
+			set(key, value, ttl, customNow);
+			uniSet(CACHE_VARY_PREFIX + key, window.wgStyleVersion);
+		}
+
+		/**
+		 * Get previously saved value. If value is not available or expired, return null
+		 *
+		 * @public
+		 *
+		 * @param {String} key       Key to get
+		 * @param {Date}   customNow [OPTIONAL] Custom now (date object) for computing TTL
+		 *
+		 * @return {Mixed} The value stored in the key or null
+		 */
+		function getVersioned(key, customNow){
+			var vary = uniGet(CACHE_VARY_PREFIX + key);
+
+			if(!vary || vary == window.wgStyleVersion) {
+				return get(key, customNow);
+			}
+
+			del(key);
+			return null;
+		}
+
 		return {
 			get: get,
 			set: set,
-			del: del
+			del: del,
+			setVersioned: setVersioned,
+			getVersioned: getVersioned,
+			delVersioned: del
 		};
 	}
 
@@ -138,10 +183,16 @@
 		context.Wikia = {};
 	}
 
+	// Trying to access storage with cookies disabled can throw
+	// security exceptions in some browsers like Firefox (BugId:94924)
+	try {
+		storage = context.localStorage;
+	} catch( e ) {}
+
 	//namespace
-	context.Wikia.Cache = cache(window.localStorage);
+	context.Wikia.Cache = cache(storage, context);
 
 	if (context.define && context.define.amd) {
-		context.define('wikia.cache', ['wikia.localStorage'], cache);
+		context.define('wikia.cache', ['wikia.localStorage', 'wikia.window'], cache);
 	}
 }(this));

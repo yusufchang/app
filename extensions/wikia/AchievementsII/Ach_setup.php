@@ -109,7 +109,6 @@ $wgAutoloadClasses[ 'WikiaPhotoGalleryUpload' ] = "{$dir}../WikiaPhotoGallery/Wi
 // I18N
 $wgExtensionMessagesFiles['AchievementsII'] = $dir.'i18n/AchievementsII.i18n.php';
 $wgExtensionMessagesFiles['AchievementsIIAliases'] = $dir.'AchievementsII.alias.php' ;
-$wgExtensionMessagesFiles['AutoCreateWiki'] = $dir.'../AutoCreateWiki/AutoCreateWiki.i18n.php' ;
 
 // Michał Roszka (Mix) <michal@wikia-inc.com>
 // BugId:10474
@@ -215,8 +214,8 @@ function Ach_GetHTMLAfterBody($skin, &$html) {
 				header('X-Pass-Cache-Control: no-store, private, no-cache, must-revalidate');
 			}
 
-			$notificationService = new AchNotificationService();
-			$wgOut->addHTML($notificationService->getNotifcationHTML($wgUser));
+			$notificationService = new AchNotificationService($wgUser);
+			$wgOut->addHTML($notificationService->getNotificationHTML());
 			if( isset($_SESSION['achievementsNewBadges']) )
 				unset($_SESSION['achievementsNewBadges']);
 		}

@@ -23,9 +23,11 @@ $messages['af'] = array(
 );
 
 /** Arabic (العربية)
+ * @author Achraf94
  * @author OsamaK
  */
 $messages['ar'] = array(
+	'randomwiki-desc' => 'يتيح للمستخدمين استكشاف ويكي عشوائي',
 	'randomwiki' => 'ويكي عشوائية',
 );
 
@@ -107,6 +109,14 @@ $messages['fa'] = array(
 $messages['fi'] = array(
 	'randomwiki-desc' => 'Antaa käyttäjien tutkia satunnaista wikiä',
 	'randomwiki' => 'Satunnainen wiki',
+);
+
+/** Faroese (føroyskt)
+ * @author EileenSanda
+ */
+$messages['fo'] = array(
+	'randomwiki-desc' => 'Letur brúkarar granska eina tilvildarliga wiki',
+	'randomwiki' => 'Tilvildarlig Wiki',
 );
 
 /** French (français)
@@ -234,6 +244,14 @@ $messages['nl'] = array(
 	'randomwiki' => 'Willekeurige wiki',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'randomwiki-desc' => "Permet als utilizaires d’explorar un wiki a l'azard",
+	'randomwiki' => "Un wiki a l'azard",
+);
+
 /** Deitsch (Deitsch)
  * @author Xqt
  */
@@ -257,6 +275,13 @@ $messages['pms'] = array(
 	'randomwiki' => "Wiki a l'asar",
 );
 
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'randomwiki' => 'ناټاکلې ويکي',
+);
+
 /** Portuguese (português)
  * @author Hamilton Abreu
  */
@@ -271,6 +296,14 @@ $messages['pt'] = array(
 $messages['pt-br'] = array(
 	'randomwiki-desc' => 'Permite que os usuários explorem uma wiki aleatória',
 	'randomwiki' => 'Wiki Aleatória',
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'randomwiki-desc' => "Lasse le utinde a esplorà 'na uicchi a uecchije",
+	'randomwiki' => 'Uicchi a uecchije',
 );
 
 /** Russian (русский)

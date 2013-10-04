@@ -7,7 +7,7 @@
 
 class ThumbnailVideo extends ThumbnailImage {
 
-//	function ThumbnailVideo( $file, $url, $width, $height, $path = false, $page = false ){
+//	function ThumbnailVideo( $file, $url, $width, $height, $path = false, $page = false ) {
 //
 //		$this->file = $file;
 //
@@ -26,46 +26,43 @@ class ThumbnailVideo extends ThumbnailImage {
 //		$this->page = $page;
 //	}
 
-	function getFile() {
+	function getFile( ) {
 		return $this->file;
 	}
 
-	function getUrl() {
+	function getUrl( ) {
 		return $this->url;
 	}
 
-	function getPath() {
+	function getPath( ) {
 		return $this->path;
 	}
 
-	function getPage() {
+	function getPage( ) {
 		return $this->page;
 	}
 
-	function getWidth() {
+	function getWidth( ) {
 		return $this->width;
 	}
 
-	function getHeight() {
+	function getHeight( ) {
 		return $this->height;
 	}
 
 	/*
 	 * Render video thumbnail as image thumbnail
 	 */
-	function renderAsThumbnailImage($options) {
+	function renderAsThumbnailImage( $options ) {
 
-		$thumb = F::build(
-			'ThumbnailImage',
-			array(
-				"file" => $this->getFile(),
-				"url" => $this->getUrl(),
-				"width" => $this->getWidth(),
-				"height" => $this->getHeight(),
-				"path" => $this->getPath(),
-				"page" => $this->getPage()
-			)
-		); /** @var $thumb ThumbnailImage  */
+		$thumb = new ThumbnailImage(
+				$this->getFile(),
+				$this->getUrl(),
+				$this->getWidth(),
+				$this->getHeight(),
+				$this->getPath(),
+				$this->getPage()
+		);
 
 		// make sure to replace 'image' css class whith 'video' css class
 		// in order to make thumbnail be handled correctly by RTE
@@ -85,7 +82,6 @@ class ThumbnailVideo extends ThumbnailImage {
 
 			$options['img-class'] = "video";
 		}
-
 		return $thumb->toHtml( array('img-class' => $options['img-class']) );
 	}
 
@@ -121,39 +117,15 @@ class ThumbnailVideo extends ThumbnailImage {
 		 */
 		$title = !isset( $options['title'] ) ? $alt : $options['title'];
 
-		$query = empty( $options['desc-query'] )  ? '' : $options['desc-query'];
+		$videoTitle = $this->file->getTitle();
 
-		if ( !empty( $options['custom-url-link'] ) ) {
-			$linkAttribs = array( 'href' => $options['custom-url-link'] );
-			if ( !empty( $options['title'] ) ) {
-				$linkAttribs['title'] = $options['title'];
-			}
-		} elseif ( !empty( $options['custom-title-link'] ) ) {
-			$title = $options['custom-title-link'];
-			$linkAttribs = array(
-				'href' => $title->getLinkUrl(),
-				'title' => empty( $options['title'] ) ? $title->getFullText() : $options['title']
-			);
-		} elseif ( !empty( $options['desc-link'] ) ) {
-			$linkAttribs = $this->getDescLinkAttribs( empty( $options['title'] ) ? null : $options['title'], $query );
-			if ( F::app()->checkSkin( array( 'oasis', 'wikiamobile' ) ) ) {
-				$linkAttribs['data-video-name'] = $this->file->getTitle()->getText();
-				$linkAttribs['href'] = $this->file->getTitle()->getLocalURL();
-				if ( !empty( $options['id'] ) ){
-					$linkAttribs['id'] = $options['id'];
-				}
-			}
-		} elseif ( !empty( $options['file-link'] ) ) {
-			$linkAttribs = array( 'href' => $this->file->getTitle()->getLocalURL() );
-		} else {
-			$linkAttribs = array();
+		$linkAttribs = array(
+			'href' => $videoTitle->getLocalURL(),
+		);
+
+		if ( !empty( $options['id'] ) ) {
+			$linkAttribs['id'] = $options['id'];
 		}
-
-		if ( isset( $options['linkAttribs'] ) && is_array( $options['linkAttribs'] ) ) {
-			$linkAttribs = array_merge( $linkAttribs, $options['linkAttribs'] );
-		}
-
-		$linkAttribs['class'] = empty($linkAttribs['class']) ? 'video' : $linkAttribs['class'].' video';
 
 		if ( $useRDFData ) { // bugId: #46621
 			$linkAttribs['itemprop'] = 'video';
@@ -161,21 +133,33 @@ class ThumbnailVideo extends ThumbnailImage {
 			$linkAttribs['itemtype'] = 'http://schema.org/VideoObject';
 		}
 
+		// let extension override any link attributes
+		if ( isset( $options['linkAttribs'] ) && is_array( $options['linkAttribs'] ) ) {
+			$linkAttribs = array_merge( $linkAttribs, $options['linkAttribs'] );
+		}
+
+		$extraClasses = 'video';
+		if ( empty($options['noLightbox']) ) {
+			$extraClasses .= ' image lightbox';
+		}
+		$linkAttribs['class'] = empty($linkAttribs['class']) ? $extraClasses : $linkAttribs['class'] . ' ' . $extraClasses;
+
 		$attribs = array(
 			'alt' => $alt,
 			'src' => !empty($options['src']) ? $options['src'] : $this->url,
 			'width' => $this->width,
 			'height' => $this->height,
-			'data-video' => $this->file->getTitle()->getText(),
+			'data-video-name' => htmlspecialchars($videoTitle->getText()),
+			'data-video-key' => htmlspecialchars(urlencode($videoTitle->getDBKey())),
 		);
 
 		if ( $useRDFData ) {
 			$attribs['itemprop'] = 'thumbnail';
 		}
 
-	        if ( !empty($options['usePreloading']) ) {
-	            $attribs['data-src'] = $this->url;
-	        }
+        if ( !empty($options['usePreloading']) ) {
+            $attribs['data-src'] = $this->url;
+        }
 
 		if ( $this->file instanceof OldLocalFile ) {
 			$archive_name = $this->file->getArchiveName();
@@ -193,7 +177,7 @@ class ThumbnailVideo extends ThumbnailImage {
 			$attribs['class'] .= ' ' . $options['img-class'];
 		}
 
-		if ($this->file instanceof WikiaLocalFile || $this->file instanceof WikiaForeignDBFile) {
+		if ( $this->file instanceof WikiaLocalFile || $this->file instanceof WikiaForeignDBFile ) {
 			$extraBorder = $this->file->addExtraBorder( $this->width );
 		}
 		if ( !empty( $extraBorder ) ) {
@@ -207,15 +191,14 @@ class ThumbnailVideo extends ThumbnailImage {
 		}
 
 		if ( isset( $options['duration'] ) && $options['duration'] == true ) {
-			$duration = $this->file->getHandler()->getFormattedDuration();
+			$duration = WikiaFileHelper::formatDuration( $this->file->getMetadataDuration() );
 		}
 
 		if ( isset($options['constHeight']) ) {
-
 			$this->appendHtmlCrop($linkAttribs, $options);
 		}
 
-		$html = ( $linkAttribs && isset($linkAttribs['href']) ) ? Xml::openElement( 'a', $linkAttribs ) : '';
+		$html = Xml::openElement( 'a', $linkAttribs );
 
 		if ( isset( $duration ) && !empty( $duration ) ) {
 			$timerProp = array( 'class'=>'timer' );
@@ -228,12 +211,12 @@ class ThumbnailVideo extends ThumbnailImage {
 		if ( !empty( $extraBorder ) ) $playButtonHeight += ( $extraBorder*2 );
 		$html .= WikiaFileHelper::videoPlayButtonOverlay( $this->width, $playButtonHeight );
 		$html .= Xml::element( 'img', $attribs, '', true );
-		
-		
-		if( empty( $options['hideOverlay'] ) ) {
-			$html .= WikiaFileHelper::videoInfoOverlay( $this->width, $this->file->getTitle() );
+
+
+		if ( empty( $options['hideOverlay'] ) ) {
+			$html .= WikiaFileHelper::videoInfoOverlay( $this->width, $videoTitle );
 		}
-		
+
 		$html .= ( $linkAttribs && isset($linkAttribs['href']) ) ? Xml::closeElement( 'a' ) : '';
 
 		//give extensions a chance to modify the markup
@@ -243,7 +226,7 @@ class ThumbnailVideo extends ThumbnailImage {
 		return $html;
 	}
 
-	private function appendHtmlCrop( &$linkAttribs, $options) {
+	private function appendHtmlCrop( &$linkAttribs, $options ) {
 
 		if ( !isset( $linkAttribs['style'] ) ) $linkAttribs['style'] = '';
 
