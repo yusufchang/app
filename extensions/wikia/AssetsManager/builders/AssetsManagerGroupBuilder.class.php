@@ -46,7 +46,13 @@ class AssetsManagerGroupBuilder extends AssetsManagerBaseBuilder {
 					}
 				}
 			} else {
-				$this->mContent .= file_get_contents($IP . '/' . $asset);
+				$assetFile = $IP . '/' . $asset;
+
+				if (file_exists($assetFile)) {
+					$this->mContent .= file_get_contents($assetFile);
+				} else {
+					Wikia::log(__METHOD__, false, "{$asset} does not exist");
+				}
 			}
 
 

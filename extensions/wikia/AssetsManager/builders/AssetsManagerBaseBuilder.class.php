@@ -5,6 +5,10 @@
  */
 
 class AssetsManagerBaseBuilder {
+	const MINIFY_METHOD_JS_UGLIFYJS = 'uglifyjs';
+	const MINIFY_METHOD_LEGACY = 'legacy';
+
+	const SERIALIZED_FILE = 'preprocessed-asset-hashes.ser';
 
 	protected $mOid;
 	protected $mType;
@@ -41,11 +45,14 @@ class AssetsManagerBaseBuilder {
 				$minifyTimeStart = microtime( true );
 			}
 
-			if ( $this->mContentType == AssetsManager::TYPE_CSS ) {
-				$newContent = $this->minifyCSS( $this->mContent );
-
-			} else if ( $this->mContentType == AssetsManager::TYPE_JS ) {
-				$newContent = self::minifyJS( $this->mContent, ( $this->mOid == 'oasis_shared_js' || $this->mOid == 'rte' ) ? true : false );
+			$newContent = self::getPreProcessedAsset($this->mOid);
+			if (!$newContent) {
+				if ( $this->mContentType == AssetsManager::TYPE_CSS ) {
+					$newContent = $this->minifyCSS( $this->mContent );
+				} elseif ( $this->mContentType == AssetsManager::TYPE_JS ) {
+					$useYUI = $this->mOid == 'oasis_shared_js' || $this->mOid == 'rte';
+					$newContent = self::minifyJS( $this->mContent, $useYUI );
+				}
 			}
 		}
 
@@ -99,24 +106,32 @@ class AssetsManagerBaseBuilder {
 	}
 
 	public static function minifyJS($content, $useYUI = false) {
-		global $IP;
+		global $IP, $wgMinifyMethod;
 		wfProfileIn(__METHOD__);
 
 		$tempInFile = tempnam(sys_get_temp_dir(), 'AMIn');
 		file_put_contents($tempInFile, $content);
 
-		if($useYUI) {
-			$tempOutFile = tempnam(sys_get_temp_dir(), 'AMOut');
-			shell_exec("nice -n 15 java -jar {$IP}/lib/vendor/yuicompressor-2.4.2.jar --type js -o {$tempOutFile} {$tempInFile}");
-			$out = file_get_contents($tempOutFile);
-			unlink($tempOutFile);
-		} else {
-			$jsmin = "{$IP}/lib/vendor/jsmin";
-			$out = shell_exec("cat $tempInFile | $jsmin");
+		switch ($wgMinifyMethod) {
+			case self::MINIFY_METHOD_JS_UGLIFYJS:
+				$tempOutFile = tempnam( sys_get_temp_dir(), 'AMOut' );
+				shell_exec("uglifyjs -m -c warnings=false -o {$tempOutFile} < {$tempInFile}");
+				$out = file_get_contents($tempOutFile);
+				unlink($tempOutFile);
+				break;
+			default:
+				if ( $useYUI ) {
+					$tempOutFile = tempnam( sys_get_temp_dir(), 'AMOut' );
+					shell_exec( "nice -n 15 java -jar {$IP}/lib/vendor/yuicompressor-2.4.2.jar --type js -o {$tempOutFile} {$tempInFile}" );
+					$out = file_get_contents( $tempOutFile );
+					unlink( $tempOutFile );
+				} else {
+					$jsmin = "{$IP}/lib/vendor/jsmin";
+					$out = shell_exec( "cat $tempInFile | $jsmin" );
+				}
 		}
 
 		unlink($tempInFile);
-
 		wfProfileOut(__METHOD__);
 		return $out;
 	}
@@ -126,5 +141,30 @@ class AssetsManagerBaseBuilder {
 		$out = Minify_CSS_Compressor::process($content);
 		wfProfileOut(__METHOD__);
 		return $out;
+	}
+
+	protected static function getPreProcessedAsset( $oid ) {
+		global $IP, $wgAssetsManagerAllowedPreProcessedAssets;
+
+		if ( !$wgAssetsManagerAllowedPreProcessedAssets ) {
+			return false;
+		}
+
+		static $preProcessedAssets = null;
+		if ( !isset( $preProcessedAssets[ $oid ] ) ) {
+			$preProcessedAssets = wfGetPrecompiledData( self::SERIALIZED_FILE );
+		}
+
+		if ( !isset( $preProcessedAssets[ $oid ] ) ) {
+			return false;
+		}
+
+		$assetFile = "{$IP}/resources/preProcessed/{$preProcessedAssets[$oid]}";
+
+		if ( !file_exists( $assetFile ) ) {
+			return false;
+		}
+
+		return file_get_contents( $assetFile );
 	}
 }

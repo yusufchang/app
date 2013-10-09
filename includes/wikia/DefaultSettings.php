@@ -1180,3 +1180,15 @@ $wgPagesWithNoAdsForLoggedInUsersOverriden = array();
  * Default is 'corporate' (LB+MR+skin only); 'all' may be useful sometimes
  */
 $wgPagesWithNoAdsForLoggedInUsersOverriden_AD_LEVEL = null;
+
+/**
+ * @name $wgAssetsManagerAllowedPreProcessedAssets
+ * whether or not we should prioritize using pre-processed assets (if available)
+ */
+$wgAssetsManagerAllowedPreProcessedAssets = false;
+
+/**
+ * @name $wgMinifyMethod
+ * the method used to minify assets (js/css) in AssetsManager
+ */
+$wgMinifyMethod = 'legacy';
