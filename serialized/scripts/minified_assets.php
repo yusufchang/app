@@ -4,6 +4,11 @@ if ( defined( 'MEDIAWIKI' ) ) {
 }
 
 require_once( dirname( __FILE__ ) . '/../../maintenance/commandLine.inc' );
+define( 'ASSET_ARCHIVE_DIR', '/home/nelson/asset-bak' ); // TODO: what's a good default for this?
+
+if (isset($argv[1])) {
+	assetDir($argv[1]);
+}
 
 $preProcessedDataDir = dirname( __FILE__ ) . '/../../resources/preProcessed';
 $serializedOutputFile = dirname( __FILE__ ) . '/../' . AssetsManagerBaseBuilder::SERIALIZED_FILE;
@@ -45,29 +50,30 @@ $fileList = [ ];
 findAssetFiles( $IP, $fileList );
 
 foreach ( array_unique( $fileList ) as $file ) {
-	preg_match( '/\.(js|css)$/', $file, $match );
-	$dataOut = trim( file_get_contents( "{$IP}/{$file}" ) );
-
-	switch ( $match[ 1 ] ) {
-		case 'js':
-			$dataOut = AssetsManagerBaseBuilder::minifyJS( $dataOut );
-			break;
-		default:
-			continue;
-	}
-
-	$hash = md5( $dataOut );
+	$filePath = "{$IP}/{$file}";
+	list($hash) = explode(" ", shell_exec( "md5sum {$filePath}" ));
 	$targetOut = "{$preProcessedDataDir}/{$hash}";
 
-	if ( file_put_contents( $targetOut, $dataOut ) ) {
+	if ( !file_exists( assetArchive($hash) ) ) {
+		$dataOut = AssetsManagerBaseBuilder::minifyJS( trim( file_get_contents( $filePath ) ) );
+
+		if (empty($dataOut)) {
+			echo "ERROR: empty data result for {$file}\n";
+		} elseif ( file_put_contents( $targetOut, $dataOut ) ) {
+			copy( $targetOut, assetArchive( $hash ) );
+			$hashes[ $file ] = $hash;
+		}
+	} elseif ( copy( assetArchive( $hash ), $targetOut ) ) {
 		$hashes[ $file ] = $hash;
+	} else {
+		echo "ERROR: unable to complete asset {$file}\n";
 	}
 }
 
 file_put_contents( $serializedOutputFile, serialize( $hashes ) );
 
 function findAssetFiles( $directory, &$fileList ) {
-	$newFiles = glob( "{$directory}/**.{js,css}", GLOB_BRACE );
+	$newFiles = glob( "{$directory}/**.js" );
 	array_walk( $newFiles, function ( &$file ) {
 		global $IP;
 		$file = str_replace( "{$IP}/", '', $file );
@@ -79,4 +85,24 @@ function findAssetFiles( $directory, &$fileList ) {
 	foreach ( $dirs as $dir ) {
 		findAssetFiles( $dir, $fileList );
 	}
+}
+
+function assetArchive( $md5 ) {
+	return assetDir() . "/{$md5}";
+}
+
+function assetDir($dir=null) {
+	static $assetDir = null;
+
+	if ($assetDir === null) {
+		echo "setting assetDir to ".ASSET_ARCHIVE_DIR."\n";
+		$assetDir = ASSET_ARCHIVE_DIR;
+	}
+
+	if ($dir !== null && is_dir($dir) ) {
+		echo "setting assetDir to {$dir}\n";
+		$assetDir = $dir;
+	}
+
+	return $assetDir;
 }
