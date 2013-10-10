@@ -6,8 +6,8 @@ if ( defined( 'MEDIAWIKI' ) ) {
 require_once( dirname( __FILE__ ) . '/../../maintenance/commandLine.inc' );
 define( 'ASSET_ARCHIVE_DIR', '/home/nelson/asset-bak' ); // TODO: what's a good default for this?
 
-if (isset($argv[1])) {
-	assetDir($argv[1]);
+if (isset($argv[2])) {
+	assetDir($argv[2]);
 }
 
 $preProcessedDataDir = dirname( __FILE__ ) . '/../../resources/preProcessed';
