@@ -65,16 +65,19 @@ class AssetsManagerBaseBuilder {
 				}
 
 				if ( $minifyTimeStart ) {
-					$this->mProfilerData[] = "Minification time: " . intval( ( $timeEnd - $minifyTimeStart ) * 1000 ) . "ms";
+//					$this->mProfilerData[] = "Minification time: " . intval( ( $timeEnd - $minifyTimeStart ) * 1000 ) . "ms";
 				}
 
 				$oldSize = intval( strlen( $this->mContent ) / 1024 );
 				$newSize = intval( strlen( $newContent ) / 1024 );
 
-				$this->mProfilerData[] = "Compressed Size: " . $newSize . "kb";
-				$this->mProfilerData[] = "Compression Ratio: " . intval( ( 1 - ( $newSize / $oldSize ) ) * 100 ) . "%";
+				$compressedContent = gzcompress($newContent);
+				$compressedSize = strlen($compressedContent) > 1024 ? intval(strlen($compressedContent) / 1024)."kb" : strlen($compressedContent)."B";
 
-				$newContent = "/* " . implode( " | ", $this->mProfilerData ) . " */\n\n" . $newContent;
+				$this->mProfilerData[] = "Original Size: {$oldSize}kb";
+				$this->mProfilerData[] = "Minified Size: " . $newSize . "kb";
+				$this->mProfilerData[] = "Minification Ratio: " . intval( ( 1 - ( $newSize / $oldSize ) ) * 100 ) . "%";
+				$this->mProfilerData[] = "Compressed Size: {$compressedSize}";
 			}
 
 			$this->mContent = $newContent;
@@ -166,5 +169,9 @@ class AssetsManagerBaseBuilder {
 		}
 
 		return file_get_contents( $assetFile );
+	}
+
+	public function profilerData() {
+		return $this->mProfilerData;
 	}
 }

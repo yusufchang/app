@@ -1,4 +1,11 @@
 <?php
+global $optionsWithArgs;
+
+$optionsWithArgs = [
+	'assetDir',
+	'statsFile',
+];
+
 if ( defined( 'MEDIAWIKI' ) ) {
 	exit( 1 );
 }
@@ -6,8 +13,14 @@ if ( defined( 'MEDIAWIKI' ) ) {
 require_once( dirname( __FILE__ ) . '/../../maintenance/commandLine.inc' );
 define( 'ASSET_ARCHIVE_DIR', '/home/nelson/asset-bak' ); // TODO: what's a good default for this?
 
-if (isset($argv[2])) {
-	assetDir($argv[2]);
+if (isset($options['assetDir'])) {
+	assetDir($options['assetDir']);
+}
+
+$statsFile = null;
+if (isset($options['statsFile'])) {
+	$statsFile = $options['statsFile'];
+	file_put_contents($statsFile, '');
 }
 
 $preProcessedDataDir = dirname( __FILE__ ) . '/../../resources/preProcessed';
@@ -17,11 +30,15 @@ $wgAssetsManagerAllowedPreProcessedAssets = false;
 
 $hashes = array();
 $config = new AssetsConfig();
+
+$params = 'minify=true';
+if ($statsFile) {
+	$params .= '&forceprofile=1';
+}
+
 $request = new FauxRequest( [
 	'type' => 'group',
-	'params' => [
-		'minify' => true,
-	]
+	'params' => $params,
 ] );
 
 if ( !is_dir( $preProcessedDataDir ) ) {
@@ -31,6 +48,10 @@ if ( !is_dir( $preProcessedDataDir ) ) {
 // build up group files
 $targetGroups = $config->getGroupNames();
 foreach ( $targetGroups as $groupName ) {
+	if ($config->getGroupType($groupName) != AssetsManager::TYPE_JS) {
+		continue;
+	}
+
 	$request->setVal( 'oid', $groupName );
 	$builder = new AssetsManagerGroupBuilder( $request );
 	$content = $builder->getContent();
@@ -42,6 +63,10 @@ foreach ( $targetGroups as $groupName ) {
 		echo "ERROR writing $groupName: 0 length!\n";
 	} elseif ( file_put_contents( $targetOut, $dataOut ) ) {
 		$hashes[ $groupName ] = $hash;
+	}
+
+	if ($statsFile) {
+		logStats($statsFile, $groupName, $builder->profilerData());
 	}
 }
 
@@ -55,12 +80,20 @@ foreach ( array_unique( $fileList ) as $file ) {
 	$targetOut = "{$preProcessedDataDir}/{$hash}";
 
 	if ( !file_exists( assetArchive($hash) ) ) {
-		$dataOut = AssetsManagerBaseBuilder::minifyJS( trim( file_get_contents( $filePath ) ) );
+		$originalContent = trim(file_get_contents( $filePath ));
+
+		if (empty($originalContent)) {
+			echo "ERROR: file has 0 length: {$file}\n";
+			continue;
+		}
+
+		$dataOut = AssetsManagerBaseBuilder::minifyJS( trim( $originalContent ) );
 
 		if (empty($dataOut)) {
 			echo "ERROR: empty data result for {$file}\n";
 		} elseif ( file_put_contents( $targetOut, $dataOut ) ) {
 			copy( $targetOut, assetArchive( $hash ) );
+			prepareAndLogStats($statsFile, $file, $originalContent, $dataOut);
 			$hashes[ $file ] = $hash;
 		}
 	} elseif ( copy( assetArchive( $hash ), $targetOut ) ) {
@@ -105,4 +138,28 @@ function assetDir($dir=null) {
 	}
 
 	return $assetDir;
+}
+
+function logStats($statsFile, $header, $stats) {
+	file_put_contents($statsFile, "{$header}\n", FILE_APPEND);
+	foreach ($stats as $stat) {
+		file_put_contents($statsFile, "\t{$stat}\n", FILE_APPEND);
+	}
+}
+
+function prepareAndLogStats($statsFile, $file, $original, $new) {
+	$oldSize = intval(strlen($original) / 1024);
+	$newSize = intval(strlen($new) / 1024);
+
+	$compressedContent = gzcompress($new);
+	$compressedSize = strlen($compressedContent) > 1024 ? intval(strlen($compressedContent) / 1024)."kb" : strlen($compressedContent)."B";
+
+	$log = [
+		"Original Size: {$oldSize}kb",
+		"Minified Size: {$newSize}kb",
+		"Minification Ratio: ".intval( ( 1 - ( $newSize / $oldSize ) ) * 100 ) . "%",
+		"Compressed Size: {$compressedSize}",
+	];
+
+	logStats($statsFile, $file, $log);
 }
