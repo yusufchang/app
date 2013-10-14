@@ -65,7 +65,7 @@ class AssetsManagerBaseBuilder {
 				}
 
 				if ( $minifyTimeStart ) {
-//					$this->mProfilerData[] = "Minification time: " . intval( ( $timeEnd - $minifyTimeStart ) * 1000 ) . "ms";
+					$this->mProfilerData[] = "Minification time: " . intval( ( $timeEnd - $minifyTimeStart ) * 1000 ) . "ms";
 				}
 
 				$oldSize = intval( strlen( $this->mContent ) / 1024 );

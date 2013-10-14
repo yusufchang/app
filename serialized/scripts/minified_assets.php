@@ -87,13 +87,15 @@ foreach ( array_unique( $fileList ) as $file ) {
 			continue;
 		}
 
+		$start = microtime(true);
 		$dataOut = AssetsManagerBaseBuilder::minifyJS( trim( $originalContent ) );
+		$compressionTime = intval((microtime(true) - $start)/1000);
 
 		if (empty($dataOut)) {
 			echo "ERROR: empty data result for {$file}\n";
 		} elseif ( file_put_contents( $targetOut, $dataOut ) ) {
 			copy( $targetOut, assetArchive( $hash ) );
-			prepareAndLogStats($statsFile, $file, $originalContent, $dataOut);
+			prepareAndLogStats($statsFile, $file, $originalContent, $dataOut, $compressionTime);
 			$hashes[ $file ] = $hash;
 		}
 	} elseif ( copy( assetArchive( $hash ), $targetOut ) ) {
@@ -147,7 +149,11 @@ function logStats($statsFile, $header, $stats) {
 	}
 }
 
-function prepareAndLogStats($statsFile, $file, $original, $new) {
+function prepareAndLogStats($statsFile, $file, $original, $new, $compressionTime) {
+	if (!$statsFile) {
+		return;
+	}
+
 	$oldSize = intval(strlen($original) / 1024);
 	$newSize = intval(strlen($new) / 1024);
 
@@ -155,6 +161,7 @@ function prepareAndLogStats($statsFile, $file, $original, $new) {
 	$compressedSize = strlen($compressedContent) > 1024 ? intval(strlen($compressedContent) / 1024)."kb" : strlen($compressedContent)."B";
 
 	$log = [
+		"Minification time: {$compressionTime}ms",
 		"Original Size: {$oldSize}kb",
 		"Minified Size: {$newSize}kb",
 		"Minification Ratio: ".intval( ( 1 - ( $newSize / $oldSize ) ) * 100 ) . "%",
