@@ -27,6 +27,15 @@ class Base
 			'nolang_txt'        => 10,
 			'backlinks_txt'     => 25,
 			];
+
+	protected $entertainmentQueryFields = [
+		'title'             => 100,
+		'html'              => 5,
+		'redirect_titles'   => 50,
+		'categories'        => 25,
+		'nolang_txt'        => 10,
+		'backlinks_txt'     => 25,
+	];
 	
 	/**
 	 * Query fields to boost for the cross-wiki core
@@ -77,6 +86,8 @@ class Base
 		switch ( $queryService ) {
 		    case '\\Wikia\\Search\\QueryService\\Select\\Dismax\\InterWiki':
 		    	return $this->interWikiQueryFields;
+			case '\\Wikia\\Search\\QueryService\\Select\\Dismax\\OnEntertainment':
+				return $this->entertainmentQueryFields;
 		    case '\\Wikia\\Search\\QueryService\\Select\\Dismax\\Video':
 		    case '\\Wikia\\Search\\QueryService\\Select\\Dismax\\VideoEmbedTool':
 		    case '\\Wikia\\Search\\QueryService\\Select\\Dismax\\CombinedMedia':

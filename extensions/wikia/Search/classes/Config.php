@@ -706,8 +706,8 @@ class Config
 	 * @param  boolean $apply
 	 * @return Wikia\Search\Config provides fluent interface
 	 */
-	public function setOnWiki( $apply ) {
-		return $this->setQueryService( 'Select\\Dismax\\OnWiki', $apply );
+	public function setOnEntertainment( $apply ) {
+		return $this->setQueryService( 'Select\\Dismax\\OnEntertainment', $apply );
 	}
 
 	/**
