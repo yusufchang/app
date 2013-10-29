@@ -74,7 +74,7 @@ class OnEntertainment extends AbstractDismax
 				->setMaxCollationTries( self::SPELLING_MAX_COLLATION_TRIES )
 				->setMaxCollations( self::SPELLING_MAX_COLLATIONS )
 				->setExtendedResults( true )
-				->setCollateParam( 'fq', 'is_content:true AND wid:'.$this->config->getCityId() )
+				->setCollateParam( 'fq', '(episode) AND is_content:true AND wid:'.$this->config->getCityId() )
 				->setOnlyMorePopular( true )
 				->setCollateExtendedResults( true )
 			;
