@@ -7,6 +7,6 @@ namespace Wikia\Sass;
  *
  * @author Władysław Bodzek <wladek@wikia-inc.com>
  */
-class Exception extends \Exception {
+class Exception extends \WikiaException {
 
 }
