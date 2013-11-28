@@ -97,8 +97,7 @@ ve.ui.PagedLayout.prototype.addPage = function ( name, config ) {
  * @chainable
  */
 ve.ui.PagedLayout.prototype.clearPages = function () {
-	var pages = this.pagesPanel.getItems(),
-			page;
+	var pages = this.pagesPanel.getItems();
 
 	this.currentPageName = null;
 	this.pages = {};
