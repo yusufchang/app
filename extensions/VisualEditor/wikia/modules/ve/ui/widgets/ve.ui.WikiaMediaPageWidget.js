@@ -81,6 +81,8 @@ ve.ui.WikiaMediaPageWidget = function VeUiWikiaMediaPageWidget( model, config ) 
 		// TODO: support embdedded video
 		this.setupVideoOverlay();
 	}
+
+	this.inputTimeout = null;
 };
 
 /* Inheritance */
@@ -110,7 +112,18 @@ ve.ui.WikiaMediaPageWidget.prototype.getModel = function () {
  * @method
  */
 ve.ui.WikiaMediaPageWidget.prototype.onTitleKeyup = function () {
-	this.model.setTitle( this.title.$input.val() );
+	var oldTitle = this.model.title,
+			context = this;
+	if ( this.inputTimeout ) {
+		clearTimeout( this.inputTimeout );
+		this.inputTimeout = null;
+	}
+	
+	this.inputTimeout = setTimeout( function () {
+		context.model.setTitle( context.title.$input.val() );
+		// We need the old title to update old page references
+		context.emit( 'change', context.model, oldTitle );
+	}, 500 );
 };
 
 /**

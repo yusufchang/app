@@ -248,7 +248,10 @@ ve.ui.WikiaMediaInsertDialog.prototype.onCartModelAdd = function ( items ) {
 			config.$license = this.$$( this.license.html );
 		}
 		page = new ve.ui.WikiaMediaPageWidget( item, config );
-		page.connect( this, { 'remove': 'onMediaPageRemove' } );
+		page.connect( this, {
+			'remove': 'onMediaPageRemove',
+			'change': 'onMediaPageChange'
+		} );
 		this.pages.addPage( item.title, { '$content': page.$ } );
 	}
 
@@ -291,7 +294,19 @@ ve.ui.WikiaMediaInsertDialog.prototype.setPage = function ( name ) {
 ve.ui.WikiaMediaInsertDialog.prototype.getDefaultPage = function () {
 	return this.queryInput.getValue().trim().length === 0 ? 'main' : 'search';
 };
-
+/**
+ * Handles title input changes to cart item
+ *
+ * @method
+ * @param {ve.dm.WikiaCartItem} item The cart item model
+ * @param {String} The previous title which will also be the page's key in page store
+ */
+ve.ui.WikiaMediaInsertDialog.prototype.onMediaPageChange = function ( item, oldPageName ) {
+	this.pages.pages[ item.title ] = this.pages.pages[ oldPageName ];
+	this.setPage( item.title );
+	this.pages.getPage( item.title ).$.find( 'input' ).focus();
+	delete this.pages.pages[ oldPageName ];
+};
 /**
  * Handle clicks on the file page remove item button.
  *
@@ -338,6 +353,7 @@ ve.ui.WikiaMediaInsertDialog.prototype.onClose = function ( action ) {
 		this.insertMedia( ve.copy( this.cartModel.getItems() ) );
 	}
 	this.cartModel.clearItems();
+	this.pages.clearPages();
 	this.queryInput.setValue( '' );
 };
 
