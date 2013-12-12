@@ -39,7 +39,10 @@ class ChatHelper {
 			}
 		}
 
-		$status = false;
+		$status = [
+			'online' => false,
+			'inviteUrl' => ''
+		];
 
 		return true;
 	}

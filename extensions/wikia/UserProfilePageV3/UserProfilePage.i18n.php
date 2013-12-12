@@ -129,6 +129,7 @@ $messages['en'] = array(
 
 	'userprofilepage-edit-modal-error' => 'Unexpected error occurred',
 	'user-identity-box-start-chat' => 'Start private chat with $1',
+	'user-identity-box-invite-to-chat' => 'Invite $1 to chat',
 );
 
 /** Message documentation (Message documentation)

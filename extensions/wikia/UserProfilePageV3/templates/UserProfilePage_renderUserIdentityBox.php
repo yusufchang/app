@@ -39,6 +39,7 @@
 					<?php if ( $chatStatus[ 'online' ] ): ?>
 						<a class="WikiaChatLink" href="<?=$chatStatus['url'] ?>"><?= wfMessage('user-identity-box-start-chat', [ $user[ 'name' ] ])->plain(); ?></a>
 					<? else: ?>
+						<a class="WikiaChatInvite" href="#" data-username='<?= htmlentities($user[ 'name' ], ENT_QUOTES); ?>' ><?= wfMessage('user-identity-box-invite-to-chat', [ $user[ 'name' ] ])->plain(); ?></a>
 					<? endif; ?>
 				</span>
 			<? endif; ?>

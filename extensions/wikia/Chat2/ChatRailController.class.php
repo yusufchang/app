@@ -18,6 +18,18 @@ class ChatRailController extends WikiaController {
 		$this->response->getView()->setTemplatePath( dirname( __FILE__ ) .'/templates/entryPointTag.tmpl.php' );
 	}
 
+	public function executeInviteUser() {
+		global $wgUser, $wgRequest;
+		if (!$wgUser->isAnon()) {
+			$username = $wgRequest->getVal('username');
+			error_log('MECH inviting ' . $username);
+			$this->status = true;
+			$this->message = wfMessage( 'chat-invitation-sent', [ $username ] )->plain();
+		} else {
+			$this->status = false;
+		}
+	}
+
 	public function executeAnonLoginSuccess() {
 		wfProfileIn( __METHOD__ );
 

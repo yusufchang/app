@@ -12,8 +12,15 @@ var ChatEntryPoint = {
 				event.stopPropagation();
 				ChatEntryPoint.onClickChatButton(this.href);
 			});
+			$('body').on('click', '.WikiaChatInvite', function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				ChatEntryPoint.onClickChatInvite(this.getAttribute('data-username'));
+			});
+
 			ChatEntryPoint.bindComplete = true;
 		}
+
 		// check if content was pre-rendered to JS variable
 		if (window.wgWikiaChatUsers) {
 			ChatEntryPoint.initEntryPoint();
@@ -22,6 +29,25 @@ var ChatEntryPoint = {
 			ChatEntryPoint.loading = true;
 			ChatEntryPoint.loadChatUsers();
 		}
+	},
+
+	onClickChatInvite: function(username) {
+		$.nirvana.sendRequest(
+			{
+				controller: 'ChatRailController',
+				method: 'InviteUser',
+				type: 'POST',
+				format: 'json',
+				data: {
+					username: username
+				},
+				callback: function(response) {
+					if (response.status == true) {
+						window.GlobalNotification.show(response.message, 'confirm');
+					}
+				}
+			}
+		);
 	},
 
 	loadChatUsers: function() {

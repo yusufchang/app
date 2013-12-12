@@ -118,7 +118,8 @@ $messages['en'] = array(
     'chat-browser-is-notsupported' => '	Your browser is not supported. For the best experience, use a <a href="http://community.wikia.com/wiki/Help:Supported_browsers">newer browser</a>.',
     'chat-checkuser-join-action' => 'Joined Chat',
     
-    'chat-status-away' => 'Away'
+    'chat-status-away' => 'Away',
+	'chat-invitation-sent' => 'Your chat invitation was sent to $1',
 );
 
 /** Message documentation (Message documentation)
