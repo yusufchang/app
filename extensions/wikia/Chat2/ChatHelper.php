@@ -26,6 +26,24 @@ class ChatHelper {
 		return true;
 	}
 
+	static public function onUserProfileChatStatus($user, &$status) {
+		$users = ChatEntryPoint::getChatUsersInfo();
+
+		foreach($users as $chatUser) {
+			if ( $chatUser['username'] == $user->getName() ) {
+				$status = [
+					'online' => true,
+					'url' => SpecialPage::getTitleFor( 'Chat' )->escapeLocalUrl( 'private=' . urlencode( $user->getName() ) )
+				];
+				return true;
+			}
+		}
+
+		$status = false;
+
+		return true;
+	}
+
 	/**
 	 * $mode - true = operation, false = failover
 	 */

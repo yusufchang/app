@@ -133,6 +133,13 @@ class UserProfilePageController extends WikiaController {
 		$this->setVal('isWikiStaff', $sessionUser->isAllowed('staff'));
 		$this->setVal('canEditProfile', ($isUserPageOwner || $sessionUser->isAllowed('staff') || $sessionUser->isAllowed('editprofilev3')));
 
+		$chatStatus = null;
+		if ( !$user->isAnon() ) {
+			wfRunHooks( 'UserProfileChatStatus', [ $user, &$chatStatus ] );
+		}
+		$this->setVal( 'chatStatus', $chatStatus );
+
+
 		if (!empty($this->title)) {
 			$this->setVal('reloadUrl', htmlentities($this->title->getFullUrl(), ENT_COMPAT, 'UTF-8'));
 		} else {

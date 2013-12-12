@@ -204,6 +204,29 @@ var NodeRoomController = $.createClass(Observable,{
 		this.model.chats.add(chatEntry);
 	},
 
+	getQueryString: function() {
+		// This function is anonymous, is executed immediately and
+		// the return value is assigned to QueryString!
+		var query_string = {};
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i=0;i<vars.length;i++) {
+			var pair = vars[i].split("=");
+			// If first entry with this name
+			if (typeof query_string[pair[0]] === "undefined") {
+				query_string[pair[0]] = pair[1];
+				// If second entry with this name
+			} else if (typeof query_string[pair[0]] === "string") {
+				var arr = [ query_string[pair[0]], pair[1] ];
+				query_string[pair[0]] = arr;
+				// If third or later entry with this name
+			} else {
+				query_string[pair[0]].push(pair[1]);
+			}
+		}
+		return query_string;
+	},
+
 	onInitial: function(message) {
 		if(!this.isInitialized){
 
@@ -220,6 +243,10 @@ var NodeRoomController = $.createClass(Observable,{
 			if(this.isMain()) {
 				var newChatEntry = new models.InlineAlert({text: $.msg('chat-welcome-message', wgSiteName ) });
 				this.model.chats.add(newChatEntry);
+				var params = this.getQueryString();
+				if (params.private) {
+					this.privateMessage({name: params.private});
+				}
 			}
 
 			this.userMain = this.model.users.findByName(wgUserName);

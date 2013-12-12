@@ -157,9 +157,31 @@ var ChatEntryPoint = {
 		});
 	},
 
+	chatWindowHandle: null,
+
+	openChatWindow: function(link) {
+		if (ChatEntryPoint.chatWindowHandle) {
+			try
+			{
+				ChatEntryPoint.chatWindowHandle.window.location.href;
+			}
+			catch(err)
+			{
+				console.log('Invalid chat window');
+				ChatEntryPoint.chatWindowHandle = null;
+			}
+		}
+		if (!ChatEntryPoint.chatWindowHandle) {
+			ChatEntryPoint.chatWindowHandle = window.open(link, 'wikiachat', window.wgWikiaChatWindowFeatures);
+		} else {
+			// @todo - if the window is already open, we can call ChatEntryPoint.chatWindowHandle.window.mainRoom to
+			// open private channel
+		}
+	},
+
 	onClickChatButton: function(linkToSpecialChat) {
 		if (window.wgUserName) {
-			window.open(linkToSpecialChat, 'wikiachat', window.wgWikiaChatWindowFeatures);
+			ChatEntryPoint.openChatWindow( linkToSpecialChat );
 		} else {
 			UserLoginModal.show({
 				persistModal: true,
@@ -211,9 +233,10 @@ var ChatEntryPoint = {
 		Wikia.Querystring().addCb().goTo();
 	},
 
+
 	launchChatWindow: function( event, chatLaunchModal ) {
 		var pageLink = $( '#modal-join-chat-button').data('chat-page' );
-		window.open( pageLink, 'wikiachat', window.wgWikiaChatWindowFeatures );
+		ChatEntryPoint.openChatWindow( pageLink );
 		if( chatLaunchModal ) {
 			chatLaunchModal.trigger( 'close' );
 		}

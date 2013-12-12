@@ -20,7 +20,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
-	
+
 	<div class="masthead-info">
 		<hgroup>
 			<? if( !empty($user['realName']) ): ?>
@@ -34,6 +34,15 @@
 					<span class="tag"><?= $tag; ?></span>
 				<?php endforeach; ?>
 			<? endif; ?>
+			<? if (!$isUserPageOwner && !is_null($chatStatus)): ?>
+				<span>
+					<?php if ( $chatStatus[ 'online' ] ): ?>
+						<a class="WikiaChatLink" href="<?=$chatStatus['url'] ?>"><?= wfMessage('user-identity-box-start-chat', [ $user[ 'name' ] ])->plain(); ?></a>
+					<? else: ?>
+					<? endif; ?>
+				</span>
+			<? endif; ?>
+
 		</hgroup>
 
 		<? if( $canEditProfile ): ?>
