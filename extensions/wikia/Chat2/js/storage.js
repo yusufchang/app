@@ -286,14 +286,15 @@ RedisStorage.prototype = {
 	},
 
 	removeInvitation: function(cityId, invitedUserName, invitingUserName, callback, errback, both) {
-		self._hdel( this.config.getKey_chatInvitation( cityId, invitedUserName ), invitingUserName, callback,
+		logger.critical("Removing invitations from " + invitingUserName + ' to ' + invitedUserName);
+		this._hdel( this.config.getKey_chatInvitation( cityId, invitedUserName ), invitingUserName, callback,
 			"Error while removing invitation for " + cityId + " from " + invitingUserName + " to " + invitedUserName,
 			errback, both);
 	},
 
 	removeInvitesForUser: function(cityId, invitedUserName, callback, errback, both) {
 		logger.critical("Removing invitations for " + invitedUserName);
-		self._del( this.config.getKey_chatInvitation( cityId, invitedUserName ), callback,
+		this._del( this.config.getKey_chatInvitation( cityId, invitedUserName ), callback,
 			"Error while removing invitations for " + cityId + ":" + invitedUserName,
 			errback, both
 		);

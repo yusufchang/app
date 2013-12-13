@@ -48,7 +48,7 @@ var ChatEntryPoint = {
 	installKeepAlive: function() {
 		if (window.wgUserName) {    // not for anons, that would kill us
 			ChatEntryPoint.keepAlive();
-			setInterval( ChatEntryPoint.keepAlive, 1000 * 60 );
+			setInterval( ChatEntryPoint.keepAlive, 1000 * 15 ); // WARNING: for hackaton demo presentation purposes only!!!
 		}
 	},
 
@@ -70,7 +70,7 @@ var ChatEntryPoint = {
 							showDuration: "slow",
 							showAnimation: function(d) { this.fadeIn(d); }
 						});
-						setTimeout(function() {$('#WallNotifications').hideBalloon({})}, 3000);
+						setTimeout(function() {$('#WallNotifications').hideBalloon({})}, 20000);
 					}
 				}
 			}
