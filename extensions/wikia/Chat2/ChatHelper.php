@@ -191,6 +191,7 @@ class ChatHelper {
 				$vars[ 'wgWikiaChatProfileAvatarUrl' ] = AvatarService::getAvatarUrl( $wgUser->getName(), ChatRailController::AVATAR_SIZE );
 			}
 			$vars['wgWikiaChatMonts'] = $wgLang->getMonthAbbreviationsArray();
+			$vars['wgHideWikiaOnlineStatus'] = $wgUser->getOption('hideonlinestatus');
 		} else {
 			$vars[ 'wgWikiaChatUsers' ] = '';
 		}
@@ -341,5 +342,20 @@ class ChatHelper {
 		}
 
 		return wfMsg('chat-'.$action.'-log-entry', $link, $time, $endon );
+	}
+
+	public static function onGetPreferences( $user, &$preferences ) {
+		global $wgEnableUserPreferencesV2Ext;
+		$section = ( !empty( $wgEnableUserPreferencesV2Ext ) ) ? 'under-the-hood/advanced-displayv2' : 'misc';
+
+		if( $user->isLoggedIn() ) {
+			$preferences[ 'hideonlinestatus' ] = [
+				'type' => 'toggle',
+				'label-message' => 'chat-hide-online-status',
+				'section' => $section
+			];
+		}
+
+		return true;
 	}
 }

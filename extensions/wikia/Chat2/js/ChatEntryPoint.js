@@ -30,7 +30,9 @@ var ChatEntryPoint = {
 				ChatEntryPoint.onIgnoreChatInvitation(this.getAttribute('data-username'));
 			});
 
-			ChatEntryPoint.installKeepAlive();
+			if (!window.wgHideWikiaOnlineStatus) {
+				ChatEntryPoint.installKeepAlive();
+			}
 
 			ChatEntryPoint.bindComplete = true;
 		}

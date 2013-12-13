@@ -12,6 +12,7 @@
 @import "skins/oasis/css/core/layout";
 @import "skins/oasis/css/core/modal";
 @import "skins/oasis/css/core/reset";
+@import "skins/oasis/css/core/GlobalNotification";
 @import "skins/oasis/css/core/typography";
 @import "extensions/wikia/WikiaStyleGuide/css/Form";
 
@@ -96,6 +97,15 @@ a {
 	height: 40px;
 	margin: 10px;
 	position: relative;
+
+	.WikiaPageContentWrapper {
+		position: relative;
+		width: 80%;
+		left: 20%;
+		z-index: 123214;
+		top: -30px;
+	}
+
 	.User {
 		border-left: 1px solid $color-page-border;
 		height: 26px;
@@ -410,4 +420,8 @@ a {
 	.splotch {
 		top: 6px;
 	}
+}
+
+#WikiaInviteToChat {
+	margin-left: 30px;
 }

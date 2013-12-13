@@ -116,6 +116,7 @@ $wgHooks[ 'LogLine' ][] = 'ChatHelper::onLogLine';
 $wgHooks[ 'UserGetRights' ][] = 'chatAjaxonUserGetRights';
 $wgHooks[ 'GetIP' ][] = 'ChatAjax::onGetIP'; // used for calls from chat nodejs server
 $wgHooks[ 'UserProfileChatStatus' ][] = 'ChatHelper::onUserProfileChatStatus';
+$wgHooks[ 'GetPreferences' ][] = 'ChatHelper::onGetPreferences';
 
 // logs
 $wgLogTypes[] = 'chatban';
@@ -142,6 +143,7 @@ JSMessages::registerPackage('ChatBanModal', array(
 	'chat-ban-modal-change-ban-heading',
 	'chat-ban-modal-button-cancel',
 	'chat-ban-modal-button-ok',
+	'chat-invite-modal-button-ok',
 	'chat-ban-modal-button-change-ban',
 ));
 

@@ -46,6 +46,8 @@ $messages['en'] = array(
     
     'chat-ban-undolink' => 'undo',
     'chat-ban-modal-button-ok' => 'Ban this user',
+	'chat-invite-modal-button-ok' => 'Invite selected user',
+	'chat-invite-modal-choose-user' => 'List of online users',
     
     'chat-ban-modal-button-change-ban' => 'Change Ban',
     'chat-ban-modal-button-cancel' => 'Cancel',
@@ -122,6 +124,7 @@ $messages['en'] = array(
 	'chat-invitation-sent' => 'Your chat invitation was sent to $1',
 	'chat-invitation' => '$1 invites you to chat',
 	'chat-accept-invitation' => 'Join Chat',
+	'chat-hide-online-status' => 'Don\'t show when I\'m online on my profile page'
 );
 
 /** Message documentation (Message documentation)

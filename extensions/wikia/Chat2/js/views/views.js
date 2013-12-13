@@ -454,6 +454,10 @@ var NodeChatUsers = Backbone.View.extend({
 				$('#WikiChatList').slideDown('fast');
 			}
 		});
+
+		$('#WikiaInviteToChat').click(function() {
+			var chatInviteModal = new ChatInviteModal();
+		});
 	},
 
 	triggerEvents: {

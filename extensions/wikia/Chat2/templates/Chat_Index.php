@@ -35,6 +35,9 @@
 			<span class="font-<?= $themeSettings['wordmark-font']?>"><?= $themeSettings['wordmark-text'] ?></span>
 			<? } ?>
 			</a>
+			<div class="WikiaPageContentWrapper" style="position: relative; z-index: 123456;">
+
+			</div>
 		</h1>
 		<h1 class="private"></h1>
 		<div class="User"></div>
@@ -53,8 +56,12 @@
 				<span id="MsgCount_<?php echo $roomId ?>" class="splotch">0</span>
 			</h1>
 			<ul id="WikiChatList" class="WikiChatList"></ul>
+			<div id="WikiaInviteToChat">
+				<button>Invite to chat</button>
+			</div>
 			<h1 class="private"><?= wfMsg('chat-private-messages') ?></h1>
 			<ul id="PrivateChatList" class="PrivateChatList"></ul>
+
 		</div>
 
 		<form id="Write" class="Write" onsubmit="return false">

@@ -235,6 +235,25 @@ class ChatAjax {
 	} // end addChatMod()
 
 
+	function GetUsersToInvite() {
+		global $wgUser;
+		$chatters = NodeApiClient::getChatters();   // array of names
+		$chatters[] = $wgUser->getName(); // prevent inviting yourself
+		$online = WikiOnlineUsers::getOnlineUsers();    // array of user names
+		$usersToInvite = array_diff( $online, $chatters);
+		sort( $usersToInvite );
+
+		$tmpl = new EasyTemplate(dirname(__FILE__).'/templates/');
+		$tmpl->set_vars([
+				'users' => $usersToInvite
+		]);
+
+		return [
+			'template' => $tmpl->render("inviteModal"),
+			'usersToInvite' => $usersToInvite
+		];
+	}
+
 	function BanModal( ) {
 		global $wgRequest, $wgCityId, $wgLang;
 		wfProfileIn( __METHOD__ );
