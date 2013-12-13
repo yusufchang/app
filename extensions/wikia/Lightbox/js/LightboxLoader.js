@@ -390,10 +390,6 @@ window.LightboxTracker = LightboxTracker;
 			}
 
 			controller.on( 'frame' , function( frame ){
-				if( frame.gestures.length ) {
-					console.log( frame.gestures[0].type + ' ' + frame.gestures[0].state );
-				}
-
 				var showFinger = false,
 				// get the first hand we see
 					hand = frame.hands[0];
@@ -434,34 +430,53 @@ window.LightboxTracker = LightboxTracker;
 								//console.log( frame.gestures );
 								var gesture = frame.gestures[0];
 
-								gesture && console.log( gesture );
+								//gesture && console.log( gesture.type + ' ' + gesture.state );
 
-								if( window.LightboxIsOpen && gesture && ( gesture.type === 'swipe' ) ) {
-
+								if( window.LightboxIsOpen && gesture && ( /*gesture.type === 'swipe' ||*/ gesture.type === 'circle' ) ) {
 									if( gesture.state === 'stop' ) {
 										if( swipeDirection === 'right' ) {
-											console.log( 'right' );
+											console.log( 'go right' );
 											$( '#LightboxPrevious' ).click();
 										} else if( swipeDirection === 'left' ) {
-											console.log( 'left' );
+											console.log( 'go left' );
 											$( '#LightboxNext' ).click();
 										}
-									} else {
-										//Classify swipe as either horizontal or vertical
-										var isHorizontal = Math.abs( gesture.direction[0] ) > Math.abs( gesture.direction[1] );
+									} else if( gesture.state === 'update' ) {
+										if( gesture.type === 'swipe' ) {
+											//Classify swipe as either horizontal or vertical
+											var isHorizontal = Math.abs( gesture.direction[0] ) > Math.abs( gesture.direction[1] );
 
-										//Classify as right-left or up-down
-										if( isHorizontal ){
-											if( gesture.direction[0] > 0 ){
-												swipeDirection = 'right';
-											} else {
-												swipeDirection = 'left';
+											//Classify as right-left or up-down
+											if( isHorizontal ){
+												if( gesture.direction[0] > 0 ){
+													swipeDirection = 'right';
+												} else {
+													swipeDirection = 'left';
+												}
+											} else { //vertical
+												if( gesture.direction[1] > 0 ){
+													swipeDirection = 'up';
+												} else {
+													swipeDirection = 'down';
+												}
 											}
-										} else { //vertical
-											if( gesture.direction[1] > 0 ){
-												swipeDirection = 'up';
-											} else {
-												swipeDirection = 'down';
+										} else if( gesture.type === 'circle' ) {
+											gesture.pointable = frame.pointable( gesture.pointableIds[0] );
+											var direction = gesture.pointable.direction;
+
+											// make sure it's not a tiny/unintended circle by checking the radius
+											if( direction && gesture.radius > 40 ) {
+												console.log( gesture.radius );
+
+												var normal = gesture.normal;
+												clockwise = Leap.vec3.dot( direction, normal ) > 0;
+												if( clockwise ) {
+													console.log( 'circle is clockwise' );
+													swipeDirection = 'left';
+												} else {
+													console.log( 'circle is counter-clockwise' );
+													swipeDirection = 'right';
+												}
 											}
 										}
 									}

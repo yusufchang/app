@@ -38,7 +38,7 @@ $color-lightbox-border: mix($color-page-border, $color-page, 75%);
 	overflow: hidden;
 	&.overlay-hidden {
 		.lightbox-arrows span,
-		.LightboxCarousel,
+		//.LightboxCarousel,
 		.LightboxHeader {
 			@include transition-shorthand(opacity $lightbox-overlay-hide-duration ease-out);
 			@include opacity(0);
