@@ -325,6 +325,9 @@ var Lightbox = {
 					Lightbox.openModal.vbClickSource = LightboxTracker.clickSource.LB;
 				}, 500);
 
+				console.log( 'lightbox stopped loading' );
+				window.lightboxIsLoading = false;
+
 			});
 
 		},
@@ -461,6 +464,9 @@ var Lightbox = {
 				Lightbox.openModal.clickSource = LightboxTracker.clickSource.LB;
 			}, 3000);
 
+			console.log( 'lightbox stopped loading' );
+			window.lightboxIsLoading = false;
+
 		}
 	},
 	ads: {
@@ -566,6 +572,9 @@ var Lightbox = {
 
 			// remove "?file=" from URL
 			Lightbox.updateUrlState(true);
+
+			console.log( 'lightbox stopped loading' );
+			window.lightboxIsLoading = false;
 		},
 		// Remove showing ad flag
 		reset: function() {
@@ -613,6 +622,9 @@ var Lightbox = {
 
 			// remove "?file=" from URL
 			Lightbox.updateUrlState(true);
+
+			console.log( 'lightbox stopped loading' );
+			window.lightboxIsLoading = false;
 		}
 	},
     updateMediaType: function() {

@@ -53,6 +53,7 @@ var LightboxLoader = {
 				LightboxLoader.videoInstance.clearTimeoutTrack();
 			}
 			window.LightboxIsOpen = false;
+			window.lightboxIsLoading = false;
 		}
 	},
 	videoThumbWidthThreshold: 400,
@@ -369,7 +370,8 @@ window.LightboxTracker = LightboxTracker;
 					.appendTo( $wrapper ),
 				width = $window.width(),
 				height = $window.height(),
-				swipeDirection;
+				swipeDirection,
+				lastCircleId;
 
 
 			function leapToScene( frame, leapPos ){
@@ -433,17 +435,29 @@ window.LightboxTracker = LightboxTracker;
 
 								//gesture && console.log( gesture.type + ' ' + gesture.state );
 
-								if( window.LightboxIsOpen && gesture && ( /*gesture.type === 'swipe' ||*/ gesture.type === 'circle' ) ) {
+								if( window.LightboxIsOpen && !window.lightboxIsLoading && gesture && ( /*gesture.type === 'swipe' ||*/ gesture.type === 'circle' ) && ( gesture.radius > 10 ) ) {
 									if( gesture.state === 'stop' ) {
-										if( swipeDirection === 'right' ) {
-											console.log( 'go right' );
+										if( swipeDirection === 'left' ) {
+											//console.log( 'go left' );
+											console.log( 'lightbox is loading' );
+											window.lightboxIsLoading = true;
 											$( '#LightboxPrevious' ).click();
-										} else if( swipeDirection === 'left' ) {
-											console.log( 'go left' );
+										} else if( swipeDirection === 'right' ) {
+											//console.log( 'go right' );
+											console.log( 'lightbox is loading' );
+											window.lightboxIsLoading = true;
 											$( '#LightboxNext' ).click();
 										}
+										swipeDirection = null;
+
+										console.log( "frame " + frame.id );
+										console.log( "last circle " + lastCircleId );
+										console.log( "current circle " + gesture.id );
+										console.log( '---' );
+										lastCircleId = gesture.id;
 									} else if( gesture.state === 'update' ) {
-										if( gesture.type === 'swipe' ) {
+										// swipe gesture wasn't working out so well
+										/*if( gesture.type === 'swipe' ) {
 											//Classify swipe as either horizontal or vertical
 											var isHorizontal = Math.abs( gesture.direction[0] ) > Math.abs( gesture.direction[1] );
 
@@ -461,25 +475,21 @@ window.LightboxTracker = LightboxTracker;
 													swipeDirection = 'down';
 												}
 											}
-										} else if( gesture.type === 'circle' ) {
+										} else if( gesture.type === 'circle' ) {*/
 											gesture.pointable = frame.pointable( gesture.pointableIds[0] );
 											var direction = gesture.pointable.direction;
 
 											// make sure it's not a tiny/unintended circle by checking the radius
-											if( direction && gesture.radius > 40 ) {
-												console.log( gesture.radius );
-
+											if( direction ) {
 												var normal = gesture.normal;
 												clockwise = Leap.vec3.dot( direction, normal ) > 0;
 												if( clockwise ) {
-													console.log( 'circle is clockwise' );
-													swipeDirection = 'left';
-												} else {
-													console.log( 'circle is counter-clockwise' );
 													swipeDirection = 'right';
+												} else {
+													swipeDirection = 'left';
 												}
 											}
-										}
+										//}
 									}
 								}
 							}
@@ -505,13 +515,12 @@ window.LightboxTracker = LightboxTracker;
 				var compare_to = null;
 				Leap && Leap.loop(function (frame) {
 
-					if( !document.hasFocus() ) {
-						console.log( 'not in focus' );
-						return;
-					}
-
 					// Only allow scrolling if window is active
-					if (!frame.valid || frame.pointables.length < 3 || frame.hands.length !== 1) {
+					/*if( !document.hasFocus() ) {
+						return;
+					}*/
+
+					if (!frame.valid || frame.pointables.length < 4 || frame.hands.length !== 1) {
 						return;
 					}
 					if (compare_to) {
