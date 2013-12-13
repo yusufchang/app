@@ -36,14 +36,13 @@
 			<? endif; ?>
 			<? if (!$isUserPageOwner && !is_null($chatStatus)): ?>
 				<span>
-					<?php if ( $chatStatus[ 'online' ] ): ?>
+					<?php if ( $chatStatus[ 'loggedToChat' ] ): ?>
 						<a class="WikiaChatLink" href="<?=$chatStatus['url'] ?>"><?= wfMessage('user-identity-box-start-chat', [ $user[ 'name' ] ])->plain(); ?></a>
-					<? else: ?>
-						<a class="WikiaChatInvite" href="#" data-username='<?= htmlentities($user[ 'name' ], ENT_QUOTES); ?>' ><?= wfMessage('user-identity-box-invite-to-chat', [ $user[ 'name' ] ])->plain(); ?></a>
+					<? elseif ( $chatStatus[ 'loggedToWiki' ] ): ?>
+						<a class="WikiaChatInvite" href="<?=$chatStatus['url'] ?>" data-username='<?= htmlentities($user[ 'name' ], ENT_QUOTES); ?>' ><?= wfMessage('user-identity-box-invite-to-chat', [ $user[ 'name' ] ])->plain(); ?></a>
 					<? endif; ?>
 				</span>
 			<? endif; ?>
-
 		</hgroup>
 
 		<? if( $canEditProfile ): ?>

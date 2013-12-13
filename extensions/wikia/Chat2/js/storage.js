@@ -278,6 +278,49 @@ RedisStorage.prototype = {
 			});
 		});
 	},
+
+	storeInvitation: function(cityId, invitingUserName, invitedUserName, timestamp, callback, errback, both) {
+		this._hset( this.config.getKey_chatInvitation(cityId, invitedUserName), invitingUserName, timestamp, callback,
+			"Error while storing invitation for " + cityId + " from " + invitingUserName + " to " + invitedUserName,
+			errback, both );
+	},
+
+	removeInvitation: function(cityId, invitedUserName, invitingUserName, callback, errback, both) {
+		self._hdel( this.config.getKey_chatInvitation( cityId, invitedUserName ), invitingUserName, callback,
+			"Error while removing invitation for " + cityId + " from " + invitingUserName + " to " + invitedUserName,
+			errback, both);
+	},
+
+	removeInvitesForUser: function(cityId, invitedUserName, callback, errback, both) {
+		logger.critical("Removing invitations for " + invitedUserName);
+		self._del( this.config.getKey_chatInvitation( cityId, invitedUserName ), callback,
+			"Error while removing invitations for " + cityId + ":" + invitedUserName,
+			errback, both
+		);
+	},
+
+	getInvitationsForUser: function(cityId, invitedUserName, callback, errback, both) {
+		//key, callback, errorMsg, errback, both, formatResult
+		var self = this;
+		self._hgetall( this.config.getKey_chatInvitation( cityId, invitedUserName ),  callback,
+			"Error while fetching invitations for " + cityId + ":" + invitedUserName,
+			errback, both,
+			function(invitations) {
+				var userName, result = [],
+					minTimestamp =  new Date().getTime() - 7 * 24 * 3600 * 1000;
+				if (invitations) {
+					for (userName in invitations) {
+						if ( invitations[userName] >= minTimestamp ) {
+							result.push( [ userName, invitations[userName] ] );
+						} else {
+							self._hdel( this.config.getKey_chatInvitation( cityId, invitedUserName ), userName );
+						}
+					}
+				}
+				return result;
+			}
+		);
+	},
 	
 	/**
 	 * To prevent the messages backlog from expanding indefinitely, we call this (currently when a message is added) to make

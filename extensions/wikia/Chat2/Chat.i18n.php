@@ -120,6 +120,8 @@ $messages['en'] = array(
     
     'chat-status-away' => 'Away',
 	'chat-invitation-sent' => 'Your chat invitation was sent to $1',
+	'chat-invitation' => '$1 invites you to chat',
+	'chat-accept-invitation' => 'Join Chat',
 );
 
 /** Message documentation (Message documentation)

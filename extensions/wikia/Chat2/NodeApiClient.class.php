@@ -34,6 +34,52 @@ class NodeApiClient {
 		return $cityId;
 	} // end getCityIdForRoom()
 
+	static public function inviteUserToChat( $invitingUserName, $invitedUserName ) {
+		global $wgCityId;
+
+		$response = NodeApiClient::makeRequest(array(
+			'func' => 'inviteUserToChat',
+			'wgCityId' => $wgCityId,
+			'invitingUserName' => $invitingUserName,
+			'invitedUserName' => $invitedUserName
+		));
+		$response = json_decode($response);
+		if (isset($response->status)) return $response->status;
+		return false;
+	}
+
+	static public function ignoreInvitation( $invitedUserName, $invitingUserName) {
+		global $wgCityId;
+		$response = NodeApiClient::makeRequest(array(
+			'func' => 'ignoreInvitation',
+			'wgCityId' => $wgCityId,
+			'invitingUserName' => $invitingUserName,
+			'invitedUserName' => $invitedUserName
+		));
+		$response = json_decode($response);
+		if (isset($response->status)) return $response->status;
+		return false;
+	}
+
+	/**
+	 * Return array of user names that are inviting a given user to chat
+	 */
+	static public function getInvitationsForUser($invitedUserName) {
+		global $wgCityId;
+
+		$response = NodeApiClient::makeRequest(array(
+			'func' => 'getInvitationsForUser',
+			'wgCityId' => $wgCityId,
+			'invitedUserName' => $invitedUserName
+		));
+		$response = json_decode($response);
+		if (isset($response->status) && $response->status) {
+			return $response->invitations;
+		}
+		error_log('MECH failed to fetch invitations (response was '.json_encode($response).')');
+		return [];
+	}
+
 	/**
 	 * Returns the id of the default chat for the current wiki.
 	 *
@@ -118,6 +164,7 @@ class NodeApiClient {
 		if(empty($wgReadOnly)){
 			$requestUrl = "http://" . NodeApiClient::getHostAndPort() . "/api?" . http_build_query($params);
 			$response = Http::get( $requestUrl, 'default', array('noProxy' => true) );
+			error_log('MECH response for ' . $requestUrl . ' is ' . json_encode($response));
 			if($response === false){
 				$response = "";
 			}

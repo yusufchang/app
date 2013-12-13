@@ -15,8 +15,22 @@ var ChatEntryPoint = {
 			$('body').on('click', '.WikiaChatInvite', function(event) {
 				event.preventDefault();
 				event.stopPropagation();
-				ChatEntryPoint.onClickChatInvite(this.getAttribute('data-username'));
+				ChatEntryPoint.onClickChatInvite(this.getAttribute('data-username'), this.href);
 			});
+
+			$('body').on('click', '.chat-invitation button.accept', function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				ChatEntryPoint.onClickChatButton(this.getAttribute('data-url'));
+			});
+
+			$('body').on('click', '.chat-invitation button.wikia-chiclet-button', function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				ChatEntryPoint.onIgnoreChatInvitation(this.getAttribute('data-username'));
+			});
+
+			ChatEntryPoint.installKeepAlive();
 
 			ChatEntryPoint.bindComplete = true;
 		}
@@ -24,14 +38,65 @@ var ChatEntryPoint = {
 		// check if content was pre-rendered to JS variable
 		if (window.wgWikiaChatUsers) {
 			ChatEntryPoint.initEntryPoint();
-		} else if ( ! ChatEntryPoint.loading ) {
+		} else if ( !ChatEntryPoint.loading ) {
 			// if we're not loading yet - start it
 			ChatEntryPoint.loading = true;
 			ChatEntryPoint.loadChatUsers();
 		}
 	},
 
-	onClickChatInvite: function(username) {
+	installKeepAlive: function() {
+		if (window.wgUserName) {    // not for anons, that would kill us
+			ChatEntryPoint.keepAlive();
+			setInterval( ChatEntryPoint.keepAlive, 1000 * 60 );
+		}
+	},
+
+	keepAlive: function() {
+		console.log('chat ping');
+		$.nirvana.sendRequest(
+			{
+				controller: 'ChatRailController',
+				method: 'KeepAlive',
+				type: 'GET',
+				format: 'json',
+				callback: function(response) {
+					if (response && response.notification) {
+						console.log('MECH - got invitations from ' + JSON.stringify(response.invitations));
+						$('#WallNotifications').showBalloon({
+							hideDuration: 1280,
+							position: 'bottom',
+							contents: response.notification,
+							showDuration: "slow",
+							showAnimation: function(d) { this.fadeIn(d); }
+						});
+						setTimeout(function() {$('#WallNotifications').hideBalloon({})}, 3000);
+					}
+				}
+			}
+		);
+	},
+
+	onIgnoreChatInvitation: function(username) {
+		$('#WallNotifications').hideBalloon({});
+
+		$.nirvana.sendRequest(
+			{
+				controller: 'ChatRailController',
+				method: 'IgnoreInvitation',
+				type: 'POST',
+				format: 'json',
+				data: {
+					username: username
+				},
+				callback: function(response) {
+				}
+			}
+		);
+
+	},
+
+	onClickChatInvite: function(username, linkToSpecialChat) {
 		$.nirvana.sendRequest(
 			{
 				controller: 'ChatRailController',
@@ -44,6 +109,7 @@ var ChatEntryPoint = {
 				callback: function(response) {
 					if (response.status == true) {
 						window.GlobalNotification.show(response.message, 'confirm');
+						ChatEntryPoint.openChatWindow( linkToSpecialChat );
 					}
 				}
 			}

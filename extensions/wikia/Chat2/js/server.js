@@ -307,6 +307,7 @@ function authConnection(handshakeData, authcallback){
 			
 					handshakeData.clientData = client;
 					logger.debug("User authentication success.");
+					storage.removeInvitesForUser( data.wgCityId, data.username );
 					monitoring.incrEventCounter('logins');
 										
 					authcallback(null, true); // error first callback style 

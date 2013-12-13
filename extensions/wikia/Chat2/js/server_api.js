@@ -60,6 +60,12 @@ function apiDispatcher(req, res, reqData, successCallback, errorCallback){
 			api_getCityIdForRoom(reqData.query.roomId, successCallback, errorCallback);
 		} else if(func == "getusersinroom"){
 			api_getUsersInRoom(reqData.query.roomId, successCallback, errorCallback);
+		} else if (func == "inviteusertochat"){
+			api_inviteUserToChat(reqData.query.wgCityId, reqData.query.invitingUserName, reqData.query.invitedUserName, successCallback, errorCallback);
+		} else if (func == "getinvitationsforuser"){
+			api_getInvitationsForUser(reqData.query.wgCityId, reqData.query.invitedUserName, successCallback, errorCallback);
+		} else if (func == "ignoreinvitation"){
+			api_ignoreInvitation(reqData.query.wgCityId, reqData.query.invitedUserName, reqData.query.invitingUserName, successCallback, errorCallback);
 		} else {
 			errorCallback("Function not recognized: " + func);
 		}
@@ -68,6 +74,50 @@ function apiDispatcher(req, res, reqData, successCallback, errorCallback){
 	}
 }
 
+function api_ignoreInvitation(cityId, invitedUserName, invitingUserName, successCallback, errorCallback) {
+	logger.critical("MECH ignoreInvitation called!");
+	storage.removeInvitation(cityId, invitedUserName, invitingUserName,
+		function() {
+			logger.critical("MECH ignoreInvitation success!");
+			successCallback({status: true});
+		},
+		errorCallback
+	);
+
+}
+
+function api_inviteUserToChat(cityId, invitingUserName, invitedUserName, successCallback, errorCallback) {
+	logger.critical("MECH inviteUserToChat called!");
+	storage.storeInvitation(cityId, invitingUserName, invitedUserName, new Date().getTime(),
+	function() {
+		logger.critical("MECH inviteUserToChat success!");
+		successCallback({status: true});
+	}, errorCallback
+	);
+}
+
+function api_getInvitationsForUser(cityId, invitedUserName, successCallback, errorCallback) {
+	logger.critical("MECH getInvitationsForUser called!");
+	storage.getInvitationsForUser(cityId, invitedUserName,
+		function(invitations) {
+			// invites are arrays of [username, ts]. sort it and return just usernames
+			function compare(a, b) {
+				if ( a[1] > b[1] )
+					return -1;
+				if ( a[1] < b[1] )
+					return 1;
+				return 0;
+			}
+			invitations.sort(compare);
+
+			successCallback(
+				{
+					status: true,
+					invitations: invitations.map(function(a) {return a[0];})
+				}
+			);
+		}, errorCallback);
+}
 
 /** API FUNCTIONS (for use by the MediaWiki server) **/
 

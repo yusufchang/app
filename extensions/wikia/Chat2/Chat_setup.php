@@ -92,6 +92,7 @@ $wgAutoloadClasses['ChatRailController'] = "$dir/ChatRailController.class.php";
 $wgAutoloadClasses['SpecialChat'] = "$dir/SpecialChat.class.php";
 $wgAutoloadClasses['NodeApiClient'] = "$dir/NodeApiClient.class.php";
 $wgAutoloadClasses['ChatfailoverSpecialController'] = "$dir/ChatfailoverSpecialController.class.php";
+$wgAutoloadClasses['WikiOnlineUsers'] = "$dir/WikiOnlineUsers.class.php";
 
 $wgSpecialPages[ 'Chatfailover'] = 'ChatfailoverSpecialController';
 

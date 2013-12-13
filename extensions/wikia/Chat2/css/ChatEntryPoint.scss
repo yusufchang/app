@@ -14,6 +14,14 @@ body.skin-monobook .ChatEntryPoint,
 body.skin-oasis .ChatMonobookEntryPoint {
 	display: none;
 }
+.chat-invitation {
+	.chat-join {
+		padding-right: 10px;
+	}
+	button.close.wikia-chiclet-button {
+		background-color: #220F0F;
+	}
+}
 
 .chat-join {
 	button:before {

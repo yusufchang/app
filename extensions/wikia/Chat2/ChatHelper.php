@@ -26,24 +26,32 @@ class ChatHelper {
 		return true;
 	}
 
-	static public function onUserProfileChatStatus($user, &$status) {
+	static public function isUserLoggedInToChat( $user ) {
 		$users = ChatEntryPoint::getChatUsersInfo();
 
 		foreach($users as $chatUser) {
 			if ( $chatUser['username'] == $user->getName() ) {
-				$status = [
-					'online' => true,
-					'url' => SpecialPage::getTitleFor( 'Chat' )->escapeLocalUrl( 'private=' . urlencode( $user->getName() ) )
-				];
 				return true;
 			}
 		}
 
+		return false;
+	}
+
+	static public function onUserProfileChatStatus($user, &$status) {
 		$status = [
-			'online' => false,
-			'inviteUrl' => ''
+			'loggedToWiki' => false,
+			'loggedToChat' => false
 		];
 
+		if ( self::isUserLoggedInToChat( $user ) ) {
+			$status[ 'loggedToChat' ] = true;
+			$status[ 'url' ] = SpecialPage::getTitleFor( 'Chat' )->escapeLocalUrl( 'private=' . urlencode( $user->getName() ) );
+		} else
+		if ( WikiOnlineUsers::isUserOnline($user ) ) {
+			$status[ 'loggedToWiki' ] = true;
+			$status[ 'url' ] = SpecialPage::getTitleFor( 'Chat' )->escapeLocalUrl();
+		}
 		return true;
 	}
 

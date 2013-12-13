@@ -114,3 +114,5 @@ exports.getKeyPrefix_usersAllowedInPrivRoom = function( roomId ){ return "users_
 exports.getKey_usersAllowedInPrivRoom = function( roomId ){ return exports.getKeyPrefix_usersAllowedInPrivRoom() + ":" + roomId; }
 
 exports.getKey_chatEntriesInRoom = function(roomId){ return "chatentries:" + roomId; }
+
+exports.getKey_chatInvitation = function(cityId, invitedUserName){ return 'invitations:' + cityId + ':' + invitedUserName; }

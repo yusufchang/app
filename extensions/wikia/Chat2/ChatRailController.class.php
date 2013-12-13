@@ -22,12 +22,41 @@ class ChatRailController extends WikiaController {
 		global $wgUser, $wgRequest;
 		if (!$wgUser->isAnon()) {
 			$username = $wgRequest->getVal('username');
-			error_log('MECH inviting ' . $username);
-			$this->status = true;
-			$this->message = wfMessage( 'chat-invitation-sent', [ $username ] )->plain();
+			$this->status = NodeApiClient::inviteUserToChat( $wgUser->getName(), $username);
+			if ( $this->status ) {
+				$this->message = wfMessage( 'chat-invitation-sent', [ $username ] )->plain();
+			}
 		} else {
 			$this->status = false;
 		}
+	}
+
+	public function executeIgnoreInvitation() {
+		global $wgUser, $wgRequest;
+		if (!$wgUser->isAnon()) {
+			$username = $wgRequest->getVal('username');
+			NodeApiClient::ignoreInvitation( $wgUser->getName(), $username);
+		}
+	}
+
+	public function invitation() {
+		$this->username = $this->request->getVal('username');
+		$this->chatUrl = SpecialPage::getTitleFor( 'Chat' )->escapeLocalUrl( 'private=' . urlencode( $this->username ) );
+
+	}
+
+	public function executeKeepAlive() {
+		global $wgUser;
+		if (!$wgUser->isAnon()) {
+			error_log('MECH KeepAlive received');
+			WikiOnlineUsers::userPing($wgUser);
+
+			$this->invitations = NodeApiClient::getInvitationsForUser( $wgUser->getName() );
+			if (count($this->invitations > 0)) {
+				$this->notification = $this->app->renderView('ChatRailController', 'invitation', [ 'username' => $this->invitations[0]]);
+			}
+		}
+		$this->response->setCacheValidity(0, 0, array(WikiaResponse::CACHE_TARGET_BROWSER, WikiaResponse::CACHE_TARGET_VARNISH));
 	}
 
 	public function executeAnonLoginSuccess() {
