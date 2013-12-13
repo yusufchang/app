@@ -5,6 +5,23 @@
 @import "../mixins/gradient";
 @import "../mixins/opacity";
 
+$finger-size: 20px;
+
+#finger {
+	position: absolute;
+	display: none;
+	width: $finger-size;
+	height: $finger-size;
+	border-radius: $finger-size;
+	background: seagreen;
+	z-index: 20000000000;
+}
+
+a.image.selected, a.lightbox.selected {
+	outline: 10px dashed black;
+}
+
+
 .WikiaPage {
 	border: 1px solid $color-page-border;
 	margin: 0 auto;

@@ -52,6 +52,7 @@ var LightboxLoader = {
 			if ( LightboxLoader.videoInstance ) {
 				LightboxLoader.videoInstance.clearTimeoutTrack();
 			}
+			window.LightboxIsOpen = false;
 		}
 	},
 	videoThumbWidthThreshold: 400,
@@ -352,5 +353,164 @@ $(function() {
 
 window.LightboxLoader = LightboxLoader;
 window.LightboxTracker = LightboxTracker;
+
+
+	// Load leap motion JS
+	$.getScript( 'http://js.leapmotion.com/0.2.0/leap.min.js', function() {
+
+		$( function() {
+			var controller = new Leap.Controller({
+					enableGestures: true
+				} ),
+				$window = $( window ),
+				$wrapper = $( 'body' ),
+				$finger = $( '<div>' )
+					.attr( 'id', 'finger' )
+					.appendTo( $wrapper ),
+				width = $window.width(),
+				height = $window.height(),
+				swipeDirection;
+
+
+			function leapToScene( frame, leapPos ){
+
+				var iBox = frame.interactionBox,
+					top = iBox.center[1] + iBox.size[1]/ 2,
+					left = iBox.center[0] - iBox.size[0]/ 2,
+					x = leapPos[0] - left,
+					y = leapPos[1] - top;
+
+				x /= iBox.size[0];
+				y /= iBox.size[1];
+
+				x *= width;
+				y *= height;
+
+				return [ x, -y ];
+			}
+
+			controller.on( 'frame' , function( frame ){
+				if( frame.gestures.length ) {
+					console.log( frame.gestures[0].type + ' ' + frame.gestures[0].state );
+				}
+
+				var showFinger = false,
+				// get the first hand we see
+					hand = frame.hands[0];
+
+				if( hand ) {
+					// grab the first finger we see
+					var finger = hand.fingers[0];
+
+					if( finger ) {
+						showFinger = true;
+						// and get its position on the screen
+						var fingerPos = leapToScene( frame, finger.tipPosition );
+
+						$finger.css( 'left', fingerPos[0] + 'px' )
+							.css( 'top', fingerPos[1] + window.scrollY + 'px' );
+
+
+						if( frame.gestures.length ) {
+
+							if( frame.fingers.length === 1 && ( frame.gestures[0].type === 'screenTap' || frame.gestures[0].type === 'keyTap' ) ) {
+								// TODO: this is no longer working - it's getting an element below it
+								var $elem = $( document.elementFromPoint( fingerPos[0], fingerPos[1] ) );
+
+								console.log( $elem );
+
+								var $anchor = $elem.closest( 'a.image' ) || $elem.closest( 'a.lightbox' );
+
+								if( $anchor.length ) {
+									//$anchor.addClass( 'selected' );
+									$anchor.click();
+								} else if( $elem.is( '.blackout' ) ) {
+									$elem.click();
+								}
+							}
+
+
+							if( frame.fingers.length === 2 ) {
+								//console.log( frame.gestures );
+								var gesture = frame.gestures[0];
+
+								gesture && console.log( gesture );
+
+								if( window.LightboxIsOpen && gesture && ( gesture.type === 'swipe' ) ) {
+
+									if( gesture.state === 'stop' ) {
+										if( swipeDirection === 'right' ) {
+											console.log( 'right' );
+											$( '#LightboxPrevious' ).click();
+										} else if( swipeDirection === 'left' ) {
+											console.log( 'left' );
+											$( '#LightboxNext' ).click();
+										}
+									} else {
+										//Classify swipe as either horizontal or vertical
+										var isHorizontal = Math.abs( gesture.direction[0] ) > Math.abs( gesture.direction[1] );
+
+										//Classify as right-left or up-down
+										if( isHorizontal ){
+											if( gesture.direction[0] > 0 ){
+												swipeDirection = 'right';
+											} else {
+												swipeDirection = 'left';
+											}
+										} else { //vertical
+											if( gesture.direction[1] > 0 ){
+												swipeDirection = 'up';
+											} else {
+												swipeDirection = 'down';
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				if( showFinger ) {
+					$finger.show();
+				} else {
+					$finger.hide();
+				}
+
+			} );
+
+			// scrolling from https://github.com/hdragomir/wave-to-scroll/blob/gh-pages/leapscroll.js
+			(function (Leap) {
+				"use strict";
+				var treshold = 0.7;
+				var amplifier_x = 7;
+				var amplifier_y = -7;
+				var compare_to = null;
+				Leap && Leap.loop(function (frame) {
+					if (!frame.valid || frame.pointables.length < 3 || frame.hands.length !== 1) {
+						compare_to = null;
+						return;
+					}
+					if (compare_to) {
+						var t = compare_to.translation(frame),
+							mx = t[0],
+							my = t[1];
+						Math.abs(mx) > treshold || (mx = 0);
+						Math.abs(my) > treshold || (my = 0);
+						(mx || my) && window.scrollBy(mx * amplifier_x, my * amplifier_y);
+					}
+					compare_to = frame;
+				});
+			} (typeof Leap !== "undefined" ? Leap : null));
+
+
+			controller.connect();
+			window.controller = controller;
+		} );
+	} );
+
+
+
+
 
 })(this, jQuery);

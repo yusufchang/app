@@ -87,6 +87,8 @@ var Lightbox = {
 		// attach event handlers
 		Lightbox.bindEvents();
 
+		window.LightboxIsOpen = true;
+
 	},
 	cacheDOM: function() {
 		// Template cache
@@ -208,6 +210,12 @@ var Lightbox = {
 		}).on('click.Lightbox', '.article-add-button', function() {
 			Lightbox.doAutocomplete($(this));
 		});
+
+
+
+
+
+
 	},
 	doAutocomplete: function (elem) {
 		$.when(
