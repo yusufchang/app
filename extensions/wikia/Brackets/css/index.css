@@ -1,0 +1,46 @@
+.opponent-thumb{
+	max-height: 200px;
+	max-width: 200px;
+}
+
+.opponent{
+	text-align: center;
+}
+
+.matchup-header{
+	text-align: center;
+}
+
+.thumb-wrapper{
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	height: 201px;
+	display: table-cell;
+	vertical-align: middle;
+	width: 201px;
+}
+
+.blurb-wrapper{
+	height: 40px;
+}
+
+.blurb-wrapper p{
+	text-style: italic;
+}
+
+div.voting-left{
+	text-align: left;
+}
+
+div.voting-right{
+	text-align: right;
+}
+
+.matchup{
+	padding-bottom: 30px;
+	border-bottom: 2px solid #0EBFE9;
+}
+
+.matchups{
+	margin-bottom: 30px;
+}
