@@ -15,10 +15,10 @@ var ChatEntryPoint = {
 			$('body').on('click', '.WikiaChatInvite', function(event) {
 				event.preventDefault();
 				event.stopPropagation();
-				ChatEntryPoint.onClickChatInvite(this.getAttribute('data-username'), this.href);
+				ChatEntryPoint.onClickChatInvite(this.getAttribute('data-username'), this.getAttribute('data-url'));
 			});
 
-			$('body').on('click', '.chat-invitation button.accept', function(event) {
+			$('body').on('click', '.chat-join button.accept', function(event) {
 				event.preventDefault();
 				event.stopPropagation();
 				ChatEntryPoint.onClickChatButton(this.getAttribute('data-url'));

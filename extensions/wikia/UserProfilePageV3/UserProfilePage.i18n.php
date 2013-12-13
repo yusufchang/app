@@ -128,8 +128,8 @@ $messages['en'] = array(
 	'user-identity-avatars-maintenance' => 'Upload and deletion of avatars temporarily disabled during maintenance!',
 
 	'userprofilepage-edit-modal-error' => 'Unexpected error occurred',
-	'user-identity-box-start-chat' => 'Start private chat with $1',
-	'user-identity-box-invite-to-chat' => 'Invite $1 to chat',
+	'user-identity-box-start-chat' => 'Available on chat!',
+	'user-identity-box-invite-to-chat' => '$1 is online! Invite to chat',
 );
 
 /** Message documentation (Message documentation)

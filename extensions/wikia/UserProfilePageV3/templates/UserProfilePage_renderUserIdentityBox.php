@@ -35,11 +35,17 @@
 				<?php endforeach; ?>
 			<? endif; ?>
 			<? if (!$isUserPageOwner && !is_null($chatStatus)): ?>
-				<span>
+				<span class="chat-status">
 					<?php if ( $chatStatus[ 'loggedToChat' ] ): ?>
-						<a class="WikiaChatLink" href="<?=$chatStatus['url'] ?>"><?= wfMessage('user-identity-box-start-chat', [ $user[ 'name' ] ])->plain(); ?></a>
+						<span class="chat-join">
+							<button class="accept" data-url="<?=$chatStatus['url'] ?>"><?= wfMessage('user-identity-box-start-chat', [ $user[ 'name' ] ])->plain() ?></button>
+						</span>
 					<? elseif ( $chatStatus[ 'loggedToWiki' ] ): ?>
-						<a class="WikiaChatInvite" href="<?=$chatStatus['url'] ?>" data-username='<?= htmlentities($user[ 'name' ], ENT_QUOTES); ?>' ><?= wfMessage('user-identity-box-invite-to-chat', [ $user[ 'name' ] ])->plain(); ?></a>
+						<span class="chat-join">
+							<button class="WikiaChatInvite" data-url="<?=$chatStatus['url'] ?>" data-username='<?= htmlentities($user[ 'name' ], ENT_QUOTES); ?>'>
+								<?= wfMessage('user-identity-box-invite-to-chat', [ $user[ 'name' ] ])->plain(); ?>
+							</button>
+						</span>
 					<? endif; ?>
 				</span>
 			<? endif; ?>
