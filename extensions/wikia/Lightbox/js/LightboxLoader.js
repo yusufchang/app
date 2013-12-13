@@ -390,6 +390,7 @@ window.LightboxTracker = LightboxTracker;
 			}
 
 			controller.on( 'frame' , function( frame ){
+
 				var showFinger = false,
 				// get the first hand we see
 					hand = frame.hands[0];
@@ -497,13 +498,20 @@ window.LightboxTracker = LightboxTracker;
 			// scrolling from https://github.com/hdragomir/wave-to-scroll/blob/gh-pages/leapscroll.js
 			(function (Leap) {
 				"use strict";
+
 				var treshold = 0.7;
 				var amplifier_x = 7;
 				var amplifier_y = -7;
 				var compare_to = null;
 				Leap && Leap.loop(function (frame) {
+
+					if( !document.hasFocus() ) {
+						console.log( 'not in focus' );
+						return;
+					}
+
+					// Only allow scrolling if window is active
 					if (!frame.valid || frame.pointables.length < 3 || frame.hands.length !== 1) {
-						compare_to = null;
 						return;
 					}
 					if (compare_to) {
