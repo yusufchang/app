@@ -22,6 +22,7 @@ var ChatEntryPoint = {
 				event.preventDefault();
 				event.stopPropagation();
 				ChatEntryPoint.onClickChatButton(this.getAttribute('data-url'));
+				$('#WallNotifications').hideBalloon({});
 			});
 
 			$('body').on('click', '.chat-invitation button.wikia-chiclet-button', function(event) {
