@@ -1,5 +1,5 @@
 <h2><?=$campaign_data['name']?></h2>
-<h3>Round <?=$round['ordinal']?> &emdash; <?=$round['name']?></h3>
+<h3>Round <?=$round['ordinal']?> &mdash; <?=$round['name']?></h3>
 <?php $counter = 0; ?>
 <?php foreach ( $campaign_data['matchups_by_round'][$campaign_data['active_round']] as $matchup_id => $matchup ): ?>
     <?php if ($counter % 2 == 0): ?>
