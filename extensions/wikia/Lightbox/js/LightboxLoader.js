@@ -343,6 +343,9 @@ LightboxTracker = {
 		TOUCHSTORM: 'touchStorm'
 	}
 };
+	window.LightboxLoader = LightboxLoader;
+	window.LightboxTracker = LightboxTracker;
+
 
 $(function() {
 	if (window.wgEnableLightboxExt) {
@@ -350,198 +353,192 @@ $(function() {
 		LightboxLoader.loadFromURL();
 	}
 
-});
-
-window.LightboxLoader = LightboxLoader;
-window.LightboxTracker = LightboxTracker;
-
-
 	// Load leap motion JS
 	$.getScript( 'http://js.leapmotion.com/0.2.0/leap.min.js', function() {
 
-		$( function() {
-			var controller = new Leap.Controller({
-					enableGestures: true
-				} ),
-				$window = $( window ),
-				$wrapper = $( 'body' ),
-				$finger = $( '<div>' )
-					.attr( 'id', 'finger' )
-					.appendTo( $wrapper ),
-				width = $window.width(),
-				height = $window.height(),
-				swipeDirection,
-				lastCircleId;
+		var controller = new Leap.Controller({
+				enableGestures: true
+			} ),
+			$window = $( window ),
+			$wrapper = $( 'body' ),
+			$finger = $( '<div>' )
+				.attr( 'id', 'finger' )
+				.appendTo( $wrapper ),
+			width = $window.width(),
+			height = $window.height(),
+			swipeDirection,
+			canUpdateLightbox = true;
 
 
-			function leapToScene( frame, leapPos ){
+		function leapToScene( frame, leapPos ){
 
-				var iBox = frame.interactionBox,
-					top = iBox.center[1] + iBox.size[1]/ 2,
-					left = iBox.center[0] - iBox.size[0]/ 2,
-					x = leapPos[0] - left,
-					y = leapPos[1] - top;
+			var iBox = frame.interactionBox,
+				top = iBox.center[1] + iBox.size[1]/ 2,
+				left = iBox.center[0] - iBox.size[0]/ 2,
+				x = leapPos[0] - left,
+				y = leapPos[1] - top;
 
-				x /= iBox.size[0];
-				y /= iBox.size[1];
+			x /= iBox.size[0];
+			y /= iBox.size[1];
 
-				x *= width;
-				y *= height;
+			x *= width;
+			y *= height;
 
-				return [ x, -y ];
-			}
+			return [ x, -y ];
+		}
 
-			controller.on( 'frame' , function( frame ){
+		function afterUpdate() {
+			canUpdateLightbox = false;
+			setTimeout( function() {
+				canUpdateLightbox = true;
+			}, 500 );
+		}
 
-				var showFinger = false,
-				// get the first hand we see
-					hand = frame.hands[0];
+		controller.on( 'frame' , function( frame ){
 
-				if( hand ) {
-					// grab the first finger we see
-					var finger = hand.fingers[0];
+			var showFinger = false,
+			// get the first hand we see
+				hand = frame.hands[0];
 
-					if( finger ) {
-						showFinger = true;
-						// and get its position on the screen
-						var fingerPos = leapToScene( frame, finger.tipPosition );
+			if( hand ) {
+				// grab the first finger we see
+				var finger = hand.fingers[0];
 
-						$finger.css( 'left', fingerPos[0] + 'px' )
-							.css( 'top', fingerPos[1] + window.scrollY + 'px' );
+				if( finger ) {
+					showFinger = true;
+					// and get its position on the screen
+					var fingerPos = leapToScene( frame, finger.tipPosition );
+
+					$finger.css( 'left', fingerPos[0] + 'px' )
+						.css( 'top', fingerPos[1] + window.scrollY + 'px' );
 
 
-						if( frame.gestures.length ) {
+					if( frame.gestures.length ) {
 
-							if( frame.fingers.length === 1 && ( frame.gestures[0].type === 'screenTap' || frame.gestures[0].type === 'keyTap' ) ) {
-								// TODO: this is no longer working - it's getting an element below it
-								var $elem = $( document.elementFromPoint( fingerPos[0], fingerPos[1] ) );
+						if( frame.fingers.length === 1 && ( frame.gestures[0].type === 'screenTap' || frame.gestures[0].type === 'keyTap' ) ) {
+							// TODO: this is no longer working - it's getting an element below it
+							var $elem = $( document.elementFromPoint( fingerPos[0], fingerPos[1] ) );
 
-								console.log( $elem );
+							console.log( $elem );
 
-								var $anchor = $elem.closest( 'a.image' ) || $elem.closest( 'a.lightbox' );
+							var $anchor = $elem.closest( 'a.image' ) || $elem.closest( 'a.lightbox' );
 
-								if( $anchor.length ) {
-									//$anchor.addClass( 'selected' );
-									$anchor.click();
-								} else if( $elem.is( '.blackout' ) ) {
-									$elem.click();
-								}
+							if( $anchor.length ) {
+								//$anchor.addClass( 'selected' );
+								$anchor.click();
+							} else if( $elem.is( '.blackout' ) ) {
+								$elem.click();
 							}
+						}
 
 
-							if( frame.fingers.length === 2 ) {
-								//console.log( frame.gestures );
-								var gesture = frame.gestures[0];
+						if( frame.fingers.length === 2 ) {
+							//console.log( frame.gestures );
+							var gesture = frame.gestures[0];
 
-								//gesture && console.log( gesture.type + ' ' + gesture.state );
+							//gesture && console.log( gesture.type + ' ' + gesture.state );
 
-								if( window.LightboxIsOpen && !window.lightboxIsLoading && gesture && ( /*gesture.type === 'swipe' ||*/ gesture.type === 'circle' ) && ( gesture.radius > 10 ) ) {
-									if( gesture.state === 'stop' ) {
-										if( swipeDirection === 'left' ) {
-											//console.log( 'go left' );
-											console.log( 'lightbox is loading' );
-											window.lightboxIsLoading = true;
-											$( '#LightboxPrevious' ).click();
-										} else if( swipeDirection === 'right' ) {
-											//console.log( 'go right' );
-											console.log( 'lightbox is loading' );
-											window.lightboxIsLoading = true;
-											$( '#LightboxNext' ).click();
-										}
-										swipeDirection = null;
-
-										console.log( "frame " + frame.id );
-										console.log( "last circle " + lastCircleId );
-										console.log( "current circle " + gesture.id );
-										console.log( '---' );
-										lastCircleId = gesture.id;
-									} else if( gesture.state === 'update' ) {
-										// swipe gesture wasn't working out so well
-										/*if( gesture.type === 'swipe' ) {
-											//Classify swipe as either horizontal or vertical
-											var isHorizontal = Math.abs( gesture.direction[0] ) > Math.abs( gesture.direction[1] );
-
-											//Classify as right-left or up-down
-											if( isHorizontal ){
-												if( gesture.direction[0] > 0 ){
-													swipeDirection = 'right';
-												} else {
-													swipeDirection = 'left';
-												}
-											} else { //vertical
-												if( gesture.direction[1] > 0 ){
-													swipeDirection = 'up';
-												} else {
-													swipeDirection = 'down';
-												}
-											}
-										} else if( gesture.type === 'circle' ) {*/
-											gesture.pointable = frame.pointable( gesture.pointableIds[0] );
-											var direction = gesture.pointable.direction;
-
-											// make sure it's not a tiny/unintended circle by checking the radius
-											if( direction ) {
-												var normal = gesture.normal;
-												clockwise = Leap.vec3.dot( direction, normal ) > 0;
-												if( clockwise ) {
-													swipeDirection = 'right';
-												} else {
-													swipeDirection = 'left';
-												}
-											}
-										//}
+							if( window.LightboxIsOpen && canUpdateLightbox && gesture && ( /*gesture.type === 'swipe' ||*/ gesture.type === 'circle' ) && ( gesture.radius > 10 ) ) {
+								if( gesture.state === 'stop' ) {
+									if( swipeDirection === 'left' ) {
+										//console.log( 'go left' );
+										console.log( 'lightbox is loading' );
+										window.lightboxIsLoading = true;
+										$( '#LightboxPrevious' ).click();
+									} else if( swipeDirection === 'right' ) {
+										//console.log( 'go right' );
+										console.log( 'lightbox is loading' );
+										window.lightboxIsLoading = true;
+										$( '#LightboxNext' ).click();
 									}
+									swipeDirection = null;
+									afterUpdate();
+
+								} else if( gesture.state === 'update' ) {
+									// swipe gesture wasn't working out so well
+									/*if( gesture.type === 'swipe' ) {
+										//Classify swipe as either horizontal or vertical
+										var isHorizontal = Math.abs( gesture.direction[0] ) > Math.abs( gesture.direction[1] );
+
+										//Classify as right-left or up-down
+										if( isHorizontal ){
+											if( gesture.direction[0] > 0 ){
+												swipeDirection = 'right';
+											} else {
+												swipeDirection = 'left';
+											}
+										} else { //vertical
+											if( gesture.direction[1] > 0 ){
+												swipeDirection = 'up';
+											} else {
+												swipeDirection = 'down';
+											}
+										}
+									} else if( gesture.type === 'circle' ) {*/
+										gesture.pointable = frame.pointable( gesture.pointableIds[0] );
+										var direction = gesture.pointable.direction;
+
+										// make sure it's not a tiny/unintended circle by checking the radius
+										if( direction ) {
+											var normal = gesture.normal;
+											clockwise = Leap.vec3.dot( direction, normal ) > 0;
+											if( clockwise ) {
+												swipeDirection = 'right';
+											} else {
+												swipeDirection = 'left';
+											}
+										}
+									//}
 								}
 							}
 						}
 					}
 				}
+			}
 
-				if( showFinger ) {
-					$finger.show();
-				} else {
-					$finger.hide();
-				}
+			if( showFinger ) {
+				$finger.show();
+			} else {
+				$finger.hide();
+			}
 
-			} );
-
-			// scrolling from https://github.com/hdragomir/wave-to-scroll/blob/gh-pages/leapscroll.js
-			(function (Leap) {
-				"use strict";
-
-				var treshold = 0.7;
-				var amplifier_x = 7;
-				var amplifier_y = -7;
-				var compare_to = null;
-				Leap && Leap.loop(function (frame) {
-
-					// Only allow scrolling if window is active
-					/*if( !document.hasFocus() ) {
-						return;
-					}*/
-
-					if (!frame.valid || frame.pointables.length < 4 || frame.hands.length !== 1) {
-						return;
-					}
-					if (compare_to) {
-						var t = compare_to.translation(frame),
-							mx = t[0],
-							my = t[1];
-						Math.abs(mx) > treshold || (mx = 0);
-						Math.abs(my) > treshold || (my = 0);
-						(mx || my) && window.scrollBy(mx * amplifier_x, my * amplifier_y);
-					}
-					compare_to = frame;
-				});
-			} (typeof Leap !== "undefined" ? Leap : null));
-
-
-			controller.connect();
-			window.controller = controller;
 		} );
+
+		// scrolling from https://github.com/hdragomir/wave-to-scroll/blob/gh-pages/leapscroll.js
+		(function (Leap) {
+			"use strict";
+
+			var treshold = 0.7;
+			var amplifier_x = 7;
+			var amplifier_y = -7;
+			var compare_to = null;
+			Leap && Leap.loop(function (frame) {
+
+				// Only allow scrolling if window is active
+				/*if( !document.hasFocus() ) {
+					return;
+				}*/
+
+				if (!frame.valid || frame.pointables.length < 4 || frame.hands.length !== 1) {
+					return;
+				}
+				if (compare_to) {
+					var t = compare_to.translation(frame),
+						mx = t[0],
+						my = t[1];
+					Math.abs(mx) > treshold || (mx = 0);
+					Math.abs(my) > treshold || (my = 0);
+					(mx || my) && window.scrollBy(mx * amplifier_x, my * amplifier_y);
+				}
+				compare_to = frame;
+			});
+		} (typeof Leap !== "undefined" ? Leap : null));
+
+
+		controller.connect();
+		window.controller = controller;
 	} );
-
-
+} );
 
 
 
