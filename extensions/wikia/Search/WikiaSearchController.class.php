@@ -54,7 +54,7 @@ class WikiaSearchController extends WikiaSpecialPageController {
 	 * Used for changing mem cache key for top articles snippet (after changed will end up in purging cache)
 	 * @var string
 	 */
-	const TOP_ARTICLES_CACHE = 1;
+	const TOP_ARTICLES_CACHE = 2;
 
 	/**
 	 * Dimensions for hot article image in Top Wiki Articles module
