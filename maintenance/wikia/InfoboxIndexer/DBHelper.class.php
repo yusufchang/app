@@ -118,7 +118,7 @@ class DBHelper {
 	}
 
 	protected function initSharedConnection() {
-		return wfGetDB(DB_MASTER, array(), F::app()->wg->ExternalSharedDB);
+		return wfGetDB(DB_MASTER, array(), F::app()->wg->ExternalDatawareDB);
 	}
 
 	protected function normalizeString( $string ) {
