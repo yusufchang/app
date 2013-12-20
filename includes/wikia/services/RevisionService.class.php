@@ -95,7 +95,7 @@ class RevisionService {
 	 * @param array $namespaces list of namespaces to filter by. No filter applied if null
 	 * @return ResultWrapper
 	 */
-	public function getLatestRevisionsQuery( $limit, $namespaces ) {
+	public function getLatestRevisionsQuery( $limit, $namespaces = null, $time = null, $fields = null) {
 		$namespaces = $this->sqlSanitizeArray($namespaces);
 
 		$tables = array('recentchanges');
@@ -105,15 +105,21 @@ class RevisionService {
 		// clear out the bots
 		$conditions[] = "rc_bot=0";
 
+		$fields = ($fields === null) ? 'rc_id as id, rc_timestamp as timestamp, rc_user as userId' : $fields;
+
 		// filter by namespaces if provided
 		if ( $namespaces != null ) {
-			$conditions[] = "page_namespace in (" . implode(",",$namespaces) . ")";
-			$tables[] = 'page';
-			$joinConditions['page'] = array( "JOIN", "rc_cur_id=page_id" );
+			$conditions[] = "rc_namespace in (" . implode(",",$namespaces) . ")";
+//			$tables[] = 'page';
+//			$joinConditions['page'] = array( "JOIN", "rc_cur_id=page_id" );
+//			$fields .= ', page_id as pageId';
+		}
+		if ( $time != null ) {
+			$conditions[] = "rc_timestamp > " . $time;
 		}
 		$query = $this->databaseConnection->selectSQLText(
 			$tables
-			, 'rc_id as id, page_id as pageId, rc_timestamp as timestamp, rc_user as userId'
+			, $fields
 			, $conditions
 			, __METHOD__
 			, array( 'LIMIT' => $limit, 'ORDER BY' => 'rc_id DESC' )

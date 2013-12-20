@@ -8,7 +8,7 @@ class UserService extends Service {
 
 	public static function getNameFromUrl($url) {
 		$out = false;
-		
+
 		$userUrlParted = explode(':', $url, 3);
 		if( isset($userUrlParted[2]) ) {
 			$user = User::newFromName( urldecode($userUrlParted[2]) );
@@ -35,9 +35,9 @@ class UserService extends Service {
 		//by id first
 		$result = $this->getUsersFromCacheById( $where[ 'user_id' ] );
 		//then check for names
-		$result = array_merge( $result, $this->getUsersFromCacheByName( $where[ 'user_name' ] ) );
+		$result = $result + $this->getUsersFromCacheByName( $where[ 'user_name' ] );
 		//get user by id
-		$result = array_merge( $result, $this->getUsersObjects( $where ) );
+		$result = $result + $this->getUsersObjects( $where );
 
 		wfProfileOut( __METHOD__ );
 		return array_unique( $result );
