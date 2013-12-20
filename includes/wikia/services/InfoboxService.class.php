@@ -32,7 +32,7 @@ class InfoboxService extends Service {
 					'key' => $row['info_key'],
 					'value' => $row['value'],
 					'template' => $row['template'],
-					'additional' => $row['additional']
+					'additional' => unserialize( $row['additional'] )
 				];
 		}
 		return $result;

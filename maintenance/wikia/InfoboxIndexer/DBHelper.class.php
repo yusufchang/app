@@ -36,6 +36,7 @@ class DBHelper {
 			$title = Title::newFromID( $id );
 			foreach( $data as $template => $values ) {
 				foreach ( $values as $val ) {
+					$addData = [];
 					//wid int, id int, title varchar(255), info_key varchar(255), value varchar(255), template varchar(255)
 					$row = [
 						'wid' => $wikiId,
@@ -46,8 +47,15 @@ class DBHelper {
 						'template' => $template,
 						'additional' => ''
 					];
-					if( isset( $val['add'] ) ) {
-						$row['additional'] = $val['add'];
+					if( !empty( $val['add'] ) ) {
+						$addData[ 'additionalValue' ] = $val['add'];
+					}
+					if( !empty( $val['link'] ) ) {
+						//handle links saving
+						$addData = array_merge( $addData, $val[ 'link' ] );
+					}
+					if( !empty( $addData ) ) {
+						$row['additional'] = serialize( $addData );
 					}
 					$rows[] = $row;
 				}

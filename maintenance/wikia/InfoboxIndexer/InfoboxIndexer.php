@@ -79,7 +79,7 @@ class InfoboxIndexer extends Maintenance {
 					//template inside found, extract it
 					$this->getTemplatesFromWikiText( substr( $text, $second ), $matches );
 					//remove inside template
-					$inside = substr( $text, $second, $close - $second );
+					$inside = substr( $text, $second, $close - $second + 2 );
 					$text = str_replace( $inside, '', $text );
 					$second = strpos( $text, '{{', 2 );
 					$close = strpos( $text, '}}' );
@@ -88,10 +88,8 @@ class InfoboxIndexer extends Maintenance {
 				$matches[] = substr( $text, $open, $close + 2 );
 				//look for next template
 				return substr( $text, $close + 2 );
-//				$this->getTemplatesFromWikiText( substr( $text, $close + 2 ), $matches );
 			} else {
 				//go to start
-//				$this->getTemplatesFromWikiText( substr( $text, $open ), $matches );
 				return substr( $text, $open );
 			}
 		}
@@ -100,13 +98,7 @@ class InfoboxIndexer extends Maintenance {
 
 	protected function parseTemplate( $template ) {
 		$stripped = strip_tags( $template, '<br><br/>' );
-		preg_match_all( '|\[\[.*(\|.*)\]\]|sU', $stripped, $matches );
-		foreach( $matches[1] as $match ) {
-			if( strpos( $match, '[[' ) === false ) {
-				$stripped = str_replace( $match, '', $stripped );
-			}
-		}
-		$data = explode( '|', trim( $stripped, '{}' ) );
+		$data = $this->explodeTemplate( $stripped );
 		$templateKeys = [];
 		if ( !empty( $data ) ) {
 			foreach ( $data as $d ) {
@@ -120,6 +112,30 @@ class InfoboxIndexer extends Maintenance {
 			}
 		}
 		return [];
+	}
+
+	protected function explodeTemplate( $template ) {
+		$result = [];
+		$el = null;
+		$data = explode( '|', trim( $template, '{}' ) );
+		foreach( $data as $key => $d ) {
+			if ( strpos( $d, '=' ) !== false ) {
+				if ( !empty( $el ) ) {
+					$result[] = $el;
+					$el = null;
+				}
+				//add new one
+				$el = $d;
+			} else {
+				//add to previous one, but only if its not first one
+				$el .= ( !empty( $el ) ) ? '|' . $d : $d;
+			}
+		}
+		//add last element
+		if ( !empty( $el ) ) {
+			$result[] = $el;
+		}
+		return $result;
 	}
 
 	protected function parseInfoKey( $text ) {
@@ -141,13 +157,13 @@ class InfoboxIndexer extends Maintenance {
 
 	protected function sanitizeInfoKey( $key ) {
 		$sanitized = strip_tags( $key );
-		$sanitized = str_replace( ['[', '\'\'', '\'\'\'', '"', ']', '(', ')' ], '', trim( $sanitized ) );
+		$sanitized = str_replace( ['[', '\'\'\'', '\'\'', '"', ']', '(', ')' ], '', trim( $sanitized ) );
 		return $sanitized;
 	}
 
 	protected function sanitizeValue( $value ) {
 		$result = [];
-		$sanitized = str_replace( ['[', '\'\'', '\'\'\'', '"', ']' ], '', trim( $value ) );
+		$sanitized = str_replace( [ '\'\'\'', '\'\'', '"' ], '', trim( $value ) );
 		//edge case with whitespace in tag
 		$sanitized = preg_replace( '|<br\s+\/*>|sU', '<br>', $sanitized );
 		if ( strpos( $sanitized, '<br>' ) !== false ) {
@@ -158,22 +174,66 @@ class InfoboxIndexer extends Maintenance {
 			$list = [ $sanitized ];
 		}
 		foreach( $list as $element ) {
+			//add link handling
+			//add template handling, so it dont break further parsing
 			$el = [];
 			//lets not do this for files
-			if ( !preg_match( '|^.*\.\w{3}$|', $element ) && strpos( $element, '(' ) !== false ) {
-				//brackets means it some kind of additional info we should extract
-				preg_match( '|(\(.*\))|s', $element, $matches );
-				//remove this from main string
-				if ( isset( $matches[0] ) ) {
-					$element = str_replace( $matches[0], '', $element );
-					$add = trim( $matches[0], '()' );
-					$el[ 'add' ] = trim( $add );
-				}
+			$addData = $this->handleAdditionalInfo( $element );
+			if ( !empty( $addData ) ) {
+				$el[ 'add' ] = $addData;
+			}
+			$linkData = $this->handleLinks( $element );
+			if ( !empty( $linkData ) ) {
+				$el[ 'link' ] = $linkData;
 			}
 			$el[ 'val' ] = trim( $element );
 			$result[] = $el;
 		}
 		return $result;
+	}
+
+	protected function handleLinks( &$element ) {
+		$result = [];
+		if ( strpos( $element, '[[' ) !== false ) {
+			//at least one linke there
+			//lets match all links!
+			preg_match_all( '|\[\[(.*)\]\]|sU', $element, $matches );
+			foreach( $matches[0] as $match ) {
+				$trimmed = trim( $match, '[]' );
+				$linkInfo = explode( '|', $trimmed );
+				if ( preg_match( '|^.*\.\w{3}$|', $linkInfo[0] ) ) {
+					//file link
+					$name = str_replace( [ 'File:', 'Image:' ], '', $linkInfo[0] );
+					$result[] = [
+						'type' => 'file',
+					];
+				} else {
+					$name = isset( $linkInfo[1] ) ? $linkInfo[1] : $linkInfo[0];
+					$result[] = [
+						'linksTo' => $linkInfo[0],
+						'string' => $name,
+						'type' => 'link'
+					];
+				}
+				$element = str_replace( $match, $name, $element );
+			}
+			return $result;
+		}
+		return false;
+	}
+
+	protected function handleAdditionalInfo( &$element ) {
+		if ( !preg_match( '|^.*\.\w{3}$|', $element ) && strpos( $element, '(' ) !== false ) {
+			//brackets means it some kind of additional info we should extract
+			preg_match( '|(\ (.*\))|s', $element, $matches );
+			//remove this from main string
+			if ( isset( $matches[0] ) ) {
+				$element = str_replace( $matches[0], '', $element );
+				$add = trim( $matches[0], '()' );
+				return trim( $add );
+			}
+		}
+		return false;
 	}
 
 	protected function getIDs() {
