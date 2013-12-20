@@ -19,12 +19,16 @@ class InfoboxService extends Service {
 		return wfGetDB(DB_MASTER, array(), F::app()->wg->ExternalDatawareDB);
 	}
 
-	public function getValuesForTitle( $title ) {
+	public function getValuesForTitle( $title, $wid = 0 ) {
 		$result = [];
+		$where = "title = " . $this->db->addQuotes( $title );
+		if ( !empty( $wid ) ) {
+			$where .= " AND wid = " . $wid;
+		}
 		$res = $this->db->select(
 			'info_data',
 			'*',
-			"title = " . $this->db->addQuotes( $title )
+			$where
 		);
 		while( $row = $res->fetchRow() ) {
 			$result[] =
@@ -38,12 +42,13 @@ class InfoboxService extends Service {
 		return $result;
 	}
 
-	public function getKeys() {
+	public function getKeys( $wid = 0 ) {
 		$result = [];
+		$where = (!empty( $wid ) ) ? "wid = " . $wid : '';
 		$res = $this->db->select(
 			'info_data',
 			'count(*) as num, info_key',
-			'',
+			$where,
 			'',
 			[ 'GROUP BY' => 'info_key', 'ORDER BY' => 'num DESC' ]
 		);

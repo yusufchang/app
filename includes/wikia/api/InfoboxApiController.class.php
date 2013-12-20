@@ -10,11 +10,11 @@ class InfoboxApiController extends WikiaApiController {
 
 	public function getKeys() {
 		$title = $this->request->getVal( 'title' );
-		$items = [];
+		$wid = $this->request->getVal( 'wid', 0 );
 		if ( !empty( $title ) ) {
-			$items = $this->getService()->getValuesForTitle( $title );
+			$items = $this->getService()->getValuesForTitle( $title, $wid );
 		} else {
-			$items = $this->getService()->getKeys();
+			$items = $this->getService()->getKeys( $wid );
 		}
 		$this->setVal( 'items', $items );
 	}
