@@ -186,35 +186,50 @@ class InfoboxIndexer extends Maintenance {
 			if ( !empty( $linkData ) ) {
 				$el[ 'link' ] = $linkData;
 			}
+			$imagesData = $this->handleImages( $element );
+			if ( !empty( $imagesData ) ) {
+				$el[ 'link' ] = $imagesData;
+			}
 			$el[ 'val' ] = trim( $element );
 			$result[] = $el;
 		}
 		return $result;
 	}
 
+	protected function handleImages( &$element ) {
+		$result = [];
+		//we expect only one image in each line
+		if( preg_match( '|.*\.\w{3}|', $element, $match ) ) {
+			//remove link brackets
+			$image = trim( $element, '[]' );
+			$imageInfo = explode( '|', $image );
+			if ( !empty( $imageInfo[0] ) ) {
+				$element = str_replace( [ 'File:', 'Image:' ], '', $imageInfo[0] );
+			}
+			//file link
+			$result[] = [
+				'type' => 'file',
+			];
+		}
+		return $result;
+	}
+
 	protected function handleLinks( &$element ) {
 		$result = [];
-		if ( strpos( $element, '[[' ) !== false ) {
+		//images are handled separately
+		if ( !preg_match( '|.*\.\w{3}|', $element ) && strpos( $element, '[[' ) !== false ) {
 			//at least one linke there
 			//lets match all links!
 			preg_match_all( '|\[\[(.*)\]\]|sU', $element, $matches );
 			foreach( $matches[0] as $match ) {
 				$trimmed = trim( $match, '[]' );
 				$linkInfo = explode( '|', $trimmed );
-				if ( preg_match( '|^.*\.\w{3}$|', $linkInfo[0] ) ) {
-					//file link
-					$name = str_replace( [ 'File:', 'Image:' ], '', $linkInfo[0] );
-					$result[] = [
-						'type' => 'file',
-					];
-				} else {
-					$name = isset( $linkInfo[1] ) ? $linkInfo[1] : $linkInfo[0];
-					$result[] = [
-						'linksTo' => $linkInfo[0],
-						'string' => $name,
-						'type' => 'link'
-					];
-				}
+				$name = isset( $linkInfo[1] ) ? $linkInfo[1] : $linkInfo[0];
+				$result[] = [
+					'linksTo' => $linkInfo[0],
+					'string' => $name,
+					'type' => 'link'
+				];
 				$element = str_replace( $match, $name, $element );
 			}
 			return $result;
