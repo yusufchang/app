@@ -13,6 +13,16 @@ class InfoboxApiController extends WikiaApiController {
 		$items = [];
 		if ( !empty( $title ) ) {
 			$items = $this->getService()->getValuesForTitle( $title );
+		} else {
+			$items = $this->getService()->getKeys();
+		}
+		$this->setVal( 'items', $items );
+	}
+
+	public function getValues() {
+		$key = $this->request->getVal( 'key' );
+		if( !empty( $key ) ) {
+			$items = $this->getService()->getValuesForKey( $key );
 		}
 		$this->setVal( 'items', $items );
 	}

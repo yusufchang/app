@@ -27,7 +27,48 @@ class InfoboxService extends Service {
 			"title = " . $this->db->addQuotes( $title )
 		);
 		while( $row = $res->fetchRow() ) {
-			$result[] = $row;
+			$result[] =
+				[
+					'key' => $row['info_key'],
+					'value' => $row['value'],
+					'template' => $row['template'],
+					'additional' => $row['additional']
+				];
+		}
+		return $result;
+	}
+
+	public function getKeys() {
+		$result = [];
+		$res = $this->db->select(
+			'info_data',
+			'count(*) as num, info_key',
+			'',
+			'',
+			[ 'GROUP BY' => 'info_key', 'ORDER BY' => 'num DESC' ]
+		);
+		while( $row = $res->fetchRow() ) {
+			$result[] = [ 'count' => $row['num'], 'key' => $row['info_key'] ];
+		}
+		return $result;
+	}
+
+	public function getValuesForKey( $key, $limit = 10 ) {
+		$result = [];
+		$res = $this->db->select(
+			'info_data',
+			'value, additional, template, title',
+			'info_key = ' . $this->db->addQuotes( $key ),
+			'',
+			[ 'LIMIT' => $limit, 'GROUP BY' => 'wid' ]
+		);
+		while( $row = $res->fetchRow() ) {
+			$result[] = [
+				'value' => $row['value'],
+				'additional' => $row['additional'],
+				'template' => $row['template'],
+				'title' => $row['title']
+			];
 		}
 		return $result;
 	}

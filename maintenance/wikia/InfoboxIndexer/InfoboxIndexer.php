@@ -159,7 +159,8 @@ class InfoboxIndexer extends Maintenance {
 		}
 		foreach( $list as $element ) {
 			$el = [];
-			if ( strpos( $element, '(' ) !== false ) {
+			//lets not do this for files
+			if ( !preg_match( '|^.*\.\w{3}$|', $element ) && strpos( $element, '(' ) !== false ) {
 				//brackets means it some kind of additional info we should extract
 				preg_match( '|(\(.*\))|s', $element, $matches );
 				//remove this from main string
