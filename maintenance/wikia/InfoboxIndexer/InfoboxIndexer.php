@@ -119,7 +119,9 @@ class InfoboxIndexer extends Maintenance {
 		$el = null;
 		$data = explode( '|', trim( $template, '{}' ) );
 		foreach( $data as $key => $d ) {
-			if ( strpos( $d, '=' ) !== false ) {
+			if ( strpos( $d, '=' ) !== false
+				&& ( strpos( $el, '[[' ) === false || strpos( $d, '=' ) > strpos( $d, ']]' ) )
+			) {
 				if ( !empty( $el ) ) {
 					$result[] = $el;
 					$el = null;
