@@ -119,9 +119,7 @@ class InfoboxIndexer extends Maintenance {
 		$el = null;
 		$data = explode( '|', trim( $template, '{}' ) );
 		foreach( $data as $key => $d ) {
-			if ( strpos( $d, '=' ) !== false
-				&& ( strpos( $el, '[[' ) === false || strpos( $d, '=' ) > strpos( $d, ']]' ) )
-			) {
+			if ( $this->checkLinkElement( $d, $el ) ) {
 				if ( !empty( $el ) ) {
 					$result[] = $el;
 					$el = null;
@@ -138,6 +136,25 @@ class InfoboxIndexer extends Maintenance {
 			$result[] = $el;
 		}
 		return $result;
+	}
+
+	protected function checkLinkElement( $current, $element ) {
+		if ( strpos( $current, '=' ) !== false ) {
+			//check if inside link
+			if ( strpos( $element, '[[' ) !== false ) {
+				$openings = preg_match_all( '|\[\[|sU', $element );
+				$closings = preg_match_all( '|\]\]|sU', $element );
+				if ( $openings > $closings ) {
+					//some links are not closed
+					if ( strpos( $current, '=' ) < strpos( $current, ']]' ) ) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	protected function parseInfoKey( $text ) {
