@@ -54,6 +54,13 @@ $messages['be-tarask'] = array(
 	'mostpopularcategories' => 'Найпапулярнейшыя катэгорыі',
 );
 
+/** Bulgarian (български)
+ * @author Aquilax
+ */
+$messages['bg'] = array(
+	'mostpopularcategories' => 'Най-популярни категории',
+);
+
 /** Breton (brezhoneg)
  * @author Y-M D
  */
@@ -76,7 +83,7 @@ $messages['ce'] = array(
 	'mostpopularcategories' => 'Массарел гӀарайаьлла категореш',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Mormegil
  */
 $messages['cs'] = array(

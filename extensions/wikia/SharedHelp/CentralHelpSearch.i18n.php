@@ -51,7 +51,7 @@ $messages['ca'] = array(
 	'centralhelpsearch-placeholder' => 'Buscar en Ajuda...',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Chmee2
  * @author Darth Daron
  */
@@ -147,6 +147,13 @@ $messages['it'] = array(
  */
 $messages['lb'] = array(
 	'centralhelpsearch-placeholder' => 'An der Hëllef sichen...',
+);
+
+/** لوری (لوری)
+ * @author Mogoeilor
+ */
+$messages['lrc'] = array(
+	'centralhelpsearch-placeholder' => 'پی جوری هومیاری',
 );
 
 /** Lithuanian (lietuvių)
@@ -276,6 +283,14 @@ $messages['tt-cyrl'] = array(
 $messages['uk'] = array(
 	'centralhelpsearch-desc' => 'Дозволити включення форми для пошуку довідки',
 	'centralhelpsearch-placeholder' => 'Пошук довідки...',
+);
+
+/** Vietnamese (Tiếng Việt)
+ * @author Baonguyen21022003
+ */
+$messages['vi'] = array(
+	'centralhelpsearch-desc' => 'Cho phép bao gồm một hình thức tìm kiếm cộng đồng Trung tâm trợ giúp',
+	'centralhelpsearch-placeholder' => 'Tìm kiếm trợ giúp...',
 );
 
 /** Simplified Chinese (中文（简体）‎)

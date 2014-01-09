@@ -1,3 +1,4 @@
+/*exported AdConfig2Late*/
 var AdConfig2Late = function (
 	// regular dependencies
 	log,
@@ -5,28 +6,35 @@ var AdConfig2Late = function (
 
 	// AdProviders
 	adProviderGamePro,
-	adProviderLiftium2Dom,
-	adProviderNull
+	adProviderLiftium,
+	adProviderNull,
+	adProviderSevenOneMedia
 ) {
 	'use strict';
 
 	var logGroup = 'AdConfig2',
 		cityLang = window.wgContentLanguage,
-		getProvider;
+		deProvider = window.wgAdDriverUseSevenOneMedia ? adProviderSevenOneMedia : adProviderGamePro,
+		liftiumSlotsToShowWithSevenOneMedia = {
+			'WIKIA_BAR_BOXAD_1': true,
+			'TOP_BUTTON_WIDE': true,
+			'TOP_BUTTON_WIDE.force': true
+		},
+		tryLiftium,
+		ie8 = window.navigator && window.navigator.userAgent && window.navigator.userAgent.match(/MSIE [6-8]\./);
 
-	getProvider = function(slot) {
+	function getProvider(slot) {
 		var slotname = slot[0];
 
 		log('getProvider', 5, logGroup);
 		log(slot, 5, logGroup);
 
-		if (slot[2] === 'Liftium2' || slot[2] === 'Liftium2Dom') {
-			if (adProviderLiftium2Dom.canHandleSlot(slot)) {
-				return adProviderLiftium2Dom;
-			} else {
-				log('#' + slotname + ' disabled. Forced Liftium2, but it can\'t handle it', 7, logGroup);
-				return adProviderNull;
+		if (slot[2] === 'Liftium') {
+			if (adProviderLiftium.canHandleSlot(slot)) {
+				return adProviderLiftium;
 			}
+			log('#' + slotname + ' disabled. Forced Liftium, but it can\'t handle it', 7, logGroup);
+			return adProviderNull;
 		}
 
 		// First ask GamePro (german lang wiki)
@@ -34,19 +42,29 @@ var AdConfig2Late = function (
 			if (slotname === 'PREFOOTER_RIGHT_BOXAD' || slotname === 'LEFT_SKYSCRAPER_3') {
 				return adProviderNull;
 			}
-			if (adProviderGamePro.canHandleSlot(slot)) {
-				return adProviderGamePro;
+			if (deProvider.canHandleSlot(slotname)) {
+				if (ie8 && window.wgAdDriverUseSevenOneMedia) {
+					return adProviderNull;
+				}
+				return deProvider;
 			}
 		}
 
-		if (adProviderLiftium2Dom.canHandleSlot(slot)) {
-			return adProviderLiftium2Dom;
+		if (window.wgAdDriverUseSevenOneMedia) {
+			tryLiftium = liftiumSlotsToShowWithSevenOneMedia[slot[0]];
+		} else {
+			tryLiftium = true;
+		}
+
+		if (tryLiftium && adProviderLiftium.canHandleSlot(slotname)) {
+			return adProviderLiftium;
 		}
 
 		return adProviderNull;
-	};
+	}
 
 	return {
+		getDecorators: function () {},
 		getProvider: getProvider
 	};
 };

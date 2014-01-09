@@ -84,7 +84,7 @@ ve.ui.Frame.prototype.load = function () {
 	doc.open();
 	doc.write(
 		'<!doctype html>' +
-		'<html>' +
+		'<html class="ve-ui-frame-html">' +
 			'<body class="ve-ui-frame-body ve-' + this.dir + '" style="direction:' + this.dir + ';" dir="' + this.dir + '">' +
 				'<div class="ve-ui-frame-content"></div>' +
 			'</body>' +
@@ -119,7 +119,7 @@ ve.ui.Frame.prototype.transplantStyles = function () {
 		try {
 			rules = sheet.cssRules;
 		} catch ( e ) { }
-		if ( sheet.ownerNode.nodeName.toLowerCase() === 'link' && rules ) {
+		if ( false && sheet.ownerNode.nodeName.toLowerCase() === 'link' && rules ) {
 			// This is a <link> tag pointing to a same-origin style sheet. Rebuild it as a
 			// <style> tag. This needs to be in a try-catch because it sometimes fails in Firefox.
 			try {

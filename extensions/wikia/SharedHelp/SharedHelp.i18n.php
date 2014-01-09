@@ -66,7 +66,7 @@ $messages['ca'] = array(
 	'sharedhelp-searchprofile-tooltip' => "Cercar pàgines d'ajuda",
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Darth Daron
  * @author Mormegil
  */
@@ -300,6 +300,7 @@ $messages['pt'] = array(
 	'sharedhelp-desc' => 'Insere páginas da [[w:c:Help|Help Wikia]] no espaço nominal {{ns:help}} desta wiki',
 	'sharedhelp-autotalkcreate-summary' => 'Página de discussão criada automaticamente',
 	'sharedhelp-searchprofile' => 'Páginas de ajuda',
+	'sharedhelp-searchprofile-tooltip' => 'Pesquisar nas páginas de ajuda',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -365,6 +366,16 @@ $messages['uk'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Сторінку обговорення створено автоматично',
 	'sharedhelp-searchprofile' => 'Сторінки довідки',
 	'sharedhelp-searchprofile-tooltip' => 'Пошук у довідці',
+);
+
+/** Vietnamese (Tiếng Việt)
+ * @author Baonguyen21022003
+ */
+$messages['vi'] = array(
+	'sharedhelp-desc' => 'Mất trang từ [[w:c:Help|Giúp Wikia]] và chèn chúng vào không gian tên {{ns:help}} wiki này',
+	'sharedhelp-autotalkcreate-summary' => 'Thảo luận trang tự động tạo ra',
+	'sharedhelp-searchprofile' => 'Trang trợ giúp',
+	'sharedhelp-searchprofile-tooltip' => 'Trang trợ giúp tìm kiếm',
 );
 
 /** Simplified Chinese (中文（简体）‎)

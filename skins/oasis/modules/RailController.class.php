@@ -54,38 +54,64 @@ class RailController extends WikiaController {
 	}
 
 	/**
-	 *
+	 * Get lazy right rail modules
 	 */
 	protected function getLazyRail() {
 		wfProfileIn(__METHOD__);
-		global $wgUseSiteJs, $wgAllowUserJs;
+		global $wgUseSiteJs, $wgAllowUserJs, $wgTitle, $wgAllInOne;
+		$title = Title::newFromText($this->request->getVal('articleTitle', null), $this->request->getInt('namespace', null));
 
-		$railModules = $this->filterModules((new BodyController)->getRailModuleList(), self::FILTER_LAZY_MODULES);
-		$this->railLazyContent = '';
-		krsort($railModules);
-		foreach ($railModules as $railModule) {
-			$this->railLazyContent .= $this->app->renderView(
-				$railModule[0], /* Controller */
-				$railModule[1], /* Method */
-				$railModule[2] /* array of params */
-			);
+		if ($title instanceof Title) {
+			// override original wgTitle from title given in parameters
+			// we cannot use wgTitle that is created on by API because it's broken on wikis without '/wiki' in URL
+			// https://wikia-inc.atlassian.net/browse/BAC-906
+			$oldWgTitle = $wgTitle;
+			$wgTitle = $title;
+			$assetManager = AssetsManager::getInstance();
+			$railModules = $this->filterModules((new BodyController)->getRailModuleList(), self::FILTER_LAZY_MODULES);
+			$this->railLazyContent = '';
+			krsort($railModules);
+			foreach ($railModules as $railModule) {
+				$this->railLazyContent .= $this->app->renderView(
+					$railModule[0], /* Controller */
+					$railModule[1], /* Method */
+					$railModule[2] /* array of params */
+				);
+			}
+
+			$this->railLazyContent .= Html::element('div', ['id' => 'WikiaAdInContentPlaceHolder']);
+
+			$this->css = $sassFiles = [];
+			foreach (array_keys($this->app->wg->Out->styles) as $style) {
+				if ($wgAllInOne && $assetManager->isSassUrl($style)) {
+					$sassFiles[] = $style;
+				} else {
+					$this->css[] = $style;
+				}
+			}
+
+			if (!empty($sassFiles)) {
+				$excludeScss = (array) $this->getRequest()->getVal('excludeScss', []);
+				$sassFilePath = (array) $assetManager->getSassFilePath($sassFiles);
+				$includeScss = array_diff($sassFilePath, $excludeScss);
+
+				if (!empty($includeScss)) {
+					$this->css[] = $assetManager->getSassesUrl($includeScss);
+				}
+			}
+
+			// Do not load user and site jses as they are already loaded and can break page
+			$oldWgUseSiteJs = $wgUseSiteJs;
+			$oldWgAllowUserJs = $wgAllowUserJs;
+			$wgUseSiteJs = false;
+			$wgAllowUserJs = false;
+
+			$this->js = $this->app->wg->Out->getBottomScripts();
+
+			$wgUseSiteJs = $oldWgUseSiteJs;
+			$wgAllowUserJs = $oldWgAllowUserJs;
+			$wgTitle = $oldWgTitle;
 		}
-
-		$this->railLazyContent .= Html::element('div', ['id' => 'WikiaAdInContentPlaceHolder']);
-
-		$this->css = array_keys($this->app->wg->Out->styles);
-
-		// Do not load user and site jses as they are already loaded and can break page
-		$oldWgUseSiteJs = $wgUseSiteJs;
-		$oldWgAllowUserJs = $wgAllowUserJs;
-		$wgUseSiteJs = false;
-		$wgAllowUserJs = false;
-
-		$this->js = $this->app->wg->Out->getBottomScripts();
-
-		$wgUseSiteJs = $oldWgUseSiteJs;
-		$wgAllowUserJs = $oldWgAllowUserJs;
-
 
 		wfProfileOut(__METHOD__);
 	}

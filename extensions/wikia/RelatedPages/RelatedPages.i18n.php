@@ -8,10 +8,12 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Shirayuki
  * @author The Evil IP address
  */
 $messages['qqq'] = array(
 	'wikiarelatedpages-desc' => '{{desc}}',
+	'wikiarelatedpages-heading' => '{{Identical|Read more}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -47,6 +49,15 @@ $messages['be-tarask'] = array(
 	'wikiarelatedpages-heading' => 'Даведацца болей',
 );
 
+/** Bulgarian (български)
+ * @author Aquilax
+ * @author DCLXVI
+ */
+$messages['bg'] = array(
+	'wikiarelatedpages-desc' => 'Добавя в страниците списък със свързани страници',
+	'wikiarelatedpages-heading' => 'Прочетете повече',
+);
+
 /** Breton (brezhoneg)
  * @author Y-M D
  */
@@ -71,7 +82,7 @@ $messages['ca'] = array(
 	'wikiarelatedpages-heading' => 'Llegir més',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Dontlietome7
  */
 $messages['cs'] = array(
@@ -102,6 +113,13 @@ $messages['el'] = array(
 $messages['es'] = array(
 	'wikiarelatedpages-desc' => 'Añadir una lista a páginas de páginas relacionadas',
 	'wikiarelatedpages-heading' => 'Leer más',
+);
+
+/** Persian (فارسی)
+ * @author Reza1615
+ */
+$messages['fa'] = array(
+	'wikiarelatedpages-heading' => 'بیشتر بخوانید',
 );
 
 /** Finnish (suomi)
@@ -166,6 +184,13 @@ $messages['it'] = array(
 $messages['ja'] = array(
 	'wikiarelatedpages-desc' => 'ページに関連ページのリストを追加する',
 	'wikiarelatedpages-heading' => 'さらに読む',
+);
+
+/** Georgian (ქართული)
+ * @author DevaMK
+ */
+$messages['ka'] = array(
+	'wikiarelatedpages-heading' => 'წაიკითხე მეტი',
 );
 
 /** Korean (한국어)

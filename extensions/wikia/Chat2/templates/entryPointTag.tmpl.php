@@ -6,7 +6,7 @@
 		</h1>
 		<p class="chat-name"> </p>
 		<div class="chat-join">
-			<button onclick="ChatEntryPoint.onClickChatButton('<?= $linkToSpecialChat ?>')"> </button>
+			<button type="button" onclick="ChatEntryPoint.onClickChatButton('<?= $linkToSpecialChat ?>')"> </button>
 		</div>
 		<div class="chat-whos-here">
 			<span class="arrow-left"><img src="<?= $blankImgUrl ?>" /></span>
@@ -51,5 +51,6 @@
 	</div>
 </section>
 <?php if ($isEntryPoint): ?>
+	<script language="javascript" type="text/javascript">if ( typeof ChatEntryPoint!=="undefined" ) ChatEntryPoint.init();</script>
 	<a class="ChatMonobookEntryPoint" href="<?= $linkToSpecialChat ?>"><?= wfMsg('chat-join-the-chat')?></a>
 <?php endif; ?>

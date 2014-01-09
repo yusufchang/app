@@ -67,14 +67,18 @@ Check given username for possible typos.</p>',
  * @author Umherirrender
  */
 $messages['qqq'] = array(
+	'lookupcontribslinks' => '{{Identical|Contribution link}}',
 	'lookupcontribsgo' => '{{Identical|Go}}',
 	'lookupcontribswiki' => '{{Identical|Wiki}}',
+	'lookupcontribswikidbname' => '{{Identical|Database name}}',
 	'lookupcontribswikiurl' => '{{Identical|URL}}',
 	'lookupcontribswikititle' => '{{Identical|Title}}',
+	'lookupcontribscontribslink' => '{{Identical|Contribution link}}',
 	'lookupcontribsnext' => '{{Identical|Next}}',
 	'lookupcontribsprevious' => '{{Identical|Previous}}',
 	'lookupcontribspageremoved' => '{{Identical|Removed}}',
 	'lookupcontribsrestore' => '{{Identical|Restore}}',
+	'lookupcontribscontribs' => '{{Identical|Contribution}}',
 	'right-lookupcontribs' => '{{doc-right|lookupcontribs|ns=Wikia}}',
 	'lookupcontribsshowpages' => '',
 	'lookupcontribscontent' => '{{Identical|Content}}',
@@ -321,15 +325,19 @@ Registre d\'entrada donat nom d\'usuari per possibles errors tipogràfics.</p>',
  */
 $messages['ce'] = array(
 	'lookupcontribs' => 'Къинхьегаме хьажа',
-	'lookupcontribslinks' => 'къинхьегаме хьажориг',
+	'lookupcontribslinks' => 'къинхьегаме хьажораг',
+	'lookupcontribsgo' => 'Дехьа гӀо',
 	'lookupcontribsnoresultfound' => 'ХӀума ца карийна!',
 	'lookupcontribswikititle' => 'ЦӀе',
 	'lookupcontribswikioptions' => 'Параметраш',
-	'lookupcontribscontribslink' => 'Къинхьегаме хьажориг',
+	'lookupcontribscontribslink' => 'Къинхьегаме хьажораг',
 	'lookupcontribscontribs' => 'къинхьегам',
+	'lookupcontribshist' => 'истори',
+	'lookupcontribscontent' => 'чулацам',
+	'lookupcontribsall' => 'массо',
 );
 
-/** Czech (česky)
+/** Czech (čeština)
  * @author Chmee2
  * @author Mormegil
  */
@@ -557,8 +565,16 @@ $messages['eu'] = array(
 /** Persian (فارسی)
  * @author BlueDevil
  * @author Ebraminio
+ * @author Reza1615
  */
 $messages['fa'] = array(
+	'lookupcontribsgo' => 'برو',
+	'lookupcontribswiki' => 'ویکی',
+	'lookupcontribswikiurl' => 'نشانی اینترنتی',
+	'lookupcontribswikititle' => 'عنوان',
+	'lookupcontribswikioptions' => 'گزینه',
+	'lookupcontribshist' => 'تاریخچه',
+	'lookupcontribsdiff' => 'تفاوت',
 	'lookupcontribscontent' => 'محتوا',
 	'lookupcontribsnormal' => 'اخیر',
 	'lookupcontribsall' => 'همه',
@@ -954,6 +970,23 @@ Vergewëssert Iech datt Dir Iech beim Benotzernumm net vertippt hutt.</p>',
 	'lookupcontribsshowpages' => 'All Säiten ($1 Nummraim)',
 	'lookupcontribscontent' => 'Inhalt',
 	'lookupcontribsall' => 'All',
+);
+
+/** لوری (لوری)
+ * @author Mogoeilor
+ */
+$messages['lrc'] = array(
+	'lookupcontribsselectfor' => 'انتخاب بيه سی:',
+	'lookupcontribsgo' => 'رو',
+	'lookupcontribswiki' => 'ويكی',
+	'lookupcontribswikidbname' => 'نوم دی بی',
+	'lookupcontribswikiurl' => 'يو آر ال',
+	'lookupcontribsnext' => 'نها',
+	'lookupcontribsprevious' => 'وادمايی',
+	'lookupcontribspageremoved' => 'ؤرداشته بیه:',
+	'lookupcontribscontent' => 'محتويات',
+	'lookupcontribsnormal' => 'تازه باو',
+	'lookupcontribsall' => 'همه',
 );
 
 /** Macedonian (македонски)
@@ -1406,7 +1439,7 @@ $messages['ps'] = array(
 	'lookupcontribshist' => 'پېښليک',
 	'lookupcontribsdiff' => 'توپير',
 	'lookupcontribsshowpages' => 'ټول مخونه ($1 نومتشيالونه)',
-	'lookupcontribscontent' => 'منځپانګه',
+	'lookupcontribscontent' => 'منځپانگه',
 	'lookupcontribscontribtitleforuser' => 'د کارن لپاره ونډې:',
 	'lookupcontribsall' => 'ټول',
 );
@@ -1469,6 +1502,7 @@ Verifique se se enganou no nome do utilizador.</p>',
 
 /** Brazilian Portuguese (português do Brasil)
  * @author Aristóbulo
+ * @author Fitoschido
  * @author JM Pessanha
  * @author Luckas
  * @author Luckas Blade
@@ -1507,7 +1541,7 @@ Verifique se se enganou com o nome do utilizador.</p>',
 	'lookupcontribsdetails' => 'Ver detalhes de:',
 	'lookupcontribslastedited' => 'Última edição',
 	'lookupcontribsrecordspager' => "A mostrar os registos '''$1''' a '''$2''' de '''$3'''.",
-	'lookupcontribsnbrresult' => 'Nº do resultado:',
+	'lookupcontribsnbrresult' => 'N.º do resultado:',
 	'lookupcontribsnext' => 'seguintes',
 	'lookupcontribsprevious' => 'anteriores',
 	'lookupcontribspageremoved' => 'Removidas:',
