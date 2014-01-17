@@ -1,10 +1,10 @@
 /*
-	$Revision: 1.8 $Date: 2014/01/15 09:29:04 $
+	$Revision: 1.9 $Date: 2014/01/17 13:06:34 $
 	SevenOne Media Ad Integration for de.wikia.com
 */
 
 .ad-version:after {
-	content: '$Revision: 1.8 $';
+	content: '$Revision: 1.9 $';
 	display: none;
 }
 .ad-wrapper div,
@@ -43,10 +43,6 @@
 	width: 300px;
 	min-height: 263px;
 	margin: 0px auto;
-	padding: 15px;
-}
-.WikiaRail #ad-rectangle1 {
-	padding: 15px 0px;
 }
 #ad-promo1-outer,
 #ad-promo2-outer,
@@ -119,7 +115,7 @@
 /* foreign ad slot */
 #ads-outer #TOP_BUTTON_WIDE {
 	position: absolute;
-	z-index: 3;
+	z-index: 2;
 	max-width: 292px; /* 292 = 1030 - 728 - 10 */
 	margin: 10px 0px 0px 0px;
 	padding: 0px;
