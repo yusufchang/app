@@ -5,6 +5,7 @@ class StructureBuilder {
 	const ALBUM_TEMPLATE_NAME = 'Album';
 
 	protected $lyrics;
+	protected $albums = [];
 	/**
 	 * @var Template[] $templatesData
 	 */
@@ -26,6 +27,25 @@ class StructureBuilder {
 		$this->parseAlbums( $wikiText );
 
 		return $wikiText;
+	}
+
+	public function getResult() {
+		$result = [];
+		if ( !empty( $this->albums ) ) {
+			foreach( $this->albums as $album ) {
+				$result[ 'albums' ][] = $album[ 'name' ];
+			}
+		}
+		if ( !empty( $this->lyrics ) ) {
+			$result[ 'lyrics' ][] = $this->lyrics;
+		}
+		if ( !empty( $this->templatesData ) ) {
+			$result[ 'keys' ] = [];
+			foreach( $this->templatesData as $template ) {
+				$result[ 'keys' ] = array_merge( $result[ 'keys' ], $template->getInfobox() );
+			}
+		}
+		return $result;
 	}
 
 	/**

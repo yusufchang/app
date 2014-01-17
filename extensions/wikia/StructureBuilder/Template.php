@@ -9,6 +9,9 @@ class Template {
 	const SEPARATOR = '|';
 	const KEY_VAL_SEPARATOR = '=';
 
+	/**
+	 * @var InfoboxKey[] $infoKeys
+	 */
 	protected $infoKeys = [];
 	protected $others = [];
 	protected $raw;
@@ -29,6 +32,15 @@ class Template {
 
 	public function getName() {
 		return (isset( $this->others[0] ) ) ? $this->others[0] : '';
+	}
+
+	public function getInfobox() {
+		$result = [];
+		foreach( $this->infoKeys as $info ) {
+			$result[] = [ 'key' => $info->getKey(), 'data' => $info->getData() ];
+		}
+		$result[] = $this->others;
+		return $result;
 	}
 
 	protected function explodeTemplate( $template ) {

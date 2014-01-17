@@ -27,6 +27,25 @@ class InfoboxKey {
 		$this->value = $this->sanitizeValue( $info[1] );
 	}
 
+	public function getKey() {
+		return ( !empty( $this->key ) ) ? $this->key : '';
+	}
+
+	public function getData() {
+		$result = [];
+		$result['value'] = !empty( $this->value ) ? $this->value : '';
+		if ( !empty( $this->links ) ) {
+			$result['links'] = $this->links;
+		}
+		if ( !empty( $this->images ) ) {
+			$result['images'] = $this->images;
+		}
+		if ( !empty( $this->links ) ) {
+			$result['additionalValue'] = $this->additionalValue;
+		}
+		return $result;
+	}
+
 	protected function explodeKey( $text ) {
 		//explode on first one as we expect key = value pattern
 		$result = [];
