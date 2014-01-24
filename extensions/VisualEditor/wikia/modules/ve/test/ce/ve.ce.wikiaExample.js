@@ -110,9 +110,9 @@ ve.ce.wikiaExample = ( function ( utils ) {
 
 	media.html.inline = {
 		'frameless':
-			'<a class="image ve-ce-mwInlineImageNode ve-ce-leafNode ve-ce-generatedContentNode ve-ce-protectedNode" contenteditable="false">' +
+			'<a class="image ve-ce-mwInlineImageNode ve-ce-leafNode ve-ce-generatedContentNode">' +
 				'<img src="' + fakeImageUrlResolved + '" width="" height="">' +
-				media.html.shield +
+				//media.html.shield +
 			'</a>'
 	};
 
@@ -241,9 +241,9 @@ ve.ce.wikiaExample = ( function ( utils ) {
 		}
 
 		$mock
-			.addClass( 've-ce-branchNode ve-ce-generatedContentNode ve-ce-protectedNode' )
-			.attr( 'contenteditable', false )
-			.append( media.html.shield );
+			.addClass( 've-ce-branchNode ve-ce-generatedContentNode' );
+			//.attr( 'contenteditable', false )
+			//.append( media.html.shield );
 
 		$mock.find( 'img[src="' + fakeImageUrlResolved + '"]' ).attr( {
 			height: attributes.height,

@@ -217,7 +217,11 @@ ve.ce.WikiaBlockMediaNode.prototype.rebuild = function () {
 	} else {
 		$root = $thumb;
 	}
-	this.emit( 'teardown' );
+
+	if ( this.live ) {
+		this.emit( 'teardown' );
+	}
+
 	this.$element.replaceWith( $root );
 	this.$element = $root;
 
@@ -253,5 +257,7 @@ ve.ce.WikiaBlockMediaNode.prototype.rebuild = function () {
 
 	// This should be called last so the listeners will get the same DOM
 	// structure and jQuery object references they do on initialization.
-	this.emit( 'setup' );
+	if ( this.live ) {
+		this.emit( 'setup' );
+	}
 };

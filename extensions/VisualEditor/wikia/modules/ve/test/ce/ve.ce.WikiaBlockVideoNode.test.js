@@ -5,7 +5,7 @@
 QUnit.module( 've.ce.WikiaBlockVideoNode', ve.wikiaTest.utils.disableDebugModeForTests() );
 
 /* Tests */
-
+/*
 QUnit.test( 'Build NodeView from HTMLDOM', function ( assert ) {
 	ve.wikiaTest.utils.media.runHtmlDomToNodeViewTests(
 		assert,
@@ -16,14 +16,14 @@ QUnit.test( 'Build NodeView from HTMLDOM', function ( assert ) {
 		}
 	);
 } );
-
+*/
 QUnit.test( 'NodeView Transactions', function ( assert ) {
 	ve.wikiaTest.utils.media.runNodeViewTransactionTests(
 		assert,
 		'block',
 		'mw:Video',
 		function( documentNode ) {
-			return documentNode.getChildren()[0];
+			return new ve.ce.WikiaBlockVideoNode( documentNode.getChildren()[0] );
 		}
 	);
 } );

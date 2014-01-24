@@ -196,32 +196,56 @@ ve.wikiaTest = ( function () {
 	 * @param {Object} assert QUnit.assert object
 	 * @param {String} displayType The node's display type: 'block' or 'inline'
 	 * @param {String} rdfaType The node's RDFa type: 'mw:Image' or 'mw:Video'
-	 * @param {Function} callback A function that returns the proper node view from a document node
+	 * @param {Function} getNodeView A function that returns the proper node view from a document node
 	 */
-	utils.media.runNodeViewTransactionTests = function ( assert, displayType, rdfaType, callback ) {
-		var $fixture = $( '#qunit-fixture' ),
-			current,
-			diff,
-			doc,
-			documentModel,
-			documentView,
-			getHtml,
-			i,
+	utils.media.runNodeViewTransactionTests = function ( assert, displayType, rdfaType, getNodeView ) {
+		var current, diff, htmlDocument, i, merged, nodeView,
+			documentModel = new ve.dm.Document( [] ),
 			media = ve.ce.wikiaExample.media,
-			merged,
-			nodeView,
-			previous,
-			surface,
-			surfaceModel,
+			previous = {},
+			getHtml = media[ displayType ][ rdfaType ].getHtml,
 			testCases = utils.getTestCases( media.data.testCases[ displayType ][ rdfaType ] );
 
-		getHtml = media[ displayType ][ rdfaType ].getHtml;
-		previous = testCases[0];
+		for ( i = 0; i < testCases.length; i++ ) {
+			current = testCases[i];
+			diff = utils.getObjectDiff( previous, current );
+			merged = ve.extendObject( {}, previous, current, true );
 
-		doc = ve.createDocumentFromHtml(
-			media.getHtmlDom( displayType, rdfaType, previous )
-		);
+			if ( i === 0 ) {
+				// TODO: use data directly instead of getting it from HTMLDOM
+				htmlDocument = ve.createDocumentFromHtml(
+					media.getHtmlDom( displayType, rdfaType, current )
+				);
+				documentModel = new ve.dm.Document( ve.dm.converter.getDataFromDom(
+					htmlDocument,
+					documentModel.getStore(),
+					documentModel.getInternalList(),
+					documentModel.getInnerWhitespace
+				) );
 
+				nodeView = getNodeView( documentModel.getDocumentNode() );
+				// FIXME: calling setLive here breaks nodes like FocusableNode and ResizableNode
+				// because they try to act on the surface and documentView which don't exist
+				nodeView.setLive( true );
+
+			} else {
+				documentModel.commit( new ve.dm.Transaction.newFromAttributeChanges(
+					documentModel, nodeView.getOffset(), diff
+				) );
+			}
+
+			assert.equalDomStructure(
+				nodeView.$element,
+				getHtml( merged ),
+				'Attributes: ' + utils.getObjectDescription( diff )
+			);
+
+			previous = merged;
+		}
+
+		QUnit.expect( testCases.length );
+
+/*
 		surface = new ve.init.sa.Target( $fixture, doc ).surface;
 		surfaceModel = surface.getModel();
 		documentModel = surfaceModel.getDocument();
@@ -261,6 +285,7 @@ ve.wikiaTest = ( function () {
 		}
 
 		QUnit.expect( testCases.length );
+*/
 	};
 
 	// Exports
