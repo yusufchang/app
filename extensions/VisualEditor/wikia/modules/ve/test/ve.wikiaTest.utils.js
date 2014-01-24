@@ -117,6 +117,27 @@ ve.wikiaTest = ( function () {
 	};
 
 	/**
+	 *
+	 */
+	utils.setupNodeTree = function( node ) {
+		var i, child, children;
+
+		node.emit( 'setup' );
+		if ( !node.hasChildren() ) {
+			return;
+		}
+
+		children = node.getChildren();
+		for ( i = 0; i < children.length; i++ ) {
+			child = children[i];
+			child.emit( 'setup' );
+			if ( child.hasChildren() ) {
+				utils.setupNodeTree( child );
+			}
+		}
+	};
+
+	/**
 	 * Uppercase the first letter in a string.
 	 *
 	 * @method
@@ -199,7 +220,7 @@ ve.wikiaTest = ( function () {
 	 * @param {Function} getNodeView A function that returns the proper node view from a document node
 	 */
 	utils.media.runNodeViewTransactionTests = function ( assert, displayType, rdfaType, getNodeView ) {
-		var current, diff, htmlDocument, i, merged, nodeView,
+		var children, current, diff, htmlDocument, i, j, merged, nodeView,
 			documentModel = new ve.dm.Document( [] ),
 			media = ve.ce.wikiaExample.media,
 			previous = {},
@@ -224,10 +245,6 @@ ve.wikiaTest = ( function () {
 				) );
 
 				nodeView = getNodeView( documentModel.getDocumentNode() );
-				// FIXME: calling setLive here breaks nodes like FocusableNode and ResizableNode
-				// because they try to act on the surface and documentView which don't exist
-				nodeView.setLive( true );
-
 			} else {
 				documentModel.commit( new ve.dm.Transaction.newFromAttributeChanges(
 					documentModel, nodeView.getOffset(), diff

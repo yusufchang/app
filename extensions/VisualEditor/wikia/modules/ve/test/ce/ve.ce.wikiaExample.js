@@ -58,9 +58,9 @@ ve.ce.wikiaExample = ( function ( utils ) {
 	media.data.testCases = {
 		'block': {
 			'mw:Image': {
-				'align': [ 'center', 'default', 'left', 'none', 'right' ],
+				'align': [ 'center'/*, 'default', 'left', 'none', 'right'*/ ],
 				'height': [ media.data.defaultHeight, 1 ],
-				'type': [ 'frame', 'frameless', 'none', 'thumb' ],
+				'type': [ 'frame'/*, 'frameless', 'none', 'thumb'*/ ],
 				'width': [ media.data.defaultWidth, 2 ]
 			}
 		},
@@ -78,11 +78,7 @@ ve.ce.wikiaExample = ( function ( utils ) {
 
 	/* Mock HTML */
 
-	media.html = {
-		'shield':
-			'<img class="ve-ce-protectedNode-shield" ' +
-				'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">'
-	};
+	media.html = {};
 
 	media.html.block = {
 		'attribution':
@@ -91,8 +87,8 @@ ve.ce.wikiaExample = ( function ( utils ) {
 				mw.message( 'oasis-content-picture-added-by', '<a href="/wiki/User:Foo">Foo</a>' ).plain() +
 			'</div>',
 		'caption':
-			'<figcaption class="thumbcaption ve-ce-branchNode">' +
-				'<p class="ve-ce-generated-wrapper ve-ce-branchNode">abc</p>' +
+			'<figcaption class="thumbcaption">' +
+				'<p class="ve-ce-generated-wrapper">abc</p>' +
 			'</figcaption>',
 		'frame':
 			'<figure class="thumb thumbinner" style="">' +
@@ -112,14 +108,12 @@ ve.ce.wikiaExample = ( function ( utils ) {
 		'frameless':
 			'<a class="image ve-ce-mwInlineImageNode ve-ce-leafNode ve-ce-generatedContentNode">' +
 				'<img src="' + fakeImageUrlResolved + '" width="" height="">' +
-				//media.html.shield +
 			'</a>'
 	};
 
 	media.html.inline.none = media.html.inline.frameless;
 
 	media.html.video = {
-		//'overlay':
 		'playButton':
 			'<div class="Wikia-video-play-button ve-no-shield" style="">' +
 				'<img class="sprite play" src="">' +
@@ -240,10 +234,7 @@ ve.ce.wikiaExample = ( function ( utils ) {
 			$mock = $root;
 		}
 
-		$mock
-			.addClass( 've-ce-branchNode ve-ce-generatedContentNode' );
-			//.attr( 'contenteditable', false )
-			//.append( media.html.shield );
+		//$mock.addClass( 've-ce-branchNode ve-ce-generatedContentNode' );
 
 		$mock.find( 'img[src="' + fakeImageUrlResolved + '"]' ).attr( {
 			height: attributes.height,

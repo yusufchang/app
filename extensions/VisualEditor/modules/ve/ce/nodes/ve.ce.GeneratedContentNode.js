@@ -181,6 +181,7 @@ ve.ce.GeneratedContentNode.prototype.afterRender = function () {
  * @param {Object} [config] Optional additional data to pass to generateContents()
  */
 ve.ce.GeneratedContentNode.prototype.update = function ( config ) {
+	if ( !this.live ) return;
 	var store = this.model.doc.getStore(),
 		index = store.indexOfHash( OO.getHash( [ this.model, config ] ) );
 	if ( index !== null ) {
