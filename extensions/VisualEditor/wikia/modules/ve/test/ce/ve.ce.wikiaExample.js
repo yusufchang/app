@@ -106,7 +106,7 @@ ve.ce.wikiaExample = ( function ( utils ) {
 
 	media.html.inline = {
 		'frameless':
-			'<a class="image ve-ce-mwInlineImageNode ve-ce-leafNode ve-ce-generatedContentNode">' +
+			'<a class="image ve-ce-mwInlineImageNode">' +
 				'<img src="' + fakeImageUrlResolved + '" width="" height="">' +
 			'</a>'
 	};
@@ -234,7 +234,7 @@ ve.ce.wikiaExample = ( function ( utils ) {
 			$mock = $root;
 		}
 
-		//$mock.addClass( 've-ce-branchNode ve-ce-generatedContentNode' );
+		$mock.addClass( 've-ce-branchNode ve-ce-generatedContentNode' );
 
 		$mock.find( 'img[src="' + fakeImageUrlResolved + '"]' ).attr( {
 			height: attributes.height,
@@ -343,7 +343,7 @@ ve.ce.wikiaExample = ( function ( utils ) {
 		$mockImage.addClass( 'Wikia-video-thumb' );
 
 		$mockImage.parent()
-			.addClass( 'video' )
+			.addClass( 've-ce-leafNode ve-ce-generatedContentNode video' )
 			.prepend( $playButton );
 
 		return $mock[ 0 ].outerHTML;

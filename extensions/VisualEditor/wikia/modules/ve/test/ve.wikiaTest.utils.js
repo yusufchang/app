@@ -117,27 +117,6 @@ ve.wikiaTest = ( function () {
 	};
 
 	/**
-	 *
-	 */
-	utils.setupNodeTree = function( node ) {
-		var i, child, children;
-
-		node.emit( 'setup' );
-		if ( !node.hasChildren() ) {
-			return;
-		}
-
-		children = node.getChildren();
-		for ( i = 0; i < children.length; i++ ) {
-			child = children[i];
-			child.emit( 'setup' );
-			if ( child.hasChildren() ) {
-				utils.setupNodeTree( child );
-			}
-		}
-	};
-
-	/**
 	 * Uppercase the first letter in a string.
 	 *
 	 * @method
@@ -249,7 +228,10 @@ ve.wikiaTest = ( function () {
 				documentModel.commit( new ve.dm.Transaction.newFromAttributeChanges(
 					documentModel, nodeView.getOffset(), diff
 				) );
+				nodeView.emit( 'teardown' );
 			}
+
+			nodeView.emit( 'setup' );
 
 			assert.equalDomStructure(
 				nodeView.$element,
