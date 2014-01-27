@@ -21,7 +21,7 @@ ve.ce.WikiaVideoNode = function VeCeWikiaVideoNode( $image ) {
 
 	// Properties
 	this.$image = $image || this.$image || this.$element;
-	this.$wikiaVideoElements = $( [] );
+	this.$wikiaVideoElements = this.$( [] );
 
 	// The minimum allowable width for the information overlay to be displayed
 	this.minWidth = 320;
@@ -120,7 +120,7 @@ ve.ce.WikiaVideoNode.prototype.onWikiaVideoSetup = function () {
 			.addClass( 'Wikia-video-thumb' ).parent().addClass( 'video' );
 
 		// Play button
-		this.$wikiaVideoElements.add(
+		this.$wikiaVideoElements = this.$wikiaVideoElements.add(
 			this.createPlayButton().prependTo( $parent )
 		);
 
@@ -131,7 +131,7 @@ ve.ce.WikiaVideoNode.prototype.onWikiaVideoSetup = function () {
 		// Information overlay
 		// This logic is from the function videoInfoOverlay() in WikiaFileHelper.class.php
 		if ( title && width > this.minWidth ) {
-			this.$wikiaVideoElements.add(
+			this.$wikiaVideoElements = this.$wikiaVideoElements.add(
 				this.createOverlay().appendTo( $parent )
 			);
 		}
@@ -151,6 +151,6 @@ ve.ce.WikiaVideoNode.prototype.onWikiaVideoTeardown = function () {
 			.removeClass( 'Wikia-video-thumb' ).parent().removeClass( 'video' );
 
 		this.$wikiaVideoElements.remove();
-		this.$wikiaVideoElements = $( [] );
+		this.$wikiaVideoElements = this.$( [] );
 	}
 };
