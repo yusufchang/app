@@ -27,7 +27,7 @@ ve.ce.WikiaBlockMediaNode = function VeCeWikiaBlockMediaNode( model, config ) {
 	this.rebuild();
 
 	// Events
-	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
+	this.model.connect( this, { 'update': 'onUpdate' } );
 
 	// Mixin constructors
 	ve.ce.MWImageNode.call( this, this.$element, this.$image );
@@ -163,7 +163,7 @@ ve.ce.WikiaBlockMediaNode.prototype.getCssClass = function ( type, alignment ) {
  *
  * @method
  */
-ve.ce.WikiaBlockMediaNode.prototype.onAttributeChange = function () {
+ve.ce.WikiaBlockMediaNode.prototype.onUpdate = function () {
 	this.rebuild();
 };
 
