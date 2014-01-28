@@ -8,6 +8,7 @@ var AdConfig2 = function (
 	abTest,
 
 	adDecoratorPageDimensions,
+	adDecoratorTriggerExtraMedrec,
 
 	// adProviders
 	adProviderGpt,
@@ -24,7 +25,7 @@ var AdConfig2 = function (
 		defaultHighValueSlots,
 		highValueSlots,
 		useSevenOneMedia = window.wgAdDriverUseSevenOneMedia,
-		decorators = [adDecoratorPageDimensions];
+		decorators = [adDecoratorPageDimensions, adDecoratorTriggerExtraMedrec];
 
 	defaultHighValueSlots = {
 		'CORP_TOP_LEADERBOARD': true,

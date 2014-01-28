@@ -23,7 +23,7 @@ var AdDecoratorPageDimensions = function (adLogicPageDimensions, log) {
 				});
 
 				log(['decorated', slot, 'deferred'], 'debug', logGroup);
-				return function () {};
+				return;
 			}
 
 			log(['decorated', slot, 'return same'], 'debug', logGroup);

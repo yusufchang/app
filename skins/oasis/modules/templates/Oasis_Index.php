@@ -117,6 +117,10 @@ if (!$wg->DevelEnvironment):?>
 <?= $body ?>
 
 <?php
+	// Hack for ADEN-885
+	if ($wg->EnableWikiaHomePageExt) {
+		echo F::app()->renderView('Ad', 'Index', array('slotname' => 'CORP_TOP_RIGHT_BOXAD_TRIGGER'));
+	}
 	echo F::app()->renderView('Ad', 'Index', array('slotname' => 'GPT_FLUSH'));
 	if (empty($wg->SuppressAds)) {
 		echo F::app()->renderView('Ad', 'Index', array('slotname' => 'INVISIBLE_1'));
