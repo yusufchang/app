@@ -133,61 +133,6 @@ ve.wikiaTest = ( function () {
 	utils.media = {};
 
 	/**
-	 * Runs the QUnit tests for generating node views from HTML DOM.
-	 * Should be used inside of a QUnit.test()
-	 *
-	 * @method
-	 * @static
-	 * @param {Object} assert QUnit.assert object
-	 * @param {String} displayType The node's display type: 'block' or 'inline'
-	 * @param {String} rdfaType The node's RDFa type: 'mw:Image' or 'mw:Video'
-	 * @param {Function} callback A function that returns the proper node view from a document node
-	 */
-	utils.media.runHtmlDomToNodeViewTests = function ( assert, displayType, rdfaType, callback ) {
-		var $fixture = $( '#qunit-fixture' ),
-			current,
-			doc,
-			documentModel,
-			documentView,
-			getHtml,
-			i,
-			media = ve.ce.wikiaExample.media,
-			nodeView,
-			previous = {},
-			surface,
-			testCases = utils.getTestCases( media.data.testCases[ displayType ][ rdfaType ] );
-
-		getHtml = media[ displayType ][ rdfaType ].getHtml;
-
-		for ( i = 0; i < testCases.length; i++ ) {
-			current = testCases[i];
-
-			doc = ve.createDocumentFromHtml(
-				media.getHtmlDom( displayType, rdfaType, current )
-			);
-
-			surface = new ve.init.sa.Target( $fixture, doc ).surface;
-			documentModel = surface.getModel().getDocument();
-			documentView = surface.getView().getDocument();
-			nodeView = callback( documentView.getDocumentNode() );
-
-			nodeView.setFocused( false );
-
-			assert.equalDomStructure(
-				nodeView.$element,
-				getHtml( current ),
-				'Built with attributes: ' + utils.getObjectDescription( current )
-			);
-
-			surface.destroy();
-
-			previous = current;
-		}
-
-		QUnit.expect( testCases.length );
-	};
-
-	/**
 	 * Runs the QUnit tests for performing transaction changes on node views.
 	 * Should be used inside of a QUnit.test()
 	 *
@@ -243,48 +188,6 @@ ve.wikiaTest = ( function () {
 		}
 
 		QUnit.expect( testCases.length );
-
-/*
-		surface = new ve.init.sa.Target( $fixture, doc ).surface;
-		surfaceModel = surface.getModel();
-		documentModel = surfaceModel.getDocument();
-		documentView = surface.getView().getDocument();
-		nodeView = callback( documentView.getDocumentNode() );
-
-		nodeView.setFocused( false );
-
-		assert.equalDomStructure(
-			nodeView.$element,
-			getHtml( previous ),
-			'Starting with attributes: ' + utils.getObjectDescription( previous )
-		);
-
-		for ( i = 1; i < testCases.length; i++ ) {
-			current = testCases[i];
-			diff = utils.getObjectDiff( previous, current );
-			merged = ve.extendObject( {}, previous, current, true );
-
-			surfaceModel.change(
-				ve.dm.Transaction.newFromAttributeChanges(
-					documentModel,
-					nodeView.getOffset(),
-					diff
-				)
-			);
-
-			nodeView.$element.removeClass( 've-ce-generatedContentNode-generating' );
-
-			assert.equalDomStructure(
-				nodeView.$element,
-				getHtml( merged ),
-				'Attributes changed: ' + utils.getObjectDescription( diff )
-			);
-
-			previous = merged;
-		}
-
-		QUnit.expect( testCases.length );
-*/
 	};
 
 	// Exports
