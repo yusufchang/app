@@ -1,10 +1,10 @@
 /*
-	$Revision: 1.6 $Date: 2014/01/15 09:29:31 $
+	$Revision: 1.7 $Date: 2014/01/31 14:06:31 $
 	SevenOne Media Ad Integration for de.wikia.com
 */
 
 window.myAd = {
-	revision: '$Revision: 1.6 $Date: 2014/01/15 09:29:31 $',
+	revision: '$Revision: 1.7 $Date: 2014/01/31 14:06:31 $',
 	soi_site_script:  'wikia.js',
 
 	container_prefix: 'ad-',
@@ -54,9 +54,8 @@ window.myAd = {
 				if (client_width < 1300) window.SOI_SB = 0;
 				if (client_width < 1200) window.SOI_SC1 = window.SOI_WP = window.SOI_FP = 0;
 				if (client_width < 1170) window.SOI_SC1 = window.SOI_SB = window.SOI_WP = 0; // (1170 - 960) / 2 - 5 = 100px visibible width
-				if (content_width < 800) window.SOI_PL = window.SOI_FA = window.SOI_BB = window.SOI_PD = window.SOI_HP = 0;
-				if (window.SoiUtils && window.SoiUtils.isMobile())
-					window.SOI_PU = window.SOI_PL = window.SOI_FA = 0;
+				if (content_width < 800) window.SOI_PU = window.SOI_PL = window.SOI_FA
+					= window.SOI_BB = window.SOI_PD = window.SOI_HP = 0;
 			}
 			catch(e) {}
 		},
