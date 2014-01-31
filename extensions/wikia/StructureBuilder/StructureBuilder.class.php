@@ -3,6 +3,8 @@
 class StructureBuilder {
 
 	const ALBUM_TEMPLATE_NAME = 'Album';
+	const SONG_TEMPLATE_NAME = 'Song';
+	const ARTIST_TEMPLATE_NAME = 'ArtistHeader';
 
 	protected $lyrics;
 	protected $albums = [];
@@ -19,6 +21,7 @@ class StructureBuilder {
 	 * @var Title $title
 	 */
 	protected $title;
+	protected $excludedAlbums = [ 'Group Members', 'Other Songs', 'Additional information', 'Featured Songs' ];
 
 	public function __construct() {
 	}
@@ -41,36 +44,49 @@ class StructureBuilder {
 
 	public function getResult() {
 		$result = [];
-//		if ( !empty( $this->artistAlbums ) ) {
-//			$result[ 'albums' ]['fromSections'] = $this->artistAlbums;
-//		}
-//		if ( !empty( $this->albums ) ) {
-//			foreach( $this->albums as $album ) {
-//				$result[ 'albums' ][] = $album[ 'name' ];
-//			}
-//		}
-//		if ( !empty( $this->lyrics ) ) {
-//			$result[ 'lyrics' ][] = $this->lyrics;
-//		}
-		foreach( $this->artistAlbums as $album ) {
-			$result['albums'][$album] = [ 'release' => $this->albumsDates[ $album ] ];
-		}
-
-		if ( !empty( $this->templatesData ) ) {
-//			$result[ 'keys' ] = [];
-			foreach( $this->templatesData as $template ) {
-				foreach( $template->getInfobox() as $info ) {
-					if ( isset( $info['key'] ) ) {
-//						$result['keys'][] = [ $info['key'] => $info['data']['value'] ];
-					} else {
-						if ( isset( $info[2] ) && in_array( $info[2], $this->artistAlbums ) ) {
-							$result['albums'][$info[2]]['image'] = [ $info[1] ];
-						}
-
+		$metadata = [];
+		$type = null;
+		foreach ( $this->templatesData as $template ) {
+			//album page
+			if ( $template->getName() === self::ALBUM_TEMPLATE_NAME ) {
+				$type = self::ALBUM_TEMPLATE_NAME;
+				$infos = $template->getInfobox();
+				foreach( $infos as $info ) {
+					if ( in_array( $info['key'], ['Album', 'Artist', 'Genre', 'Length', 'Cover', 'iTunes']) ) {
+						$metadata[] = $info;
 					}
 				}
 			}
+
+			if ( $template->getName() === self::ARTIST_TEMPLATE_NAME ) {
+				$type = self::ARTIST_TEMPLATE_NAME;
+				$infos = $template->getInfobox();
+				foreach( $infos as $info ) {
+					if ( in_array( $info['key'], ['pic', 'iTunes']) ) {
+						$metadata[] = $info;
+					}
+				}
+			}
+
+			if ( $template->getName() === self::SONG_TEMPLATE_NAME ) {
+				$type = self::SONG_TEMPLATE_NAME;
+				$metadata['lyrics'] = $this->lyrics;
+			}
 		}
+		$result['metadata'] = $metadata;
+		//get list
+		if ( $type === self::ALBUM_TEMPLATE_NAME ) {
+			$result['songs'] = $this->albums;
+		}
+		if ( $type === self::ARTIST_TEMPLATE_NAME ) {
+			foreach ( $this->albumsDates as $album => $date ) {
+				if ( !in_array( $album, $this->excludedAlbums) ) {
+					$albums[] = [ 'name' => $album, 'release' => $date ];
+				}
+			}
+			$result['albums'] = $albums;
+		}
+
 		return $result;
 	}
 
@@ -118,7 +134,7 @@ class StructureBuilder {
 			$name = $sectionInfo['line'];
 			$date = '';
 			//extract date
-			if ( preg_match( '|^(.*)\((\d{4})\)$|', $sectionInfo['line'], $match ) ) {
+			if ( preg_match( '|^(.*)\((\d{4})\).*$|', $sectionInfo['line'], $match ) ) {
 				$name = trim( $match[1] );
 				$date = trim( $match[2] );
 			}

@@ -84,7 +84,7 @@ class InfoboxKey {
 
 	protected function parseImages( $element ) {
 		//images as links
-		if ( preg_match_all( '|\[\[[.\S]*\.\w{3}[\|]*.*\]\]|U', $element, $match ) ) {
+		if ( preg_match_all( '|\[\[.*\.\w{3}[\|]*.*\]\]|U', $element, $match ) ) {
 			foreach( $match[0] as $image ) {
 				$trimmed = trim( $image, '[]' );
 				//get additional info
@@ -99,7 +99,7 @@ class InfoboxKey {
 			return $element;
 		}
 		//try to find anything that looks like image
-		if ( preg_match_all( '|[.\S]*\.\w{3}|', $element, $match ) ) {
+		if ( preg_match_all( '|.*\.\w{3}|', $element, $match ) ) {
 			//get images string
 			foreach( $match[0] as $image ) {
 				//take only image name
