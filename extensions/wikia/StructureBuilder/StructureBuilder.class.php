@@ -10,6 +10,7 @@ class StructureBuilder {
 	protected $albums = [];
 	protected $artistAlbums = [];
 	protected $albumsDates = [];
+	protected $templateAlbums = [];
 	/**
 	 * @var Template[] $templatesData
 	 */
@@ -29,7 +30,7 @@ class StructureBuilder {
 	/**
 	 * @param int $id Article id
 	 */
-	public function parse( $id ) {
+	public function parse( $id, $d = false ) {
 		wfProfileIn( __METHOD__ );
 		$this->getWikiData( $id );
 
@@ -38,7 +39,7 @@ class StructureBuilder {
 
 		$this->parseLyrics();
 		$this->parseAlbums();
-		$this->parseSectionNames();
+		$this->parseSectionNames($d);
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -52,25 +53,35 @@ class StructureBuilder {
 				$type = self::ALBUM_TEMPLATE_NAME;
 				$infos = $template->getInfobox();
 				foreach( $infos as $info ) {
-					if ( in_array( $info['key'], ['Album', 'Artist', 'Genre', 'Length', 'Cover', 'iTunes']) ) {
+					if ( in_array( $info['key'], ['Album', 'Artist', 'Genre', 'Length', 'Cover']) ) {
 						$metadata[] = $info;
 					}
 				}
 			}
 
-			if ( $template->getName() === self::ARTIST_TEMPLATE_NAME ) {
-				$type = self::ARTIST_TEMPLATE_NAME;
-				$infos = $template->getInfobox();
-				foreach( $infos as $info ) {
-					if ( in_array( $info['key'], ['pic', 'iTunes']) ) {
+			 else if ( $template->getName() === self::ARTIST_TEMPLATE_NAME ) {
+				 $type = self::ARTIST_TEMPLATE_NAME;
+				 $infos = $template->getInfobox();
+				 foreach( $infos as $info ) {
+					if ( in_array( $info['key'], ['pic']) ) {
 						$metadata[] = $info;
 					}
 				}
 			}
 
-			if ( $template->getName() === self::SONG_TEMPLATE_NAME ) {
+			else if ( $template->getName() === self::SONG_TEMPLATE_NAME ) {
 				$type = self::SONG_TEMPLATE_NAME;
 				$metadata['lyrics'] = $this->lyrics;
+			}
+
+			else {
+				//general
+				$infos = $template->getInfobox();
+				foreach( $infos as $info ) {
+					if ( in_array( $info['key'], ['iTunes']) ) {
+						$metadata[] = $info;
+					}
+				}
 			}
 		}
 		$result['metadata'] = $metadata;
@@ -79,12 +90,7 @@ class StructureBuilder {
 			$result['songs'] = $this->albums;
 		}
 		if ( $type === self::ARTIST_TEMPLATE_NAME ) {
-			foreach ( $this->albumsDates as $album => $date ) {
-				if ( !in_array( $album, $this->excludedAlbums) ) {
-					$albums[] = [ 'name' => $album, 'release' => $date ];
-				}
-			}
-			$result['albums'] = $albums;
+			$result['albums'] = $this->albums;
 		}
 
 		return $result;
@@ -120,7 +126,8 @@ class StructureBuilder {
 			if ( $template->getName() === self::ALBUM_TEMPLATE_NAME ) {
 				preg_match_all( '|#.*\[\[(.*)\|(.*)\]\]|sU', $this->wikiText, $matches );
 				for ( $i = 0; $i < count( $matches[0] ); $i++ ) {
-					$this->albums[] = [ 'article' => $matches[1][$i], 'name' => $matches[2][$i] ];
+
+					$this->albums[ $matches[1][$i] ] = [ $matches[2][$i] ];
 				}
 				return true;
 			}
@@ -128,19 +135,36 @@ class StructureBuilder {
 		return false;
 	}
 
-	protected function parseSectionNames() {
+	protected function parseSectionNames( $d ) {
 		foreach( $this->sectionsInfo as $sectionInfo ) {
 			//get only highest level sections
 			$name = $sectionInfo['line'];
 			$date = '';
 			//extract date
 			if ( preg_match( '|^(.*)\((\d{4})\).*$|', $sectionInfo['line'], $match ) ) {
-				$name = trim( $match[1] );
+				$name = trim( preg_replace( '|\(.*\)|U', '', $match[1] ) );
 				$date = trim( $match[2] );
 			}
 
 			$this->artistAlbums[] = $name;
 			$this->albumsDates[ $name ] = $date;
+		}
+
+		//parse albums from templates
+		foreach( $this->templatesData as $template ) {
+			if ( $template->getName() === 'Album Art' ) {
+				$infos = $template->getInfobox();
+				if ( isset( $infos[0][2] ) ) {
+					$this->templateAlbums[] = trim( preg_replace( '|\(.*\)|U', '', $infos[0][2] ) );
+				}
+			}
+		}
+
+		//do one list
+		foreach( $this->albumsDates as $album => $date ) {
+			if ( !empty( $date ) || in_array( $album, $this->templateAlbums ) ) {
+				$this->albums[] = [ 'name' => $album, 'release' => $date ];
+			}
 		}
 	}
 
