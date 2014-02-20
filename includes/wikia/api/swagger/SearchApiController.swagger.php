@@ -602,7 +602,7 @@ use Swagger\Annotations as SWG;
  * 	)
  * )
  *
- *  @SWG\Api(
+ * @SWG\Api(
  * 	path="/api/v1/Search/Combined",
  * 	description="Get results for combined wiki and cross-wiki search ",
  * 	@SWG\Operations(
