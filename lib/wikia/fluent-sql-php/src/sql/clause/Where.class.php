@@ -10,32 +10,10 @@
 namespace FluentSql;
 
 class Where implements ClauseBuild {
-	protected $conditions;
+	use ConditionAble;
 
 	public function __construct() {
 		$this->conditions = [];
-	}
-
-	public function add(Condition $condition) {
-		$this->conditions []= $condition;
-	}
-
-	public function and_($condition) {
-		if (!($condition instanceof Condition)) {
-			$condition = new Condition($condition);
-		}
-
-		$condition->connector(Condition::AND_);
-		$this->add($condition);
-	}
-
-	public function or_($condition) {
-		if (!($condition instanceof Condition)) {
-			$condition = new Condition($condition);
-		}
-
-		$condition->connector(Condition::OR_);
-		$this->add($condition);
 	}
 
 	public function build(Breakdown $bk, $tabs) {

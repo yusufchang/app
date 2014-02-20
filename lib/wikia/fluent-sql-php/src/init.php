@@ -17,6 +17,7 @@ class Autoloader {
 			'type' => 'trait',
 			'list' => [
 				'AsAble',
+				'ConditionAble',
 				'IntervalAble',
 			],
 		],

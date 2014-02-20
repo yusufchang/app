@@ -10,7 +10,7 @@
 namespace FluentSql;
 
 class Having implements ClauseBuild {
-	protected $conditions;
+	use ConditionAble;
 
 	public function __construct(Condition $condition) {
 		$this->conditions = [$condition];
@@ -24,6 +24,9 @@ class Having implements ClauseBuild {
 				$bk->line($tabs);
 				$bk->append(" HAVING");
 				$doHaving = false;
+			} else {
+				$bk->line($tabs + 1);
+				$bk->append(" ".$condition->connector());
 			}
 
 			$condition->build($bk, $tabs);

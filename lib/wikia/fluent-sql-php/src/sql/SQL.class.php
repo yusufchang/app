@@ -567,12 +567,14 @@ class SQL {
 		if ($column2 !== null) {
 			return $this->ON($column1, $column2);
 		} else {
-			if ($this->where == null) {
+			/** @var ConditionAble $clause */
+			$clause = $this->getLast('ConditionAble', 'trait');
+			if ($clause == null) {
 				return $this->WHERE($column1);
 			}
 
 			$condition = new Condition($column1);
-			$this->where->and_($condition);
+			$clause->and_($condition);
 
 			return $this->called($condition);
 		}
@@ -667,10 +669,11 @@ class SQL {
 	public function WHERE($column) {
 		if ($this->where == null) {
 			$this->where = new Where();
+			$this->called($this->where);
 		}
 
 		$condition = new Condition($column);
-		$this->where->add($condition);
+		$this->where->addCondition($condition);
 
 		return $this->called($condition);
 	}
@@ -806,7 +809,8 @@ class SQL {
 		$having = new Having($condition);
 		$this->having = $having;
 
-		return $this->called($having);
+		$this->called($having);
+		return $this->called($condition);
 	}
 
 	/**
