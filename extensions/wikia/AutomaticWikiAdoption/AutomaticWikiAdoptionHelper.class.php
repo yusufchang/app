@@ -276,27 +276,22 @@ class AutomaticWikiAdoptionHelper {
 	 * @author Maciej Błaszkowski <marooned at wikia-inc.com>
 	 */
 	private static function countUserEditsOnWiki($wikiId, $user) {
-		global $wgStatsDB, $wgStatsDBEnabled;
+		global $wgDatamartDB, $wgStatsDBEnabled;
 		wfProfileIn(__METHOD__);
 
-		$result = 0;
-		if ( !empty( $wgStatsDBEnabled ) ) {
-			$dbr = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
-
-			$row = $dbr->selectRow(
-				'specials.events_local_users',
-				'edits',
-				array('wiki_id' => $wikiId, 'user_id' => $user->getId()),
-				__METHOD__
-			);
-
-			if ($row !== false) {
-				$result = $row->edits;
-			}
-		}
+		$edits = 0;
+		(new WikiaSQL())->skipIf(empty($wgStatsDBEnabled))
+			->SELECT('edits')
+			->FROM('rollup_edit_events')
+			->WHERE('wiki_id')->EQUAL_TO($wikiId)
+				->AND_('user_id')->EQUAL_TO($user->getId())
+				->AND_('period_id')->EQUAL_TO(DataMartService::PERIOD_ID_MONTHLY)
+			->runLoop(wfGetDB(DB_SLAVE, [], $wgDatamartDB), function(&$result, $row) use (&$edits) {
+				$edits += $row->edits;
+			});
 
 		wfProfileOut(__METHOD__);
-		return $result;
+		return $edits;
 	}
 
 	/**

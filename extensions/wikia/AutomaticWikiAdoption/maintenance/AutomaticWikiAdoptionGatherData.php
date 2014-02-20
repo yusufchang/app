@@ -75,61 +75,73 @@ class AutomaticWikiAdoptionGatherData {
 		$recentAdminEdit = array();
 		
 		if ( !empty($wgStatsDBEnabled) && !empty($fromWikiId) && !empty($toWikiId) ) {
-			$dbrStats = wfGetDB(DB_SLAVE, array(), $wgStatsDB);			
+			$dbrStats = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
 
-			//get wikis with edits < 1000 and admins not active in last 45 days
-			//260000 = ID of wiki created on 2011-05-01 so it will work for wikis created after this project has been deployed
-			$res = $dbrStats->query(
-				'select e1.wiki_id, sum(e1.edits) as sum_edits from specials.events_local_users e1 ' .
-				'where e1.wiki_id > '.$fromWikiId.' and e1.wiki_id <= '.$toWikiId.' ' .
-				'group by e1.wiki_id ' .
-				'having sum_edits < 1000 and (' .
-				'select count(0) from specials.events_local_users e2 ' .
-				'where e1.wiki_id = e2.wiki_id and ' .
-				'all_groups like "%sysop%" and ' .
-				'editdate > now() - interval 45 day ' .
-				') = 0',
-				__METHOD__
-			);
-
-			while ($row = $dbrStats->fetchObject($res)) {
-				$wikiDbname = WikiFactory::IDtoDB($row->wiki_id);
-				if ($wikiDbname === false) {
-					//check if wiki exists in city_list
-					continue;
-				}
-				
-				if (WikiFactory::isPublic($row->wiki_id) === false) {
-					//check if wiki is closed
-					continue;
-				}
-				
-				if (self::isFlagSet($row->wiki_id, WikiFactory::FLAG_ADOPTABLE)) {
-					// check if adoptable flag is set
-					continue;
-				}
-				
-				$res2 = $dbrStats->query(
-					"select user_id, max(editdate) as lastedit from specials.events_local_users where wiki_id = {$row->wiki_id} and all_groups like '%sysop%' group by 1 order by null;",
-					__METHOD__
-				);
-
-				$recentAdminEdit[$row->wiki_id] = array(
-					'recentEdit' => time(),
-					'admins' => array()
-				);
-				while ($row2 = $dbrStats->fetchObject($res2)) {
-					if (($lastedit = wfTimestamp(TS_UNIX, $row2->lastedit)) < $recentAdminEdit[$row->wiki_id]['recentEdit']) {
-						$recentAdminEdit[$row->wiki_id]['recentEdit'] = $lastedit;
-					} else if ($row2->lastedit == '0000-00-00 00:00:00') { // use city_created if no lastedit
-						$wiki = WikiFactory::getWikiByID($row->wiki_id);
-						if (!empty($wiki)) {
-							$recentAdminEdit[$row->wiki_id]['recentEdit'] = wfTimestamp(TS_UNIX, $wiki->city_created);
+			(new WikiaSQL())
+				->SELECT('rwe.wiki_id', 'sum(rwe.edits) AS sum_edits')
+				->FROM('rollup_wiki_events rwe')
+				->WHERE('rwe.wiki_id')->GREATER_THAN($fromWikiId)
+					->AND_('rwe.wiki_id')->LESS_THAN_OR_EQUAL($toWikiId)
+					->AND_('rwe.period_id')->EQUAL_TO(DataMartService::PERIOD_ID_MONTHLY)
+				->GROUP_BY('rwe.wiki_id')
+				->HAVING('sum_edits')->LESS_THAN(1000)
+					->AND_(
+						(new WikiaSQL())
+							->SELECT()->COUNT(0)
+							->FROM('rollup_edit_events ree')->JOIN('dimension_wiki_user_groups dwug')
+								->ON('ree.wiki_id', 'dwug.wiki_id')->AND_('ree.user_id', 'dwug.user_id')
+							->WHERE('ree.wiki_id')->EQUAL_TO_FIELD('rwe.wiki_id')
+								->AND_('dwug.user_group')->EQUAL_TO('sysop')
+								->AND_('ree.period_id')->EQUAL_TO(DataMartService::PERIOD_ID_MONTHLY)
+								->AND_('ree.time_id')->GREATER_THAN(\FluentSql\StaticSQL::RAW('now() - interval 45 day'))
+					)->EQUAL_TO(0)
+				->run($dbrStats, function($res) use ($dbrStats, &$recentAdminEdit) {
+					/** @var ResultWrapper $res */
+					while ($row = $res->fetchObject()) {
+						$wikiDbname = WikiFactory::IDtoDB($row->wiki_id);
+						if ($wikiDbname === false) {
+							//check if wiki exists in city_list
+							continue;
 						}
+
+						if (WikiFactory::isPublic($row->wiki_id) === false) {
+							//check if wiki is closed
+							continue;
+						}
+
+						if (self::isFlagSet($row->wiki_id, WikiFactory::FLAG_ADOPTABLE)) {
+							// check if adoptable flag is set
+							continue;
+						}
+
+						$recentAdminEdit[$row->wiki_id] = [
+							'recentEdit' => time(),
+							'admins' => []
+						];
+
+						(new WikiaSQL())
+							->SELECT('ree.user_id', 'max(time_id) AS lastedit')
+							->FROM('rollup_edit_events ree')->JOIN('dimension_wiki_user_groups dwug')
+								->ON('ree.user_id', 'dwug.user_id')->AND_('ree.wiki_id', 'dwug.wiki_id')
+							->WHERE('ree.wiki_id')->EQUAL_TO($row->wiki_id)
+								->AND_('dwug.user_group')->EQUAL_TO('sysop')
+							->GROUP_BY(1)
+							->run($dbrStats, function($res) use ($row, &$recentAdminEdit) {
+								/** @var ResultWrapper $res */
+								while ($row2 = $res->fetchObject()) {
+									if (($lastedit = wfTimestamp(TS_UNIX, $row2->lastedit)) < $recentAdminEdit[$row->wiki_id]['recentEdit']) {
+										$recentAdminEdit[$row->wiki_id]['recentEdit'] = $lastedit;
+									} else if ($row2->lastedit == '0000-00-00 00:00:00') { // use city_created if no lastedit
+										$wiki = WikiFactory::getWikiByID($row->wiki_id);
+										if (!empty($wiki)) {
+											$recentAdminEdit[$row->wiki_id]['recentEdit'] = wfTimestamp(TS_UNIX, $wiki->city_created);
+										}
+									}
+									$recentAdminEdit[$row->wiki_id]['admins'][] = $row2->user_id;
+								}
+							});
 					}
-					$recentAdminEdit[$row->wiki_id]['admins'][] = $row2->user_id;
-				}
-			}
+				});
 		}
 
 		return $recentAdminEdit;
