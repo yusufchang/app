@@ -70,12 +70,12 @@ class AutomaticWikiAdoptionGatherData {
 	}
 
 	function getRecentAdminEdits($fromWikiId=null, $toWikiId=null) {
-		global $wgDWStatsDB, $wgStatsDBEnabled;
+		global $wgDatamartDB, $wgStatsDBEnabled;
 
 		$recentAdminEdit = array();
 		
 		if ( !empty($wgStatsDBEnabled) && !empty($fromWikiId) && !empty($toWikiId) ) {
-			$dbrStats = wfGetDB(DB_SLAVE, array(), $wgDWStatsDB);
+			$dbrStats = wfGetDB(DB_SLAVE, array(), $wgDatamartDB);
 
 			(new WikiaSQL())
 				->SELECT('rwe.wiki_id', 'sum(rwe.edits) AS sum_edits')
