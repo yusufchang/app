@@ -432,10 +432,10 @@ class DataProvider {
 	 */
 	final public static function GetTopFiveUsers($limit = 7) {
 		wfProfileIn(__METHOD__);
-		global $wgStatsDB, $wgMemc, $wgCityId, $wgStatsDBEnabled;
+		global $wgDatamartDB, $wgMemc, $wgCityId, $wgStatsDBEnabled;
 
-		if (empty($wgStatsDB) || empty($wgStatsDBEnabled)) {
-			$result = array();
+		if (empty($wgDatamartDB) || empty($wgStatsDBEnabled)) {
+			$results = array();
 		}
 		else {
 			$memckey = wfMemcKey("TopFiveUsers", $limit);
@@ -445,25 +445,35 @@ class DataProvider {
 				$dbr = wfGetDB(DB_SLAVE);
 				$row = $dbr->selectRow("user_groups", "GROUP_CONCAT(ug_user) AS user_list", array("ug_group IN ('staff', 'bot')"), __METHOD__);
 
-				$dbs = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
-				$query = "SELECT user_id AS rev_user, edits AS cnt FROM specials.events_local_users WHERE wiki_id = '" . $wgCityId . "' " . (!empty($row->user_list) ? "AND user_id NOT IN (" . $row->user_list . ",'0','929702')" : "") . " ORDER BY edits DESC";
+				$dbs = wfGetDB(DB_SLAVE, array(), $wgDatamartDB);
+				$sql = (new WikiaSQL())
+					->SELECT('user_id as rev_user', 'sum(edits) as cnt')
+					->FROM('rollup_wiki_user_events')
+					->WHERE('wiki_id')->EQUAL_TO($wgCityId)
+						->AND_('period_id')->EQUAL_TO(DataMartService::PERIOD_ID_MONTHLY);
 
-				$res = $dbs->query($dbs->limitResult($query, $limit * 4, 0));
-
-				$results = array();
-				while ($row = $dbs->fetchObject($res)) {
-					$user = User::newFromID($row->rev_user);
-
-					if (!$user->isBlocked() && !$user->isAllowed('bot')
-						&& ($user->getName() != 'Wikia') # rt24706
-						&& $user->getUserPage()->exists()
-					) {
-						$article['url'] = $user->getUserPage()->getLocalUrl();
-						$article['text'] = $user->getName();
-						$results[] = $article;
-					}
+				if (!empty($row->user_list)) {
+					$excludeUsers = explode(',', $row->user_list.', 0, 929702');
+					$sql->AND_('user_id')->NOT_IN($excludeUsers);
 				}
-				$dbs->freeResult($res);
+
+				$results = $sql
+					->GROUP_BY('user_id')
+					->ORDER_BY(['edits', 'desc'])
+					->LIMIT($limit*4)
+					->runLoop($dbs, function(&$results, $row) {
+						$user = User::newFromID($row->rev_user);
+
+						if (!$user->isBlocked() && !$user->isAllowed('bot')
+							&& ($user->getName() != 'Wikia') # rt24706
+							&& $user->getUserPage()->exists()
+						) {
+							$results[] = [
+								'url' => $user->getUserPage()->getLocalUrl(),
+								'text' => $user->getName(),
+							];
+						}
+					});
 
 				$results = array_slice($results, 0, $limit);
 				$wgMemc->set($memckey, $results, 60 * 60 * 12);
