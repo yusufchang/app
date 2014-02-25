@@ -64,7 +64,7 @@
 		 * @return array|int
 		 */
 		static protected function getPageViews( $pageIds ) {
-			global $wgStatsDB, $wgCityId, $wgDevelEnvironment, $wgStatsDBEnabled;
+			global $wgCityId;
 
 			wfProfileIn(__METHOD__);
 

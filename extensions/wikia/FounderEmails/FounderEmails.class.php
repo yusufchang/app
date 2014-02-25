@@ -236,7 +236,6 @@ class FounderEmails {
 	/* stats methods */
 
 	public function getPageViews ( $cityID ) {
-		global $wgStatsDB, $wgStatsDBEnabled, $wgDevelEnvironment;
 		wfProfileIn( __METHOD__ );
 
 		$today = date( 'Y-m-d', strtotime('-1 day') );
