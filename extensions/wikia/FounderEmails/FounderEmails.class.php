@@ -257,15 +257,17 @@ class FounderEmails {
 			$today = ( empty( $day ) ) ? date( 'Y-m-d', strtotime('-1 day') ) : $day;
 
 			$db = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
-
-			$oRow = $db->selectRow(
-				array( 'events' ),
-				array( 'count(0) as cnt' ),
-				array(  " rev_timestamp between '$today 00:00:00' and '$today 23:59:59' ", 'wiki_id' => $cityID ),
-				__METHOD__
-			);
-
-			$edits = isset( $oRow->cnt ) ? $oRow->cnt : 0;
+			$edits = (new WikiaSQL())
+				->SELECT('sum(edits) + sum(creates) as cnt')
+				->FROM('rollup_wiki_events')
+				->WHERE('period_id')->EQUAL_TO(DataMartService::PERIOD_ID_DAILY)
+					->AND_('time_id')->EQUAL_TO($today)
+					->AND_('wiki_id')->EQUAL_TO($cityID)
+				->run($db, function($reswrap) {
+					/** @var ResultWrapper $reswrap */
+					$row = $reswrap->fetchObject();
+					return isset($row->cnt) ? $row->cnt : 0;
+				});
 		}
 
 		wfProfileOut( __METHOD__ );
