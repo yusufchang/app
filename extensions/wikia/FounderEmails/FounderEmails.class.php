@@ -249,14 +249,14 @@ class FounderEmails {
 	}
 
 	public function getDailyEdits ($cityID, /*Y-m-d*/ $day = null) {
-		global $wgStatsDB, $wgStatsDBEnabled;
+		global $wgDatamartDB, $wgStatsDBEnabled;
 		wfProfileIn( __METHOD__ );
 
 		$edits = 0;
 		if ( !empty( $wgStatsDBEnabled ) ) {
 			$today = ( empty( $day ) ) ? date( 'Y-m-d', strtotime('-1 day') ) : $day;
 
-			$db = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
+			$db = wfGetDB(DB_SLAVE, array(), $wgDatamartDB);
 			$edits = (new WikiaSQL())
 				->SELECT('sum(edits) + sum(creates) as cnt')
 				->FROM('rollup_wiki_events')
