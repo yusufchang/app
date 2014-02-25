@@ -12,12 +12,22 @@ namespace FluentSql;
 class Where implements ClauseBuild {
 	use ConditionAble;
 
-	public function __construct() {
+	/** @var bool */
+	private $isGroup;
+
+	public function __construct($isGroup) {
 		$this->conditions = [];
+		$this->isGroup = $isGroup;
 	}
 
 	public function build(Breakdown $bk, $tabs) {
-		$doWhere = true;
+		$doWhere = !$this->isGroup;
+
+		if ($this->isGroup) {
+			$bk->append(' ( ');
+			$tabs++;
+		}
+
 		/** @var Condition $condition */
 		foreach ($this->conditions as $condition) {
 			if ($doWhere) {
@@ -30,6 +40,11 @@ class Where implements ClauseBuild {
 			}
 
 			$condition->build($bk, $tabs);
+		}
+
+		if ($this->isGroup) {
+			$bk->line($tabs);
+			$bk->append(' ) ');
 		}
 	}
 

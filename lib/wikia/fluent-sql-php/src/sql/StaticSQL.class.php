@@ -76,6 +76,14 @@ class StaticSQL {
 	}
 
 	/**
+	 * @param string $column
+	 * @return SQL
+	 */
+	public static function CONDITION($column) {
+		return self::getSql()->WHERE($column, true);
+	}
+
+	/**
 	 * @return SQL
 	 */
 	public static function CASE_() {

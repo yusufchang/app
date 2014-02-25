@@ -666,9 +666,9 @@ class SQL {
 		return $this->called($set);
 	}
 
-	public function WHERE($column) {
+	public function WHERE($column, $isGroup=false) {
 		if ($this->where == null) {
-			$this->where = new Where();
+			$this->where = new Where($isGroup);
 			$this->called($this->where);
 		}
 
