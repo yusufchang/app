@@ -109,6 +109,7 @@ $config['oasis_ads_js'] = array(
 $config['oasis_noads_extensions_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
+		'//resources/wikia/libraries/jquery/ellipses.js',
 		'//extensions/wikia/CreatePage/js/CreatePage.js',
 		'//extensions/wikia/VideoHandlers/js/VideoBootstrap.js',
 		'//extensions/wikia/Lightbox/js/LightboxLoader.js',
@@ -1126,7 +1127,6 @@ $config['videohomepage_js'] = array(
 		// jQuery plugins
 		'//resources/wikia/libraries/jquery/bxslider/jquery.bxslider.js',
 		'//resources/wikia/libraries/jquery/owl.carousel/owl.carousel.js',
-		'//extensions/wikia/VideoPageTool/js/shared/views/ellipses.js',
 
 		// Lodash is an underscore.js rewrite and a prereq for Backbone
 		'//extensions/wikia/VideoPageTool/js/lib/lodash/dist/lodash.underscore.js',
@@ -1253,6 +1253,7 @@ $config['wikiahomepage_scss_wikiamobile'] = array(
 );
 
 /** WikiaHubsV2 **/
+//TODO: remove after HubsV3 release @WikiaHubsV2Remove
 $config['wikiahubs_v2'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => array('oasis'),
@@ -1282,6 +1283,39 @@ $config['wikiahubs_v2_scss_mobile'] = array(
 	'skin' => array('wikiamobile'),
 	'assets' => array(
 		'//extensions/wikia/WikiaHubsV2/css/WikiaHubsV2Mobile.scss'
+	)
+);
+
+/** WikiaHubsV3 **/
+$config['wikiahubs_v3'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => array('oasis'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/js/WikiaHubsV3.js'
+	)
+);
+
+$config['wikiahubs_v3_modal'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => array('oasis'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/js/WikiaHubsV3Modals.js'
+	)
+);
+
+$config['wikiahubs_v3_scss'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array('oasis'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/css/WikiaHubsV3.scss'
+	)
+);
+
+$config['wikiahubs_v3_scss_mobile'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array('wikiamobile'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/css/WikiaHubsV3Mobile.scss'
 	)
 );
 
@@ -1522,7 +1556,6 @@ $config['manage_wikia_home_js'] = array(
 $config['licensed_video_swap_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//resources/wikia/libraries/jquery/ellipses.js',
 		'//extensions/wikia/LicensedVideoSwap/js/lvsTracker.js',
 		'//extensions/wikia/LicensedVideoSwap/js/lvsCommonAjax.js',
 		'//extensions/wikia/LicensedVideoSwap/js/lvsVideoControls.js',
@@ -1641,5 +1674,13 @@ $config['videos_module_js'] = [
 		'//extensions/wikia/VideosModule/scripts/views/titleThumbnail.js',
 		'//extensions/wikia/VideosModule/scripts/views/bottomModule.js',
 		'//extensions/wikia/VideosModule/scripts/controllers/index.js',
+	]
+];
+
+$config['qualtrics_zone_code_injector_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//extensions/wikia/QualtricsZoneCodeInjector/scripts/QualtricsZoneCodeInjector.js',
 	]
 ];
