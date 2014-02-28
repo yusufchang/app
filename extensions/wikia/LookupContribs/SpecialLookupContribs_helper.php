@@ -117,7 +117,7 @@ class LookupContribsCore {
 	 * @author Andrzej 'nAndy' Łukaszewski <nandy (at) wikia-inc.com>
 	 */
 	public function checkUserActivity($addEditCount = false, $order = null) {
-		global $wgMemc, $wgContLang, $wgStatsDB, $wgStatsDBEnabled;
+		global $wgDatamartDB, $wgStatsDBEnabled;
 		wfProfileIn( __METHOD__ );
 
 		$userActivity = array(
@@ -131,85 +131,69 @@ class LookupContribsCore {
 			$sMemKey = __METHOD__ . ":{$this->mUserId}:data";
 		}
 
-		$data = $wgMemc->get( $sMemKey );
+		$dbr = wfGetDB( DB_SLAVE, [], $wgDatamartDB );
+		if ( !is_null( $dbr ) ) {
+			//bugId:6196
+			$excludedWikis = $this->getExclusionList();
 
-		if ( ( !is_array( $data ) || LOOKUPCONTRIBS_NO_CACHE ) && !empty( $wgStatsDBEnabled ) ) {
+			$sql = (new WikiaSQL())->skipIf(empty($wgStatsDBEnabled))
+				->SELECT('wiki_id', 'max(unix_timestamp(time_id)) as last_edit')
+				->FROM('rollup_edit_events')
+				->WHERE('user_id')->EQUAL_TO($this->mUserId)
+					->AND_(
+						\FluentSql\StaticSQL::CONDITION('creates')->GREATER_THAN(0)
+						->OR_('edits')->GREATER_THAN(0)
+					)
+				->GROUP_BY('wiki_id');
 
-			$dbr = wfGetDB( DB_SLAVE, "stats", $wgStatsDB );
-			if ( !is_null( $dbr ) ) {
-				//bugId:6196
-				$excludedWikis = $this->getExclusionList();
+			if ( !empty( $excludedWikis ) && is_array( $excludedWikis ) ) {
+				$sql->AND_('wiki_id')->NOT_IN($excludedWikis);
+			}
 
-				$where = array (
-					'user_id'    => $this->mUserId,
-					'event_type' => array(1,2)
-				);
+			$wikisIds = $wikiEdits = [];
+			if ( $addEditCount === true ) {
+				$wikiEdits = $this->getEditCount( $wikisIds );
+				if ( !empty( $wikisIds ) ) {
+					$sql->AND_('wiki_id')->IN($wikisIds);
+				}
+			}
 
-				if ( !empty( $excludedWikis ) && is_array( $excludedWikis ) ) {
-					$where[] = 'wiki_id NOT IN (' . $dbr->makeList( $excludedWikis ) . ')';
+			if (!LOOKUPCONTRIBS_NO_CACHE) {
+				$sql->cache(60*10, $sMemKey);
+			}
+
+			$sql->run($dbr, function($res) use ($wikisIds, $wikiEdits, &$userActivity) {
+				$queryWikiData = [];
+				/** @var ResultWrapper $res */
+				while ($row = $res->fetchObject()) {
+					$queryWikiData[$row->wiki_id] = $row->last_edit;
 				}
 
-				$options = array( 'GROUP BY' => 'wiki_id' );
-
-				if ( $addEditCount === true ) {
-					$wikisIds = array();
-					$wikiEdits = $this->getEditCount( $wikisIds );
-					if ( !empty( $wikisIds ) ) {
-						$where['wiki_id'] = $wikisIds;
-					}
-				}
-
-				/* rows */
-				$res = $dbr->select(
-					array('events'),
-					array(
-						'wiki_id',
-						'max(unix_timestamp(rev_timestamp)) as last_edit'
-					),
-					$where,
-					__METHOD__,
-					$options
-				);
-
-				if ( empty( $wikisIds ) ) {
-					$wikisIds = array();
-					while ( $row = $dbr->fetchObject( $res ) ) {
-						$wikisIds[] = $row->wiki_id;
-					}
-					$dbr->dataSeek( $res, 0 );
-				}
-
-				$wData = WikiFactory::getWikisByID( $wikisIds );
-				$i = 0;
-				while ( $row = $dbr->fetchObject( $res ) ) {
-					if ( !isset( $wData[$row->wiki_id] ) ) {
+				$wData = WikiFactory::getWikisByID(empty($wikisIds) ? array_keys($queryWikiData) : $wikisIds);
+				foreach ($queryWikiData as $wikiId => $lastEdit) {
+					if (!isset($wData[$wikiId])) {
 						continue;
 					}
 
-					$aItem = array(
-						'id'         =>  $row->wiki_id,
-						'url'        =>  $wData[$row->wiki_id]->city_url,
-						'dbname'     =>  $wData[$row->wiki_id]->city_dbname,
-						'title'      =>  $wData[$row->wiki_id]->city_title,
-						'active'     =>  $wData[$row->wiki_id]->city_public,
-						'last_edit'  =>  $row->last_edit,
+					$activity = array(
+						'id'         =>  $wikiId,
+						'url'        =>  $wData[$wikiId]->city_url,
+						'dbname'     =>  $wData[$wikiId]->city_dbname,
+						'title'      =>  $wData[$wikiId]->city_title,
+						'active'     =>  $wData[$wikiId]->city_public,
+						'last_edit'  =>  $lastEdit,
 						'edit_count' => 0
 					);
 
-					if ( isset( $wikiEdits[$row->wiki_id]->edits ) ) {
-						$aItem['editcount'] = $wikiEdits[$row->wiki_id]->edits;
+					if (isset($wikiEdits[$wikiId]->edits)) {
+						$activity['editcount'] = $wikiEdits[$wikiId]->edits;
 					}
 
-					$userActivity['data'][] = $aItem;
+					$userActivity['data'][] = $activity;
 				}
 
-				$dbr->freeResult( $res );
-				if ( !LOOKUPCONTRIBS_NO_CACHE ) {
-					$wgMemc->set( $sMemKey, $userActivity, 60*10 );
-				}
-			}
-		} else {
-			$userActivity = $data;
+				return $userActivity;
+			});
 		}
 
 		wfProfileOut( __METHOD__ );
