@@ -24,7 +24,7 @@ class RandomWikiHelper {
 	}
 
 	static public function loadData( $forceRefresh = false, $forceLanguage = null ) {
-		global $wgMemc, $wgStatsDB, $wgContLang, $wgExternalSharedDB, $wgStatsDBEnabled;
+		global $wgMemc, $wgContLang, $wgStatsDBEnabled;
 		wfProfileIn( __METHOD__ );
 
 		self::$mLanguage = ( !empty( $forceLanguage ) ) ? $forceLanguage : $wgContLang->getCode();
