@@ -725,7 +725,7 @@ class WikiMetrics {
 	 * @return array
 	 */
 	private function getWikisByNbrPageviews() {
-		global $wgMemc, $wgStatsDB, $wgStatsDBEnabled;
+		global $wgMemc, $wgStatsDBEnabled;
 
 		$pageViews = $this->axNbrPageviews;
 		$pageViewsDays = $this->axNbrPageviewsDays;
