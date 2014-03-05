@@ -450,6 +450,44 @@ class NavigationModel extends WikiaModel {
 		);
 	}
 
+	private static function getMenuHelper($name, $limit = 7) {
+		global $wgMemc;
+		wfProfileIn(__METHOD__);
+
+		$key = wfMemcKey('popular-art');
+		$data = $wgMemc->get($key);
+
+		if(!empty($data) && isset($data[$name])) {
+			wfProfileOut(__METHOD__);
+			return $data[$name];
+		}
+
+		$name = str_replace(" ", "_", $name);
+
+		$dbr =& wfGetDB( DB_SLAVE );
+		$query = "SELECT cl_from FROM categorylinks USE INDEX (cl_from), page_visited USE INDEX (page_visited_cnt_inx) WHERE article_id = cl_from AND cl_to = '".addslashes($name)."' ORDER BY COUNT DESC LIMIT $limit";
+		$res = $dbr->query($query);
+		$result = array();
+		while($row = $dbr->fetchObject($res)) {
+			$result[] = $row->cl_from;
+		}
+		if(count($result) < $limit) {
+			$query = "SELECT cl_from FROM categorylinks WHERE cl_to = '".addslashes($name)."' ".(count($result) > 0 ? " AND cl_from NOT IN (".implode(',', $result).") " : "")." LIMIT ".($limit - count($result));
+			$res = $dbr->query($query);
+			while($row = $dbr->fetchObject($res)) {
+				$result[] = $row->cl_from;
+			}
+		}
+		if(empty($data) || !is_array($data)) {
+			$data = array($data);
+		}
+		$data[$name] = $result;
+		$wgMemc->set($key, $data, 60 * 60 * 6);
+
+		wfProfileOut(__METHOD__);
+		return $result;
+	}
+
 	/**
 	 * @author: Inez Korczyński
 	 *
@@ -487,7 +525,7 @@ class NavigationModel extends WikiaModel {
 					$node[ self::TEXT ] = str_replace( '_', ' ', $name );
 				}
 
-				$data = getMenuHelper( $name );
+				$data = self::getMenuHelper( $name );
 
 				foreach( $data as $val ) {
 					$title = Title::newFromId($val);
