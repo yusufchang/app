@@ -856,7 +856,7 @@ class WikiStats {
 	}
 
 	public function rollupStats($wiki_id, $by_month=null, $by_day=null) {
-		global $wgStatsDB, $wgDatamartDB;
+		global $wgDatamartDB;
 
 		$data = $dates = $params = array();
 
@@ -1047,7 +1047,7 @@ class WikiStats {
 	 */
 
 	public function loadMonthlyNSActions() {
-		global $wgStatsDB, $wgDatamartDB;
+		global $wgDatamartDB;
 
 		// The existing index requires a city ID, so don't try anything without it
 		if (!$this->mCityId) return array();
