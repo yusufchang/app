@@ -21,12 +21,9 @@ class TvSolrIndexer extends Maintenance {
 		);
 //		series_name, series_lang, series_lookup, wiki_id, wiki_name, wiki_lang
 		while( $row = $db->fetchRow( $res ) ) {
-			var_dump( $row );
-			die;
 			$this->getFromRow( $row );
 		}
-		var_dump( $this->data );
-		die;
+		
 		$queryData = $this->createSolrUpdate();
 		$this->update( $queryData );
 	}
