@@ -31,7 +31,7 @@ class TvDBmigration extends Maintenance {
 		}
 
 		$this->saveToFile();
-//		$this->save();
+		$this->save();
 	}
 
 	protected function saveToFile() {
@@ -50,10 +50,10 @@ class TvDBmigration extends Maintenance {
 	protected function save() {
 		$db = $this->getConnection();
 		if ( !empty( $this->s ) ) {
-			$db->insert('crm_series', $this->s );
+			$db->insert('tv_series', $this->s );
 		}
 		if ( !empty( $this->sw ) ) {
-			$db->insert('crm_series_wikis', $this->sw );
+			$db->insert('tv_series_wikis', $this->sw );
 		}
 	}
 
@@ -156,9 +156,9 @@ class TvDBmigration extends Maintenance {
 	}
 
 	protected function getConnection() {
-		global $wgStatsDB;
+		global $wgExternalDatawareDB;
 		if ( !isset( $this->db ) ) {
-			$this->db = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
+			$this->db = wfGetDB(DB_MASTER, array(), $wgExternalDatawareDB);
 		}
 		return $this->db;
 	}
