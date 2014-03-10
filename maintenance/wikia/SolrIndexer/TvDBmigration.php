@@ -50,10 +50,22 @@ class TvDBmigration extends Maintenance {
 	protected function save() {
 		$db = $this->getConnection();
 		if ( !empty( $this->s ) ) {
-			$db->insert('tv_series', $this->s );
+			foreach( $this->s as $series ) {
+				try {
+					$db->insert('tv_series', $series );
+				} catch (Exception $e) {
+					echo $e->getMessage()."\n";
+				}
+			}
 		}
 		if ( !empty( $this->sw ) ) {
-			$db->insert('tv_series_wikis', $this->sw );
+			foreach( $this->sw as $sw ) {
+				try {
+					$db->insert('tv_series_wikis', $sw );
+				} catch (Exception $e) {
+					echo $e->getMessage()."\n";
+				}
+			}
 		}
 	}
 
