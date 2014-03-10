@@ -14,20 +14,17 @@ class TvSolrIndexer extends Maintenance {
 	 */
 	public function execute() {
 
-//		$db = $this->getConnection();
-//		$db->select( ['sw' => 'crm_series_wikis', 's' => 'crm_series'],
-//			'*',
-//			[ 'sw.series_lookup' => 's.series_lookup', 'wiki_lang' = 'series_lang' ]
-//		);
-		//series_name, series_lang, series_lookup, wiki_id, wiki_name, wiki_lang
-		$mock = [
-			[ 'series_name' => 'Supernatural', 'wiki_id' => 831, 'wiki_lang' => 'en' ],
-			[ 'series_name' => 'The Muppet Show', 'wiki_id' => 831, 'wiki_lang' => 'en' ],
-			[ 'series_name' => 'Fictional Series', 'wiki_id' => 831, 'wiki_lang' => 'en' ],
-		];
-		foreach( $mock as $row ) {
+		$db = $this->getConnection();
+		$res = $db->select( ['sw' => 'tv_series_wikis', 's' => 'tv_series'],
+			'*',
+			[ 'sw.series_lookup' => 's.series_lookup', 'wiki_lang' => 'series_lang' ]
+		);
+//		series_name, series_lang, series_lookup, wiki_id, wiki_name, wiki_lang
+		while( $row = $db->fetchRow( $res ) ) {
 			$this->getFromRow( $row );
 		}
+		var_dump( $this->data );
+		die;
 		$queryData = $this->createSolrUpdate();
 		$this->update( $queryData );
 	}
@@ -69,9 +66,9 @@ class TvSolrIndexer extends Maintenance {
 	}
 
 	protected function getConnection() {
-		global $wgStatsDB;
+		global $wgExternalDatawareDB;
 		if ( !isset( $this->db ) ) {
-			$this->db = wfGetDB(DB_SLAVE, array(), $wgStatsDB);
+			$this->db = wfGetDB(DB_SLAVE, array(), $wgExternalDatawareDB);
 		}
 		return $this->db;
 	}
