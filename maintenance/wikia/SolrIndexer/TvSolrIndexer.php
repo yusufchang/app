@@ -23,7 +23,7 @@ class TvSolrIndexer extends Maintenance {
 		while( $row = $db->fetchRow( $res ) ) {
 			$this->getFromRow( $row );
 		}
-		
+
 		$queryData = $this->createSolrUpdate();
 		$this->update( $queryData );
 	}
@@ -57,7 +57,7 @@ class TvSolrIndexer extends Maintenance {
 	}
 
 	protected function update( $data ) {
-		$c = curl_init('http://dev-search-s4:8983/solr/xwiki/update');
+		$c = curl_init('http://search-master:8983/solr/xwiki/update');
 		curl_setopt($c, CURLOPT_POST, true);
 		curl_setopt($c, CURLOPT_HTTPHEADER, ['Content-type:application/json']);
 		curl_setopt($c, CURLOPT_POSTFIELDS, json_encode( $data ) );
