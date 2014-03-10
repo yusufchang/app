@@ -17,10 +17,12 @@ class TvSolrIndexer extends Maintenance {
 		$db = $this->getConnection();
 		$res = $db->select( ['sw' => 'tv_series_wikis', 's' => 'tv_series'],
 			'*',
-			[ 'sw.series_lookup' => 's.series_lookup', 'wiki_lang' => 'series_lang' ]
+			[ 'sw.series_lookup = s.series_lookup', 'wiki_lang = series_lang' ]
 		);
 //		series_name, series_lang, series_lookup, wiki_id, wiki_name, wiki_lang
 		while( $row = $db->fetchRow( $res ) ) {
+			var_dump( $row );
+			die;
 			$this->getFromRow( $row );
 		}
 		var_dump( $this->data );
