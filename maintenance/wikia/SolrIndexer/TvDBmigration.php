@@ -154,8 +154,17 @@ class TvDBmigration extends Maintenance {
 			$lines = explode("\n", $data);
 			foreach( $lines as $line ) {
 				$fields = explode("\t", $line);
-				$fullLang = explode(',', $fields[15])[0];
-				$lang = strtolower( explode( '-', $fullLang )[0] );
+				$fullLang = explode(',', $fields[15]);
+				$extLang = explode( '-', $fullLang[0] );
+				$lang = strtolower( $extLang[0] );
+				//for english check if US or UK
+				if ( $lang == 'en' &&
+					!empty( $fullLang[1] ) &&
+					( isset( $extLang[1] ) && !in_array( strtolower( $extLang[1] ), [ 'uk', 'us' ] ) )
+				) {
+					//else get second lang
+					$lang = strtolower( explode( '-', $fullLang[1] )[0] );
+				}
 				if ( !empty( $lang ) ) {
 					$this->codes[strtolower($fields[0])] = strtolower($lang);
 					$this->codes[strtolower($fields[1])] = strtolower($lang);
