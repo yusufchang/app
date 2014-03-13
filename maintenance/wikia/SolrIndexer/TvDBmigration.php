@@ -136,12 +136,20 @@ class TvDBmigration extends Maintenance {
 	}
 
 	protected function getData( $h, $u, $d ) {
+		//manually curated wikis
+		$wikiMap = [
+			769071 => 358337,
+			774679 => 13346
+		];
 		$connection = mysql_connect($h, $u);
 		mysql_select_db($d, $connection);
 		$q = 'SELECT * FROM fact_tv_official_wikis off, lookup_tv_shows sh WHERE off.tvrage_id = sh.tvrage_id';
 		$r = mysql_query($q);
 		$result = [];
 		while( $row = mysql_fetch_array($r) ) {
+			if ( isset( $wikiMap[ $row['wiki_id'] ] ) ) {
+				$row['wiki_id'] = $wikiMap[ $row['wiki_id'] ];
+			}
 			$result[] = $row;
 		}
 		mysql_close($connection);
