@@ -41,6 +41,7 @@ class TvSolrIndexer extends Maintenance {
 
 		$this->data[ $row[ 'wiki_id' ] ][ $row[ 'wiki_lang' ] ][] = $row['series_name'];
 		$this->data[ $row[ 'wiki_id' ] ][ 'txt' ][] = $row['series_name'];
+		$this->data[ $row[ 'wiki_id' ] ][ 'em' ][] = $row['series_name'];
 	}
 
 	protected function createSolrUpdate() {
