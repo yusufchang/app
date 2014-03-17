@@ -3,7 +3,7 @@
     <description>Wikia QA Tests</description>
 
     <property name="localsettings" value="/usr/wikia/source/wiki/LocalSettings.php" />
-    <property name="phpunitexcludegroups" value="deprecated,Broken" />
+    <property name="phpunitexcludegroups" value="deprecated,Broken,Infrastructure" />
     <property name="dbname" value="firefly" />
 
 	<!-- PHP Tests -->
