@@ -48,6 +48,20 @@
         </exec>
     </target>
 
+	<!-- debug -->
+    <target name="debug">
+		<mkdir dir="${basedir}/build/logs" />
+        <exec executable="php" dir="${basedir}" failonerror="true">
+            <env key="SERVER_DBNAME" value="${dbname}" />
+            <arg line="run-test.php
+                       --log-junit ${basedir}/build/logs/phpunit.xml
+                       --conf ${localsettings}
+                       --configuration ${basedir}/phpunit.xml
+					   --exclude-group ${phpunitexcludegroups}
+                       " />
+        </exec>
+    </target>
+
 	<!-- used to run a single test file / extension-->
     <target name="phpunit-single">
         <exec executable="php" dir="${basedir}" failonerror="true">
