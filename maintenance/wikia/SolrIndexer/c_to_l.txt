@@ -14,7 +14,7 @@ AU	AUS	036	AS	Australia	Canberra	7686850	21515754	OC	.au	AUD	Dollar	61	####	^(\d
 AW	ABW	533	AA	Aruba	Oranjestad	193	71566	NA	.aw	AWG	Guilder	297			nl-AW,es,en	3577279
 AX	ALA	248		Aland Islands	Mariehamn		26711	EU	.ax	EUR	Euro	+358-18			sv-AX	661882		FI
 AZ	AZE	031	AJ	Azerbaijan	Baku	86600	8303512	AS	.az	AZN	Manat	994	AZ ####	^(?:AZ)*(\d{4})$	az,ru,hy	587116	GE,IR,AM,TR,RU
-BA	BIH	070	BK	Bosnia and Herzegovina	Sarajevo	51129	4590000	EU	.ba	BAM	Marka	387	#####	^(\d{5})$	bs,hr-BA,sr-BA	3277605	CS,HR,ME,RS
+BS	BIH	070	BK	Bosnia and Herzegovina	Sarajevo	51129	4590000	EU	.ba	BAM	Marka	387	#####	^(\d{5})$	bs,hr-BA,sr-BA	3277605	CS,HR,ME,RS
 BB	BRB	052	BB	Barbados	Bridgetown	431	285653	NA	.bb	BBD	Dollar	+1-246	BB#####	^(?:BB)*(\d{5})$	en-BB	3374084
 BD	BGD	050	BG	Bangladesh	Dhaka	144000	156118464	AS	.bd	BDT	Taka	880	####	^(\d{4})$	bn-BD,en	1210997	MM,IN
 BE	BEL	056	BE	Belgium	Brussels	30510	10403000	EU	.be	EUR	Euro	32	####	^(\d{4})$	nl-BE,fr-BE,de-BE	2802361	DE,NL,LU,FR
@@ -29,7 +29,6 @@ BN	BRN	096	BX	Brunei	Bandar Seri Begawan	5770	395027	AS	.bn	BND	Dollar	673	@@###
 BO	BOL	068	BL	Bolivia	Sucre	1098580	9947418	SA	.bo	BOB	Boliviano	591			es-BO,qu,ay	3923057	PE,CL,PY,BR,AR
 BQ	BES	535		Bonaire, Saint Eustatius and Saba 			18012	NA	.bq	USD	Dollar	599			nl,pap,en	7626844
 BR	BRA	076	BR	Brazil	Brasilia	8511965	201103330	SA	.br	BRL	Real	55	#####-###	^(\d{8})$	pt-BR,es,en,fr	3469034	SR,PE,BO,UY,GY,PY,GF,VE,CO,AR
-BS	BHS	044	BF	Bahamas	Nassau	13940	301790	NA	.bs	BSD	Dollar	+1-242			en-BS	3572887
 BT	BTN	064	BT	Bhutan	Thimphu	47000	699847	AS	.bt	BTN	Ngultrum	975			dz	1252634	CN,IN
 BV	BVT	074	BV	Bouvet Island			0	AN	.bv	NOK	Krone					3371123
 BW	BWA	072	BC	Botswana	Gaborone	600370	2029307	AF	.bw	BWP	Pula	267			en-BW,tn-BW	933860	ZW,ZA,NA
