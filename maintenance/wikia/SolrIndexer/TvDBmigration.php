@@ -161,6 +161,7 @@ class TvDBmigration extends Maintenance {
 			$data = file_get_contents('c_to_l.txt');
 			$lines = explode("\n", $data);
 			foreach( $lines as $line ) {
+				$lang = null;
 				$fields = explode("\t", $line);
 				$fullLang = explode(',', $fields[15]);
 				$extLang = explode( '-', $fullLang[0] );
@@ -168,7 +169,7 @@ class TvDBmigration extends Maintenance {
 				//for english check if US or UK
 				if ( $lang == 'en' &&
 					!empty( $fullLang[1] ) &&
-					( isset( $extLang[1] ) && !in_array( strtolower( $extLang[1] ), [ 'uk', 'us' ] ) )
+					( isset( $extLang[1] ) && !in_array( strtolower( $extLang[1] ), [ 'gb', 'us' ] ) )
 				) {
 					//else get second lang
 					$lang = strtolower( explode( '-', $fullLang[1] )[0] );
