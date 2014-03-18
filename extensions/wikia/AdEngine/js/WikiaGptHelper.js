@@ -71,47 +71,6 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams, gp
 			node.parentNode.insertBefore(gads, node);
 			googletag = window.googletag;
 
-			log(['loadGpt', 'googletag.cmd.push', 'bind to GPT events'], 4, logGroup);
-			googletag.cmd.push(function () {
-				var debug_log = googletag.debug_log,
-					oldLog = debug_log.log;
-
-				// We're plugging into the log function in GPT so we get some insight of what
-				// happens in GPT internals. The message parameter is an object with getMessageId()
-				// method returning the following integer for the interesting events:
-				//
-				// 3, /Fetching ad for slot ([\/\w]*)/ig);
-				// 4, /Receiving ad for slot ([\/\w]*)/ig);
-				// 5, /^Rendering ad for slot ([\/\w]*)/ig);
-				// 6, /Completed rendering ad for slot ([\/\w]*)/
-				//
-				// Inspiration: https://github.com/mcountis/dfp-events
-				//
-				// 23 Oct 2013: the method changed as explained in this bug and pull request:
-				//
-				// https://github.com/mcountis/dfp-events/pull/5
-
-				googletag.debug_log.log = function (level, message, service, slot) {
-					var domId,
-						doneMessageId = 5;
-
-					// Play extra-safe with this
-					try {
-						domId = slot && slot.getSlotId().getDomId();
-
-						if (domId && typeof message === 'object' && message.getMessageId) {
-							if (message.getMessageId() === doneMessageId) {
-								triggerDone(domId);
-							}
-						}
-					} catch (e) {
-					}
-
-					// Call the original function
-					return oldLog.apply(debug_log, arguments);
-				};
-			});
-
 			// Set page level params
 			log(['loadGpt', 'googletag.cmd.push', 'page level targeting'], 4, logGroup);
 			googletag.cmd.push(function () {
@@ -201,6 +160,13 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams, gp
 				googletag.enableServices();
 
 				log(['loadGpt', 'services enabled'], 9, logGroup);
+
+				// Bind to slot events
+				googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+					triggerDone(event.slot.getSlotId().getDomId());
+				});
+
+				log(['loadGpt', 'bound to slotRenderEnded event'], 9, logGroup);
 			});
 		}
 	}
