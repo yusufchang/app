@@ -1,4 +1,4 @@
-/*global setTimeout, define*/
+/*global define*/
 /*jshint maxlen:150, camelcase:false, maxdepth:5*/
 var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams, gptSlotConfig) {
 	'use strict';
@@ -18,22 +18,10 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams, gp
 		pageLevelParams = adLogicPageLevelParams.getPageLevelParams(),
 		path = '/5441/wka.' + pageLevelParams.s0 + '/' + pageLevelParams.s1 + '//' + pageLevelParams.s2,
 		slotQueue = [],
-		doneCallbacks = {},// key: slot name, value: callback
 		providerSlotMap = gptSlotConfig.getConfig(),
 		gptSlots = {},
 		dataAttribs = {},
 		googletag;
-
-	function triggerDone(slotnameGpt) {
-		var callback = doneCallbacks[slotnameGpt];
-
-		log(['triggerDone', slotnameGpt], 3, logGroup);
-
-		if (callback) {
-			delete doneCallbacks[slotnameGpt];
-			setTimeout(callback, 0); // escape from GPT's error-catching
-		}
-	}
 
 	function convertSizesToGpt(slotsize) {
 		log(['convertSizeToGpt', slotsize], 9, logGroup);
@@ -161,11 +149,6 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams, gp
 
 				log(['loadGpt', 'services enabled'], 9, logGroup);
 
-				// Bind to slot events
-				googletag.pubads().addEventListener('slotRenderEnded', function (event) {
-					triggerDone(event.slot.getSlotId().getDomId());
-				});
-
 				log(['loadGpt', 'bound to slotRenderEnded event'], 9, logGroup);
 			});
 		}
@@ -191,32 +174,45 @@ var WikiaGptHelper = function (log, window, document, adLogicPageLevelParams, gp
 
 			slotQueue.push(gptSlots[slotnameGpt]);
 
-			doneCallbacks[slotnameGpt] = function () {
-				var status, height;
+			googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+				var status, height, empty;
 
-				status = window.adDriver2ForcedStatus && window.adDriver2ForcedStatus[slotname];
+				if (event.slot === gptSlots[slotnameGpt]) {
+					log(['slotRenderEnded', slotname, event], 'info', logGroup);
 
-				if (status === 'success') {
-					log(['doneCallback', slotname, 'running success callback (forced status)'], 4, logGroup);
-					if (typeof success === 'function') {
-						success();
-					}
-				} else {
-					height = slotDiv.offsetHeight;
-					log(['doneCallback', slotname, 'height', height], 4, logGroup);
-					if (height <= 1) {
-						log(['doneCallback', slotname, 'running error callback (hop)'], 4, logGroup);
-						if (typeof error === 'function') {
-							error();
-						}
-					} else {
-						log(['doneCallback', slotname, 'running success callback'], 4, logGroup);
+					slotDiv.setAttribute('data-gpt-line-item-id', JSON.stringify(event.lineItemId));
+					slotDiv.setAttribute('data-gpt-creative-id', JSON.stringify(event.creativeId));
+					slotDiv.setAttribute('data-gpt-creative-size', JSON.stringify(event.size));
+
+					status = window.adDriver2ForcedStatus && window.adDriver2ForcedStatus[slotname];
+
+					if (status === 'success') {
+						log(['slotRenderEnded', slotname, 'running success callback (forced status)'], 4, logGroup);
 						if (typeof success === 'function') {
 							success();
+							return;
+						}
+
+					} else {
+						height = event.size && event.size[1];
+						empty = event.isEmpty;
+
+						log(['slotRenderEnded', slotname, 'height', height, 'empty', empty], 4, logGroup);
+
+						if (empty || height <= 1) {
+							log(['slotRenderEnded', slotname, 'running error callback (hop)'], 4, logGroup);
+							if (typeof error === 'function') {
+								error();
+							}
+						} else {
+							log(['slotRenderEnded', slotname, 'running success callback'], 4, logGroup);
+							if (typeof success === 'function') {
+								success();
+							}
 						}
 					}
 				}
-			};
+			});
 
 			// Save page level and slot level params for easier ad delivery debugging
 			for (attrName in dataAttribs[slotnameGpt]) {
