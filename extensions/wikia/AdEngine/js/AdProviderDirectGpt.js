@@ -110,23 +110,34 @@ var AdProviderDirectGpt = function (log, window, Geo, slotTweaker, cacheStorage,
 		log(['canHandleSlot', slotname], 'debug', logGroup);
 
 		if (window.wgAdDriverForceDirectGptAd && slotMap[slotname]) {
+			log(['canHandleSlot', slotname, 'Forced GPT', true], 'debug', logGroup);
 			return true;
 		}
 
-		if (!isHighValueCountry || !slotMap[slotname]) {
+		if (!isHighValueCountry) {
+			log(['canHandleSlot', slotname, 'Not high value country', false], 'debug', logGroup);
+			return false;
+		}
+
+		if (!slotMap[slotname]) {
+			log(['canHandleSlot', slotname, 'Not present in slotMap', false], 'debug', logGroup);
 			return false;
 		}
 
 		if (gptConfig[slotname] === 'flushonly') {
+			log(['canHandleSlot', slotname, 'flushonly', true], 'debug', logGroup);
 			return true;
 		}
 
 		var canHandle = shouldCallDart(slotname);
+		log(['canHandleSlot', slotname, 'shouldCallDart', canHandle], 'debug', logGroup);
 
 		if (!canHandle && gptConfig[slotname] === 'flush') {
+			log(['canHandleSlot', slotname, 'flushing ads'], 'debug', logGroup);
 			flushGpt();
 		}
 
+		log(['canHandleSlot', slotname, 'return', canHandle], 'debug', logGroup);
 		return canHandle;
 	}
 
