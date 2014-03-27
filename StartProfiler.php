@@ -3,7 +3,6 @@
 $wgProfilerSamplePercent = 1;
 if( !empty( $_GET['forceprofile'] ) ) {
 	require_once( dirname(__FILE__).'/includes/profiler/ProfilerSimpleText.php' );
-	$wgProfiler = new ProfilerSimpleText(array());
 	$wgProfiler->setProfileID( 'forced' );
 // Wikia change - begin - @author: wladek
 } elseif( !empty( $_GET['forcetrace'] ) && $_GET['forcetrace'] == 2 ) {

@@ -63,6 +63,7 @@ class Profiler {
 	 * @return Profiler
 	 */
 	public static function instance() {
+		global $wgProfiler;
 		if( is_null( self::$__instance ) ) {
 			global $wgProfiler;
 			if( is_array( $wgProfiler ) ) {
