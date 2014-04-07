@@ -3,8 +3,12 @@
 global $wgAutoloadClasses;
 $wgAutoloadClasses['TestController'] = dirname(__FILE__) . '/TestController.php';
 $wgAutoloadClasses['AnotherTestController'] = dirname(__FILE__) . '/TestController.php';
+$wgAutoloadClasses['NextTestController'] = dirname(__FILE__) . '/NextTestController.php';
 
 class TestController extends WikiaController {
+
+	public function dispatcherCharacterization() {
+	}
 
 	/**
 	 * This method does nothing and is available in json context only
@@ -61,5 +65,22 @@ class AnotherTestController extends WikiaController {
 		$this->getResponse()->setVal( 'wasCalled', "hello" );
 		$this->getResponse()->setVal( 'foo', true );
 
+	}
+}
+
+class NextTestController extends WikiaController {
+
+	public function index(){}
+
+	public function hasNext() {
+		return true;
+	}
+
+	public function getNext() {
+		return [
+			'controller' => 'TestController',
+			'method' => 'dispatcherCharacterization',
+			'reset' => false
+		];
 	}
 }
