@@ -246,6 +246,9 @@ class WikiaDispatcher {
 					$response->getView()->setTemplatePath( null );  	// response is re-used so skip the original template
 				}
 			}
+			if ( $method == 'getDoubleForward' ) {
+				var_dump( $controller->callNext );
+			}
 
 		} while ( $controller && $controller->hasNext() );
 

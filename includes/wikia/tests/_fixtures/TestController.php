@@ -50,6 +50,17 @@ class TestController extends WikiaController {
 	public function globalRoutingTest() {
 		$this->getResponse()->setVal( 'wasCalled', "globalRouting");
 	}
+
+	public function action1() {
+	}
+
+	public function action2() {
+	}
+
+	public function getDoubleForward() {
+		$this->forward("TestController", "action1", false);
+		$this->forward("TestController", "action2", false);
+	}
 }
 
 class AnotherTestController extends WikiaController {
