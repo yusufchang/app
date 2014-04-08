@@ -12,7 +12,7 @@ class AdEngine2Hooks {
 	static public function onAfterInitialize($title, $article, $output, $user, WebRequest $request, $wiki) {
 
 		global $wgAdDriverForceDirectGptAd, $wgAdDriverForceLiftiumAd, $wgEnableRHonDesktop,
-			   $wgLiftiumOnLoad, $wgNoExternals, $wgAdVideoTargeting;
+			   $wgLiftiumOnLoad, $wgNoExternals, $wgAdVideoTargeting, $wgAdPageType;
 
 		$wgNoExternals = $request->getBool('noexternals', $wgNoExternals);
 		$wgLiftiumOnLoad = $request->getBool('liftiumonload', (bool) $wgLiftiumOnLoad);
@@ -20,8 +20,9 @@ class AdEngine2Hooks {
 
 		$wgEnableRHonDesktop = $request->getBool( 'noremnant', $wgEnableRHonDesktop );
 
-		$wgAdDriverForceDirectGptAd = $request->getBool( 'forcedirectgpt', $wgAdDriverForceDirectGptAd );
-		$wgAdDriverForceLiftiumAd = $request->getBool( 'forceliftium', $wgAdDriverForceLiftiumAd );
+		$wgAdDriverForceDirectGptAd = $request->getBool('forcedirectgpt', $wgAdDriverForceDirectGptAd);
+		$wgAdDriverForceLiftiumAd = $request->getBool('forceliftium', $wgAdDriverForceLiftiumAd);
+		$wgAdPageType = AdEngine2Service::getPageType();
 
 		return true;
 	}
@@ -43,7 +44,7 @@ class AdEngine2Hooks {
 			   $wgOutboundScreenRedirectDelay, $wgEnableOutboundScreenExt, $wgAdDriverUseSevenOneMedia,
 			   $wgAdPageLevelCategoryLangsDefault, $wgAdDriverTrackState,
 			   $wgAdDriverForceDirectGptAd, $wgAdDriverForceLiftiumAd,
-			   $wgEnableRHonDesktop, $wgOut;
+			   $wgEnableRHonDesktop, $wgAdPageType, $wgOut;
 
 		$highValueCountries = WikiFactory::getVarValueByName(
 			'wgHighValueCountries',
@@ -67,6 +68,7 @@ class AdEngine2Hooks {
 			// Ad Driver
 			"wgHighValueCountries" => $highValueCountries,
 			"wgAdPageLevelCategoryLangs" => $pageLevelCategoryLanguages,
+			'wgAdPageType' => $wgAdPageType,
 			"wgAdDriverUseSevenOneMedia" => $wgAdDriverUseSevenOneMedia,
 			"wgUserShowAds" => $wgUser->getOption('showAds'),
 			"wgOutboundScreenRedirectDelay" => $wgOutboundScreenRedirectDelay,
