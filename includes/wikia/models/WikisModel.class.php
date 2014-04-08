@@ -309,7 +309,7 @@ class WikisModel extends WikiaModel {
 					'desc' => $row->city_description,
 					//this is stored in a pretty peculiar format,
 					//see extensions/wikia/CityVisualization/models/CityVisualization.class.php
-					'image' => $row->city_main_image,
+					'image' => PromoImage::fixupIncompletePathname($row->city_main_image, $row->city_id),
 					'flags' => array(
 						'new' => ( ( $row->city_flags & self::FLAG_NEW ) == self::FLAG_NEW ),
 						'hot' => ( ( $row->city_flags & self::FLAG_HOT ) == self::FLAG_HOT ),

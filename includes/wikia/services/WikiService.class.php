@@ -366,7 +366,10 @@ class WikiService extends WikiaModel {
 
 			while ( $row = $results->fetchObject() ) {
 				$promoImage = PromoImage::fromPathname($row->city_main_image);
-				$promoImage->setCityId($row->city_id);
+				if (!$promoImage->isDBSet()){
+					$promoImage->setCityId($row->city_id);
+				}
+
 				$file = $promoImage->corporateFileByLang('en');
 				if ( $file->exists() ) {
 					$imageServing = new ImageServing( null, $imageWidth, $imageHeight );
@@ -830,7 +833,7 @@ class WikiService extends WikiaModel {
 					'desc' => $row->city_description,
 					//this is stored in a pretty peculiar format,
 					//see extensions/wikia/CityVisualization/models/CityVisualization.class.php
-					'image' => $row->city_main_image,
+					'image' => PromoImage::fixupIncompletePathname($row->city_main_image, $row->city_id),
 					'flags' => array(
 						'new' => ( ( $row->city_flags & self::FLAG_NEW ) == self::FLAG_NEW ),
 						'hot' => ( ( $row->city_flags & self::FLAG_HOT ) == self::FLAG_HOT ),
