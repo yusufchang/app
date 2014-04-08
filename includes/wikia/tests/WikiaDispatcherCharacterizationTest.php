@@ -401,4 +401,64 @@ class WikiaDispatcherCharacterizationTest extends WikiaBaseTest {
 		$this->assertEquals($response, $result);
 	}
 
+	public function testPrivateMethodPath() {
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'privateMethod']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_JSON, $request);
+		$response->setControllerName('TestController');
+		$response->setMethodName('privateMethod');
+		$response->setCode(404);
+		$response->setData([
+			'error' => 'MethodNotFoundException',
+			'message' => 'Method not found: TestController::privateMethod',
+		]);
+		$response->setException(new MethodNotFoundException("TestController::privateMethod"));
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testPrivateMethodInternalPath() {
+		$this->setExpectedException('MethodNotFoundException', 'Not found');
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'privateMethod']
+		);
+
+		$request->setInternal(true);
+		$this->dispatcher->dispatch(F::app(), $request);
+	}
+
+	public function testExecutePrefixPath() {
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'execMethod']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_JSON, $request);
+		$response->setControllerName('TestController');
+		$response->setMethodName('execMethod');
+		$response->setCode(404);
+		$response->setData([
+			'error' => 'MethodNotFoundException',
+			'message' => 'Method not found: TestController::ExecMethod',
+		]);
+		$response->setException(new MethodNotFoundException("TestController::ExecMethod"));
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testExecutePrefixInternalPath() {
+		$this->setExpectedException('MethodNotFoundException', 'Not found');
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'execMethod']
+		);
+
+		$request->setInternal(true);
+		$this->dispatcher->dispatch(F::app(), $request);
+	}
+
 }

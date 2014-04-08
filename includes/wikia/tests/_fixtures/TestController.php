@@ -10,8 +10,11 @@ $wgAutoloadClasses['PreventUsageTestController'] = dirname(__FILE__) . '/Prevent
 
 class TestController extends WikiaController {
 
-	public function dispatcherCharacterization() {
-	}
+	private function privateMethod() {}
+
+	public function executeExecMethod() {}
+
+	public function dispatcherCharacterization() {}
 
 	public function init(){}
 
