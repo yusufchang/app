@@ -4,11 +4,16 @@ global $wgAutoloadClasses;
 $wgAutoloadClasses['TestController'] = dirname(__FILE__) . '/TestController.php';
 $wgAutoloadClasses['AnotherTestController'] = dirname(__FILE__) . '/TestController.php';
 $wgAutoloadClasses['NextTestController'] = dirname(__FILE__) . '/NextTestController.php';
+$wgAutoloadClasses['NonExternalTestController'] = dirname(__FILE__) . '/NonExternalTestController.php';
+$wgAutoloadClasses['ContextTestController'] = dirname(__FILE__) . '/ContextTestController.php';
+$wgAutoloadClasses['PreventUsageTestController'] = dirname(__FILE__) . '/PreventUsageTestController.php';
 
 class TestController extends WikiaController {
 
 	public function dispatcherCharacterization() {
 	}
+
+	public function init(){}
 
 	/**
 	 * This method does nothing and is available in json context only
@@ -93,5 +98,38 @@ class NextTestController extends WikiaController {
 			'method' => 'dispatcherCharacterization',
 			'reset' => false
 		];
+	}
+}
+
+class NonExternalTestController extends WikiaDispatchableObject {
+
+	public function allowsExternalRequests() {
+		return false;
+	}
+
+	public function index() {
+	}
+}
+
+class ContextTestController extends WikiaController {
+
+	public function index() {
+
+	}
+
+	public function getContext() {
+		return RequestContext::getMain();
+	}
+}
+
+class PreventUsageTestController extends WikiaController {
+	public function index() {}
+
+	public function preventUsage($user, $method) {
+		return true;
+	}
+
+	public function skipRendering() {
+		$this->getResponse()->setData(['renderingSkipped' => true]);
 	}
 }

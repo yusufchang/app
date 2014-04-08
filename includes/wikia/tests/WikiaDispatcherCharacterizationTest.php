@@ -34,7 +34,6 @@ class WikiaDispatcherCharacterizationTest extends WikiaBaseTest {
 		$this->assertEquals($response, $result);
 	}
 
-
 	/**
 	 * @test
 	 */
@@ -47,6 +46,36 @@ class WikiaDispatcherCharacterizationTest extends WikiaBaseTest {
 		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
 		$response->setControllerName('TestController');
 		$response->setMethodName('dispatcherCharacterization');
+
+		$request->setInternal(true);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	/** @test */
+	public function testHappyPathDefaultMethod() {
+		$request = new WikiaRequest(
+			['controller' => 'TestController']
+		);
+		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
+		$response->setControllerName('TestController');
+		$response->setMethodName('index');
+		$response->setData(['wasCalled' => 'index']);
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	/** @test */
+	public function testHappyPathDefaultMethodInternal() {
+		$request = new WikiaRequest(
+			['controller' => 'TestController']
+		);
+		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
+		$response->setControllerName('TestController');
+		$response->setMethodName('index');
+		$response->setData(['wasCalled' => 'index']);
 
 		$request->setInternal(true);
 		$result = $this->dispatcher->dispatch(F::app(), $request);
@@ -106,7 +135,7 @@ class WikiaDispatcherCharacterizationTest extends WikiaBaseTest {
 
 	/** @test */
 	public function testWrongController() {
-		// fiven
+		// given
 		$request = new WikiaRequest(
 			['controller' => 'adfdController', 'method' => 'dispatcherCharacterization']);
 
@@ -236,5 +265,140 @@ class WikiaDispatcherCharacterizationTest extends WikiaBaseTest {
 		$this->mockClass($controllerClassName, $controller);
 	}
 
+	public function testNotExistingMethodPath() {
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'getNonExistingMethodName']
+		);
+		$response = new WikiaResponse( WikiaResponse::FORMAT_JSON, $request);
+		$response->setControllerName('TestController');
+		$response->setMethodName('getNonExistingMethodName');
+		$response->setCode(404);
+		$response->setData([
+			'error' => 'MethodNotFoundException',
+			'message' => 'Method not found: TestController::GetNonExistingMethodName',
+		]);
+		$response->setException(new MethodNotFoundException("TestController::GetNonExistingMethodName"));
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testNotExistingMethodInternalPath() {
+		$this->setExpectedException('MethodNotFoundException', 'Not found');
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'getNonExistingMethodName']
+		);
+
+		$request->setInternal(true);
+		$this->dispatcher->dispatch(F::app(), $request);
+	}
+
+	public function testNotAllowedExternalRequestsPath() {
+		$request = new WikiaRequest(
+			['controller' => 'NonExternalTestController']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_JSON, $request);
+		$response->setControllerName('NonExternalTestController');
+		$response->setMethodName('index');
+		$response->setCode(404);
+		$response->setData([
+			'error' => 'MethodNotFoundException',
+			'message' => 'Method not found: NonExternalTestController::index',
+		]);
+		$response->setException(new MethodNotFoundException("NonExternalTestController::index"));
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testExcludedMethodPath() {
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'init']
+		);
+		$response = new WikiaResponse( WikiaResponse::FORMAT_JSON, $request);
+		$response->setControllerName('TestController');
+		$response->setMethodName('init');
+		$response->setCode(404);
+		$response->setData([
+			'error' => 'MethodNotFoundException',
+			'message' => 'Method not found: TestController::init',
+		]);
+		$response->setException(new MethodNotFoundException("TestController::init"));
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testExcludedMethodInternalPath() {
+		$this->setExpectedException('MethodNotFoundException', 'Not found');
+		$request = new WikiaRequest(
+			['controller' => 'TestController', 'method' => 'init']
+		);
+
+		$request->setInternal(true);
+		$this->dispatcher->dispatch(F::app(), $request);
+	}
+
+	public function testContextAlreadySetPath() {
+		$request = new WikiaRequest(
+			['controller' => 'ContextTestController', 'method' => 'index']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
+		$response->setControllerName('ContextTestController');
+		$response->setMethodName('index');
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testContextAlreadySetInternalPath() {
+		$request = new WikiaRequest(
+			['controller' => 'ContextTestController', 'method' => 'index']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
+		$response->setControllerName('ContextTestController');
+		$response->setMethodName('index');
+
+		$request->setInternal(true);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testPreventUsagePath() {
+		$request = new WikiaRequest(
+			['controller' => 'PreventUsageTestController', 'method' => 'index']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
+		$response->setControllerName('PreventUsageTestController');
+		$response->setMethodName('index');
+		$response->setData(['renderingSkipped' => true]);
+
+		$request->setInternal(false);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
+
+	public function testPreventUsageInternalPath() {
+		$request = new WikiaRequest(
+			['controller' => 'PreventUsageTestController', 'method' => 'index']
+		);
+
+		$response = new WikiaResponse( WikiaResponse::FORMAT_HTML, $request);
+		$response->setControllerName('PreventUsageTestController');
+		$response->setMethodName('index');
+		$response->setData(['renderingSkipped' => true]);
+
+		$request->setInternal(true);
+		$result = $this->dispatcher->dispatch(F::app(), $request);
+		$this->assertEquals($response, $result);
+	}
 
 }

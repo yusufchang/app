@@ -152,7 +152,6 @@ class WikiaDispatcher {
 					$hookMethod = $method;
 					$params = array();
 				}
-
 				if (
 					( !$request->isInternal() && !$controller->allowsExternalRequests() ) ||
 					in_array( $method, array(
