@@ -109,19 +109,28 @@ class ProfilerXhProf extends Profiler {
 			return false;
 		}
 		
-		$options = [ 'prefix' => 'XHProf', 'alwaysFlush' => 1, 'packetSize' => 100 ];
+		$options = [ 'prefix' => 'XHProf', 'alwaysFlush' => 0, 'packetSize' => 1000 ];
 		$statsD = new Wikia\Xhprof\StatsD( $setup[ 'host' ], $setup[ 'port' ], $setup['proto'], $options );
 		
 		if ( is_object( $statsD ) ) {
 			$data = [];
+			$i = 0;
 			foreach ( $profile_data as $call => $callData) {
 				$pos = strpos( $call, "==>" );
 				if ( !$pos ) {
 					continue;
 				}
 				
+				if ( $call == 'main()' ) {
+					continue;
+				}
+				
 				/* method stats */
 				$callee = substr( $call, $pos + 3 );
+				
+				if ( !is_callable( $callee ) ) {
+					continue;
+				} 
 				
 				/* class/helper function stats */
 				$pos = strpos( $callee, '::' );
@@ -129,78 +138,72 @@ class ProfilerXhProf extends Profiler {
 				
 				/* replace ==> with . */
 				$call = str_replace( "==>", ".", $call );
-				
+
+				$callee = str_replace( "::", ".", $callee );
+
 				/* ct - The number of times the function was called */
 				if ( !empty( $setup['metrics']['ct'] ) ) {
-					/* disable for now 
-					$statsD->set( sprintf( "%s.ct.count", $call ), $callData['ct'] );
-					*/
+					$statsD->set( sprintf( "ct.%s", $callee ), $callData['ct'] );
 					// counter for classes and helpers
-					$this->_setCounter( $data, [ $callee, $class ], $callData['ct'] );
+					//$this->_setCounter( $data, [ $callee, $class ], $callData['ct'] );
 				}
 				
 				/* wt- wall time. Amount of "real world" time */
 				if ( !empty( $setup['metrics']['wt'] ) ) {
-					/* disable for now
-					$statsD->timing( $call, $callData['wt'] );
-					*/
+					$statsD->timing( sprintf( "wt.%s", $callee ), $callData['wt'] );
 					// count timing for classes and helpers
-					$this->_setTiming( $data, [ $callee, $class ], $callData[ 'wt' ] );
+					//$this->_setTiming( $data, [ $callee, $class ], $callData[ 'wt' ] );
 				}
 
 				/* cpu - number of CPU "ticks" executed for this function (a measure of CPU usage). */
 				if ( !empty( $setup['metrics']['cpu'] ) ) {
-					/* disable for now
-					$statsD->set( sprintf( "%s.cpu.count", $call ), $callData['cpu'] );
-					*/
+					$statsD->set( sprintf( "cpu.%s", $callee ), $callData['cpu'] );
 					// count cpu usage for classes and helpers
-					$this->_setCPU( $data, [ $callee, $class ], $callData[ 'cpu' ] );
+					//$this->_setCPU( $data, [ $callee, $class ], $callData[ 'cpu' ] );
 				}
 				
 				/* mu - memory usage */
 				if ( !empty( $setup['metrics']['mu'] ) ) {
-					/* disable for npw 
-					$statsD->set( sprintf( "%s.mu.count", $call ), $callData['mu'] );
-					*/
+					$statsD->set( sprintf( "mu.%s", $callee ), $callData['mu'] );
 					// count memory usage for classes and helpers
-					$this->_setMemoryUsage( $data, [ $callee, $class ], $callData[ 'mu' ] );
+					//$this->_setMemoryUsage( $data, [ $callee, $class ], $callData[ 'mu' ] );
 				}
 
 				/* pmu - peak memory usage (a la get_peak_memory_usage()). This does not always seem to be accurate, */
 				if ( !empty( $setup['metrics']['pmu'] ) ) {
-					/* disable for now
-					$statsD->set( sprintf( "%s.pmu.count", $call ), $callData['pmu'] );
-					*/
+					$statsD->set( sprintf( "pmu.%s", $callee ), $callData['pmu'] );
 					// count memory picks for classes and helpers
-					$this->_setPMU( $data, [ $callee, $class ], $callData[ 'pmu' ] );
+					//$this->_setPMU( $data, [ $callee, $class ], $callData[ 'pmu' ] );
 				}
+				$i++;
 			}
 			
-			if ( !empty( $data ) ) {
+			/*if ( !empty( $data ) ) {
 				foreach ( $data as $callee => $metrics ) {
 					foreach( $metrics as $metric => $val ) {
 						$name_base = sprintf( "%s.%s", str_replace( "::", ".", $callee ), $metric );
 						if ( $metric == 'wt' ) {
 							foreach ( $val as $k => $v ) {
-								$name = sprintf( "%s.%s", $name_base, $k );
+								$name = sprintf( "%s.%s", $k, $name_base );
 								$statsD->timing( $name, ( $metrics[ 'ct' ] && $k == 'sum' ) ? intval($v/$metrics[ 'ct' ]) : $v );	
 							} 
 						} else {
 							if ( !is_array( $val ) ) {
-								$statsD->set( $name, $val );
+								$statsD->gauge( $name, $val );
 							} else {
 								foreach ( $val as $k => $v ) {
-									$name = sprintf( "%s.%s.count", $name_base, $k );
-									$statsD->set( $name, $v );
+									$name = sprintf( "%s.%s", $k, $name_base );
+									$statsD->gauge( $name, $v );
 								}
 							} 
 						}
 					}
 				}
-			}
+			}*/
 		}
 		
-		error_log( __METHOD__ . ": data = " . count( $data ) . "\n", 3, "/tmp/moli.log" );
+		//error_log( __METHOD__ . ": data = " . print_r( $profile_data, true ) . "\n", 3, "/tmp/moli.log" );
+		error_log( __METHOD__ . ": i = " . print_r( $i, true ) . "\n", 3, "/tmp/moli_data.log" );
 	}
 	
 	private function _setCounter( &$data, $keys, $val ) {

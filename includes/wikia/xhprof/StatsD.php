@@ -38,7 +38,7 @@ class StatsD {
 			$this->alwaysFlush = $options[ 'alwaysFlush' ];
 		}
 		
-		if ( isset( $options[ 'mergePackets' ] ) ) {
+		if ( isset( $options[ 'mergePackets' ] ) && !empty( $options[ ' mergePackets' ] ) ) {
 			$this->mergePackets = $options[ 'mergePackets' ];
 		}
 		
@@ -146,7 +146,7 @@ class StatsD {
 		}
 		
 		foreach ( $data as $stat => $value ) {
-			$msg = "$this->prefix.$stat:$value";
+			$msg = "{$this->prefix}.{$stat}:{$value}";
 			if ( $this->queueSize + strlen($msg) > $this->packetSize ) {
 				$this->flush();
 			}
