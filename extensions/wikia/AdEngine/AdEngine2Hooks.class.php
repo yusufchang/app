@@ -45,7 +45,8 @@ class AdEngine2Hooks {
 		global $wgCityId, $wgEnableAdsInContent, $wgEnableOpenXSPC,
 			   $wgHighValueCountriesDefault, $wgUser,
 			   $wgEnableAdMeldAPIClient, $wgEnableAdMeldAPIClientPixels,
-			   $wgOutboundScreenRedirectDelay, $wgEnableOutboundScreenExt, $wgAdDriverUseSevenOneMedia,
+			   $wgOutboundScreenRedirectDelay, $wgEnableOutboundScreenExt,
+			   $wgAdDriverUseSevenOneMedia, $wgAdDriverUseEbay,
 			   $wgAdPageLevelCategoryLangsDefault, $wgAdDriverTrackState,
 			   $wgAdDriverForceDirectGptAd, $wgAdDriverForceLiftiumAd,
 			   $wgEnableRHonDesktop, $wgAdPageType, $wgOut;
@@ -74,6 +75,7 @@ class AdEngine2Hooks {
 			"wgAdPageLevelCategoryLangs" => $pageLevelCategoryLanguages,
 			'wgAdPageType' => $wgAdPageType,
 			"wgAdDriverUseSevenOneMedia" => $wgAdDriverUseSevenOneMedia,
+			"wgAdDriverUseEbay" => $wgAdDriverUseEbay,
 			"wgUserShowAds" => $wgUser->getOption('showAds'),
 			"wgOutboundScreenRedirectDelay" => $wgOutboundScreenRedirectDelay,
 			"wgEnableOutboundScreenExt" => $wgEnableOutboundScreenExt,
