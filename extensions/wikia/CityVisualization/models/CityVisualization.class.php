@@ -454,10 +454,6 @@ class CityVisualization extends WikiaModel {
 		return wfSharedMemcKey('single_wiki_data_visualization', self::CITY_VISUALIZATION_MEMC_VERSION, $corporateWikiId, $wikiId, $langCode, __METHOD__);
 	}
 
-	public function getWikiImagesCacheKey($wikiId, $langCode) {
-		return $this->getVisualizationElementMemcKey('wiki_data_visualization_images', $wikiId, $langCode);
-	}
-
 	public function getWikiImageNamesCacheKey($wikiId, $langCode) {
 		return $this->getVisualizationElementMemcKey('wiki_data_visualization_image_names', $wikiId, $langCode);
 	}
@@ -565,20 +561,32 @@ class CityVisualization extends WikiaModel {
 		return $conditions;
 	}
 
-	public function getWikiImages($wikiId, $langCode, $filter = ImageReviewStatuses::STATE_APPROVED) {
+	public function notCachedGetWikiImageNames($wikiId, $langCode, $filter = ImageReviewStatuses::STATE_APPROVED) {
+//		public function getWikiImageData($wikiId, $langCode, $filter = ImageReviewStatuses::STATE_APPROVED, callable $filterFunction = null) {
 		wfProfileIn(__METHOD__);
 
-		$memKey = $this->getWikiImagesCacheKey($wikiId, $langCode);
-		$wikiImages = $this->wg->Memc->get($memKey);
+		$wikiImageNames = array();
+		$db = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
+		$conditions = $this->getWikiImagesConditions($wikiId, $langCode, $filter);
 
-		if (empty($wikiImages)) {
-			$rowAssigner = new WikiImageRowHelper();
-			$wikiImages = $this->getWikiImageData($wikiId, $langCode, $rowAssigner, $filter);
-			$this->wg->Memc->set($memKey, $wikiImages, 60 * 60 * 24);
+		$result = $db->select(
+			array(self::CITY_VISUALIZATION_IMAGES_TABLE_NAME),
+			array(
+				'image_name',
+				'image_index'
+			),
+			$conditions,
+			__METHOD__
+		);
+
+		while ($row = $result->fetchObject()) {
+			$parsed = WikiImageRowHelper::parseWikiImageRow($row);
+			$name = PromoImage::fromPathname($parsed->name)->ensureCityIdIsSet($wikiId)->getPathname();
+			$wikiImageNames[$parsed->index] = $name;
 		}
-		wfProfileOut(__METHOD__);
 
-		return $wikiImages;
+		wfProfileOut(__METHOD__);
+		return $wikiImageNames;
 	}
 
 	public function getWikiImageNames($wikiId, $langCode, $filter = ImageReviewStatuses::STATE_APPROVED) {
@@ -588,43 +596,12 @@ class CityVisualization extends WikiaModel {
 		$wikiImageNames = $this->wg->Memc->get($memKey);
 
 		if (empty($wikiImageNames)) {
-			$rowAssigner = new WikiImageNameRowHelper();
-			$wikiImageNames = $this->getWikiImageData($wikiId, $langCode, $rowAssigner, $filter);
+			$wikiImageNames = $this->notCachedGetWikiImageNames($wikiId, $langCode, $filter);
 			$this->wg->Memc->set($memKey, $wikiImageNames, 60 * 60 * 24);
 		}
 		wfProfileOut(__METHOD__);
 
 		return $wikiImageNames;
-	}
-
-	public function getWikiImageData($wikiId, $langCode, WikiImageRowAssigner $rowAssigner, $filter = ImageReviewStatuses::STATE_APPROVED) {
-		wfProfileIn(__METHOD__);
-
-		$wikiImages = array();
-		$db = wfGetDB(DB_SLAVE, array(), $this->wg->ExternalSharedDB);
-
-		$conditions = $this->getWikiImagesConditions($wikiId, $langCode, $filter);
-
-		$result = $db->select(
-			array(self::CITY_VISUALIZATION_IMAGES_TABLE_NAME),
-			array(
-				'image_name',
-				'image_index',
-				'image_review_status',
-			),
-			$conditions,
-			__METHOD__
-		);
-
-		while ($row = $result->fetchObject()) {
-			$tmp = $rowAssigner->returnParsedWikiImageRow($row);
-			$tmp['image_name'] = PromoImage::fromPathname($tmp['image_name'])->ensureCityIdIsSet($wikiId)->getPathname();
-			$wikiImages[$row->image_index] = $tmp;
-		}
-
-		wfProfileOut(__METHOD__);
-
-		return $wikiImages;
 	}
 
 	public function saveImagesForReview($cityId, $langCode, $images, $imageReviewStatus = ImageReviewStatuses::STATE_UNREVIEWED) {
@@ -801,7 +778,7 @@ class CityVisualization extends WikiaModel {
 		return $wikiImages;
 	}
 
-	public function getImageReviewStatus($wikiId, $pageId, WikiImageRowAssigner $rowAssigner) {
+	public function getImageReviewStatus($wikiId, $pageId) {
 		wfProfileIn(__METHOD__);
 		$reviewStatus = ImageReviewStatuses::STATE_UNREVIEWED;
 
@@ -819,7 +796,7 @@ class CityVisualization extends WikiaModel {
 		);
 
 		while ($row = $result->fetchObject()) {
-			$reviewStatus = $rowAssigner->returnParsedWikiImageRow($row);
+			$reviewStatus = WikiImageRowHelper::parseWikiImageRow($row)->review_status;
 		}
 
 		wfProfileOut(__METHOD__);
