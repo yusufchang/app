@@ -562,7 +562,6 @@ class CityVisualization extends WikiaModel {
 	}
 
 	public function notCachedGetWikiImageNames($wikiId, $langCode, $filter = ImageReviewStatuses::STATE_APPROVED) {
-//		public function getWikiImageData($wikiId, $langCode, $filter = ImageReviewStatuses::STATE_APPROVED, callable $filterFunction = null) {
 		wfProfileIn(__METHOD__);
 
 		$wikiImageNames = array();
