@@ -49,7 +49,8 @@ class AdEngine2Hooks {
 			   $wgAdDriverUseSevenOneMedia, $wgAdDriverUseEbay,
 			   $wgAdPageLevelCategoryLangsDefault, $wgAdDriverTrackState,
 			   $wgAdDriverForceDirectGptAd, $wgAdDriverForceLiftiumAd,
-			   $wgEnableRHonDesktop, $wgAdPageType, $wgOut;
+			   $wgEnableRHonDesktop, $wgAdPageType, $wgOut,
+			   $wgOasisResponsive, $wgOasisResponsiveLimited;
 
 		$highValueCountries = WikiFactory::getVarValueByName(
 			'wgHighValueCountries',
@@ -75,6 +76,7 @@ class AdEngine2Hooks {
 			"wgAdPageLevelCategoryLangs" => $pageLevelCategoryLanguages,
 			'wgAdPageType' => $wgAdPageType,
 			"wgAdDriverUseSevenOneMedia" => $wgAdDriverUseSevenOneMedia,
+			"wgAdDriverSevenOneMediaDisableFirePlaces" => !empty($wgOasisResponsive) && empty($wgOasisResponsiveLimited),
 			"wgAdDriverUseEbay" => $wgAdDriverUseEbay,
 			"wgUserShowAds" => $wgUser->getOption('showAds'),
 			"wgOutboundScreenRedirectDelay" => $wgOutboundScreenRedirectDelay,
