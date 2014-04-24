@@ -1755,3 +1755,11 @@ $config['lazy_rail_js'] = [
 		'//skins/oasis/js/LatestPhotos.js',
 	]
 ];
+
+/** jQuery **/
+$config['qualaroo_blocking_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/Qualaroo/scripts/QualarooBlocking.js',
+	)
+);
