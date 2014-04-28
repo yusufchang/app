@@ -73,7 +73,11 @@
 <?= $dynamicYield ?>
 <?= $ivw2 ?>
 <div class="WikiaSiteWrapper">
+	<div id="q1media_vread"></div>
+	<script src="http://Q1MediaHydraPlatform.com/ads/video/controller.php?eid=39716"></script>
+
 	<?= $body ?>
+
 
 	<?php
 		echo F::app()->renderView('Ad', 'Index', ['slotName' => 'GPT_FLUSH', 'pageTypes' => ['*']]);
