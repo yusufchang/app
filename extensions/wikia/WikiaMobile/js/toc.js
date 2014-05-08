@@ -18,7 +18,8 @@ function ( sections, window, $, mustache, toc, track ) {
 		inPageToc,
 		tocMarkup,
 		headers = sections.list(),
-		show = headers.length > 0;
+		show = headers.length > 0,
+		isLocked = false;
 
 	/**
 	 * @desc Creates object representing a section
@@ -153,17 +154,23 @@ function ( sections, window, $, mustache, toc, track ) {
 			window.scrollTo( 0, 0 );
 		} )
 		.on( 'click', 'li', function ( event ) {
-			var $li = $( this ),
-				$a = $li.find( 'a' ).first();
+			if (!isLocked) {
+				var $li = $( this ),
+					$a = $li.find( 'a' ).first();
 
-			event.stopPropagation();
-			event.preventDefault();
+				event.stopPropagation();
+				event.preventDefault();
 
-			if ( !toggleLi( $li ) ) {
-				onClose( 'element' );
+				if ( !toggleLi( $li ) ) {
+					onClose( 'element' );
+				}
+
+				sections.scrollTo( $a.attr( 'href' ) );
+				isLocked = true;
 			}
-
-			sections.scrollTo( $a.attr( 'href' ) );
+			else {
+				isLocked = false;
+			}
 		} );
 
 		renderToc();
