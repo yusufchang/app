@@ -153,11 +153,11 @@ function ( sections, window, $, mustache, toc, track ) {
 			onClose( 'header' );
 			window.scrollTo( 0, 0 );
 		} )
-		.on( 'click', 'li', function ( event ) {
+		.on( 'click', 'li', function (event) {
 			if (!isLocked) {
+				isLocked = true;
 				var $li = $( this ),
 					$a = $li.find( 'a' ).first();
-
 				event.stopPropagation();
 				event.preventDefault();
 
@@ -166,10 +166,9 @@ function ( sections, window, $, mustache, toc, track ) {
 				}
 
 				sections.scrollTo( $a.attr( 'href' ) );
-				isLocked = true;
-			}
-			else {
-				isLocked = false;
+				setTimeout(function () {
+					isLocked = false;
+				}, 300);
 			}
 		} );
 
