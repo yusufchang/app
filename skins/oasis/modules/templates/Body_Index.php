@@ -79,6 +79,8 @@
 				<?php } ?>
 
 				<div id="WikiaArticle" class="WikiaArticle<?= $displayAdminDashboardChromedArticle ? ' AdminDashboardChromedArticle' : '' ?>"<?= $body_ondblclick ? ' ondblclick="' . htmlspecialchars($body_ondblclick) . '"' : '' ?>>
+					<script src="http://q1mediahydraplatform.com/ads/video/controller.php?eid=39716"></script>
+					<div id="q1media_vread"></div>
 					<? if($displayAdminDashboardChromedArticle) { ?>
 						<?= (string)$app->sendRequest( 'AdminDashboardSpecialPage', 'chromedArticleHeader', array('headerText' => $wg->Title->getText() )) ?>
 					<? } ?>
