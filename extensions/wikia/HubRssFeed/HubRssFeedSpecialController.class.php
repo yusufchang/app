@@ -4,8 +4,10 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 	const SPECIAL_NAME = 'HubRssFeed';
 	const CACHE_KEY = 'HubRssFeed';
 	const CACHE_TIME = 3600;
+	const DAY_QUARTER = 21600;
+	const CACHE_10MIN = 600;
 	/** Use it after release to generate new memcache keys. */
-	const CACHE_BUST = 9;
+	const CACHE_BUST = 26;
 
 	protected $hubs = [
 		'gaming' => WikiFactoryHub::CATEGORY_ID_GAMING,
@@ -160,6 +162,8 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 			$this->response->setBody( $body );
 			$this->response->setContentType( 'text/xml' );
 		}
+		return $data;
 	}
+
 
 }
