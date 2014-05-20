@@ -122,7 +122,7 @@ class FeedEntitySearchService extends EntitySearchService {
 			. ( isset( $l ) ? ' AND +(lang:' . $l . ')' : '' )
 			. ( isset( $wids ) ? ' AND +wid:( ' . implode( ' | ', $wids ) . ')' : '' )
 			. ( isset( $hubs ) ? ' AND +hub:( ' . implode( ' | ', $hubs ) . ')' : '' );
-		var_dump($query);
+	//	var_dump($query);
 		return $query;
 	}
 
@@ -132,11 +132,12 @@ class FeedEntitySearchService extends EntitySearchService {
 			$items[ ] = [
 				'id' => $res[ 'id' ],
 				'url' => $res[ 'url' ],
-				'title' => $res[ $this->withLang( 'title', $this->getLang() ) ],
-				'timestamp' => strtotime( $res[ 'touched' ] ),
-				'description' => substr( $res[ $this->withLang( 'html', $this->getLang() ) ], 0, 100 ),
+				'title' => $res[  'title_en' ],
+				'timestamp' => strtotime( $res[ 'created' ] ),
+				'description' => substr( $res[ 'html_en' ], 0, 100 ),
 				'host' => $res[ 'host' ],
-				'wid' => $res[ 'wid' ]
+				'wid' => $res[ 'wid' ],
+				'wikititle' => $res['wikititle_en']
 			];
 		}
 		return $items;

@@ -29,7 +29,7 @@ class HubRssFeedService {
 			'd' => 'Wikia TV Feed' ],
 
 		MixedFeedModel::FAKE_HUB_ELDERSCROLLS =>
-		[ 't' => 'Elder scrolls',
+		[ 't' => 'Wikia Gaming Feed',
 			'd' => 'Wikia Gaming Feed' ],
 
 		MixedFeedModel::FAKE_HUB_MARVEL =>
