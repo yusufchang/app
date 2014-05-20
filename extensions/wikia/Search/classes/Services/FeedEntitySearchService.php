@@ -7,7 +7,64 @@ class FeedEntitySearchService extends EntitySearchService {
 	const ALLOWED_NAMESPACE = 0;
 	const ROWS_NUMBER = 100;
 	private $urls;
+	private $ids;
+	private $categories;
+	private $hosts;
+	private $sorts;
 
+	/**
+	 * @param mixed $sorts
+	 */
+	public function setSorts( $sorts ) {
+		$this->sorts = $sorts;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getSorts() {
+		return $this->sorts;
+	}
+	/**
+	 * @param mixed $host
+	 */
+	public function setHosts( $hosts ) {
+		$this->hosts = $hosts;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getHosts() {
+		return $this->hosts;
+	}
+
+	/**
+	 * @param mixed $categories
+	 */
+	public function setCategories( $categories ) {
+		$this->categories = $categories;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getCategories() {
+		return $this->categories;
+	}
+	/**
+	 * @param mixed $ids
+	 */
+	public function setIds( $ids ) {
+		$this->ids = $ids;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getIds() {
+		return $this->ids;
+	}
 	protected function prepareQuery( $query ) {
 		$select = $this->getSelect();
 
@@ -15,8 +72,14 @@ class FeedEntitySearchService extends EntitySearchService {
 		$dismax->setQueryParser( 'edismax' );
 
 		$select->setQuery( $this->createQuery( $query ) );
-		$select->createFilterQuery( 'ns' )->setQuery( '+(ns:' . static::ALLOWED_NAMESPACE . ')' );
+		if(!empty($this->sorts)){
+			$select->addSorts($this->sorts);
+		}
+		//	$select->createFilterQuery( 'ns' )->setQuery( '+(ns:' . static::ALLOWED_NAMESPACE . ')' );
+
+
 		$select->createFilterQuery( 'mp' )->setQuery( '-(is_main_page:true)' );
+
 		$select->setRows( static::ROWS_NUMBER );
 
 		return $select;
@@ -24,7 +87,7 @@ class FeedEntitySearchService extends EntitySearchService {
 
 	public function setUrls( $data ) {
 		foreach ( $data as $item ) {
-			$this->urls[ ] = '"http://' . $item . '"';
+			$this->urls[ ] = '"' . $item . '"';
 		}
 	}
 
@@ -39,11 +102,27 @@ class FeedEntitySearchService extends EntitySearchService {
 		if ( !empty( $hub ) ) {
 			$hubs = is_array( $hub ) ? $hub : [ $hub ];
 		}
-		$query .= '+url:(' . implode( ' | ', $this->urls ) . ')'
-			. ( isset( $q ) ? ' AND +(article_quality_i:[' . $q . ' TO *])' : '' )
+		if(!empty($this->ids)){
+			$query .= '+id:(' . implode( ' | ', $this->ids ) . ') ';
+		}
+		if(!empty($this->urls)){
+			$query .= ' +url:(' . implode( ' | ', $this->urls ) . ')';
+		}
+
+		if(!empty($this->categories)){
+			$query .= ' +categories_mv_en:(' . implode( ' AND ', $this->categories ) . ')';
+		}
+		if(!empty($this->hosts)){
+			$query .= ' +host:(' . implode( ' | ', $this->hosts ) . ') ';
+		}
+
+
+		$query .=
+			 ( isset( $q ) ? ' AND +(article_quality_i:[' . $q . ' TO *])' : '' )
 			. ( isset( $l ) ? ' AND +(lang:' . $l . ')' : '' )
 			. ( isset( $wids ) ? ' AND +wid:( ' . implode( ' | ', $wids ) . ')' : '' )
 			. ( isset( $hubs ) ? ' AND +hub:( ' . implode( ' | ', $hubs ) . ')' : '' );
+		var_dump($query);
 		return $query;
 	}
 

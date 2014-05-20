@@ -39,6 +39,31 @@ class MixedFeedModel extends WikiaModel {
 		$this->setQuarter( $this->computeDayQuarter() );
 
 	}
+	public function getLastPagesByDeltaContent($wikiId, $dateMin = null, $dateMax = null){
+		if ( $dateMax === null ) {
+			$dateMax = date( 'Y-m-d', strtotime( 'now - 1day' ) );
+			if ( $dateMin === null ) {
+				$dateMin = date( 'Y-m-d', strtotime( 'now - 2day' ) );
+			}
+		}
+		$dateMax = preg_replace('/[^0-9]+/','',$dateMax).'000000';
+		$dateMin = preg_replace('/[^0-9]+/','',$dateMin).'000000';
+		$wikiId = (int)$wikiId;
+		$query =
+			"a.rev_page, max(a.rev_len) - min(a.rev_len) as xdiff from revision a, page p where  a.rev_timestamp>= '".$dateMin."'
+				and   a.rev_timestamp<= '".$dateMax."'
+                and p.page_id=a.rev_page and p.page_namespace=0  group by 1 having xdiff > 0 order by  2 desc limit 20  ";
+
+		$db = wfGetDB( DB_SLAVE, array(), WikiFactory::IDtoDB($wikiId) );
+		$wikisData = ( new WikiaSQL() )
+			->SELECT( $query )
+			->runLoop( $db, function (&$wikisData, $row ) use ($wikiId) {
+				$wikisData[] = $wikiId.'_'. $row->rev_page ;
+
+			} );
+
+		return $wikisData;
+	}
 
 	public function getLastPagesByViewsGA( $hostName, $dateMin = null, $dateMax = null, $startIndex = 1, $limit = 10 ) {
 		if ( !$this->ga ) {
@@ -71,6 +96,35 @@ class MixedFeedModel extends WikiaModel {
 		$seconds = time() - strtotime( "today" );
 		return ceil( $seconds / self::DAY_QUARTER );
 	}
+
+
+	public function fromHub($rows){
+		$urls = array_keys($rows);
+		$feedModel = new \Wikia\Search\Services\FeedEntitySearchService();
+		$feedModel->setQuality( 10 );
+		$feedModel->setLang( 'en' );
+		$feedModel->setUrls( $urls );
+		$rows = $feedModel->query( '' );
+		return $rows;
+	}
+
+	public function GamesWikiaData(){
+		$feedModel = new \Wikia\Search\Services\FeedEntitySearchService();
+		$feedModel->setQuality( 1 );
+		$feedModel->setLang( 'en' );
+		$feedModel->setSorts(['created'=>'desc']);
+		$rows = $feedModel->query( '(+host:"dragonage.wikia.com" AND +categories_mv_en:"News")
+		| (+host:"warframe.wikia.com" AND +categories_mv_en:"Blog posts")
+		| (+host:"monsterhunter.wikia.com" AND +categories_mv_en:"News")
+		| (+host:"darksouls.wikia.com" AND +categories_mv_en:"News")
+		| (+host:"halo.wikia.com" AND +categories_mv_en:"Blog_posts/News")
+		| (+host:"gta.wikia.com" AND +categories_mv_en:"News")
+		| (+host:"fallout.wikia.com" AND +categories_mv_en:"News")
+		| (+host:"elderscrolls.wikia.com" AND +categories_mv_en:"News")
+		| (+host:"leagueoflegends.wikia.com" AND +categories_mv_en:"News_blog")' );
+		return $rows;
+	}
+
 
 	public function GOTWikiaData() {
 		$limits = [ 'gameofthrones.wikia.com' => 5, 'iceandfire.wikia.com' => 3 ];
@@ -165,7 +219,6 @@ class MixedFeedModel extends WikiaModel {
 		$url = sprintf( 'http://%s/api/v1/Articles/AsSimpleJson?id=%u', $host, $articleId );
 		$res = Http::get( $url );
 		$res = json_decode( $res, true );
-		//var_dump($res);
 		foreach ( $res[ 'sections' ] as $section ) {
 			if ( is_array( $section[ 'content' ] ) ) {
 				foreach ( $section[ 'content' ] as $content ) {
@@ -175,8 +228,6 @@ class MixedFeedModel extends WikiaModel {
 				}
 			}
 		}
-
 	}
-
 
 }
