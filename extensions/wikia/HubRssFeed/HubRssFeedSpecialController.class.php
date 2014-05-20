@@ -112,7 +112,7 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 
 			$rssService->setFeedTitle("Wikia TV");
 			$rssService->setFeedDescription("Tv episodes");
-			$rssService->setFeedUrl("http://www.wikia.com/Special:HubRssFeed/Tv");
+			$rssService->setFeedUrl(SpecialPage::getTitleFor( self::SPECIAL_NAME )->getFullUrl() . "/Tv");
 			$epizodes = $tvPremieres->getTVEpisodes();
 			$data = $tvPremieres->getWikiaArticles( $epizodes );
 
@@ -122,9 +122,9 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 					$wikisFound[$ep['wikia']['wikiId']] = $ep['wikia']['wikiId'];
 				}
 			}
-			$d = $tvPremieres->otherArticles($wikisFound[0]);
-			var_dump($d);
-			var_dump(($wikisFound)); die;
+			$wikisFound = array_keys($wikisFound);
+			$numWikiFound = count($wikisFound);
+
 
 			foreach ( $data as $ep ) {
 				if ( isset( $ep['wikia'] ) ) {
@@ -155,12 +155,39 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 				}
 			}
 
+			if ( $numWikiFound < 5 && $numWikiFound > 0 ) {
+				foreach ($wikisFound as $wikiId) {
+					$other = $tvPremieres->otherArticles($wikiId);
+					if ( isset($other[1]) ) {
+						$details = $rssService->getArticleDetails(
+							$wikiId,
+							$other[1][0]['article_id'],
+							$other[1][0]['url']
+						);
+						$abstract = $details->items->{$other[1][0]['article_id']}->abstract;
+						$timestamp = $details->items->{$other[1][0]['article_id']}->revision->timestamp;
+						if ( $details ) {
+							$rssService->addElem(
+								$details->items->{$other[1][0]['article_id']}->title,
+								$abstract,
+								str_replace("jacek.wikia-dev", "wikia", $other[1][0]['url']),
+								$timestamp,
+								$thumbA
+							);
+						}
+					}
+				}
+
+			}
+
+
 			$body = $rssService->toXml();
 			$this->wg->memc->set("test-rss-tv2", $body);
 
 			$this->response->setFormat( WikiaResponse::FORMAT_RAW );
 			$this->response->setBody( $body );
 			$this->response->setContentType( 'text/xml' );
+			$this->response->setCacheValidity( WikiaResponse::CACHE_SHORT );
 		}
 		return $data;
 	}

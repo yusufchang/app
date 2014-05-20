@@ -2,6 +2,8 @@
 class TVEpisodePremiereService extends WikiaService {
 
 	const tvrage_rss_yesterday = "http://www.tvrage.com/myrss.php?class=scripted&date=yesterday";
+	const tvrage_rss_today = "http://www.tvrage.com/myrss.php?class=scripted&date=today";
+
 	const MIN_ARTICLE_QUALITY = 30;
 
 	/* @var Solarium_Client $solariumClient  */
@@ -66,10 +68,8 @@ class TVEpisodePremiereService extends WikiaService {
 	}
 
 	public function otherArticles($wikiId) {
+
 		global $wgDatamartDB;
-
-		//$wikiId = $this->getVal( 'wikiId' );
-
 		$wikis = [$wikiId];
 
 		$rec_list = [];
@@ -96,7 +96,7 @@ class TVEpisodePremiereService extends WikiaService {
 				$stats_record = $stats->fetchObject();
 				$pageviews = intval( $stats_record->pageviews );
 				if (($document !== null) && (isset($document[$urlField]) && (isset($document[$qualityField])) && intval( $document[$qualityField] ) >= 80)) {
-					$pages[] = $document[$urlField];
+					$pages[] = array("url" => $document[$urlField], "wiki_id"=>$community, "article_id"=>$row->page_id );
 					$touches [] = $row->page_touched;
 					$pvs [] = $pageviews;
 				}
