@@ -13,6 +13,10 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 		'lifestyle' => WikiFactoryHub::CATEGORY_ID_LIFESTYLE
 	];
 
+	protected $customFeeds = [
+		'tv' => 'customRssTV'
+	];
+
 	/**
 	 * @var HubRssFeedModel
 	 */
@@ -65,7 +69,10 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 
 		$hubName = strtolower( (string)$params[ 'par' ] );
 
-		if ( !isset($this->hubs[ $hubName ]) ) {
+		if ( !isset( $this->hubs[ $hubName ] ) ) {
+			if ( isset( $this->customFeeds[$hubName] ) ) {
+				return $this->forward( 'HubRssFeedSpecial', $this->customFeeds[$hubName] );
+			}
 			return $this->forward( 'HubRssFeedSpecial', 'notfound' );
 		}
 
@@ -87,6 +94,72 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 		$this->response->setFormat( WikiaResponse::FORMAT_RAW );
 		$this->response->setBody( $xml );
 		$this->response->setContentType( 'text/xml' );
+	}
+
+	public function customRssTV() {
+
+		$body = $this->wg->memc->get("test-rss-tv2");
+		if ( 0 && $body ) {
+			$this->response->setFormat( WikiaResponse::FORMAT_RAW );
+			$this->response->setBody( $body );
+			$this->response->setContentType( 'text/xml' );
+		} else {
+
+			$rssService = new RssFeedService();
+			$tvPremieres = new TVEpisodePremiereService();
+
+			$rssService->setFeedTitle("Wikia TV");
+			$rssService->setFeedDescription("Tv episodes");
+			$rssService->setFeedUrl("http://www.wikia.com/Special:HubRssFeed/Tv");
+			$epizodes = $tvPremieres->getTVEpisodes();
+			$data = $tvPremieres->getWikiaArticles( $epizodes );
+
+			$wikisFound = [];
+			foreach ( $data as $ep ) {
+				if ( isset($ep['wikia']) ) {
+					$wikisFound[$ep['wikia']['wikiId']] = $ep['wikia']['wikiId'];
+				}
+			}
+			$d = $tvPremieres->otherArticles($wikisFound[0]);
+			var_dump($d);
+			var_dump(($wikisFound)); die;
+
+			foreach ( $data as $ep ) {
+				if ( isset( $ep['wikia'] ) ) {
+
+					$details = $rssService->getArticleDetails(
+						$ep['wikia']['wikiId'],
+						$ep['wikia']['articleId'],
+						$ep['wikia']['url']
+					);
+					$abstract = $details->items->{$ep['wikia']['articleId']}->abstract;
+					$timestamp = $details->items->{$ep['wikia']['articleId']}->revision->timestamp;
+					$thumb = $details->items->{$ep['wikia']['articleId']}->thumbnail;
+					$thumbA = null;
+					if ( !empty($thumb) ) {
+						$thumbA['url'] = $thumb;
+						$thumbA['width'] = $details->items->{$ep['wikia']['articleId']}->original_dimensions->width;
+						$thumbA['height'] = $details->items->{$ep['wikia']['articleId']}->original_dimensions->height;
+					}
+					if ( $details ) {
+						$rssService->addElem(
+							"New episode from " . $ep['title'].': '.$ep['episode_title'],
+							$abstract,
+							str_replace("jacek.wikia-dev", "wikia", $ep['wikia']['url']),
+							$timestamp,
+							$thumbA
+						);
+					}
+				}
+			}
+
+			$body = $rssService->toXml();
+			$this->wg->memc->set("test-rss-tv2", $body);
+
+			$this->response->setFormat( WikiaResponse::FORMAT_RAW );
+			$this->response->setBody( $body );
+			$this->response->setContentType( 'text/xml' );
+		}
 	}
 
 }

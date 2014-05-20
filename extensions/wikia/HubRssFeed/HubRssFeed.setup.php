@@ -8,7 +8,7 @@ $dir = dirname(__FILE__) . '/';
 $wgAutoloadClasses['HubRssFeedSpecialController']	= $dir . 'HubRssFeedSpecialController.class.php';
 $wgAutoloadClasses['HubRssFeedModel']	= $dir . 'HubRssFeedModel.class.php';
 $wgAutoloadClasses['HubRssFeedService']	= $dir . 'HubRssFeedService.class.php';
-$wgAutoloadClasses['BlogLinksRecService']	= $dir . 'BlogLinksRecService.class.php';
+$wgAutoloadClasses['RssFeedService']	= $dir . 'RssFeedService.class.php';
 $wgAutoloadClasses['TVEpisodePremiereService']	= $dir . 'TVEpisodePremiereService.class.php';
 $wgSpecialPages['HubRssFeed']		= 'HubRssFeedSpecialController';
 
