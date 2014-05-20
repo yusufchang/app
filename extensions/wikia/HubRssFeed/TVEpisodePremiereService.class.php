@@ -78,7 +78,10 @@ class TVEpisodePremiereService extends WikiaService {
 			$sdb = wfGetDB( DB_SLAVE, [], WikiFactory::IDtoDB( $community ) );
 			$ddb = wfGetDB( DB_SLAVE, [], $wgDatamartDB );
 
-			$result = $sdb->query( 'select page_id,page_touched from page where page_namespace in (0) order by page_latest desc limit 100' );
+			$result = $sdb->query( 'select page_id,page_touched
+									from page where page_namespace in (0)
+									order by page_latest desc
+									limit 100' );
 
 			while ($row = $result->fetchObject()) {
 				$service = new SolrDocumentService();
@@ -88,11 +91,10 @@ class TVEpisodePremiereService extends WikiaService {
 				$qualityField = Wikia\Search\Utilities::field( 'article_quality_i' );
 				$document = $service->getResult();
 
-				$sql = 'select * from rollup_wiki_article_pageviews where wiki_id = ' . $community . ' and period_id = 2 and namespace_id = 0 and time_id=\'2014-05-18\' and article_id=' . $row->page_id . ' ';
+				$sql = 'select * from rollup_wiki_article_pageviews where wiki_id = ' . (int)$community . ' and period_id = 2 and namespace_id = 0 and time_id="2014-05-18" and article_id=' . (int)$row->page_id . ' ';
 				$stats = $ddb->query( $sql );
 				$stats_record = $stats->fetchObject();
 				$pageviews = intval( $stats_record->pageviews );
-
 				if (($document !== null) && (isset($document[$urlField]) && (isset($document[$qualityField])) && intval( $document[$qualityField] ) >= 80)) {
 					$pages[] = $document[$urlField];
 					$touches [] = $row->page_touched;
@@ -100,11 +102,8 @@ class TVEpisodePremiereService extends WikiaService {
 				}
 			}
 			$sdb->close();
-
 			array_multisort( $pvs, SORT_DESC, SORT_NUMERIC, $pages );
-
 			$rec_list = array_merge( $rec_list, array_slice( $pages, 0, 200 ) );
-
 		}
 
 		$batches = [];
