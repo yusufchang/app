@@ -51,12 +51,11 @@ class RssFeedService {
 	}
 
 	public function getArticleDetails($wikiId, $articleId, $url) {
+		$domain = WikiFactory::DBtoUrl(WikiFactory::IDtoDB($wikiId));
 		//TODO: REFACTOR THE HACK
-		$url = str_replace("jacek.wikia-dev", "wikia", $url);
-		$domain = explode(".com", $url);
-		if ( count($domain) == 2 ) {
-			$callUrl = $domain[0] . ".com/api/v1/Articles/Details?ids=[id]&abstract=200&width=400&height=400";
-			$callUrl = str_replace("[id]", $articleId, $callUrl);
+
+		if ( $domain ) {
+			$callUrl = sprintf( '%sapi/v1/Articles/Details?ids=%u', $domain, $articleId );
 			$details = Http::get($callUrl);
 			if (empty($details)) {
 				$details = file_get_contents($callUrl);

@@ -196,8 +196,6 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 			}
 			$wikisFound = array_keys($wikisFound);
 			$numWikiFound = count($wikisFound);
-
-
 			foreach ( $data as $ep ) {
 				if ( isset( $ep['wikia'] ) ) {
 
@@ -206,9 +204,11 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 						$ep['wikia']['articleId'],
 						$ep['wikia']['url']
 					);
+
 					$abstract = $details->items->{$ep['wikia']['articleId']}->abstract;
 					$timestamp = $details->items->{$ep['wikia']['articleId']}->revision->timestamp;
 					$thumb = $details->items->{$ep['wikia']['articleId']}->thumbnail;
+
 					$thumbA = null;
 					if ( !empty($thumb) ) {
 						$thumbA['url'] = $thumb;
@@ -227,6 +227,7 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 				}
 			}
 
+
 			if ( $numWikiFound < 5 && $numWikiFound > 0 ) {
 				foreach ($wikisFound as $wikiId) {
 					$other = $tvPremieres->otherArticles($wikiId);
@@ -236,6 +237,15 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 							$other[1][0]['article_id'],
 							$other[1][0]['url']
 						);
+
+						$thumb = $details->items->{$other[1][0]['article_id']}->thumbnail;
+						$thumbA = null;
+						if ( !empty($thumb) ) {
+							$thumbA['url'] = $thumb;
+							$thumbA['width'] = $details->items->{$other[1][0]['article_id']}->original_dimensions->width;
+							$thumbA['height'] = $details->items->{$other[1][0]['article_id']}->original_dimensions->height;
+						}
+
 						$abstract = $details->items->{$other[1][0]['article_id']}->abstract;
 						$timestamp = $details->items->{$other[1][0]['article_id']}->revision->timestamp;
 						if ( $details ) {
