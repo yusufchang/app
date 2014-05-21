@@ -100,6 +100,8 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 	}
 
 	public function gamesRssTV() {
+		$cacheKey = 'test-rss-games';
+
 		$feedModel = new \Wikia\Search\Services\FeedEntitySearchService();
 		$m = new MixedFeedModel();
 		$feedModel->setSorts(['created'=>'desc']);
@@ -126,13 +128,21 @@ class HubRssFeedSpecialController extends WikiaSpecialPageController {
 				$data[$item['url']] = $item;
 			}
 		}
-		foreach ( $rows as $item ) {
-			$ids = explode( '_', $item[ 'id' ] );
-			$item[ 'img' ] = $m->getArticleThumbnail( $item[ 'host' ], $ids[ 0 ], $ids[ 1 ] );
-			$item[ 'description' ] = $m->getArticleDescription( $item[ 'host' ], $ids[ 1 ] );
-
-			$data[ $item[ 'url' ] ] = $item;
+		$body = $this->wg->memc->get($cacheKey);
+		if(!$body){
+			$body = [];
 		}
+		foreach ( $rows as $item ) {
+			if(array_key_exists($item[ 'url' ],$body)){
+				$data[ $item[ 'url' ] ]  = $body[$item[ 'url' ]];
+			}else{
+				$ids = explode( '_', $item[ 'id' ] );
+				$item[ 'img' ] = $m->getArticleThumbnail( $item[ 'host' ], $ids[ 0 ], $ids[ 1 ] );
+				$item[ 'description' ] = $m->getArticleDescription( $item[ 'host' ], $ids[ 1 ] );
+				$data[ $item[ 'url' ] ] = $item;
+			}
+		}
+		$this->wg->memc->set($cacheKey, $data);
 		$timestamps = [];
 		foreach ($data as $key => $row) {
 			$timestamps[$key]  = $row['timestamp'];
