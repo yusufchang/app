@@ -3,6 +3,7 @@ require_once( dirname( __FILE__ ) . '/../../Maintenance.php' );
 require_once( "RoviTableImporter.php" );
 require_once( "RoviTableSeriesImporter.php" );
 require_once( "RoviTableEpisodeSeriesImporter.php" );
+require_once( "RoviTableProgramsImporter.php" );
 
 
 class ImportRoviData extends Maintenance {
@@ -14,7 +15,8 @@ class ImportRoviData extends Maintenance {
 	const TMP_DIR = '/tmp';
 	protected $filesOptions = [
 		'seriesFile' => 'A csv file from Rovi containing series data (mostly Series.txt)',
-		'episodesFile' => 'A csv file from Rovi containing episodes data (mostly Episode_Sequence.txt)'
+		'episodesFile' => 'A csv file from Rovi containing episodes data (mostly Episode_Sequence.txt)',
+		'programsFile' => 'A csv file from Rovi containing programs data (mostly Programs.txt)'
 	];
 	protected $files;
 	protected $db;
@@ -46,6 +48,7 @@ class ImportRoviData extends Maintenance {
 		$this->checkFiles();
 		$this->loadData( new RoviTableSeriesImporter(), 'seriesFile' );
 		$this->loadData( new RoviTableEpisodeSeriesImporter(), 'episodesFile' );
+		$this->loadData( new RoviTableProgramsImporter(), 'programsFile' );
 	}
 
 

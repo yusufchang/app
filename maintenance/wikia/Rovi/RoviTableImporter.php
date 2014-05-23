@@ -43,7 +43,7 @@ abstract class RoviTableImporter {
 		$command = $row[ $this->command_column ];
 		$keyFields = '(' . implode( ',', $primaryKeyMap ) . ')';
 		try {
-			switch ( $command ) {
+			switch ( strtoupper($command) ) {
 				case 'INS':
 					$select = $db->select( $this->table, [ '1' ], $primaryKeyMap );
 					if ( $select->numRows() == 0 ) {
