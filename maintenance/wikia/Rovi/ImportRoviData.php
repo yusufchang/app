@@ -4,6 +4,8 @@ require_once( "RoviTableImporter.php" );
 require_once( "RoviTableSeriesImporter.php" );
 require_once( "RoviTableEpisodeSeriesImporter.php" );
 require_once( "RoviTableProgramsImporter.php" );
+require_once( "RoviTableProgramsGenresImporter.php" );
+require_once( "RoviTableProgramsCreditsImporter.php" );
 
 
 class ImportRoviData extends Maintenance {
@@ -16,7 +18,9 @@ class ImportRoviData extends Maintenance {
 	protected $filesOptions = [
 		'seriesFile' => 'A csv file from Rovi containing series data (mostly Series.txt)',
 		'episodesFile' => 'A csv file from Rovi containing episodes data (mostly Episode_Sequence.txt)',
-		'programsFile' => 'A csv file from Rovi containing programs data (mostly Programs.txt)'
+		'programsFile' => 'A csv file from Rovi containing programs data (mostly Program.txt)',
+		'programsGenresFile' => 'A csv file from Rovi containing programs genres data (mostly Program_Genres.txt)',
+		'programsCreditsFile' => 'A csv file from Rovi containing programs credits data (mostly Program_Credits.txt)',
 	];
 	protected $files;
 	protected $db;
@@ -49,6 +53,8 @@ class ImportRoviData extends Maintenance {
 		$this->loadData( new RoviTableSeriesImporter(), 'seriesFile' );
 		$this->loadData( new RoviTableEpisodeSeriesImporter(), 'episodesFile' );
 		$this->loadData( new RoviTableProgramsImporter(), 'programsFile' );
+		$this->loadData( new RoviTableProgramsGenresImporter(), 'programsGenresFile' );
+		$this->loadData( new RoviTableProgramsCreditsImporter(), 'programsCreditsFile' );
 	}
 
 
