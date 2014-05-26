@@ -290,6 +290,7 @@ abstract class BaseRssModel extends WikiaService {
 
 		$perWiki = ceil( $numResults / count( $wikis ) );
 		$numberOfItemsToAdd = [ ];
+		//TODO:Fix calculations here!
 		foreach ( $wikis as $wid ) {
 			$numberOfItemsToAdd[ $wid ] = $perWiki;
 		}
