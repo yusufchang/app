@@ -464,7 +464,7 @@ class DataMartService extends Service {
 	                                                 Array $namespaces = null,
 	                                                 $excludeNamespaces = false,
 	                                                 $limit = 200,
-	                                                 $rollupDate = null
+													 $rollupDate = null
 	) {
 		$app = F::app();
 		wfProfileIn( __METHOD__ );
@@ -497,7 +497,7 @@ class DataMartService extends Service {
 			$rollupDate ? $rollupDate : 'current'
 		);
 
-		$getData = function() use ( $app, $wikiId, $namespaces, $excludeNamespaces, $articleIds, $limitUsed, $rollupDate ) {
+		$getData = function() use ( $app, $wikiId, $namespaces, $excludeNamespaces, $articleIds, $limitUsed ) {
 			wfProfileIn( __CLASS__ . '::TopArticlesQuery' );
 
 			/*
