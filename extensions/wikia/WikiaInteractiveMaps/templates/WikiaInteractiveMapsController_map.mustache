@@ -1,4 +1,15 @@
-<h2>{{title}}</h2>
+<header>
+	<h1>{{title}}</h1>
+	<nav class="wikia-menu-button">
+		<a href="#">{{viewSource}}</a>
+		<span class ='drop'></span>
+		<ul class="WikiaMenuElement">
+			<li>
+				<a>{{deleteMap}}</a>
+			</li>
+		</ul>
+	</nav>
+</header>
 {{#mapFound}}
 <iframe src="{{url}}" name="wikia-interactive-map" width="100%" height="{{#height}}{{height}}{{/height}}{{^height}}100%{{/height}}"></iframe>
 {{/mapFound}}
