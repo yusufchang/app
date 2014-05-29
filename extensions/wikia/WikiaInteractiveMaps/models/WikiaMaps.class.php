@@ -8,6 +8,8 @@ class WikiaMaps {
 	const ENTRY_POINT_RENDER = 'render';
 	const ENTRY_POINT_TILE_SET = 'tile_set';
 
+	const MAP_DELETE_SUCCESS = 'Map successfully deleted!';
+
 	const STATUS_DONE = 0;
 	const STATUS_PROCESSING = 1;
 	const STATUS_FAILED = 3;
@@ -79,6 +81,23 @@ class WikiaMaps {
 	 */
 	private function postRequest( $url, $data ) {
 		return Http::post( $url, [
+			'postData' => json_encode( $data ),
+			'headers' => [
+				'Authorization' => $this->config['token']
+			]
+		] );
+	}
+
+	/**
+	 * Wrapper for put request with authorization token attached
+	 *
+	 * @param String $url
+	 * @param Array $data
+	 *
+	 * @return string|bool
+	 */
+	private function putRequest( $url, $data ) {
+		return Http::request( 'PUT', $url, [
 			'postData' => json_encode( $data ),
 			'headers' => [
 				'Authorization' => $this->config['token']
@@ -226,6 +245,17 @@ class WikiaMaps {
 			$this->buildUrl( [ self::ENTRY_POINT_TILE_SET ] ),
 			$tileSetData
 		);
+	}
+
+	private function deleteMapById( Array $data ) {
+		$payload = [
+			'id' => array_shift($data),
+			'locked' => true
+		];
+		$url = $this->buildUrl( [ self::ENTRY_POINT_MAP, $mapId ] );
+		$res = $this->putRequest($url, $payload);
+		//ToDo -> validate based on status code, not a message
+		return ( $res && $res->message == self::MAP_DELETE_SUCCESS );
 	}
 
 	/**
