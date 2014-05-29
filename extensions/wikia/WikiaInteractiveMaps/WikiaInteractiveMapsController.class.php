@@ -199,6 +199,26 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 	}
 
 	/**
+	* @brief Ajax method for deleting a map from IntMaps API
+	*/
+	public function deleteMap() {
+		$mapId = $this->request->getVal( 'mapId', 0 );
+		$result = false;
+		if( $mapId && $this->hasRightsToDelete() ) {
+			$result = $this->mapsModel->request('deleteMapByIdFromApi', ['mapId' => $mapId] );
+		}
+ 		$this->setVal('result', $result);
+ 	}
+
+	/**
+	 * @brief Check if user has rights to delete a map
+	 * @return Bool
+	 */
+	function hasRightsToDelete () {
+		return $this->wg->user->isLoggedIn();
+ 	}
+
+	/**
 	 * Maps error status code to an error message
 	 * @param Integer $errorStatus error code status returned from UploadBase method
 	 * @return String
