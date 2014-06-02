@@ -3,10 +3,10 @@ require( ['jquery'], function($) {
 		modalConfig = {
 			vars: {
 				id: 'intMapsDeleteMapModal',
-				size: 'small', // size of the modal
-				content: 'Do you really want to delete the map?', // content
-				title: 'Delete Map', // title
-				buttons: [  // buttons in the footer
+				size: 'small',
+				content: 'Do you really want to delete the map?',
+				title: 'Delete Map',
+				buttons: [
 					{
 						vars: {
 							value: 'Delete',
@@ -34,6 +34,7 @@ require( ['jquery'], function($) {
 		};
 
 	function deleteMap(mapId) {
+		modal.deactivate();
 		$.nirvana.sendRequest({
 			controller: 'WikiaInteractiveMaps',
 			method: 'deleteMap',
@@ -59,40 +60,28 @@ require( ['jquery'], function($) {
 				uiFactory.init( [ 'modal' ] ).then( function( uiModal ) {
 					uiModal.createComponent( modalConfig, function( _modal ) {
 						modal = _modal;
-						// bind the Save button to this anon. function
 						modal.bind( 'delete', function( event ) {
 							event.preventDefault();
 							deleteMap();
 						});
 						modal.bind('mapDeleted', showSuccess);
 						modal.bind('error', showError);
-						modal.bind('close', cleanUpError);
-						showDeleteMapModal(modal);
+						modal.show();
 					});
 				});
 			});
+		} else {
+			modal.show();
 		}
 	}
 
-	function showDeleteMapModal(modal) {
-		modal.show();
-		modal.deactivate();
-		modal.activate();
-	}
-
 	function showError() {
-		modal.$errorContainer
-			.html($.msg('wikia-interactive-maps-delete-map-error'))
-			.removeClass('hidden');
-	}
-
-	function cleanUpError() {
-		modal.$errorContainer
-			.html('')
-			.addClass('hidden');
+		modal.activate();
+		modal.setContent($.msg('wikia-interactive-maps-delete-map-error'));
 	}
 
 	function showSuccess() {
+		modal.activate();
 		modal.setContent($.msg('wikia-interactive-maps-delete-map-success'));
 		modal.$element.find('button').attr('disabled', 'true');
 		setTimeout(function(){
@@ -101,8 +90,7 @@ require( ['jquery'], function($) {
 		}, 2000);
 	}
 
-
-	$('body').click('#intMapsDeleteMap', function(event) {
+	$('body').click('#intMapsDeleteMap', function() {
 		triggerDeleteMapModal();
 	});
 });

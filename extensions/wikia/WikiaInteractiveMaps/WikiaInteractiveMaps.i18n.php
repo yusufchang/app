@@ -57,6 +57,10 @@ $messages[ 'en' ] = [
 	'wikia-interactive-maps-image-uploads-error-bad-type' => 'The file you tried to upload is not an image',
 
 	'wikia-interactive-maps-create-map-error-invalid-map-title' => 'Error: You must title the map before proceeding.',
+
+	'wikia-interactive-maps-delete-map' => 'Delete map',
+	'wikia-interactive-maps-delete-map-title' => 'Delete map',
+	'wikia-interactive-maps-view-source' => 'View source',
 ];
 
 $messages[ 'qqq' ] = [

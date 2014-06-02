@@ -144,6 +144,8 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 			$this->setVal( 'mapFound', true );
 			$this->setVal( 'url', $url );
 			$this->setVal( 'height', self::MAP_HEIGHT );
+			$this->setVal( 'viewSource', wfMessage( 'wikia-interactive-maps-view-source' ) );
+			$this->setVal( 'deleteMap', wfMessage( 'wikia-interactive-maps-delete-map' ) );
 		} else {
 			$this->setVal( 'mapFound', false );
 			$this->setVal( 'title', wfMessage( 'error' ) );
@@ -151,6 +153,7 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 				'wikia-interactive-maps-map-not-found-error' => wfMessage( 'wikia-interactive-maps-map-not-found-error' )
 			] );
 		}
+		JSMessages::enqueuePackage( 'WikiaInteractiveMapsDeleteMap', 'inline' );
 		$this->response->addAsset( 'extensions/wikia/WikiaInteractiveMaps/js/intMapDeleteMap.js' );
 		$this->response->setTemplateEngine( WikiaResponse::TEMPLATE_ENGINE_MUSTACHE );
 	}
