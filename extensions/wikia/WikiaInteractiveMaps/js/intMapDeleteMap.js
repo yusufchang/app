@@ -4,8 +4,8 @@ require( ['jquery'], function($) {
 			vars: {
 				id: 'intMapsDeleteMapModal',
 				size: 'small',
-				content: 'Do you really want to delete the map?',
-				title: 'Delete Map',
+				content: $.msg('wikia-interactive-maps-delete-map-prompt'),
+				title: $.msg('wikia-interactive-maps-delete-map-title'),
 				buttons: [
 					{
 						vars: {
@@ -14,6 +14,17 @@ require( ['jquery'], function($) {
 								{
 									key: 'event',
 									value: 'delete'
+								}
+							]
+						}
+					},
+					{
+						vars: {
+							value: 'Cancel',
+							data: [
+								{
+									key: 'event',
+									value: 'close'
 								}
 							]
 						}
