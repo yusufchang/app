@@ -68,7 +68,6 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 		];
 
 		$mapsResponse = $this->mapsModel->cachedRequest( 'getMapsFromApi', $params );
-
 		if ( !$mapsResponse ) {
 			$this->forward( 'WikiaInteractiveMaps', 'error' );
 			return;
@@ -152,6 +151,7 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 				'wikia-interactive-maps-map-not-found-error' => wfMessage( 'wikia-interactive-maps-map-not-found-error' )
 			] );
 		}
+		$this->response->addAsset( 'extensions/wikia/WikiaInteractiveMaps/js/intMapDeleteMap.js' );
 		$this->response->setTemplateEngine( WikiaResponse::TEMPLATE_ENGINE_MUSTACHE );
 	}
 
@@ -205,7 +205,7 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 		$mapId = $this->request->getVal( 'mapId', 0 );
 		$result = false;
 		if( $mapId && $this->hasRightsToDelete() ) {
-			$result = $this->mapsModel->request('deleteMapByIdFromApi', ['mapId' => $mapId] );
+			$result = $this->mapsModel->cachedRequest('deleteMapById', ['mapId' => $mapId] );
 		}
  		$this->setVal('result', $result);
  	}
