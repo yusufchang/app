@@ -13,18 +13,7 @@ require( ['jquery'], function($) {
 							data: [
 								{
 									key: 'event',
-									value: 'delete',
-								}
-							]
-						}
-					},
-					{
-						vars: {
-							value: 'Cancel',
-							data: [
-								{
-									key: 'event',
-									value: 'close'
+									value: 'delete'
 								}
 							]
 						}
@@ -34,6 +23,7 @@ require( ['jquery'], function($) {
 		};
 
 	function deleteMap(mapId) {
+		event.preventDefault();
 		modal.deactivate();
 		$.nirvana.sendRequest({
 			controller: 'WikiaInteractiveMaps',
@@ -48,7 +38,7 @@ require( ['jquery'], function($) {
 					modal.trigger('error');
 				}
 			},
-			onErrorCallback: function(response) {
+			onErrorCallback: function() {
 				modal.trigger('error');
 			}
 		});
@@ -60,10 +50,7 @@ require( ['jquery'], function($) {
 				uiFactory.init( [ 'modal' ] ).then( function( uiModal ) {
 					uiModal.createComponent( modalConfig, function( _modal ) {
 						modal = _modal;
-						modal.bind( 'delete', function( event ) {
-							event.preventDefault();
-							deleteMap();
-						});
+						modal.bind('delete', deleteMap);
 						modal.bind('mapDeleted', showSuccess);
 						modal.bind('error', showError);
 						modal.show();

@@ -208,7 +208,7 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 		$mapId = $this->request->getVal( 'mapId', 0 );
 		$result = false;
 		if( $mapId && $this->hasRightsToDelete() ) {
-			$result = $this->mapsModel->cachedRequest('deleteMapById', ['mapId' => $mapId] );
+			$result = $this->mapsModel->cachedRequest('deleteMapById', $mapId );
 		}
  		$this->setVal('result', $result);
  	}

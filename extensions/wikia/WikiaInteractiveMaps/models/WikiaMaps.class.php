@@ -247,13 +247,19 @@ class WikiaMaps {
 		);
 	}
 
-	private function deleteMapById( Array $data ) {
+	/**
+	 * Sends a request to delete a map instance
+	 *
+	 * @param array $data
+	 *
+	 * @return bool
+	 */
+	public function deleteMapById( $mapId ) {
 		$payload = [
-			'id' => array_shift($data),
-			'locked' => true
+			'deleted' => true
 		];
 		$url = $this->buildUrl( [ self::ENTRY_POINT_MAP, $mapId ] );
-		$res = $this->putRequest($url, $payload);
+		$res = json_decode( $this->putRequest($url, $payload) );
 		//ToDo -> validate based on status code, not a message
 		return ( $res && $res->message == self::MAP_DELETE_SUCCESS );
 	}
