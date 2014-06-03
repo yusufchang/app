@@ -21,6 +21,7 @@ require( ['jquery'], function($) {
 					{
 						vars: {
 							value: 'Cancel',
+							classes: ['primary'],
 							data: [
 								{
 									key: 'event',
@@ -31,16 +32,19 @@ require( ['jquery'], function($) {
 					}
 				]
 			}
-		};
+		},
+		$deleteMapButton = $('#intMapsDeleteMap');
 
-	function deleteMap(mapId) {
+	function deleteMap() {
 		event.preventDefault();
 		modal.deactivate();
 		$.nirvana.sendRequest({
 			controller: 'WikiaInteractiveMaps',
 			method: 'deleteMap',
 			format: 'json',
-			data: {mapId: mapId},
+			data: {
+				mapId: data
+			},
 			callback: function(response) {
 				var data = response.result;
 				if (data) {
@@ -56,7 +60,20 @@ require( ['jquery'], function($) {
 	}
 
 	function triggerDeleteMapModal() {
-		if (!modal) {
+		if (window.wgUserName === null) {
+			window.UserLoginModal.show({
+				origin: 'wikia-int-map-create-map',
+				callback: function() {
+					loadModal();
+				}
+			});
+		} else {
+			loadModal();
+		}
+	}
+
+	function loadModal() {
+		//if (!modal) {
 			require( [ 'wikia.ui.factory' ], function( uiFactory ) {
 				uiFactory.init( [ 'modal' ] ).then( function( uiModal ) {
 					uiModal.createComponent( modalConfig, function( _modal ) {
@@ -68,9 +85,9 @@ require( ['jquery'], function($) {
 					});
 				});
 			});
-		} else {
-			modal.show();
-		}
+//		} else {
+//			modal.show();
+//		}
 	}
 
 	function showError() {
@@ -88,7 +105,7 @@ require( ['jquery'], function($) {
 		}, 2000);
 	}
 
-	$('body').click('#intMapsDeleteMap', function() {
+	$deleteMapButton.click(function() {
 		triggerDeleteMapModal();
 	});
 });

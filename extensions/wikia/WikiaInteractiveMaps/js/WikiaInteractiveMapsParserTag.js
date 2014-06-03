@@ -54,7 +54,8 @@ require(['jquery', 'wikia.mustache'], function ($, mustache) {
 		loadTemplate(templatePath, cacheKey)
 			.done(function (template) {
 				var iframe = mustache.render(template, {
-					url: mapUrl
+					url: mapUrl,
+					mapId: mapId
 				});
 
 				require(['wikia.ui.factory'], function (uiFactory) {
