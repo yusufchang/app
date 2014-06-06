@@ -154,7 +154,6 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 			] );
 		}
 		JSMessages::enqueuePackage( 'WikiaInteractiveMapsDeleteMap', 'inline' );
-		$this->response->addAsset( 'extensions/wikia/WikiaInteractiveMaps/js/intMapDeleteMap.js' );
 		$this->response->setTemplateEngine( WikiaResponse::TEMPLATE_ENGINE_MUSTACHE );
 	}
 
@@ -204,13 +203,15 @@ class WikiaInteractiveMapsController extends WikiaSpecialPageController {
 	/**
 	* @brief Ajax method for deleting a map from IntMaps API
 	*/
-	public function deleteMap() {
+	public function deleteMap () {
 		$mapId = $this->request->getVal( 'mapId', 0 );
 		$result = false;
 		if( $mapId && $this->hasRightsToDelete() ) {
 			$result = $this->mapsModel->deleteMapById( $mapId );
 		}
- 		$this->setVal('result', $result);
+		NotificationsController::addConfirmation($result ? 'Map has been deleted' :
+			'There was an error while deleting a map.');
+		$this->wg->Out->redirect( Title::newFromText( 'InteractiveMaps', NS_SPECIAL )->getFullUrl() );
  	}
 
 	/**

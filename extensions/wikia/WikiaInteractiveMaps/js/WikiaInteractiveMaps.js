@@ -3,10 +3,11 @@ require(['wikia.querystring', 'wikia.window'], function (qs, w) {
 
 	var doc = w.document,
 		body = doc.getElementsByTagName('body')[0],
+		querystring = qs(),
 
 		// create map modal assets
-		cacheKey = 'wikia_interactive_maps_create_map',
-		source = {
+		createMapCacheKey = 'wikia_interactive_maps_create_map',
+		createMapSource = {
 			messages: ['WikiaInteractiveMapsCreateMap'],
 			scripts: ['int_map_create_map_js'],
 			styles: ['extensions/wikia/WikiaInteractiveMaps/css/intMapCreateMap.scss'],
@@ -15,6 +16,24 @@ require(['wikia.querystring', 'wikia.window'], function (qs, w) {
 				'extensions/wikia/WikiaInteractiveMaps/templates/intMapCreateMapTileSet.mustache',
 				'extensions/wikia/WikiaInteractiveMaps/templates/intMapCreateMapPreview.mustache'
 			]
+		},
+		// delete map modal assets
+		deleteMapCacheKey = 'wikia_interactive_maps_delete_map',
+		deleteMapSource = {
+			messages: ['WikiaInteractiveMapsDeleteMap'],
+			scripts: ['int_map_delete_map_js']
+		},
+		initModal = {
+			createMap: function(assets) {
+				require(['wikia.intMaps.createMap.modal'], function(createMap) {
+					createMap.init(assets.mustache);
+				});
+			},
+			deleteMap: function() {
+				require(['wikia.intMaps.deleteMap'], function(deleteMap) {
+					deleteMap.init();
+				});
+			}
 		};
 
 	// attach handlers
@@ -28,7 +47,10 @@ require(['wikia.querystring', 'wikia.window'], function (qs, w) {
 
 	body.addEventListener('click', function(event) {
 		if (event.target.id === 'createMap') {
-			loadModal(convertSource(source), cacheKey);
+			loadModal('createMap', convertSource(createMapSource), createMapCacheKey);
+		}
+		if (event.target.id === 'intMapsDeleteMap') {
+			loadModal('deleteMap', convertSource(deleteMapSource), deleteMapCacheKey);
 		}
 	});
 
@@ -39,7 +61,7 @@ require(['wikia.querystring', 'wikia.window'], function (qs, w) {
 	 */
 
 	function sortMapList(sortType) {
-		qs().setVal('sort', sortType, false).goTo();
+		querystring.setVal('sort', sortType, false).goTo();
 	}
 
 	/**
@@ -48,13 +70,10 @@ require(['wikia.querystring', 'wikia.window'], function (qs, w) {
 	 * @param {string} cacheKey - local storage key
 	 */
 
-	function loadModal(source, cacheKey) {
+	function loadModal(action, source, cacheKey) {
 		getAssets(source, cacheKey).then(function(assets) {
 			addAssetsToDOM(assets);
-
-			require(['wikia.intMaps.createMap.modal'], function(createMap) {
-				createMap.init(assets.mustache);
-			});
+			initModal[action](assets);
 		});
 	}
 
@@ -116,4 +135,12 @@ require(['wikia.querystring', 'wikia.window'], function (qs, w) {
 
 		return convertedSource;
 	}
+
+	function showNotifications() {
+		if (querystring.getVal('intMapAction') === 'mapDeleted') {
+			GlobalNotification.show($.msg('interactive-maps-delete-map-success'), 'confirm');
+		}
+	}
+
+	showNotifications();
 });

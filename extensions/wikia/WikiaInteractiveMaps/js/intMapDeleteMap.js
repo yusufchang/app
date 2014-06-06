@@ -1,4 +1,4 @@
-require( ['jquery'], function($) {
+define('wikia.intMaps.deleteMap', ['jquery', 'wikia.intMap.createMap.utils'], function($, utils) {
 	var modal,
 		modalConfig = {
 			vars: {
@@ -33,30 +33,18 @@ require( ['jquery'], function($) {
 				]
 			}
 		},
-		$deleteMapButton = $('#intMapsDeleteMap');
+		$deleteMapButton = $('#intMapsDeleteMap'),
+		$mapId = $('iframe.wikia-interactive-map').data('mapId'),
+		url = 'wikia.php?controller=WikiaInteractiveMaps&method=deleteMap';
+		debugger;
 
 	function deleteMap() {
 		event.preventDefault();
 		modal.deactivate();
-		$.nirvana.sendRequest({
-			controller: 'WikiaInteractiveMaps',
-			method: 'deleteMap',
-			format: 'json',
-			data: {
-				mapId: data
-			},
-			callback: function(response) {
-				var data = response.result;
-				if (data) {
-					modal.trigger('mapDeleted');
-				} else {
-					modal.trigger('error');
-				}
-			},
-			onErrorCallback: function() {
-				modal.trigger('error');
-			}
-		});
+		var $form = $('<form method="post" action="'+ url + '"></form>');
+		$('<input type="hidden" name="mapId">').val($mapId).appendTo($form);
+		debugger;
+		$form.submit();
 	}
 
 	function triggerDeleteMapModal() {
@@ -72,40 +60,19 @@ require( ['jquery'], function($) {
 		}
 	}
 
-	function loadModal() {
-		//if (!modal) {
-			require( [ 'wikia.ui.factory' ], function( uiFactory ) {
-				uiFactory.init( [ 'modal' ] ).then( function( uiModal ) {
-					uiModal.createComponent( modalConfig, function( _modal ) {
-						modal = _modal;
-						modal.bind('delete', deleteMap);
-						modal.bind('mapDeleted', showSuccess);
-						modal.bind('error', showError);
-						modal.show();
-					});
+	function init() {
+		require( [ 'wikia.ui.factory' ], function( uiFactory ) {
+			uiFactory.init( [ 'modal' ] ).then( function( uiModal ) {
+				uiModal.createComponent( modalConfig, function( _modal ) {
+					modal = _modal;
+					modal.bind('delete', deleteMap);
+					modal.show();
 				});
 			});
-//		} else {
-//			modal.show();
-//		}
+		});
 	}
 
-	function showError() {
-		modal.activate();
-		modal.setContent($.msg('wikia-interactive-maps-delete-map-error'));
+	return {
+		init: init
 	}
-
-	function showSuccess() {
-		modal.activate();
-		modal.setContent($.msg('wikia-interactive-maps-delete-map-success'));
-		modal.$element.find('button').attr('disabled', 'true');
-		setTimeout(function(){
-			window.location.href = 'www.google.com';
-			modal.trigger('close');
-		}, 2000);
-	}
-
-	$deleteMapButton.click(function() {
-		triggerDeleteMapModal();
-	});
 });

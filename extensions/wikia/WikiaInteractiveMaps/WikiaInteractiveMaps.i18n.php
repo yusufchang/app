@@ -60,10 +60,10 @@ $messages[ 'en' ] = [
 
 	'wikia-interactive-maps-delete-map' => 'Delete map',
 	'wikia-interactive-maps-view-source' => 'View source',
-	'wikia-interactive-maps-delete-map-title' => 'Title of the "delete map" modal',
-	'wikia-interactive-maps-delete-map-prompt' => 'Prompt asking if user is sure to delete a map',
-	'wikia-interactive-maps-delete-map-success' => 'Information about succesful deletion of the map',
-	'wikia-interactive-maps-delete-map-error' => 'Information about error during deletion of the map',
+	'wikia-interactive-maps-delete-map-title' => 'Delete map',
+	'wikia-interactive-maps-delete-map-prompt' => 'Are you sure to delete the map?',
+	'wikia-interactive-maps-delete-map-success' => 'Map was succesfuly deleted!',
+	'wikia-interactive-maps-delete-map-error' => 'There was an error while deleting a map.',
 ];
 
 $messages[ 'qqq' ] = [

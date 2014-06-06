@@ -1745,3 +1745,11 @@ $config['int_map_create_map_js'] = [
 		'//extensions/wikia/WikiaInteractiveMaps/js/intMapCreateMapModal.js',
 	]
 ];
+
+$config['int_map_delete_map_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//extensions/wikia/WikiaInteractiveMaps/js/intMapDeleteMap.js',
+	]
+];

@@ -8,7 +8,7 @@ class WikiaMaps {
 	const ENTRY_POINT_RENDER = 'render';
 	const ENTRY_POINT_TILE_SET = 'tile_set';
 
-	const MAP_DELETE_SUCCESS = 'Map successfully deleted!';
+	const MAP_DELETE_SUCCESS = 'Map successfully updated';
 
 	const STATUS_DONE = 0;
 	const STATUS_PROCESSING = 1;
@@ -261,6 +261,8 @@ class WikiaMaps {
 		$url = $this->buildUrl( [ self::ENTRY_POINT_MAP, $mapId ] );
 		$res = json_decode( $this->putRequest($url, $payload) );
 		//ToDo -> validate based on status code, not a message
+		var_dump($res);
+		exit();
 		return ( $res && $res->message == self::MAP_DELETE_SUCCESS );
 	}
 
