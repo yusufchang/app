@@ -10,6 +10,7 @@
 	},
 	"require": {
 		"wikia/fluent-sql-php": "1.0.*",
+		"phpunit/phpunit": "3.7.12",
 		"videlalvaro/php-amqplib": "2.2.*",
 		"monolog/monolog": "1.9.1"
 	}

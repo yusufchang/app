@@ -1,5 +1,5 @@
 <?php
-require_once( $IP . '/extensions/wikia/LyricsApi/LyricsUtils.class.php' );
+require_once( $GLOBALS['IP'] . '/extensions/wikia/LyricsApi/LyricsUtils.class.php' );
 
 class LyricsUtilsTest extends WikiaBaseTest {
 
