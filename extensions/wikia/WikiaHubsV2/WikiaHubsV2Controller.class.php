@@ -13,7 +13,7 @@ class WikiaHubsV2Controller extends WikiaController {
 	const CACHE_VALIDITY_VARNISH = 86400;
 
 	/**
-	 * @var WikiaHubsV2Model
+	 * @var WikiaHubsModel
 	 */
 	protected $model;
 	
@@ -68,7 +68,24 @@ class WikiaHubsV2Controller extends WikiaController {
 		}
 	}
 
-	/**
+	public function getArticleSuggestModal() {
+		$templateData = [
+			'urlLabel' => wfMessage('wikiahubs-suggest-article-what-article')->text(),
+			'reasonLabel' => wfMessage('wikiahubs-suggest-article-reason')->text(),
+			'successMessage' => wfMessage('wikiahubs-suggest-article-success')->text()
+		];
+
+		$this->setVal( 'html', ( new Wikia\Template\MustacheEngine )
+			->setPrefix( dirname( __FILE__ ) . '/templates' )
+			->setData( $templateData )
+			->render( 'WikiaHubsV2_suggestArticle.mustache' ) );
+
+		$this->setVal( 'title', wfMessage('wikiahubs-suggest-article-header')->escaped() );
+		$this->setVal( 'labelSubmit', wfMessage( 'wikiahubs-suggest-article-submit-button' )->escaped() );
+		$this->setVal( 'labelCancel', wfMessage( 'wikiahubs-suggest-article-close-button' )->escaped() );
+	}
+
+    /**
 	 * Check if user has access to see hub page in future date
 	 *
 	 * @return bool
@@ -131,18 +148,15 @@ class WikiaHubsV2Controller extends WikiaController {
 		$this->initVertical();
 		$this->initVerticalSettings();
 		$this->initHubTimestamp();
+		$this->initSearch();
 	}
 
 	protected function initCacheValidityTimes() {
-		$this->response->setCacheValidity(
-			self::CACHE_VALIDITY_BROWSER,
-			self::CACHE_VALIDITY_VARNISH,
-			array(WikiaResponse::CACHE_TARGET_BROWSER, WikiaResponse::CACHE_TARGET_VARNISH)
-		);
+		$this->response->setCacheValidity(self::CACHE_VALIDITY_VARNISH, self::CACHE_VALIDITY_BROWSER);
 	}
 
 	/**
-	 * @return WikiaHubsV2Model
+	 * @return WikiaHubsModel
 	 */
 	protected function getModel() {
 		if (!$this->model) {
@@ -169,12 +183,32 @@ class WikiaHubsV2Controller extends WikiaController {
 	protected function initVertical() {
 		$this->verticalId = $this->getRequest()->getVal('verticalid', WikiFactoryHub::CATEGORY_ID_GAMING);
 		$this->verticalName = $this->model->getVerticalName($this->verticalId);
-		$this->canonicalVerticalName = $this->model->getCanonicalVerticalName($this->verticalId);
+		$this->canonicalVerticalName = str_replace(' ', '', $this->model->getCanonicalVerticalName($this->verticalId));
 	}
 
 	protected function initModel() {
-		$this->model = new WikiaHubsV2Model();
+		$this->model = new WikiaHubsModel();
 		$this->model->setVertical($this->verticalId);
+	}
+
+	protected function initSearch() {
+		$this->specialSearchUrl = SpecialPage::getTitleFor( 'WikiaSearch' )->getFullUrl();
+		$this->searchHubName = $this->getSearchHubName();
+	}
+
+	/**
+	 * Since search works better only for EN hub pages we implemented this simple method
+	 *
+	 * @param int|string $vertical vertical name or id
+	 * @return string
+	 */
+	protected function getSearchHubName() {
+		$searchNames = F::app()->wg->WikiaHubsSearchMapping;
+		if( !empty($searchNames[$this->verticalId]) ) {
+			return $searchNames[$this->verticalId];
+		}
+
+		return null;
 	}
 
 	/**

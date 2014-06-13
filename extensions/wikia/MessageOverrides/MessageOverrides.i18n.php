@@ -4880,7 +4880,6 @@ Ersetzte diesen Text durch deinen Artikel!',
 	'oasis-global-nav-header' => 'Wikia-Navigation',
 	'oasis-home' => 'Hauptseite',
 	'oasis-interlang-languages' => 'Sprachen:',
-	'oasis-interlang-show-all' => '... alle zeigen >',
 	'oasis-latest-activity-delete-details' => 'gelöscht von $1 $2',
 	'oasis-latest-activity-delete' => '$1 hat $2 gelöscht',
 	'oasis-latest-activity-edit-details' => 'bearbeitet von $1 $2',
@@ -5052,8 +5051,6 @@ Bitte ignoriere diese E-Mail, falls du sie nicht selbst angefordert hast. Das al
 	'philcalendar-20120223' => '*  vafsfafad|asdf
 **  DESCRIPTION: sadfadsfsafds
 **  SYSTEMS: ps3',
-	'photopop-game-loading' => 'Lade…',
-	'photopop-game-progress' => 'Bilder',
 	'plb-create-already-exists-error' => 'Ein Layout mit diesem Titel existiert bereits. Versuche es mit einem anderen Titel.',
 	'plb-create-button-draft-title' => 'Layout als Entwurf speichern',
 	'plb-create-button-draft' => 'Layout als Entwurf speichern',
@@ -7807,7 +7804,6 @@ Wenn du die Herausforderungen deaktivierst werden existierende Auszeichnungen si
 	'wikiamobile-unsupported-video-download' => 'Dein Browser unterstützt dieses Videoformat nicht, versuche es <a href="$1">hier</a>',
 	'wikiamobile-wikiasearch2-next' => 'Nächste',
 	'wikiamobile-wikiasearch2-prev' => 'Vorherige',
-	'wikiamobile-wikiasearch2-results-count-of' => ' von $1 {{PLURAL:$1|Ergebnis|Ergebnissen}}',
 	'wikiamobileeditor-cancel' => 'Abbrechen',
 	'wikiamobileeditor-internet' => 'Hast du eine Internet-Verbindung?',
 	'wikiamobileeditor-licensing-type' => 'CC-BY-SA',
@@ -11709,7 +11705,6 @@ El formato wiki permite a cualquiera crear o editar cualquier artículo, así qu
 	'oasis-edits-counter' => '$1 <sup>{{PLURAL:$1|edición hecha|ediciones hechas}}</sup>',
 	'oasis-global-nav-create-wiki-alt' => 'Crear un wiki',
 	'oasis-global-nav-create-wiki' => 'Crear un wiki',
-	'oasis-interlang-show-all' => '... ver todos >',
 	'oasis-latest-activity-delete' => '$2 borrado por $1',
 	'oasis-latest-activity-edit' => '$2 editado por $1',
 	'oasis-latest-activity-new' => '$2 creado por $1',
@@ -14024,7 +14019,6 @@ Por favor, ¡déjame un mensaje si puedo ayudarte con cualquier cosa!',
 	'widget-title-contribs' => 'Contribuciones',
 	'widget-title-editedrecently' => 'Editado por',
 	'widget-title-featureduser' => 'Usuario destacado',
-	'widget-title-founderbadge' => 'Fundador/a',
 	'widget-title-languages' => 'En otros idiomas',
 	'widget-title-lastwikis' => 'Últimos wikis visitados',
 	'widget-title-mostvisited' => 'Más visitados',
@@ -17702,8 +17696,6 @@ N’oublie pas de personnaliser tes [[Special:Preferences|préférences sur {{SI
 	'wikia-editor-modules-plb-list-title-count' => 'Liste des modules',
 	'wikia-editor-preview-type-tooltip' => 'Modifier cette option affichera l\'article tel qu\'il serait affiché sur un navigateur avec un écran petit, un écran large, un appareil mobile ou avec votre affichage actuel.',
 	'wikia-file-page-replace-button' => 'Remplacer',
-	'wikia-home-page-hot' => 'Chaud',
-	'wikia-home-page-new' => 'Nouveau',
 	'wikia-home-page-official' => 'Officiel',
 	'wikia-home-page-preview' => 'Aperçu',
 	'wikia-home-page-visit' => 'Visiter',
@@ -17820,7 +17812,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Wikia en tous lieux===
 *[http://www.wikia.com/Mobile Wikia mobile]
 *[http://www.wikia.com/Mobile/GameGuides App. jeux vidéo]
-*[http://www.wikia.com/Mobile/PhotoPop App. divertissement]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-wikiainc' => '===Wikia, Inc.===
@@ -17868,7 +17859,6 @@ __NOEDITSECTION__',
 	'wikiamobile-wikiapoll-open-poll' => 'Que pensez-vous ?',
 	'wikiamobile-wikiasearch2-next' => 'Suivant',
 	'wikiamobile-wikiasearch2-prev' => 'Précédent',
-	'wikiamobile-wikiasearch2-results-count-of' => ' sur $1 {{PLURAL:$1|résultat|résultats}}',
 	'wikiamobileeditor-cancel' => 'Annuler',
 	'wikiamobileeditor-keep-editing' => 'Continuer à modifier',
 	'wikiamobileeditor-licensing' => 'Contributions sous licence',
@@ -19182,7 +19172,6 @@ Ecco cosa sta succedendo:<br /><em>$1</em></p>
 	'oasis-global-page-header' => 'Wikia',
 	'oasis-home' => 'Home',
 	'oasis-interlang-languages' => 'Lingue:',
-	'oasis-interlang-show-all' => '... vedi tutte >',
 	'oasis-latest-activity-delete-details' => 'cancellato da $1 $2',
 	'oasis-latest-activity-edit-details' => 'modificato da $1 $2',
 	'oasis-latest-activity-new-details' => 'creato da $1 $2',
@@ -21133,7 +21122,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Wikia ovunque===
 *[http://www.wikia.com/Mobile Wikia Mobile]
 *[http://www.wikia.com/Mobile/GameGuides Video Game Apps]
-*[http://www.wikia.com/Mobile/PhotoPop Entertainment Apps]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-follow-us' => '===Seguici===
@@ -23383,7 +23371,6 @@ $1
 	'oasis-global-nav-create-wiki' => '새 위키 만들기',
 	'oasis-home' => '대문',
 	'oasis-interlang-languages' => '다른 언어:',
-	'oasis-interlang-show-all' => '... 모두 보기 >',
 	'oasis-latest-activity-delete-details' => '$2 $1에 의해 삭제됨',
 	'oasis-latest-activity-delete' => '$1 사용자가 삭제함: $2',
 	'oasis-latest-activity-edit-details' => '$2 $1에 의해 편집됨',
@@ -25063,8 +25050,6 @@ ___________________________________________
 	'wikia-editor-source-bold-tooltip' => '굵게',
 	'wikia-editor-source-italic-tooltip' => '이탤릭',
 	'wikia-editor-source-link-tooltip' => '링크 추가',
-	'wikia-home-page-hot' => '인기',
-	'wikia-home-page-new' => '새 위키',
 	'wikia-home-page-official' => '공식',
 	'wikia-home-page-preview' => '맛보기',
 	'wikia-home-page-visit' => '방문하기',
@@ -25313,7 +25298,6 @@ ___________________________________________
 	'wikiahome-footer-everywhere' => '=== 어디서나 위키아 ===
 *[http://www.wikia.com/Mobile 위키아 모바일 (영어)]
 *[http://www.wikia.com/Mobile/GameGuides 비디오 게임 앱 (영어)]
-*[http://www.wikia.com/Mobile/PhotoPop 엔터테인먼트 앱 (영어)]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API (영어)]',
 	'wikiahome-footer-follow-us' => '=== 소식 구독하기 ===
 *[http://community.wikia.com/wiki/Blog:Wikia_Staff_Blog 위키아 블로그 (영어)]
@@ -25457,7 +25441,6 @@ ___________________________________________
 	'wikiamobile-wikiapoll-user-voted' => '$1에 투표하셨습니다.',
 	'wikiamobile-wikiasearch2-next' => '다음',
 	'wikiamobile-wikiasearch2-prev' => '이전',
-	'wikiamobile-wikiasearch2-results-count-of' => '번째 결과 (모두 $1개의 결과)',
 	'wikianewfiles-more' => '더 보기...',
 	'wikianewfiles-postedin' => '포함하는 문서',
 	'wikianewfiles-title' => '새로 올라온 그림',
@@ -27963,8 +27946,6 @@ Zostaw wiadomość, gdyby potrzebna była Ci jakakolwiek pomoc.',
 	'wikia-editor-preview-mobile-width' => 'Skórka mobilna',
 	'wikia-editor-preview-type-tooltip' => 'Zobacz jak Twoje edycje wyglądać będą w elastycznym układzie. Zmiana tej opcji umożliwi Ci zobaczenie jak artykuł wyglądać będzie w skórce mobilnej lub w przeglądarce w małej, dużej lub obecnie wykorzystywanej przez Ciebie rozdzielczości.',
 	'wikia-file-page-replace-button' => 'Zastąp',
-	'wikia-home-page-hot' => 'Gorące',
-	'wikia-home-page-new' => 'Nowe',
 	'wikia-home-page-preview' => 'Podgląd',
 	'wikia-home-page-visit' => 'Odwiedź',
 	'wikia-home-parse-source-empty-exception' => 'Komunikat MediaWiki jest pusty',
@@ -28201,7 +28182,6 @@ __NOEDITSECTION__',
 	'wikiamobile-video-views-counter' => '$1 {{PLURAL:$1|odwiedziny|odwiedzin}}',
 	'wikiamobile-wikiasearch2-next' => 'Dalej',
 	'wikiamobile-wikiasearch2-prev' => 'Wstecz',
-	'wikiamobile-wikiasearch2-results-count-of' => ' z $1 {{PLURAL:$1|wyniku|wyników}}',
 	'wikianewfiles-desc' => 'Rozszerzenie [[Special:NewFiles|strony specjalnej]] nadpisujące pierwotne formatowanie nagłówka.',
 	'wikianewfiles-more' => 'więcej...',
 	'wikianewfiles-postedin' => 'Użyto&nbsp;w',
@@ -30439,7 +30419,6 @@ ___________________________________________
 	'wikia-editor-preview-mobile-width' => 'Мобильный скин',
 	'wikia-editor-preview-type-tooltip' => 'Посмотрите, как ваши правки будут выглядеть при действии динамического макета страницы.<br>Меняя значения в этом меню, вы можете проверить, как статья будет отображаться в браузере на маленьком и большом экранах, а также на вашем экране.',
 	'wikia-file-page-replace-button' => 'Заменить',
-	'wikia-home-page-new' => 'Новое',
 	'wikia-home-page-preview' => 'О вики',
 	'wikia-home-page-visit' => 'Посетить',
 	'wikia-home-parse-source-empty-exception' => 'Пустая страница MediaWiki',
@@ -30531,7 +30510,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Викия повсюда===
 *[http://www.wikia.com/Mobile Мобильная Викия]
 *[http://www.wikia.com/Mobile/GameGuides Приложение для видеоигр]
-*[http://www.wikia.com/Mobile/PhotoPop Приложение для кино и сериалов]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-follow-us' => '===Следите за нами===
@@ -37298,7 +37276,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===其他===
 *[http://www.wikia.com/Mobile 维基移动]
 *[http://www.wikia.com/Mobile/GameGuides 维基游戏指南]
-*[http://www.wikia.com/Mobile/PhotoPop 维基娱乐汇]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-follow-us' => '===关注我们===
@@ -42162,7 +42139,6 @@ http://ja.wikia.com/wiki/Special:Following',
 	'oasis-global-nav-create-wiki' => '新しいウィキを作成',
 	'oasis-home' => 'ホーム',
 	'oasis-interlang-languages' => '他の言語:',
-	'oasis-interlang-show-all' => '全て表示 >',
 	'oasis-latest-activity-delete-details' => '$1 による削除: $2',
 	'oasis-latest-activity-delete' => '$1 による削除: $2',
 	'oasis-latest-activity-edit-details' => '$1 による編集: $2',
@@ -51893,7 +51869,6 @@ Abans de contribuir al fòrum de {{SITENAME}} tingues en compte les següents pr
 	'oasis-button-wiki-activity' => 'Wiki Activitat',
 	'oasis-global-nav-create-wiki' => 'Crear un wiki',
 	'oasis-interlang-languages' => 'Llengües:',
-	'oasis-interlang-show-all' => '... veure-ho tot >',
 	'oasis-latest-activity-edit-details' => 'editat per $1 $2',
 	'oasis-latest-photos-header' => '<em>{{FORMATNUM:$1}}</em><span class="$2">{{PLURAL:$1|imatge en aquest wiki|imatges en aquest wiki}}</span>',
 	'oasis-latest-photos-inner-message' => 'Veure totes les imatges',

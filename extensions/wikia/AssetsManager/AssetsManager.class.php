@@ -53,14 +53,12 @@ class AssetsManager {
 	}
 
 	public static function onMakeGlobalVariablesScript(Array &$vars) {
-		global $wgCdnRootUrl, $wgAssetsManagerQuery;
+		global $wgAssetsManagerQuery;
 
 		$params = SassUtil::getSassSettings();
 
 		$vars['sassParams'] = $params;
 		$vars['wgAssetsManagerQuery'] = $wgAssetsManagerQuery;
-		$vars['wgCdnRootUrl'] = $wgCdnRootUrl; // TODO: wgCdnStylePath?
-
 		return true;
 	}
 
@@ -726,14 +724,6 @@ class AssetsManager {
 
 		if ( !empty( $options['ttl'] ) ) {
 			$request['ttl'] = $options['ttl'];
-		}
-
-		if ( !empty( $options['varnishTTL'] ) ) {
-			$request['varnishTTL'] = $options['varnishTTL'];
-		}
-
-		if ( !empty( $options['browserTTL'] ) ) {
-			$request['browserTTL'] = $options['browserTTL'];
 		}
 
 		$request['cb'] = $wgStyleVersion;

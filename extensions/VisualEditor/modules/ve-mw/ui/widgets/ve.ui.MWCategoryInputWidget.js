@@ -1,7 +1,7 @@
 /*!
  * VisualEditor UserInterface MWCategoryInputWidget class.
  *
- * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -11,8 +11,8 @@
  * Creates an ve.ui.MWCategoryInputWidget object.
  *
  * @class
- * @extends ve.ui.TextInputWidget
- * @mixins ve.ui.LookupInputWidget
+ * @extends OO.ui.TextInputWidget
+ * @mixins OO.ui.LookupInputWidget
  *
  * @constructor
  * @param {ve.ui.MWCategoryWidget} categoryWidget
@@ -25,10 +25,10 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 	}, config );
 
 	// Parent constructor
-	ve.ui.TextInputWidget.call( this, config );
+	OO.ui.TextInputWidget.call( this, config );
 
 	// Mixin constructors
-	ve.ui.LookupInputWidget.call( this, this, config );
+	OO.ui.LookupInputWidget.call( this, this, config );
 
 	// Properties
 	this.categoryWidget = categoryWidget;
@@ -36,15 +36,15 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )['14'] + ':';
 
 	// Initialization
-	this.$.addClass( 've-ui-mwCategoryInputWidget' );
-	this.lookupMenu.$.addClass( 've-ui-mwCategoryInputWidget-menu' );
+	this.$element.addClass( 've-ui-mwCategoryInputWidget' );
+	this.lookupMenu.$element.addClass( 've-ui-mwCategoryInputWidget-menu' );
 };
 
 /* Inheritance */
 
-ve.inheritClass( ve.ui.MWCategoryInputWidget, ve.ui.TextInputWidget );
+OO.inheritClass( ve.ui.MWCategoryInputWidget, OO.ui.TextInputWidget );
 
-ve.mixinClass( ve.ui.MWCategoryInputWidget, ve.ui.LookupInputWidget );
+OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.LookupInputWidget );
 
 /* Methods */
 
@@ -55,16 +55,28 @@ ve.mixinClass( ve.ui.MWCategoryInputWidget, ve.ui.LookupInputWidget );
  * @returns {jqXHR} AJAX object without success or fail handlers attached
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
-	return $.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'format': 'json',
+	var propsJqXhr,
+		searchJqXhr = ve.init.mw.Target.static.apiRequest( {
 			'action': 'opensearch',
 			'search': this.categoryPrefix + this.value,
 			'suggest': ''
-		},
-		'dataType': 'json'
-	} );
+		} );
+
+	return searchJqXhr.then( function ( data ) {
+		propsJqXhr = ve.init.mw.Target.static.apiRequest( {
+			'action': 'query',
+			'prop': 'pageprops',
+			'titles': ( data[1] || [] ).join( '|' ),
+			'ppprop': 'hiddencat'
+		} );
+		return propsJqXhr;
+	} ).promise( { abort: function () {
+		searchJqXhr.abort();
+
+		if ( propsJqXhr ) {
+			propsJqXhr.abort();
+		}
+	} } );
 };
 
 /**
@@ -74,15 +86,17 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
  * @param {Mixed} data Response from server
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( data ) {
-	var i, len, title, result = [];
-	if ( ve.isArray( data ) && data.length ) {
-		for ( i = 0, len = data[1].length; i < len; i++ ) {
-			try {
-				title = new mw.Title( data[1][i] );
-				result.push( title.getMainText() );
-			} catch ( e ) { }
-			// If the received title isn't valid, just ignore it
-		}
+	var categoryWidget = this.categoryWidget, result = {};
+	if ( data.query && data.query.pages ) {
+		$.each( data.query.pages, function ( pageId, pageInfo ) {
+			var title = mw.Title.newFromText( pageInfo.title );
+			if ( title ) {
+				result[title.getMainText()] = !!( pageInfo.pageprops && pageInfo.pageprops.hiddencat !== undefined );
+				categoryWidget.categoryHiddenStatus[pageInfo.title] = result[title.getMainText()];
+			} else {
+				mw.log.warning( '"' + pageInfo.title + '" is an invalid title!' );
+			}
+		} );
 	}
 	return result;
 };
@@ -91,7 +105,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheItemFromData = function ( da
  * Get list of menu items from a server response.
  *
  * @param {Object} data Query result
- * @returns {ve.ui.MenuItemWidget[]} Menu items
+ * @returns {OO.ui.MenuItemWidget[]} Menu items
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( data ) {
 	var i, len, item,
@@ -99,11 +113,21 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 		newCategoryItems = [],
 		existingCategoryItems = [],
 		matchingCategoryItems = [],
+		hiddenCategoryItems = [],
 		items = [],
-		menu$$ = this.lookupMenu.$$,
+		menu$ = this.lookupMenu.$,
 		category = this.getCategoryItemFromValue( this.value ),
 		existingCategories = this.categoryWidget.getCategories(),
-		matchingCategories = data || [];
+		matchingCategories = [],
+		hiddenCategories = [];
+
+	$.each( data, function ( title, hiddenStatus ) {
+		if ( hiddenStatus ) {
+			hiddenCategories.push( title );
+		} else {
+			matchingCategories.push( title );
+		}
+	} );
 
 	// Existing categories
 	for ( i = 0, len = existingCategories.length - 1; i < len; i++ ) {
@@ -129,6 +153,19 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 			matchingCategoryItems.push( item );
 		}
 	}
+	// Hidden categories
+	for ( i = 0, len = hiddenCategories.length; i < len; i++ ) {
+		item = hiddenCategories[i];
+		if (
+			ve.indexOf( item, existingCategories ) === -1 &&
+			item.lastIndexOf( category.value, 0 ) === 0
+		) {
+			if ( item === category.value ) {
+				exactMatch = true;
+			}
+			hiddenCategoryItems.push( item );
+		}
+	}
 	// New category
 	if ( !exactMatch ) {
 		newCategoryItems.push( category.value );
@@ -136,30 +173,39 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuItemsFromData = function ( da
 
 	// Add sections for non-empty groups
 	if ( newCategoryItems.length ) {
-		items.push( new ve.ui.MenuSectionItemWidget(
-			'newCategory', { '$$': menu$$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-newcategorylabel' ) }
+		items.push( new OO.ui.MenuSectionItemWidget(
+			'newCategory', { '$': menu$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-newcategorylabel' ) }
 		) );
 		for ( i = 0, len = newCategoryItems.length; i < len; i++ ) {
 			item = newCategoryItems[i];
-			items.push( new ve.ui.MenuItemWidget( item, { '$$': menu$$, 'label': item } ) );
+			items.push( new OO.ui.MenuItemWidget( item, { '$': menu$, 'label': item } ) );
 		}
 	}
 	if ( existingCategoryItems.length ) {
-		items.push( new ve.ui.MenuSectionItemWidget(
-			'inArticle', { '$$': menu$$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-movecategorylabel' ) }
+		items.push( new OO.ui.MenuSectionItemWidget(
+			'inArticle', { '$': menu$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-movecategorylabel' ) }
 		) );
 		for ( i = 0, len = existingCategoryItems.length; i < len; i++ ) {
 			item = existingCategoryItems[i];
-			items.push( new ve.ui.MenuItemWidget( item, { '$$': menu$$, 'label': item } ) );
+			items.push( new OO.ui.MenuItemWidget( item, { '$': menu$, 'label': item } ) );
 		}
 	}
 	if ( matchingCategoryItems.length ) {
-		items.push( new ve.ui.MenuSectionItemWidget(
-			'matchingCategories', { '$$': menu$$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-matchingcategorieslabel' ) }
+		items.push( new OO.ui.MenuSectionItemWidget(
+			'matchingCategories', { '$': menu$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-matchingcategorieslabel' ) }
 		) );
 		for ( i = 0, len = matchingCategoryItems.length; i < len; i++ ) {
 			item = matchingCategoryItems[i];
-			items.push( new ve.ui.MenuItemWidget( item, { '$$': menu$$, 'label': item } ) );
+			items.push( new OO.ui.MenuItemWidget( item, { '$': menu$, 'label': item } ) );
+		}
+	}
+	if ( hiddenCategoryItems.length ) {
+		items.push( new OO.ui.MenuSectionItemWidget(
+			'hiddenCategories', { '$': menu$, 'label': ve.msg( 'visualeditor-dialog-meta-categories-input-hiddencategorieslabel' ) }
+		) );
+		for ( i = 0, len = hiddenCategoryItems.length; i < len; i++ ) {
+			item = hiddenCategoryItems[i];
+			items.push( new OO.ui.MenuItemWidget( item, { '$': menu$, 'label': item } ) );
 		}
 	}
 
@@ -177,18 +223,22 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryItemFromValue = function ( valu
 	var title;
 
 	// Normalize
-	try {
-		title = new mw.Title( this.categoryPrefix + value );
+	title = mw.Title.newFromText( this.categoryPrefix + value );
+	if ( title ) {
 		return {
 			'name': title.getPrefixedText(),
 			'value': title.getMainText(),
 			'metaItem': {}
 		};
-	} catch ( e ) { }
+	}
 
 	if ( this.forceCapitalization ) {
 		value = value.substr( 0, 1 ).toUpperCase() + value.substr( 1 );
 	}
 
-	return { 'name': this.categoryPrefix + value, 'value': value, 'metaItem': {} };
+	return {
+		'name': this.categoryPrefix + value,
+		'value': value,
+		'metaItem': {}
+	};
 };

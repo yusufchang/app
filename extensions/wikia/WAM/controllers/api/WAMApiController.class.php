@@ -15,7 +15,7 @@ class WAMApiController extends WikiaApiController {
 	const DEFAULT_WIKI_IMAGE_WIDTH = 150;
 	const DEFAULT_WIKI_ADMINS_LIMIT = 5;
 
-	const MEMCACHE_VER = '1.02';
+	const MEMCACHE_VER = '1.04';
 
 	/**
 	 * A method to get WAM index (list of wikis with their WAM ranks)
@@ -104,15 +104,7 @@ class WAMApiController extends WikiaApiController {
 		$this->response->setVal('wam_index', $wamIndex['wam_index']);
 		$this->response->setVal('wam_results_total', $wamIndex['wam_results_total']);
 		$this->response->setVal('wam_index_date', $wamIndex['wam_index_date']);
-		$this->response->setCacheValidity(
-			6 * 60 * 60 /* 6h */,
-			6 * 60 * 60 /* 6h */,
-			array(
-				WikiaResponse::CACHE_TARGET_BROWSER,
-				WikiaResponse::CACHE_TARGET_VARNISH
-			)
-		);
-
+		$this->response->setCacheValidity(6 * 60 * 60);
 	}
 
 	/**

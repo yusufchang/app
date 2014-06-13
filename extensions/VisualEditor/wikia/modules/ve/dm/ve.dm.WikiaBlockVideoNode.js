@@ -18,11 +18,15 @@ ve.dm.WikiaBlockVideoNode = function VeDmWikiaBlockVideoNode( length, element ) 
 
 /* Inheritance */
 
-ve.inheritClass( ve.dm.WikiaBlockVideoNode, ve.dm.WikiaBlockMediaNode );
+OO.inheritClass( ve.dm.WikiaBlockVideoNode, ve.dm.WikiaBlockMediaNode );
 
 /* Static Properties */
 
 ve.dm.WikiaBlockVideoNode.static.name = 'wikiaBlockVideo';
+
+ve.dm.WikiaBlockMediaNode.static.childNodeTypes = [ 'wikiaVideoCaption' ];
+
+ve.dm.WikiaBlockMediaNode.static.captionNodeType = 'wikiaVideoCaption';
 
 ve.dm.WikiaBlockVideoNode.static.rdfaToType = {
 	'mw:Video/Thumb': 'thumb',

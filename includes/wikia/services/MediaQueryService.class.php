@@ -13,6 +13,10 @@ class MediaQueryService extends WikiaService {
 	 * Get list of images which:
 	 *  - are used on pages (in content namespaces) matching given query
 	 *  - match given query
+	 *
+	 * @param string $query A query to send to search
+	 * @param int $limit Limit the results returned
+	 * @return array An array of image DB keys
 	 */
 	public static function search( $query, $limit = 50 ) {
 		global $wgContentNamespaces;
@@ -61,6 +65,14 @@ class MediaQueryService extends WikiaService {
 		return $images;
 	}
 
+	/**
+	 * Search for images who's name contains the string given
+	 *
+	 * @param string $query The substring to search for
+	 * @param int $page The page of results to return
+	 * @param int $limit The number of results per page
+	 * @return array An array of image DB keys
+	 */
 	public function searchInTitle( $query, $page=1, $limit=8 ) {
 		wfProfileIn(__METHOD__);
 
@@ -100,6 +112,11 @@ class MediaQueryService extends WikiaService {
 		return $results;
 	}
 
+	/**
+	 * Return the total number of images that contain the substring given
+	 * @param string $name The substring counted image names should contain
+	 * @return int The number of images found
+	 */
 	public function getTotalImages( $name = '' ) {
 		wfProfileIn(__METHOD__);
 
@@ -167,9 +184,19 @@ class MediaQueryService extends WikiaService {
 	}
 
 	/**
-	 * get essential information about media
+	 * Get essential information about media.  This includes:
+	 *
+	 *   title - The display name of the media Title passed in
+	 *   desc - A section of the description for this image
+	 *   type - Whether this is an image or a video, one of:
+	 *          * MediaQueryService::MEDIA_TYPE_VIDEO
+	 *          * MediaQueryService::MEDIA_TYPE_IMAGE
+	 *   meta - Metadata for the media
+	 *   thumbURL - Thumbnail URL for the media
+	 *
 	 * @param Title $media
-	 * @param $length - snippet length
+	 * @param int $length Trim the returned article snippet to this character length
+	 * @return array The associative array of data for this media Title
 	 */
 	public function getMediaData( Title $media, $length = 256 ) {
 		return $this->getMediaDataFromCache( $media, $length );
@@ -209,6 +236,17 @@ class MediaQueryService extends WikiaService {
 		return $this->mediaCache[ $media->getDBKey() ];
 	}
 
+	/**
+	 * Find media used in an article
+	 *
+	 * @param Title $title
+	 * @param string $type Whether to return videos or images.  If null, both are returned.
+	 *                     If given, the following values are accepted:
+	 *                     * One of MediaQueryService::MEDIA_TYPE_VIDEO
+	 *                     * MediaQueryService::MEDIA_TYPE_IMAGE
+	 * @param int $limit
+	 * @return array|Mixed
+	 */
 	public function getMediaFromArticle( Title $title, $type = null, $limit = null ) {
 		wfProfileIn(__METHOD__);
 
@@ -256,9 +294,9 @@ class MediaQueryService extends WikiaService {
 	/**
 	 * Get list of recently uploaded files (RT #79288)
 	 *
-	 * @param $limit
+	 * @param $limit Limit the number of files returned to this number
 	 *
-	 * @return Title[]
+	 * @return array An array of Title objects
 	 */
 	public static function getRecentlyUploaded( $limit ) {
 		global $wgEnableAchievementsExt;
@@ -309,7 +347,16 @@ class MediaQueryService extends WikiaService {
 	}
 
 	/**
-	 * adaptor for getRecentlyUploaded to format as mediaTable
+	 * Adaptor for getRecentlyUploaded to format as mediaTable.  Returns an array of associative arrays.
+	 * The keys for the associative arrays are:
+	 *
+	 *   - title : The media name
+	 *   - type : The media type, one of:
+	 *            * One of MediaQueryService::MEDIA_TYPE_VIDEO
+	 *            * MediaQueryService::MEDIA_TYPE_IMAGE
+	 *
+	 * @param int $limit Limit the number of items returned to this number
+	 * @return array An array of arrays.
 	 */
 	public static function getRecentlyUploadedAsMediaTable( $limit ) {
 		$output = array();
@@ -328,79 +375,94 @@ class MediaQueryService extends WikiaService {
 	}
 
 	/**
-	 * get list of all videos (order by timestamp)
-	 * @param string $sort [recent/popular/trend]
-	 * @param string $filter [all/premium]
-	 * @param integer $limit
-	 * @param integer $page
-	 * @param array $providers
+	 * Get list of videos based on a few filters ($type, $providers, $category)
+	 * and sort options ($sort, $limit, $page).
+	 *
+	 * @param string $sort How to sort the results.  Valid options are:
+	 *                     - recent  : Sort by the date the video was added (DEFAULT)
+	 *                     - popular : Sort by total views
+	 *                     - trend   : Sort by views over the last 7 days
+	 * @param string $type What type of videos to return.  Valid options are:
+	 *                     - all     : Show all videos (DEFAULT)
+	 *                     - premium : Show only premium videos
+	 * @param integer $limit Limit the number of videos to return
+	 * @param integer $page Specify a page of results (DEFAULT $page = 1)
+	 * @param array $providers An array of content providers.  Only videos hosted by these providers
+	 *                        will be returned (DEFAULT all providers)
+	 * @param array|string $categories - category names.  Only videos tagged with these categories will be returned
+	 *                         (DEFAULT any category)
 	 * @return array $videoList
 	 */
-	public function getVideoList( $sort = 'recent', $filter = 'all', $limit = 0, $page = 1, $providers = array() ) {
+	public function getVideoList( $sort = 'recent', $type = 'all', $limit = 0, $page = 1, $providers = [], $categories = [] ) {
 		wfProfileIn( __METHOD__ );
 
-		$db = wfGetDB( DB_SLAVE );
+		// Determine the sort column
+		if ( $sort == 'popular' ) {
+			$sortCol = 'views_total';
+		} elseif ( $sort == 'trend' ) {
+			$sortCol = 'views_7day';
+		} else {
+			$sortCol = 'added_at';
+		}
 
-		$sqlTables = array( 'video_info' );
-		$sqlWhere = array( 'removed' => 0 );
-		$sqlOptions = array();
+		// Setup the base query cache for a minimal amount of time
+		$query = (new WikiaSQL())->cache( 5 )
+			->SELECT( 'video_title' )
+				->FIELD( 'provider' )
+				->FIELD( 'added_at' )
+				->FIELD( 'added_by' )
+				->FIELD( 'duration' )
+				->FIELD( 'views_total' )
+				->DISTINCT( 'video_title' )
+			->FROM( 'video_info' )
+			->WHERE( 'removed' )->EQUAL_TO( 0 )
+			->ORDER_BY( $sortCol )->DESC();
 
-		// Check for providers
+		if ( $categories ) {
+				$query->JOIN( 'page' )->ON( 'video_title', 'page_title' )
+					  ->JOIN( 'categorylinks' )->ON( 'page_id', 'cl_from' )
+					  ->AND_( 'cl_to' )->IN( $categories )
+					  ->AND_( 'page_namespace' )->EQUAL_TO( NS_FILE );
+		}
+
 		if ( $providers ) {
-			// This will become an IN clause from the $providers array
-			$sqlWhere['provider'] = $providers;
+			$query->AND_( 'provider' )->IN( $providers );
 		}
 
-		// check for filter
-		if ( $filter == 'premium' ) {
-			$sqlWhere['premium'] = 1;
+		if ( $type == 'premium' ) {
+			$query->AND_( 'premium' )->EQUAL_TO( 1 );
 		}
 
-		// check for limit
-		if ( !empty($limit) ) {
-			$sqlOptions['LIMIT'] = $limit;
-			if ( !empty($page) ) {
-				$sqlOptions['OFFSET'] = ($page * $limit) - $limit;
+		if ( $limit ) {
+			$query->LIMIT( $limit );
+			if ( $page && $page > 1 ) {
+				$query->OFFSET( ($page - 1) * $limit );
 			}
 		}
 
-		// check for sorting
-		if ( $sort == 'popular' ) {
-			$sqlOptions['ORDER BY'] = 'views_total DESC';
-		} else if ( $sort == 'trend' ) {
-			$sqlOptions['ORDER BY'] = 'views_7day DESC';
-		} else {
-			$sqlOptions['ORDER BY'] = 'added_at DESC';
-		}
+		$db = wfGetDB( DB_SLAVE );
 
-		$result = $db->select(
-			array( 'video_info' ),
-			array( 'video_title, provider, added_at, added_by, duration, views_total' ),
-			$sqlWhere,
-			__METHOD__,
-			$sqlOptions
-		);
-
-		$videoList = array();
-		while ( $row = $db->fetchObject($result) ) {
-			$videoList[] = array(
+		$videoList = $query->runLoop( $db, function( &$videoList, $row ) {
+			$videoList[] = [
 				'title'      => $row->video_title,
 				'provider'   => $row->provider,
 				'addedAt'    => $row->added_at,
 				'addedBy'    => $row->added_by,
 				'duration'   => $row->duration,
-				'viewsTotal' => $row->views_total,
-			);
-		}
+				'viewsTotal' => $row->views_total
+			];
+		});
 
 		wfProfileOut( __METHOD__ );
 
-		return $videoList;
+		// Make sure we're returning an array
+		return empty( $videoList ) ? [] : $videoList;
 	}
 
 	/**
-	 * get number of total videos
-	 * @return integer $totalVideos
+	 * Get total number of videos in this wiki
+	 *
+	 * @return integer
 	 */
 	public function getTotalVideos() {
 		wfProfileIn( __METHOD__ );
@@ -427,17 +489,20 @@ class MediaQueryService extends WikiaService {
 		return $totalVideos;
 	}
 
-	//get memcache key for total videos
+	// Get memcache key for getTotalVideos
 	protected function getMemKeyTotalVideos() {
 		return wfMemcKey( 'videos', 'total_videos', 'v4' );
 	}
 
+	/**
+	 * Clear the cache of total video count for this wiki
+	 */
 	public function clearCacheTotalVideos() {
 		$this->wg->Memc->delete( $this->getMemKeyTotalVideos() );
 	}
 
 	/**
-	 * get number of total premium videos
+	 * Get number of total premium videos
 	 * @return integer $totalVideos
 	 */
 	public function getTotalPremiumVideos() {
@@ -469,18 +534,66 @@ class MediaQueryService extends WikiaService {
 	}
 
 	/**
+	 * Get number of total videos in a given category
+	 *
+	 * @param string $category Category name
+	 * @return integer
+	 */
+	public function getTotalVideosByCategory ( $category ) {
+
+		wfProfileIn( __METHOD__ );
+
+		$db = wfGetDB( DB_SLAVE );
+		$memKey = $this->getMemKeyTotalVideosByCategory( $category );
+
+		$totalViews = (new WikiaSQL())->cache( 60*60*6, $memKey )
+			->SELECT( 'count(video_title) cnt' )
+			->FROM( 'video_info' )
+			->WHERE('removed' )->EQUAL_TO( 0 )
+			->JOIN( 'page' )->ON( 'video_title', 'page_title' )
+			->JOIN( 'categorylinks' )->ON( 'page_id', 'cl_from' )
+				->AND_( 'cl_to' )->EQUAL_TO( $category )
+				->AND_( 'page_namespace' )->EQUAL_TO( NS_FILE )
+			->run( $db, function ( $result ) {
+				$row = $result->fetchObject( $result );
+				return $row->cnt;
+			});
+
+		wfProfileOut( __METHOD__ );
+
+		return $totalViews;
+	}
+
+	protected function getMemKeyTotalVideosByCategory( $category ) {
+		return wfMemcKey( 'videos', 'total_videos', $category );
+	}
+
+	/**
+	 * Clear the cache of total videos for a given category
+	 *
+	 * @param $category The category name
+	 */
+	public function clearCacheTotalVideosByCategory( $category ) {
+		$this->wg->Memc->delete( $this->getMemKeyTotalVideosByCategory( $category ) );
+	}
+
+	/**
 	 * Get memcache key for total premium videos
 	 */
 	protected function getMemKeyTotalPremiumVideos() {
 		return wfMemcKey( 'videos', 'total_premium_videos', 'v3' );
 	}
 
+	/**
+	 * Clear the cache of total premium video count
+	 */
 	public function clearCacheTotalPremiumVideos() {
 		$this->wg->Memc->delete( $this->getMemKeyTotalPremiumVideos() );
 	}
 
 	/**
-	 * get memcache key for total video views
+	 * Get memcache key for total video views
+	 *
 	 * @return string
 	 */
 	public static function getMemKeyTotalVideoViews() {
@@ -488,7 +601,8 @@ class MediaQueryService extends WikiaService {
 	}
 
 	/**
-	 * get total video views by title
+	 * Get total video views by title
+	 *
 	 * @param string $title
 	 * @return integer $videoViews
 	 */
@@ -513,5 +627,4 @@ class MediaQueryService extends WikiaService {
 
 		return $videoViews;
 	}
-
 }

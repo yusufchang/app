@@ -6,6 +6,7 @@
  * DataModel Wikia media caption node.
  *
  * @class
+ * @abstract
  * @extends ve.dm.MWImageCaptionNode
  * @constructor
  * @param {number} [length] Length of content data in document
@@ -17,16 +18,11 @@ ve.dm.WikiaMediaCaptionNode = function VeDmWikiaMediaCaptionNode( length, elemen
 
 /* Inheritance */
 
-ve.inheritClass( ve.dm.WikiaMediaCaptionNode, ve.dm.MWImageCaptionNode );
+OO.inheritClass( ve.dm.WikiaMediaCaptionNode, ve.dm.MWImageCaptionNode );
 
 /* Static Properties */
 
 ve.dm.WikiaMediaCaptionNode.static.name = 'wikiaMediaCaption';
-
-ve.dm.WikiaMediaCaptionNode.static.parentNodeTypes = [
-	'wikiaBlockImage',
-	'wikiaBlockVideo'
-];
 
 /* Registration */
 

@@ -22,13 +22,17 @@ class JsonFormatTest extends WikiaBaseTest {
 			}
 			//else leave it as it is
 		} else {
-			$this->hooks = $wgHooks['ThumbnailImageHTML'];
-			unset( $wgHooks['ThumbnailImageHTML'] );
+			if (array_key_exists('ThumbnailImageHTML', $wgHooks)) {
+				$this->hooks = $wgHooks['ThumbnailImageHTML'];
+				unset( $wgHooks['ThumbnailImageHTML'] );
+			}
 		}
 	}
 
 	/* Main tests */
 	/**
+	 * @group Slow
+	 * @slowExecutionTime 0.21435 ms
 	 * @dataProvider StructureProvider
 	 */
 	public function testStructureMatching( $wikiText, $expectedStructure = null ) {
@@ -41,6 +45,8 @@ class JsonFormatTest extends WikiaBaseTest {
 	}
 
 	/**
+	 * @group Slow
+	 * @slowExecutionTime 0.1468 ms
 	 * @dataProvider StructureProvider
 	 */
 	public function testStructureMatchingWithLazyLoad( $wikiText, $expectedStructure = null ) {
@@ -55,6 +61,7 @@ class JsonFormatTest extends WikiaBaseTest {
 	}
 
 	/**
+	 * @group UsingDB
 	 * @dataProvider ContentProvider
 	 */
 	public function testContentMatching( $wikiText, $expectedContent ) {
@@ -66,6 +73,7 @@ class JsonFormatTest extends WikiaBaseTest {
 	}
 
 	/**
+	 * @group UsingDB
 	 * @dataProvider ContentProvider
 	 */
 	public function testContentMatchingWithLazyLoad( $wikiText, $expectedContent ) {
@@ -156,7 +164,7 @@ Nullam eros mi, mollis in sollicitudin non, tincidunt sed enim. Sed et felis met
 							1 => [
 								'child' => [
 									0 => [
-										'text' => "Nullam eros mi, mollis in sollicitudin non, tincidunt sed enim. Sed et felis metus, rhoncus ornare nibh. Ut at magna leo."
+										'text' => "Nullam eros mi, mollis in sollicitudin non, tincidunt sed enim. Sed et felis metus, rhoncus ornare nibh. Ut at magna leo. "
 									]
 								]
 							]
@@ -170,7 +178,7 @@ Nullam eros mi, mollis in sollicitudin non, tincidunt sed enim. Sed et felis met
 					0 => [
 						'child' => [
 							0 => [
-								'text' => "mollis in sollicitudin non"
+								'text' => "mollis in sollicitudin non "
 							]
 						]
 					]

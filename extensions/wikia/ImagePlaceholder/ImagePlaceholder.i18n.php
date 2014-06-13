@@ -48,6 +48,13 @@ $messages['ast'] = array(
 	'imgplc-notinhistory' => 'Nun pues amestar una imaxe nel mou historial.',
 );
 
+/** Azerbaijani (azərbaycanca)
+ * @author Cekli829
+ */
+$messages['az'] = array(
+	'imgplc-image' => 'Şəkil',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
@@ -293,6 +300,14 @@ $messages['ja'] = array(
 	'imgplc-notinhistory' => '履歴表示モードでは画像を追加できません。',
 );
 
+/** Kannada (ಕನ್ನಡ)
+ * @author VASANTH S.N.
+ */
+$messages['kn'] = array(
+	'imgplc-add-image' => 'ಚಿತ್ರಗಳನ್ನು ಸೇರಿಸು',
+	'imgplc-image' => 'ಚಿತ್ರ',
+);
+
 /** Korean (한국어)
  * @author 아라
  * @author 한글화담당
@@ -464,8 +479,8 @@ $messages['pms'] = array(
  * @author Ahmed-Najib-Biabani-Ibrahimkhel
  */
 $messages['ps'] = array(
-	'imgplc-add-image' => 'انځور ورګډول',
-	'imgplc-add-video' => 'ويډيو ورګډول',
+	'imgplc-add-image' => 'انځور ورگډول',
+	'imgplc-add-video' => 'ويډيو ورگډول',
 	'imgplc-image' => 'انځور',
 );
 
@@ -544,6 +559,17 @@ $messages['sv'] = array(
 	'imgplc-image' => 'Bild',
 	'imgplc-notinhistory' => 'Du kan inte lägga till en bild i historikläget.',
 	'imgplc-notinhistory-video' => 'Du kan inte lägga till ett videoklipp i historikläget.',
+);
+
+/** Telugu (తెలుగు)
+ * @author Chaduvari
+ */
+$messages['te'] = array(
+	'imgplc-add-image' => 'బొమ్మను చేర్చు',
+	'imgplc-add-video' => 'వీడియోను చేర్చు',
+	'imgplc-image' => 'బొమ్మ',
+	'imgplc-notinhistory' => 'చరిత్ర మోడ్‍లో ఉండగా మీరు బొమ్మను చేర్చలేరు.',
+	'imgplc-notinhistory-video' => 'చరిత్ర మోడ్‍లో ఉండగా మీరు వీడియోను చేర్చలేరు.',
 );
 
 /** Tagalog (Tagalog)

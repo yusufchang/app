@@ -18,7 +18,6 @@ $config['oasis_shared_core_js'] = array(
 $config['oasis_extensions_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
-		'#group_oasis_ads_js',
 		'#group_oasis_noads_extensions_js',
 		'#group_ui_repo_api_js',
 	)
@@ -41,6 +40,7 @@ $config['liftium_ads_js'] = array(
 		'//extensions/wikia/AdEngine/liftium/Wikia.AQ.js',
 		'//extensions/wikia/AdEngine/liftium/Wikia.meerkat.js',
 		'//extensions/wikia/AdEngine/liftium/Wikia.ve_alternate.js',
+		'//extensions/wikia/AdEngine/liftium/AdsInContent.js'
 	),
 );
 
@@ -52,67 +52,89 @@ $config['adengine2_js'] = array(
 		'//extensions/wikia/AdEngine/js/Krux.js',
 		'//extensions/wikia/AdEngine/js/SlotTweaker.js',
 		'//extensions/wikia/AdEngine/js/AdEngine2.js',
-		'//extensions/wikia/AdEngine/js/AdTracker.js',
 		'//extensions/wikia/AdEngine/js/SlotTracker.js',
+		'//extensions/wikia/AdEngine/js/LateAdsQueue.js',
+		'//extensions/wikia/AdEngine/js/MessageListener.js',
 
 		// high prio
-		'//extensions/wikia/AdEngine/js/OoyalaTracking.js',
+		'//extensions/wikia/AdEngine/js/EventDispatcher.js',
+		'//extensions/wikia/AdEngine/js/GptSlotConfig.js',
+		'//extensions/wikia/AdEngine/js/EvolveSlotConfig.js',
 		'//extensions/wikia/AdEngine/js/DartUrl.js',
+		'//extensions/wikia/AdEngine/js/WikiaAdHelper.js',
 		'//extensions/wikia/AdEngine/js/WikiaDartHelper.js',
-		'//extensions/wikia/AdEngine/js/WikiaDartVideoHelper.js',
-		'//extensions/wikia/AdEngine/js/WikiaFullGptHelper.js',
-		'//extensions/wikia/AdEngine/js/SevenOneMediaHelper.js',
-		'//extensions/wikia/AdEngine/js/EvolveHelper.js',
-		'//extensions/wikia/AdEngine/js/AdProviderEvolve.js',
-		'//extensions/wikia/AdEngine/js/AdProviderGamePro.js',
-		'//extensions/wikia/AdEngine/js/AdProviderSevenOneMedia.js',
-		'//extensions/wikia/AdEngine/js/AdProviderGpt.js',
+		'//extensions/wikia/AdEngine/js/WikiaGptHelper.js',
+		'//extensions/wikia/AdEngine/js/WikiaGptAdDetect.js',
+		'//extensions/wikia/AdEngine/js/AdProviderDirectGpt.js',
+		'//extensions/wikia/AdEngine/js/AdProviderEbay.js',
 		'//extensions/wikia/AdEngine/js/AdProviderLater.js',
 		'//extensions/wikia/AdEngine/js/AdProviderNull.js',
+		'//extensions/wikia/AdEngine/js/AdProviderRemnantGpt.js',
 		'//extensions/wikia/AdEngine/js/AdTemplateSkin.js',
 		'//extensions/wikia/AdEngine/js/AdLogicDartSubdomain.js',
 		'//extensions/wikia/AdEngine/js/AdLogicHighValueCountry.js',
-		'//extensions/wikia/AdEngine/js/AdLogicPageLevelParams.js',
-		'//extensions/wikia/AdEngine/js/AdLogicPageLevelParamsLegacy.js',
+		'//extensions/wikia/AdEngine/js/AdLogicPageParams.js',
 		'//extensions/wikia/AdEngine/js/AdLogicPageDimensions.js',
 		'//extensions/wikia/AdEngine/js/AdDecoratorPageDimensions.js',
 		'//extensions/wikia/AdEngine/js/AdConfig2.js',
 		'//extensions/wikia/AdEngine/js/AdEngine2.run.js',
-
 		// low prio
 		// not here! @see adengine2 low prio section someplace else
 	),
 );
 
-$config['oasis_ads_js'] = array(
+$config['adengine2_late_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
 		// ads
-		'//extensions/wikia/AdEngine/AdMeldAPIClient.js',
 		'//extensions/wikia/AdEngine/AdProviderOpenX.js',
 		'//extensions/wikia/AdEngine/LazyLoadAds.js',
-
-		// adengine2 low prio
-		// @requires adengine2 core already loaded
-		// @requires liftium loaded later (TODO FIXME)
+		'//extensions/wikia/AdEngine/js/AdLogicPageParamsLegacy.js',
+		'//extensions/wikia/AdEngine/js/AdProviderEvolve.js',
 		'//extensions/wikia/AdEngine/js/AdProviderLiftium.js',
 		'//extensions/wikia/AdEngine/js/AdProviderSevenOneMedia.js',
 		'//extensions/wikia/AdEngine/js/AdConfig2Late.js',
-		'//extensions/wikia/AdEngine/js/AdEngine2.configLateAds.js',
-
-		'#group_liftium_ads_js',
-
-		'//extensions/wikia/AdEngine/liftium/AdsInContent.js',
+		'//extensions/wikia/AdEngine/js/EvolveHelper.js',
+		'//extensions/wikia/AdEngine/js/OoyalaTracking.js',
+		'//extensions/wikia/AdEngine/js/SevenOneMediaHelper.js',
+		'//extensions/wikia/AdEngine/js/WikiaDartVideoHelper.js',
+		// Needs to load after Krux.js, jQuery and AdEngine2.run.js
+		'//extensions/wikia/AdEngine/js/Krux.run.js',
 	),
+);
+
+$config['adengine2_wikiabar_boxad_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/AdEngine/js/AdSlotWikiaBarBoxad2.js',
+		'//extensions/wikia/AdEngine/js/AdSlotWikiaBarBoxad2.run.js',
+	),
+);
+
+$config['adengine2_ebay_scss'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array( 'oasis' ),
+	'assets' => array(
+		'//extensions/wikia/AdEngine/css/AdProviderEbay_centerWell.scss'
+	)
+);
+
+$config['adengine2_ebay_scss_wikiamobile'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array( 'wikiamobile' ),
+	'assets' => array(
+		'//extensions/wikia/AdEngine/css/AdProviderEbay_centerWell.wikiamobile.scss'
+	)
 );
 
 $config['oasis_noads_extensions_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
+		'//resources/wikia/libraries/jquery/ellipses.js',
 		'//extensions/wikia/CreatePage/js/CreatePage.js',
 		'//extensions/wikia/VideoHandlers/js/VideoBootstrap.js',
 		'//extensions/wikia/Lightbox/js/LightboxLoader.js',
-		'//extensions/wikia/ImageLazyLoad/js/ImageLazyLoad.js',
+		'#group_imglzy_js',
 		'//extensions/wikia/AjaxLogin/AjaxLoginBindings.js',
 		// We allow logged in users to change login without logging out
 		'//extensions/wikia/UserLogin/js/UserLoginAjaxForm.js',
@@ -128,31 +150,15 @@ $config['oasis_noads_extensions_js'] = array(
 		// This needs to load last after all common extensions, please keep this last.
 		'//skins/oasis/js/GlobalModal.js',
 		'//extensions/wikia/UserLogin/js/UserLogin.js',
-		// Needs to load after Krux.js, jQuery and AdEngine2.run.js
-		'//extensions/wikia/AdEngine/js/Krux.run.js',
 		// WikiaBar is enabled sitewide
 		'//extensions/wikia/WikiaBar/js/WikiaBar.js',
 		// Chat is enabled sitewide
 		'//extensions/wikia/Chat2/js/ChatEntryPoint.js',
-		// Related Forum Discussion is on all article pages
-		'//extensions/wikia/Forum/js/RelatedForumDiscussion.js',
 		'//extensions/wikia/VideoEmbedTool/js/VET_Loader.js',
-	)
-);
-
-/** Site specific CSS **/
-$config['site_anon_css'] = array(
-	'type' => AssetsManager::TYPE_CSS,
-	'assets' => array(
-		'#function_AssetsConfig::getSiteCSS'
-	)
-);
-
-/** User specific CSS **/
-$config['site_user_css'] = array(
-	'type' => AssetsManager::TYPE_CSS,
-	'assets' => array(
-		'#group_site_anon_css',
+		// Survey for first time editors
+		'//extensions/wikia/EditorSurvey/js/EditorSurvey.js',
+		// Image and video thumbnail mustache templates
+		'//extensions/wikia/Thumbnails/scripts/templates.mustache.js',
 	)
 );
 
@@ -165,7 +171,6 @@ $config['site_user_css'] = array(
 $config['oasis_blocking'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//skins/wikia/js/WikiaScriptLoader.js',
 		'//skins/wikia/js/JqueryLoader.js',
 		'//resources/wikia/modules/lazyqueue.js',
 	)
@@ -178,13 +183,6 @@ $config['abtesting'] = array(
 		'//extensions/wikia/AbTesting/js/AbTest.js',
 	)
 );
-$config['optimizely'] = array(
-	'type' => AssetsManager::TYPE_JS,
-	'assets' => array(
-		'//extensions/wikia/Optimizely/js/OptimizelyLoader.js',
-	)
-);
-
 
 /** jQuery **/
 $config['jquery'] = array(
@@ -219,6 +217,7 @@ $config['oasis_jquery'] = array(
 		// libraries loaders
 		'//resources/wikia/libraries/jquery/getResources/jquery.wikia.getResources.js',
 		'//resources/wikia/libraries/jquery/loadLibrary/jquery.wikia.loadLibrary.js',
+		'//skins/oasis/js/isTouchScreen.js',
 
 		// jQuery/Oasis specific code
 		'//skins/oasis/js/tables.js',
@@ -230,6 +229,12 @@ $config['oasis_jquery'] = array(
 		'//extensions/wikia/Search/js/SearchAbTest.DomUpdater.js',
 		'//extensions/wikia/Search/js/SearchAbTest.Context.js',
 		'//extensions/wikia/Search/js/SearchAbTest.js',
+
+		// Global Header tracking
+		'//skins/oasis/js/GlobalHeader.js',
+
+		// Lazy rail
+		'#group_lazy_rail_js',
 	)
 );
 
@@ -290,7 +295,6 @@ $config['oasis_nojquery_shared_js'] = array(
 		'//extensions/wikia/WikiaStyleGuide/js/Form.js',
 		'//resources/wikia/modules/csspropshelper.js',
 		'//resources/wikia/modules/fluidlayout.js',
-		'//extensions/wikia/EditPreview/js/preview.js',
 
 		// oasis specific files
 		'//resources/wikia/libraries/bootstrap/tooltip.js',
@@ -302,10 +306,8 @@ $config['oasis_nojquery_shared_js'] = array(
 		'//skins/oasis/js/CorporateFooter.js',
 		'//skins/oasis/js/buttons.js',
 		'//skins/oasis/js/WikiHeader.js',
-		'//skins/oasis/js/Interlang.js',
 		'//skins/oasis/js/WikiaNotifications.js',
 		'//skins/oasis/js/FirefoxFindFix.js',
-		'//skins/oasis/js/isTouchScreen.js',
 		'//skins/oasis/js/tabs.js',
 		'//skins/oasis/js/SharingToolbar/SharingToolbarLoader.js',
 		'//skins/oasis/js/Tracking.js',
@@ -322,6 +324,7 @@ $config['oasis_anon_js'] = array(
 		'//extensions/wikia/UserLogin/js/UserLoginFacebook.js',
 		'//extensions/wikia/UserLogin/js/UserLoginFacebookForm.js',
 		'//extensions/wikia/UserLogin/js/UserLoginDropdown.js',
+		'//skins/oasis/js/LatestActivity.js',
 	)
 );
 
@@ -480,6 +483,7 @@ $config['wikiamobile_js_body_minimal'] = array(
 		'//resources/wikia/modules/cookies.js',
 		//depends on querystring.js and cookies.js
 		'//resources/wikia/modules/log.js',
+		'//resources/wikia/modules/abTest.js',
 
 		//feature detection
 		'//extensions/wikia/WikiaMobile/js/features.js',
@@ -511,7 +515,9 @@ $config['wikiamobile_js_body_full'] = array(
 		//polyfills
 		'//extensions/wikia/WikiaMobile/js/viewport.js',
 
+		//libraries
 		'//resources/wikia/libraries/iScroll/iscroll.js',
+		'//extensions/wikia/WikiaMobile/js/webview.js',
 
 		//platform components
 		'//extensions/wikia/AssetsManager/js/AssetsManager.js',
@@ -602,26 +608,35 @@ $config['wikiamobile_tables_js'] = array(
 	)
 );
 
-$config['wikiamobile_js_ads'] = array(
+$config['wikiamobile_ads_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => 'wikiamobile',
 	'assets' => array(
-		//libraries
-		//I wan't to minimize how much data we have to transfer
-		//We currently don't have JS minimizer so I used minified version of it
-		'//resources/wikia/libraries/postscribe/postscribe.min.js',
-		'//resources/wikia/modules/scriptwriter.js',
+		// Modules
+		'//resources/wikia/modules/geo.js',
+		'//resources/wikia/modules/lazyqueue.js',
+		'//extensions/wikia/AdEngine/js/MessageListener.js',
 
-		//advertisement "core"
-		'//extensions/wikia/AdEngine/js/AdLogicPageLevelParams.js',
-		'//extensions/wikia/AdEngine/js/DartUrl.js',
-		'//extensions/wikia/AdEngine/js/WikiaDartMobileHelper.js',
+		// Advertisement libs
+		'//extensions/wikia/AdEngine/js/EventDispatcher.js',
+		'//extensions/wikia/AdEngine/js/AdLogicPageParams.js',
+		'//extensions/wikia/AdEngine/js/AdConfigMobile.js',
+		'//extensions/wikia/AdEngine/js/AdEngine2.js',
+		'//extensions/wikia/AdEngine/js/AdProviderRemnantGptMobile.js',
+		'//extensions/wikia/AdEngine/js/AdProviderDirectGptMobile.js',
+		'//extensions/wikia/AdEngine/js/AdProviderEbay.js',
+		'//extensions/wikia/AdEngine/js/AdProviderNull.js',
+		'//extensions/wikia/AdEngine/js/GptSlotConfig.js',
+		'//extensions/wikia/AdEngine/js/SlotTracker.js',
+		'//extensions/wikia/AdEngine/js/SlotTweaker.js',
+		'//extensions/wikia/AdEngine/js/WikiaGptHelper.js',
+		'//extensions/wikia/AdEngine/js/WikiaGptAdDetect.js',
+
+		// Video ads
 		'//extensions/wikia/AdEngine/js/WikiaDartVideoHelper.js',
 
-		//modules
-		'//resources/wikia/modules/geo.js',
-		'//extensions/wikia/WikiaMobile/js/ads.js',
-		'//extensions/wikia/WikiaMobile/js/ad_slots.js',
+		// Run!
+		'//extensions/wikia/WikiaMobile/js/ads_run.js',
 	)
 );
 
@@ -638,6 +653,25 @@ $config['wikiamobile_autocomplete_js'] = array(
 	'skin' => 'wikiamobile',
 	'assets' => array(
 		'//extensions/wikia/WikiaMobile/js/autocomplete.js'
+	)
+);
+
+$config['wikiamobile_usersignup_scss'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => 'wikiamobile',
+	'assets' => array(
+		'//extensions/wikia/UserLogin/css/UserSignup.wikiamobile.scss'
+	)
+);
+
+$config['wikiamobile_usersignup_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => 'wikiamobile',
+	'assets' => array(
+		'//resources/wikia/libraries/bootstrap/tooltip.js',
+		'//extensions/wikia/WikiaStyleGuide/js/Form.js',
+		'//extensions/wikia/UserLogin/js/UserSignupAjaxForm.js',
+		'//extensions/wikia/UserLogin/js/UserSignup.js'
 	)
 );
 
@@ -707,7 +741,7 @@ $config['monobook_js'] = array(
 		'//resources/wikia/modules/lazyqueue.js',
 		'//extensions/wikia/JSMessages/js/JSMessages.js',
 		'//extensions/wikia/AjaxLogin/AjaxLoginBindings.js',
-		'//extensions/wikia/ImageLazyLoad/js/ImageLazyLoad.js',
+		'#group_imglzy_js',
 		'//extensions/FBConnect/fbconnect.js',
 		'//extensions/wikia/AdEngine/AdProviderOpenX.js',
 		'//extensions/wikia/AdEngine/LazyLoadAds.js',
@@ -777,7 +811,7 @@ $config['filepage_js_wikiamobile'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => 'wikiamobile',
 	'assets' => array(
-		'//extensions/wikia/FilePage/js/FilePage.wikiamobile.js'
+		'//extensions/wikia/FilePage/scripts/FilePage.wikiamobile.js'
 	)
 );
 
@@ -796,6 +830,14 @@ $config['relatedpages_js'] = array(
 		'//resources/wikia/libraries/sloth/sloth.js',
 		'//resources/wikia/libraries/mustache/mustache.js',
 		'//extensions/wikia/RelatedPages/js/RelatedPages.js'
+	)
+);
+
+$config['relatedpages_wikiamobile_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => [ 'wikiamobile' ],
+	'assets' => array(
+		'//extensions/wikia/RelatedPages/js/relatedPages.wikiamobile.js'
 	)
 );
 
@@ -923,25 +965,6 @@ $config['theme_designer_js'] = array(
 	)
 );
 
-/** PhotoPop **/
-$config['photopop'] = array(
-	'type' => AssetsManager::TYPE_JS,
-	'assets' => array(
-		'//resources/wikia/modules/cookies.js',
-		'//resources/wikia/modules/querystring.js',
-		'//resources/wikia/modules/log.js',
-		'//resources/wikia/libraries/mustache/mustache.js',
-		'//resources/wikia/libraries/my.class/my.class.js',
-		'//extensions/wikia/PhotoPop/shared/lib/store.js',
-		'//extensions/wikia/PhotoPop/shared/lib/observable.js',
-		'//extensions/wikia/PhotoPop/shared/lib/reqwest.js',
-		'//extensions/wikia/PhotoPop/shared/lib/classlist.js',
-		'//extensions/wikia/PhotoPop/shared/lib/wikia.js',
-		'//extensions/wikia/PhotoPop/shared/lib/require.js',
-		'#group_tracker_js',
-	)
-);
-
 /** MessageWall **/
 $config['wall_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
@@ -957,6 +980,13 @@ $config['wall_js'] = array(
 		'//extensions/wikia/Wall/js/WallReplyMessageForm.js',
 		'//extensions/wikia/Wall/js/WallSortingBar.js',
 		'//extensions/wikia/Wall/js/WallSetup.js'
+	)
+);
+
+$config['wall_notifications_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/Wall/js/WallNotifications.js',
 	)
 );
 
@@ -1011,23 +1041,6 @@ $config['forum_mini_editor_js'] = array(
 	)
 );
 
-/** RelatedVideos **/
-$config['relatedvideos_js'] = array(
-	'skin' => array( 'oasis' ), //we have no support for relatedvideos in wikiamobile and monobook as for now
-	'type' => AssetsManager::TYPE_JS,
-	'assets' => array(
-		'//extensions/wikia/RelatedVideos/js/RelatedVideos.js'
-	)
-);
-
-$config['relatedvideos_scss'] = array(
-	'type' => AssetsManager::TYPE_SCSS,
-	'skin' => array( 'oasis' ), //we have no support for relatedvideos in wikiamobile and monobook as for now
-	'assets' => array(
-		'//extensions/wikia/RelatedVideos/css/RelatedVideos.scss'
-	)
-);
-
 $config['VET_js'] = array(
 	'skin' => array( 'oasis' ),
 	'type' => AssetsManager::TYPE_JS,
@@ -1043,29 +1056,59 @@ $config['VET_js'] = array(
 /**
  * @name VideoPageTool
  * @description Assets for the VideoPageTool, same styles as SpecialMarketingToolbox
- * @TODO: decide if we want to split the js/css into two different packages for index and edit pages
+ * The JS is split into two different packages for the dashboard and edit pages
  */
 
-$config['videopageadmin_js'] = array(
+$config['videopageadmin_dashboard_js'] = [
+	'skin' => ['oasis'],
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => [
+		// Library Dependencies
+		'//extensions/wikia/VideoPageTool/js/lib/lodash/dist/lodash.underscore.js',
+		'//extensions/wikia/VideoPageTool/js/lib/backbone/backbone.js',
+		'//resources/jquery.ui/jquery.ui.datepicker.js',
+
+		'//extensions/wikia/VideoPageTool/js/admin/models/datepicker.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/datepicker.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/dashboard.js',
+	]
+];
+$config['videopageadmin_edit_js'] = array(
 	'skin' => array( 'oasis' ),
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
+		// Lodash is an underscore.js rewrite and a prereq for Backbone
+		'//extensions/wikia/VideoPageTool/js/lib/lodash/dist/lodash.underscore.js',
+		'//extensions/wikia/VideoPageTool/js/lib/backbone/backbone.js',
+
 		// Library Dependencies
+		'//resources/wikia/libraries/jquery/owl.carousel/owl.carousel.js',
 		'//resources/jquery.ui/jquery.ui.core.js',
-		'//resources/jquery.ui/jquery.ui.datepicker.js',
 		'//resources/jquery/jquery.validate.js',
 		'//resources/wikia/modules/aim.js',
 		'//extensions/wikia/WikiaMiniUpload/js/WMU.js',
 		// TODO: probably move this jQuery plugin to /resources at some point
-		'//extensions/wikia/VideoPageTool/js/views/jquery.switcher.js',
+		'//extensions/wikia/VideoPageTool/js/shared/views/switcher.js',
 
-		'//extensions/wikia/VideoPageTool/js/models/videopageadmin.datepicker.js',
-		'//extensions/wikia/VideoPageTool/js/models/videopageadmin.thumbnail.js',
-		'//extensions/wikia/VideoPageTool/js/models/videopageadmin.validator.js',
-		'//extensions/wikia/VideoPageTool/js/views/videopageadmin.datepicker.js',
-		'//extensions/wikia/VideoPageTool/js/views/videopageadmin.index.js',
-		'//extensions/wikia/VideoPageTool/js/views/videopageadmin.thumbnailupload.js',
-		'//extensions/wikia/VideoPageTool/js/views/videopageadmin.edit.js',
+		// Compiled Mustache templates
+		'//extensions/wikia/VideoPageTool/js/templates.mustache.js',
+
+		'//extensions/wikia/VideoPageTool/js/admin/models/thumbnail.js',
+		'//extensions/wikia/VideoPageTool/js/admin/models/validator.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/thumbnailupload.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/editbase.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/featured.js',
+		'//extensions/wikia/VideoPageTool/js/admin/collections/category.js',
+		'//extensions/wikia/VideoPageTool/js/admin/collections/categorydata.js',
+
+		'//extensions/wikia/VideoPageTool/js/shared/views/owlcarousel.js',
+		'//extensions/wikia/VideoPageTool/js/shared/views/carouselThumb.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/carousel.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/autocompleteitem.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/autocomplete.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/categoryforms.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/category.js',
+		'//extensions/wikia/VideoPageTool/js/admin/views/index.js',
 	)
 );
 
@@ -1073,7 +1116,8 @@ $config['videopageadmin_css'] = array(
 	'skin' => array( 'oasis' ),
 	'type' => AssetsManager::TYPE_CSS,
 	'assets' => array(
-		'//resources/jquery.ui/themes/default/jquery.ui.datepicker.css'
+		'//resources/jquery.ui/themes/default/jquery.ui.datepicker.css',
+		'//resources/wikia/libraries/jquery/owl.carousel/owl.carousel.css',
 	)
 );
 
@@ -1083,8 +1127,9 @@ $config['videopageadmin_scss'] = array(
 	'assets' => array(
 		'//skins/oasis/css/modules/CorporateDatepicker.scss',
 		'//extensions/wikia/WikiaMiniUpload/css/WMU.scss',
-		'//extensions/wikia/VideoPageTool/css/Admin/VideoPageTool.scss',
-		'//extensions/wikia/VideoPageTool/css/Admin/VideoPageTool_Header.scss',
+		'//extensions/wikia/VideoPageTool/css/admin/VideoPageTool.scss',
+		'//extensions/wikia/VideoPageTool/css/admin/VideoPageTool_Header.scss',
+		'//extensions/wikia/VideoPageTool/css/carousel.scss',
 	)
 );
 
@@ -1097,18 +1142,47 @@ $config['videohomepage_js'] = array(
 	'skin' => array( 'oasis' ),
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
+		// jQuery plugins
 		'//resources/wikia/libraries/jquery/bxslider/jquery.bxslider.js',
-		'//resources/wikia/libraries/jquery/ellipses.js',
+		'//resources/wikia/libraries/jquery/owl.carousel/owl.carousel.js',
 
 		// Lodash is an underscore.js rewrite and a prereq for Backbone
 		'//extensions/wikia/VideoPageTool/js/lib/lodash/dist/lodash.underscore.js',
 		'//extensions/wikia/VideoPageTool/js/lib/backbone/backbone.js',
 
-		'//extensions/wikia/VideoPageTool/js/models/videohomepage.slide.js',
-		'//extensions/wikia/VideoPageTool/js/collections/videohomepage.featuredslides.js',
-		'//extensions/wikia/VideoPageTool/js/views/videohomepage.featured.js',
-		'//extensions/wikia/VideoPageTool/js/views/videohomepage.search.js',
-		'//extensions/wikia/VideoPageTool/js/views/videohomepage.index.js',
+		// Compiled Mustache templates
+		'//extensions/wikia/VideoPageTool/js/templates.mustache.js',
+
+		// Featured video slider
+		'//extensions/wikia/VideoPageTool/js/homepage/collections/featuredslides.js',
+		'//extensions/wikia/VideoPageTool/js/homepage/views/featured.js',
+
+		// Latest videos / category carousels
+		'//extensions/wikia/VideoPageTool/js/homepage/models/categorycarousel.js',
+		'//extensions/wikia/VideoPageTool/js/homepage/models/categorythumb.js',
+
+		'//extensions/wikia/VideoPageTool/js/admin/collections/category.js',
+		'//extensions/wikia/VideoPageTool/js/admin/collections/categorydata.js',
+
+		'//extensions/wikia/VideoPageTool/js/shared/views/carouselThumb.js',
+		'//extensions/wikia/VideoPageTool/js/shared/views/owlcarousel.js',
+		'//extensions/wikia/VideoPageTool/js/homepage/views/carouselThumb.js',
+		'//extensions/wikia/VideoPageTool/js/homepage/views/carousels.js',
+		'//extensions/wikia/VideoPageTool/js/homepage/views/carousel.js',
+
+		// Search box
+		'//extensions/wikia/VideoPageTool/js/homepage/views/search.js',
+
+		// "Router" for views
+		'//extensions/wikia/VideoPageTool/js/homepage/views/index.js',
+	)
+);
+
+$config['videohomepage_css'] = array(
+	'skin' => array( 'oasis' ),
+	'type' => AssetsManager::TYPE_CSS,
+	'assets' => array(
+		'//resources/wikia/libraries/jquery/owl.carousel/owl.carousel.css',
 	)
 );
 
@@ -1119,8 +1193,9 @@ $config['videohomepage_scss'] = array(
 		// Dependencies
 		'//resources/wikia/libraries/jquery/bxslider/jquery.bxslider.scss',
 		// VideoHomePage
-		'//extensions/wikia/VideoPageTool/css/HomePage/main.scss',
-		'//extensions/wikia/VideoPageTool/css/HomePage/featured.scss',
+		'//extensions/wikia/VideoPageTool/css/homepage/main.scss',
+		'//extensions/wikia/VideoPageTool/css/carousel.scss',
+		'//extensions/wikia/VideoPageTool/css/homepage/featured.scss',
 	)
 );
 
@@ -1197,6 +1272,7 @@ $config['wikiahomepage_scss_wikiamobile'] = array(
 );
 
 /** WikiaHubsV2 **/
+//TODO: remove after HubsV3 release @WikiaHubsV2Remove
 $config['wikiahubs_v2'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => array('oasis'),
@@ -1226,6 +1302,39 @@ $config['wikiahubs_v2_scss_mobile'] = array(
 	'skin' => array('wikiamobile'),
 	'assets' => array(
 		'//extensions/wikia/WikiaHubsV2/css/WikiaHubsV2Mobile.scss'
+	)
+);
+
+/** WikiaHubsV3 **/
+$config['wikiahubs_v3'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => array('oasis'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/js/WikiaHubsV3.js'
+	)
+);
+
+$config['wikiahubs_v3_modal'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => array('oasis'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/js/WikiaHubsV3Modals.js'
+	)
+);
+
+$config['wikiahubs_v3_scss'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array('oasis'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/css/WikiaHubsV3.scss'
+	)
+);
+
+$config['wikiahubs_v3_scss_mobile'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array('wikiamobile'),
+	'assets' => array(
+		'//extensions/wikia/WikiaHubsV3/css/WikiaHubsV3Mobile.scss'
 	)
 );
 
@@ -1325,6 +1434,14 @@ $config['analytics_gas_js'] = array(
 	)
 );
 
+$config['analytics_bluekai_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => array( 'wikiamobile' ),
+	'assets' => array(
+		'//extensions/wikia/AdEngine/js/AdLogicPageParams.js',
+	)
+);
+
 /** WikiMap Extension **/
 $config['wiki_map_js'] = array(
     'type' => AssetsManager::TYPE_JS,
@@ -1379,7 +1496,7 @@ $config['special_videos_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => array( 'oasis', 'monobook' ),
 	'assets' => array(
-		'//extensions/wikia/SpecialVideos/js/SpecialVideos.js',
+		'//extensions/wikia/SpecialVideos/scripts/SpecialVideos.js',
 		'//extensions/wikia/WikiaStyleGuide/js/Dropdown.js',
 	)
 );
@@ -1388,7 +1505,7 @@ $config['special_videos_css'] = array(
 	'type' => AssetsManager::TYPE_SCSS,
 	'skin' => array( 'oasis', 'monobook' ),
 	'assets' => array(
-		'//extensions/wikia/SpecialVideos/css/SpecialVideos.scss',
+		'//extensions/wikia/SpecialVideos/styles/SpecialVideos.scss',
 		'//extensions/wikia/WikiaStyleGuide/css/Dropdown.scss',
 	)
 );
@@ -1397,7 +1514,27 @@ $config['special_videos_css_monobook'] = array(
 	'type' => AssetsManager::TYPE_SCSS,
 	'skin' => array( 'monobook' ),
 	'assets' => array(
-		'//skins/oasis/css/wikiagrid.scss',
+		'//skins/oasis/css/lib/foundation.custom/foundation.custom.scss',
+	)
+);
+
+$config['special_videos_js_mobile'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => array( 'wikiamobile' ),
+	'assets' => array(
+		'//extensions/wikia/SpecialVideos/scripts/templates.mustache.js',
+		'//extensions/wikia/SpecialVideos/scripts/mobile/collections/video.js',
+		'//extensions/wikia/SpecialVideos/scripts/mobile/views/index.js',
+		'//extensions/wikia/SpecialVideos/scripts/mobile/controller.js',
+	)
+);
+
+$config['special_videos_css_mobile'] = array(
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => array( 'wikiamobile' ),
+	'assets' => array(
+		'//skins/oasis/css/core/thumbnails.scss',
+		'//extensions/wikia/SpecialVideos/styles/mobile.scss',
 	)
 );
 
@@ -1427,13 +1564,13 @@ $config['categoryselect_edit_js'] = array(
 $config['wikia_file_page_js'] = array(
 	'type'=> AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//extensions/wikia/FilePage/js/WikiaFilePage.js',
+		'//extensions/wikia/FilePage/scripts/WikiaFilePage.js',
 	)
 );
 $config['file_page_tabbed_js'] = array(
 	'type'=> AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//extensions/wikia/FilePage/js/FilePageTabbed.js',
+		'//extensions/wikia/FilePage/scripts/FilePageTabbed.js',
 	)
 );
 $config['file_page_tabbed_css'] = array(
@@ -1466,7 +1603,6 @@ $config['manage_wikia_home_js'] = array(
 $config['licensed_video_swap_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
-		'//resources/wikia/libraries/jquery/ellipses.js',
 		'//extensions/wikia/LicensedVideoSwap/js/lvsTracker.js',
 		'//extensions/wikia/LicensedVideoSwap/js/lvsCommonAjax.js',
 		'//extensions/wikia/LicensedVideoSwap/js/lvsVideoControls.js',
@@ -1587,5 +1723,72 @@ $config['suggestions_scss'] = array(
 	'type' => AssetsManager::TYPE_SCSS,
 	'assets' => array(
 		'//extensions/wikia/Suggestions/css/Suggestions.scss',
+	)
+);
+
+$config['videos_module_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//extensions/wikia/Thumbnails/scripts/templates.mustache.js',
+		'//extensions/wikia/Thumbnails/scripts/views/titleThumbnail.js',
+
+		'//extensions/wikia/VideosModule/scripts/templates.mustache.js',
+		'//extensions/wikia/VideosModule/scripts/models/videos.js',
+		'//extensions/wikia/VideosModule/scripts/views/titleThumbnail.js',
+		'//extensions/wikia/VideosModule/scripts/views/bottomModule.js',
+		'//extensions/wikia/VideosModule/scripts/views/rail.js',
+		'//extensions/wikia/VideosModule/scripts/controllers/index.js',
+	]
+];
+
+$config['qualaroo_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//extensions/wikia/Qualaroo/scripts/Qualaroo.js',
+	]
+];
+
+$config['imglzy_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => [
+		'//extensions/wikia/ImageLazyLoad/js/ImgLzy.module.js',
+		'//extensions/wikia/ImageLazyLoad/js/ImageLazyLoad.js',
+	]
+];
+
+$config['lazy_rail_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//skins/oasis/js/LazyRail.js',
+		'//skins/oasis/js/LatestPhotos.js',
+	]
+];
+
+/** Qualaroo blocking **/
+$config['qualaroo_blocking_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/Qualaroo/scripts/QualarooBlocking.js',
+	)
+);
+
+/** Optimizely Blocking **/
+$config['optimizely_blocking_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => [ 'oasis', 'wikiamobile' ],
+	'assets' => array(
+		'//extensions/wikia/Optimizely/scripts/OptimizelyBlocking.js',
+	)
+);
+
+/* extension/wikia/Bucky */
+$config['bucky_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => [ 'oasis' ],
+	'assets' => array(
+		'//extensions/wikia/Bucky/vendor/BuckyClient/bucky.js',
 	)
 );

@@ -17,6 +17,7 @@ psy.cfg
 *.iml
 /build
 /LocalSettings.php
+/robots.txt
 /atlassian-ide-plugin.xml
 _misc
 
@@ -28,3 +29,5 @@ _misc
 
 # Ignore files created by identifySpamAccounts
 spamAccountIds.txt
+
+lib/composer/**/.git

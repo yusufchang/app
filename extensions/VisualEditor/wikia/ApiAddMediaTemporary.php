@@ -17,7 +17,7 @@ class ApiAddMediaTemporary extends ApiAddMedia {
 			$result = $this->executeVideo();
 		}
 
-		$this->getResult()->addValue( null, $this->getModuleName(), $result );	
+		$this->getResult()->addValue( null, $this->getModuleName(), $result );
 	}
 
 	private function executeImage() {
@@ -49,7 +49,7 @@ class ApiAddMediaTemporary extends ApiAddMedia {
 	}
 
 	private function executeVideo() {
-		$wikiaFilename = $this->getWikiaFilename( $this->mParams['url'] );
+		$wikiaFilename = WikiaFileHelper::getWikiaFilename( $this->mParams['url'] );
 		if ( $wikiaFilename ) {
 			return $this->executeWikiaVideo( $wikiaFilename );
 		} else {
@@ -93,15 +93,14 @@ class ApiAddMediaTemporary extends ApiAddMedia {
 			'videoId' => $apiwrapper->getVideoId()
 		);
 		if ( $duplicate ) {
-			$result[ 'title' ] = $duplicate->getTitle()->getText();
-			$result[ 'url' ] = $duplicate->getUrl();
+			$result['title'] = $duplicate->getTitle()->getText();
+			$result['url'] = $duplicate->getUrl();
 		} else {
 			// Check whether upload is enabled
 			if ( !UploadBase::isEnabled() ) {
 				$this->dieUsageMsg( 'uploaddisabled' );
 			}
 			$this->mUpload = new UploadFromUrl();
-			$this->checkPermissions();
 			$this->mUpload->initializeFromRequest( new FauxRequest(
 				array(
 					'wpUpload' => 1,
@@ -111,27 +110,21 @@ class ApiAddMediaTemporary extends ApiAddMedia {
 				true
 			) );
 			$this->mUpload->fetchFile();
+			$this->checkPermissions();
 			$this->verifyUpload();
+
 			$tempFile = $this->createTempFile( $this->mUpload->getTempPath() );
-			$result[ 'title' ] = $apiwrapper->getTitle();
-			$result[ 'tempUrl' ] = $tempFile->getUrl();
-			$result[ 'tempName' ] = $tempFile->getName();				
+
+			$result['title'] = $apiwrapper->getTitle();
+			$result['tempUrl'] = $tempFile->getUrl();
+			$result['tempName'] = $tempFile->getName();
 		}
 		return $result;
 	}
 
-    private function getWikiaFilename( $url ) {
-        $nsFileTranslated = F::app()->wg->ContLang->getNsText( NS_FILE );
-        $pattern = '/(File|'.$nsFileTranslated.'):(.+)$/';
-        if ( preg_match( $pattern, urldecode( $url ), $matches ) ) {
-        	return $matches[2];
-        }
-        return null;
-    }
-
 	private function createTempFile( $filepath ) {
 		$tempFile = new FakeLocalFile(
-			Title::newFromText( 'Temp_' . uniqid( '', true ), 6 ),
+			Title::newFromText( uniqid( 'Temp_', true ), 6 ),
 			RepoGroup::singleton()->getLocalRepo()
 		);
 		$tempFile->upload( $filepath, '', '' );
@@ -141,7 +134,7 @@ class ApiAddMediaTemporary extends ApiAddMedia {
 
 	protected function checkPermissions() {
 		// Check whether the user has the appropriate permissions to upload anyway
-		if ( $this->mUpload->isAllowed( $this->mUser ) !== true ) {
+		if ( $this->mUpload->verifyTitlePermissions( $this->mUser ) !== true ) {
 			if ( !$this->mUser->isLoggedIn() ) {
 				$this->dieUsageMsg( array( 'mustbeloggedin', 'upload' ) );
 			} else {

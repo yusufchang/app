@@ -696,12 +696,13 @@ class LocalFile extends File {
 		$this->purgeThumbnails( $options );
 
 		// Purge squid cache for this file
-/**
-		SquidUpdate::purge( array( $this->getURL() ) );
-**/
-		// Wikia purge the base thumbnail url
-		SquidUpdate::purge( array( $this->getURL(), $this->getThumbUrl() ) );
+		// Wikia change - begin
+		// @author macbre / BAC-1206
+		$urls = array( $this->getURL() );
+		wfRunHooks( 'LocalFilePurgeCacheUrls', [ $this, &$urls ] );
 
+		SquidUpdate::purge( $urls );
+		// Wikia change - end
 	}
 
 	/**
@@ -757,6 +758,8 @@ class LocalFile extends File {
 			foreach( $files as $file ) {
 				$urls[] = $this->getThumbUrl( $file );
 			}
+
+			wfRunHooks( 'LocalFilePurgeThumbnailsUrls', [ $this, &$urls ] ); // Wikia change - BAC-1206
 			SquidUpdate::purge( $urls );
 		}
 	}
@@ -1796,6 +1799,7 @@ class LocalFileDeleteBatch {
 				$urlRel = str_replace( '%2F', '/', rawurlencode( $srcRel ) );
 				$urls[] = $this->file->repo->getZoneUrl( 'public' ) . '/' . $urlRel;
 			}
+			wfRunHooks( 'LocalFileExecuteUrls', [ $this->file, &$urls ] ); // Wikia change - BAC-1206
 			SquidUpdate::purge( $urls );
 		}
 
@@ -2206,6 +2210,7 @@ class LocalFileMoveBatch {
 	 */
 	var $target;
 
+	/* @var $db Database */
 	var $cur, $olds, $oldCount, $archive, $db;
 
 	function __construct( File $file, Title $target ) {
@@ -2343,6 +2348,28 @@ class LocalFileMoveBatch {
 			return $status;
 		}
 
+		// Wikia change - begin
+		// @author macbre (PLATFORM-238)
+		$rowsWithEmptyArchiveName = $dbw->selectField(
+			'oldimage',
+			'count(*)',
+			array(
+				'oi_name' => $this->oldName,
+				'oi_archive_name = ""',
+			),
+			__METHOD__
+		);
+
+		if ( $rowsWithEmptyArchiveName > 0 ) {
+			\Wikia\Logger\WikiaLogger::instance()->debug( 'Empty oi_archive_name' , [
+				'oi_name' => $this->oldName,
+				'new_name' => $this->newName,
+				'count' => $rowsWithEmptyArchiveName
+			] );
+		}
+
+		// Wikia change - end
+
 		// Update old images
 		$dbw->update(
 			'oldimage',
@@ -2350,12 +2377,15 @@ class LocalFileMoveBatch {
 				'oi_name' => $this->newName,
 				'oi_archive_name = ' . $dbw->strreplace( 'oi_archive_name', $dbw->addQuotes( $this->oldName ), $dbw->addQuotes( $this->newName ) ),
 			),
-			array( 'oi_name' => $this->oldName ),
+			array(
+				'oi_name' => $this->oldName,
+				'oi_archive_name <> ""', // Wikia change - @author macbre (PLATFORM-238)
+			),
 			__METHOD__
 		);
 
-		$affected = $dbw->affectedRows();
-		$total = $this->oldCount;
+		$affected = $dbw->affectedRows() + $rowsWithEmptyArchiveName; // Wikia change - @author macbre (PLATFORM-238)
+		$total = $this->oldCount + $rowsWithEmptyArchiveName; // Wikia change - @author macbre (PLATFORM-238)
 		$status->successCount += $affected;
 		$status->failCount += $total - $affected;
 		if ( $status->failCount ) {

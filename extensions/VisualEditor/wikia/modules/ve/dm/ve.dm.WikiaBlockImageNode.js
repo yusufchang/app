@@ -18,11 +18,16 @@ ve.dm.WikiaBlockImageNode = function VeDmWikiaBlockImageNode( length, element ) 
 
 /* Inheritance */
 
-ve.inheritClass( ve.dm.WikiaBlockImageNode, ve.dm.WikiaBlockMediaNode );
+OO.inheritClass( ve.dm.WikiaBlockImageNode, ve.dm.WikiaBlockMediaNode );
 
 /* Static Properties */
 
 ve.dm.WikiaBlockImageNode.static.name = 'wikiaBlockImage';
+
+ve.dm.WikiaBlockImageNode.static.childNodeTypes = [ 'wikiaImageCaption' ];
+
+ve.dm.WikiaBlockImageNode.static.captionNodeType = 'wikiaImageCaption';
+
 
 /* Registration */
 

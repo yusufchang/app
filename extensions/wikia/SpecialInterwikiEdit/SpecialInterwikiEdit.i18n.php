@@ -90,8 +90,10 @@ $messages['bar'] = array(
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Red Winged Duck
  */
 $messages['be-tarask'] = array(
+	'interwikiedit' => 'Рэдактар інтэрвікі',
 	'iwedit-title' => 'Рэдактар інтэрвікі',
 	'iwedit-language-interwikis' => 'толькі моўныя інтэрвікі',
 	'iwedit-all-interwikis' => 'усе інтэрвікі',
@@ -260,6 +262,19 @@ $messages['gl'] = array(
 	'iwedit-update' => 'Actualizar',
 	'iwedit-error' => '<p>Houbo un erro.</p>',
 	'iwedit-success' => '<p>A ligazón creouse con éxito.</p>',
+);
+
+/** Hebrew (עברית)
+ * @author Yona b
+ */
+$messages['he'] = array(
+	'interwikiedit' => 'עורך קישורי שפה',
+	'iwedit-title' => 'עורך קישורי שפה',
+	'iwedit-language-interwikis' => 'שפות קישורי שפה בלבד',
+	'iwedit-all-interwikis' => 'כל קישורי השפה',
+	'iwedit-update' => 'עדכון',
+	'iwedit-error' => '<p>אירעה שגיאה.</p>',
+	'iwedit-success' => '<p>יצירת קישור עברה בהצלחה.</p>',
 );
 
 /** Hungarian (magyar)

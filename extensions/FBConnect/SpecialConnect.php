@@ -160,6 +160,9 @@ class SpecialConnect extends SpecialPage {
 		switch ( $par ) {
 		case 'ChooseName':
 			$choice = $wgRequest->getText('wpNameChoice');
+			if ( empty( $this->mEmail ) ) {
+				$this->mEmail = $wgRequest->getText( 'wpEmail' );
+			}
 			if ($wgRequest->getCheck('wpCancel')) {
 				$fb->logout();
 				$this->sendError('fbconnect-cancel', 'fbconnect-canceltext');
@@ -470,7 +473,7 @@ class SpecialConnect extends SpecialPage {
 			wfRunHooks( 'AddNewAccount', array( $user, false ) );
 
 			// Mark that the user is a Facebook user
-			$user->addGroup('fb-user');
+			// $user->addGroup('fb-user'); // Wikia change - Make fb-user a properly implicit group (CE-767)
 
 			// Store which fields should be auto-updated from Facebook when the user logs in.
 			$updateFormPrefix = "wpUpdateUserInfo";
@@ -555,6 +558,17 @@ class SpecialConnect extends SpecialPage {
 		//}
 
 		$u->setEmail( $this->mEmail );
+
+		if ( empty( $this->mEmail ) ) {
+			// Write to log in case Facebook does not provide email for the user
+			Wikia::log( __METHOD__, false,
+				sprintf( 'Facebook user "%s" [%d] without email', $this->mName, $this->mId )
+			);
+		} else {
+			// CONN-421: Auto authenticate user's email on FBConnect
+			$u->confirmEmail();
+		}
+
 		$u->setRealName( $this->mRealName );
 		$u->setToken();
 
@@ -597,12 +611,14 @@ class SpecialConnect extends SpecialPage {
 		if ( !$fb_user ) {
 			wfDebug("FBConnect: aborting in attachUser(): no Facebook ID was reported.\n");
 			$wgOut->showErrorPage( 'fbconnect-error', 'fbconnect-errortext' );
+			wfProfileOut(__METHOD__);
 			return;
 		}
 		// Look up the user by their name
 		$user = new FBConnectUser(User::newFromName($name));
 		if (!$user || !$user->checkPassword($password)) {
 			$this->sendPage('chooseNameForm', 'wrongpassword');
+			wfProfileOut(__METHOD__);
 			return;
 		}
 		// Attach the user to their Facebook account in the database
@@ -847,6 +863,7 @@ class SpecialConnect extends SpecialPage {
 		<form id="chooseNameForm" action="' . $this->getTitle('ChooseName')->getLocalUrl() . '" method="POST">
 			<fieldset id="mw-fbconnect-choosename">
 				<legend>' . wfMsg('fbconnect-chooselegend') . '</legend>
+				<input type="hidden" name="wpEmail" value="' . FBConnectUser::getOptionFromInfo( 'email', $userinfo ) . '">
 				<table>');
 		// Let them attach to an existing user if $fbConnectOnly allows it
 		if (!$fbConnectOnly) {

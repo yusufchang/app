@@ -1,7 +1,7 @@
 /*!
  * VisualEditor ContentEditable MWExtensionNode class.
  *
- * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -35,50 +35,46 @@ ve.ce.MWExtensionNode = function VeCeMWExtensionNode( model, config ) {
 	ve.ce.ProtectedNode.call( this );
 	ve.ce.RelocatableNode.call( this );
 	ve.ce.GeneratedContentNode.call( this );
+	ve.ce.ClickableNode.call( this );
 
 	// DOM changes
-	this.$.addClass( 've-ce-mwExtensionNode' );
+	this.$element.addClass( 've-ce-mwExtensionNode' );
 };
 
 /* Inheritance */
 
-ve.inheritClass( ve.ce.MWExtensionNode, ve.ce.LeafNode );
+OO.inheritClass( ve.ce.MWExtensionNode, ve.ce.LeafNode );
 
-ve.mixinClass( ve.ce.MWExtensionNode, ve.ce.FocusableNode );
-ve.mixinClass( ve.ce.MWExtensionNode, ve.ce.ProtectedNode );
-ve.mixinClass( ve.ce.MWExtensionNode, ve.ce.RelocatableNode );
-ve.mixinClass( ve.ce.MWExtensionNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.FocusableNode );
+OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.ProtectedNode );
+OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.RelocatableNode );
+OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWExtensionNode, ve.ce.ClickableNode );
 
 /* Methods */
 
 /** */
 ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
-	var deferred = $.Deferred(),
+	var xhr,
+		deferred = $.Deferred(),
 		mwData = this.getModel().getAttribute( 'mw' ),
 		extsrc = config && config.extsrc !== undefined ? config.extsrc : mwData.body.extsrc,
 		attrs = config && config.attrs || mwData.attrs,
-		extensionNode = $( document.createElement( this.getModel().getExtensionName() ) )
-			.attr( attrs ).text( extsrc );
+		xmlDoc = ( new DOMParser() ).parseFromString( '<' + this.getModel().getExtensionName() + '/>', 'text/xml' ),
+		wikitext = ( new XMLSerializer() ).serializeToString(
+			$( xmlDoc.documentElement ).attr( attrs ).text( extsrc )[0]
+		);
 
-	$.ajax( {
-		'url': mw.util.wikiScript( 'api' ),
-		'data': {
-			'action': 'visualeditor',
-			'paction': 'parsefragment',
-			'page': mw.config.get( 'wgRelevantPageName' ),
-			'wikitext': extensionNode[0].outerHTML,
-			'token': mw.user.tokens.get( 'editToken' ),
-			'format': 'json'
-		},
-		'dataType': 'json',
-		'type': 'POST',
-		// Wait up to 100 seconds before giving up
-		'timeout': 100000,
-		'cache': 'false',
-		'success': ve.bind( this.onParseSuccess, this, deferred ),
-		'error': ve.bind( this.onParseError, this, deferred )
-	} );
-	return deferred.promise();
+	xhr = ve.init.mw.Target.static.apiRequest( {
+		'action': 'visualeditor',
+		'paction': 'parsefragment',
+		'page': mw.config.get( 'wgRelevantPageName' ),
+		'wikitext': wikitext,
+	}, { 'type': 'POST' } )
+		.done( ve.bind( this.onParseSuccess, this, deferred ) )
+		.fail( ve.bind( this.onParseError, this, deferred ) );
+
+	return deferred.promise( { abort: xhr.abort } );
 };
 
 /**
@@ -88,7 +84,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
  * @param {Object} response Response data
  */
 ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response ) {
-	var data = response.visualeditor, contentNodes = $( data.content ).get();
+	var data = response.visualeditor, contentNodes = this.$( data.content ).get();
 	deferred.resolve( contentNodes );
 };
 
@@ -96,7 +92,7 @@ ve.ce.MWExtensionNode.prototype.onParseSuccess = function ( deferred, response )
 ve.ce.MWExtensionNode.prototype.afterRender = function () {
 	// Rerender after images load
 	// TODO: ignore shields, and count multiple images
-	this.$.find( 'img' ).on( 'load', ve.bind( function () {
+	this.$element.find( 'img' ).on( 'load', ve.bind( function () {
 		this.emit( 'rerender' );
 	}, this ) );
 };

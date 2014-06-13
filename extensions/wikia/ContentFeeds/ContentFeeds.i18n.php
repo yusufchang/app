@@ -55,6 +55,7 @@ $messages['ar'] = array(
  * @author Cekli829
  */
 $messages['az'] = array(
+	'contentfeeds-firstfewarticles-tag-title' => 'Başlıq',
 	'contentfeeds-firstfewarticles-tag-next' => 'Növbəti',
 );
 
@@ -191,6 +192,8 @@ $messages['fa'] = array(
  * @author Nedergard
  */
 $messages['fi'] = array(
+	'contentfeeds-desc' => 'Tarjoaa runsasta ja ajankohtaista tietoa eri tunnisteiden tai "syötteiden" kautta',
+	'contentfeeds-newimages-rss-title' => 'RSS-syöte: {{#Special:NewFiles}}',
 	'contentfeeds-newimages-rss-desc' => 'Syöte sivulta $1',
 	'contentfeeds-firstfewarticles-tag-header' => 'Luo ensimmäiset sivusi!',
 	'contentfeeds-firstfewarticles-tag-title' => 'Otsikko',
@@ -293,6 +296,17 @@ $messages['ja'] = array(
 	'contentfeeds-firstfewarticles-tag-next' => '次',
 	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'エラー: ページのタイトルが必要です',
 	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'エラー: ページ本体が必要です',
+);
+
+/** Kannada (ಕನ್ನಡ)
+ * @author VASANTH S.N.
+ */
+$messages['kn'] = array(
+	'contentfeeds-firstfewarticles-tag-header' => 'ನಿಮ್ಮ ಪ್ರಥಮ ಕೆಲವು ಪುಟಗಳನ್ನು ಸೃಜಿಸಿ!',
+	'contentfeeds-firstfewarticles-tag-title' => 'ಶೀರ್ಷಿಕೆ',
+	'contentfeeds-firstfewarticles-tag-next' => 'ನಂತರ',
+	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'ದೋಷ:ಪುಟ ಶೀರ್ಷಿಕೆ ಅಗತ್ಯವಿದೆ',
+	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'ದೋಷ:ಪಠ್ಯದ ವಿಷಯ ಅಗತ್ಯವಿದೆ',
 );
 
 /** Colognian (Ripoarisch)
@@ -399,13 +413,14 @@ $messages['ne'] = array(
 
 /** Dutch (Nederlands)
  * @author Siebrand
+ * @author Yatalu
  */
 $messages['nl'] = array(
 	'contentfeeds-desc' => 'Biedt rijke en bijgewerkte informatie via verschillende labels of "feeds"',
 	'contentfeeds-newimages-rss-title' => 'RSS-feed voor {{#Special:NewFiles}}',
 	'contentfeeds-newimages-rss-desc' => 'Feed van $1',
 	'contentfeeds-firstfewarticles-tag-header' => "Maak uw eerste pagina's aan!",
-	'contentfeeds-firstfewarticles-tag-title' => 'Pagina',
+	'contentfeeds-firstfewarticles-tag-title' => 'Titel',
 	'contentfeeds-firstfewarticles-tag-next' => 'Volgende',
 	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'Fout: paginanaam is verplicht',
 	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'Fout: paginainhoud is verplicht',
@@ -551,6 +566,7 @@ $messages['sr-ec'] = array(
 
 /** Swedish (svenska)
  * @author Tobulos1
+ * @author WikiPhoenix
  */
 $messages['sv'] = array(
 	'contentfeeds-desc' => 'Ger riklig och aktuell information genom olika taggar eller "feeds"',
@@ -560,7 +576,7 @@ $messages['sv'] = array(
 	'contentfeeds-firstfewarticles-tag-title' => 'Rubrik',
 	'contentfeeds-firstfewarticles-tag-next' => 'Nästa',
 	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'Fel: Sidrubrik krävs',
-	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'Fel: Sidans kropp krävs',
+	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'Fel: Sidinnehåll krävs',
 );
 
 /** Swahili (Kiswahili)
@@ -572,9 +588,15 @@ $messages['sw'] = array(
 );
 
 /** Telugu (తెలుగు)
+ * @author Chaduvari
  */
 $messages['te'] = array(
+	'contentfeeds-newimages-rss-desc' => '$1 నుండి వడ్డన',
+	'contentfeeds-firstfewarticles-tag-header' => 'మీ మొదటి పేజీలను సృష్టించండి!',
 	'contentfeeds-firstfewarticles-tag-title' => 'శీర్షిక',
+	'contentfeeds-firstfewarticles-tag-next' => 'తరువాతి',
+	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'లోపం: పేజీ శీర్షిక ఆవశ్యకం',
+	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'లోపం: పేజీ దేహం ఆవశ్యకం',
 );
 
 /** Tagalog (Tagalog)
@@ -597,6 +619,16 @@ $messages['tl'] = array(
 $messages['tly'] = array(
 	'contentfeeds-firstfewarticles-tag-title' => 'Сәрловһә',
 	'contentfeeds-firstfewarticles-tag-next' => 'Бәнав',
+);
+
+/** Turkish (Türkçe)
+ * @author Incelemeelemani
+ */
+$messages['tr'] = array(
+	'contentfeeds-firstfewarticles-tag-title' => 'Başlık',
+	'contentfeeds-firstfewarticles-tag-next' => 'Sonraki',
+	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'Hata: Sayfa başlığı gereklidir',
+	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'Hata: Sayfa metni gereklidir',
 );
 
 /** Tatar (Cyrillic script) (татарча)

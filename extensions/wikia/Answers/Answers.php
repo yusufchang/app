@@ -284,9 +284,6 @@ function fnAddAnswerJSGlobalVariables(Array &$vars){
 	global $wgMinimalPasswordLength;
 	$vars['wgMinimalPasswordLength'] = $wgMinimalPasswordLength;
 
-	global $wgAfterContentAndJS;
-	$vars['wgAfterContentAndJS'] = ($wgAfterContentAndJS?$wgAfterContentAndJS:array());
-
 	global $wgIsMainpage;
 	$vars['wgIsMainpage'] = ($wgIsMainpage?$wgIsMainpage:false);
 
@@ -408,7 +405,7 @@ $wgHooks['CategoryViewer::addPage'][] = 'answerAddCategoryPage';
 // Since this function returns false, it prevents the default behavior from adding this item to the "pages" section
 // of the category page.
 ////
-function answerAddCategoryPage(&$catView, &$title, &$row){
+function answerAddCategoryPage( &$catView, &$title, &$row, $humanSortkey ) {
 	global $wgContLang;
 
 	if (empty($catView->answers)){
@@ -596,12 +593,10 @@ class CategoryWithAds extends CategoryViewer{
 		);
 
 		$count = 0;
-		$this->nextPage = null;
 		while( $x = $dbr->fetchObject ( $res ) ) {
 			if( ++$count > $this->limit ) {
 				// We've reached the one extra which shows that there are
 				// additional pages to be had. Stop here...
-				$this->nextPage = $x->cl_sortkey;
 				break;
 			}
 
@@ -613,7 +608,7 @@ class CategoryWithAds extends CategoryViewer{
 			} elseif( $this->showGallery && $title->getNamespace() == NS_FILE ) {
 				$this->addImage( $title, $x->cl_sortkey, $x->page_len, $x->page_is_redirect );
 			} else {
-				if( wfRunHooks( "CategoryViewer::addPage", array( &$this, &$title, &$x ) ) ) {
+				if( wfRunHooks( "CategoryViewer::addPage", array( &$this, &$title, &$x, $x->cl_sortkey ) ) ) {
 					$this->addPage( $title, $x->cl_sortkey, $x->page_len, $x->page_is_redirect );
 				}
 			}

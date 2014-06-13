@@ -1,7 +1,7 @@
 /*!
  * VisualEditor DataModel MWDefaultSortMetaItem class.
  *
- * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -20,7 +20,7 @@ ve.dm.MWDefaultSortMetaItem = function VeDmMWDefaultSortMetaItem( element ) {
 
 /* Inheritance */
 
-ve.inheritClass( ve.dm.MWDefaultSortMetaItem, ve.dm.MetaItem );
+OO.inheritClass( ve.dm.MWDefaultSortMetaItem, ve.dm.MetaItem );
 
 /* Static Properties */
 

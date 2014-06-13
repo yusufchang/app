@@ -31,7 +31,9 @@ class Http {
 	 *		                    to avoid attacks on intranet services accessible by HTTP.
 	 *    - userAgent           A user agent, if you want to override the default
 	 *                          MediaWiki/$wgVersion
-	 * @return Mixed: (bool)false on failure or a string on success
+	 *    - headers             Additional headers for request
+	 *    - returnInstance      If set the method will return MWHttpRequest instance instead of string|boolean
+	 * @return Mixed: (bool)false on failure or a string on success or MWHttpRequest instance if returnInstance option is set
 	 */
 	public static function request( $method, $url, $options = array() ) {
 		$fname = __METHOD__ . '::' . $method;
@@ -45,13 +47,52 @@ class Http {
 		}
 
 		$req = MWHttpRequest::factory( $url, $options );
+		// Wikia change - @author: suchy - begin
+		if ( isset( $options[ 'headers' ] ) && is_array( $options[ 'headers' ] ) ) {
+			foreach ( $options[ 'headers' ] as $name => $value ) {
+				$req->setHeader( $name, $value );
+			}
+		}
+		// Wikia change - end
 		if( isset( $options['userAgent'] ) ) {
 			$req->setUserAgent( $options['userAgent'] );
 		}
+
+		// Wikia change - @author: mech - begin
+		$requestTime = microtime( true );
+		// Wikia change - end
+
 		$status = $req->execute();
 
-		if ( $status->isOK() ) {
+		// Wikia change - @author: mech - begin
+		// log all the requests we make (except valid Phalanx calls, as we have a lot of them)
+		$caller =  wfGetCallerClassMethod( [ __CLASS__, 'Hooks' ] );
+		$isOk = $status->isOK();
+		if ( class_exists( 'Wikia\\Logger\\WikiaLogger' ) && ( !$isOk || false === strpos( $caller, 'Phalanx' ) ) ) {
+
+			$requestTime = (int)( ( microtime( true ) - $requestTime ) * 1000.0 );
+			$params = [
+				'statusCode' => $req->getStatus(),
+				'reqMethod' => $method,
+				'reqUrl' => $url,
+				'caller' => $caller,
+				'isOk' => $isOk,
+				'requestTimeMS' => $requestTime
+			];
+			if ( !$isOk ) {
+				$params[ 'statusMessage' ] = $status->getMessage();
+			}
+			\Wikia\Logger\WikiaLogger::instance()->debug( 'Http request' , $params );
+
+		}
+
+		// Wikia change - @author: nAndy - begin
+		// Introduced new returnInstance options to return MWHttpRequest instance instead of string-bool mix
+		if( !empty( $options['returnInstance'] ) ) {
+			$ret = $req;
+		} else if( $isOk ) {
 			$ret = $req->getContent();
+			// Wikia change - end
 		} else {
 			$ret = false;
 		}

@@ -329,11 +329,21 @@ $messages['az'] = array(
 	'rte-ck-hoverPreview-comment-title' => 'Şərh',
 	'rte-ck-hoverPreview-delete' => 'sil',
 	'rte-ck-hoverPreview-edit' => 'redaktə',
+	'rte-ck-image-photo' => 'Foto',
 	'rte-ck-link-error-title' => 'Xəta',
 	'rte-ck-link-external-url' => 'URL',
+	'rte-ck-modeSwitch-toSource' => 'Mənbə',
+	'rte-ck-photoGallery-gallery' => 'Qalereya',
 	'rte-ck-signature-label' => 'İmza',
 	'rte-ck-templateDropDown-label' => 'Şablon',
 	'rte-ck-templateEditor-dialog-insert' => 'Yerləşdirmək',
+	'rte-ck-templateEditor-editor-previewButton' => 'Sınaq görüntüsü',
+	'rte-ck-templateEditor-editor-previewTitle' => 'Sınaq görüntüsü',
+	'rte-ck-video-video' => 'Video',
+	'rte-ck-format-tag_h2' => 'Başlıq 2',
+	'rte-ck-format-tag_h3' => 'Başlıq 3',
+	'rte-ck-format-tag_h4' => 'Başlıq 4',
+	'rte-ck-format-tag_h5' => 'Başlıq 5',
 );
 
 /** Belarusian (беларуская)
@@ -971,7 +981,7 @@ $messages['de-formal'] = array(
  */
 $messages['diq'] = array(
 	'rte-ck-bucket-controls' => 'Qontroli',
-	'rte-ck-errorPopupTitle' => 'Xırab',
+	'rte-ck-errorPopupTitle' => 'Xeta!',
 	'rte-ck-hoverPreview-comment-title' => 'Vatış',
 	'rte-ck-hoverPreview-delete' => 'bestere',
 	'rte-ck-hoverPreview-edit' => 'bıvurne',
@@ -979,7 +989,7 @@ $messages['diq'] = array(
 	'rte-ck-image-photo' => 'Fotraf',
 	'rte-ck-justify-center' => 'Miyan fi',
 	'rte-ck-link-add' => 'Gre deke',
-	'rte-ck-link-error-title' => 'Xırab',
+	'rte-ck-link-error-title' => 'Xeta',
 	'rte-ck-link-external-linkText' => 'Metnê gri',
 	'rte-ck-link-external-tab' => 'Gırêy teberi',
 	'rte-ck-link-external-url' => 'GRE',
@@ -1140,6 +1150,16 @@ $messages['es'] = array(
 	'rte-ck-format-tag_h3' => 'Encabezado 3',
 	'rte-ck-format-tag_h4' => 'Encabezado 4',
 	'rte-ck-format-tag_h5' => 'Encabezado 5',
+);
+
+/** Basque (euskara)
+ * @author Subi
+ */
+$messages['eu'] = array(
+	'rte-ck-photoGallery-gallery' => 'Galeria',
+	'rte-ck-video-add' => 'Bideo bat gehitu',
+	'rte-ck-video-video' => 'Bideoa',
+	'rte-ck-video-confirmDeleteTitle' => 'Bideo hau ezabatu?',
 );
 
 /** Persian (فارسی)
@@ -1960,26 +1980,60 @@ $messages['ja'] = array(
 
 /** Kannada (ಕನ್ನಡ)
  * @author Nayvik
+ * @author VASANTH S.N.
  */
 $messages['kn'] = array(
+	'rte-ck-bucket-insert' => 'ಸೇರ್ಪಡಿಸು',
+	'rte-ck-errorPopupTitle' => 'ದೋಷ!',
+	'rte-ck-hoverPreview-comment-title' => 'ಟಿಪ್ಪಣಿ',
+	'rte-ck-hoverPreview-delete' => 'ಅಳಿಸಿ',
+	'rte-ck-hoverPreview-edit' => 'ಸಂಪಾದಿಸಿ',
+	'rte-ck-image-photo' => 'ಭಾವಚಿತ್ರಗಳು',
+	'rte-ck-link-error-title' => 'ದೋಷ',
+	'rte-ck-link-external-tab' => 'ಬಾಹ್ಯ ಸಂಪರ್ಕ',
+	'rte-ck-link-internal-pageName' => 'ಪುಟದ ಹೆಸರು',
+	'rte-ck-link-internal-tab' => 'ಆಂತರಿಕ ಸಂಪರ್ಕ',
+	'rte-ck-link-status-external' => 'ಬಾಹ್ಯ ಸಂಪರ್ಕ',
+	'rte-ck-media-delete' => 'ತೆಗೆ',
+	'rte-ck-media-edit' => 'ಪರಿಷ್ಕರಿಸು',
+	'rte-ck-modeSwitch-toSource' => 'ಆಕರ',
+	'rte-ck-signature-label' => 'ಸಹಿ',
 	'rte-ck-templateDropDown-label' => 'ಟೆಂಪ್ಲೇಟು',
+	'rte-ck-templateEditor-dialog-insert' => 'ಸೇರ್ಪಡಿಸು',
+	'rte-ck-templateEditor-dialog-magicWords' => 'ಜಾದೂ ಶಬ್ದಗಳು',
+	'rte-ck-templateEditor-editor-parameters' => 'ಪರಿಮಿತಿಗಳು',
+	'rte-ck-templateEditor-editor-previewButton' => 'ಮುನ್ನೋಟ',
+	'rte-ck-templateEditor-editor-previewTitle' => 'ಮುನ್ನೋಟ',
+	'rte-ck-templateEditor-title' => 'ಸಿದ್ಧವಿನ್ಯಾಸ ಸಂಪಾದಕರು',
+	'rte-ck-format-tag_h2' => 'ತಲೆಬರಹ ೨',
+	'rte-ck-format-tag_h3' => 'ತಲೆಬರಹ ೩',
+	'rte-ck-format-tag_h4' => 'ತಲೆಬರಹ ೪',
+	'rte-ck-format-tag_h5' => 'ತಲೆಬರಹ ೫',
 );
 
 /** Korean (한국어)
  * @author Infinity
+ * @author Priviet
  * @author 아라
  */
 $messages['ko'] = array(
 	'rte-ck-link-external-tab' => '바깥 링크',
 	'rte-ck-link-title' => '링크 만들거나 편집하기',
 	'rte-ck-link-label-target' => '대상 문서 또는 URL',
-	'rte-ck-link-label-display' => '문서에 보여지는 글',
+	'rte-ck-link-label-display' => '문서에 보이는 글',
 	'rte-ck-link-label-internal' => '위키 문서로 링크',
 	'rte-ck-link-label-external' => '바깥 링크',
 	'rte-ck-link-status-checking' => '상태 확인 중',
 	'rte-ck-link-status-exists' => '존재하는 문서',
 	'rte-ck-link-status-notexists' => '존재하지 않는 문서',
 	'rte-ck-link-status-external' => '바깥 링크',
+);
+
+/** Karachay-Balkar (къарачай-малкъар)
+ * @author Iltever
+ */
+$messages['krc'] = array(
+	'rte-ck-modeSwitch-toWysiwyg' => 'Визуал редактор',
 );
 
 /** Colognian (Ripoarisch)
@@ -2161,7 +2215,7 @@ $messages['mk'] = array(
 	'rte-ck-templateEditor-dialog-mostFrequentlyUsed' => 'Најкористени',
 	'rte-ck-templateEditor-dialog-search' => 'Пребарајте шаблон',
 	'rte-ck-templateEditor-editor-chooseAnotherTpl' => 'Одберете друг шаблон',
-	'rte-ck-templateEditor-editor-intro' => 'Сменете ги вредностите лево и кликнете за преглед. Кога сте готови со уредување, кликнете на „ОК“.',
+	'rte-ck-templateEditor-editor-intro' => 'Сменете ги вредностите лево и стиснете за преглед. Кога сте готови со уредување, стиснете на „ОК“.',
 	'rte-ck-templateEditor-editor-parameters' => 'Параметри',
 	'rte-ck-templateEditor-editor-previewButton' => 'Преглед',
 	'rte-ck-templateEditor-editor-previewTitle' => 'Преглед',
@@ -2957,7 +3011,7 @@ $messages['ps'] = array(
 	'rte-ck-templateDropDown-label' => 'کينډۍ',
 	'rte-ck-templateDropDown-title' => 'يوه کينډۍ ټاکل',
 	'rte-ck-templateEditor-dialog-insert' => 'ورټومبل',
-	'rte-ck-templateEditor-dialog-magicWords' => 'کوډګريز وييونه',
+	'rte-ck-templateEditor-dialog-magicWords' => 'کوډگريز وييونه',
 	'rte-ck-templateEditor-editor-previewButton' => 'مخليدنه',
 	'rte-ck-templateEditor-editor-previewTitle' => 'مخليدنه',
 	'rte-ck-video-add' => 'يوه ويډيو ورگډول',
@@ -3557,14 +3611,16 @@ $messages['ta'] = array(
 );
 
 /** Telugu (తెలుగు)
+ * @author Chaduvari
  * @author Veeven
  */
 $messages['te'] = array(
 	'rte-ck-hoverPreview-comment-title' => 'వ్యాఖ్య',
 	'rte-ck-hoverPreview-delete' => 'తొలగించు',
+	'rte-ck-link-error-title' => 'లోపం',
 	'rte-ck-link-external-linkText' => 'లంకె పాఠ్యం',
 	'rte-ck-link-external-tab' => 'బయటి లంకె',
-	'rte-ck-link-internal-pageName' => 'పుట పేరు',
+	'rte-ck-link-internal-pageName' => 'పేజీ పేరు',
 	'rte-ck-link-internal-tab' => 'అంతర్గత లంకె',
 	'rte-ck-link-status-external' => 'బయటి లంకె',
 	'rte-ck-media-delete' => 'తొలగించు',

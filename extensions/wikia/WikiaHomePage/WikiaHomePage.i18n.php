@@ -28,6 +28,8 @@ $messages['en'] = array(
 	'wikiahome-stats-new-communities' => 'Communities today',
 	'wikiahome-stats-totalpages' => 'Total Pages',
 
+	'wikiahome-hubs-slot-more-in-heading' => 'More in $1',
+
 	'wikia-home-page-preview' => 'Preview',
 	'wikia-home-page-visit' => 'Visit',
 
@@ -102,7 +104,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Wikia Everywhere===
 *[http://www.wikia.com/Mobile Wikia Mobile]
 *[http://www.wikia.com/Mobile/GameGuides Video Game Apps]
-*[http://www.wikia.com/Mobile/PhotoPop Entertainment Apps]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-partner' => "===Partner===
@@ -110,9 +111,6 @@ __NOEDITSECTION__',
 *'''[http://mediakit.wikia.com/wiki/Contact Advertise with us]'''
 __NOEDITSECTION__",
 	'wikiahome-footer-community-wam' =>'*[$1 WAM Score]',
-
-	'wikia-home-page-hot' => 'Hot',
-	'wikia-home-page-new' => 'New',
 
 	'wikiahome-preview-stats-wam-empty-label' => 'WAM',
 	'wikiahome-preview-stats-wam' => "'''$1''' WAM Score",
@@ -342,7 +340,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Wikia para todos===
 *[http://es.wikia.com/Móviles Wikia Móviles]
 *[http://es.wikia.com/Móviles/GameGuide Ap. Videojuegos]
-*[http://es.wikia.com/Móbiles/PhotoPop Ap. Entretenimiento]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-partner' => "===Publicidad===
@@ -350,10 +347,6 @@ __NOEDITSECTION__',
 *'''[http://mediakit.wikia.com/wiki/Contact Anúnciate con nosotros]'''
 __NOEDITSECTION__",
 	'wikiahome-footer-community-wam' =>'*[$1 Puntuación WAM]',
-
-
-	'wikia-home-page-hot' => 'Calentito',
-	'wikia-home-page-new' => 'Nuevo',
 
 	'wikiahome-preview-stats-page' => "{{PLURAL:$1|'''1''' Página|'''$1''' Páginas}}",
 	'wikiahome-preview-stats-photos' => "{{PLURAL:$1|'''1''' Imagen|'''$1''' Imágenes}}",
@@ -450,7 +443,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Wikia en tous lieux===
 *[http://www.wikia.com/Mobile Wikia Mobile]
 *[http://www.wikia.com/Mobile/GameGuides Video Game Apps]
-*[http://www.wikia.com/Mobile/PhotoPop Entertainment Apps]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-partner' => "===Partenaire===
@@ -458,9 +450,6 @@ __NOEDITSECTION__',
 *'''[http://mediakit.wikia.com/wiki/Contact Publicité]'''
 __NOEDITSECTION__",
 	'wikiahome-footer-community-wam' =>'*[$1 Classement WAM]',
-
-	'wikia-home-page-hot' => 'Chaud',
-	'wikia-home-page-new' => 'Nouveau',
 	
 	'wikiahome-preview-stats-videos' => "'''1''' {{PLURAL:$1|vidéo|vidéos}}",
 
@@ -571,7 +560,6 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===Wikia wszędzie===
 *[http://www.wikia.com/Mobile Wikia Mobilna]
 *[http://pl.wikia.com/Aplikacje_mobilne/GameGuides Video Game Apps]
-*[http://www.wikia.com/Mobile/PhotoPop Entertainment Apps]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-partner' => "===Współpraca===
@@ -579,9 +567,6 @@ __NOEDITSECTION__',
 *'''[http://mediakit.wikia.com/wiki/Contact Reklama na Wikii]'''
 __NOEDITSECTION__",
 	'wikiahome-footer-community-wam' =>'*[$1 Punktacja WAM]',
-
-	'wikia-home-page-hot' => 'Gorące',
-	'wikia-home-page-new' => 'Nowe',
 
 	'wikiahome-preview-stats-wam-empty-label' => 'WAM',
 	'wikiahome-preview-stats-wam' => "'''$1''' Punktacja WAM",
@@ -604,20 +589,20 @@ __NOEDITSECTION__",
 );
 
 $messages['ja'] = array(
-	'wikiahome-page-header-heading' => 'クリエイト コラボレート オリジナルで',
-	'wikiahome-page-header-subheading' => 'あなたの知識とお気に入りをシェアしてください',
+	'wikiahome-page-header-heading' => '作成。合作。独創的にする。',
+	'wikiahome-page-header-subheading' => 'あなたの知っていること、好きなことをシェアしよう',
 	'wikiahome-page-header-create-wiki-button' => 'ウィキアを始める',
 	'wikiahome-page-header-create-wiki-button-destination' => 'http://www.wikia.com/Special:CreateWiki?uselang=ja',
 
-	'wikiahome-visualisation-remix-mixitup' => 'ミックスアップ!',
-	'wikiahome-visualisation-remix-mixituptext' => 'いくつものコミュニティーに簡単にアクセスできます。ウィキア内を探求しよう!',
+	'wikiahome-visualisation-remix-mixitup' => 'シャッフル!',
+	'wikiahome-visualisation-remix-mixituptext' => 'ウィキア内の様々な<br/>コミュニティーを<br/>探求しよう!',
 	'wikiahome-visualisation-remix-button' => 'ミックス',
 
-	'wikiahome-stats-heading' => 'コラボ中です',
+	'wikiahome-stats-heading' => 'コラボ中',
 	'wikiahome-stats-visitors' => '月の訪問者',
 	'wikiahome-stats-visitors-tooltip' => '月の訪問者の数はクオントキャストのグローバル「PEOPLE」スコアで測定しており、その構成はオンラインとモバイルウェブから成り立っています。',
 	'wikiahome-stats-mobile-visitors' => 'ひと月のモバイルからの訪問者',
-	'wikiahome-stats-mobile-percentage' => '% モバイルからの訪問者',
+	'wikiahome-stats-mobile-percentage' => 'モバイルからの訪問者',
 	'wikiahome-stats-mobile-percentage-value' => '$1%',
 	'wikiahome-stats-edits' => '本日の変更',
 	'wikiahome-stats-communities' => 'コミュニティーの合計数',
@@ -633,34 +618,34 @@ $messages['ja'] = array(
 
 	'wikiahome-hubs-videogames-heading' => 'ゲーム',
 	'wikiahome-hubs-videogames-url' => 'http://ja.wikia.com/ゲーム',
-	'wikiahome-hubs-videogames-creative' => 'ウィキアはゲームカルチャーを作り上げ基盤となる場所です。',
+	'wikiahome-hubs-videogames-creative' => 'ウィキアはゲームカルチャーを作り上げ基盤となる場所',
 	'wikiahome-hubs-videogames-more-heading' => '',
 	'wikiahome-hubs-videogames-more-list' => '',
 
 	'wikiahome-hubs-entertainment-heading' => 'エンターテイメント',
 	'wikiahome-hubs-entertainment-url' => 'http://ja.wikia.com/エンタテインメント',
-	'wikiahome-hubs-entertainment-creative' => 'エンターテイメントに詳しいコミュニティーから直にフレッシュな情報を得られる場所です。',
+	'wikiahome-hubs-entertainment-creative' => 'エンターテイメントに詳しいコミュニティーから<br/>直にフレッシュな情報を得られる場所',
 	'wikiahome-hubs-entertainment-more-heading' => '',
 	'wikiahome-hubs-entertainment-more-list' => '',
 
 	'wikiahome-hubs-lifestyle-heading' => 'ライフスタイル & カルチャー',
 	'wikiahome-hubs-lifestyle-url' => 'http://ja.wikia.com/ライフスタイル',
-	'wikiahome-hubs-lifestyle-creative' => '熱狂的で面白いコミュニティーを発見しよう。',
+	'wikiahome-hubs-lifestyle-creative' => '熱狂的で情報を持っているコミュニティーを発見しよう',
 	'wikiahome-hubs-lifestyle-more-heading' => '',
 	'wikiahome-hubs-lifestyle-more-list' => '',
 
 	'wikiahome-community-column1-heading' => 'コミュニティーリソース',
 	'wikiahome-community-column1-link' => 'http://ja.community.wikia.com',
-	'wikiahome-community-column1-creative' => 'ウィキアにはあなたがコミュニティーを始め成長させるための必要な情報はそろっています。ヒントやツール、そしてニュースをチェックしてみて下さい。それでも疑問がある場合は人々に連絡することができます。',
+	'wikiahome-community-column1-creative' => 'ウィキアにはあなたがコミュニティーを始め成長させる<br/>ための必要な情報が揃っています。ヒントやツール<br/>そしてニュースをチェックしてみて下さい。<br/>それでも疑問がある時は人々に訪ねることもできます。',
 	'wikiahome-community-column2-heading' => 'ウィキアの改革',
 	'wikiahome-community-column2-link' => 'http://www.wikia.com/Mobile',
-	'wikiahome-community-column2-creative' => 'ウィキアからマイウィキアとゲームガイドという公式モバイルアプリをご紹介させていただきます。各それぞれのアプリにはウィキアコミュニティーユーザーによって創られた上質で生き生きとしたコンテンツを数多く見る事が出来ます。ダウンロードは[[w:c:Wikia:Mobile|こちら]]から。',
+	'wikiahome-community-column2-creative' => 'ウィキアからマイウィキアとゲームガイドという<br/>公式モバイルアプリをご紹介させていただきます。<br/>それぞれのアプリにはウィキアコミュニティーユーザー<br/>によって創られた上質で生き生きとしたコンテンツを<br/>数多く見ることが出来ます。<br/>ダウンロードはこちらから。',
 	'wikiahome-community-column3-heading' => 'フォローしてね',
 	'wikiahome-community-social-wikia-blog' => 'ウィキアブログ',
 	'wikiahome-community-social-wikia-blog-link' => 'http://ja.community.wikia.com/wiki/カテゴリ:スタッフブログ',
 	'wikiahome-community-social-twitter' => 'ツイッター',
 	'wikiahome-community-social-facebook' => 'フェイスブック',
-	'wikiahome-community-social-googleplus' => 'グーグル+',
+	'wikiahome-community-social-googleplus' => 'Google+',
 
 	'wikiahome-footer-wikiainc' => '===Wikia, Inc.===
 *[http://ja.wikia.com/ウィキアについて ウィキアについて]
@@ -677,7 +662,7 @@ __NOEDITSECTION__',
 *[https://twitter.com/wikia ツイッター]
 __NOEDITSECTION__',
 	'wikiahome-footer-community' => '===コミュニティー===
-*[http://ja.community.wikia.com コミュニティーセントラルl]
+*[http://ja.community.wikia.com コミュニティーセントラル]
 *[http://ja.community.wikia.com/wiki/ヘルプ:ユーザー権限 設立者&管理者]
 *[http://ja.wikia.com/Special:Contact サポートコンタクト]$1
 *[http://www.wikia.com/Stars ウィキア スター]
@@ -687,16 +672,12 @@ __NOEDITSECTION__',
 	'wikiahome-footer-everywhere' => '===どこでもウィキア===
 *[http://www.wikia.com/Mobile ウィキアモバイル]
 *[http://www.wikia.com/Mobile/GameGuides ゲームアプリ]
-*[http://www.wikia.com/Mobile/PhotoPop エンターテイメントアプリ]
 *[http://api.wikia.com/wiki/Wikia_API_Wiki API]
 __NOEDITSECTION__',
 	'wikiahome-footer-partner' => "===パートナー===
 *[http://www.mediakit.wikia.com メディアキット]
 __NOEDITSECTION__",
 	'wikiahome-footer-community-wam' =>'*[$1 WAM スコア]',
-
-	'wikia-home-page-hot' => 'ホット',
-	'wikia-home-page-new' => 'ニュー',
 
 	'wikiahome-preview-stats-wam-empty-label' => 'WAM',
 	'wikiahome-preview-stats-wam' => "'''$1''' WAM スコア",
@@ -736,6 +717,8 @@ $messages['qqq'] = array(
 	'wikiahome-stats-communities' => 'The text above number telling about our communities in total',
 	'wikiahome-stats-new-communities' => 'The text above number telling about our new communities',
 	'wikiahome-stats-totalpages' => 'The text above number telling about total pages on all our wikis',
+
+	'wikiahome-hubs-slot-more-in-heading' => 'The headline in hub section before more links connected to Hub vertical',
 
 	'wikia-home-page-preview' => 'The text on preview button; when you click the button you\'ll be presented with more detailed information about a wiki; the button is visible when you hover on a wiki image',
 	'wikia-home-page-visit' => 'The text on visit button; when you click the button you\'ll be redirected to chosen wiki; the button is visible when you hover on a wiki image',
@@ -785,9 +768,6 @@ $messages['qqq'] = array(
 	'wikiahome-footer-everywhere' => '5rd column in the corporate footer; use here wikitext: __NOEDITSECTION__ magic word, bold headline and create list of links; the corporate footer is displayed on all corporate pages and is divided to few columns',
 	'wikiahome-footer-partner' => '6th column in the corporate footer; use here wikitext: __NOEDITSECTION__ magic word, bold headline and create list of links; the corporate footer is displayed on all corporate pages and is divided to few columns',
 	'wikiahome-footer-community-wam' => 'A link to WAM Scores page; use here wikitext to make it a list element and to make it working link',
-
-	'wikia-home-page-hot' => 'Mark for wiki, that is flagged as hot',
-	'wikia-home-page-new' => 'Mark for wiki, that is flagged as new',
 
 	'wikiahome-preview-stats-wam-empty-label' => 'Label for WAM score placeholder, when this Wiki is not included in WAM Index',
 	'wikiahome-preview-stats-wam' => "WAM Score label, 1st parameter is score - please bold it with wikitext",

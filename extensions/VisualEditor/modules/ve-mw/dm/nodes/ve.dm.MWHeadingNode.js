@@ -1,7 +1,7 @@
 /*!
  * VisualEditor DataModel MWHeadingNode class.
  *
- * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -21,19 +21,13 @@ ve.dm.MWHeadingNode = function VeDmMWHeadingNode( children, element ) {
 
 /* Inheritance */
 
-ve.inheritClass( ve.dm.MWHeadingNode, ve.dm.HeadingNode );
+OO.inheritClass( ve.dm.MWHeadingNode, ve.dm.HeadingNode );
 
 /* Static Properties */
 
 ve.dm.MWHeadingNode.static.name = 'mwHeading';
 
 ve.dm.MWHeadingNode.static.suggestedParentNodeTypes = [ 'document' ];
-
-ve.dm.MWHeadingNode.static.toDataElement = function () {
-	var parentElement = ve.dm.HeadingNode.static.toDataElement.apply( this, arguments );
-	parentElement.type = 'mwHeading';
-	return parentElement;
-};
 
 /* Registration */
 

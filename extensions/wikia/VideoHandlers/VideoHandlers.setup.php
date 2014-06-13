@@ -5,6 +5,10 @@
  * @author Will Lee <wlee at wikia-inc.com>
  * @author Piotr Bablok <pbablok at wikia-inc.com>
  * @author Jacek Jursza <jacek at wikia-inc.com>
+ * @author Saipetch Kongkatong <saipetch at wikia-inc.com>
+ * @author Liz Lee <Liz at wikia-inc.com>
+ * @author Garth Webb <garth at wikia-inc.com>
+ * @author James Sutterfield <james at wikia-inc.com>
  * @date 2011-12-06
  * @copyright Copyright (C) 2010 Jakub Kurcek, Wikia Inc.
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
@@ -17,6 +21,10 @@ $wgExtensionCredits['videohandlers'][] = array(
 		"Will Lee <wlee at wikia-inc.com>",
 		"Piotr Bablok <pbablok at wikia-inc.com>",
 		"Jacek Jursza <jacek at wikia-inc.com>",
+		"Saipetch Kongkatong <saipetch at wikia-inc.com>",
+		"Liz Lee <liz at wikia-inc.com>",
+		"Garth Webb <garth at wikia-inc.com>",
+		"James Sutterfield <james at wikia-inc.com>",
 	),
 	'url' => 'http://video.wikia.com',
 	'descriptionmsg' => 'wikia-videohandlers-desc',
@@ -37,12 +45,10 @@ $wgWikiaVideosFoundInTemplates = 0;
 $dir = dirname( __FILE__ );
 
 // Main classes
-$wgAutoloadClasses[ 'ThumbnailVideo' ] = $dir . '/ThumbnailVideo.class.php';
 $wgAutoloadClasses[ 'VideoHandlerController' ] = $dir . '/VideoHandlerController.class.php';
 $wgAutoloadClasses[ 'VideoHandlerHooks' ] = $dir . '/VideoHandlerHooks.class.php';
 $wgAutoloadClasses[ 'VideoFileUploader' ] = $dir . '/VideoFileUploader.class.php';
 $wgAutoloadClasses[ 'VideoHandlerHelper' ] = $dir . '/VideoHandlerHelper.class.php';
-$wgAutoloadClasses[ 'VideoThumbnailController' ] = $dir . '/VideoThumbnailController.class.php';
 
 // actions
 $wgAutoloadClasses[ 'WikiaRevertVideoAction'] = $dir . '/actions/WikiaRevertVideoAction.php';
@@ -98,7 +104,6 @@ $wgHooks['ParserBeforeStrip'][] = 'VideoHandlerHooks::WikiaVideoParserBeforeStri
 
 $wgHooks['FileRevertFormBeforeUpload'][] = 'VideoHandlerHooks::onFileRevertFormBeforeUpload';
 $wgHooks['SetupAfterCache'][] = 'VideoHandlerHooks::onSetupAfterCache';
-$wgHooks['BeforePageDisplay'][] = 'VideoHandlerHooks::onBeforePageDisplay';
 $wgHooks['LinkerMakeThumbLink2FileOriginalSize'][] = 'VideoHandlerHooks::onLinkerMakeThumbLink2FileOriginalSize';
 $wgHooks['ParserAfterStrip'][] = 'VideoHandlerHooks::convertOldInterwikiToNewInterwiki';
 $wgHooks['File::checkExtensionCompatibilityResult'][] = 'VideoHandlerHooks::checkExtensionCompatibilityResult';
@@ -117,6 +122,11 @@ $wgHooks['UndeleteComplete'][] = 'VideoInfoHooksHelper::onUndeleteComplete';
 $wgHooks['ForeignFileDeleted'][] = 'VideoInfoHooksHelper::onForeignFileDeleted';
 $wgHooks['RemovePremiumVideo'][] = 'VideoInfoHooksHelper::onRemovePremiumVideo';
 $wgHooks['WikiFilePageCheckFile'][] = 'VideoInfoHooksHelper::onCheckGhostFile';
+if ( !empty( $wgUseVideoVerticalFilters ) ) {
+	$wgHooks['ArticleDelete'][] = 'VideoInfoHooksHelper::onArticleDelete';
+	$wgHooks['ArticleUpdateBeforeRedirect'][] = 'VideoInfoHooksHelper::onArticleUpdateBeforeRedirect';
+	$wgHooks['CategorySelectSave'][] = 'VideoInfoHooksHelper::onCategorySelectSave';
+}
 
 if ( !empty($wgVideoHandlersVideosMigrated) ) {
 	$wgHooks['ParserFirstCallInit'][] = 'VideoHandlerHooks::initParserHook';
@@ -226,6 +236,9 @@ $wgAutoloadClasses['UstreamVideoHandler'] =  $dir . '/handlers/UstreamVideoHandl
 $wgAutoloadClasses['UstreamApiWrapper'] =  $dir . '/apiwrappers/UstreamApiWrapper.class.php';
 $wgMediaHandlers['video/ustream'] = 'UstreamVideoHandler';
 
+$wgAutoloadClasses['YoukuApiWrapper'] =  $dir . '/apiwrappers/YoukuApiWrapper.class.php';
+$wgAutoloadClasses['YoukuVideoHandler'] =  $dir . '/handlers/YoukuVideoHandler.class.php';
+$wgMediaHandlers['video/youku'] = 'YoukuVideoHandler';
 
 /**
  * Feed ingesters
@@ -265,4 +278,5 @@ $wgVideoMigrationProviderMap = array(
 	29 => 'Iva',
 	30 => 'Snappytv',
 	31 => 'Ustream',
+	32 => 'Youku'
 );

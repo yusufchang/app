@@ -1,27 +1,63 @@
-/*exported AdConfig2Late*/
-var AdConfig2Late = function (
+/*global define*/
+define('ext.wikia.adEngine.adConfigLate', [
+	// regular dependencies
+	'wikia.log',
+	'wikia.window',
+	'wikia.abTest',
+	'wikia.geo',
+
+	// adProviders
+	'ext.wikia.adEngine.provider.evolve',
+	'ext.wikia.adEngine.provider.liftium',
+	'ext.wikia.adEngine.provider.directGpt',
+	'ext.wikia.adEngine.provider.remnantGpt',
+	'ext.wikia.adEngine.provider.null',
+	'ext.wikia.adEngine.provider.sevenOneMedia',
+	'ext.wikia.adEngine.provider.ebay'
+], function (
 	// regular dependencies
 	log,
 	window,
+	abTest,
+	geo,
 
 	// AdProviders
-	adProviderGamePro,
+	adProviderEvolve,
 	adProviderLiftium,
+	adProviderDirectGpt,
+	adProviderRemnantGpt,
 	adProviderNull,
-	adProviderSevenOneMedia
+	adProviderSevenOneMedia, // TODO: move this to the early queue (remove jQuery dependency first)
+	adProviderEbay
 ) {
 	'use strict';
 
-	var logGroup = 'AdConfig2',
-		cityLang = window.wgContentLanguage,
-		deProvider = window.wgAdDriverUseSevenOneMedia ? adProviderSevenOneMedia : adProviderGamePro,
+	var logGroup = 'ext.wikia.adEngine.adConfigLate',
+		country = geo.getCountryCode(),
 		liftiumSlotsToShowWithSevenOneMedia = {
 			'WIKIA_BAR_BOXAD_1': true,
 			'TOP_BUTTON_WIDE': true,
 			'TOP_BUTTON_WIDE.force': true
 		},
-		tryLiftium,
-		ie8 = window.navigator && window.navigator.userAgent && window.navigator.userAgent.match(/MSIE [6-8]\./);
+		ie8 = window.navigator && window.navigator.userAgent && window.navigator.userAgent.match(/MSIE [6-8]\./),
+		sevenOneMediaDisabled = abTest && abTest.inGroup('SEVENONEMEDIA_DR', 'DISABLED'),
+		adProviderRemnant,
+
+		dartBtfCountries = {
+			US: true
+		},
+		dartBtfSlots = {
+			LEFT_SKYSCRAPER_3: true,
+			PREFOOTER_LEFT_BOXAD: true,
+			PREFOOTER_RIGHT_BOXAD: true
+		},
+		dartBtfEnabled = window.wgAdDriverUseDartForSlotsBelowTheFold && dartBtfCountries[country];
+
+	if (window.wgEnableRHonDesktop) {
+		adProviderRemnant = adProviderRemnantGpt;
+	} else {
+		adProviderRemnant = adProviderLiftium;
+	}
 
 	function getProvider(slot) {
 		var slotname = slot[0];
@@ -29,35 +65,65 @@ var AdConfig2Late = function (
 		log('getProvider', 5, logGroup);
 		log(slot, 5, logGroup);
 
-		if (slot[2] === 'Liftium') {
-			if (adProviderLiftium.canHandleSlot(slot)) {
-				return adProviderLiftium;
+
+		if (slot[2] === 'Evolve') {
+			log(['getProvider', slot, 'Evolve'], 'info', logGroup);
+			return adProviderEvolve;
+		}
+
+		if (slot[2] === 'Liftium' || window.wgAdDriverForceLiftiumAd) {
+			if (adProviderRemnant.canHandleSlot(slotname)) {
+				return adProviderRemnant;
 			}
 			log('#' + slotname + ' disabled. Forced Liftium, but it can\'t handle it', 7, logGroup);
 			return adProviderNull;
 		}
 
-		// First ask GamePro (german lang wiki)
-		if (cityLang === 'de') {
-			if (slotname === 'PREFOOTER_RIGHT_BOXAD' || slotname === 'LEFT_SKYSCRAPER_3') {
-				return adProviderNull;
+		if (country === 'AU' || country === 'CA' || country === 'NZ') {
+			if (adProviderEvolve.canHandleSlot(slotname)) {
+				log(['getProvider', slot, 'Evolve'], 'info', logGroup);
+				return adProviderEvolve;
 			}
-			if (deProvider.canHandleSlot(slotname)) {
-				if (ie8 && window.wgAdDriverUseSevenOneMedia) {
+		}
+
+		// First ask SevenOne Media
+		if (window.wgAdDriverUseSevenOneMedia) {
+			if (adProviderSevenOneMedia.canHandleSlot(slotname)) {
+				if (ie8) {
+					log('SevenOneMedia not supported on IE8. Using Null provider instead', 'warn', logGroup);
 					return adProviderNull;
 				}
-				return deProvider;
+
+				if (sevenOneMediaDisabled) {
+					log('SevenOneMedia disabled by A/B test. Using Null provider instead', 'warn', logGroup);
+					return adProviderNull;
+				}
+
+				return adProviderSevenOneMedia;
+			}
+
+			if (!liftiumSlotsToShowWithSevenOneMedia[slot[0]]) {
+				return adProviderNull;
 			}
 		}
 
-		if (window.wgAdDriverUseSevenOneMedia) {
-			tryLiftium = liftiumSlotsToShowWithSevenOneMedia[slot[0]];
-		} else {
-			tryLiftium = true;
+		// DART for some slots below the fold a.k.a. coffee cup
+		if (dartBtfEnabled && dartBtfSlots[slotname] && adProviderDirectGpt.canHandleSlot(slotname)) {
+			return adProviderDirectGpt;
 		}
 
-		if (tryLiftium && adProviderLiftium.canHandleSlot(slotname)) {
-			return adProviderLiftium;
+		// Ebay integration
+		if (window.wgAdDriverUseEbay) {
+			if (slotname === 'PREFOOTER_LEFT_BOXAD') {
+				return adProviderEbay;
+			}
+			if (slotname === 'PREFOOTER_RIGHT_BOXAD') {
+				return adProviderNull;
+			}
+		}
+
+		if (adProviderRemnant.canHandleSlot(slotname)) {
+			return adProviderRemnant;
 		}
 
 		return adProviderNull;
@@ -67,4 +133,4 @@ var AdConfig2Late = function (
 		getDecorators: function () {},
 		getProvider: getProvider
 	};
-};
+});

@@ -1686,6 +1686,14 @@ function wfHostname() {
 function wfReportTime() {
 	global $wgRequestTime, $wgShowHostnames;
 
+	// Wikia change - begin
+	// @author macbre - BAC-550
+	global $wgDisableReportTime;
+	if ( !empty( $wgDisableReportTime ) ) {
+		return '';
+	}
+	// Wikia change - end
+
 	$elapsed = microtime( true ) - $wgRequestTime;
 
 	return $wgShowHostnames
@@ -3523,7 +3531,6 @@ function wfSplitWikiID( $wiki ) {
  * @return DatabaseBase
  */
 function &wfGetDB( $db, $groups = array(), $wiki = false ) {
-
 	// wikia change begin -- SMW DB separation project, @author Krzysztof Krzyżaniak (eloy)
 	global $smwgUseExternalDB, $wgDBname;
 	if( $smwgUseExternalDB === true ) {
@@ -3582,6 +3589,7 @@ function wfFindFile( $title, $options = array() ) {
 	wfProfileIn(__METHOD__);
 
 	if ( F::app()->wg->IsGhostVideo ) {
+		wfProfileOut(__METHOD__);
 		return false;
 	}
 	$file = RepoGroup::singleton()->findFile( $title, $options );
@@ -3957,4 +3965,3 @@ function wfUnpack( $format, $data, $length=false ) {
 	}
 	return $result;
 }
-

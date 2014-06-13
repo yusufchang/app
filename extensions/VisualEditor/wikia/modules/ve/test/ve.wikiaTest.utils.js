@@ -116,6 +116,32 @@ ve.wikiaTest = ( function () {
 		return testCases;
 	};
 
+	/**
+	 * Uppercase the first letter in a string.
+	 *
+	 * @method
+	 * @static
+	 * @param {String} str The string.
+	 * @returns {String} The string with the first letter uppercased.
+	 */
+	utils.ucFirst = function ( str ) {
+		return str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	};
+
+	/**
+	 * Use the base URL of window.document as the base URL of another document.
+	 *
+	 * @method
+	 * @static
+	 * @param {Document} doc Document object
+	 * @returns {void}
+	 */
+	utils.appendBase = function( doc ) {
+		baseElement = document.createElement( 'base' );
+		baseElement.setAttribute( 'href', /.*\//.exec( window.location.href ) )
+		doc.getElementsByTagName( 'head' )[0].appendChild( baseElement );
+	};
+
 	/* Media Utils */
 
 	utils.media = {};
@@ -143,7 +169,8 @@ ve.wikiaTest = ( function () {
 			nodeView,
 			previous = {},
 			surface,
-			testCases = utils.getTestCases( media.data.testCases[ displayType ][ rdfaType ] );
+			testCases = utils.getTestCases( media.data.testCases[ displayType ][ rdfaType ] ),
+			baseElement;
 
 		getHtml = media[ displayType ][ rdfaType ].getHtml;
 
@@ -153,6 +180,7 @@ ve.wikiaTest = ( function () {
 			doc = ve.createDocumentFromHtml(
 				media.getHtmlDom( displayType, rdfaType, current )
 			);
+			utils.appendBase( doc );
 
 			surface = new ve.init.sa.Target( $fixture, doc ).surface;
 			documentModel = surface.getModel().getDocument();
@@ -162,7 +190,7 @@ ve.wikiaTest = ( function () {
 			nodeView.setFocused( false );
 
 			assert.equalDomStructure(
-				nodeView.$,
+				nodeView.$element,
 				getHtml( current ),
 				'Built with attributes: ' + utils.getObjectDescription( current )
 			);
@@ -209,6 +237,7 @@ ve.wikiaTest = ( function () {
 		doc = ve.createDocumentFromHtml(
 			media.getHtmlDom( displayType, rdfaType, previous )
 		);
+		utils.appendBase( doc );
 
 		surface = new ve.init.sa.Target( $fixture, doc ).surface;
 		surfaceModel = surface.getModel();
@@ -219,7 +248,7 @@ ve.wikiaTest = ( function () {
 		nodeView.setFocused( false );
 
 		assert.equalDomStructure(
-			nodeView.$,
+			nodeView.$element,
 			getHtml( previous ),
 			'Starting with attributes: ' + utils.getObjectDescription( previous )
 		);
@@ -237,8 +266,10 @@ ve.wikiaTest = ( function () {
 				)
 			);
 
+			nodeView.$element.removeClass( 've-ce-generatedContentNode-generating' );
+
 			assert.equalDomStructure(
-				nodeView.$,
+				nodeView.$element,
 				getHtml( merged ),
 				'Attributes changed: ' + utils.getObjectDescription( diff )
 			);

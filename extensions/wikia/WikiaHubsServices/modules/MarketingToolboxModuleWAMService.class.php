@@ -32,9 +32,17 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 			$params['image_width'] = $this->getModel()->getImageWidth();
 		}
 
+		if( empty($this->verticalId) ) {
+			$this->verticalId = WikiFactoryHub::getInstance()->getCategoryId($this->cityId);
+		}
+
+		if( empty($this->langCode) ) {
+			$this->langCode = $this->app->wg->ContLang->getCode();
+		}
+
 		return parent::prepareParameters([
 			'wam_day' => $params['ts'],
-			'vertical_id' => $this->verticalId,
+			'vertical_id' => HubService::getCanonicalCategoryId($this->verticalId),
 			'wiki_lang' => $this->langCode,
 			'exclude_blacklist' => true,
 			'fetch_admins' => true,
@@ -48,10 +56,9 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 	}
 
 	public function loadData($model, $params) {
+		$hubParams = $this->getHubsParams();
 		$lastTimestamp = $model->getLastPublishedTimestamp(
-									$this->langCode,
-									$this->sectionId,
-									$this->verticalId,
+									$hubParams,
 									$params['ts']
 						);
 
@@ -164,8 +171,8 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 					$this->skinName
 				),
 				6 * 60 * 60,
-				function () use( $params ) {
-					return $this->loadStructuredData($params);
+				function () use( $model, $params ) {
+					return $this->loadStructuredData($model, $params);
 				}
 			);
 		}
@@ -177,8 +184,7 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 		return $structuredData;
 	}
 
-	protected function loadStructuredData($params) {
-
+	protected function loadStructuredData($model, $params) {
 		try {
 
 			$apiResponse = $this->app->sendRequest('WAMApi', 'getWAMIndex', $params)->getData();
@@ -200,17 +206,33 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 	}
 
 	public function getWamPageUrl () {
-		$devboxUrl = ($this->app->wg->DevelEnvironment == true) ? '/wiki' : '';
-		return !empty($this->app->wg->WAMPageConfig['pageName']) ? $devboxUrl.'/'.$this->app->wg->WAMPageConfig['pageName'] : '#';
+		if ( $this->getHubsVersion() == MarketingToolboxV3Model::VERSION ) {
+			try {
+				$wikiId = (new WikiaCorporateModel())->getCorporateWikiIdByLang( $this->langCode );
+			} catch ( Exception $e ) {
+				$wikiId = WikiService::WIKIAGLOBAL_CITY_ID;
+			}
+
+			$wamPageConfig = WikiFactory::getVarByName( 'wgWAMPageConfig', $wikiId )->cv_value;
+			$pageName = ( !empty( $wamPageConfig['pageName'] ) ) ? $wamPageConfig['pageName'] : 'WAM';
+
+			$url = GlobalTitle::newFromText( $pageName, NS_MAIN, $wikiId )->getFullURL();
+		} else {
+			$devboxUrl = ( $this->app->wg->DevelEnvironment == true ) ? '/wiki' : '';
+			$url = !empty( $this->app->wg->WAMPageConfig['pageName'] ) ? $devboxUrl.'/'.$this->app->wg->WAMPageConfig['pageName'] : '#';
+		}
+
+		return $url;
 	}
+
 	public function getStructuredData($data) {
 		$hubModel = $this->getWikiaHubsModel();
 
-
+		$realVerticalId = HubService::getCanonicalCategoryId($data['vertical_id']);
 		$structuredData = [
 			'wamPageUrl' => $this->getWamPageUrl(),
-			'verticalName' => $hubModel->getVerticalName($data['vertical_id']),
-			'canonicalVerticalName' => str_replace(' ', '', $hubModel->getCanonicalVerticalName($data['vertical_id'])),
+			'verticalName' => $hubModel->getVerticalName($realVerticalId),
+			'canonicalVerticalName' => str_replace(' ', '', $hubModel->getCanonicalVerticalName($realVerticalId)),
 			'ranking' => []
 		];
 
@@ -251,14 +273,12 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 	}
 
 	public function getWikiaHubsModel() {
-		return new WikiaHubsV2Model();
+		return new WikiaHubsModel();
 	}
 
 	public function render($data) {
 		$data['imagesHeight'] = $this->getModel()->getImageHeight();
 		$data['imagesWidth'] = $this->getModel()->getImageWidth();
-		$data['searchHubName'] = $this->getSearchHubName($data['verticalName']);
-		$data['specialSearchUrl'] = SpecialPage::getTitleFor( 'WikiaSearch' )->getFullUrl();
 		$data['scoreChangeMap'] = [self::WAM_SCORE_CHANGE_DOWN => 'down', self::WAM_SCORE_NO_CHANGE => 'nochange', self::WAM_SCORE_CHANGE_UP => 'up'];
 
 		return parent::render($data);
@@ -270,21 +290,6 @@ class MarketingToolboxModuleWAMService extends MarketingToolboxModuleNonEditable
 		}
 		
 		return $this->model;
-	}
-
-	/**
-	 * @desc Since search works better only for EN hub pages we implemented this simple method
-	 * 
-	 * @param int|string $vertical vertical name or id
-	 * @return string
-	 */
-	protected function getSearchHubName($vertical) {
-		$searchNames = F::app()->wg->WikiaHubsSearchMapping;
-		if( !empty($searchNames[$vertical]) ) {
-			return $searchNames[$vertical];
-		}
-		
-		return null;
 	}
 
 	/**

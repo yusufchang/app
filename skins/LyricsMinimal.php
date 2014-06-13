@@ -699,8 +699,7 @@ class LyricsMinimalTemplate extends QuickTemplate {
 
 	// Site-CSS.
 	global $wgUser, $wgStylePath, $wgJsMimeType;
-	$srcs = AssetsManager::getInstance()->getGroupLocalURL($wgUser->isLoggedIn() ? 'site_user_css' : 'site_anon_css');
-	$srcs[] = $wgStylePath."/lyricsminimal/article.css"; // Probably ghetto.  This whole skin needs to just be rewritten as Oasis modifications anyway though.
+	$srcs = [ $wgStylePath."/lyricsminimal/article.css" ]; // Probably ghetto.  This whole skin needs to just be rewritten as Oasis modifications anyway though.
 	foreach($srcs as $src) {
 		echo '<link rel="stylesheet" href="'. htmlspecialchars( $src ) .'">';
 	}
@@ -841,7 +840,7 @@ if(empty($wgEnableRecipesTweaksExt) || !RecipesTweaks::isHeaderStripeShown()) {
 <?php
 // Note, these were placed above the Ad calls intentionally because ad code screws with analytics
 echo AnalyticsEngine::track('GA_Urchin', AnalyticsEngine::EVENT_PAGEVIEW);
-echo AnalyticsEngine::track('GA_Urchin', 'hub', AdEngine2Controller::getCachedCategory());
+echo AnalyticsEngine::track('GA_Urchin', 'hub', AdEngine2Service::getCachedCategory());
 global $wgCityId;
 echo AnalyticsEngine::track('GA_Urchin', 'onewiki', array($wgCityId));
 echo AnalyticsEngine::track('GA_Urchin', 'pagetime', array('lean_monaco'));

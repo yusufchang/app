@@ -1,7 +1,7 @@
 /*!
  * VisualEditor DataModel MWReferenceListNode class.
  *
- * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -21,7 +21,7 @@ ve.dm.MWReferenceListNode = function VeDmMWReferenceListNode( length, element ) 
 
 /* Inheritance */
 
-ve.inheritClass( ve.dm.MWReferenceListNode, ve.dm.BranchNode );
+OO.inheritClass( ve.dm.MWReferenceListNode, ve.dm.BranchNode );
 
 /* Static members */
 
@@ -53,8 +53,8 @@ ve.dm.MWReferenceListNode.static.toDataElement = function ( domElements, convert
 		}
 	};
 	if ( mwData.body && mwData.body.html ) {
-		$contents = $( '<div>' ).append( mwData.body.html );
-		contentsData = converter.getDataFromDomRecursionClean( $contents[0] );
+		$contents = $( '<div>', domElements[0].ownerDocument ).append( mwData.body.html );
+		contentsData = converter.getDataFromDomClean( $contents[0] );
 		return [ referenceListData ].
 			concat( contentsData ).
 			concat( [ { 'type': '/' + this.name } ] );

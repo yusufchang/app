@@ -67,6 +67,13 @@ $messages['ar'] = array(
 	'prefs-rte' => 'محرر النص المتطور',
 );
 
+/** Azerbaijani (azərbaycanca)
+ * @author Cekli829
+ */
+$messages['az'] = array(
+	'rte-edgecase-redirect' => 'yönləndirmə',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author EugeneZelenko
  * @author Jim-by
@@ -406,6 +413,13 @@ $messages['ja'] = array(
 	'rte-enablerichtexteditormessage' => 'リッチテキストエディタを有効にしました',
 	'rte-first-run-notice' => '私たちは、エディタの改善に取り組んでいます。詳細につきましては、[http://www.wikia.com/wiki/User_blog:Kirkburn/Rich_text_editor_upgrade_news アナウンスを確認してください。]',
 	'prefs-rte' => 'リッチテキストエディタ',
+);
+
+/** Kannada (ಕನ್ನಡ)
+ * @author VASANTH S.N.
+ */
+$messages['kn'] = array(
+	'rte-edgecase-redirect' => 'ಪುನರ್ನಿರ್ದೇಶನಗಳು',
 );
 
 /** Colognian (Ripoarisch)

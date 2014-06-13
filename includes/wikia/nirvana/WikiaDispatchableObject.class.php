@@ -10,6 +10,7 @@
  * @author Owen Davis <owen(at)wikia-inc.com>
  */
 abstract class WikiaDispatchableObject extends WikiaObject {
+	const DEFAULT_TEMPLATE_ENGINE = WikiaResponse::TEMPLATE_ENGINE_PHP;
 
 	/**
 	 * Mediawiki RequestContext object
@@ -107,7 +108,8 @@ abstract class WikiaDispatchableObject extends WikiaObject {
 	/**
 	 * Convenience method for getting a value from the request object
 	 * @param string $key
-	 * @param string $value
+	 * @param string $default
+	 * @return mixed
 	 */
 
 	protected function getVal($key, $default = null) {

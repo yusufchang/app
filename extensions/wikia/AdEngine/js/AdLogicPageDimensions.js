@@ -1,16 +1,22 @@
-/*jshint camelcase:false*/
-/*exported AdLogicPageDimensions*/
-var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
+/*jshint camelcase:false, maxdepth:4*/
+/*global define*/
+define('ext.wikia.adEngine.adLogicPageDimensions', [
+	'wikia.window',
+	'wikia.document',
+	'wikia.log',
+	'ext.wikia.adEngine.slotTweaker',
+	'ext.wikia.adEngine.adHelper'
+], function (window, document, log, slotTweaker, adHelper) {
 	'use strict';
 
-	var logGroup = 'ext.wikia.adengine.logic.pagedimensions',
+	var logGroup = 'ext.wikia.adEngine.adLogicPageDimensions',
 		initCalled = false,
 		wrappedAds = {},
 
 		/**
 		 * Slots based on page length
 		 */
-		preFootersThreshold = 2400,
+		preFootersThreshold = 1500,
 		slotsOnlyOnLongPages = {
 			LEFT_SKYSCRAPER_2: 2400,
 			LEFT_SKYSCRAPER_3: 4000,
@@ -18,6 +24,14 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 			PREFOOTER_RIGHT_BOXAD: preFootersThreshold
 		},
 		pageHeight,
+
+		/**
+		 * Slots based on whether there's a right rail on page or not
+		 */
+		slotsOnlyWithRail = {
+			LEFT_SKYSCRAPER_3: true
+		},
+		rightRailPresent = !!document.getElementById('WikiaRail'),
 
 		/**
 		 * Slots based on screen width
@@ -71,6 +85,11 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 			wideEnough = false,
 			conflictingMediaQuery;
 
+		if (slotsOnlyWithRail[slotname]) {
+			if (!rightRailPresent) {
+				return false;
+			}
+		}
 		if (pageHeight) {
 			longEnough = !slotsOnlyOnLongPages[slotname] || pageHeight > slotsOnlyOnLongPages[slotname];
 		}
@@ -111,38 +130,16 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 			if (ad.state === 'none') {
 				log(['Hiding empty slot ' + ad.slotname, ad], 'info', logGroup);
 
-				slotTweaker.hide(ad.slotname, true);
+				slotTweaker.hide(ad.slotname);
 				ad.state = 'ready';
 
 			} else if (ad.state === 'shown') {
 				log(['Hiding slot ' + ad.slotname, ad], 'info', logGroup);
 
-				slotTweaker.hide(ad.slotname, true);
+				slotTweaker.hide(ad.slotname);
 				ad.state = 'hidden';
 			}
 		}
-	}
-
-	/**
-	 * Add an ad to the wrappedAds
-	 *
-	 * @param slotname
-	 * @param loadCallback -- the function to call when an ad shows up the first time
-	 */
-	function add(slotname, loadCallback) {
-		log(['add', slotname, loadCallback], 'debug', logGroup);
-
-		if (!initCalled) {
-			init();
-		}
-
-		wrappedAds[slotname] = {
-			slotname: slotname,
-			state: 'none',
-			loadCallback: loadCallback
-		};
-
-		refresh(wrappedAds[slotname]);
 	}
 
 	/**
@@ -180,6 +177,7 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 		}
 	}
 
+
 	/**
 	 * If supported, bind to resize event (and fire it once)
 	 */
@@ -187,10 +185,34 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 		log('init', 'debug', logGroup);
 		if (window.addEventListener) {
 			onResize();
-			window.addEventListener('resize', onResize);
+			window.addEventListener('resize', adHelper.throttle(onResize, 100));
 		} else {
 			log('No support for addEventListener. No dimension-dependent ads will be shown', 'error', logGroup);
 		}
+
+		initCalled = true;
+	}
+
+	/**
+	 * Add an ad to the wrappedAds
+	 *
+	 * @param slotname
+	 * @param loadCallback -- the function to call when an ad shows up the first time
+	 */
+	function add(slotname, loadCallback) {
+		log(['add', slotname, loadCallback], 'debug', logGroup);
+
+		if (!initCalled) {
+			init();
+		}
+
+		wrappedAds[slotname] = {
+			slotname: slotname,
+			state: 'none',
+			loadCallback: loadCallback
+		};
+
+		refresh(wrappedAds[slotname]);
 	}
 
 	/**
@@ -214,7 +236,11 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 	function isApplicable(slotname) {
 		log(['isApplicable', slotname], 'debug', logGroup);
 
-		return !!(slotsOnlyOnLongPages[slotname] || slotsToHideOnMediaQuery[slotname]);
+		return !!(
+			slotsOnlyOnLongPages[slotname] ||
+				slotsToHideOnMediaQuery[slotname] ||
+				slotsOnlyWithRail[slotname]
+		);
 	}
 
 	return {
@@ -222,4 +248,4 @@ var AdLogicPageDimensions = function (window, document, log, slotTweaker) {
 		addSlot: add,
 		hasPreFooters: hasPreFooters
 	};
-};
+});

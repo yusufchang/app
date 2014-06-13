@@ -1,7 +1,7 @@
 /*!
  * VisualEditor MediaWiki Initialization Platform class.
  *
- * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -23,15 +23,12 @@ ve.init.mw.Platform = function VeInitMwPlatform() {
 	this.externalLinkUrlProtocolsRegExp = new RegExp( '^' + mw.config.get( 'wgUrlProtocols' ) );
 	this.modulesUrl = mw.config.get( 'wgExtensionAssetsPath' ) + '/VisualEditor/modules';
 	this.parsedMessages = {};
-	this.mediaSources = [
-		{ 'url': mw.util.wikiScript( 'api' ) },
-		{ 'url': '//commons.wikimedia.org/w/api.php' }
-	];
+	this.linkCache = new ve.init.mw.LinkCache();
 };
 
 /* Inheritance */
 
-ve.inheritClass( ve.init.mw.Platform, ve.init.Platform );
+OO.inheritClass( ve.init.mw.Platform, ve.init.Platform );
 
 /* Methods */
 
@@ -84,23 +81,19 @@ ve.init.mw.Platform.prototype.getUserLanguages = function () {
 		langParts = lang.split( '-' ),
 		langs = [ lang ];
 
-	if ( langParts.length > 0 ) {
+	if ( langParts.length > 1 ) {
 		langs.push( langParts[0] );
 	}
 
 	return langs;
 };
 
-/**
- * Get a list of URLs to MediaWiki API entry points where media can be found.
- *
- * @method
- * @returns {string[]} API URLs
- */
-ve.init.mw.Platform.prototype.getMediaSources = function () {
-	return this.mediaSources;
-};
-
 /* Initialization */
 
 ve.init.platform = new ve.init.mw.Platform();
+
+/* Extension */
+
+OO.ui.getUserLanguages = ve.bind( ve.init.platform.getUserLanguages, ve.init.platform );
+
+OO.ui.msg = ve.bind( ve.init.platform.getMessage, ve.init.platform );

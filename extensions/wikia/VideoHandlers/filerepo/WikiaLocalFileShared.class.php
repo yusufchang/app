@@ -52,7 +52,7 @@ class WikiaLocalFileShared  {
 	 * @param string $width Desired width of video player
 	 * @param bool $autoplay Whether the video should play on page load
 	 * @param bool $isAjax Whether the curent request is part of an ajax call
-	 * @param bool $postOnload
+	 * @param bool $postOnload Whether player is loaded after page onload event (used for JWPlayer)
 	 * @return bool|string
 	 */
 	public function getEmbedCode( $width, $autoplay = false, $isAjax = false, $postOnload = false ) {
@@ -141,6 +141,19 @@ class WikiaLocalFileShared  {
 		$handler = $this->oFile->getHandler();
 		if ( $this->isVideo() && !empty( $handler ) ) {
 			return $handler->getExpirationDate();
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get regional restrictions of Video file or false
+	 * @return string|false
+	 */
+	public function getRegionalRestrictions() {
+		$handler = $this->oFile->getHandler();
+		if ( $this->isVideo() && !empty( $handler ) ) {
+			return $handler->getRegionalRestrictions();
 		}
 
 		return false;

@@ -56,6 +56,13 @@ $messages['ar'] = array(
 	'category-exhibition-display-new' => 'عرض معرض التصنيف',
 );
 
+/** Azerbaijani (azərbaycanca)
+ * @author Cekli829
+ */
+$messages['az'] = array(
+	'category-exhibition-subcategories-header' => 'Alt kateqoriyalar',
+);
+
 /** Bikol Central (Bikol Central)
  * @author Geopoet
  */
@@ -366,8 +373,15 @@ $messages['ja'] = array(
  * @author VASANTH S.N.
  */
 $messages['kn'] = array(
+	'category-exhibition-alphabetical' => 'ಅಕ್ಷರಾನುಕ್ರಮ',
+	'category-exhibition-mostvisited' => 'ಹೆಚ್ಚು ಸಂದರ್ಶಿಸಲ್ಪಟ್ಟ',
+	'category-exhibition-recentedits' => 'ಇತ್ತೀಚಿಗೆ ಸಂಪಾದಿಸಿದ',
 	'category-exhibition-page-header' => '"$1" ವರ್ಗದಲ್ಲಿರುವ ಲೇಖನಗಳು',
 	'category-exhibition-subcategories-header' => 'ಉಪವರ್ಗಗಳು',
+	'category-exhibition-media-header' => '"$1" ವರ್ಗದಲ್ಲಿರುವ ಚಿತ್ರ/ಶಬ್ದ ಫೈಲುಗಳು',
+	'category-exhibition-blogs-header' => 'ಬ್ಲಾಗ್ ಪೋಸ್ಟ್ ಗಳು',
+	'category-exhibition-display-old' => 'ವರ್ಗ ಪಟ್ಟಿ ನೋಟ',
+	'category-exhibition-display-new' => 'ವರ್ಗ ಪ್ರದರ್ಶನ ನೋಟ',
 );
 
 /** Korean (한국어)
@@ -465,6 +479,7 @@ $messages['nb'] = array(
 /** Dutch (Nederlands)
  * @author McDutchie
  * @author Siebrand
+ * @author Yatalu
  */
 $messages['nl'] = array(
 	'category-exhibition-sorttype' => 'Sorteertype:',
@@ -472,7 +487,7 @@ $messages['nl'] = array(
 	'category-exhibition-mostvisited' => 'Meest bekeken',
 	'category-exhibition-recentedits' => 'Recent bewerkt',
 	'category-exhibition-page-header' => 'Pagina\'s in de categorie "$1"',
-	'category-exhibition-subcategories-header' => 'Ondercategorieën',
+	'category-exhibition-subcategories-header' => 'Subcategorieën',
 	'category-exhibition-media-header' => 'Mediabestanden in de categorie "$1"',
 	'category-exhibition-blogs-header' => 'Blogberichten',
 	'category-exhibition-display-old' => 'Categorielijstweergave',
@@ -539,7 +554,7 @@ $messages['ps'] = array(
 	'category-exhibition-page-header' => 'د "$1" وېشنيزې مخونه',
 	'category-exhibition-subcategories-header' => 'څېرمه وېشنيزې',
 	'category-exhibition-media-header' => 'د "$1" وېشنيزې رسنۍ',
-	'category-exhibition-blogs-header' => 'د بلاګ پوستونه',
+	'category-exhibition-blogs-header' => 'د بلاگ پوستونه',
 	'category-exhibition-display-old' => 'د وېشنيزې لړليک کتل',
 );
 
@@ -642,17 +657,27 @@ $messages['sv'] = array(
 	'category-exhibition-page-header' => 'Sidor i kategorin "$1"',
 	'category-exhibition-subcategories-header' => 'Underkategorier',
 	'category-exhibition-media-header' => 'Media i kategorin "$1"',
-	'category-exhibition-blogs-header' => 'Blogg-inlägg',
+	'category-exhibition-blogs-header' => 'Blogginlägg',
 	'category-exhibition-display-old' => 'Kategori-listvyn',
 	'category-exhibition-display-new' => 'Visning av kategoriutställning',
 );
 
 /** Telugu (తెలుగు)
+ * @author Chaduvari
+ * @author Ravichandra
  * @author Veeven
  */
 $messages['te'] = array(
+	'category-exhibition-sorttype' => 'క్రమ విధానం:',
+	'category-exhibition-alphabetical' => 'అక్షరక్రమంలో',
+	'category-exhibition-mostvisited' => 'ఎక్కువగా చూసినవి',
+	'category-exhibition-recentedits' => 'ఇటీవలే మార్చినది',
+	'category-exhibition-page-header' => '"$1" వర్గం లోని పేజీలు',
 	'category-exhibition-subcategories-header' => 'ఉపవర్గాలు',
+	'category-exhibition-media-header' => '"$1" వర్గంలోని మీడియా',
 	'category-exhibition-blogs-header' => 'బ్లాగు టపాలు',
+	'category-exhibition-display-old' => 'వర్గ జాబితా దృశ్యం',
+	'category-exhibition-display-new' => 'వర్గ ప్రదర్శన దృశ్యం',
 );
 
 /** Tagalog (Tagalog)

@@ -53,6 +53,7 @@ $wgAutoloadClasses['WikiaMobileCategoryService'] = "{$dir}/WikiaMobileCategorySe
 $wgAutoloadClasses['WikiaMobileSharingService'] = "{$dir}/WikiaMobileSharingService.class.php";
 $wgAutoloadClasses['WikiaMobileErrorService'] = "{$dir}/WikiaMobileErrorService.class.php";
 $wgAutoloadClasses['WikiaMobileMediaService'] = "{$dir}/WikiaMobileMediaService.class.php";
+$wgAutoloadClasses['WikiaMobileTrendingArticlesService'] = "{$dir}/WikiaMobileTrendingArticlesService.class.php";
 
 /**
  * models
@@ -141,6 +142,7 @@ if ( empty( $wgWikiaMobileIncludeJSGlobals ) ) {
 			'wikiaPageIsHub',
 			'wikiaPageType',
 			'wgAdVideoTargeting',
+			'wgAdDriverUseEbay',
 
 			//server/wiki
 			'wgServer',
@@ -151,7 +153,6 @@ if ( empty( $wgWikiaMobileIncludeJSGlobals ) ) {
 			'wgCdnRootUrl',
 			'wgAssetsManagerQuery',
 			'wgContentLanguage',
-			'wgMedusaSlot',
 			'wgResourceBasePath',
 			'wgMainPageTitle',
 			'wgSitename',
@@ -160,6 +161,7 @@ if ( empty( $wgWikiaMobileIncludeJSGlobals ) ) {
 			'wgDisableAnonymousEditing',
 			'wgNamespaceIds',
 			'wgExtensionsPath',
+			'wikiaPageIsCorporate',
 
 			//article
 			'wgArticlePath',
@@ -187,22 +189,9 @@ if ( empty( $wgWikiaMobileIncludeJSGlobals ) ) {
 			//skin
 			'skin',
 
-			//facebook login
+			//login
 			'fbAppId',
-			'fbUseMarkup'
+			'fbUseMarkup',
+			'wgLoginToken'
 		];
-}
-
-//list of Videos provides that we support
-if ( empty( $wgWikiaMobileSupportedVideos ) ) {
-	$wgWikiaMobileSupportedVideos = [
-		'screenplay',
-		'ign',
-		'ooyala',
-		'youtube',
-		'dailymotion',
-		'vimeo',
-		'bliptv',
-		'uStream'
-	];
 }

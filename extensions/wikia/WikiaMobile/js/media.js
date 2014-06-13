@@ -53,6 +53,7 @@ function(
 		currentMedia,
 		currentWrapper,
 		currentWrapperStyle,
+		disableSwipe,
 		wkMdlImages,
 		qs = querystring(),
 		shrImg = encodeURIComponent( qs.getVal( 'file', '' ) ) || null,
@@ -205,8 +206,17 @@ function(
 			if ( isMedia ) {
 				!inited && setup();
 
-				if ( className.indexOf( 'Wikia-video-thumb' ) > -1 ) {
+				if ( className.indexOf( 'video-thumbnail' ) > -1 ) {
 					track.event( 'video', track.CLICK, {label: 'article'});
+				}
+
+				// tracking call for S:Videos mobile
+				if ( document.body.className.indexOf( 'Special_Videos' ) ) {
+					track.event( 'special-videos', track.CLICK, {
+						label: 'thumbnail',
+						value: Array.prototype.indexOf.call( document.getElementsByClassName('media'), t ),
+						method: 'both'
+					});
 				}
 
 				openModal( ~~t.getAttribute( 'data-num' ) );
@@ -389,11 +399,8 @@ function(
 					cap = cap();
 				} else {
 					//if caption is not a string and img.caption is set to true grab it from DOM
-					figCap = currentMedia.element.parentElement.parentElement.getElementsByClassName( 'thumbcaption' )[0];
-
-					cap = figCap ? figCap.innerHTML : '';
 					//and then cache it in media object
-					currentMedia.caption = cap;
+					currentMedia.caption = cap = $( currentMedia.element ).parents( 'figure' ).find( '.thumbcaption' ).text();
 				}
 			} else {
 				cap = '';
@@ -647,8 +654,7 @@ function(
 						type: loader.MULTI,
 						resources: {
 							styles: '/extensions/wikia/WikiaMobile/css/mediagallery.scss',
-							scripts: 'wikiamobile_mediagallery_js',
-							ttl: ttl
+							scripts: 'wikiamobile_mediagallery_js'
 						}
 					} ).done( function ( res ) {
 						var script = res.scripts,
@@ -705,7 +711,8 @@ function(
 						refresh();
 					}
 				},
-				circle: true
+				circle: true,
+				disableSwipe: disableSwipe
 			} );
 
 			function tap ( ev ) {
@@ -756,7 +763,6 @@ function(
 	}
 
 	/** @public **/
-
 	return {
 		openModal: openModal,
 		getMedia: function ( whiteList ) {
@@ -790,6 +796,14 @@ function(
 				} )
 			}
 
+		},
+		reset: function () {
+			inited = false;
+			init(document.getElementsByClassName('media'));
+			setup();
+		},
+		disableSwipe: function () {
+			disableSwipe = true;
 		},
 		skip: function () {
 			if ( currentNum - lastNum > 0 ) {

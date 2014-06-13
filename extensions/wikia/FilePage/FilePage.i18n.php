@@ -12,6 +12,7 @@ $messages['en'] = array(
 	'video-page-global-file-list-header' => 'Appears on these wikis',
 	'video-page-from-provider' => 'From $1',
 	'video-page-expires' => 'Content expires on $1',
+	'video-page-regional-restrictions' => 'This video can only be viewed in $1',
 	'video-page-views' => '$1 {{PLURAL:$1|View|Views}}',
 	'video-page-see-more-info' => 'Show more info',
 	'video-page-see-less-info' => 'Show less info',
@@ -42,12 +43,15 @@ $messages['qqq'] = array(
 * $1 is the provider name.',
 	'video-page-expires' => 'After the date specified, the video content will no longer be available to view. Parameters:
 * $1 is a date',
+	'video-page-regional-restrictions' => 'Denotes the countries where the video is available for viewing. Parameters:
+* $1 - comma-separated country names.',
 	'video-page-views' => 'Shows total number of views (plays) of the video. Parameters:
 * $1 - a number of views (integer)
 {{Identical|View}}',
 	'video-page-see-more-info' => 'Label to uncollapse UI that shows more info',
 	'video-page-see-less-info' => 'Label to collapse UI that shows more info',
-	'video-page-description-heading' => 'Description heading',
+	'video-page-description-heading' => 'Description heading.
+{{Identical|Description}}',
 	'video-page-description-zero-state' => 'Placeholder file page content that states there is no description',
 	'video-page-add-description-link-text' => 'This is a link that takes you to the edit page where you can add a description for a video or image. The description, once added, will be a section in the file page content.',
 	'video-page-file-list-pagination' => 'Pagination for file listing.  e.g. 1 of 2.  $1 is current page, $2 is total pages',
@@ -83,6 +87,14 @@ $messages['ar'] = array(
 	'file-page-tab-history' => 'تاريخ الملف',
 	'file-page-tab-metadata' => 'بيانات ميتا',
 	'file-page-more-links' => 'انظر القائمة الكاملة',
+);
+
+/** Azerbaijani (azərbaycanca)
+ * @author Cekli829
+ */
+$messages['az'] = array(
+	'video-page-file-list-pagination' => '$1 və ya $2',
+	'file-page-tab-about' => 'Haqqında',
 );
 
 /** Bulgarian (български)
@@ -248,8 +260,11 @@ $messages['fa'] = array(
  * @author Ville96
  */
 $messages['fi'] = array(
+	'filepage-desc' => 'Normaalin MediaWiki-tiedostosivun muunnos videotukea varten',
 	'video-page-file-list-header' => 'Esiintyy näillä sivuilla',
 	'video-page-global-file-list-header' => 'Esiintyy näissä wikeissä',
+	'video-page-from-provider' => 'Tuotu sivulta $1',
+	'video-page-expires' => 'Sisältö vanhenee $1',
 	'video-page-views' => '$1 {{PLURAL:$1|Katselukerta|Katselukertaa}}',
 	'video-page-see-more-info' => 'Näytä lisätiedot',
 	'video-page-see-less-info' => 'Näytä vähemmän tietoa',
@@ -258,6 +273,7 @@ $messages['fi'] = array(
 	'video-page-add-description-link-text' => 'Lisää kuvaus.',
 	'video-page-default-description-header-and-text' => '== Kuvaus ==
 Lisää kuvaus tähän.',
+	'video-page-file-list-pagination' => '$1 ($2)',
 	'file-page-replace-button' => 'Korvaa',
 	'file-page-tab-about' => 'Tietoja',
 	'file-page-tab-history' => 'Tiedoston historia',
@@ -437,12 +453,24 @@ $messages['ka'] = array(
 	'file-page-more-links' => 'იხილე სრული სია',
 );
 
+/** Kannada (ಕನ್ನಡ)
+ * @author VASANTH S.N.
+ */
+$messages['kn'] = array(
+	'video-page-description-heading' => 'ವಿವರ',
+	'video-page-file-list-pagination' => '$1 ಇಂದ $2',
+	'file-page-tab-about' => 'ಕುರಿತು',
+	'file-page-tab-history' => 'ಕಡತದ ಇತಿಹಾಸ',
+	'file-page-tab-metadata' => 'ಮೇಲ್ದರ್ಜೆ ಮಾಹಿತಿ',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
 $messages['lb'] = array(
 	'video-page-from-provider' => 'Vu(n) $1',
 	'video-page-see-more-info' => 'Méi Informatioune weisen',
+	'video-page-see-less-info' => 'Manner Informatioune weisen',
 	'video-page-description-heading' => 'Beschreiwung',
 	'video-page-description-zero-state' => 'Et ass nach keng Beschreiwung do.',
 	'video-page-add-description-link-text' => 'Eng Beschreiwung derbäisetzen.',
@@ -787,6 +815,31 @@ Ange en beskrivning här.',
 	'file-page-more-links' => 'Se hela listan',
 );
 
+/** Telugu (తెలుగు)
+ * @author Chaduvari
+ * @author Ravichandra
+ */
+$messages['te'] = array(
+	'video-page-file-list-header' => 'ఇది, ఈ పేజీల్లో కనిపిస్తుంది',
+	'video-page-global-file-list-header' => 'ఈ వికీల్లో కనిపిస్తుంది',
+	'video-page-from-provider' => '$1 నుండి',
+	'video-page-expires' => 'కంటెంటుకు $1 న కాలం చెల్లుతుంది',
+	'video-page-views' => '$1 {{PLURAL:$1|సందర్శన|సందర్శనలు}}',
+	'video-page-see-more-info' => 'మరింత సమాచారాన్ని చూపించు',
+	'video-page-see-less-info' => 'తక్కువ సమాచారాన్ని చూపించు',
+	'video-page-description-heading' => 'వివరణ',
+	'video-page-description-zero-state' => 'ఇంకా వివరణేమీ లేదు.',
+	'video-page-add-description-link-text' => 'వివరణను చేర్చు.',
+	'video-page-default-description-header-and-text' => '==వివరణ==
+ఇక్కడ వివరణ ఇవ్వండి.',
+	'video-page-file-list-pagination' => '$2 లో $1',
+	'file-page-replace-button' => 'భర్తీచేయి',
+	'file-page-tab-about' => 'గురించి',
+	'file-page-tab-history' => 'ఫైలు చరిత్ర',
+	'file-page-tab-metadata' => 'మెటాడేటా',
+	'file-page-more-links' => 'పూర్తి జాబితా చూడండి',
+);
+
 /** Turkish (Türkçe)
  * @author Incelemeelemani
  */
@@ -917,14 +970,24 @@ $messages['zh-hans'] = array(
 );
 
 /** Traditional Chinese (中文（繁體）‎)
+ * @author Ffaarr
  * @author Simon Shek
  */
 $messages['zh-hant'] = array(
+	'video-page-file-list-header' => '出現在這些頁面上',
+	'video-page-global-file-list-header' => '出現在這些 wiki 上',
 	'video-page-from-provider' => '出自$1',
+	'video-page-see-more-info' => '顯示更多資訊',
+	'video-page-see-less-info' => '顯示較少資訊',
 	'video-page-description-heading' => '描述',
+	'video-page-description-zero-state' => '現在還沒有描述',
 	'video-page-add-description-link-text' => '添加說明。',
+	'video-page-default-description-header-and-text' => '在這裡輸入描述。',
+	'video-page-file-list-pagination' => '$2的$1',
 	'file-page-replace-button' => '取代',
 	'file-page-tab-about' => '關於',
+	'file-page-tab-history' => '檔案歷史',
+	'file-page-tab-metadata' => '元數據',
 	'file-page-more-links' => '查看完整清單',
 );
 

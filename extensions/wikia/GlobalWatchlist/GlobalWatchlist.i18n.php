@@ -148,6 +148,13 @@ Wikia
 	'globalwatchlist-no-blog-page-found' => "No s'ha trobat el fitxer del registre.",
 );
 
+/** Chechen (нохчийн)
+ * @author Умар
+ */
+$messages['ce'] = array(
+	'tog-watchlistdigestclear' => 'Билгал йе еша сана сан тергаме могӀам чура агӀонаш',
+);
+
 /** Czech (čeština)
  * @author Dontlietome7
  */
@@ -247,10 +254,11 @@ $messages['diq'] = array(
 
 /** Spanish (español)
  * @author Translationista
+ * @author VegaDark
  */
 $messages['es'] = array(
 	'globalwatchlist-desc' => 'Envía correos electrónicos semanales con las páginas en seguimiento de todos los wikis',
-	'tog-watchlistdigest' => 'Envíame por correo electrónico un Boletín Semanal de mi lista de Seguimiento',
+	'tog-watchlistdigest' => 'Enviarme por correo electrónico un Boletín Semanal de mi lista de Seguimiento',
 	'tog-watchlistdigestclear' => 'Marcar todas las páginas desde mi Boletín Semanal de mi lista de Seguimiento como visitadas',
 	'globalwatchlist-see-more' => 'Por favor, comprueba tu lista de seguimiento local para más cambios',
 	'globalwatchlist-digest-email-subject' => 'Boletín Semanal',
@@ -390,7 +398,30 @@ Wikia
  * @author Amire80
  */
 $messages['he'] = array(
-	'tog-watchlistdigest' => 'לשלוח אליי בדואר אלקטרוני סיכום רשימת מעקב שבועי',
+	'globalwatchlist-desc' => 'שליחת מכתבי סיכום שבועיים על דפים ברשימת המעקב בכל אתרי הוויקי',
+	'tog-watchlistdigest' => 'לשלוח אליי בדואר אלקטרוני סיכום רשימות מעקב שבועי',
+	'tog-watchlistdigestclear' => 'לסמן את כל הדפים מסיכום רשימות המעקב השבועי שלי כדפים שביקרתי בהם',
+	'globalwatchlist-see-more' => 'נא לבדוק את רשימות המעקב המקומיות שלך לשינויים נוספים',
+	'globalwatchlist-digest-email-subject' => 'סיכום שבועי',
+	'globalwatchlist-digest-email-body' => 'שלום $1,
+
+זוכי רשימת הדפים ברשימת המעקב שלך בוויקיה שנערכו מאז שביקרת בהם.
+
+$2
+
+זוהי רשימה של דפי בלוג ברשימת המעקב שלך בוויקיה שנערכו או שנכתבו עליהן הערות מאז שביקרת בהם.
+
+$3
+
+אנו מזמינים אותך לבוא ולערוך לעתים קרובות...
+
+ויקיה
+
+* כדי לשנות את ההעדפות שלך להודעות על רשימת המעקב, נא לבקר בדף http://www.wikia.com/wiki/Special:Preferences
+* כדי לסמן את כל הדפים בסיכום השבועי כאילו ביקרת בהם, ר\' את האפשרות "רשימת מעקב" בדף ההעדפות',
+	'globalwatchlist-blog-page-title-comment' => '$1 ({{PLURAL:$2|תגובה אחת|$2 תגובות}})',
+	'globalwatchlist-no-page-found' => 'לא נמצא שום דף.',
+	'globalwatchlist-no-blog-page-found' => 'לא נמצא דף בלוג.',
 );
 
 /** Hungarian (magyar)
@@ -783,15 +814,16 @@ Wikia
 $messages['ps'] = array(
 	'globalwatchlist-blog-page-title-comment' => '$1 ($2 {{PLURAL:$2|تبصره|تبصرې}})',
 	'globalwatchlist-no-page-found' => 'دا مخ و نه موندل شو.',
-	'globalwatchlist-no-blog-page-found' => 'د بلاګ دا مخ و نه موندل شو.',
+	'globalwatchlist-no-blog-page-found' => 'د بلاگ دا مخ و نه موندل شو.',
 );
 
 /** Portuguese (português)
  * @author Hamilton Abreu
+ * @author Luckas
  */
 $messages['pt'] = array(
 	'globalwatchlist-desc' => 'Envia mensagens mensais de resumo das páginas vigiadas em todas as wikis',
-	'tog-watchlistdigest' => 'Enviar-me, por correio eletrónico, uma Compilação Semanal de Mudanças nas Páginas Vigiadas',
+	'tog-watchlistdigest' => 'Enviar-me, por e-mail, uma Compilação Semanal de Mudanças nas Páginas Vigiadas',
 	'tog-watchlistdigestclear' => 'Marcar como visitadas todas as páginas da Compilação Semanal de Mudanças nas Páginas Vigiadas',
 	'globalwatchlist-see-more' => 'Para ver mudanças adicionais, verifique as páginas vigiadas locais',
 	'globalwatchlist-digest-email-subject' => 'Compilação Semanal',
@@ -983,6 +1015,18 @@ Wikia
 	'globalwatchlist-no-blog-page-found' => 'Ingen bloggsida hittades.',
 );
 
+/** Telugu (తెలుగు)
+ * @author Chaduvari
+ */
+$messages['te'] = array(
+	'globalwatchlist-desc' => 'అన్ని వికీలలోని పేజీల వారపు వీక్షణజాబితా సంగ్రహాల ఈమెయిళ్ళను పంపుతుంది',
+	'tog-watchlistdigest' => 'వారపు వీక్షణజాబితా సంగ్రహాన్ని నాకు ఈమెయిలు చెయ్యి',
+	'globalwatchlist-digest-email-subject' => 'వారపు సంగ్రహం',
+	'globalwatchlist-blog-page-title-comment' => '$1 ($2 {{PLURAL:$2|వ్యాఖ్య|వ్యాఖ్యలు}})',
+	'globalwatchlist-no-page-found' => 'పేజీ ఏదీ కనబడలేదు.',
+	'globalwatchlist-no-blog-page-found' => 'బ్లాగు పేజీ ఏదీ కనబడలేదు.',
+);
+
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
@@ -1014,6 +1058,16 @@ Wikia
 	'globalwatchlist-no-blog-page-found' => 'Walang natagpuang pahina ng blog.',
 );
 
+/** Turkish (Türkçe)
+ * @author Incelemeelemani
+ */
+$messages['tr'] = array(
+	'globalwatchlist-desc' => 'Tüm wikilerdeki izleme listenizdeki sayfaları haftalık özet e-posta olarak gönderir',
+	'tog-watchlistdigest' => 'Bana Haftalık İzleme Özetini e-posta gönder',
+	'globalwatchlist-no-page-found' => 'Sayfa bulunamadı.',
+	'globalwatchlist-no-blog-page-found' => 'Blog sayfası bulunamadı.',
+);
+
 /** Ukrainian (українська)
  * @author Ua2004
  * @author Ата
@@ -1022,28 +1076,28 @@ $messages['uk'] = array(
 	'globalwatchlist-desc' => 'Надсилає на електронну пошту щотижневий дайджест списків спостереження з усіх вікі.',
 	'tog-watchlistdigest' => 'Надсилати мені щотижневий дайджест списку спостереження',
 	'tog-watchlistdigestclear' => 'Позначити усі сторінки з тижневого дайджесту списку спостереження як відвідані',
-	'globalwatchlist-see-more' => 'Для додаткових змін перевірте, будь ласка, Ваші місцеві списки спостереження',
+	'globalwatchlist-see-more' => 'Більше новин можна знайти у ваших локальних списках спостереження на кожній вікі',
 	'globalwatchlist-digest-email-subject' => 'Щотижневий дайджест',
-	'globalwatchlist-digest-email-body' => 'Шановний(-а) $1!
+	'globalwatchlist-digest-email-body' => 'Привіт, $1!
 
-Ось список сторінок з вашого списку спостереження Wikia, які було змінено з моменту Вашого останнього візиту.
+Ось список сторінок із вашого списку спостереження Wikia, які було змінено з моменту вашого останнього візиту.
 
 $2
 
 
-Ось список сторінок блоґу з вашого списку спостереження Wikia, які було змінено чи прокоментовано з моменту Вашого останнього візиту.
+Ось список сторінок блоґу з вашого списку спостереження Wikia, які було змінено чи прокоментовано з моменту вашого останнього візиту.
 
 $3
 
-Відвідайте ці сторінки, якщо бажаєте...
+Відвідайте ці сторінки, якщо бажаєте.
 
 Wikia
 
 * Щоб вимкнути сповіщення про сторінки зі списку спостереження, перейдіть сюди: http://www.wikia.com/wiki/Special:Preferences
-* Щоб позначити усі сторінки з цього листа прочитаними, зайдіть на вкладку "Список спостереження" на сторінці ваших налаштувань',
+* Щоб позначити усі сторінки з цього листа прочитаними, зайдіть на вкладку "<a href="http://www.wikia.com/wiki/Special:Preferences#mw-prefsection-emailv2">Електронна пошта</a>" на сторінці ваших налаштувань',
 	'globalwatchlist-blog-page-title-comment' => '$1 ($2 {{PLURAL:$2|коментар|коментарі|коментарів}})',
-	'globalwatchlist-no-page-found' => 'Сторінки не знайдено.',
-	'globalwatchlist-no-blog-page-found' => 'Сторінки блогу не знайдено.',
+	'globalwatchlist-no-page-found' => 'Змінених сторінок немає.',
+	'globalwatchlist-no-blog-page-found' => 'Змінених сторінок блоґів немає.',
 );
 
 /** Vietnamese (Tiếng Việt)
