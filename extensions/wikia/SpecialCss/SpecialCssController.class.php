@@ -1,6 +1,10 @@
 <?php
 class SpecialCssController extends WikiaSpecialPageController {
 	protected  $model;
+	protected $forbiddenSelectors = [
+		'.WikiaHeader',
+		'#WikiaHeader'
+	];
 
 	public function __construct() {
 		parent::__construct('CSS', 'editinterface', true);
@@ -25,32 +29,45 @@ class SpecialCssController extends WikiaSpecialPageController {
 
 		if ($this->request->wasPosted()) {
 				$content = $this->request->getVal('cssContent', '');
-				/** @var $status Status */
-				$status = $model->saveCssFileContent(
-					$content,
-					$this->request->getVal('editSummary', ''),
-					$this->request->getVal('minorEdit', '') != '',
-					$this->request->getVal('lastEditTimestamp', false),
-					$this->wg->user
-				);
+				$isForbidden = $this->filterForbiddenSelectors($content);
 
-				if (!$status) {
+				if ( $isForbidden ) {
 					NotificationsController::addConfirmation(
-						wfMessage('special-css-merge-error')->plain(),
+						wfMessage('special-css-forbiden-error')
+							->params( implode($this->forbiddenSelectors,', ' ) )
+							->parse()
+						,
 						NotificationsController::CONFIRMATION_ERROR
 					);
-					$this->diff = $this->app->sendRequest(__CLASS__, 'getDiff', ['wikitext' => $content])->getVal('diff');
-				} else if ($status->isOk()) {
-					NotificationsController::addConfirmation( wfMessage('special-css-save-message')->plain() );
-					$this->wg->Out->redirect($this->specialPage->getTitle()->getLocalURL());
-					wfProfileOut(__METHOD__);
-					return false; // skip rendering
+					$this->cssFileInfo['content'] = $content;
 				} else {
-					NotificationsController::addConfirmation(
-						$status->getMessage(),
-						NotificationsController::CONFIRMATION_ERROR
+					/** @var $status Status */
+					$status = $model->saveCssFileContent(
+						$content,
+						$this->request->getVal('editSummary', ''),
+						$this->request->getVal('minorEdit', '') != '',
+						$this->request->getVal('lastEditTimestamp', false),
+						$this->wg->user
 					);
-					$this->cssContent = $content;
+
+					if (!$status) {
+						NotificationsController::addConfirmation(
+							wfMessage('special-css-merge-error')->plain(),
+							NotificationsController::CONFIRMATION_ERROR
+						);
+						$this->diff = $this->app->sendRequest(__CLASS__, 'getDiff', ['wikitext' => $content])->getVal('diff');
+					} else if ($status->isOk()) {
+						NotificationsController::addConfirmation( wfMessage('special-css-save-message')->plain() );
+						$this->wg->Out->redirect($this->specialPage->getTitle()->getLocalURL());
+						wfProfileOut(__METHOD__);
+						return false; // skip rendering
+					} else {
+						NotificationsController::addConfirmation(
+							$status->getMessage(),
+							NotificationsController::CONFIRMATION_ERROR
+						);
+						$this->cssContent = $content;
+					}
 				}
 		}
 
@@ -77,6 +94,19 @@ class SpecialCssController extends WikiaSpecialPageController {
 
 		wfProfileOut(__METHOD__);
 		return true;
+	}
+
+	public function filterForbiddenSelectors( $content ) {
+		$isForbidden = false;
+
+		foreach ( $this->forbiddenSelectors as $selector ) {
+			if ( strpos( $content, $selector ) !== false) {
+				$isForbidden = true;
+				break;
+			}
+		}
+
+		return $isForbidden;
 	}
 
 	/**
