@@ -5,7 +5,7 @@ define('SuggestionsClient', ['jquery', 'SuggestionsMatcher', 'wikia.log'], funct
 		pending = {},
 		errors = 0,
 		uid = new Date().getTime(),
-		endpointUrl = 'http://search-suggest.wikia.net/web/api/search-suggest';
+		endpointUrl = 'http://dev-damian:8080/api/search-suggest';
 
 	function writeToCache(key, data) {
 		cache[ key ] = data;

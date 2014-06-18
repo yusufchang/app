@@ -36,7 +36,7 @@ class SuggestionsIndexer extends Maintenance {
 		self::SOLR_SUGGEST => [
 			[
 				'adapteroptions' => [
-					'host' => 'db-sds-s1',
+					'host' => 'dev-damian',
 					'port' => 8983,
 					'path' => '/solr/',
 					'core' => 'suggest'
@@ -49,7 +49,7 @@ class SuggestionsIndexer extends Maintenance {
 		self::SOLR_SUGGEST_S2 => [
 			[
 				'adapteroptions' => [
-					'host' => 'db-sds-s2',
+					'host' => '10.10.10.203',
 					'port' => 8983,
 					'path' => '/solr/',
 					'core' => 'suggest'
@@ -236,17 +236,23 @@ class SuggestionsIndexer extends Maintenance {
 	protected function getFromSolr( $batch ) {
 		$this->startProfile();
 		$client = $this->getSolrClient( self::SOLR_MAIN );
-		$solrData = $client->getByArticleId( $this->wikiId, $batch, $this->solrFields, $count );
+		$solrData = null;
+		while ($solrData === null) {
+			try {
+				$solrData = $client->getByArticleId( $this->wikiId, $batch, $this->solrFields, $count );
+			} catch (Solarium_Exception $e) {
+				echo 'argh!!!';
+			}
+		}
+
 		echo $count." found!\n";
 		//acquire needed data
 		$result = [];
 		foreach( $solrData as $data ) {
 			$id = $data['pageid'];
 			$result[ $id ] = [
-				'title_ngram' => $data[ 'title_en' ],
 				'title_simple' => $data[ 'title_en' ],
 				'title_prefix_suffix' => $data[ 'title_en' ],
-				'title' => $data[ 'title_en' ],
 				'views_i' => $data[ 'views' ],
 				'abstract_en' => $this->cutSnippet( $data[ 'html_en' ] ),
 				'namespace_i' => $data[ 'ns' ],
@@ -257,7 +263,6 @@ class SuggestionsIndexer extends Maintenance {
 				'id' => $this->wikiId.'_'.$data[ 'pageid' ]
 			];
 			if ( !empty( $data[ 'redirect_titles_mv_en' ] ) ) {
-				$result[ $id ]['redirects_ngram_mv'] = array_unique( $data[ 'redirect_titles_mv_en' ] );
 				$result[ $id ]['redirects_prefix_suffix_mv'] = array_unique( $data[ 'redirect_titles_mv_en' ] );
 				$result[ $id ]['redirects_simple_mv'] = array_unique( $data[ 'redirect_titles_mv_en' ] );
 			}
