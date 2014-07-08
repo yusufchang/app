@@ -60,6 +60,26 @@
 
 <?= $headItems ?>
 
+	<? if ( $share == 1 ): ?>
+		<style>
+			#share-button {
+				background-color:white;
+				border:1px solid black;
+				padding:10px;
+				position:absolute;
+				top:-9999px;
+				left:-9999px;
+				z-index:9999;
+				box-shadow:0 1px 3px rgba(0,0,0,.4);
+			}
+		</style>
+	<? elseif ( $share == 2 ): ?>
+		<link rel="stylesheet" href="/skins/oasis/js/SelectedShareTest/selection-sharer.css"/>
+	<? elseif ( $share == 3 ): ?>
+		<link rel="stylesheet" href="/skins/oasis/js/SelectedShareTest/main-style.css"/>
+		<link rel="stylesheet" href="/skins/oasis/js/SelectedShareTest/tooltipster.min.css"/>
+	<? endif ?>
+
 </head>
 <body class="<?= implode(' ', $bodyClasses) ?>"<?= $itemType ?>>
 <? if ( BodyController::isResponsiveLayoutEnabled() ): ?>
@@ -74,6 +94,7 @@
 <?= $ivw2 ?>
 <div class="WikiaSiteWrapper">
 	<?= $body ?>
+	<div id="share-button"><button>Share!</button></div>
 
 	<?php
 		echo F::app()->renderView('Ad', 'Index', ['slotName' => 'GPT_FLUSH', 'pageTypes' => ['*']]);
@@ -105,6 +126,18 @@
 <?php } ?>
 <?= $bottomScripts ?>
 <?= $cssPrintLinks ?>
+
+<? if ( $share == 1 ): ?>
+	<script src="/skins/oasis/js/SelectedShareTest/SelectedShare.js"></script>
+<? elseif ( $share == 2 ): ?>
+	<script src="/skins/oasis/js/SelectedShareTest/selection-sharer.js"></script>
+	<script>
+		$('#WikiaArticle p').selectionSharer();
+	</script>
+<? elseif ( $share == 3 ): ?>
+	<script src="/skins/oasis/js/SelectedShareTest/jquery.tooltipster.min.js"></script>
+	<script src="/skins/oasis/js/SelectedShareTest/contentshare.js"></script>
+<? endif ?>
 
 </body>
 

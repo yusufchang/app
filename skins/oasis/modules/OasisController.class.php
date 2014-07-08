@@ -118,6 +118,8 @@ class OasisController extends WikiaController {
 		/* set the grid if passed in, otherwise, respect the default */
 		$grid = $wgRequest->getVal('wikiagrid', '');
 
+		$this->share = $wgRequest->getVal('share', 0);
+
 		if ( '1' === $grid ) {
 			$this->wg->OasisGrid = true;
 		} else if ( '0' === $grid ) {
