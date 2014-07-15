@@ -1,50 +1,47 @@
-// krux ad targeting. must come before dart urls are constructed
-/*global Krux,define,unescape*/
-window.Krux || ((Krux = function () {
-	Krux.q.push(arguments);
-}).q = []);
-Krux.load = function (confid) {
-	var k = document.createElement('script');
-	k.type = 'text/javascript';
-	k.async = true;
-	var m, src = (m = location.href.match(/\bkxsrc=([^&]+)\b/)) && decodeURIComponent(m[1]);
-	k.src = src || (location.protocol === 'https:' ? 'https:' : 'http:') + '//cdn.krxd.net/controltag?confid=' + confid;
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(k, s);
-};
+/*global define*/
+/*jshint camelcase:false*/
+/*jshint maxdepth:4*/
 
-if (window.wgEnableKruxTargeting) {
-	(function () {
-		'use strict';
-		function retrieve(n) {
-			var m, k = 'kx' + n;
-			if (window.localStorage) {
-				return window.localStorage[k] || "";
-			} else if (navigator.cookieEnabled) {
-				m = document.cookie.match(k + '=([^;]*)');
-				return (m && unescape(m[1])) || "";
-			} else {
-				return '';
-			}
-		}
-
-		var kvs = [];
-		Krux.user = retrieve('user');
-		if (Krux.user) {
-			kvs.push('u=' + Krux.user);
-		}
-		Krux.segments = retrieve('segs') && retrieve('segs').split(',') || [];
-		for (var i = 0; i < Krux.segments.length; i++) {
-			kvs.push('ksgmnt=' + Krux.segments[i]);
-		}
-		Krux.dartKeyValues = kvs.length ? kvs.join(';') + ';' : '';
-	})();
-} else {
-	Krux.dartKeyValues = '';
-}
-
-define('ext.wikia.adEngine.krux', function () {
+(function (w) {
 	'use strict';
 
-	return Krux;
-});
+	var params, param, value;
+
+	function logMock() {}
+
+	function retrieve(n) {
+		var k = 'kx' + n;
+		if (w.localStorage) {
+			return w.localStorage[k] || '';
+		}
+		return '';
+	}
+
+	if (!w.Krux) {
+		w.Krux = function () {
+			w.Krux.q.push(arguments);
+		};
+		w.Krux.q = [];
+	}
+
+	w.Krux.user = retrieve('user');
+	w.Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+
+	if (w.AdEngine_adLogicPageParams) {
+		params = w.AdEngine_adLogicPageParams(logMock, w).getPageLevelParams();
+
+		for (param in params) {
+			if (params.hasOwnProperty(param)) {
+				value = params[param];
+				if (value) {
+					w['kruxDartParam_' + param] = value.toString();
+				}
+			}
+		}
+	}
+
+	define('ext.wikia.adEngine.krux', function () {
+		return w.Krux;
+	});
+
+}(this));

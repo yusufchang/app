@@ -220,8 +220,7 @@ class AdEngine2Service
 			$wgAdDriverForceDirectGptAd, $wgAdDriverForceLiftiumAd,
 			$wgOasisResponsive, $wgOasisResponsiveLimited,
 			$wgEnableRHonDesktop, $wgAdPageType, $wgOut,
-			$wgRequest, $wgEnableKruxTargeting,
-			$wgAdVideoTargeting, $wgLiftiumOnLoad, $wgAdDriverSevenOneMediaSub4Site,
+			$wgRequest, $wgAdVideoTargeting, $wgLiftiumOnLoad, $wgAdDriverSevenOneMediaSub4Site,
 			$wgDartCustomKeyValues, $wgWikiDirectedAtChildrenByStaff, $wgAdEngineDisableLateQueue,
 			$wgAdDriverUseBottomLeaderboard, $wgAdDriverBottomLeaderboardImpressionCapping, $wgAdDriverEnableAdsInMaps;
 
@@ -266,7 +265,6 @@ class AdEngine2Service
 			'cscoreCat' => HubService::getComscoreCategory($wgCityId)->cat_name,
 
 			// Krux
-			'wgEnableKruxTargeting' => $wgEnableKruxTargeting,
 			'wgUsePostScribe' => $wgRequest->getBool('usepostscribe', false),
 			'wgDartCustomKeyValues' => $wgDartCustomKeyValues,
 			'wgWikiDirectedAtChildren' => (bool) $wgWikiDirectedAtChildrenByStaff,
@@ -277,11 +275,6 @@ class AdEngine2Service
 			// intMapPontoBridge.js
 			'wgAdDriverEnableAdsInMaps' => $wgAdDriverEnableAdsInMaps,
 		];
-
-		if (!empty($wgEnableKruxTargeting)) {
-			$cat = AdEngine2Service::getCachedCategory();
-			$variablesToExpose['wgKruxCategoryId'] = WikiFactoryHub::getInstance()->getKruxId($cat['id']);
-		}
 
 		if (!empty($wgAdDriverUseSevenOneMedia)) {
 			$url = ResourceLoader::makeCustomURL($wgOut, ['wikia.ext.adengine.sevenonemedia'], 'scripts');
@@ -325,8 +318,6 @@ class AdEngine2Service
 			'cityShort',                     // AdLogicPageParams.js
 			'cscoreCat',                     // analytics_prod.js
 			'wgAdsShowableOnPage',           // TODO: remove var
-			'wgEnableKruxTargeting',         // Krux.js
-			'wgKruxCategoryId',              // Krux.run.js
 			'wgShowAds',                     // analytics_prod.js
 			'wgUserShowAds',                 // JWPlayer.class.php
 			'wikiaPageIsCorporate',          // analytics_prod.js

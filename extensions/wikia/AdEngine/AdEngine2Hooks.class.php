@@ -77,9 +77,20 @@ class AdEngine2Hooks {
 	 * @return bool
 	 */
 	static public function onWikiaSkinTopScripts(&$vars, &$scripts) {
+		global $wgEnableKruxTargeting;
+
 		foreach (AdEngine2Service::getTopJsVariables() as $varName => $varValue) {
 			$vars[$varName] = $varValue;
 		}
+
+		if ($wgEnableKruxTargeting) {
+			$cat = AdEngine2Service::getCachedCategory();
+			$wgKruxCategoryId = WikiFactoryHub::getInstance()->getKruxId($cat['id']);
+
+			$kruxUrl = 'http://cdn.krxd.net/controltag?confid=' . $wgKruxCategoryId;
+			$scripts .= Html::element('script', ['src' => $kruxUrl, 'async' => 'async']);
+		}
+
 		return true;
 	}
 
@@ -134,7 +145,11 @@ class AdEngine2Hooks {
 	 */
 	static public function onOasisSkinAssetGroupsBlocking(&$jsAssets) {
 
-		global $wgAdDriverUseTopInContentBoxad;
+		global $wgAdDriverUseTopInContentBoxad, $wgEnableKruxTargeting;
+
+		if ($wgEnableKruxTargeting) {
+			$jsAssets[] = 'adengine2_krux_js';
+		}
 
 		if (AdEngine2Service::areAdsInHead()) {
 			// Add ad asset to JavaScripts loaded on top (in <head>)
@@ -158,12 +173,14 @@ class AdEngine2Hooks {
 	 * @return bool
 	 */
 	static public function onWikiaSkinTopModules(&$scriptModules, $skin) {
+
 		if (AdEngine2Service::areAdsInHead() || AnalyticsProviderAmazonDirectTargetedBuy::isEnabled()) {
 			$scriptModules[] = 'wikia.instantGlobals';
 			$scriptModules[] = 'wikia.cookies';
 			$scriptModules[] = 'wikia.geo';
 			$scriptModules[] = 'wikia.window';
 		}
+
 		if (AdEngine2Service::areAdsInHead()) {
 			$scriptModules[] = 'wikia.document';
 			$scriptModules[] = 'wikia.abTest';

@@ -1,12 +1,6 @@
 /*jshint camelcase:false*/
 /*global define, require*/
-define('ext.wikia.adEngine.adLogicPageParams', [
-	'wikia.log',
-	'wikia.window',
-	require.optional('ext.wikia.adEngine.krux'),
-	require.optional('ext.wikia.adEngine.adLogicPageDimensions'),
-	require.optional('wikia.abTest')
-], function (log, window, Krux, adLogicPageDimensions, abTest) {
+function AdEngine_adLogicPageParams(log, window, Krux, adLogicPageDimensions, abTest) {
 	'use strict';
 
 	var logGroup = 'ext.wikia.adEngine.adLogicPageParams',
@@ -188,4 +182,12 @@ define('ext.wikia.adEngine.adLogicPageParams', [
 	return {
 		getPageLevelParams: getPageLevelParams
 	};
-});
+}
+
+define('ext.wikia.adEngine.adLogicPageParams', [
+	'wikia.log',
+	'wikia.window',
+	require.optional('ext.wikia.adEngine.krux'),
+	require.optional('ext.wikia.adEngine.adLogicPageDimensions'),
+	require.optional('wikia.abTest')
+], AdEngine_adLogicPageParams);
