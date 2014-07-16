@@ -141,7 +141,7 @@ ve.ui.WikiaMediaPreviewWidget.prototype.onRequestVideoFail = function () {
 ve.ui.WikiaMediaPreviewWidget.prototype.displayOverlay = function ( title ) {
 	this.$title.text( title );
 	this.$element.show();
-	this.$element.startThrobbing();
+	//this.$element.startThrobbing();
 };
 
 /**
@@ -168,6 +168,22 @@ ve.ui.WikiaMediaPreviewWidget.prototype.openForImage = function ( title, url ) {
 	this.$image
 		.load( ve.bind( this.onImageLoad, this ) )
 		.appendTo( this.$element );
+};
+
+ve.ui.WikiaMediaPreviewWidget.prototype.openForMap = function ( title, id ) {
+	this.displayOverlay( title );
+
+	var height = $( window ).height() - this.$titlebar.outerHeight() - 150;
+	var width = $( window ).width() - 150;
+
+
+	this.$iframe = $( '<iframe>' )
+		.attr( 'src', 'http://dev-interactive-maps.wikia.nocookie.net/api/v1/render/' + id )
+		.width( width )
+		.height( height )
+		.css('margin', 75)
+		.appendTo( this.$element );
+
 };
 
 /**

@@ -20,6 +20,8 @@ ve.ui.WikiaMapInsertDialog = function VeUiWikiaMapInsertDialog( config ) {
 
 	// Parent constructor
 	ve.ui.WikiaMapInsertDialog.super.call( this, config );
+
+	this.mediaPreview = new ve.ui.WikiaMediaPreviewWidget();
 };
 
 /* Inheritance */
@@ -73,6 +75,9 @@ ve.ui.WikiaMapInsertDialog.prototype.initialize = function () {
 			}
 		}, this ) );
 	}
+
+	this.$globalOverlay = this.$frame.closest('.ve-ui-surface-overlay-global');
+	this.$globalOverlay.append( this.mediaPreview.$element );
 };
 
 ve.ui.WikiaMapInsertDialog.prototype.setupResultsPanel = function () {
@@ -93,9 +98,14 @@ ve.ui.WikiaMapInsertDialog.prototype.setupResultsPanel = function () {
 	headlineButton.on( 'click', ve.bind( this.onCreateClick, this ) );
 
 	this.resultsWidget = new ve.ui.WikiaMediaResultsWidget( { '$': this.$ } );
-	this.resultsWidget.on( 'preview', ve.bind( this.onMapSelect, this ) );
+	this.resultsWidget.connect( this, {
+		'check': 'onMapSelect',
+		'preview': 'onMapPreview'
+	} );
 	this.selectWidget = this.resultsWidget.getResults();
-
+	this.selectWidget.connect( this, {
+		'preview': 'onMapPreview'
+	} );
 	this.panels.results.$element.append( $headline, this.resultsWidget.$element );
 };
 
@@ -185,7 +195,7 @@ ve.ui.WikiaMapInsertDialog.prototype.showResults = function ( data ) {
 	}
 };
 
-ve.ui.WikiaMapInsertDialog.prototype.onMapSelect = function ( option ) {
+ve.ui.WikiaMapInsertDialog.prototype.onMapSelect = function ( data ) {
 	if ( !this.inserting ) {
 		this.inserting = true;
 		this.getFragment().collapseRangeToEnd().insertContent( [
@@ -195,7 +205,7 @@ ve.ui.WikiaMapInsertDialog.prototype.onMapSelect = function ( option ) {
 					mw: {
 						name: 'imap',
 						body: { extsrc:'' },
-						attrs: { 'map-id': option.getData().id.toString() }
+						attrs: { 'map-id': data.id.toString() }
 					}
 				}
 			},
@@ -203,6 +213,11 @@ ve.ui.WikiaMapInsertDialog.prototype.onMapSelect = function ( option ) {
 		] );
 		this.close();
 	}
+};
+
+ve.ui.WikiaMapInsertDialog.prototype.onMapPreview = function ( option ) {
+	var data = option.getData();
+	this.mediaPreview.openForMap( data.title, data.id );
 };
 
 ve.ui.WikiaMapInsertDialog.prototype.onCreateClick = function () {
