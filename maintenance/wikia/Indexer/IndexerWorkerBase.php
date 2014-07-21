@@ -5,11 +5,8 @@ require_once __DIR__.'/../../../lib/composer/autoload.php';
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class IndexerWorkerBase {
+trait IndexerWorkerBase {
 
-	const DEFAULT_EXCHANGE = 'test_ex';
-	const PREFETCH_SIZE = 5;
-	const DEADS = 'dead_bodies';
 	protected $city_id;
 	private $host;
 	private $port;
@@ -17,24 +14,28 @@ class IndexerWorkerBase {
 	private $password;
 	private $vhost;
 	private $connection;
+	private $main_channel;
 	private $anon_channel;
+	private $exchange = 'test_ex';
+	private $prefetch = 5;
+	private $deadLetterExchange = 'dead_bodies';
 
 	public function execute() {
 		if (function_exists('xdebug_disable')) {
 			xdebug_disable();
 		}
-		if ( !$this->get_params_from_env() ) {
+		if ( !$this->getParamsFromEnv() ) {
 			$this->output('Some params are not set in env, please check: RABBITMQ_HOST, RABBITMQ_PORT, RABBITMQ_USER, RABBITMQ_PASSWORD, RABBITMQ_VHOST.');
 			die;
 		}
 		$this->preprocess();
 		$routing = $this->getRoutingKey();
 		if ( $routing ) {
-			$connection = $this->connect( $this->getRoutingKey() );
-			while( count( $connection->callbacks ) ) {
-				$connection->wait();
+			$this->main_channel = $this->connect( $this->getRoutingKey() );
+			while( count( $this->main_channel->callbacks ) ) {
+				$this->main_channel->wait();
 			}
-			$connection->close();
+			$this->main_channel->close();
 		}
 		$this->postprocess();
 	}
@@ -45,18 +46,30 @@ class IndexerWorkerBase {
 			$res = $this->process( $data );
 			if ( !isset( $res ) || $res ) {
 				$req->delivery_info['channel']->basic_ack($req->delivery_info['delivery_tag']);
-			} else {
-				$req->delivery_info['channel']->basic_nack($req->delivery_info['delivery_tag']);
 			}
 		} catch (Exception $e) {
 			$req->delivery_info['channel']->basic_nack($req->delivery_info['delivery_tag']);
+			print_r($e->getMessage());
+			print_r($e->getTrace());
 		}
 	}
 
 	protected function publish( $routing, $data, $exchange = null ) {
-		$exchange = ($exchange !== null) ? $exchange : static::DEFAULT_EXCHANGE;
-		$channel = $this->get_anon_channel();
+		$exchange = ($exchange !== null) ? $exchange : $this->exchange;
+		$channel = $this->getAnonChannel();
 		$channel->basic_publish( new AMQPMessage( json_encode( $data ) ), $exchange, $routing );
+	}
+
+	protected function close() {
+		$connection = $this->getConnection();
+		$this->getAnonChannel()->close();
+		$this->main_channel->close();
+		$connection->close();
+		die();
+	}
+
+	protected function output($text) {
+		print_r($text);
 	}
 
 	protected function process( $data ) {}
@@ -66,46 +79,46 @@ class IndexerWorkerBase {
 	protected function preprocess() {}
 	protected function postprocess() {}
 
-	private function get_params_from_env() {
-		$this->host = $this->get_from_env( 'RABBITMQ_HOST' );
-		$this->port = $this->get_from_env( 'RABBITMQ_PORT' );
-		$this->user = $this->get_from_env( 'RABBITMQ_USER' );
-		$this->password = $this->get_from_env( 'RABBITMQ_PASSWORD' );
-		$this->vhost = $this->get_from_env( 'RABBITMQ_VHOST' );
-		$this->city_id = $this->get_from_env( 'SERVER_ID' );
+	private function getParamsFromEnv() {
+		$this->host = $this->getFromEnv( 'RABBITMQ_HOST' );
+		$this->port = $this->getFromEnv( 'RABBITMQ_PORT' );
+		$this->user = $this->getFromEnv( 'RABBITMQ_USER' );
+		$this->password = $this->getFromEnv( 'RABBITMQ_PASSWORD' );
+		$this->vhost = $this->getFromEnv( 'RABBITMQ_VHOST' );
+		$this->city_id = $this->getFromEnv( 'SERVER_ID' );
 		return $this->host && $this->port && $this->user && $this->password && $this->vhost;
 	}
 
-	private function get_from_env( $param ) {
+	private function getFromEnv( $param ) {
 		return getenv($param);
 	}
 
 	private function connect( $routing_key, $exchange = null ) {
-		$exchange = $exchange !== null ? $exchange : static::DEFAULT_EXCHANGE;
-		$queue = $this->get_queue_name( $routing_key );
-		$connection = $this->get_connection();
+		$exchange = $exchange !== null ? $exchange : $this->exchange;
+		$queue = $this->getQueueName( $routing_key );
+		$connection = $this->getConnection();
 		$channel = $connection->channel();
 		$channel->queue_declare( $queue, false, true, false, false, false,
-			[ 'x-dead-letter-exchange' => [ 'S', static::DEADS ] ] );
+			[ 'x-dead-letter-exchange' => [ 'S', $this->deadLetterExchange ] ] );
 		$channel->queue_bind( $queue, $exchange, $routing_key );
-		$channel->basic_qos( null, static::PREFETCH_SIZE, null );
+		$channel->basic_qos( null, $this->prefetch, null );
 		$channel->basic_consume( $queue, "", false, false, false, false, array( $this, 'route' ) );
 		return $channel;
 	}
 
-	private function get_queue_name($routing_key) {
+	private function getQueueName($routing_key) {
 		return implode('.', [get_class($this), $routing_key, 'queue']);
 	}
 
-	private function get_anon_channel() {
+	private function getAnonChannel() {
 		if ( !isset( $this->anon_channel ) ) {
-			$connection = $this->get_connection();
+			$connection = $this->getConnection();
 			$this->anon_channel = $connection->channel();
 		}
 		return $this->anon_channel;
 	}
 
-	private function get_connection() {
+	private function getConnection() {
 		if ( !isset( $this->connection ) ) {
 			return new AMQPConnection($this->host, $this->port, $this->user, $this->password, $this->vhost);
 		}

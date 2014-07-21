@@ -5,31 +5,34 @@ use Wikia\JsonFormat\JsonFormatWorker;
 require_once( dirname( __FILE__ ) . '/../../../extensions/wikia/JsonFormat/JsonFormatWorker.class.php' );
 require_once( dirname( __FILE__ ) . '/IndexerWorkerBase.php' );
 
-class SnippetWorker extends IndexerWorkerBase {
+class SnippetWorker {
+	use IndexerWorkerBase;
 
 	const PREFETCH_SIZE = 5;
 	private $worker;
-	private $max = 209715200 ; //200MiB
+	private $max = 1000000000 ; //~1GiB
 
 	protected function process( $data ) {
-
 		if( !$data->is_redirect ) {
-			$jw = $this->get_worker();
+			$jw = $this->getWorker();
 			$jw->setHtml( $data->html );
 			$msg = new stdClass();
+			$msg->html = $data->html;
 			$msg->val = $jw->process();
 			$msg->lang = $data->wiki_lang;
 			$msg->id = $data->id;
 			$this->publish('solr.snippet.ready', $msg );
 		}
-		if (memory_get_usage(true) >= $this->max) die("OUT OF MEMORY!");
+		if (memory_get_usage(true) >= $this->max) {
+			$this->close();
+		}
 	}
 
 	protected function getRoutingKey() {
 		return 'article.ready';
 	}
 
-	protected function get_worker() {
+	protected function getWorker() {
 		if ( !isset( $this->worker ) ) {
 			$this->worker = new JsonFormatWorker();
 		}
@@ -37,8 +40,6 @@ class SnippetWorker extends IndexerWorkerBase {
 	}
 }
 
-
 $maintClass = 'SnippetWorker';
-
 $instance = new $maintClass;
 $instance->execute();
