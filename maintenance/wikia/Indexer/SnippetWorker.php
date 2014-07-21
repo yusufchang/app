@@ -17,10 +17,10 @@ class SnippetWorker extends IndexerWorkerBase {
 			$jw = $this->get_worker();
 			$jw->setHtml( $data->html );
 			$msg = new stdClass();
-			$msg->snippet = $jw->process();
+			$msg->val = $jw->process();
 			$msg->lang = $data->wiki_lang;
 			$msg->id = $data->id;
-			$this->publish('snippet.ready', $msg );
+			$this->publish('solr.snippet.ready', $msg );
 		}
 		if (memory_get_usage(true) >= $this->max) die("OUT OF MEMORY!");
 	}
