@@ -9,19 +9,13 @@ class AdEngine2Service
 	const ASSET_GROUP_LIFTIUM = 'liftium_ads_js';
 
 	const PAGE_TYPE_NO_ADS = 'no_ads';                   // show no ads
+	const PAGE_TYPE_MAPS = 'maps';                       // show only ads on maps
 	const PAGE_TYPE_HOMEPAGE_LOGGED = 'homepage_logged'; // show some ads (logged in users on main page)
 	const PAGE_TYPE_CORPORATE = 'corporate';             // show some ads (anonymous users on corporate pages)
 	const PAGE_TYPE_ALL_ADS = 'all_ads';                 // show all ads!
 
 	const cacheKeyVersion = "2.03a";
 	const cacheTimeout = 1800;
-
-	private $_allPageTypes = [
-		self::PAGE_TYPE_NO_ADS,
-		self::PAGE_TYPE_HOMEPAGE_LOGGED,
-		self::PAGE_TYPE_CORPORATE,
-		self::PAGE_TYPE_ALL_ADS
-	];
 
 	/**
 	 * Get page type for the current page (ad-wise).
@@ -73,7 +67,8 @@ class AdEngine2Service
 
 					// Chosen special pages:
 					|| $title->isSpecial('Videos')
-					|| $title->isSpecial('Leaderboard');
+					|| $title->isSpecial('Leaderboard')
+					|| $title->isSpecial('Maps');
 			}
 		}
 
@@ -87,6 +82,11 @@ class AdEngine2Service
 			// Only leaderboard, medrec and invisible on corporate sites for anonymous users
 			if (WikiaPageType::isCorporatePage()) {
 				$pageLevel = self::PAGE_TYPE_CORPORATE;
+				return $pageLevel;
+			}
+
+			if ($title->isSpecial('Maps')) {
+				$pageLevel = self::PAGE_TYPE_MAPS;
 				return $pageLevel;
 			}
 
