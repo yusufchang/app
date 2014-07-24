@@ -10,11 +10,18 @@ define('ext.wikia.adEngine.adConfigMobile', [
 ], function (log, window, document, adProviderDirectGpt, adProviderRemnantGpt, adProviderNull, adProviderEbay) {
 	'use strict';
 
+	var pageTypesWithAdsOnMobile = {
+		'all_ads': true,
+		'corporate': true
+	};
+
 	function getProvider(slot) {
 		var slotName = slot[0];
 
 		// If wgShowAds set to false, hide slots
-		if (!window.wgShowAds) {
+		// On pages with type other than all_ads (corporate, homepage_logged, maps), hide slots
+		// @see https://docs.google.com/a/wikia-inc.com/document/d/1Lxz0PQbERWSFvmXurvJqOjPMGB7eZR86V8tpnhGStb4/edit
+		if (!window.wgShowAds || pageTypesWithAdsOnMobile[window.AdEnginePageType]) {
 			return adProviderNull;
 		}
 

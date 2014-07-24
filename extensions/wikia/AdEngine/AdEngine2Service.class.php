@@ -20,7 +20,7 @@ class AdEngine2Service
 	/**
 	 * Get page type for the current page (ad-wise).
 	 * Take into account type of the page and user status.
-	 * Return one of the PAGE_TYPE_* const
+	 * Return one of the PAGE_TYPE_* constants
 	 *
 	 * @return string
 	 */
@@ -103,9 +103,9 @@ class AdEngine2Service
 
 		// Override ad level for a (set of) specific page(s)
 		// Use case: sponsor ads on a landing page targeted to Wikia editors (=logged in)
-		if ($wg->Title &&
+		if ($title &&
 			!empty($wg->PagesWithNoAdsForLoggedInUsersOverriden) &&
-			in_array($wg->Title->getDBkey(), $wg->PagesWithNoAdsForLoggedInUsersOverriden)
+			in_array($title->getDBkey(), $wg->PagesWithNoAdsForLoggedInUsersOverriden)
 		) {
 			$pageLevel = self::PAGE_TYPE_CORPORATE;
 			return $pageLevel;
@@ -256,6 +256,8 @@ class AdEngine2Service
 			'wgShowAds' => AdEngine2Service::areAdsShowableOnPage(),
 			'wgAdsShowableOnPage' => AdEngine2Service::areAdsShowableOnPage(), // not used
 			'wgAdDriverStartLiftiumOnLoad' => $wgLiftiumOnLoad,
+
+			'AdEnginePageType' => self::getPageType(),
 
 			// generic type of page: forum/search/article/home/...
 			'wikiaPageType' => WikiaPageType::getPageType(),
