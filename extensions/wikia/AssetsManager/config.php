@@ -111,6 +111,13 @@ $config['adengine2_bottom_leaderboard_js'] = array(
 	),
 );
 
+$config['adengine2_interactive_maps_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/AdEngine/js/AdSlotInteractiveMaps.js',
+	),
+);
+
 $config['adengine2_top_in_content_boxad_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
@@ -642,6 +649,9 @@ $config['wikiamobile_ads_js'] = array(
 		// Video ads
 		'//extensions/wikia/AdEngine/js/WikiaDartVideoHelper.js',
 
+		// Interactive maps integration
+		'#group_adengine2_interactive_maps_js',
+
 		// Run!
 		'//extensions/wikia/WikiaMobile/js/ads_run.js',
 	)
@@ -663,6 +673,7 @@ $config['interactivemaps_ads_js'] = array(
 		// Advertisement libs
 		'//extensions/wikia/AdEngine/js/AdProviderDirectGptMobile.js',
 		'//extensions/wikia/AdEngine/js/WikiaGptHelper.js',
+		'//extensions/wikia/AdEngine/InteractiveMaps/ads.js'
 	)
 );
 
@@ -1740,11 +1751,9 @@ $config['videos_module_js'] = [
 	'assets' => [
 		'//extensions/wikia/Thumbnails/scripts/templates.mustache.js',
 		'//extensions/wikia/Thumbnails/scripts/views/titleThumbnail.js',
-
 		'//extensions/wikia/VideosModule/scripts/templates.mustache.js',
 		'//extensions/wikia/VideosModule/scripts/models/videos.js',
 		'//extensions/wikia/VideosModule/scripts/views/titleThumbnail.js',
-		'//extensions/wikia/VideosModule/scripts/views/bottomModule.js',
 		'//extensions/wikia/VideosModule/scripts/views/rail.js',
 		'//extensions/wikia/VideosModule/scripts/controllers/index.js',
 	]
@@ -1864,6 +1873,15 @@ $config['int_map_delete_map_js'] = [
 	'assets' => [
 		'//extensions/wikia/WikiaInteractiveMaps/js/intMapUtils.js',
 		'//extensions/wikia/WikiaInteractiveMaps/js/intMapDeleteMap.js',
+	]
+];
+
+$config['int_map_undelete_map_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//extensions/wikia/WikiaInteractiveMaps/js/intMapUtils.js',
+		'//extensions/wikia/WikiaInteractiveMaps/js/intMapUnDeleteMap.js',
 	]
 ];
 
