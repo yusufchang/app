@@ -36,7 +36,7 @@ class SuggestionsIndexer extends Maintenance {
 		self::SOLR_SUGGEST => [
 			[
 				'adapteroptions' => [
-					'host' => 'dev-damian',
+					'host' => 'suggest-s3.wikia-prod',
 					'port' => 8983,
 					'path' => '/solr/',
 					'core' => 'suggest'
