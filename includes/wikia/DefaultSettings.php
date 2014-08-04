@@ -1249,6 +1249,18 @@ $wgAdDriverUseTopInContentBoxad = false;
 $wgAdDriverBottomLeaderboardImpressionCapping = [2, 4, 6];
 
 /**
+ * @name $wgAdDriverLiftiumDR
+ * Whether to enable Liftium Disaster Recovery (true) or the not (false)
+ */
+$wgAdDriverLiftiumDR = false;
+
+/**
+ * @name $wgAdDriverSevenOneMediaDR
+ * Whether to enable SevenOneMedia Disaster Recovery (true) or the not (false)
+ */
+$wgAdDriverSevenOneMediaDR = false;
+
+/**
  * @name $wgAdDriverUseSevenOneMedia
  * Whether to use SevenOne Media ads (true) or the other ads (false)
  * Null means true for languages within $wgAdDriverUseSevenOneMediaInLanguages
