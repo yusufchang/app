@@ -1,15 +1,15 @@
-<section class="result clearfix">
+<section class="result">
 	<div>
 		<?php if ( $result['ns'] == NS_FILE ) {
 			$thumbnailHtml = $result->getThumbnailHtmlForVenus();
 		}?>
 		<?php if(! empty( $thumbnailHtml ) ): ?>
-			<div class="thumbnail small-4 medium-3 large-3 columns no-padding">
+			<div class="thumbnail small-4 medium-3 large-3 columns">
 				<div class="thumbnail-wrapper"><div class="image-wrapper"><?= $thumbnailHtml ?></div></div>
 			</div>
 			<div><? // Open media-text div when there's a thumbnail ?>
 		<?php endif; ?>
-		<section class="result-description clearfix">
+		<section class="result-description small-6 medium-7 large-7 columns">
 			<h1 class="headline">
 				<?php
 				$title = $result->getTitle();

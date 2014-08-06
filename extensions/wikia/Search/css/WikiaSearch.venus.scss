@@ -7,11 +7,6 @@ a {
 	text-decoration: none;
 }
 
-.clearfix {
-	clear: both;
-	@include clearfix;
-}
-
 .subtext {
 	color: $color-alternate-text;
 	font-size: 16px;
@@ -31,72 +26,76 @@ a {
 
 .results-section {
 	margin-top: 30px;
-}
 
-.result-count {
-	color: $color-alternate-text;
-	font-size: 16px;
-	margin-bottom: 5px;
-	text-align: left;
-}
-
-.results {
-	margin-top: 40px;
-}
-
-.result {
-	margin-top: 35px;
-
-	.searchmatch {
-		font-weight: bold;
+	.result-count {
+		color: $color-alternate-text;
+		font-size: 16px;
+		margin-bottom: 5px;
+		text-align: left;
 	}
 
-	.thumbnail {
-		background-color: $color-article-thumb-background;
-		display: table;
-		height: 158px;
-		text-align: center;
-		width: 280px;
+	.results {
+		margin-top: 40px;
 
-		.thumbnail-wrapper {
-			display: table-cell;
-			position: relative;
-			vertical-align: middle;
-		}
+		.result {
+			margin-top: 35px;
 
-		.image-wrapper {
-			display: inline;
-			position: relative;
-			
-			img {
-				vertical-align: text-bottom;
+			.searchmatch {
+				font-weight: bold;
 			}
-		}
 
-		.duration {
-			display: none;
-		}
+			.thumbnail {
+				display: table;
+				height: 158px;
+				text-align: center;
+				width: 280px;
 
-		.play-circle {
-			background-image: url('/extensions/wikia/Search/images/play_btn.svg'); /* base64 */
-			background-position: center;
-			background-repeat: no-repeat;
-			bottom: 15px;
-			height: 33px;
-			left: 15px;
-			position: absolute;
-			width: 33px;
-		}
-	}
+				.thumbnail-wrapper {
+					background-color: $color-article-thumb-background;
+					display: table-cell;
+					position: relative;
+					vertical-align: middle;
+				}
 
-	.result-description {
-		.headline {
-			margin: 0;
-		}
+				.image-wrapper {
+					display: inline;
+					position: relative;
 
-		.subtext {
-			margin-bottom: 14px;
-			margin-top: 8px;
+					img {
+						vertical-align: text-bottom;
+					}
+				}
+
+				.duration {
+					display: none;
+				}
+
+				.play-circle {
+					background-image: url('/extensions/wikia/Search/images/play_btn.svg'); /* base64 */
+					background-position: center;
+					background-repeat: no-repeat;
+					bottom: 15px;
+					height: 33px;
+					left: 15px;
+					position: absolute;
+					width: 33px;
+				}
+			}
+
+			.result-description {
+				.headline {
+					margin: 0;
+				}
+
+				.subtext {
+					margin-bottom: 14px;
+					margin-top: 8px;
+				}
+
+				.result-link.subtext {
+					word-wrap: break-word;
+				}
+			}
 		}
 	}
 }
