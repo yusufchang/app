@@ -108,6 +108,7 @@ a {
 	 width: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
 
 	 a {
+		 color: $color-links;
 		 font-size: 18px;
 		 font-weight: bold;
 	 }
@@ -117,6 +118,7 @@ a {
 	 }
 
 	 h1 {
+		 color: $color-wikiahome-community;
 		 font-size: 18px;
 		 margin: 40px 0 0;
 		 padding: 0 $large-grid-gutter;

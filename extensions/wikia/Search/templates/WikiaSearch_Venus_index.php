@@ -67,5 +67,14 @@
 			<p class="no-result"><i><?=wfMsg('wikiasearch2-noresults')?></i></p>
 		<?php endif; ?>
 	</article>
+	<div class="small-5 medium-4 large-4 columns push-1">
+		<div class="SearchAdsTopWrapper">
+			<?= F::app()->renderView('Ad', 'Index', ['slotName' => 'TOP_RIGHT_BOXAD', 'pageTypes' => ['search']]); ?>
+		</div>
+		<?= $topWikiArticles ?>
+		<div id="WikiaAdInContentPlaceHolder">
+			<?= F::app()->renderView('Ad', 'Index', ['slotName' => 'LEFT_SKYSCRAPER_2', 'pageTypes' => ['search']]); ?>
+		</div>
+	</div>
 	</div>
 </form>
