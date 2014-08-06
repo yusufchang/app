@@ -744,7 +744,7 @@ class WikiaSearchController extends WikiaSpecialPageController {
 		$cacheKey = wfMemcKey(
 			__CLASS__,
 			'WikiaSearch',
-			'topWikiArticlesForVenus',
+			$method,
 			$this->wg->CityId,
 			static::TOP_ARTICLES_CACHE,
 			$isGridLayoutEnabled
