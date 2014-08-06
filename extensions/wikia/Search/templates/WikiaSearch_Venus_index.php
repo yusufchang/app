@@ -67,7 +67,7 @@
 				<div class="no-result"><em><?= wfMessage( 'wikiasearch2-noresults' )->text() ?></em></div>
 			<?php endif; ?>
 		</article>
-		<div class="small-5 medium-4 large-4 columns push-1">
+		<div class="small-5 medium-4 large-4 columns">
 			<div class="SearchAdsTopWrapper">
 				<?= F::app()->renderView('Ad', 'Index', ['slotName' => 'TOP_RIGHT_BOXAD', 'pageTypes' => ['search']]); ?>
 			</div>
