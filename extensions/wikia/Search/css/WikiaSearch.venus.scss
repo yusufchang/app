@@ -124,11 +124,14 @@ a {
 				content: " ";
 				position: absolute;
 			}
+
+			a {
+				font-weight: bold;
+			}
 		}
 
 		a:hover, &.selected a {
 			color: $color-text;
-			font-weight: bold;
 		}
 	}
 }
