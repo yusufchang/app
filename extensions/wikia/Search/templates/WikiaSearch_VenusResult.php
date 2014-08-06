@@ -1,5 +1,5 @@
 <section class="result">
-	<div>
+	<div class="row">
 		<?php if ( $result['ns'] == NS_FILE ) {
 			$thumbnailHtml = $result->getThumbnailHtmlForVenus();
 		}?>
