@@ -199,7 +199,7 @@ a {
 	}
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1280) {
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
 	.body-text {
 		font-size: 16px;
 		line-height: 22px;
@@ -243,7 +243,7 @@ a {
 			width: ($medium-grid-column + $medium-grid-margin) * 4 + $medium-grid-gutter * 3;
 		}
 
-		.thumbnail-medium {
+		.thumbnail-small {
 			height: $medium-grid-column + $medium-grid-margin;
 			margin-right: $medium-grid-gutter;
 			width: $medium-grid-column + $medium-grid-margin;
