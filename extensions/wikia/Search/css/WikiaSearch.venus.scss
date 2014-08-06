@@ -175,7 +175,7 @@ a {
 	}
 
 	.top-wiki-articles {
-		width: ($small-grid-column + $small-grid-margin) * 4 + $small-grid-gutter * 3;
+		width: ($small-grid-column + $small-grid-margin) * 5 + $small-grid-gutter * 4;
 
 		a {
 			display: block;
@@ -190,8 +190,8 @@ a {
 		}
 
 		.thumbnail-large {
-			height: ($small-grid-column + $small-grid-margin) * 4 + $small-grid-gutter * 3;
-			width: ($small-grid-column + $small-grid-margin) * 4 + $small-grid-gutter * 3;
+			height: ($small-grid-column + $small-grid-margin) * 5 + $small-grid-gutter * 4;
+			width: ($small-grid-column + $small-grid-margin) * 5 + $small-grid-gutter * 4;
 		}
 
 		.thumbnail-small {
