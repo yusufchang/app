@@ -868,40 +868,19 @@ class Config
 	 * @return array
 	 */
 	public function getSearchProfiles() {
+		global $wgEnableVenusSkin;
+
 		$nsAllSet = array_keys( $this->getService()->getSearchableNamespacesFromSearchEngine() );
 		$defaultNamespaces = $this->getService()->getDefaultNamespacesFromSearchEngine();
 
-	    $profiles = array(
-	            SEARCH_PROFILE_DEFAULT => array(
-	                    'message' => 'wikiasearch2-tabs-articles',
-	                    'tooltip' => 'searchprofile-articles-tooltip',
-	                    'namespaces' => $defaultNamespaces,
-	                    'namespace-messages' => $this->getService()->getTextForNamespaces( $defaultNamespaces ),
-	            ),
-	            SEARCH_PROFILE_IMAGES => array(
-	                    'message' => 'wikiasearch2-tabs-photos-and-videos',
-	                    'tooltip' => 'searchprofile-images-tooltip',
-	                    'namespaces' => array( NS_FILE ),
-	            ),
-	            SEARCH_PROFILE_USERS => array(
-	                    'message' => 'wikiasearch2-users',
-	                    'tooltip' => 'wikiasearch2-users-tooltip',
-	                    'namespaces' => array( NS_USER )
-	            ),
-	            SEARCH_PROFILE_ALL => array(
-	                    'message' => 'searchprofile-everything',
-	                    'tooltip' => 'searchprofile-everything-tooltip',
-	                    'namespaces' => $nsAllSet,
-	            ),
-	            SEARCH_PROFILE_ADVANCED => array(
-	                    'message' => 'searchprofile-advanced',
-	                    'tooltip' => 'searchprofile-advanced-tooltip',
-	                    'namespaces' => $this->getNamespaces(),
-	                    'parameters' => array( 'advanced' => 1 ),
-	            )
-	    );
+		if ( !empty( $wgEnableVenusSkin ) ) {
+			$profiles = $this->getDefaultVenusProfiles( $defaultNamespaces, $nsAllSet );
+		} else {
+			$profiles = $this->getDefaultProfiles( $defaultNamespaces, $nsAllSet );
+		}
 
-	    $this->getService()->invokeHook( 'SpecialSearchProfiles', array( &$profiles ) );
+
+		$this->getService()->invokeHook( 'SpecialSearchProfiles', array( &$profiles ) );
 
 	    foreach ( $profiles as $key => &$data ) {
 	        sort( $data['namespaces'] );
@@ -1315,5 +1294,81 @@ class Config
 	 */
 	public function getMainPage() {
 		return $this->mainPage;
+	}
+
+	/**
+	 * @param $defaultNamespaces
+	 * @param $nsAllSet
+	 * @return array
+	 */
+	protected function getDefaultProfiles( $defaultNamespaces, $nsAllSet ) {
+		$profiles = array(
+			SEARCH_PROFILE_DEFAULT => array(
+				'message' => 'wikiasearch2-tabs-articles',
+				'tooltip' => 'searchprofile-articles-tooltip',
+				'namespaces' => $defaultNamespaces,
+				'namespace-messages' => $this->getService()->getTextForNamespaces( $defaultNamespaces ),
+			),
+			SEARCH_PROFILE_IMAGES => array(
+				'message' => 'wikiasearch2-tabs-photos-and-videos',
+				'tooltip' => 'searchprofile-images-tooltip',
+				'namespaces' => array( NS_FILE ),
+			),
+			SEARCH_PROFILE_USERS => array(
+				'message' => 'wikiasearch2-users',
+				'tooltip' => 'wikiasearch2-users-tooltip',
+				'namespaces' => array( NS_USER )
+			), SEARCH_PROFILE_ALL => array(
+				'message' => 'searchprofile-everything',
+				'tooltip' => 'searchprofile-everything-tooltip',
+				'namespaces' => $nsAllSet,
+			),
+			SEARCH_PROFILE_ADVANCED => array(
+				'message' => 'searchprofile-advanced',
+				'tooltip' => 'searchprofile-advanced-tooltip',
+				'namespaces' => $this->getNamespaces(),
+				'parameters' => array( 'advanced' => 1 ),
+			)
+		);
+
+		return $profiles;
+	}
+
+	/**
+	 * @param $defaultNamespaces
+	 * @param $nsAllSet
+	 * @return array
+	 */
+	protected function getDefaultVenusProfiles( $defaultNamespaces, $nsAllSet ) {
+		$profiles = array(
+			SEARCH_PROFILE_ALL => array(
+				'message' => 'searchprofile-everything',
+				'tooltip' => 'searchprofile-everything-tooltip',
+				'namespaces' => $nsAllSet,
+			),
+			SEARCH_PROFILE_DEFAULT => array(
+				'message' => 'wikiasearch2-tabs-articles',
+				'tooltip' => 'searchprofile-articles-tooltip',
+				'namespaces' => $defaultNamespaces,
+				'namespace-messages' => $this->getService()->getTextForNamespaces( $defaultNamespaces ),
+			),
+			SEARCH_PROFILE_IMAGES => array(
+				'message' => 'wikiasearch2-tabs-photos-and-videos',
+				'tooltip' => 'searchprofile-images-tooltip',
+				'namespaces' => array( NS_FILE ),
+			),
+			SEARCH_PROFILE_USERS => array(
+				'message' => 'wikiasearch2-users',
+				'tooltip' => 'wikiasearch2-users-tooltip',
+				'namespaces' => array( NS_USER )
+			),
+			/*SEARCH_PROFILE_ADVANCED => array(
+				'message' => 'searchprofile-advanced',
+				'tooltip' => 'searchprofile-advanced-tooltip',
+				'namespaces' => $this->getNamespaces(),
+				'parameters' => array( 'advanced' => 1 ),
+			)*/
+		);
+		return $profiles;
 	}
 }

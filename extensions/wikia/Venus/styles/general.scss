@@ -1,3 +1,5 @@
+// TODO use Venus colors
+@import "skins/oasis/css/core/color.scss";
 
 html {
 	box-sizing: border-box;
@@ -5,4 +7,8 @@ html {
 
 *, *:before, *:after {
 	box-sizing: inherit;
+}
+
+a {
+	color: $color-links;
 }

@@ -1,5 +1,13 @@
+// TODO use Venus colors
+@import "skins/oasis/css/core/color.scss";
+@import "extensions/wikia/Venus/styles/mixins.scss";
+
+$color-search-form-background: mix($color-page, #000, 97%);
+@if $is-dark-wiki {
+	$color-search-form-background: mix($color-page, #fff, 90%);
+}
+
 a {
-	color: inherit;
 	text-decoration: none;
 }
 
@@ -82,6 +90,45 @@ a {
 		.subtext {
 			margin-bottom: 14px;
 			margin-top: 8px;
+		}
+	}
+}
+
+.SearchTabsContainer {
+	background-color: $color-search-form-background;
+	@include clearfix;
+}
+
+.SearchTabs {
+	list-style: none;
+	padding: 0;
+
+	li {
+		float: left;
+		margin-right: 45px;
+
+		a {
+			display: block;
+			line-height: 75px;
+		}
+
+		&.selected {
+			position: relative;
+			&:after {
+				border: 10px solid $color-page;
+				border-top-color: $color-search-form-background;
+				// TODO mixin calc
+				left: calc( 50% - 10px );
+				top: 75px;
+				display: block;
+				content: " ";
+				position: absolute;
+			}
+		}
+
+		a:hover, &.selected a {
+			color: $color-text;
+			font-weight: bold;
 		}
 	}
 }

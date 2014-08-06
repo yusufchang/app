@@ -1,5 +1,6 @@
 <form class="WikiaSearch" id="search-v2-form" action="<?=$specialSearchUrl;?>#">
-	<div class="SearchInput">
+	<? // TODO cleanup this code when we implement advanced options
+	/*<div class="SearchInput">
 		<?php if(!empty($advancedSearchBox)) : ?>
 			<p class="advanced-link"><a href="#" id="advanced-link"><?= wfMessage('searchprofile-advanced') ?></a></p>
 		<?php endif ?>
@@ -14,7 +15,7 @@
 			<?php echo $advancedSearchBox; ?>
 		<?php endif; ?>
 	</div>
-
+	*/ ?>
 	<?php echo $tabs; ?>
 
 	<div class="row">
