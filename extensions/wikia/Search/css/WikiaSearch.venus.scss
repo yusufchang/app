@@ -99,53 +99,53 @@ a {
 			margin-top: 8px;
 		}
 	}
-
-	.top-wiki-articles {
-		 font-size: 16px;
-		 line-height: 22px;
-		 padding: 0;
-		 width: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
-
-		 a {
-			 font-size: 18px;
-			 font-weight: bold;
-		 }
-
-		 div {
-			 overflow: hidden;
-		 }
-
-		 h1 {
-			 font-size: 18px;
-			 margin: 40px 0 0;
-			 padding: 0 $large-grid-gutter;
-		 }
-
-		 img {
-			 float: left;
-		 }
-
-		 .top-wiki-articles-item {
-			 border-bottom: 1px solid $color-text-light;
-			 padding: 20px 0;
-		 }
-
-		 .top-wiki-articles-snippet {
-			 padding: 0 $large-grid-gutter;
-		 }
-
-		 .thumbnail-large {
-			 height: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
-			 margin-bottom: 20px;
-			 width: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
-		 }
-
-		 .thumbnail-small {
-			 height: $large-grid-column + $large-grid-margin;
-			 width: $large-grid-column + $large-grid-margin;
-		 }
-	 }
 }
+
+.top-wiki-articles {
+	 font-size: 16px;
+	 line-height: 22px;
+	 padding: 0;
+	 width: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
+
+	 a {
+		 font-size: 18px;
+		 font-weight: bold;
+	 }
+
+	 div {
+		 overflow: hidden;
+	 }
+
+	 h1 {
+		 font-size: 18px;
+		 margin: 40px 0 0;
+		 padding: 0 $large-grid-gutter;
+	 }
+
+	 img {
+		 float: left;
+	 }
+
+	 .top-wiki-articles-item {
+		 border-bottom: 1px solid $color-text-light;
+		 padding: 20px 0;
+	 }
+
+	 .top-wiki-articles-snippet {
+		 padding: 0 $large-grid-gutter;
+	 }
+
+	 .thumbnail-large {
+		 height: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
+		 margin-bottom: 20px;
+		 width: ($large-grid-column + $large-grid-margin) * 4 + $large-grid-gutter * 3;
+	 }
+
+	 .thumbnail-small {
+		 height: $large-grid-column + $large-grid-margin;
+		 width: $large-grid-column + $large-grid-margin;
+	 }
+ }
 
 @media screen and (max-width: 1023px) {
 	.body-text {
@@ -166,6 +166,7 @@ a {
 	.thumbnail {
 		height: 138px;
 		width: 245px;
+
 		img {
 			max-width: 245px;
 		}
@@ -218,6 +219,7 @@ a {
 	.thumbnail {
 		height: 139px;
 		width: 247px;
+
 		img {
 			max-width: 247px;
 		}
