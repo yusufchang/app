@@ -10,7 +10,12 @@ class VideoAnnotationController extends WikiaController {
 	public function index() {
 		wfProfileIn( __METHOD__ );
 
-		$this->video = [];
+		$title = $this->request->getVal( 'title', '' );
+
+		$helper = new VideoAnnotationHelper();
+		$annotation = $helper->annotation( $title );
+
+		$this->annotation = $annotation;
 
 		wfProfileOut( __METHOD__ );
 	}
