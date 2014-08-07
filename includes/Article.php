@@ -226,6 +226,14 @@ class Article extends Page {
 	 *             current revision
 	 */
 	public function getOldID() {
+		global $wgEnableTimeMachineExt;
+
+		// Check if TimeMachine is enabled and has a revision to rewind to
+		if ( isset( $wgEnableTimeMachineExt ) && $wgEnableTimeMachineExt === true ) {
+			$timeMachine = new TimeMachine();
+			$this->mOldId = $timeMachine->getRevId( $this->getTitle() );
+		}
+
 		if ( is_null( $this->mOldId ) ) {
 			$this->mOldId = $this->getOldIDFromRequest();
 		}
