@@ -220,6 +220,22 @@ class Revision {
 	}
 
 	/**
+	 * Load the latest revision for the given title before the given timestamp.
+	 *
+	 * @param $title Title
+	 * @param $timestamp String
+	 * @return Revision or null
+	 */
+	public static function getLatestBeforeTimestamp( $title, $timestamp ) {
+		$db = wfGetDB( DB_SLAVE );
+		return Revision::loadFromConds( $db,
+			array( 'rev_timestamp < ' . $db->timestamp( $timestamp ),
+				   'page_namespace' => $title->getNamespace(),
+				   'page_title'     => $title->getDBkey() )
+		);
+	}
+
+	/**
 	 * Given a set of conditions, fetch a revision.
 	 *
 	 * @param $conditions Array
@@ -293,7 +309,7 @@ class Revision {
 			$fields,
 			$conditions,
 			__METHOD__,
-			array( 'LIMIT' => 1 ),
+			array( 'LIMIT' => 1, 'ORDER BY' => 'rev_id DESC' ),
 			array( 'page' => self::pageJoinCond(), 'user' => self::userJoinCond() )
 		);
 	}
