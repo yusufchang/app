@@ -10,6 +10,8 @@ class VideoAnnotationController extends WikiaController {
 	public function index() {
 		wfProfileIn( __METHOD__ );
 
+		$this->response->addAsset('video_annotation_js');
+
 		$title = $this->request->getVal( 'title', '' );
 
 		$helper = new VideoAnnotationHelper();

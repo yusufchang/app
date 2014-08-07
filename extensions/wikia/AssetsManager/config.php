@@ -1948,3 +1948,13 @@ $config['int_map_parser_tag_js_wikiamobile'] = [
 		'//extensions/wikia/WikiaInteractiveMaps/js/WikiaInteractiveMapsParserTag.wikiamobile.js'
 	]
 ];
+
+$config['video_annotation_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => ['oasis'],
+	'assets' => [
+		'//extensions/wikia/VideoAnnotation/scripts/views/form.js',
+		'//extensions/wikia/VideoAnnotation/scripts/views/overlay.js',
+		'//extensions/wikia/VideoAnnotation/scripts/controllers/index.js'
+	]
+];

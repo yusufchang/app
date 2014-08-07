@@ -12,7 +12,7 @@
  */
 class WikiaFilePage extends ImagePage {
 
-	const VIDEO_WIDTH = 670;
+	const VIDEO_WIDTH = '100%'; // 670;
 
 	/**
 	 * Override the default action behavior for videos

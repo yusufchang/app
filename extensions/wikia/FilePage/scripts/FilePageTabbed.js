@@ -133,6 +133,7 @@ $(function () {
 			this.initRemoveVideo();
 			this.initPagination();
 			this.initClickTracking();
+			this.initAnnotations();
 
 			// Hide global usage sections in Oasis
 			$('#globalusage, #mw-imagepage-section-globalusage')
@@ -253,6 +254,15 @@ $(function () {
 						action: globalTracker.ACTIONS.CLICK
 					});
 				}
+			});
+		},
+		initAnnotations: function () {
+			var self = this;
+			require(['annotaions.controllers.index'], function (Annotations) {
+				self.annotations = new Annotations({
+					$videoWrapper: $('.fullImageLink'),
+					$formWrapper: $('.video-annotations-wrapper')
+				});
 			});
 		}
 	};

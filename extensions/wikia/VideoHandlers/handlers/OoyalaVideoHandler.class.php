@@ -19,7 +19,7 @@ class OoyalaVideoHandler extends VideoHandler {
 		$autoPlayStr = ( $autoplay ) ? 'true' : 'false';
 
 		$html = <<<EOT
-<div id='{$playerId}' style="width:{$width}px; height:{$height}px"></div>
+<div id='{$playerId}' style="width:100%; height:100%"></div>
 EOT;
 
 		return array(

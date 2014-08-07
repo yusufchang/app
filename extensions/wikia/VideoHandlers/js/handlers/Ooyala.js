@@ -26,8 +26,8 @@ define('wikia.videohandler.ooyala', [
 			started = false,
 			tagUrl,
 			createParams = {
-				width: vb.width + 'px',
-				height: vb.height + 'px',
+				width: '100%', // vb.width + 'px',
+				height: '100%', //vb.height + 'px',
 				autoplay: params.autoPlay,
 				wmode: 'transparent'
 			};

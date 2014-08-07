@@ -7,7 +7,7 @@ require(['wikia.videoBootstrap', 'jquery', 'wikia.window', 'wikia.geo'], functio
 	 */
 	function initVideo() {
 		if (window.playerParams) {
-			var filePageVideoWidth = 670,
+			var filePageVideoWidth = '100%',
 				element = $('#file'),
 				clickSource = 'filePage',
 				videoInstance = new VideoBootstrap(element[0], window.playerParams, clickSource);
