@@ -21,19 +21,10 @@ $wgExtensionCredits['videoannotation'][] = array(
 $dir = dirname( __FILE__ ) . '/';
 
 // classes
-$wgAutoloadClasses[ 'VideoAnnotation'] =  $dir. 'VideoAnnotation.class.php' ;
+$wgAutoloadClasses['VideoAnnotationHelper'] =  $dir. 'VideoAnnotationHelper.class.php' ;
 
 // controllers
-$wgAutoloadClasses['VideoAnnotationSpecialController'] =  $dir . 'VideoAnnotationSpecialController.class.php';
-
-// special pages
-$wgSpecialPages['VideoAnnotation'] = 'VideoAnnotationSpecialController';
-
-$wgSpecialPageGroups['VideoAnnotation'] = 'media';
-
-// permissions
-$wgGroupPermissions['*']['videoannotation'] = false;
-$wgGroupPermissions['staff']['videoannotation'] = true;
+$wgAutoloadClasses['VideoAnnotationController'] =  $dir . 'VideoAnnotationController.class.php';
 
 // i18n mapping
 $wgExtensionMessagesFiles['VideoAnnotation'] = $dir . 'VideoAnnotation.i18n.php';

@@ -1,12 +1,8 @@
 <?php
 
-class VideoAnnotationSpecialController extends WikiaSpecialPageController {
+class VideoAnnotationController extends WikiaController {
 
 	const DEFAULT_TEMPLATE_ENGINE = WikiaResponse::TEMPLATE_ENGINE_MUSTACHE;
-
-	public function __construct() {
-		parent::__construct( 'VideoAnnotation', 'videoannotation', true );
-	}
 
 	/**
 	 * VideoAnnotation
