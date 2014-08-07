@@ -10,4 +10,10 @@
 			<a><?= wfMessage('file-page-tab-metadata') ?></a>
 		</li>
 	<? endif; ?>
+	<? if($showAnnotations): ?>
+		<li data-tab="annotations">
+			<a><?= wfMessage('file-page-tab-annotations')->text() ?></a>
+		</li>
+	<? endif; ?>
+
 </ul>

@@ -13,7 +13,7 @@ class VideoAnnotationController extends WikiaController {
 		$title = $this->request->getVal( 'title', '' );
 
 		$helper = new VideoAnnotationHelper();
-		$annotation = $helper->annotation( $title );
+		$annotation = $helper->getAnnotation( $title );
 
 		$this->annotation = $annotation;
 

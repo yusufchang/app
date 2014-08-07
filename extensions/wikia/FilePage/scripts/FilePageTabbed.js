@@ -130,11 +130,8 @@ $(function () {
 	FilePageTabbed = {
 		init: function () {
 			this.initTabCookies();
-
 			this.initRemoveVideo();
-
 			this.initPagination();
-
 			this.initClickTracking();
 
 			// Hide global usage sections in Oasis

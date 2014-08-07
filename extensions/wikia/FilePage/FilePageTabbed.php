@@ -119,6 +119,7 @@ class FilePageTabbed extends WikiaFilePage {
 	 */
 	protected function imageFooter() {
 		$out = $this->getContext()->getOutput();
+		$out->addHTML( F::app()->renderView( 'FilePageController', 'videoAnnotations', array() ) );
 		$out->addHTML( F::app()->renderView( 'FilePageController', 'relatedPages', array() ) );
 	}
 
@@ -135,7 +136,14 @@ class FilePageTabbed extends WikiaFilePage {
 		$app = F::app();
 		$out = $this->getContext()->getOutput();
 
-		$tabs = $app->renderPartial( 'FilePageController', 'tabs', array('showmeta' => $this->showmeta ) );
+		// hackathon!
+		$showAnnotations = true;
+
+		$tabs = $app->renderPartial( 'FilePageController', 'tabs', array(
+			'showmeta' => $this->showmeta,
+			'showAnnotations' => $showAnnotations
+			) );
+
 		$out->addHtml($tabs);
 
 		wfProfileOut( __METHOD__ );

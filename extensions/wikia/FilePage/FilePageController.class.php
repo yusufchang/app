@@ -591,4 +591,8 @@ SQL;
 
 		return $fullData;
 	}
+
+	public function videoAnnotations() {
+		$this->annotations = F::app()->renderView('VideoAnnotationController', 'index', []);
+	}
 }

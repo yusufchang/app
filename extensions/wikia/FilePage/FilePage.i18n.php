@@ -29,6 +29,7 @@ Enter the description here.',
 	'file-page-tab-about' => 'About',
 	'file-page-tab-history' => 'File History',
 	'file-page-tab-metadata' => 'Metadata',
+	'file-page-tab-annotations' => 'Annotations',
 	'file-page-more-links' => 'See full list',
 );
 
