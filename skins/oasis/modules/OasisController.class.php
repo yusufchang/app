@@ -168,6 +168,12 @@ class OasisController extends WikiaController {
 		$bodyClasses = array_merge($bodyClasses, self::$extraBodyClasses);
 		$bodyClasses[] = $this->skinNameClass;
 
+		// Wikia TimeMachine Hack
+		$tm = new TimeMachine();
+		if ( $tm->isActive() ) {
+			$bodyClasses[] = 'time-machine';
+		}
+
 		if(Wikia::isMainPage()) {
 			$bodyClasses[] = 'mainpage';
 		}

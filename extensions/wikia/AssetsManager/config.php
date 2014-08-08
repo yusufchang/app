@@ -1674,13 +1674,6 @@ $config['ui_repo_api_js'] = array(
 	)
 );
 
-//$config['timemachine_scss'] = array(
-//	'type' => AssetsManager::TYPE_SCSS,
-//	'assets' => array(
-//		'//extensions/wikia/TimeMachine/css/TimeMachine.css'
-//	)
-//);
-//
 $config['time_machine_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(

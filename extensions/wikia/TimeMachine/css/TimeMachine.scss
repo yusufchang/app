@@ -1,0 +1,19 @@
+#TimeMachine {
+	background: url(/extensions/wikia/TimeMachine/images/time-machine.gif);
+
+	.close {
+		cursor: pointer;
+		float: right;
+		padding: 7px;
+	}
+}
+
+body.time-machine {
+	.subtitle,
+	.RelatedForumDiscussion,
+	#WikiaArticleComments,
+	#WikiaPageHeader .wikia-menu-button,
+	#WikiaPageHeader a.comments {
+		display: none;
+	}
+}
