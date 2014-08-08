@@ -4,7 +4,7 @@ $(function () {
 	var TimeMachine = {
 
 		// Pretend-immutable
-		COOKIE_NAME = 'time_machine',
+		COOKIE_NAME: 'time_machine',
 
 		bar: false,
 
