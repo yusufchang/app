@@ -37,6 +37,8 @@ define('wikia.videohandler.ooyala', [
 
 			messageBus.subscribe(window.OO.EVENTS.PLAYBACK_READY, 'ready', function () {
 				player.setClosedCaptionsLanguage('en');
+				window.ooyalaPlayerInstance = player;
+				$(window).trigger('play.ooyala');
 			});
 
 			// Player has loaded

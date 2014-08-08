@@ -1,19 +1,20 @@
 define('annotaions.controllers.index', [
-	'annotations.views.overlay',
+	'annotations.views.button',
     'annotations.views.form'
-], function (Overlay, Form) {
+], function (Button, Form) {
 	'use strict';
 
 	function Annotations(options) {
 		var $videoWrapper = options.$videoWrapper,
 			$formWrapper = options.$formWrapper;
 
-		this.overlay = new Overlay({
-			$el: $videoWrapper
-		});
-
 		this.form = new Form({
 			$el: $formWrapper
+		});
+
+		this.button = new Button({
+			$el: $videoWrapper,
+			form: this.form
 		});
 
 	}

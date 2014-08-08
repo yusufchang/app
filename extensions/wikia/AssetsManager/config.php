@@ -1954,7 +1954,7 @@ $config['video_annotation_js'] = [
 	'skin' => ['oasis'],
 	'assets' => [
 		'//extensions/wikia/VideoAnnotation/scripts/views/form.js',
-		'//extensions/wikia/VideoAnnotation/scripts/views/overlay.js',
+		'//extensions/wikia/VideoAnnotation/scripts/views/button.js',
 		'//extensions/wikia/VideoAnnotation/scripts/controllers/index.js'
 	]
 ];
