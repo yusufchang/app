@@ -21,12 +21,6 @@ class VideoAnnotationController extends WikiaController {
 			return;
 		}
 
-		if ( !VideoAnnotationHelper::isValidProvider( $file ) ) {
-			$this->result = 'error';
-			$this->msg = wfMessage( 'videoannotation-error-invalid-provider' )->text();
-			return;
-		}
-
 		$helper = new VideoAnnotationHelper();
 		$annotation = $helper->getAnnotation( $file );
 
@@ -49,15 +43,9 @@ class VideoAnnotationController extends WikiaController {
 			return;
 		}
 
-		if ( $file->getProviderName() != 'ooyala' ) {
+		if ( !VideoAnnotationHelper::isValidProvider( $file ) ) {
 			$this->result = 'error';
 			$this->msg = wfMessage( 'videoannotation-error-invalid-provider' )->text();
-			return;
-		}
-
-		if ( empty( $annotation ) ) {
-			$this->result = 'error';
-			$this->msg = wfMessage( 'videoannotation-error-empty-annotation' )->text();
 			return;
 		}
 
