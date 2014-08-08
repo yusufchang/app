@@ -1948,3 +1948,13 @@ $config['int_map_parser_tag_js_wikiamobile'] = [
 		'//extensions/wikia/WikiaInteractiveMaps/js/WikiaInteractiveMapsParserTag.wikiamobile.js'
 	]
 ];
+
+/* extension/wikia/UltimateNavigation */
+$config['ultimate_navigation_js'] = array(
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => [ 'oasis' ],
+	'assets' => array(
+		'//extensions/wikia/UltimateNavigation/vendor/qtip2/jquery.qtip.js',
+		'//extensions/wikia/UltimateNavigation/js/ultinav.js',
+	)
+);

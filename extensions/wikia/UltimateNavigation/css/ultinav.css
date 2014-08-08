@@ -1,0 +1,25 @@
+body {
+	top: 25px;
+}
+
+#ultinav {
+	position: fixed;
+	height: 25px;
+	width: 100%;
+	background-color: #F2FFD0;
+	top: 0;
+	padding: 2px;
+	vertical-align: middle;
+	z-index: 1000;
+}
+
+#ultinav > div, #ultinav .context-ctr span {
+	display: inline-block;
+}
+#ultinav .nav-menu {
+	float: right;
+}
+.qtip {
+	max-width: 800px;
+	width: 800px;
+}
