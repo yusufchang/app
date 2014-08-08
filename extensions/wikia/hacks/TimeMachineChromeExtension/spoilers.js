@@ -29,10 +29,15 @@ function scanSRP() {
 		$result = $( this );
 		$link = $result.find( 'h3 > a' ).first();
 		if ( $link.attr( 'href' ).indexOf('wikia.com') != -1 ) {
+			redirectLinkToDev( $link );
 			insertControls( $result, $link );
 		}
 	} );
 };
+
+function redirectLinkToDev( $link ) {
+	$link.attr( 'href', prodToDev( $link.attr( 'href' ) ) );
+}
 
 /**
  * Inserts Time Machine controls for links to Wikia
@@ -90,7 +95,7 @@ function onEpisodeChange( e ) {
 	chrome.runtime.sendMessage(
 		cookieData,
 		function( response ) {
-			document.location = prodToDev( href );
+			document.location = href;
 		}
 	);
 };
@@ -139,7 +144,7 @@ function onSeasonChange( e ) {
 function getShowData( $link ) {
 	var $show, $episodeList, $season, seasonNumber, $episode,
 		href = $link.attr('href'),
-		subdomain = href.slice( href.indexOf( '://' ) + 3, href.indexOf( '.wikia.com' ) ),
+		subdomain = href.slice( href.indexOf( '://' ) + 3, href.indexOf( '.' ) ),
 
 		showData = {
 			'name': '',
