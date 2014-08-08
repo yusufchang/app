@@ -36,7 +36,13 @@ class VideoAnnotationHelper extends WikiaModel {
 	}
 
 	public static function isValidProvider( $file ) {
-		return in_array( $file->getProviderName(), self::$validProviders );
+		$provider = $file->getProviderName();
+		if ( strstr( $provider, '/' ) ) {
+			$providers = explode( '/', $provider );
+			$provider = $providers[0];
+		}
+
+		return in_array( $provider, self::$validProviders );
 	}
 
 }
