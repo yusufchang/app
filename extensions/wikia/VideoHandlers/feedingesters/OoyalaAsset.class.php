@@ -830,4 +830,24 @@ class OoyalaAsset extends WikiaModel {
 		return $result;
 	}
 
+
+	/**
+	 * Send request to Ooyala to delete closed caption
+	 * @param string $videoId
+	 * @return boolean
+	 */
+	public static function deleteClosedCaption( $videoId ) {
+		wfProfileIn( __METHOD__ );
+
+		$method = 'DELETE';
+		$reqPath = '/v2/assets/'.$videoId.'/closed_captions';
+		$url = OoyalaApiWrapper::getApi( $method, $reqPath );
+		$req = MWHttpRequest::factory( $url, [ 'method' => $method, 'noProxy' => true] );
+		$status = $req->execute();
+
+		wfProfileOut( __METHOD__ );
+
+		return $status->isGood();
+	}
+
 }

@@ -35,6 +35,14 @@ class VideoAnnotationHelper extends WikiaModel {
 		return $status;
 	}
 
+	public function deleteAnnotation( $file ) {
+		$articleId = $file->getTitle()->getArticleID();
+		wfDeleteWikiaPageProp( WPP_VIDEO_ANNOTATION, $articleId );
+		$status = OoyalaAsset::deleteClosedCaption( $file->getVideoId() );
+
+		return $status;
+	}
+
 	public static function isValidProvider( $file ) {
 		$provider = $file->getProviderName();
 		if ( strstr( $provider, '/' ) ) {

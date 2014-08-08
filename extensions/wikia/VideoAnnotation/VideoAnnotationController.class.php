@@ -50,7 +50,12 @@ class VideoAnnotationController extends WikiaController {
 		}
 
 		$helper = new VideoAnnotationHelper();
-		$status = $helper->setAnnotation( $file, $annotation );
+		if ( empty( $annotation ) ) {
+			$status = $helper->deleteAnnotation( $file );
+		} else {
+			$status = $helper->setAnnotation( $file, $annotation );
+		}
+
 		if ( !$status ) {
 			$this->result = 'error';
 			$this->msg = wfMessage( 'videoannotation-error-edited' )->text();
