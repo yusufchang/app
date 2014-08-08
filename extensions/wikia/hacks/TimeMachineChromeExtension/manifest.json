@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "Wikia Spoilers",
+  "description": "Don't get spoiled.",
+  "version": "0.1",
+  "permissions": [
+    "cookies",
+    "https://www.google.com/",
+    "http://services.tvrage.com/",
+    "*://*.wikia.com/",
+    "*://wikia.com/"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/*"],
+      "js": ["jquery.min.js", "spoilers.js"]
+    }
+  ]
+}
