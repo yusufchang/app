@@ -1,7 +1,6 @@
 document.addEventListener( 'DOMNodeInserted', verifySRP, false );
 $( verifySRP );
 
-
 /**
  * Verifies that the current page is a Google Search Results Page
  */
@@ -48,7 +47,7 @@ function redirectLinkToDev( $link ) {
 function insertControls( $result, $link ) {
 	$.when( getShowData( $link ) ).then( function( showData ) {
 		var i, seasonNumber,
-			$wrapper = $( '<div class="WikiaTimeMachine"></div>' ),
+			$wrapper = $( '<div class="WikiaTimeMachine"><p>Not caught up? Read safely with SpoilerGuard.</p></div>' ),
 			$season = $( '<select class="WikiaSeason"></select>' ),
 			$episode = $( '<select class="WikiaEpisode"></select>' );
 
@@ -107,7 +106,7 @@ function onEpisodeChange( e ) {
  * @returns {string}
  */
 function prodToDev( url ) {
-	return url.replace( 'wikia', 'garth.wikia-dev' );
+	return url.replace( 'wikia', 'christian.wikia-dev' );
 };
 
 /**

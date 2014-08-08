@@ -15,9 +15,13 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+  "web_accessible_resources": [
+    "*.png"
+  ],
   "content_scripts": [
     {
       "matches": ["https://www.google.com/*"],
+      "css": ["spoilers.css"],
       "js": ["jquery.min.js", "spoilers.js"]
     }
   ]
