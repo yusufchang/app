@@ -29,8 +29,8 @@ function scanSRP() {
 		$result = $( this );
 		$link = $result.find( 'h3 > a' ).first();
 		if ( $link.attr( 'href' ).indexOf('wikia.com') != -1 ) {
-			redirectLinkToDev( $link );
 			insertControls( $result, $link );
+			redirectLinkToDev( $link );
 		}
 	} );
 };
@@ -79,7 +79,7 @@ function insertControls( $result, $link ) {
  */
 function onEpisodeChange( e ) {
 	var href = e.data.$link.attr('href'),
-		subdomain = href.slice( href.indexOf( '://' ) + 3, href.indexOf( '.wikia.com' ) ),
+		subdomain = href.slice( href.indexOf( '://' ) + 3, href.indexOf( '.' ) ),
 		timestamp = e.target.options[e.target.options.selectedIndex].value,
 		seasonIndex = e.data.$season[0].options.selectedIndex,
 		episodeIndex = e.target.options.selectedIndex;
