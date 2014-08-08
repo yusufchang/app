@@ -1,3 +1,1 @@
-<div id="TimeMachine">
-	<p>This is your Time Machine</p>
-</div>
+<p>Not caught up? Read safely with SpoilerGuard.</p>
