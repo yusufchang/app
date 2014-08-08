@@ -6,6 +6,7 @@ $(function () {
 		// Pretend-immutable
 		COOKIE_NAME: 'time_machine',
 		subdomain: window.location.hostname.split('.')[0],
+		cookieDomain: window.location.hostname.split('.').slice(-2).join('.'),
 		bar: false,
 
 		init: function () {
@@ -38,10 +39,10 @@ $(function () {
 							.html(data.content)
 							.insertAfter('#WikiaHeader')
 							.find( '.close' ).on( 'click', function () {
-								TimeMachine.clearCookie( window.location.hostname.split('.')[0] );
+								TimeMachine.clearCookie();
 								window.location.reload();
 							} );
-						TimeMachine.insertControls();
+						TimeMachine.insertControls(JSON.parse(data.showData));
 					} else if (viewType === 'activation') {
 						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
 							.addClass('activation')
@@ -55,32 +56,29 @@ $(function () {
 		 * Inserts Time Machine controls for links to Wikia
 		 *
 		 */
-		insertControls: function () {
-			$.when( TimeMachine.getShowData() ).then( function( showData ) {
-				var i, seasonNumber,
-					$season = $('#TimeMachine .WikiaSeason'),
-					$episode = $('#TimeMachine .WikiaEpisode');
+		insertControls: function (showData) {
+			var i, seasonNumber,
+				$season = $('#TimeMachine .WikiaSeason'),
+				$episode = $('#TimeMachine .WikiaEpisode');
 
-				//Season
-				$season
-					.append( '<option value="0">Choose a season</opiton>' )
-					.on( 'change', { 'showData': showData, '$episode': $episode }, TimeMachine.onSeasonChange );
+			//Season
+			$season
+				.append( '<option value="0">Choose a season</opiton>' )
+				.on( 'change', { 'showData': showData, '$episode': $episode }, TimeMachine.onSeasonChange );
 
-				for ( i = 0; i < showData.seasons; i++ ) {
-					seasonNumber = i + 1;
-					$season.append( '<option value="' + seasonNumber + '">' + seasonNumber + '</option>');
-				}
+			for ( i = 0; i < showData.seasons; i++ ) {
+				seasonNumber = i + 1;
+				$season.append( '<option value="' + seasonNumber + '">' + seasonNumber + '</option>');
+			}
 
-				//Episode
-				$episode
-					.on( 'change', { '$season': $season }, TimeMachine.onEpisodeChange )
-					.hide();
-			});
+			//Episode
+			$episode
+				.on( 'change', { '$season': $season }, TimeMachine.onEpisodeChange )
+				.hide();
 		},
 
 		clearCookie: function () {
 			var cookies = document.cookie.split( ';' ),
-				host = window.location.hostname.split( '.' ),
 				newValue = '';
 
 			for ( var i in cookies ) {
@@ -89,7 +87,7 @@ $(function () {
 					// Convert the cookie value to an object
 					var cookieObj = JSON.parse( cookies[i].substr( cookies[i].indexOf('=') + 1 ) );
 					// Remove the setting for the specified wiki
-					delete cookieObj[host[0]];
+					delete cookieObj[TimeMachine.subdomain];
 					// Convert the object back to a string
 					newValue = JSON.stringify( cookieObj );
 					break;
@@ -97,7 +95,7 @@ $(function () {
 			}
 
 			// Set the new value of the cookie (might be "{}")
-			document.cookie = this.COOKIE_NAME + '=' + newValue + ';path=/;domain=.' + host[host.length - 2] + '.' + host[host.length - 1];
+			document.cookie = this.COOKIE_NAME + '=' + newValue + ';path=/;domain=.' + TimeMachine.cookieDomain;
 		},
 
 		/**
@@ -111,13 +109,14 @@ $(function () {
 				episodeIndex = e.target.options.selectedIndex,
 				tmCookie;
 
-			tmCookie = $.cookie('time_machine') || {};
+			tmCookie = JSON.parse($.cookie('time_machine')) || {};
 			tmCookie[TimeMachine.subdomain] = {
 				'timestamp': timestamp,
 				'season': seasonIndex,
 				'episode': episodeIndex
 			};
-			$.cookie('time_machine', JSON.stringify(tmCookie), {path: '/'});
+
+			$.cookie('time_machine', JSON.stringify(tmCookie), {path: '/', domain: TimeMachine.cookieDomain});
 			document.location.reload();
 		},
 
@@ -144,53 +143,6 @@ $(function () {
 					e.data.$episode.append( '<option value="' + episodes[i][2] + '">' + episodes[i][1] + '</option>' );
 				}
 			}
-		},
-
-		/**
-		 * Gets the structured data about the show
-		 *
-		 * @returns {jQuery.promise}
-		 */
-		getShowData: function () {
-			var $show, $episodeList, $season, seasonNumber, $episode,
-				showData = {
-					'name': '',
-					'id': '',
-					'seasons': '',
-					'episodes': {}
-				},
-				dfd = $.Deferred();
-
-			$.get( 'http://services.tvrage.com/feeds/search.php?show=' + TimeMachine.subdomain, function( doc ) {
-				$show = $( doc ).find( 'show' ).first();
-				showData.name = $show.find( 'name' ).text();
-				showData.id = $show.find( 'showid' ).text();
-				showData.seasons = $show.find( 'seasons' ).text();
-
-				$.get( 'http://services.tvrage.com/feeds/episode_list.php?sid=' + showData.id, function( doc ) {
-					$episodeList = $( doc ).find( 'Show Episodelist' );
-
-					// Iterate through season list
-					$episodeList.find('Season').each( function() {
-						$season = $( this );
-						seasonNumber = $season.attr('no');
-						showData.episodes[ seasonNumber ] = [];
-
-						// Iterate through a season's episode list
-						$season.find( 'episode' ).each( function( i ) {
-							$episode = $( this );
-							showData.episodes[ seasonNumber ].push( [
-								i + 1,
-								$episode.find( 'title' ).text().replace( '-', ' ' ),
-								new Date( $episode.find( 'airdate' ).text() ).getTime() / 1000
-							] );
-						});
-					});
-					//return showData;
-					dfd.resolve( showData );
-				});
-			});
-			return dfd.promise();
 		}
 	};
 

@@ -4,6 +4,7 @@ class TimeMachine {
 
 	/** @var  array $data */
 	private $data;
+	private $subdomain;
 
 	public function __construct() {
 		// Get Time Machine date from cookie, if available, and use it to rewind article to the closest revision
@@ -12,7 +13,9 @@ class TimeMachine {
 
 			// Look for the subdomain we were requested from
 			$server_parts = explode( '.', $_SERVER[ 'SERVER_NAME' ] );
-			$this->data = $timeMachineData[ $server_parts[0] ];
+			$this->subdomain = $server_parts[0];
+
+			$this->data = $timeMachineData[ $this->subdomain ];
 		}
 	}
 
@@ -23,6 +26,10 @@ class TimeMachine {
 
 	public function isInactive() {
 		return ! $this->isActive();
+	}
+
+	public function getSubdomain() {
+		return $this->subdomain;
 	}
 
 	/**
