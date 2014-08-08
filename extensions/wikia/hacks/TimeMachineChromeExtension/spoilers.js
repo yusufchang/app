@@ -90,7 +90,7 @@ function onEpisodeChange( e ) {
 	chrome.runtime.sendMessage(
 		cookieData,
 		function( response ) {
-			document.location = href;
+			document.location = prodToDev( href );
 		}
 	);
 };
@@ -102,10 +102,7 @@ function onEpisodeChange( e ) {
  * @returns {string}
  */
 function prodToDev( url ) {
-	muppet.wikia.com
-	muppet.garth.wikia-dev.com
-
-	debugger;
+	return url.replace( 'wikia', 'garth.wikia-dev' );
 };
 
 /**
