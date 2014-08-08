@@ -10,7 +10,10 @@
 
 body.time-machine {
 	.subtitle,
-	.RelatedForumDiscussion {
+	.RelatedForumDiscussion,
+	#WikiaArticleComments,
+	#WikiaPageHeader .wikia-menu-button,
+	#WikiaPageHeader a.comments {
 		display: none;
 	}
 }
