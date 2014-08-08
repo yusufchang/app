@@ -5,16 +5,14 @@ class TimeMachine {
 	/** @var  array $data */
 	private $data;
 
-	public function __constructor() {
+	public function __construct() {
 		// Get Time Machine date from cookie, if available, and use it to rewind article to the closest revision
-		if ( $_COOKIE['time_machine'] ) {
-			// Translate our city ID into the subdomain for this wikia
-			$dbname = WikiFactory::IDtoDB( F::app()->wg->CityId );
-			$domain = WikiFactory::DBtoDomain( $dbname );
-			$parts = explode('.', $domain);
+		if ( $_COOKIE[ 'time_machine' ] ) {
+			$timeMachineData = json_decode( $_COOKIE[ 'time_machine' ], true );
 
-			$timeMachineData = json_decode( $_COOKIE['time_machine'], true );
-			$this->data = $timeMachineData[ $parts[0] ];
+			// Look for the subdomain we were requested from
+			$server_parts = explode( '.', $_SERVER[ 'SERVER_NAME' ] );
+			$this->data = $timeMachineData[ $server_parts[0] ];
 		}
 	}
 
