@@ -12,8 +12,7 @@ class VideoAnnotationController extends WikiaController {
 
 		$this->response->addAsset('video_annotation_js');
 
-		//$videoTitle = $this->request->getVal( 'videoTitle', '' );
-		$videoTitle = 'IVA_test_4';
+		$videoTitle = $this->request->getVal( 'videoTitle', '' );
 
 		$file = WikiaFileHelper::getVideoFileFromTitle( $videoTitle );
 		if ( empty( $file ) ) {
@@ -40,8 +39,7 @@ class VideoAnnotationController extends WikiaController {
 	public function save() {
 		wfProfileIn( __METHOD__ );
 
-		$videoTitle = 'IVA_test_4';
-		//$videoTitle = $this->request->getVal( 'videoTitle', '' );
+		$videoTitle = $this->request->getVal( 'videoTitle', '' );
 		$annotation = $this->request->getVal( 'annotation', [] );
 
 		$file = WikiaFileHelper::getVideoFileFromTitle( $videoTitle );
@@ -59,7 +57,7 @@ class VideoAnnotationController extends WikiaController {
 
 		if ( empty( $annotation ) ) {
 			$this->result = 'error';
-			$this->msg = wfMessage( 'videoannotation-empty-annotation' )->text();
+			$this->msg = wfMessage( 'videoannotation-error-empty-annotation' )->text();
 			return;
 		}
 

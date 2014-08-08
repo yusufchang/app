@@ -20,14 +20,14 @@ class VideoAnnotationHelper extends WikiaModel {
 	}
 
 	public function setAnnotation( $file, $annotation ) {
+		$articleId = $file->getTitle()->getArticleID();
+		wfSetWikiaPageProp( WPP_VIDEO_ANNOTATION, $articleId, $annotation );
+
 		$timeFormat = 'H:i:s';
 		foreach( $annotation as &$list ) {
 			$list['begin'] = gmdate( $timeFormat, $list['begin'] );
 			$list['end'] = gmdate( $timeFormat, $list['end'] );
 		}
-
-		$articleId = $file->getTitle()->getArticleID();
-		wfSetWikiaPageProp( WPP_VIDEO_ANNOTATION, $articleId, $annotation );
 
 		$data = $this->app->renderView( 'VideoAnnotation', 'dfxp', [ 'annotation' => $annotation ] );
 		$status = OoyalaAsset::setClosedCaption( $file->getVideoId(), $data );
