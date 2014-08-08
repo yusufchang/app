@@ -7,16 +7,8 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		this.$formHolder = $('#annotation-form-holder');
 		this.submitAdded = false;
 		this.title = window.location.href.split('File:')[1];
-		this.render();
-	}
-
-	Button.prototype.render = function () {
-		var $button = $('<button class="annotation-control big">Annotate</button>');
-
-		$('.video-page-caption .video-views').before($button);
-		this.$button = $button;
 		this.bindEvents();
-	};
+	}
 
 	Button.prototype.bindEvents = function() {
 		if (!window.ooyalaPlayerInstance) {
@@ -26,10 +18,24 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		}
 	};
 
+	Button.prototype.renderButtons = function () {
+		var $button = $('<button class="annotation-control big">Annotate</button>')
+				.attr('disabled', true),
+			$startPause = $('<button class="annotation-start-pause big secondary" data-action="play">Start</button>');
+
+		$('.video-page-caption .video-views').before($button);
+		$startPause.insertBefore($button);
+		this.$startPause = $startPause;
+		this.$button = $button;
+	};
+
 	Button.prototype.init = function () {
 		var self = this,
-			time;
+			time,
+			messageBus;
+
 		this.player = window.ooyalaPlayerInstance;
+		this.renderButtons();
 
 		this.$button.on('click', function () {
 			time = self.player.getPlayheadTime();
@@ -39,6 +45,30 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 			}
 			self.player.pause();
 			self.addForm(time);
+		});
+
+		// handle play/pause button interaction
+		messageBus = this.player.mb;
+		messageBus.subscribe(window.OO.EVENTS.PLAYING, 'annotations', function () {
+			self.$startPause.html('Pause')
+				.data('action', 'pause');
+			self.$button.attr('disabled', false);
+		});
+		messageBus.subscribe(window.OO.EVENTS.PAUSED, 'annotations', function () {
+			self.$startPause.html('Play')
+				.data('action', 'play');
+			self.$button.attr('disabled', true);
+		});
+
+		this.$startPause.on('click', function () {
+			var $this = $(this),
+				action = $this.data('action');
+
+			if (action === 'play') {
+				self.player.play();
+			} else {
+				self.player.pause();
+			}
 		});
 	};
 

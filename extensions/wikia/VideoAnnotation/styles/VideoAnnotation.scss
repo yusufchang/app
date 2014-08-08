@@ -18,8 +18,9 @@
 	}
 }
 
-.annotation-control {
+.annotation-control, .annotation-start-pause {
 	display: block;
 	float: right;
-	margin: -10px 0 0 20px;
+	margin: -10px 0 0 10px;
+	outline: none;
 }
