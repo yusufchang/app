@@ -12,11 +12,11 @@ class TimeMachineHooks extends WikiaObject {
 
 			$out->addScript( "<script src='{$script}'></script>" );
 		}
-
-//		$out->addStyle(
-//			AssetsManager::getInstance()->getSassCommonURL('/extensions/wikia/MediaGallery/styles/MediaGallery.scss' )
-//		);
-
+		
+		$out->addStyle(
+			AssetsManager::getInstance()->getSassCommonURL('/extensions/wikia/TimeMachine/css/TimeMachine.scss' )
+		);
+		
 		wfProfileOut(__METHOD__);
 		return true;
 	}
