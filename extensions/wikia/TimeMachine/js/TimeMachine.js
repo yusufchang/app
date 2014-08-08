@@ -3,11 +3,14 @@ $(function () {
 
 	var TimeMachine = {
 
+		// Pretend-immutable
+		COOKIE_NAME = 'time_machine',
+
 		bar: false,
 
 		show: function () {
 			var subdomain = window.location.hostname.split('.')[0],
-				data = $.cookie('time_machine'),
+				data = $.cookie(this.COOKIE_NAME),
 				timeMachineData,
 				wikiData = '',
 				viewType = '',
@@ -38,6 +41,9 @@ $(function () {
 							html(data.content).
 							insertAfter('header#WikiaPageHeader');
 					}
+					this.bar.find( '.close' ).on( 'click', function () {
+						TimeMachine.clearCookie('adventuretime');
+					} );
 				});
 		},
 
@@ -50,6 +56,26 @@ $(function () {
 
 		init: function () {
 			this.show();
+		},
+
+		clearCookie: function () {
+			var cookies = document.cookie.split( ';' ),
+				host = window.location.host.split( '.' );
+
+			for ( var i in cookies ) {
+				// Search through all cookies for the cookie
+				if ( cookies[i].trim().indexOf( this.COOKIE_NAME ) === 0 ) {
+					// Convert the cookie value to an object
+					var cookieObj = JSON.parse( cookies[i].substr( cookies[i].indexOf('=') + 1 ) );
+					// Remove the setting for the specified wiki
+					delete cookieObj[host[0]];
+					// Convert the object back to a string
+					newValue = JSON.stringify( cookieObj );
+				}
+			}
+
+			// Set the new value of the cookie (might be "{}")
+			document.cookie = this.COOKIE_NAME + '=' + newValue + ';domain=.' + host[host.length - 2] + '.' + host[host.length - 1];
 		}
 	}
 
