@@ -1,15 +1,17 @@
-<div class="form-item columns small-4">
-	<a class="close" href="#">x</a>
-	<div class="input-group">
-		<label for="start">Start Time</label>
-		<input type="text" name="start" class="start-time" value="{{startTime}}">
+<li class="form-item">
+	<div class="inner">
+		<a class="close" href="#">x</a>
+		<div class="input-group">
+			<label for="start">Start Time</label>
+			<input type="text" name="start" class="start-time" value="{{startTime}}">
+		</div>
+		<div class="input-group">
+			<label for="duration">Duration (in seconds)</label>
+			<input type="text" name="duration" class="duration" value="{{duration}}">
+		</div>
+		<div class="input-group">
+			<label for="message">Annotation</label>
+			<textarea name="message" class="message">{{message}}</textarea>
+		</div>
 	</div>
-	<div class="input-group">
-		<label for="duration">Duration (in seconds)</label>
-		<input type="text" name="duration" class="duration" value="{{duration}}">
-	</div>
-	<div class="input-group">
-		<label for="message">Annotation</label>
-		<textarea name="message" class="message">{{message}}</textarea>
-	</div>
-</div>
+</li>

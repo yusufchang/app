@@ -26,22 +26,29 @@
 }
 
 #annotation-form-holder {
-	margin: 0;
+	margin: 0 -0.83333em;
 }
 
 #submit-annotation-form {
 	clear: both;
 	float: right;
-	margin-top: 10px;
+	outline: none;
 }
 
 .video-annotations-wrapper {
 	.form-item {
-		@include clearfix;
-		border: 1px solid #CCC;
-		border-radius: 10px;
 		float: left !important;
-		padding-top: 10px;
+
+		.inner {
+			@include clearfix;
+			border: 1px solid #CCC;
+			border-radius: 10px;
+			padding: 5px 10px;
+		}
+
+		textarea {
+			height: 100px;
+		}
 	}
 	.close {
 		display: block;
