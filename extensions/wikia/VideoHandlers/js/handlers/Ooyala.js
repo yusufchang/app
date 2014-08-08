@@ -35,6 +35,10 @@ define('wikia.videohandler.ooyala', [
 		function onCreate(player) {
 			var messageBus = player.mb;
 
+			messageBus.subscribe(window.OO.EVENTS.PLAYBACK_READY, 'ready', function () {
+				player.setClosedCaptionsLanguage('en');
+			});
+
 			// Player has loaded
 			messageBus.subscribe(window.OO.EVENTS.PLAYER_CREATED, 'tracking', function () {
 				vb.track('player-load');
