@@ -78,3 +78,6 @@ $wgWPPNotSerialized = array( WPP_LVS_SUGGEST_DATE, WPP_LVS_EMPTY_SUGGEST, WPP_LV
 	WPP_VIDEO_STATUS);
 
 define( 'PREFERENCE_EDITOR', 'editor' );
+
+// Video Annotation
+define( "WPP_VIDEO_ANNOTATION", 26 );

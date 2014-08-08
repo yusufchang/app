@@ -12,12 +12,67 @@ class VideoAnnotationController extends WikiaController {
 
 		$this->response->addAsset('video_annotation_js');
 
-		$title = $this->request->getVal( 'title', '' );
+		//$videoTitle = $this->request->getVal( 'videoTitle', '' );
+		$videoTitle = 'IVA_test_4';
+
+		$file = WikiaFileHelper::getVideoFileFromTitle( $videoTitle );
+		if ( empty( $file ) ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videohandler-error-video-no-exist' )->text();
+			return;
+		}
+
+		if ( $file->getProviderName() != 'ooyala' ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videoannotation-error-invalid-provider' )->text();
+			return;
+		}
 
 		$helper = new VideoAnnotationHelper();
-		$annotation = $helper->getAnnotation( $title );
+		$annotation = $helper->getAnnotation( $file );
 
+		$this->result = 'ok';
 		$this->annotation = $annotation;
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	public function save() {
+		wfProfileIn( __METHOD__ );
+
+		$videoTitle = 'IVA_test_4';
+		//$videoTitle = $this->request->getVal( 'videoTitle', '' );
+		$annotation = $this->request->getVal( 'annotation', [] );
+
+		$file = WikiaFileHelper::getVideoFileFromTitle( $videoTitle );
+		if ( empty( $file ) ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videohandler-error-video-no-exist' )->text();
+			return;
+		}
+
+		if ( $file->getProviderName() != 'ooyala' ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videoannotation-error-invalid-provider' )->text();
+			return;
+		}
+
+		if ( empty( $annotation ) ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videoannotation-empty-annotation' )->text();
+			return;
+		}
+
+		$helper = new VideoAnnotationHelper();
+		$status = $helper->setAnnotation( $file, $annotation );
+		if ( !$status->isGood() ) {
+			$this->result = 'error';
+			$this->msg = 'Cannot added video annotation.';
+			return;
+		}
+
+		$this->result = 'ok';
+		$this->msg = 'Successfully added video annotation.';
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -25,9 +80,10 @@ class VideoAnnotationController extends WikiaController {
 	public function dfxp() {
 		wfProfileIn( __METHOD__ );
 
-		$annotation = [];
+		$annotation = $this->request->getVal( 'annotation', [] );
 		$this->annotation = $annotation;
 
 		wfProfileOut( __METHOD__ );
 	}
+
 }
