@@ -36,6 +36,12 @@ class VideoAnnotationController extends WikiaController {
 		$videoTitle = $this->request->getVal( 'videoTitle', '' );
 		$annotation = $this->request->getVal( 'annotation', [] );
 
+		if ( !$this->wg->User->isLoggedIn() ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videos-error-not-logged-in' )->text();
+			return;
+		}
+
 		$file = WikiaFileHelper::getVideoFileFromTitle( $videoTitle );
 		if ( empty( $file ) ) {
 			$this->result = 'error';
