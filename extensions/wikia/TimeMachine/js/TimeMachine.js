@@ -6,9 +6,19 @@ $(function () {
 		bar: false,
 
 		show: function () {
-			// Read cookie & determine whether the user is in the Time Machine or not and set this
-			// variable accordingly
-			var viewType = 'activation';// 'status'; // or 'activation'
+			var subdomain = window.location.hostname.split('.')[0],
+				data = $.cookie('time_machine'),
+				timeMachineData,
+				wikiData = '';
+
+			if (data) {
+				timeMachineData = JSON.parse(data);
+				wikiData = timeMachineData[subdomain];
+			}
+
+			// If we have data for this wiki use the status view.  Otherwise use the
+			// activation view.
+			var viewType = wikiData ? 'status' : 'activation';
 
 			$.nirvana.getJson('TimeMachine', 'index', { view: viewType })
 				.done(function (data) {
