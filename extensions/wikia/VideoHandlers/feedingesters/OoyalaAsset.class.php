@@ -788,4 +788,46 @@ class OoyalaAsset extends WikiaModel {
 		}
 	}
 
+	/**
+	 * Set closed caption
+	 * @param string $videoId
+	 * @param string $data - DFXP file contents
+	 * @return boolean $resp
+	 */
+	public function setClosedCaption( $videoId, $data ) {
+		wfProfileIn( __METHOD__ );
+
+		if ( empty( $data ) || !is_string( $data ) ) {
+			//print( "ERROR: Empty closed caption (Id: $videoId).\n" );
+			wfProfileOut( __METHOD__ );
+			return false;
+		}
+
+		$method = 'PUT';
+		$reqPath = '/v2/assets/'.$videoId.'/closed_captions';
+
+		$url = OoyalaApiWrapper::getApi( $method, $reqPath, array(), $data );
+		//print( "Connecting to $url...\n" );
+
+		$options = [
+			'method'   => $method,
+			'postData' => $data,
+			'noProxy'  => true,
+		];
+
+		$req = MWHttpRequest::factory( $url, $options );
+		$status = $req->execute();
+		if ( $status->isGood() ) {
+			$result = true;
+			//print( "Ooyala: sent $reqPath request: \n" );
+		} else {
+			$result = false;
+			//print( "ERROR: problem sending $reqPath request (".$status->getMessage().").\n" );
+		}
+
+		wfProfileOut( __METHOD__ );
+
+		return $result;
+	}
+
 }
