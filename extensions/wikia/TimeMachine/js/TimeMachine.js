@@ -35,15 +35,16 @@ $(function () {
 					if (viewType === 'status') {
 						this.bar = $('<div>', {id: 'TimeMachine'}).
 							html(data.content).
-							insertAfter('#WikiaHeader');
+							insertAfter('#WikiaHeader').
+							find( '.close' ).on( 'click', function () {
+								TimeMachine.clearCookie( window.location.hostname.split('.')[0] );
+								window.location.reload();
+							} );
 					} else if (viewType === 'activation') {
 						this.bar = $('<div>', {id: 'TimeMachine'}).
 							html(data.content).
 							insertAfter('header#WikiaPageHeader');
 					}
-					this.bar.find( '.close' ).on( 'click', function () {
-						TimeMachine.clearCookie('adventuretime');
-					} );
 				});
 		},
 
@@ -60,7 +61,8 @@ $(function () {
 
 		clearCookie: function () {
 			var cookies = document.cookie.split( ';' ),
-				host = window.location.host.split( '.' );
+				host = window.location.host.split( '.' ),
+				newValue = '';
 
 			for ( var i in cookies ) {
 				// Search through all cookies for the cookie
@@ -71,11 +73,12 @@ $(function () {
 					delete cookieObj[host[0]];
 					// Convert the object back to a string
 					newValue = JSON.stringify( cookieObj );
+					break;
 				}
 			}
 
 			// Set the new value of the cookie (might be "{}")
-			document.cookie = this.COOKIE_NAME + '=' + newValue + ';domain=.' + host[host.length - 2] + '.' + host[host.length - 1];
+			document.cookie = this.COOKIE_NAME + '=' + newValue + ';path=/;domain=.' + host[host.length - 2] + '.' + host[host.length - 1];
 		}
 	}
 
