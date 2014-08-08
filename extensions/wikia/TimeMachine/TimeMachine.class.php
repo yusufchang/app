@@ -56,7 +56,7 @@ class TimeMachine {
 		if ( empty( $rev ) ) {
 			return null;
 		} else {
-			$rev->getId();
+			return $rev->getId();
 		}
 	}
 }
