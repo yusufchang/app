@@ -7,6 +7,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		this.$formHolder = $('#annotation-form-holder');
 		this.submitAdded = false;
 		this.title = window.wgTitle;
+		this.tab = $('[data-tab="annotations"]').find('a');
 		this.bindEvents();
 	}
 
@@ -45,6 +46,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 				return;
 			}
 			self.player.pause();
+			self.tab.click();
 			self.addFormItem(time);
 		});
 
