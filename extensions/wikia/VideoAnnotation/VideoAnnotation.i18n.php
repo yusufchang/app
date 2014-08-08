@@ -3,9 +3,10 @@
 $messages['en'] = array(
 	'wikia-videoannotation-desc' => 'Extension for editing video annotation.',
 	'videoannotation-error-invalid-provider' => 'Invalid provider.',
-	'videoannotation-error-empty-annotation' => 'Empty annotation',
-	'videoannotation-error-edited' => 'Cannot edit the annotation',
-	'videoannotation-success-edited' => 'Successfully edited the annotation',
+	'videoannotation-error-empty-annotation' => 'Empty annotation.',
+	'videoannotation-error-edited' => 'Cannot edit the annotation.',
+	'videoannotation-success-edited' => 'Successfully edited the annotation.',
+	'videoannotation-error-permission' => 'Sorry. You do not have permission to edit the annotation.',
 );
 
 /**
@@ -17,5 +18,5 @@ $messages['qqq'] = array(
 	'videoannotation-error-empty-annotation' => '',
 	'videoannotation-error-edited' => '',
 	'videoannotation-success-edited' => '',
-
+	'videoannotation-error-permission' => '',
 );

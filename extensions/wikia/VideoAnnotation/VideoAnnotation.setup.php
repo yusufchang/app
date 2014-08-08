@@ -28,3 +28,7 @@ $wgAutoloadClasses['VideoAnnotationController'] =  $dir . 'VideoAnnotationContro
 
 // i18n mapping
 $wgExtensionMessagesFiles['VideoAnnotation'] = $dir . 'VideoAnnotation.i18n.php';
+
+// permissions
+$wgGroupPermissions['*']['videoannotation'] = false;
+$wgGroupPermissions['staff']['videoannotation'] = true;

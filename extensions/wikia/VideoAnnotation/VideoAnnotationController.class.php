@@ -42,6 +42,12 @@ class VideoAnnotationController extends WikiaController {
 			return;
 		}
 
+		if ( !$this->wg->User->isAllowed( 'videoannotation' ) ) {
+			$this->result = 'error';
+			$this->msg = wfMessage( 'videoannotation-error-permission' )->plain();
+			return;
+		}
+
 		$file = WikiaFileHelper::getVideoFileFromTitle( $videoTitle );
 		if ( empty( $file ) ) {
 			$this->result = 'error';
