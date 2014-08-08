@@ -18,6 +18,15 @@ class TimeMachine {
 		}
 	}
 
+	public function isActive() {
+		// If we don't have any data for this wiki, it means its not active
+		return empty( $this->data ) ? false : true;
+	}
+
+	public function isInactive() {
+		return ! $this->isActive();
+	}
+
 	/**
 	 * @return mixed
 	 */

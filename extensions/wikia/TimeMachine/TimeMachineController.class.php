@@ -9,10 +9,35 @@ class TimeMachineController extends WikiaController {
 	 *
 	 */
 	public function index() {
-		gbug("Time machine controller");
+		$view = $this->getVal( 'view', 'activation' );
 
-		$this->message = 'This is your Time Machine';
+		if ( strtolower( $view ) == 'status' ) {
+			$tm = new TimeMachine();
+			$this->timestamp = $tm->getTimestamp();
+			$this->season = $tm->getSeason();
+			$this->episode = $tm->getEpisode();
+
+			$content = $this->sendSelfRequest( 'statusBar', [] )->toString();
+		} else {
+			$content = $this->sendSelfRequest( 'activationBar', [] )->toString();
+		}
+
+		$this->content = $content;
 		$this->result = "ok";
 		$this->msg = '';
+	}
+
+	/**
+	 * The bar users see when they are using the Time Machine to browse the site
+	 */
+	public function statusBar() {
+
+	}
+
+	/**
+	 * The bar users see when coming from a google search, prompting them to use Time Machine
+	 */
+	public function activationBar() {
+
 	}
 }

@@ -19,7 +19,7 @@ $wgAutoloadClasses['TimeMachineController'] =  $dir . 'TimeMachineController.cla
 $wgAutoloadClasses['TimeMachineHooks']      =  $dir . 'TimeMachineHooks.class.php';
 
 // hooks
-$app->registerHook('SkinAfterBottomScripts', 'TimeMachineHooks', 'onSkinAfterBottomScripts');
+$app->registerHook('OutputPageBeforeHTML', 'TimeMachineHooks', 'onOutputPageBeforeHTML');
 
 // i18n mapping
 $wgExtensionMessagesFiles['TimeMachine'] = $dir.'TimeMachine.i18n.php';

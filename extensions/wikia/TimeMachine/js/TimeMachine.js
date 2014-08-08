@@ -1,29 +1,42 @@
-var TimeMachine = {
+$(function () {
+	'use strict';
 
-	bar: false,
+	var TimeMachine = {
 
-	show: function () {
-		ret = $.nirvana.getJson('TimeMachine', 'index', {})
-			.done(function (data) {
+		bar: false,
 
-				this.bar = $('<div>', {id: 'TimeMachineBar'}).
-					html(data.message).
-					insertAfter('#WikiaHeader');
-		});
-	},
+		show: function () {
+			// Read cookie & determine whether the user is in the Time Machine or not and set this
+			// variable accordingly
+			var viewType = 'activation';// 'status'; // or 'activation'
 
-	hide: function () {
-		this.bar.slideUp(1000);
+			$.nirvana.getJson('TimeMachine', 'index', { view: viewType })
+				.done(function (data) {
 
-		// wait at least SHOW_DELAY before showing the toolbar the next time
-		$.storage.set(this.STORAGE_TIMESTAMP, this.now());
-	},
+					if (viewType === 'status') {
+						this.bar = $('<div>', {id: 'TimeMachine'}).
+							html(data.content).
+							insertAfter('#WikiaHeader');
+					} else {
+						this.bar = $('<div>', {id: 'TimeMachine'}).
+							html(data.content).
+							insertAfter('header#WikiaPageHeader');
+					}
+				});
+		},
 
-	init: function () {
-		$.getResources ([
-			function (cb) {$.getMessagesForContent('TimeMachineBar', cb);},
-			$.getSassCommonURL('extensions/wikia/TimeMachine/css/TimeMachine.css')
-		],
-		$.proxy(this.show, this));
+		hide: function () {
+			this.bar.slideUp(1000);
+
+			// wait at least SHOW_DELAY before showing the toolbar the next time
+			$.storage.set(this.STORAGE_TIMESTAMP, this.now());
+		},
+
+		init: function () {
+			this.show();
+		}
 	}
-}
+
+	TimeMachine.init();
+
+});
