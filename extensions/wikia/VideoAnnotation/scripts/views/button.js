@@ -6,7 +6,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		this.formTemplate = formTemplate.annotationForm;
 		this.$formHolder = $('#annotation-form-holder');
 		this.submitAdded = false;
-		this.title = window.location.href.split('File:')[1];
+		this.title = window.wgTitle;
 		this.bindEvents();
 	}
 
@@ -39,7 +39,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		this.renderForm();
 
 		this.$button.on('click', function () {
-			time = self.player.getPlayheadTime();
+			time = Math.round(self.player.getPlayheadTime());
 			if ( !time ) {
 				alert('you must start the video before you can annotate');
 				return;
@@ -137,7 +137,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 				annotation: data
 			}
 		}).done(function (resp) {
-			window.GlobalNotification.show(resp.msg, 'success');
+			window.GlobalNotification.show(resp.msg, 'confirm');
 		}).fail(function (resp) {
 			window.GlobalNotification.show(resp.msg, 'error');
 		});
