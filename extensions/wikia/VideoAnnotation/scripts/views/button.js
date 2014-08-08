@@ -36,6 +36,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 
 		this.player = window.ooyalaPlayerInstance;
 		this.renderButtons();
+		this.renderForm();
 
 		this.$button.on('click', function () {
 			time = self.player.getPlayheadTime();
@@ -72,11 +73,13 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		});
 	};
 
-	Button.prototype.addForm = function (time) {
+	Button.prototype.addForm = function (time, duration, message) {
 		this.addSumbit();
 
 		var html = Mustache.render(this.formTemplate, {
-			startTime: time
+			startTime: time,
+			duration: duration,
+			message: message
 		});
 		this.$formHolder.append(html);
 	};
@@ -88,7 +91,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 			return;
 		}
 
-		$submit = $('<button id="submit-annotation-form">Submit</button>');
+		$submit = $('<button id="submit-annotation-form" class="big">Submit</button>');
 		this.$formHolder.after($submit);
 		this.$submit = $submit;
 		this.submitAdded = true;
@@ -112,9 +115,26 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 			data.push({
 				begin: Math.round(start),
 				end: Math.round(end),
-				message: message
+				msg: message
 			});
 		});
+
+		$.nirvana.sendRequest({
+			controller: 'VideoAnnotation',
+			method: 'save',
+			type: 'POST',
+			format: 'json',
+			data: {
+				videoTitle: this.title,
+				annotation: data
+			}
+		}).done(function () {
+			window.GlobalNotification.show(data.msg, 'success');
+		});
+	};
+
+	Button.prototype.renderForm = function () {
+		var self = this;
 
 		$.nirvana.sendRequest({
 			controller: 'VideoAnnotation',
@@ -122,12 +142,28 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 			type: 'POST',
 			format: 'json',
 			data: {
-				videoTitle: self.title,
-				annotation: data
+				videoTitle: this.title
 			}
-		}).done(function () {
-			console.log(arguments);
+		}).done(function (data) {
+			var i,
+				annnotations;
+
+			if (data.result !== 'ok') {
+				window.GlobalNotification.show(data.msg, 'error');
+				return;
+			}
+
+			annnotations = data.annotation;
+
+			for (i=0; i < annnotations.length; i++) {
+				self.addForm(
+					annnotations[i].begin,
+					annnotations[i].end - annnotations[i].begin,
+					annnotations[i].msg
+				);
+			}
 		});
+
 	};
 
 	return Button;

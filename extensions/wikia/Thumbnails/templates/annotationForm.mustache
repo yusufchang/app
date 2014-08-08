@@ -1,5 +1,14 @@
-<div class="form-item">
-	<input type="text" class="start-time" value="{{startTime}}">
-	<input type="text" class="duration" value="{{duration}}">
-	<textarea class="message">{{message}}</textarea>
+<div class="form-item columns small-4">
+	<div class="input-group">
+		<label for="start">Start Time</label>
+		<input type="text" name="start" class="start-time" value="{{startTime}}">
+	</div>
+	<div class="input-group">
+		<label for="duration">Duration (in seconds)</label>
+		<input type="text" name="duration" class="duration" value="{{duration}}">
+	</div>
+	<div class="input-group">
+		<label for="message">Annotation</label>
+		<textarea name="message" class="message">{{message}}</textarea>
+	</div>
 </div>

@@ -24,3 +24,27 @@
 	margin: -10px 0 0 10px;
 	outline: none;
 }
+
+#annotation-form-holder {
+	margin: 0;
+}
+
+#submit-annotation-form {
+	clear: both;
+	float: right;
+	margin-top: 10px;
+}
+
+.video-annotations-wrapper {
+	.form-item {
+		@include clearfix;
+		border: 1px solid #CCC;
+		border-radius: 10px;
+		float: left !important;
+		padding-top: 10px;
+	}
+
+	input, textarea {
+//		@include wikia-form-input-field;
+	}
+}
