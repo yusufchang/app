@@ -89,7 +89,6 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 			$html.fadeOut(function () {
 				$html.remove();
 			});
-			self.$submit.click();
 		});
 	};
 
@@ -137,7 +136,11 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 				annotation: data
 			}
 		}).done(function (resp) {
-			window.GlobalNotification.show(resp.msg, 'confirm');
+			if (resp.result === 'ok') {
+				window.GlobalNotification.show(resp.msg, 'confirm');
+			} else {
+				window.GlobalNotification.show(resp.msg, 'error');
+			}
 		}).fail(function (resp) {
 			window.GlobalNotification.show(resp.msg, 'error');
 		});
