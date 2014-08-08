@@ -33,19 +33,20 @@ $(function () {
 
 					console.log('viewType == ' + viewType);
 					if (viewType === 'status') {
-						TimeMachine.bar = $('<div>', {id: 'TimeMachine'}).
-							html(data.content).
-
-							insertAfter('#WikiaHeader').
-							find( '.close' ).on( 'click', function () {
+						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
+							.addClass('status')
+							.html(data.content)
+							.insertAfter('#WikiaHeader')
+							.find( '.close' ).on( 'click', function () {
 								TimeMachine.clearCookie( window.location.hostname.split('.')[0] );
 								window.location.reload();
 							} );
 						TimeMachine.insertControls();
 					} else if (viewType === 'activation') {
-						TimeMachine.bar = $('<div>', {id: 'TimeMachine'}).
-							html(data.content).
-							insertAfter('header#WikiaPageHeader');
+						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
+							.addClass('activation')
+							.html(data.content)
+							.insertAfter('header#WikiaPageHeader');
 					}
 				});
 		},
