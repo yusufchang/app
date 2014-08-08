@@ -61,7 +61,7 @@ $(function () {
 
 		clearCookie: function () {
 			var cookies = document.cookie.split( ';' ),
-				host = window.location.host.split( '.' ),
+				host = window.location.hostname.split( '.' ),
 				newValue = '';
 
 			for ( var i in cookies ) {
