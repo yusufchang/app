@@ -9,7 +9,9 @@ $(function () {
 			var subdomain = window.location.hostname.split('.')[0],
 				data = $.cookie('time_machine'),
 				timeMachineData,
-				wikiData = '';
+				wikiData = '',
+				viewType = '',
+				referrer = document.referrer.split('/')[2];
 
 			if (data) {
 				timeMachineData = JSON.parse(data);
@@ -18,7 +20,11 @@ $(function () {
 
 			// If we have data for this wiki use the status view.  Otherwise use the
 			// activation view.
-			var viewType = wikiData ? 'status' : 'activation';
+			if (wikiData) {
+				viewType = 'status';
+			} else if ( referrer.match(/google\.com$/) ) {
+				viewType = wikiData ? 'status' : 'activation';
+			}
 
 			$.nirvana.getJson('TimeMachine', 'index', { view: viewType })
 				.done(function (data) {
@@ -27,7 +33,7 @@ $(function () {
 						this.bar = $('<div>', {id: 'TimeMachine'}).
 							html(data.content).
 							insertAfter('#WikiaHeader');
-					} else {
+					} else if (viewType === 'activation') {
 						this.bar = $('<div>', {id: 'TimeMachine'}).
 							html(data.content).
 							insertAfter('header#WikiaPageHeader');
