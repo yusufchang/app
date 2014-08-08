@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(
 	function (request, sender, sendResponse) {
 		var cookieValue = {},
-			cookieUrl = 'http://wikia.com/',
+			cookieUrl = 'http://.wikia-dev.com/',
 			cookieName = 'time_machine';
 
 		// Existing cookie

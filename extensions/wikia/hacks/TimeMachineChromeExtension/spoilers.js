@@ -96,6 +96,19 @@ function onEpisodeChange( e ) {
 };
 
 /**
+ * Converts a production Wikia URL to a devbox URL
+ *
+ * @param {string} url The url to convert
+ * @returns {string}
+ */
+function prodToDev( url ) {
+	muppet.wikia.com
+	muppet.garth.wikia-dev.com
+
+	debugger;
+};
+
+/**
  * Handler for the season dropdown change event
  *
  * @param {jQuery.Event} e
@@ -128,6 +141,9 @@ function onSeasonChange( e ) {
  */
 function getShowData( $link ) {
 	var $show, $episodeList, $season, seasonNumber, $episode,
+		href = $link.attr('href'),
+		subdomain = href.slice( href.indexOf( '://' ) + 3, href.indexOf( '.wikia.com' ) ),
+
 		showData = {
 			'name': '',
 			'id': '',
@@ -136,7 +152,7 @@ function getShowData( $link ) {
 		},
 		dfd = $.Deferred();
 
-	$.get( 'http://services.tvrage.com/feeds/search.php?show=' + $link.text(), function( doc ) {
+	$.get( 'http://services.tvrage.com/feeds/search.php?show=' + subdomain, function( doc ) {
 		$show = $( doc ).find( 'show' ).first();
 		showData.name = $show.find( 'name' ).text();
 		showData.id = $show.find( 'showid' ).text();
@@ -157,7 +173,7 @@ function getShowData( $link ) {
 					showData.episodes[ seasonNumber ].push( [
 						i + 1,
 						$episode.find( 'title' ).text().replace( '-', ' ' ),
-						new Date( $episode.find( 'airdate' ).text() ).getTime()
+						new Date( $episode.find( 'airdate' ).text() ).getTime() / 1000
 					] );
 				} );
 			} );

@@ -8,8 +8,8 @@
     "cookies",
     "https://www.google.com/",
     "http://services.tvrage.com/",
-    "*://*.wikia.com/",
-    "*://wikia.com/"
+    "*://wikia.com/",
+    "*://.wikia-dev.com/"
   ],
   "background": {
     "scripts": ["background.js"],
