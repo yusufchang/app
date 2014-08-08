@@ -43,14 +43,22 @@ class TimeMachine {
 	/**
 	 * @param Title $title
 	 *
-	 * @return int
+	 * @return null|int
 	 */
 	public function getRevId( $title = null ) {
+		// Use current title if one is not given
 		if ( empty( $title ) ) {
 			$title = F::app()->wg->Title;
 		}
-		$rev = Revision::getLatestBeforeTimestamp( $title, $this->getTimestamp() );
 
+		// Make sure we have a timestamp
+		$ts = $this->getTimestamp();
+		if ( empty( $ts ) ) {
+			return null;
+		}
+
+		// See if we have a revision prior to this timestamp
+		$rev = Revision::getLatestBeforeTimestamp( $title, $ts );
 		if ( empty( $rev ) ) {
 			return null;
 		} else {
