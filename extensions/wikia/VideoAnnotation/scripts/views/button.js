@@ -45,7 +45,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 				return;
 			}
 			self.player.pause();
-			self.addForm(time);
+			self.addFormItem(time);
 		});
 
 		// handle play/pause button interaction
@@ -73,15 +73,24 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 		});
 	};
 
-	Button.prototype.addForm = function (time, duration, message) {
+	Button.prototype.addFormItem = function (time, duration, message) {
+		var self = this;
+
 		this.addSumbit();
 
-		var html = Mustache.render(this.formTemplate, {
+		var $html = $(Mustache.render(this.formTemplate, {
 			startTime: time,
 			duration: duration,
 			message: message
+		}));
+		this.$formHolder.append($html);
+		$html.find('.close').on('click', function (e) {
+			e.preventDefault();
+			$html.fadeOut(function () {
+				$html.remove();
+			});
+			self.$submit.click();
 		});
-		this.$formHolder.append(html);
 	};
 
 	Button.prototype.addSumbit = function () {
@@ -102,8 +111,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 	};
 
 	Button.prototype.submitForm = function () {
-		var self = this,
-			data = [];
+		var data = [];
 
 		this.$formHolder.find('.form-item').each(function () {
 			var $this = $(this),
@@ -128,8 +136,10 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 				videoTitle: this.title,
 				annotation: data
 			}
-		}).done(function () {
-			window.GlobalNotification.show(data.msg, 'success');
+		}).done(function (resp) {
+			window.GlobalNotification.show(resp.msg, 'success');
+		}).fail(function (resp) {
+			window.GlobalNotification.show(resp.msg, 'error');
 		});
 	};
 
@@ -156,7 +166,7 @@ define('annotations.views.button', ['thumbnails.templates.mustache'], function (
 			annnotations = data.annotation;
 
 			for (i=0; i < annnotations.length; i++) {
-				self.addForm(
+				self.addFormItem(
 					annnotations[i].begin,
 					annnotations[i].end - annnotations[i].begin,
 					annnotations[i].msg

@@ -43,8 +43,10 @@
 		float: left !important;
 		padding-top: 10px;
 	}
-
-	input, textarea {
-//		@include wikia-form-input-field;
+	.close {
+		display: block;
+		text-align: right;
+		margin-bottom: -12px;
 	}
+
 }
