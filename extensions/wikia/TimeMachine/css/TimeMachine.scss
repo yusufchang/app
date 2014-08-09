@@ -1,10 +1,110 @@
-#TimeMachine {
-	background: url(/extensions/wikia/TimeMachine/images/time-machine.gif);
+@import "../../../../skins/oasis/css/mixins/gradient";
 
-	.close {
-		cursor: pointer;
-		float: right;
-		padding: 7px;
+#TimeMachine {
+	background: url(/extensions/wikia/TimeMachine/images/spoilerguard-pattern.png);
+
+	&.activation {
+		padding: 15px 0;
+
+		.inner {
+			background: white;
+			color: black;
+			display: table-row;
+
+			& > * {
+				display: table-cell;
+				padding: 15px 10px;
+				vertical-align: middle;
+			}
+
+			h1 {
+				font-size: 54px;
+				font-weight: bold;
+				letter-spacing: -.02em;
+				line-height: .9em;
+				text-transform: uppercase;
+			}
+
+			.settings {
+				background: #EEE;
+				min-width: 280px;
+
+				p {
+					background: url(/extensions/wikia/TimeMachine/images/spoilerguard-40.png) no-repeat;
+					font-size: 17px;
+					font-weight: bold;
+					height: 40px;
+					margin-bottom: 10px;
+					padding-left: 50px;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+
+	&.status {
+		box-sizing: border-box;
+		display: table;
+		height: 60px;
+		padding-top: 5px;
+		position: relative;
+		width: 100%;
+
+		.inner {
+			@include linear-gradient(#FFF, top, #FFF, 0%, #c1c1c1, 100%);
+			height: 55px;
+			padding-left: 80px;
+			width: 100%;
+
+			> * {
+				float: left;
+			}
+
+			p {
+				color: black;
+				display: inline-block;
+				font-size: 17px;
+				font-weight: bold;
+				margin: 18px 5px 0 0;
+				text-transform: uppercase;
+			}
+
+			select {
+				margin-top: 18px;
+				vertical-align: text-bottom;
+			}
+
+			.plugin {
+				background: red;
+				color: white;
+				display: inline-block;
+				font-weight: bold;
+				padding: 10px;
+				margin: 9px 0 0 20px;
+				text-transform: uppercase;
+
+				.chevron {
+					border-color: transparent transparent transparent white;
+					display: inline-block;
+					height: 0;
+					margin: -2px 0 0 8px;
+				}
+			}
+		}
+
+		.close {
+			background: #0a2241 url(/extensions/wikia/TimeMachine/images/spoilerguard-switch.png) ;
+			cursor: pointer;
+			height: 60px;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 60px;
+
+			&:hover {
+				background-position: 0 60px;
+			}
+		}
 	}
 }
 
