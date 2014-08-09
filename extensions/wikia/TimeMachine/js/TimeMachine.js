@@ -25,7 +25,7 @@ $(function () {
 			// activation view.
 			if (wikiData) {
 				viewType = 'status';
-			} else if (referrer.match(/google\.com$/)) {
+			} else if ( referrer && referrer.match(/google\.com$/)) {
 				viewType = wikiData ? 'status' : 'activation';
 			}
 
