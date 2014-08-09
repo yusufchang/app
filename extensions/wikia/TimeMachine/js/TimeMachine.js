@@ -42,7 +42,7 @@ $(function () {
 								TimeMachine.clearCookie();
 								window.location.reload();
 							} );
-						TimeMachine.insertControls(JSON.parse(data.showData));
+						TimeMachine.insertControls(JSON.parse(data.showData), wikiData);
 					} else if (viewType === 'activation') {
 						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
 							.addClass('activation')
@@ -56,10 +56,11 @@ $(function () {
 		 * Inserts Time Machine controls for links to Wikia
 		 *
 		 */
-		insertControls: function (showData) {
+		insertControls: function (showData, wikiData) {
 			var i, seasonNumber,
 				$season = $('#TimeMachine .WikiaSeason'),
-				$episode = $('#TimeMachine .WikiaEpisode');
+				$episode = $('#TimeMachine .WikiaEpisode'),
+				seasonSelected = false;
 
 			//Season
 			$season
@@ -68,13 +69,26 @@ $(function () {
 
 			for ( i = 0; i < showData.seasons; i++ ) {
 				seasonNumber = i + 1;
-				$season.append( '<option value="' + seasonNumber + '">' + seasonNumber + '</option>');
+
+				var selected = false;
+				if (seasonNumber === wikiData.season) {
+					selected = true;
+					seasonSelected = true;
+				}
+				$season.append( '<option value="' + seasonNumber + '"' + (selected ? ' selected' : '') + '>' + seasonNumber + '</option>');
 			}
 
 			//Episode
 			$episode
 				.on( 'change', { '$season': $season }, TimeMachine.onEpisodeChange )
 				.hide();
+
+			if (seasonSelected) {
+				$season.change();
+				if (wikiData.episode) {
+					$episode.find(':nth-child(' + (wikiData.episode+1) + ')').prop('selected', true);
+				}
+			}
 		},
 
 		clearCookie: function () {
