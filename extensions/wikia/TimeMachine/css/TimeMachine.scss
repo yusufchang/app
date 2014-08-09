@@ -1,11 +1,51 @@
 #TimeMachine {
 	background: url(/extensions/wikia/TimeMachine/images/spoilerguard-pattern.png);
 
-	.close {
-		cursor: pointer;
-		float: right;
-		padding: 7px;
+	&.status {
+		.close {
+			cursor: pointer;
+			float: right;
+			padding: 7px;
+		}
 	}
+
+	&.activation {
+		padding: 15px 0;
+
+		.inner {
+			background: white;
+			color: black;
+			display: table-row;
+
+			& > * {
+				display: table-cell;
+				padding: 15px 10px;
+				vertical-align: middle;
+			}
+
+			h1 {
+				font-size: 54px;
+				font-weight: bold;
+				letter-spacing: -.02em;
+				line-height: .9em;
+				text-transform: uppercase;
+			}
+
+			.settings {
+				p {
+					background: url(/extensions/wikia/TimeMachine/images/spoilerguard-60.png) no-repeat;
+					display: table-cell;
+					font-size: 20px;
+					font-weight: bold;
+					height: 60px;
+					padding-left: 70px;
+					text-transform: uppercase;
+				}
+				min-width: 280px;
+			}
+		}
+	}
+
 }
 
 body.time-machine {
