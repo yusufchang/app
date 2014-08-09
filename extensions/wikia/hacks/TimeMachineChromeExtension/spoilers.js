@@ -27,9 +27,10 @@ function scanSRP() {
 	$results.each( function() {
 		$result = $( this );
 		$link = $result.find( 'h3 > a' ).first();
-		if ( $link.attr( 'href' ).indexOf('wikia.com') != -1 ) {
-			insertControls( $result, $link );
+
+		if ( $link.length && $link.attr( 'href' ).indexOf('wikia.com') != -1 ) {
 			redirectLinkToDev( $link );
+			insertControls( $result, $link );
 		}
 	} );
 };
@@ -47,7 +48,7 @@ function redirectLinkToDev( $link ) {
 function insertControls( $result, $link ) {
 	$.when( getShowData( $link ) ).then( function( showData ) {
 		var i, seasonNumber,
-			$wrapper = $( '<div class="WikiaTimeMachine"><p>Not caught up? Read safely with SpoilerGuard.</p></div>' ),
+			$wrapper = $( '<div class="WikiaTimeMachine"><p>Not all caught up? Read safely with Spoiler Guard.</p></div>' ),
 			$season = $( '<select class="WikiaSeason"></select>' ),
 			$episode = $( '<select class="WikiaEpisode"></select>' );
 
@@ -144,43 +145,11 @@ function getShowData( $link ) {
 	var $show, $episodeList, $season, seasonNumber, $episode,
 		href = $link.attr('href'),
 		subdomain = href.slice( href.indexOf( '://' ) + 3, href.indexOf( '.' ) ),
-
-		showData = {
-			'name': '',
-			'id': '',
-			'seasons': '',
-			'episodes': {}
-		},
 		dfd = $.Deferred();
 
-	$.get( 'http://services.tvrage.com/feeds/search.php?show=' + subdomain, function( doc ) {
-		$show = $( doc ).find( 'show' ).first();
-		showData.name = $show.find( 'name' ).text();
-		showData.id = $show.find( 'showid' ).text();
-		showData.seasons = $show.find( 'seasons' ).text();
-
-		$.get( 'http://services.tvrage.com/feeds/episode_list.php?sid=' + showData.id, function( doc ) {
-			$episodeList = $( doc ).find( 'Show Episodelist' );
-
-			// Iterate through season list
-			$episodeList.find('Season').each( function() {
-				$season = $( this );
-				seasonNumber = $season.attr('no');
-				showData.episodes[ seasonNumber ] = [];
-
-				// Iterate through a season's episode list
-				$season.find( 'episode' ).each( function( i ) {
-					$episode = $( this );
-					showData.episodes[ seasonNumber ].push( [
-						i + 1,
-						$episode.find( 'title' ).text().replace( '-', ' ' ),
-						new Date( $episode.find( 'airdate' ).text() ).getTime() / 1000
-					] );
-				} );
-			} );
-			//return showData;
-			dfd.resolve( showData );
-		} );
+	$.get( 'http://' + subdomain + '.christian.wikia-dev.com/wikia.php?controller=TimeMachine&method=index&format=json&view=activation', function( response ) {
+		dfd.resolve( JSON.parse( response.showData ) );
 	} );
+
 	return dfd.promise();
 };

@@ -4,6 +4,8 @@ chrome.runtime.onMessage.addListener(
 			cookieUrl = 'http://.wikia-dev.com/',
 			cookieName = 'time_machine';
 
+
+
 		// Existing cookie
 		chrome.cookies.get(
 			{
@@ -12,7 +14,7 @@ chrome.runtime.onMessage.addListener(
 			},
 			function( cookie ) {
 				if ( cookie ) {
-					cookieValue = JSON.parse( cookie.value );
+					cookieValue = JSON.parse( decodeURIComponent( cookie.value ) );
 				}
 
 				cookieValue[ request.subdomain ] = {
