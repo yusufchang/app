@@ -32,16 +32,18 @@
 			}
 
 			.settings {
+				background: #EEE;
+				min-width: 280px;
+
 				p {
-					background: url(/extensions/wikia/TimeMachine/images/spoilerguard-60.png) no-repeat;
-					display: table-cell;
-					font-size: 20px;
+					background: url(/extensions/wikia/TimeMachine/images/spoilerguard-40.png) no-repeat;
+					font-size: 17px;
 					font-weight: bold;
-					height: 60px;
-					padding-left: 70px;
+					height: 40px;
+					margin-bottom: 10px;
+					padding-left: 50px;
 					text-transform: uppercase;
 				}
-				min-width: 280px;
 			}
 		}
 	}
