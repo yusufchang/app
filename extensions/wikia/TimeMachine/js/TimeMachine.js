@@ -48,6 +48,8 @@ $(function () {
 							.addClass('activation')
 							.html(data.content)
 							.insertAfter('header#WikiaPageHeader');
+
+						TimeMachine.insertControls(JSON.parse(data.showData), wikiData);
 					}
 				});
 		},
@@ -70,8 +72,9 @@ $(function () {
 			for (i = 0; i < showData.seasons; i++) {
 				seasonNumber = i + 1;
 
-				var selectedText = '';
-				if (seasonNumber === wikiData.season) {
+				var selectedText = '',
+					curSeason = wikiData ? wikiData.season : -1;
+				if (seasonNumber === curSeason) {
 					selectedText = ' selected';
 					seasonSelected = true;
 				} else {
