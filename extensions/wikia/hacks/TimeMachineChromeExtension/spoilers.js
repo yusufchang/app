@@ -52,7 +52,19 @@ function insertControls( $result, $link ) {
 			$season = $( '<select class="WikiaSeason"></select>' ),
 			$episode = $( '<select class="WikiaEpisode"></select>' );
 
-		//Season
+		// Demo hack
+		if ( $link.attr( 'href' ).indexOf( 'breakingbad' ) !== -1 ) {
+			return;
+		}
+
+		// Redact
+		$result.find( '.st' )
+			.css( {
+				'background-color': '#545454',
+				'opacity': '.5'
+			} );
+
+		// Season
 		$season
 			.append( '<option value="0">Choose a season</opiton>' )
 			.on( 'change', { 'showData': showData, '$episode': $episode }, onSeasonChange );
@@ -62,7 +74,7 @@ function insertControls( $result, $link ) {
 			$season.append( '<option value="' + seasonNumber + '">' + seasonNumber + '</option>');
 		}
 
-		//Episode
+		// Episode
 		$episode
 			.on( 'change', { 'showData': showData, '$link': $link, '$season': $season }, onEpisodeChange )
 			.hide();
