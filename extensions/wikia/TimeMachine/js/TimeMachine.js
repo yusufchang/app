@@ -32,7 +32,6 @@ $(function () {
 			$.nirvana.getJson('TimeMachine', 'index', { view: viewType })
 				.done(function (data) {
 
-					console.log('viewType == ' + viewType);
 					if (viewType === 'status') {
 						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
 							.addClass('status')

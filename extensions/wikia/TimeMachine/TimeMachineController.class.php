@@ -43,11 +43,18 @@ class TimeMachineController extends WikiaController {
 	}
 
 	public function getShowData() {
+		global $wgMemc;
+
 		$tm = new TimeMachine();
 
-		$url = 'http://services.tvrage.com/feeds/search.php?show=' . $tm->getSubdomain();
+		$resp = $wgMemc->get( 'time_machine'. $tm->getSubdomain() );
+		if ( empty( $resp ) ) {
+			$url = 'http://services.tvrage.com/feeds/search.php?show=' . $tm->getSubdomain();
+			$resp = Http::get( $url, 60000 );
 
-		$resp = Http::get( $url );
+			$wgMemc->set( 'time_machine'. $tm->getSubdomain(), $resp, 60 * 60 * 24 * 30 );
+		}
+
 		if ( $resp === false ) {
 			wfDebug( __METHOD__ . ": failed!\n" );
 			return null;
@@ -67,8 +74,14 @@ class TimeMachineController extends WikiaController {
 			'seasons' => $seasons,
 		];
 
-		$url = 'http://services.tvrage.com/feeds/episode_list.php?sid=' . $showId;
-		$resp = Http::get( $url );
+		$resp = $wgMemc->get( 'time_machine'. $showId );
+		if ( empty( $resp ) ) {
+			$url = 'http://services.tvrage.com/feeds/episode_list.php?sid=' . $showId;
+			$resp = Http::get( $url, 60000 );
+
+			$wgMemc->set( 'time_machine'. $showId, $resp, 60 * 60 * 24 * 30 );
+		}
+
 		if ( $resp === false ) {
 			wfDebug( __METHOD__ . ": failed!\n" );
 			return null;

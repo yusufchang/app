@@ -7,13 +7,13 @@ class TimeMachine {
 	private $subdomain;
 
 	public function __construct() {
+		// Look for the subdomain we were requested from
+		$server_parts = explode( '.', $_SERVER[ 'SERVER_NAME' ] );
+		$this->subdomain = $server_parts[0];
+
 		// Get Time Machine date from cookie, if available, and use it to rewind article to the closest revision
 		if ( $_COOKIE[ 'time_machine' ] ) {
 			$timeMachineData = json_decode( $_COOKIE[ 'time_machine' ], true );
-
-			// Look for the subdomain we were requested from
-			$server_parts = explode( '.', $_SERVER[ 'SERVER_NAME' ] );
-			$this->subdomain = $server_parts[0];
 
 			$this->data = $timeMachineData[ $this->subdomain ];
 		}
