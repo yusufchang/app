@@ -97,24 +97,11 @@ $(function () {
 		},
 
 		clearCookie: function () {
-			var cookies = document.cookie.split(';'),
-				newValue = '';
+			var cookieObject = JSON.parse( $.cookie( TimeMachine.COOKIE_NAME ) );
 
-			for (var i in cookies) {
-				// Search through all cookies for the cookie
-				if (cookies[i].trim().indexOf(this.COOKIE_NAME) === 0) {
-					// Convert the cookie value to an object
-					var cookieObj = JSON.parse(cookies[i].substr(cookies[i].indexOf('=') + 1));
-					// Remove the setting for the specified wiki
-					delete cookieObj[TimeMachine.subdomain];
-					// Convert the object back to a string
-					newValue = JSON.stringify(cookieObj);
-					break;
-				}
-			}
+			delete cookieObject[ TimeMachine.subdomain ];
 
-			// Set the new value of the cookie (might be "{}")
-			document.cookie = this.COOKIE_NAME + '=' + newValue + ';path=/;domain=.' + TimeMachine.cookieDomain;
+			$.cookie( TimeMachine.COOKIE_NAME, JSON.stringify( cookieObject ), { 'domain': TimeMachine.cookieDomain, 'path': '/' } );
 		},
 
 		/**
