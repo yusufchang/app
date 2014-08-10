@@ -11,7 +11,6 @@ class EditPageLayoutController extends WikiaController {
 
 	public function init() {
 		$this->bodytext = $this->app->getSkinTemplateObj()->data['bodytext'];
-//		preg_replace('@(<body id="bodyContent"[^>]+>)@', '$1' . 'hello', $this->bodytext);
 	}
 
 	/**
