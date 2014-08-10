@@ -15,7 +15,7 @@ foreach ( $items as $item ) {
 		continue;
 	}
 
-	$thumbs[$title] = $file->transform( [ 'width' => $width - $padding ] )->toHtml();
+	$thumbs[htmlspecialchars($title)] = $file->transform( [ 'width' => $width - $padding ] )->toHtml();
 }
 
 if ( !empty( $thumbs ) ) :
@@ -40,7 +40,7 @@ if ( !empty( $thumbs ) ) :
 							<input type="hidden" value="<?= $timestamp ?>" name="wpEdittime" />
 							<input type="hidden" value="" name="wpScrolltop" id="wpScrolltop" />
 							<input type="hidden" name="wpTextbox1" value="---originalcontent---"/>
-							<input type="hidden" name="wpSummary" value="Adding relevant video" id="wpSummary" />
+							<input type="hidden" name="wpSummary" value="Add relevant video: <?=$title?>" id="wpSummary" />
 							<input name="wpAutoSummary" type="hidden" value="" />
 							<input type="hidden" value="<?=$wgRequest->getVal('token')?>" name="wpEditToken" />
 						</form>
