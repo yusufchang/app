@@ -89,7 +89,7 @@ class ThumbnailController extends WikiaController {
 
 		// Set a positive flag for whether we need to lazy load
 		$lazyLoad = $this->shouldLazyLoad( $options );
-$lazyLoad = false;
+		$lazyLoad = false; // hack!!!
 		// Only add RDF metadata when the thumb is not lazy loaded
 		if ( !$lazyLoad ) {
 			// link
@@ -145,7 +145,7 @@ $lazyLoad = false;
 				'imgTag',
 				$this->response->getData()
 			);
-//var_dump($this->noscript);die;
+
 			ImageLazyLoad::setLazyLoadingAttribs( $this->dataSrc, $this->imgSrc, $this->imgClass, $this->imgAttrs );
 		}
 
@@ -160,7 +160,6 @@ $lazyLoad = false;
 	}
 
 	public function imgTag() {
-//var_dump($this->request->getParams());
 		$this->response->setData( $this->request->getParams() );
 	}
 

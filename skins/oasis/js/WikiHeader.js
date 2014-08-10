@@ -85,18 +85,9 @@
 
 				var options = {
 					callbackAfterEmbed: callback
-//					embedPresets: embedPresets,
-//					onClose: onClose,
-//					startPoint: startPoint,
-//					track: track
 				};
 
 				window.vetLoaderInline.load(options);
-
-//				require(['wikia.vet'], function (vet) {
-//					window.console.log('init reached!!!');
-//					vet.loadMain('default', '#VideoSuggestionSection');
-//				});
 
 				// BugID: 64318 - hiding publish button on nav edit
 				if ( (window.wgIsWikiNavMessage) && (window.wgAction === 'edit') ) {

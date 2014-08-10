@@ -214,7 +214,6 @@ class VideoEmbedToolSearchService
 		];
 
 		foreach ( $searchResponse['items'] as $singleVideoData ) {
-//var_dump($singleVideoData);
 			if ( !empty( $singleVideoData['title'] ) ) {
 
 				// Get data about this video from the video wiki
@@ -230,7 +229,6 @@ class VideoEmbedToolSearchService
 					$videosDetail['fileTitle'] = mb_substr( $singleVideoData['title'], 0, $trimTitle );
 				}
 				$singleVideoData['pos'] = $pos++;
-//var_dump($videosDetail);
 				$data[] = $videosDetail;
 			}
 		}
@@ -239,8 +237,6 @@ class VideoEmbedToolSearchService
 				'nextStartFrom' => $start + $config->getLimit(),
 				'items' => $data
 		];
-
-//		var_dump($x);die;
 	}
 
 	/**

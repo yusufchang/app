@@ -567,12 +567,19 @@ class EditPage {
 
 		# Section edit can come from either the form or a link
 		$this->section = $request->getVal( 'wpSection', $request->getVal( 'section' ) );
-
+//var_dump($request);die;
 		if ( $request->wasPosted() ) {
 			# These fields need to be checked for encoding.
 			# Also remove trailing whitespace, but don't remove _initial_
 			# whitespace from the text boxes. This may be significant formatting.
+
 			$this->textbox1 = $this->safeUnicodeInput( $request, 'wpTextbox1' );
+			if ($this->textbox1 == "---originalcontent---") {
+				$prepend = $request->getVal('bodytextPrepend');
+				if ( $prepend ) {
+					$this->textbox1 = $prepend . "\n\n" . $this->getOriginalContent();
+				}
+			}
 			if ( !$request->getCheck('wpTextbox2') ) {
 				// Skip this if wpTextbox2 has input, it indicates that we came
 				// from a conflict page with raw page text, not a custom form

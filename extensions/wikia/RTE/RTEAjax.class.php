@@ -34,13 +34,6 @@ class RTEAjax {
 		return $ret;
 	}
 
-	public static function wiki2html_direct( $wikiText ) {
-//var_dump($wikiText);
-		global $wgRequest;
-		$wgRequest->setVal( 'wikitext', $wikiText );
-		return self::wiki2html();
-	}
-
 	/**
 	 * Perform reverse parsing from HTML to wikitext
 	 */
@@ -83,11 +76,6 @@ class RTEAjax {
 
 		wfProfileOut(__METHOD__);
 		return $res;
-	}
-	public static function parse_direct( $wikiText ) {
-		global $wgRequest;
-		$wgRequest->setVal( 'wikitext', $wikiText );
-		return self::parse();
 	}
 
 	/**
