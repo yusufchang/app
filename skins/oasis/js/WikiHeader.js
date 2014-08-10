@@ -79,6 +79,25 @@
 					//Hide when focus out of last anchor
 					.on( 'focusout', '.subnav-3:last-child > li:last-child a', $.proxy( this.hideNavL3, this ) );
 
+				var callback = function (embedData) {
+					window.RTE.mediaEditor.addVideo('', embedData);
+				};
+
+				var options = {
+					callbackAfterEmbed: callback
+//					embedPresets: embedPresets,
+//					onClose: onClose,
+//					startPoint: startPoint,
+//					track: track
+				};
+
+				window.vetLoaderInline.load(options);
+
+//				require(['wikia.vet'], function (vet) {
+//					window.console.log('init reached!!!');
+//					vet.loadMain('default', '#VideoSuggestionSection');
+//				});
+
 				// BugID: 64318 - hiding publish button on nav edit
 				if ( (window.wgIsWikiNavMessage) && (window.wgAction === 'edit') ) {
 					$( '#wpSave' ).hide();

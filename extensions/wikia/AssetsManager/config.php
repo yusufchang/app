@@ -169,6 +169,7 @@ $config['oasis_noads_extensions_js'] = array(
 		// Chat is enabled sitewide
 		'//extensions/wikia/Chat2/js/ChatEntryPoint.js',
 		'//extensions/wikia/VideoEmbedTool/js/VET_Loader.js',
+		'//extensions/wikia/VideoEmbedTool/js/VET_Loader_Inline.js',
 		// Survey for first time editors
 		'//extensions/wikia/EditorSurvey/js/EditorSurvey.js',
 		// Image and video thumbnail mustache templates

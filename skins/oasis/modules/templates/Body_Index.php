@@ -78,6 +78,10 @@
 					<div id="contentSub"><?= $subtitle ?></div>
 				<?php } ?>
 
+				<? if ( $suggestVideos ) : ?>
+					<div id="VideoSuggestionSection" class="VideoSuggestionSection"></div>
+				<? endif ?>
+
 				<div id="WikiaArticle" class="WikiaArticle<?= $displayAdminDashboardChromedArticle ? ' AdminDashboardChromedArticle' : '' ?>"<?= $body_ondblclick ? ' ondblclick="' . htmlspecialchars($body_ondblclick) . '"' : '' ?>>
 					<? if($displayAdminDashboardChromedArticle) { ?>
 						<?= (string)$app->sendRequest( 'AdminDashboardSpecialPage', 'chromedArticleHeader', array('headerText' => $wg->Title->getText() )) ?>

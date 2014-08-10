@@ -345,7 +345,7 @@ class VideoHandlerHelper extends WikiaModel {
 			'fileTitle'    => $title,
 			'videoOptions' => $videoOptions,
 		];
-
+//var_dump($params);
 		$response = ApiService::foreignCall( $dbName, $params, ApiService::WIKIA );
 		$videoDetail = empty( $response['detail'] ) ? [] : $response['detail'];
 

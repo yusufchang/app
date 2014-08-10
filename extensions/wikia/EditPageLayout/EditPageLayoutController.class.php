@@ -10,7 +10,15 @@ class EditPageLayoutController extends WikiaController {
 	const TITLE_MAX_LENGTH = 30;
 
 	public function init() {
+//print_r($this->app->getSkinTemplateObj()->data['bodytext']);die;
+//		$bodytextPrepend = RTEAjax::parse_direct($this->wg->Request->getVal('bodytextPrepend'))['html'];
+		$bodytextPrepend = RTE::WikitextToHtml($this->wg->Request->getVal('bodytextPrepend'));
+//		die($bodytextPrepend);
+//		$this->bodytext = $bodytextPrepend . ' ' .$this->app->getSkinTemplateObj()->data['bodytext'];
+//die($this->app->getSkinTemplateObj()->data['bodycontent']);die;
+
 		$this->bodytext = $this->app->getSkinTemplateObj()->data['bodytext'];
+//		preg_replace('@(<body id="bodyContent"[^>]+>)@', '$1' . 'hello', $this->bodytext);
 	}
 
 	/**
@@ -19,7 +27,7 @@ class EditPageLayoutController extends WikiaController {
 	public function executeIndex() {
 		// render edit page content
 		$body = $this->app->renderView('EditPageLayout', 'EditPage');
-
+//var_dump($body);
 		// page has one column
 		OasisController::addBodyClass('oasis-one-column');
 
@@ -68,6 +76,11 @@ class EditPageLayoutController extends WikiaController {
 		// Editing [foo]
 		$this->title = $editPage->getEditedTitle();
 		$section = $this->wg->Request->getVal('section');
+
+//		$bodytextPrepend = $this->wg->Request->getVal('bodytextPrepend');
+//		if ( !empty( $bodytextPrepend ) ) {
+//			$this->bodytext = $bodytextPrepend . ' ' . $this->bodytext;
+//		}
 
 		// Is user logged in?
 		$this->isLoggedIn = $this->wg->User->isLoggedIn();

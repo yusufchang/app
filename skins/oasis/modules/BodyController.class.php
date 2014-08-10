@@ -483,6 +483,23 @@ class BodyController extends WikiaController {
 			}
 		}
 
+		$this->suggestVideos = ( $namespace == NS_MAIN );
+
+//		$this->bodytext = $this->app->getSkinTemplateObj()->data['bodytext'];
+//		$videoSuggestionPhrase = $this->getSiteSubject() . ' ' . strtolower( $wgTitle->getText() );
+//
+//		$this->videoSuggestionSection = $this->app->renderView(
+//			'VideoEmbedToolController',
+//			'search',
+//			[
+//				'phrase' => $videoSuggestionPhrase,
+//				'order' => 'default',
+//				'svSize' => '20',
+//				'svStart' => 0,
+//				'type' => 'premium',
+//			]
+//		);
+
 		// bugid-70243: optionally hide navigation h1s for SEO
 		$this->setVal( 'displayHeader', !$this->wg->HideNavigationHeaders );
 

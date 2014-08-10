@@ -154,6 +154,12 @@ class VideoEmbedToolSearchService
 		return $this->postProcessSearchResponse( $this->getFactory()->getFromConfig( $config )->searchAsApi( $expectedFields, true ) );
 	}
 
+	public function videoSearchObj( $query ) {
+		$expectedFields = $this->getExpectedFields();
+		$config = $this->getConfig()->setVideoSearch( true )->setQuery( $query )->setRequestedFields( $expectedFields );
+		return $this->getFactory()->getFromConfig( $config )->searchAsApi( $expectedFields, true );
+	}
+
 	/**
 	 * Given an article ID, stores the suggestion query.
 	 * @param int
@@ -208,6 +214,7 @@ class VideoEmbedToolSearchService
 		];
 
 		foreach ( $searchResponse['items'] as $singleVideoData ) {
+//var_dump($singleVideoData);
 			if ( !empty( $singleVideoData['title'] ) ) {
 
 				// Get data about this video from the video wiki
@@ -223,6 +230,7 @@ class VideoEmbedToolSearchService
 					$videosDetail['fileTitle'] = mb_substr( $singleVideoData['title'], 0, $trimTitle );
 				}
 				$singleVideoData['pos'] = $pos++;
+//var_dump($videosDetail);
 				$data[] = $videosDetail;
 			}
 		}
@@ -231,6 +239,8 @@ class VideoEmbedToolSearchService
 				'nextStartFrom' => $start + $config->getLimit(),
 				'items' => $data
 		];
+
+//		var_dump($x);die;
 	}
 
 	/**

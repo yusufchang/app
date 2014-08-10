@@ -238,9 +238,10 @@ define('wikia.vet', ['wikia.videoBootstrap', 'jquery', 'wikia.window'], function
 	}
 
 	/* ajax call for first screen (aka video search) */
-	function loadMain(searchOrder) {
+	function loadMain(searchOrder, selector) {
+		selector = selector || '#VideoEmbedMain'
 		var callback = function (data) {
-			$('#VideoEmbedMain').html(data.responseText);
+			$(selector).html(data.responseText);
 			$('#VideoEmbedUrl').focusNoScroll();
 			updateHeader();
 
@@ -1097,7 +1098,8 @@ define('wikia.vet', ['wikia.videoBootstrap', 'jquery', 'wikia.window'], function
 	// globally available functions
 	VET = {
 		show: show,
-		close: close
+		close: close,
+		loadMain: loadMain
 	};
 
 	return VET;

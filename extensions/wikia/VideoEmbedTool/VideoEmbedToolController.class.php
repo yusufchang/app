@@ -97,14 +97,39 @@ class VideoEmbedToolController extends WikiaController {
 		$request = $this->getRequest();
 		$phrase = $request->getVal( 'phrase' );
 		$searchType = $request->getVal( 'type', 'local' );
-		
+		$format = $request->getVal( 'format' );
+
 		$service = new VideoEmbedToolSearchService();
 		$service->setTrimTitle( $this->request->getInt( 'trimTitle', 0 ) )
 		        ->setStart( $request->getInt( 'svStart', 0 ) )
 		        ->setLimit( max( [ 1, $request->getInt( 'svSize', 20 ) ] ) )
 		        ->setRank( $request->getVal( 'order', 'default' ) )
 		        ->setSearchType( $searchType );
-		$response = $service->videoSearch( $phrase );
+
+		if ( $format == 'html' && empty( $phrase ) ) {
+			$pageTitle = $request->getVal( 'pageTitle', '' );
+			$phrase = $request->getVal( 'phrase', $this->getDefaultSearchPhrase( $pageTitle ) );
+		}
+
+		$response = $service->videoSearchObj( $phrase );
+
+		if ( $format == 'html' ) {
+			global $wgUser;
+
+			if ( !$wgUser->isAllowed( 'videoupload' ) ) {
+				echo '';
+			} else {
+				$tmpl = new EasyTemplate( dirname( __FILE__ ) . '/templates/' );
+				$tmpl->set_vars( [
+					                 'searchPhrase' => $phrase,
+					                 'items' => $response['items'],
+				                 ]
+				);
+
+				echo $tmpl->render( "videolist" );
+			}
+			return;
+		}
 
 		// Grep help: can be either vet-search-results-WVL or vet-search-results-local
 		$captionKey = 'vet-search-results-'.($searchType == 'premium' ? 'WVL' : 'local');
@@ -167,6 +192,12 @@ class VideoEmbedToolController extends WikiaController {
 			$this->status = 'fail';
 			$this->errMsg = wfMessage('vet-description-save-error')->text();
 		}
+	}
+
+	protected function getDefaultSearchPhrase( $pageTitle ) {
+		global $wgSitename;
+
+		return str_replace( ['wiki', 'wikia'], '', strtolower( $wgSitename ) ) . ' ' . strtolower( $pageTitle );
 	}
 
 }
