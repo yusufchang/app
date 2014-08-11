@@ -4,6 +4,7 @@ global $wgRequest;
 
 $width = 250;
 $padding = 5;
+$maxTitleLength = 35;
 
 $timestamp = wfTimestampNow();
 
@@ -22,19 +23,25 @@ if ( !empty( $thumbs ) ) :
 ?>
 <div id="VET-carousel-wrapper" class="VET-carousel-wrapper show">
 	<div class="VET-suggestions-wrapper" id="VET-suggestions-wrapper"
-	     style="padding:7px <?=$padding ?>px; background-color:#bbb; border: 1px solid #888">
+	     style="padding:7px <?=$padding ?>px; background-color:#555; border: 1px solid #888;height:215px;overflow:visible;">
 		<h2 style="padding: 2px 5px 7px <?= $padding ?>px">Add a relevant video to this page</h2>
-		<div id="VET-suggestions" class="VET-suggestions" style="width:100%;">
+		<div id="VET-suggestions" class="VET-suggestions" style="width:100%;overflow:visible;">
 			<div>
 				<ul class="carousel">
-	<? foreach ( $thumbs as $title => $thumb ) : ?>
-		<? 	$videoMarkup = "[[File:$title|thumb|left|300px]]"; ?>
-					<li class="title-thumbnail" style="width: <?= $width ?>px;padding-right: 10px">
+	<? foreach ( $thumbs as $title => $thumb ) :
+		$videoMarkup = "[[File:$title|thumb|left|300px]]";
+		if ( strlen( $title ) > $maxTitleLength ) {
+			$truncatedTitle = substr( $title, 0, $maxTitleLength ) . '...';
+		} else {
+			$truncatedTitle = $title;
+		}
+	?>
+					<li class="title-thumbnail" style="width: <?= $width ?>px;padding-right:10px">
 						<?= $thumb ?>
+						<span style="height:20px" title="<?= $title ?>"><?= $truncatedTitle ?></span>
 						<form action="?action=edit" method="POST" >
-							<input type="submit" style="height:16px;padding-bottom:3px;" value="Add Video"/>
+							<input type="submit" style="height:16px;padding:10px;line-height:3px;margin:4px 0;" value="Add Video"/>
 							<input type="hidden" name="bodytextPrepend" value="<?= $videoMarkup ?>"/>
-
 							<input type="hidden" value="" name="wpSection" />
 							<input type="hidden" value="<?= $timestamp ?>" name="wpStarttime" />
 							<input type="hidden" value="<?= $timestamp ?>" name="wpEdittime" />
