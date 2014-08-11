@@ -7,6 +7,26 @@
 		$ultinav.text('Error: Could not load configuration');
 	});
 
+	function initTabs( $el ) {
+		var $tabs = $el.find('.tab[data-target]'),
+			$targets = $el.find('.tab-target[data-target-id]');
+		$tabs.removeClass('selected');
+		$($tabs[0]).addClass('selected');
+		$targets.hide();
+		$($targets[0]).show();
+
+		$tabs.click(function(ev){
+			var $tab = $(ev.target).closest('.tab'),
+				target_id = $tab.data('target');
+			$tabs.removeClass('selected');
+			$tab.addClass('selected');
+			$.each($targets,function(i,v){
+				var $e = $(v);
+				$e[$e.data('target-id') == target_id?'show':'hide']();
+			});
+		})
+	}
+
 	var config;
 
 	var Context = (function(){
@@ -30,6 +50,7 @@
 	}
 
 	function initTooltip( $el, title, contentFn ) {
+		console.log('calling qtip()',$el);
 		$el.qtip({
 			content: {
 				title: title,
@@ -52,7 +73,7 @@
 			},
 			show: true,
 			position: {
-				target: 'mouse', // Use the mouse position as the position origin
+				target: $el, // Use the mouse position as the position origin
 				adjust: {
 					// Don't adjust continuously the mouse, just use initial position
 					mouse: false
@@ -78,10 +99,11 @@
 			});
 			$.ajax({ url: url })
 				.done(function(html) {
-					api.set('content.text', html)
+					api.set('content.text', html);
+					initTabs($(api.elements.content));
 				})
 				.fail(function(xhr, status, error) {
-					api.set('content.text', status + ': ' + error)
+					api.set('content.text', status + ': ' + error);
 				});
 		})
 	}
@@ -123,7 +145,7 @@
 	}
 
 	function handleLinkHover( $link ) {
-		var link = $link[0], path = link.pathname,
+		var link = $link[0], path = decodeURI(link.pathname),
 			linkType = classifyUrl(path);
 
 		if ( !linkType ) {
@@ -150,13 +172,39 @@
 		}
 	}
 
-	$body.mouseover(function(ev){
-		console.log('mouseover[1]',ev.target);
+
+	var curElement = false, timer = false;
+	$body.click(function(ev){
+		if ( !ev.shiftKey || !ev.altKey ) {
+			return;
+		}
 		var $link = $(ev.target).closest('a');
-		console.log('mouseover[2]',$link);
 		if ( $link.length ) {
+			ev.preventDefault();
+			ev.stopPropagation();
 			handleLinkHover($link);
 		}
 	});
+
+/*
+	$body.mouseover(function(ev){
+		var current = false;
+		console.log('mouseover[1]',ev.target);
+		var $link = $(ev.target).closest('a');
+		console.log('mouseover[2]',$link);
+		clearTimeout(timer);
+		timer = false;
+		if ( $link.length ) {
+			timer = setTimeout(function(){
+				handleLinkHover($link);
+			},500);
+		}
+	});
+	$body.mouseout(function(ev){
+		console.log('mouseleave',ev.target);
+		clearTimeout(timer);
+		timer = false;
+	});
+*/
 
 })(window,window.jQuery);

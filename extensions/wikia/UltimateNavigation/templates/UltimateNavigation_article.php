@@ -1,9 +1,19 @@
 <? if ( $exists ) { ?>
-<div style="float:left; width: 200px; max-height: 500px; overflow-y: auto">
+<div class="ultinav-user-links">
+	<?= implode(" &bullet; ", $articleLinks) ?>
+	&bullet; and some more....
+</div>
+<hr />
+<div class="tabs">
+	<span class="tab" data-target="contributions">Contributions</span>
+	<span class="tab" data-target="preview">Preview</span>
+	What else could go here?
+</div>
+<hr />
+<div class="tab-target" data-target-id="contributions">
 <div>
 	Last edit: <?= $lastEdit ?>
 </div>
-
 <div>
 	Contributors:
 <? if ( $user ) { ?>
@@ -14,9 +24,12 @@
 <? } ?>
 </div>
 </div>
-
-<div style="float:right; width: 580px; overflow-y: scroll; max-height: 500px">
-	<?= $articleContent ?>
+<div class="tab-target" data-target-id="preview">
+	<article class="WikiaMainContent">
+		<div class="WikiaMainContentContainer">
+			<?= $articleContent ?>
+		</div>
+	</article>
 </div>
 
 <? } else { // exists ?>

@@ -1,25 +1,25 @@
-body {
-	top: 25px;
-}
-
-#ultinav {
-	position: fixed;
-	height: 25px;
-	width: 100%;
-	background-color: #F2FFD0;
-	top: 0;
-	padding: 2px;
-	vertical-align: middle;
-	z-index: 1000;
-}
-
-#ultinav > div, #ultinav .context-ctr span {
-	display: inline-block;
-}
-#ultinav .nav-menu {
-	float: right;
-}
 .qtip {
-	max-width: 800px;
-	width: 800px;
+	max-width: 900px;
+	width: 900px;
+}
+.qtip .WikiaMainContent {
+	margin-right: 0;
+	max-height: 600px;
+	overflow-y: auto;
+}
+.qtip .WikiaMainContentContainer {
+	margin-right: 0;
+}
+.qtip .tab {
+	cursor: pointer;
+	display: inline-block;
+	padding: 4px 8px;
+	border: 1px solid #666666;
+	border-bottom: 0;
+	background-color: white;
+}
+
+.qtip .tab.selected {
+	border-color: #557755;
+	background-color: #ddffdd;
 }

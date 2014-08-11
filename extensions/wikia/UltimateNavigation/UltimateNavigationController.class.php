@@ -17,8 +17,6 @@ class UltimateNavigationController extends WikiaController {
 	}
 
 	public function article() {
-		global $wgHooks;
-
 		$name = $this->getVal('name');
 		$title = Title::newFromText($name);
 		if ( !$title->exists() ) {
@@ -44,7 +42,15 @@ class UltimateNavigationController extends WikiaController {
 		$this->setVal('contributorNames',$contributorNames);
 
 		$this->setVal('articleContent',$this->getArticleHtml($article,$title));
+
+		$articleLinks = array();
+		$articleLinks['Edit'] = Linker::linkKnown($title,'Edit',array(),array('action'=>'edit'));
+		$articleLinks['History'] = Linker::linkKnown($title,'History',array(),array('action'=>'history'));
+		$articleLinks['Delete'] = Linker::linkKnown($title,'Delete',array(),array('action'=>'delete'));
+		$articleLinks['Protect'] = Linker::linkKnown($title,'Protect',array(),array('action'=>'protect'));
+		$this->setVal('articleLinks',$articleLinks);
 	}
+
 	protected function getArticleHtml( Article $article, Title $title ) {
 		$parserCache = ParserCache::singleton();
 		$parserOptions = $article->getParserOptions();
@@ -98,5 +104,41 @@ class UltimateNavigationController extends WikiaController {
 		$info['Edits on all wikis'] = $userStats->getEditCountGlobal();
 		$info['Edits on this wiki'] = $userStats->getEditCountWiki();
 		$this->setVal('info',$info);
+
+		$this->setVal('userContributions',$this->fetchUserContributions( $name ));
 	}
+
+	public function userContributions() {
+		$name = $this->getVal('name');
+
+		$contributions = $this->fetchUserContributions( $name );
+
+		$this->setVal('contributions',$contributions);
+	}
+
+	protected function fetchUserContributions( $name ) {
+		$contributions = $this->captureOutput( function () use ( $name ) {
+			$title = SpecialPage::getTitleFor( 'Contributions', $name );
+			SpecialPageFactory::executePath( $title, RequestContext::getMain() );
+		} );
+
+		# remove form
+		$contributions = preg_replace( '#<form[> ].*?</form>#sm', '', $contributions );
+		# remove paging
+		$contributions = preg_replace( '#<p>\\(Latest.*?</p>#sm', '', $contributions );
+
+		return $contributions;
+	}
+
+	protected function captureOutput( $callback ) {
+		global $wgOut;
+
+		$oldBodyText = $wgOut->mBodytext;
+		$callback();
+		$bodyText = $wgOut->mBodytext;
+		$wgOut->mBodytext = $oldBodyText;
+
+		return $bodyText;
+	}
+
 }
