@@ -51,7 +51,7 @@ class UltimateNavigationController extends WikiaController {
 		$parserOutput = $parserCache->get( $article, $parserOptions );
 
 		if ( $parserOutput === false ) {
-			$poolArticleView = new PoolWorkArticleView( $this, $parserOptions,
+			$poolArticleView = new PoolWorkArticleView( $article, $parserOptions,
 				$article->getRevIdFetched(), true, $article->getContent() );
 			if ( !$poolArticleView->execute() ) {
 				return 'Error: PoolWorkArticleView did not return correctly';
@@ -69,9 +69,7 @@ class UltimateNavigationController extends WikiaController {
 		$user = User::newFromName($name);
 		$oldTitle = $wgTitle;
 		$wgTitle = $userTitle;
-		$profileResponse = $this->sendRequest('UserProfilePage','renderUserIdentityBox',array(
-
-		));
+		$profileResponse = $this->sendRequest('UserProfilePage','renderUserIdentityBox');
 		$wgTitle = $oldTitle;
 		$userProfile = $profileResponse->toString();
 		$sectionPos = strpos($userProfile,'<section');
