@@ -905,16 +905,36 @@ class Config
 		// we will always return at least SEARCH_PROFILE_ADVANCED, because it is identical to the return value of getNamespaces
 		$searchProfile = SEARCH_PROFILE_ADVANCED;
 		foreach ( $this->getSearchProfiles() as $name => $profile ) {
-
-			var_dump($nsVals);
-			var_dump($profile);
-			if (   ( count( array_diff( $nsVals, $profile['namespaces'] ) ) == 0 )
-				&& ( count( array_diff($profile['namespaces'], $nsVals ) ) == 0 ) ) {
+			if ( $this->compareNamespacesAndFilters( $nsVals, $profileFilters, $profile ) )
+            {
 				$searchProfile = $name !== SEARCH_PROFILE_ADVANCED ? $name : $searchProfile;
 			}
 		}
 		return $searchProfile;
 	}
+
+    /**
+     * Check if profile uses exactly the same namespaces and filters as input parasm
+     *
+     * @param array $namespaces - expected namespaces
+     * @param array $filters - expected filters
+     * @param array $profile - analyzed filter.
+     *  Structure [
+     *      'namespaces' => [0, 1, 1000, ...],
+     *      'parameters' => ['filters' => ['is_video'], ...]] // optional
+     * @return bool
+     */
+    private function compareNamespacesAndFilters($namespaces, $filters, $profile) {
+        $result = ( count( array_diff( $namespaces, $profile['namespaces'] ) ) == 0 )
+            && ( count( array_diff($profile['namespaces'], $namespaces ) ) == 0 );
+
+        if ( isset( $profile['parameters']['filters'] ) ) {
+            $result &= ( count( array_diff( $filters, $profile['parameters']['filters'] ) ) == 0 )
+                && ( count( array_diff($profile['parameters']['filters'], $filters ) ) == 0 );
+        }
+
+        return $result;
+    }
 
 	/**
 	 * Determines the number of pages based on the desired number of results per page
