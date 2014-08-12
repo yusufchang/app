@@ -40,7 +40,11 @@ $messages['en'] = array(
 	'wikiasearch2-search-ads-header' => 'Advertisements',
 	'wikiasearch2-tabs-articles' => 'Articles',
 	'wikiasearch2-tabs-photos-and-videos' => 'Photos and Videos',
+	'wikiasearch2-tabs-photos' => 'Images',
+	'wikiasearch2-tabs-videos' => 'Videos',
 	'wikiasearch2-users' => 'People',
+	'wikiasearch2-images-tooltip' => 'Search for Images',
+	'wikiasearch2-videos-tooltip' => 'Search for Videos',
 	'wikiasearch2-users-tooltip' => 'Search in Users',
 	'wikiasearch2-filter-options-label' => 'Filtering Options',
 	'wikiasearch2-sort-options-label' => 'Sorting Options',
@@ -104,6 +108,7 @@ $messages['qqq'] = array(
 	'wikiasearch2-top-module-title' => 'Top module header title on search page',
 	'wikiasearch2-top-module-edit' => 'Article last edit string containing date',
 	'wikiasearch2-video-results' => 'List on-wiki and premium videos in a search'
+	// TODO qqq
 );
 
 /** Afrikaans (Afrikaans)

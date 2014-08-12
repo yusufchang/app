@@ -900,10 +900,14 @@ class Config
 		}
 		// $nsVals should always have a value at this point
 		$nsVals = $this->getNamespaces();
+		$profileFilters = $this->getProfileFilters();
 
 		// we will always return at least SEARCH_PROFILE_ADVANCED, because it is identical to the return value of getNamespaces
 		$searchProfile = SEARCH_PROFILE_ADVANCED;
 		foreach ( $this->getSearchProfiles() as $name => $profile ) {
+
+			var_dump($nsVals);
+			var_dump($profile);
 			if (   ( count( array_diff( $nsVals, $profile['namespaces'] ) ) == 0 )
 				&& ( count( array_diff($profile['namespaces'], $nsVals ) ) == 0 ) ) {
 				$searchProfile = $name !== SEARCH_PROFILE_ADVANCED ? $name : $searchProfile;
@@ -1352,10 +1356,17 @@ class Config
 				'namespaces' => $defaultNamespaces,
 				'namespace-messages' => $this->getService()->getTextForNamespaces( $defaultNamespaces ),
 			),
-			SEARCH_PROFILE_IMAGES => array(
-				'message' => 'wikiasearch2-tabs-photos-and-videos',
-				'tooltip' => 'searchprofile-images-tooltip',
+			SEARCH_PROFILE_VIDEOS => array(
+				'message' => 'wikiasearch2-tabs-videos',
+				'tooltip' => 'wikiasearch2-videos-tooltip',
 				'namespaces' => array( NS_FILE ),
+				'parameters' => ['filters' => [ self::FILTER_VIDEO ] ]
+			),
+			SEARCH_PROFILE_IMAGES => array(
+				'message' => 'wikiasearch2-tabs-photos',
+				'tooltip' => 'wikiasearch2-images-tooltip',
+				'namespaces' => array( NS_FILE ),
+				'parameters' => ['filters' => [ self::FILTER_IMAGE ] ]
 			),
 			SEARCH_PROFILE_USERS => array(
 				'message' => 'wikiasearch2-users',
@@ -1370,5 +1381,11 @@ class Config
 			)*/
 		);
 		return $profiles;
+	}
+
+	protected function getProfileFilters() {
+		$filters = $this->getFilterQueries();
+
+		return array_intersect( array_keys( $filters ), array_keys( $this->filterCodes ) );
 	}
 }

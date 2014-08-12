@@ -20,6 +20,7 @@ Solarium_Autoloader::register();
 define( 'SEARCH_PROFILE_DEFAULT',  'default' );
 define( 'SEARCH_PROFILE_IMAGES',   'images' );
 define( 'SEARCH_PROFILE_USERS',    'users' );
+define( 'SEARCH_PROFILE_BLOGS',    'blogs' );
 define( 'SEARCH_PROFILE_ALL',      'all' );
 define( 'SEARCH_PROFILE_ADVANCED', 'advanced' );
 
