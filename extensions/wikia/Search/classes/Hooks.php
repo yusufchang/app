@@ -18,13 +18,13 @@ class Hooks
 	 * @var unknown_type
 	 */
 	protected static $outboundLinks = array();
-	
+
 	/**
 	 * Encapsulates MediaWiki logic
 	 * @var Wikia\Search\MediaWikiService
 	 */
 	protected static $service;
-	
+
 	/**
 	 * Sends delete request to article if it gets deleted
 	 * @param WikiPage $article
@@ -35,7 +35,7 @@ class Hooks
 	public static function onArticleDeleteComplete( &$article, \User &$user, $reason, $id ) {
 		return (new Indexer)->deleteArticle( $id );
 	}
-	
+
 	/**
 	 * Reindexes the page
 	 * @param WikiPage $article
@@ -54,7 +54,7 @@ class Hooks
 	        $minoredit, $watchthis, $sectionanchor, &$flags, $revision, &$status, $baseRevId ) {
 		return (new Indexer)->reindexBatch( array( $article->getTitle()->getArticleID() ) );
 	}
-	
+
 	/**
 	 * Reindexes page on undelete
 	 * @param Title $title
@@ -63,7 +63,7 @@ class Hooks
 	public static function onArticleUndelete( $title, $create ) {
 		return (new Indexer)->reindexBatch( array( $title->getArticleID() ) );
 	}
-	
+
 	/**
 	 * Issues a reindex event or deletes all docs, depending on whether a wiki is being closed or reopened
 	 * @param  int    $city_public
@@ -72,18 +72,18 @@ class Hooks
 	 * @return bool
 	 */
 	public static function onWikiFactoryPublicStatusChange( &$city_public, &$city_id, $reason ) {
-		return ( $city_public < 1 ) 
+		return ( $city_public < 1 )
 		    ? (new Indexer)->deleteWikiDocs( $city_id )
 		    : (new Indexer)->reindexWiki( $city_id );
 	}
-	
+
 	/**
-	 * Used to configure the user preference pane settings for search. 
+	 * Used to configure the user preference pane settings for search.
 	 * This is a registered hook function of the samme name.
-	 * 
+	 *
 	 * @param User $user
 	 * @param array $defaultPreferences
-	 */ 
+	 */
 	public static function onGetPreferences( $user, &$defaultPreferences ) {
 		// removes core mw search prefs
 		$defunctPreferences = array(
@@ -112,12 +112,12 @@ class Hooks
 		);
 		return true;
 	}
-	
+
 	/**
 	 * WikiaMobile hook to add assets so they are minified and concatenated
 	 * @see    SearchControllerTest::testOnWikiaMobileAssetsPackages
-	 * @param  array $jsHeadPackages
-	 * @param  array $jsBodyPackages
+	 * @param  array $jsStaticPackages
+	 * @param  array $jsExtensionPackages
 	 * @param  array $scssPackages
 	 * @return boolean
 	 */
@@ -128,7 +128,19 @@ class Hooks
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Venus skin hook to add assets so they are minified and concatenated
+	 * @param  array $jsHeadPackages
+	 * @param  array $jsBodyPackages
+	 * @param  array $scssPackages
+	 * @return boolean
+	 */
+	public static function onVenusAssetsPackages( &$jsHeadPackages, &$jsBodyPackages, &$scssPackages ){
+		$scssPackages[] = 'venus_search_css';
+		return true;
+	}
+
 	/**
 	 * Uses MediaWiki LinkEnd hook to store outbound links
 	 * @param unknown_type $skin
@@ -149,7 +161,7 @@ class Hooks
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Returns the current parse's outbound links and reinitializes the array.
 	 * @return array
@@ -160,8 +172,4 @@ class Hooks
 		return $links;
 	}
 
-	static public function onVenusAssetsPackages( &$jsHeadGroups, &$jsBodyGroups, &$cssGroups ) {
-		$cssGroups[] = 'venus_search_css';
-		return true;
-	}
 }
