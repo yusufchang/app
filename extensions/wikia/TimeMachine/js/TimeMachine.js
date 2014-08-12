@@ -25,15 +25,19 @@ $(function () {
 			// activation view.
 			if (wikiData) {
 				viewType = 'status';
-			} else if ( referrer && referrer.match(/google\.com$/)) {
+			} else if (referrer && referrer.match(/google\.com$/)) {
 				viewType = wikiData ? 'status' : 'activation';
 			}
 
-			$.nirvana.getJson('TimeMachine', 'index', { view: viewType })
+			$.nirvana.getJson('TimeMachine', 'index', {
+				view: viewType
+			})
 				.done(function (data) {
 
 					if (viewType === 'status') {
-						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
+						TimeMachine.bar = $('<div>', {
+							id: 'TimeMachine'
+						})
 							.addClass('status')
 							.html(data.content)
 							.insertAfter('#WikiaHeader')
@@ -43,7 +47,9 @@ $(function () {
 							});
 						TimeMachine.insertControls(JSON.parse(data.showData), wikiData);
 					} else if (viewType === 'activation') {
-						TimeMachine.bar = $('<div>', {id: 'TimeMachine'})
+						TimeMachine.bar = $('<div>', {
+							id: 'TimeMachine'
+						})
 							.addClass('activation')
 							.html(data.content)
 							.insertAfter('header#WikiaPageHeader');
@@ -61,47 +67,61 @@ $(function () {
 			var i, seasonNumber,
 				$season = $('#TimeMachine .WikiaSeason'),
 				$episode = $('#TimeMachine .WikiaEpisode'),
-				seasonSelected = false;
+				seasonSelected = false,
+				selectedText = '',
+				curSeason,
+				child;
 
 			//Season
 			$season
 				.append('<option value="0">Choose a season</opiton>')
-				.on('change', { 'showData': showData, '$episode': $episode }, TimeMachine.onSeasonChange);
+				.on('change', {
+					'showData': showData,
+					'$episode': $episode
+				}, TimeMachine.onSeasonChange);
 
 			for (i = 0; i < showData.seasons; i++) {
 				seasonNumber = i + 1;
 
-				var selectedText = '',
-					curSeason = wikiData ? wikiData.season : -1;
+				selectedText = '';
+				curSeason = wikiData ? wikiData.season : -1;
 				if (seasonNumber === curSeason) {
 					selectedText = ' selected';
 					seasonSelected = true;
 				} else {
 					selectedText = '';
 				}
-				$season.append('<option value="' + seasonNumber + '"' + selectedText + '>' + seasonNumber + '</option>');
+				$season.append(
+					'<option value="' + seasonNumber + '"' + selectedText + '>' +
+					seasonNumber +
+					'</option>');
 			}
 
 			//Episode
 			$episode
-				.on('change', { '$season': $season }, TimeMachine.onEpisodeChange)
+				.on('change', {
+					'$season': $season
+				}, TimeMachine.onEpisodeChange)
 				.hide();
 
 			if (seasonSelected) {
 				$season.change();
 				if (wikiData.episode) {
-					var child = wikiData.episode + 1;
+					child = wikiData.episode + 1;
 					$episode.find(':nth-child(' + child + ')').prop('selected', true);
 				}
 			}
 		},
 
 		clearCookie: function () {
-			var cookieObject = JSON.parse( $.cookie( TimeMachine.COOKIE_NAME ) );
+			var cookieObject = JSON.parse($.cookie(TimeMachine.COOKIE_NAME));
 
-			delete cookieObject[ TimeMachine.subdomain ];
+			delete cookieObject[TimeMachine.subdomain];
 
-			$.cookie( TimeMachine.COOKIE_NAME, JSON.stringify( cookieObject ), { 'domain': TimeMachine.cookieDomain, 'path': '/' } );
+			$.cookie(TimeMachine.COOKIE_NAME, JSON.stringify(cookieObject), {
+				'domain': TimeMachine.cookieDomain,
+				'path': '/'
+			});
 		},
 
 		/**
@@ -122,7 +142,10 @@ $(function () {
 				'episode': episodeIndex
 			};
 
-			$.cookie('time_machine', JSON.stringify(tmCookie), {path: '/', domain: TimeMachine.cookieDomain});
+			$.cookie('time_machine', JSON.stringify(tmCookie), {
+				path: '/',
+				domain: TimeMachine.cookieDomain
+			});
 			document.location.reload();
 		},
 
@@ -133,7 +156,8 @@ $(function () {
 		 */
 		onSeasonChange: function (e) {
 			var seasonNumber = e.target.options.selectedIndex,
-				episodes = e.data.showData.episodes[seasonNumber];
+				episodes = e.data.showData.episodes[seasonNumber],
+				i;
 
 			e.data.$episode.empty();
 
@@ -145,7 +169,7 @@ $(function () {
 					.append('<option>Choose an episode</opiton> ')
 					.show();
 
-				for (var i = 0; i < episodes.length; i++) {
+				for (i = 0; i < episodes.length; i++) {
 					e.data.$episode.append('<option value="' + episodes[i][2] + '">' + episodes[i][1] + '</option>');
 				}
 			}
