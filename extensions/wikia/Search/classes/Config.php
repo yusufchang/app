@@ -1393,7 +1393,9 @@ class Config
 				'tooltip' => 'wikiasearch2-users-tooltip',
 				'namespaces' => array( NS_USER )
 			),
-			/*SEARCH_PROFILE_ADVANCED => array(
+			/*
+			 * TODO implement advanced options when designs are ready
+			 SEARCH_PROFILE_ADVANCED => array(
 				'message' => 'searchprofile-advanced',
 				'tooltip' => 'searchprofile-advanced-tooltip',
 				'namespaces' => $this->getNamespaces(),
