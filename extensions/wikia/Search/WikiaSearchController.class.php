@@ -904,7 +904,6 @@ class WikiaSearchController extends WikiaSpecialPageController {
 	 * @throws Exception
 	 */
 	public function tabs() {
-		global $wgEnableVenusSkin;
 		$config = $this->getVal('config', false);
 
 		if ( ! $config || (! $config instanceOf Wikia\Search\Config ) ) {
@@ -941,7 +940,8 @@ class WikiaSearchController extends WikiaSpecialPageController {
 		$this->setVal( 'form',				$form );
 		$this->setVal( 'is_video_wiki',		$is_video_wiki );
 
-		if ( !empty( $wgEnableVenusSkin ) ) {
+
+		if ( $this->app->checkSkin( 'venus' ) ) {
 			$this->overrideTemplate( 'Venus_tabs' );
 		}
 	}

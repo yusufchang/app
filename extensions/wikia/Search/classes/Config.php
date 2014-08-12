@@ -868,12 +868,11 @@ class Config
 	 * @return array
 	 */
 	public function getSearchProfiles() {
-		global $wgEnableVenusSkin;
 
 		$nsAllSet = array_keys( $this->getService()->getSearchableNamespacesFromSearchEngine() );
 		$defaultNamespaces = $this->getService()->getDefaultNamespacesFromSearchEngine();
 
-		if ( !empty( $wgEnableVenusSkin ) ) {
+		if ( \F::app()->checkSkin( 'venus' ) ) {
 			$profiles = $this->getDefaultVenusProfiles( $defaultNamespaces, $nsAllSet );
 		} else {
 			$profiles = $this->getDefaultProfiles( $defaultNamespaces, $nsAllSet );
