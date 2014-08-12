@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <form class="WikiaSearch" id="search-v2-form" action="<?=$specialSearchUrl;?>#">
 	<? // TODO cleanup this code when we implement advanced options
 	/*<div class="SearchInput">
@@ -16,7 +15,7 @@
 			<?= $advancedSearchBox ?>
 		<?php endif; ?>
 	</div>
-    <? */
+	<? */ ?>
 
 	<?= $tabs ?>
 

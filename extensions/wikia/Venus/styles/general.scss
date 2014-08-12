@@ -9,10 +9,6 @@ html {
 	box-sizing: inherit;
 }
 
-a {
-	color: $color-links;
-}
-
 .clearfix {
 	@include clearfix;
 }

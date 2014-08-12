@@ -6,7 +6,7 @@ $messages = array();
 
 
   /********************************/
- /*   Begin V2 Messages          */
+ /*   Begin V2 Messages		  */
 /********************************/
 
 $messages['en'] = array(
@@ -91,14 +91,14 @@ $messages['qqq'] = array(
 	'wikiamobile-wikiasearch2-prev' => 'Message is used to go to previous result page',
 	'wikiamobile-wikiasearch2-count-of-results' => 'Message uses to show start number of first and last result shown on current page and numbet of total results',
 	'wikiasearch2-tabs-articles' => 'Name of a tab with articles. This tab is displayed in the left column on search page',
-    'wikiasearch2-tabs-photos' => 'Name of a tab with photos. This tab is displayed in the left column on search page',
-    'wikiasearch2-tabs-videos' => 'Name of a tab with videos. This tab is displayed in the left column on search page',
+	'wikiasearch2-tabs-photos' => 'Name of a tab with photos. This tab is displayed in the left column on search page',
+	'wikiasearch2-tabs-videos' => 'Name of a tab with videos. This tab is displayed in the left column on search page',
 	'wikiasearch2-tabs-photos-and-videos' => 'Name of a tab with photos and videos. This tab is displayed in the left column on search page',
 	'wikiasearch2-users' => 'Name of a tab with users. This tab is displayed in the left column on search page',
 	'wikiasearch2-users-tooltip' => 'Search in Users Tooltip displayed on hover on Blogs Tab in the left column on
 	search page',
-    'wikiasearch2-images-tooltip' => 'Search in Photos Tooltip displayed on hover on Photos Tab in the left column on search page',
-    'wikiasearch2-videos-tooltip' => 'Search in Videos Tooltip displayed on hover on Videos Tab in the left column on search page',
+	'wikiasearch2-images-tooltip' => 'Search in Photos Tooltip displayed on hover on Photos Tab in the left column on search page',
+	'wikiasearch2-videos-tooltip' => 'Search in Videos Tooltip displayed on hover on Videos Tab in the left column on search page',
 	'wikiasearch2-pages' => 'Parameters: $1 - number of Pages below 1000',
 	'wikiasearch2-images' => 'Parameters: $1 - number of Images below 1000',
 	'wikiasearch2-videos' => 'Parameters: $1 - number of Videos below 1000',
