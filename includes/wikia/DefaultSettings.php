@@ -1361,6 +1361,12 @@ $wgAdVideoTargeting = true;
 $wgAnalyticsProviderPageFair = null;
 
 /**
+ * @name $wgAnalyticsProviderPageFairAlternativeMarkup
+ * Whether to use the alternative markup (without wrapping the ads)
+ */
+$wgAnalyticsProviderPageFairAlternativeMarkup = false;
+
+/**
  * @name $wgAnalyticsProviderPageFairSlotIds
  * Slot IDs for PageFair analytics provider.
  */

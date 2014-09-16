@@ -4,6 +4,9 @@
 <script>
 	window.adslots2.push(<?= json_encode([$slotName, null, 'AdEngine2']) ?>);
 </script>
+<?php if (isset($pageFairId)): ?>
+<div id="<?= htmlspecialchars($pageFairId) ?>" class="pagefair-acceptable"></div>
+<?php endif; ?>
 </div>
 <!-- END SLOTNAME: <?= htmlspecialchars($slotName) ?> -->
 <?php else: ?>

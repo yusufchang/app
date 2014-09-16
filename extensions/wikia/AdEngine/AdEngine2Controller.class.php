@@ -58,9 +58,11 @@ class AdEngine2Controller extends WikiaController {
 	public function ad() {
 		$slotName = $this->request->getVal('slotName');
 		$pageTypes = $this->request->getVal('pageTypes');
+		$pageFairId = $this->request->getVal('pageFairId');
 
 		$this->showAd = AdEngine2Service::shouldShowAd($pageTypes);
 		$this->slotName = $slotName;
 		$this->pageTypes = $pageTypes;
+		$this->pageFairId = $pageFairId;
 	}
 }
