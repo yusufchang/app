@@ -14,7 +14,8 @@ class AdEngine2Hooks {
 
 		global $wgAdDriverForceDirectGptAd, $wgAdDriverForceLiftiumAd, $wgAdDriverUseRemnantGpt,
 			   $wgLiftiumOnLoad, $wgNoExternals, $wgAdVideoTargeting, $wgEnableKruxTargeting,
-			   $wgAdEngineDisableLateQueue, $wgLoadAdsInHead, $wgLoadLateAdsAfterPageLoad;
+			   $wgAdEngineDisableLateQueue, $wgLoadAdsInHead, $wgLoadLateAdsAfterPageLoad,
+			   $wgAnalyticsProviderPageFairAlternativeMarkup;
 
 		$wgNoExternals = $request->getBool( 'noexternals', $wgNoExternals );
 		$wgLiftiumOnLoad = $request->getBool( 'liftiumonload', (bool)$wgLiftiumOnLoad );
@@ -31,6 +32,8 @@ class AdEngine2Hooks {
 		$wgLoadLateAdsAfterPageLoad = $request->getBool( 'lateadsafterload', $wgLoadLateAdsAfterPageLoad );
 
 		$wgEnableKruxTargeting = !$wgAdEngineDisableLateQueue && !$wgNoExternals && $wgEnableKruxTargeting;
+
+		$wgAnalyticsProviderPageFairAlternativeMarkup = $request->getBool( 'pagefairalternative', $wgAnalyticsProviderPageFairAlternativeMarkup );
 
 		return true;
 	}
