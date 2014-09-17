@@ -28,7 +28,7 @@ class MovieEntitySearchService extends EntitySearchService {
 		$select->createFilterQuery( 'ns' )->setQuery( '+(ns:' . static::ALLOWED_NAMESPACE . ')' );
 		$select->createFilterQuery( 'lang' )->setQuery( '+(lang:' . $slang . ')' );
 		if ( in_array( strtolower( $slang ), static::$ARTICLE_TYPES_SUPPORTED_LANGS ) ) {
-			$select->createFilterQuery( 'type' )->setQuery( '+(article_type_s:' . static::MOVIE_TYPE . ' OR ' . static::EXACT_MATCH_FIELD . ':*)' );
+			$select->createFilterQuery( 'type' )->setQuery( '+(article_type_2_s:' . static::MOVIE_TYPE . ' OR ' . static::EXACT_MATCH_FIELD . ':*)' );
 		}
 		if ( !empty( static::$EXCLUDED_WIKIS ) ) {
 			$excluded = [ ];

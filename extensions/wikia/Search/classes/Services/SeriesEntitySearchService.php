@@ -32,7 +32,7 @@ class SeriesEntitySearchService extends EntitySearchService {
 		$select->createFilterQuery( 'ns' )->setQuery( '+(ns:(' . implode( ' ', $namespaces ) . '))' );
 		$select->createFilterQuery( 'main_page' )->setQuery( '-(is_main_page:true)' );
 		if ( in_array( strtolower( $slang ), static::$ARTICLE_TYPES_SUPPORTED_LANGS ) ) {
-			$select->createFilterQuery( 'type' )->setQuery( '+(article_type_s:' . static::SERIES_TYPE . ')' );
+			$select->createFilterQuery( 'type' )->setQuery( '+(article_type_2_s:' . static::SERIES_TYPE . ')' );
 		}
 
 		$dismax->setQueryFields( implode( ' ', [

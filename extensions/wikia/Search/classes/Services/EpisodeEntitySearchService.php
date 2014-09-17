@@ -42,7 +42,7 @@ class EpisodeEntitySearchService extends EntitySearchService {
 		$namespaces = is_array( $namespaces ) ? $namespaces : [ $namespaces ];
 		$select->createFilterQuery( 'ns' )->setQuery( '+(ns:(' . implode( ' ', $namespaces ) . '))' );
 		if ( in_array( strtolower( $slang ), static::$ARTICLE_TYPES_SUPPORTED_LANGS ) ) {
-			$select->createFilterQuery( 'type' )->setQuery( '+(article_type_s:' . static::EPISODE_TYPE . ' OR ' . static::EXACT_MATCH_FIELD . ':*)' );
+			$select->createFilterQuery( 'type' )->setQuery( '+(article_type_2_s:' . static::EPISODE_TYPE . ' OR ' . static::EXACT_MATCH_FIELD . ':*)' );
 		}
 
 		$dismax->setQueryFields( implode( ' ', [
