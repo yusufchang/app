@@ -30,8 +30,6 @@ class AbTestingData extends WikiaObject {
 		return wfGetDB( $db_type, array(), $this->wg->ExternalDatawareDB );
 	}
 
-
-
 	/* READ METHODS */
 
 	public function getModifiedTime() {
@@ -54,6 +52,9 @@ class AbTestingData extends WikiaObject {
 					'id' => $row->e_id,
 					'name' => $row->e_name,
 					'description' => $row->e_description,
+					'status' => AbTesting::STATUS_INACTIVE,
+					'next_activate' => null,
+					'next_deactivate' => null,
 					'versions' => array(),
 					'groups' => array(),
 				);
@@ -86,6 +87,17 @@ class AbTestingData extends WikiaObject {
 					'flags' => $row->v_flags,
 					'group_ranges' => array(),
 				);
+				if($row->is_active) {
+					$ret[$e_id]['status'] = AbTesting::STATUS_ACTIVE;
+					$ret[$e_id]['next_deactivate'] = $row->v_end_time_unix;
+				}
+				if($row->in_future &&
+					(
+						$ret[$e_id]['next_activate'] === null ||
+						$row->v_start_time_unix < $ret[$e_id]['next_activate']
+					) ) {
+					$ret[$e_id]['next_activate'] = $row->v_start_time_unix;
+				}
 			}
 			if ( $v_id ) {
 				$ver = &$exp['versions'][$v_id];
@@ -127,7 +139,12 @@ class AbTestingData extends WikiaObject {
 				'g.id as g_id, g.name as g_name, g.description as g_description',
 				'v.id as v_id, v.start_time as v_start_time, v.end_time as v_end_time, v.ga_slot as v_ga_slot',
 					'v.flags as v_flags',
-				'r.ranges as r_ranges, r.group_id as r_group_id, r.styles as r_styles, r.scripts as r_scripts',
+				'r.ranges as r_ranges, r.group_id as r_group_id',
+				'r.styles as r_styles, r.scripts as r_scripts',
+				'v.start_time <= current_timestamp && v.end_time >= current_timestamp as is_active',
+				'v.start_time > current_timestamp as in_future',
+				'UNIX_TIMESTAMP(v.start_time) as v_start_time_unix',
+				'UNIX_TIMESTAMP(v.end_time) as v_end_time_unix'
 			),
 			$where, // conditions
 			__METHOD__,
@@ -143,11 +160,11 @@ class AbTestingData extends WikiaObject {
 		return $this->loadFromRows($res);
 	}
 
-	public function getCurrent() {
+	public function getCurrent( $use_master = false ) {
 		return $this->loadFromDb(array(
 			'v.start_time <= current_timestamp + interval 2 hour', // 2 hours margin
 			'v.end_time >= current_timestamp'
-		));
+		), $use_master);
 	}
 
 	public function getAll() {

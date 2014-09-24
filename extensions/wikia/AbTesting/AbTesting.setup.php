@@ -1,9 +1,8 @@
 <?php
 /**
  * @author Sean Colombo
- * @author Władysław Bodzek
  * @author Piotr Bablok
- * @date 20120501
+ * @author Władysław Bodzek
  *
  * Extension which helps with running A/B tests or Split Tests (can actually be a/b/c/d/etc. as needed).
  *
@@ -41,7 +40,11 @@ $wgAutoloadClasses['AbExperiment'] = "{$dir}/AbTesting.class.php";
 $wgAutoloadClasses['AbTestingData'] = "{$dir}/AbTestingData.class.php";
 $wgAutoloadClasses['ResourceLoaderAbTestingModule'] = "{$dir}/ResourceLoaderAbTestingModule.class.php";
 $wgAutoloadClasses['SpecialAbTestingController'] = "{$dir}/SpecialAbTestingController.class.php";
+$wgAutoloadClasses['SpecialAbTesting2Controller'] = "{$dir}/SpecialAbTesting2Controller.class.php";
 $wgAutoloadClasses['AbTestingController'] = "{$dir}/AbTestingController.class.php";
+$wgAutoloadClasses['AbTestingHooks'] = "{$dir}/AbTestingHooks.class.php";
+$wgAutoloadClasses['AbTestingConfig'] = "{$dir}/AbTestingConfig.class.php";
+$wgAutoloadClasses['AbTest'] = "{$dir}/AbTest.class.php";
 
 /**
  * message files
@@ -49,11 +52,12 @@ $wgAutoloadClasses['AbTestingController'] = "{$dir}/AbTestingController.class.ph
 $wgExtensionMessagesFiles['AbTesting'] = "{$dir}/AbTesting.i18n.php";
 
 // Embed the experiment/treatment config in the head scripts.
-$wgHooks['WikiaSkinTopScripts'][] =  'AbTesting::onWikiaSkinTopScripts';
-$wgHooks['WikiaSkinTopShortTTLModules'][] =  'AbTesting::onWikiaSkinTopShortTTLModules';
-$wgHooks['WikiaMobileAssetsPackages'][] = 'AbTesting::onWikiaMobileAssetsPackages';
+$wgHooks['WikiaSkinTopScripts'][] =  'AbTestingHooks::onWikiaSkinTopScripts';
+$wgHooks['WikiaMobileAssetsPackages'][] = 'AbTestingHooks::onWikiaMobileAssetsPackages';
+
+$wgHooks['WikiaSkinTopShortTTLModules'][] =  'AbTestingHooks::onWikiaSkinTopShortTTLModules';
 // Add js code in Oasis
-$wgHooks['OasisSkinAssetGroupsBlocking'][] = 'AbTesting::onOasisSkinAssetGroupsBlocking';
+$wgHooks['OasisSkinAssetGroupsBlocking'][] = 'AbTestingHooks::onOasisSkinAssetGroupsBlocking';
 
 // Register Resource Loader module
 $wgResourceModules['wikia.ext.abtesting'] = array(
@@ -87,10 +91,23 @@ $wgResourceModules['wikia.ext.abtesting.edit'] = array(
 	)
 );
 
-//AbTesting is an Oasis-only experiment for now
-//$wgHooks['WikiaMobileAssetsPackages'][] = 'AbTesting::onWikiaMobileAssetsPackages';
 
-$wgSpecialPages[ 'AbTesting'] = 'SpecialAbTestingController';
+$wgResourceModules['wikia.ext.abtesting.edit2'] = array(
+	 'scripts' => array(
+		 'extensions/wikia/AbTesting/js/AbTestEditor2.js',
+		 'extensions/wikia/AbTesting/js/ba-linkify.js',
+	 ),
+);
+
+$wgResourceModules['wikia.ext.abtesting.edit2.styles'] = array(
+	 'styles' => array(
+		 'extensions/wikia/AbTesting/css/AbTestEditor2.scss',
+	 ),
+);
+
+
+$wgSpecialPages['AbTesting'] = 'SpecialAbTestingController';
+$wgSpecialPages['AbTesting2'] = 'SpecialAbTesting2Controller';
 
 
 /*

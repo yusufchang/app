@@ -1,5 +1,5 @@
 @import "skins/shared/color";
-@import "skins/shared/mixins/arrow";
+//@import "skins/shared/mixins/arrow";
 @import "skins/shared/mixins/clearfix";
 
 $abTesting-color-border: mix($color-page, $color-text, 30);
@@ -152,10 +152,10 @@ $abTesting-color-text-warning: #c27500;
 		width: 15px;
 	}
 	.arrow {
-		@include arrow(6px, $color-text);
+		//@include arrow(6px, $color-text);
 	}
 	.collapsed .arrow {
-		@include arrow(6px, $color-text, 'up');
+		//@include arrow(6px, $color-text, 'up');
 	}
 	.actions {
 		width: 50px;

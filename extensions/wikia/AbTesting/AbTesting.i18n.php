@@ -19,6 +19,8 @@ $messages['en'] = array(
 	'abtesting-heading-id' => 'ID',
 	'abtesting-heading-name' => 'Name',
 	'abtesting-heading-description' => 'Description',
+	'abtesting-heading-status' => 'Status',
+	'abtesting-heading-actions' => 'Actions',
 
 	'abtesting-heading-start-time' => 'Start Time (UTC)',
 	'abtesting-heading-end-time' => 'End Time (UTC)',
@@ -27,11 +29,15 @@ $messages['en'] = array(
 	'abtesting-heading-flag-dw_tracking' => 'DW',
 	'abtesting-heading-flag-forced_ga_tracking_on_load' => 'GA onload',
 	'abtesting-heading-flag-limit_to_special_wikis' => 'SpecialWikis',
+	'abtesting-heading-flag-server_side' => 'Server-side',
 	'abtesting-heading-long-flag-ga_tracking' => 'GA tracking',
 	'abtesting-heading-long-flag-dw_tracking' => 'DW tracking',
 	'abtesting-heading-long-flag-forced_ga_tracking_on_load' => 'Force GA track on window.onload',
 	'abtesting-heading-long-flag-limit_to_special_wikis' => 'Limit to SpecialWikis',
+	'abtesting-heading-long-flag-server_side' => 'Server-side',
 	'abtesting-heading-group' => 'Group',
+	'abtesting-heading-groups' => 'Groups',
+	'abtesting-heading-schedule' => 'Schedule',
 	'abtesting-heading-control-group' => 'Control Group',
 	'abtesting-heading-ranges' => 'Ranges (0-99)',
 	'abtesting-heading-treatment-groups' => 'Treatment Groups',
@@ -41,10 +47,16 @@ $messages['en'] = array(
 	'abtesting-edit-experiment-title' => 'Edit Experiment',
 	'abtesting-add-treatment-group' => 'Add Treatment Group',
 
+	'abtesting-cancel-button' => 'Cancel experiment',
+	'abtesting-remove-button' => 'Remove permanently',
 	'abtesting-edit-button' => 'Edit',
 	'abtesting-save-button' => 'Save',
 
 	'abtesting-flag-set-short' => 'YES',
+
+	'abtesting-status-active' => 'Active',
+	'abtesting-status-inactive' => 'Inactive',
+	'abtesting-status-planned' => 'Planned',
 
 	'abtesting-ranges-info' => '(0-99)',
 	'action-abtestpanel' => 'configure A/B tests',
@@ -63,6 +75,8 @@ $messages['qqq'] = array(
 	'abtesting-heading-id' => 'Label for the ID field',
 	'abtesting-heading-name' => 'Label for the Name field',
 	'abtesting-heading-description' => 'Label for the Description field',
+	'abtesting-heading-status' => 'Label for the Status field (active/inactive)',
+	'abtesting-heading-actions' => 'Label for the Actions field (Edit, Deactivate, ...,  buttons)',
 
 	'abtesting-heading-start-time' => 'Label for the experiment start time',
 	'abtesting-heading-end-time' => 'Label for the experiement end time',
@@ -76,6 +90,9 @@ $messages['qqq'] = array(
 	'abtesting-add-experiment-title' => 'Add Experiment',
 	'abtesting-edit-experiment-title' => 'Edit Experiment',
 	'abtesting-add-treatment-group' => 'Button for adding a new treatment group',
+
+	'abtesting-status-active' => 'Test in Active (in progress) state',
+	'abtesting-status-inactive' => 'Test in Inactive (not running) state',
 
 	'abtesting-edit-button' => 'Edit button',
 	'abtesting-save-button' => 'Save button',
