@@ -38,10 +38,8 @@ class AbTest {
 
 		$activeExperiments = array();
 		$allExperiments = AbTestingConfig::getInstance()->getExperiments();
-		print_r($allExperiments);
 		$time = time();
 		$variantExperiments = self::getVariantExperiments();
-		//var_dump($variantExperiments);
 		foreach ($allExperiments as $expName => $exp) {
 			// skip experiments that are not mentioned in X-Page-Variant
 			if ( !array_key_exists($expName,$variantExperiments) ) {
