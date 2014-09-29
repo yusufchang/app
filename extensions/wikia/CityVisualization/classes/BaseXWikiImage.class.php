@@ -203,7 +203,7 @@ abstract class BaseXWikiImage {
 		$sourceImage = null;
 		$imgInfo = getimagesize( $path );
 
-		switch ( $imgInfo['mime'] ) {
+		switch ( $imgInfo[ 'mime' ] ) {
 			case 'image/gif':
 				$sourceImage = @imagecreatefromgif( $path );
 				break;
@@ -224,7 +224,7 @@ abstract class BaseXWikiImage {
 	private function postProcessImageInternal( $sourceTempFilePath, &$errorNo = UPLOAD_ERR_OK, &$errorMsg = '' ) {
 		$imgInfo = getimagesize( $sourceTempFilePath );
 
-		if ( !in_array( $imgInfo['mime'], $this->getAllowedMime() ) ) {
+		if ( !in_array( $imgInfo[ 'mime' ], $this->getAllowedMime() ) ) {
 			$errorNo = UPLOAD_ERR_EXTENSION;
 			return $errorNo;
 		}
@@ -260,7 +260,9 @@ abstract class BaseXWikiImage {
 			$errorNo = $res->isOK() ? UPLOAD_ERR_OK : UPLOAD_ERR_CANT_WRITE;
 
 			// synchronize between DC
-			if ( $res->isOK() ) {
+			// check is it dev environment
+			global $wgDevelEnvironment;
+			if ( empty( $wgDevelEnvironment ) && $res->isOK() ) {
 				$mwStorePath = sprintf( self::MWSTORE_SWIFT_BACKEND_TEMPLATE,
 					$this->getSwiftContainer(), $this->getSwiftPathPrefix(), $this->getLocalPath() );
 				Wikia\SwiftSync\Queue::newFromParams( [
@@ -292,7 +294,7 @@ abstract class BaseXWikiImage {
 		$files = [ ];
 		$iterator = $backend->getFileList( array( 'dir' => $thumbnailDir ) );
 		foreach ( $iterator as $file ) {
-			$files[] = sprintf( "%s/%s", $this->getLocalThumbnailPath(), $file );
+			$files[ ] = sprintf( "%s/%s", $this->getLocalThumbnailPath(), $file );
 		}
 
 		// deleting files on file system and creating an array of URLs to purge
@@ -300,9 +302,9 @@ abstract class BaseXWikiImage {
 			foreach ( $files as $file ) {
 				$status = $swift->remove( $file );
 				if ( !$status->isOk() ) {
-					\Wikia\Logger\WikiaLogger::instance()->warning("removal of thumbnail file ${file} failed");
+					\Wikia\Logger\WikiaLogger::instance()->warning( "removal of thumbnail file ${file} failed" );
 				} else {
-					$urls[] = wfReplaceImageServer( $baseFileUrl ) . "/$file";
+					$urls[ ] = wfReplaceImageServer( $baseFileUrl ) . "/$file";
 				}
 			}
 		}

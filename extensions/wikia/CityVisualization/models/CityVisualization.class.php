@@ -310,8 +310,8 @@ class CityVisualization extends WikiaModel {
 			if ( array_key_exists( $wikiId, $approvedImages ) ) {
 				$imgName = $approvedImages[$wikiId];
 				$wikiData['main_image'] = $imgName;
+				$result[$wikiId] = $wikiData;
 			}
-			$result[$wikiId] = $wikiData;
 		}
 		return $result;
 	}
