@@ -66,9 +66,8 @@
 		}
 
 		var selectors = [
-			'table[class*=infobox]',
-			'div.bigTable',
-			'#infoboxinternal'
+			'table[class*=infobox], div[class*=infobox], div[id*=infobox]',
+			'div.bigTable'
 		], i, len, $infobox;
 
 		for (i = 0, len = selectors.length; i < len; i += 1) {
