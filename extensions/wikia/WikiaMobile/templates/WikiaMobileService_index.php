@@ -58,25 +58,27 @@
 <?= $jsExtensionPackages ?>
 <?= $trackingCode ;?>
 <script>
-	function markInfobox($infobox) {
-		var adHtml = '<div id="infobox-ad" style="width: 300px; height: 250px; background: #666; margin: 20px auto; color: #fff; font-size: 50px; text-align: center; line-height: 250px">ad</div>'
-		$infobox.css('outline', 'red 1px solid');
-		$infobox.after(adHtml);
-	}
-
-	var selectors = [
-		'table.infobox',
-		'div.bigTable',
-		'#infoboxinternal'
-	], i, len, $infobox;
-
-	for (i = 0, len = selectors.length; i < len; i += 1) {
-		$infobox = $(selectors[i]).first();
-		if ($infobox.length === 1) {
-			markInfobox($infobox);
-			break;
+	$(function() {
+		function markInfobox($infobox) {
+			var adHtml = '<div id="infobox-ad" style="width: 300px; height: 250px; background: #666; margin: 20px auto; color: #fff; font-size: 50px; text-align: center; line-height: 250px">ad</div>'
+			$infobox.css('outline', 'red 1px solid');
+			$infobox.after(adHtml);
 		}
-	}
+
+		var selectors = [
+			'table[class*=infobox]',
+			'div.bigTable',
+			'#infoboxinternal'
+		], i, len, $infobox;
+
+		for (i = 0, len = selectors.length; i < len; i += 1) {
+			$infobox = $(selectors[i]).first();
+			if ($infobox.length === 1) {
+				markInfobox($infobox);
+				break;
+			}
+		}
+	});
 </script>
 </body>
 </html>
