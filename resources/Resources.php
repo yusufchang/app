@@ -79,7 +79,11 @@ return array(
 
 	'jquery' => array(
 		// Wikia change - begin
-		'scripts' => 'resources/jquery/jquery-1.8.2.js',
+		'scripts' => array(
+			'resources/jquery/jquery-1.11.1.js',
+			// remove below after all tests are done
+			'resources/jquery/jquery-migrate-1.2.1.js',
+		),
 		// Wikia change - end
 		'debugRaw' => false,
 	),
