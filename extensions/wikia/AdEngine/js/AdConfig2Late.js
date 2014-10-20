@@ -1,4 +1,3 @@
-// TODO: ADEN-1332-ize after ADEN-1326
 /*global define,require*/
 define('ext.wikia.adEngine.adConfigLate', [
 	// regular dependencies
@@ -6,6 +5,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 	'wikia.window',
 	'wikia.instantGlobals',
 	'wikia.geo',
+	'ext.wikia.adEngine.adContext',
 
 	// adProviders
 	'ext.wikia.adEngine.provider.evolve',
@@ -22,6 +22,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 	window,
 	instantGlobals,
 	geo,
+	adContext,
 
 	// AdProviders
 	adProviderEvolve,
@@ -37,6 +38,8 @@ define('ext.wikia.adEngine.adConfigLate', [
 
 	var logGroup = 'ext.wikia.adEngine.adConfigLate',
 		country = geo.getCountryCode(),
+		context = adContext.getContext(),
+		targeting = context.targeting,
 		liftiumSlotsToShowWithSevenOneMedia = {
 			'WIKIA_BAR_BOXAD_1': true,
 			'TOP_BUTTON_WIDE': true,
@@ -60,9 +63,9 @@ define('ext.wikia.adEngine.adConfigLate', [
 			onedirection: true
 		},
 		taboolaEnabled = country === 'US' &&
-			(window.wikiaPageType === 'article' || window.wikiaPageType === 'home') &&
-			taboolaEnabledWikis[window.wgDBname] &&
-			window.wgAdDriverUseTaboola &&
+			(targeting.pageType === 'article' || targeting.pageType === 'home') &&
+			taboolaEnabledWikis[targeting.wikiDbName] &&
+			context.providers.taboola &&
 			abTest && abTest.inGroup('NATIVE_ADS_TABOOLA', 'YES'),
 
 		dartBtfCountries = {
@@ -74,19 +77,12 @@ define('ext.wikia.adEngine.adConfigLate', [
 			PREFOOTER_LEFT_BOXAD: true,
 			PREFOOTER_RIGHT_BOXAD: true
 		},
-		dartBtfVerticals = {
-			Entertainment: true,
-			Gaming: true
-		},
 
-		dartBtfEnabled = dartBtfCountries[country] && (
-				window.wgAdDriverUseDartForSlotsBelowTheFold === true ||
-				(window.wgAdDriverUseDartForSlotsBelowTheFold && dartBtfVerticals[window.cscoreCat])
-			);
+		dartBtfEnabled = dartBtfCountries[country] && context.opts.useDartForSlotsBelowTheFold;
 
 	function getProvider(slot) {
 		var slotname = slot[0],
-			useRemnantGpt = window.wgAdDriverUseRemnantGpt ||
+			useRemnantGpt = context.providers.remnantGpt ||
 				slotsToAlwaysCallRemnantGpt[slotname] ||
 				countriesToAlwaysCallRemnantGpt[country];
 
@@ -99,7 +95,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 			return adProviderEvolve;
 		}
 
-		if (slot[2] === 'Liftium' || window.wgAdDriverForceLiftiumAd) {
+		if (slot[2] === 'Liftium' || context.forceProviders.liftium) {
 			if (adProviderLiftium.canHandleSlot(slotname)) {
 				return adProviderLiftium;
 			}
@@ -108,7 +104,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 		}
 
 		// First ask SevenOne Media
-		if (window.wgAdDriverUseSevenOneMedia) {
+		if (context.providers.sevenOneMedia) {
 			if (adProviderSevenOneMedia.canHandleSlot(slotname)) {
 				if (ie8) {
 					log('SevenOneMedia not supported on IE8. Using Null provider instead', 'warn', logGroup);
@@ -156,7 +152,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 	}
 
 	return {
-		getDecorators: function () {},
+		getDecorators: function () { return; },
 		getProvider: getProvider
 	};
 });
