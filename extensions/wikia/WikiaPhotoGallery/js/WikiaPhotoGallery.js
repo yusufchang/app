@@ -2563,7 +2563,9 @@
 
 				config.category = ( type == 3 ? 'slider' : type == 2 ? 'slideshow' : 'gallery' ) + '-tool';
 
-				Wikia.trackEditorComponent.apply( null, [ config ].concat( slice.call( arguments ) ) );
+				if (typeof Wikia.trackEditorComponent !== 'undefined') {
+					Wikia.trackEditorComponent.apply( null, [ config ].concat( slice.call( arguments ) ) );
+				}
 			};
 		})()
 	};

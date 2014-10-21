@@ -44,9 +44,10 @@ var WikiaPhotoGalleryView = {
 	},
 
 	// force user to log in before using gallery editor in view mode (BugId:7453)
-	// returns true when log in dialog is shown
+	// returns true when log  in dialog is shown
 	forceLogIn: function() {
-		return UserLogin.isForceLogIn();
+		// add a check for UserLogin global object as this extension is not enabled across the skins
+		return window.UserLogin && UserLogin.isForceLogIn();
 	},
 
 	initGalleries: function () {
