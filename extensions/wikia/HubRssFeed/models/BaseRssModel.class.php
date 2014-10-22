@@ -370,7 +370,7 @@ abstract class BaseRssModel extends WikiaService {
 		return $rawData;
 	}
 
-	protected function getDataFromHubs( $hubId, $fromTimestamp, $duplicates = [ ] ) {
+	protected function getDataFromHubs( $hubId, $fromTimestamp ) {
 		$model = new HubRssFeedModel( static::getFeedLanguage() );
 		$v3 = $model->getRealDataV3( $hubId, null, true );
 		foreach ( $v3 as $key => $item ) {
@@ -381,9 +381,7 @@ abstract class BaseRssModel extends WikiaService {
 				$v3[ $key ][ 'url' ] = $key;
 			}
 		}
-		$hubData = $this->removeDuplicates( $v3, $duplicates );
-		$out = $this->findIdForUrls( $hubData, self::SOURCE_HUB . '_' . $hubId );
-		return $out;
+		return $v3;
 	}
 
 	protected function findIdForUrls( $urls, $source = null ) {
