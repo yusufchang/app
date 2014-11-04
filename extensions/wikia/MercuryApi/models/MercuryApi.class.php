@@ -5,7 +5,7 @@ class MercuryApi {
 	const MERCURY_SKIN_NAME = 'mercury';
 
 	const CACHE_TIME_TOP_CONTRIBUTORS = 2592000; // 30 days
-	const TOP_CONTRIBUTORS_LIMIT = 5;
+	const CACHE_TOP_CONTRIBUTORS_LIMIT = 5;
 
 	/**
 	 * Aggregated list of comments users
@@ -60,7 +60,7 @@ class MercuryApi {
 					[
 						'GROUP BY' => 'rev_user',
 						'ORDER BY' => 'count(1) DESC',
-						'LIMIT' => self::TOP_CONTRIBUTORS_LIMIT
+						'LIMIT' => self::CACHE_TOP_CONTRIBUTORS_LIMIT
 					]
 				);
 				$result = [];

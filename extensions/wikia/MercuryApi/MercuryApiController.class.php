@@ -30,18 +30,6 @@ class MercuryApiController extends WikiaController {
 	}
 
 	/**
-	 * @desc Returns user ids for top contributors
-	 *
-	 * @param int $articleId
-	 *
-	 * @return int[]
-	 */
-	private function getTopContributorsPerArticle( $articleId ) {
-		$usersIds = $this->mercuryApi->topContributorsPerArticle( $articleId, self::NUMBER_CONTRIBUTORS );
-		return $usersIds;
-	}
-
-	/**
 	 * @desc returns article details
 	 *
 	 * @param int $articleId
