@@ -11,6 +11,8 @@ class VenusController extends WikiaController {
 	/** @var WikiaSkin $skin */
 	private $skin;
 
+	const CONTRIBUTORS_LIMIT = 3;
+
 	public function init() {
 		$this->assetsManager = AssetsManager::getInstance();
 		$this->skinTemplateObj = $this->app->getSkinTemplateObj();
@@ -227,7 +229,7 @@ class VenusController extends WikiaController {
 	}
 
 	public function header() {
-		global $wgOut, $wgArticle, $wgSupressPageTitle, $wgSupressPageSubtitle, $wgRequest;
+		global $wgOut, $wgArticle, $wgSupressPageTitle, $wgSupressPageSubtitle;
 
 		$title = $wgOut->getPageTitle();
 		$redirect = null;
@@ -253,11 +255,14 @@ class VenusController extends WikiaController {
 			$redirect = null;
 		}
 
-		//TODO should be removed when cover unit is going to be implemented
-		$this->response->setVal('showCoverUnit', $wgRequest->getBool('coverunit', false));
 		$this->response->setVal('title', $title);
 		$this->response->setVal('subtitle', $subtitle);
 		$this->response->setVal('redirect', $redirect);
+
+		// render top contributors
+		$api = new MercuryApi();
+		$contributors = $api->getTopContributorsDetails( $wgArticle->getTitle()->getArticleID(), self::CONTRIBUTORS_LIMIT );
+		$this->response->setVal('contributors', $contributors);
 
 		$this->response->setTemplateEngine( WikiaResponse::TEMPLATE_ENGINE_MUSTACHE );
 	}

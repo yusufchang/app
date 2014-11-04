@@ -1,4 +1,9 @@
-<header class="clearfix{{#showCoverUnit}} cover-unit{{/showCoverUnit}}">
+<header class="clearfix cover-unit">
+	<ul class="top-contributors">
+	{{#contributors}}
+		<li><a href="{{url}}" title="{{name}}"><img src="{{avatar}}" width="32" height="32" class="avatar"></a></li>
+	{{/contributors}}
+	</ul>
 	<h1>{{title}}</h1>
 	{{#subtitle}}
 		<span>{{{subtitle}}}</span>
