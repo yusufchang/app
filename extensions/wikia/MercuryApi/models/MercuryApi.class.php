@@ -5,6 +5,7 @@ class MercuryApi {
 	const MERCURY_SKIN_NAME = 'mercury';
 
 	const CACHE_TIME_TOP_CONTRIBUTORS = 2592000; // 30 days
+	const TOP_CONTRIBUTORS_LIMIT = 5;
 
 	/**
 	 * Aggregated list of comments users
@@ -25,8 +26,8 @@ class MercuryApi {
 		return $articleCommentList->getCountAll();
 	}
 
-	public static function getTopContributorsKey ( $articleId, $limit ){
-		return wfMemcKey( __CLASS__, __METHOD__, $articleId, $limit );
+	public static function getTopContributorsKey ( $articleId ){
+		return wfMemcKey( __CLASS__, __METHOD__, $articleId );
 	}
 
 	/**
@@ -37,7 +38,7 @@ class MercuryApi {
 	 * @return array
 	 */
 	public function topContributorsPerArticle( $articleId, $limit ) {
-		$key = self::getTopContributorsKey( $articleId, $limit );
+		$key = self::getTopContributorsKey( $articleId );
 		$method = __METHOD__;
 		$contributions = WikiaDataAccess::cache($key, self::CACHE_TIME_TOP_CONTRIBUTORS,
 			function() use ( $articleId, $limit, $method ) {
@@ -59,7 +60,7 @@ class MercuryApi {
 					[
 						'GROUP BY' => 'rev_user',
 						'ORDER BY' => 'count(1) DESC',
-						'LIMIT' => $limit
+						'LIMIT' => self::TOP_CONTRIBUTORS_LIMIT
 					]
 				);
 				$result = [];
@@ -72,6 +73,30 @@ class MercuryApi {
 		// Cached results may contain more than the $limit results
 		$contributions = array_slice ( $contributions , 0, $limit, true );
 		return array_keys( $contributions );
+	}
+
+	/**
+	 * @desc returns top contributors user details
+	 *
+	 * @param int $articleId
+	 * @param int $limit
+	 * @return mixed
+	 */
+	public function getTopContributorsDetails( $articleId, $limit ) {
+		$ids = $this->topContributorsPerArticle( $articleId, $limit );
+
+		if ( empty ( $ids ) ){
+			return [];
+		}
+
+		try {
+			return F::app()->sendRequest( 'UserApi', 'getDetails', [ 'ids' => implode( ',', $ids ) ] )
+				->getData()[ 'items' ];
+		} catch (NotFoundApiException $e) {
+			// getDetails throws NotFoundApiException when no contributors are found
+			// and we want the article even if we don't have the contributors
+			return [];
+		}
 	}
 
 	/**

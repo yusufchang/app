@@ -68,26 +68,6 @@ class MercuryApiController extends WikiaController {
 	}
 
 	/**
-	 * @desc returns top contributors user details
-	 *
-	 * @param int[] $ids
-	 * @return mixed
-	 */
-	private function getTopContributorsDetails( Array $ids ) {
-		if ( empty( $ids ) ) {
-			return [];
-		}
-		try {
-			return $this->sendRequest( 'UserApi', 'getDetails', [ 'ids' => implode( ',', $ids ) ] )
-				->getData()[ 'items' ];
-		} catch (NotFoundApiException $e) {
-			// getDetails throws NotFoundApiException when no contributors are found
-			// and we want the article even if we don't have the contributors
-			return [];
-		}
-	}
-
-	/**
 	 * @desc Returns local navigation data for current wiki
 	 *
 	 * @return array
@@ -213,9 +193,7 @@ class MercuryApiController extends WikiaController {
 
 		$data = [
 			'details' => $this->getArticleDetails( $articleId ),
-			'topContributors' => $this->getTopContributorsDetails(
-					$this->getTopContributorsPerArticle( $articleId )
-				),
+			'topContributors' => $this->mercuryApi->getTopContributorsDetails( $articleId, self::NUMBER_CONTRIBUTORS ),
 			'article' => $articleAsJson,
 			'adsContext' => $this->mercuryApi->getAdsContext( $title ),
 			'basePath' => $this->wg->Server
