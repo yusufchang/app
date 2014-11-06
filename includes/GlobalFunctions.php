@@ -3766,12 +3766,14 @@ function wfGetNull() {
  */
 function wfWaitForSlaves( $maxLag = false, $wiki = false ) {
 	$lb = wfGetLB( $wiki );
+	wfDebug($lb->getServerCount());
 	// bug 27975 - Don't try to wait for slaves if there are none
 	// Prevents permission error when getting master position
 	if ( $lb->getServerCount() > 1 ) {
 		/* Wikia change - added array() and $wiki parameters to getConnection to be able to wait for various DBs */
 		$dbw = $lb->getConnection( DB_MASTER, array(), $wiki );
 		$pos = $dbw->getMasterPos();
+		wfDebug($pos);
 		$lb->waitForAll( $pos );
 	}
 }
