@@ -38,6 +38,8 @@ class TvApiController extends WikiaApiController {
 			$minQuality = (int)$minQuality;
 		}
 
+		$this->debug( 'Searching for |SERIES| ' . $seriesName . ' |EPISODE| ' . $episodeName );
+
 		$episodes = explode( ';', $episodeName );
 		$result = null;
 		foreach ( $episodes as $episode ) {
@@ -88,29 +90,43 @@ class TvApiController extends WikiaApiController {
 
 		$seriesService = $this->getWikiSeriesService();
 		$seriesService->setLang( $lang );
+
+		$this->debug( 'Searching for |SERIES| ' . $seriesName );
 		$wikis = $seriesService->query( $seriesName );
 		if ( !empty( $wikis ) ) {
+			$this->debug( 'Found wikis for |SERIES| ' . $seriesName . ' |WIKIS| ' . implode(',', array_map(function($item) {return intval($item['id']);}, $wikis ) ) );
 			$episodeService = $this->getEpisodeService();
 			$episodeService->setLang( $lang )
 				->setSeries( $seriesName )
 				->setQuality( ( $quality !== null ) ? $quality : self::DEFAULT_QUALITY );
 			$result = null;
 			foreach ( $wikis as $wiki ) {
+				$this->debug( 'Processing wiki for |SERIES| ' . $seriesName . ' |WIKI| ' . $wiki[ 'id' ] );
 				$episodeService->setWikiId( $wiki[ 'id' ] );
 				$namespaces = WikiFactory::getVarValueByName( self::WG_CONTENT_NAMESPACES_KEY, $wiki[ 'id' ] );
 				$episodeService->setNamespace( $namespaces );
 				$result = $episodeService->query( $episodeName );
 				if ( $result === null ) {
+					$this->debug( 'Empty result from episodeService; |EPISODE|: ' . $episodeName );
 					$result = $this->getTitle( $episodeName, $wiki[ 'id' ] );
+					if($result !== null) {
+						$this->debug( 'Found result from getTitle' );
+					}
+				} else {
+					$this->debug( 'Found result from episodeService' );
 				}
 				if ( $result === null ) {
+					$this->debug( 'Empty result from getTitle; |EPISODE|: ' . $episodeName );
 					$namespaceNames = WikiFactory::getVarValueByName( self::WG_EXTRA_LOCAL_NAMESPACES_KEY, $wiki[ 'id' ] );
 					if ( is_array( $namespaces ) ) {
 						foreach ( $namespaces as $ns ) {
 							if ( !MWNamespace::isTalk( $ns ) && isset( $namespaceNames[ $ns ] ) ) {
 								$result = $episodeService->query( $namespaceNames[ $ns ] . ":" . $episodeName );
 								if ( $result !== null ) {
+									$this->debug( 'Found result from NamespacesQuery in episodeService' );
 									break;
+								} else {
+									$this->debug( 'Empty result from NamespacesQuery in episodeService' );
 								}
 							}
 						}
@@ -118,10 +134,18 @@ class TvApiController extends WikiaApiController {
 				}
 				if ( $result !== null ) {
 					if ( ( $quality == null ) || ( $result[ 'quality' ] !== null && $result[ 'quality' ] >= $quality ) ) {
+						$this->debug( 'Result: '
+							. $result['contentUrl'] . ' meeting quality requirements: '
+							. $result['quality'] . ($quality?(' / ' . $quality):''));
 						return $result;
+					} else {
+						$this->debug( 'Result: ' . $result['contentUrl'] . ' not meeting quality requirements');
 					}
 				}
+				$this->debug( 'No results returned' );
 			}
+		} else {
+			$this->debug( 'Found no wikis for |SERIES| ' . $seriesName );
 		}
 		return false;
 	}

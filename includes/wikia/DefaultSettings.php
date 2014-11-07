@@ -181,6 +181,11 @@ $wgAutoloadClasses[ 'InvalidParameterApiException'] =  "{$IP}/includes/wikia/api
 $wgAutoloadClasses[ 'LimitExceededApiException'] =  "{$IP}/includes/wikia/api/ApiExceptions.php" ;
 $wgAutoloadClasses[ 'NotFoundApiException'] =  "{$IP}/includes/wikia/api/ApiExceptions.php" ;
 
+//Wikia Api debugging permissions
+$wgAvailableRights[] = 'display_api_debug';
+$wgGroupPermissions['*']['display_api_debug'] = false;
+$wgGroupPermissions['staff']['display_api_debug'] = true;
+
 /**
  * Wikia API end
  */

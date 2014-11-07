@@ -17,6 +17,8 @@ class WikiaApiController extends WikiaController {
 	const OUTPUT_FIELD_TYPE_FLOAT = 8;
 	const OUTPUT_FIELD_TYPE_STRING = 16;
 	protected $outputFieldsTypes = [ ];
+	protected $debugMessages= [ ];
+	protected $debugMode = false;
 
 	private $allowedFormats = array(
 		'json',
@@ -59,6 +61,7 @@ class WikiaApiController extends WikiaController {
 		$controller = $webRequest->getVal( 'controller' );
 		$method = $webRequest->getVal( 'method' );
 		$accessService->checkUse( $controller.'Controller', $method );
+		$this->debugMode = $webRequest->getVal( 'debugMode', false );
 
 		//this is used for monitoring purposes, do not change unless you know what you are doing
 		//should set api/v1 as the transaction name
@@ -321,6 +324,9 @@ class WikiaApiController extends WikiaController {
 	 * @param int $cacheValidity set only if greater than 0
 	 */
 	protected function setResponseData( $data, $processFields = null, $cacheValidity = 0 ) {
+		if ( $this->debugMode && $this->wg->User->isAllowed( 'display_api_debug' ) ) {
+			$data['debugMessages'] = $this->debugMessages;
+		}
 
 		if ( is_array( $data ) ) {
 			$data = $this->processImgFields( $data, $processFields );
@@ -353,6 +359,13 @@ class WikiaApiController extends WikiaController {
 		}
 	}
 
+	/**
+	 * Appends debugging message to response or logs it if the user does not have permissions to display api debugging
+	 * @param $message
+	 */
+	protected function debug($message) {
+		$this->debugMessages [] = $message;
+	}
 }
 
 
