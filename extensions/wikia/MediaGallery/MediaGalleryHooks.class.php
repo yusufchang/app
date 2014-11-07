@@ -29,6 +29,11 @@ class MediaGalleryHooks {
 		return true;
 	}
 
+	public static function onVenusAssetsPackages( &$jsHeadGroups, &$jsBodyGroups, &$cssGroups ) {
+		$jsBodyGroups[] = 'media_gallery_js';
+		return true;
+	}
+
 	/**
 	 * Add extension enabled flag to JS
 	 * @param array $vars

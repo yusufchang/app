@@ -343,7 +343,8 @@ class SkinChooser {
 		$isSpecialVenusTest = $title->isSpecialPage() && $title->getText() == 'VenusTest';
 
 		//TODO: Add WikiaPageType::isArticlePage() to enable new skin on article pages
-		return $wgEnableVenusSkin && ( $isSpecialSearch || $isSpecialVenusTest );
+		//return $wgEnableVenusSkin && ( $isSpecialSearch || $isSpecialVenusTest );
+		return true;
 	}
 
 	/**

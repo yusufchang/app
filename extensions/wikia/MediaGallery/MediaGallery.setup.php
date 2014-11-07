@@ -29,6 +29,8 @@ $wgHooks['OutputPageBeforeHTML'][] = 'MediaGalleryHooks::onOutputPageBeforeHTML'
 $wgHooks['OasisSkinAssetGroups'][] = 'MediaGalleryHooks::onOasisSkinAssetGroups';
 $wgHooks['MakeGlobalVariablesScript'][] = 'MediaGalleryHooks::onMakeGlobalVariablesScript';
 $wgHooks['WikiFeatures::afterToggleFeature'][] = 'MediaGalleryHooks::afterToggleFeature';
+$wgHooks['VenusAssetsPackages'][] = 'MediaGalleryHooks::onVenusAssetsPackages';
+
 
 // i18n mapping
 $wgExtensionMessagesFiles['MediaGallery'] = $dir . 'MediaGallery.i18n.php';
