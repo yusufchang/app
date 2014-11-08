@@ -237,11 +237,21 @@ class TvApiController extends WikiaApiController {
 	protected function findSeries( $seriesName, $lang, $quality = null ) {
 		$minQuality = $quality !== null ? $quality : self::DEFAULT_QUALITY;
 		//check exact match on series first
+		$this->debug( 'Searching for |SERIES| ' . $seriesName );
 		$result = $this->exactMatchOnSeries( $seriesName, $lang );
-		if ( $result == null ) {
+
+		if ( $result === null ) {
 			$result = $this->searchForSeries( $seriesName, $lang, $minQuality );
+			if ( $result !== null ) {
+				$this->debug( 'Found results from Search |SERIES| ' . $seriesName );
+			}
+		} else {
+			$this->debug( 'Found results from ExactMatch |SERIES| ' . $seriesName );
 		}
 		if ( $result !== null && $result[ 'quality' ] >= $minQuality ) {
+			$this->debug( 'Result: '
+				. $result['contentUrl'] . ' meeting quality requirements: '
+				. $result['quality'] . ($minQuality?(' / ' . $minQuality):''));
 			return $result;
 		}
 		return false;
