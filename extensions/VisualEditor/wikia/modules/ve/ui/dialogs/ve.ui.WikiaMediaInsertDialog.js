@@ -489,6 +489,64 @@ ve.ui.WikiaMediaInsertDialog.prototype.convertTemporaryToPermanent = function ( 
  * @param {ve.dm.SurfaceFragment} fragment
  */
 ve.ui.WikiaMediaInsertDialog.prototype.insertMedia = function ( cartItems, fragment ) {
+	var files = [ 'Wiki.png', 'Kermit.png' ];
+	var linmod = [];
+
+	// Gallery opening
+	linmod.push( {
+		'type': 'wikiaGallery',
+		'attributes': {
+			'expand': false,
+			'mw': {
+				'name': 'gallery'
+			}
+		}
+	} )
+
+	linmod.push( {
+		'type': 'alien',
+		'attributes': {
+			'domElements': $( '<meta typeof="mw:Placeholder" data-parsoid="{&quot;src&quot;:&quot;&quot;}" />' ).toArray()
+		}
+	} );
+	linmod.push( { 'type': '/alien' } );
+
+	// Gallery items
+	for( var i = 0; i < files.length; i++ ) {
+		linmod.push( {
+			'type': 'wikiaGalleryItem',
+			'attributes': {
+				'type': 'thumb',
+				'align': 'none',
+				'href': './' + 'File:' + files[i],
+				'src': 'http://vignette.wikia-dev.com/muppet/images/7/71/Kermit.png/revision/latest?cb=20131105235328',
+				'resource': './' + 'File:' + files[i],
+				'defaultSize': true
+			}
+		} );
+		linmod.push( {
+			'type': '/wikiaGalleryItem'
+		} );
+	}
+
+	linmod.push( {
+		'type': 'alien',
+		'attributes': {
+			'domElements': $( '<meta typeof="mw:Placeholder" data-parsoid="{&quot;src&quot;:&quot;&quot;}" />' ).toArray()
+		}
+	} );
+	linmod.push( { 'type': '/alien' } );
+
+	// Gallery closing
+	linmod.push( {
+		'type': '/wikiaGallery'
+	} )
+
+	fragment.collapseRangeToEnd().insertContent( linmod );
+	return;
+
+// 
+
 	var i, promises = [];
 
 	this.timings.insertStart = ve.now();
