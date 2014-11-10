@@ -49,7 +49,7 @@ class TvApiController extends WikiaApiController {
 			}
 		}
 		if ( !$result ) {
-			throw new NotFoundApiException();
+			throw new NotFoundApiException($this->getDebugMessages());
 		}
 
 		$this->setResponseData(
@@ -70,7 +70,7 @@ class TvApiController extends WikiaApiController {
 
 		$result = $this->findSeries( $name, $lang, $minQuality );
 		if ( !$result ) {
-			throw new NotFoundApiException();
+			throw new NotFoundApiException($this->getDebugMessages());
 		}
 
 		$this->setResponseData(

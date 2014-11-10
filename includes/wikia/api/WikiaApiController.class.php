@@ -366,6 +366,11 @@ class WikiaApiController extends WikiaController {
 	protected function debug($message) {
 		$this->debugMessages [] = $message;
 	}
+
+	protected function getDebugMessages() {
+		return $this->debugMode?$this->debugMessages:null;
+	}
+
 }
 
 
