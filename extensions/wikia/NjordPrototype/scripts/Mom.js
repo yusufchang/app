@@ -177,7 +177,7 @@
 			$('<div id="MomNewPlaceHolder" class="mom-no-display"></div>').insertBefore($(this).parent());
 			$.nirvana.sendRequest({
 				controller: 'NjordController',
-				method: 'modula',
+				method: 'mommodule',
 				format: 'HTML',
 				type: 'GET',
 				data: {

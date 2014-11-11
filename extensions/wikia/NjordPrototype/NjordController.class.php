@@ -71,7 +71,7 @@ class NjordController extends WikiaController {
 		$this->isAllowedToEdit = $this->wg->user->isAllowed( 'njordeditmode' );
 	}
 
-	public function modula() {
+	public function mommodule() {
 		$this->content = $this->getRequest()->getVal( 'content' );
 		$this->align = $this->getRequest()->getVal( 'align' );
 		$this->ctitle = $this->getRequest()->getVal( 'content-title' );
@@ -107,7 +107,7 @@ class NjordController extends WikiaController {
 		$dom->loadHTML($content);
 		$dom = $this->cleanUpAutoTags( $dom );
 
-		$modules = $dom->getElementsByTagName('modula');
+		$modules = $dom->getElementsByTagName('mommodule');
 		//remove old modules
 		for ( $i = 0; $i < $modules->length; $i++ ) {
 			$cur = $modules->item($i);
@@ -117,7 +117,7 @@ class NjordController extends WikiaController {
 		$fragment = $dom->createDocumentFragment();
 		foreach ( $params[ 'left' ] as $raw ) {
 			$data = json_decode( $raw );
-			$tag = $dom->createElement('modula');
+			$tag = $dom->createElement('mommodule');
 			$tag->setAttribute('title', $data->text);
 			$tag->setAttribute('content-title', $data->title);
 			$fragment->appendChild($tag);
