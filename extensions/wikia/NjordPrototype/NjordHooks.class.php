@@ -5,7 +5,7 @@ class NjordHooks {
 
 	public static function onParserFirstCallInit( Parser $parser ) {
 		$parser->setHook( 'hero', 'NjordHooks::renderHeroTag' );
-		$parser->setHook( 'mommodule', 'NjordHooks::renderModuleContainerTag' );
+		$parser->setHook( 'momcharactermodule', 'NjordHooks::renderCharacterModuleContainerTag' );
 		return true;
 	}
 
@@ -23,7 +23,7 @@ class NjordHooks {
 		return '';
 	}
 
-	public static function renderModuleContainerTag( $content, array $attributes, Parser $parser, PPFrame $frame ) {
+	public static function renderCharacterModuleContainerTag( $content, array $attributes, Parser $parser, PPFrame $frame ) {
 		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
 		$characterModel->setFromContent( $content );
 		return F::app()->renderView( 'NjordCharacter', 'index', [ 'characterModel' => $characterModel ] );

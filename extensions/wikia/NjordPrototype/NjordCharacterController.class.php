@@ -20,7 +20,6 @@ class NjordCharacterController extends WikiaController {
 	public function saveModuleData() {
 		$params = $this->request->getParams();
 
-
 		
 	}
 }
