@@ -25,7 +25,16 @@
 			<div class="new-btn inverse-btn settings-btn sg-sub"></div>
 		</div>
 	</div>
-	<ul class="items-list <?php if ( isset( $wikiData->elements ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+	<ul class="items-list <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+		<?php foreach ( $characterModel->contentSlots as $contentSlot ): ?>
+			<section class="item character">
+				<a href="<?= $contentSlot->link ?>" title=" <?= $contentSlot->title ?>">
+					<img src="<?= $contentSlot->image ?>"/>
+					<h1><?= $contentSlot->title ?></h1>
+					<h2><?= $contentSlot->description ?></h2>
+				</a>
+			</section>
+		<?php endforeach; ?>
 		<div class="add-block">
 			<div class="main-add-text">
 				<span class="sg-main">Add an Article</span>
@@ -35,20 +44,11 @@
 				button on the top right corner
 			</div>
 		</div>
-		<li class="item"></li>
-		<li class="item"></li>
-		<li class="item"></li>
-		<li class="item"></li>
+		<?php if ( !isset( $characterModel->contentSlots ) ) : ?>
+			<li class="item"></li>
+			<li class="item"></li>
+			<li class="item"></li>
+			<li class="item"></li>
+		<?php endif; ?>
 	</ul>
-<div class="mom-character-module">
-	<?php foreach ( $characterModel->contentSlots as $contentSlot ): ?>
-	<section class="mom-character">
-		<a href="<?= $contentSlot->link ?>" title=" <?= $contentSlot->title ?>">
-			<img src="<?= $contentSlot->image ?>"/>
-			<h1><?= $contentSlot->title ?></h1>
-			<h2><?= $contentSlot->description ?></h2>
-		</a>
-	</section>
-	<?php endforeach; ?>
-
 </div>
