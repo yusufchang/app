@@ -55,8 +55,8 @@ class NjordController extends WikiaController {
 		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/jquery-ui-1.10.4.js' );
 		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/jquery.caret.js' );
 		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/Njord.js' );
-//		$this->wg->out->addStyle( AssetsManager::getInstance()->getSassCommonURL( 'extensions/wikia/NjordPrototype/css/Mom.scss' ) );
-//		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/Mom.js' );
+		$this->wg->out->addStyle( AssetsManager::getInstance()->getSassCommonURL( 'extensions/wikia/NjordPrototype/css/Mom.scss' ) );
+		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/Mom.js' );
 
 		$wikiDataModel = new WikiDataModel( Title::newMainPage()->getText() );
 		$wikiDataModel->getFromProps();
@@ -102,30 +102,56 @@ class NjordController extends WikiaController {
 		$pageArticleObj = new Article( $pageTitleObj );
 		$content = $pageArticleObj->getContent();
 
-		$content = mb_ereg_replace( '<modula.*/>', '', $content, 'sU' );
-		$moduleTags = [ ];
+		$dom = new DOMDocument();
+		$dom->recover = true;
+		$dom->loadHTML($content);
+		$dom = $this->cleanUpAutoTags( $dom );
+
+		$modules = $dom->getElementsByTagName('modula');
+		//remove old modules
+		for ( $i = 0; $i < $modules->length; $i++ ) {
+			$cur = $modules->item($i);
+			$cur->parentNode->removeChild($cur);
+		}
+		//create new modules
+		$fragment = $dom->createDocumentFragment();
 		foreach ( $params[ 'left' ] as $raw ) {
 			$data = json_decode( $raw );
-			$moduleTags[ ] = Xml::element( 'modula', $attribs = [
-				'align' => 'left',
-				'title' => $data->text,
-				'content-title' => $data->title,
-			] );
+			$tag = $dom->createElement('modula');
+			$tag->setAttribute('title', $data->text);
+			$tag->setAttribute('content-title', $data->title);
+			$fragment->appendChild($tag);
 		}
-		$content = mb_ereg_replace( '(<mainpage-leftcolumn-start.*/>)\s*', "\\1\n" . implode( $moduleTags, "\n" ) . "\n", $content, 'sU' );
-		$moduleTags = [ ];
-		foreach ( $params[ 'right' ] as $raw ) {
-			$data = json_decode( $raw );
-			$moduleTags[ ] = Xml::element( 'modula', $attribs = [
-				'align' => 'right',
-				'title' => $data->text,
-				'content-title' => $data->title,
-			] );
+		//place them
+		$hero = $dom->getElementsByTagName('hero')->item(0);
+		if ( $hero !== null ) {
+			$dom->insertBefore($fragment, $hero->nextSibling);
+		} else{
+			$dom->insertBefore($fragment, $dom->firstChild);
 		}
-		$content = mb_ereg_replace( '(<mainpage-rightcolumn-start.*/>)\s*', "\\1\n" . implode( $moduleTags, "\n" ) . "\n", $content, 'sU' );
 		// save and purge
-		$pageArticleObj->doEdit( $content, '' );
+		$pageArticleObj->doEdit( $dom->saveHTML(), '' );
 		$pageArticleObj->doPurge();
+	}
+
+	protected function cleanUpAutoTags(DOMDocument $dom) {
+		$dom->doctype->parentNode->removeChild($dom->doctype);
+		// Remove html element, preserving child nodes
+		$html = $dom->getElementsByTagName("html")->item(0);
+		$fragment = $dom->createDocumentFragment();
+		while ($html->childNodes->length > 0) {
+			$fragment->appendChild($html->childNodes->item(0));
+		}
+		$html->parentNode->replaceChild($fragment, $html);
+
+		// Remove body element, preserving child nodes
+		$body = $dom->getElementsByTagName("body")->item(0);
+		$fragment = $dom->createDocumentFragment();
+		while ($body->childNodes->length > 0) {
+			$fragment->appendChild($body->childNodes->item(0));
+		}
+		$body->parentNode->replaceChild($fragment, $body);
+		return $dom;
 	}
 
 	public function upload() {
