@@ -5,13 +5,13 @@ class NjordHooks {
 
 	public static function onParserFirstCallInit( Parser $parser ) {
 		$parser->setHook( 'hero', 'NjordHooks::renderHeroTag' );
-		$parser->setHook( 'modula', 'NjordHooks::renderModuleContainerTag' );
+		$parser->setHook( 'mommodule', 'NjordHooks::renderModuleContainerTag' );
 		return true;
 	}
 
 	public static function onCreateNewWikiComplete( $params ) {
-		if ( !empty( $params[ 'city_id' ] ) ) {
-			WikiFactory::setVarByName( 'wgEnableNjordExt', $params[ 'city_id' ], true );
+		if ( !empty( $params['city_id'] ) ) {
+			WikiFactory::setVarByName( 'wgEnableNjordExt', $params['city_id'], true );
 		}
 		return true;
 	}
@@ -24,13 +24,8 @@ class NjordHooks {
 	}
 
 	public static function renderModuleContainerTag( $content, array $attributes, Parser $parser, PPFrame $frame ) {
-		if( !empty( $attributes[ 'content-title' ] ) ) {
-			$title = Title::newFromText( $attributes[ 'content-title' ] );
-			if ( $title->exists() ) {
-				$article = Article::newFromTitle( $title, RequestContext::getMain() );
-				$attributes['content'] = $parser->recursiveTagParse($article->getContent());
-			}
-		}
-		return F::app()->renderView('Njord', 'modula', $attributes);
+		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
+		$characterModel->setFromContent( $content );
+		return F::app()->renderView( 'NjordCharacter', 'index', [ 'characterModel' => $characterModel ] );
 	}
 }

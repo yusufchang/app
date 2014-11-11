@@ -11,7 +11,11 @@ $dir = dirname( __FILE__ );
 
 $wgAutoloadClasses['NjordHooks'] =  $dir . '/NjordHooks.class.php';
 $wgAutoloadClasses['NjordModel'] =  $dir . '/models/NjordModel.class.php';
+
 $wgAutoloadClasses['WikiDataModel'] =  $dir . '/models/WikiDataModel.class.php';
+$wgAutoloadClasses['CharacterModuleModel'] =  $dir . '/models/CharacterModuleModel.class.php';
+$wgAutoloadClasses['ContentEntity'] =  $dir . '/models/ContentEntity.class.php';
+
 $wgAutoloadClasses['NjordController'] =  $dir . '/NjordController.class.php';
 $wgAutoloadClasses['NjordCharacterController'] =  $dir . '/NjordCharacterController.class.php';
 
