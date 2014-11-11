@@ -3,7 +3,7 @@
 class CharacterModuleModel {
 	const WIKI_CHARACTER_IMAGE_MAX_WIDTH = 350;
 	const WIKI_CHARACTER_IMAGE_MAX_HEIGHT = 350;
-	const THUMBNAILER_SIZE_SUFIX = '350px-0';
+	const THUMBNAILER_SIZE_SUFFIX = '350px-0';
 
 	public $contentSlots = [ ];
 
@@ -56,7 +56,7 @@ class CharacterModuleModel {
 		if ( $imageTitle instanceof Title ) {
 			$imageFile = wfFindFile( $imageTitle );
 			if ( $imageFile instanceof File && $imageFile->exists() ) {
-				$image = wfReplaceImageServer( $imageFile->getThumbUrl( self::THUMBNAILER_SIZE_SUFIX ) );
+				$image = wfReplaceImageServer( $imageFile->getThumbUrl( self::THUMBNAILER_SIZE_SUFFIX ) );
 			}
 		}
 		return $image;

@@ -16,4 +16,11 @@ class NjordCharacterController extends WikiaController {
 		$wd->title = 'Characters';
 		$this->wikiData = $wd;
 	}
+
+	public function saveModuleData() {
+		$params = $this->request->getParams();
+
+
+		
+	}
 }
