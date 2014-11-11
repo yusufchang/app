@@ -1,15 +1,158 @@
-.nj-character-module {
-  //general
+@import "skins/shared/color";
 
+.mom-character-module {
+  //general
+  .add-block {
+    box-sizing: border-box;
+    display: none;
+    flex-direction: column;
+    height: 15vw;
+    justify-content: center;
+    margin: 10px 5px;
+    max-height: 250px;
+    max-width: 250px;
+    min-height: 200px;
+    min-width: 200px;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+    width: 15vw;
+  }
+  .bar {
+    align-items: center;
+    border-bottom: 1px solid $color-page-border;
+    display: flex;
+    padding-bottom: 5px;
+    margin:0 8%;
+  }
+  .btn-group {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+  .items-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 8% 20px 8%;
+    .item {
+      border: 1px dashed $color-page-border;
+      display: block;
+      height: 15vw;
+      margin: 10px 5px 0 5px;
+      max-height: 250px;
+      max-width: 250px;
+      min-height: 200px;
+      min-width: 200px;
+      width: 15vw;
+    }
+  }
+  .title-wrap {
+    .edit-box {
+      background-color: rgba(0, 0, 0, .2);
+      bottom: -64px;
+      display: none;
+      position: absolute;
+      width: 100%;
+    }
+    .hero-title {
+      min-height: 44px;
+      outline: none;
+      word-wrap: break-word;
+    }
+    .title-edit-btn {
+      cursor: pointer;
+      height: 20px;
+      vertical-align: middle;
+    }
+    .title-text {
+      word-wrap: break-word;
+      max-width: 400px;
+    }
+    display: inline-block;
+    position: relative;
+  }
 
   //states
-  &.filled-state {
+  .filled-state {
+    .title-default-text {
+      display: none;
+    }
+  }
+  .no-edit-state {
 
   }
-  &.no-edit-state {
-
+  .zero-state {
+    .add-block {
+      display: flex;
+    }
+    .title-text {
+      display: none;
+    }
   }
-  &.zero-state {
 
+  //general texts and buttons
+  .new-btn {
+    border: 1px solid #092140;
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    margin: 0 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    &.edit-btn {
+      display: none;
+    }
+  }
+  .new-btn.inverse-btn {
+    background-color: #FFFFFF;
+    color: #092140;
+    &:hover {
+      background-color: #0a5fa3;
+      border: 1px solid #0a5fa3;
+      color: #fff;
+    }
+  }
+  .new-btn.default-btn {
+    background-color: #092140;
+    color: #fff;
+    &:hover {
+      background-color: #0a5fa3;
+      border: 1px solid #0a5fa3;
+    }
+  }
+  .sg-main {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  .sg-main-small {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+  }
+
+  .sg-title {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+  }
+
+  .sg-sub {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .sg-sub-title {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32px;
   }
 }
