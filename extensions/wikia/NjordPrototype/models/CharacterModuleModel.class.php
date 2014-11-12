@@ -14,7 +14,7 @@ class CharacterModuleModel {
 	}
 
 	public function isEmpty() {
-		return empty($this->title) && empty( $this->contentSlots );
+		return empty( $this->title ) && empty( $this->contentSlots );
 	}
 
 	public function setFromAttributes( $attributes ) {
@@ -42,12 +42,12 @@ class CharacterModuleModel {
 	public function storeInProps() {
 		$pageId = Title::newFromText( $this->pageName )->getArticleId();
 
-		$contentSlots = [];
-		foreach($this->contentSlots as $contentSlot) {
+		$contentSlots = [ ];
+		foreach ( $this->contentSlots as $contentSlot ) {
 			$newSlot = $contentSlot;
 			$newSlot->imagePath = null;
 			$newSlot->originalImagePath = null;
-			$contentSlots []= $newSlot;
+			$contentSlots [] = $newSlot;
 		}
 
 		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId, $this->title );
@@ -58,7 +58,17 @@ class CharacterModuleModel {
 		$pageId = Title::newFromText( $this->pageName )->getArticleId();
 
 		$this->title = wfGetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId );
-		$this->contentSlots = json_decode( wfGetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId ) );
+		$items = json_decode( wfGetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId ) );
+		$contentSlots = [ ];
+		foreach ( $items as $item ) {
+			$contentSlot = new ContentEntity();
+			$contentSlot->link = $item->link;
+			$contentSlot->image = $item->image;
+			$contentSlot->title = $item->title;
+			$contentSlot->description = $item->description;
+			$contentSlots [] = $contentSlot;
+		}
+		$this->contentSlots = $contentSlots;
 
 		$this->initializeImagePaths();
 	}
@@ -69,19 +79,19 @@ class CharacterModuleModel {
 
 		$articleContents = $pageArticleObj->getContent();
 
-		// Remove the original hero text; if there's a newline at the end, we will strip it
+		// Remove the original text; if there's a newline at the end, we will strip it
 		// as new tag has one and we don't want a barrage of newlines
 		$newContent = mb_ereg_replace( '<momcharactermodule(.*?)>(.*?)</momcharactermodule>\n?', '', $articleContents, 'mi' );
 
 		$entities = [];
-		foreach($this->contentSlots as $contentSlot) {
-			$entities []= $contentSlot->toString();
+		$entities [] = '';
+		foreach ( $this->contentSlots as $contentSlot ) {
+			$entities [] = $contentSlot->toString();
 		}
+		$entities [] = '';
 
-		// Prepend the hero tag
-		$characterModuleTag = Xml::element( 'momcharactermodule', $attribs = [
-			'title' => $this->title
-		], $contents = implode( PHP_EOL, $entities ) );
+		// Prepend the character module tag
+		$characterModuleTag = Xml::element( 'momcharactermodule', $attribs = [ 'title' => $this->title ], $contents = implode( PHP_EOL, $entities ) );
 
 		$newContent = $characterModuleTag . PHP_EOL . $newContent;
 
@@ -91,25 +101,18 @@ class CharacterModuleModel {
 
 	}
 
-	protected function getImagePaths($imageName) {
+	protected function getImagePaths( $imageName ) {
 		$imagePath = null;
 		$originalImagePath = null;
 
 		$imageTitle = Title::newFromText( $imageName, NS_FILE );
 		$file = wfFindFile( $imageTitle );
 		if ( $file && $file->exists() ) {
-			$imagePath = $file->getThumbUrl(
-				$this->getThumbSuffix(
-					$file,
-					self::WIKI_CHARACTER_IMAGE_MAX_SIDE_LENGTH
-				) );
+			$imagePath = $file->getThumbUrl( $this->getThumbSuffix( $file, self::WIKI_CHARACTER_IMAGE_MAX_SIDE_LENGTH ) );
 			$originalImagePath = $file->getFullUrl();
 		}
 
-		return [
-			'imagePath' => $imagePath,
-			'originalImagePath' => $originalImagePath
-		];
+		return [ 'imagePath' => $imagePath, 'originalImagePath' => $originalImagePath ];
 	}
 
 	protected function getLink( $attributes ) {
@@ -162,7 +165,7 @@ class CharacterModuleModel {
 		}
 	}
 
-	private function getThumbSuffix( File $file, $expectedSideLength) {
+	private function getThumbSuffix( File $file, $expectedSideLength ) {
 		$originalHeight = $file->getHeight();
 		$originalWidth = $file->getWidth();
 		$originalRatio = $originalWidth / $originalHeight;
@@ -173,7 +176,7 @@ class CharacterModuleModel {
 			$height = ( $originalHeight > $expectedSideLength ) ? $expectedSideLength : $originalHeight;
 			$width = $height * $originalRatio;
 		}
-		$width = round($width);
+		$width = round( $width );
 
 		return "{$width}px-0,$originalWidth,0,$originalHeight";
 	}

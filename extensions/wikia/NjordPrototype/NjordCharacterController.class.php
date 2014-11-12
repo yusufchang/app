@@ -13,28 +13,49 @@ class NjordCharacterController extends WikiaController {
 		$this->isAllowedToEdit = $this->wg->user->isAllowed( 'njordeditmode' );
 	}
 
-	public function saveModuleData() {
+
+	public function saveModuleTitle() {
 		$request = $this->getRequest();
 		$moduleTitle = $request->getVal( 'moduletitle', false );
-		$moduleItems = $request->getVal( 'moduleitems', []);
+		$success = false;
+
+		if ( !empty( $moduleTitle ) ) {
+			$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
+			$characterModel->getFromProps();
+			$characterModel->title = $moduleTitle;
+			$characterModel->storeInPage();
+			$characterModel->storeInProps();
+			$success = true;
+		}
+
+		$this->getResponse()->setVal( 'success', $success );
+		$this->getResponse()->setVal( 'characterModel', $characterModel );
+	}
+
+	public function saveModuleItems() {
+		$request = $this->getRequest();
+		$moduleItems = $request->getVal( 'moduleitems', [ ] );
 		$success = false;
 
 		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
-		$characterModel->title = $moduleTitle;
-		$items = [];
-		foreach($moduleItems as $moduleItem) {
-			$item = new ContentEntity();
-			$item->link = $moduleItem['link'];
-			$item->image = $moduleItem['image'];
-			$item->title = $moduleItem['title'];
-			$item->description = $moduleItem['description'];
-			$items []= $item;
-		}
+		$characterModel->getFromProps();
 
-		$characterModel->contentSlots = $items;
-		$characterModel->storeInPage();
-		$characterModel->storeInProps();
-		$success = true;
+		if ( !empty( $moduleItems ) && is_array( $moduleItems ) ) {
+			$items = [ ];
+			foreach ( $moduleItems as $moduleItem ) {
+				$item = new ContentEntity();
+				$item->link = $moduleItem['link'];
+				$item->image = $moduleItem['image'];
+				$item->title = $moduleItem['title'];
+				$item->description = $moduleItem['description'];
+				$items [] = $item;
+			}
+
+			$characterModel->contentSlots = $items;
+			$characterModel->storeInPage();
+			$characterModel->storeInProps();
+			$success = true;
+		}
 
 		$this->getResponse()->setVal( 'success', $success );
 		$this->getResponse()->setVal( 'characterModel', $characterModel );
