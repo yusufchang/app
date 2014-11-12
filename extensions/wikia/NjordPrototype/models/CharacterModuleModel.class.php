@@ -29,6 +29,7 @@ class CharacterModuleModel {
 			$item = new ContentEntity();
 
 			$item->link = $this->getLink( $attributes );
+			$item->setWikiLink( $this->getWikiLink( $attributes ) );
 			$item->image = $this->getImage( $attributes );
 			$item->title = $this->getTitle( $attributes );
 			$item->description = $this->getDescription( $attributes );
@@ -42,16 +43,8 @@ class CharacterModuleModel {
 	public function storeInProps() {
 		$pageId = Title::newFromText( $this->pageName )->getArticleId();
 
-		$contentSlots = [ ];
-		foreach ( $this->contentSlots as $contentSlot ) {
-			$newSlot = $contentSlot;
-			$newSlot->imagePath = null;
-			$newSlot->originalImagePath = null;
-			$contentSlots [] = $newSlot;
-		}
-
 		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId, $this->title );
-		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId, json_encode( $contentSlots ) );
+		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId, json_encode( $this->contentSlots ) );
 	}
 
 	public function getFromProps() {
@@ -63,6 +56,7 @@ class CharacterModuleModel {
 		foreach ( $items as $item ) {
 			$contentSlot = new ContentEntity();
 			$contentSlot->link = $item->link;
+			$contentSlot->setWikiLink( $this->getWikiLink( $item->link ) );
 			$contentSlot->image = $item->image;
 			$contentSlot->title = $item->title;
 			$contentSlot->description = $item->description;
@@ -83,7 +77,7 @@ class CharacterModuleModel {
 		// as new tag has one and we don't want a barrage of newlines
 		$newContent = mb_ereg_replace( '<momcharactermodule(.*?)>(.*?)</momcharactermodule>\n?', '', $articleContents, 'mi' );
 
-		$entities = [];
+		$entities = [ ];
 		$entities [] = '';
 		foreach ( $this->contentSlots as $contentSlot ) {
 			$entities [] = $contentSlot->toString();
@@ -119,13 +113,21 @@ class CharacterModuleModel {
 		$link = null;
 
 		if ( !empty( $attributes[0] ) ) {
-			$linkTitle = Title::newFromText( $attributes[0] );
-			if ( $linkTitle instanceof Title ) {
-				$link = $linkTitle->getLocalURL();
-			}
+			$link = $attributes[0];
 		}
 
 		return $link;
+	}
+
+	protected function getWikiLink( $link ) {
+		$wikiLink = null;
+
+		$linkTitle = Title::newFromText( $link );
+		if ( $linkTitle instanceof Title ) {
+			$wikiLink = $linkTitle->getLocalUrl();
+		}
+
+		return $wikiLink;
 	}
 
 	protected function getImage( $attributes ) {
@@ -160,8 +162,8 @@ class CharacterModuleModel {
 	public function initializeImagePaths() {
 		foreach ( $this->contentSlots as &$contentEntity ) {
 			$imageData = $this->getImagePaths( $contentEntity->image );
-			$contentEntity->imagePath = $imageData['imagePath'];
-			$contentEntity->originalImagePath = $imageData['originalImagePath'];
+			$contentEntity->setImagePath( $imageData['imagePath'] );
+			$contentEntity->setOriginalImagePath( $imageData['originalImagePath'] );
 		}
 	}
 
@@ -179,13 +181,9 @@ class CharacterModuleModel {
 		}
 		$width = round( $width );
 
-		$top = ( $originalHeight > $originalWidth )
-			? round(($originalHeight - $originalWidth)/2)
-			: 0;
+		$top = ( $originalHeight > $originalWidth ) ? round( ( $originalHeight - $originalWidth ) / 2 ) : 0;
 		$bottom = $originalHeight - $top;
-		$left = ( $originalWidth > $originalHeight )
-			? round(($originalWidth - $originalHeight)/2)
-			: 0;
+		$left = ( $originalWidth > $originalHeight ) ? round( ( $originalWidth - $originalHeight ) / 2 ) : 0;
 		$right = $originalWidth - $left;
 
 		return "{$width}px-$left,$right,$top,$bottom";

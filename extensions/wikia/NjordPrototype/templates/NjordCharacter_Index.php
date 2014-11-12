@@ -32,8 +32,8 @@
 	<ul class="items-list <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 		<?php foreach ( $characterModel->contentSlots as $contentSlot ): ?>
 			<section class="item character">
-				<a href="<?= $contentSlot->link ?>" title=" <?= $contentSlot->title ?>">
-					<img class="item-image" src="<?= $contentSlot->imagePath ?>"/>
+				<a href="<?= $contentSlot->getWikiLink() ?>" title=" <?= $contentSlot->title ?>">
+					<img class="item-image" src="<?= $contentSlot->getImagePath() ?>"/>
 
 					<h1 class="item-title sg-main"><?= $contentSlot->title ?></h1>
 				</a>
