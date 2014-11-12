@@ -50,7 +50,7 @@ class CharacterModuleModel {
 			$contentSlots []= $newSlot;
 		}
 
-		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId, $this->imageName );
+		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId, $this->title );
 		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId, json_encode( $contentSlots ) );
 	}
 
@@ -71,7 +71,7 @@ class CharacterModuleModel {
 
 		// Remove the original hero text; if there's a newline at the end, we will strip it
 		// as new tag has one and we don't want a barrage of newlines
-		$newContent = mb_ereg_replace( '<momcharactermodule(.*?)></momcharactermodule>\n?', '', $articleContents, 'mi' );
+		$newContent = mb_ereg_replace( '<momcharactermodule(.*?)>(.*?)</momcharactermodule>\n?', '', $articleContents, 'mi' );
 
 		$entities = [];
 		foreach($this->contentSlots as $contentSlot) {

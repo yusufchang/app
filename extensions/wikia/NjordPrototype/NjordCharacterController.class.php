@@ -14,7 +14,29 @@ class NjordCharacterController extends WikiaController {
 	}
 
 	public function saveModuleData() {
-		$params = $this->request->getParams();
+		$request = $this->getRequest();
+		$moduleTitle = $request->getVal( 'moduletitle', false );
+		$moduleItems = $request->getVal( 'moduleitems', []);
+		$success = false;
 
+		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
+		$characterModel->title = $moduleTitle;
+		$items = [];
+		foreach($moduleItems as $moduleItem) {
+			$item = new ContentEntity();
+			$item->link = $moduleItem['link'];
+			$item->image = $moduleItem['image'];
+			$item->title = $moduleItem['title'];
+			$item->description = $moduleItem['description'];
+			$items []= $item;
+		}
+
+		$characterModel->contentSlots = $items;
+		$characterModel->storeInPage();
+		$characterModel->storeInProps();
+		$success = true;
+
+		$this->getResponse()->setVal( 'success', $success );
+		$this->getResponse()->setVal( 'characterModel', $characterModel );
 	}
 }
