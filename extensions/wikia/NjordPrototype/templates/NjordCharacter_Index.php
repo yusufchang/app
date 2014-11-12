@@ -19,19 +19,23 @@
 				<img class="title-edit-btn" src="/extensions/wikia/NjordPrototype/images/pencil_b.svg">
 			<? endif; ?>
 		</div>
-		<div class="btn-group <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
-			<div class="new-btn default-btn add-btn sg-sub"><span class="add-btn-text">Add article page</span></div>
-			<div class="new-btn inverse-btn settings-btn sg-sub"></div>
-		</div>
+		<? if ( $isAllowedToEdit ): ?>
+			<div
+				class="btn-group <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+				<div class="new-btn default-btn add-btn sg-sub"><span class="add-btn-text">Add article page</span></div>
+				<div class="new-btn inverse-btn settings-btn sg-sub"></div>
+			</div>
+		<? endif; ?>
 	</div>
 	<ul class="items-list <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 		<?php foreach ( $characterModel->contentSlots as $contentSlot ): ?>
 			<section class="item character">
 				<a href="<?= $contentSlot->link ?>" title=" <?= $contentSlot->title ?>">
 					<img class="item-image" src="<?= $contentSlot->imagePath ?>"/>
+
 					<h1 class="item-title sg-main"><?= $contentSlot->title ?></h1>
 				</a>
-<!--				<h2>--><?//= $contentSlot->description ?><!--</h2>-->
+				<!--				<h2>--><? //= $contentSlot->description ?><!--</h2>-->
 			</section>
 		<?php endforeach; ?>
 		<div class="add-block">
