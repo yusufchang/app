@@ -19,12 +19,14 @@ class NjordCharacterController extends WikiaController {
 		$moduleTitle = $request->getVal( 'moduletitle', false );
 		$success = false;
 
+		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
+		$characterModel->getFromProps();
+
 		if ( !empty( $moduleTitle ) ) {
-			$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
-			$characterModel->getFromProps();
 			$characterModel->title = $moduleTitle;
 			$characterModel->storeInPage();
 			$characterModel->storeInProps();
+			$characterModel->initializeImagePaths();
 			$success = true;
 		}
 
@@ -54,6 +56,7 @@ class NjordCharacterController extends WikiaController {
 			$characterModel->contentSlots = $items;
 			$characterModel->storeInPage();
 			$characterModel->storeInProps();
+			$characterModel->initializeImagePaths();
 			$success = true;
 		}
 

@@ -157,7 +157,7 @@ class CharacterModuleModel {
 		return $description;
 	}
 
-	protected function initializeImagePaths() {
+	public function initializeImagePaths() {
 		foreach ( $this->contentSlots as &$contentEntity ) {
 			$imageData = $this->getImagePaths( $contentEntity->image );
 			$contentEntity->imagePath = $imageData['imagePath'];
