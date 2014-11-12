@@ -13,6 +13,10 @@ class CharacterModuleModel {
 		$this->pageName = $pageName;
 	}
 
+	public function isEmpty() {
+		return empty($this->title) && empty( $this->contentSlots );
+	}
+
 	public function setFromAttributes( $attributes ) {
 		$this->title = !empty( $attributes['title'] ) ? $attributes['title'] : null;
 	}
