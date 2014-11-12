@@ -4,8 +4,8 @@
  */
 ?>
 <div class="mom-character-module no-edit-state">
-	<div class="bar <?php if ( isset( $wikiData->title ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
-		<div class="title-wrap sg-sub-title">
+	<div class="bar">
+		<div class="title-wrap sg-sub-title <?php if ( isset( $wikiData->title ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 			<div class="edit-box">
 				<div class="mc-title" contenteditable="true"><?= $wikiData->title ?></div>
 				<div class="btn-bar">
@@ -19,7 +19,7 @@
 				<img class="title-edit-btn" src="/extensions/wikia/NjordPrototype/images/pencil_b.svg">
 			<? endif; ?>
 		</div>
-		<div class="btn-group">
+		<div class="btn-group <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 			<div class="new-btn default-btn add-btn sg-sub"><span class="add-btn-text">Add article page</span></div>
 			<div class="new-btn inverse-btn settings-btn sg-sub"></div>
 		</div>
