@@ -44,7 +44,20 @@
       max-width: 250px;
       min-height: 200px;
       min-width: 200px;
+      position: relative;
+      text-align: center;
       width: 15vw;
+    }
+    .item-image {
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .item-title {
+      background: rgba(255, 255, 255, .6);
+      bottom: 0;
+      color: $color-text-dark;
+      position: absolute;
+      width: 100%;
     }
   }
   .title-wrap {
@@ -75,6 +88,12 @@
 
   //states
   .filled-state {
+    .add-btn-text {
+      display: none;
+    }
+    .item {
+      border: none;
+    }
     .title-default-text {
       display: none;
     }
