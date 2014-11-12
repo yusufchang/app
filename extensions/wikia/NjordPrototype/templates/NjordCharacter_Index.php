@@ -23,13 +23,13 @@
 		</div>
 		<? if ( $isAllowedToEdit ): ?>
 			<div
-				class="btn-group <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+				class="btn-group <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 				<div class="new-btn default-btn add-btn sg-sub"><span class="add-btn-text">Add article page</span></div>
 				<div class="new-btn inverse-btn settings-btn sg-sub"></div>
 			</div>
 		<? endif; ?>
 	</div>
-	<ul class="items-list <?php if ( isset( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+	<ul class="items-list <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 		<?php foreach ( $characterModel->contentSlots as $contentSlot ): ?>
 			<section class="item character">
 				<a href="<?= $contentSlot->link ?>" title=" <?= $contentSlot->title ?>">
@@ -49,7 +49,7 @@
 				button on the top right corner
 			</div>
 		</div>
-		<?php if ( !isset( $characterModel->contentSlots ) ) : ?>
+		<?php if ( empty( $characterModel->contentSlots ) ) : ?>
 			<li class="item"></li>
 			<li class="item"></li>
 			<li class="item"></li>
