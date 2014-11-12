@@ -4,9 +4,7 @@ class CharacterModuleModel {
 	const WIKI_CHARACTER_MODULE_TITLE_PROP_ID = 10004;
 	const WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID = 10005;
 
-	const WIKI_CHARACTER_IMAGE_MAX_WIDTH = 350;
-	const WIKI_CHARACTER_IMAGE_MAX_HEIGHT = 350;
-	const THUMBNAILER_SIZE_SUFFIX = '350px-0';
+	const WIKI_CHARACTER_IMAGE_MAX_SIDE_LENGTH = 250;
 
 	public $title = '';
 	public $contentSlots = [ ];
@@ -40,8 +38,16 @@ class CharacterModuleModel {
 	public function storeInProps() {
 		$pageId = Title::newFromText( $this->pageName )->getArticleId();
 
+		$contentSlots = [];
+		foreach($this->contentSlots as $contentSlot) {
+			$newSlot = $contentSlot;
+			$newSlot->imagePath = null;
+			$newSlot->originalImagePath = null;
+			$contentSlots []= $newSlot;
+		}
+
 		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId, $this->imageName );
-		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId, json_encode( $this->contentSlots ) );
+		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId, json_encode( $contentSlots ) );
 	}
 
 	public function getFromProps() {
@@ -63,8 +69,7 @@ class CharacterModuleModel {
 			$imagePath = $file->getThumbUrl(
 				$this->getThumbSuffix(
 					$file,
-					self::WIKI_CHARACTER_IMAGE_MAX_WIDTH,
-					self::WIKI_CHARACTER_IMAGE_MAX_HEIGHT
+					self::WIKI_CHARACTER_IMAGE_MAX_SIDE_LENGTH
 				) );
 			$originalImagePath = $file->getFullUrl();
 		}
@@ -125,24 +130,20 @@ class CharacterModuleModel {
 		}
 	}
 
-	private function getThumbSuffix( File $file, $expectedWidth, $expectedHeight ) {
+	private function getThumbSuffix( File $file, $expectedSideLength) {
 		$originalHeight = $file->getHeight();
 		$originalWidth = $file->getWidth();
 		$originalRatio = $originalWidth / $originalHeight;
-		$ratio = $expectedWidth / $expectedHeight;
+		$ratio = 1;
 		if ( $originalRatio > $ratio ) {
-			$width = round( $originalHeight * $ratio );
-			$height = $originalHeight;
+			$width = ( $originalWidth > $expectedSideLength ) ? $expectedSideLength : $originalWidth;
+			$height = $width / $originalRatio;
 		} else {
-			$width = $originalWidth;
-			$height = round( $originalWidth / $ratio );
+			$height = ( $originalHeight > $expectedSideLength ) ? $expectedSideLength : $originalHeight;
+			$width = $height * $originalRatio;
 		}
+		$width = round($width);
 
-		$width = ( $width > $expectedWidth ) ? $expectedWidth : $width;
-		$left = 0;
-		$right = $originalWidth;
-		$top = 0;
-		$bottom = $top + $height;
-		return "{$width}px-$left,$right,$top,$bottom";
+		return "{$width}px-0,$originalWidth,0,$originalHeight";
 	}
 }
