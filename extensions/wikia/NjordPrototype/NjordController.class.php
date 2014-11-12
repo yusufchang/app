@@ -193,13 +193,13 @@ class NjordController extends WikiaController {
 	}
 
 	public function saveHeroImage() {
-		$image = $this->getRequest()->getVal( 'imagename', false );
-		$cropPosition = $this->getRequest()->getVal( 'cropposition', false );
+		$request = $this->getRequest();
+		$image = $request->getVal( 'imagename', false );
+		$cropPosition = $request->getVal( 'cropposition', false );
 		$success = false;
 		if ( $image !== false && $cropPosition !== false ) {
 			$wikiDataModel = $this->getWikiData();
 			$wikiDataModel->cropPosition = $cropPosition;
-
 			wfProfileIn( __METHOD__ . '::uploadStart' );
 			$stash = RepoGroup::singleton()->getLocalRepo()->getUploadStash();
 
@@ -237,51 +237,6 @@ class NjordController extends WikiaController {
 		} else {
 			return false;
 		}
-	}
-
-	public function saveHeroData() {
-		wfProfileIn( __METHOD__ );
-
-		$success = false;
-
-		$this->getResponse()->setFormat( 'json' );
-
-		$wikiData = $this->request->getVal( 'wikiData', [ ] );
-		$wikiDataModel = new WikiDataModel( Title::newMainPage()->getText() );
-		$wikiDataModel->setFromAttributes( $wikiData );
-		$imageChanged = !empty( $wikiData[ 'imagechanged' ] );
-		$imageName = !empty( $wikiData[ 'imagename' ] ) ? $wikiData[ 'imagename' ] : null;
-
-		if ( $imageChanged && $imageName ) {
-			wfProfileIn( __METHOD__ . '::uploadStart' );
-			$stash = RepoGroup::singleton()->getLocalRepo()->getUploadStash();
-
-			$temp_file = $stash->getFile( $imageName );
-			$file = new LocalFile( static::HERO_IMAGE_FILENAME, RepoGroup::singleton()->getLocalRepo() );
-
-			$status = $file->upload( $temp_file->getPath(), '', '' );
-			wfProfileIn( __METHOD__ . '::uploadEnd' );
-
-			if ( $status->isOK() ) {
-				$wikiDataModel->setImageName( $file->getTitle()->getDBKey() );
-				$wikiDataModel->setImagePath( $file->getFullUrl() );
-
-				$success = $this->setWikiData( $wikiDataModel );
-
-				//clean up stash
-				$stash->removeFile( $imageName );
-			}
-		} else {
-			$wikiDataModel->setImageNameFromProps();
-			$success = $this->setWikiData( $wikiDataModel );
-		}
-		if ( !$success ) {
-			$wikiDataModel->getFromProps();
-		}
-
-		$this->getResponse()->setVal( 'success', $success );
-		$this->getResponse()->setVal( 'wikiData', $wikiDataModel );
-		wfProfileOut( __METHOD__ );
 	}
 
 	/**

@@ -63,7 +63,35 @@ class CharacterModuleModel {
 		$this->initializeImagePaths();
 	}
 
-	function getImagePaths($imageName) {
+	public function storeInPage() {
+		$pageTitleObj = Title::newFromText( $this->pageName );
+		$pageArticleObj = new Article( $pageTitleObj );
+
+		$articleContents = $pageArticleObj->getContent();
+
+		// Remove the original hero text; if there's a newline at the end, we will strip it
+		// as new tag has one and we don't want a barrage of newlines
+		$newContent = mb_ereg_replace( '<momcharactermodule(.*?)></momcharactermodule>\n?', '', $articleContents, 'mi' );
+
+		$entities = [];
+		foreach($this->contentSlots as $contentSlot) {
+			$entities []= $contentSlot->toString();
+		}
+
+		// Prepend the hero tag
+		$characterModuleTag = Xml::element( 'momcharactermodule', $attribs = [
+			'title' => $this->title
+		], $contents = implode( PHP_EOL, $entities ) );
+
+		$newContent = $characterModuleTag . PHP_EOL . $newContent;
+
+		// save and purge
+		$pageArticleObj->doEdit( $newContent, '' );
+		$pageArticleObj->doPurge();
+
+	}
+
+	protected function getImagePaths($imageName) {
 		$imagePath = null;
 		$originalImagePath = null;
 
@@ -141,7 +169,6 @@ class CharacterModuleModel {
 		$ratio = 1;
 		if ( $originalRatio > $ratio ) {
 			$width = ( $originalWidth > $expectedSideLength ) ? $expectedSideLength : $originalWidth;
-			$height = $width / $originalRatio;
 		} else {
 			$height = ( $originalHeight > $expectedSideLength ) ? $expectedSideLength : $originalHeight;
 			$width = $height * $originalRatio;

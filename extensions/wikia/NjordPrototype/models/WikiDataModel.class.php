@@ -34,7 +34,6 @@ class WikiDataModel {
 
 	public function storeInProps() {
 		$pageId = Title::newFromText( $this->pageName )->getArticleId();
-
 		wfSetWikiaPageProp( self::WIKI_HERO_IMAGE_PROP_ID, $pageId, $this->imageName );
 		wfSetWikiaPageProp( self::WIKI_HERO_TITLE_PROP_ID, $pageId, $this->title );
 		wfSetWikiaPageProp( self::WIKI_HERO_DESCRIPTION_ID, $pageId, $this->description );
@@ -98,7 +97,9 @@ class WikiDataModel {
 		$right = $originalWidth;
 		$top = round( $originalHeight * $crop );
 		$bottom = $top + $height;
-		return "{$width}px-$left,$right,$top,$bottom";
+
+		$suffix = "{$width}px-$left,$right,$top,$bottom";
+		return $suffix;
 	}
 
 	public function storeInPage() {
@@ -123,7 +124,6 @@ class WikiDataModel {
 		// save and purge
 		$pageArticleObj->doEdit( $newContent, '' );
 		$pageArticleObj->doPurge();
-
 	}
 
 	public function getImageName() {
