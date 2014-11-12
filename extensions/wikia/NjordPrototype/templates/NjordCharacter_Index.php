@@ -29,7 +29,7 @@
 		<?php foreach ( $characterModel->contentSlots as $contentSlot ): ?>
 			<section class="item character">
 				<a href="<?= $contentSlot->link ?>" title=" <?= $contentSlot->title ?>">
-					<img src="<?= $contentSlot->image ?>"/>
+					<img src="<?= $contentSlot->imagePath ?>"/>
 					<h1><?= $contentSlot->title ?></h1>
 					<h2><?= $contentSlot->description ?></h2>
 				</a>

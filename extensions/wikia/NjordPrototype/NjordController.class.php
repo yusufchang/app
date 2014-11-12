@@ -34,22 +34,8 @@ class NjordController extends WikiaController {
 	}
 
 	public function index() {
-		global $wgTitle, $wgUser, $wgBlankImgUrl;
+		global $wgBlankImgUrl;
 		$this->wg->SuppressPageHeader = true;
-		//set correct editor
-		$this->editor = EditorPreference::getPrimaryEditor();
-		$this->name = 'edit';
-		$this->source = false;
-		if ( !$wgUser->isAllowed('edit') || !$wgUser->isLoggedIn() || $wgTitle->isNamespaceProtected( $wgUser ) ) {
-			$this->name = 'view source';
-			$this->source = true;
-			$this->editor = EditorPreference::OPTION_EDITOR_SOURCE;
-		}
-		$editOptions = [ 'action' => 'edit' ];
-		if ( $this->editor === EditorPreference::OPTION_EDITOR_VISUAL ) {
-			$editOptions = [ 'veaction' => 'edit' ];
-		}
-		$this->editLink = $wgTitle->getLocalURL( $editOptions );
 
 		$this->wg->out->addStyle( AssetsManager::getInstance()->getSassCommonURL( 'extensions/wikia/NjordPrototype/css/Njord.scss' ) );
 		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/jquery-ui-1.10.4.js' );
@@ -343,5 +329,23 @@ class NjordController extends WikiaController {
 	public function getUploadFileErrorMessage( UploadFromFile $uploader, $verified ) {
 		$errorReadable = $uploader->getVerificationErrorCode( $verified[ 'status' ] );
 		return wfMessage( $errorReadable )->parse();
+	}
+
+	public function edit() {
+		global $wgTitle, $wgUser;
+		//set correct editor
+		$this->editor = EditorPreference::getPrimaryEditor();
+		$this->name = 'edit';
+		$this->source = false;
+		if ( !$wgUser->isAllowed('edit') || !$wgUser->isLoggedIn() || $wgTitle->isNamespaceProtected( $wgUser ) ) {
+			$this->name = 'view source';
+			$this->source = true;
+			$this->editor = EditorPreference::OPTION_EDITOR_SOURCE;
+		}
+		$editOptions = [ 'action' => 'edit' ];
+		if ( $this->editor === EditorPreference::OPTION_EDITOR_VISUAL ) {
+			$editOptions = [ 'veaction' => 'edit' ];
+		}
+		$this->editLink = $wgTitle->getLocalURL( $editOptions );
 	}
 }

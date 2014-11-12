@@ -35,6 +35,8 @@
 		<?php
 		if ( !empty( $wg->EnableNjordExt) && WikiaPageType::isMainPage() ) {
 			echo $app->renderView( 'Njord', 'Index' );
+			echo $app->renderView( 'NjordCharacter', 'Index' );
+			echo $app->renderView( 'Njord', 'Edit' );
 		}
 		?>
 		<?php

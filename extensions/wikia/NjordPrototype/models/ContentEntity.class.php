@@ -5,4 +5,6 @@ class ContentEntity {
 	public $image;
 	public $title;
 	public $description;
+	public $imagePath;
+	public $originalImagePath;
 }

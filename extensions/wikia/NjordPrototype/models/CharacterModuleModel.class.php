@@ -1,14 +1,22 @@
 <?php
 
 class CharacterModuleModel {
+	const WIKI_CHARACTER_MODULE_TITLE_PROP_ID = 10004;
+	const WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID = 10005;
+
 	const WIKI_CHARACTER_IMAGE_MAX_WIDTH = 350;
 	const WIKI_CHARACTER_IMAGE_MAX_HEIGHT = 350;
 	const THUMBNAILER_SIZE_SUFFIX = '350px-0';
 
+	public $title = '';
 	public $contentSlots = [ ];
 
 	public function __construct( $pageName ) {
 		$this->pageName = $pageName;
+	}
+
+	public function setFromAttributes( $attributes ) {
+		$this->title = !empty( $attributes['title'] ) ? $attributes['title'] : null;
 	}
 
 	public function setFromContent( $content ) {
@@ -26,12 +34,47 @@ class CharacterModuleModel {
 			$items[] = $item;
 		}
 		$this->contentSlots = $items;
+		$this->initializeImagePaths();
 	}
 
-	/**
-	 * @param $attributes
-	 * @param $item
-	 */
+	public function storeInProps() {
+		$pageId = Title::newFromText( $this->pageName )->getArticleId();
+
+		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId, $this->imageName );
+		wfSetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId, json_encode( $this->contentSlots ) );
+	}
+
+	public function getFromProps() {
+		$pageId = Title::newFromText( $this->pageName )->getArticleId();
+
+		$this->title = wfGetWikiaPageProp( self::WIKI_CHARACTER_MODULE_TITLE_PROP_ID, $pageId );
+		$this->contentSlots = json_decode( wfGetWikiaPageProp( self::WIKI_CHARACTER_MODULE_CONTENTS_PROP_ID, $pageId ) );
+
+		$this->initializeImagePaths();
+	}
+
+	function getImagePaths($imageName) {
+		$imagePath = null;
+		$originalImagePath = null;
+
+		$imageTitle = Title::newFromText( $imageName, NS_FILE );
+		$file = wfFindFile( $imageTitle );
+		if ( $file && $file->exists() ) {
+			$imagePath = $file->getThumbUrl(
+				$this->getThumbSuffix(
+					$file,
+					self::WIKI_CHARACTER_IMAGE_MAX_WIDTH,
+					self::WIKI_CHARACTER_IMAGE_MAX_HEIGHT
+				) );
+			$originalImagePath = $file->getFullUrl();
+		}
+
+		return [
+			'imagePath' => $imagePath,
+			'originalImagePath' => $originalImagePath
+		];
+	}
+
 	protected function getLink( $attributes ) {
 		$link = null;
 
@@ -45,27 +88,15 @@ class CharacterModuleModel {
 		return $link;
 	}
 
-	/**
-	 * @param $attributes
-	 * @param $item
-	 */
 	protected function getImage( $attributes ) {
 		$image = null;
 
-		$imageTitle = Title::newFromText( $attributes[1], NS_FILE );
-		if ( $imageTitle instanceof Title ) {
-			$imageFile = wfFindFile( $imageTitle );
-			if ( $imageFile instanceof File && $imageFile->exists() ) {
-				$image = wfReplaceImageServer( $imageFile->getThumbUrl( self::THUMBNAILER_SIZE_SUFFIX ) );
-			}
+		if ( !empty( $attributes[1] ) ) {
+			$image = $attributes[1];
 		}
 		return $image;
 	}
 
-	/**
-	 * @param $attributes
-	 * @param $item
-	 */
 	protected function getTitle( $attributes ) {
 		$title = null;
 
@@ -76,10 +107,6 @@ class CharacterModuleModel {
 		return $title;
 	}
 
-	/**
-	 * @param $attributes
-	 * @param $item
-	 */
 	protected function getDescription( $attributes ) {
 		$description = null;
 
@@ -88,5 +115,34 @@ class CharacterModuleModel {
 		}
 
 		return $description;
+	}
+
+	protected function initializeImagePaths() {
+		foreach ( $this->contentSlots as &$contentEntity ) {
+			$imageData = $this->getImagePaths( $contentEntity->image );
+			$contentEntity->imagePath = $imageData['imagePath'];
+			$contentEntity->originalImagePath = $imageData['originalImagePath'];
+		}
+	}
+
+	private function getThumbSuffix( File $file, $expectedWidth, $expectedHeight ) {
+		$originalHeight = $file->getHeight();
+		$originalWidth = $file->getWidth();
+		$originalRatio = $originalWidth / $originalHeight;
+		$ratio = $expectedWidth / $expectedHeight;
+		if ( $originalRatio > $ratio ) {
+			$width = round( $originalHeight * $ratio );
+			$height = $originalHeight;
+		} else {
+			$width = $originalWidth;
+			$height = round( $originalWidth / $ratio );
+		}
+
+		$width = ( $width > $expectedWidth ) ? $expectedWidth : $width;
+		$left = 0;
+		$right = $originalWidth;
+		$top = 0;
+		$bottom = $top + $height;
+		return "{$width}px-$left,$right,$top,$bottom";
 	}
 }

@@ -3,8 +3,9 @@
 class NjordCharacterController extends WikiaController {
 
 	public function index() {
-		$params = $this->request->getParams();
-		$this->characterModel = !empty( $params['characterModel'] ) ? $params['characterModel'] : null;
+		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
+		$characterModel->getFromProps();
+		$this->characterModel = $characterModel;
 		if ( !$this->wg->user->isLoggedIn() ) {
 			//TODO: add check for zero state
 			return $this->skipRendering();
@@ -20,6 +21,5 @@ class NjordCharacterController extends WikiaController {
 	public function saveModuleData() {
 		$params = $this->request->getParams();
 
-		
 	}
 }

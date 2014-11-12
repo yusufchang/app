@@ -26,6 +26,8 @@ class NjordHooks {
 	public static function renderCharacterModuleContainerTag( $content, array $attributes, Parser $parser, PPFrame $frame ) {
 		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
 		$characterModel->setFromContent( $content );
-		return F::app()->renderView( 'NjordCharacter', 'index', [ 'characterModel' => $characterModel ] );
+		$characterModel->setFromAttributes( $attributes );
+		$characterModel->storeInProps();
+		return '';
 	}
 }
