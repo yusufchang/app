@@ -171,13 +171,23 @@ class CharacterModuleModel {
 		$originalRatio = $originalWidth / $originalHeight;
 		$ratio = 1;
 		if ( $originalRatio > $ratio ) {
-			$width = ( $originalWidth > $expectedSideLength ) ? $expectedSideLength : $originalWidth;
-		} else {
 			$height = ( $originalHeight > $expectedSideLength ) ? $expectedSideLength : $originalHeight;
-			$width = $height * $originalRatio;
+			$width = $height;
+		} else {
+			$width = ( $originalWidth > $expectedSideLength ) ? $expectedSideLength : $originalWidth;
+			$height = $width;
 		}
 		$width = round( $width );
 
-		return "{$width}px-0,$originalWidth,0,$originalHeight";
+		$top = ( $originalHeight > $originalWidth )
+			? round(($originalHeight - $originalWidth)/2)
+			: 0;
+		$bottom = $originalHeight - $top;
+		$left = ( $originalWidth > $originalHeight )
+			? round(($originalWidth - $originalHeight)/2)
+			: 0;
+		$right = $originalWidth - $left;
+
+		return "{$width}px-$left,$right,$top,$bottom";
 	}
 }
