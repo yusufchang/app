@@ -10,11 +10,7 @@ class NjordCharacterController extends WikiaController {
 			return $this->skipRendering();
 		}
 		$this->wg->out->addStyle( AssetsManager::getInstance()->getSassCommonURL( 'extensions/wikia/NjordPrototype/css/NjCharacter.scss' ) );
-
 		$this->isAllowedToEdit = $this->wg->user->isAllowed( 'njordeditmode' );
-		$wd = new stdClass();
-		$wd->title = 'Characters';
-		$this->wikiData = $wd;
 	}
 
 	public function saveModuleData() {

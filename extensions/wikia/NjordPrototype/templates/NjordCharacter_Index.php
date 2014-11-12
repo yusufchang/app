@@ -5,15 +5,15 @@
 ?>
 <div class="mom-character-module no-edit-state">
 	<div class="bar">
-		<div class="title-wrap sg-sub-title <?php if ( isset( $wikiData->title ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+		<div class="title-wrap sg-sub-title <?php if ( isset( $characterModel->title ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 			<div class="edit-box">
-				<div class="mc-title" contenteditable="true"><?= $wikiData->title ?></div>
+				<div class="mc-title" contenteditable="true"><?= $characterModel->title ?></div>
 				<div class="btn-bar">
 					<div class="new-btn inverse-btn discard-btn sg-sub">Discard</div>
 					<div class="new-btn default-btn save-btn sg-sub">Publish</div>
 				</div>
 			</div>
-			<span class="title-text"><?= $wikiData->title ?></span>
+			<span class="title-text"><?= $characterModel->title ?></span>
 			<span class="title-default-text">Characters</span>
 			<? if ( $isAllowedToEdit ): ?>
 				<img class="title-edit-btn" src="/extensions/wikia/NjordPrototype/images/pencil_b.svg">
