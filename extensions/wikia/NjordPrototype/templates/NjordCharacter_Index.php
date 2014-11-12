@@ -13,11 +13,13 @@
 					<div class="new-btn default-btn save-btn sg-sub">Publish</div>
 				</div>
 			</div>
-			<span class="title-text"><?= $characterModel->title ?></span>
-			<span class="title-default-text">Characters</span>
-			<? if ( $isAllowedToEdit ): ?>
-				<img class="title-edit-btn" src="/extensions/wikia/NjordPrototype/images/pencil_b.svg">
-			<? endif; ?>
+			<div class="text-wrap">
+				<span class="title-text"><?= $characterModel->title ?></span>
+				<span class="title-default-text">Characters</span>
+				<? if ( $isAllowedToEdit ): ?>
+					<img class="title-edit-btn" src="/extensions/wikia/NjordPrototype/images/pencil_b.svg">
+				<? endif; ?>
+			</div>
 		</div>
 		<? if ( $isAllowedToEdit ): ?>
 			<div

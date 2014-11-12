@@ -10,6 +10,8 @@ class NjordCharacterController extends WikiaController {
 			return $this->skipRendering();
 		}
 		$this->wg->out->addStyle( AssetsManager::getInstance()->getSassCommonURL( 'extensions/wikia/NjordPrototype/css/NjCharacter.scss' ) );
+		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/jquery.caret.js' );
+		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/NjCharacter.js' );
 		$this->isAllowedToEdit = $this->wg->user->isAllowed( 'njordeditmode' );
 	}
 
