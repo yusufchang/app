@@ -618,6 +618,26 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 				wfRunHooks( 'PrefsPasswordAudit', array( $user, $this->newpassword, 'success' ) );
 				$user->saveSettings();
 
+				\Wikia\Logger\WikiaLogger::instance()->debug(
+					'CONN-638 - User::setToken()',
+					[
+						'session_id' => session_id(),
+						'user::mToken' => $user->getToken(),
+						'session::wsToken' => $this->request->getSessionData('wsToken'),
+					]
+				);
+
+				$this->request->setSessionData('wsToken', $user->getToken());
+
+				\Wikia\Logger\WikiaLogger::instance()->debug(
+					'CONN-638 - User::setToken()',
+					[
+						'session_id' => session_id(),
+						'user::mToken' => $user->getToken(),
+						'session::wsToken' => $this->request->getSessionData('wsToken'),
+					]
+				);
+
 				$this->result = 'ok';
 				$this->msg = wfMessage( 'resetpass_success' )->escaped();
 

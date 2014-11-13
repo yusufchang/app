@@ -2193,6 +2193,7 @@ class User {
 			[
 				'debug_backtrace' => $backtrace,
 				'session_id' => session_id(),
+				'token' => $token,
 			]
 		);
 
