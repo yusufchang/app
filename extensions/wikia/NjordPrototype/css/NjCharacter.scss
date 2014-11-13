@@ -3,6 +3,9 @@
 .mom-character-module {
   //general
   .add-block {
+    .add-icon {
+      vertical-align: baseline;
+    }
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -17,6 +20,10 @@
     position: absolute;
     text-align: center;
     width: 15vw;
+  }
+  .add-icon {
+    width: 17px;
+    vertical-align: sub;
   }
   .bar {
     align-items: center;
@@ -58,6 +65,14 @@
       color: $color-text-dark;
       position: absolute;
       width: 100%;
+    }
+  }
+  .settings-btn {
+    background: url('/extensions/wikia/NjordPrototype/images/gear_b.svg') center no-repeat ; /* base64 */
+    background-size: 25px;
+    &:hover {
+      background: url('/extensions/wikia/NjordPrototype/images/gear.svg') center no-repeat ; /* base64 */
+      background-size: 25px;
     }
   }
   .title-wrap {
@@ -116,9 +131,6 @@
     }
   }
   .filled-state {
-    .add-btn-text {
-      display: none;
-    }
     .item {
       border: none;
     }

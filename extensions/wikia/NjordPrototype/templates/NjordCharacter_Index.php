@@ -24,7 +24,10 @@
 		<? if ( $isAllowedToEdit ): ?>
 			<div
 				class="btn-group <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
-				<div class="new-btn default-btn add-btn sg-sub"><span class="add-btn-text">Add article page</span></div>
+				<div class="new-btn default-btn add-btn sg-sub">
+					<img class="add-icon" src="/extensions/wikia/NjordPrototype/images/plus.svg">
+					<span class="add-btn-text">Add article page</span>
+				</div>
 				<div class="new-btn inverse-btn settings-btn sg-sub"></div>
 			</div>
 		<? endif; ?>
@@ -42,6 +45,7 @@
 		<?php endforeach; ?>
 		<div class="add-block">
 			<div class="main-add-text">
+				<img class="add-icon" src="/extensions/wikia/NjordPrototype/images/plus_g.svg">
 				<span class="sg-main">Add an Article</span>
 			</div>
 			<div class="add-text sg-sub">Click on
@@ -56,4 +60,8 @@
 			<li class="item"></li>
 		<?php endif; ?>
 	</ul>
+
+	<div class="modal">
+
+	</div>
 </div>
