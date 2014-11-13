@@ -34,6 +34,7 @@
 		$titleEditBtn = $('.mom-character-module .title-edit-btn'),
 		$titleSaveBtn = $('.mom-character-module .save-btn'),
 		$titleDiscardBtn = $('.mom-character-module .discard-btn'),
+		$characterAddBtn = $('.mom-character-module .add-btn'),
 	//functions
 		saveTitle = function () {
 			$titleEditElement.startThrobbing();
@@ -77,6 +78,12 @@
 			States.setState($titleWrap, 'edit-state');
 			$titleEditFld.text(data.title);
 			placeCaretAtEnd( $titleEditFld.get(0) );
+		},
+		addCharacter = function () {
+			$.showModal('Add an Character', $('.modal-wrap').html(), {
+				height: '38vw',
+				width: '55vw',
+			});
 		},
 		onFocus = function () {
 			var $this = $(this);
@@ -138,6 +145,8 @@
 				.on('blur keyup paste input', onInput)
 				.on('paste', onPaste)
 				.on('change', onChange);
+
+			$characterAddBtn.on('click', addCharacter);
 		};
 
 	//fire up if logged user

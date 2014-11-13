@@ -5,7 +5,8 @@
 ?>
 <div class="mom-character-module no-edit-state">
 	<div class="bar">
-		<div class="title-wrap sg-sub-title <?php if ( isset( $characterModel->title ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
+		<div
+			class="title-wrap sg-sub-title <?php if ( isset( $characterModel->title ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 			<div class="edit-box">
 				<div class="mc-title" contenteditable="true"><?= $characterModel->title ?></div>
 				<div class="btn-bar">
@@ -60,8 +61,35 @@
 			<li class="item"></li>
 		<?php endif; ?>
 	</ul>
-
-	<div class="modal">
-
+	<div class="modal-wrap">
+		<div class="mom-character-modal sg-main">
+			<div class="modal-content">
+				<div class="modal-upload">
+					<div class="upload-mask"></div>
+					<div class="overlay">
+						<div class="overlay-flex">
+							<span class="overlay-text sg-main">drop an image here</span>
+						</div>
+					</div>
+					<div class="upload">
+						<div class="upload-btn-group">
+							<img class="upload-icon upload-btn" src="/extensions/wikia/NjordPrototype/images/plus.svg">
+							<span class="upload-call upload-btn">add a character image</span>
+							<span class="upload-call-sub sg-sub">or, drop an image here</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-form">
+					<label class="label sg-sub" for="character">Full Name</label>
+					<input class="input sg-main" type="text" id="character" name="character"/>
+				</div>
+			</div>
+			<div class="modal-bottom-bar">
+				<div class="btn-group">
+					<div class="new-btn inverse-btn discard-btn sg-sub">Discard</div>
+					<div class="new-btn default-btn save-btn sg-sub">Publish</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

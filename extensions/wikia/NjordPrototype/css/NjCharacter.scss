@@ -1,7 +1,135 @@
 @import "skins/shared/color";
 
+.mom-character-modal {
+  background: $color-page;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 55vw;
+  .btn-group {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+  .input {
+    background: #C7D1D8;
+    border: none;
+    outline: none;
+  }
+  .label {
+    font-weight: 700;
+  }
+  .modal-bottom-bar {
+    padding: 10px 5px;
+    border-top: 1px solid $color-page-border;
+  }
+  .modal-content {
+    display: flex;
+    flex-grow: 1;
+  }
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 20px 0 0;
+  }
+  .modal-upload {
+    background: #092140;
+    height: 25vw;
+    margin: 20px;
+    position: relative;
+    width: 25vw;
+  }
+  .new-btn {
+    border: 1px solid #092140;
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    margin: 0 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    &.edit-btn {
+      display: none;
+    }
+  }
+  .new-btn.inverse-btn {
+    background-color: #FFFFFF;
+    color: #092140;
+    &:hover {
+      background-color: #0a5fa3;
+      border: 1px solid #0a5fa3;
+      color: #fff;
+    }
+  }
+  .new-btn.default-btn {
+    background-color: #092140;
+    color: #fff;
+    &:hover {
+      background-color: #0a5fa3;
+      border: 1px solid #0a5fa3;
+    }
+  }
+  .overlay {
+    display: none;
+    background: rgba(0, 0, 0, .3);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  }
+  .overlay-flex {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  }
+  .overlay-text {
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+  .upload {
+    border: 1px dashed $color-page-border;
+    display: flex;
+    height: 95%;
+    justify-content: center;
+    margin: 2%;
+    width: 95%;
+  }
+  .upload-btn {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .upload-btn-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .upload-call {
+    color: #FFFFFF;
+    margin: 0 auto;
+    text-transform: uppercase;
+  }
+  .upload-call-sub {
+    color: #FFFFFF;
+  }
+  .upload-icon {
+    display: block;
+    height: 30px;
+    margin: 10px auto;
+  }
+  .upload-mask {
+    display: none;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  }
+}
+
 .mom-character-module {
   //general
+  position: relative;
   .add-block {
     .add-icon {
       vertical-align: baseline;
@@ -30,7 +158,7 @@
     border-bottom: 1px solid $color-page-border;
     display: flex;
     padding-bottom: 5px;
-    margin:0 8%;
+    margin: 0 8%;
   }
   .btn-group {
     display: flex;
@@ -67,11 +195,14 @@
       width: 100%;
     }
   }
+  .modal-wrap {
+    display: none;
+  }
   .settings-btn {
-    background: url('/extensions/wikia/NjordPrototype/images/gear_b.svg') center no-repeat ; /* base64 */
+    background: url('/extensions/wikia/NjordPrototype/images/gear_b.svg') center no-repeat; /* base64 */
     background-size: 25px;
     &:hover {
-      background: url('/extensions/wikia/NjordPrototype/images/gear.svg') center no-repeat ; /* base64 */
+      background: url('/extensions/wikia/NjordPrototype/images/gear.svg') center no-repeat; /* base64 */
       background-size: 25px;
     }
   }
