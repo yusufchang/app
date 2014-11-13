@@ -2178,6 +2178,15 @@ class User {
 		} else {
 			$this->mToken = $token;
 		}
+
+		\Wikia\Logger\WikiaLogger::instance()->debug(
+			'CONN-638 - User::setToken()',
+			[
+				'debug_backtrace' => debug_backtrace(),
+				'session_id' => session_id(),
+			]
+		);
+
 	}
 
 	/**

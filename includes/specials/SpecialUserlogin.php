@@ -1411,6 +1411,14 @@ class LoginForm extends SpecialPage {
 		// Generate a token directly instead of using $user->editToken()
 		// because the latter reuses $_SESSION['wsEditToken']
 		$wgRequest->setSessionData( 'wsLoginToken', MWCryptRand::generateHex( 32 ) );
+
+		\Wikia\Logger\WikiaLogger::instance()->debug(
+			'CONN-638 - LoginForm::setLoginToken()',
+			[
+				'debug_backtrace' => debug_backtrace(),
+				'session_id' => session_id(),
+			]
+		);
 	}
 
 	/**
