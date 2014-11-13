@@ -87,6 +87,18 @@
     color: #FFFFFF;
     text-transform: uppercase;
   }
+  .sg-main {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  .sg-sub {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
   .upload {
     border: 1px dashed $color-page-border;
     display: flex;

@@ -31,9 +31,9 @@
 		$titleDataFld = $('.mom-character-module .title-text'),
 		$titleWrap = $('.mom-character-module .title-wrap'),
 		$titleEditElement = $('.mom-character-module .edit-box'),
-		$titleEditBtn = $('.mom-character-module .title-edit-btn'),
-		$titleSaveBtn = $('.mom-character-module .save-btn'),
-		$titleDiscardBtn = $('.mom-character-module .discard-btn'),
+		$titleEditBtn = $('.mom-character-module .edit-box .title-edit-btn'),
+		$titleSaveBtn = $('.mom-character-module .edit-box .save-btn'),
+		$titleDiscardBtn = $('.mom-character-module .edit-box .discard-btn'),
 		$characterAddBtn = $('.mom-character-module .add-btn'),
 	//functions
 		saveTitle = function () {
@@ -80,9 +80,12 @@
 			placeCaretAtEnd( $titleEditFld.get(0) );
 		},
 		addCharacter = function () {
-			$.showModal('Add an Character', $('.modal-wrap').html(), {
+			var modal = $.showModal('Add an Character', $('.modal-wrap').html(), {
 				height: '38vw',
 				width: '55vw',
+			});
+			$('.modalContent .mom-character-modal .discard-btn').one('click', function () {
+				modal.closeModal();
 			});
 		},
 		onFocus = function () {
