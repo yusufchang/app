@@ -627,7 +627,7 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 					]
 				);
 
-				$this->request->setSessionData('wsToken', $user->getToken());
+				$this->request->setSessionData('wsToken', $user->getToken() . 'debugging');
 
 				\Wikia\Logger\WikiaLogger::instance()->debug(
 					'CONN-638 - User::setToken()',
