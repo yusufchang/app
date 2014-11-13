@@ -1412,10 +1412,18 @@ class LoginForm extends SpecialPage {
 		// because the latter reuses $_SESSION['wsEditToken']
 		$wgRequest->setSessionData( 'wsLoginToken', MWCryptRand::generateHex( 32 ) );
 
+		$backtrace = [];
+		$debugBacktrace = debug_backtrace();
+		foreach( $debugBacktrace as $step ) {
+			if( isset( $step['file'] ) && $step['line'] ) {
+				$backtrace[] = $step['file'] . ', line ' . $step['line'];
+			}
+		}
+
 		\Wikia\Logger\WikiaLogger::instance()->debug(
 			'CONN-638 - LoginForm::setLoginToken()',
 			[
-				'debug_backtrace' => debug_backtrace(),
+				'debug_backtrace' => $backtrace,
 				'session_id' => session_id(),
 			]
 		);
