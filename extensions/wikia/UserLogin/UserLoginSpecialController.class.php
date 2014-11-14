@@ -403,9 +403,41 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						$this->wg->User->setOption( 'rememberpassword', $loginForm->mRemember ? 1 : 0 );
 						$this->wg->User->saveSettings();
 					} else {
+						\Wikia\Logger\WikiaLogger::instance()->debug(
+							'CONN-638 - ' . __METHOD__,
+							[
+								'invalidates user cache',
+								'session_id' => session_id(),
+								'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+								'User::mToken' => $this->wg->User->getToken(false),
+							]
+						);
+
 						$this->wg->User->invalidateCache();
 					}
+
+					\Wikia\Logger\WikiaLogger::instance()->debug(
+						'CONN-638 - ' . __METHOD__,
+						[
+							'before setCookies',
+							'session_id' => session_id(),
+							'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+							'User::mToken' => $this->wg->User->getToken(false),
+						]
+					);
+
 					$this->wg->User->setCookies();
+
+					\Wikia\Logger\WikiaLogger::instance()->debug(
+						'CONN-638 - ' . __METHOD__,
+						[
+							'after setting cookies',
+							'session_id' => session_id(),
+							'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+							'User::mToken' => $this->wg->User->getToken(false),
+						]
+					);
+
 					LoginForm::clearLoginToken();
 					UserLoginHelper::clearNotConfirmedUserSession();
 					$this->userLoginHelper->clearPasswordThrottle( $loginForm->mUsername );
@@ -619,22 +651,11 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 				$user->saveSettings();
 
 				\Wikia\Logger\WikiaLogger::instance()->debug(
-					'CONN-638 - User::setToken()',
+					'CONN-638 - ' . __METHOD__,
 					[
 						'session_id' => session_id(),
-						'user::mToken' => $user->getToken(),
-						'session::wsToken' => $this->request->getSessionData('wsToken'),
-					]
-				);
-
-				$this->request->setSessionData('wsToken', $user->getToken() . 'debugging');
-
-				\Wikia\Logger\WikiaLogger::instance()->debug(
-					'CONN-638 - User::setToken()',
-					[
-						'session_id' => session_id(),
-						'user::mToken' => $user->getToken(),
-						'session::wsToken' => $this->request->getSessionData('wsToken'),
+						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+						'User::mToken' => $this->wg->User->getToken(false),
 					]
 				);
 
