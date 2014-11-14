@@ -1448,7 +1448,7 @@ class LoginForm extends SpecialPage {
  	/**
 	 * Renew the user's session id, using strong entropy
 	 */
-	private function renewSessionId() {
+	public function renewSessionId() {
 		if ( wfCheckEntropy() ) {
 			session_regenerate_id( false );
 		} else {

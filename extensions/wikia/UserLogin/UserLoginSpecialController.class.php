@@ -426,6 +426,8 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						'memsess::read' => memsess_read( session_id() )
 					]);
 
+					$loginForm->renewSessionId();
+
 					LoginForm::clearLoginToken();
 					UserLoginHelper::clearNotConfirmedUserSession();
 					$this->userLoginHelper->clearPasswordThrottle( $loginForm->mUsername );
