@@ -89,10 +89,10 @@
 						</picture>
 					</div>
 				</div>
-				<div class="modal-form">
+				<form class="modal-form">
 					<label class="label sg-sub" for="character">Full Name</label>
 					<input class="input sg-main" type="text" id="character" name="character"/>
-				</div>
+				</form>
 			</div>
 			<div class="modal-bottom-bar">
 				<div class="btn-group">

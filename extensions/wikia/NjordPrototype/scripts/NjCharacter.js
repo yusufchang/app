@@ -82,27 +82,49 @@
 		},
 		addCharacter = function () {
 			var modal = $.showModal('Add an Character', $('.modal-wrap').html(), {
-				height: '38vw',
-				width: '55vw',
+				width: '650px',
 			}),
+				//modal selectors
+				$modal = $('.modalContent'),
 				$modalUploadBtn = $('.modalContent .mom-character-modal .upload-btn'),
 				$modalDiscardBtn = $('.modalContent .mom-character-modal .discard-btn'),
 				$modalSaveBtn = $('.modalContent .mom-character-modal .save-btn'),
 				$modalUploadFld = $('.modalContent .mom-character-modal input[type=file]'),
+				$modalForm = $('.modalContent .mom-character-modal .modal-form'),
 				$modalUpload = $('.modalContent .mom-character-modal .modal-upload'),
 				$modalUploadArea = $('.modalContent .mom-character-modal .upload'),
 				$modalUploadOverlay = $('.modalContent .mom-character-modal .overlay'),
 				$modalUploadMask = $('.modalContent .mom-character-modal .upload-mask'),
 				$modalImage = $('.modalContent .mom-character-modal .character-image')
 				;
-			//get modal selectors
-
 			//add modal events
 			$modalUploadBtn.on('click', function () {
 				$modalUploadFld.click();
 			});
 			$modalDiscardBtn.one('click', function () {
 				modal.closeModal();
+			});
+			$modalSaveBtn.on('click', function () {
+				$modal.startThrobbing();
+				var formData = $modalForm.serialize();
+				//add filename
+				formData += '&filename=' + $modalImage.data('filename');
+				console.info(formData);
+				//TODO: save new element
+				$.nirvana.sendRequest({
+					controller: 'NjordCharacterController',
+					method: 'save',
+					type: 'POST',
+					data: formData,
+					callback: function (data) {
+						$modal.stopThrobbing();
+					},
+					onErrorCallback: function () {
+						$modal.stopThrobbing();
+						modal.closeModal();
+						$.showModal($.msg('error'), $.msg('unknown-error'));
+					},
+				});
 			});
 			$modalUploadFld.on('change', function () {
 				if ($modalUploadFld[0].files.length) {
@@ -155,6 +177,7 @@
 					//TODO: set image in data
 					$target.stopThrobbing();
 				});
+				$image.data('filename', data.filename);
 				$image.attr('src', data.url);
 			} else {
 				$.showModal($.msg('error'), data.errMessage);
