@@ -276,8 +276,7 @@ class User {
 				nAndy::log([
 					'CONN-638 - ' . __METHOD__,
 					'session_id' => session_id(),
-					'User::mToken - false' => $this->getToken(false),
-					'User::mToken' => $this->getToken(),
+					'User::mToken' => $this->getToken(false),
 				]);
 
 				wfRunHooks( 'UserLoadAfterLoadFromSession', array( $this ) );
@@ -2972,7 +2971,7 @@ class User {
 			'CONN-638 - ' . __METHOD__,
 			'session_id' => session_id(),
 			'wsToken' => $request->getSessionData('wsToken'),
-			'User::getToken()' => $this->getToken(),
+			'User::getToken()' => $this->getToken(false),
 			'User::mToken' => $this->mToken
 		]);
 
