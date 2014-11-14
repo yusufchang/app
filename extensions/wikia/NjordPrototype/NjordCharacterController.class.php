@@ -92,6 +92,10 @@ class NjordCharacterController extends WikiaController {
 			$success = true;
 		}
 
+		if ( !$success ) {
+			$this->getResponse()->setCode( 400 );
+		}
+
 		$this->getResponse()->setVal( 'success', $success );
 		$this->getResponse()->setVal( 'characterModel', $characterModel );
 	}

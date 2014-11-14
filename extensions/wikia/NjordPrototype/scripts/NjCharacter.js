@@ -26,8 +26,11 @@
 		data = {
 			oTitle: null,
 			title: null,
+			oCharacterData: [],
+			characterData: []
 		},
 	//selectors
+		$characterModule = $('.mom-character-module'),
 		$titleEditFld = $('.mom-character-module .mc-title'),
 		$titleDataFld = $('.mom-character-module .title-text'),
 		$titleWrap = $('.mom-character-module .title-wrap'),
@@ -49,7 +52,7 @@
 				callback: function (r) {
 					if (r.success) {
 						$titleDataFld.text(data.oTitle = data.title);
-						if (data.oTitle === "") {
+						if (data.oTitle === '') {
 							States.setState($titleWrap, 'zero-state');
 						} else {
 							States.setState($titleWrap, 'filled-state');
@@ -69,7 +72,7 @@
 			data.title = data.oTitle;
 			$titleEditFld.text(data.oTitle);
 			$titleDataFld.text(data.oTitle);
-			if (data.oTitle === "") {
+			if (data.oTitle === '') {
 				States.setState($titleWrap, 'zero-state');
 			} else {
 				States.setState($titleWrap, 'filled-state');
@@ -78,13 +81,13 @@
 		editTitle = function () {
 			States.setState($titleWrap, 'edit-state');
 			$titleEditFld.text(data.title);
-			placeCaretAtEnd( $titleEditFld.get(0) );
+			placeCaretAtEnd($titleEditFld.get(0));
 		},
 		addCharacter = function () {
 			var modal = $.showModal('Add an Character', $('.modal-wrap').html(), {
-				width: '650px',
-			}),
-				//modal selectors
+					width: '650px'
+				}),
+			//modal selectors
 				$modal = $('.modalContent'),
 				$modalUploadBtn = $('.modalContent .mom-character-modal .upload-btn'),
 				$modalDiscardBtn = $('.modalContent .mom-character-modal .discard-btn'),
@@ -123,7 +126,7 @@
 						$modal.stopThrobbing();
 						modal.closeModal();
 						$.showModal($.msg('error'), $.msg('unknown-error'));
-					},
+					}
 				});
 			});
 			$modalUploadFld.on('change', function () {
@@ -234,15 +237,15 @@
 		},
 		placeCaretAtEnd = function (el) {
 			el.focus();
-			if (typeof window.getSelection != "undefined"
-				&& typeof document.createRange != "undefined") {
+			if (typeof window.getSelection !== 'undefined' &&
+				typeof document.createRange !== 'undefined') {
 				var range = document.createRange();
 				range.selectNodeContents(el);
 				range.collapse(false);
 				var sel = window.getSelection();
 				sel.removeAllRanges();
 				sel.addRange(range);
-			} else if (typeof document.body.createTextRange != "undefined") {
+			} else if (typeof document.body.createTextRange !== 'undefined') {
 				var textRange = document.body.createTextRange();
 				textRange.moveToElementText(el);
 				textRange.collapse(false);
@@ -252,8 +255,118 @@
 		onDragDisabled = function () {
 			return false;
 		},
+		removeCharacter = function (ev) {
+			var $characterItem = $(this).closest('.item'),
+				self = this;
+
+			require(['wikia.ui.factory'], function (uiFactory) {
+				uiFactory.init(['modal']).then(function (uiModal) {
+					var votersModalConfig = {
+						vars: {
+							id: 'RemoveCharacterModule',
+							classes: ['remove-character'],
+							size: 'small',
+							content: 'Are you sure you want to remove this character?',
+							title: 'Remove Character',
+							closeButton: true,
+							buttons: [
+								{
+									vars: {
+										value: $.msg('cancel'),
+										classes: ['primary', 'new-btn', 'inverse-btn'],
+										data: [
+											{
+												key: 'event',
+												value: 'close'
+											}
+										]
+									}
+								},
+								{
+									vars: {
+										value: $.msg('ok'),
+										classes: ['primary', 'new-btn', 'default-btn'],
+										data: [
+											{
+												key: 'event',
+												value: 'remove'
+											}
+										]
+									}
+								}
+							]
+						}
+					};
+
+					uiModal.createComponent(votersModalConfig, function (removeCharacterModal) {
+						removeCharacterModal.bind('remove', function (event) {
+							removeCharacterModal.$element.startThrobbing();
+							var characterData = [];
+							$('.item').each(function (i, item) {
+								var $item = $(item);
+
+								if ($item.data('itemid') !== $characterItem.data('itemid')) {
+									characterData.push(
+										{
+											'link': $item.data('link'),
+											'image': $item.data('image'),
+											'title': $item.data('title'),
+											'description': $item.data('description')
+										});
+								}
+							});
+							data.characterData = characterData;
+
+							saveCharacterData().done(function () {
+									$characterItem.remove();
+									removeCharacterModal.$element.stopThrobbing();
+									removeCharacterModal.trigger('close');
+								}
+							).fail(function () {
+									data.characterData = data.oCharacterData;
+									removeCharacterModal.$element.stopThrobbing();
+									removeCharacterModal.trigger('close');
+								});
+						});
+
+						removeCharacterModal.show();
+					});
+				});
+			});
+			ev.preventDefault();
+		},
+		saveCharacterData = function () {
+			return (
+				$.nirvana.sendRequest({
+					controller: 'NjordCharacterController',
+					method: 'saveModuleItems',
+					type: 'POST',
+					data: {
+						'moduleitems': data.characterData
+					}
+				}));
+		},
 		initData = function () {
+			initTitle();
+			initCharacterData();
+		},
+		initTitle = function () {
 			data.oTitle = data.title = $titleDataFld.text();
+		},
+		initCharacterData = function () {
+			var characterData = [];
+			$('.item').each(function (i, item) {
+				var $item = $(item);
+				characterData.push(
+					{
+						'itemid': $item.data('itemid'),
+						'link': $item.data('link'),
+						'image': $item.data('image'),
+						'title': $item.data('title'),
+						'description': $item.data('description')
+					});
+			});
+			data.oCharacterData = data.characterData = characterData;
 		},
 		init = function () {
 			initData();
@@ -270,10 +383,12 @@
 
 			//turn off browser image handling
 			$body.on('dragover', onDragDisabled).on('dragend', onDragDisabled).on('drop', onDragDisabled);
+			$characterModule.on('click', 'a.remove', removeCharacter);
 		};
 
-	//fire up if logged user
+//fire up if logged user
 	if (window.wgUserName) {
 		init();
 	}
-})(window, jQuery);
+})
+(window, jQuery);
