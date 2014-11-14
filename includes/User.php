@@ -272,13 +272,6 @@ class User {
 				break;
 			case 'session':
 				$this->loadFromSession();
-
-				nAndy::log([
-					'CONN-638 - ' . __METHOD__,
-					'session_id' => session_id(),
-					'User::mToken' => $this->getToken(false),
-				]);
-
 				wfRunHooks( 'UserLoadAfterLoadFromSession', array( $this ) );
 				break;
 			default:
@@ -2966,15 +2959,6 @@ class User {
 
 		$this->load();
 		if ( 0 == $this->mId ) return;
-
-		nAndy::log([
-			'CONN-638 - ' . __METHOD__,
-			'session_id' => session_id(),
-			'wsToken' => $request->getSessionData('wsToken'),
-			'User::getToken()' => $this->getToken(false),
-			'User::mToken' => $this->mToken
-		]);
-
 		if ( !$this->mToken ) {
 			// When token is empty or NULL generate a new one and then save it to the database
 			// This allows a wiki to re-secure itself after a leak of it's user table or $wgSecretKey
@@ -2998,21 +2982,7 @@ class User {
 			$cookies['Token'] = false;
 		}
 
-		nAndy::log([
-			'CONN-638 - ' . __METHOD__,
-			'before UserSetCookies hook',
-			'session_id' => session_id(),
-			'$session' => $session,
-		]);
-
 		wfRunHooks( 'UserSetCookies', array( $this, &$session, &$cookies ) );
-
-		nAndy::log([
-			'CONN-638 - ' . __METHOD__,
-			'after UserSetCookies hook',
-			'session_id' => session_id(),
-			'$session' => $session,
-		]);
 
 		foreach ( $session as $name => $value ) {
 			$request->setSessionData( $name, $value );

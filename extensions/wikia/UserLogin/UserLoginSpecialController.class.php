@@ -375,11 +375,6 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 		);
 		/** PLATFORM-508 - logging for Helios project - end */
 
-		nAndy::log([
-			'CONN-638 - ' . __METHOD__,
-			'login_case' =>  $loginCase,
-		]);
-
 		switch ( $loginCase ) {
 			case LoginForm::SUCCESS:
 				// first check if user has confirmed email after sign up
@@ -408,16 +403,6 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						$this->wg->User->setOption( 'rememberpassword', $loginForm->mRemember ? 1 : 0 );
 						$this->wg->User->saveSettings();
 					} else {
-
-						nAndy::log([
-							'CONN-638 - ' . __METHOD__,
-							'invalidates user cache',
-							'session_id' => session_id(),
-							'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-							'User::mToken' => $this->wg->User->getToken(false),
-						]);
-
-
 						$this->wg->User->invalidateCache();
 					}
 
@@ -427,6 +412,7 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						'session_id' => session_id(),
 						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
 						'User::mToken' => $this->wg->User->getToken(false),
+						'memsess::read' => memsess_read( session_id() )
 					]);
 
 					$this->wg->User->setCookies();
@@ -651,13 +637,6 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 				$user->setPassword( $this->newpassword );
 				wfRunHooks( 'PrefsPasswordAudit', array( $user, $this->newpassword, 'success' ) );
 				$user->saveSettings();
-
-				nAndy::log([
-					'CONN-638 - ' . __METHOD__,
-					'session_id' => session_id(),
-					'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-					'User::mToken' => $this->wg->User->getToken(false),
-				]);
 
 				$this->result = 'ok';
 				$this->msg = wfMessage( 'resetpass_success' )->escaped();
