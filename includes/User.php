@@ -272,6 +272,14 @@ class User {
 				break;
 			case 'session':
 				$this->loadFromSession();
+
+				nAndy::log([
+					'CONN-638 - ' . __METHOD__,
+					'session_id' => session_id(),
+					'User::mToken' => $this->getToken(),
+					'memcache' => $this->wg->Memc->get('wikicities:session:b1eee8cb69f1a3e4cdd8060967c6b393'),
+				]);
+
 				wfRunHooks( 'UserLoadAfterLoadFromSession', array( $this ) );
 				break;
 			default:
