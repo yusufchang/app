@@ -2960,15 +2960,13 @@ class User {
 		$this->load();
 		if ( 0 == $this->mId ) return;
 
-		\Wikia\Logger\WikiaLogger::instance()->debug(
+		nAndy::log([
 			'CONN-638 - ' . __METHOD__,
-			[
-				'session_id' => session_id(),
-				'wsToken' => $request->getSessionData('wsToken'),
-				'User::getToken()' => $this->getToken(),
-				'User::mToken' => $this->mToken
-			]
-		);
+			'session_id' => session_id(),
+			'wsToken' => $request->getSessionData('wsToken'),
+			'User::getToken()' => $this->getToken(),
+			'User::mToken' => $this->mToken
+		]);
 
 		if ( !$this->mToken ) {
 			// When token is empty or NULL generate a new one and then save it to the database
@@ -2993,25 +2991,21 @@ class User {
 			$cookies['Token'] = false;
 		}
 
-		\Wikia\Logger\WikiaLogger::instance()->debug(
+		nAndy::log([
 			'CONN-638 - ' . __METHOD__,
-			[
-				'before UserSetCookies hook',
-				'session_id' => session_id(),
-				'$session' => $session,
-			]
-		);
+			'before UserSetCookies hook',
+			'session_id' => session_id(),
+			'$session' => $session,
+		]);
 
 		wfRunHooks( 'UserSetCookies', array( $this, &$session, &$cookies ) );
 
-		\Wikia\Logger\WikiaLogger::instance()->debug(
+		nAndy::log([
 			'CONN-638 - ' . __METHOD__,
-			[
-				'after UserSetCookies hook',
-				'session_id' => session_id(),
-				'$session' => $session,
-			]
-		);
+			'after UserSetCookies hook',
+			'session_id' => session_id(),
+			'$session' => $session,
+		]);
 
 		foreach ( $session as $name => $value ) {
 			$request->setSessionData( $name, $value );

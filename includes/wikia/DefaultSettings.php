@@ -1612,3 +1612,17 @@ $wgDisableWAMOnHubs = false;
  * see PLATFORM-392
  */
 $wgImageServingForceNoResults = false;
+
+class nAndy {
+	public static function log( $input ) {
+		if( !is_string( $input ) ) {
+			$input = print_r( $input, true );
+		}
+
+		$file = fopen( '/var/log/nandy.log', 'a+' );
+		flock( $file, LOCK_EX );
+		fwrite( $file, $input );
+		flock( $file, LOCK_UN );
+		fclose( $file );
+	}
+}

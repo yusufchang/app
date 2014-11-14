@@ -403,40 +403,36 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						$this->wg->User->setOption( 'rememberpassword', $loginForm->mRemember ? 1 : 0 );
 						$this->wg->User->saveSettings();
 					} else {
-						\Wikia\Logger\WikiaLogger::instance()->debug(
+
+						nAndy::log([
 							'CONN-638 - ' . __METHOD__,
-							[
-								'invalidates user cache',
-								'session_id' => session_id(),
-								'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-								'User::mToken' => $this->wg->User->getToken(false),
-							]
-						);
+							'invalidates user cache',
+							'session_id' => session_id(),
+							'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+							'User::mToken' => $this->wg->User->getToken(false),
+						]);
+
 
 						$this->wg->User->invalidateCache();
 					}
 
-					\Wikia\Logger\WikiaLogger::instance()->debug(
+					nAndy::log([
 						'CONN-638 - ' . __METHOD__,
-						[
-							'before setCookies',
-							'session_id' => session_id(),
-							'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-							'User::mToken' => $this->wg->User->getToken(false),
-						]
-					);
+						'before setCookies',
+						'session_id' => session_id(),
+						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+						'User::mToken' => $this->wg->User->getToken(false),
+					]);
 
 					$this->wg->User->setCookies();
 
-					\Wikia\Logger\WikiaLogger::instance()->debug(
+					nAndy::log([
 						'CONN-638 - ' . __METHOD__,
-						[
-							'after setting cookies',
-							'session_id' => session_id(),
-							'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-							'User::mToken' => $this->wg->User->getToken(false),
-						]
-					);
+						'after setting cookies',
+						'session_id' => session_id(),
+						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+						'User::mToken' => $this->wg->User->getToken(false),
+					]);
 
 					LoginForm::clearLoginToken();
 					UserLoginHelper::clearNotConfirmedUserSession();
@@ -650,14 +646,12 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 				wfRunHooks( 'PrefsPasswordAudit', array( $user, $this->newpassword, 'success' ) );
 				$user->saveSettings();
 
-				\Wikia\Logger\WikiaLogger::instance()->debug(
+				nAndy::log([
 					'CONN-638 - ' . __METHOD__,
-					[
-						'session_id' => session_id(),
-						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-						'User::mToken' => $this->wg->User->getToken(false),
-					]
-				);
+					'session_id' => session_id(),
+					'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
+					'User::mToken' => $this->wg->User->getToken(false),
+				]);
 
 				$this->result = 'ok';
 				$this->msg = wfMessage( 'resetpass_success' )->escaped();
