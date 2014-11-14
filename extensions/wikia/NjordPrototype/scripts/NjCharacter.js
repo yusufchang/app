@@ -30,6 +30,7 @@
 			characterData: []
 		},
 	//selectors
+		$body = $('body'),
 		$characterModule = $('.mom-character-module'),
 		$titleEditFld = $('.mom-character-module .mc-title'),
 		$titleDataFld = $('.mom-character-module .title-text'),
