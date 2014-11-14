@@ -2,6 +2,8 @@
 
 class NjordCharacterController extends WikiaController {
 
+	const THUMBNAILER_SIZE_SUFIX = '250px-0';
+
 	public function index() {
 		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
 		$characterModel->getFromProps();
@@ -13,6 +15,34 @@ class NjordCharacterController extends WikiaController {
 		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/jquery.caret.js' );
 		$this->wg->Out->addScriptFile( $this->wg->ExtensionsPath . '/wikia/NjordPrototype/scripts/NjCharacter.js' );
 		$this->isAllowedToEdit = $this->wg->user->isAllowed( 'njordeditmode' );
+	}
+
+	public function upload() {
+		if ( $this->getRequest()->wasPosted() ) {
+			$url = $this->getRequest()->getVal( 'url', false );
+			try {
+				if ( $url ) {
+					$result = ImageUploadController::uploadFromUrl( $url );
+				} else {
+					$result = ImageUploadController::uploadFromFile( $this->getContext()->getRequest() );
+				}
+				$status = $result[ 'status' ];
+			} catch ( Exception $exception ) {
+				$status = false;
+				$errorMessage = $exception->getMessage();
+			}
+
+			$this->getResponse()->setFormat( 'json' );
+			$this->getResponse()->setVal( 'isOk', $result[ 'status' ] );
+			if ( $status ) {
+				$stashFile = $result[ 'file' ];
+				$this->getResponse()->setVal( 'url',
+					wfReplaceImageServer( $stashFile->getThumbUrl( static::THUMBNAILER_SIZE_SUFIX ) ) );
+				$this->getResponse()->setVal( 'filename', $stashFile->getFileKey() );
+			} else {
+				$this->getResponse()->setVal( 'errMessage', $result[ 'error' ] );
+			}
+		}
 	}
 
 
