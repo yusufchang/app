@@ -375,6 +375,11 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 		);
 		/** PLATFORM-508 - logging for Helios project - end */
 
+		nAndy::log([
+			'CONN-638 - ' . __METHOD__,
+			'login_case' =>  $loginCase,
+		]);
+
 		switch ( $loginCase ) {
 			case LoginForm::SUCCESS:
 				// first check if user has confirmed email after sign up
