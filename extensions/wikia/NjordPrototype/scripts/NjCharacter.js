@@ -10,7 +10,8 @@
 				'zero-state',
 				'filled-state',
 				'edit-state',
-				'no-edit-state'
+				'no-edit-state',
+				'upload-state'
 			],
 			clearState: function ($element) {
 				$element.removeClass(this.list.join(' '));
@@ -31,7 +32,7 @@
 		$titleDataFld = $('.mom-character-module .title-text'),
 		$titleWrap = $('.mom-character-module .title-wrap'),
 		$titleEditElement = $('.mom-character-module .edit-box'),
-		$titleEditBtn = $('.mom-character-module .edit-box .title-edit-btn'),
+		$titleEditBtn = $('.mom-character-module .title-edit-btn'),
 		$titleSaveBtn = $('.mom-character-module .edit-box .save-btn'),
 		$titleDiscardBtn = $('.mom-character-module .edit-box .discard-btn'),
 		$characterAddBtn = $('.mom-character-module .add-btn'),
@@ -83,9 +84,99 @@
 			var modal = $.showModal('Add an Character', $('.modal-wrap').html(), {
 				height: '38vw',
 				width: '55vw',
+			}),
+				$modalUploadBtn = $('.modalContent .mom-character-modal .upload-btn'),
+				$modalDiscardBtn = $('.modalContent .mom-character-modal .discard-btn'),
+				$modalSaveBtn = $('.modalContent .mom-character-modal .save-btn'),
+				$modalUploadFld = $('.modalContent .mom-character-modal input[type=file]'),
+				$modalUpload = $('.modalContent .mom-character-modal .modal-upload'),
+				$modalUploadArea = $('.modalContent .mom-character-modal .upload'),
+				$modalUploadOverlay = $('.modalContent .mom-character-modal .overlay'),
+				$modalUploadMask = $('.modalContent .mom-character-modal .upload-mask'),
+				$modalImage = $('.modalContent .mom-character-modal .character-image')
+				;
+			//get modal selectors
+
+			//add modal events
+			$modalUploadBtn.on('click', function () {
+				$modalUploadFld.click();
 			});
-			$('.modalContent .mom-character-modal .discard-btn').one('click', function () {
+			$modalDiscardBtn.one('click', function () {
 				modal.closeModal();
+			});
+			$modalUploadFld.on('change', function () {
+				if ($modalUploadFld[0].files.length) {
+					var fd = new FormData();
+					fd.append('file', $modalUploadFld[0].files[0]);
+					uploadImage(fd, $modalUpload, $modalImage);
+					//reset input
+					$modalUploadFld.wrap('<form>').closest('form').get(0).reset();
+					$modalUploadFld.unwrap();
+				}
+			});
+			$modalUploadArea.on('dragenter', function () {
+				$modalUploadOverlay.show();
+				$modalUploadMask.show();
+				return false;
+			});
+			$modalUploadMask.on('dragleave', function (e) {
+				$modalUploadOverlay.hide();
+				$modalUploadMask.hide();
+				e.stopImmediatePropagation();
+				return false;
+			});
+			$modalUploadMask.on('dragend', function () {
+				return false;
+			});
+			$modalUploadMask.on('drop', function (e) {
+				$modalUploadOverlay.hide();
+				$modalUploadMask.hide();
+				e.preventDefault();
+				var fd = new FormData();
+				if (e.dataTransfer.files.length) {
+					//if file is uploaded
+					fd.append('file', e.dataTransfer.files[0]);
+					uploadImage(fd, $modalUpload, $modalImage);
+				} else if (e.dataTransfer.getData('text/html')) {
+					//if url
+					var $img = $(e.dataTransfer.getData('text/html'));
+					if (e.target.src !== $img.attr('src')) {
+						fd.append('url', $img.attr('src'));
+						uploadImage(fd, $modalUpload, $modalImage);
+					}
+				}
+			});
+		},
+		onImageUploaded = function (data, $target, $image) {
+			if (data.isOk) {
+				$image.bind('load', function () {
+					$image.unbind('load');
+					States.setState($target, 'upload-state');
+					//TODO: set image in data
+					$target.stopThrobbing();
+				});
+				$image.attr('src', data.url);
+			} else {
+				$.showModal($.msg('error'), data.errMessage);
+				$target.stopThrobbing();
+			}
+		},
+		uploadImage = function (formdata, $target, $image) {
+			$target.startThrobbing();
+			$.nirvana.sendRequest({
+				controller: 'NjordCharacterController',
+				method: 'upload',
+				type: 'POST',
+				data: formdata,
+				callback: function (data) {
+					onImageUploaded(data, $target, $image);
+				},
+				onErrorCallback: function () {
+					$.showModal($.msg('error'), $.msg('unknown-error'));
+					$target.stopThrobbing();
+				},
+				processData: false,
+				contentType: false
 			});
 		},
 		onFocus = function () {
@@ -135,6 +226,9 @@
 				textRange.select();
 			}
 		},
+		onDragDisabled = function () {
+			return false;
+		},
 		initData = function () {
 			data.oTitle = data.title = $titleDataFld.text();
 		},
@@ -150,6 +244,9 @@
 				.on('change', onChange);
 
 			$characterAddBtn.on('click', addCharacter);
+
+			//turn off browser image handling
+			$body.on('dragover', onDragDisabled).on('dragend', onDragDisabled).on('drop', onDragDisabled);
 		};
 
 	//fire up if logged user

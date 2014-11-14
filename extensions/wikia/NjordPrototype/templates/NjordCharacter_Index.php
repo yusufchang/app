@@ -62,7 +62,7 @@
 		<?php endif; ?>
 	</ul>
 	<div class="modal-wrap">
-		<div class="mom-character-modal sg-main">
+		<div class="mom-character-modal">
 			<div class="modal-content">
 				<div class="modal-upload">
 					<div class="upload-mask"></div>
@@ -74,9 +74,19 @@
 					<div class="upload">
 						<div class="upload-btn-group">
 							<img class="upload-icon upload-btn" src="/extensions/wikia/NjordPrototype/images/plus.svg">
-							<span class="upload-call upload-btn">add a character image</span>
+							<span class="upload-call upload-btn sg-main">add a character image</span>
 							<span class="upload-call-sub sg-sub">or, drop an image here</span>
 						</div>
+						<div class="after-upload-btn-group">
+							<img class="after-upload-icon upload-btn" src="/extensions/wikia/NjordPrototype/images/addImage.svg">
+							<span class="after-upload-text sg-main upload-btn">update image</span>
+						</div>
+						<input name="file" type="file" hidden/>
+					</div>
+					<div class="image-wrap">
+						<picture>
+							<img class="character-image" src=""/>
+						</picture>
 					</div>
 				</div>
 				<div class="modal-form">

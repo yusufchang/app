@@ -18,6 +18,8 @@ $wgAutoloadClasses['ContentEntity'] =  $dir . '/models/ContentEntity.class.php';
 
 $wgAutoloadClasses['NjordController'] =  $dir . '/NjordController.class.php';
 $wgAutoloadClasses['NjordCharacterController'] =  $dir . '/NjordCharacterController.class.php';
+/** Helper controllers */
+$wgAutoloadClasses['ImageUploadController'] =  $dir . '/ImageUploadController.class.php';
 
 $wgHooks['ParserFirstCallInit'][] = 'NjordHooks::onParserFirstCallInit';
 

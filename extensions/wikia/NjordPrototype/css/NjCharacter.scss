@@ -6,10 +6,35 @@
   flex-direction: column;
   margin: auto;
   width: 55vw;
+  .after-upload-btn-group {
+    align-items: flex-start;
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(top, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)); /* Standard syntax */
+    display: none;
+    justify-content: center;
+    left: -5px;
+    position: absolute;
+    right: -7px;
+    top: -5px;
+  }
+  .after-upload-icon {
+    height: 24px;
+  }
+  .after-upload-text {
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
   .btn-group {
     display: flex;
     flex-grow: 1;
     justify-content: flex-end;
+  }
+  .image-wrap {
+    display: none;
+    height: 250px;
+    width: 250px;
   }
   .input {
     background: #C7D1D8;
@@ -35,10 +60,10 @@
   }
   .modal-upload {
     background: #092140;
-    height: 25vw;
+    height: 250px;
     margin: 20px;
     position: relative;
-    width: 25vw;
+    width: 250px;
   }
   .new-btn {
     border: 1px solid #092140;
@@ -76,6 +101,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
+    z-index: 1;
   }
   .overlay-flex {
     align-items: center;
@@ -105,7 +131,9 @@
     height: 95%;
     justify-content: center;
     margin: 2%;
+    position: absolute;
     width: 95%;
+    z-index: 1;
   }
   .upload-btn {
     &:hover {
@@ -136,6 +164,24 @@
     height: 100%;
     position: absolute;
     width: 100%;
+    z-index: 2;
+  }
+
+  .upload-state {
+    .after-upload-btn-group {
+      display: flex;
+    }
+    .upload {
+      border: none;
+    }
+    .upload-btn-group {
+      display: none;
+    }
+    .image-wrap {
+      display: block;
+      position: absolute;
+      top:0;
+    }
   }
 }
 

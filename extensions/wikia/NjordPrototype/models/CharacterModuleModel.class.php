@@ -14,7 +14,7 @@ class CharacterModuleModel {
 	}
 
 	public function isEmpty() {
-		return empty( $this->title ) && empty( $this->contentSlots );
+		return empty( $this->contentSlots );
 	}
 
 	public function setFromAttributes( $attributes ) {
