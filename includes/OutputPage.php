@@ -279,11 +279,12 @@ class OutputPage extends ContextSource {
 		}
 		# end wikia change
 
+		global $wgUser;
 		nAndy::log([
 			'CONN-638 - ' . __METHOD__,
 			'session_id' => session_id(),
 			'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-			'User::mToken' => $this->wg->User->getToken(false),
+			'User::mToken' => $wgUser->getToken(false),
 			'memsess::read' => memsess_read( session_id() )
 		]);
 	}
