@@ -438,6 +438,8 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
 						'User::mToken' => $this->wg->User->getToken(false),
 					]);
+					
+					session_write_close();
 
 					LoginForm::clearLoginToken();
 					UserLoginHelper::clearNotConfirmedUserSession();
