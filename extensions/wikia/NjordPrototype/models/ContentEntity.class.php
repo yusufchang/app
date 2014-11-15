@@ -5,13 +5,13 @@ class ContentEntity {
 	public $image;
 	public $title;
 	public $description;
-	public $position;
+	public $cropposition;
 	protected $wikiLink;
 	protected $imagePath;
 	protected $originalImagePath;
 
 	public function toString() {
-		return implode( '|', [ $this->link, $this->image, $this->title, $this->description ] );
+		return implode( '|', [ $this->link, $this->image, $this->title, $this->description, $this->cropposition ] );
 	}
 
 	public function getWikiLink() {
