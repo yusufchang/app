@@ -27,7 +27,7 @@
 				class="btn-group <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 				<div class="new-btn default-btn add-btn sg-sub">
 					<img class="add-icon" src="/extensions/wikia/NjordPrototype/images/plus.svg">
-					<span class="add-btn-text">Add article page</span>
+					<span class="add-btn-text">Add a character</span>
 				</div>
 <!--				<div class="new-btn inverse-btn settings-btn sg-sub"></div>-->
 			</div>
