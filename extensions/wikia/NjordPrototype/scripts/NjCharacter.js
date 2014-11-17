@@ -32,6 +32,7 @@
 	//selectors
 		$body = $('body'),
 		$characterModule = $('.mom-character-module'),
+		$characterList = $('.mom-character-module .items-list'),
 		$titleEditFld = $('.mom-character-module .mc-title'),
 		$titleDataFld = $('.mom-character-module .title-text'),
 		$titleWrap = $('.mom-character-module .title-wrap'),
@@ -99,9 +100,12 @@
 				$modalUploadArea = $('.modalContent .mom-character-modal .upload'),
 				$modalUploadOverlay = $('.modalContent .mom-character-modal .overlay'),
 				$modalUploadMask = $('.modalContent .mom-character-modal .upload-mask'),
+				$modalImageWrap = $('.modalContent .mom-character-modal .image-wrap'),
 				$modalImage = $('.modalContent .mom-character-modal .character-image'),
-				$modalImageWrap = $('.modalContent .mom-character-modal .image-wrap')
-				;
+				$modalName = $('.modalContent .mom-character-modal .character-name'),
+				$modalLink = $('.modalContent .mom-character-modal .character-link'),
+				linkEdited = false;
+
 			//add modal events
 			$modalUploadBtn.on('click', function () {
 				$modalUploadFld.click();
@@ -109,20 +113,41 @@
 			$modalDiscardBtn.one('click', function () {
 				modal.closeModal();
 			});
+			$modalName.on('keyup', function () {
+				if (!linkEdited) {
+					$modalLink.val($modalName.val());
+				}
+			});
+			$modalLink.on('keyup', function () {
+				linkEdited = true;
+			});
+
 			$modalSaveBtn.on('click', function () {
 				$modal.startThrobbing();
 				var formData = $modalForm.serialize();
 				//add filename
 				formData += '&filename=' + $modalImage.data('filename');
-				console.info(formData);
-				//TODO: save new element
+
 				$.nirvana.sendRequest({
 					controller: 'NjordCharacterController',
-					method: 'save',
+					method: 'addModuleItem',
 					type: 'POST',
 					data: formData,
 					callback: function (data) {
+						require(['wikia.mustache', 'wikia.loader'], function (mustache, loader) {
+							loader({
+								type: loader.MULTI,
+								resources: {
+									mustache: 'extensions/wikia/NjordPrototype/templates/NjordCharacter_item.mustache'
+								}
+							}).done(function (data) {
+								var template = data.mustache[0];
+								$characterList.append(mustache.render(template, data));
+							});
+						});
+
 						$modal.stopThrobbing();
+						modal.closeModal();
 					},
 					onErrorCallback: function () {
 						$modal.stopThrobbing();

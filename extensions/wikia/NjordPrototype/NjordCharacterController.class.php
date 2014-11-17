@@ -26,22 +26,21 @@ class NjordCharacterController extends WikiaController {
 				} else {
 					$result = ImageUploadController::uploadFromFile( $this->getContext()->getRequest() );
 				}
-				$status = $result[ 'status' ];
+				$status = $result['status'];
 			} catch ( Exception $exception ) {
 				$status = false;
 				$errorMessage = $exception->getMessage();
 			}
 
 			$this->getResponse()->setFormat( 'json' );
-			$this->getResponse()->setVal( 'isOk', $result[ 'status' ] );
+			$this->getResponse()->setVal( 'isOk', $result['status'] );
 			if ( $status ) {
 				/** @var UploadStashFile $stashFile */
 				$stashFile = $result[ 'file' ];
-				$this->getResponse()->setVal( 'url',
-					wfReplaceImageServer( $this->getThumbUrl( $stashFile ) ) );
+				$this->getResponse()->setVal( 'url', wfReplaceImageServer( $this->getThumbUrl( $stashFile ) ) );
 				$this->getResponse()->setVal( 'filename', $stashFile->getFileKey() );
 			} else {
-				$this->getResponse()->setVal( 'errMessage', $result[ 'error' ] );
+				$this->getResponse()->setVal( 'errMessage', $result['error'] );
 			}
 		}
 	}
@@ -71,6 +70,57 @@ class NjordCharacterController extends WikiaController {
 			$characterModel->storeInProps();
 			$characterModel->initializeImagePaths();
 			$success = true;
+		}
+
+		$this->getResponse()->setVal( 'success', $success );
+		$this->getResponse()->setVal( 'characterModel', $characterModel );
+	}
+
+
+	public function addModuleItem() {
+		$request = $this->getRequest();
+		$characterName = $request->getVal( 'charactername', '' );
+		$characterLink = $request->getVal( 'characterlink', $characterName );
+		$characterImage = $request->getVal( 'filename', '' );
+		$characterImageCropPosition = $request->getVal( 'cropposition', 0 );
+		$success = false;
+
+		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
+		$characterModel->getFromProps();
+
+		if ( !empty( $characterName ) && !empty( $characterLink ) && !empty( $characterImage ) ) {
+			$items = $characterModel->contentSlots;
+			// add new item
+			$item = new ContentEntity();
+			$item->title = $characterName;
+			$item->link = $characterLink;
+			$item->cropposition = $characterImageCropPosition;
+
+			wfProfileIn( __METHOD__ . '::uploadStart' );
+			$stash = RepoGroup::singleton()->getLocalRepo()->getUploadStash();
+			$temp_file = $stash->getFile( $characterImage );
+			$file = new LocalFile( $characterName . uniqid(), RepoGroup::singleton()->getLocalRepo() );
+			$status = $file->upload( $temp_file->getPath(), '', '' );
+			wfProfileIn( __METHOD__ . '::uploadEnd' );
+
+			if ( $status->isOK() ) {
+				$item->image = $file->getTitle()->getDBKey();
+				$items []= $item;
+				$characterModel->contentSlots = $items;
+				$characterModel->storeInPage();
+				$characterModel->storeInProps();
+				$characterModel->initializeImagePaths();
+				$characterModel->exposeImagePaths();
+				$success = true;
+				//clean up stash
+				$stash->removeFile( $characterImage );
+			}
+		}
+
+		if ( !$success ) {
+			$characterModel->initializeImagePaths();
+			$characterModel->exposeImagePaths();
+			$this->getResponse()->setCode( 400 );
 		}
 
 		$this->getResponse()->setVal( 'success', $success );

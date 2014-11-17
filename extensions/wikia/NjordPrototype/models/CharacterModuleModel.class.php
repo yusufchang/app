@@ -198,4 +198,11 @@ class CharacterModuleModel {
 		}
 		return "{$size}px-$left,$right,$top,$bottom";
 	}
+
+	public function exposeImagePaths() {
+		/* @var $contentEntity ContentEntity */
+		foreach ( $this->contentSlots as &$contentEntity ) {
+			$contentEntity->publicImagePath = $contentEntity->getImagePath();
+		}
+	}
 }

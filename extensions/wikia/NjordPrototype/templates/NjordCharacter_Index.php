@@ -36,7 +36,9 @@
 	<ul class="items-list <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 		<?php foreach ( $characterModel->contentSlots as $itemid => $contentSlot ): ?>
 			<section class="item character" data-itemid="<?= $itemid ?>" data-title="<?= htmlspecialchars($contentSlot->title) ?>" data-link="<?= htmlspecialchars($contentSlot->link) ?>" data-image="<?= htmlspecialchars($contentSlot->image) ?>" data-description="<?= htmlspecialchars($contentSlot->description) ?>">
+				<? if ( $isAllowedToEdit ): ?>
 				<a href="#" class="remove"></a>
+				<? endif; ?>
 				<a href="<?= $contentSlot->getWikiLink() ?>" title="<?= htmlspecialchars($contentSlot->title) ?>" title="<?= htmlspecialchars($contentSlot->title) ?>">
 					<img class="item-image" src="<?= $contentSlot->getImagePath() ?>"/>
 					<h1 class="item-title sg-main"><?= $contentSlot->title ?></h1>
@@ -90,10 +92,10 @@
 					</div>
 				</div>
 				<form class="modal-form">
-					<label class="label sg-sub" for="character">Full Name</label>
-					<input class="input sg-main" type="text" id="character" name="charactername"/>
-					<label class="label sg-sub" for="character">Article Tile</label>
-					<input class="input sg-main" type="text" id="character" name="charactertitle"/>
+					<label class="label sg-sub" for="character-name">Full Name</label>
+					<input class="input sg-main character-name" type="text" id="character-name" name="charactername"/>
+					<label class="label sg-sub" for="character-link">Article Tile</label>
+					<input class="input sg-main character-link" type="text" id="character-link" name="characterlink"/>
 				</form>
 			</div>
 			<div class="modal-bottom-bar">
