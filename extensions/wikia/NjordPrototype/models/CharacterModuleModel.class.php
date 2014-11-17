@@ -31,6 +31,7 @@ class CharacterModuleModel {
 			$item->link = $this->getLink( $attributes );
 			$item->setWikiLink( $this->getWikiLink( $attributes ) );
 			$item->image = $this->getImage( $attributes );
+			$item->cropposition = $this->getCropPosition( $attributes );
 			$item->title = $this->getTitle( $attributes );
 			$item->description = $this->getDescription( $attributes );
 
@@ -60,6 +61,7 @@ class CharacterModuleModel {
 			$contentSlot->image = $item->image;
 			$contentSlot->title = $item->title;
 			$contentSlot->description = $item->description;
+			$contentSlot->cropposition = $item->cropposition;
 			$contentSlots [] = $contentSlot;
 		}
 		$this->contentSlots = $contentSlots;
@@ -95,14 +97,14 @@ class CharacterModuleModel {
 
 	}
 
-	protected function getImagePaths( $imageName ) {
+	protected function getImagePaths( $imageName, $cropposition ) {
 		$imagePath = null;
 		$originalImagePath = null;
 
 		$imageTitle = Title::newFromText( $imageName, NS_FILE );
 		$file = wfFindFile( $imageTitle );
 		if ( $file && $file->exists() ) {
-			$imagePath = $file->getThumbUrl( $this->getThumbSuffix( $file, self::WIKI_CHARACTER_IMAGE_MAX_SIDE_LENGTH ) );
+			$imagePath = $file->getThumbUrl( $this->getThumbSuffix( $file, self::WIKI_CHARACTER_IMAGE_MAX_SIDE_LENGTH, $cropposition ) );
 			$originalImagePath = $file->getFullUrl();
 		}
 
@@ -139,11 +141,19 @@ class CharacterModuleModel {
 		return $image;
 	}
 
+	protected function getCropPosition( $attributes ) {
+		$position = 0;
+		if ( !empty( $attributes[2] ) ) {
+			$position = $attributes[2];
+		}
+		return $position;
+	}
+
 	protected function getTitle( $attributes ) {
 		$title = null;
 
-		if ( !empty( $attributes[2] ) ) {
-			$title = $attributes[2];
+		if ( !empty( $attributes[3] ) ) {
+			$title = $attributes[3];
 		}
 
 		return $title;
@@ -152,8 +162,8 @@ class CharacterModuleModel {
 	protected function getDescription( $attributes ) {
 		$description = null;
 
-		if ( !empty( $attributes[3] ) ) {
-			$description = $attributes[3];
+		if ( !empty( $attributes[4] ) ) {
+			$description = $attributes[4];
 		}
 
 		return $description;
@@ -161,31 +171,31 @@ class CharacterModuleModel {
 
 	public function initializeImagePaths() {
 		foreach ( $this->contentSlots as &$contentEntity ) {
-			$imageData = $this->getImagePaths( $contentEntity->image );
+			$imageData = $this->getImagePaths( $contentEntity->image, $contentEntity->cropposition );
 			$contentEntity->setImagePath( $imageData['imagePath'] );
 			$contentEntity->setOriginalImagePath( $imageData['originalImagePath'] );
 		}
 	}
 
-	private function getThumbSuffix( File $file, $expectedSideLength ) {
+	private function getThumbSuffix( File $file, $expectedSideLength, $crop ) {
 		$originalHeight = $file->getHeight();
 		$originalWidth = $file->getWidth();
+		$size = min($expectedSideLength, $originalHeight, $originalWidth);
 		$originalRatio = $originalWidth / $originalHeight;
 		$ratio = 1;
 		if ( $originalRatio > $ratio ) {
-			$height = ( $originalHeight > $expectedSideLength ) ? $expectedSideLength : $originalHeight;
-			$width = $height;
+			$height = ( $expectedSideLength > $originalHeight ) ? $expectedSideLength : $originalHeight;
+			$left = round( $originalWidth * $crop );
+			$right = $left + $height;
+			$top = 0;
+			$bottom = $height;
 		} else {
-			$width = ( $originalWidth > $expectedSideLength ) ? $expectedSideLength : $originalWidth;
-			$height = $width;
+			$width = ( $expectedSideLength > $originalWidth ) ? $expectedSideLength : $originalWidth;
+			$left = 0;
+			$right = $width;
+			$top = round( $originalHeight * $crop );
+			$bottom = $top + $width;
 		}
-		$width = round( $width );
-
-		$top = ( $originalHeight > $originalWidth ) ? round( ( $originalHeight - $originalWidth ) / 2 ) : 0;
-		$bottom = $originalHeight - $top;
-		$left = ( $originalWidth > $originalHeight ) ? round( ( $originalWidth - $originalHeight ) / 2 ) : 0;
-		$right = $originalWidth - $left;
-
-		return "{$width}px-$left,$right,$top,$bottom";
+		return "{$size}px-$left,$right,$top,$bottom";
 	}
 }

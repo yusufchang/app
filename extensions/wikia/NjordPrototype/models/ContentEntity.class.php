@@ -11,7 +11,7 @@ class ContentEntity {
 	protected $originalImagePath;
 
 	public function toString() {
-		return implode( '|', [ $this->link, $this->image, $this->title, $this->description, $this->cropposition ] );
+		return implode( '|', [ $this->link, $this->image, $this->cropposition, $this->title, $this->description ] );
 	}
 
 	public function getWikiLink() {

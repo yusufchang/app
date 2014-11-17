@@ -29,7 +29,7 @@
 					<img class="add-icon" src="/extensions/wikia/NjordPrototype/images/plus.svg">
 					<span class="add-btn-text">Add article page</span>
 				</div>
-				<div class="new-btn inverse-btn settings-btn sg-sub"></div>
+<!--				<div class="new-btn inverse-btn settings-btn sg-sub"></div>-->
 			</div>
 		<? endif; ?>
 	</div>

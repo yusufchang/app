@@ -2,7 +2,7 @@
 
 class NjordCharacterController extends WikiaController {
 
-	const THUMBNAILER_SIZE_SUFIX = '250px-0';
+	const THUMBNAIL_SIZE = 250;
 
 	public function index() {
 		$characterModel = new CharacterModuleModel( Title::newMainPage()->getText() );
@@ -35,14 +35,25 @@ class NjordCharacterController extends WikiaController {
 			$this->getResponse()->setFormat( 'json' );
 			$this->getResponse()->setVal( 'isOk', $result[ 'status' ] );
 			if ( $status ) {
+				/** @var UploadStashFile $stashFile */
 				$stashFile = $result[ 'file' ];
 				$this->getResponse()->setVal( 'url',
-					wfReplaceImageServer( $stashFile->getThumbUrl( static::THUMBNAILER_SIZE_SUFIX ) ) );
+					wfReplaceImageServer( $this->getThumbUrl( $stashFile ) ) );
 				$this->getResponse()->setVal( 'filename', $stashFile->getFileKey() );
 			} else {
 				$this->getResponse()->setVal( 'errMessage', $result[ 'error' ] );
 			}
 		}
+	}
+
+	protected function getThumbUrl( UploadStashFile $file ) {
+		$width = $file->getWidth();
+		$height = $file->getHeight();
+		$size = self::THUMBNAIL_SIZE;
+		if ( $width > $height ) {
+			$size = round( $width * ( self::THUMBNAIL_SIZE / $height ) );
+		}
+		return $file->getThumbUrl( "{$size}px-0" );
 	}
 
 
