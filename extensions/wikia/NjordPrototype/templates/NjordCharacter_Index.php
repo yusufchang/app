@@ -52,7 +52,7 @@
 				<span class="sg-main">Add a character</span>
 			</div>
 			<div class="add-text sg-sub">Click on
-				<span class="add-sub-text">+add article page</span>
+				<span class="add-sub-text">+add a character/span>
 				button on the top right corner
 			</div>
 		</div>
