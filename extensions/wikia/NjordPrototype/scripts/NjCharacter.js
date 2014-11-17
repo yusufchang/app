@@ -86,7 +86,7 @@
 			placeCaretAtEnd($titleEditFld.get(0));
 		},
 		addCharacter = function () {
-			var modal = $.showModal('Add an Character', $('.modal-wrap').html(), {
+			var modal = $.showModal('Add a character', $('.modal-wrap').html(), {
 					width: '650px'
 				}),
 			//modal selectors

@@ -49,7 +49,7 @@
 		<div class="add-block">
 			<div class="main-add-text">
 				<img class="add-icon" src="/extensions/wikia/NjordPrototype/images/plus_g.svg">
-				<span class="sg-main">Add an Article</span>
+				<span class="sg-main">Add a character</span>
 			</div>
 			<div class="add-text sg-sub">Click on
 				<span class="add-sub-text">+add article page</span>
