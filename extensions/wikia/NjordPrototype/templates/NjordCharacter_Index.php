@@ -94,7 +94,7 @@
 				<form class="modal-form">
 					<label class="label sg-sub" for="character-name">Full Name</label>
 					<input class="input sg-main character-name" type="text" id="character-name" name="charactername"/>
-					<label class="label sg-sub" for="character-link">Article Tile</label>
+					<label class="label sg-sub" for="character-link">Article Title</label>
 					<input class="input sg-main character-link" type="text" id="character-link" name="characterlink"/>
 				</form>
 			</div>
