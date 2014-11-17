@@ -31,6 +31,12 @@
     flex-grow: 1;
     justify-content: flex-end;
   }
+  .character-image {
+    position: relative;
+  }
+  .high {
+    width: 100%;
+  }
   .image-wrap {
     display: none;
     height: 250px;
@@ -167,13 +173,20 @@
     width: 100%;
     z-index: 2;
   }
+  .wide {
+    height: 100%;
+  }
 
   .upload-state {
     .after-upload-btn-group {
       display: flex;
     }
+    .drag-cursor {
+      cursor: move;
+    }
     .upload {
       border: none;
+      height: 0;
     }
     .upload-btn-group {
       display: none;

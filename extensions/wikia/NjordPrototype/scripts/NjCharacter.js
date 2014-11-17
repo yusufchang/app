@@ -99,7 +99,8 @@
 				$modalUploadArea = $('.modalContent .mom-character-modal .upload'),
 				$modalUploadOverlay = $('.modalContent .mom-character-modal .overlay'),
 				$modalUploadMask = $('.modalContent .mom-character-modal .upload-mask'),
-				$modalImage = $('.modalContent .mom-character-modal .character-image')
+				$modalImage = $('.modalContent .mom-character-modal .character-image'),
+				$modalImageWrap = $('.modalContent .mom-character-modal .image-wrap')
 				;
 			//add modal events
 			$modalUploadBtn.on('click', function () {
@@ -140,7 +141,7 @@
 					$modalUploadFld.unwrap();
 				}
 			});
-			$modalUploadArea.on('dragenter', function () {
+			$modalUpload.on('dragenter', function () {
 				$modalUploadOverlay.show();
 				$modalUploadMask.show();
 				return false;
@@ -172,13 +173,50 @@
 					}
 				}
 			});
+
+		},
+		enableDragging = function($target, $container) {
+			//reset target position
+			$target.css("top", "");
+			$target.css("left", "");
+			$target.removeClass("wide high");
+			var ratio = $target.width() / $target.height(),
+				contOffsetTop = $container.offset().top,
+				contOffsetLeft = $container.offset().left,
+				containment = [
+					contOffsetLeft - $target.width() + $container.width(),
+					contOffsetTop - $target.height() + $container.height(),
+					contOffsetLeft,
+					contOffsetTop
+				];
+			$target.addClass("drag-cursor");
+			if (ratio > 1) {
+				$target.addClass("wide");
+			} else {
+				$target.addClass("high");
+			}
+			$target.draggable({
+				disabled: false,
+				axis: ratio > 1 ? 'x' : 'y',
+				containment: containment,
+				drag: function () {
+					var pos;
+					if (ratio > 1) {
+						pos = Math.abs($target.position().left) / $target.width();
+					} else {
+						pos = Math.abs($target.position().top) / $target.height();
+					}
+					$target.data('cropposition', pos);
+				}
+			});
 		},
 		onImageUploaded = function (data, $target, $image) {
 			if (data.isOk) {
 				$image.bind('load', function () {
 					$image.unbind('load');
 					States.setState($target, 'upload-state');
-					//TODO: set image in data
+					//dragging for reposition
+					enableDragging($image, $target);
 					$target.stopThrobbing();
 				});
 				$image.data('filename', data.filename);
