@@ -199,10 +199,14 @@ class CharacterModuleModel {
 		return "{$size}px-$left,$right,$top,$bottom";
 	}
 
-	public function exposeImagePaths() {
+	public function exposePublicPaths() {
 		/* @var $contentEntity ContentEntity */
 		foreach ( $this->contentSlots as &$contentEntity ) {
 			$contentEntity->publicImagePath = $contentEntity->getImagePath();
+			$title = Title::newFromText($contentEntity->link);
+			if($title instanceof Title) {
+				$contentEntity->publicLinkUrl = $title->getFullURL();
+			}
 		}
 	}
 }

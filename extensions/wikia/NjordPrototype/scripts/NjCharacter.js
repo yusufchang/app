@@ -133,7 +133,7 @@
 					method: 'addModuleItem',
 					type: 'POST',
 					data: formData,
-					callback: function (data) {
+					callback: function (response) {
 						require(['wikia.mustache', 'wikia.loader'], function (mustache, loader) {
 							loader({
 								type: loader.MULTI,
@@ -141,8 +141,13 @@
 									mustache: 'extensions/wikia/NjordPrototype/templates/NjordCharacter_item.mustache'
 								}
 							}).done(function (data) {
-								var template = data.mustache[0];
-								$characterList.append(mustache.render(template, data));
+								var template = data.mustache[0],
+									characterData = JSON.parse(response.responseText).characterModel.contentSlots,
+									character = characterData[0];
+
+								character.itemid = characterData.length;
+
+								$characterList.append(mustache.render(template, character));
 							});
 						});
 

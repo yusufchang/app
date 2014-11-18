@@ -109,8 +109,6 @@ class NjordCharacterController extends WikiaController {
 				$characterModel->contentSlots = $items;
 				$characterModel->storeInPage();
 				$characterModel->storeInProps();
-				$characterModel->initializeImagePaths();
-				$characterModel->exposeImagePaths();
 				$success = true;
 				//clean up stash
 				$stash->removeFile( $characterImage );
@@ -118,11 +116,11 @@ class NjordCharacterController extends WikiaController {
 		}
 
 		if ( !$success ) {
-			$characterModel->initializeImagePaths();
-			$characterModel->exposeImagePaths();
 			$this->getResponse()->setCode( 400 );
 		}
 
+		$characterModel->initializeImagePaths();
+		$characterModel->exposePublicPaths();
 		$this->getResponse()->setVal( 'success', $success );
 		$this->getResponse()->setVal( 'characterModel', $characterModel );
 	}
