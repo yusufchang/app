@@ -1,6 +1,6 @@
 @import "skins/shared/color";
 
-.mom-character-modal {
+.character-modal {
   background: $color-page;
   display: flex;
   flex-direction: column;
@@ -194,8 +194,93 @@
     .image-wrap {
       display: block;
       position: absolute;
-      top:0;
+      top: 0;
     }
+  }
+  //general texts and buttons
+  .buttons {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: flex-end;
+  }
+  button {
+    border-radius: 0;
+  }
+
+  &.modal > footer {
+    padding: 5px 20px 5px;
+
+    .button {
+      background-image: none;
+      float: none;
+      margin-left: 0;
+    }
+  }
+  .new-btn {
+    border: 1px solid #092140;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 34px;
+    line-height: 1em;
+    margin: 0 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    &.edit-btn {
+      display: none;
+    }
+  }
+  .new-btn.inverse-btn {
+    background-color: #FFFFFF;
+    color: #092140;
+    &:hover {
+      background-color: #0a5fa3;
+      border: 1px solid #0a5fa3;
+      color: #fff;
+    }
+  }
+  .new-btn.default-btn {
+    background-color: #092140;
+    color: #fff;
+    &:hover {
+      background-color: #0a5fa3;
+      border: 1px solid #0a5fa3;
+    }
+  }
+  .sg-main {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  .sg-main-small {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+  }
+
+  .sg-title {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+  }
+
+  .sg-sub {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .sg-sub-title {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32px;
   }
 }
 
@@ -372,94 +457,6 @@
     cursor: pointer;
     display: block;
     height: 20px;
-    margin: 0 5px;
-    padding: 10px 20px;
-    text-align: center;
-    text-transform: uppercase;
-    &.edit-btn {
-      display: none;
-    }
-  }
-  .new-btn.inverse-btn {
-    background-color: #FFFFFF;
-    color: #092140;
-    &:hover {
-      background-color: #0a5fa3;
-      border: 1px solid #0a5fa3;
-      color: #fff;
-    }
-  }
-  .new-btn.default-btn {
-    background-color: #092140;
-    color: #fff;
-    &:hover {
-      background-color: #0a5fa3;
-      border: 1px solid #0a5fa3;
-    }
-  }
-  .sg-main {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 28px;
-  }
-  .sg-main-small {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 26px;
-  }
-
-  .sg-title {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 44px;
-  }
-
-  .sg-sub {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-  }
-
-  .sg-sub-title {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 27px;
-    font-weight: 700;
-    line-height: 32px;
-  }
-}
-
-.remove-character {
-  //general texts and buttons
-  .buttons {
-    display: flex;
-    flex-grow: 1;
-    height: 100%;
-    justify-content: flex-end;
-  }
-  button {
-    border-radius: 0;
-  }
-
-  &.modal > footer {
-    padding: 5px 20px 5px;
-
-    .button {
-      background-image: none;
-      float: none;
-      margin-left: 0;
-    }
-  }
-  .new-btn {
-    border: 1px solid #092140;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: block;
-    height: 34px;
-    line-height: 1em;
     margin: 0 5px;
     padding: 10px 20px;
     text-align: center;

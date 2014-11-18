@@ -141,6 +141,7 @@ class NjordCharacterController extends WikiaController {
 				$item->image = $moduleItem['image'];
 				$item->title = $moduleItem['title'];
 				$item->description = $moduleItem['description'];
+				$item->cropposition = $moduleItem['cropposition'];
 				$items [] = $item;
 			}
 

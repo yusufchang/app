@@ -3,7 +3,6 @@
 
 	var
 	//const
-
 	//helpers
 		States = {
 			list: [
@@ -86,133 +85,132 @@
 			placeCaretAtEnd($titleEditFld.get(0));
 		},
 		addCharacter = function () {
-			var modal = $.showModal('Add a character', $('.modal-wrap').html(), {
-					width: '650px'
-				}),
-			//modal selectors
-				$modal = $('.modalContent'),
-				$modalUploadBtn = $('.modalContent .mom-character-modal .upload-btn'),
-				$modalDiscardBtn = $('.modalContent .mom-character-modal .discard-btn'),
-				$modalSaveBtn = $('.modalContent .mom-character-modal .save-btn'),
-				$modalUploadFld = $('.modalContent .mom-character-modal input[type=file]'),
-				$modalForm = $('.modalContent .mom-character-modal .modal-form'),
-				$modalUpload = $('.modalContent .mom-character-modal .modal-upload'),
-				$modalUploadArea = $('.modalContent .mom-character-modal .upload'),
-				$modalUploadOverlay = $('.modalContent .mom-character-modal .overlay'),
-				$modalUploadMask = $('.modalContent .mom-character-modal .upload-mask'),
-				$modalImageWrap = $('.modalContent .mom-character-modal .image-wrap'),
-				$modalImage = $('.modalContent .mom-character-modal .character-image'),
-				$modalName = $('.modalContent .mom-character-modal .character-name'),
-				$modalLink = $('.modalContent .mom-character-modal .character-link'),
-				linkEdited = false;
+			require(['wikia.ui.factory'], function (uiFactory) {
+				uiFactory.init(['modal']).then(function (uiModal) {
+					var addCharacterModalConfig = getAddCharacterModalConfig();
 
-			//add modal events
-			$modalUploadBtn.on('click', function () {
-				$modalUploadFld.click();
-			});
-			$modalDiscardBtn.one('click', function () {
-				modal.closeModal();
-			});
-			$modalName.on('keyup', function () {
-				if (!linkEdited) {
-					$modalLink.val($modalName.val());
-				}
-			});
-			$modalLink.on('keyup', function () {
-				linkEdited = true;
-			});
+					uiModal.createComponent(addCharacterModalConfig, function (addCharacterModal) {
 
-			$modalSaveBtn.on('click', function () {
-				$modal.startThrobbing();
-				var formData = $modalForm.serialize();
-				console.log(formData);
-				//add filename
-				formData += '&cropposition=' + $modalImage.data('cropposition')
-				formData += '&filename=' + $modalImage.data('filename');
+						var $modal = addCharacterModal.$element,
+							$modalUploadBtn = $modal.find('.upload-btn'),
+							$modalUploadFld = $modal.find('input[type=file]'),
+							$modalForm = $modal.find('.modal-form'),
+							$modalUpload = $modal.find('.modal-upload'),
+							$modalUploadOverlay = $modal.find('.overlay'),
+							$modalUploadMask = $modal.find('.upload-mask'),
+							$modalImage = $modal.find('.character-image'),
+							$modalName = $modal.find('.character-name'),
+							$modalLink = $modal.find('.character-link'),
+							linkEdited = false;
 
-				$.nirvana.sendRequest({
-					controller: 'NjordCharacterController',
-					method: 'addModuleItem',
-					type: 'POST',
-					data: formData,
-					callback: function (response) {
-						require(['wikia.mustache', 'wikia.loader'], function (mustache, loader) {
-							loader({
-								type: loader.MULTI,
-								resources: {
-									mustache: 'extensions/wikia/NjordPrototype/templates/NjordCharacter_item.mustache'
+						//add modal events
+						$modalUploadBtn.on('click', function () {
+							$modalUploadFld.click();
+						});
+
+						$modalName.on('keyup', function () {
+							if (!linkEdited) {
+								$modalLink.val($modalName.val());
+							}
+						});
+						$modalLink.on('keyup', function () {
+							linkEdited = true;
+						});
+
+						$modalUploadFld.on('change', function () {
+							if ($modalUploadFld[0].files.length) {
+								var fd = new FormData();
+								fd.append('file', $modalUploadFld[0].files[0]);
+								uploadImage(fd, $modalUpload, $modalImage);
+								//reset input
+								$modalUploadFld.wrap('<form>').closest('form').get(0).reset();
+								$modalUploadFld.unwrap();
+							}
+						});
+						$modalUpload.on('dragenter', function () {
+							$modalUploadOverlay.show();
+							$modalUploadMask.show();
+							return false;
+						});
+						$modalUploadMask.on('dragleave', function (e) {
+							$modalUploadOverlay.hide();
+							$modalUploadMask.hide();
+							e.stopImmediatePropagation();
+							return false;
+						});
+						$modalUploadMask.on('dragend', function () {
+							return false;
+						});
+						$modalUploadMask.on('drop', function (e) {
+							$modalUploadOverlay.hide();
+							$modalUploadMask.hide();
+							e.preventDefault();
+							var fd = new FormData();
+							if (e.dataTransfer.files.length) {
+								//if file is uploaded
+								fd.append('file', e.dataTransfer.files[0]);
+								uploadImage(fd, $modalUpload, $modalImage);
+							} else if (e.dataTransfer.getData('text/html')) {
+								//if url
+								var $img = $(e.dataTransfer.getData('text/html'));
+								if (e.target.src !== $img.attr('src')) {
+									fd.append('url', $img.attr('src'));
+									uploadImage(fd, $modalUpload, $modalImage);
 								}
-							}).done(function (data) {
-								var template = data.mustache[0],
-									characterData = response.characterModel.contentSlots,
-									character = characterData[characterData.length - 1];
+							}
+						});
 
-								character.itemid = characterData.length;
+						addCharacterModal.bind('save', function (event) {
+							addCharacterModal.$element.startThrobbing();
+							var formData = $modalForm.serialize();
+							//add filename
+							formData += '&cropposition=' + $modalImage.data('cropposition');
+							formData += '&filename=' + $modalImage.data('filename');
 
-								$characterList.append(mustache.render(template, character));
+							$.nirvana.sendRequest({
+								controller: 'NjordCharacterController',
+								method: 'addModuleItem',
+								type: 'POST',
+								data: formData,
+								callback: function (response) {
+									require(['wikia.mustache', 'wikia.loader'], function (mustache, loader) {
+										loader({
+											type: loader.MULTI,
+											resources: {
+												mustache: 'extensions/wikia/NjordPrototype/templates/NjordCharacter_item.mustache'
+											}
+										}).done(function (data) {
+											var template = data.mustache[0],
+												characterData = response.characterModel.contentSlots,
+												character = characterData[characterData.length - 1];
+
+											character.itemid = characterData.length;
+
+											$characterList.append(mustache.render(template, character));
+										});
+									});
+
+									addCharacterModal.$element.stopThrobbing();
+									addCharacterModal.trigger('close');
+								},
+								onErrorCallback: function () {
+									addCharacterModal.$element.stopThrobbing();
+									showErrorModal($.msg('error'), $.msg('unknown-error'));
+								}
 							});
 						});
 
-						$modal.stopThrobbing();
-						modal.closeModal();
-					},
-					onErrorCallback: function () {
-						$modal.stopThrobbing();
-						modal.closeModal();
-						$.showModal($.msg('error'), $.msg('unknown-error'));
-					}
+						addCharacterModal.show();
+					});
 				});
 			});
-			$modalUploadFld.on('change', function () {
-				if ($modalUploadFld[0].files.length) {
-					var fd = new FormData();
-					fd.append('file', $modalUploadFld[0].files[0]);
-					uploadImage(fd, $modalUpload, $modalImage);
-					//reset input
-					$modalUploadFld.wrap('<form>').closest('form').get(0).reset();
-					$modalUploadFld.unwrap();
-				}
-			});
-			$modalUpload.on('dragenter', function () {
-				$modalUploadOverlay.show();
-				$modalUploadMask.show();
-				return false;
-			});
-			$modalUploadMask.on('dragleave', function (e) {
-				$modalUploadOverlay.hide();
-				$modalUploadMask.hide();
-				e.stopImmediatePropagation();
-				return false;
-			});
-			$modalUploadMask.on('dragend', function () {
-				return false;
-			});
-			$modalUploadMask.on('drop', function (e) {
-				$modalUploadOverlay.hide();
-				$modalUploadMask.hide();
-				e.preventDefault();
-				var fd = new FormData();
-				if (e.dataTransfer.files.length) {
-					//if file is uploaded
-					fd.append('file', e.dataTransfer.files[0]);
-					uploadImage(fd, $modalUpload, $modalImage);
-				} else if (e.dataTransfer.getData('text/html')) {
-					//if url
-					var $img = $(e.dataTransfer.getData('text/html'));
-					if (e.target.src !== $img.attr('src')) {
-						fd.append('url', $img.attr('src'));
-						uploadImage(fd, $modalUpload, $modalImage);
-					}
-				}
-			});
-
 		},
 		enableDragging = function ($target, $container) {
 			//reset target position
 			$target.css('top', '');
 			$target.css('left', '');
 			$target.removeClass('wide high');
-			var ratio = $target.width() / $target	.height(),
+			var ratio = $target.width() / $target.height(),
 				contOffsetTop = $container.offset().top,
 				contOffsetLeft = $container.offset().left,
 				containment = [
@@ -254,7 +252,7 @@
 				$image.data('filename', data.filename);
 				$image.attr('src', data.url);
 			} else {
-				$.showModal($.msg('error'), data.errMessage);
+				showErrorModal($.msg('error'), data.errMessage);
 				$target.stopThrobbing();
 			}
 		},
@@ -269,7 +267,7 @@
 					onImageUploaded(data, $target, $image);
 				},
 				onErrorCallback: function () {
-					$.showModal($.msg('error'), $.msg('unknown-error'));
+					showErrorModal($.msg('error'), $.msg('unknown-error'));
 					$target.stopThrobbing();
 				},
 				processData: false,
@@ -332,44 +330,9 @@
 
 			require(['wikia.ui.factory'], function (uiFactory) {
 				uiFactory.init(['modal']).then(function (uiModal) {
-					var votersModalConfig = {
-						vars: {
-							id: 'RemoveCharacterModule',
-							classes: ['remove-character'],
-							size: 'small',
-							content: 'Are you sure you want to remove this character?',
-							title: 'Remove Character',
-							closeButton: true,
-							buttons: [
-								{
-									vars: {
-										value: $.msg('cancel'),
-										classes: ['primary', 'new-btn', 'inverse-btn'],
-										data: [
-											{
-												key: 'event',
-												value: 'close'
-											}
-										]
-									}
-								},
-								{
-									vars: {
-										value: $.msg('ok'),
-										classes: ['primary', 'new-btn', 'default-btn'],
-										data: [
-											{
-												key: 'event',
-												value: 'remove'
-											}
-										]
-									}
-								}
-							]
-						}
-					};
+					var removeCharacterModalConfig = getRemoveCharacterModalConfig();
 
-					uiModal.createComponent(votersModalConfig, function (removeCharacterModal) {
+					uiModal.createComponent(removeCharacterModalConfig, function (removeCharacterModal) {
 						removeCharacterModal.bind('remove', function (event) {
 							removeCharacterModal.$element.startThrobbing();
 							var characterData = [];
@@ -379,8 +342,10 @@
 								if ($item.data('itemid') !== $characterItem.data('itemid')) {
 									characterData.push(
 										{
+											'itemid': $item.data('itemid'),
 											'link': $item.data('link'),
 											'image': $item.data('image'),
+											'cropposition': $item.data('cropposition'),
 											'title': $item.data('title'),
 											'description': $item.data('description')
 										});
@@ -433,6 +398,7 @@
 						'itemid': $item.data('itemid'),
 						'link': $item.data('link'),
 						'image': $item.data('image'),
+						'cropposition': $item.data('cropposition'),
 						'title': $item.data('title'),
 						'description': $item.data('description')
 					});
@@ -455,8 +421,123 @@
 			//turn off browser image handling
 			$body.on('dragover', onDragDisabled).on('dragend', onDragDisabled).on('drop', onDragDisabled);
 			$characterModule.on('click', 'a.remove', removeCharacter);
-		};
+		},
+		getRemoveCharacterModalConfig = function () {
+			var removeCharacterModalConfig = {
+				vars: {
+					id: 'RemoveCharacterModule',
+					classes: ['character-modal'],
+					size: 'small',
+					content: 'Are you sure you want to remove this character?',
+					title: 'Remove Character',
+					closeButton: true,
+					buttons: [
+						{
+							vars: {
+								value: $.msg('cancel'),
+								classes: ['primary', 'new-btn', 'inverse-btn'],
+								data: [
+									{
+										key: 'event',
+										value: 'close'
+									}
+								]
+							}
+						},
+						{
+							vars: {
+								value: $.msg('ok'),
+								classes: ['primary', 'new-btn', 'default-btn'],
+								data: [
+									{
+										key: 'event',
+										value: 'remove'
+									}
+								]
+							}
+						}
+					]
+				}
+			};
+			return removeCharacterModalConfig;
+		},
+		getAddCharacterModalConfig = function () {
+			var addCharacterModalConfig = {
+				vars: {
+					id: 'AddCharacterModule',
+					classes: ['character-modal'],
+					size: 'medium',
+					content: $('.mom-character-modal').html(),
+					title: 'Add a Character',
+					closeButton: true,
+					buttons: [
+						{
+							vars: {
+								value: 'Discard',
+								classes: ['primary', 'new-btn', 'inverse-btn'],
+								data: [
+									{
+										key: 'event',
+										value: 'close'
+									}
+								]
+							}
+						},
+						{
+							vars: {
+								value: 'Publish',
+								classes: ['primary', 'new-btn', 'default-btn'],
+								data: [
+									{
+										key: 'event',
+										value: 'save'
+									}
+								]
+							}
+						}
+					]
+				}
+			};
+			return addCharacterModalConfig;
+		},
+		showErrorModal = function (title, message) {
+			require(['wikia.ui.factory'], function (uiFactory) {
+				uiFactory.init(['modal']).then(function (uiModal) {
+					var errorModalConfig = getErrorModalConfig(title, message);
 
+					uiModal.createComponent(errorModalConfig, function (errorModal) {
+						errorModal.show();
+					});
+				});
+			});
+		},
+		getErrorModalConfig = function (title, message) {
+			var errorModalConfig = {
+				vars: {
+					id: 'Error',
+					size: 'small',
+					classes: ['character-modal'],
+					content: message,
+					title: title,
+					closeButton: true,
+					buttons: [
+						{
+							vars: {
+								value: 'OK',
+								classes: ['primary', 'new-btn', 'default-btn'],
+								data: [
+									{
+										key: 'event',
+										value: 'close'
+									}
+								]
+							}
+						}
+					]
+				}
+			};
+			return errorModalConfig;
+		};
 //fire up if logged user
 	if (window.wgUserName) {
 		init();

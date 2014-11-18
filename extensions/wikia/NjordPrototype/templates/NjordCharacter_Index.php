@@ -35,7 +35,7 @@
 	</div>
 	<ul class="items-list <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 		<?php foreach ( $characterModel->contentSlots as $itemid => $contentSlot ): ?>
-			<section class="item character" data-itemid="<?= $itemid ?>" data-title="<?= htmlspecialchars($contentSlot->title) ?>" data-link="<?= htmlspecialchars($contentSlot->link) ?>" data-image="<?= htmlspecialchars($contentSlot->image) ?>" data-description="<?= htmlspecialchars($contentSlot->description) ?>">
+			<section class="item character" data-itemid="<?= $itemid ?>" data-title="<?= htmlspecialchars($contentSlot->title) ?>" data-link="<?= htmlspecialchars($contentSlot->link) ?>" data-image="<?= htmlspecialchars($contentSlot->image) ?>" data-cropposition="<?= htmlspecialchars($contentSlot->cropposition) ?>" data-description="<?= htmlspecialchars($contentSlot->description) ?>">
 				<? if ( $isAllowedToEdit ): ?>
 				<a href="#" class="remove"></a>
 				<? endif; ?>
@@ -97,12 +97,6 @@
 					<label class="label sg-sub" for="character-link">Article Title</label>
 					<input class="input sg-main character-link" type="text" id="character-link" name="characterlink"/>
 				</form>
-			</div>
-			<div class="modal-bottom-bar">
-				<div class="btn-group">
-					<div class="new-btn inverse-btn discard-btn sg-sub">Discard</div>
-					<div class="new-btn default-btn save-btn sg-sub">Publish</div>
-				</div>
 			</div>
 		</div>
 	</div>
