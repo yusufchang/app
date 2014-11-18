@@ -125,7 +125,9 @@
 			$modalSaveBtn.on('click', function () {
 				$modal.startThrobbing();
 				var formData = $modalForm.serialize();
+				console.log(formData);
 				//add filename
+				formData += '&cropposition=' + $modalImage.data('cropposition')
 				formData += '&filename=' + $modalImage.data('filename');
 
 				$.nirvana.sendRequest({
@@ -142,8 +144,8 @@
 								}
 							}).done(function (data) {
 								var template = data.mustache[0],
-									characterData = JSON.parse(response.responseText).characterModel.contentSlots,
-									character = characterData[0];
+									characterData = response.characterModel.contentSlots,
+									character = characterData[characterData.length - 1];
 
 								character.itemid = characterData.length;
 
@@ -205,12 +207,12 @@
 			});
 
 		},
-		enableDragging = function($target, $container) {
+		enableDragging = function ($target, $container) {
 			//reset target position
-			$target.css("top", "");
-			$target.css("left", "");
-			$target.removeClass("wide high");
-			var ratio = $target.width() / $target.height(),
+			$target.css('top', '');
+			$target.css('left', '');
+			$target.removeClass('wide high');
+			var ratio = $target.width() / $target	.height(),
 				contOffsetTop = $container.offset().top,
 				contOffsetLeft = $container.offset().left,
 				containment = [
@@ -219,11 +221,11 @@
 					contOffsetLeft,
 					contOffsetTop
 				];
-			$target.addClass("drag-cursor");
+			$target.addClass('drag-cursor');
 			if (ratio > 1) {
-				$target.addClass("wide");
+				$target.addClass('wide');
 			} else {
-				$target.addClass("high");
+				$target.addClass('high');
 			}
 			$target.draggable({
 				disabled: false,
