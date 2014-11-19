@@ -417,14 +417,12 @@
 
     .item-card {
 
-      position: absolute;
-      top: 255px;
     }
 
     .item-title, .item-actor {
       color: $color-text-dark;
       overflow: hidden;
-      padding-left: 10px;
+      padding-left: 1em;
       text-align: left;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -433,10 +431,10 @@
     .item-description {
       color: $color-text-dark;
       display: block;
-      margin-top: 12px;
-      max-height: 55px;
+      max-height: 6em;
+      margin-top: 1em;
       overflow: hidden;
-      padding-left: 10px;
+      padding-left: 1em;
       text-align: left;
     }
 
