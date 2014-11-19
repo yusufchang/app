@@ -246,6 +246,8 @@ class TvApiController extends WikiaApiController {
 			$result = $this->searchForSeries( $seriesName, $lang, $minQuality );
 			if ( $result !== null ) {
 				$this->debug( __METHOD__ . ' Found results from Search |SERIES| ' . $seriesName );
+			} else {
+				$this->debug( __METHOD__ . ' No results from Search |SERIES| ' . $seriesName );
 			}
 		} else {
 			$this->debug( __METHOD__ . ' Found results from ExactMatch |SERIES| ' . $seriesName );
