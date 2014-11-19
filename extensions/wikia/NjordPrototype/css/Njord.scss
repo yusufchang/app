@@ -1,4 +1,4 @@
-@import "skins/shared/color";
+@import 'skins/shared/color';
 
 .global-edit-wrap {
   border-bottom: 1px solid $color-page-border;
@@ -6,9 +6,11 @@
   a:hover {
     text-decoration: none;
   }
+
   .global-edit-btn {
     vertical-align: text-bottom;
   }
+
   .edit-link {
     color: #0a5fa3;
     text-transform: uppercase;
@@ -45,8 +47,9 @@
   .image-window {
     height: 100%;
     overflow: hidden;
+
     &:after {
-      content: "";
+      content: '';
       display: block;
       width: 100%;
       height: 100%;
@@ -71,19 +74,23 @@
       position: absolute;
       width: 100%;
     }
+
     .hero-title {
       min-height: 44px;
       outline: none;
       word-wrap: break-word;
     }
+
     .title-edit-btn {
       cursor: pointer;
       height: 24px;
     }
+
     .title-text {
       word-wrap: break-word;
       max-width: 400px;
     }
+
     bottom: 6%;
     color: #fff;
     display: inline-block;
@@ -97,6 +104,7 @@
     vertical-align: bottom;
     width: 100%;
   }
+
   .position-info {
     display: none;
     position: absolute;
@@ -104,7 +112,7 @@
     width: 100%;
     z-index: 1;
     .position-text {
-      background-color: #C7D1D8;
+      background-color: #c7d1d8;
       border-radius: 3px;
       color: #092140;
       margin: auto;
@@ -117,25 +125,31 @@
     .update-btn {
       cursor: pointer;
     }
+
     .update-text {
       text-transform: uppercase;
       vertical-align: super;
     }
+
     .upload-btn {
       cursor: pointer;
       text-align: left;
     }
+
     .upload-desc {
       margin-left: 5px;
       text-align: left;
     }
+
     .upload-icon {
       height: 25px;
     }
+
     .upload-text {
       text-transform: uppercase;
       vertical-align: super;
     }
+
     color: #fff;
     display: flex;
     display: -webkit-flex;
@@ -146,7 +160,7 @@
   }
 
   .overlay {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, .2);
     display: none;
     height: 100%;
     position: absolute;
@@ -157,11 +171,13 @@
       display: -webkit-flex;
       height: 100%;
     }
+
     .overlay-text {
-      color: #FFFFFF;
+      color: #fff;
       margin: auto;
       text-transform: uppercase;
     }
+
   }
 
   .upload-mask {
@@ -199,7 +215,9 @@
       min-height: 1.2em;
       display: block;
     }
+
   }
+
   .edit-btn {
     cursor: pointer;
   }
@@ -232,6 +250,7 @@
       -webkit-flex-grow: 1;
     }
   }
+
   .new-btn {
     border: 1px solid #092140;
     cursor: pointer;
@@ -245,8 +264,9 @@
       display: none;
     }
   }
+
   .new-btn.discard-btn {
-    background-color: #FFFFFF;
+    background-color: #fff;
     color: #092140;
     &:hover {
       background-color: #0a5fa3;
@@ -254,6 +274,7 @@
       color: #fff;
     }
   }
+
   .new-btn.save-btn {
     background-color: #092140;
     color: #fff;
@@ -262,12 +283,14 @@
       border: 1px solid #0a5fa3;
     }
   }
+
   .sg-main {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 18px;
     font-weight: 500;
     line-height: 28px;
   }
+
   .sg-main-small {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -295,47 +318,59 @@
     font-weight: 700;
     line-height: 32px;
   }
+
   //states
   &.no-edit-state {
     .MainPageHero {
       box-sizing: border-box;
       padding-top: 25%;
     }
+
     .edit-btn {
       display: none;
     }
+
     .image-wrap {
       height: 100%;
       position: absolute;
       width: 100%;
       top: 0;
     }
+
     .title-edit-btn {
       display: none;
     }
+
     .upload-wrap {
       display: none;
     }
   }
+
   .edit-state {
     .edit-box {
       display: block;
     }
+
     .title-edit-btn {
       display: none;
     }
+
     .title-default-text {
       display: none;
     }
+
     .title-text {
       display: none;
     }
+
     .hero-description-text {
       display: none;
     }
+
     .hero-description-default-text {
       display: none;
     }
+
     .edit-btn {
       display: none;
     }
@@ -345,15 +380,19 @@
     .title-default-text {
       display: none;
     }
+
     .desc-default-text {
       display: none;
     }
+
     .update-btn {
       display: inherit;
     }
+
     .upload-btn {
       display: none;
     }
+
     .upload {
       display: flex;
       display: -webkit-flex;
@@ -361,14 +400,17 @@
       position: absolute;
       width: 100%;
     }
+
     .upload-desc {
       display: none;
     }
+
     .upload-group {
       margin: 5px auto auto 8%;
       position: absolute;
       z-index: 1;
     }
+
     .hero-description-default-text {
       display: none;
     }
@@ -378,26 +420,32 @@
     .image-window:after {
       display: none;
     }
+
     .position-info {
       display: flex;
       display: -webkit-flex;
     }
+
     .upload-wrap {
       display: none;
     }
+
     &.image-save-bar {
       display: flex;
       display: -webkit-flex;
     }
+
   }
 
   .zero-state {
     .title-text {
       display: none;
     }
+
     .update-btn {
       display: none;
     }
+
     .upload {
       border: 1px dashed white;
       display: flex;
@@ -408,9 +456,11 @@
       text-align: center;
       width: 98%;
     }
+
     .hero-description-text {
       display: none;
     }
+
     .hero-description-default-text {
       display: inline-block;
     }

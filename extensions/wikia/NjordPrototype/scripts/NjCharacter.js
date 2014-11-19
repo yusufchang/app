@@ -98,23 +98,11 @@
 							$modalUpload = $modal.find('.modal-upload'),
 							$modalUploadOverlay = $modal.find('.overlay'),
 							$modalUploadMask = $modal.find('.upload-mask'),
-							$modalImage = $modal.find('.character-image'),
-							$modalName = $modal.find('.character-name'),
-							$modalLink = $modal.find('.character-link'),
-							linkEdited = false;
+							$modalImage = $modal.find('.character-image');
 
 						//add modal events
 						$modalUploadBtn.on('click', function () {
 							$modalUploadFld.click();
-						});
-
-						$modalName.on('keyup', function () {
-							if (!linkEdited) {
-								$modalLink.val($modalName.val());
-							}
-						});
-						$modalLink.on('keyup', function () {
-							linkEdited = true;
 						});
 
 						$modalUploadFld.on('change', function () {
@@ -160,9 +148,10 @@
 							}
 						});
 
-						addCharacterModal.bind('save', function (event) {
+						addCharacterModal.bind('save', function () {
 							addCharacterModal.$element.startThrobbing();
-							var formData = $modalForm.serialize();
+							var formData = $modalForm.serialize(),
+								templatePath = 'extensions/wikia/NjordPrototype/templates/NjordCharacter_item.mustache';
 							//add filename
 							formData += '&cropposition=' + $modalImage.data('cropposition');
 							formData += '&filename=' + $modalImage.data('filename');
@@ -177,7 +166,7 @@
 										loader({
 											type: loader.MULTI,
 											resources: {
-												mustache: 'extensions/wikia/NjordPrototype/templates/NjordCharacter_item.mustache'
+												mustache: templatePath
 											}
 										}).done(function (data) {
 											var template = data.mustache[0],
@@ -287,7 +276,7 @@
 			}
 			return $this;
 		},
-		onPaste = function (e) {
+		onPaste = function () {
 			var $this = $(this);
 			window.setTimeout(function () {
 				$this.html($this.text());
@@ -325,15 +314,14 @@
 			return false;
 		},
 		removeCharacter = function (ev) {
-			var $characterItem = $(this).closest('.item'),
-				self = this;
+			var $characterItem = $(this).closest('.item');
 
 			require(['wikia.ui.factory'], function (uiFactory) {
 				uiFactory.init(['modal']).then(function (uiModal) {
 					var removeCharacterModalConfig = getRemoveCharacterModalConfig();
 
 					uiModal.createComponent(removeCharacterModalConfig, function (removeCharacterModal) {
-						removeCharacterModal.bind('remove', function (event) {
+						removeCharacterModal.bind('remove', function () {
 							removeCharacterModal.$element.startThrobbing();
 							var characterData = [];
 							$('.item').each(function (i, item) {
@@ -347,7 +335,9 @@
 											'image': $item.data('image'),
 											'cropposition': $item.data('cropposition'),
 											'title': $item.data('title'),
-											'description': $item.data('description')
+											'description': $item.data('description'),
+											'actor': $item.data('actor'),
+											'actorlink': $item.data('actorlink')
 										});
 								}
 							});
@@ -400,7 +390,9 @@
 						'image': $item.data('image'),
 						'cropposition': $item.data('cropposition'),
 						'title': $item.data('title'),
-						'description': $item.data('description')
+						'description': $item.data('description'),
+						'actor': $item.data('actor'),
+						'actorlink': $item.data('actorlink')
 					});
 			});
 			data.oCharacterData = data.characterData = characterData;

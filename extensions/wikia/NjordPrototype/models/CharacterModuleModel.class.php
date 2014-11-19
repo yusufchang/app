@@ -29,11 +29,14 @@ class CharacterModuleModel {
 			$item = new ContentEntity();
 
 			$item->link = $this->getLink( $attributes );
-			$item->setWikiLink( $this->getWikiLink( $attributes ) );
+			$item->setWikiUrl( $this->urlFromTitleText( $item->link ) );
 			$item->image = $this->getImage( $attributes );
 			$item->cropposition = $this->getCropPosition( $attributes );
 			$item->title = $this->getTitle( $attributes );
 			$item->description = $this->getDescription( $attributes );
+			$item->actor = $this->getActor( $attributes );
+			$item->actorlink = $this->getActorLink( $attributes );
+			$item->setActorUrl( $this->urlFromTitleText( $item->actorlink ) );
 
 			$items[] = $item;
 		}
@@ -57,11 +60,14 @@ class CharacterModuleModel {
 		foreach ( $items as $item ) {
 			$contentSlot = new ContentEntity();
 			$contentSlot->link = $item->link;
-			$contentSlot->setWikiLink( $this->getWikiLink( $item->link ) );
+			$contentSlot->setWikiUrl( $this->urlFromTitleText( $item->link ) );
 			$contentSlot->image = $item->image;
 			$contentSlot->title = $item->title;
 			$contentSlot->description = $item->description;
 			$contentSlot->cropposition = $item->cropposition;
+			$contentSlot->actor = $item->actor;
+			$contentSlot->actorlink = $item->actorlink;
+			$contentSlot->setActorUrl( $this->urlFromTitleText( $item->actorlink ) );
 			$contentSlots [] = $contentSlot;
 		}
 		$this->contentSlots = $contentSlots;
@@ -121,15 +127,15 @@ class CharacterModuleModel {
 		return $link;
 	}
 
-	protected function getWikiLink( $link ) {
-		$wikiLink = null;
+	protected function urlFromTitleText( $link ) {
+		$wikiUrl = null;
 
 		$linkTitle = Title::newFromText( $link );
 		if ( $linkTitle instanceof Title ) {
-			$wikiLink = $linkTitle->getLocalUrl();
+			$wikiUrl = $linkTitle->getLocalUrl();
 		}
 
-		return $wikiLink;
+		return $wikiUrl;
 	}
 
 	protected function getImage( $attributes ) {
@@ -169,6 +175,26 @@ class CharacterModuleModel {
 		return $description;
 	}
 
+	protected function getActor( $attributes ) {
+		$actor = null;
+
+		if ( !empty( $attributes[5] ) ) {
+			$actor = $attributes[5];
+		}
+
+		return $actor;
+	}
+
+	protected function getActorLink( $attributes ) {
+		$actorlink = null;
+
+		if ( !empty( $attributes[6] ) ) {
+			$actorlink = $attributes[6];
+		}
+
+		return $actorlink;
+	}
+
 	public function initializeImagePaths() {
 		foreach ( $this->contentSlots as &$contentEntity ) {
 			$imageData = $this->getImagePaths( $contentEntity->image, $contentEntity->cropposition );
@@ -206,6 +232,10 @@ class CharacterModuleModel {
 			$title = Title::newFromText($contentEntity->link);
 			if($title instanceof Title) {
 				$contentEntity->publicLinkUrl = $title->getFullURL();
+			}
+			$actortitle = Title::newFromText($contentEntity->actorlink);
+			if($actortitle instanceof Title) {
+				$contentEntity->publicActorLinkUrl = $actortitle->getFullURL();
 			}
 		}
 	}

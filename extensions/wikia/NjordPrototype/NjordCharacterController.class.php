@@ -80,7 +80,10 @@ class NjordCharacterController extends WikiaController {
 	public function addModuleItem() {
 		$request = $this->getRequest();
 		$characterName = $request->getVal( 'charactername', '' );
-		$characterLink = $request->getVal( 'characterlink', $characterName );
+		$characterLink = $characterName;
+		$characterActorName = $request->getVal( 'characteractor', '' );
+		$characterActorLink = $characterActorName;
+		$characterDescription = $request->getVal( 'characterdescription', '' );
 		$characterImage = $request->getVal( 'filename', '' );
 		$characterImageCropPosition = $request->getVal( 'cropposition', 0 );
 		$success = false;
@@ -94,7 +97,11 @@ class NjordCharacterController extends WikiaController {
 			$item = new ContentEntity();
 			$item->title = $characterName;
 			$item->link = $characterLink;
+			$item->description = $characterDescription;
 			$item->cropposition = $characterImageCropPosition;
+			$item->actor = $characterActorName;
+			$item->actorlink = $characterActorLink;
+			$item->isAllowedToEdit = $this->wg->user->isAllowed( 'njordeditmode' );
 
 			wfProfileIn( __METHOD__ . '::uploadStart' );
 			$stash = RepoGroup::singleton()->getLocalRepo()->getUploadStash();
@@ -142,6 +149,8 @@ class NjordCharacterController extends WikiaController {
 				$item->title = $moduleItem['title'];
 				$item->description = $moduleItem['description'];
 				$item->cropposition = $moduleItem['cropposition'];
+				$item->actor = $moduleItem['actor'];
+				$item->actorlink = $moduleItem['actorlink'];
 				$items [] = $item;
 			}
 

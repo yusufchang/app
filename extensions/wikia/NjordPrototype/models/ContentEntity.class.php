@@ -6,20 +6,31 @@ class ContentEntity {
 	public $title;
 	public $description;
 	public $cropposition;
-	protected $wikiLink;
+	public $actor;
+	public $actorlink;
+	protected $actorUrl;
+	protected $wikiUrl;
 	protected $imagePath;
 	protected $originalImagePath;
 
 	public function toString() {
-		return implode( '|', [ $this->link, $this->image, $this->cropposition, $this->title, $this->description ] );
+		return implode( '|', [ $this->link, $this->image, $this->cropposition, $this->title, $this->description, $this->actor, $this->actorlink ] );
 	}
 
-	public function getWikiLink() {
-		return $this->wikiLink;
+	public function getWikiUrl() {
+		return $this->wikiUrl;
 	}
 
-	public function setWikiLink($wikiLink) {
-		$this->wikiLink = $wikiLink;
+	public function setWikiUrl($wikiUrl) {
+		$this->wikiUrl = $wikiUrl;
+	}
+
+	public function getActorUrl() {
+		return $this->actorUrl;
+	}
+
+	public function setActorUrl($actorUrl) {
+		$this->actorUrl = $actorUrl;
 	}
 
 	public function getImagePath() {

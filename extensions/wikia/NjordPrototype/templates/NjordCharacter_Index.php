@@ -35,15 +35,21 @@
 	</div>
 	<ul class="items-list <?php if ( !empty( $characterModel->contentSlots ) ) : ?>filled-state<? else : ?>zero-state<?php endif; ?>">
 		<?php foreach ( $characterModel->contentSlots as $itemid => $contentSlot ): ?>
-			<section class="item character" data-itemid="<?= $itemid ?>" data-title="<?= htmlspecialchars($contentSlot->title) ?>" data-link="<?= htmlspecialchars($contentSlot->link) ?>" data-image="<?= htmlspecialchars($contentSlot->image) ?>" data-cropposition="<?= htmlspecialchars($contentSlot->cropposition) ?>" data-description="<?= htmlspecialchars($contentSlot->description) ?>">
+			<section class="item character" data-itemid="<?= $itemid ?>" data-title="<?= htmlspecialchars($contentSlot->title) ?>" data-link="<?= htmlspecialchars($contentSlot->link) ?>" data-image="<?= htmlspecialchars($contentSlot->image) ?>" data-cropposition="<?= htmlspecialchars($contentSlot->cropposition) ?>" data-description="<?= htmlspecialchars($contentSlot->description) ?>" data-actor="<?= htmlspecialchars($contentSlot->actor) ?>" data-actorlink="<?= htmlspecialchars($contentSlot->actorlink) ?>">
 				<? if ( $isAllowedToEdit ): ?>
 				<a href="#" class="remove"></a>
 				<? endif; ?>
-				<a href="<?= $contentSlot->getWikiLink() ?>" title="<?= htmlspecialchars($contentSlot->title) ?>" title="<?= htmlspecialchars($contentSlot->title) ?>">
+				<a href="<?= $contentSlot->getWikiUrl() ?>" title="<?= htmlspecialchars($contentSlot->title) ?>" title="<?= htmlspecialchars($contentSlot->title) ?>">
 					<img class="item-image" src="<?= $contentSlot->getImagePath() ?>"/>
-					<h1 class="item-title sg-main"><?= $contentSlot->title ?></h1>
 				</a>
-				<!--				<h2>--><? //= $contentSlot->description ?><!--</h2>-->
+				<div class="item-card"?>
+					<h1 class="item-title sg-main"><a href="<?= $contentSlot->getWikiUrl() ?>" title="<?= htmlspecialchars($contentSlot->title) ?>" title="<?= htmlspecialchars($contentSlot->title) ?>"><?= htmlspecialchars($contentSlot->title) ?></a></h1>
+					<? if ( !empty($contentSlot->actor) ): ?>
+					<h1 class="item-actor sg-sub">Portrayed by <a href="<?= htmlentities($contentSlot->getActorUrl()) ?>" title="<?= htmlentities($contentSlot->actor) ?>" title="<?= htmlentities($contentSlot->actor) ?>"><?= htmlentities($contentSlot->actor) ?></a></h1>
+					<? endif; ?>
+					<span class="item-description sg-sub"><?= htmlspecialchars($contentSlot->description) ?></span>
+				</div>
+
 			</section>
 		<?php endforeach; ?>
 		<div class="add-block">
@@ -93,9 +99,11 @@
 				</div>
 				<form class="modal-form">
 					<label class="label sg-sub" for="character-name">Full Name</label>
-					<input class="input sg-main character-name" type="text" id="character-name" name="charactername"/>
-					<label class="label sg-sub" for="character-link">Article Title</label>
-					<input class="input sg-main character-link" type="text" id="character-link" name="characterlink"/>
+					<input class="input sg-sub character-name" type="text" id="character-name" placeholder="Fill in the character's name" name="charactername"/>
+					<label class="label sg-sub" for="character-actor">Played by</label>
+					<input class="input sg-sub character-actor" type="text" id="character-actor" placeholder="Fill in the actor that portrays this character" name="characteractor"/>
+					<label class="label sg-sub" for="character-description">About</label>
+					<textarea class="input sg-sub character-description" type="text" id="character-description" placeholder="Describe the character on the show" name="characterdescription"></textarea>
 				</form>
 			</div>
 		</div>

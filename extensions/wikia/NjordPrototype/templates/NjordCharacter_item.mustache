@@ -1,9 +1,15 @@
-<section class="item character" data-itemid="{{{itemid}}}" data-title="{{{title}}}" data-link="{{{link}}}" data-image="{{{image}}}" data-cropposition="{{{cropposition}}}" data-description="{{{description}}}">
+<section class="item character" data-itemid="{{{itemid}}}" data-title="{{{title}}}" data-link="{{{link}}}" data-image="{{{image}}}" data-cropposition="{{{cropposition}}}" data-description="{{{description}}}" data-actor="{{{actor}}}" data-actorlink="{{{actorlink}}}" >
 	{{#isAllowedToEdit}}
     <a href="#" class="remove"></a>
 	{{/isAllowedToEdit}}
     <a href="{{{publicLinkUrl}}}" title="{{{title}}}" title="{{{title}}}">
         <img class="item-image" src="{{{publicImagePath}}}"/>
-        <h1 class="item-title sg-main">{{{title}}}</h1>
     </a>
+    <div class="item-card">
+        <h1 class="item-title sg-main"><a href="{{{publicLinkUrl}}}" title="{{{title}}}" title="{{{title}}}">{{{title}}}</a></h1>
+		{{#actor}}
+		<h1 class="item-actor sg-sub">Portrayed by <a href="{{{publicActorLinkUrl}}}" title="{{{actor}}}" title="{{{actor}}}">{{{actor}}}</a></h1>
+		{{/actor}}
+		<span class="item-description sg-sub">{{{description}}}</span>
+    </div>
 </section>
