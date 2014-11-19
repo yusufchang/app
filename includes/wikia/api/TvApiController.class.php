@@ -94,7 +94,8 @@ class TvApiController extends WikiaApiController {
 		$this->debug( __METHOD__ . ' Searching for |SERIES| ' . $seriesName );
 		$wikis = $seriesService->query( $seriesName );
 		if ( !empty( $wikis ) ) {
-			$this->debug( __METHOD__ . ' Found wikis for |SERIES| ' . $seriesName . ' |WIKIS| ' . implode(',', array_map(function($item) {return intval($item['id']);}, $wikis ) ) );
+			$this->debug( __METHOD__ . ' Found wikis for |SERIES| ' . $seriesName . ' |WIKIS| '
+				. implode(',', array_map(function($item) {return intval($item['id']);}, $wikis ) ) );
 			$episodeService = $this->getEpisodeService();
 			$episodeService->setLang( $lang )
 				->setSeries( $seriesName )
