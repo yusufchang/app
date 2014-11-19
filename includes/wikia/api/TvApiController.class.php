@@ -38,7 +38,7 @@ class TvApiController extends WikiaApiController {
 			$minQuality = (int)$minQuality;
 		}
 
-		$this->debug( 'Searching for |SERIES| ' . $seriesName . ' |EPISODE| ' . $episodeName );
+		$this->debug( __METHOD__ . ' Searching for |SERIES| ' . $seriesName . ' |EPISODE| ' . $episodeName );
 
 		$episodes = explode( ';', $episodeName );
 		$result = null;
@@ -91,42 +91,42 @@ class TvApiController extends WikiaApiController {
 		$seriesService = $this->getWikiSeriesService();
 		$seriesService->setLang( $lang );
 
-		$this->debug( 'Searching for |SERIES| ' . $seriesName );
+		$this->debug( __METHOD__ . ' Searching for |SERIES| ' . $seriesName );
 		$wikis = $seriesService->query( $seriesName );
 		if ( !empty( $wikis ) ) {
-			$this->debug( 'Found wikis for |SERIES| ' . $seriesName . ' |WIKIS| ' . implode(',', array_map(function($item) {return intval($item['id']);}, $wikis ) ) );
+			$this->debug( __METHOD__ . ' Found wikis for |SERIES| ' . $seriesName . ' |WIKIS| ' . implode(',', array_map(function($item) {return intval($item['id']);}, $wikis ) ) );
 			$episodeService = $this->getEpisodeService();
 			$episodeService->setLang( $lang )
 				->setSeries( $seriesName )
 				->setQuality( ( $quality !== null ) ? $quality : self::DEFAULT_QUALITY );
 			$result = null;
 			foreach ( $wikis as $wiki ) {
-				$this->debug( 'Processing wiki for |SERIES| ' . $seriesName . ' |WIKI| ' . $wiki[ 'id' ] );
+				$this->debug( __METHOD__ . ' Processing wiki for |SERIES| ' . $seriesName . ' |WIKI| ' . $wiki[ 'id' ] );
 				$episodeService->setWikiId( $wiki[ 'id' ] );
 				$namespaces = WikiFactory::getVarValueByName( self::WG_CONTENT_NAMESPACES_KEY, $wiki[ 'id' ] );
 				$episodeService->setNamespace( $namespaces );
 				$result = $episodeService->query( $episodeName );
 				if ( $result === null ) {
-					$this->debug( 'Empty result from episodeService; |EPISODE|: ' . $episodeName );
+					$this->debug( __METHOD__ . ' Empty result from episodeService; |EPISODE|: ' . $episodeName );
 					$result = $this->getTitle( $episodeName, $wiki[ 'id' ] );
 					if($result !== null) {
-						$this->debug( 'Found result from getTitle' );
+						$this->debug( __METHOD__ . ' Found result from getTitle' );
 					}
 				} else {
-					$this->debug( 'Found result from episodeService' );
+					$this->debug( __METHOD__ . ' Found result from episodeService' );
 				}
 				if ( $result === null ) {
-					$this->debug( 'Empty result from getTitle; |EPISODE|: ' . $episodeName );
+					$this->debug( __METHOD__ . ' Empty result from getTitle; |EPISODE|: ' . $episodeName );
 					$namespaceNames = WikiFactory::getVarValueByName( self::WG_EXTRA_LOCAL_NAMESPACES_KEY, $wiki[ 'id' ] );
 					if ( is_array( $namespaces ) ) {
 						foreach ( $namespaces as $ns ) {
 							if ( !MWNamespace::isTalk( $ns ) && isset( $namespaceNames[ $ns ] ) ) {
 								$result = $episodeService->query( $namespaceNames[ $ns ] . ":" . $episodeName );
 								if ( $result !== null ) {
-									$this->debug( 'Found result from NamespacesQuery in episodeService' );
+									$this->debug( __METHOD__ . ' Found result from NamespacesQuery in episodeService' );
 									break;
 								} else {
-									$this->debug( 'Empty result from NamespacesQuery in episodeService' );
+									$this->debug( __METHOD__ . ' Empty result from NamespacesQuery in episodeService' );
 								}
 							}
 						}
@@ -134,18 +134,18 @@ class TvApiController extends WikiaApiController {
 				}
 				if ( $result !== null ) {
 					if ( ( $quality == null ) || ( $result[ 'quality' ] !== null && $result[ 'quality' ] >= $quality ) ) {
-						$this->debug( 'Result: '
+						$this->debug( __METHOD__ . ' Result: '
 							. $result['contentUrl'] . ' meeting quality requirements: '
 							. $result['quality'] . ($quality?(' / ' . $quality):''));
 						return $result;
 					} else {
-						$this->debug( 'Result: ' . $result['contentUrl'] . ' not meeting quality requirements');
+						$this->debug( __METHOD__ . ' Result: ' . $result['contentUrl'] . ' not meeting quality requirements');
 					}
 				}
-				$this->debug( 'No results returned' );
+				$this->debug( __METHOD__ . ' No results returned' );
 			}
 		} else {
-			$this->debug( 'Found no wikis for |SERIES| ' . $seriesName );
+			$this->debug( __METHOD__ . ' Found no wikis for |SERIES| ' . $seriesName );
 		}
 		return false;
 	}
@@ -237,19 +237,20 @@ class TvApiController extends WikiaApiController {
 	protected function findSeries( $seriesName, $lang, $quality = null ) {
 		$minQuality = $quality !== null ? $quality : self::DEFAULT_QUALITY;
 		//check exact match on series first
-		$this->debug( 'Searching for |SERIES| ' . $seriesName );
+		$this->debug( __METHOD__ . ' Searching for |SERIES| ' . $seriesName );
 		$result = $this->exactMatchOnSeries( $seriesName, $lang );
 
 		if ( $result === null ) {
+			$this->debug( __METHOD__ . ' No results from ExactMatch |SERIES| ' . $seriesName );
 			$result = $this->searchForSeries( $seriesName, $lang, $minQuality );
 			if ( $result !== null ) {
-				$this->debug( 'Found results from Search |SERIES| ' . $seriesName );
+				$this->debug( __METHOD__ . ' Found results from Search |SERIES| ' . $seriesName );
 			}
 		} else {
-			$this->debug( 'Found results from ExactMatch |SERIES| ' . $seriesName );
+			$this->debug( __METHOD__ . ' Found results from ExactMatch |SERIES| ' . $seriesName );
 		}
 		if ( $result !== null && $result[ 'quality' ] >= $minQuality ) {
-			$this->debug( 'Result: '
+			$this->debug( __METHOD__ . ' Result: '
 				. $result['contentUrl'] . ' meeting quality requirements: '
 				. $result['quality'] . ($minQuality?(' / ' . $minQuality):''));
 			return $result;
