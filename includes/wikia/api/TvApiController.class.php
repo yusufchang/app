@@ -136,10 +136,11 @@ class TvApiController extends WikiaApiController {
 					if ( ( $quality == null ) || ( $result[ 'quality' ] !== null && $result[ 'quality' ] >= $quality ) ) {
 						$this->debug( __METHOD__ . ' Result: '
 							. $result['contentUrl'] . ' meeting quality requirements: '
-							. $result['quality'] . ($quality?(' / ' . $quality):''));
+							. $result['quality'] . ( $quality ? ( ' / ' . $quality ) : '' ) );
 						return $result;
 					} else {
-						$this->debug( __METHOD__ . ' Result: ' . $result['contentUrl'] . ' not meeting quality requirements');
+						$this->debug( __METHOD__ . ' Result: ' . $result['contentUrl']
+							. ' not meeting quality requirements' );
 					}
 				}
 				$this->debug( __METHOD__ . ' No results returned' );
@@ -249,11 +250,17 @@ class TvApiController extends WikiaApiController {
 		} else {
 			$this->debug( __METHOD__ . ' Found results from ExactMatch |SERIES| ' . $seriesName );
 		}
-		if ( $result !== null && $result[ 'quality' ] >= $minQuality ) {
-			$this->debug( __METHOD__ . ' Result: '
-				. $result['contentUrl'] . ' meeting quality requirements: '
-				. $result['quality'] . ($minQuality?(' / ' . $minQuality):''));
-			return $result;
+		if ( $result !== null ) {
+			if ($result[ 'quality' ] >= $minQuality ) {
+				$this->debug( __METHOD__ . ' Result: '
+					. $result['contentUrl'] . ' meeting quality requirements: '
+					. $result['quality'] . ( $minQuality ? ( ' / ' . $minQuality ) : '' ) );
+				return $result;
+			} else {
+				$this->debug( __METHOD__ . ' Result: ' . $result['contentUrl'] . ' not meeting quality requirements' );
+			}
+		} else {
+			$this->debug( __METHOD__ . ' Result empty' );
 		}
 		return false;
 	}
