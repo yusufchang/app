@@ -272,21 +272,7 @@ class User {
 				break;
 			case 'session':
 				$this->loadFromSession();
-
-				nAndy::log([
-					__METHOD__,
-					'from session',
-					$this,
-				]);
-
 				wfRunHooks( 'UserLoadAfterLoadFromSession', array( $this ) );
-
-				nAndy::log([
-					__METHOD__,
-					'from session',
-					$this,
-				]);
-
 				break;
 			default:
 				throw new MWException( "Unrecognised value for User->mFrom: \"{$this->mFrom}\"" );
@@ -947,8 +933,6 @@ class User {
 
 		$this->mBirthDate = null; // Wikia. Added to reflect our user table layout.
 
-		nAndy::log(nAndy::getBacktrace());
-
 		wfRunHooks( 'UserLoadDefaults', array( $this, $name ) );
 
 		wfProfileOut( __METHOD__ );
@@ -1038,12 +1022,6 @@ class User {
 		// wikia change end
 
 		$proposedUser = User::newFromId( $sId );
-
-		nAndy::log([
-			__METHOD__,
-			$proposedUser
-		]);
-
 		if ( !$proposedUser->isLoggedIn() ) {
 			# Not a valid ID
 			$this->loadDefaults();
@@ -1057,8 +1035,22 @@ class User {
 			return false;
 		}
 
+		nAndy::log([
+			__METHOD__,
+			'$proposedUser' => $proposedUser,
+			$proposedUser->getToken( false ),
+			$request->getSessionData( 'wsToken' ),
+		]);
+
 		if ( $request->getSessionData( 'wsToken' ) ) {
 			$passwordCorrect = $proposedUser->getToken( false ) === $request->getSessionData( 'wsToken' );
+
+			nAndy::log([
+				__METHOD__,
+				$proposedUser->getToken( false ),
+				$request->getSessionData( 'wsToken' ),
+			]);
+
 			$from = 'session';
 		} elseif ( $request->getCookie( 'Token' ) ) {
 			# Get the token from DB/cache and clean it up to remove garbage padding.
@@ -1077,20 +1069,7 @@ class User {
 			$this->loadFromUserObject( $proposedUser );
 			$request->setSessionData( 'wsToken', $this->mToken );
 			wfDebug( "User: logged in from $from\n" );
-
-			nAndy::log([
-				__METHOD__,
-				"User: logged in from $from"
-			]);
-
 			wfRunHooks( 'UserLoadFromSessionInfo', array( $this, $from ) );
-
-			nAndy::log([
-				__METHOD__,
-				'user' => $this,
-				'$from' => $from
-			]);
-
 			return true;
 		} else {
 			nAndy::log([
