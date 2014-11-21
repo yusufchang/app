@@ -272,7 +272,21 @@ class User {
 				break;
 			case 'session':
 				$this->loadFromSession();
+
+				nAndy::log([
+					__METHOD__,
+					'from session',
+					$this,
+				]);
+
 				wfRunHooks( 'UserLoadAfterLoadFromSession', array( $this ) );
+
+				nAndy::log([
+					__METHOD__,
+					'from session',
+					$this,
+				]);
+
 				break;
 			default:
 				throw new MWException( "Unrecognised value for User->mFrom: \"{$this->mFrom}\"" );
