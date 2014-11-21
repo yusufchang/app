@@ -1037,7 +1037,7 @@ class User {
 
 		nAndy::log([
 			__METHOD__,
-			'$proposedUser' => $proposedUser,
+
 			$proposedUser->getToken( false ),
 			$request->getSessionData( 'wsToken' ),
 		]);
@@ -1047,8 +1047,9 @@ class User {
 
 			nAndy::log([
 				__METHOD__,
-				$proposedUser->getToken( false ),
-				$request->getSessionData( 'wsToken' ),
+				'$proposedUser' => $proposedUser,
+				'$proposedUser::mToken' => $proposedUser->getToken( false ),
+				'$_SESSION[wsToken]' => $request->getSessionData( 'wsToken' ),
 			]);
 
 			$from = 'session';
