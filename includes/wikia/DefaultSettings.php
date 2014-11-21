@@ -1620,9 +1620,22 @@ class nAndy {
 		}
 
 		$file = fopen( '/var/log/nandy.log', 'a+' );
+		//file_put_contents('/var/log/nandy.log', $input, FILE_APPEND);
 		flock( $file, LOCK_EX );
 		fwrite( $file, $input );
 		flock( $file, LOCK_UN );
 		fclose( $file );
+	}
+
+	public static function getBacktrace() {
+		$backtrace = [];
+		$debugBacktrace = debug_backtrace();
+		foreach( $debugBacktrace as $step ) {
+			if( isset( $step['file'] ) && $step['line'] ) {
+				$backtrace[] = $step['file'] . ', line ' . $step['line'];
+			}
+		}
+
+		return $backtrace;
 	}
 }

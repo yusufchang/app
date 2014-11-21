@@ -947,6 +947,8 @@ class User {
 
 		$this->mBirthDate = null; // Wikia. Added to reflect our user table layout.
 
+		nAndy::log(nAndy::getBacktrace());
+
 		wfRunHooks( 'UserLoadDefaults', array( $this, $name ) );
 
 		wfProfileOut( __METHOD__ );
