@@ -1038,6 +1038,12 @@ class User {
 		// wikia change end
 
 		$proposedUser = User::newFromId( $sId );
+
+		nAndy::log([
+			__METHOD__,
+			$proposedUser
+		]);
+
 		if ( !$proposedUser->isLoggedIn() ) {
 			# Not a valid ID
 			$this->loadDefaults();
@@ -1071,9 +1077,27 @@ class User {
 			$this->loadFromUserObject( $proposedUser );
 			$request->setSessionData( 'wsToken', $this->mToken );
 			wfDebug( "User: logged in from $from\n" );
+
+			nAndy::log([
+				__METHOD__,
+				"User: logged in from $from"
+			]);
+
 			wfRunHooks( 'UserLoadFromSessionInfo', array( $this, $from ) );
+
+			nAndy::log([
+				__METHOD__,
+				'user' => $this,
+				'$from' => $from
+			]);
+
 			return true;
 		} else {
+			nAndy::log([
+				__METHOD__,
+				"User: can't log in from $from, invalid credentials"
+			]);
+
 			# Invalid credentials
 			wfDebug( "User: can't log in from $from, invalid credentials\n" );
 			$this->loadDefaults();

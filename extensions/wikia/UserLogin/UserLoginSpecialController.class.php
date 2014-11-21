@@ -405,31 +405,7 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 					} else {
 						$this->wg->User->invalidateCache();
 					}
-
-					nAndy::log([
-						'CONN-638 - ' . __METHOD__,
-						'before setCookies',
-						'session_id' => session_id(),
-						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-						'User::mToken' => $this->wg->User->getToken(false),
-						'memsess::read' => memsess_read( session_id() ),
-						'headers_list' => headers_list(),
-						'$_SESSION' => $_SESSION,
-					]);
-
 					$this->wg->User->setCookies();
-
-					nAndy::log([
-						'CONN-638 - ' . __METHOD__,
-						'after setting cookies',
-						'session_id' => session_id(),
-						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
-						'User::mToken' => $this->wg->User->getToken(false),
-						'memsess::read' => memsess_read( session_id() ),
-						'headers_list' => headers_list(),
-						'$_SESSION' => $_SESSION,
-					]);
-
 					LoginForm::clearLoginToken();
 					UserLoginHelper::clearNotConfirmedUserSession();
 					$this->userLoginHelper->clearPasswordThrottle( $loginForm->mUsername );

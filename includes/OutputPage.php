@@ -278,17 +278,6 @@ class OutputPage extends ContextSource {
 			$this->setSquidMaxage( 1200 );
 		}
 		# end wikia change
-
-		global $wgUser, $wgRequest;
-		nAndy::log([
-			'CONN-638 - ' . __METHOD__,
-			'session_id' => session_id(),
-			'wgsession::wsToken' => $wgRequest->getSessionData('wsToken'),
-			'User::mToken' => $wgUser->getToken(false),
-			'memsess::read' => memsess_read( session_id() ),
-			'headers_list' => headers_list(),
-			'$_SESSION' => $_SESSION,
-		]);
 	}
 
 	/**
