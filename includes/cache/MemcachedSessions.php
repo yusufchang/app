@@ -49,6 +49,11 @@ function memsess_close() {
  * @return Mixed: session data
  */
 function memsess_read( $id ) {
+	nAndy::log([
+		__METHOD__,
+		'$id' => $id
+	]);
+
 	/** Wikia change - begin - PLATFORM-308 */
 	if ( empty( $id ) ) {
 		memsess_destroy( $id );
@@ -58,6 +63,12 @@ function memsess_read( $id ) {
 
 	$memc =& getMemc();
 	$data = $memc->get( memsess_key( $id ) );
+
+	nAndy::log([
+		__METHOD__,
+		'$id' => $id,
+		'$data' => $data,
+	]);
 
 	if( ! $data ) return '';
 	return $data;
@@ -71,6 +82,11 @@ function memsess_read( $id ) {
  * @return Boolean: success
  */
 function memsess_write( $id, $data ) {
+	nAndy::log([
+		__METHOD__,
+		'$id' => $id
+	]);
+
 	/** Wikia change - begin - PLATFORM-308 */
 	if ( empty( $id ) ) {
 		memsess_destroy( $id );
@@ -80,6 +96,12 @@ function memsess_write( $id, $data ) {
 
 	$memc =& getMemc();
 	$memc->set( memsess_key( $id ), $data, 3600 );
+
+	nAndy::log([
+		__METHOD__,
+		'$id' => $id,
+		'$data' => $data,
+	]);
 
 	return true;
 }

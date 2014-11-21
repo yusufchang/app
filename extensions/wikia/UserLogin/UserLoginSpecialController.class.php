@@ -413,7 +413,8 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
 						'User::mToken' => $this->wg->User->getToken(false),
 						'memsess::read' => memsess_read( session_id() ),
-						'headers_list' => headers_list()
+						'headers_list' => headers_list(),
+						'$_SESSION' => $_SESSION,
 					]);
 
 					$this->wg->User->setCookies();
@@ -425,7 +426,8 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 						'wgsession::wsToken' => $this->wg->Request->getSessionData('wsToken'),
 						'User::mToken' => $this->wg->User->getToken(false),
 						'memsess::read' => memsess_read( session_id() ),
-						'headers_list' => headers_list()
+						'headers_list' => headers_list(),
+						'$_SESSION' => $_SESSION,
 					]);
 
 					LoginForm::clearLoginToken();
