@@ -285,7 +285,8 @@ class OutputPage extends ContextSource {
 			'session_id' => session_id(),
 			'wgsession::wsToken' => $wgRequest->getSessionData('wsToken'),
 			'User::mToken' => $wgUser->getToken(false),
-			'memsess::read' => memsess_read( session_id() )
+			'memsess::read' => memsess_read( session_id() ),
+			'headers_list' => headers_list()
 		]);
 	}
 
