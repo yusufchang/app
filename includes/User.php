@@ -1038,17 +1038,24 @@ class User {
 		nAndy::log([
 			__METHOD__,
 
-			$proposedUser->getToken( false ),
-			$request->getSessionData( 'wsToken' ),
+			'token' => $proposedUser->getToken( false ),
+			'touched' => $proposedUser->getTouched(),
+			'session token' => $request->getSessionData( 'wsToken' ),
 		]);
+
+		$proposedUser2 = User::newFromId($sId);
+		$proposedUser2->loadFromDatabase();
 
 		if ( $request->getSessionData( 'wsToken' ) ) {
 			$passwordCorrect = $proposedUser->getToken( false ) === $request->getSessionData( 'wsToken' );
 
 			nAndy::log([
 				__METHOD__,
-				'$proposedUser' => $proposedUser,
 				'$proposedUser::mToken' => $proposedUser->getToken( false ),
+				'$proposedUser::mTouched' => $proposedUser->getTouched(),
+				'$proposedUser2::mToken' => $proposedUser2->getToken( false ),
+				'$proposedUser2::mTouched' => $proposedUser2->getTouched(),
+				'session token' => $request->getSessionData( 'wsToken' ),
 				'$_SESSION[wsToken]' => $request->getSessionData( 'wsToken' ),
 			]);
 
@@ -1075,6 +1082,13 @@ class User {
 		} else {
 			nAndy::log([
 				__METHOD__,
+				'$sName' => $sName,
+				'$proposedUser::mToken' => $proposedUser->getToken( false ),
+				'$proposedUser::mTouched' => $proposedUser->getTouched(),
+				'$proposedUser2::mToken' => $proposedUser2->getToken( false ),
+				'$proposedUser2::mTouched' => $proposedUser2->getTouched(),
+				'$passwordCorrect' => $passwordCorrect,
+				'check' => ( $sName === $proposedUser->getName() ) && $passwordCorrect,
 				"User: can't log in from $from, invalid credentials"
 			]);
 
