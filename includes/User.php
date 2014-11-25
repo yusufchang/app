@@ -245,7 +245,7 @@ class User {
 	/**
 	 * Load the user table data for this object from the source given by mFrom.
 	 */
-	public function load( $log = false ) {
+	public function load( $nAndyLog = false ) {
 		if ( $this->mLoadedItems === true ) {
 			return;
 		}
@@ -254,7 +254,12 @@ class User {
 		# Set it now to avoid infinite recursion in accessors
 		$this->mLoadedItems = true;
 
-		if( $log === true ) {
+		nAndy::log([
+			__METHOD__,
+			'$nAndyLog' => $nAndyLog
+		]);
+
+		if( $nAndyLog === true ) {
 			nAndy::log([
 				__METHOD__,
 				'from' => $this->mFrom,
