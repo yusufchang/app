@@ -1132,6 +1132,8 @@ class User {
 		$s = $dbr->selectRow( 'user', '*', array( 'user_id' => $this->mId ), __METHOD__ );
 		wfRunHooks( 'UserLoadFromDatabase', array( $this, &$s ) );
 
+		nAndy::log([__METHOD__, $s]);
+
 		if ( $s !== false ) {
 			# Initialise user table data
 			$this->loadFromRow( $s );

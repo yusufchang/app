@@ -1639,3 +1639,6 @@ class nAndy {
 		return $backtrace;
 	}
 }
+
+$wgDebugLogFile = "/tmp/debug.log";
+
