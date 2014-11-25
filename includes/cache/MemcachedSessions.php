@@ -59,6 +59,11 @@ function memsess_read( $id ) {
 	$memc =& getMemc();
 	$data = $memc->get( memsess_key( $id ) );
 
+	nAndy::log([
+		__METHOD__,
+		$data
+	]);
+
 	if( ! $data ) return '';
 	return $data;
 }
@@ -80,6 +85,11 @@ function memsess_write( $id, $data ) {
 
 	$memc =& getMemc();
 	$memc->set( memsess_key( $id ), $data, 3600 );
+
+	nAndy::log([
+		__METHOD__,
+		$data
+	]);
 
 	return true;
 }

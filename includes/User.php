@@ -1035,17 +1035,6 @@ class User {
 			return false;
 		}
 
-		nAndy::log([
-			__METHOD__,
-
-			'token' => $proposedUser->getToken( false ),
-			'touched' => $proposedUser->getTouched(),
-			'session token' => $request->getSessionData( 'wsToken' ),
-		]);
-
-		$proposedUser2 = User::newFromId($sId);
-		$proposedUser2->loadFromDatabase();
-
 		if ( $request->getSessionData( 'wsToken' ) ) {
 			$passwordCorrect = $proposedUser->getToken( false ) === $request->getSessionData( 'wsToken' );
 
@@ -1053,8 +1042,6 @@ class User {
 				__METHOD__,
 				'$proposedUser::mToken' => $proposedUser->getToken( false ),
 				'$proposedUser::mTouched' => $proposedUser->getTouched(),
-				'$proposedUser2::mToken' => $proposedUser2->getToken( false ),
-				'$proposedUser2::mTouched' => $proposedUser2->getTouched(),
 				'session token' => $request->getSessionData( 'wsToken' ),
 				'$_SESSION[wsToken]' => $request->getSessionData( 'wsToken' ),
 			]);
@@ -1085,8 +1072,6 @@ class User {
 				'$sName' => $sName,
 				'$proposedUser::mToken' => $proposedUser->getToken( false ),
 				'$proposedUser::mTouched' => $proposedUser->getTouched(),
-				'$proposedUser2::mToken' => $proposedUser2->getToken( false ),
-				'$proposedUser2::mTouched' => $proposedUser2->getTouched(),
 				'$passwordCorrect' => $passwordCorrect,
 				'check' => ( $sName === $proposedUser->getName() ) && $passwordCorrect,
 				"User: can't log in from $from, invalid credentials"
@@ -2992,6 +2977,13 @@ class User {
 		}
 
 		$this->load();
+
+		nAndy::log([
+			__METHOD__,
+			'User::$mId' => $this->mId,
+			'User::mToken' => $this->mToken,
+		]);
+
 		if ( 0 == $this->mId ) return;
 		if ( !$this->mToken ) {
 			// When token is empty or NULL generate a new one and then save it to the database
@@ -3006,6 +2998,14 @@ class User {
 			'wsToken' => $this->mToken,
 			'wsUserName' => $this->getName()
 		);
+
+		nAndy::log([
+			__METHOD__,
+			'User::$mId' => $this->mId,
+			'User::mToken' => $this->mToken,
+			'$session' => $session,
+		]);
+
 		$cookies = array(
 			'UserID' => $this->mId,
 			'UserName' => $this->getName(),
