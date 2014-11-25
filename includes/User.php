@@ -3097,6 +3097,13 @@ class User {
 
 		// wikia change end
 
+		nAndy::log([
+			__METHOD__,
+			'session token' => $_SESSION['wsToken'],
+			'User::mToken' => $this->mToken,
+			'strval => User::mToken' => strval( $this->mToken ),
+		]);
+
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->update( 'user',
 			array( /* SET */

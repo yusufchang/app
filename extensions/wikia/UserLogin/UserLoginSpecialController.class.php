@@ -614,6 +614,12 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 					return;
 				}
 
+				nAndy::log([
+					__METHOD__,
+					'editToken' => $this->editToken,
+					'User::mToken' => $user->getToken( false ),
+				]);
+
 				$user->setPassword( $this->newpassword );
 				wfRunHooks( 'PrefsPasswordAudit', array( $user, $this->newpassword, 'success' ) );
 				$user->saveSettings();
