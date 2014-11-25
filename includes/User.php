@@ -320,6 +320,12 @@ class User {
 
 		if ( !$data || $isExpired ) { # Wikia
 			wfDebug( "User: cache miss for user {$this->mId}\n" );
+
+			nAndy::log([
+				__METHOD__,
+				"User: cache miss for user {$this->mId}"
+			]);
+
 			# Load from DB
 			if ( !$this->loadFromDatabase() ) {
 				# Can't load from ID, user is anonymous
@@ -328,6 +334,12 @@ class User {
 			$this->saveToCache();
 		} else {
 			wfDebug( "User: got user {$this->mId} from cache\n" );
+
+			nAndy::log([
+				__METHOD__,
+				"User: got user {$this->mId} from cache"
+			]);
+
 			# Restore from cache
 			foreach ( self::$mCacheVars as $name ) {
 				if( isset( $data[$name] ) ) {
@@ -2969,15 +2981,6 @@ class User {
 		}
 
 		$this->load();
-
-		nAndy::log([
-			__METHOD__,
-			'User::$mId' => $this->mId,
-			'User::getToken' => $this->getToken( false ),
-			'User::mFrom' => $this->mFrom,
-			'session token' => $_SESSION['wsToken'],
-		]);
-
 		if ( 0 == $this->mId ) return;
 		if ( !$this->mToken ) {
 			// When token is empty or NULL generate a new one and then save it to the database
@@ -2997,6 +3000,7 @@ class User {
 			__METHOD__,
 			'User::$mId' => $this->mId,
 			'User::getToken' => $this->getToken( false ),
+			'User::mFrom' => $this->mFrom,
 			'session token' => $_SESSION['wsToken'],
 			'$session' => $session,
 			nAndy::getBacktrace()
@@ -3092,13 +3096,6 @@ class User {
 		}
 
 		// wikia change end
-
-		nAndy::log([
-			__METHOD__,
-			'User::getToken' => $this->getToken( false ),
-			'session token' => $_SESSION['wsToken'],
-			nAndy::getBacktrace()
-		]);
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->update( 'user',
