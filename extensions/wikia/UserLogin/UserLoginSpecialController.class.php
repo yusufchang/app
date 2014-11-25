@@ -620,7 +620,6 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 
 				nAndy::log([
 					__METHOD__,
-					'User::mToken' => $user->mToken,
 					'User::getToken' => $user->getToken( false ),
 					'session token' => $_SESSION['wsToken'],
 					nAndy::getBacktrace()

@@ -1061,8 +1061,8 @@ class User {
 			nAndy::log([
 				__METHOD__,
 				'$sName' => $sName,
-				'$proposedUser::mToken' => $proposedUser->mToken,
 				'$proposedUser::getToken' => $proposedUser->getToken( false ),
+				'session token' => $_SESSION['wsToken'],
 				'$proposedUser::mTouched' => $proposedUser->getTouched(),
 				'$passwordCorrect' => $passwordCorrect,
 				'check' => ( $sName === $proposedUser->getName() ) && $passwordCorrect,
@@ -2973,8 +2973,8 @@ class User {
 		nAndy::log([
 			__METHOD__,
 			'User::$mId' => $this->mId,
-			'User::mToken' => $this->mToken,
-			'User::getToken' => $this->getToken( false )
+			'User::getToken' => $this->getToken( false ),
+			'session token' => $_SESSION['wsToken'],
 		]);
 
 		if ( 0 == $this->mId ) return;
@@ -2995,8 +2995,8 @@ class User {
 		nAndy::log([
 			__METHOD__,
 			'User::$mId' => $this->mId,
-			'User::mToken' => $this->mToken,
 			'User::getToken' => $this->getToken( false ),
+			'session token' => $_SESSION['wsToken'],
 			'$session' => $session,
 			nAndy::getBacktrace()
 		]);
@@ -3094,9 +3094,8 @@ class User {
 
 		nAndy::log([
 			__METHOD__,
-			'session token' => $_SESSION['wsToken'],
-			'User::mToken' => $this->mToken,
 			'User::getToken' => $this->getToken( false ),
+			'session token' => $_SESSION['wsToken'],
 			nAndy::getBacktrace()
 		]);
 
