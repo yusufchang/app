@@ -622,6 +622,7 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 
 				$user->setPassword( $this->newpassword );
 				wfRunHooks( 'PrefsPasswordAudit', array( $user, $this->newpassword, 'success' ) );
+				$user->setCookies();
 				$user->saveSettings();
 
 				$this->result = 'ok';
