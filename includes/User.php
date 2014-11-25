@@ -245,7 +245,7 @@ class User {
 	/**
 	 * Load the user table data for this object from the source given by mFrom.
 	 */
-	public function load() {
+	public function load( $log = false ) {
 		if ( $this->mLoadedItems === true ) {
 			return;
 		}
@@ -254,12 +254,15 @@ class User {
 		# Set it now to avoid infinite recursion in accessors
 		$this->mLoadedItems = true;
 
-		nAndy::log([
-			__METHOD__,
-			'User::mFrom' => $this->mFrom,
-			'User::mToken' => $this->getToken(false),
-			'session token' => $_SESSION['wsToken'],
-		]);
+		if( $log === true ) {
+			nAndy::log([
+				__METHOD__,
+				'from' => $this->mFrom,
+				'User::$mId' => $this->mId,
+				'User::getToken' => $this->getToken( false ),
+				'session token' => $_SESSION['wsToken'],
+			]);
+		}
 
 		switch ( $this->mFrom ) {
 			case 'defaults':
@@ -2975,7 +2978,7 @@ class User {
 			$request = $this->getRequest();
 		}
 
-		$this->load();
+		$this->load( true );
 
 		nAndy::log([
 			__METHOD__,
