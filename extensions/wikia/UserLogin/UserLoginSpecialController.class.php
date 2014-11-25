@@ -614,16 +614,16 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 					return;
 				}
 
-				nAndy::log([
-					__METHOD__,
-					'editToken' => $this->editToken,
-					'User::mToken' => $user->getToken( false ),
-				]);
-
 				$user->setPassword( $this->newpassword );
 				wfRunHooks( 'PrefsPasswordAudit', array( $user, $this->newpassword, 'success' ) );
-				$user->setCookies();
 				$user->saveSettings();
+
+				nAndy::log([
+					__METHOD__,
+					'User::mToken' => $user->mToken,
+					'User::getToken' => $user->getToken( false ),
+					nAndy::getBacktrace()
+				]);
 
 				$this->result = 'ok';
 				$this->msg = wfMessage( 'resetpass_success' )->escaped();

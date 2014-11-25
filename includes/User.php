@@ -1037,15 +1037,6 @@ class User {
 
 		if ( $request->getSessionData( 'wsToken' ) ) {
 			$passwordCorrect = $proposedUser->getToken( false ) === $request->getSessionData( 'wsToken' );
-
-			nAndy::log([
-				__METHOD__,
-				'$proposedUser::mToken' => $proposedUser->getToken( false ),
-				'$proposedUser::mTouched' => $proposedUser->getTouched(),
-				'session token' => $request->getSessionData( 'wsToken' ),
-				'$_SESSION[wsToken]' => $request->getSessionData( 'wsToken' ),
-			]);
-
 			$from = 'session';
 		} elseif ( $request->getCookie( 'Token' ) ) {
 			# Get the token from DB/cache and clean it up to remove garbage padding.
@@ -1070,7 +1061,8 @@ class User {
 			nAndy::log([
 				__METHOD__,
 				'$sName' => $sName,
-				'$proposedUser::mToken' => $proposedUser->getToken( false ),
+				'$proposedUser::mToken' => $proposedUser->mToken,
+				'$proposedUser::getToken' => $proposedUser->getToken( false ),
 				'$proposedUser::mTouched' => $proposedUser->getTouched(),
 				'$passwordCorrect' => $passwordCorrect,
 				'check' => ( $sName === $proposedUser->getName() ) && $passwordCorrect,
@@ -2982,6 +2974,7 @@ class User {
 			__METHOD__,
 			'User::$mId' => $this->mId,
 			'User::mToken' => $this->mToken,
+			'User::getToken' => $this->getToken( false ),
 		]);
 
 		if ( 0 == $this->mId ) return;
@@ -3003,7 +2996,9 @@ class User {
 			__METHOD__,
 			'User::$mId' => $this->mId,
 			'User::mToken' => $this->mToken,
+			'User::getToken' => $this->getToken( false ),
 			'$session' => $session,
+			nAndy::getBacktrace()
 		]);
 
 		$cookies = array(
@@ -3101,7 +3096,8 @@ class User {
 			__METHOD__,
 			'session token' => $_SESSION['wsToken'],
 			'User::mToken' => $this->mToken,
-			'strval => User::mToken' => strval( $this->mToken ),
+			'User::getToken' => $this->getToken( false ),
+			nAndy::getBacktrace()
 		]);
 
 		$dbw = wfGetDB( DB_MASTER );
