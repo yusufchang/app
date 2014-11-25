@@ -254,6 +254,13 @@ class User {
 		# Set it now to avoid infinite recursion in accessors
 		$this->mLoadedItems = true;
 
+		nAndy::log([
+			__METHOD__,
+			'User::mFrom' => $this->mFrom,
+			'User::mToken' => $this->getToken(false),
+			'session token' => $_SESSION['wsToken'],
+		]);
+
 		switch ( $this->mFrom ) {
 			case 'defaults':
 				$this->loadDefaults();

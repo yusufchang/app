@@ -396,7 +396,7 @@ class UserLoginSpecialController extends WikiaSpecialPageController {
 
 					//Login succesful
 					$injected_html = '';
-					wfRunHooks('UserLoginComplete', array(&$this->wg->User, &$injected_html));
+					//wfRunHooks('UserLoginComplete', array(&$this->wg->User, &$injected_html));
 
 					// set rememberpassword option
 					if ( (bool)$loginForm->mRemember != (bool)$this->wg->User->getOption('rememberpassword') ) {
