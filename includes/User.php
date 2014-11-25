@@ -2974,7 +2974,7 @@ class User {
 			__METHOD__,
 			'User::$mId' => $this->mId,
 			'User::mToken' => $this->mToken,
-			'User::getToken' => $this->getToken( false ),
+			'User::getToken' => $this->getToken( false )
 		]);
 
 		if ( 0 == $this->mId ) return;
