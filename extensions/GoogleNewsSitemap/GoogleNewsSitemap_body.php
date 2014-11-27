@@ -460,7 +460,6 @@ class GoogleNewsSitemap extends SpecialPage {
 			if ( $nsVal >= 0 && MWNamespace::exists( $nsVal ) ) {
 				return $nsVal;
 			} else {
-				wfDebug( __METHOD__ . ' Invalid numeric ns number. Using main.' );
 				return 0;
 			}
 		} elseif ( $ns === ':all:' ) {
@@ -472,7 +471,6 @@ class GoogleNewsSitemap extends SpecialPage {
 			// Default of main only if user gives bad input.
 			// Note, this branch is only reached on bad input. Omitting
 			// the namespace parameter is like saying namespace=0.
-			wfDebug( __METHOD__ . ' Invalid (non-numeric) ns. Using main.' );
 			return 0;
 		}
 

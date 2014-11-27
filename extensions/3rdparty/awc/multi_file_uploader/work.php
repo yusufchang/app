@@ -359,7 +359,6 @@ class working{
 
 		// Fail now if the image isn't there
 		if ( !$img->fileExists || $img->fromSharedDirectory ) {
-			wfDebug( "Image::recordUpload: File ".$img->imagePath." went missing!\n" );
 			return false;
 		}
 

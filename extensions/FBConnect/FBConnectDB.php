@@ -142,7 +142,7 @@ class FBConnectDB {
 		$memkey = wfSharedMemcKey( "fb_user_id", $user->getId() );
 
 		if($user->getId() == 0){
-			wfDebug("FBConnect: tried to store a mapping from fbid \"$fbid\" to a user with no id (ie: not logged in).\n");
+			Wikia::log("FBConnect: tried to store a mapping from fbid \"$fbid\" to a user with no id (ie: not logged in).\n");
 		} elseif ($fbid == 0) {
 			Wikia::log(__METHOD__, "", "FBConnect: \"fbid\" = 0\n");
 		} else {

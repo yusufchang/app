@@ -86,7 +86,6 @@ class SimpleCaptcha {
 		global $wgCaptchaTriggers, $wgOut, $wgUser;
 		if ( $wgCaptchaTriggers['sendemail'] ) {
 			if ( $wgUser->isAllowed( 'skipcaptcha' ) ) {
-				wfDebug( "ConfirmEdit: user group allows skipping captcha on email sending\n" );
 				return true;
 			}
 			$form->addFooterText(
@@ -108,7 +107,6 @@ class SimpleCaptcha {
 		global $wgCaptchaTriggers, $wgOut, $wgUser;
 		if ( $wgCaptchaTriggers['createaccount'] ) {
 			if ( $wgUser->isAllowed( 'skipcaptcha' ) ) {
-				wfDebug( "ConfirmEdit: user group allows skipping captcha on account creation\n" );
 				return true;
 			}
 			/* Wikia change - begin */
@@ -254,7 +252,6 @@ class SimpleCaptcha {
 
 		global $wgUser;
 		if ( $wgUser->isAllowed( 'skipcaptcha' ) ) {
-			wfDebug( "ConfirmEdit: user group allows skipping captcha\n" );
 			return false;
 		}
 		if ( $this->isIPWhitelisted() )
@@ -264,7 +261,6 @@ class SimpleCaptcha {
 		global $wgEmailAuthentication, $ceAllowConfirmedEmail;
 		if ( $wgEmailAuthentication && $ceAllowConfirmedEmail &&
 			$wgUser->isEmailConfirmed() ) {
-			wfDebug( "ConfirmEdit: user has confirmed mail, skipping captcha\n" );
 			return false;
 		}
 
@@ -275,7 +271,6 @@ class SimpleCaptcha {
 				$wgUser->getName(),
 				$title->getPrefixedText() );
 			$this->action = 'edit';
-			wfDebug( "ConfirmEdit: checking all edits...\n" );
 			return true;
 		}
 
@@ -286,7 +281,6 @@ class SimpleCaptcha {
 				$wgUser->getName(),
 				$title->getPrefixedText() );
 			$this->action = 'create';
-			wfDebug( "ConfirmEdit: checking on page creation...\n" );
 			return true;
 		}
 
@@ -387,7 +381,6 @@ class SimpleCaptcha {
 
 		# No lines, don't make a regex which will match everything
 		if ( count( $lines ) == 0 ) {
-			wfDebug( "No lines\n" );
 			return false;
 		} else {
 			# Make regex
@@ -453,7 +446,6 @@ class SimpleCaptcha {
 		if ( $this->shouldCheck( $editPage, $newtext, $section, $merged ) ) {
 			return $this->passCaptcha();
 		} else {
-			wfDebug( "ConfirmEdit: no need to show captcha.\n" );
 			return true;
 		}
 	}
@@ -517,7 +509,6 @@ class SimpleCaptcha {
 			/*	Wikia edit, fbId::47248 No one will be allowed to skip captcha for user creation.
 				Commenting this section out, but feel free to uncomment it if situation changes.
 			if ( $wgUser->isAllowed( 'skipcaptcha' ) ) {
-				wfDebug( "ConfirmEdit: user group allows skipping captcha on account creation\n" );
 				return true;
 			}
 			end Wikia edit fbId::47248 */
@@ -567,7 +558,6 @@ class SimpleCaptcha {
 		global $wgCaptchaTriggers, $wgUser;
 		if ( $wgCaptchaTriggers['sendemail'] ) {
 			if ( $wgUser->isAllowed( 'skipcaptcha' ) ) {
-				wfDebug( "ConfirmEdit: user group allows skipping captcha on email sending\n" );
 				return true;
 			}
 			if ( $this->isIPWhitelisted() )

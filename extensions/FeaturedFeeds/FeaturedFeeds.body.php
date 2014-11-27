@@ -147,7 +147,6 @@ class FeaturedFeeds {
 				foreach ( $messages as $msgType ) {
 					$nt = Title::makeTitleSafe( NS_MEDIAWIKI, $feed[$msgType] );
 					if ( $nt->equals( $baseTitle ) ) {
-						wfDebug( "FeaturedFeeds-related page {$title->getFullText()} edited, purging cache\n" );
 						$wgMemc->delete( self::getCacheKey( $wgLanguageCode ) );
 						$lang = $title->getSubpageText();
 						// Sorry, users of multilingual feeds, we can't purge cache for every possible language

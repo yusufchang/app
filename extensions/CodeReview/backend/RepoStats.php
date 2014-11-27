@@ -27,12 +27,9 @@ class RepoStats {
 
 		$key = wfMemcKey( 'codereview1', 'stats', $repo->getName() );
 		$stats = $wgMemc->get( $key );
-		wfDebug( "{$repo->getName()} repo stats: cache " );
 		if ( $stats ) {
-			wfDebug( "hit\n" );
 			return $stats;
 		}
-		wfDebug( "miss\n" );
 		$stats = new RepoStats( $repo );
 		$stats->generate();
 		$wgMemc->set( $key, $stats, $wgCodeReviewRepoStatsCacheTime );

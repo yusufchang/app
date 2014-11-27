@@ -59,7 +59,6 @@ class ExternalPages extends UnlistedSpecialPage {
 		if ( $action !== 'purge' ) {
 			$entry = $wgMemc->get( $cacheKey );
 			if ( $entry && is_array( $entry ) ) {
-				wfDebug( __CLASS__.": got $titleText from cache\n" );
 				$this->showExternalPage( $title, $entry );
 				return;
 			}
@@ -74,7 +73,6 @@ class ExternalPages extends UnlistedSpecialPage {
 		$entry = $status->value;
 
 		// Save to the cache
-		wfDebug( __CLASS__.": storing $titleText to cache\n" );
 		$wgMemc->set( $cacheKey, $entry, $this->epExpiry );
 
 		// Display the page

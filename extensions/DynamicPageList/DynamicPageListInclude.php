@@ -112,7 +112,6 @@ class DPLInclude {
     {
       // Infinite loop test
       if ( isset( $parser->mTemplatePath[$part1] ) ) {
-        wfDebug( __METHOD__.": template loop broken at '$part1'\n" );
         return false;
       } else {
         $parser->mTemplatePath[$part1] = 1;
@@ -127,8 +126,6 @@ class DPLInclude {
       // Infinite loop test
       if ( isset( $parser->mTemplatePath[$part1] ) ) {
         unset( $parser->mTemplatePath[$part1] );
-      } else {
-        wfDebug( __METHOD__.": close unopened template loop at '$part1'\n" );
       }
     }
     
@@ -431,8 +428,7 @@ class DPLInclude {
         }
     
         $nhead = self::countHeadings($text, $begin_off);
-        wfDebug( "LSTH: head offset = $nhead" );
-    
+
         if (isset($end_off)) {
             if ($end_off == -1) {
                 return $output;

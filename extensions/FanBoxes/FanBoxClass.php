@@ -299,7 +299,6 @@ class FanBox {
 		}
 
 		if ( $this->dataLoaded ) {
-			wfDebug( "loaded Fan:{$this->name} from cache\n" );
 			wfIncrStats( 'fantag_cache_hit' );
 		} else {
 			wfIncrStats( 'fantag_cache_miss' );

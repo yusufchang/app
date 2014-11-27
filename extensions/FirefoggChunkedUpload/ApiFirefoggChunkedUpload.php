@@ -96,8 +96,6 @@ class ApiFirefoggChunkedUpload extends ApiUpload {
 	 * @see UploadBase::performUpload
 	 */
 	public function performUpload( ) {
-		wfDebug( "\n\n\performUpload(chunked): comment: " . $this->comment .
-				 ' pageText: ' . $this->pageText . ' watch: ' . $this->watch );
 		$ret = "unknown error";
 
 		global $wgUser;

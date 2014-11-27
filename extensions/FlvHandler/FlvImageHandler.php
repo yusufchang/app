@@ -19,9 +19,7 @@
 class FlvImageHandler extends ImageHandler {
 	function isEnabled() {
 		global $wgFLVConverters, $wgFLVConverter, $wgFLVProbes;
-		wfDebug('probes is ' . print_r($wgFLVProbes, true) . "\n");
 		if ((!isset( $wgFLVConverters[$wgFLVConverter])) || (!isset($wgFLVProbes[$wgFLVConverter]))) {
-			wfDebug( "\$wgFLVConverter is invalid, disabling FLV preview frames.\n" );
 			return false;
 		} else {
 			return true;
@@ -37,17 +35,13 @@ class FlvImageHandler extends ImageHandler {
 					   wfEscapeShellArg( $filename ) ),
 				$wgFLVProbes[$wgFLVConverter]['cmd'] ) . " 2>&1";
 			wfProfileIn( 'rsvg' );
-			wfDebug( __METHOD__.": $cmd\n" );
 			$out = wfShellExec( $cmd, $retval );
 			wfProfileOut( 'rsvg' );
 
 			if (preg_match($wgFLVProbes[$wgFLVConverter]['regex'], $out, $matches)) {
 				return array($matches[1], $matches[2]); // width/height
-			} else {
-				wfDebug(__METHOD__ . ': Unable to extract video dimensions from ' . $wgFLVConverter . ' output: ' . $out . "\n");
 			}
 		}
-		wfDebug(__METHOD__ . ": No probe function defined, .flv previews unavailable.\n");
 		return false;
 	}
 
@@ -97,7 +91,6 @@ class FlvImageHandler extends ImageHandler {
 					   wfEscapeShellArg( $dstPath ) ),
 				$wgFLVConverters[$wgFLVConverter] ) . " 2>&1";
 			wfProfileIn( 'rsvg' );
-			wfDebug( __METHOD__.": $cmd\n" );
 			$err = wfShellExec( $cmd, $retval );
 			wfProfileOut( 'rsvg' );
 		}

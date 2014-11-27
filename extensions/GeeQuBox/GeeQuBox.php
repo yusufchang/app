@@ -70,7 +70,6 @@ class GeeQuBox {
 			$this->_gqbAddScripts( $page );
 			return true;
 		} catch ( Exception $e ) {
-			wfDebug('GeeQuBox::'.$e->getMessage());
 			return true;	// see above message on returns
 		}
 	}

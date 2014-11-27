@@ -711,11 +711,9 @@ class Comment {
 		$data = $wgMemc->get( $key );
 
 		if( !$data ) {
-			wfDebug( "Loading comments for page {$this->PageID} from DB\n" );
 			$comments = $this->getCommentList();
 			$wgMemc->set( $key, $comments );
 		} else {
-			wfDebug( "Loading comments for page {$this->PageID} from cache\n" );
 			$comments = $data;
 		}
 
@@ -729,7 +727,6 @@ class Comment {
 				$voted = $this->getCommentVotedList();
 				$wgMemc->set( $key, $voted );
 			} else {
-				wfDebug( "Loading comment voted for page {$this->PageID} for user {$wgUser->getID()} from cache\n" );
 				$voted = $data;
 			}
 		}

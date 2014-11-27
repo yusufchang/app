@@ -30,7 +30,6 @@ class MeanEditorEditPage extends EditPage {
 		#}
 
 		wfProfileIn( __METHOD__ );
-		wfDebug( __METHOD__.": enter\n" );
 
 		// This is not an article
 		$wgOut->setArticleFlag( false );
@@ -61,7 +60,6 @@ class MeanEditorEditPage extends EditPage {
 
 		$permErrors = $this->getEditPermissionErrors();
 		if ( $permErrors ) {
-			wfDebug( __METHOD__ . ": User can't edit\n" );
 			$this->readOnlyPage( $this->getContent( false ), true, $permErrors, 'edit' );
 			wfProfileOut( __METHOD__ );
 			return;

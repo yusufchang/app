@@ -113,8 +113,6 @@ class LanguageNames extends CldrNames {
 						self::$cache[$code] = $languageNames;
 					}
 				}
-			} else {
-				wfDebug( __METHOD__ . ": Unable to load language names for $filename\n" );
 			}
 			wfProfileOut( __METHOD__ . '-recache' );
 		}

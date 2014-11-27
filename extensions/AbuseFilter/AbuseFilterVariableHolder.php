@@ -140,8 +140,6 @@ class AFComputedVariable {
 			return self::$userCache[$username];
 		}
 
-		wfDebug( "Couldn't find user $username in cache\n" );
-
 		if ( count( self::$userCache ) > 1000 ) {
 			self::$userCache = array();
 		}
@@ -168,8 +166,6 @@ class AFComputedVariable {
 		if ( count( self::$articleCache ) > 1000 ) {
 			self::$articleCache = array();
 		}
-
-		wfDebug( "Creating article object for $namespace:$title in cache\n" );
 
 		$t = Title::makeTitle( $namespace, $title );
 		self::$articleCache["$namespace:$title"] = new Article( $t );
@@ -245,9 +241,7 @@ class AFComputedVariable {
 
 				if ( $vars->getVar( 'context' )->toString() == 'filter' ) {
 					$links = $this->getLinksFromDB( $article );
-					wfDebug( "AbuseFilter: loading old links from DB\n" );
 				} else {
-					wfDebug( "AbuseFilter: loading old links from Parser\n" );
 					$textVar = $parameters['text-var'];
 
 					$wikitext = $vars->getVar( $textVar )->toString();

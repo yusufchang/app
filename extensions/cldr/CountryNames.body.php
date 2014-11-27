@@ -76,8 +76,6 @@ class CountryNames extends CldrNames {
 						self::$cache[$code] = $countryNames;
 					}
 				}
-			} else {
-				wfDebug( __METHOD__ . ": Unable to load country names for $filename\n" );
 			}
 			wfProfileOut( __METHOD__ . '-recache' );
 		}

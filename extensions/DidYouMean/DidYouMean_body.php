@@ -17,8 +17,6 @@ class DidYouMean {
 	
 	# pass pageid = 0 to lookup by normtitle
 	public static function lookup( $pageid, $title ) {
-		wfDebug( 'HIPP: ' . __METHOD__ . "\n" );
-   
 		$sees = array();
    
 		$dbr = wfGetDB( DB_SLAVE );
@@ -27,14 +25,12 @@ class DidYouMean {
 			$normid = false;
    
 			if ($pageid) {
-				wfDebug( "HIPP: lookup by pageid: $pageid\n" );
 				$normid = $dbr->selectField(
 					array( 'page', 'dympage' ),
 					'dp_normid',
 					array( 'page_id = dp_pageid', 'page_id' => $pageid )
 				);
 			} else {
-				wfDebug( "HIPP: lookup by normtitle: " . wfDymNormalise($title) . "\n" );
 				$normid = $dbr->selectField(
 					'dymnorm',
 					'dn_normid',
@@ -52,10 +48,8 @@ class DidYouMean {
 				$nr = $dbr->numRows( $res );
    
 				if ($nr == 0) {
-					wfDebug( "HIPP: DB New Miss\n" );
+                    // noop
 				} else {
-					wfDebug( "HIPP: DB New  Hit\n" );
-   
 					# accumulate the db results
 					while( $o = $dbr->fetchObject( $res ) ) {
 						$t2 = str_replace('_', ' ', $o->page_title);
@@ -66,21 +60,17 @@ class DidYouMean {
 						}
 						else
 							$dbo = '  (' . $dbo . ')';
-						wfDebug( "HIPP: $dbo\n" );
 					}
    
 					$dbr->freeResult( $res );
 				}
 			}
-		} else {
-			wfDebug( "HIPP: No dympage or dymnorm table\n" );
 		}
-   
+
 		return $sees;
 	}
 	
 	public static function doInsert( $pageid , $title ) {
-		wfDebug( 'HIPP: ' . __METHOD__ . " INSERT\n" );
 		$dbw = wfGetDB( DB_MASTER );
    
 		$norm = wfDymNormalise($title);
@@ -88,12 +78,11 @@ class DidYouMean {
 		# find or create normid for the new title
 		$normid = $dbw->selectField( 'dymnorm', 'dn_normid', array( 'dn_normtitle' => $norm ) );
 		if ($normid) {
-			wfDebug( "HIPP: old: $title ->\t$norm = $normid\n" );
+            // noop
 		} else {
 			$nsvid = $dbw->nextSequenceValue( 'dymnorm_dn_normid_seq' );
 			$dbw->insert( 'dymnorm', array( 'dn_normid' => $nsvid, 'dn_normtitle' => $norm ) );
 			$normid = $dbw->insertId();
-			wfDebug( "HIPP: NEW: $title ->\t$norm = $normid\n" );
 		}
 		$dbw->insert( 'dympage', array( 'dp_pageid' => $pageid, 'dp_normid' => $normid ) );
    
@@ -123,7 +112,6 @@ class DidYouMean {
 	}
 
 	public static function doDelete( $pageid ) {
-		wfDebug( 'HIPP: ' . __METHOD__ . " DELETE\n" );
 		$dbw = wfGetDB( DB_MASTER );
    
 		$normid = $dbw->selectField( 'dympage', 'dp_normid', array('dp_pageid' => $pageid) );
@@ -142,19 +130,17 @@ class DidYouMean {
 	}
 
 	public static function doUpdate( $pageid, $title ) {
-		wfDebug( 'HIPP: ' . __METHOD__ . " MOVE\n" );
 		$dbw = wfGetDB( DB_MASTER );
    
 		$norm = wfDymNormalise($title);
    
 		$normid = $dbw->selectField( 'dymnorm', 'dn_normid', array( 'dn_normtitle' => $norm ) );
 		if ($normid) {
-			wfDebug( "HIPP: old: $title ->\t$norm = $normid\n" );
+            // noop
 		} else {
 			$nsvid = $dbw->nextSequenceValue( 'dymnorm_dn_normid_seq' );
 			$dbw->insert( 'dymnorm', array( 'dn_normid' => $nsvid, 'dn_normtitle' => $norm ) );
 			$normid = $dbw->insertId();
-			wfDebug( "HIPP: NEW: $title ->\t$norm = $normid\n" );
 		}
    
 		$oldnormid = $dbw->selectField( 'dympage', 'dp_normid', array('dp_pageid' => $pageid) );

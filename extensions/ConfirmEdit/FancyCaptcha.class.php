@@ -16,10 +16,8 @@ class FancyCaptcha extends SimpleCaptcha {
 		$answerHash = substr( md5( $digest ), 0, 16 );
 
 		if ( $answerHash == $info['hash'] ) {
-			wfDebug( "FancyCaptcha: answer hash matches expected {$info['hash']}\n" );
 			return true;
 		} else {
-			wfDebug( "FancyCaptcha: answer hashes to $answerHash, expected {$info['hash']}\n" );
 			return false;
 		}
 	}
@@ -51,8 +49,6 @@ class FancyCaptcha extends SimpleCaptcha {
 		// This is needed so multiple edits in separate tabs or windows can
 		// go through without extra pain.
 		$index = $this->storeCaptcha( $info );
-
-		wfDebug( "Captcha id $index using hash ${info['hash']}, salt ${info['salt']}.\n" );
 
 		$title = SpecialPage::getTitleFor( 'Captcha', 'image' );
 

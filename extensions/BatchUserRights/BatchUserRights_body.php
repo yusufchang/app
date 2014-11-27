@@ -163,8 +163,6 @@ class SpecialBatchUserRights extends SpecialPage {
 		// Ensure that caches are cleared
 		$user->invalidateCache();
 
-		wfDebug( 'oldGroups: ' . print_r( $oldGroups, true ) );
-		wfDebug( 'newGroups: ' . print_r( $newGroups, true ) );
 		if ( $user instanceof User ) {
 			$removegroup = array();
 			// hmmm

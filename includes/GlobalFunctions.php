@@ -888,51 +888,6 @@ function wfMatchesDomainList( $url, $domains ) {
 	return false;
 }
 
-/**
- * Sends a line to the debug log if enabled or, optionally, to a comment in output.
- * In normal operation this is a NOP.
- *
- * Controlling globals:
- * $wgDebugLogFile - points to the log file
- * $wgProfileOnly - if set, normal debug messages will not be recorded.
- * $wgDebugRawPage - if false, 'action=raw' hits will not result in debug output.
- * $wgDebugComments - if on, some debug items may appear in comments in the HTML output.
- *
- * @param $text String
- * @param $logonly Bool: set true to avoid appearing in HTML when $wgDebugComments is set
- */
-function wfDebug( $text, $logonly = false ) {
-	global $wgOut, $wgDebugLogFile, $wgDebugComments, $wgProfileOnly, $wgDebugRawPage;
-	global $wgDebugLogPrefix, $wgShowDebug;
-
-	static $cache = array(); // Cache of unoutputted messages
-	$text = wfDebugTimer() . $text;
-
-	if ( !$wgDebugRawPage && wfIsDebugRawPage() ) {
-		return;
-	}
-
-	if ( ( $wgDebugComments || $wgShowDebug ) && !$logonly ) {
-		$cache[] = $text;
-
-		if ( isset( $wgOut ) && is_object( $wgOut ) ) {
-			// add the message and any cached messages to the output
-			array_map( array( $wgOut, 'debug' ), $cache );
-			$cache = array();
-		}
-	}
-	# if ( wfRunHooks( 'Debug', array( $text, null ) ) ) { // Wikia change - BAC-91
-		if ( $wgDebugLogFile != '' && !$wgProfileOnly ) {
-			# Strip unprintables; they can switch terminal modes when binary data
-			# gets dumped, which is pretty annoying.
-			$text = preg_replace( '![\x00-\x08\x0b\x0c\x0e-\x1f]!', ' ', $text );
-			$text = $wgDebugLogPrefix . $text;
-			wfErrorLog( $text, $wgDebugLogFile );
-		}
-	#} // Wikia change - BAC-91
-
-	MWDebug::debugMsg( $text );
-}
 
 /**
  * Returns true if debug logging should be suppressed if $wgDebugRawPage = false

@@ -671,7 +671,6 @@ class EnhancedInterwikiIntegrationChangesList extends InterwikiIntegrationChange
 				$logname = LogPage::logName( $logtype );
 				$clink = '(' . $this->skin->linkKnown( $rc->getTitle(), $logname ) . ')';
 			} else {
-				wfDebug( "Unexpected special page in recentchanges\n" );
 				$clink = '';
 			}
 		// Edits

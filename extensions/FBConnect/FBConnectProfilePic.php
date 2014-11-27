@@ -61,10 +61,10 @@ class FBConnectProfilePic {
 			if(0 < preg_match("/<profile[^>]*>.*?(http[s]?:\/\/[^<]*).*?<\/profile>/is", $page, $matches)){
 				$profilePicUrl = $matches[1];
 			} else {
-				wfDebug("FBConnect: Could not find a profile picture for user id \"$fb_id\" using url: \"$fqlUrl\"");
+				// "FBConnect: Could not find a profile picture for user id \"$fb_id\" using url: \"$fqlUrl\""
 			}
 		} else {
-			wfDebug("FBConnect: no content found for facebook fql query: \"$fqlUrl\". Make sure outbound requests are working from your MediaWiki install.\n");
+			// "FBConnect: no content found for facebook fql query: \"$fqlUrl\". Make sure outbound requests are working from your MediaWiki install.";
 		}
 
 		return $profilePicUrl;

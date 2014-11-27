@@ -93,7 +93,6 @@ class LabeledSectionTransclusion {
 	static function open_( $parser, $part1 ) {
 		// Infinite loop test
 		if ( isset( $parser->mTemplatePath[$part1] ) ) {
-			wfDebug( __METHOD__ . ": template loop broken at '$part1'\n" );
 			return false;
 		} else {
 			$parser->mTemplatePath[$part1] = 1;
@@ -107,8 +106,6 @@ class LabeledSectionTransclusion {
 		// Infinite loop test
 		if ( isset( $parser->mTemplatePath[$part1] ) ) {
 			unset( $parser->mTemplatePath[$part1] );
-		} else {
-			wfDebug( __METHOD__ . ": close unopened template loop at '$part1'\n" );
 		}
 	}
 

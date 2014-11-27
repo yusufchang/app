@@ -7,8 +7,6 @@ class DidYouMeanHooks {
 
 	# TODO this is called even when editing a new page
 	public static function articleNoArticleText( &$article, &$text ) {
-		wfDebug( 'HIPP: ' . __METHOD__ . "\n" );
-   
 		$sees = DidYouMean::lookup( 0, $article->getTitle()->getText() );
    
 		sort($sees);
@@ -22,8 +20,6 @@ class DidYouMeanHooks {
 	# this is called when using the Go/Search box but it is not called when entering
 	# a URL for a non-existing article
 	public static function specialSearchNoResults( $term ) {
-		wfDebug( 'HIPP: ' . __METHOD__ . "\n" );
-		
 		$sees = DidYouMean::lookup( 0, $term );
 		
 		sort($sees);
@@ -37,8 +33,6 @@ class DidYouMeanHooks {
 	
 	# this is called per chunk of wikitext, not per article
 	public static function parserBeforeStrip( &$parser, &$text, &$stripState ) {
-		#wfDebug( 'HIPP: ' . __METHOD__ . "\n" );
-   
 		# if revisionid is 0 this is not an article chunk
 		if( isset( $parser->mDymFirstChunk ) || !$parser->getVariableValue('revisionid') || $parser->getVariableValue('namespace'))
 			return true;
@@ -49,16 +43,13 @@ class DidYouMeanHooks {
 		$parser->mDymSees = DidYouMean::lookup( $title->getArticleID(), $title->getText() );
    
 		if (preg_match( "/{{[sS]ee\|([^}]*)}}/", $text, $see )) {
-			wfDebug( "HIPP: see Hit\n" );
 			$hasTemplate = true;
 			$sees = explode("|", $see[1]);
 		} elseif (preg_match( "/{{[xX]see(\|[^}]*)}}/", $text, $see )) {
-			wfDebug( "HIPP: xsee Hit\n" );
 			$hasTemplate = true;
 			preg_match_all( "/\|\[\[([^]|]*)(?:\|([^|]*))?\]\](?: \(([^)]*)\))?/", $see[1], $ma );
 			$sees = $ma[1];
 		} else {
-			wfDebug( "HIPP: (x)see Miss\n" );
 			# there's no {{see}} in this chunk of wikitext
 			# if this is the 1st chunk of the article itself we can put an empty {{see}} there.
 			$hasTemplate = false;
@@ -69,15 +60,11 @@ class DidYouMeanHooks {
 		foreach ($sees as &$value)
 			$value = rawurldecode(html_entity_decode($value, ENT_QUOTES, 'UTF-8'));
    
-		wfDebug( 'HIPP: Parser: ' . implode(', ', $sees) . "\n" );
-		wfDebug( 'HIPP: DBase:  ' . implode(', ', $parser->mDymSees) . "\n" );
-   
 		# add in the stuff from the database lookup
 		$sees = array_unique(array_merge($sees, $parser->mDymSees));
 		sort($sees);
    
-		wfDebug( 'HIPP: Merged: ' . implode(', ', $sees) . "\n" );
-   
+
 		# TODO is it better to use $parser->insertStripItem() ?
    
 		if (count($sees)) {
@@ -114,8 +101,6 @@ class DidYouMeanHooks {
 		$newtitletext = $nt->getText();
 		$newns = $nt->getNamespace();
    
-		wfDebug( 'HIPP: ' . __METHOD__ . "\n" );
-   
 		if ($oldns != 0 && $newns != 0)
 			return true;
    
@@ -124,9 +109,7 @@ class DidYouMeanHooks {
 		# TODO  new title's content is still "noarticletext" at this point!
 		#$a1 = new Article( $title );
 		#$a2 = new Article( $nt );
-		#wfDebug( "HIPP: getContent() for isRedirect()\n\tfrom <<<" . $a1->getContent() . ">>>\n\t  to <<<" . $a2->getContent() . ">>>\n" );
 		#if ($a1->isRedirect( $a->getContent() )) {
-		#	wfDebug( "HIPP: moving a redirect (?)\n" );
 		#	return true;
 		#}
    

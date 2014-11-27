@@ -610,7 +610,6 @@ class Gadget {
 		// cache for a while. gets purged automatically when MediaWiki:Gadgets-definition is edited
 		$wgMemc->set( $key, $gadgets, 60 * 60 * 24 );
 		$source = $forceNewText !== null ? 'input text' : 'MediaWiki:Gadgets-definition';
-		wfDebug( __METHOD__ . ": $source parsed, cache entry $key updated\n" );
 		wfProfileOut( __METHOD__ );
 
 		return $gadgets;

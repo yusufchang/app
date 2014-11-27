@@ -177,7 +177,6 @@ function efCategoryTree() {
 
 	# Abort if AJAX is not enabled
 	if ( !$wgUseAjax ) {
-		wfDebug( 'efCategoryTree: $wgUseAjax is not enabled, aborting extension setup.' );
 		return;
 	}
 
@@ -280,7 +279,6 @@ function efCategoryTreeCapDepth( $mode, $depth ) {
 	} elseif ( is_numeric( $wgCategoryTreeMaxDepth ) ) {
 		$max = $wgCategoryTreeMaxDepth;
 	} else {
-		wfDebug( 'efCategoryTreeCapDepth: $wgCategoryTreeMaxDepth is invalid.' );
 		$max = 1;
 	}
 

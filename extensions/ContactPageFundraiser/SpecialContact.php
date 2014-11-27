@@ -65,7 +65,6 @@ class SpecialContact extends SpecialPage {
 
 		$nu = User::newFromName( $wgContactUser );
 		if( is_null( $nu ) || !$nu->canReceiveEmail() ) {
-			wfDebug( "Target is invalid user or can't receive.\n" );
 			$wgOut->showErrorPage( "noemailtitle", "noemailtext" );
 			return;
 		}
@@ -73,7 +72,6 @@ class SpecialContact extends SpecialPage {
 		$f = new EmailContactForm( $nu );
 
 		if ( "success" == $action ) {
-			wfDebug( "$fname: success.\n" );
 			$f->showSuccess( );
 		} elseif ( "submit" == $action && $wgRequest->wasPosted() && $f->hasAllInfo() ) {
 			$token = $wgRequest->getVal( 'wpEditToken' );
@@ -87,19 +85,15 @@ class SpecialContact extends SpecialPage {
 			}
 
 			if ( !$tokenOk ) {
-				wfDebug( "$fname: bad token (".($wgUser->isAnon()?'anon':'user')."): $token\n" );
 				$wgOut->addWikiText( wfMsg( 'sessionfailure' ) );
 				$f->showForm();
 			} elseif ( !$f->passCaptcha() ) {
-				wfDebug( "$fname: captcha failed" );
 				$wgOut->addWikiText( wfMsg( 'contactpage-captcha-failed' ) ); //TODO: provide a message for this!
 				$f->showForm();
 			} else {
-				wfDebug( "$fname: submit\n" );
 				$f->doSubmit();
 			}
 		} else {
-			wfDebug( "$fname: form\n" );
 			$f->showForm();
 		}
 	}
@@ -240,7 +234,6 @@ class EmailContactForm {
 		if ( !@$wgCaptchaTriggers['contactpage'] ) return false; //don't trigger on contact form
 
 		if( $wgUser->isAllowed( 'skipcaptcha' ) ) {
-			wfDebug( "EmailContactForm::useCaptcha: user group allows skipping captcha\n" );
 			return false;
 		}
 
@@ -276,8 +269,6 @@ class EmailContactForm {
 
 		$fname = 'EmailContactForm::doSubmit';
 
-		wfDebug( "$fname: start\n" );
-
 		$to = new MailAddress( $this->target );
 		$replyto = null;
 
@@ -303,8 +294,6 @@ class EmailContactForm {
 
 		if( wfRunHooks( 'ContactForm', array( &$to, &$replyto, &$subject, &$this->text ) ) ) {
 
-			wfDebug( "$fname: sending mail from ".$from->toString()." to ".$to->toString()." replyto ".($replyto==null?'-/-':$replyto->toString())."\n" );
-
 			$replyaddr = $replyto == null ? null : $replyto;
 
 			$mailResult = UserMailer::send( $to, $from, $subject, $this->text, $replyaddr );
@@ -318,7 +307,6 @@ class EmailContactForm {
 				if ($this->cc_me && $replyto) {
 					$cc_subject = wfMsg('emailccsubject', $this->target->getName(), $subject);
 					if( wfRunHooks( 'ContactForm', array( &$from, &$replyto, &$cc_subject, &$this->text ) ) ) {
-						wfDebug( "$fname: sending cc mail from ".$from->toString()." to ".$replyto->toString()."\n" );
 						$ccResult = UserMailer::send( $replyto, $from, $cc_subject, $this->text );
 						if( WikiError::isError( $ccResult ) ) {
 							// At this stage, the user's CC mail has failed, but their
@@ -332,8 +320,6 @@ class EmailContactForm {
 					}
 				}
 
-				wfDebug( "$fname: success\n" );
-
 				$returnto = Title::newFromText( $wgRequest->getVal( 'returnto' ) );
 				if( is_null( $returnto ) || !$returnto->isLocal() ) {
 					$returnto = SpecialPage::getTitleFor( "Contact" );
@@ -342,8 +328,6 @@ class EmailContactForm {
 				wfRunHooks( 'ContactFromComplete', array( $to, $replyto, $subject, $this->text ) );
 			}
 		}
-
-		wfDebug( "$fname: end\n" );
 	}
 
 	function showSuccess( ) {

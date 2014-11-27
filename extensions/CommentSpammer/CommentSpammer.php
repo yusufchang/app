@@ -68,7 +68,6 @@ class HoneyPotCommentSpammer {
 		// logged in users are assumed to not be comment spammers.
 		global $wgUser;
 		if( ! $wgUser->isAnon() ) {
-			//wfDebug( __METHOD__ . ": Assuming not spammer as logged in.\n" );
 			#return false;
 		}
 
@@ -79,7 +78,6 @@ class HoneyPotCommentSpammer {
 
 		$params = array( $ip_addr );
 		$is_spammer = self::resultsSaySpammer( $results, $params );
-		wfDebug( __METHOD__ . ": DNS says $ip_addr is " . ($is_spammer ? '' : 'NOT ' ) . "a spammer.\n" );
 
 		// We record a diagnostic log in here, that will appear in Special:Log
 		// For high-volume or mid-volume sites, this should be commented out.
@@ -183,7 +181,6 @@ class HoneyPotCommentSpammer {
 		// honey_pot_record = key + '.' + reversed ip address + '.' + honey pot dnsbl
 		$honey_pot_record = $wgHoneyPotKey . '.' . $reverse_ip_addr . '.' . self::HONEY_POT_DNSBL;
 
-		//wfDebug( __METHOD__ . ": honey_pot_record: $honey_pot_record\n" );
 		$result = dns_get_record( $honey_pot_record, DNS_A );
 		return $result;
 	}
@@ -195,24 +192,20 @@ class HoneyPotCommentSpammer {
 	 * @return boolean  True for spammer, false for non-spammer, or if get unexpected results.
 	 */
 	private static function resultsSaySpammer( $result, & $params ) {
-		//wfDebug( __METHOD__ . ": Entering\n" );
 		// if there was anything wrong with the data we got, assume they're
 		// not a spammer.
 		if( ! is_array( $result ) ) return false;
-		//wfDebug( __METHOD__ . ": Data was array\n" );
 
 		// if not properly formed, assume they're not a spammer.
 		if( ! isset( $result[0]       ) ) return false;
 		if( ! isset( $result[0]['ip'] ) ) return false;
 
-		//wfDebug( __METHOD__ . ": Data looks well-formed\n" );
 		// the result code is in the ip address we got back.
 		$honey_pot_code = $result[0]['ip'];
 		$parts = explode( '.', $honey_pot_code );
 
 		// if not properly formed IPv4 address, assume they're not a spammer.
 		if( count( $parts ) != 4 ) return false;
-		//wfDebug( __METHOD__ . ": Looks like an IPv4 address.\n" );
 		list( $first, $second, $third, $fourth ) = $parts;
 		$params[] = $second;
 		$params[] = $third;
@@ -220,15 +213,12 @@ class HoneyPotCommentSpammer {
 
 		// if we got an error response, assume they're not a spammer.
 		if( $first != self::HONEY_POT_NO_ERROR ) return false;
-		//wfDebug( __METHOD__ . ": Did not get an error response: $first\n" );
 
 		// if they have mended or abstained from their wicked spammy ways, then forgive.
 		if( $second >= self::MAX_STALENESS ) return false;
-		//wfDebug( __METHOD__ . ": Have not abstained from their spammy ways: $second\n" );
 
 		// if they are not really a threat, then forgive.
 		if( $third <= self::MIN_THREAT_LEVEL ) return false;
-		//wfDebug( __METHOD__ . ": Looks like a threat: $third. Offence code: $fourth\n" );
 		// if they are not a comment spammer, then forgive.
 		return $fourth & self::COMMENT_SPAMMER_CODE;
 

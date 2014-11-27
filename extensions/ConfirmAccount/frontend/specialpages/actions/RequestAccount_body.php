@@ -249,7 +249,6 @@ class RequestAccountPage extends SpecialPage {
 		$abortError = '';
 		if ( !wfRunHooks( 'AbortNewAccount', array( $u, &$abortError ) ) ) {
 			// Hook point to add extra creation throttles and blocks
-			wfDebug( "RequestAccount::doSubmit: a hook blocked creation\n" );
 			$this->showForm( $abortError );
 			return;
 		}
@@ -344,9 +343,6 @@ class RequestAccountPage extends SpecialPage {
 					'requestaccount-email-body-admin', $name, $title->getFullUrl() );
 				# Actually send the email...
 				$result = UserMailer::send( $target, $source, $subject, $body );
-				if ( !$result->isOK() ) {
-					wfDebug( "Could not sent email to admin at $target\n" );
-				}
 			}
 			$out->addWikiMsg( 'request-account-econf' );
 			$out->returnToMain();

@@ -32,7 +32,6 @@ class ExtendedEditPage extends EditPage {
 
 		$permErrors = $this->getEditPermissionErrors();
 		if ( $permErrors ) {
-			wfDebug( __METHOD__ . ": User can't edit\n" );
 			$this->readOnlyPage( $this->getContent( false ), true, $permErrors, 'edit' );
 			wfProfileOut( __METHOD__ );
 			return false;

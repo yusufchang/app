@@ -46,7 +46,6 @@ function renderChosen( $input, $argv, $parser ) {
 	#$parser->disableCache();
 	global $wgParserCacheExpireTime;
 	$wgParserCacheExpireTime = 60;
-	wfDebug( "soft disable Cache (choose)\n" );
 
 	# Parse the options and calculate total weight
 	$len = preg_match_all("/<option(?:(?:\\s[^>]*?)?\\sweight=[\"']?([^\\s>]+))?"

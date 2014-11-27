@@ -830,8 +830,7 @@ class DonationData {
 		// fetch a salted version of the session token
 		$sessionSaltedToken = $this->token_getSaltedSessionToken();
 		if ( $val != $sessionSaltedToken ) {
-			wfDebug( "DonationData::matchEditToken: broken session data\n" );
-			//and reset the token for next time. 
+			//and reset the token for next time.
 			$this->token_refreshAllTokenEverything();
 		}
 		return $val == $sessionSaltedToken;

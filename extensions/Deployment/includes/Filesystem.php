@@ -358,8 +358,7 @@ abstract class Filesystem {
 	 */	
 	protected function addErrorMessage( $error ) {
 		$this->errors[] = $error;
-		wfDebug( $error );
-	}	
+	}
 	
 	/**
 	 * Determines if the string provided contains binary characters.

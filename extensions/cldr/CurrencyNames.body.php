@@ -76,8 +76,6 @@ class CurrencyNames extends CldrNames {
 						self::$cache[$code] = $currencyNames;
 					}
 				}
-			} else {
-				wfDebug( __METHOD__ . ": Unable to load currency names for $filename\n" );
 			}
 			wfProfileOut( __METHOD__ . '-recache' );
 		}

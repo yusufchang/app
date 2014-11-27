@@ -167,7 +167,6 @@ class EditConflict {
 			$prev_user = User::newFromId( $editpage->mArticle->getUser() );
 			# in case of edit conflict, user who belongs to group with higher weight wins ("successful merge")
 			if ( self::getGroupWeight( $wgUser ) > ($prev_ug_weight = self::getGroupWeight( $prev_user ) ) ) {
-				wfDebug( __METHOD__ . " suppressing edit conflict, current user has higher groupweight than previous user.\n" );
 				if ( $prev_ug_weight > 0 && $editpage->mTitle->getNamespace() == NS_MAIN ) {
 					# copy the conflicting revision only when in main namespace and 
 					# previous user groupweight is higher than zero

@@ -73,7 +73,6 @@ function ipAuthUserLoadFromSession( $user, &$result ) {
 			// For example, the file session handler only allows characters in the range a-z A-Z 0-9 , (comma) and - (minus)! 
 			$sid = "ipauth" . '-' . preg_replace('![_.:]!', '-', $ip) . '-' . md5("$name:$ip:$wgIPAuthIdSecret"); 
 
-			wfDebug( "Forcing session id for $name at $ip to $sid\n" );
 			session_id($sid); //note: hope session isn't already open.
 		}
 	}
@@ -95,17 +94,14 @@ function ipAuthUserLoadAfterLoadFromSession( $user ) {
 		$xuser = User::newFromName( $name );
 
 		if ( $xuser->getID() == 0 ) {
-			wfDebug( "User $name assigned to IP $ip does not exist!\n" );
+            // noop
 		} else {
 			# HACK: force user data reload by assigning members directly
 			$user->mId = $xuser->mId;
 			$user->mName = $xuser->mName;
 			$user->loadFromId();
 
-			wfDebug( "User $name assigned to IP $ip logged in.\n" );
-
 			if ( !isset( $_SESSION['wsUserID'] ) ) {
-				wfDebug( "Setting up a session for $name assigned to IP $ip logged in.\n" );
 				wfSetupSession();
 				$_SESSION['wsToken'] = "IP:$ip";
 				$_SESSION['wsUserName'] = $name;

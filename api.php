@@ -152,7 +152,6 @@ if ( $wgAPIRequestLog ) {
 		$items[] = wfArrayToCGI( $wgRequest->getValues() );
 	}
 	wfErrorLog( implode( ',', $items ) . "\n", $wgAPIRequestLog );
-	wfDebug( "Logged API request to $wgAPIRequestLog\n" );
 }
 
 wfRunHooks( 'RestInPeace' ); // Wikia change - @author macbre

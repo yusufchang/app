@@ -142,7 +142,6 @@ class SubversionShell extends SubversionAdaptor {
 		global $wgMaxShellMemory;
 		if( $wgMaxShellMemory < self::MIN_MEMORY ) {
 			$wgMaxShellMemory = self::MIN_MEMORY;
-			wfDebug( __METHOD__ . " raised wgMaxShellMemory to $wgMaxShellMemory\n" );
 		}
 	}
 

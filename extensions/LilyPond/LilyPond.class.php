@@ -83,14 +83,12 @@ class LilyPond {
 			$res = mkdir( $wgMathDirectory );
 			wfRestoreWarnings();
 			if ( !$res ) {
-				wfDebug( 'Unable to create directory ' . $wgMathDirectory );
 				wfProfileOut( __METHOD__ );
 				return "<b>$mf (" . wfMsg( "math_bad_output" ) .
 					$wgMathDirectory . ")</b>";
 			}
 		} elseif ( !is_dir( $wgMathDirectory ) ||
 			!is_writable( $wgMathDirectory ) ) {
-			wfDebug( 'Unable to write to directory ' . $wgMathDirectory );
 			wfProfileOut( __METHOD__ );
 			return "<b>$mf (" . wfMsg( "math_bad_output" ) . ")</b>";
 		}
@@ -99,14 +97,12 @@ class LilyPond {
 			$res = mkdir( $wgTmpDirectory );
 			wfRestoreWarnings();
 			if ( !$res ) {
-				wfDebug( 'Unable to create temporary directory ' . $wgTmpDirectory );
 				wfProfileOut( __METHOD__ );
 				return "<b>$mf (" . wfMsg( "math_bad_tmpdir" )
 					. ")</b>";
 			}
 		} elseif ( !is_dir( $wgTmpDirectory ) ||
 			!is_writable( $wgTmpDirectory ) ) {
-			wfDebug( 'Unable to write to temporary directory ' . $wgTmpDirectory );
 			wfProfileOut( __METHOD__ );
 			return "<b>$mf (" . wfMsg( "math_bad_tmpdir" ) . ")</b>";
 		}
@@ -114,7 +110,6 @@ class LilyPond {
 		$lyFile = $md5 . ".ly";
 		$out = fopen( $wgTmpDirectory . "/" . $lyFile, "w" );
 		if ( $out === false ) {
-			wfDebug( 'Unable to write to temporary directory ' . $wgTmpDirectory . "/" . $lyFile );
 			wfProfileOut( __METHOD__ );
 			return "<b>$mf (" . wfMsg( "math_bad_tmpdir" ) . ")</b>";
 		}
@@ -125,7 +120,6 @@ class LilyPond {
 			" -dsafe='#t' -dbackend=eps --png --header=texidoc " .
 			escapeshellarg( $lyFile ) . " 2>&1";
 
-		wfDebug( "Lilypond: $cmd\n" );
 		$oldcwd = getcwd();
 		chdir( $wgTmpDirectory );
 		exec( $cmd, $output, $ret );
@@ -144,7 +138,6 @@ class LilyPond {
 			$outputFile = $wgTmpDirectory . "/" . $md5 . ".png";
 
 			if ( !file_exists( $outputFile ) ) {
-				wfDebug( 'Output file doesn\'t exist ' . $outputFile );
 				wfProfileOut( __METHOD__ );
 				return "<b>$mf (" . wfMsg( "math_image_error" )
 					. ")</b>";

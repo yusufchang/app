@@ -60,7 +60,6 @@ function renderRss( $input ) {
 	#$wgParser->disableCache();
 	global $wgParserCacheExpireTime;
 	$wgParserCacheExpireTime = 600;
-	wfDebug( "soft disable Cache (rss)\n" );
 
 	if ( !$input ) return ''; #if <rss>-section is empty, return nothing
 

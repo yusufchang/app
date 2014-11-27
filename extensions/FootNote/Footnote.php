@@ -56,8 +56,6 @@ $footnoteRecursionGuard = false;
 function insert_endnotes( &$parser, &$text ) {
 	global $footnoteNotes , $footnoteCount, $footnoteRecursionGuard ;
 	
-	wfDebug("insert_endnotes:\n<<<$text>>>\n");
-
 	if( $footnoteRecursionGuard ) return true;
 	if( count( $footnoteNotes ) == 0 ) return true;
 	

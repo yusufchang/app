@@ -121,7 +121,6 @@ class SpecialCreateRedirect extends SpecialPage {
 					wfArrayDiff2( $crEditTitle->getUserPermissionsErrors( 'create', $wgUser ), $permErrors ) );
 			}
 			if ( $permErrors ) {
-				wfDebug( __METHOD__ . ": User can't edit\n" );
 				$wgOut->addWikiText( $crEdit->formatPermissionsErrorMessage( $permErrors, 'edit' ) );
 				wfProfileOut( __METHOD__ );
 				return;

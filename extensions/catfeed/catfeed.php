@@ -183,18 +183,13 @@ function setupCatRSSExtension() {
 
 			if( $feedLastmod = $messageMemc->get( $timekey )
 			and $catLastAddDel <= $feedLastmod ) {
-				wfDebug( "CatFeed: loading feed from cache ($key; $feedLastmod; $catLastAddDel )...\n" );
 				$cachedFeed = $messageMemc->get( $key );
-			} else {
-				wfDebug( "CatFeed: cached feed timestamp check failed ($feedLastmod; $catLastAddDel) timekey: $timekey; adddel: $adddeltimestamp \n" );
-
 			}
+
 			if( is_string( $cachedFeed ) ) {
-				wfDebug( "CatFeed: Outputting cached feed\n" );
 				$this->feed->httpHeaders();
 				echo $cachedFeed;
 			} else {
-				wfDebug( "CatFeed: rendering new feed and caching it\n" );
 				ob_start();
 				$this->getData();
 				$cachedFeed = ob_get_contents();

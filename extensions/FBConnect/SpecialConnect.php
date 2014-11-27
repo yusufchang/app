@@ -141,9 +141,6 @@ class SpecialConnect extends SpecialPage {
 		}
 
 		// Look at the subpage name to discover where we are in the login process
-		wfDebug("FBConnect: Executing Special:Connect with the parameter of \"$par\".\n");
-		wfDebug("FBConnect: User is".($wgUser->isLoggedIn()?"":" NOT")." logged in.\n");
-
 		// If the user is logged in to Wikia on an unconnected account, and trying to connect a
 		// facebook id, but the FB-id is already connected to a DIFFERENT Wikia account... display an error message.
 		global $wgUser;
@@ -325,7 +322,6 @@ class SpecialConnect extends SpecialPage {
 			// Make sure we're not stealing an existing user account.
 			if (!$name || !$this->userNameOK($name)) {
 				// TODO: Provide an error message that explains that they need to pick a name or the name is taken.
-				wfDebug("FBConnect: Name not OK: '$name'\n");
 				$this->sendPage('chooseNameForm');
 				wfProfileOut(__METHOD__);
 				return;
@@ -342,7 +338,6 @@ class SpecialConnect extends SpecialPage {
 				wfProfileOut(__METHOD__);
 				return;
 			} elseif ( $wgUser->isBlockedFromCreateAccount() ) {
-				wfDebug("FBConnect: Blocked user was attempting to create account via Facebook Connect.\n");
 				$wgOut->showErrorPage('fbconnect-error', 'fbconnect-errortext');
 				wfProfileOut(__METHOD__);
 				return;
@@ -387,7 +382,6 @@ class SpecialConnect extends SpecialPage {
 
 			$user = User::newFromName($name, 'creatable' );
 			if (!$user) {
-				wfDebug("FBConnect: Error adding new user.\n");
 				$wgOut->showErrorPage('fbconnect-error', 'fbconnect-error-creating-user');
 				wfProfileOut(__METHOD__);
 				return;
@@ -416,7 +410,6 @@ class SpecialConnect extends SpecialPage {
 			$pass = $email = $realName = ""; // the real values will get filled in outside of the scope of this function.
 			$pass = null;
 			if( !$wgAuth->addUser( $user, $pass, $email, $realName ) ) {
-				wfDebug("FBConnect: Error adding new user to database.\n");
 				$wgOut->showErrorPage('fbconnect-error', 'fbconnect-errortext');
 				wfProfileOut(__METHOD__);
 				return;
@@ -547,7 +540,6 @@ class SpecialConnect extends SpecialPage {
 
 		// The user must be logged into Facebook before choosing a wiki username
 		if ( !$fb_user ) {
-			wfDebug("FBConnect: aborting in attachUser(): no Facebook ID was reported.\n");
 			$wgOut->showErrorPage( 'fbconnect-error', 'fbconnect-errortext' );
 			wfProfileOut(__METHOD__);
 			return;

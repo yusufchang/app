@@ -109,7 +109,6 @@ class HoneypotIntegration {
 		
 		$data = $wgMemc->get( wfMemcKey( 'honeypot-data', $subnet ) );
 		if ($data) {
-			wfDebug( "Honeypot Integration: Got data for subnet $subnet from memcached\n" );
 			self::$mData[$subnet] = $data;
 			return $data;
 		}
@@ -121,8 +120,6 @@ class HoneypotIntegration {
 			return $data;
 		}
 		
-		wfDebug( "Honeypot Integration: Couldn't find honeypot data for subnet $subnet ".
-					"in cache, and AutoLoad disabled\n" );
 	}
 	
 	// Gets IPs from memcached for a given Class A subnet
@@ -136,7 +133,6 @@ class HoneypotIntegration {
 		
 		$ips = $wgMemc->get( wfMemcKey( 'honeypot-ips', $subnet ) );
 		if ($ips) {
-			wfDebug( "Honeypot Integration: Got IPs for subnet $subnet from memcached\n" );
 			self::$IPs[$subnet] = $ips;
 			return $ips;
 		}
@@ -147,9 +143,6 @@ class HoneypotIntegration {
 			list($data,$ips) = self::loadHoneypotData( $subnet );
 			return $ips;
 		}
-		
-		wfDebug( "Honeypot Integration: Couldn't find honeypot data for subnet $subnet" .
-					" in cache, and AutoLoad disabled\n" );
 	}
 	
 	// Loads data and saves it to memcached

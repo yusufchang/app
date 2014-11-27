@@ -95,9 +95,7 @@ class MathRenderer {
 				$cmd = 'sh -c ' . wfEscapeShellArg( $cmd );
 			}
 
-			wfDebug( "TeX: $cmd\n" );
 			$contents = wfShellExec( $cmd );
-			wfDebug( "TeX output:\n $contents\n---\n" );
 
 			if ( strlen( $contents ) == 0 ) {
 				return $this->_error( 'math_unknown_error' );
@@ -285,7 +283,6 @@ class MathRenderer {
 			$this->mathml = $rpage->math_mathml;
 
 			$filename = $this->_getHashPath() . "/{$this->hash}.png";
-			wfDebug(__METHOD__ . ": rendering to {$filename}\n"); // Wikia change
 
 			if( !$wgMathCheckFiles ) {
 				// Short-circuit the file existence & migration checks
@@ -322,11 +319,9 @@ class MathRenderer {
 					$ret = wfMkdirParents( $hashpath, 0755, __METHOD__ );
 					wfRestoreWarnings();
 					if( !$ret ) {
-						wfDebug(__METHOD__ . ": failed to create directory tree - {$hashpath}\n"); // Wikia change
 						return false;
 					}
 				} elseif( !is_dir( $hashpath ) || !is_writable( $hashpath ) ) {
-					wfDebug(__METHOD__ . ": can't write to {$hashpath}\n"); // Wikia change
 					return false;
 				}
 				if ( function_exists( 'link' ) ) {
@@ -404,7 +399,6 @@ class MathRenderer {
 	function _getHashPath() {
 		global $wgMathDirectory;
 		$path = $wgMathDirectory . '/' . $this->_getHashSubPath();
-		wfDebug( "TeX: getHashPath, hash is: $this->hash, path is: $path\n" );
 		return $path;
 	}
 

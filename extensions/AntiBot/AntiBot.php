@@ -79,7 +79,6 @@ class AntiBot {
 
 		foreach ( $payloadChain as $payloadType ) {
 			if ( !isset( $wgAntiBotPayloadTypes[$payloadType] ) ) {
-				wfDebug( "Invalid payload type: $payloadType\n" );
 				continue;
 			}
 			$ret = call_user_func( $wgAntiBotPayloadTypes[$payloadType], $pluginName );

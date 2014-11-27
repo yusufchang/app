@@ -186,8 +186,6 @@ class SpecialForm extends SpecialPage {
 				return;
 			}
 
-			wfDebug( __METHOD__ . ": for index '$i', namePattern = '$namePattern' and template = '$template'.\n" );
-
 			$title = $this->makeTitle( $form, $namePattern );
 
 			$nt[$i] = Title::newFromText( $title );
@@ -223,8 +221,6 @@ class SpecialForm extends SpecialPage {
 			}
 
 			$title = $nt[$i]->GetPrefixedText();
-
-			wfDebug( __METHOD__ . ": saving article with index '$i' and title '$title'\n" );
 
 			$article = new Article( $nt[$i] );
 
@@ -341,9 +337,6 @@ class Form {
 					$this->title = $matches[2];
 				} elseif ( strcasecmp( $matches[1], 'instructions' ) == 0 ) {
 					$this->instructions = $matches[2];
-					wfDebug( __METHOD__ . ": Got instructions: '" . $this->instructions . "'.\n" );
-				} else {
-					wfDebug( __METHOD__ . ": unknown form attribute '$matches[1]'; skipping.\n" );
 				}
 			} elseif ( preg_match( '/^(\w+)\|([^\|]+)\|(\w+)(\|([^\|]+)(\|(.*))?)?$/', $line, $matches ) ) {
 				# XXX: build an inheritance tree for different kinds of fields
@@ -358,15 +351,11 @@ class Form {
 						foreach ( $rawOptions as $rawOption ) {
 							if ( preg_match( '/^(\w+)=(.+)/', $rawOption, $optMatches ) ) {
 								$field->setOption( $optMatches[1], $optMatches[2] );
-							} else {
-								wfDebug( __METHOD__ . ": unrecognized form field option: '$rawOption'; skipping.\n" );
 							}
 						}
 					}
 				}
 				$this->fields[$field->name] = $field;
-			} else {
-				wfDebug( __METHOD__ . ": unrecognized form line: '$line'; skipping.\n" );
 			}
 		}
 	}
@@ -501,7 +490,6 @@ class FormField {
 					Xml::closeElement( 'select' );
 			break;
 			default:
-				wfDebug( __METHOD__ . ": unknown form field type '$this->type', skipping.\n" );
 				return '';
 		}
 	}

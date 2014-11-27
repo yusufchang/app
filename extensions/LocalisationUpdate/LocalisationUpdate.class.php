@@ -664,7 +664,7 @@ class LocalisationUpdate {
 			return;
 		}
 		if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-			wfDebug( $log . "\n" );
+            // noop
 		} else {
 			print( $log . "\n" );
 		}
@@ -714,13 +714,11 @@ class LocalisationUpdate {
 			$contents = @file_get_contents( $file );
 
 			if ( $contents === false ) {
-				wfDebug( "Failed to read file '$file'\n" );
 				$retval = array();
 			} else {
 				$retval = unserialize( $contents );
 
 				if ( $retval === false ) {
-					wfDebug( "Corrupted data in file '$file'\n" );
 					$retval = array();
 				}
 			}

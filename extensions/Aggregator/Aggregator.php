@@ -217,7 +217,6 @@ class Aggregator {
 			// Magpie
 			require_once 'rss_fetch.inc';
 
-			wfDebug( "$fname checking $row->feed_url\n" );
 			$feed = fetch_rss( $row->feed_url );
 			$this->saveItems( $row->feed_url, $feed->items );
 		}
@@ -226,7 +225,6 @@ class Aggregator {
 
 	private function saveItems( $url, $items ) {
 		$fname = __CLASS__ . '::' . __FUNCTION__;
-		wfDebug( "$fname saving items from $url\n" );
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->begin();

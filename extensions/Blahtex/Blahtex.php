@@ -49,8 +49,6 @@ function efBlahtexMathAfterTexvc( &$mathRenderer, &$errmsg ) {
 	 $br->setState( $mathRenderer, $errmsg );
 	 $br->render();
 	 $errmsg = $br->getErrmsg();
-	 wfDebug( 'Blahtex MathML: ' . $br->mr->mathml . "\n" );
-	 wfDebug( 'Blahtex errmsg: ' . $errmsg . "\n" );
 
 	 return true;
 }
@@ -173,8 +171,6 @@ class BlahtexRenderer {
 		if ( function_exists( 'is_executable' ) && !is_executable( $wgBlahtex ) )
 			return array( false, $this->error( 'math_noblahtex', $wgBlahtex ) );
 
-		wfDebug( "Blahtex command: $wgBlahtex $options\n" );
-		wfDebug( "Blahtex input: \\displaystyle $tex\n" );
 		$process = proc_open( $wgBlahtex . ' ' . $options, $descriptorspec, $pipes );
 		if ( !$process ) {
 			return array( false, $this->error( 'math_unknown_error' ) );
@@ -187,7 +183,6 @@ class BlahtexRenderer {
 		while ( !feof( $pipes[1] ) ) {
 			$contents .= fgets( $pipes[1], 4096 );
 		}
-		wfDebug( "Blahtex output: $contents\n" );
 		fclose( $pipes[1] );
 		if ( proc_close( $process ) != 0 ) {
 			// exit code of blahtex is not zero; this shouldn't happen
@@ -248,7 +243,6 @@ class BlahtexRenderer {
 	 */
 	function blahtexError( $results, $node ) {
 		$id = 'math_' . $results[$node . ":id"];
-		wfDebug( "Blahtex blahtexError(): node = $node, id = $id\n" );
 		$fallback = $results[$node . ":message"];
 		if ( isset( $results[$node . ":arg"] ) ) {
 			if ( is_array( $results[$node . ":arg"] ) ) {
@@ -285,7 +279,6 @@ class BlahtexRenderer {
 	 * @return HTML fragment with the error message (string)
 	 */
 	function error( $msg, $arg1 = '', $arg2 = '', $arg3 = '', $fallback = null ) {
-		wfDebug( "Blahtex _error(): msg = $msg, arg1 = $arg1\n" );
 		$mf = htmlspecialchars( wfMsg( 'math_failure' ) );
 		if ( $msg ) {
 			if ( $fallback && wfMsg( $msg ) == '&lt;' . htmlspecialchars( $msg ) . '&gt;' )
@@ -295,7 +288,6 @@ class BlahtexRenderer {
 		}
 		else
 			$errmsg = '';
-		wfDebug( "Blahtex _error(): errmsg = $errmsg\n" );
 		$source = htmlspecialchars( str_replace( "\n", ' ', $this->mr->tex ) );
 		// Note: the str_replace above is because the return value must not contain newlines
 		return "<strong class='error'>$mf ($errmsg): $source</strong>\n";

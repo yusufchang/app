@@ -217,7 +217,6 @@ class ConfirmAccount {
 		$mime = $magic->guessMimeType( $tmpfile, false );
 		# check mime type, if desired
 		if ( $wgVerifyMimeType ) {
-			wfDebug ( "\n\nmime: <$mime> extension: <$extension>\n\n" );
 			# Check mime type against file extension
 			if ( !UploadBase::verifyExtension( $mime, $extension ) ) {
 				return Status::newFatal( 'uploadcorrupt' );
@@ -228,7 +227,6 @@ class ConfirmAccount {
 				return Status::newFatal( 'filetype-badmime', $mime );
 			}
 		}
-		wfDebug( __METHOD__ . ": all clear; passing.\n" );
 		return Status::newGood();
 	}
 
