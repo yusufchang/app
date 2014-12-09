@@ -93,6 +93,11 @@ $article-nav-gap-coverunit-large: 220px;
 		clear: left;
 	}
 
+	.venus-wrapper {
+		width: auto;
+		overflow: hidden;
+	}
+
 	.editsection {
 		@include font-size-xxs;
 		display: inline-block;

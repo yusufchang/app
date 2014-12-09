@@ -100,7 +100,7 @@ class VenusHooks {
 	 * @return bool
 	 */
 	static public function isInfoboxInFirstSection( $parser, $section, $content ) {
-		return $parser->mIsMainParse && $section === 0 && stripos( $content, InfoboxExtractor::INFOBOX_CLASS_NAME );
+		return $parser->mIsMainParse && $section === 0 /*&& stripos( $content, InfoboxExtractor::INFOBOX_CLASS_NAME )*/;
 	}
 
 	/**
@@ -164,5 +164,46 @@ class VenusHooks {
 			empty($diff);
 
 		return $wgEnableVenusSkin && ( $isSpecialSearch || $isSpecialVenusTest || $isVenusArticle );
+	}
+
+	static public function onParserSectionCreateRevert( $parser, $section, &$content, $showEditLinks ) {
+		// skip if we're not parsing for venus
+		if ( !F::app()->checkSkin( 'venus' ) ) {
+			return true;
+		}
+
+		try {
+			if ( self::isInfoboxInFirstSection( $parser, $section, $content ) ) {
+				$infoboxExtractor = new InfoboxExtractor( $content );
+
+				$dom = $infoboxExtractor->getDOMDocument();
+				$body = $dom->documentElement->firstChild;
+
+				$wrapper = $dom->createElement('div');
+				$wrapper->setAttribute('class', 'venus-wrapper');
+
+				$childs = $body->childNodes;
+				$childsCount = $childs->length;
+
+				for($i = 0; $i < $childsCount; $i++) {
+					$child = $childs->item($i);
+					if ($child instanceof DOMElement) {
+						$cloneWrapper = $wrapper->cloneNode();
+						$child->parentNode->replaceChild($cloneWrapper, $child);
+						$cloneWrapper->appendChild($child);
+					}
+				}
+
+				$content = $dom->saveHTML();
+			}
+		}
+		catch ( DOMException $e ) {
+			// log exceptions
+			WikiaLogger::instance()->error( __METHOD__, [
+				'exception' => $e,
+			] );
+		}
+
+		return true;
 	}
 }
