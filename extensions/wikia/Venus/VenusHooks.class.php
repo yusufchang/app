@@ -179,6 +179,9 @@ class VenusHooks {
 				$dom = $infoboxExtractor->getDOMDocument();
 				$body = $dom->documentElement->firstChild;
 
+				$nodes = $infoboxExtractor->getInfoboxNodes();
+				$node = $nodes->item( 0 );
+
 				$wrapper = $dom->createElement('div');
 				$wrapper->setAttribute('class', 'venus-wrapper');
 
@@ -187,7 +190,7 @@ class VenusHooks {
 
 				for($i = 0; $i < $childsCount; $i++) {
 					$child = $childs->item($i);
-					if ($child instanceof DOMElement) {
+					if ($child instanceof DOMElement && $child !== $node) {
 						$cloneWrapper = $wrapper->cloneNode();
 						$child->parentNode->replaceChild($cloneWrapper, $child);
 						$cloneWrapper->appendChild($child);

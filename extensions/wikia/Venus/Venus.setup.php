@@ -63,6 +63,7 @@ JSMessages::registerPackage('VenusArticle', [ 'venus-article-*' ]);
  */
 $wgHooks['MakeGlobalVariablesScript'][] = 'VenusHooks::onMakeGlobalVariablesScript';
 $wgHooks['ParserAfterTidy'][] = 'VenusHooks::onParserAfterTidy';
+$wgHooks['ParserSectionCreate'][] = 'VenusHooks::onParserSectionCreate';
 $wgHooks['ParserSectionCreate'][] = 'VenusHooks::onParserSectionCreateRevert';
 $wgHooks['MakeHeadline'][] = 'VenusHooks::onMakeHeadline';
 $wgHooks['UserLogoutComplete'][] = 'NotificationsController::addLogOutConfirmation';
