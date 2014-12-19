@@ -2,7 +2,7 @@
 	<a href="#" class="btn btn-default" data-tab="popular">Trending</a>
 	<a href="#" class="btn btn-default" data-tab="unpopular">Biggest Loosers</a>
 </div>
-<canvas id="chart" width="400" height="400"></canvas>
+<canvas id="chart" width="600" height="400"></canvas>
 <div class="tab-contents" data-tab="popular">
 	<h2>Trending</h2>
 	<table class="table active table-striped table-hover">
