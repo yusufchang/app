@@ -946,6 +946,15 @@ use Swagger\Annotations as SWG;
  * 					allowMultiple="true",
  * 					dataType="Array",
  * 					defaultValue=""
+ * 				),
+ * 				@SWG\Parameter(
+ * 					name="order",
+ * 					description="asc/desc Ascending/Descending order",
+ * 					paramType="query",
+ * 					required="false",
+ * 					allowMultiple="false",
+ * 					dataType="string",
+ * 					defaultValue="desc"
  * 				)
  * 			)
  * 		)

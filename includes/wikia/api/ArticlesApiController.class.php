@@ -1346,9 +1346,10 @@ class ArticlesApiController extends WikiaApiController {
 		$wikiId = trim( $this->request->getVal( 'wikiId', null ) );
 		$langs = $this->request->getArray( 'langs' );
 		$namespaces = self::processNamespaces( $this->request->getArray( self::PARAMETER_NAMESPACES, null ), __METHOD__ );
+		$order = $this->request->getVal( 'order', 'desc' );
 
 		$mart = new HackMartService();
-		$articles = $mart->getTrendingArticles($verticalId, $langs, $wikiId, $namespaces);
+		$articles = $mart->getTrendingArticles($verticalId, $langs, $wikiId, $namespaces, 20, $order);
 
 		$out = [];
 		foreach($articles as $article) {

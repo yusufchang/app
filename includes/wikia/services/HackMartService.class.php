@@ -2,7 +2,7 @@
 
 class HackMartService extends Service {
 
-	public function getTrendingArticles($verticalId = null, $langs = [], $wikiIds = [], $namespaceIds = [0], $limit = 20) {
+	public function getTrendingArticles($verticalId = null, $langs = [], $wikiIds = [], $namespaceIds = [0], $limit = 20, $order = 'desc') {
 		$app = F::app();
 		$db = $this->getDB();
 
@@ -40,7 +40,7 @@ class HackMartService extends Service {
 		}
 
 		$sql = $sql
-			->ORDER_BY('pv_diff DESC')
+			->ORDER_BY(['pv_diff', $order])
 			->LIMIT($limit);
 
 		$articles = $sql
