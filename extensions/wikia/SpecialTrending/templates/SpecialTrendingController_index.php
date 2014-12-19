@@ -15,9 +15,9 @@
 		</thead>
 		<tbody>
 			<? for($i = 0; $i < count($trendingArticles); $i++): ?>
-			<tr>
+			<tr data-wiki-id="<?= $trendingArticles[$i]['wiki_id'] ?>" data-article-id="<?= $trendingArticles[$i]['article_id'] ?>">
 				<td><?=$i + 1?>.</td>
-				<td><a href="<?= $trendingArticles[$i]['url'] ?> "><?= $trendingArticles[$i]['title'] ?></a></td>
+				<td><a href="<?= $trendingArticles[$i]['url'] ?>"><?= $trendingArticles[$i]['title'] ?></a></td>
 				<td><?= $trendingArticles[$i]['pvDiff'] ?></td>
 			</tr>
 			<? endfor ?>
@@ -37,7 +37,7 @@
 		</thead>
 		<tbody>
 		<? for($i=0; $i < count($loosingArticles); $i++): ?>
-			<tr>
+			<tr data-wiki-id="<?= $loosingArticles[$i]['wiki_id'] ?>" data-article-id="<?= $loosingArticles[$i]['article_id'] ?>">
 				<td><?=$i+1?>.</td>
 				<td><a href="<?=$loosingArticles[$i]['url'] ?>"><?=$loosingArticles[$i]['title'] ?></a></td>
 				<td><?=$loosingArticles[$i]['pvDiff'] ?></td>

@@ -3,6 +3,15 @@ require(['jquery'], function($) {
 
 	/* global Chart */
 
+	var chart;
+
+	function updateChart(data) {
+		for(var i = 0; i < 7; i++) {
+			chart.datasets[0].points[i].value = data[i];
+		}
+		chart.update();
+	}
+
 	$(function(){
 		var $tabs = $('.tab-contents'),
 			$buttons = $('.trending-tabs a');
@@ -18,6 +27,19 @@ require(['jquery'], function($) {
 			$tabs.filter('[data-tab='+name+']').addClass('active');
 		}).first().click();
 
+		$tabs.on('click', '[data-wiki-id]', function(e) {
+			//e.preventDefault();
+			updateChart([
+				Math.random(),
+				Math.random(),
+				Math.random(),
+				Math.random(),
+				Math.random(),
+				Math.random(),
+				Math.random()
+			]);
+		});
+
 		var data = {
 			labels: [ '-6d', '-5d', '-4d', '-3d', '-2d', '-1d', 'Today'],
 			datasets: [
@@ -29,13 +51,14 @@ require(['jquery'], function($) {
 					pointStrokeColor: "#fff",
 					pointHighlightFill: "#fff",
 					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [1, 2, 3, 4, 5, 6, 7]
+					data: [7, 6, 5, 4, 3, 2, 1]
 				}
 			]
 		};
 		var ctx = document.getElementById("chart").getContext("2d");
-		var myLineChart = new Chart(ctx).Line(data, {
-		});
+		chart = new Chart(ctx).Line(data, {});
+		updateChart([1,2,3,4,5,6,7.3]);
 
+		$t
 	});
 });
