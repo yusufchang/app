@@ -1338,4 +1338,61 @@ class ArticlesApiController extends WikiaApiController {
 			throw new BadRequestApiException( $message );
 		}
 	}
+
+
+
+	public function getTrending() {
+		$verticalId = $this->request->getVal( 'verticalId', null );
+		$wikiId = trim( $this->request->getVal( 'wikiId', null ) );
+		$langs = $this->request->getArray( 'langs' );
+		$namespaces = self::processNamespaces( $this->request->getArray( self::PARAMETER_NAMESPACES, null ), __METHOD__ );
+
+		$mart = new HackMartService();
+		$articles = $mart->getTrendingArticles($verticalId, $langs, $wikiId, $namespaces);
+
+		$out = [];
+		foreach($articles as $article) {
+			$articleId = $article['articleId'];
+			$wikiId = $article['wikiId'];
+
+			$params = [
+				'controller' => 'ArticlesApiController',
+				'method' => 'getDetails',
+				'ids' => $articleId,
+				'width' => 400,
+				'height' => 225
+			];
+
+			$wikiData = \WikiFactory::getWikiByID( $wikiId );
+
+			$response = \ApiService::foreignCall( $wikiData->city_dbname, $params, \ApiService::WIKIA );
+
+			if ( !empty( $response['items'][$articleId] ) ) {
+				$articleDetails =  $response['items'][$articleId];
+
+				$media = [
+					'thumbUrl' => $articleDetails['thumbnail'],
+					'originalWidth' => !empty( $articleDetails['original_dimensions']['width'])
+							? (int) $articleDetails['original_dimensions']['width']
+							: null,
+					'originalHeight' => !empty( $articleDetails['original_dimensions']['height'])
+							? (int) $articleDetails['original_dimensions']['height']
+							: null,
+				];
+
+				$out[] = [
+					'wiki_title' => $wikiData->city_title,
+					'wiki_url' => $response['basepath'],
+					'title' =>  $articleDetails['title'],
+					'url' =>  $articleDetails['url'],
+					'description' => $articleDetails['abstract'],
+					'media' => $media,
+					'pageviews' => $article['pageviews'],
+					'pvDiff' => $article['pvDiff'],
+				];
+			}
+		}
+
+		$this->setResponseData(['items' => $out]);
+	}
 }
