@@ -1,7 +1,9 @@
+@import "extensions/wikia/SpecialTrending/bootstrap/css/bootstrap";
+@import "extensions/wikia/SpecialTrending/bootstrap/css/bootstrap-theme";
 @import "extensions/wikia/SpecialTrending/styles/c3";
 
 .tab-contents:not(.active) {
-  display: none;
+	display: none;
 }
 
 .trending-tabs a.active {
