@@ -1,6 +1,9 @@
 @import "extensions/wikia/SpecialTrending/bootstrap/css/bootstrap";
 @import "extensions/wikia/SpecialTrending/bootstrap/css/bootstrap-theme";
 
+.AdminDashboardHeader h1 a:before {
+	content: "🔙";
+}
 .tab-contents:not(.active) {
 	display: none;
 }
