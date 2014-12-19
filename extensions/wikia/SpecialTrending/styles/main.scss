@@ -1,5 +1,31 @@
-@import "extensions/wikia/SpecialTrending/styles/c3";
+@import "extensions/wikia/SpecialTrending/bootstrap/css/bootstrap";
+@import "extensions/wikia/SpecialTrending/bootstrap/css/bootstrap-theme";
 
-body {
-  color: red;
+.AdminDashboardHeader h1 a:before {
+	content: "←";
+}
+.AdminDashboardGeneralHeader {
+	height: 50px !important;
+}
+.AdminDashboardArticleHeader h1 {
+	font-weight: bold;
+	font-size: 24px !important;
+	padding: 10px;
+}
+.tab-contents:not(.active) {
+	display: none;
+}
+
+.trending-tabs a.active {
+	font-weight: bold;
+}
+canvas#chart {
+	float: right;
+	height: 400px;
+	margin-left: 20px;
+	width: 600px;
+}
+
+.tab-contents table {
+	width: calc(100% - 620px);
 }
