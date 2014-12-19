@@ -2,6 +2,7 @@
 	<a href="#" class="btn btn-info" data-tab="popular">Trending</a>
 	<a href="#" class="btn btn-info" data-tab="unpopular">Biggest Loosers</a>
 </div>
+<canvas id="chart" width="400" height="400"></canvas>
 <div class="tab-contents" data-tab="popular">
 	<h2>Trending</h2>
 	<table class="table active table-striped table-hover">
@@ -13,11 +14,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<? for($i=0; $i < count($trendingArticles); $i++): ?>
+			<? for($i = 0; $i < count($trendingArticles); $i++): ?>
 			<tr>
-				<td><?=$i+1?>.</td>
-				<td><a href="<?=$trendingArticles[$i]['url'] ?>"><?=$trendingArticles[$i]['title'] ?></a></td>
-				<td><?=$trendingArticles[$i]['pvDiff'] ?></td>
+				<td><?=$i + 1?>.</td>
+				<td><a href="<?= $trendingArticles[$i]['url'] ?> "><?= $trendingArticles[$i]['title'] ?></a></td>
+				<td><?= $trendingArticles[$i]['pvDiff'] ?></td>
 			</tr>
 			<? endfor ?>
 		</tbody>
@@ -45,4 +46,3 @@
 		</tbody>
 	</table>
 </div>
-<canvas id="chart" width="720" height="400"></canvas>

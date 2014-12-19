@@ -44,7 +44,9 @@ require(['jquery'], function($) {
 			]
 		};
 		var ctx = document.getElementById("chart").getContext("2d");
-		var myLineChart = new Chart(ctx).Line(data, {});
+		var myLineChart = new Chart(ctx).Line(data, {
+			tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>"
+		});
 
 	});
 });
