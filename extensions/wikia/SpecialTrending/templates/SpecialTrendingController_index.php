@@ -1,7 +1,7 @@
-<ul class="trending-tabs">
-	<li><a href="#" data-tab="popular">Trending</a></li>
-	<li><a href="#" data-tab="unpopular">Biggest Loosers</a></li>
-</ul>
+<div class="trending-tabs">
+	<a href="#" class="btn btn-info" data-tab="popular">Trending</a>
+	<a href="#" class="btn btn-info" data-tab="unpopular">Biggest Loosers</a>
+</div>
 <div class="tab-contents" data-tab="popular">
 	<h2>Trending</h2>
 	<table class="table active table-striped table-hover">
