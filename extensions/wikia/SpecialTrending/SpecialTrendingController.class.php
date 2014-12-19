@@ -12,12 +12,6 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 	public function index() {
 		wfProfileIn(__METHOD__);
 
-		if( $this->checkPermissions() ) {
-			$this->displayRestrictionError();
-			wfProfileOut(__METHOD__);
-			return false; // skip rendering
-		}
-
 		if ( $this->wg->User->isBlocked() ) {
 			$block = $this->wg->User->mBlock;
 			wfProfileOut(__METHOD__);
@@ -25,7 +19,7 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 		}
 
 		$this->handleAssets();
-		$this->wg->Out->setPageTitle( $this->wf->Message('special-treding-title')->plain() );
+		$this->wg->Out->setPageTitle( $this->wf->Message('special-trending-title')->plain() );
 
 		$this->getTrending();
 
@@ -36,8 +30,8 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 	}
 
 	protected function handleAssets() {
-		$this->response->addAsset('/extensions/wikia/SpecialTrending/css/main.scss');
-		$this->response->addAsset('special_trending_js');
+		$this->response->addAsset('special_trending_styles');
+		$this->response->addAsset('special_trending_scripts');
 	}
 
 	protected function getTrending() {
