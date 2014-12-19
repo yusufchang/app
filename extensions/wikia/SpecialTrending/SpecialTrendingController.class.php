@@ -22,6 +22,7 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 		$this->wg->Out->setPageTitle( $this->wf->Message('special-trending-title')->plain() );
 
 		$this->getTrending();
+		$this->getLoosers();
 
 		$this->wg->SuppressSpotlights = true;
 
@@ -41,6 +42,17 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 			[
 				'wikiId' => $wgCityId,
 				'namespaces' => 0
+			])->getData()['items'];
+	}
+
+	protected function getLoosers() {
+		global $wgCityId;
+
+		$this->loosingArticles = $this->sendRequest('ArticlesApi', 'getTrending',
+			[
+				'wikiId' => $wgCityId,
+				'namespaces' => 0,
+				'order' => 'asc'
 			])->getData()['items'];
 	}
 }
