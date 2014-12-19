@@ -2235,3 +2235,14 @@ $config['fbconnect_js'] = [
 		'//extensions/FBConnect/fbconnect.js',
 	]
 ];
+
+
+/* SpecialTreding */
+$config['special_trending_js'] = array(
+    'type' => AssetsManager::TYPE_JS,
+    'assets' => array(
+        '//extensions/wikia/SpecialTrending/js/d3.js',
+        '//extensions/wikia/SpecialTrending/js/c3.js',
+        '//extensions/wikia/SpecialTrending/js/main.js',
+    )
+);
