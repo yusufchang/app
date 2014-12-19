@@ -38,3 +38,4 @@
 	<? endfor ?>
 	</tbody>
 </table>
+<div id="chart"></div>
