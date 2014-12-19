@@ -1348,51 +1348,60 @@ class ArticlesApiController extends WikiaApiController {
 		$namespaces = self::processNamespaces( $this->request->getArray( self::PARAMETER_NAMESPACES, null ), __METHOD__ );
 		$order = $this->request->getVal( 'order', 'desc' );
 
-		$mart = new HackMartService();
-		$articles = $mart->getTrendingArticles($verticalId, $langs, $wikiId, $namespaces, 20, $order);
 
-		$out = [];
-		foreach($articles as $article) {
-			$articleId = $article['articleId'];
-			$wikiId = $article['wikiId'];
+		$out = WikiaDataAccess::cache(
+			wfSharedMemcKey('trending', $verticalId, $wikiId, $langs, $namespaces, $order),
+			60*60*24,
+			function() use ($verticalId, $wikiId, $langs, $namespaces, $order) {
+				$mart = new HackMartService();
+				$articles = $mart->getTrendingArticles($verticalId, $langs, $wikiId, $namespaces, 20, $order);
 
-			$params = [
-				'controller' => 'ArticlesApiController',
-				'method' => 'getDetails',
-				'ids' => $articleId,
-				'width' => 400,
-				'height' => 225
-			];
+				$out = [];
+				foreach($articles as $article) {
+					$articleId = $article['articleId'];
+					$wikiId = $article['wikiId'];
 
-			$wikiData = \WikiFactory::getWikiByID( $wikiId );
+					$params = [
+						'controller' => 'ArticlesApiController',
+						'method' => 'getDetails',
+						'ids' => $articleId,
+						'width' => 400,
+						'height' => 225
+					];
 
-			$response = \ApiService::foreignCall( $wikiData->city_dbname, $params, \ApiService::WIKIA );
+					$wikiData = \WikiFactory::getWikiByID( $wikiId );
 
-			if ( !empty( $response['items'][$articleId] ) ) {
-				$articleDetails =  $response['items'][$articleId];
+					$response = \ApiService::foreignCall( $wikiData->city_dbname, $params, \ApiService::WIKIA );
 
-				$media = [
-					'thumbUrl' => $articleDetails['thumbnail'],
-					'originalWidth' => !empty( $articleDetails['original_dimensions']['width'])
-							? (int) $articleDetails['original_dimensions']['width']
-							: null,
-					'originalHeight' => !empty( $articleDetails['original_dimensions']['height'])
-							? (int) $articleDetails['original_dimensions']['height']
-							: null,
-				];
+					if ( !empty( $response['items'][$articleId] ) ) {
+						$articleDetails =  $response['items'][$articleId];
 
-				$out[] = [
-					'wiki_title' => $wikiData->city_title,
-					'wiki_url' => $response['basepath'],
-					'title' =>  $articleDetails['title'],
-					'url' =>  $articleDetails['url'],
-					'description' => $articleDetails['abstract'],
-					'media' => $media,
-					'pageviews' => $article['pageviews'],
-					'pvDiff' => $article['pvDiff'],
-				];
+						$media = [
+							'thumbUrl' => $articleDetails['thumbnail'],
+							'originalWidth' => !empty( $articleDetails['original_dimensions']['width'])
+									? (int) $articleDetails['original_dimensions']['width']
+									: null,
+							'originalHeight' => !empty( $articleDetails['original_dimensions']['height'])
+									? (int) $articleDetails['original_dimensions']['height']
+									: null,
+						];
+
+						$out[] = [
+							'wiki_title' => $wikiData->city_title,
+							'wiki_url' => $response['basepath'],
+							'title' =>  $articleDetails['title'],
+							'url' =>  $articleDetails['url'],
+							'description' => $articleDetails['abstract'],
+							'media' => $media,
+							'pageviews' => $article['pageviews'],
+							'pvDiff' => $article['pvDiff'],
+						];
+					}
+				}
+				return $out;
 			}
-		}
+		);
+
 
 		$this->setResponseData(['items' => $out]);
 	}

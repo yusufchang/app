@@ -6,7 +6,7 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 
 	/**
 	 * Main page for Special:Css page
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public function index() {
@@ -27,6 +27,8 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 		$this->handleAssets();
 		$this->wg->Out->setPageTitle( $this->wf->Message('special-treding-title')->plain() );
 
+		$this->getTrending();
+
 		$this->wg->SuppressSpotlights = true;
 
 		wfProfileOut(__METHOD__);
@@ -36,5 +38,15 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 	protected function handleAssets() {
 		$this->response->addAsset('/extensions/wikia/SpecialTrending/css/main.scss');
 		$this->response->addAsset('special_trending_js');
+	}
+
+	protected function getTrending() {
+		global $wgCityId;
+
+		$this->trendingArticles = $this->sendRequest('ArticlesApi', 'getTrending',
+			[
+				'wikiId' => $wgCityId,
+				'namespaces' => 0
+			])->getData()['items'];
 	}
 }
