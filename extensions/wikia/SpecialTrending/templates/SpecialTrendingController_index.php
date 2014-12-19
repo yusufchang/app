@@ -10,7 +10,7 @@
 			<tr>
 				<td>Rank</td>
 				<td>Title</td>
-				<td>Pageviews change</td>
+				<td>PVs change</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,7 +32,7 @@
 		<tr>
 			<td>Rank</td>
 			<td>Title</td>
-			<td>Pageviews change</td>
+			<td>PVs change</td>
 		</tr>
 		</thead>
 		<tbody>
