@@ -2247,8 +2247,7 @@ $config['special_trending_styles'] = [
 $config['special_trending_scripts'] = [
     'type' => AssetsManager::TYPE_JS,
     'assets' => [
-        '//extensions/wikia/SpecialTrending/scripts/d3.v3.js',
-        '//extensions/wikia/SpecialTrending/scripts/c3.js',
+        '//extensions/wikia/SpecialTrending/scripts/chart.js',
         '//extensions/wikia/SpecialTrending/scripts/main.js',
     ]
 ];

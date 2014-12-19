@@ -45,4 +45,4 @@
 		</tbody>
 	</table>
 </div>
-<div id="chart"></div>
+<canvas id="chart" width="720" height="400"></canvas>
