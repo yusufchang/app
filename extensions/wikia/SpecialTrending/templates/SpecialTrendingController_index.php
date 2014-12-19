@@ -1,5 +1,5 @@
 <div class="trending-tabs">
-	<a href="#" class="btn btn-success" data-tab="popular">Trending &#8599;</a>
+	<a href="#" class="btn btn-success" data-tab="popular">Greatest Winners &#8599;</a>
 	<a href="#" class="btn btn-danger" data-tab="unpopular">Biggest Loosers &#8600;</a>
 </div>
 <canvas id="chart" width="600" height="400"></canvas>
