@@ -18,15 +18,6 @@ class GlobalNavigationController extends WikiaController {
 	}
 
 	public function index() {
-		$result = $this->sendRequest('ArticlesApi', 'getTrending',
-		[
-			'verticalId' => 2,
-			//'langs' => 'de',
-			//'wikiId' => 147,
-			'namespaces' => 0
-		]);
-		var_dump($result->getData());die;
-
 		global $wgLang;
 
 		Wikia::addAssetsToOutput( 'global_navigation_scss' );
