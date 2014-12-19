@@ -1,5 +1,5 @@
 <div class="trending-tabs">
-	<a href="#" class="btn btn-success" data-tab="popular">Trending &#8599;</a>
+	<a href="#" class="btn btn-success" data-tab="popular">Greatest Winners &#8599;</a>
 	<a href="#" class="btn btn-danger" data-tab="unpopular">Biggest Loosers &#8600;</a>
 </div>
 <canvas id="chart" width="600" height="400"></canvas>
@@ -10,14 +10,14 @@
 			<tr>
 				<td>Rank</td>
 				<td>Title</td>
-				<td>Pageviews change</td>
+				<td>PVs change</td>
 			</tr>
 		</thead>
 		<tbody>
 			<? for($i = 0; $i < count($trendingArticles); $i++): ?>
-			<tr>
+			<tr data-wiki-id="<?= $trendingArticles[$i]['wiki_id'] ?>" data-article-id="<?= $trendingArticles[$i]['article_id'] ?>">
 				<td><?=$i + 1?>.</td>
-				<td><a href="<?= $trendingArticles[$i]['url'] ?> "><?= $trendingArticles[$i]['title'] ?></a></td>
+				<td><a href="<?= $trendingArticles[$i]['url'] ?>"><?= $trendingArticles[$i]['title'] ?></a></td>
 				<td><?= $trendingArticles[$i]['pvDiff'] ?></td>
 			</tr>
 			<? endfor ?>
@@ -32,13 +32,12 @@
 		<tr>
 			<td>Rank</td>
 			<td>Title</td>
-			<td>Pageviews change</td>
-			<td>Pageviews</td>
+			<td>PVs change</td>
 		</tr>
 		</thead>
 		<tbody>
 		<? for($i=0; $i < count($loosingArticles); $i++): ?>
-			<tr>
+			<tr data-wiki-id="<?= $loosingArticles[$i]['wiki_id'] ?>" data-article-id="<?= $loosingArticles[$i]['article_id'] ?>">
 				<td><?=$i+1?>.</td>
 				<td><a href="<?=$loosingArticles[$i]['url'] ?>"><?=$loosingArticles[$i]['title'] ?></a></td>
 				<td><?=$loosingArticles[$i]['pvDiff'] ?></td>
