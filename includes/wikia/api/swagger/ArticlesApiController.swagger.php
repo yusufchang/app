@@ -107,6 +107,76 @@ use Swagger\Annotations as SWG;
  * 		description="Article list"
  * 	)
  *
+ * @SWG\Model( id="TrendingArticleResult" )
+ * 	@SWG\Property(
+ * 		name="wiki_title",
+ * 		type="string",
+ * 		required="true",
+ * 		description="Wiki title"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="wiki_url",
+ * 		type="string",
+ * 		required="true",
+ * 		description="Wiki url"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="url",
+ * 		type="string",
+ * 		required="true",
+ * 		description="article url"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="title",
+ * 		type="string",
+ * 		required="true",
+ * 		description="title"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="description",
+ * 		type="string",
+ * 		required="true",
+ * 		description="Recommendation item description"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="media",
+ * 		type="Media",
+ * 		required="true",
+ * 		description="Object describing recommendation item media format"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="pageviews",
+ * 		type="string",
+ * 		required="true",
+ * 		description="pageviews"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="pvDiff",
+ * 		type="string",
+ * 		required="true",
+ * 		description="pageviews diff"
+ * 	)
+ *
+ * @SWG\Model( id="Media" )
+ * 	@SWG\Property(
+ * 		name="thumbUrl",
+ * 		type="string",
+ * 		required="true",
+ * 		description="URL to thumbnail"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="originalWidth",
+ * 		type="int",
+ * 		required="false",
+ * 		description="Original image width"
+ * 	)
+ * 	@SWG\Property(
+ * 		name="originalHeight",
+ * 		type="int",
+ * 		required="false",
+ * 		description="Original image height"
+ * 	)
+ *
  * @SWG\Model( id="Wikia" )
  * 	@SWG\Property(
  * 		name="id",
@@ -252,7 +322,7 @@ use Swagger\Annotations as SWG;
  * 		type="OriginalDimension",
  * 		description="The original dimensions of the thumbnail for the article, if available"
  * 	)
- * 
+ *
  * @SWG\Model( id="Revision" )
  * 	@SWG\Property(
  * 		name="id",
@@ -278,7 +348,7 @@ use Swagger\Annotations as SWG;
  * 		required="true",
  * 		description="The Unix timestamp (in seconds) that the revision was made"
  * 	)
- * 
+ *
  * @SWG\Model( id="OriginalDimension" )
  * 	@SWG\Property(
  * 		name="width",
@@ -313,6 +383,15 @@ use Swagger\Annotations as SWG;
  * 		required="true",
  * 		type="Array",
  * 		items="$ref:HubArticleResult",
+ * 		description="Standard container name for element collection (list)"
+ * 	)
+ *
+ * @SWG\Model( id="TrendingArticleResultSet" )
+ * 	@SWG\Property(
+ * 		name="items",
+ * 		required="true",
+ * 		type="Array",
+ * 		items="$ref:TrendingArticleResult",
  * 		description="Standard container name for element collection (list)"
  * 	)
  *
@@ -738,7 +817,7 @@ use Swagger\Annotations as SWG;
  * 		)
  * 	)
  * )
- * 
+ *
  *
  * @SWG\Api(
  * 	path="/Articles/MostLinked",
@@ -804,6 +883,60 @@ use Swagger\Annotations as SWG;
  * 					required="false",
  * 					allowMultiple="true",
  * 					dataType="string",
+ * 					defaultValue=""
+ * 				),
+ * 				@SWG\Parameter(
+ * 					name="namespaces",
+ * 					description="Comma-separated namespace ids, see more: http://community.wikia.com/wiki/Help:Namespaces",
+ * 					paramType="query",
+ * 					required="false",
+ * 					allowMultiple="true",
+ * 					dataType="Array",
+ * 					defaultValue=""
+ * 				)
+ * 			)
+ * 		)
+ * 	)
+ * )
+ * @SWG\Api(
+ * 	path="/Articles/Trending",
+ * 	description="View the most trending articles.",
+ * 	@SWG\Operations(
+ * 		@SWG\Operation(
+ * 			httpMethod="GET",
+ * 			summary="Get the top articles by pageviews for a hub",
+ * 			nickname="getTrending",
+ * 			responseClass="TrendingArticleResultSet",
+ * 			@SWG\ErrorResponses(
+ * 				@SWG\ErrorResponse( code="400", reason="Missing 'hub' parameter, number of languages exceeded or not on www.wikia.com domain" ),
+ * 				@SWG\ErrorResponse( code="404", reason="Results not found" )
+ * 			),
+ * 			@SWG\Parameters(
+ * 				@SWG\Parameter(
+ * 					name="verticalId",
+ * 					description="ID of the vertical",
+ * 					paramType="query",
+ * 					required="true",
+ * 					allowMultiple="false",
+ * 					dataType="Int",
+ * 					defaultValue="2"
+ * 				),
+ * 				@SWG\Parameter(
+ * 					name="lang",
+ * 					description="Comma separated language codes (e.g. en,de,fr)",
+ * 					paramType="query",
+ * 					required="false",
+ * 					allowMultiple="true",
+ * 					dataType="string",
+ * 					defaultValue=""
+ * 				),
+ * 				@SWG\Parameter(
+ * 					name="wikiId",
+ * 					description="wiki ID",
+ * 					paramType="query",
+ * 					required="false",
+ * 					allowMultiple="true",
+ * 					dataType="Array",
  * 					defaultValue=""
  * 				),
  * 				@SWG\Parameter(
@@ -1001,7 +1134,7 @@ use Swagger\Annotations as SWG;
  * 		)
  * 	)
  * )
- * 
+ *
  * @SWG\Api(
  * 		path="/Articles/Details",
  * 		description="Get top articles for the current wiki",
