@@ -12,12 +12,6 @@ class SpecialTrendingController extends WikiaSpecialPageController {
 	public function index() {
 		wfProfileIn(__METHOD__);
 
-		if( $this->checkPermissions() ) {
-			$this->displayRestrictionError();
-			wfProfileOut(__METHOD__);
-			return false; // skip rendering
-		}
-
 		if ( $this->wg->User->isBlocked() ) {
 			$block = $this->wg->User->mBlock;
 			wfProfileOut(__METHOD__);
