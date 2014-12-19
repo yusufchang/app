@@ -29,6 +29,9 @@ require(['jquery'], function($) {
 
 		$tabs.on('click', '[data-wiki-id]', function(e) {
 			//e.preventDefault();
+			$(this).parent().find('tr').removeClass('active');
+			$(this).addClass('active');
+
 			updateChart([
 				Math.random(),
 				Math.random(),
@@ -57,8 +60,6 @@ require(['jquery'], function($) {
 		};
 		var ctx = document.getElementById("chart").getContext("2d");
 		chart = new Chart(ctx).Line(data, {});
-		updateChart([1,2,3,4,5,6,7.3]);
-
-		$t
+		updateChart([1,2,3,4,5,6,7]);
 	});
 });

@@ -29,3 +29,7 @@ canvas#chart {
 .tab-contents table {
 	width: calc(100% - 620px);
 }
+
+tr.active {
+  font-weight: bold;
+}
