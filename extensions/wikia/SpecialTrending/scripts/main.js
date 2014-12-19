@@ -13,14 +13,19 @@ require(['jquery'], function($) {
 	//	}
 	//});
 
-	var $tabs = $('.tab'),
-		$buttons = $('.tabs a');
+	$(function(){
+		var $tabs = $('.tab-contents'),
+			$buttons = $('.trending-tabs a');
 
-	$buttons.on('click', function(e) {
-		e.preventDefault();
-		var name = $(this).data('tab');
+		$buttons.on('click', function(e) {
+			e.preventDefault();
 
-		$buttons.removeClass('active').find('[data-tab='+name+']').addClass('active');
-		$tabs.removeClass('active').find('[data-tab='+name+']').addClass('active');
-	}).first().click();
+			$buttons.removeClass('active');
+			$tabs.removeClass('active');
+
+			var name = $(this).addClass('active').data('tab');
+
+			$tabs.filter('[data-tab='+name+']').addClass('active');
+		}).first().click();
+	});
 });

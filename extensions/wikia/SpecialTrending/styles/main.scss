@@ -1,9 +1,9 @@
 @import "extensions/wikia/SpecialTrending/styles/c3";
 
-.tab:not(.active) {
+.tab-contents:not(.active) {
   display: none;
 }
 
-.tabs a.active {
+.trending-tabs a.active {
   border: bold;
 }

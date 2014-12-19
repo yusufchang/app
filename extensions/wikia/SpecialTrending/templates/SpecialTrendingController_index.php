@@ -1,8 +1,8 @@
-<ul class="tabs">
+<ul class="trending-tabs">
 	<li><a href="#" data-tab="popular">Trending</a></li>
 	<li><a href="#" data-tab="unpopular">Biggest Loosers</a></li>
 </ul>
-<div class="tab" data-tab="popular">
+<div class="tab-contents" data-tab="popular">
 	<h2>Trending</h2>
 	<table style="color: green">
 		<thead>
@@ -24,7 +24,7 @@
 	</table>
 </div>
 
-<div class="tab" data-tab="popular">
+<div class="tab-contents" data-tab="unpopular">
 	<h2>Biggest Loosers</h2>
 	<table>
 		<thead>
