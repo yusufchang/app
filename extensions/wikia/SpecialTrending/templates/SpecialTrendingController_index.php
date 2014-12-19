@@ -1,6 +1,6 @@
 <div class="trending-tabs">
-	<a href="#" class="btn btn-info" data-tab="popular">Trending</a>
-	<a href="#" class="btn btn-info" data-tab="unpopular">Biggest Loosers</a>
+	<a href="#" class="btn btn-default" data-tab="popular">Trending</a>
+	<a href="#" class="btn btn-default" data-tab="unpopular">Biggest Loosers</a>
 </div>
 <canvas id="chart" width="400" height="400"></canvas>
 <div class="tab-contents" data-tab="popular">

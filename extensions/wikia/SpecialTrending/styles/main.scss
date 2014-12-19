@@ -4,6 +4,14 @@
 .AdminDashboardHeader h1 a:before {
 	content: "🔙";
 }
+.AdminDashboardGeneralHeader {
+	height: 50px !important;
+}
+.AdminDashboardArticleHeader h1 {
+	font-weight: bold;
+	font-size: 24px !important;
+	padding: 10px;
+}
 .tab-contents:not(.active) {
 	display: none;
 }
