@@ -1,8 +1,7 @@
 <?php
 class SpecialTrendingController extends WikiaSpecialPageController {
-	protected  $model;
-
 	public function __construct() {
+        parent::__construct('Trending', 'trending', true);
 	}
 
 	/**
