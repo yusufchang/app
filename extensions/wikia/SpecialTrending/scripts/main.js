@@ -41,22 +41,14 @@ require(['jquery'], function($) {
 					wikiId: $t.data('wiki-id')
 				},
 				callback: function (response) {
-					var data = [
-						Math.random(),
-						Math.random(),
-						Math.random(),
-						Math.random(),
-						Math.random(),
-						Math.random(),
-						Math.random()
-					];
+					var data = [0, 0, 0, 0, 0, 0, 0];
 
 					for(var i = 0; i < response.items.length; i++) {
 						data[i] = response.items[i].pageviews;
 					}
 
 					$t.addClass('active');
-					updateChart(data.reverse());
+					updateChart(data);
 				}
 			});
 
@@ -64,7 +56,7 @@ require(['jquery'], function($) {
 		});
 
 		var data = {
-			labels: [ '-6d', '-5d', '-4d', '-3d', '-2d', '-1d', 'Today'],
+			labels: [ '-6d', '-5d', '-4d', '-3d', '-2d', '-1d', '*'],
 			datasets: [
 				{
 					label: "Dataset",
