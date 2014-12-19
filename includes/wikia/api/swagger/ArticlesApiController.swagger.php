@@ -904,11 +904,10 @@ use Swagger\Annotations as SWG;
  * 	@SWG\Operations(
  * 		@SWG\Operation(
  * 			httpMethod="GET",
- * 			summary="Get the top articles by pageviews for a hub",
+ * 			summary="View the most trending articles. Can be filtered by vertical, lang, wikiId and/or namespace",
  * 			nickname="getTrending",
  * 			responseClass="TrendingArticleResultSet",
  * 			@SWG\ErrorResponses(
- * 				@SWG\ErrorResponse( code="400", reason="Missing 'hub' parameter, number of languages exceeded or not on www.wikia.com domain" ),
  * 				@SWG\ErrorResponse( code="404", reason="Results not found" )
  * 			),
  * 			@SWG\Parameters(
