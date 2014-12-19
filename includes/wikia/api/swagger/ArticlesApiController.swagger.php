@@ -915,7 +915,7 @@ use Swagger\Annotations as SWG;
  * 					name="verticalId",
  * 					description="ID of the vertical",
  * 					paramType="query",
- * 					required="true",
+ * 					required="false",
  * 					allowMultiple="false",
  * 					dataType="Int",
  * 					defaultValue="2"
