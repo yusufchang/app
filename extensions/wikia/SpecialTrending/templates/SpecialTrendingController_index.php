@@ -33,7 +33,6 @@
 			<td>Rank</td>
 			<td>Title</td>
 			<td>Pageviews change</td>
-			<td>Pageviews</td>
 		</tr>
 		</thead>
 		<tbody>
