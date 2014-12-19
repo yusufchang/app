@@ -1,5 +1,9 @@
 @import "extensions/wikia/SpecialTrending/styles/c3";
 
-body {
-  color: red;
+.tab:not(.active) {
+  display: none;
+}
+
+.tabs a.active {
+  border: bold;
 }
