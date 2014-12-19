@@ -2238,17 +2238,17 @@ $config['fbconnect_js'] = [
 
 
 /* SpecialTreding */
-$config['special_trending_styles'] = array(
+$config['special_trending_styles'] = [
     'type' => AssetsManager::TYPE_SCSS,
-    'assets' => array(
+    'assets' => [
         '//extensions/wikia/SpecialTrending/styles/main.scss',
-    )
-);
-$config['special_trending_scripts'] = array(
+    ]
+];
+$config['special_trending_scripts'] = [
     'type' => AssetsManager::TYPE_JS,
-    'assets' => array(
-        '//extensions/wikia/SpecialTrending/scripts/d3.v3.min.js',
+    'assets' => [
+        '//extensions/wikia/SpecialTrending/scripts/d3.v3.js',
         '//extensions/wikia/SpecialTrending/scripts/c3.js',
         '//extensions/wikia/SpecialTrending/scripts/main.js',
-    )
-);
+    ]
+];
