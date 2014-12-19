@@ -1387,9 +1387,11 @@ class ArticlesApiController extends WikiaApiController {
 						];
 
 						$out[] = [
+							'wiki_id' => $wikiId,
 							'wiki_title' => $wikiData->city_title,
 							'wiki_url' => $response['basepath'],
 							'title' =>  $articleDetails['title'],
+							'article_id' => $articleId,
 							'url' =>  $articleDetails['url'],
 							'description' => $articleDetails['abstract'],
 							'media' => $media,
