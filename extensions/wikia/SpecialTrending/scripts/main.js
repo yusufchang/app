@@ -28,19 +28,39 @@ require(['jquery'], function($) {
 		}).first().click();
 
 		$tabs.on('click', '[data-wiki-id]', function(e) {
-			//e.preventDefault();
-			$(this).parent().find('tr').removeClass('active');
-			$(this).addClass('active');
+			var $t = $(this);
+			$t.parent().find('tr').removeClass('active');
 
-			updateChart([
-				Math.random(),
-				Math.random(),
-				Math.random(),
-				Math.random(),
-				Math.random(),
-				Math.random(),
-				Math.random()
-			]);
+			$.nirvana.sendRequest({
+				controller: 'ArticlesApi',
+				method: 'getPageviews',
+				format: 'json',
+				type: 'GET',
+				data: {
+					articleId: $t.data('article-id'),
+					wikiId: $t.data('wiki-id')
+				},
+				callback: function (response) {
+					var data = [
+						Math.random(),
+						Math.random(),
+						Math.random(),
+						Math.random(),
+						Math.random(),
+						Math.random(),
+						Math.random()
+					];
+
+					for(var i = 0; i < response.items.length; i++) {
+						data[i] = response.items[i].pageviews;
+					}
+
+					$t.addClass('active');
+					updateChart(data.reverse());
+				}
+			});
+
+
 		});
 
 		var data = {
