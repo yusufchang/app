@@ -1405,4 +1405,23 @@ class ArticlesApiController extends WikiaApiController {
 
 		$this->setResponseData(['items' => $out]);
 	}
+
+	public function getPageviews() {
+		$wikiId = trim( $this->request->getVal( 'wikiId', null ) );
+		$articleId = trim( $this->request->getVal( 'articleId', null ) );
+
+		$out = WikiaDataAccess::cache(
+			wfSharedMemcKey('pvs', $wikiId, $articleId),
+			60*60*24,
+			function() use ( $wikiId, $articleId) {
+				$mart = new HackMartService();
+				$articles = $mart->getPageviews($wikiId, $articleId);
+
+				return $articles;
+			}
+		);
+
+
+		$this->setResponseData(['items' => $out]);
+	}
 }

@@ -5,6 +5,7 @@
 			<td>Rank</td>
 			<td>Title</td>
 			<td>Pageviews change</td>
+			<td>Pageviews</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -13,6 +14,7 @@
 			<td><?=$i+1?>.</td>
 			<td><a href="<?=$trendingArticles[$i]['url'] ?>"><?=$trendingArticles[$i]['title'] ?></a></td>
 			<td><?=$trendingArticles[$i]['pvDiff'] ?></td>
+			<td><?=$trendingArticles[$i]['pageviews'] ?></td>
 		</tr>
 		<? endfor ?>
 	</tbody>
@@ -26,6 +28,7 @@
 		<td>Rank</td>
 		<td>Title</td>
 		<td>Pageviews change</td>
+		<td>Pageviews</td>
 	</tr>
 	</thead>
 	<tbody>
@@ -34,6 +37,7 @@
 			<td><?=$i+1?>.</td>
 			<td><a href="<?=$loosingArticles[$i]['url'] ?>"><?=$loosingArticles[$i]['title'] ?></a></td>
 			<td><?=$loosingArticles[$i]['pvDiff'] ?></td>
+			<td><?=$loosingArticles[$i]['pageviews'] ?></td>
 		</tr>
 	<? endfor ?>
 	</tbody>
