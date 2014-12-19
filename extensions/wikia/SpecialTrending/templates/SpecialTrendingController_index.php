@@ -4,7 +4,7 @@
 </ul>
 <div class="tab-contents" data-tab="popular">
 	<h2>Trending</h2>
-	<table class="table active able-striped table-hover">
+	<table class="table active table-striped table-hover">
 		<thead>
 			<tr>
 				<td>Rank</td>
