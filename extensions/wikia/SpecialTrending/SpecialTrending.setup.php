@@ -4,8 +4,6 @@
  *
  * @author Bartosz V. Bentkowski
  */
-$dir = dirname(__FILE__) . '/';
-
 $wgExtensionCredits['specialpage'][] = array(
 	'name' => 'Trending Pages',
 	'description' => 'Admin tool for Trending Pages',
@@ -16,12 +14,13 @@ $wgExtensionCredits['specialpage'][] = array(
 );
 
 // models
-$wgAutoloadClasses['SpecialTrendingHooks'] =  $dir . 'SpecialTrendingHooks.class.php';
+$wgAutoloadClasses['SpecialTrendingHooks'] =  __DIR__ . '/SpecialTrendingHooks.class.php';
+$wgAutoloadClasses['SpecialTrendingController'] =  __DIR__ . '/SpecialTrendingController.class.php';
 
 // special page
 $wgSpecialPages['Trending'] = 'SpecialTrendingController';
 $wgSpecialPageGroups['Trending'] = 'wikia';
 
 // message files
-$wgExtensionMessagesFiles['SpecialTrending'] = $dir.'SpecialTrending.i18n.php';
+$wgExtensionMessagesFiles['SpecialTrending'] = __DIR__ . '/SpecialTrending.i18n.php';
 JSMessages::registerPackage( 'SpecialTrending', array( 'special-trending-*' ) );
