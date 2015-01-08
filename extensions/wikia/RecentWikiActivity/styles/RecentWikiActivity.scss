@@ -6,11 +6,12 @@
 $recent-wiki-activity-background-color: mix($color-page, $color-page-opposite, 95%);
 
 .recent-wiki-activity {
-	@include grid-column-width('medium', 4, -2 * $medium-grid-column-padding);
+	//@include grid-column-width('medium', 4, -2 * $medium-grid-column-padding);
+	width: 300px;
 	background-color: $recent-wiki-activity-background-color;
 	clear: right;
 	float: right;
-	margin: 0 $medium-grid-column-padding + $medium-content-padding - $content-border-width 36px $medium-grid-gutter + $medium-grid-column-padding;
+	margin: 0 0 36px 0;
 	padding: 0 20px;
 	position: relative; // Temporary fix for tables overlapping recentWikiActivity & medrec ad
 	word-wrap: break-word;
@@ -63,8 +64,8 @@ $recent-wiki-activity-background-color: mix($color-page, $color-page-opposite, 9
 	}
 
 	@media #{$small-only} {
-		@include grid-column-width('small', 5);
-		margin: 0 $small-content-padding - $content-border-width 16px $small-grid-gutter + $small-grid-column-padding;
+		//@include grid-column-width('small', 5);
+		//margin: 0 $small-content-padding - $content-border-width 16px $small-grid-gutter + $small-grid-column-padding;
 
 		li {
 			margin-bottom: 12px;
@@ -72,8 +73,8 @@ $recent-wiki-activity-background-color: mix($color-page, $color-page-opposite, 9
 	}
 
 	@media #{$large-up} {
-		@include grid-column-width('large', 4, -2 * $large-grid-column-padding);
-		margin: 0 $large-grid-column-padding + $large-content-padding - $content-border-width 36px $large-grid-gutter + $large-grid-column-padding;
+		//@include grid-column-width('large', 4, -2 * $large-grid-column-padding);
+		//margin: 0 $large-grid-column-padding + $large-content-padding - $content-border-width 36px $large-grid-gutter + $large-grid-column-padding;
 
 		header {
 			margin: 40px 0 33px;
