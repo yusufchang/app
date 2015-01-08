@@ -38,8 +38,8 @@ $category-height: 16px;
 
 	border-top: 1px solid $color-page-border;
 	line-height: $category-height;
-	margin: 0 $medium-grid-column + $medium-grid-gutter + $medium-content-padding - $content-border-width $categories-vertical-spacing;
-	padding: 0 $medium-grid-column-padding;
+	margin: 0 $medium-content-padding - $content-border-width $categories-vertical-spacing;
+	padding: 0;
 
 	.categories {
 		margin: $categoryselect-list-spacing 0 0;
@@ -139,13 +139,13 @@ $category-height: 16px;
 	}
 
 	@media #{$small-only} {
-		margin: 0 $small-content-padding - $content-border-width $categories-vertical-spacing $small-grid-column + $small-grid-gutter + $small-content-padding - $content-border-width;
-		padding: 0 $small-grid-column-padding;
+		margin: 0 $small-content-padding - $content-border-width $categories-vertical-spacing;
+		padding: 0 0;
 	}
 
 	@media #{$large-up} {
-		margin: 0 $large-grid-column + $large-grid-gutter + $large-content-padding - $content-border-width $categories-vertical-spacing;
-		padding: 0 $large-grid-column-padding;
+		margin: 0 $large-content-padding - $content-border-width $categories-vertical-spacing;
+		padding: 0 0;
 	}
 
 	&.editMode {

@@ -34,10 +34,10 @@
 }
 
 .top-right-ad {
-	@include grid-column-width('medium', 4, -2 * $medium-grid-column-padding);
+	width: 300px;
 	display: block;
 	float: right;
-	margin: 0 $medium-grid-column-padding + $medium-content-padding - $content-border-width 0 $medium-grid-gutter + $medium-grid-column-padding;
+	margin: 0 $medium-content-padding - $content-border-width 0 $medium-content-padding;
 	position: relative; // Temporary fix for tables overlapping recentWikiActivity & medrec ad
 	text-align: center;
 
@@ -125,19 +125,19 @@ $incontent-slots: INCONTENT_1, INCONTENT_2, INCONTENT_3;
 
 @media #{$small-only} {
 	.ad-in-content > .wikia-ad {
-		margin-right: -$small-grid-column-padding;
+		//margin-right: -$small-grid-column-padding;
 	}
 }
 
 @media #{$medium-only} {
 	.ad-in-content > .wikia-ad {
-		margin-right: -$medium-grid-column - $medium-grid-column-padding;
+		//margin-right: -$medium-grid-column - $medium-grid-column-padding;
 	}
 }
 
 @media #{$large-only} {
 	.ad-in-content > .wikia-ad {
-		margin-right: -$large-grid-column - $large-grid-column-padding;
+		//margin-right: -$large-grid-column - $large-grid-column-padding;
 	}
 }
 
@@ -151,15 +151,15 @@ $incontent-slots: INCONTENT_1, INCONTENT_2, INCONTENT_3;
 	}
 
 	.top-right-ad {
-		@include grid-column-width('small', 5);
-		margin: 0 $small-content-padding - $content-border-width 0 $small-grid-gutter + $small-grid-column-padding;
+		width: 300px;
+		margin: 0 $small-content-padding - $content-border-width 0 $small-content-padding;
 	}
 }
 
 @media #{$large-up} {
 	.top-right-ad {
-		@include grid-column-width('large', 4, -2 * $large-grid-column-padding);
-		margin: 0 $large-grid-column-padding + $large-content-padding - $content-border-width 0 $large-grid-gutter + $large-grid-column-padding;
+		width: 300px;
+		margin: 0 $large-content-padding - $content-border-width 0 $large-content-padding;
 	}
 
 	// Scale the skin ads on the largest breakpoint

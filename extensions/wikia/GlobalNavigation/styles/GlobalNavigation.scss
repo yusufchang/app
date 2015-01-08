@@ -70,7 +70,7 @@
 
 @media #{$small-only} {
 	.wikia-logo-container {
-		@include grid-column-width('small', 3, $small-content-padding);
+		@include grid-column-width('small', 3);
 
 		.wikia-logo {
 			padding: 0 $small-grid-column-padding 0 $small-content-padding + $small-grid-column-padding - $content-border-width;

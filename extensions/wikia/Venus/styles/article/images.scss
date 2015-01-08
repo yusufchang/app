@@ -107,7 +107,7 @@ $image-max-columns-medium-and-large: 10;
 	}
 
 	@each $direction in left, right {
-		@include floated-element-base($direction, $image-margin, -$medium-grid-column-padding);
+		@include floated-element-base($direction, $image-margin, 0);
 	}
 
 	table {
