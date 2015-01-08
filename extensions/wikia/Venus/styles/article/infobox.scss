@@ -9,7 +9,7 @@
 	clear: right;
 	display: block;
 	float: right;
-	margin: 0 (-$medium-grid-gutter - $medium-grid-column) 30px $medium-grid-gutter + $medium-grid-column-padding;
+	margin: 0 0 30px $medium-grid-gutter + $medium-grid-column-padding;
 	text-align: center;
 
 	/* taken from /skins/oasis/css/core/article.scss and slightly modified for Venus */
@@ -121,7 +121,7 @@
 	.infobox-container {
 		@include grid-column-width('large', 4, -2 * $large-grid-column-padding);
 		margin-left: $large-grid-gutter + $large-grid-column-padding;
-		margin-right: -$large-grid-gutter - $large-grid-column;
+		margin-right: 0;
 
 		table, div {
 			@include grid-column-max-width('large', 4, -2 * $large-grid-column-padding);
@@ -133,7 +133,7 @@
 	.infobox-container {
 		@include grid-column-width('small', 5);
 		margin-left: $small-grid-gutter + $small-grid-column-padding;
-		margin-right: -$small-grid-column-padding;
+		margin-right: 0;
 
 		table, div {
 			@include grid-column-max-width('small', 5);
