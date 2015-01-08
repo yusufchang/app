@@ -37,6 +37,7 @@ $category-height: 16px;
 	@include font-size-xs;
 
 	border-top: 1px solid $color-page-border;
+	clear: left;
 	line-height: $category-height;
 	margin: 0 $medium-content-padding - $content-border-width $categories-vertical-spacing;
 	padding: 0;
