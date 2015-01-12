@@ -87,7 +87,7 @@ define('ext.wikia.adEngine.wikiaGptAdDetect', [
 	}
 
 	function getAdType(slotname, gptEvent, iframe) {
-		var status, height, gptEmpty, iframeOk = false;
+		var status, height, gptEmpty, dataAttrib, iframeOk = false;
 
 		log(['getAdType', slotname], 'info', logGroup);
 
@@ -103,6 +103,13 @@ define('ext.wikia.adEngine.wikiaGptAdDetect', [
 
 			return iframe.contentWindow.AdEngine_adType;
 		}
+
+		try {
+			dataAttrib = iframe.parentNode.parentNode.getAttribute('data-ad-type');
+			if (dataAttrib) {
+				return dataAttrib;
+			}
+		} catch (ignore) {}
 
 		status = window.adDriver2ForcedStatus && window.adDriver2ForcedStatus[slotname];
 

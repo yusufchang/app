@@ -43,6 +43,11 @@ define('ext.wikia.adEngine.gptSlotConfig', function () {
 		GPT_FLUSH: 'flushonly'
 	}, slotMapConfig = {
 		gpt: desktopSlots,
+		turtle_desktop: {
+			TOP_LEADERBOARD:            {size: '728x90,970x250,970x90', path: '/98544404/Wikia/Testing', adType: 'async'},
+			TOP_RIGHT_BOXAD:            {size: '300x250', path: '/98544404/Wikia/Testing', adType: 'async'},
+			LEFT_SKYSCRAPER_2:          {size: '300x600,160x600', path: '/98544404/Wikia/Testing', adType: 'async'}
+		},
 		mobile: {
 			MOBILE_TOP_LEADERBOARD:     {size: '320x50,320x100,1x1'},
 			MOBILE_IN_CONTENT:          {size: '300x250,1x1'},
@@ -90,6 +95,7 @@ define('ext.wikia.adEngine.gptSlotConfig', function () {
 		return JSON.parse(JSON.stringify(slotMapConfig[src]));
 	}
 
+	// Add some key-value pairs to existing slots. Used for Amazon and Rubicon integrations
 	function extendSlotParams(src, slotName, params) {
 		var i;
 		if (!(params && slotMapConfig[src] && slotMapConfig[src][slotName])) {

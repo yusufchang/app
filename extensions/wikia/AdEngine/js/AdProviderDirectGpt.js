@@ -14,7 +14,7 @@ define('ext.wikia.adEngine.provider.directGpt', [
 	'use strict';
 
 	var logGroup = 'ext.wikia.adEngine.provider.directGpt',
-		srcName = 'gpt',
+		srcName = 'turtle_desktop',
 		slotMap = slotMapConfig.getConfig(srcName),
 		forgetAdsShownAfterTime = 3600, // an hour
 		country = Geo.getCountryCode(),

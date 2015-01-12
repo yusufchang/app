@@ -85,7 +85,6 @@ define('ext.wikia.adEngine.wikiaGptHelper', [
 			slotMapSrc,
 			slotItem,
 			slotPath,
-			slotParams,
 			name,
 			value;
 
@@ -109,13 +108,26 @@ define('ext.wikia.adEngine.wikiaGptHelper', [
 							sizes = filterOutSizesBiggerThanScreenSize(sizes);
 						}
 
-						slotPath = path + '/' + slotnameGpt;
+						if (slotItem.path) {
+							slotPath = slotItem.path + '/' + slotnameGpt;
+						} else {
+							slotPath = path + '/' + slotnameGpt;
+						}
 
 						log(['defineSlots', 'googletag.defineSlot', slotPath, sizes, slotnameGpt], 'debug', logGroup);
 						slot = googletag.defineSlot(slotPath, sizes, slotnameGpt);
 						slot.addService(pubads);
 
+						dataAttribs[slotnameGpt] = {};
+
+						if (slotItem.adType) {
+							dataAttribs[slotnameGpt]['data-ad-type'] = slotItem.adType;
+						}
+
+						delete slotItem.adType;
+						delete slotItem.path;
 						delete slotItem.size;
+
 						slotItem.pos = slotItem.pos || slotname;
 						slotItem.src = slotMapSrc;
 
@@ -131,11 +143,9 @@ define('ext.wikia.adEngine.wikiaGptHelper', [
 
 						gptSlots[slotnameGpt] = slot;
 
-						dataAttribs[slotnameGpt] = {
-							'data-gpt-page-params': JSON.stringify(pageLevelParams),
-							'data-gpt-slot-params': JSON.stringify(slotItem),
-							'data-gpt-slot-sizes': JSON.stringify(sizes)
-						};
+						dataAttribs[slotnameGpt]['data-gpt-page-params'] = JSON.stringify(pageLevelParams);
+						dataAttribs[slotnameGpt]['data-gpt-slot-params'] = JSON.stringify(slotItem);
+						dataAttribs[slotnameGpt]['data-gpt-slot-sizes'] = JSON.stringify(sizes);
 
 						log(['defineSlots', 'defined slot', slotname, slot], 'debug', logGroup);
 					}
