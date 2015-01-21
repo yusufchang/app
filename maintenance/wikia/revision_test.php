@@ -12,7 +12,9 @@ class RevisionBulkTest extends Maintenance {
 		$app = F::app();
 		$a = $app->sendRequest('ArticlesApi',
 								'getDetails',
-								['method'=>'getDetails', 'titles'=>'Test Article 1']);
+								[	'method'=>'getDetails',
+									'titles'=>'Test Article 1',
+									'ids'=>'1461']);
 
 		$data = $a->getData();
 		var_dump(count($data['items']));
