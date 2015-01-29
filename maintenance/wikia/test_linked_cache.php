@@ -7,11 +7,7 @@
 #ini_set('display_errors', 'stderr');
 #ini_set('error_reporting', E_NOTICE);
 
-global $wgMemCachedServers;
-$wgMemCachedServers = [ '127.0.0.1:666' ];
-
 require_once( dirname( __FILE__ ) . '/../Maintenance.php' );
-$GLOBALS['wgMemCachedServers'] = $wgMemCachedServers;
 
 /**
  * TestLinkedCacheIssue
