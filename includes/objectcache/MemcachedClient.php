@@ -893,7 +893,6 @@ class MWMemcached {
 		}
 
 		$hv = is_array( $key ) ? intval( $key[0] ) : $this->_hashfunc( $key );
-
 		if ( $this->_buckets === null ) {
 			foreach ( $this->_servers as $v ) {
 				if ( is_array( $v ) ) {
@@ -912,6 +911,10 @@ class MWMemcached {
 		for( $tries = 0; $tries < 20; $tries++ ) {
 			$host = $this->_buckets[$hv % $this->_bucketcount];
 			$sock = $this->sock_to_host( $host );
+			# TEMPORARY DEBUG ---------------------------------------------
+			if ( strpos($key, "linkcache") )
+				print "[USING: $host | $key ]\n";
+			# TEMPORARY DEBUG ---------------------------------------------
 			if ( is_resource( $sock ) ) {
 				$this->_flush_read_buffer( $sock );
 				return $sock;
