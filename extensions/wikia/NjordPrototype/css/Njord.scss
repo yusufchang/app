@@ -156,6 +156,11 @@
 }
 
 .MainPageHeroHeader {
+	[contenteditable=true]:empty:before{
+		content: attr(placeholder);
+		display: block; /* For Firefox */
+	}
+
 	&.hero-image-wrapper {
 		margin: -1px -1px 0;
 		overflow: hidden;
