@@ -1,4 +1,4 @@
-define("ace/ext/linking",["require","exports","module","ace/editor","ace/config"], function(require, exports, module) {
+ace.define("ace/ext/linking",["require","exports","module","ace/editor","ace/config"], function(require, exports, module) {
 
 var Editor = require("ace/editor").Editor;
 
@@ -49,4 +49,3 @@ function onClick(e) {
                 (function() {
                     window.require(["ace/ext/linking"], function() {});
                 })();
-            
