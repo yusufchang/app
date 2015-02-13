@@ -57,6 +57,7 @@ final class InfoboxBuilderHooks {
 
 			unset( $args[0] );
 			$childFrame = $frame->newChild( $args, $parser->getTitle(), 1 );
+			self::saveInfoboxData($parser->getOutput(), $childFrame->getArguments());
 
 			$moduleText = file_get_contents( __DIR__ . '/includes/lua/InfoboxBuilder.lua' );
 			$module = new \Scribunto_LuaModule( $engine, $moduleText, 'InfoboxBuilder' );
@@ -100,5 +101,25 @@ final class InfoboxBuilderHooks {
 	public static function addInfoboxBuilderStyles( \EditPageLayoutController $controller ) {
 		$controller->wg->Out->addModuleStyles( 'ext.wikia.InfoboxBuilder' );
 		return true;
+	}
+
+	protected static function saveInfoboxData( \ParserOutput $parserOutput, $rawData ) {
+		$data = self::parseInfoboxMetadata( $rawData );
+		if ( !empty( $data ) ) {
+			$infoboxes = $parserOutput->getProperty( "infoboxes" );
+			$infoboxes[] = $data;
+			$parserOutput->setProperty( "infoboxes", $infoboxes );
+		}
+	}
+
+	protected static function parseInfoboxMetadata( $data ) {
+		$result = [];
+		foreach ( $data as $key => $value ) {
+			$keys = explode( ":", $key );
+			$result[ intval( $keys[ 0 ] ) ][ $keys[ 1 ] ] =
+				( strpos( $value, ";" ) != false ) ? explode( ";", $value ) : $value;
+		}
+
+		return $result;
 	}
 }
