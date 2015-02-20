@@ -3911,7 +3911,7 @@ ___________________________________________
 To check out the latest happenings on Wikia, visit http://community.wikia.com
 Want to control which emails you receive? Go to: {{fullurl:{{ns:special}}:Preferences}}",
 	'usersignup-facebook-problem' => 'Er is een probleem opgetreden tijdens het communiceren met Facebook. Probeer het later opnieuw.',
-	'usersignup-facebook-signup-header' => 'Creating a new account?',
+	'usersignup-facebook-signup-header' => 'Een nieuwe account aanmaken?',
 	'usersignup-facebook-login-header' => 'Heb je al een account?',
 	'usersignup-page-captcha-load-fail-title' => 'CAPTCHA niet geladen',
 	'usersignup-page-captcha-load-fail-text' => 'Het spijt ons, de uitdaging kon niet geladen worden en is vereist om een account te creëren. Probeer het later nog eens.',
@@ -4005,7 +4005,7 @@ $messages['pl'] = array(
 	'usersignup-error-throttled-email' => 'Zażądano dzisiaj zbyt wielu wiadomości potwierdzających e-mail. Spróbuj ponownie później.',
 	'usersignup-error-too-many-changes' => 'Osiągnięto limit żądań zmiany e-maila. Spróbuj ponownie później.',
 	'usersignup-error-password-length' => 'Twoje hasło jest zbyt długie. Wybierz hasło, które ma mniej niż 51 znaków.',
-	'usersignup-error-confirmed-user' => "Looks like you've already confirmed your email address for $1!  Check out your [$2 user profile].",
+	'usersignup-error-confirmed-user' => 'Wygląda na to, że już potwierdzono adres e-mail $1. Sprawdź swój [$2 profil użytkownika].',
 	'usersignup-facebook-heading' => 'Zakończenie rejestracji',
 	'usersignup-facebook-create-account' => 'Załóż nowe konto',
 	'usersignup-facebook-email-tooltip' => 'Jeśli chcesz zmienić swój adres e-mail, możesz to zrobić później w swoich preferencjach.',
