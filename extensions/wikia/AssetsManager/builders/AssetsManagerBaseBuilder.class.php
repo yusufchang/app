@@ -101,6 +101,7 @@ class AssetsManagerBaseBuilder {
 	 * @throws Exception
 	 */
 	public static function minifyJS($content, $useYUI = false) {
+		return $content;
 		global $IP;
 		wfProfileIn(__METHOD__);
 
