@@ -102,11 +102,9 @@
 		 * @return array
 		 */
 		protected function fetchTopArticlesInfo( $count, $namespace = NS_MAIN ) {
-			global $wgDevelEnvironment;
-
 			wfProfileIn(__METHOD__);
 
-			$articles = array();
+			$articles = [];
 			$dbr = wfGetDB( DB_SLAVE );
 			$res = $dbr->select(
 				array( 'page', 'categorylinks' ),
@@ -116,7 +114,7 @@
 					'page_namespace' => $namespace,
 				),
 				__METHOD__,
-				array(),
+				array( 'LIMIT' => $count ),
 				array( 'categorylinks'  => array( 'INNER JOIN', 'cl_from = page_id' ) )
 			);
 
@@ -129,36 +127,15 @@
 
 				$pageIds = array_keys($pages);
 				$pageViews = self::getPageViews($pageIds);
-				$articles = array();
-				$entries = 0;
-
-				foreach ($pageViews as $pageId => $views) {
-					if ($entries >= $count)
-						break;
-					if (empty($pages[$pageId]))
-						continue;
-					$page = $pages[$pageId];
-					$articles[$pageId] = array(
-						'page_id' => $pageId,
-						'page_title' => $page->page_title,
-						'page_namespace' => $page->page_namespace,
-						'views' => $views,
-					);
-					$entries++;
-					unset($pages[$pageId]);
-				}
 
 				foreach ($pages as $page) {
-					if ($entries >= $count)
-						break;
 					$page->page_id = intval($page->page_id);
 					$articles[$page->page_id] = array(
 						'page_id' => $page->page_id,
 						'page_title' => $page->page_title,
 						'page_namespace' => $page->page_namespace,
-						'views' => 0,
+						'views' => !empty( $pageViews[$page->page_id] ) ? $pageViews[$page->page_id] : 0
 					);
-					$entries++;
 				}
 			}
 
