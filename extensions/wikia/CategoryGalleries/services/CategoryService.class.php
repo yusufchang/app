@@ -107,19 +107,19 @@
 			$articles = [];
 			$dbr = wfGetDB( DB_SLAVE );
 			$res = $dbr->select(
-				array( 'page', 'categorylinks' ),
-				array( 'page_id', 'page_title', 'page_namespace'  ),
-				array(
+				[ 'page', 'categorylinks' ],
+				[ 'page_id', 'page_title', 'page_namespace'  ],
+				[
 					'cl_to' => $this->dbkey,
 					'page_namespace' => $namespace,
-				),
+				],
 				__METHOD__,
-				array( 'LIMIT' => $count ),
-				array( 'categorylinks'  => array( 'INNER JOIN', 'cl_from = page_id' ) )
+				[ 'LIMIT' => $count ],
+				[ 'categorylinks'  => [ 'INNER JOIN', 'cl_from = page_id' ] ]
 			);
 
 			if($res !== false){
-				$pages = array();
+				$pages = [];
 
 				while ($row = $res->fetchObject($res)) {
 					$pages[intval($row->page_id)] = $row;
@@ -130,12 +130,12 @@
 
 				foreach ($pages as $page) {
 					$page->page_id = intval($page->page_id);
-					$articles[$page->page_id] = array(
+					$articles[$page->page_id] = [
 						'page_id' => $page->page_id,
 						'page_title' => $page->page_title,
 						'page_namespace' => $page->page_namespace,
 						'views' => !empty( $pageViews[$page->page_id] ) ? $pageViews[$page->page_id] : 0
-					);
+					];
 				}
 			}
 
