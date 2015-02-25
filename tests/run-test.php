@@ -20,7 +20,7 @@ $wgAnnotateTestSpeed = (getenv('ANNOTATE_TEST_SPEED') === '1');
 require_once dirname(__FILE__) . '/bootstrap.php';
 
 if (extension_loaded('xdebug')) {
-    xdebug_disable();
+    #xdebug_disable();
 }
 
 if ( !isset( $params['slow-list'] ) ) {
