@@ -3,15 +3,15 @@
  * Unit test for WikiaDispatchableObject
  */
 
-class WikiaDispatchableObjectTest extends WikiaBaseTest {
-	private $dispatchableMock = null;
+class TestingDispatchableObject extends WikiaDispatchableObject {
+	function allowsExternalRequests() {
+		return false;
+	}
+}
 
+class WikiaDispatchableObjectTest extends WikiaBaseTest {
 	protected function setUp() {
 		parent::setUp();
-
-		$this->dispatchableMock = $this->getMockBuilder( 'WikiaDispatchableObject' )
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
 	}
 
 	//data provider for testGetUrl
@@ -31,40 +31,37 @@ class WikiaDispatchableObjectTest extends WikiaBaseTest {
 	 * @dataProvider getUrlProvider
 	 */
 	public function testGetUrl( $methodName, $params, $format, $encodedParams ) {
-		$className = get_class( $this->dispatchableMock );
 		$serverName = "test-server";
 		$scriptPath = "/test-path";
-		$requestURI = "{$serverName}{$scriptPath}/wikia.php?controller={$className}&method={$methodName}{$encodedParams}";
+		$requestURI = "{$serverName}{$scriptPath}/wikia.php?controller=TestingDispatchableObject&method={$methodName}{$encodedParams}";
 
 		$this->mockGlobalVariable( 'wgServer', $serverName );
 		$this->mockGlobalVariable( 'wgScriptPath', $scriptPath );
 
-		$this->assertEquals( $requestURI, $className::getUrl( $methodName, $params, $format ) );
+		$this->assertEquals( $requestURI, TestingDispatchableObject::getUrl( $methodName, $params, $format ) );
 	}
 
 	/**
 	 * @dataProvider getUrlProvider
 	 */
 	public function testGetLocalUrl( $methodName, $params, $format, $encodedParams ) {
-		$className = get_class( $this->dispatchableMock );
-		$requestURI = "/wikia.php?controller={$className}&method={$methodName}{$encodedParams}";
+		$requestURI = "/wikia.php?controller=TestingDispatchableObject&method={$methodName}{$encodedParams}";
 
-		$this->assertEquals( $requestURI, $className::getLocalUrl( $methodName, $params, $format ) );
+		$this->assertEquals( $requestURI, TestingDispatchableObject::getLocalUrl( $methodName, $params, $format ) );
 	}
 
 	/**
 	 * @dataProvider getUrlProvider
 	 */
 	public function testGetNoCookieUrl( $methodName, $params, $format, $encodedParams ) {
-		$className = get_class( $this->dispatchableMock );
 		$mockCdnApiUrl = "api.nocookie.test-server";
 		$scriptPath = "/test-path";
-		$requestURI = "{$mockCdnApiUrl}{$scriptPath}/wikia.php?controller={$className}&method={$methodName}{$encodedParams}";
+		$requestURI = "{$mockCdnApiUrl}{$scriptPath}/wikia.php?controller=TestingDispatchableObject&method={$methodName}{$encodedParams}";
 
 		$this->mockGlobalVariable( 'wgCdnApiUrl', $mockCdnApiUrl );
 		$this->mockGlobalVariable( 'wgScriptPath', $scriptPath );
 
-		$this->assertEquals( $requestURI, $className::getNoCookieUrl( $methodName, $params, $format ) );
+		$this->assertEquals( $requestURI, TestingDispatchableObject::getNoCookieUrl( $methodName, $params, $format ) );
 	}
 
 	/**
@@ -72,10 +69,9 @@ class WikiaDispatchableObjectTest extends WikiaBaseTest {
 	 * @slowExecutionTime 0.0102 ms
 	 */
 	public function testPurgeUrl() {
-		$className = get_class( $this->dispatchableMock );
 		$serverName = "test-server";
 		$scriptPath = "/test-path";
-		$baseURI = "{$serverName}{$scriptPath}/wikia.php?controller={$className}&method=";
+		$baseURI = "{$serverName}{$scriptPath}/wikia.php?controller=TestingDispatchableObject&method=";
 
 		$squidMock =  $this->getMockBuilder( 'SquidUpdate' )
 			->disableOriginalConstructor()
@@ -89,25 +85,25 @@ class WikiaDispatchableObjectTest extends WikiaBaseTest {
 
 		$this->assertEquals(
 			[$baseURI . 'test'],
-			$className::purgeMethod( 'test' )
+			TestingDispatchableObject::purgeMethod( 'test' )
 		);
 		$this->assertEquals(
 			[$baseURI . 'testParams&a=1&b=2'],
-			$className::purgeMethod( 'testParams', ['a' => 1, 'b' => 2] )
+			TestingDispatchableObject::purgeMethod( 'testParams', ['a' => 1, 'b' => 2] )
 		);
 
 		$this->assertEquals(
 			[$baseURI . 'testVariants&a=1&b=2', $baseURI . 'testVariants&c=3&d=4'],
-			$className::purgeMethodVariants( 'testVariants', [['a' => 1, 'b' => 2], ['c' => 3, 'd' => 4]] )
+			TestingDispatchableObject::purgeMethodVariants( 'testVariants', [['a' => 1, 'b' => 2], ['c' => 3, 'd' => 4]] )
 		);
 
 		$this->assertEquals(
 			[$baseURI . 'testMultiple1&a=1&b=2', $baseURI . 'testMultiple2&c=3&d=4'],
-			$className::purgeMethods( [['testMultiple1', ['a' => 1, 'b' => 2]], ['testMultiple2', ['c' => 3, 'd' => 4]]] )
+			TestingDispatchableObject::purgeMethods( [['testMultiple1', ['a' => 1, 'b' => 2]], ['testMultiple2', ['c' => 3, 'd' => 4]]] )
 		);
 		$this->assertEquals(
 			[$baseURI . 'testMultiple3', $baseURI . 'testMultiple4'],
-			$className::purgeMethods( ['testMultiple3', 'testMultiple4'] )
+			TestingDispatchableObject::purgeMethods( ['testMultiple3', 'testMultiple4'] )
 		);
 	}
 }
