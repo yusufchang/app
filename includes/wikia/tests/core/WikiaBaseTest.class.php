@@ -135,14 +135,13 @@ abstract class WikiaBaseTest extends PHPUnit_Framework_TestCase {
 	 * @param $mock PHPUnit_Framework_MockObject_MockObject instance of Mock
 	 * @param $functionName String name of static constructor
 	 * @return void
+	 * @throws Exception
 	 */
 	protected function mockClass($className, $mock, $functionName = null) {
 		$functionNames = is_array( $functionName ) ? $functionName : array( $functionName );
 		foreach ($functionNames as $functionName) {
 			if ( empty( $mock ) && empty($functionName) ) {
-				// constructor cannot return null
-				// todo: maybe we should throw an exception here instead of failing silently
-				return;
+				throw new Exception($className . ' constructor cannot return null');
 			}
 			if ( empty($functionName) ) { // regular constructor
 				$action = $this->getMockProxy()->getClassConstructor($className);
