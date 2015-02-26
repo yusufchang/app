@@ -7,18 +7,14 @@ class MockedClass {
 }
 
 function foo(MockedClass $instance) {
-	var_dump($instance);
-	var_dump($instance->getBar());
+	return $instance->getBar();
 }
 
 class FooBarTest extends WikiaBaseTest {
 	function testClassMock() {
-		$mock = $this->getMockBuilder( 'MockedClass' )
-			->getMock();
-
-		$mock->expects($this->any())
-			->method('getBar')
-			->willReturn('mocked');
+		$mock = $this->mockClassWithMethods('MockedClass', [
+			'getBar' => 'mocked'
+		]);
 
 		$this->mockClass( 'MockedClass', $mock );
 
@@ -30,6 +26,6 @@ class FooBarTest extends WikiaBaseTest {
 		$instance = new MockedClass();
 
 		/* @var MockedClass $mock */
-		foo($instance);
+		$this->assertEquals('mocked', foo($instance));
 	}
 }

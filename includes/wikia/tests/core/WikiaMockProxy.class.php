@@ -291,6 +291,7 @@ class WikiaMockProxy {
 	// we can use a static instance to hold the instance of whatever class we are overloading
 	// We have to do this because overload returns a string with the class name and not an object (grr)
 	static public function overload($className) {
+
 		/** @var $action WikiaMockProxyAction */
 		if ( self::$instance
 			&& ($action = self::$instance->retrieve(self::CLASS_CONSTRUCTOR,$className) )
@@ -306,7 +307,12 @@ class WikiaMockProxy {
 				echo "\n";
 				$value = $className;
 			}
-			return $value;
+
+			var_dump(__METHOD__);
+			#var_dump($className);
+			#$className = get_class($value);
+			$className = $value;
+			var_dump($className);
 		}
 		return $className;
 	}
