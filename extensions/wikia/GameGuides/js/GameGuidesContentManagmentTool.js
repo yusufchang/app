@@ -21,42 +21,45 @@ $(function(){
 			categoryId = wgNamespaceIds.category,
 			categoryName = wgFormattedNamespaces[categoryId] + ':',
 			setup = function(elem){
-				(elem || $ul.find('.cat-input')).autocomplete({
-					serviceUrl: wgServer + wgScript,
-					params: {
-						action: 'ajax',
-						rs: 'getLinkSuggest',
-						format: 'json',
-						ns: categoryId
-					},
-					appendTo: form,
-					onSelect: function(){
-						$ul.find('input:focus').next().focus();
-					},
-					fnPreprocessResults: function(data){
-						var suggestions = data.suggestions,
-							suggestion,
-							l = suggestions.length,
-							i = 0;
+				if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+					(elem || $ul.find('.cat-input')).autocomplete({
 
-						for(; i < l; i++) {
-							suggestion = suggestions[i];
-							//get rid of non categories suggestions
-							//and 'Category:' part of suggestion
-							if(suggestion.indexOf(categoryName) > -1) {
-								suggestions[i] = suggestion.replace(categoryName, '');
-							}else{
-								delete suggestions[i];
+						serviceUrl: wgServer + wgScript,
+						params: {
+							action: 'ajax',
+							rs: 'getLinkSuggest',
+							format: 'json',
+							ns: categoryId
+						},
+						appendTo: form,
+						onSelect: function () {
+							$ul.find('input:focus').next().focus();
+						},
+						fnPreprocessResults: function (data) {
+							var suggestions = data.suggestions,
+								suggestion,
+								l = suggestions.length,
+								i = 0;
+
+							for (; i < l; i++) {
+								suggestion = suggestions[i];
+								//get rid of non categories suggestions
+								//and 'Category:' part of suggestion
+								if (suggestion.indexOf(categoryName) > -1) {
+									suggestions[i] = suggestion.replace(categoryName, '');
+								} else {
+									delete suggestions[i];
+								}
 							}
-						}
 
-						data.suggestions = suggestions;
-						return data;
-					},
-					deferRequestBy: 50,
-					minLength: 3,
-					skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
-				});
+							data.suggestions = suggestions;
+							return data;
+						},
+						deferRequestBy: 50,
+						minLength: 3,
+						skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
+					});
+				}
 			},
 			addNew = function(row, elem){
 				var cat;

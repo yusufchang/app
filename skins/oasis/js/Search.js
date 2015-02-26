@@ -11,7 +11,7 @@ WikiaSearchApp = (function() {
 		// RT #141437 - hide HOME_TOP_RIGHT_BOXAD when showing search suggestions
 		this.ads = $("[id$='TOP_RIGHT_BOXAD']");
 
-		if ( !this.searchForm.hasClass('noautocomplete') ) {
+		if (!this.searchForm.hasClass('noautocomplete') && mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
 			this.searchField.bind({
 				'suggestShow': $.proxy(this.hideAds, this),
 				'suggestHide': $.proxy(this.showAds, this)

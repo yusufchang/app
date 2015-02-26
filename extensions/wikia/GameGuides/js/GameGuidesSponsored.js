@@ -21,23 +21,25 @@ $(function () {
 			ul = form.getElementsByTagName( 'ul' )[0],
 			$ul = $( ul ),
 			setup = function ( elem ) {
-				(elem || $ul.find( '.video-name' )
-					).autocomplete( {
-					serviceUrl: window.wgServer + window.wgScript,
-					params: {
-						action: 'ajax',
-						rs: 'getLinkSuggest',
-						format: 'json',
-						ns: window.wgNamespaceIds.video
-					},
-					appendTo: form,
-					onSelect: function () {
-						$ul.find( 'input:focus' ).next().focus();
-					},
-					deferRequestBy: 100,
-					minLength: 3,
-					skipBadQueries: true
-				} );
+				if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+					(elem || $ul.find('.video-name')
+					).autocomplete({
+							serviceUrl: window.wgServer + window.wgScript,
+							params: {
+								action: 'ajax',
+								rs: 'getLinkSuggest',
+								format: 'json',
+								ns: window.wgNamespaceIds.video
+							},
+							appendTo: form,
+							onSelect: function () {
+								$ul.find('input:focus').next().focus();
+							},
+							deferRequestBy: 100,
+							minLength: 3,
+							skipBadQueries: true
+						});
+				}
 			},
 			addNew = function ( row ) {
 				$ul.append( row );

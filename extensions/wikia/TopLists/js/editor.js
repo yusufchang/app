@@ -16,20 +16,22 @@ var TopListsEditor = {
 		TopListsEditor._mSelectedPictureField = $('#toplist-editor input[name="selected_picture_name"]');
 		TopListsEditor._mPictureFrame =  $('#toplist-editor .ImageBrowser .frame');
 
-		$.loadJQueryAutocomplete(function(){
-			TopListsEditor._mAutocompleteField.autocomplete({
-				serviceUrl: wgServer + wgScript + '?action=ajax&rs=getLinkSuggest&format=json',
-				appendTo: '#toplist-editor div.InputSet:last',
-				deferRequestBy: 1000,
-				maxHeight: 1000,
-				selectedClass: 'selected',
-				width: '270px',
-				onSelect: function(v, d){
-					TopListsEditor._mAutocompleteFieldChanged = true;
-					TopListsEditor.autoSelectImage(v);
-				}
+		if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+			$.loadJQueryAutocomplete(function () {
+				TopListsEditor._mAutocompleteField.autocomplete({
+					serviceUrl: wgServer + wgScript + '?action=ajax&rs=getLinkSuggest&format=json',
+					appendTo: '#toplist-editor div.InputSet:last',
+					deferRequestBy: 1000,
+					maxHeight: 1000,
+					selectedClass: 'selected',
+					width: '270px',
+					onSelect: function (v, d) {
+						TopListsEditor._mAutocompleteFieldChanged = true;
+						TopListsEditor.autoSelectImage(v);
+					}
+				});
 			});
-		});
+		}
 
 		$.loadJQueryUI(function(){
 			TopListsEditor._mListContainer.sortable({

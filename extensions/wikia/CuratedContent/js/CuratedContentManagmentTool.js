@@ -25,25 +25,27 @@ $(function () {
 		//it looks better if we display in input item name without Item:
 
 			setup = function (elem) {
-				(elem || $ul.find('.item-input')).autocomplete({
-					serviceUrl: wgServer + wgScript,
-					params: {
-						action: 'ajax',
-						rs: 'getLinkSuggest',
-						format: 'json'
-						//ns: categoryId
-					},
-					appendTo: form,
-					onSelect: function () {
-						$ul.find('input:focus').next().focus();
-					},
-					fnPreprocessResults: function (data) {
-						return data;
-					},
-					deferRequestBy: 50,
-					minLength: 3,
-					skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
-				});
+				if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+					(elem || $ul.find('.item-input')).autocomplete({
+						serviceUrl: wgServer + wgScript,
+						params: {
+							action: 'ajax',
+							rs: 'getLinkSuggest',
+							format: 'json'
+							//ns: categoryId
+						},
+						appendTo: form,
+						onSelect: function () {
+							$ul.find('input:focus').next().focus();
+						},
+						fnPreprocessResults: function (data) {
+							return data;
+						},
+						deferRequestBy: 50,
+						minLength: 3,
+						skipBadQueries: true // BugId:4625 - always send the request even if previous one returned no suggestions
+					});
+				}
 			},
 			addNew = function (row, elem) {
 				var cat;

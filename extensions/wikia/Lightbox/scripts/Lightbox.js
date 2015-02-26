@@ -258,7 +258,9 @@
 
 				Lightbox.openModal.find('.carousel li').eq(Lightbox.current.index).trigger('click');
 			}).on('click.Lightbox', '.article-add-button', function () {
-				Lightbox.doAutocomplete($(this));
+				if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+					Lightbox.doAutocomplete($(this));
+				}
 			});
 		},
 		doAutocomplete: function (elem) {

@@ -15,11 +15,13 @@ $(function() {
 					'suggestHide': window.transparentOut.hide
 				});
 
-				// load autosuggest code on first focus
-				this.searchField.one('focus', $.proxy(this.initSuggest, this));
+				// load autosuggest code on first focus only if LinkSuggest is enabled
+				if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+					this.searchField.one('focus', $.proxy(this.initSuggest, this));
 
-				if (this.searchField.is(':focus')) {
-					this.initSuggest();
+					if (this.searchField.is(':focus')) {
+						this.initSuggest();
+					}
 				}
 			}
 		}

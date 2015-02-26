@@ -419,5 +419,7 @@ $.widget( 'wikia.linksuggest', {
 $( function() {
 	// Apply font-style for bug in IE. This should be done using a style sheet
 	// BugId:68869 removed unnecessary inline style. Seems to work fine in IE anyway
-	$( '#wpTextbox1' ).linksuggest();
+	if (mw.loader.getModuleNames().indexOf('ext.wikia.LinkSuggest') > -1) {
+		$('#wpTextbox1').linksuggest();
+	}
 });
