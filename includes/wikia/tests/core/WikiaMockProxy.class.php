@@ -160,11 +160,11 @@ class WikiaMockProxy {
 				if ( $state ) { // enable
 					is_callable( "{$className}::{$methodName}" );
 					$flags = RUNKIT_ACC_PUBLIC | ( $type == self::STATIC_METHOD ? RUNKIT_ACC_STATIC : 0);
-					runkit_method_rename( $className, $methodName, $savedName);  // save the original method
-					runkit_method_add($className, $methodName, '', $this->getExecuteCallCode($type,$id, $type === self::DYNAMIC_METHOD), $flags );
+					runkit_method_rename( $className, $methodName, $savedName) or die(__METHOD__);  // save the original method
+					runkit_method_add($className, $methodName, '', $this->getExecuteCallCode($type,$id, $type === self::DYNAMIC_METHOD), $flags )  or die(__METHOD__);
 				} else { // diable
-					runkit_method_remove($className, $methodName);  // remove the redefined instance
-					runkit_method_rename($className, $savedName, $methodName); // restore the original
+					runkit_method_remove($className, $methodName) or die(__METHOD__);  // remove the redefined instance
+					runkit_method_rename($className, $savedName, $methodName) or die(__METHOD__); // restore the original
 				}
 				break;
 			case self::GLOBAL_FUNCTION:
@@ -174,12 +174,12 @@ class WikiaMockProxy {
 				$savedName = $namespace . self::SAVED_PREFIX . $baseName;
 				if ( $state ) { // enable
 					$tempName = "WikiaMockProxyTempFuncName"; // workaround for namespaces functions
-					runkit_function_rename($functionName, $savedName);
-					runkit_function_add($tempName, '', $this->getExecuteCallCode($type,$id));
-					runkit_function_rename($tempName,$functionName);
+					runkit_function_rename($functionName, $savedName) or die(__METHOD__);
+					runkit_function_add($tempName, '', $this->getExecuteCallCode($type,$id)) or die(__METHOD__);
+					runkit_function_rename($tempName,$functionName) or die(__METHOD__);
 				} else { // disable
-					runkit_function_remove($functionName);  // remove the redefined instance
-					runkit_function_rename($savedName, $functionName); // restore the original
+					runkit_function_remove($functionName) or die(__METHOD__);  // remove the redefined instance
+					runkit_function_rename($savedName, $functionName) or die(__METHOD__); // restore the original
 				}
 				break;
 		}
