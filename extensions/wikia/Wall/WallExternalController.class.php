@@ -674,8 +674,11 @@ class WallExternalController extends WikiaController {
 		/**
 		 * @var $mw WallMessage
 		 */
+		if($messageId != ''){
+
 		$mw = WallMessage::newFromId($messageId);
-		if ( !empty( $mw ) ) {
+
+		if ( $mw instanceof WallMessage ) {
 			$mw->load();
 
 			$username = $mw->getUser()->getName();
@@ -696,7 +699,7 @@ class WallExternalController extends WikiaController {
 
 			$status = 'success';
 		}
-
+		}
 		$this->response->setVal( 'markup', $markup );
 		$this->response->setVal( 'status', $status );
 	}
