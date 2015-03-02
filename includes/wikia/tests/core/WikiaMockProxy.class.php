@@ -260,7 +260,17 @@ class WikiaMockProxy {
 		// enable this instance
 		self::$instance = $this;
 		$this->enabled = true;
-		set_new_overload('WikiaMockProxy::overload');
+		if (function_exists('uopz_overload')) {
+			// @see https://github.com/krakjoe/uopz/blob/master/tests/002.phpt
+			uopz_overload(ZEND_NEW, function(&$className) {
+				$className = WikiaMockProxy::overload($className);
+			});
+		}
+		else {
+			set_new_overload(function($className) {
+				return WikiaMockProxy::overload($className);
+			});
+		}
 		foreach ($this->mocks as $list1) {
 			foreach ($list1 as $type => $mock) {
 				$this->notify($mock[self::PROP_ACTION]);
@@ -278,7 +288,12 @@ class WikiaMockProxy {
 
 		// disable this instance
 		$this->enabled = false;
-		unset_new_overload();
+		if (function_exists('uopz_overload')) {
+			uopz_overload(ZEND_NEW, null);
+		}
+		else {
+			unset_new_overload();
+		}
 		foreach ($this->mocks as $list1) {
 			foreach ($list1 as $type => $mock) {
 				$this->notify($mock[self::PROP_ACTION]);
@@ -287,9 +302,14 @@ class WikiaMockProxy {
 		self::$instance = null;
 	}
 
-	// Because overload is called _immediately_ before the __construct function
-	// we can use a static instance to hold the instance of whatever class we are overloading
-	// We have to do this because overload returns a string with the class name and not an object (grr)
+	/**
+	 * Because overload is called _immediately_ before the __construct function
+	 * we can use a static instance to hold the instance of whatever class we are overloading
+	 * We have to do this because overload returns a string with the class name and not an object (grr)
+	 *
+	 * @param string $className
+	 * @return object
+	 */
 	static public function overload($className) {
 
 		/** @var $action WikiaMockProxyAction */
@@ -308,11 +328,7 @@ class WikiaMockProxy {
 				$value = $className;
 			}
 
-			var_dump(__METHOD__);
-			#var_dump($className);
-			#$className = get_class($value);
-			$className = $value;
-			var_dump($className);
+			return $value;
 		}
 		return $className;
 	}
