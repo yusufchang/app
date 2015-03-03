@@ -18,7 +18,6 @@ var AdminDashboard = {
 		AdminDashboard.section.advanced = $('#AdminDashboardAdvanced');
 		AdminDashboard.section.contentarea = $('#AdminDashboardContentArea');
 		AdminDashboard.wikiaArticle = $('#WikiaArticle');
-		AdminDashboard.bannerNotification = new window.BannerNotification().setType('error');
 
 		// events
 		AdminDashboard.allControls.hover(function() {
@@ -36,6 +35,8 @@ var AdminDashboard = {
 		if( $.fn.addVideoButton ) { //FB#68272
 			addVideoButton.addVideoButton({
 				callbackAfterSelect: function(url, VET) {
+					var bannerNotification = new window.BannerNotification()
+						.setType('error');
 					$.nirvana.postJson(
 						// controller
 						'VideosController',
@@ -45,9 +46,9 @@ var AdminDashboard = {
 						{ url: url },
 						// success callback
 						function( formRes ) {
-							AdminDashboard.bannerNotification.hide();
+							bannerNotification.hide();
 							if ( formRes.error ) {
-								AdminDashboard.bannerNotification
+								bannerNotification
 									.setContent(formRes.error)
 									.show();
 							} else {
@@ -57,7 +58,7 @@ var AdminDashboard = {
 						},
 						// error callback
 						function() {
-							AdminDashboard.BannerNotification
+							bannerNotification
 								.setContent($.msg('vet-error-while-loading'))
 								.show();
 						}

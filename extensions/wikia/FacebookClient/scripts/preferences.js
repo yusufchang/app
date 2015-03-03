@@ -24,10 +24,8 @@
 			$disconnectLink = $('#fbDisconnectLink').find('a');
 			$disconnectButton = $('.fb-disconnect');
 			$connectLink = $('.sso-login-facebook');
-			//reusable banner notification
-			bannerNotification = new window.BannerNotification();
 
-			$.loadFacebookAPI()
+			$.loadFacebookSDK()
 				.done(function () {
 					bindEvents();
 				})
@@ -135,6 +133,8 @@
 			$connectLink.on('click', connect);
 			$disconnectLink.on('click', disconnect);
 			$disconnectButton.on('click', disconnect);
+			//create reusable banner notification
+			bannerNotification = new window.BannerNotification();
 		}
 
 		/**

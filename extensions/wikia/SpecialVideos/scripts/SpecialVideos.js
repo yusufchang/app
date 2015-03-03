@@ -77,7 +77,8 @@ $(function () {
 							},
 							// error callback
 							function () {
-								bannerNotification.setContent($.msg('vet-error-while-loading'))
+								SpecialVideos.bannerNotification
+									.setContent($.msg('vet-error-while-loading'))
 									.show();
 							}
 						);
@@ -117,7 +118,9 @@ $(function () {
 										// reload page with cb
 										(new Wikia.Querystring(window.location)).addCb().goTo();
 									} else {
-										bannerNotification.setContent(json.msg).show();
+										SpecialVideos.bannerNotification
+											.setContent(json.msg)
+											.show();
 									}
 
 								}
@@ -125,7 +128,9 @@ $(function () {
 						}
 					});
 				} else {
-					bannerNotification.setContent($.msg('oasis-generic-error')).show();
+					SpecialVideos.bannerNotification
+						.setContent($.msg('oasis-generic-error'))
+						.show();
 				}
 			});
 		}
