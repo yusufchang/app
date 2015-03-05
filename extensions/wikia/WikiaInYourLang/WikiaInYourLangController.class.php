@@ -185,11 +185,11 @@ class WikiaInYourLangController extends WikiaController {
 	 * Checks if a native wikia is not:
 	 * - closed
 	 * - in a different language than the target one
-	 * @param ResultWrapper $oWiki A native wikia city_list row
+	 * @param object $oWiki A native wikia city_list row
 	 * @param string $sTargetLanguage The target language code
 	 * @return bool
 	 */
-	private function isNativeWikiaValid( ResultWrapper $oWiki, $sTargetLanguage ) {
+	private function isNativeWikiaValid( $oWiki, $sTargetLanguage ) {
 		if ( $oWiki->city_public === WikiFactory::CLOSE_ACTION ) {
 			$this->response->setVal( 'error', "A native wikia is closed." );
 			return false;
