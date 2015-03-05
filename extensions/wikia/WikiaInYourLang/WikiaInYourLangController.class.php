@@ -53,7 +53,7 @@ class WikiaInYourLangController extends WikiaController {
 			 * If a wikia is found - send a response with its url and sitename.
 			 * Send success=false otherwise.
 			 */
-			if ( $oNativeWiki instanceof ResultWrapper ) {
+			if ( is_object( $oNativeWiki ) ) {
 				/**
 				 * Check for false-positives - see CE-1216
 				 * Per request we should unify dialects like pt and pt-br
@@ -169,7 +169,7 @@ class WikiaInYourLangController extends WikiaController {
 		if ( $oRow !== false ) {
 			$iNativeWikiId = $oRow->city_id;
 			$oNativeWiki = WikiFactory::getWikiById( $iNativeWikiId );
-			if ( $oNativeWiki instanceof ResultWrapper ) {
+			if ( is_object( $oNativeWiki ) ) {
 				return $oNativeWiki;
 			} else {
 				$this->response->setVal( 'error', "A native wikia with id={$iNativeWikiId} not found." );
