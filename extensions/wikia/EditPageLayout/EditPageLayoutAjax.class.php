@@ -6,7 +6,7 @@ class EditPageLayoutAjax {
 	 * Perform reverse parsing on given HTML (when needed)
 	 */
 	static private function resolveWikitext( $content, $mode, $page, $method, $section ) {
-		global $wgRequest, $wgTitle, $wgOut, $wgEnableSlowPagesBlacklistExt;
+		global $wgRequest, $wgTitle, $wgOut, $wgEnableSlowPagesBlacklistExt, $wgMercuryPreviewUrlPrefix;
 		wfProfileIn(__METHOD__);
 
 		if ( !empty( $wgEnableSlowPagesBlacklistExt) ) {
@@ -23,15 +23,25 @@ class EditPageLayoutAjax {
 
 		if($wgTitle && class_exists($page)) {
 			$pageObj = new $page();
+			$title = $wgRequest->getVal('title', 'empty');
 			if(is_a( $pageObj, 'SpecialCustomEditPage' )) {
-				$wikitext = $pageObj->getWikitextFromRequestForPreview($wgRequest->getVal('title', 'empty'));
+				$wikitext = $pageObj->getWikitextFromRequestForPreview($title);
 				$service = new EditPageService($wgTitle);
 				$html = $pageObj->getOwnPreviewDiff($wikitext, $method);
 
 				/**
-				 * @val String $type - partial or full - whether to return full skin along with css and js or just a content
+				 * @val String $type - partial, full or mercury
+				 *
+				 * full means content along with CSS and JS
+				 * partial means just the article content
+				 * mercury means previewing the article in Mercury skin (needs $wgMercuryPreviewUrlPrefix)
 				 */
 				$type = $wgRequest->getVal( 'type', 'partial' );
+
+				if ($type === 'mercury' && empty($wgMercuryPreviewUrlPrefix)) {
+					// Fall back to regular wikiamobile if Mercury is not available
+					$type = 'full';
+				}
 
 				$res = [];
 
@@ -39,14 +49,21 @@ class EditPageLayoutAjax {
 					$html = '';
 
 					if ( $method == 'preview' ) {
-						list($html, $catbox, $interlanglinks) = $service->getPreview($wikitext);
 
-						// allow extensions to modify preview (BugId:8354) - this hook should only be run on article's content
-						wfRunHooks('OutputPageBeforeHTML', array(&$wgOut, &$html));
+						$asJson = ( $type === 'mercury' );
+						list($html, $catbox, $interlanglinks) = $service->getPreview($wikitext, $asJson);
+
+						if (!$asJson) {
+							// allow extensions to modify preview (BugId:8354) - this hook should only be run on article's content
+							wfRunHooks('OutputPageBeforeHTML', array(&$wgOut, &$html));
+						}
 
 						if ( F::app()->checkSkin( 'wikiamobile' ) ) {
 							if ( $type === 'full' ) {
 								$res['html'] = F::app()->renderView( 'WikiaMobileService', 'preview', [ 'content' => $html, 'section' => $section ] );
+							} elseif ( $type === 'mercury' ) {
+								$mercuryUrl = $wgMercuryPreviewUrlPrefix . $title;
+								$res['html'] = F::app()->renderView( 'EditPageLayout', 'mercuryPreview', [ 'parserOutput' => $html, 'mercuryUrl' => $mercuryUrl ] );
 							} else {
 								$res['html'] = $html;
 							}

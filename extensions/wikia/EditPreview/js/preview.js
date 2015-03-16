@@ -194,7 +194,7 @@ define('wikia.preview', [
 			$previewTypeDropdown.attr('disabled', false);
 			$article.parent().stopThrobbing();
 
-			if (type === previewTypes.mobile.name) {
+			if (type === previewTypes.mobile.name || type === previewTypes.mercury.name) {
 				handleMobilePreview(data);
 			} else if (type === previewTypes.venus.name) {
 				handleVenusPreview(data);
@@ -277,6 +277,13 @@ define('wikia.preview', [
 			params.options.push({
 				value: previewTypes.venus.name,
 				name: $.htmlentities(msg('wikia-editor-preview-venus'))
+			});
+		}
+
+		if (window.wgEnableMercuryPreview) {
+			params.options.push({
+				value: previewTypes.mercury.name,
+				name: $.htmlentities(msg('wikia-editor-preview-mercury'))
 			});
 		}
 
@@ -507,6 +514,11 @@ define('wikia.preview', [
 				max: {
 					name: 'max',
 					value: articleMaxWidth - 2 * articleMargin
+				},
+				mercury: {
+					name: 'mercury',
+					skin: 'mercury',
+					value: null
 				},
 				mobile: {
 					name: 'mobile',
