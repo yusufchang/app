@@ -54,7 +54,7 @@ define('ext.wikia.adEngine.provider.directGpt', [
 			MODAL_INTERSTITIAL_4:       {size: '300x250,600x400,800x450,550x480', loc: 'modal'},
 			MODAL_INTERSTITIAL_5:       {size: '300x250,300x600,728x90,970x250,160x600', loc: 'modal'},
 			MODAL_RECTANGLE:            {size: '300x100', loc: 'modal'},
-			PREFOOTER_LEFT_BOXAD:       {size: '300x250', loc: 'footer'},
+			PREFOOTER_LEFT_BOXAD:       {size: '300x250,1000x1000', loc: 'footer'},
 			PREFOOTER_RIGHT_BOXAD:      {size: '300x250', loc: 'footer'},
 			TOP_LEADERBOARD:            {size: '728x90,1030x130,1030x65,1030x250,970x250,970x90,970x66,970x180,980x150', loc: 'top'},
 			TOP_RIGHT_BOXAD:            {size: '300x250,300x600,300x1050', loc: 'top'},
