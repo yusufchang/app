@@ -52,7 +52,7 @@ The MediaWiki software was written by:
 * Platonides
 * Antoine Musso
 * Several others (view CREDITS for a more complete list)
-* test
+* test1
 The contributors hold the copyright to this work, and it is licensed under the
 terms of the GNU General Public License, version 2 or later (see
 http://www.fsf.org/licensing/licenses/gpl.html). Derivative works and later
