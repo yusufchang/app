@@ -1,3 +1,4 @@
+test
 2008-11-11
 
 [![Code Climate](https://codeclimate.com/repos/52fbebbee30ba028c40026ae/badges/c8dd65a2f35624eae8ec/gpa.png)](https://codeclimate.com/repos/52fbebbee30ba028c40026ae/feed)
@@ -52,7 +53,6 @@ The MediaWiki software was written by:
 * Platonides
 * Antoine Musso
 * Several others (view CREDITS for a more complete list)
-* test2
 The contributors hold the copyright to this work, and it is licensed under the
 terms of the GNU General Public License, version 2 or later (see
 http://www.fsf.org/licensing/licenses/gpl.html). Derivative works and later
