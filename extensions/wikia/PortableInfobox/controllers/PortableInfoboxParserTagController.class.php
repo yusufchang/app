@@ -9,7 +9,9 @@ class PortableInfoboxParserTagController extends WikiaController {
 	 * @return bool
 	 */
 	public static function parserTagInit( Parser $parser ) {
-		$parser->setHook( self::PARSER_TAG_NAME, [new static(), 'renderInfobox'] );
+		$parser->setFunctionTagHook( self::PARSER_TAG_NAME, [new static(), 'renderInfobox'], 0);
+
+		//$parser->setHook( self::PARSER_TAG_NAME, [new static(), 'renderInfobox'] );
 		return true;
 	}
 
@@ -22,10 +24,10 @@ class PortableInfoboxParserTagController extends WikiaController {
 	 * @param PPFrame $frame
 	 * @returns String $html
 	 */
-	public function renderInfobox( $text, $params, $parser, $frame ) {
+	public function renderInfobox( &$parser, $frame, $content, $attributes ) {
 		$connector = new InfoboxServiceConnector();
 		$data = $frame->getNamedArguments();
-		$html = $connector->getHtmlBySource('<'.self::PARSER_TAG_NAME.'>'.$text.'</'.self::PARSER_TAG_NAME.'>', $data);
+		$html = $connector->getHtmlBySource('<'.self::PARSER_TAG_NAME.'>'.$content.'</'.self::PARSER_TAG_NAME.'>', $data);
 		return $html;
 	}
 }
