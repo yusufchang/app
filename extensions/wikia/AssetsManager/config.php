@@ -760,14 +760,15 @@ $config['mercury_ads_js'] = array(
 		'//resources/wikia/modules/localStorage.js',
 
 		// Advertisement libs
-		'//resources/wikia/modules/iframeWriter.js',
-		'//extensions/wikia/AdEngine/js/AdLogicPageViewCounter.js',
 		'//extensions/wikia/AbTesting/js/AbTest.js',
-		'//resources/wikia/modules/abTest.js',
+		'//extensions/wikia/AdEngine/js/AdLogicPageViewCounter.js',
 		'//extensions/wikia/AdEngine/js/CustomAdsLoader.js',
-		'//extensions/wikia/AdEngine/js/template/modal.js',
 		'//extensions/wikia/AdEngine/js/mercury.run.js',
-		'//resources/wikia/modules/krux.js',
+		'//extensions/wikia/AdEngine/js/provider/outbrain.js',
+		'//extensions/wikia/AdEngine/js/template/modal.js',
+		'//resources/wikia/modules/abTest.js',
+		'//resources/wikia/modules/iframeWriter.js',
+		'//resources/wikia/modules/krux.js'
 	)
 );
 
