@@ -5,8 +5,9 @@ define('ext.wikia.adEngine.adConfigMobile', [
 	'ext.wikia.adEngine.provider.remnantGptMobile',
 	'ext.wikia.adEngine.provider.turtle',
 	require.optional('ext.wikia.adEngine.provider.taboola'),
+	require.optional('ext.wikia.adEngine.provider.outbrain'),
 	require.optional('wikia.instantGlobals')
-], function (adContext, directGptMobile, remnantGptMobile, turtle, taboola, instantGlobals) {
+], function (adContext, directGptMobile, remnantGptMobile, turtle, taboola, outbrain, instantGlobals) {
 	'use strict';
 
 	var pageTypesWithAdsOnMobile = {
@@ -30,6 +31,10 @@ define('ext.wikia.adEngine.adConfigMobile', [
 
 		if (context.providers.taboola && taboola && taboola.canHandleSlot(slotName)) {
 			return [taboola];
+		}
+
+		if (context.providers.outbrain && outbrain && outbrain.canHandleSlot(slotName)) {
+			return [outbrain];
 		}
 
 		if (instantGlobals && instantGlobals.wgSitewideDisableGpt) {
