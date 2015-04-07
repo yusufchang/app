@@ -14,9 +14,9 @@ define('ext.wikia.adEngine.provider.outbrain', [
 		outbrainSlotname = 'NATIVE_OUTBRAIN',
 		libraryLoaded = false,
 		readMoreDiv = document.getElementById('RelatedPagesModuleWrapper'),
+		mercuryReadMoreDiv = document.getElementsByClassName('content-recommendations'),
 		context = adContext.getContext(),
-		isMobile = context.targeting.skin === 'wikiamobile' || context.targeting.skin === 'mercury',
-		pageType = context.targeting.pageType;
+		isMobile = context.targeting.skin === 'wikiamobile' || context.targeting.skin === 'mercury';
 
 	function canHandleSlot(slot) {
 		log(['canHandleSlot', slot], 'debug', logGroup);
@@ -26,7 +26,7 @@ define('ext.wikia.adEngine.provider.outbrain', [
 			return false;
 		}
 
-		if (!readMoreDiv) {
+		if (!readMoreDiv && !mercuryReadMoreDiv) {
 			log(['canHandleSlot', slot, 'No "read more" section, disabling'], 'error', logGroup);
 			return false;
 		}
@@ -57,6 +57,7 @@ define('ext.wikia.adEngine.provider.outbrain', [
 		document.getElementById(outbrainSlotname).appendChild(s);
 
 		libraryLoaded = true;
+		log(['loadOutbrain', 'Loaded.'], 'debug', logGroup);
 	}
 
 	function fillInSlot(slotname, success) {
