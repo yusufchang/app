@@ -61,16 +61,7 @@ define('ext.wikia.adEngine.provider.outbrain', [
 
 	function fillInSlot(slotname, success) {
 		log(['fillInSlot', slotname], 'debug', logGroup);
-
 		loadOutbrain();
-
-		window._taboola.push({
-			mode: isMobile ? 'thumbnails-b' : 'thumbnails-a',
-			container: slotname,
-			placement: ['Read More on', pageType, '@', (isMobile ? 'mobile' : 'desktop')].join(' '),
-			target_type: 'mix'
-		});
-
 		slotTweaker.show(slotname);
 		success();
 	}
