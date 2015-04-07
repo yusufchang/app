@@ -14,6 +14,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 	'ext.wikia.adEngine.provider.remnantGpt',
 	'ext.wikia.adEngine.provider.sevenOneMedia',
 	require.optional('ext.wikia.adEngine.provider.taboola'),
+	require.optional('ext.wikia.adEngine.provider.outbrain'),
 
 	require.optional('ext.wikia.adEngine.adDecoratorTopInContent')
 ], function (
@@ -31,6 +32,7 @@ define('ext.wikia.adEngine.adConfigLate', [
 	adProviderRemnantGpt,
 	adProviderSevenOneMedia, // TODO: move this to the early queue (remove jQuery dependency first)
 	adProviderTaboola,
+	adProviderOutbrain,
 
 	adDecoratorTopInContent
 ) {
@@ -83,6 +85,10 @@ define('ext.wikia.adEngine.adConfigLate', [
 
 		if (context.providers.taboola && adProviderTaboola && adProviderTaboola.canHandleSlot(slotname)) {
 			return [adProviderTaboola];
+		}
+
+		if (context.providers.outbrain && adProviderOutbrain && adProviderOutbrain.canHandleSlot(slotname)) {
+			return [adProviderOutbrain];
 		}
 
 		if (country === 'AU' || country === 'CA' || country === 'NZ') {

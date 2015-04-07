@@ -63,6 +63,7 @@ class AdEngine2ContextService {
 					'sevenOneMedia' => $wg->AdDriverUseSevenOneMedia,
 					'sevenOneMediaCombinedUrl' => $sevenOneMediaCombinedUrl,
 					'taboola' => $wg->AdDriverUseTaboola,
+					'outbrain' => $wg->AdDriverUseOutbrain,
 				] ),
 				'slots' => $this->filterOutEmptyItems( [
 				] ),

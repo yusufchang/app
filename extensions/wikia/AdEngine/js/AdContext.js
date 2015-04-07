@@ -77,6 +77,13 @@ define('ext.wikia.adEngine.adContext', [
 				(context.targeting.pageType === 'article' || context.targeting.pageType === 'home');
 		}
 
+		// Outbrain integration
+		if (context.providers.outbrain) {
+			// aden-1865: we want to check Outbrain only on dev if we want to test it on prod we should use AB testing
+			context.providers.outbrain = // abTest && abTest.inGroup('NATIVE_ADS_OUTBRAIN', 'YES') &&
+			(context.targeting.pageType === 'article' || context.targeting.pageType === 'home');
+		}
+
 		// Turtle
 		if (context.forceProviders.turtle) {
 			context.providers.turtle = true;

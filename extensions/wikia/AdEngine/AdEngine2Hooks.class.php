@@ -12,6 +12,7 @@ class AdEngine2Hooks {
 	const ASSET_GROUP_ADENGINE_LATE = 'adengine2_late_js';
 	const ASSET_GROUP_ADENGINE_RUBICON_RTP = 'adengine2_rubicon_rtp_js';
 	const ASSET_GROUP_ADENGINE_TABOOLA = 'adengine2_taboola_js';
+	const ASSET_GROUP_ADENGINE_OUTBRAIN = 'adengine2_outbrain_js';
 	const ASSET_GROUP_ADENGINE_TRACKING = 'adengine2_tracking_js';
 	const ASSET_GROUP_LIFTIUM = 'liftium_ads_js';
 	const ASSET_GROUP_LIFTIUM_EXTRA = 'liftium_ads_extra_js';
@@ -123,7 +124,7 @@ class AdEngine2Hooks {
 	 */
 	public static function onOasisSkinAssetGroups( &$jsAssets ) {
 
-		global $wgAdDriverUseTopInContentBoxad, $wgAdDriverUseTaboola;
+		global $wgAdDriverUseTopInContentBoxad, $wgAdDriverUseTaboola, $wgAdDriverUseOutbrain;
 
 		$coreGroupIndex = array_search( self::ASSET_GROUP_CORE, $jsAssets );
 		if ( $coreGroupIndex === false ) {
@@ -154,6 +155,10 @@ class AdEngine2Hooks {
 
 		if ( $wgAdDriverUseTaboola === true ) {
 			$jsAssets[] = self::ASSET_GROUP_ADENGINE_TABOOLA;
+		}
+
+		if ( $wgAdDriverUseOutbrain === true ) {
+			$jsAssets[] = self::ASSET_GROUP_ADENGINE_OUTBRAIN;
 		}
 
 		$jsAssets[] = 'adengine2_interactive_maps_js';
