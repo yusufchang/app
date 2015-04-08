@@ -40,6 +40,7 @@ require(
 			mobileInContent = 'MOBILE_IN_CONTENT',
 			mobilePreFooter = 'MOBILE_PREFOOTER',
 			mobileTaboola = 'NATIVE_TABOOLA',
+			mobileOutbrain = 'NATIVE_OUTBRAIN',
 			showInContent = firstSectionTop > minZerothSectionLength,
 			showPreFooter = doc.body.offsetHeight > minPageLength || firstSectionTop < minZerothSectionLength;
 
@@ -66,6 +67,7 @@ require(
 					adSlots.push([mobilePreFooter]);
 				}
 				adSlots.push([mobileTaboola]);
+				adSlots.push([mobileOutbrain]);
 			}
 
 			log('Loading Krux module, site id: ' + kruxSiteId, logLevel, logGroup);

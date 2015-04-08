@@ -234,7 +234,7 @@ class AdEngine2Hooks {
 	 */
 	public static function onWikiaMobileAssetsPackages( array &$jsStaticPackages, array &$jsExtensionPackages, array &$scssPackages ) {
 
-		global $wgAdDriverUseTaboola;
+		global $wgAdDriverUseTaboola, $wgAdDriverUseOutbrain;
 
 		$coreGroupIndex = array_search( self::ASSET_GROUP_ADENGINE_MOBILE, $jsStaticPackages );
 
@@ -245,6 +245,10 @@ class AdEngine2Hooks {
 
 		if ( $wgAdDriverUseTaboola === true ) {
 			array_splice( $jsStaticPackages, $coreGroupIndex, 0, self::ASSET_GROUP_ADENGINE_TABOOLA );
+		}
+
+		if ( $wgAdDriverUseOutbrain === true ) {
+			array_splice( $jsStaticPackages, $coreGroupIndex, 0, self::ASSET_GROUP_ADENGINE_OUTBRAIN );
 		}
 
 		return true;

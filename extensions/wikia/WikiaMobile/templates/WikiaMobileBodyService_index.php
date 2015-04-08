@@ -20,6 +20,7 @@
 			<nav id="wkRltdCnt">
 				<div id="RelatedPagesModuleWrapper"></div>
 				<div id="NATIVE_TABOOLA"></div>
+				<div id="NATIVE_OUTBRAIN"></div>
 				<?= !empty( $trendingArticles ) ? $trendingArticles : ''; ?>
 				<?= !empty( $categoryLinks ) ? $categoryLinks : ''; ?>
 			</nav>
