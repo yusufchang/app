@@ -3800,7 +3800,7 @@ $messages['ru'] = array(
 	'cnw-userauth-marketing-heading' => 'Нет учетной записи?',
 	'cnw-userauth-marketing-body' => 'Чтобы создать вики на Викия, необходима учетная запись. Регистрация займёт всего одну минуту!',
 	'cnw-userauth-signup-button' => 'Регистрация',
-	'cnw-desc-headline' => 'О чём ваша викия?',
+	'cnw-desc-headline' => 'О чём ваша вики?',
 	'cnw-desc-creative' => 'Составьте описание, которое поможет людям найти вашу вики.',
 	'cnw-desc-placeholder' => 'Постарайтесь! Ваш текст будет отображаться на заглавной странице вики.',
 	'cnw-desc-tip1' => 'Подсказка!',
@@ -3810,14 +3810,14 @@ $messages['ru'] = array(
 	'cnw-desc-select-vertical' => 'Выберите категорию портала',
 	'cnw-desc-select-categories' => 'Выберите дополнительные категории',
 	'cnw-desc-select-one' => 'Выберите категорию',
-	'cnw-desc-all-ages' => 'Эта викия предназначена для детей?',
+	'cnw-desc-all-ages' => 'Эта вики предназначена для детей?',
 	'cnw-desc-tip-all-ages' => 'Тема проекта будет интересна детям? Для соблюдения законодательства США мы отслеживаем проекты по темам, которые непосредственно предназначены для детей в возрасте 12 лет и младше.',
 	'cnw-desc-default-lang' => 'Язык вашей вики – $1',
 	'cnw-desc-change-lang' => 'изменить',
 	'cnw-desc-lang' => 'Язык',
 	'cnw-desc-wiki-submit-error' => 'Необходимо выбрать категорию',
-	'cnw-theme-headline' => 'Выбрать тему',
-	'cnw-theme-creative' => 'Сделайте красивой свою вики! Вы можете просмотреть каждую тему до того, как сделать окончательный выбор.',
+	'cnw-theme-headline' => 'Выбор темы',
+	'cnw-theme-creative' => 'Сделайте свою вики красивой! Вы можете просмотреть каждую тему до того, как сделать окончательный выбор.',
 	'cnw-theme-instruction' => 'Хотите проявить индивидуальность? Вы можете создать свои собственные темы позже, перейдя в «Конструктор тем» через панель администратора.',
 	'cnw-welcome-headline' => 'Поздравляем! $1 создана',
 	'cnw-welcome-instruction1' => 'Нажмите на кнопку ниже, чтобы начать добавлять страницы на вики.',
@@ -4794,7 +4794,7 @@ $messages['zh-hans'] = array(
 
 您的维基已创建！请点击<$1>查看 。
 
-准备好开始了吗？我们添加了一些链接到您的聊天页面（<$5>）帮助您开始，并鼓励您去探索与Wikia相关的许多有用信息。如有任何疑问或感到困惑，请回复此电子邮件或查看我们的帮助页面<http://cn.help.wikia.com>。
+准备好开始了吗？我们添加了一些链接到您的聊天页面（<$5>）帮助您开始，并鼓励您去探索与Wikia相关的许多有用信息。如有任何疑问或感到困惑，请回复此电子邮件或查看我们的帮助页面<http://zh.help.wikia.com>。
 
 您还可以查阅一下创始人与管理员博客<http://community.wikia.com/wiki/Blog%3AWikia_Founders_%26_Admins>（英文）和Wikia社区中心博客<http://zh.community.wikia.com/wiki/Category:%E7%A4%BE%E5%8C%BA%E4%B8%AD%E5%BF%83%E5%8D%9A%E5%AE%A2>。在这里您会找到很多提示和技巧，以及关于Wikia新事物和新功能的信息。
 
@@ -4813,7 +4813,7 @@ ___________________________________________
  *通过访问 [[Special:ThemeDesigner|主题界面]]自定义您的维基的外观，在这里您可以给您的背景和文字添加颜色和样式。
 *到[[w:c:zh.community|社区中心]]来看看，通过我们的[[w:c:zh.community:Category:社区中心博客|社区中心博客]]了解最新信息、在我们的[[w:c:zh.community:Special:Forum|社区论坛]]提问、参与我们的[[w:c:community:Help:Webinars|网络研讨会系列]]（英文）或与其他Wikia用户[[w:c:zh.community:Special:Chat|在线聊天]] 
 *最后，请访问我们的[[Help:Contents|帮助页面]]了解如何使用Wikia的所有功能， 包括[[Help:New page|如何在您的维基上添加新页面]]、[[Help:Attracting contributors|如何吸引用户]] 以及[[Help:User access levels|如何添加其他管理员]]。
- * 您还可以到您的管理员控制面板使用上述所有工具，只需点击工具栏底部的“管理员”即可找到这些工具。
+ * 您还可以到您的管理员控制面板使用上述所有工具，只需点击底部工具栏的“管理员”即可找到这些工具。
 
 上面列出的所有链接都是开始探索的好起点。祝您玩得开心！',
 	'autocreatewiki-welcometalk' => '==欢迎您==
@@ -4931,14 +4931,14 @@ $messages['zh-tw'] = array(
 	'cnw-userauth-headline' => '已有帳戶？',
 	'cnw-userauth-creative' => '登入',
 	'cnw-userauth-marketing-heading' => '還沒有帳戶？',
-	'cnw-userauth-marketing-body' => '你需要有帳戶才能在維基上創建維基。註冊只需要一分鐘!',
+	'cnw-userauth-marketing-body' => '你需要有帳戶才能在Wikia上創建維基。註冊只需要一分鐘!',
 	'cnw-userauth-signup-button' => '註冊',
 	'cnw-desc-headline' => '你的維基的主題為何？',
 	'cnw-desc-creative' => '用準確到位的描述幫助網友找到你的維基。',
 	'cnw-desc-placeholder' => '寫好一點！你的文字會顯示在你的維基的首頁上。',
-	'cnw-desc-tip1' => '這裡有個提示！',
+	'cnw-desc-tip1' => '提示：',
 	'cnw-desc-tip1-creative' => '在此欄中説明你的維基的重要性及創建理由。',
-	'cnw-desc-tip2' => '提示#2',
+	'cnw-desc-tip2' => '提示2：',
 	'cnw-desc-tip2-creative' => '透過提供你的維基的相關詳細資訊鼓勵其他人加入你的社區。',
 	'cnw-desc-select-vertical' => '選擇主題類別',
 	'cnw-desc-select-categories' => '查看其它類別',
@@ -5076,7 +5076,7 @@ ___________________________________________
  *透過訪問[[Special:ThemeDesigner|主題界面]]自訂你的維基的外觀，在這裡你可以給你的背景和文字添加顔色和樣式。
  *到[[w:c:zh.community|社區中心]]來看看，透過我們的[[w:c:zh.community:Category:社区中心博客|社區中心網誌]]了解最新資訊、在我們的[[w:c:zh.community:Special:Forum|社區論壇]]提問、參與我們的[[w:c:community:Help:Webinars|網路研討會系列]]（英文）或與其他Wikia用户[[w:c:zh.community:Special:Chat|線上聊天]]。
  *最後，請訪問我們的[[Help:Contents|幫助頁面]]了解如何使用Wikia的所有功能，包括[[Help:New page|如何在你的維基上添加新頁面]]、 [[Help:Attracting contributors|如何吸引網友]]以及[[Help:User access levels|如何添加其他管理員]]。
- * 你還可以到你的管理員控制面板使用上述所有工具，只需按一下工具欄底部的「管理員」即可找到這些工具。
+ * 你還可以到你的管理員控制面板使用上述所有工具，只需按一下底部工具欄的「管理員」即可找到這些工具。
 
  上面列出的所有連結都是開始探索的好起點。祝你使用愉快！',
 	'autocreatewiki-welcometalk' => '==歡迎你！==
