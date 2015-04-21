@@ -1882,29 +1882,33 @@ ___________________________________________
 	'autocreatewiki-welcometalk-wall-title' => 'Bienvenue !',
 	'autocreatewiki-welcometalk-wall' => "Bonjour !
 
-Nous sommes heureux que vous ayez ajouté {{subst:SITENAME}} sur Wikia ! Voici quelques liens et astuces qui vous permettront de dynamiser et gérer votre wikia :
+Nous sommes heureux d'accueillir {{subst:SITENAME}} dans la communauté Wikia ! Voici quelques liens et astuces utiles qui vous permettront de dynamiser et gérer votre wikia :
 
-*Faites un premier arrêt sur le [[w:fr:Accueil|Centre des communautés]] et consultez le blog « [[w:fr:Blog:Conseils pour fondateurs/administrateurs|Conseils pour fondateurs et administrateurs]] » : vous y trouverez des astuces pour démarrer votre wikia et le faire évoluer.
-*Consultez ensuite l'[[w:fr:Blog:Actualité Wikia|actualité Wikia]] pour vous tenir informé des derniers événements.
+*Vous n'êtes pas sûr de savoir par où commencer ? Arrêtez-vous sur le [[w:fr:Accueil|Centre des communautés]] et lisez le blog « [[w:fr:Blog:Conseils pour fondateurs/administrateurs|Conseils pour fondateurs et administrateurs]] ». Vous y trouverez des astuces pour démarrer votre wikia et le faire évoluer.
+*Consultez l'[[w:fr:Blog:Actualité Wikia|actualité Wikia]] pour vous tenir informé des derniers événements.
 *Explorez le [[w:fr:Special:Forum|forum]] sur le Centre des communautés pour voir quelles questions posent les autres administrateurs.
 *Personnalisez l'apparence de votre wikia en visitant le [[Special:ThemeDesigner|Concepteur de thème]] : ajoutez des couleurs, modifiez l'arrière-plan et le logo etc.
-*N'oubliez pas de consulter la page [[Special:WikiFeatures|Composants de wikia]] pour voir quelles fonctionnalités activer sur votre wikia.
-*Enfin, consultez les [[Aide:Contenu|pages d'aide]] pour trouver des réponses à toutes vos questions.
+*Consultez la page [[Special:WikiFeatures|Composants de wikia]] pour découvrir quelles fonctionnalités vous pouvez activer sur votre wikia.
+*Pour finir, parcourez les [[Aide:Contenu|pages d'aide]] pour trouver des réponses à vos questions.
 
-Tous les liens ci-dessus vous permettront de faire vos premiers pas tout en vous amusant !",
+Tous les liens ci-dessus sont un bon moyen de commencer à naviguer sur Wikia. Si vous êtes bloqué ou si vous avez toujours des questions, [[Special:Contact|contactez-nous]]. Mais le plus important est que vous vous amusiez !
+
+Bonnes modifications !",
 	'autocreatewiki-welcometalk' => "==Bienvenue !==
 Bonjour !
 
-Nous sommes heureux que vous ayez ajouté '''$4''' sur Wikia ! Voici quelques liens et astuces qui vous permettront de dynamiser et gérer votre wikia :
+Nous sommes heureux d'accueillir $4 dans la communauté Wikia ! Voici quelques liens et astuces utiles qui vous permettront de dynamiser et gérer votre wikia :
 
-*Faites un premier arrêt sur le [[w:fr:Accueil|Centre des communautés]] et consultez le blog « [[w:fr:Blog:Conseils pour fondateurs/administrateurs|Conseils pour fondateurs et administrateurs]] » : vous y trouverez des astuces pour démarrer votre wikia et le faire évoluer !
-*Consultez ensuite l'[[w:fr:Blog:Actualité Wikia|actualité Wikia]] pour vous tenir informé des derniers événements.
+*Vous n'êtes pas sûr de savoir par où commencer ? Arrêtez-vous sur le [[w:fr:Accueil|Centre des communautés]] et lisez le blog « [[w:fr:Blog:Conseils pour fondateurs/administrateurs|Conseils pour fondateurs et administrateurs]] ». Vous y trouverez des astuces pour démarrer votre wikia et le faire évoluer.
+*Consultez l'[[w:fr:Blog:Actualité Wikia|actualité Wikia]] pour vous tenir informé des derniers événements.
 *Explorez le [[w:fr:Special:Forum|forum]] sur le Centre des communautés pour voir quelles questions posent les autres administrateurs.
 *Personnalisez l'apparence de votre wikia en visitant le [[Special:ThemeDesigner|Concepteur de thème]] : ajoutez des couleurs, modifiez l'arrière-plan et le logo etc.
-N'oubliez pas de consulter la page [[Special:WikiFeatures|Composants de wikia]] pour voir quelles fonctionnalités activer sur votre wikia.
-*Enfin, consultez les [[Aide:Contenu|pages d'aide]] pour trouver des réponses à toutes vos questions.
+*Consultez la page [[Special:WikiFeatures|Composants de wikia]] pour découvrir quelles fonctionnalités vous pouvez activer sur votre wikia.
+*Pour finir, parcourez les [[Aide:Contenu|pages d'aide]] pour trouver des réponses à vos questions.
 
-Tous les liens ci-dessus vous permettront de faire vos premiers pas tout en vous amusant !
+Tous les liens ci-dessus sont un bon moyen de commencer à naviguer sur Wikia. Si vous êtes bloqué ou si vous avez toujours des questions, [[Special:Contact|contactez-nous]]. Mais le plus important est que vous vous amusiez !
+
+Bonnes modifications !
 
 — [[User:$2|$3]] <staff /></div>",
 	'createnewwiki-desc' => 'Assistant de création de wikia',
@@ -1938,7 +1942,7 @@ Tous les liens ci-dessus vous permettront de faire vos premiers pas tout en vous
 	'cnw-userauth-signup-button' => "S'inscrire",
 	'cnw-desc-headline' => 'De quoi parle votre wikia ?',
 	'cnw-desc-creative' => 'Une bonne description rendra votre wikia plus visible.',
-	'cnw-desc-placeholder' => 'Soyez exigent ! Ce texte apparaîtra sur la page principale de votre wikia.',
+	'cnw-desc-placeholder' => 'Ce texte apparaîtra sur la page principale de votre wikia.',
 	'cnw-desc-tip1' => 'Astuce nº 1 :',
 	'cnw-desc-tip1-creative' => 'Expliquez ici pourquoi ce wikia est important et ce qui vous a motivé à le créer.',
 	'cnw-desc-tip2' => 'Astuce nº 2 :',
@@ -2637,10 +2641,10 @@ Tutti questi link sono un buon punto di partenza per entrare nel mondo di Wikia 
 	'createnewwiki-desc' => 'Creazione guidata della wiki',
 	'cnw-next' => 'Avanti',
 	'cnw-back' => 'Indietro',
-	'cnw-or' => 'o',
+	'cnw-or' => 'oppure',
 	'cnw-title' => 'Crea una nuova wiki',
 	'cnw-name-wiki-headline' => 'Crea una wiki',
-	'cnw-name-wiki-creative' => 'Wikia è il posto migliore per costruire un sito web e far crescere una community intorno a ciò che ti piace.',
+	'cnw-name-wiki-creative' => 'Wikia è il posto migliore per costruire un sito web e far crescere una community intorno alle tue passioni.',
 	'cnw-name-wiki-label' => 'Dai un nome alla tua wiki',
 	'cnw-name-wiki-domain-label' => 'Dai un indirizzo alla tua wiki',
 	'cnw-name-wiki-language' => '',
@@ -2673,7 +2677,7 @@ Tutti questi link sono un buon punto di partenza per entrare nel mondo di Wikia 
 	'cnw-desc-select-vertical' => "Seleziona una categoria dell'Hub",
 	'cnw-desc-select-categories' => 'Seleziona una o più categorie aggiuntive',
 	'cnw-desc-select-one' => 'Scegline una',
-	'cnw-desc-all-ages' => 'Questa wikia è destinata ai bambini?',
+	'cnw-desc-all-ages' => 'Questa wikia è per bambini?',
 	'cnw-desc-tip-all-ages' => "Riguarda un tema d'interesse per il pubblico infantile? In osservanza delle leggi degli Stati Uniti, monitoriamo le wikia che riguardano tematiche che attirano bambini di età fino ai 12 anni.",
 	'cnw-desc-default-lang' => 'La tua wiki sarà in $1',
 	'cnw-desc-change-lang' => 'cambia',
@@ -2682,7 +2686,7 @@ Tutti questi link sono un buon punto di partenza per entrare nel mondo di Wikia 
 	'cnw-theme-headline' => 'Scegli un tema',
 	'cnw-theme-creative' => "Cura l'aspetto della tua creazione! Scegli uno dei temi qui sotto per vederne l'anteprima.",
 	'cnw-theme-instruction' => 'Vuoi creare un tema personalizzato? Potrai farlo più avanti con il Theme Designer che si trova nel Pannello Admin.',
-	'cnw-welcome-headline' => 'Complimenti! $1 è stata creata',
+	'cnw-welcome-headline' => 'Complimenti! Hai creato $1',
 	'cnw-welcome-instruction1' => 'Clicca il pulsante sottostante per iniziare a creare pagine nella tua wiki.',
 	'cnw-welcome-help' => 'Puoi trovare risposte, consigli e altro nella <a href="http://it.community.wikia.com/wiki/Wiki_della_Community">Wiki della Community</a>.',
 	'cnw-error-general' => 'Ops! Qualcosa non ha funzionato. Riprova più tardi o [[Special:Contact|contattaci]] per ricevere assistenza.',
@@ -2834,63 +2838,63 @@ ___________________________________________
 	'cnw-or' => 'または',
 	'cnw-title' => '新しいウィキアを作成',
 	'cnw-name-wiki-headline' => '新しいウィキアを作る',
-	'cnw-name-wiki-creative' => 'ウィキアは、好きなものに関するウェブサイトやコミュニティを作り上げるのに最適の場所です。',
+	'cnw-name-wiki-creative' => 'ウィキアは、好きなものに関するウェブサイトやコミュニティを作り上げるのに最適な場所です。',
 	'cnw-name-wiki-label' => 'ウィキアの名前を入力してください',
 	'cnw-name-wiki-domain-label' => 'あなたのウィキアのアドレスを入力してください',
 	'cnw-name-wiki-language' => '',
 	'cnw-name-wiki-domain' => '.wikia.com',
-	'cnw-name-wiki-submit-error' => '続けるには、上の欄をどちらも入力する必要があります。',
+	'cnw-name-wiki-submit-error' => '次へ進むには、上の欄をどちらも入力する必要があります。',
 	'cnw-login' => 'ログイン',
 	'cnw-signup' => 'アカウント作成',
-	'cnw-signup-prompt' => 'アカウントが必要ですか？',
-	'cnw-call-to-signup' => 'こちらでサインアップしてください',
-	'cnw-login-prompt' => '既にアカウントをお持ちですか？',
-	'cnw-call-to-login' => 'こちらでログインしてください',
+	'cnw-signup-prompt' => '新しいアカウントを作成しますか？',
+	'cnw-call-to-signup' => 'こちらからサインアップしてください',
+	'cnw-login-prompt' => 'すでにアカウントをお持ちですか？',
+	'cnw-call-to-login' => 'こちらからログインしてください',
 	'cnw-auth-headline' => 'ログイン',
 	'cnw-auth-headline2' => 'サインアップ',
-	'cnw-auth-creative' => '続けるにはアカウントにログインしてください。',
-	'cnw-auth-signup-creative' => '続けるにはアカウントが必要です。<br />サインアップは数分で完了します。',
+	'cnw-auth-creative' => 'ウィキアの作成を続行するにはアカウントにログインしてください。',
+	'cnw-auth-signup-creative' => 'ウィキアの作成を続行するにはアカウントが必要です。<br />サインアップは数分ほどで完了することができます。',
 	'cnw-auth-facebook-signup' => 'Facebookアカウントを使ってサインアップ',
 	'cnw-auth-facebook-login' => 'Facebookアカウントを使ってログイン',
 	'cnw-userauth-headline' => 'アカウントをお持ちの場合',
 	'cnw-userauth-creative' => 'ログイン',
-	'cnw-userauth-marketing-heading' => 'アカウントをまだお持ちでない場合',
-	'cnw-userauth-marketing-body' => 'ウィキアにウィキア・コミュニティを作成するには、アカウントが必要です。サインアップは数分で完了します。',
+	'cnw-userauth-marketing-heading' => 'まだアカウントを お持ちでないですか？',
+	'cnw-userauth-marketing-body' => 'ウィキアでコミュニティを作成するには、アカウントが必要です。サインアップは数分ほどで完了することができます。',
 	'cnw-userauth-signup-button' => 'サインアップ',
-	'cnw-desc-headline' => 'ウィキアの内容をご説明ください。',
-	'cnw-desc-creative' => 'ピンポイントの説明を追加すると、ユーザーにウィキアを見つけてもらいやすくなります。',
-	'cnw-desc-placeholder' => 'ここに入力した内容はメインページに表示されます。',
+	'cnw-desc-headline' => 'あなたのウィキアの内容についてご説明ください。',
+	'cnw-desc-creative' => 'ピンポイントの説明を追加すると、あなたのウィキアを見つけてもらいやすくなります。',
+	'cnw-desc-placeholder' => 'こちらに入力した内容はあなたのウィキアのメインページで表示されます。',
 	'cnw-desc-tip1' => 'ヒント',
-	'cnw-desc-tip1-creative' => 'ここで、ウィキアの魅力や作成した理由などを伝えましょう。',
-	'cnw-desc-tip2' => 'その他のヒント',
-	'cnw-desc-tip2-creative' => 'ウィキアについて詳しく説明して、他のユーザーをコミュニティに呼び込みましょう。',
+	'cnw-desc-tip1-creative' => 'ここでは、あなたのウィキアの良いところや作成した理由などを伝えてみましょう。',
+	'cnw-desc-tip2' => 'PS',
+	'cnw-desc-tip2-creative' => 'あなたのウィキアについて詳しい説明をして、他のユーザーをコミュニティに呼び込むようにしましょう。',
 	'cnw-desc-select-vertical' => 'ジャンルを選んでください',
-	'cnw-desc-select-categories' => '追加のカテゴリを選択してください',
+	'cnw-desc-select-categories' => '追加するカテゴリを選択してください',
 	'cnw-desc-select-one' => '1つ選択',
-	'cnw-desc-all-ages' => 'すべての年齢',
-	'cnw-desc-tip-all-ages' => '子供も関心が持てるトピックですか？ウィキアでは、アメリカ合衆国の法律に準拠するため、12歳以下の子供に直接アピールするトピックを扱うウィキアの確認を行っています。',
-	'cnw-desc-default-lang' => 'ウィキアの言語は$1になります',
+	'cnw-desc-all-ages' => 'このウィキアはお子様にも適したコミュニティですか。',
+	'cnw-desc-tip-all-ages' => 'このトピックはお子様に関心を持っていただくためのものですか？ウィキアでは、アメリカ合衆国の法律に準拠するため、12歳以下のお子様に直接アピールするトピックを扱うウィキアの確認を行っています。',
+	'cnw-desc-default-lang' => 'このウィキアの言語は$1になります',
 	'cnw-desc-change-lang' => '変更',
 	'cnw-desc-lang' => '言語',
 	'cnw-desc-wiki-submit-error' => 'カテゴリを選択してください',
 	'cnw-theme-headline' => 'テーマを選択',
-	'cnw-theme-creative' => 'テーマを選択すると、プレビューを確認できます。',
-	'cnw-theme-instruction' => '後で[管理者ダッシュボード]の[テーマデザイナー]からテーマをデザインすることもできます。',
-	'cnw-welcome-headline' => '「$1」を作成しました',
-	'cnw-welcome-instruction1' => '下のボタンをクリックすると、ウィキアに新しいページを追加できます。',
-	'cnw-welcome-help' => '答えやアドバイスなどを見つけたいときは <a href="http://ja.wikia.com/">コミュニティ・セントラル</a> をご覧ください。',
-	'cnw-error-general' => 'ウィキアの作成中に問題が発生しました。もう一度お試しいただくか、[[Special:Contact|ご連絡]]ください。',
-	'cnw-error-general-heading' => 'ウィキアの作成エラー',
-	'cnw-badword-header' => '不適切な言葉',
-	'cnw-badword-msg' => 'ウィキアの説明で不適切な言葉や使用禁止の言葉は使用しないでください：$1',
+	'cnw-theme-creative' => 'テーマを選択すると、プレビューで確認することができます。',
+	'cnw-theme-instruction' => 'ご自分でカスタマイズしたい場合には、管理者ダッシュボードのテーマデザイナーから、好きなテーマをデザインすることもできます。',
+	'cnw-welcome-headline' => 'おめでとうございます！「$1」の作成に成功しました！',
+	'cnw-welcome-instruction1' => '下のボタンをクリックすると、ウィキアに新しいページを追加することができます。',
+	'cnw-welcome-help' => 'ヒントやアドバイスなどが必要な際には <a href="http://ja.community.wikia.com/">コミュニティ・セントラル</a> をご覧ください。',
+	'cnw-error-general' => 'ウィキアの作成中に問題が発生しました。もう一度お試しいただくか、[[特別:Contact|こちら]]からご連絡ください。',
+	'cnw-error-general-heading' => '申し訳ありません',
+	'cnw-badword-header' => '不適切な言葉です',
+	'cnw-badword-msg' => 'ウィキアの説明文での不適切な言葉、禁止されている言葉の使用はご遠慮ください：$1',
 	'cnw-error-wiki-limit-header' => 'ウィキアの上限に達しました',
-	'cnw-error-wiki-limit' => '1日に作成できるウィキアの数は{{PLURAL:$1|$1 wiki creation|$1 wiki creations}}個までです。別のウィキアを作成するには24時間お待ちください。',
-	'cnw-error-blocked-header' => 'アカウントのブロック',
+	'cnw-error-wiki-limit' => '1日に作成できるウィキアの数は{{PLURAL:$1|$1個|$1個}}までです。恐れ入りますが、新しいウィキアを作成するには24時間お待ちください。',
+	'cnw-error-blocked-header' => 'アカウントがブロックされています',
 	'cnw-error-blocked' => '$1さんによりブロックされています。理由：$2（参照用ブロックID：$3）。',
 	'cnw-error-anon-user-header' => 'ログインしてください',
-	'cnw-error-anon-user' => '未登録ユーザーはウィキアを作成できません。[[Special:UserLogin|ログイン]]してからもう一度お試しください。',
+	'cnw-error-anon-user' => '未登録ユーザーはウィキアを作成することができません。[[Special:UserLogin|ログイン]]してからもう一度お試しください。',
 	'cnw-error-torblock' => 'Torネットワーク経由でウィキアを作成することはできません。',
-	'cnw-error-bot' => 'ボットの可能性が検出されました。これが間違いである場合は、次の場所から誤ってボットとして検出された旨をウィキアまでお知らせください。ウィキアの作成をサポートいたします：[http://www.wikia.com/Special:Contact/general Contact Us]',
+	'cnw-error-bot' => 'ボットの可能性が検出されました。ボットでない場合には、誤ってボットと検出された旨を下記のお問い合わせからお知らせください。その後、ウィキアの作成をサポートさせていただきます：[http://www.wikia.com/Special:Contact/general お問い合わせ]',
 	'cnw-error-bot-header' => 'ボットとして検出されました',
 	'cnw-error-unconfirmed-email-header' => 'メールの認証が完了していません',
 	'cnw-error-unconfirmed-email' => 'ウィキアを作成するには、メールの認証を行っていただく必要があります。',
@@ -3889,9 +3893,9 @@ $messages['pl'] = array(
 	'autocreatewiki-bad-name' => 'Nazwa nie może zawierać znaków specjalnych (np. $ czy @) oraz musi stanowić jedno słowo zapisane małymi literami bez odstępów.',
 	'autocreatewiki-invalid-wikiname' => 'Nazwa nie może zawierać znaków specjalnych (np. $ czy @) i nie może być pusta',
 	'autocreatewiki-violate-policy' => 'Nazwa wiki zawiera słowo, które narusza nasze zasady nadawania tytułów',
-	'autocreatewiki-name-taken' => 'Wiki pod tym adresem już istnieje. Zacznij edytować na <a href="http://$1.wikia.com">http://$1.wikia.com</a> lub wybierz inny adresu.',
-	'autocreatewiki-name-too-short' => 'Ten adres jest zbyt krótki. Należy wybrać adres o co najmniej 3 znakach.',
-	'autocreatewiki-name-too-long' => 'Ten adres jest zbyt długi. Należy wybrać adres o maksymalnie 50 znakach.',
+	'autocreatewiki-name-taken' => 'Wiki pod tym adresem już istnieje. Zacznij edytować na <a href="http://$1.wikia.com">http://$1.wikia.com</a> lub wybierz inny adres.',
+	'autocreatewiki-name-too-short' => 'Adres jest zbyt krótki. Wybierz adres, który ma przynajmniej 3 znaki.',
+	'autocreatewiki-name-too-long' => 'Adres jest zbyt długi. Wybierz adres, który ma maksymalnie 50 znaków.',
 	'autocreatewiki-similar-wikis' => 'Poniżej znajdują się istniejące wiki dotyczące tego tematu. Proponujemy edycję jednej z nich.',
 	'autocreatewiki-invalid-username' => 'Ta nazwa użytkownika jest nieprawidłowa.',
 	'autocreatewiki-busy-username' => 'Ta nazwa użytkownika jest już wykorzystywana.',
@@ -3986,9 +3990,9 @@ Wszystkie powyższe linki to świetne miejsca, od których możesz rozpocząć z
 	'cnw-or' => 'lub',
 	'cnw-title' => 'Utwórz nową Wiki',
 	'cnw-name-wiki-headline' => 'Utwórz Wiki',
-	'cnw-name-wiki-creative' => 'Zbuduj swoją stronę, stwórz wokół niej społeczność i rozpocznij odkrywanie świata fanów.',
-	'cnw-name-wiki-label' => 'Nazwij swoją wiki',
-	'cnw-name-wiki-domain-label' => 'Nadaj adres swojej wiki',
+	'cnw-name-wiki-creative' => 'Stwórz stronę, zbierz wokół niej społeczność i rozpocznij odkrywanie świata fanów.',
+	'cnw-name-wiki-label' => 'Nazwa twojej wiki',
+	'cnw-name-wiki-domain-label' => 'Adres twojej wiki',
 	'cnw-name-wiki-language' => '',
 	'cnw-name-wiki-domain' => '.wikia.com',
 	'cnw-name-wiki-submit-error' => 'Ups! Musisz wypełnić oba pola powyżej, aby przejść dalej.',
@@ -3996,7 +4000,7 @@ Wszystkie powyższe linki to świetne miejsca, od których możesz rozpocząć z
 	'cnw-signup' => 'Utwórz konto',
 	'cnw-signup-prompt' => 'Chcesz założyć konto?',
 	'cnw-call-to-signup' => 'Zarejestruj się',
-	'cnw-login-prompt' => 'Posiadasz już konto?',
+	'cnw-login-prompt' => 'Masz już konto?',
 	'cnw-call-to-login' => 'Zaloguj się tutaj',
 	'cnw-auth-headline' => 'Zaloguj się',
 	'cnw-auth-headline2' => 'Zarejestruj się',
@@ -4007,15 +4011,15 @@ Wszystkie powyższe linki to świetne miejsca, od których możesz rozpocząć z
 	'cnw-userauth-headline' => 'Masz już konto?',
 	'cnw-userauth-creative' => 'Zaloguj się',
 	'cnw-userauth-marketing-heading' => 'Nie masz konta?',
-	'cnw-userauth-marketing-body' => 'Posiadanie konta jest wymagane, aby tworzyć wiki na portalu Wikia. Rejestracja zajmie Ci tylko chwilę!',
+	'cnw-userauth-marketing-body' => 'Rejestracja zajmie Ci tylko chwilę! Posiadanie konta jest wymagane, aby tworzyć wiki na portalu Wikia.',
 	'cnw-userauth-signup-button' => 'Zarejestruj się',
 	'cnw-desc-headline' => 'O czym jest twoja wiki?',
-	'cnw-desc-creative' => 'Dodaj świetny opis i pomóż znaleźć twoją wiki.',
+	'cnw-desc-creative' => 'Pomóż znaleźć twoją wiki poprzez wspaniały opis.',
 	'cnw-desc-placeholder' => 'Postaraj się! Twój tekst pojawi się na stronie głównej twojej wiki.',
-	'cnw-desc-tip1' => 'Wskazówka!',
+	'cnw-desc-tip1' => 'Podpowiedź!',
 	'cnw-desc-tip1-creative' => 'W tym miejscu opisz, dlaczego ta wiki jest ważna i dlaczego ją stworzyłeś.',
-	'cnw-desc-tip2' => 'Wskazówka 2',
-	'cnw-desc-tip2-creative' => 'Zachęć innych do dołączenia do Twojej społeczności przez szczegółowe opisanie twojej wiki.',
+	'cnw-desc-tip2' => 'PS',
+	'cnw-desc-tip2-creative' => 'Zachęć innych do dołączenia do twojej społeczności przez szczegółowe opisanie twojej wiki.',
 	'cnw-desc-select-vertical' => 'Wybierz kategorię Huba',
 	'cnw-desc-select-categories' => 'Wybierz dodatkowe kategorie',
 	'cnw-desc-select-one' => 'Wybierz',
@@ -4026,10 +4030,10 @@ Wszystkie powyższe linki to świetne miejsca, od których możesz rozpocząć z
 	'cnw-desc-lang' => 'Język',
 	'cnw-desc-wiki-submit-error' => 'Wybierz kategorię',
 	'cnw-theme-headline' => 'Wybierz motyw',
-	'cnw-theme-creative' => 'Niech Twoja wiki świetnie wygląda! Wybierz jeden z poniższych motywów, aby zobaczyć podgląd.',
-	'cnw-theme-instruction' => 'Chcesz zmienić motyw? Możesz zaprojektować motyw później, korzystając z Kreatora Motywu w Panelu Administratora.',
+	'cnw-theme-creative' => 'Stwórz piękną stronę! Wybierz jeden z poniższych motywów, aby zobaczyć podgląd.',
+	'cnw-theme-instruction' => 'Chcesz zmienić motyw? Możesz zaprojektować go później, korzystając z Kreatora Motywu w Panelu Administratora.',
 	'cnw-welcome-headline' => 'Gratulacje! $1 została utworzona',
-	'cnw-welcome-instruction1' => 'Kliknij na poniższy przycisk, aby zacząć dodawanie stron do Twojej wiki.',
+	'cnw-welcome-instruction1' => 'Kliknij na poniższy przycisk, aby zacząć dodawanie stron do twojej wiki.',
 	'cnw-welcome-help' => 'Znajdź odpowiedzi, porady i więcej w <a href="http://spolecznosc.wikia.com">Centrum Społeczności</a>.',
 	'cnw-error-general' => 'Ups, coś poszło nie tak po naszej stronie! Spróbuj ponownie, lub [[Special:Contact|napisz do nas]].',
 	'cnw-error-general-heading' => 'Przepraszamy',
@@ -4711,7 +4715,7 @@ ___________________________________________
 * Хотите получать от нас меньше писем? Вы можете отписаться от рассылки или изменить её параметры по ссылке: http://community.wikia.com/Special:Preferences.',
 	'autocreatewiki-welcometalk-wall-title' => 'Добро пожаловать!',
 	'autocreatewiki-welcometalk-wall' => 'Здравствуйте!
-Мы рады, что вики {{subst:SITENAME}} стала частью сообщества Викия! 
+Мы рады, что вики «{{subst:SITENAME}}» стала частью сообщества Викия! 
 
 Вам ещё многое предстоит сделать, поэтому позвольте дать несколько советов и полезных ссылок, которые помогут вам начать работу.
 *Посетите страницу [[Special:WikiFeatures|Функции Вики]], чтобы узнать о том, какие функции можно активировать для вашей вики, включая чат, достижения и многие другие.
