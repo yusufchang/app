@@ -21,13 +21,16 @@
  * @ingroup SpecialPage
  */
 
+//use Wikia\Logger\WikiaLogger;
+use Wikia\Logger\Loggable;
+
 /**
  * Implements Special:Allpages
  *
  * @ingroup SpecialPage
  */
 class SpecialAllpages extends IncludableSpecialPage {
-
+	use Loggable;
 	/**
 	 * Maximum number of pages to show on single subpage.
 	 */
@@ -58,6 +61,17 @@ class SpecialAllpages extends IncludableSpecialPage {
 	 * @param $par String: becomes "FOO" when called like Special:Allpages/FOO (default NULL)
 	 */
 	function execute( $par ) {
+
+//		WikiaLogger::instance()->error( "ERROR: good", [
+//			'method'      => __METHOD__,
+//			'cluster'     => 2,
+//			'server'      => 'kamserv',
+//			'db_name'     => 'bnfd',
+//		] );
+
+		$this->error('kamilktest',['context'=>'kamilkcontext']);
+		exit;
+
 		global $wgContLang;
 		$request = $this->getRequest();
 		$out = $this->getOutput();
