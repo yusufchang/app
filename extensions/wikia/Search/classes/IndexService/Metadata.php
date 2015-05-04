@@ -35,9 +35,9 @@ class Metadata extends AbstractService
 		if( isset( $data['query']['pages'][$pageId] ) ) {
 			$pageData = $data['query']['pages'][$pageId];
 			$result['views'] = $pageData['views'];
-			$result['revcount'] = $pageData['revcount'];
+//			$result['revcount'] = $pageData['revcount'];
 			$result['created'] = $pageData['created'];
-			$result['touched'] = $pageData['touched'];
+//			$result['touched'] = $pageData['touched'];
 		}
 			
 		$result['hub'] = isset($data['query']['category']['catname']) ? $data['query']['category']['catname'] : '';

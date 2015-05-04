@@ -40,18 +40,18 @@ class MediaData extends AbstractService
 				/**
 				 * This maps video metadata field keys to dynamic fields
 				 */
-				$videoMetadataMapper = array(
-						'provider'		=>	'video_provider_s',
-						'videoId'		=>	'video_id_s',
-						'altVideoId'	=>	'video_altid_s',
-						'aspectRatio'	=>	'video_aspectratio_s'
-						);
-				
-				foreach ( $videoMetadataMapper as $key => $field ) {
-					if ( isset( $metadata[$key] ) ) {
-						$results[$field] = $metadata[$key];
-					}
-				}
+//				$videoMetadataMapper = array(
+//						'provider'		=>	'video_provider_s',
+//						'videoId'		=>	'video_id_s',
+//						'altVideoId'	=>	'video_altid_s',
+//						'aspectRatio'	=>	'video_aspectratio_s'
+//						);
+//
+//				foreach ( $videoMetadataMapper as $key => $field ) {
+//					if ( isset( $metadata[$key] ) ) {
+//						$results[$field] = $metadata[$key];
+//					}
+//				}
 				// special cases
 				if ( isset( $metadata['duration'] ) ) {
 					$results['video_duration_i'] = (int) $metadata['duration'];

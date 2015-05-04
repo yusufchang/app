@@ -30,10 +30,10 @@ class WikiStats extends AbstractWikiService
 			$data = $service->getApiStatsForWiki();
 			$statistics = $data['query']['statistics'];
 			if( is_array($statistics) ) {
-				$this->result['wikipages']      = $statistics['pages'];
+//				$this->result['wikipages']      = $statistics['pages'];
 				$this->result['wikiarticles']   = $statistics['articles'];
-				$this->result['activeusers']    = $statistics['activeusers'];
-				$this->result['wiki_images']    = $statistics['images'];
+//				$this->result['activeusers']    = $statistics['activeusers'];
+//				$this->result['wiki_images']    = $statistics['images'];
 			}
 		}
 		return $this->result;

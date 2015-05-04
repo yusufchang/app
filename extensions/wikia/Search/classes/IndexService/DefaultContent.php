@@ -74,14 +74,14 @@ class DefaultContent extends AbstractService
 				'pageid'                     => $pageId,
 				$this->field( 'title' )      => $titleStr,
 				'titleStrict'                => $titleStr,
-				'title_em'                   => $titleStr,
+//				'title_em'                   => $titleStr,
 				'url'                        => $service->getUrlFromPageId( $pageId ),
 				'ns'                         => $service->getNamespaceFromPageId( $pageId ),
 				'host'                       => $service->getHostName(),
 				'lang'                       => $service->getSimpleLanguageCode(),
 				$this->field( 'wikititle' )  => $sitename,
-				'page_images'                => count( $response['parse']['images'] ),
-				'iscontent'                  => $service->isPageIdContent( $pageId ) ? 'true' : 'false',
+//				'page_images'                => count( $response['parse']['images'] ),
+//				'iscontent'                  => $service->isPageIdContent( $pageId ) ? 'true' : 'false',
 				'is_main_page'               => $service->isPageIdMainPage( $pageId ) ? 'true' : 'false',
 				'indexed'                    => gmdate("Y-m-d\TH:i:s\Z")
 		];
@@ -89,16 +89,16 @@ class DefaultContent extends AbstractService
 		$returnValue = array_merge(
 				$this->getPageContentFromParseResponse( $response ),
 				$this->getCategoriesFromParseResponse( $response ),
-				$this->getHeadingsFromParseResponse( $response ),
-				$this->getOutboundLinks(),
+//				$this->getHeadingsFromParseResponse( $response ),
+//				$this->getOutboundLinks(),
 				$pageFields,
 				$this->getNolangTxt()
 				);
 
-		$poiMetadata = $this->getPOIMetadata();
-		if ( is_array( $poiMetadata ) && count( $poiMetadata ) > 0 ) {
-			$returnValue = array_merge( $returnValue, $poiMetadata );
-		}
+//		$poiMetadata = $this->getPOIMetadata();
+//		if ( is_array( $poiMetadata ) && count( $poiMetadata ) > 0 ) {
+//			$returnValue = array_merge( $returnValue, $poiMetadata );
+//		}
 
 		return $returnValue;
 	}
@@ -222,9 +222,9 @@ class DefaultContent extends AbstractService
 
 		$dom = new \simple_html_dom( html_entity_decode($html, ENT_COMPAT, 'UTF-8') );
 		if ( $dom->root ) {
-			if ( $this->getService()->getGlobal( 'ExtractInfoboxes' ) ) {
-				$result = array_merge( $result, $this->extractInfoboxes( $dom, $result ) );
-			}
+//			if ( $this->getService()->getGlobal( 'ExtractInfoboxes' ) ) {
+//				$result = array_merge( $result, $this->extractInfoboxes( $dom, $result ) );
+//			}
 			$this->removeGarbageFromDom( $dom );
 			$plaintext = $this->getPlaintextFromDom( $dom );
 			$paragraphs = $this->getParagraphsFromDom( $dom );
@@ -241,7 +241,7 @@ class DefaultContent extends AbstractService
 		return  array_merge( $result,
 				[
 				'nolang_txt'           => $upTo100Words,
-				'words'                => $wordCount,
+//				'words'                => $wordCount,
 				$this->field( 'html' ) => $plaintext
 				]);
 	}
