@@ -21,7 +21,7 @@ class All extends AbstractService
 			'Wikia\Search\IndexService\BacklinkCount'   => null,
 			'Wikia\Search\IndexService\MediaData'       => null,
 			'Wikia\Search\IndexService\Metadata'        => null,
-//			'Wikia\Search\IndexService\Redirects'       => null,
+			'Wikia\Search\IndexService\Redirects'       => null,
 //			'Wikia\Search\IndexService\Wam'             => null,
 //			'Wikia\Search\IndexService\WikiPromoData'   => null,
 			'Wikia\Search\IndexService\WikiStats'       => null,
