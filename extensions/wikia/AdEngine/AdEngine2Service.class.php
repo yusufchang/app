@@ -26,25 +26,17 @@ class AdEngine2Service {
 		return in_array( $pageType, $pageTypes );
 	}
 
-
 	public static function shouldLoadLiftium() {
 		global $wgAdEngineDisableLateQueue;
-		return !$wgAdEngineDisableLateQueue;
+
+		$pageType = ( new AdEngine2PageTypeService() )->getPageType();
+
+		return !$wgAdEngineDisableLateQueue && ($pageType !== AdEngine2PageTypeService::PAGE_TYPE_NO_ADS);
 	}
 
 	public static function shouldLoadLateQueue() {
 		global $wgAdEngineDisableLateQueue;
 		return !$wgAdEngineDisableLateQueue;
-	}
-
-	public static function areAdsInHead() {
-		global $wgLoadAdsInHead;
-		return $wgLoadAdsInHead;
-	}
-
-	public static function areAdsAfterPageLoad() {
-		global $wgLoadLateAdsAfterPageLoad;
-		return $wgLoadLateAdsAfterPageLoad;
 	}
 
 	/**

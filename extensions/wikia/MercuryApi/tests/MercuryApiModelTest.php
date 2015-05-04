@@ -11,13 +11,9 @@ class MercuryApiModelTest extends WikiaBaseTest {
 	 * Setup global variables used to generate Ads context
 	 */
 	private function setupGlobals() {
-		$this->mockGlobalVariable('wgLoadAdsInHead', true);
-		$this->mockGlobalVariable('wgAdDriverBottomLeaderboardImpressionCapping', false);
-		$this->mockGlobalVariable('wgAdDriverEnableRemnantGptMobile', true);
 		$this->mockGlobalVariable('wgAdDriverSevenOneMediaOverrideSub2Site', true);
 		$this->mockGlobalVariable('wgAdDriverTrackState', true);
 		$this->mockGlobalVariable('wgAdEngineDisableLateQueue', true);
-		$this->mockGlobalVariable('wgLoadLateAdsAfterPageLoad', true);
 		$this->mockGlobalVariable('wgEnableWikiaHubsV3Ext', true);
 		$this->mockGlobalVariable('wgWikiDirectedAtChildren', true);
 		$this->mockGlobalVariable('wgAdDriverUseSevenOneMedia', false);
@@ -52,11 +48,9 @@ class MercuryApiModelTest extends WikiaBaseTest {
 
 		$expected = [
 			'opts' => [
-				'adsInHead' => true,
 				'adsInContent' => true,
 				'disableLateQueue' => true,
 				'enableAdsInMaps' => true,
-				'lateAdsAfterPageLoad' => true,
 				'pageType' => 'corporate',
 				'showAds' => true,
 				'trackSlotState' => true,
@@ -80,7 +74,6 @@ class MercuryApiModelTest extends WikiaBaseTest {
 				'wikiVertical' => 'Lifestyle',
 			],
 			'providers' => [
-				'remnantGptMobile' => true,
 			],
 			'slots' => [
 			],
@@ -92,9 +85,9 @@ class MercuryApiModelTest extends WikiaBaseTest {
 	}
 
 	/**
-	 * @dataProvider getSitenameDataProvider
-	 */
-	public function testGetSiteName( $expected, $isDisabled, $textMock, $wgSitenameMock ) {
+	* @dataProvider getSiteMessageDataProvider
+	*/
+	public function testGetSiteMessage( $expected, $isDisabled, $siteMessageMock, $wgSitenameMock ) {
 		$messageMock = $this->getMockBuilder( 'Message' )
 			->disableOriginalConstructor()
 			->setMethods( [ 'inContentLanguage', 'isDisabled', 'text' ] )
@@ -106,7 +99,7 @@ class MercuryApiModelTest extends WikiaBaseTest {
 
 		$messageMock->expects( $this->any() )
 			->method( 'text' )
-			->willReturn( $textMock );
+			->willReturn( $siteMessageMock );
 
 		$messageMock->expects( $this->once() )
 			->method( 'inContentLanguage' )
@@ -116,22 +109,23 @@ class MercuryApiModelTest extends WikiaBaseTest {
 		$this->mockGlobalFunction( 'wfMessage', $messageMock );
 
 		$mercuryApi = new MercuryApi();
-		$this->assertEquals( $expected, $mercuryApi->getSitename() );
+		$this->assertEquals( $expected, $mercuryApi->getSiteMessage() );
 	}
 
-	public function getSiteNameDataProvider() {
+	public function getSiteMessageDataProvider() {
 		return [
 			[
 				'$expected' => 'Test Wiki',
 				'$isDisabled' => false,
-				'$textMock' => 'Test Wiki',
-				'$wgSitenameMock' => 'A test wikia'
-			],
-			[
-				'$expected' => 'A test wikia',
+				'$siteMessageMock' => 'Test Wiki'
+			], [
+				'$expected' => false,
 				'$isDisabled' => true,
-				'$textMock' => 'Test Wiki',
-				'$wgSitenameMock' => 'A test wikia'
+				'$siteMessageMock' => 'Test Wiki',
+			], [
+				'$expected' => false,
+				'$isDisabled' => false,
+				'$siteMessageMock' => '',
 			]
 		];
 	}

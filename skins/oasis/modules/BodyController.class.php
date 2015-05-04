@@ -48,6 +48,10 @@ class BodyController extends WikiaController {
 	 * Returns if current layout should be applying gridlayout
 	 */
 	public static function isGridLayoutEnabled() {
+		if ( self::isOasisBreakpoints( ) ) {
+			return false;
+		}
+
 		$app = F::app();
 
 		// Don't enable when responsive layout is enabled
@@ -73,13 +77,36 @@ class BodyController extends WikiaController {
 	}
 
 	/**
+	 * @return Boolean
+	 */
+	public static function isOasisBreakpoints() {
+		global $wgOasisBreakpoints, $wgRequest, $wgLanguageCode, $wgOasisBreakpointsDE;
+
+		//For now we want to disable breakpoints for German wikis if not turn on explicitly.
+		//@TODO remove when 71Media fixes their styles and $wgOasisBreakpointsDE will retire
+		if ( strtolower( $wgLanguageCode ) == 'de' && empty( $wgOasisBreakpointsDE ) ) {
+			$wgOasisBreakpoints = false;
+		}
+
+		$wgOasisBreakpoints = $wgRequest->getBool( 'oasisbreakpoints', $wgOasisBreakpoints ) !== false;
+		return !empty( $wgOasisBreakpoints );
+	}
+
+	/**
 	 * Decide on which pages responsive / liquid layout should be turned on.
 	 * @return Boolean
 	 */
 	public static function isResponsiveLayoutEnabled() {
 		global $wgOasisResponsive;
 
-		return !empty( $wgOasisResponsive );
+		return !self::isOasisBreakpoints() && !empty( $wgOasisResponsive );
+	}
+
+	public static function isOasisTypography() {
+		global $wgOasisTypography, $wgRequest;
+
+		$wgOasisTypography = $wgRequest->getBool( 'oasistypography', $wgOasisTypography ) !== false;
+		return !empty( $wgOasisTypography );
 	}
 
 	/**
@@ -200,10 +227,6 @@ class BodyController extends WikiaController {
 						$railModuleList[$huluVideoPanelKey] = array('HuluVideoPanel', 'Index', null);
 					}
 				}
-			} else if( $wgTitle->isSpecial('PageLayoutBuilderForm') ) {
-				$railModuleList = array (
-					1500 => array('PageLayoutBuilderForm', 'Index', null)
-				);
 			} else {
 				// don't show any module for MW core special pages
 				$railModuleList = array();

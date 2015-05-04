@@ -11,6 +11,12 @@ class Wall extends WikiaModel {
 	protected $mRelatedPageId = false;
 	protected $cacheable = true;
 
+	/**
+	 * @param $id
+	 * @param int $flags
+	 *
+	 * @return null|Wall
+	 */
 	static public function newFromId( $id, $flags = 0 ) {
 		$title = Title::newFromId($id, $flags);
 		if( empty($title) ) {
@@ -19,6 +25,11 @@ class Wall extends WikiaModel {
 		return self::newFromTitle( $title );
 	}
 
+	/**
+	 * @param Title $title
+	 *
+	 * @return null|Wall
+	 */
 	static public function newFromTitle( Title $title ) {
 		wfProfileIn(__METHOD__);
 		if(!($title instanceof Title)) {
@@ -46,7 +57,10 @@ class Wall extends WikiaModel {
 		wfProfileOut(__METHOD__);
 		return $wall;
 	}
-	
+
+	/**
+	 * @return Wall
+	 */
 	static public function getEmpty() {
 		/* small work around for problem with static constructors and inheritance */
 		//TODO: Look in to Late Static Bindings
@@ -169,7 +183,14 @@ class Wall extends WikiaModel {
 		wfProfileIn(__METHOD__);
 		$title = Title::newFromText( $this->getUser()->getName(), NS_USER_WALL );
 		wfProfileOut(__METHOD__);
-		return $title->getFullUrl();
+		if ( $title instanceof Title ) {
+			return $title->getFullUrl();
+		} else {
+			\Wikia\Logger\WikiaLogger::instance()->error( 'Wall: no wall title found', [
+				'userName' => $this->getUser()->getName(),
+			] );
+			return '';
+		}
 	}
 
 	public function disableCache() {

@@ -248,6 +248,14 @@ class LoadBalancer {
 							'while the slave database servers catch up to the master';
 						$i = $this->pickRandom( $currentLoads );
 						$laggedSlaveMode = true;
+
+						// Wikia change - begin
+						Wikia\Logger\WikiaLogger::instance()->error( 'All slaves lagged', [
+							'exception' => new Exception(),
+							'group'     => $group,
+							'wiki'      => $wiki
+						] );
+						// Wikia change - end
 					}
 				}
 
@@ -494,40 +502,9 @@ class LoadBalancer {
 			}
 		}
 
-		// Wikia change - begin
-		// check the status of selected master
-		if ( $i == $this->getWriterIndex() ) {
-			// will return an instance of MastersPoll when LBFactory_Wikia is used
-			$mastersPoll = wfGetLBFactory()->getMastersPoll();
-
-			if ( $mastersPoll instanceof \Wikia\MastersPoll && $mastersPoll->isMasterBroken( $this->mServers[0] ) ) {
-				// handle broken master - connect to a different master
-				$clusterInfo = $this->parentInfo()['id'];
-				$newMaster = $mastersPoll->getNextMasterForSection( $clusterInfo );
-
-				// replace the master in LoadBalancer config
-				if ( !empty( $newMaster ) ) {
-					$this->mServers[$i] = $newMaster;
-				}
-			}
-		}
-		// Wikia change - end
-
 		# Now we have an explicit index into the servers array
 		$conn = $this->openConnection( $i, $wiki );
 		if ( !$conn ) {
-			// Wikia change - begin
-			# master connection error handling
-			// will return an instance of MastersPoll when LBFactory_Wikia is used
-			$mastersPoll = wfGetLBFactory()->getMastersPoll();
-
-			if ( $i == $this->getWriterIndex() ) {
-				if ( $mastersPoll instanceof \Wikia\MastersPoll ) {
-					$mastersPoll->markMasterAsBroken( $this->mServers[$i] );
-				}
-			}
-			// Wikia change - end
-
 			$this->reportConnectionError( $this->mErrorConnection );
 		}
 
@@ -984,6 +961,7 @@ class LoadBalancer {
 		foreach ( $this->mConns as $conns2 ) {
 			foreach ( $conns2 as $conns3 ) {
 				foreach ( $conns3 as $conn ) {
+					/* @var DatabaseMysqlBase $conn */
 					if ( !$conn->ping() ) {
 						$success = false;
 					}

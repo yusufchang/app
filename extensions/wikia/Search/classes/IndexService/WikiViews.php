@@ -70,7 +70,11 @@
 //			}
 //		}
 //
-//		$this->service->setCacheFromStringKey( $stringKey, $row, self::WIKIPAGES_CACHE_TTL );
+//		$wrapper = new \Wikia\Util\GlobalStateWrapper(array('wgAllowMemcacheWrites' => true));
+//		$wrapper->wrap(function () use ($stringKey, $row) {
+//			$this->service->setCacheFromStringKey( $stringKey, $row, self::WIKIPAGES_CACHE_TTL );
+//		});
+//
 //		$this->result = array(
 //				'wikiviews_weekly' => (int) $row->weekly,
 //				'wikiviews_monthly' => (int) $row->monthly,
