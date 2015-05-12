@@ -99,6 +99,11 @@
 <script type="text/javascript">/*<![CDATA[*/ if (typeof AdEngine_trackPageInteractive === 'function') {wgAfterContentAndJS.push(AdEngine_trackPageInteractive);} /*]]>*/</script>
 <?php } ?>
 <?= $bottomScripts ?>
+<style>
+#HOME_TOP_LEADERBOARD, #TOP_LEADERBOARD, #CORP_TOP_LEADERBOARD, #HUB_TOP_LEADERBOARD {
+	visibility: hidden !important;
+}
+</style>
 
 </body>
 
