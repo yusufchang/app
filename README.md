@@ -1,4 +1,4 @@
-2008-11-11
+THIS BRANCH WAS FROZEN ON May 12 2015 for Internal/Wikia One
 
 [![Code Climate](https://codeclimate.com/repos/52fbebbee30ba028c40026ae/badges/c8dd65a2f35624eae8ec/gpa.png)](https://codeclimate.com/repos/52fbebbee30ba028c40026ae/feed)
 
