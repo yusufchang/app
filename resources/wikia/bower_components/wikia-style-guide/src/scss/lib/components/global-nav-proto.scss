@@ -1,0 +1,122 @@
+// todo: this is a hack
+@import '../settings';
+@import 'dropdown';
+
+$nav-height: 46px;
+
+.global-nav-proto {
+	background-color: #FFF;
+	border-bottom: 1px solid #ccc;
+	height: $nav-height;
+	position: fixed;
+	width: 100%;
+	z-index: 9999999;
+
+	> .row > * {
+		height: $nav-height;
+	}
+
+	.logo {
+		background: url('/resources/wikia/bower_components/wikia-style-guide/src/svg/wikia_logo.svg') no-repeat; /* wgCdnStylePath */
+		display: block;
+		height: 23px;
+		float: left;
+		margin: 10px 20px;
+		width: 82px;
+	}
+
+	li a {
+		color: $body-font-color;
+		height: $nav-height;
+		line-height: $nav-height;
+		padding: 0 20px;
+	}
+
+	.nav-search {
+		display: flex;
+		align-items: center;
+
+		input {
+			margin-bottom: 0;
+		}
+	}
+
+	@media #{$small-only}, #{$medium-only} {
+		$icon-size: 16px;
+		$nav-menu-padding: ($nav-height - $icon-size) / 2;
+		.nav-menu {
+			padding-top: $nav-menu-padding;
+			padding-bottom: $nav-menu-padding;
+
+			&:before {
+				content: '';
+				background: url('/resources/wikia/bower_components/wikia-style-guide/src/icons/icon_nav.svg'); /* wgCdnStylePath */
+				display: block;
+				height: $icon-size;
+				width: $icon-size;
+			}
+
+			ul {
+				@include dropdown-container;
+				display: none;
+				margin-top: $nav-menu-padding - 1px;
+			}
+			&:hover > ul {
+				display: block;
+
+				li:hover {
+					background: $color-blue-light;
+
+					> a {
+						color: white;
+					}
+
+					> ul {
+						@include dropdown-container;
+						display: block;
+						margin-left: -100%;
+						margin-top: ($nav-height + 1px) * -1;
+
+						li:hover {
+							background: $color-blue-light;
+
+							> a {
+								color: white;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media #{$large-up} {
+		.nav-menu {
+			> ul {
+				display: block;
+
+				ul {
+					display: none;
+				}
+
+				> li {
+					display: inline-block;
+
+					&:hover ul {
+						@include dropdown-container;
+						display: block;
+						margin-top: -1px;
+
+						li:hover {
+							background: $color-blue-light;
+
+							> a {
+								color: white;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

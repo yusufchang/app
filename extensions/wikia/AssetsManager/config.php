@@ -2241,7 +2241,8 @@ $config[ 'global_navigation_js' ] = [
 		'//extensions/wikia/GlobalNavigation/scripts/GlobalNavigationAccountNavigation.js',
 		'//extensions/wikia/UserLogin/js/UserBaseAjaxForm.js',
 		'//extensions/wikia/UserLogin/js/UserLoginAjaxForm.js',
-		'//resources/wikia/libraries/bootstrap/tooltip.js'
+		'//resources/wikia/libraries/bootstrap/tooltip.js',
+		'//resources/wikia/bower_components/wikia-style-guide/src/scripts/components/global-nav.js'
 	]
 ];
 

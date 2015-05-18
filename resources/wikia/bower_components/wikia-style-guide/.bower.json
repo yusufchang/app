@@ -1,6 +1,5 @@
 {
   "name": "wikia-style-guide",
-  "version": "1.0.1",
   "homepage": "http://wikia.github.io/style-guide",
   "authors": [
     "Kenneth Kouot <kenneth@wikia-inc.com>"
@@ -18,14 +17,14 @@
   "dependencies": {
     "webcomponentsjs": "~0.6.0"
   },
-  "_release": "1.0.1",
+  "_release": "015459497c",
   "_resolution": {
-    "type": "version",
-    "tag": "1.0.1",
-    "commit": "86c398a324aa0e6177b44c7acd75307824801e99"
+    "type": "branch",
+    "branch": "HG-611",
+    "commit": "015459497ccfc0a06e721721acb91b39ae4d133a"
   },
   "_source": "git://github.com/Wikia/style-guide.git",
-  "_target": "~1.0.1",
+  "_target": "HG-611",
   "_originalSource": "Wikia/style-guide",
   "_direct": true
 }

@@ -2,7 +2,7 @@
   "name": "wikia-app",
   "version": "1.0.0",
   "dependencies": {
-    "wikia-style-guide": "Wikia/style-guide#~1.0.1"
+    "wikia-style-guide": "Wikia/style-guide#HG-611"
   },
   "devDependencies": {}
 }

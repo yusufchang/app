@@ -70,6 +70,9 @@
 @import 'extensions/wikia/TOC/css/toc';
 @import 'extensions/wikia/VideosModule/styles/VideosModule';
 @import 'extensions/wikia/MediaGallery/styles/MediaGallery'; // relies on bulky foundation mixins
+@import 'resources/wikia/bower_components/wikia-style-guide/src/scss/lib/components/global-nav-proto';
+
+
 
 // CSS (needs leading slash and file extension)
 @import '/extensions/wikia/CreatePage/css/CreatePage.css';
