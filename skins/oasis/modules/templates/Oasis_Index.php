@@ -100,6 +100,8 @@
 <?php } ?>
 <?= $bottomScripts ?>
 
+
+<iframe src="/login?redirect=<?php echo urlencode('//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'])?>" style="position:absolute; top: 0; right:0; height: 600px; z-index: 10;" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';"></iframe>
 </body>
 
 <?= wfReportTime() . "\n" ?>
