@@ -1173,6 +1173,12 @@ class Article extends Page {
 		}
 
 		$revision = Revision::newFromId( $oldid );
+		// Wikia change PLATFORM-1311 michal@wikia-inc.com
+		Wikia\Util\Assert::true(
+			$revision instanceof Revision,
+			__METHOD__ . ": Revision::newFromId() did not return Revision for oldid={$oldid}."
+		);
+		// End of Wikia change
 		$timestamp = $revision->getTimestamp();
 
 		$current = ( $oldid == $this->mPage->getLatest() );
