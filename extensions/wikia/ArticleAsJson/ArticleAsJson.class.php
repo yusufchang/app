@@ -15,7 +15,10 @@ class ArticleAsJson extends WikiaService {
 		$classes = 'article-media' . ($isGallery ? ' gallery' : '');
 		$width = !empty( $width ) ? " width='{$width}'" : '';
 		$height = !empty( $height ) ? " height='{$height}'": '';
-
+		if ($isGallery) {
+			return "{{gallery-media ref={$id}{$width}{$height} model=model media=media}}";
+		}
+		return "{{image-media ref={$id}{$width}{$height} model=model media=media}}";
 		return "<img src='{$blankImgUrl}' class='{$classes}' data-ref='{$id}'{$width}{$height} />";
 	}
 
