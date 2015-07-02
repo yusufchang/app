@@ -16,7 +16,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'loops-desc' => 'Parser functions for performing loops',
-	'loops_max' => 'Maximum number of loops have been performed'
+	'loops_max' => 'Maximum number of loops have been performed',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
@@ -115,6 +115,11 @@ $messages['nl'] = array(
 	'loops_max' => 'Het maximum aantal herhalingen is uitgevoerd',
 );
 
+$messages['pl'] = array(
+	'loops-desc' => 'Funkcje parsera do wykonywania pętli.',
+	'loops_max' => 'Maksymalna ilość pętli została wykonana',
+);
+
 /** Piedmontese (Piemontèis)
  * @author Borichèt
  * @author Dragonòt
@@ -123,4 +128,3 @@ $messages['pms'] = array(
 	'loops-desc' => "Funsion dl'analisator për fé dij sicl",
 	'loops_max' => "Màssim nùmer ëd sicl ch'a son stàit fàit",
 );
-

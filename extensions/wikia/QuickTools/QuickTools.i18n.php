@@ -37,15 +37,11 @@ $messages['en'] = array(
 	'quicktools-bot-reason' => 'Cleanup',
 	'quicktools-botflag-add' => 'Bot me',
 	'quicktools-botflag-remove' => 'Unbot me',
-
-	/* Create user page */
 	'quicktools-createuserpage-link' => 'Create user page',
 	'quicktools-createuserpage-reason' => 'Creating user page',
 	'quicktools-createuserpage-success' => 'Successfully created page!',
 	'quicktools-createuserpage-exists' => 'User page already exists!',
 	'quicktools-createuserpage-error' => 'Creating page failed!',
-
-	/* Quick Adopt */
 	'quicktools-adopt-contrib-link' => 'Quick Adopt',
 	'quicktools-adopt-reason' => 'Adopting Wiki',
 	'quicktools-adopt-success' => 'User rights change succeeded!',
@@ -56,45 +52,127 @@ $messages['en'] = array(
 	'quicktools-adopt-confirm-title' => 'Confirm Adoption',
 );
 
-/**
- * @author Daniel Grunwell (grunny)
- */
-$messages['qqq'] = array(
-	'quicktools' => 'Extension name',
-	'quicktools-contrib-link' => 'Link name on Special:Contributions.',
-	'quicktools-invalidtime' => 'Error message displayed when an invalid time is provided.',
-	'quicktools-notitles' => 'Error message displayed when there are no titles to revert for the user',
-	'quicktools-success' => 'Success message when the tool completes reverting the user.',
-	'quicktools-success-rollback' => 'Success message when the tool completes reverting the user.',
-	'quicktools-success-delete' => 'Success message when the tool completes deleting the user\'s page creations.',
-	'quicktools-success-rollback-delete' => 'Success message when the tool completes reverting and deleting the user\'s edits and page creations.',
-	'quicktools-permissionerror' => 'Permissions error returned by script when user does not have the appropriate rights.',
-	'quicktools-modal-title' => 'The popup menu title. $1 is the user name.',
-	'quicktools-rollback-all' => 'Label for button to rollback all user edits.',
-	'quicktools-delete-all' => 'Label for button to delete all user page creations.',
-	'quicktools-revert-all' => 'Label for button to rollback and delete all user edits and page creations.',
-	'quicktools-block' => 'Label for button to block user.',
-	'quicktools-block-and-revert' => 'Label for button to rollback and delete all user edits and page creations as well as block user all at once.',
-	'quicktools-label-reason' => 'Label for the reason field which will be used as the revert and deletion summary.',
-	'quicktools-label-default-reason' => 'Default reason for reverting and deleting.',
-	'quicktools-label-time' => 'Label for timestamp to revert back to.',
-	'quicktools-label-block-length' => 'Label for block expiration time.',
-	'quicktools-placeholder-time' => 'Placeholder text in the timestamp input box that shows the format the timestamp should be in.',
-	'quicktools-success-block' => 'Success message when the tool successfully blocks a user. $1 is the name of the user who was blocked.',
-	'quicktools-bot-reason' => 'Reason for adding bot flag',
-	'quicktools-botflag-add' => 'Label for button to add bot flag',
-	'quicktools-botflag-remove' => 'Label for button to remove bot flag',
-	'quicktools-createuserpage-link' => 'Link in the account navigation menu to create user page.',
-	'quicktools-createuserpage-reason' => 'Edit summary used when creating user page',
-	'quicktools-createuserpage-success' => 'Success message displayed when user page was successfully created',
-	'quicktools-createuserpage-exists' => 'Message displayed when the user page already exists',
-	'quicktools-createuserpage-error' => 'Error message shown when creating user page failed',
-	'quicktools-adopt-contrib-link' => 'Link name on Special:Contributions for approving adoption request for user',
-	'quicktools-adopt-reason' => 'Summary used in the rights change when approving adoption request for user',
-	'quicktools-adopt-success' => 'Success message displayed when user rights change was successful',
-	'quicktools-adopt-error' => 'Error message displayed when user rights change failed',
-	'quicktools-adopt-confirm' => 'Message shown in a prompt to check that user wants to give the user rights',
-	'quicktools-adopt-confirm-ok' => 'Message for the OK button in the confirm dialog',
-	'quicktools-adopt-confirm-cancel' => 'Message for the cancel button in the confirm dialog',
-	'quicktools-adopt-confirm-title' => 'Title of confirm dialog',
+$messages['es'] = array(
+	'quicktools' => 'RapiTareas',
+	'quicktools-desc' => 'Una colección de herramientas para combatir fácilmente el spam y el vandalismo, y otras tareas para el staff y usuarios voluntarios',
+	'quicktools-contrib-link' => 'RapiTareas',
+	'quicktools-invalidtime' => 'Fecha y hora inválidas',
+	'quicktools-notitles' => 'No hay títulos que revertir',
+	'quicktools-success' => 'Revertidas las ediciones de $1.',
+	'quicktools-success-rollback' => 'Revertidas las ediciones de $1.',
+	'quicktools-success-delete' => 'Borradas las páginas creadas por $1.',
+	'quicktools-success-rollback-delete' => 'Revertidas y borradas las ediciones y las páginas creadas por $1.',
+	'quicktools-permissionerror' => 'No tienes los permisos apropiados para usar Quick Tools.',
+	'quicktools-modal-title' => 'RapiTareas &mdash; $1',
+	'quicktools-rollback-all' => 'Revertir todo',
+	'quicktools-delete-all' => 'Borrar todo',
+	'quicktools-revert-all' => 'Revertir y borrar',
+	'quicktools-block' => 'Bloquear',
+	'quicktools-block-and-revert' => 'Todo lo anterior',
+	'quicktools-label-reason' => 'Motivo:',
+	'quicktools-label-default-reason' => '[[w:Help:Spam|Spam]]',
+	'quicktools-label-time' => 'Realizar acciones desde:',
+	'quicktools-label-block-length' => 'Duración del bloqueo:',
+	'quicktools-success-block' => '$1 ha sido bloqueado.',
+	'quicktools-botflag-add' => 'Darme bot',
+	'quicktools-botflag-remove' => 'Quitarme bot',
+	'quicktools-createuserpage-link' => 'Crear página de usuario',
+	'quicktools-createuserpage-success' => '¡La página se creó satisfactoriamente!',
+	'quicktools-createuserpage-exists' => '¡La página de usuario ya existe!',
+	'quicktools-createuserpage-error' => '¡Falló al crear la página!',
+	'quicktools-adopt-contrib-link' => 'Adopción Rápida',
+	'quicktools-adopt-reason' => 'Adoptando el wiki',
+	'quicktools-adopt-success' => '¡Cambiados los permisos de usuario!',
+	'quicktools-adopt-error' => '¡Falló el cambio de permisos de usuario!',
+);
+
+$messages['fr'] = array(
+	'quicktools' => 'Divers outils pour rendre le combat contre le spam et le vandalisme et autres tâches du staff plus simple',
+	'quicktools-desc' => 'Divers outils pour rendre le combat contre le spam et le vandalisme et autres tâches du staff plus simple',
+);
+
+$messages['it'] = array(
+	'quicktools' => 'Crea pagina utente',
+	'quicktools-createuserpage-link' => 'Crea pagina utente',
+);
+
+$messages['ja'] = array(
+	'quicktools' => 'ユーザーページの作成に成功しました。',
+	'quicktools-createuserpage-link' => 'ユーザーページ作成',
+	'quicktools-createuserpage-success' => 'ユーザーページの作成に成功しました。',
+	'quicktools-createuserpage-exists' => 'ユーザーページはすでに作成されています。',
+);
+
+$messages['ko'] = array(
+	'quicktools' => '사용자 문서 생성하는 중...',
+	'quicktools-createuserpage-link' => '사용자 문서 생성',
+	'quicktools-createuserpage-reason' => '사용자 문서 생성하는 중...',
+	'quicktools-createuserpage-exists' => '사용자 문서가 이미 존재합니다!',
+	'quicktools-createuserpage-error' => '문서를 생성하는 데에 실패했습니다!',
+);
+
+$messages['pl'] = array(
+	'quicktools' => 'Narzędzia',
+	'quicktools-desc' => 'Zbiór narzędzi ułatwiających walkę ze spamem i wandalizmem a także wykonywaniem innych zadań pracowników i wolontariuszy Wikii.',
+	'quicktools-contrib-link' => 'Narzędzia',
+	'quicktools-invalidtime' => 'Niewłaściwy limit czasu',
+	'quicktools-notitles' => 'Brak stron do odwrócenia zmian',
+	'quicktools-success' => 'Wycofano edycje użytkownika $1.',
+	'quicktools-success-rollback' => 'Wycofano edycje użytkownika $1.',
+	'quicktools-success-delete' => 'Usunięto strony utworzone przez użytkownika $1.',
+	'quicktools-success-rollback-delete' => 'Usunięto strony i edycje wykonane przez użytkownika $1.',
+	'quicktools-permissionerror' => 'Nie masz uprawnień do korzystania z tych narzędzi.',
+	'quicktools-modal-title' => 'Narzędzia &mdash; $1',
+	'quicktools-rollback-all' => 'Cofnij wszystko',
+	'quicktools-delete-all' => 'Usuń wszystko',
+	'quicktools-revert-all' => 'Cofnij i usuń',
+	'quicktools-block' => 'Zablokuj',
+	'quicktools-block-and-revert' => 'Wszystkie powyższe',
+	'quicktools-label-reason' => 'Powód:',
+	'quicktools-label-default-reason' => 'Spam',
+	'quicktools-label-time' => 'Wykonaj na edycjach od:',
+	'quicktools-label-block-length' => 'Czas trwania blokady:',
+	'quicktools-success-block' => 'Zablokowano użytkownika $1.',
+	'quicktools-bot-reason' => 'Porządki',
+	'quicktools-botflag-add' => 'Flaga bota',
+	'quicktools-botflag-remove' => 'Zdejmij flagę bota',
+	'quicktools-createuserpage-link' => 'Utwórz profil',
+	'quicktools-createuserpage-reason' => 'Tworzenie profilu użytkownika',
+	'quicktools-createuserpage-success' => 'Utworzono profil!',
+	'quicktools-createuserpage-exists' => 'Profil użytkownika już istnieje!',
+	'quicktools-createuserpage-error' => 'Tworzenie strony nie powiodło się!',
+	'quicktools-adopt-contrib-link' => 'Adopcja',
+	'quicktools-adopt-reason' => 'Adopcja wiki',
+	'quicktools-adopt-success' => 'Zmiana uprawnień użytkownika powiodła się!',
+	'quicktools-adopt-error' => 'Zmiana uprawnień użytkownika nie powiodła się!',
+);
+
+$messages['zh'] = array(
+	'quicktools' => '创建用户页面',
+	'quicktools-createuserpage-link' => '创建用户页面',
+	'quicktools-createuserpage-exists' => '用户页面已存在！',
+);
+
+$messages['zh-hans'] = array(
+	'quicktools' => '创建用户页面',
+	'quicktools-createuserpage-link' => '创建用户页面',
+	'quicktools-createuserpage-exists' => '用户页面已存在！',
+);
+
+$messages['zh-hant'] = array(
+	'quicktools' => '創建用戶頁面',
+	'quicktools-createuserpage-link' => '創建用戶頁面',
+	'quicktools-createuserpage-exists' => '用戶頁面已存在！',
+);
+
+$messages['zh-hk'] = array(
+	'quicktools' => '創建用戶頁面',
+	'quicktools-createuserpage-link' => '創建用戶頁面',
+	'quicktools-createuserpage-exists' => '用戶頁面已存在！',
+);
+
+$messages['zh-tw'] = array(
+	'quicktools' => '創建用戶頁面',
+	'quicktools-createuserpage-link' => '創建用戶頁面',
+	'quicktools-createuserpage-exists' => '用戶頁面已存在！',
 );

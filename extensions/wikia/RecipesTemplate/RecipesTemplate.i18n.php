@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -56,7 +55,6 @@ $messages['en'] = array(
 	'recipes-template-toggle-recipe-label' => 'Recipe Page',
 	'recipes-template-yields-hint' => 'How many servings, or how many individual items?',
 	'recipes-template-yields-label' => 'Yields:',
-
 	'recipes-template-recipe-wikitext' => "[[<<wpPhoto>>|thumb|300px]]
 
 '''Prep Time:''' <<wpPrepTime>>
@@ -78,8 +76,7 @@ $messages['en'] = array(
 <<wpDirections>>
 
 <<wpCategories>>",
-
-	'recipe-menus' => "* Course
+	'recipe-menus' => '* Course
 ** Appetizer Recipes
 ** Main Dish Recipes
 ** Side Dish Recipes
@@ -112,9 +109,8 @@ $messages['en'] = array(
 ** Romantic Recipes
 ** Easter Recipes
 ** Thanksgiving Recipes
-** Christmas Recipes",
-
-	'recipes-template-ingredient-wikitext' => "[[<<wpPhoto>>|thumb|300px]]
+** Christmas Recipes',
+	'recipes-template-ingredient-wikitext' => '[[<<wpPhoto>>|thumb|300px]]
 
 == Description ==
 
@@ -136,14 +132,18 @@ $messages['en'] = array(
 
 <<wpNutrition>>
 
-<<wpCategories>>",
-
-	'ingredient-menus' => "* Ingredient
+<<wpCategories>>',
+	'ingredient-menus' => '* Ingredient
 ** Fruits and Vegetables
 ** Meat
 ** Dairy
 ** Legumes and Nuts
 ** Sweets
 ** Grains
-** Spices",
+** Spices',
+);
+
+$messages['de'] = array(
+	'createingredient' => '<!-- deprecated recipes ext? -->Create an ingredient page',
+	'createfromtemplate' => '<!-- deprecated recipes ext? -->Create a page from a template',
 );

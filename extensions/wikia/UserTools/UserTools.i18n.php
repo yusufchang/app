@@ -1,104 +1,8 @@
 <?php
-$messages = [];
+$messages = array();
 
-$messages['de'] = [
-	'user-tools-edit-cancel' => 'Abbrechen',
-	'user-tools-edit-save' => 'Speichern',
-	'user-tools-edit-rename' => 'Eintrag umbenennen',
-	'user-tools-edit-title' => 'Werkzeugkasten bearbeiten',
-	'user-tools-more' => 'mehr...',
-	'user-tools-customize' => 'Anpassen',
-	'user-tools-edit-find-a-tool' => 'Werkzeug finden',
-	'user-tools-edit-advanced-tools' => '[[w:c:hilfe:Hilfe:Werkzeugleiste/Werkzeuge|Liste aller Werkzeuge]]',
-	'user-tools-edit-search-for-tool' => 'Suche ein Werkzeug',
-	'user-tools-edit-popular-tools' => 'Beliebte Werkzeuge',
-	'user-tools-edit-hide-tools' => 'Werkzeuge verbergen',
-	'user-tools-edit-toolbar-list' => 'Dein Werkzeugkasten',
-	'user-tools-edit-reset-defaults' => 'Standard wiederherstellen',
-];
-
-$messages['it'] = [
-	'user-tools-edit-cancel' => 'Annulla',
-	'user-tools-edit-save' => 'Salva',
-	'user-tools-edit-rename' => 'Rinomina',
-	'user-tools-edit-title' => 'Personalizza la Barra degli strumenti',
-	'user-tools-more' => 'altri&hellip;',
-	'user-tools-customize' => 'Personalizza',
-	'user-tools-edit-find-a-tool' => 'Trova uno strumento',
-	'user-tools-edit-advanced-tools' => '[[Help:MyTools|lista degli strumenti avanzati]]',
-	'user-tools-edit-search-for-tool' => 'Cerca uno strumento',
-	'user-tools-edit-popular-tools' => 'Strumenti popolari',
-	'user-tools-edit-hide-tools' => 'Nascondi strumenti',
-	'user-tools-edit-toolbar-list' => 'Lista degli strumenti',
-	'user-tools-edit-reset-defaults' => 'ripristina default',
-];
-
-$messages['ko'] = [
-	'user-tools-edit-cancel' => '취소',
-	'user-tools-edit-save' => '저장',
-	'user-tools-edit-rename' => '이름 변경',
-	'user-tools-edit-title' => '내 도구 설정',
-	'user-tools-more' => '더 보기...',
-	'user-tools-customize' => '설정',
-	'user-tools-edit-find-a-tool' => '특수 문서 찾기',
-	'user-tools-edit-advanced-tools' => '[[Help:MyTools|특수 문서 목록]]',
-	'user-tools-edit-search-for-tool' => '찾을 특수 문서의 이름을 여기에 입력하세요',
-	'user-tools-edit-popular-tools' => '인기 있는 특수 문서',
-	'user-tools-edit-hide-tools' => '목록 가리기',
-	'user-tools-edit-toolbar-list' => '설정된 특수 문서 목록',
-	'user-tools-edit-reset-defaults' => '기본값으로 되돌리기',
-];
-
-$messages['pl'] = [
-	'user-tools-edit-cancel' => 'Anuluj',
-	'user-tools-edit-save' => 'Zapisz',
-	'user-tools-edit-rename' => 'Zmień nazwę',
-	'user-tools-edit-title' => 'Dostosuj pasek narzędzi',
-	'user-tools-more' => 'więcej&hellip;',
-	'user-tools-customize' => 'Dostosuj',
-	'user-tools-edit-find-a-tool' => 'Znajdź narzędzie',
-	'user-tools-edit-advanced-tools' => '[http://spolecznosc.wikia.com/wiki/Pomoc:Pasek_narzędzi/Lista_dostępnych_narzędzi lista zaawansowanych narzędzi]',
-	'user-tools-edit-search-for-tool' => 'Szukaj narzędzia',
-	'user-tools-edit-popular-tools' => 'Popularne narzędzia',
-	'user-tools-edit-hide-tools' => 'Ukryj narzędzia',
-	'user-tools-edit-toolbar-list' => 'Lista',
-	'user-tools-edit-reset-defaults' => 'przywróć domyślne',
-];
-
-$messages['ja'] = [
-	'user-tools-edit-cancel' => '中止',
-	'user-tools-edit-save' => '保存',
-	'user-tools-edit-rename' => '名前を変更',
-	'user-tools-edit-title' => 'ツールバーを設定',
-	'user-tools-more' => 'さらに表示&hellip;',
-	'user-tools-customize' => '設定',
-	'user-tools-edit-find-a-tool' => 'ツールを探す',
-	'user-tools-edit-advanced-tools' => '[[Help:マイツール|上級者向けのツール一覧]]',
-	'user-tools-edit-search-for-tool' => 'ツールを検索',
-	'user-tools-edit-popular-tools' => 'よく使われるツール',
-	'user-tools-edit-hide-tools' => '非表示',
-	'user-tools-edit-toolbar-list' => 'ツールの一覧',
-	'user-tools-edit-reset-defaults' => '既定に戻す',
-];
-
-$messages['fa'] = [
-	'user-tools-edit-cancel' => 'لغو',
-	'user-tools-edit-save' => 'ذخیره‌سازی',
-	'user-tools-edit-rename' => 'تغییرنام مورد',
-	'user-tools-edit-title' => 'سفارشی‌کردن نوارابزار',
-	'user-tools-more' => 'بیشتر...',
-	'user-tools-customize' => 'سفارشی‌سازی',
-	'user-tools-edit-find-a-tool' => 'یافتن ابزار A',
-	'user-tools-edit-advanced-tools' => '[[Help:MyTools|فهرست ابزارهای مشارکتی پیشرفته]]',
-	'user-tools-edit-search-for-tool' => 'جستجو برای ابزار',
-	'user-tools-edit-popular-tools' => 'ابزار رایج',
-	'user-tools-edit-hide-tools' => 'پنهان‌کردن ابزارها',
-	'user-tools-edit-toolbar-list' => 'فهرست نوارابزار',
-	'user-tools-edit-reset-defaults' => 'تنظیم مجدد به پیش‌فرض‌ها',
-];
-
-$messages['en'] = [
-	'user-tools-desc' => 'Customization of user tools enabled in user\'s toolbar and article navigation',
+$messages['en'] = array(
+	'user-tools-desc' => "Customization of user tools enabled in user's toolbar and article navigation",
 	'user-tools-edit-cancel' => 'Cancel',
 	'user-tools-edit-save' => 'Save',
 	'user-tools-edit-rename' => 'Rename Item',
@@ -112,20 +16,20 @@ $messages['en'] = [
 	'user-tools-edit-hide-tools' => 'Hide Tools',
 	'user-tools-edit-toolbar-list' => 'Toolbar List',
 	'user-tools-edit-reset-defaults' => 'reset defaults',
-];
+);
 
-$messages['az'] = [
+$messages['az'] = array(
 	'user-tools-edit-cancel' => 'İmtina',
-	'user-tools-edit-save' => 'Qeyd et'
-];
+	'user-tools-edit-save' => 'Qeyd et',
+);
 
-$messages['bg'] = [
+$messages['bg'] = array(
 	'user-tools-edit-cancel' => 'Отказване',
 	'user-tools-edit-save' => 'Съхраняване',
 	'user-tools-edit-toolbar-list' => 'Списък с инструменти',
-];
+);
 
-$messages['br'] = [
+$messages['br'] = array(
 	'user-tools-edit-cancel' => 'Nullañ',
 	'user-tools-edit-save' => 'Enrollañ',
 	'user-tools-edit-rename' => 'Adenvel an objed',
@@ -133,9 +37,14 @@ $messages['br'] = [
 	'user-tools-edit-find-a-tool' => 'Kavout un ostilh',
 	'user-tools-edit-search-for-tool' => 'Klask un ostilh',
 	'user-tools-edit-hide-tools' => 'Kuzhat an ostilhoù',
-];
+);
 
-$messages['cs'] = [
+$messages['ca'] = array(
+	'user-tools-more' => 'més...',
+	'user-tools-customize' => 'Přizpůsobit',
+);
+
+$messages['cs'] = array(
 	'user-tools-edit-cancel' => 'Storno',
 	'user-tools-edit-save' => 'Uložit',
 	'user-tools-edit-rename' => 'Přejmenovat položku',
@@ -148,9 +57,25 @@ $messages['cs'] = [
 	'user-tools-edit-hide-tools' => 'Skrýt nástroje',
 	'user-tools-edit-toolbar-list' => 'Seznam panelu nástrojů',
 	'user-tools-edit-reset-defaults' => 'obnovit výchozí',
-];
+);
 
-$messages['es'] = [
+$messages['de'] = array(
+	'user-tools-edit-cancel' => 'Abbrechen',
+	'user-tools-edit-save' => 'Speichern',
+	'user-tools-edit-rename' => 'Eintrag umbenennen',
+	'user-tools-edit-title' => 'Werkzeugkasten bearbeiten',
+	'user-tools-more' => 'mehr...',
+	'user-tools-customize' => 'Anpassen',
+	'user-tools-edit-find-a-tool' => 'Werkzeug finden',
+	'user-tools-edit-advanced-tools' => '[[w:c:hilfe:Hilfe:Werkzeugleiste/Werkzeuge|Liste aller Werkzeuge]]',
+	'user-tools-edit-search-for-tool' => 'Suche ein Werkzeug',
+	'user-tools-edit-popular-tools' => 'Beliebte Werkzeuge',
+	'user-tools-edit-hide-tools' => 'Werkzeuge verbergen',
+	'user-tools-edit-toolbar-list' => 'Dein Werkzeugkasten',
+	'user-tools-edit-reset-defaults' => 'Standard wiederherstellen',
+);
+
+$messages['es'] = array(
 	'user-tools-edit-cancel' => 'Cancelar',
 	'user-tools-edit-save' => 'Guardar',
 	'user-tools-edit-rename' => 'Renombrar ítem',
@@ -164,9 +89,25 @@ $messages['es'] = [
 	'user-tools-edit-hide-tools' => 'Esconder herramientas',
 	'user-tools-edit-toolbar-list' => 'Lista de herramientas',
 	'user-tools-edit-reset-defaults' => 'poner valores por defecto',
-];
+);
 
-$messages['fi'] = [
+$messages['fa'] = array(
+	'user-tools-edit-cancel' => 'لغو',
+	'user-tools-edit-save' => 'ذخیره‌سازی',
+	'user-tools-edit-rename' => 'تغییرنام مورد',
+	'user-tools-edit-title' => 'سفارشی‌کردن نوارابزار',
+	'user-tools-more' => 'بیشتر...',
+	'user-tools-customize' => 'سفارشی‌سازی',
+	'user-tools-edit-find-a-tool' => 'یافتن ابزار A',
+	'user-tools-edit-advanced-tools' => '[[Help:MyTools|فهرست ابزارهای مشارکتی پیشرفته]]',
+	'user-tools-edit-search-for-tool' => 'جستجو برای ابزار',
+	'user-tools-edit-popular-tools' => 'ابزار رایج',
+	'user-tools-edit-hide-tools' => 'پنهان‌کردن ابزارها',
+	'user-tools-edit-toolbar-list' => 'فهرست نوارابزار',
+	'user-tools-edit-reset-defaults' => 'تنظیم مجدد به پیش‌فرض‌ها',
+);
+
+$messages['fi'] = array(
 	'user-tools-edit-cancel' => 'Peruuta',
 	'user-tools-edit-save' => 'Tallenna',
 	'user-tools-edit-rename' => 'Uudelleennimeä esine',
@@ -180,9 +121,9 @@ $messages['fi'] = [
 	'user-tools-edit-hide-tools' => 'Piilota työkalut',
 	'user-tools-edit-toolbar-list' => 'Työkalulista',
 	'user-tools-edit-reset-defaults' => 'palauta oletukset',
-];
+);
 
-$messages['fr'] = [
+$messages['fr'] = array(
 	'user-tools-edit-cancel' => 'Annuler',
 	'user-tools-edit-save' => 'Enregistrer',
 	'user-tools-edit-rename' => 'Renommer l’élément',
@@ -190,15 +131,16 @@ $messages['fr'] = [
 	'user-tools-more' => 'plus …',
 	'user-tools-customize' => 'Personnaliser',
 	'user-tools-edit-find-a-tool' => 'Trouver un outil',
-	'user-tools-edit-advanced-tools' => '[[w:c:communaute:Aide:Barre d\'outils/Liste des outils disponibles|liste des outils pour les contributeurs avancés]]',
+	'user-tools-edit-advanced-tools' => "[[w:c:communaute:Aide:Barre d'outils/Liste des outils disponibles|liste des outils pour les contributeurs avancés]]",
 	'user-tools-edit-search-for-tool' => 'Rechercher un outil',
 	'user-tools-edit-popular-tools' => 'Outils populaires',
 	'user-tools-edit-hide-tools' => 'Masquer les outils',
 	'user-tools-edit-toolbar-list' => 'Liste de la barre d’outils',
 	'user-tools-edit-reset-defaults' => 'réinitialiser',
-];
+	'user-tools-desc' => "Personnalisation des outils utilisateur activée dans la barre d'outils utilisateur et la navigation de l'article",
+);
 
-$messages['gl'] = [
+$messages['gl'] = array(
 	'user-tools-edit-cancel' => 'Cancelar',
 	'user-tools-edit-save' => 'Gardar',
 	'user-tools-edit-rename' => 'Renomear o elemento',
@@ -212,9 +154,9 @@ $messages['gl'] = [
 	'user-tools-edit-hide-tools' => 'Agochar as ferramentas',
 	'user-tools-edit-toolbar-list' => 'Lista da barra de ferramentas',
 	'user-tools-edit-reset-defaults' => 'restablecer os valores por defecto',
-];
+);
 
-$messages['he'] = [
+$messages['he'] = array(
 	'user-tools-edit-cancel' => 'ביטול',
 	'user-tools-edit-save' => 'שמירה',
 	'user-tools-edit-rename' => 'שינוי שם פריט',
@@ -228,9 +170,9 @@ $messages['he'] = [
 	'user-tools-edit-hide-tools' => 'הסתרת כלים',
 	'user-tools-edit-toolbar-list' => 'רשימת הסרגלים',
 	'user-tools-edit-reset-defaults' => 'שחזור הגדרות לפי בררת מחדל',
-];
+);
 
-$messages['hu'] = [
+$messages['hu'] = array(
 	'user-tools-edit-cancel' => 'Mégse',
 	'user-tools-edit-save' => 'Mentés',
 	'user-tools-edit-rename' => 'Elem átnevezése',
@@ -241,9 +183,9 @@ $messages['hu'] = [
 	'user-tools-edit-hide-tools' => 'Eszközök elrejtése',
 	'user-tools-edit-toolbar-list' => 'Eszköztárlista',
 	'user-tools-edit-reset-defaults' => 'alapértelmezések használata',
-];
+);
 
-$messages['ia'] = [
+$messages['ia'] = array(
 	'user-tools-edit-cancel' => 'Cancellar',
 	'user-tools-edit-save' => 'Salveguardar',
 	'user-tools-edit-rename' => 'Renominar elemento',
@@ -256,18 +198,66 @@ $messages['ia'] = [
 	'user-tools-edit-popular-tools' => 'Instrumentos popular',
 	'user-tools-edit-hide-tools' => 'Celar instrumentos',
 	'user-tools-edit-toolbar-list' => 'Lista de instrumentarios',
-];
+);
 
-$messages['ku-latn'] = [
-	'user-tools-edit-cancel' => 'Betal bike'
-];
+$messages['it'] = array(
+	'user-tools-edit-cancel' => 'Annulla',
+	'user-tools-edit-save' => 'Salva',
+	'user-tools-edit-rename' => 'Rinomina',
+	'user-tools-edit-title' => 'Personalizza la Barra degli strumenti',
+	'user-tools-more' => 'altri&hellip;',
+	'user-tools-customize' => 'Personalizza',
+	'user-tools-edit-find-a-tool' => 'Trova uno strumento',
+	'user-tools-edit-advanced-tools' => '[[Help:MyTools|lista degli strumenti avanzati]]',
+	'user-tools-edit-search-for-tool' => 'Cerca uno strumento',
+	'user-tools-edit-popular-tools' => 'Strumenti popolari',
+	'user-tools-edit-hide-tools' => 'Nascondi strumenti',
+	'user-tools-edit-toolbar-list' => 'Lista degli strumenti',
+	'user-tools-edit-reset-defaults' => 'ripristina default',
+);
 
-$messages['lb'] = [
+$messages['ja'] = array(
+	'user-tools-edit-cancel' => '中止',
+	'user-tools-edit-save' => '保存',
+	'user-tools-edit-rename' => '名前を変更',
+	'user-tools-edit-title' => 'ツールバーを設定',
+	'user-tools-more' => 'さらに表示&hellip;',
+	'user-tools-customize' => '設定',
+	'user-tools-edit-find-a-tool' => 'ツールを探す',
+	'user-tools-edit-advanced-tools' => '[[Help:マイツール|上級者向けのツール一覧]]',
+	'user-tools-edit-search-for-tool' => 'ツールを検索',
+	'user-tools-edit-popular-tools' => 'よく使われるツール',
+	'user-tools-edit-hide-tools' => '非表示',
+	'user-tools-edit-toolbar-list' => 'ツールの一覧',
+	'user-tools-edit-reset-defaults' => '既定に戻す',
+);
+
+$messages['ko'] = array(
+	'user-tools-edit-cancel' => '취소',
+	'user-tools-edit-save' => '저장',
+	'user-tools-edit-rename' => '이름 변경',
+	'user-tools-edit-title' => '내 도구 설정',
+	'user-tools-more' => '더 보기...',
+	'user-tools-customize' => '설정',
+	'user-tools-edit-find-a-tool' => '특수 문서 찾기',
+	'user-tools-edit-advanced-tools' => '[[Help:MyTools|특수 문서 목록]]',
+	'user-tools-edit-search-for-tool' => '찾을 특수 문서의 이름을 여기에 입력하세요',
+	'user-tools-edit-popular-tools' => '인기 있는 특수 문서',
+	'user-tools-edit-hide-tools' => '목록 가리기',
+	'user-tools-edit-toolbar-list' => '설정된 특수 문서 목록',
+	'user-tools-edit-reset-defaults' => '기본값으로 되돌리기',
+);
+
+$messages['ku-latn'] = array(
+	'user-tools-edit-cancel' => 'Betal bike',
+);
+
+$messages['lb'] = array(
 	'user-tools-edit-cancel' => 'Ofbriechen',
-	'user-tools-edit-save' => 'Späicheren'
-];
+	'user-tools-edit-save' => 'Späicheren',
+);
 
-$messages['lt'] = [
+$messages['lt'] = array(
 	'user-tools-edit-cancel' => 'Atšaukti',
 	'user-tools-edit-save' => 'Išsaugoti',
 	'user-tools-edit-rename' => 'Pervadinti elementą',
@@ -281,9 +271,9 @@ $messages['lt'] = [
 	'user-tools-edit-hide-tools' => 'Slėpti įrankius',
 	'user-tools-edit-toolbar-list' => 'Įrankinės sąrašas',
 	'user-tools-edit-reset-defaults' => 'iš naujo nustatyti numatytąsias reikšmes',
-];
+);
 
-$messages['mk'] = [
+$messages['mk'] = array(
 	'user-tools-edit-cancel' => 'Откажи',
 	'user-tools-edit-save' => 'Зачувај',
 	'user-tools-edit-rename' => 'Преименувај елемент',
@@ -297,9 +287,9 @@ $messages['mk'] = [
 	'user-tools-edit-hide-tools' => 'Скриј алатки',
 	'user-tools-edit-toolbar-list' => 'Алатнички список',
 	'user-tools-edit-reset-defaults' => 'врати по основно',
-];
+);
 
-$messages['ml'] = [
+$messages['ml'] = array(
 	'user-tools-edit-cancel' => 'റദ്ദാക്കുക',
 	'user-tools-edit-save' => 'സേവ് ചെയ്യുക',
 	'user-tools-edit-rename' => 'ഇനം പുനർനാമകരണം ചെയ്യുക',
@@ -307,9 +297,9 @@ $messages['ml'] = [
 	'user-tools-edit-search-for-tool' => 'ഉപകരണത്തിനായി തിരയുക',
 	'user-tools-edit-popular-tools' => 'ജനപ്രിയ ഉപകരണങ്ങൾ',
 	'user-tools-edit-hide-tools' => 'ഉപകരണങ്ങൾ മറയ്ക്കുക',
-];
+);
 
-$messages['ms'] = [
+$messages['ms'] = array(
 	'user-tools-edit-cancel' => 'Batalkan',
 	'user-tools-edit-save' => 'Simpan',
 	'user-tools-edit-rename' => 'Tukar Nama Item',
@@ -323,9 +313,9 @@ $messages['ms'] = [
 	'user-tools-edit-hide-tools' => 'Sorokkan Alatan',
 	'user-tools-edit-toolbar-list' => 'Senarai Bar Alatan',
 	'user-tools-edit-reset-defaults' => 'pulihkan asali',
-];
+);
 
-$messages['nb'] = [
+$messages['nb'] = array(
 	'user-tools-edit-cancel' => 'Avbryt',
 	'user-tools-edit-save' => 'Lagre',
 	'user-tools-edit-rename' => 'Gi element nytt navn',
@@ -338,9 +328,9 @@ $messages['nb'] = [
 	'user-tools-edit-popular-tools' => 'Populære verktøy',
 	'user-tools-edit-toolbar-list' => 'Verktøylinje-liste',
 	'user-tools-edit-reset-defaults' => 'tilbakestill',
-];
+);
 
-$messages['nl'] = [
+$messages['nl'] = array(
 	'user-tools-edit-cancel' => 'Annuleren',
 	'user-tools-edit-save' => 'Opslaan',
 	'user-tools-edit-rename' => 'Hulpmiddel hernoemen',
@@ -354,19 +344,35 @@ $messages['nl'] = [
 	'user-tools-edit-hide-tools' => 'Werkbalk verbergen',
 	'user-tools-edit-toolbar-list' => 'Werkbalklijst',
 	'user-tools-edit-reset-defaults' => 'standaardinstellingen gebruiken',
-];
+);
 
-$messages['pfl'] = [
+$messages['pfl'] = array(
 	'user-tools-edit-cancel' => 'Uffhere',
-	'user-tools-edit-save' => 'Schbaischare'
-];
+	'user-tools-edit-save' => 'Schbaischare',
+);
 
-$messages['ps'] = [
+$messages['pl'] = array(
+	'user-tools-edit-cancel' => 'Anuluj',
+	'user-tools-edit-save' => 'Zapisz',
+	'user-tools-edit-rename' => 'Zmień nazwę',
+	'user-tools-edit-title' => 'Dostosuj pasek narzędzi',
+	'user-tools-more' => 'więcej&hellip;',
+	'user-tools-customize' => 'Dostosuj',
+	'user-tools-edit-find-a-tool' => 'Znajdź narzędzie',
+	'user-tools-edit-advanced-tools' => '[http://spolecznosc.wikia.com/wiki/Pomoc:Pasek_narzędzi/Lista_dostępnych_narzędzi lista zaawansowanych narzędzi]',
+	'user-tools-edit-search-for-tool' => 'Szukaj narzędzia',
+	'user-tools-edit-popular-tools' => 'Popularne narzędzia',
+	'user-tools-edit-hide-tools' => 'Ukryj narzędzia',
+	'user-tools-edit-toolbar-list' => 'Lista',
+	'user-tools-edit-reset-defaults' => 'przywróć domyślne',
+);
+
+$messages['ps'] = array(
 	'user-tools-edit-cancel' => 'ناګارل',
-	'user-tools-edit-save' => 'خوندي کول'
-];
+	'user-tools-edit-save' => 'خوندي کول',
+);
 
-$messages['pt'] = [
+$messages['pt'] = array(
 	'user-tools-edit-cancel' => 'Cancelar',
 	'user-tools-edit-save' => 'Gravar',
 	'user-tools-edit-rename' => 'Alterar o Nome',
@@ -380,9 +386,9 @@ $messages['pt'] = [
 	'user-tools-edit-hide-tools' => 'Ocultar Ferramentas',
 	'user-tools-edit-toolbar-list' => 'Lista de Ferramentas',
 	'user-tools-edit-reset-defaults' => 'repor valores padrão',
-];
+);
 
-$messages['pt-br'] = [
+$messages['pt-br'] = array(
 	'user-tools-edit-cancel' => 'Cancelar',
 	'user-tools-edit-save' => 'Salvar',
 	'user-tools-edit-rename' => 'Alterar o Nome',
@@ -396,9 +402,9 @@ $messages['pt-br'] = [
 	'user-tools-edit-hide-tools' => 'Ocultar Ferramentas',
 	'user-tools-edit-toolbar-list' => 'Lista de Ferramentas',
 	'user-tools-edit-reset-defaults' => 'Usar o padrão',
-];
+);
 
-$messages['ru'] = [
+$messages['ru'] = array(
 	'user-tools-edit-cancel' => 'Отменить',
 	'user-tools-edit-save' => 'Сохранить',
 	'user-tools-edit-rename' => 'Переименовать инструмент',
@@ -412,9 +418,9 @@ $messages['ru'] = [
 	'user-tools-edit-hide-tools' => 'Скрыть список инструментов',
 	'user-tools-edit-toolbar-list' => 'Список инструментов',
 	'user-tools-edit-reset-defaults' => 'Вернуть по умолчанию',
-];
+);
 
-$messages['sr-ec'] = [
+$messages['sr-ec'] = array(
 	'user-tools-edit-cancel' => 'Откажи',
 	'user-tools-edit-save' => 'Сачувај',
 	'user-tools-edit-rename' => 'Преименуј ставку',
@@ -424,9 +430,9 @@ $messages['sr-ec'] = [
 	'user-tools-edit-popular-tools' => 'Популарне алатке',
 	'user-tools-edit-hide-tools' => 'Сакриј алатке',
 	'user-tools-edit-toolbar-list' => 'Списак алатница',
-];
+);
 
-$messages['sv'] = [
+$messages['sv'] = array(
 	'user-tools-edit-cancel' => 'Avbryt',
 	'user-tools-edit-save' => 'Spara',
 	'user-tools-edit-rename' => 'Byt namn på objekt',
@@ -440,15 +446,19 @@ $messages['sv'] = [
 	'user-tools-edit-hide-tools' => 'Göm verktyg',
 	'user-tools-edit-toolbar-list' => 'Verktygsfältslista',
 	'user-tools-edit-reset-defaults' => 'återställ standardvärden',
-];
+);
 
-$messages['te'] = [
+$messages['te'] = array(
 	'user-tools-edit-cancel' => 'రద్దుచేయి',
 	'user-tools-edit-save' => 'భద్రపరచు',
 	'user-tools-more' => 'మరిన్ని&hellip;',
-];
+);
 
-$messages['tt-cyrl'] = [
+$messages['tl'] = array(
+	'user-tools-edit-title' => 'Ipasadya ang Halang na Pangkasangkapan',
+);
+
+$messages['tt-cyrl'] = array(
 	'user-tools-edit-cancel' => 'Баш тарту',
 	'user-tools-edit-save' => 'Саклау',
 	'user-tools-edit-rename' => 'Коралның исемен үзгәртергә',
@@ -456,9 +466,9 @@ $messages['tt-cyrl'] = [
 	'user-tools-customize' => 'Көйләү',
 	'user-tools-edit-find-a-tool' => 'Корал табарга',
 	'user-tools-edit-toolbar-list' => 'Кораллар исемлеге',
-];
+);
 
-$messages['uk'] = [
+$messages['uk'] = array(
 	'user-tools-edit-cancel' => 'Скасувати',
 	'user-tools-edit-save' => 'Зберегти',
 	'user-tools-edit-rename' => 'Переіменувати інструмент',
@@ -472,9 +482,9 @@ $messages['uk'] = [
 	'user-tools-edit-hide-tools' => 'Приховати інструменти',
 	'user-tools-edit-toolbar-list' => 'Перелік інструментів',
 	'user-tools-edit-reset-defaults' => 'Повернути за замовчуванням',
-];
+);
 
-$messages['vi'] = [
+$messages['vi'] = array(
 	'user-tools-edit-cancel' => 'Hủy bỏ',
 	'user-tools-edit-save' => 'Lưu',
 	'user-tools-edit-rename' => 'Đổi tên mục',
@@ -488,16 +498,26 @@ $messages['vi'] = [
 	'user-tools-edit-hide-tools' => 'Ẩn công cụ',
 	'user-tools-edit-toolbar-list' => 'Danh sách công cụ',
 	'user-tools-edit-reset-defaults' => 'thiết lập lại mặc định',
-];
+);
 
-$messages['zh-hans'] = [
+$messages['zh'] = array(
+	'user-tools-customize' => '自定义',
+	'user-tools-edit-find-a-tool' => '查找工具',
+	'user-tools-edit-advanced-tools' => '[[Help:MyTools|高级编辑工具列表]]',
+	'user-tools-edit-popular-tools' => '常用工具',
+	'user-tools-edit-hide-tools' => '隐藏工具列表',
+	'user-tools-edit-toolbar-list' => '工具栏列表',
+	'user-tools-edit-reset-defaults' => '设置为默认',
+);
+
+$messages['zh-hans'] = array(
 	'user-tools-edit-cancel' => '取消',
 	'user-tools-edit-save' => '保存',
 	'user-tools-edit-rename' => '重命名项目',
-	'user-tools-edit-title' => '自定义工具栏'
-];
+	'user-tools-edit-title' => '自定义工具栏',
+);
 
-$messages['zh-hant'] = [
+$messages['zh-hant'] = array(
 	'user-tools-edit-cancel' => '取消',
 	'user-tools-edit-save' => '儲存',
 	'user-tools-edit-rename' => '重新命名項目',
@@ -511,35 +531,16 @@ $messages['zh-hant'] = [
 	'user-tools-edit-hide-tools' => '隱藏工具',
 	'user-tools-edit-toolbar-list' => '工具列清單',
 	'user-tools-edit-reset-defaults' => '重設為預設值',
-];
+);
 
-$messages['zh-hk'] = [
+$messages['zh-hk'] = array(
 	'user-tools-edit-cancel' => '取消',
 	'user-tools-edit-save' => '保存',
 	'user-tools-edit-hide-tools' => '隱藏工具',
-];
+);
 
-$messages['zh-tw'] = [
+$messages['zh-tw'] = array(
 	'user-tools-edit-cancel' => '取消',
 	'user-tools-edit-save' => '保存',
 	'user-tools-edit-hide-tools' => '隱藏工具',
-];
-
-$messages['tl'] = [
-	'user-tools-edit-title' => 'Ipasadya ang Halang na Pangkasangkapan'
-];
-
-$messages['ca'] = [
-	'user-tools-more' => 'més...',
-	'user-tools-customize' => 'Přizpůsobit',
-];
-
-$messages['zh'] = [
-	'user-tools-customize' => '自定义',
-	'user-tools-edit-find-a-tool' => '查找工具',
-	'user-tools-edit-advanced-tools' => '[[Help:MyTools|高级编辑工具列表]]',
-	'user-tools-edit-popular-tools' => '常用工具',
-	'user-tools-edit-hide-tools' => '隐藏工具列表',
-	'user-tools-edit-toolbar-list' => '工具栏列表',
-	'user-tools-edit-reset-defaults' => '设置为默认',
-];
+);

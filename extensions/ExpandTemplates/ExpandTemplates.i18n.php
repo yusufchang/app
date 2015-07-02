@@ -9,22 +9,22 @@
 $messages = array();
 
 $messages['en'] = array(
-	'expandtemplates'                  => 'Expand templates',
-	'expandtemplates-desc'             => '[[Special:ExpandTemplates|Expands templates, parser functions and variables]] to show expanded wikitext and preview rendered page',
-	'expand_templates_intro'           => 'This special page takes some text and expands all templates in it recursively.
+	'expandtemplates' => 'Expand templates',
+	'expandtemplates-desc' => '[[Special:ExpandTemplates|Expands templates, parser functions and variables]] to show expanded wikitext and preview rendered page',
+	'expand_templates_intro' => 'This special page takes some text and expands all templates in it recursively.
 It also expands parser functions like
 <nowiki>{{</nowiki>#if:…}}, and variables like
 <nowiki>{{</nowiki>CURRENTDAY}}&mdash;in fact pretty much everything in double-braces.
 It does this by calling the relevant parser stage from MediaWiki itself.',
-	'expand_templates_title'           => 'Context title, for {{FULLPAGENAME}} etc.:',
-	'expand_templates_input'           => 'Input text:',
-	'expand_templates_output'          => 'Result',
-	'expand_templates_xml_output'      => 'XML output',
-	'expand_templates_ok'              => 'OK',
+	'expand_templates_title' => 'Context title, for {{FULLPAGENAME}} etc.:',
+	'expand_templates_input' => 'Input text:',
+	'expand_templates_output' => 'Result',
+	'expand_templates_xml_output' => 'XML output',
+	'expand_templates_ok' => 'OK',
 	'expand_templates_remove_comments' => 'Remove comments',
-	'expand_templates_remove_nowiki'   => 'Suppress <nowiki> tags in result',
-	'expand_templates_generate_xml'    => 'Show XML parse tree',
-	'expand_templates_preview'         => 'Preview',
+	'expand_templates_remove_nowiki' => 'Suppress <nowiki> tags in result',
+	'expand_templates_generate_xml' => 'Show XML parse tree',
+	'expand_templates_preview' => 'Preview',
 	'expand_templates_preview_fail_html' => '<em>Because {{SITENAME}} has raw HTML enabled and there was a loss of session data, the preview is hidden as a precaution against JavaScript attacks.</em>
 
 <strong>If this is a legitimate preview attempt, please try again.</strong>
@@ -32,30 +32,6 @@ If it still does not work, try [[Special:UserLogout|logging out]] and logging ba
 	'expand_templates_preview_fail_html_anon' => '<em>Because {{SITENAME}} has raw HTML enabled and you are not logged in, the preview is hidden as a precaution against JavaScript attacks.</em>
 
 <strong>If this is a legitimate preview attempt, please [[Special:UserLogin|log in]] and try again.</strong>',
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author Jon Harald Søby
- * @author Meno25
- * @author Mormegil
- * @author The Evil IP address
- * @author Yekrats
- */
-$messages['qqq'] = array(
-	'expandtemplates' => 'The name of the [[mw:Extension:ExpandTemplates|Expand Templates extension]].',
-	'expandtemplates-desc' => 'The description of the [[mw:Extension:ExpandTemplates|Expand Templates extension]].
-{{desc}}',
-	'expand_templates_intro' => 'This is the explanation given in the heading of the [[Special:ExpandTemplates]] page; it describes its functionality to the users.
-For more information, see [[mw:Extension:ExpandTemplates]]',
-	'expand_templates_input' => '{{Identical|Input text}}',
-	'expand_templates_output' => '{{Identical|Result}}',
-	'expand_templates_ok' => '{{Identical|OK}}',
-	'expand_templates_remove_comments' => 'Check box to tell [[mw:Extension:ExpandTemplates]] to not show comments in the expanded template.',
-	'expand_templates_remove_nowiki' => 'Option on [[Special:Expandtemplates]]',
-	'expand_templates_preview' => '{{Identical|Preview}}',
-	'expand_templates_preview_fail_html' => 'Used as error message in Preview section of [[Special:ExpandTemplates]] page.',
-	'expand_templates_preview_fail_html_anon' => 'Used as error message in Preview section of [[Special:ExpandTemplates]] page.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -1629,18 +1605,18 @@ $messages['pdc'] = array(
 $messages['pl'] = array(
 	'expandtemplates' => 'Rozwijanie szablonów',
 	'expandtemplates-desc' => '[[Special:ExpandTemplates|Rozwija szablony, funkcje analizatora składni oraz zmienne]] by pokazać rozwiniętą składnię wiki oraz podgląd zinterpretowanej strony',
-	'expand_templates_intro' => 'We wprowadzonym na tej stronie tekście źródłowym zostaną rozwinięte wszystkie szablony.
+	'expand_templates_intro' => 'We wprowadzonym na tej stronie tekście źródłowym zostaną rozwinięte rekurencyjnie wszystkie szablony.
 Rozwinięte także zostaną funkcje parsera takie jak
-<nowiki>{{</nowiki>#if...}} i zmienne jak 
-<nowiki>{{</nowiki>CURRENTDAY}} &ndash; w zasadzie prawie wszystko w podwójnych nawiasach klamrowych.
-Wykonywane jest to poprzez wywołanie odpowiedniego przebiegu (etapu) parsera z samego MediaWiki.',
+<code><nowiki>{{</nowiki>#language:…}}</code> i zmienne jak
+<code><nowiki>{{</nowiki>CURRENTDAY}}</code>.
+W zasadzie rozwijane jest prawie wszystko w podwójnych nawiasach klamrowych.',
 	'expand_templates_title' => 'Pozorny tytuł strony dla zmiennych takich jak {{FULLPAGENAME}}',
 	'expand_templates_input' => 'Tekst wejściowy',
 	'expand_templates_output' => 'Rezultat',
 	'expand_templates_xml_output' => 'wynik w formacie XML',
 	'expand_templates_ok' => 'OK',
 	'expand_templates_remove_comments' => 'Usuń komentarze',
-	'expand_templates_remove_nowiki' => 'Ukrywaj w wyniku znaczniki <nowiki>',
+	'expand_templates_remove_nowiki' => 'Ukrywaj w wyniku znaczniki <nowiki />',
 	'expand_templates_generate_xml' => 'Pokaż drzewo analizatora składni w formacie XML',
 	'expand_templates_preview' => 'Podgląd',
 );
@@ -2422,4 +2398,3 @@ $messages['zh-tw'] = array(
 	'expand_templates_generate_xml' => '顯示XML解析樹',
 	'expand_templates_preview' => '預覽',
 );
-

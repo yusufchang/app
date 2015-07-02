@@ -11,18 +11,11 @@ $messages = array();
 /** English */
 $messages['en'] = array(
 	'math-desc' => 'Render mathematical formulas between <code>&lt;math&gt;</code> ... <code>&lt;/math&gt;</code> tags',
-	// Edit toolbar stuff shown on ?action=edit (example text & tooltip)
 	'math_sample' => 'Insert formula here',
 	'math_tip' => 'Mathematical formula (LaTeX)',
-
-	// Header on Special:Preferences (or something)
 	'prefs-math' => 'Math',
-
-	// Math options
 	'mw_math_png' => 'Always render PNG',
 	'mw_math_source' => 'Leave it as TeX (for text browsers)',
-
-	// Math errors
 	'math_failure' => 'Failed to parse',
 	'math_unknown_error' => 'unknown error',
 	'math_unknown_function' => 'unknown function',
@@ -32,50 +25,6 @@ $messages['en'] = array(
 	'math_bad_tmpdir' => 'Cannot write to or create math temp directory',
 	'math_bad_output' => 'Cannot write to or create math output directory',
 	'math_notexvc' => 'Missing texvc executable; please see math/README to configure.',
-);
-
-/** Message documentation (Message documentation)
- * @author Jon Harald Søby
- * @author Kizito
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'math-desc' => '{{desc}}',
-	'math_sample' => 'The sample formula text that you get when you press the fourth button from the right on the edit toolbar.',
-	'math_tip' => 'This is the text that appears when you hover the mouse over the fourth button from the right on the edit toolbar.',
-	'prefs-math' => 'Used in user preferences.',
-	'mw_math_png' => 'In user preferences. All mw_math_* messages MUST be different, things will break otherwise!',
-	'mw_math_source' => 'In user preferences (math). All mw_math_* messages MUST be different, things will break otherwise!',
-	'math_syntax_error' => '{{Identical|Syntax error}}',
-);
-
-/** Test (site admin only) (Test (site admin only)) */
-$messages['test'] = array(
-	'math_sample' => 'x',
-	'math_tip' => 'x',
-);
-
-/** Magyar (magázó) (Magyar (magázó))
- * @author Dani
- */
-$messages['hu-formal'] = array(
-	'math_image_error' => 'PNG-vé alakítás sikertelen; ellenőrizze, hogy a latex és dvipng (vagy dvips + gs + convert) helyesen van-e telepítve',
-);
-
-/** Moroccan Spoken Arabic (Maġribi)
- * @author Enzoreg
- * @author Zanatos
- */
-$messages['ary'] = array(
-	'math_sample' => 'Kṫeb ĝalaqa de l-mat hnaya',
-	'math_tip' => 'Ĝalaqa de l-mat (LaTeX)',
-	'prefs-math' => 'mat',
-	'mw_math_png' => 'dima biyn bhal  PNG',
-	'math_failure' => 'khata flmat',
-	'math_unknown_error' => 'khat mjhol',
-	'math_unknown_function' => 'wadifa mjhola',
-	'math_lexing_error' => 'khata fsigha',
-	'math_syntax_error' => 'khata fsiyagha',
 );
 
 /** Achinese (Acèh)
@@ -201,6 +150,22 @@ $messages['ar'] = array(
 $messages['arc'] = array(
 	'prefs-math' => 'ܡܬܡܐܛܝܩܘܬܐ',
 	'math_unknown_error' => 'ܦܘܕܐ ܠܐ ܝܕܝܥܐ',
+);
+
+/** Moroccan Spoken Arabic (Maġribi)
+ * @author Enzoreg
+ * @author Zanatos
+ */
+$messages['ary'] = array(
+	'math_sample' => 'Kṫeb ĝalaqa de l-mat hnaya',
+	'math_tip' => 'Ĝalaqa de l-mat (LaTeX)',
+	'prefs-math' => 'mat',
+	'mw_math_png' => 'dima biyn bhal  PNG',
+	'math_failure' => 'khata flmat',
+	'math_unknown_error' => 'khat mjhol',
+	'math_unknown_function' => 'wadifa mjhola',
+	'math_lexing_error' => 'khata fsigha',
+	'math_syntax_error' => 'khata fsiyagha',
 );
 
 /** Egyptian Spoken Arabic (مصرى)
@@ -636,22 +601,6 @@ $messages['cps'] = array(
 	'math_tip' => 'Pormula nga pangmatematika (LaTeX)',
 );
 
-/** Crimean Turkish (Latin script) (‪Qırımtatarca (Latin)‬)
- * @author Don Alessandro
- */
-$messages['crh-latn'] = array(
-	'math_sample' => 'Bu yerge formulanı kirsetiñiz',
-	'math_tip' => 'Riyaziy (matematik) formula (LaTeX formatında)',
-	'prefs-math' => 'Riyaziy (matematik) işaretler',
-	'mw_math_png' => 'Daima PNG resim formatına çevir',
-	'mw_math_source' => 'Deñiştirmeden TeX olaraq taşla  (metin temelli brauzerler içün)',
-	'math_failure' => 'Ayırıştırılamadı',
-	'math_unknown_error' => 'bilinmegen hata',
-	'math_unknown_function' => 'belgisiz funktsiya',
-	'math_lexing_error' => 'leksik hata',
-	'math_syntax_error' => 'sintaksis hatası',
-);
-
 /** Crimean Turkish (Cyrillic script) (‪Къырымтатарджа (Кирилл)‬)
  * @author Don Alessandro
  */
@@ -666,6 +615,22 @@ $messages['crh-cyrl'] = array(
 	'math_unknown_function' => 'бельгисиз функция',
 	'math_lexing_error' => 'лексик хата',
 	'math_syntax_error' => 'синтаксис хатасы',
+);
+
+/** Crimean Turkish (Latin script) (‪Qırımtatarca (Latin)‬)
+ * @author Don Alessandro
+ */
+$messages['crh-latn'] = array(
+	'math_sample' => 'Bu yerge formulanı kirsetiñiz',
+	'math_tip' => 'Riyaziy (matematik) formula (LaTeX formatında)',
+	'prefs-math' => 'Riyaziy (matematik) işaretler',
+	'mw_math_png' => 'Daima PNG resim formatına çevir',
+	'mw_math_source' => 'Deñiştirmeden TeX olaraq taşla  (metin temelli brauzerler içün)',
+	'math_failure' => 'Ayırıştırılamadı',
+	'math_unknown_error' => 'bilinmegen hata',
+	'math_unknown_function' => 'belgisiz funktsiya',
+	'math_lexing_error' => 'leksik hata',
+	'math_syntax_error' => 'sintaksis hatası',
 );
 
 /** Czech (Česky)
@@ -1034,7 +999,7 @@ $messages['fo'] = array(
  * @author Peter17
  */
 $messages['fr'] = array(
-	'math-desc' => 'Rendre les formules mathématiques entre les balises <code>&lt;math&gt;</code> ... <code>&lt;/math&gt;</code>',
+	'math-desc' => 'Met en forme les formules mathématiques entre les balises <code>&lt;math&gt;</code> et <code>&lt;/math&gt;</code>',
 	'math_sample' => 'Entrez votre formule ici',
 	'math_tip' => 'Formule mathématique (LaTeX)',
 	'prefs-math' => 'Rendu des maths',
@@ -1483,6 +1448,13 @@ $messages['hu'] = array(
 	'math_bad_tmpdir' => 'Nem írható vagy nem hozható létre a matematikai ideiglenes könyvtár',
 	'math_bad_output' => 'Nem lehet létrehozni vagy írni a matematikai függvények kimeneti könyvtárába',
 	'math_notexvc' => 'HIányzó texvc végrehajtható fájl; a beállítást lásd a math/README fájlban.',
+);
+
+/** Magyar (magázó) (Magyar (magázó))
+ * @author Dani
+ */
+$messages['hu-formal'] = array(
+	'math_image_error' => 'PNG-vé alakítás sikertelen; ellenőrizze, hogy a latex és dvipng (vagy dvips + gs + convert) helyesen van-e telepítve',
 );
 
 /** Armenian (Հայերեն)
@@ -2754,7 +2726,7 @@ $messages['pl'] = array(
 	'math_sample' => 'Tutaj wprowadź wzór',
 	'math_tip' => 'Wzór matematyczny (LaTeX)',
 	'prefs-math' => 'Wzory',
-	'mw_math_png' => 'Zawsze generuj grafikę PNG',
+	'mw_math_png' => 'Zawsze generuj obraz PNG',
 	'mw_math_source' => 'Pozostaw w TeXu (dla przeglądarek tekstowych)',
 	'math_failure' => 'Parser nie mógł rozpoznać',
 	'math_unknown_error' => 'nieznany błąd',
@@ -2766,6 +2738,7 @@ $messages['pl'] = array(
 	'math_bad_output' => 'Nie można utworzyć lub zapisywać w wyjściowym katalogu dla wzorów matematycznych',
 	'math_notexvc' => 'Brak programu texvc.
 Zapoznaj się z math/README w celu konfiguracji.',
+	'math-desc' => 'Renderowanie formuł matematycznych między znacznikami <code>&lt;math&gt;</code> ... <code>&lt;/math&gt;</code>',
 );
 
 /** Piedmontese (Piemontèis)
@@ -3540,6 +3513,12 @@ $messages['te'] = array(
 	'math_notexvc' => 'texvc ఎక్జిక్యూటబుల్ కనబడడం లేదు; కాన్ఫిగరు చెయ్యడానికి math/README చూడండి.',
 );
 
+/** Test (site admin only) (Test (site admin only)) */
+$messages['test'] = array(
+	'math_sample' => 'x',
+	'math_tip' => 'x',
+);
+
 /** Tajik (Cyrillic script) (Тоҷикӣ)
  * @author Ibrahim
  */
@@ -4091,4 +4070,3 @@ $messages['zu'] = array(
 	'math_sample' => 'Faka izibalo lapha',
 	'prefs-math' => 'Izibalo',
 );
-

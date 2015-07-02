@@ -9,159 +9,58 @@
 $messages = array();
 
 $messages['en'] = array(
-	'cite-desc'                      => 'Adds <nowiki><ref[ name=id]></nowiki> and <nowiki><references/></nowiki> tags, for citations',
-	/*
-		Debug and errors
-	*/
-	# Internal errors
-	'cite_croak'                     => 'Cite died; $1: $2',
-	'cite_error_key_str_invalid'     => 'Internal error;
+	'cite-desc' => 'Adds <nowiki><ref[ name=id]></nowiki> and <nowiki><references/></nowiki> tags, for citations',
+	'cite_croak' => 'Cite died; $1: $2',
+	'cite_error_key_str_invalid' => 'Internal error;
 invalid $str and/or $key.
 This should never occur.',
 	'cite_error_stack_invalid_input' => 'Internal error;
 invalid stack key.
 This should never occur.',
-
-	# User errors
-	'cite_error'                                     => 'Cite error: $1',
-	'cite_error_ref_numeric_key'                     => 'Invalid <code>&lt;ref&gt;</code> tag;
+	'cite_error' => 'Cite error: $1',
+	'cite_error_ref_numeric_key' => 'Invalid <code>&lt;ref&gt;</code> tag;
 name cannot be a simple integer. Use a descriptive title',
-	'cite_error_ref_no_key'                          => 'Invalid <code>&lt;ref&gt;</code> tag;
+	'cite_error_ref_no_key' => 'Invalid <code>&lt;ref&gt;</code> tag;
 refs with no content must have a name',
-	'cite_error_ref_too_many_keys'                   => 'Invalid <code>&lt;ref&gt;</code> tag;
+	'cite_error_ref_too_many_keys' => 'Invalid <code>&lt;ref&gt;</code> tag;
 invalid names, e.g. too many',
-	'cite_error_ref_no_input'                        => 'Invalid <code>&lt;ref&gt;</code> tag;
+	'cite_error_ref_no_input' => 'Invalid <code>&lt;ref&gt;</code> tag;
 refs with no name must have content',
-	'cite_error_references_invalid_parameters'       => 'Invalid <code>&lt;references&gt;</code> tag;
+	'cite_error_references_invalid_parameters' => 'Invalid <code>&lt;references&gt;</code> tag;
 no parameters are allowed.
 Use <code>&lt;references /&gt;</code>',
 	'cite_error_references_invalid_parameters_group' => 'Invalid <code>&lt;references&gt;</code> tag;
 parameter "group" is allowed only.
 Use <code>&lt;references /&gt;</code>, or <code>&lt;references group="..." /&gt;</code>',
-	'cite_error_references_no_backlink_label'        => 'Ran out of custom backlink labels.
+	'cite_error_references_no_backlink_label' => 'Ran out of custom backlink labels.
 Define more in the <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki> message.',
-	'cite_error_no_link_label_group'        => 'Ran out of custom link labels for group "$1".
+	'cite_error_no_link_label_group' => 'Ran out of custom link labels for group "$1".
 Define more in the <nowiki>[[MediaWiki:$2]]</nowiki> message.',
-	'cite_error_references_no_text'                  => 'Invalid <code>&lt;ref&gt;</code> tag;
+	'cite_error_references_no_text' => 'Invalid <code>&lt;ref&gt;</code> tag;
 no text was provided for refs named <code>$1</code>',
-	'cite_error_included_ref'                        => 'Closing &lt;/ref&gt; missing for &lt;ref&gt; tag',
-	'cite_error_refs_without_references'             => '<code>&lt;ref&gt;</code> tags exist, but no <code>&lt;references/&gt;</code> tag was found',
-	'cite_error_group_refs_without_references'       => '<code>&lt;ref&gt;</code> tags exist for a group named "$1", but no corresponding <code>&lt;references group="$1"/&gt;</code> tag was found',
-	'cite_error_references_group_mismatch'           => '<code>&lt;ref&gt;</code> tag in <code>&lt;references&gt;</code> has conflicting group attribute "$1".',
-	'cite_error_references_missing_group'            => '<code>&lt;ref&gt;</code> tag defined in <code>&lt;references&gt;</code> has group attribute "$1" which does not appear in prior text.',
-	'cite_error_references_missing_key'              => '<code>&lt;ref&gt;</code> tag with name "$1" defined in <code>&lt;references&gt;</code> is not used in prior text.',
-	'cite_error_references_no_key'                   => '<code>&lt;ref&gt;</code> tag defined in <code>&lt;references&gt;</code> has no name attribute.',
-	'cite_error_empty_references_define'             => '<code>&lt;ref&gt;</code> tag defined in <code>&lt;references&gt;</code> with name "$1" has no content.',
-
-	/*
-	   Output formatting
-	*/
+	'cite_error_included_ref' => 'Closing &lt;/ref&gt; missing for &lt;ref&gt; tag',
+	'cite_error_refs_without_references' => '<code>&lt;ref&gt;</code> tags exist, but no <code>&lt;references/&gt;</code> tag was found',
+	'cite_error_group_refs_without_references' => '<code>&lt;ref&gt;</code> tags exist for a group named "$1", but no corresponding <code>&lt;references group="$1"/&gt;</code> tag was found',
+	'cite_error_references_group_mismatch' => '<code>&lt;ref&gt;</code> tag in <code>&lt;references&gt;</code> has conflicting group attribute "$1".',
+	'cite_error_references_missing_group' => '<code>&lt;ref&gt;</code> tag defined in <code>&lt;references&gt;</code> has group attribute "$1" which does not appear in prior text.',
+	'cite_error_references_missing_key' => '<code>&lt;ref&gt;</code> tag with name "$1" defined in <code>&lt;references&gt;</code> is not used in prior text.',
+	'cite_error_references_no_key' => '<code>&lt;ref&gt;</code> tag defined in <code>&lt;references&gt;</code> has no name attribute.',
+	'cite_error_empty_references_define' => '<code>&lt;ref&gt;</code> tag defined in <code>&lt;references&gt;</code> with name "$1" has no content.',
 	'cite_reference_link_key_with_num' => '$1_$2',
-	# Ids produced by <ref>
-	'cite_reference_link_prefix'       => 'cite_ref-',
-	'cite_reference_link_suffix'       => '',
-	# Ids produced by <references>
-	'cite_references_link_prefix'      => 'cite_note-',
-	'cite_references_link_suffix'      => '',
-
-	'cite_reference_link'                              => '<sup id="$1" class="reference">[[#$2|<nowiki>[</nowiki>$3<nowiki>]</nowiki>]]</sup>',
-	'cite_references_no_link'                          => '<p id="$1">$2</p>',
-	'cite_references_link_one'                         => '<li id="$1">[[#$2|↑]] $3</li>',
-	'cite_references_link_many'                        => '<li id="$1">↑ $2 $3</li>',
-	'cite_references_link_many_format'                 => '<sup>[[#$1|$2]]</sup>',
-	# An item from this set is passed as $3 in the message above
+	'cite_reference_link_prefix' => 'cite_ref-',
+	'cite_reference_link_suffix' => '',
+	'cite_references_link_prefix' => 'cite_note-',
+	'cite_references_link_suffix' => '',
+	'cite_reference_link' => '<sup id="$1" class="reference">[[#$2|<nowiki>[</nowiki>$3<nowiki>]</nowiki>]]</sup>',
+	'cite_references_no_link' => '<p id="$1">$2</p>',
+	'cite_references_link_one' => '<li id="$1">[[#$2|↑]] $3</li>',
+	'cite_references_link_many' => '<li id="$1">↑ $2 $3</li>',
+	'cite_references_link_many_format' => '<sup>[[#$1|$2]]</sup>',
 	'cite_references_link_many_format_backlink_labels' => 'a b c d e f g h i j k l m n o p q r s t u v w x y z aa ab ac ad ae af ag ah ai aj ak al am an ao ap aq ar as at au av aw ax ay az ba bb bc bd be bf bg bh bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx by bz ca cb cc cd ce cf cg ch ci cj ck cl cm cn co cp cq cr cs ct cu cv cw cx cy cz da db dc dd de df dg dh di dj dk dl dm dn do dp dq dr ds dt du dv dw dx dy dz ea eb ec ed ee ef eg eh ei ej ek el em en eo ep eq er es et eu ev ew ex ey ez fa fb fc fd fe ff fg fh fi fj fk fl fm fn fo fp fq fr fs ft fu fv fw fx fy fz ga gb gc gd ge gf gg gh gi gj gk gl gm gn go gp gq gr gs gt gu gv gw gx gy gz ha hb hc hd he hf hg hh hi hj hk hl hm hn ho hp hq hr hs ht hu hv hw hx hy hz ia ib ic id ie if ig ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb jc jd je jf jg jh ji jj jk jl jm jn jo jp jq jr js jt ju jv jw jx jy jz ka kb kc kd ke kf kg kh ki kj kk kl km kn ko kp kq kr ks kt ku kv kw kx ky kz la lb lc ld le lf lg lh li lj lk ll lm ln lo lp lq lr ls lt lu lv lw lx ly lz ma mb mc md me mf mg mh mi mj mk ml mm mn mo mp mq mr ms mt mu mv mw mx my mz na nb nc nd ne nf ng nh ni nj nk nl nm nn no np nq nr ns nt nu nv nw nx ny nz oa ob oc od oe of og oh oi oj ok ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg ph pi pj pk pl pm pn po pp pq pr ps pt pu pv pw px py pz qa qb qc qd qe qf qg qh qi qj qk ql qm qn qo qp qq qr qs qt qu qv qw qx qy qz ra rb rc rd re rf rg rh ri rj rk rl rm rn ro rp rq rr rs rt ru rv rw rx ry rz sa sb sc sd se sf sg sh si sj sk sl sm sn so sp sq sr ss st su sv sw sx sy sz ta tb tc td te tf tg th ti tj tk tl tm tn to tp tq tr ts tt tu tv tw tx ty tz ua ub uc ud ue uf ug uh ui uj uk ul um un uo up uq ur us ut uu uv uw ux uy uz va vb vc vd ve vf vg vh vi vj vk vl vm vn vo vp vq vr vs vt vu vv vw vx vy vz wa wb wc wd we wf wg wh wi wj wk wl wm wn wo wp wq wr ws wt wu wv ww wx wy wz xa xb xc xd xe xf xg xh xi xj xk xl xm xn xo xp xq xr xs xt xu xv xw xx xy xz ya yb yc yd ye yf yg yh yi yj yk yl ym yn yo yp yq yr ys yt yu yv yw yx yy yz za zb zc zd ze zf zg zh zi zj zk zl zm zn zo zp zq zr zs zt zu zv zw zx zy zz',
-	'cite_references_link_many_sep'                    => "&#32;",
-	'cite_references_link_many_and'                    => "&#32;",
-
-	# Although I could just use # instead of <li> above and nothing here that
-	# will break on input that contains linebreaks
+	'cite_references_link_many_sep' => '&#32;',
+	'cite_references_link_many_and' => '&#32;',
 	'cite_references_prefix' => '<ol class="references">',
 	'cite_references_suffix' => '</ol>',
-);
-
-/** Message documentation (Message documentation)
- * @author Dani
- * @author LPfi
- * @author Lejonel
- * @author Mormegil
- * @author Nike
- * @author Purodha
- * @author Raimond Spekking
- * @author Raymond
- * @author Siebrand
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'cite-desc' => '{{desc}}',
-	'cite_error_key_str_invalid' => '<tt>$str</tt> and <tt>$key</tt> are literals, and refers to who knows which variables the code uses.',
-	'cite_error' => 'Cite extension. This is used when there are errors in ref or references tags. The parameter $1 is an error message.',
-	'cite_error_ref_numeric_key' => 'Cite extension. Error message shown if the name of a ref tag only contains digits. Examples that cause this error are <code>&lt;ref name="123" /&gt;</code> or <code>&lt;ref name="456"&gt;input&lt;/ref&gt;</code>',
-	'cite_error_ref_no_key' => 'Cite extension. Error message shown when ref tags without any content (that is <code>&lt;ref/&gt;</code>) are used without a name.',
-	'cite_error_ref_too_many_keys' => 'Cite extension. Error message shown when ref tags has parameters other than name and group. Examples that cause this error are <code>&lt;ref name="name" notname="value" /&gt;</code> or <code>&lt;ref notname="value" &gt;input&lt;ref&gt;</code>',
-	'cite_error_ref_no_input' => 'Cite extension. Error message shown when ref tags without names have no content. An example that cause this error is <code>&lt;ref&gt;&lt;/ref&gt;</code>',
-	'cite_error_references_invalid_parameters' => 'Cite extension. Error message shown when parmeters are used in the references tag. An example that cause this error is <code>&lt;references someparameter="value" /&gt;</code>',
-	'cite_error_references_invalid_parameters_group' => 'Cite extension. Error message shown when unknown parameters are used in the references tag. An example that cause this error is <tt><nowiki><references someparameter="value" /></nowiki></tt>',
-	'cite_error_references_no_backlink_label' => 'Cite extension. Error message shown in the references tag when the same name is used for too many ref tags. Too many in this case is more than there are backlink labels defined in [[MediaWiki:Cite references link many format backlink labels]].
-
-It is not possible to make a clickable link to this message. "nowiki" is mandatory around [[MediaWiki:Cite references link many format backlink labels]].',
-	'cite_error_no_link_label_group' => "*'''$1''' is the name of a reference group.
-*'''$2''' is <tt>cite_link_label_group-<i>groupname</i></tt>.",
-	'cite_error_references_no_text' => 'Cite extension. This error occurs when the tag <code>&lt;ref name="something" /&gt;</code> is used with the name-option specified and no other tag specifies a cite-text for this name.',
-	'cite_error_included_ref' => 'Error message shown if the <tt>&lt;ref&gt;</tt> tag is unbalanced, that means a <tt>&lt;ref&gt;</tt> is not followed by a <tt>&lt;/ref&gt;</tt>',
-	'cite_error_references_group_mismatch' => 'Error message shown when doing something like
-
-<pre>
-<references group="foo">
-<ref group="bar">...</ref>
-</references>
-</pre>
-
-The <code>$1</code> is the value of the <code>group</code> attribute on the inner <code>&lt;ref&gt;</code> (in the example above, “bar”).',
-	'cite_error_references_missing_group' => 'Error message shown when doing something like
-
-<pre>
-<references group="foo">
-<ref>...</ref>
-</references>
-</pre>
-
-and there are no <code>&lt;ref&gt;</code> tags in the page text which would use <code>group="foo"</code>.
-
-The <code>$1</code> is the name of the unused <code>group</code> (in the example above, “foo”).',
-	'cite_error_references_missing_key' => 'Error message shown when using something like
-
-<pre>
-<references>
-<ref name="refname">...</ref>
-</references>
-</pre>
-
-and the reference <code>&lt;ref name="refname" /&gt;</code> is not used anywhere in the page text.
-
-The <code>$1</code> parameter contains the name of the unused reference (in the example above, “refname”).',
-	'cite_error_references_no_key' => 'Error message shown when a <code>&lt;ref&gt;</code> inside <code>&lt;references&gt;</code> does not have a <code>name</code> attribute.',
-	'cite_error_empty_references_define' => 'Error message shown when there is a <code><ref></code> inside <code><references></code>, but it does not have any content, e.g.
-
-<pre>
-<references>
-<ref name="foo" />
-</references>
-</pre>
-
-<code>$1</code> contains the <code>name</code> of the erroneous <code>&lt;ref&gt;</code> (in the above example, “foo”).',
-	'cite_reference_link_key_with_num' => '{{optional}}',
-	'cite_reference_link_prefix' => '{{optional}}',
-	'cite_reference_link_suffix' => '{{optional}}',
-	'cite_references_link_prefix' => '{{optional}}',
-	'cite_references_link_suffix' => '{{optional}}',
-	'cite_reference_link' => '{{optional}}',
-	'cite_references_link_one' => '{{optional}}',
-	'cite_references_link_many' => '{{optional}}',
-	'cite_references_link_many_format' => '{{optional}}',
-	'cite_references_link_many_format_backlink_labels' => '{{Optional}}',
-	'cite_references_link_many_sep' => '{{optional}}',
-	'cite_references_link_many_and' => '{{optional}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -799,7 +698,7 @@ $messages['de'] = array(
 	'cite_croak' => 'Fehler im Referenzsystem. $1: $2',
 	'cite_error_key_str_invalid' => 'Interner Fehler: ungültiger $str und/oder $key. Dies sollte nicht passieren.',
 	'cite_error_stack_invalid_input' => 'Interner Fehler: ungültiger Schlüssel für den Stack. Dies sollte nicht passieren.',
-	'cite_error' => 'Referenzfehler: $1',
+	'cite_error' => 'Interner Fehler: Ungültiger „name“',
 	'cite_error_ref_numeric_key' => 'Ungültige <tt>&lt;ref&gt;</tt>-Verwendung: „name“ darf kein reiner Zahlenwert sein, benutze einen beschreibenden Namen.',
 	'cite_error_ref_no_key' => 'Ungültige <tt>&lt;ref&gt;</tt>-Verwendung: „ref“ ohne Inhalt muss einen Namen haben.',
 	'cite_error_ref_too_many_keys' => 'Ungültige <tt>&lt;ref&gt;</tt>-Verwendung: „name“ ist ungültig oder zu lang.',
@@ -1021,27 +920,20 @@ neniu teksto estis donita por ref-oj nomataj <code>$1</code>',
 $messages['es'] = array(
 	'cite-desc' => 'Añade las etiquietas <nowiki><ref[ name=id]> y <references /></nowiki> para utilizar notas al pie.',
 	'cite_croak' => "La extensión ''Cite'' se murió; $1: $2",
-	'cite_error_key_str_invalid' => 'Error interno;
-$str y/o $key no válido.
-Esto no debería ocurrir.',
+	'cite_error_key_str_invalid' => 'Error interno; $str y/o $key inválido. Esto nunca debería ocurrir.',
 	'cite_error_stack_invalid_input' => 'Error interno;
 la clave de la pila no es válida.
 Esto nunca debe ocurrir.',
-	'cite_error' => 'Error en la cita: $1',
+	'cite_error' => 'Etiqueta <code>&lt;references&gt;</code> inválida; solamente se permite el parámetro "group". Usa <code>&lt;references /&gt;</code>, o <code>&lt;references group="..." /&gt;</code>',
 	'cite_error_ref_numeric_key' => 'El elemento <code>&lt;ref&gt;</code> no es válido;
 el nombre no puede ser un número entero simple. Use un título descriptivo',
 	'cite_error_ref_no_key' => 'El elemento <code>&lt;ref&gt;</code> no es válido;
 las referencias sin contenido deben tener un nombre',
 	'cite_error_ref_too_many_keys' => 'El elemento <code>&lt;ref&gt;</code> no es válido;
 nombres de parámetros no válidos',
-	'cite_error_ref_no_input' => 'Elemento <code>&lt;ref&gt;</code> no válido;
-referencias sin nombre deben tener contenido',
-	'cite_error_references_invalid_parameters' => 'El elemento <code>&lt;references&gt;</code> no es válido;
-no admite parámetros.
-Use <code>&lt;references /&gt;</code>',
-	'cite_error_references_invalid_parameters_group' => 'El elemento <code>&lt;references&gt;</code> no es válido;
-sólo se permite el parámetro «group».
-Use <code>&lt;references /&gt;</code>, o <code>&lt;references group="..." /&gt;</code>',
+	'cite_error_ref_no_input' => 'Etiqueta <code>&lt;ref&gt;</code> inválida; las referencias sin nombre deben tener contenido',
+	'cite_error_references_invalid_parameters' => 'Etiqueta <code>&lt;references&gt;</code> inválida; solamente se permite el parámetro "group". Usa <code>&lt;references /&gt;</code>, o <code>&lt;references group="..." /&gt;</code>',
+	'cite_error_references_invalid_parameters_group' => 'Etiqueta <code>&lt;references&gt;</code> inválida; solamente se permite el parámetro "group". Usa <code>&lt;references /&gt;</code>, o <code>&lt;references group="..." /&gt;</code>',
 	'cite_error_references_no_backlink_label' => 'Se quedó sin etiquetas de vínculos de retroceso personalizadas.
 Definir más en el mensaje <nowiki>[[MediaWiki:Cite references link many format backlink labels]]</nowiki>',
 	'cite_error_no_link_label_group' => 'Se han acabado las etiquetas de vínculos personalizados para el grupo "$1".
@@ -1200,7 +1092,7 @@ Ceci ne devrait jamais se produire.',
 	'cite_error_stack_invalid_input' => 'Erreur interne ;
 clé de pile invalide.
 Ceci ne devrait jamais se produire.',
-	'cite_error' => 'Erreur de référence : $1',
+	'cite_error' => 'Balise fermante <code>&lt;/ref&gt;</code> manquante pour la balise <code>&lt;ref&gt;</code>.',
 	'cite_error_ref_numeric_key' => 'Balise <code>&lt;ref&gt;</code> incorrecte ;
 le nom ne peut être un entier simple. Utilisez un titre descriptif.',
 	'cite_error_ref_no_key' => 'Balise <code>&lt;ref&gt;</code> incorrecte ;
@@ -1221,7 +1113,7 @@ Définissez-en un plus grand nombre dans le message <nowiki>[[MediaWiki:Cite ref
 Définissez-en plus dans le message <nowiki>[[MediaWiki:$2]]</nowiki>.",
 	'cite_error_references_no_text' => 'Balise <code>&lt;ref&gt;</code> incorrecte ;
 aucun texte n’a été fourni pour les références nommées <code>$1</code>.',
-	'cite_error_included_ref' => 'Clôture <code>&lt;/ref&gt;</code> manquante pour la balise <code>&lt;ref&gt;</code>.',
+	'cite_error_included_ref' => 'Balise fermante <code>&lt;/ref&gt;</code> manquante pour la balise <code>&lt;ref&gt;</code>.',
 	'cite_error_refs_without_references' => 'Des balises <code>&lt;ref&gt;</code> existent, mais aucune balise <code>&lt;references/&gt;</code> n’a été trouvée.',
 	'cite_error_group_refs_without_references' => 'Des balises <code>&lt;ref&gt;</code> existent pour un groupe nommé « $1 », mais aucune balise <code>&lt;references group="$1"/&gt;</code> correspondante n’a été trouvée.',
 	'cite_error_references_group_mismatch' => "La balise <code>&lt;ref&gt;</code> dans <code>&lt;references&gt;</code> a l'attribut de groupe « $1 » qui entre en conflit avec celui de <code>&lt;references&gt;</code>.",
@@ -1777,10 +1669,10 @@ Usare <code>&lt;references /&gt;</code> oppure <code>&lt;references group="..." 
  */
 $messages['ja'] = array(
 	'cite-desc' => '引用のためのタグ<nowiki><ref[ name=id]></nowiki> および <nowiki><references/></nowiki> を追加する',
-	'cite_croak' => '引用タグ機能の重大なエラー。$1: $2',
+	'cite_croak' => '引用タグ機能の重大なエラー; $1: $2',
 	'cite_error_key_str_invalid' => '内部エラー。$str と $key の両方または一方が無効。これはソフトウェアのバグです。',
 	'cite_error_stack_invalid_input' => '内部エラー。スタックキーが無効。これはソフトウェアのバグです。',
-	'cite_error' => '引用エラー: $1',
+	'cite_error' => "バックリンクラベルが使用できる個数を超えました。\"''cite_references_link_many_format_backlink_labels''\"",
 	'cite_error_ref_numeric_key' => '無効な <code>&lt;ref&gt;</code> タグ。名前(<code>name</code> 属性)に単なる数値は使用できません。説明的なものにしてください',
 	'cite_error_ref_no_key' => '無効な <code>&lt;ref&gt;</code> タグ。引用句の内容がない場合には名前(<code>name</code> 属性)が必要です',
 	'cite_error_ref_too_many_keys' => '無効な <code>&lt;ref&gt;</code> タグ。引数が不正(数が多すぎる、など)',
@@ -3706,6 +3598,11 @@ $messages['yue'] = array(
 無文字提供於名為<code>$1</code>嘅參照',
 );
 
+$messages['zh'] = array(
+	'cite_croak' => '引用阻塞; $1: $2',
+	'cite_error' => "过时的自定义后退标签，现在可在标签 \"''cite_references_link_many_format_backlink_labels''\" 定义更多信息",
+);
+
 /** Simplified Chinese (‪中文(简体)‬)
  * @author Gaoxuewei
  * @author Liangent
@@ -3767,3 +3664,12 @@ $messages['zh-hant'] = array(
 	'cite_error_empty_references_define' => '<code>&lt;references&gt;</code>中定義的<code>&lt;ref&gt;</code>的名稱（name）「$1」為空。',
 );
 
+$messages['zh-hk'] = array(
+	'cite_croak' => '引用阻塞; $1: $2',
+	'cite_error' => "過時的自定義後退標簽，現在可在標簽 \"''cite_references_link_many_format_backlink_labels''\" 定義更多信息",
+);
+
+$messages['zh-tw'] = array(
+	'cite_croak' => '{{MediaWiki:Cite croak}}',
+	'cite_error' => '{{MediaWiki:Cite error 7}}',
+);

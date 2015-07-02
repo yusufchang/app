@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -9,19 +8,6 @@ $messages['en'] = array(
 	'minieditor-message-edit' => 'This is an existing message',
 	'minieditor-reply' => 'Reply',
 	'minieditor-placeholder-reply' => 'Reply to the message here',
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'minieditor-specialpage-title' => 'Browser title for the page',
-	'minieditor-new-heading' => 'Heading of a form area',
-	'minieditor-placeholder-new' => 'Placeholder text, showin in an input field, disappears when clicked',
-	'minieditor-message-edit' => 'Notification text shown when a message is being edited (as opposed to created)',
-	'minieditor-reply' => 'Button text for replying to a message.
-{{Identical|Reply}}',
-	'minieditor-placeholder-reply' => 'Placeholder text, showin in an input field, disappears when clicked',
 );
 
 /** Arabic (العربية)
@@ -138,7 +124,7 @@ $messages['fo'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'minieditor-specialpage-title' => 'Page de démonstration de MiniEditor',
+	'minieditor-specialpage-title' => 'Page de démonstration du mini-éditeur',
 	'minieditor-new-heading' => 'Créer un nouveau message',
 	'minieditor-placeholder-new' => 'Saisissez votre message ici',
 	'minieditor-message-edit' => 'Ceci est un message existant',
@@ -196,7 +182,7 @@ $messages['it'] = array(
 	'minieditor-specialpage-title' => 'Pagina demo del Mini Editor',
 	'minieditor-new-heading' => 'Crea un nuovo messaggio',
 	'minieditor-placeholder-new' => 'Inserisci qui il tuo messaggio',
-	'minieditor-message-edit' => 'Questo è un messaggio già esistente',
+	'minieditor-message-edit' => 'Questo è un messaggio esistente',
 	'minieditor-reply' => 'Rispondi',
 	'minieditor-placeholder-reply' => 'Rispondi qui al messaggio',
 );

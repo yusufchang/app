@@ -1,20 +1,10 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
-	'paginator-desc'    => 'Paginator extension',
-	'paginator-next'	=> 'Next',
-	'paginator-back'	=> 'Back',
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'paginator-desc' => '{{desc}}',
-	'paginator-next' => '{{Identical|Next}}',
-	'paginator-back' => '{{Identical|Back}}',
+	'paginator-desc' => 'Paginator extension',
+	'paginator-next' => 'Next',
+	'paginator-back' => 'Back',
 );
 
 /** Afrikaans (Afrikaans)
@@ -114,7 +104,7 @@ $messages['diq'] = array(
 $messages['es'] = array(
 	'paginator-desc' => 'Extensión de paginación',
 	'paginator-next' => 'Siguiente',
-	'paginator-back' => 'Atrás',
+	'paginator-back' => 'Anterior',
 );
 
 /** Basque (euskara)
@@ -220,7 +210,7 @@ $messages['kn'] = array(
  */
 $messages['ko'] = array(
 	'paginator-next' => '다음',
-	'paginator-back' => '뒤로',
+	'paginator-back' => '이전',
 );
 
 /** Colognian (Ripoarisch)

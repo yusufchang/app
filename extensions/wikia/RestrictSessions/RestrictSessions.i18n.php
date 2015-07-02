@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Internationalisation for RestrictSessions extension
  *
@@ -16,9 +15,6 @@ $messages['en'] = array(
 	'restrictsessions-desc' => 'Enforce more secure sessions for staff members.',
 );
 
-/**
- * @author Daniel Grunwell (grunny)
- */
-$messages['qqq'] = array(
-	'restrictsessions-desc' => '{{desc}}',
+$messages['fr'] = array(
+	'restrictsessions-desc' => 'Rend les sessions encore plus sécurisées pour les membres du staff',
 );

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Internationalization file for the 'Arrays' extension.
  *
@@ -19,14 +18,6 @@ $messages = array();
  */
 $messages['en'] = array(
 	'arrays-desc' => 'Store and compute named arrays',
-);
-
-/** Message documentation (Message documentation)
- * @author Purodha
- * @author Raymond
- */
-$messages['qqq'] = array(
-	'arrays-desc' => '{{desc}}',
 );
 
 /** Arabic (العربية)
@@ -96,7 +87,7 @@ $messages['dsb'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'arrays-desc' => 'Enregistrer et traiter les tableaux nommés',
+	'arrays-desc' => 'Stocke et traite les tableaux nommés',
 );
 
 /** Franco-Provençal (Arpetan)
@@ -302,4 +293,3 @@ $messages['vep'] = array(
 $messages['zh-hans'] = array(
 	'arrays-desc' => '存储和计算指定的数组',
 );
-

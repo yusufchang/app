@@ -1,11 +1,10 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'powertools-desc' => 'Enables privilidged users to delete and protect pages in one action.',
 );
 
-$messages['qqq'] = array(
-	'powertools-desc' => '{{desc}}',
+$messages['fr'] = array(
+	'powertools-desc' => 'Permet aux utilisateurs privilégiés de supprimer et protéger des pages en une étape',
 );

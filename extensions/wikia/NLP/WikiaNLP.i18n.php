@@ -1,13 +1,10 @@
 <?php
-/**
- * NLP i18n messages, yo
- */
-$messages = [];
+$messages = array();
 
 $messages['en'] = array(
-		'wikia-nlp-desc' => 'Extension for interacting with natural language data.'
+	'wikia-nlp-desc' => 'Extension for interacting with natural language data.',
 );
 
-$messages['qqq'] = array(
-		'wikia-nlp-desc' => 'Extension description'
+$messages['fr'] = array(
+	'wikia-nlp-desc' => 'Extension pour interagir avec les données en langage naturel',
 );

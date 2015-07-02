@@ -1,22 +1,29 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
+	'seotweaks-image' => 'Image',
+	'seotweaks-video' => 'Video',
+);
 
-	'seotweaks-image' => "Image",
-	'seotweaks-video' => "Video"
+$messages['de'] = array(
+	'seotweaks-image' => 'Bild',
+);
+
+$messages['es'] = array(
+	'seotweaks-image' => 'Imagen',
+);
+
+$messages['fr'] = array(
+	'seotweaks-video' => 'Vidéo',
 );
 
 $messages['pl'] = array(
-
-	'seotweaks-image' => "Obrazek",
-	'seotweaks-video' => "Wideo"
+	'seotweaks-image' => 'Obraz',
+	'seotweaks-video' => 'Film',
 );
 
-/** Message documentation (Message documentation) */
-$messages['qqq'] = array(
-
-	'seotweaks-image' => "Prefix for image title displayed as document title (the title tag)",
-	'seotweaks-video' => "Prefix for video title displayed as document title (the title tag)"
+$messages['ru'] = array(
+	'seotweaks-image' => 'Файл',
+	'seotweaks-video' => 'Видео',
 );

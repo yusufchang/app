@@ -12,7 +12,6 @@ $messages['en'] = array(
 	'article-comments-desc' => 'Article comments for wiki pages',
 	'article-comments-file-page' => "<a href='$1'>Comment from $2</a> on <a href='$3'>$4</a>",
 	'article-blog-comments-file-page' => "<a href='$1'>Comment from $2</a> on <a href='$3'>$4</a> post on <a href='$5'>$6's</a> blog",
-
 	'article-comments-anonymous' => 'Anonymous user',
 	'article-comments-comments' => 'Comments ($1)',
 	'article-comments-post' => 'Post comment',
@@ -52,7 +51,6 @@ $messages['en'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Post a comment',
 	'wikiamobile-article-comments-login-post' => 'Please log in to post a comment.',
 	'wikiamobile-article-comments-post-fail' => 'Failed to save comment, please try again later',
-
 	'enotif_subject_article_comment' => '$PAGEEDITOR has commented on "$PAGETITLE" on {{SITENAME}}',
 	'enotif_body_article_comment' => 'Hi $WATCHINGUSERNAME,
 
@@ -75,69 +73,6 @@ ___________________________________________
 <li>Want to receive fewer messages from us? You can unsubscribe or change your email preferences here: <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
 </ul>
 </p>',
-);
-
-/** Message documentation (Message documentation)
- * @author Hamilton Abreu
- * @author Lizlux
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'article-comments-desc' => '{{desc}}',
-	'article-comments-file-page' => 'Format of the file usage (see [[MediaWiki:Linkstoimage]]) entry on the file page if the file is used in an article comment.
-Parameters:
-* $1 - Full URL link to the comment that includes the image. $1 is placed inside an anchor tag, please do not alter.
-* $2 - Username of the user who left the comment that includes the image. This should be placed within the link of the anchor tag created by $1. Supports GENDER
-* $3 - Full URL of the parent article that has the specific comment. $3 is placed inside an anchor tag, please do not alter.
-* $4 - Page name of parent article. This should be placed within the link of the anchor tag created by $3.',
-	'article-blog-comments-file-page' => 'Format of the file usage (see [[MediaWiki:Linkstoimage]]) entry on the file page if the file is used in a blog comment.
-Parameters:
-* $1 - Full URL link to the comment that includes the image. $1 is placed inside an anchor tag, please do not alter.
-* $2 - Username of the user who left the comment that includes the image. This should placed within the link of the anchor tag created by $1. Supports GENDER
-* $3 - Full URL link to the blog that has the specific comment. $3 is placed inside an anchor tag, please do not alter.
-* $4 - Name of the blog post.  This should be placed within the link of the the anchor tag created by $3.
-* $5 - Full URL link to the blog page of the author of the blog post (not the blog comment). $5 is placed inside an anchor tag, please do not alter.
-* $6 - Username of the author of the blog post (not the blog comment). This should placed within the link of the anchor tag created by $5. Supports GENDER.',
-	'article-comments-anonymous' => 'Anonymous users are logged out / un-authenticated users.
-{{Identical|Anonymous user}}',
-	'article-comments-comments' => '{{Identical|Comment}}',
-	'article-comments-post' => 'This is the text of a submit button to post a new article comment.
-{{Identical|Post comment}}',
-	'article-comments-cancel' => 'Cancel/stop editing an article comment.
-{{Identical|Cancel}}',
-	'article-comments-delete' => 'Click this button to delete the comment. It will take you to a page where you can confirm the deletion.
-{{Identical|Delete}}',
-	'article-comments-edit' => 'Click this button to edit the message.  A box will appear to with the message text for editing.
-{{Identical|Edit}}',
-	'article-comments-history' => '{{Identical|History}}',
-	'article-comments-rc-blog-comments' => '{{Identical|Blog comment}}',
-	'article-comments-toc-item' => '{{Identical|Comment}}',
-	'article-comments-reply' => '{{Identical|Reply}}',
-	'article-comments-next-page' => '{{Identical|Next}}',
-	'article-comments-show-more' => 'Label for the button that shows more comments',
-	'wikiamobile-article-comments-counter' => 'Number of comments + word Comments to display in WM page header',
-	'wikiamobile-article-comments-header' => "The header of the Comments section shown in Wikia's mobile skin.
-{{Identical|Comment}}",
-	'wikiamobile-article-comments-more' => 'Label on a button to load next page of comments.
-{{Identical|Load more}}',
-	'wikiamobile-article-comments-prev' => 'Label on a button to load previous page of comments',
-	'wikiamobile-article-comments-none' => 'Message displayed to user if there are no comments on a page after opening a section with comments',
-	'wikiamobile-article-comments-view' => 'Message to open all replies to a comment. Parameters:
-* $1 - the number of comments',
-	'wikiamobile-article-comments-replies' => 'Message in Top Bar in a modal with all replies to comment.
-{{Identical|Reply}}',
-	'wikiamobile-article-comments-post-reply' => 'Label on a button to post a reply to comment',
-	'wikiamobile-article-comments-post' => 'Label on a button to post a comment.
-{{Identical|Post}}',
-	'wikiamobile-article-comments-placeholder' => 'This is an input placeholder displayed when no text is in given input.
-{{Identical|Post comment}}',
-	'wikiamobile-article-comments-login-post' => 'Message shown to a user if he tries to post a comment on a wiki where login is obligatory to edit.
-This is shown in small pop up message in red.',
-	'wikiamobile-article-comments-post-fail' => 'Message shown to a user when saving his comment failed.
-This is shown in small pop up message in red.',
-	'enotif_body_article_comment' => '{{doc-singularthey}}
-This is an email sent to inform a user that a page they are following has a new comment posted.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -392,7 +327,7 @@ $PAGETITLE_URL
 
 Bittscheh kumm vorbei und dua vü midorweiden.
 
-Wikia', # Fuzzy
+Wikia',
 	'enotif_body_article_comment-HTML' => '<p>Servas $WATCHINGUSERNAME,
 <br /><br />
 $PAGEEDITOR hod an Kómmentar zua "$PAGETITLE" obgeem.
@@ -406,7 +341,7 @@ Wikia
 <ul>
 <li>Wüst da åschauh, wöche E-Mails du dahoiden host? <a href="{{fullurl:Special:Preferences}}">Stö deine Eihstöungen eih<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Bikol Central (Bikol Central)
@@ -626,7 +561,7 @@ Wikia
 <ul>
 <li>Ha c\'hoant hoc\'h eus da chom mestr war ar posteloù a resevit ? <a href="{{fullurl:Special:Preferences}}">Cheñchit ho penndibaboù<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Iriga Bicolano (Iriga Bicolano)
@@ -790,7 +725,7 @@ $PAGETITLE_URL
 
 Prosím navštěvujte a editujte často...
 
-Wikia', # Fuzzy
+Wikia',
 	'enotif_body_article_comment-HTML' => '<p>Váženýr $WATCHINGUSERNAME,
 <br /><br />
 $PAGEEDITOR přidal komentář na "$PAGETITLE".
@@ -804,7 +739,7 @@ Wikia
 <ul>
 <li>Chcete nastavit, které e-maily budete dostávat? <a href="{{fullurl:Special:Preferences}}">Aktualizujte své předvolby<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Welsh (Cymraeg)
@@ -911,8 +846,8 @@ $messages['de'] = array(
 	'article-comments-comments' => 'Kommentare ($1)',
 	'article-comments-post' => 'Kommentieren',
 	'article-comments-cancel' => 'Abbrechen',
-	'article-comments-delete' => 'löschen',
-	'article-comments-edit' => 'bearbeiten',
+	'article-comments-delete' => 'Löschen',
+	'article-comments-edit' => 'Bearbeiten',
 	'article-comments-history' => 'Versionen',
 	'article-comments-error' => 'Kommentar konnte nicht gespeichert werden',
 	'article-comments-undeleted-comment' => 'Kommentar zu Blog-Beitrag $1 wiederhergestellt.',
@@ -924,14 +859,14 @@ $messages['de'] = array(
 	'article-comments-rc-blog-comments' => 'Blog-Kommentare ([[$1]])',
 	'article-comments-login' => 'Zum Kommentieren <a href="$1">anmelden</a>.',
 	'article-comments-toc-item' => 'Kommentare',
-	'article-comments-comment-cannot-add' => 'Du kannst keinen Kommentar zum Artikel hinzufügen.',
+	'article-comments-comment-cannot-add' => 'Du kannst keine Kommentare zu diesem Artikel hinzufügen.',
 	'article-comments-vote' => 'Abstimmen',
 	'article-comments-reply' => 'Antworten',
 	'article-comments-show-all' => 'Alle Kommentare anzeigen',
 	'article-comments-prev-page' => 'Vorherige',
 	'article-comments-next-page' => 'Nächste',
-	'article-comments-page-spacer' => '&#160...&#160',
-	'article-comments-delete-reason' => 'Der übergeordnete Artikel / übergeordnete Kommentar wurde gelöscht.',
+	'article-comments-page-spacer' => ' ...',
+	'article-comments-delete-reason' => 'Der ursprüngliche übergeordnete Artikel/Kommentar wurde gelöscht.',
 	'article-comments-empty-comment' => 'Ein leerer Kommentar ist nicht möglich. <a href="$1">Stattdessen löschen?</a>',
 	'article-comments-show-more' => 'Weitere Kommentare anzeigen',
 	'wikiamobile-article-comments-counter' => '{{PLURAL:$1|Ein Kommentar|$1 Kommentare}}',
@@ -946,26 +881,40 @@ $messages['de'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Kommentieren',
 	'wikiamobile-article-comments-login-post' => 'Bitte melde dich an, um Kommentare zu schreiben.',
 	'wikiamobile-article-comments-post-fail' => 'Der Kommentar konnte nicht gespeichert werden, bitte versuche es später erneut.',
-	'enotif_subject_article_comment' => '$PAGEEDITOR hat "$PAGETITLE" auf {{SITENAME}} kommentiert',
+	'enotif_subject_article_comment' => '[{{SITENAME}}] $PAGEEDITOR hat "$PAGETITLE" kommentiert',
 	'enotif_body_article_comment' => 'Hallo $WATCHINGUSERNAME,
 
-es gibt zu $PAGETITLE auf {{SITENAME}} einen neuen Kommentar. Verwende diesen Link, um alle Kommentare anzusehen: $PAGETITLE_URL#WikiaArticleComments
+$PAGEEDITOR hat einen Kommentar auf der Seite "$PAGETITLE" hinterlassen.
 
-– Wikia Community Team
+Um alle Kommentare zu sehen, folge diesem Link:
+$PAGETITLE_URL 
 
-___________________________________________
-* Bekomme Hilfe und Ratschläge auf Community Central: http://community.wikia.com
-* Willst du weniger Nachrichten von uns erhalten? Du kannst die Benachrichtigung abbestellen oder deine E-Mail-Einstellungen hier ändern: http://community.wikia.com/Special:Preferences',
+Dein freundliches {{SITENAME}}-Benachrichtigungssystem
+
+-- 
+Um die Einstellungen deiner Beobachtungsliste anzupassen, besuche: {{fullurl:Special:Watchlist/edit}}
+
+Folge Wikia auf
+
+Facebook: http://facebook.com/wikia.de
+
+Twitter: http://twitter.com/wikia_de',
 	'enotif_body_article_comment-HTML' => '<p>Hallo $WATCHINGUSERNAME,
 <br /><br />
-es gibt zu $PAGETITLE auf {{SITENAME}} einen neuen Kommentar. Verwende diesen Link, um alle Kommentare anzusehen: $PAGETITLE_URL#WikiaArticleComments
+$PAGEEDITOR hat einen Kommentar auf der Seite "$PAGETITLE" hinterlassen.
 <br /><br />
-– Wikia Community Team
+Um alle Kommentare zu sehen, folge diesem Link:
+<a href="$PAGETITLE_URL">$PAGETITLE</a>
 <br /><br />
-___________________________________________
+Dein freundliches {{SITENAME}}-Benachrichtigungssystem
+<br /><hr />
 <ul>
-<li>Bekomme Hilfe und Ratschläge auf Community Central: <a href="http://community.wikia.com">http://community.wikia.com</a><li>
-<li>Willst du weniger Nachrichten von uns erhalten? Du kannst die Benachrichtigung abbestellen oder deine E-Mail-Einstellungen hier ändern: <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+<li>Um die Einstellungen deiner Beobachtungsliste anzupassen, besuche: <a href="{{fullurl:Special:Watchlist/edit}}">{{ns:special}}:Watchlist/edit<a>.</li>
+</ul><br />
+<b>Folge uns auf</b><br />
+<ul>
+<li>Facebook: <a href="http://facebook.com/wikia.de">facebook.com/wikia.de</a></li>
+<li>Twitter: <a href="http://twitter.com/wikia_de">twitter.com/wikia_de</a></li>
 </ul>
 </p>',
 );
@@ -984,7 +933,7 @@ $PAGETITLE_URL
 
 Bitte besuchen und bearbeiten Sie das Wiki bald wieder...
 
-Wikia', # Fuzzy
+Wikia',
 );
 
 /** Zazaki (Zazaki)
@@ -1099,7 +1048,7 @@ $messages['en-gb'] = array(
  */
 $messages['eo'] = array(
 	'article-comments-anonymous' => 'Anonima uzanto',
-	'article-comments-comments' => 'Komentoj ($2)', # Fuzzy
+	'article-comments-comments' => 'Komentoj ($2)',
 	'article-comments-post' => 'Komenti',
 	'article-comments-cancel' => 'Malŝalti',
 	'article-comments-delete' => 'forigi',
@@ -1139,12 +1088,12 @@ $messages['es'] = array(
 	'article-comments-history' => 'historial',
 	'article-comments-error' => 'No se pudo guardar el comentario',
 	'article-comments-undeleted-comment' => 'Comentario no borrado para la página del blog $1',
-	'article-comments-rc-comment' => 'Comentario de artículo (<span class="plainlinks">[$1 $2]</span>)',
-	'article-comments-rc-comments' => 'Comentarios de artículo ([[$1]])',
+	'article-comments-rc-comment' => 'Comentarios de artículo (<span class="plainlinks">[[$1]]</span>)',
+	'article-comments-rc-comments' => 'Comentarios de artículo (<span class="plainlinks">[[$1]]</span>)',
 	'article-comments-fblogin' => 'Por favor, <a href="$1">identifícate y conéctate con Facebook</a> para dejar un comentario en este wiki.',
 	'article-comments-fbconnect' => 'Por favor, <a href="$1">conecta esta cuenta con Facebook</a> para dejar un comentario.',
-	'article-comments-rc-blog-comment' => 'Comentario de blog (<span class="plainlinks">[$1 $2]</span>)',
-	'article-comments-rc-blog-comments' => 'Comentarios de blog ([[$1]])',
+	'article-comments-rc-blog-comment' => 'Comentarios de blog (<span class="plainlinks">[[$1]]</span>)',
+	'article-comments-rc-blog-comments' => 'Comentarios de blog (<span class="plainlinks">[[$1]]</span>)',
 	'article-comments-login' => '<a href="$1">Identifícate</a> para dejar un comentario',
 	'article-comments-toc-item' => 'Comentarios',
 	'article-comments-comment-cannot-add' => 'No puedes añadir comentarios aquí',
@@ -1169,26 +1118,26 @@ $messages['es'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Dejar un comentario',
 	'wikiamobile-article-comments-login-post' => 'Inicia sesión para publicar un comentario.',
 	'wikiamobile-article-comments-post-fail' => 'Error al guardar el comentario, por favor inténtalo nuevamente',
-	'enotif_subject_article_comment' => '$PAGEEDITOR ha comentado en "$PAGETITLE" en {{SITENAME}}',
+	'enotif_subject_article_comment' => '$PAGEEDITOR ha comentado en la página "$PAGETITLE" de {{SITENAME}}',
 	'enotif_body_article_comment' => 'Hola $WATCHINGUSERNAME,
 
-Hay un nuevo comentario en la página $PAGETITLE de {{SITENAME}}. Usa este enlace para ver todos los comentarios: $PAGETITLE_URL#WikiaArticleComments
+Hay nuevos comentarios en la página $PAGETITLE de {{SITENAME}}. Usa el siguiente enlace para ver todos los comentarios: $PAGETITLE_URL#article-comments
 
-- Equipo Comunitario de Wikia
+- Equipo comunitario de Wikia
 
 ___________________________________________
-* Encuentra ayuda y consejos en la Central Hispana: http://es.wikia.com
-* ¿Quieres recibir pocos mensajes de nosotros? Puedes darte de baja o cambiar tus preferencias de correo electrónico aquí: http://es.wikia.com/Especial:Preferencias',
-	'enotif_body_article_comment-HTML' => '<p>Hola $WATCHINGUSERNAME,
+* Si necesitas ayuda o consejos, visita nuestra comunidad central http://comunidad.wikia.com
+* ¿Quieres dejar de recibir estos mensajes? Puedes darte de baja en el servicio de emails desde tus preferencias aquí: http://comunidad.wikia.com/Especial:Preferencias',
+	'enotif_body_article_comment-HTML' => 'Hola $WATCHINGUSERNAME,
 <br /><br />
-Hay un nuevo comentario en la página $PAGETITLE de {{SITENAME}}. Usa este enlace para ver todos los comentarios: $PAGETITLE_URL#WikiaArticleComments
+Hay nuevos comentarios en la página $PAGETITLE de {{SITENAME}}. Usa el siguiente enlace para ver todos los comentarios: <a href="$PAGETITLE_URL#article-comments">$PAGETITLE</a>
 <br /><br />
-- Equipo Comunitario de Wikia
-<br /><br />
-___________________________________________
+- Equipo comunitario de Wikia
+<br /><hr />
+<p>
 <ul>
-<li>Encuentra ayuda y consejos en la Central Hispana: <a href="http://es.wikia.com">http://es.wikia.com</a><li>
-<li>¿Quieres recibir pocos mensajes de nosotros? Puedes darte de baja o cambia tus preferencias de correo electrónico aquí: <a href="http://es.wikia.com/Especial:Preferencias">http://es.wikia.com/wiki/Especial:Preferencias</a></li>
+<li>Si necesitas ayuda o consejos, visita nuestra <a href="http://comunidad.wikia.com">comunidad central</a>.</li>
+<li>¿Quieres dejar de recibir estos mensajes? Puedes darte de baja en el servicio de emails desde tus preferencias <a href="http://comunidad.wikia.com/Especial:Preferencias">aquí</a>.</li>
 </ul>
 </p>',
 );
@@ -1470,8 +1419,8 @@ $messages['fr'] = array(
 	'article-comments-show-more' => 'Afficher plus de commentaires',
 	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|commentaire|commentaires}}',
 	'wikiamobile-article-comments-header' => 'Commentaires',
-	'wikiamobile-article-comments-more' => 'Lire la suite',
-	'wikiamobile-article-comments-prev' => 'Charger le précédent',
+	'wikiamobile-article-comments-more' => 'Charger plus',
+	'wikiamobile-article-comments-prev' => 'Charger les précédents',
 	'wikiamobile-article-comments-none' => 'Aucun commentaire',
 	'wikiamobile-article-comments-view' => 'Afficher les réponses',
 	'wikiamobile-article-comments-replies' => 'réponses',
@@ -1480,7 +1429,7 @@ $messages['fr'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Envoyer un commentaire',
 	'wikiamobile-article-comments-login-post' => 'Veuillez vous connecter pour poster un commentaire.',
 	'wikiamobile-article-comments-post-fail' => 'Échec de l’enregistrement du commentaire, veuillez réessayer plus tard',
-	'enotif_subject_article_comment' => '$PAGEEDITOR a commenté « $PAGETITLE » sur {{SITENAME}}',
+	'enotif_subject_article_comment' => '[{{SITENAME}}] Venez lire les derniers commentaires sur $PAGETITLE',
 	'enotif_body_article_comment' => '$WATCHINGUSERNAME,
 
 Un nouveau commentaire a été laissé sur « $PAGETITLE » sur {{SITENAME}}. Utilisez ce lien pour voir tous les commentaires : $PAGETITLE_URL#WikiaArticleComments
@@ -1489,21 +1438,21 @@ Un nouveau commentaire a été laissé sur « $PAGETITLE » sur {{SITENAME}}. Ut
 
 ___________________________________________
 * Pour voir les derniers évènements sur Wikia, rendez-vous sur http://communaute.wikia.com
-* Vous souhaitez contrôler les courriels que vous recevez ? Rendez-vous sur : {{fullurl:{{ns:special}}:Preferences}}.
-* Cliquez sur le lien suivant pour vous désabonner de tous les courriels de Wikia : http://communaute.wikia.com/Special:Preferences',
+* Vous souhaitez contrôler les e-mails que vous recevez ? Rendez-vous sur : {{fullurl:{{ns:special}}:Preferences}}.
+* Cliquez sur le lien suivant pour vous désabonner de tous les e-mails de Wikia : http://communaute.wikia.com/Special:Preferences',
 	'enotif_body_article_comment-HTML' => '<p>$WATCHINGUSERNAME,
 <br /><br />
-Un nouveau commentaire a été laissé sur « $PAGETITLE » sur {{SITENAME}}. Utilisez ce lien pour voir tous les commentaires : $PAGETITLE_URL#WikiaArticleComments
+Un nouveau commentaire a été laissé sur « $PAGETITLE » sur {{SITENAME}}. Utilisez <a href="$PAGETITLE_URL#WikiaArticleComments">ce lien</a> pour voir tous les commentaires.
 <br /><br />
 — L’équipe Wikia</p>
 <br /><hr />
 <p>
 <ul>
 <li><a href="http://communaute.wikia.com">Venez voir les derniers évènements sur Wikia !</a></li>
-<li>Vous souhaitez contrôler les courriels que vous recevez ? Rendez-vous sur vos <a href="{{fullurl:{{ns:special}}:Preferences}}">préférences</a></li>
+<li>Vous souhaitez contrôler les e-mails que vous recevez ? Rendez-vous sur vos <a href="{{fullurl:{{ns:special}}:Preferences}}">préférences</a></li>
 </ul>
 </p>
-<div style="font-size: 70%;margin-top: 25px;text-align: center;">Cliquez <a href="http://communaute.wikia.com/Special:Preferences">ici</a> pour vous désabonner de tous les courriels de Wikia.</div>',
+<div style="font-size: 70%;margin-top: 25px;text-align: center;">Cliquez <a href="http://communaute.wikia.com/Special:Preferences">ici</a> pour vous désabonner de tous les e-mails de Wikia.</div>',
 );
 
 /** Western Frisian (Frysk)
@@ -1807,7 +1756,7 @@ Wikia
 <ul>
 <li>Szeretnéd szabályozni az érkező e&ndash;maileket?  <a href="{{fullurl:Special:Preferences}}">Konfiguráld beállításaidban<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Interlingua (interlingua)
@@ -1860,7 +1809,7 @@ $PAGETITLE_URL
 
 Per favor visita e modifica sovente...
 
-Wikia', # Fuzzy
+Wikia',
 	'enotif_body_article_comment-HTML' => '<p>Car $WATCHINGUSERNAME,
 <br /><br />
 $PAGEEDITOR lassava un commento in "$PAGETITLE".
@@ -1874,7 +1823,7 @@ Wikia
 <ul>
 <li>Vole determinar qual emails tu recipe? <a href="{{fullurl:Special:Preferences}}">Actualisa tu preferentias<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Indonesian (Bahasa Indonesia)
@@ -2009,17 +1958,17 @@ $messages['it'] = array(
 	'article-comments-empty-comment' => "Non puoi inserire un commento vuoto. <a href='$1'>Vuoi cancellarlo invece?</a>",
 	'article-comments-show-more' => 'mostra altri commenti',
 	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|commento|commenti}}',
-	'wikiamobile-article-comments-header' => 'Commenti',
-	'wikiamobile-article-comments-more' => 'Caricane ancora',
+	'wikiamobile-article-comments-header' => 'Commenti (<span id=wkArtCnt>$1</span>)',
+	'wikiamobile-article-comments-more' => 'Carica altri',
 	'wikiamobile-article-comments-prev' => 'Carica precedenti',
 	'wikiamobile-article-comments-none' => 'Nessun commento',
 	'wikiamobile-article-comments-view' => 'Visualizza risposte',
 	'wikiamobile-article-comments-replies' => 'risposte',
 	'wikiamobile-article-comments-post-reply' => 'Rispondi',
-	'wikiamobile-article-comments-post' => 'Posta',
+	'wikiamobile-article-comments-post' => 'Pubblica',
 	'wikiamobile-article-comments-placeholder' => 'Commenta',
 	'wikiamobile-article-comments-login-post' => 'Effettua il login per lasciare un commento.',
-	'wikiamobile-article-comments-post-fail' => 'Fallito nel salvataggio del commento, si prega di riprovare più tardi',
+	'wikiamobile-article-comments-post-fail' => 'Salvataggio del commento non riuscito, per favore riprova più tardi',
 	'enotif_subject_article_comment' => '$PAGEEDITOR ha commentato su "$PAGETITLE" su {{SITENAME}}',
 	'enotif_body_article_comment' => 'Caro $WATCHINGUSERNAME,
 
@@ -2062,16 +2011,16 @@ $messages['ja'] = array(
 	'article-comments-comments' => 'コメント ($1)',
 	'article-comments-post' => 'コメントを投稿',
 	'article-comments-cancel' => '中止',
-	'article-comments-delete' => '削除',
+	'article-comments-delete' => '親記事/親コメントが削除されました',
 	'article-comments-edit' => '編集',
 	'article-comments-history' => '履歴',
 	'article-comments-error' => 'コメントを保存できませんでした',
 	'article-comments-undeleted-comment' => 'ブログの記事 $1 へのコメントを復帰',
-	'article-comments-rc-comment' => '記事コメント（<span class="plainlinks">[$1 $2]</span>）',
+	'article-comments-rc-comment' => '記事コメント（[[$1]]）',
 	'article-comments-rc-comments' => '記事コメント（[[$1]]）',
 	'article-comments-fblogin' => 'コメントするには<a href="$1" rel="nofollow">ログインしてアカウントを Facebook に接続してください</a>。',
 	'article-comments-fbconnect' => 'コメントするには<a href="$1">アカウントを Facebook に接続してください</a>。',
-	'article-comments-rc-blog-comment' => 'ブログコメント（<span class="plainlinks">[$1 $2]</span>）',
+	'article-comments-rc-blog-comment' => 'ブログコメント（[[$1]]）',
 	'article-comments-rc-blog-comments' => 'ブログコメント（[[$1]]）',
 	'article-comments-login' => 'コメントするには<a href="$1">ログイン</a>する必要があります',
 	'article-comments-toc-item' => 'コメント',
@@ -2091,32 +2040,30 @@ $messages['ja'] = array(
 	'wikiamobile-article-comments-view' => '返信を見る',
 	'wikiamobile-article-comments-replies' => '返信',
 	'wikiamobile-article-comments-post-reply' => '返信を投稿',
-	'wikiamobile-article-comments-post' => '投稿',
+	'wikiamobile-article-comments-post' => 'コメントの保存に失敗しました。のちほどもう一度お試しください。',
 	'wikiamobile-article-comments-placeholder' => 'コメントを投稿',
 	'wikiamobile-article-comments-login-post' => 'コメントを投稿するにはログインする必要があります。',
 	'wikiamobile-article-comments-post-fail' => 'コメントの保存に失敗しました。のちほどもう一度お試しください。',
-	'enotif_subject_article_comment' => '{{SITENAME}} のページ「$PAGETITLE」に $PAGEEDITOR がコメントを投稿しました',
-	'enotif_body_article_comment' => 'こんにちは、$WATCHINGUSERNAMEさん、
+	'enotif_subject_article_comment' => '{{SITENAME}} のページ「$PAGETITLE」についた最近のコメントを読む',
+	'enotif_body_article_comment' => 'こんにちは、$WATCHINGUSERNAME さん
 
-{{SITENAME}}の $PAGETITLE に $PAGEEDITOR がコメントをつけました。
+{{SITENAME}} の $PAGETITLE に新しいコメントがあります。コメントをすべて閲覧するには次のリンクをご利用ください: $PAGETITLE_URL#WikiaArticleComments
 
-全てのコメントを見るには、次のURLにアクセスしてください:
-$PAGETITLE_URL
+- ウィキア・コミュニティ・サポート
 
-- Wikiaコミュニティーサポート
 ___________________________________________
-* コミュニティセントラルでヘルプやアドバイスを読む: http://ja.community.wikia.com
-* わたしたちから受け取るメッセージを減らしたいですか？ こちらで、あなたの受け取るメールの解除・変更を設定することができます: http://ja.community.wikia.com/Special:Preferences',
-	'enotif_body_article_comment-HTML' => '<p>$WATCHINGUSERNAMEさん、こんにちは。
+* コミュニティセントラルでヘルプやアドバイスを探す : http://ja.community.wikia.com
+* 私たちが送信するメッセージの受信を減らしたいですか？　こちらにて定期購読解除や電子メールの設定変更をすることができます : http://ja.community.wikia.com/Special:Preferences',
+	'enotif_body_article_comment-HTML' => 'こんにちは、$WATCHINGUSERNAME さん
 <br /><br />
-{{SITENAME}}の$PAGETITLEに、新たなコメントがつきました。このリンクから、すべてのコメントが閲覧できます：$PAGETITLE_URL#WikiaArticleComments
+{{SITENAME}} の $PAGETITLE に新しいコメントがあります。すべてのコメントを閲覧するには次のリンクをご利用ください : <a href="$PAGETITLE_URL#WikiaArticleComments">$PAGETITLE</a>
 <br /><br />
-- ウィキア コミュニティ サポート
-<br /><br />
-___________________________________________
+- ウィキア・コミュニティ・サポート
+<br /><hr />
+<p>
 <ul>
-<li>コミュニティセントラル上のヘルプやアドバイスを見つける：<a href="http://ja.community.wikia.com">http://ja.community.wikia.com</a><li>
-<li>私たちからのメッセージを受け取りたくないですか？あなたは、設定から受信設定を変更することができます: <a href="http://ja.community.wikia.com/Special:Preferences">http://ja.community.wikia.com/Special:Preferences</a></li>
+<li><a href="http://ja.community.wikia.com/wiki/">コミュニティセントラル</a>でヘルプやアドバイスを探してみよう。</li>
+<li>私たちが送信するメッセージの受信を減らしたいですか？ <a href="http://ja.community.wikia.com/特別:Preferences">こちら</a>にて定期購読解除や電子メールの設定変更をすることができます。</li>
 </ul>
 </p>',
 );
@@ -2235,67 +2182,48 @@ $messages['ko'] = array(
 	'article-comments-file-page' => "<a href='$3'>문서, $4</a>에 남겨진 <a href='$1'>$2 사용자의 댓글</a>",
 	'article-blog-comments-file-page' => "<a href='$5'>$6의</a> <a href='$3'>블로그 글, $4</a>에 남겨진 <a href='$1'>$2 사용자의 댓글</a>",
 	'article-comments-anonymous' => '익명 사용자',
-	'article-comments-comments' => '덧글 ($1)',
-	'article-comments-post' => '덧글 남기기',
+	'article-comments-comments' => '댓글 ($1)',
+	'article-comments-post' => '댓글 작성',
 	'article-comments-cancel' => '취소',
 	'article-comments-delete' => '삭제',
 	'article-comments-edit' => '편집',
 	'article-comments-history' => '역사',
-	'article-comments-error' => '덧글을 저장할 수 없습니다',
-	'article-comments-undeleted-comment' => '블로그 글 $1의 삭제되지 않은 댓글',
-	'article-comments-rc-comment' => '문서 댓글 (<span class="plainlinks">[$1 $2]</span>)',
+	'article-comments-error' => '작성하신 댓글이 저장되지 못했습니다.',
+	'article-comments-undeleted-comment' => '블로그 글 $1의 복구된 댓글',
+	'article-comments-rc-comment' => '문서 댓글 ([[$1]])',
 	'article-comments-rc-comments' => '문서 댓글 ([[$1]])',
-	'article-comments-fblogin' => '이 위키에 덧글을 남기려면 <a href="$1" rel="nofollow">로그인하고 페이스북과 연결</a>하세요!',
-	'article-comments-fbconnect' => '덧글을 남기려면 <a href="$1">이 계정을 페이스북과 연걸</a>하세요!',
-	'article-comments-rc-blog-comment' => '블로그 댓글 (<span class="plainlinks">[$1 $2]</span>)',
+	'article-comments-fblogin' => '이 위키에 댓글을 남기시려면 로그인 후 당신의 계정을 Facebook과 <a href="$1">연동</a>하세요.',
+	'article-comments-fbconnect' => '이 글에 댓글을 남기시려면 당신의 계정을 Facebook과 <a href="$1">연동</a>하세요.',
+	'article-comments-rc-blog-comment' => '블로그 댓글 ([[$1]])',
 	'article-comments-rc-blog-comments' => '블로그 댓글 ([[$1]])',
-	'article-comments-login' => '이 글에 덧글을 남기려면 <a href="$1">로그인</a>하세요.',
+	'article-comments-login' => '이 위키에 댓글을 남기시려면 <a href="$1">로그인</a>하세요.',
 	'article-comments-toc-item' => '댓글',
-	'article-comments-comment-cannot-add' => '문서에 덧글을 추가할 수 없습니다.',
-	'article-comments-vote' => '투표하기',
-	'article-comments-reply' => '답글',
+	'article-comments-comment-cannot-add' => '이 글에는 댓글을 달 수 없습니다.',
+	'article-comments-vote' => '추천하기',
+	'article-comments-reply' => '댓글',
 	'article-comments-show-all' => '모든 댓글 보기',
 	'article-comments-prev-page' => '이전',
 	'article-comments-next-page' => '다음',
 	'article-comments-page-spacer' => '&#160...&#160',
-	'article-comments-delete-reason' => '상위 문서 / 상위 덧글이 삭제되었습니다.',
-	'article-comments-empty-comment' => "빈 덧글은 남길 수 없습니다. <a href='$1'>대신 삭제하겠습니까?</a>",
+	'article-comments-delete-reason' => '이 댓글이 달린 글이나 이 댓글의 상위 댓글이 삭제되었으므로 같이 삭제',
+	'article-comments-empty-comment' => "내용이 없는 댓글을 다실 수 없습니다. <a href='$1'>이 댓글을 삭제하시겠습니까?</a>",
 	'article-comments-show-more' => '더 많은 코멘트 보기',
 	'wikiamobile-article-comments-counter' => '{{PLURAL:$1|의견}} $1개',
-	'wikiamobile-article-comments-header' => '댓글',
-	'wikiamobile-article-comments-more' => '더 불러오기',
-	'wikiamobile-article-comments-prev' => '이전 불러오기',
+	'wikiamobile-article-comments-header' => '댓글 (<span id=wkArtCnt>$1</span>)',
+	'wikiamobile-article-comments-more' => '더 보기',
+	'wikiamobile-article-comments-prev' => '이전 댓글 더 보기',
 	'wikiamobile-article-comments-none' => '댓글 없음',
-	'wikiamobile-article-comments-view' => '댓글 보기',
-	'wikiamobile-article-comments-replies' => '댓글',
-	'wikiamobile-article-comments-post-reply' => '답변 게시',
+	'wikiamobile-article-comments-view' => '답글 보기',
+	'wikiamobile-article-comments-replies' => '답글',
+	'wikiamobile-article-comments-post-reply' => '답글 입력',
 	'wikiamobile-article-comments-post' => '게시',
-	'wikiamobile-article-comments-placeholder' => '댓글 남기기',
-	'wikiamobile-article-comments-login-post' => '덧글을 남기려면 로그인하세요.',
-	'wikiamobile-article-comments-post-fail' => '덧글을 저장하는 데에 실패했습니다, 나중에 다시 시도해주세요',
-	'enotif_subject_article_comment' => '$PAGEEDITOR님이 {{SITENAME}}의 "$PAGETITLE"에 덧글을 남겼습니다',
-	'enotif_body_article_comment' => '$WATCHINGUSERNAME님 안녕하세요,
-
-{{SITENAME}}의 $PAGETITLE 에서 새 덧글이 있습니다. 모든 덧글을 보려면 다음 링크를 사용하세요: $PAGETITLE_URL#WikiaArticleComments
-
-- 위키아 커뮤니티 지원
-
-___________________________________________
-* 중앙 커뮤니티에서 도움을 구하세요: http://community.wikia.com
-* 알림을 그만 받고 싶으신가요? 여기서 구독을 취소하거나 이메일 환경 설정을 바꿀 수 있습니다: http://community.wikia.com/Special:Preferences',
-	'enotif_body_article_comment-HTML' => '<p>안녕하세요.
-<br /><br />
-{{SITENAME}}의 $PAGETITLE에 새로운 덧글이 있습니다. 다음 링크를 통해 모든 덧글을 확인하세요:
-$PAGETITLE_URL#WikiaArticleComments
-<br /><br />
-- 위키아 커뮤니티 지원
-<br /><br />
-___________________________________________
-<ul>
-<li>중앙 커뮤니티에서 도움을 구하세요: <a href="http://community.wikia.com">http://community.wikia.com</a><li>
-<li>알림을 그만 받고 싶으신가요? 여기서 구독을 취소하거나 이메일 환경 설정을 바꿀 수 있습니다: <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
-</ul>
-</p>',
+	'wikiamobile-article-comments-placeholder' => '댓글 입력',
+	'wikiamobile-article-comments-login-post' => '댓글을 달기 위해서는 로그인이 필요합니다.',
+	'wikiamobile-article-comments-post-fail' => '댓글을 게시하는 데 실패했습니다. 다시 시도해주세요.',
+	'enotif_subject_article_comment' => '{{SITENAME}}에서 $PAGEEDITOR 사용자가 $PAGETITLE 문서에 댓글을 달았습니다.',
+	'enotif_body_article_comment' => '$WATCHINGUSERNAME님, $PAGEEDITOR 사용자가 "$PAGETITLE" 문서에 댓글을 남겼습니다. 댓글을 보시려면 다음 링크로 들어가세요: $PAGETITLE_URL
+자주 방문해주시고 기여도 많이 부탁드립니다. - 위키아 드림',
+	'enotif_body_article_comment-HTML' => '<p> $WATCHINGUSERNAME님, <br /><br /> $PAGEEDITOR 사용자가 "$PAGETITLE" 문서에 댓글을 남겼습니다. <br /><br /> 댓글을 보시려면 다음 링크로 들어가세요: <a href="$PAGETITLE_URL">$PAGETITLE</a> <br /><br /> 자주 방문해주시고 기여도 많이 부탁드립니다. <br /><br /> {{SITENAME}} <br /><hr /> <ul> <li>메일로 알림받는 항목들을 관리하고 싶으신가요? <a href="{{fullurl:{{ns:special}}:환경설정}}">{{ns:special}}:환경설정<a>에서 해주세요.</li> </ul> </p>',
 );
 
 /** Karachay-Balkar (къарачай-малкъар)
@@ -2442,7 +2370,7 @@ $PAGEEDITOR къейд ттуна "$PAGETITLE".
 <ul>
 <li>КЪвезвай email-ин низамарунар дегишиз кIанзава ниl? <a href="{{fullurl:Special:Preferences}}">Жуван низамарунар цIийи хъия<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Northern Luri (لوری مینجایی)
@@ -2530,7 +2458,7 @@ $messages['lus'] = array(
 	'article-comments-edit' => 'siamţhatna',
 	'article-comments-history' => 'chanchin',
 	'article-comments-error' => 'I tuihnihna a dahţhat theih loh tlat',
-	'article-comments-rc-comment' => 'Thuziak tuihnihna (<span class="plainlinks"> [$1 $2]</span>', # Fuzzy
+	'article-comments-rc-comment' => 'Thuziak tuihnihna (<span class="plainlinks"> [$1 $2]</span>',
 	'article-comments-rc-comments' => 'Thuziak tuihnihna ([[$1]])',
 );
 
@@ -3053,7 +2981,7 @@ $messages['nl'] = array(
 	'article-comments-rc-blog-comments' => 'Opmerkingen bij blog ([[$1]])',
 	'article-comments-login' => '<a href="$1">Meld u aan</a> om een opmerking in deze wiki te kunnen plaatsen.',
 	'article-comments-toc-item' => 'Opmerkingen',
-	'article-comments-comment-cannot-add' => 'U kunt geen opmerkingen bij de pagina plaatsen.',
+	'article-comments-comment-cannot-add' => 'Je kunt geen opmerkingen bij de pagina plaatsen.',
 	'article-comments-vote' => 'Positief beoordelen',
 	'article-comments-reply' => 'Antwoorden',
 	'article-comments-show-all' => 'Alle opmerkingen weergeven',
@@ -3061,7 +2989,7 @@ $messages['nl'] = array(
 	'article-comments-next-page' => 'Volgende',
 	'article-comments-page-spacer' => '&#160...&#160',
 	'article-comments-delete-reason' => 'De bovenliggende pagina is verwijderd.',
-	'article-comments-empty-comment' => "U kunt geen opmerking zonder inhoud plaatsen. <a href='$1'>In plaats daarvan verwijderen?</a>",
+	'article-comments-empty-comment' => "Je kunt geen opmerking zonder inhoud plaatsen. <a href='$1'>In plaats daarvan verwijderen?</a>",
 	'article-comments-show-more' => 'Meer reacties weergeven',
 	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|Reactie|Reacties}}',
 	'wikiamobile-article-comments-header' => 'Reacties',
@@ -3076,25 +3004,32 @@ $messages['nl'] = array(
 	'wikiamobile-article-comments-login-post' => 'Meld u aan om te reageren.',
 	'wikiamobile-article-comments-post-fail' => 'Het opslaan van de reactie is mislukt. Probeer het later opnieuw.',
 	'enotif_subject_article_comment' => '$PAGEEDITOR heeft een opmerking geplaatst bij "$PAGETITLE" op {{SITENAME}}',
-	'enotif_body_article_comment' => 'Hallo $WATCHINGUSERNAME,
-
-Er is een nieuwe reactie bij $PAGETITLE op {{SITENAME}}. Gebruik de volgende koppeling om alle reacties te bekijken: $PAGETITLE_URL#WikiaArticleComments
-
-- Wikia Community Support
-
-___________________________________________
-* Voor hulp en advies op Community Central gaat u naar http://community.wikia.com
-* Wilt u minder berichten van ons ontvangen? Schrijf u dan uit of wijzig uw e-mailvoorkeuren: http://community.wikia.com/wiki/Special:Preferences',
-	'enotif_body_article_comment-HTML' => '<p>Hallo $WATCHINGUSERNAME,
+	'enotif_body_article_comment' => '<p>Hoi $WATCHINGUSERNAME,
 <br /><br />
-Er is een nieuwe reactie bij $PAGETITLE op {{SITENAME}}. Gebruik de volgende koppeling om alle reacties te bekijken: $PAGETITLE_URL#WikiaArticleComments
+$ PAGEEDITOR heeft een opmerking geplaatst bij "$PAGETITLE".
 <br /><br />
-- Wikia Community Support
+Je kunt de discussie bekijken via de volgende verwijzing: <a href="$PAGETITLE_URL">$PAGETITLE</a> 
 <br /><br />
-___________________________________________
+Kom alsjeblieft vaak langs en bewerk veelvuldig...
+<br /><br />
+Wikia
+<br /><hr />
 <ul>
-<li>Voor hulp en advies op Community Central gaat u naar <a href="http://community.wikia.com">http://community.wikia.com</a><li>
-<li>Wilt u minder berichten van ons ontvangen? Schrijf u dan uit of wijzig uw e-mailvoorkeuren op <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+<li>Wilt je bepalen welke e-mails je ontvangt? <a href="{{fullurl:{{ns:special}}:Preferences}}">Pas dan je Voorkeuren<a> aan.</li>
+</ul>
+</p>',
+	'enotif_body_article_comment-HTML' => '<p>Hoi $WATCHINGUSERNAME,
+<br /><br />
+$ PAGEEDITOR heeft een opmerking geplaatst bij "$PAGETITLE".
+<br /><br />
+Je kunt de discussie bekijken via de volgende verwijzing: <a href="$PAGETITLE_URL">$PAGETITLE</a> 
+<br /><br />
+Kom alsjeblieft vaak langs en bewerk veelvuldig...
+<br /><br />
+Wikia
+<br /><hr />
+<ul>
+<li>Wilt je bepalen welke e-mails je ontvangt? <a href="{{fullurl:{{ns:special}}:Preferences}}">Pas dan je Voorkeuren<a> aan.</li>
 </ul>
 </p>',
 );
@@ -3225,18 +3160,21 @@ $messages['pl'] = array(
 	'wikiamobile-article-comments-login-post' => 'Zaloguj się aby dodać komentarz.',
 	'wikiamobile-article-comments-post-fail' => 'Nie udało się zapisać komentarza, spróbuj ponownie później',
 	'enotif_subject_article_comment' => '$PAGEEDITOR skomentował "$PAGETITLE" na {{SITENAME}}',
-	'enotif_body_article_comment' => 'Witaj $WATCHINGUSERNAME,
-
-Na {{SITENAME}} pojawił się nowy komentarz na stronie $PAGETITLE. Użyj tego linku aby zobaczyć wszystkie komentarze: $PAGETITLE_URL#WikiaArticleComments
-
+	'enotif_body_article_comment' => '<p>Witaj $WATCHINGUSERNAME,
+<br /><br />
+Na {{SITENAME}} pojawił się nowy komentarz na stronie $PAGETITLE . Użyj tego linku aby zobaczyć wszystkie komentarze: <a href="$PAGETITLE_URL#WikiaArticleComments">$PAGETITLE</a>
+<br /><br />
 - Zespół Wikii
-
+<br /><br />
 ___________________________________________
-* Aby uzyskać dodatkową pomoc od społeczności Wikii, odwiedź http://spolecznosc.wikia.com
-* W celu zmiany ustawień powiadomień e-mail, odwiedź http://spolecznosc.wikia.com/wiki/Special:Preferences',
+<ul>
+<li>Aby uzyskać dodatkową pomoc od społeczności Wikii, odwiedź <a href="http://spolecznosc.wikia.com">Centrum Społeczności</a>.</li>
+<li>W celu zmiany ustawień powiadomień e-mail, odwiedź <a href="http://spolecznosc.wikia.com/wiki/Special:Preferences">tą stronę</a>.</li>
+</ul>
+</p>',
 	'enotif_body_article_comment-HTML' => '<p>Witaj $WATCHINGUSERNAME,
 <br /><br />
-Na {{SITENAME}} pojawił się nowy komentarz na stronie $PAGETITLE . Użyj tego linku aby zobaczyć wszystkie komentarze: $PAGETITLE_URL#WikiaArticleComments
+Na {{SITENAME}} pojawił się nowy komentarz na stronie $PAGETITLE . Użyj tego linku aby zobaczyć wszystkie komentarze: <a href="$PAGETITLE_URL#WikiaArticleComments">$PAGETITLE</a>
 <br /><br />
 - Zespół Wikii
 <br /><br />
@@ -3486,7 +3424,7 @@ $messages['pt-br'] = array(
 	'wikiamobile-article-comments-login-post' => 'Autentifique-se para postar um comentário.',
 	'wikiamobile-article-comments-post-fail' => 'Falha ao salvar o comentário, por favor, tente novamente mais tarde',
 	'enotif_subject_article_comment' => 'Comentou sobre "$ PAGETITLE" em {{SITENAME}} $PAGEEDITOR',
-	'enotif_body_article_comment' => 'Olá $ WATCHINGUSERNAME,
+	'enotif_body_article_comment' => 'Olá $WATCHINGUSERNAME,
 
 Há um novo comentário em $PAGETITLE no {{SITENAME}}. Use esse link para ver todos os comentários: $PAGETITLE_URL#WikiaArticleComments
 
@@ -3645,26 +3583,25 @@ $messages['ru'] = array(
 	'wikiamobile-article-comments-placeholder' => 'Оставить комментарий',
 	'wikiamobile-article-comments-login-post' => 'Пожалуйста войдите, чтобы оставить комментарий.',
 	'wikiamobile-article-comments-post-fail' => 'Не удалось сохранить комментарий, повторите попытку позже',
-	'enotif_subject_article_comment' => '$PAGEEDITOR прокомментировал "$ PAGETITLE" на {{SITENAME}}',
-	'enotif_body_article_comment' => 'Привет $WATCHINGUSERNAME,
+	'enotif_subject_article_comment' => 'Прочитать свежие комментарии страницы $PAGETITLE на {{SITENAME}}',
+	'enotif_body_article_comment' => 'Уважаемый $WATCHINGUSERNAME,
 
-Новый комментарий был добавлен к странице $PAGETITLE на {{SITENAME}}. Вы можете посмотреть все комментарии по этой ссылке: $PAGETITLE_URL#WikiaArticleComments
+Участник $PAGEEDITOR оставил комментарий в "$PAGETITLE".
 
-- Команда Викия
+Чтобы увидеть данный комментарий, проследуйте по этой ссылке:
+$PAGETITLE_URL
 
-___________________________________________
-* Найти помощь и совет можно на Community Central (http://community.wikia.com) и Вики Сообщества (http://ru.community.wikia.com)
-* Хотите уменьшить количество данных писем? Вы можете отписаться от рассылки или внести в неё коррективы на странице личных настроек: http://community.wikia.com/Special:Preferences',
-	'enotif_body_article_comment-HTML' => '<p>Привет $WATCHINGUSERNAME,
+Викия',
+	'enotif_body_article_comment-HTML' => '<p>Уважаемый $WATCHINGUSERNAME,
 <br /><br />
-Новый комментарий был добавлен к странице $PAGETITLE на {{SITENAME}}. Uы можете посмотреть все комментарии по этой ссылке:  $PAGETITLE_URL#WikiaArticleComments
+Участник $PAGEEDITOR оставил комментарий на "$PAGETITLE".
 <br /><br />
-- Команда Викия
+Чтобы увидеть данный комментарий, проследуйте по этой ссылке: <a href="$PAGETITLE_URL">$PAGETITLE</a>
 <br /><br />
-___________________________________________
+Викия
+<br /><hr />
 <ul>
-<li>Вы можете найти помощь и совет на Центральной Вики: <a href="http://community.wikia.com">http://community.wikia.com</a><li>
-<li>Хотите контролировать, какие электронные письма вы хотите получать? Вы можете настроить рассылку или отписаться от неё на странице личных настроек: <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+<li>Чтобы настроить уведомления по email, <a href="{{fullurl:Special:Preferences}}">обновите личные настройки<a>.</li>
 </ul>
 </p>',
 );
@@ -3733,7 +3670,7 @@ $PAGETITLE_URL
 
 Dolazite i uređujte često...
 
-Wikia', # Fuzzy
+Wikia',
 	'enotif_body_article_comment-HTML' => '<p>Cijenjeni/a $WATCHINGUSERNAME,
 <br /><br />
 $PAGEEDITOR je komentirao/la "$PAGETITLE".
@@ -3747,7 +3684,7 @@ Wikia
 <ul>
 <li>Želite kontrolirate koje e-mail poruke primate? <a href="{{fullurl:Special:Preferences}}">Ažurirajte svoje postavke<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Sinhala (සිංහල)
@@ -4029,7 +3966,7 @@ $PAGETITLE_URL
 
 Mangyaring dumalaw at mamatnugot ng madalas...
 
-Wikia', # Fuzzy
+Wikia',
 	'enotif_body_article_comment-HTML' => '<p>Minamahal na $WATCHINGUSERNAME,
 <br /><br />
 Nagbigay ng puna si $PAGEEDITOR sa "$PAGETITLE".
@@ -4043,7 +3980,7 @@ Wikia
 <ul>
 <li>Nais mo bang tabanan kung anong mga e-liham ang tatanggapin? <a href="{{fullurl:Special:Preferences}}">Isapanahon ang mga Nais mo<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Talysh (толышә зывон)
@@ -4179,7 +4116,7 @@ $PAGEEDITOR "$PAGETITLE" мәкаләсендә шәрехләмә калдыр�
 Шәрехләмәне карар өчен, бу сылтама аша узыгыз:
 $PAGETITLE_URL
 
-Викия', # Fuzzy
+Викия',
 	'enotif_body_article_comment-HTML' => '<p>Кадерле $WATCHINGUSERNAME,
 <br /><br />
 $PAGEEDITOR made a comment on "$PAGETITLE".
@@ -4193,7 +4130,7 @@ Wikia
 <ul>
 <li>Want to control which emails you receive? <a href="{{fullurl:Special:Preferences}}">Update your Preferences<a>.</li>
 </ul>
-</p>', # Fuzzy
+</p>',
 );
 
 /** Central Atlas Tamazight (ⵜⴰⵎⴰⵣⵉⵖⵜ)
@@ -4367,6 +4304,34 @@ Wikia
 </p>',
 );
 
+$messages['zh'] = array(
+	'enotif_body_article_comment' => '您好 $WATCHINGUSERNAME，
+
+{{SITENAME}} 上的 $PAGETITLE 有新评论。
+点此连结查看评论：$PAGETITLE_URL#WikiaArticleComments
+
+Wikia 社群支援小组
+
+___________________________________________
+* 您可在社群中心寻找协助和建议：http://zh.community.wikia.com
+* 不想收到这么多讯息？您可以在以下页面退订或变更电子信箱设定：http://zh.community.wikia.com/Special:Preferences',
+	'enotif_body_article_comment-HTML' => '<p>Hi，$WATCHINGUSERNAME,
+<br /><br />
+{{SITENAME}}上的$PAGETITLE有评论哦。点击如下链接查看全部评论：
+<br /><br />
+依如下链接查看评论：<a href="$PAGETITLE_URL">$PAGETITLE</a>$PAGETITLE_URL#WikiaArticleComments
+<br /><br />
+- Wikia社区支持
+<br /><br />
+
+___________________________________________
+<ul>
+<li>在社区中心寻求帮助或建议：<a href="http://zh.community.wikia.com">http://zh.community.wikia.com</a><li>
+<li>管理您收到的邮件，退订或改变邮件设置请点击： <a href="http://zh.community.wikia.com/Special:Preferences">http://zh.community.wikia.com/Special:Preferences</a></li>
+</ul>
+</p>',
+);
+
 /** Simplified Chinese (中文（简体）‎)
  * @author Anakmalaysia
  * @author Dimension
@@ -4420,15 +4385,16 @@ $messages['zh-hans'] = array(
 	'wikiamobile-article-comments-login-post' => '请登录以发表评论。',
 	'wikiamobile-article-comments-post-fail' => '评论保存失败，请稍后再试',
 	'enotif_subject_article_comment' => '$PAGEEDITOR在{{SITENAME}}上对"$PAGETITLE"发表了评论',
-	'enotif_body_article_comment' => '嗨！$WATCHINGUSERNAME
+	'enotif_body_article_comment' => '您好 $WATCHINGUSERNAME，
 
-{{SITENAME}}上的$PAGETITLE有了新评论哦。点此链接查看所有评论：$PAGETITLE_URL#WikiaArticleComments
+{{SITENAME}} 上的 $PAGETITLE 有新评论。
+点此连结查看评论：$PAGETITLE_URL#WikiaArticleComments
 
-- Wikia社区支持
+Wikia 社群支援小组
 
 ___________________________________________
-* 在社区中心寻找帮助和建议：http://community.wikia.com
-* 希望减少来自我们的消息？您可以在此退订或更改您的电子邮件设置：http://community.wikia.com/Special:Preferences',
+* 您可在社群中心寻找协助和建议：http://zh.community.wikia.com
+* 不想收到这么多讯息？您可以在以下页面退订或变更电子信箱设定：http://zh.community.wikia.com/Special:Preferences',
 	'enotif_body_article_comment-HTML' => '<p>Hi，$WATCHINGUSERNAME,
 <br /><br />
 {{SITENAME}}上的$PAGETITLE有评论哦。点击如下链接查看全部评论：
@@ -4440,8 +4406,8 @@ ___________________________________________
 
 ___________________________________________
 <ul>
-<li>在社区中心群求帮助或建议：<a href="http://community.wikia.com">http://community.wikia.com</a><li>
-<li>管理您收到的邮件，退订或改变邮件设置请点击： <a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+<li>在社区中心寻求帮助或建议：<a href="http://zh.community.wikia.com">http://zh.community.wikia.com</a><li>
+<li>管理您收到的邮件，退订或改变邮件设置请点击： <a href="http://zh.community.wikia.com/Special:Preferences">http://zh.community.wikia.com/Special:Preferences</a></li>
 </ul>
 </p>',
 );
@@ -4484,7 +4450,7 @@ $messages['zh-hant'] = array(
 	'article-comments-delete-reason' => '上層文章/上層評論已經被刪除。',
 	'article-comments-empty-comment' => "您不能發佈空白的評論。<a href='$1'>要刪除它嗎？</a>",
 	'article-comments-show-more' => '顯示更多評論',
-	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|評論|評論}}',
+	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|則評論|則評論}}',
 	'wikiamobile-article-comments-header' => '評論',
 	'wikiamobile-article-comments-more' => '讀取更多',
 	'wikiamobile-article-comments-prev' => '讀取前項',
@@ -4505,8 +4471,8 @@ $messages['zh-hant'] = array(
 Wikia 社群支援小組
 
 ___________________________________________
-* 您可在社群中心尋找協助和建議：http://community.wikia.com
-* 不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：http://community.wikia.com/Special:Preferences',
+* 您可在社群中心尋找協助和建議：http://zh.community.wikia.com
+* 不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：http://zh.community.wikia.com/Special:Preferences',
 	'enotif_body_article_comment-HTML' => '<p>Hi，$WATCHINGUSERNAME,
 <br /><br />
 {{SITENAME}} 上的 $PAGETITLE 有新評論。
@@ -4518,8 +4484,8 @@ ___________________________________________
 
 ___________________________________________
 <ul>
-<li>您可在社群中心尋找協助和建議：<a href="http://community.wikia.com">http://community.wikia.com</a><li>
-<li>不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：<a href="http://community.wikia.com/Special:Preferences">http://community.wikia.com/Special:Preferences</a></li>
+<li>您可在社區中心尋找協助和建議：<a href="http://zh.community.wikia.com">http://community.wikia.com</a><li>
+<li>不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：<a href="http://zh.community.wikia.com/Special:Preferences">http://zh.community.wikia.com/Special:Preferences</a></li>
 </ul>
 </p>',
 );
@@ -4565,4 +4531,59 @@ $messages['zh-hk'] = array(
 	'wikiamobile-article-comments-login-post' => '請登錄後發表評論。',
 	'wikiamobile-article-comments-post-fail' => '評論儲存失敗，請稍後再試',
 	'enotif_subject_article_comment' => '$PAGEEDITOR 在 {{SITENAME}}的文章 "$PAGETITLE"中發表評論',
+	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|則評論|則評論}}',
+	'enotif_body_article_comment' => '您好 $WATCHINGUSERNAME，
+
+{{SITENAME}} 上的 $PAGETITLE 有新評論。
+點此連結查看評論：$PAGETITLE_URL#WikiaArticleComments
+
+Wikia 社群支援小組
+
+___________________________________________
+* 您可在社群中心尋找協助和建議：http://zh.community.wikia.com
+* 不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：http://zh.community.wikia.com/Special:Preferences',
+	'enotif_body_article_comment-HTML' => '<p>Hi，$WATCHINGUSERNAME,
+<br /><br />
+{{SITENAME}} 上的 $PAGETITLE 有新評論。
+<br /><br />
+點此連結查看評論：<a href="$PAGETITLE_URL">$PAGETITLE</a>$PAGETITLE_URL#WikiaArticleComments
+<br /><br />
+- Wikia 社群支援小組
+<br /><br />
+
+___________________________________________
+<ul>
+<li>您可在社區中心尋找協助和建議：<a href="http://zh.community.wikia.com">http://community.wikia.com</a><li>
+<li>不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：<a href="http://zh.community.wikia.com/Special:Preferences">http://zh.community.wikia.com/Special:Preferences</a></li>
+</ul>
+</p>',
+);
+
+$messages['zh-tw'] = array(
+	'wikiamobile-article-comments-counter' => '$1 {{PLURAL:$1|則評論|則評論}}',
+	'enotif_body_article_comment' => '您好 $WATCHINGUSERNAME，
+
+{{SITENAME}} 上的 $PAGETITLE 有新評論。
+點此連結查看評論：$PAGETITLE_URL#WikiaArticleComments
+
+Wikia 社群支援小組
+
+___________________________________________
+* 您可在社群中心尋找協助和建議：http://zh.community.wikia.com
+* 不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：http://zh.community.wikia.com/Special:Preferences',
+	'enotif_body_article_comment-HTML' => '<p>Hi，$WATCHINGUSERNAME,
+<br /><br />
+{{SITENAME}} 上的 $PAGETITLE 有新評論。
+<br /><br />
+點此連結查看評論：<a href="$PAGETITLE_URL">$PAGETITLE</a>$PAGETITLE_URL#WikiaArticleComments
+<br /><br />
+- Wikia 社群支援小組
+<br /><br />
+
+___________________________________________
+<ul>
+<li>您可在社區中心尋找協助和建議：<a href="http://zh.community.wikia.com">http://community.wikia.com</a><li>
+<li>不想收到這麼多訊息？您可以在以下頁面退訂或變更電子信箱設定：<a href="http://zh.community.wikia.com/Special:Preferences">http://zh.community.wikia.com/Special:Preferences</a></li>
+</ul>
+</p>',
 );

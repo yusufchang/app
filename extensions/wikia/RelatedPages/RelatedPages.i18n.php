@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -7,17 +6,6 @@ $messages['en'] = array(
 	'wikiarelatedpages-heading' => 'Read more',
 	'wikiamobile-related-article' => 'Related Article',
 	'wikiamobile-people-also-read' => 'People also read',
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'wikiarelatedpages-desc' => '{{desc}}',
-	'wikiarelatedpages-heading' => '{{Identical|Read more}}',
-	'wikiamobile-related-article' => 'Text displayed in a box with one related article',
-	'wikiamobile-people-also-read' => 'Text displayed in a box with one related article',
 );
 
 /** Afrikaans (Afrikaans)
@@ -257,7 +245,7 @@ $messages['ka'] = array(
  */
 $messages['ko'] = array(
 	'wikiarelatedpages-desc' => '문서 하단에 관련 문서 링크를 추가합니다.',
-	'wikiarelatedpages-heading' => '더 읽어보기',
+	'wikiarelatedpages-heading' => '다른 문서 보기',
 	'wikiamobile-related-article' => '관련 문서',
 );
 
@@ -361,7 +349,7 @@ $messages['oc'] = array(
  */
 $messages['pl'] = array(
 	'wikiarelatedpages-desc' => 'Dodaje do stron zestawienie stron podobnych',
-	'wikiarelatedpages-heading' => 'Podobne strony',
+	'wikiarelatedpages-heading' => 'Zobacz także',
 	'wikiamobile-related-article' => 'Polecany artykuł',
 	'wikiamobile-people-also-read' => 'Inni czytają także',
 );
@@ -423,7 +411,7 @@ $messages['roa-tara'] = array(
  */
 $messages['ru'] = array(
 	'wikiarelatedpages-desc' => 'Добавляет на страницы список связанных страниц',
-	'wikiarelatedpages-heading' => 'Читать больше',
+	'wikiarelatedpages-heading' => 'Близкие по теме статьи',
 	'wikiamobile-related-article' => 'Связанные статьи',
 	'wikiamobile-people-also-read' => 'Люди также читают',
 );

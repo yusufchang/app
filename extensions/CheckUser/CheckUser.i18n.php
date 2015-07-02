@@ -14,235 +14,89 @@ $messages = array();
  * @author John Du Hart
  */
 $messages['en'] = array(
-	'checkuser-summary'          => 'This tool scans recent changes to retrieve the IP addresses used by a user or show the edit/user data for an IP address.
+	'checkuser-summary' => 'This tool scans recent changes to retrieve the IP addresses used by a user or show the edit/user data for an IP address.
 Users and edits by a client IP address can be retrieved via XFF headers by appending the IP address with "/xff". IPv4 (CIDR 16-32) and IPv6 (CIDR 64-128) are supported.
 No more than 5,000 edits will be returned for performance reasons.
 Use this in accordance with policy.',
-	'checkuser-desc'             => 'Grants users with the appropriate permission the ability to check user\'s IP addresses and other information',
-	'checkuser-logcase'          => 'The log search is case sensitive.',
-	'checkuser'                  => 'Check user',
-	'checkuserlog'               => 'Check user log',
-	'checkuser-contribs'         => 'check user IP addresses',
-	'group-checkuser'            => 'Check users',
-	'group-checkuser-member'     => '{{GENDER:$1|check user}}',
-	'right-checkuser'            => "Check user's IP addresses and other information",
-	'right-checkuser-log'        => 'View the checkuser log',
+	'checkuser-desc' => "Grants users with the appropriate permission the ability to check user's IP addresses and other information",
+	'checkuser-logcase' => 'The log search is case sensitive.',
+	'checkuser' => 'Check user',
+	'checkuserlog' => 'Check user log',
+	'checkuser-contribs' => 'check user IP addresses',
+	'group-checkuser' => 'Check users',
+	'group-checkuser-member' => '{{GENDER:$1|check user}}',
+	'right-checkuser' => "Check user's IP addresses and other information",
+	'right-checkuser-log' => 'View the checkuser log',
 	'action-checkuser' => "check user's IP addresses and other information",
 	'action-checkuser-log' => 'view the checkuser log',
-	'grouppage-checkuser'        => '{{ns:project}}:Check user',
-	'checkuser-reason'           => 'Reason:',
-	'checkuser-reason-api'       => 'API: $1',
-	'checkuser-showlog'          => 'Show log',
-	'checkuser-query'            => 'Query recent changes',
-	'checkuser-target'           => 'IP address or username:',
-	'checkuser-users'            => 'Get users',
-	'checkuser-edits'            => 'Get edits',
-	'checkuser-ips'              => 'Get IP addresses',
-	'checkuser-search'           => 'Search',
-	'checkuser-period'           => 'Duration:',
-	'checkuser-week-1'           => 'last week',
-	'checkuser-week-2'           => 'last two weeks',
-	'checkuser-month'            => 'last 30 days',
-	'checkuser-all'              => 'all',
-	'checkuser-cidr-label'       => 'Find common range and affected IP addresses for a list of IP addresses',
-	'checkuser-cidr-res'         => 'Common CIDR:',
-	'checkuser-empty'            => 'The log contains no items.',
-	'checkuser-nomatch'          => 'No matches found.',
-	'checkuser-nomatch-edits'    => 'No matches found.
+	'grouppage-checkuser' => '{{ns:project}}:Check user',
+	'checkuser-reason' => 'Reason:',
+	'checkuser-reason-api' => 'API: $1',
+	'checkuser-showlog' => 'Show log',
+	'checkuser-query' => 'Query recent changes',
+	'checkuser-target' => 'IP address or username:',
+	'checkuser-users' => 'Get users',
+	'checkuser-edits' => 'Get edits',
+	'checkuser-ips' => 'Get IP addresses',
+	'checkuser-search' => 'Search',
+	'checkuser-period' => 'Duration:',
+	'checkuser-week-1' => 'last week',
+	'checkuser-week-2' => 'last two weeks',
+	'checkuser-month' => 'last 30 days',
+	'checkuser-all' => 'all',
+	'checkuser-cidr-label' => 'Find common range and affected IP addresses for a list of IP addresses',
+	'checkuser-cidr-res' => 'Common CIDR:',
+	'checkuser-empty' => 'The log contains no items.',
+	'checkuser-nomatch' => 'No matches found.',
+	'checkuser-nomatch-edits' => 'No matches found.
 Last edit was on $1 at $2.',
-	'checkuser-check'            => 'Check',
-	'checkuser-log-fail'         => 'Unable to add log entry',
-	'checkuser-nolog'            => 'No log file found.',
-	'checkuser-blocked'          => 'Blocked',
-	'checkuser-gblocked'         => 'Blocked globally',
-	'checkuser-locked'           => 'Locked',
-	'checkuser-wasblocked'       => 'Previously blocked',
-	'checkuser-localonly'        => 'Not unified',
-	'checkuser-massblock'        => 'Block selected users',
-	'checkuser-massblock-text'   => 'Selected accounts will be blocked indefinitely, with autoblocking of IP addresses enabled and account creation disabled.
+	'checkuser-check' => 'Check',
+	'checkuser-log-fail' => 'Unable to add log entry',
+	'checkuser-nolog' => 'No log file found.',
+	'checkuser-blocked' => 'Blocked',
+	'checkuser-gblocked' => 'Blocked globally',
+	'checkuser-locked' => 'Locked',
+	'checkuser-wasblocked' => 'Previously blocked',
+	'checkuser-localonly' => 'Not unified',
+	'checkuser-massblock' => 'Block selected users',
+	'checkuser-massblock-text' => 'Selected accounts will be blocked indefinitely, with autoblocking of IP addresses enabled and account creation disabled.
 IP addresses will be blocked for one week for anonymous users only and account creation will be disabled.',
-	'checkuser-blocktag'         => 'Replace user pages with:',
-	'checkuser-blocktag-talk'    => 'Replace talk pages with:',
+	'checkuser-blocktag' => 'Replace user pages with:',
+	'checkuser-blocktag-talk' => 'Replace talk pages with:',
 	'checkuser-massblock-commit' => 'Block selected users',
-	'checkuser-block-success'    => '\'\'\'The {{PLURAL:$2|user|users}} $1 {{PLURAL:$2|is|are}} now blocked.\'\'\'',
-	'checkuser-block-failure'    => '\'\'\'No users blocked.\'\'\'',
-	'checkuser-block-limit'      => 'Too many users selected.',
-	'checkuser-block-noreason'   => 'You must give a reason for the blocks.',
-	'checkuser-noreason'         => 'You must give a reason for this query.',
-	'checkuser-accounts'         => '$1 new {{PLURAL:$1|account|accounts}}',
-	'checkuser-too-many'         => 'Too many results (according to query estimate), please narrow down the CIDR.
+	'checkuser-block-success' => "'''The {{PLURAL:$2|user|users}} $1 {{PLURAL:$2|is|are}} now blocked.'''",
+	'checkuser-block-failure' => "'''No users blocked.'''",
+	'checkuser-block-limit' => 'Too many users selected.',
+	'checkuser-block-noreason' => 'You must give a reason for the blocks.',
+	'checkuser-noreason' => 'You must give a reason for this query.',
+	'checkuser-accounts' => '$1 new {{PLURAL:$1|account|accounts}}',
+	'checkuser-too-many' => 'Too many results (according to query estimate), please narrow down the CIDR.
 Here are the IPs used (5000 max, sorted by address):',
 	'checkuser-user-nonexistent' => 'The specified user does not exist.',
-	'checkuser-search-form'      => 'Find log entries where the $1 is $2',
-	'checkuser-search-submit'    => 'Search',
+	'checkuser-search-form' => 'Find log entries where the $1 is $2',
+	'checkuser-search-submit' => 'Search',
 	'checkuser-search-initiator' => 'initiator',
-	'checkuser-search-target'    => 'target',
-	'checkuser-ipeditcount'      => '~$1 from all users',
-	'checkuser-log-return'       => 'Switch to CheckUser main form',
-
-	'checkuser-limited'          => '\'\'\'These results have been truncated for performance reasons.\'\'\'',
-
-	'checkuser-log-userips'      => '$1 got IP addresses for $2',
-	'checkuser-log-ipedits'      => '$1 got edits for $2',
-	'checkuser-log-ipusers'      => '$1 got users for $2',
-	'checkuser-log-ipedits-xff'  => '$1 got edits for XFF $2',
-	'checkuser-log-ipusers-xff'  => '$1 got users for XFF $2',
-	'checkuser-log-useredits'    => '$1 got edits for $2',
-
+	'checkuser-search-target' => 'target',
+	'checkuser-ipeditcount' => '~$1 from all users',
+	'checkuser-log-return' => 'Switch to CheckUser main form',
+	'checkuser-limited' => "'''These results have been truncated for performance reasons.'''",
+	'checkuser-log-userips' => '$1 got IP addresses for $2',
+	'checkuser-log-ipedits' => '$1 got edits for $2',
+	'checkuser-log-ipusers' => '$1 got users for $2',
+	'checkuser-log-ipedits-xff' => '$1 got edits for XFF $2',
+	'checkuser-log-ipusers-xff' => '$1 got users for XFF $2',
+	'checkuser-log-useredits' => '$1 got edits for $2',
 	'checkuser-autocreate-action' => 'was automatically created',
 	'checkuser-create-action' => 'was created',
-	'checkuser-email-action'     => 'sent an email to user "$1"',
-	'checkuser-reset-action'     => 'reset password for user "$1"',
-
-	'checkuser-toollinks'        => '<span class="plainlinks">[[http://openrbl.org/query?$1 RDNS] ·
+	'checkuser-email-action' => 'sent an email to user "$1"',
+	'checkuser-reset-action' => 'reset password for user "$1"',
+	'checkuser-toollinks' => '<span class="plainlinks">[[http://openrbl.org/query?$1 RDNS] ·
 [http://www.robtex.com/rbls/$1.html RBLs] ·
 [http://www.dnsstuff.com/tools/tracert.ch?ip=$1 Traceroute] ·
 [http://www.ip2location.com/$1 Geolocate] ·
 [http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
-[http://ws.arin.net/whois/?queryinput=$1 WHOIS]]</span>', # do not translate or duplicate this message to other languages
-	'checkuser-token-fail'       => 'Session failure. Please try again.',
-);
-
-/** Message documentation (Message documentation)
- * @author Darth Kule
- * @author Dferg
- * @author Fryed-peach
- * @author Jon Harald Søby
- * @author Kwj2772
- * @author Lejonel
- * @author Lloffiwr
- * @author Meno25
- * @author Mormegil
- * @author Purodha
- * @author Raymond
- * @author Siebrand
- * @author Slomox
- * @author Tgr
- * @author The Evil IP address
- * @author Umherirrender
- */
-$messages['qqq'] = array(
-	'checkuser-summary' => "Explanation of CheckUser tool. See [http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface screenshot titled 'Basic CheckUser interface'].",
-	'checkuser-desc' => '{{desc}}',
-	'checkuser' => 'Check user extension. The name of the special page where checkusers can check the IP addresses of users. The message is used in the list of special pages, and at the top of [[Special:Checkuser]].
-
-{{Identical|Check user}}',
-	'checkuserlog' => 'The name of the special page where checkusers can look at a log of past checkuser actions. The message is used in the list of special pages, and at the top of [[Special:CheckUserLog]].',
-	'group-checkuser' => '{{doc-group|checkuser}}
-check is a noun, not a verb here
-
-{{Identical|Check user}}',
-	'group-checkuser-member' => '{{doc-group|checkuser|member}}
-{{Identical|Check user}}',
-	'right-checkuser' => '{{doc-right|checkuser}}',
-	'right-checkuser-log' => '{{doc-right|checkuser-log}}',
-	'action-checkuser' => '{{doc-action|checkuser}}',
-	'action-checkuser-log' => '{{doc-action|checkuser-log}}',
-	'grouppage-checkuser' => '{{doc-group|checkuser|page}}
-{{Identical|Check user}}',
-	'checkuser-reason' => "Field name on CheckUser Special page. See screenshot '[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]'.
-
-{{Identical|Reason}}",
-	'checkuser-reason-api' => 'Prefixes check user query reasons that are made through the API
-
-* $1 = User specified reason',
-	'checkuser-showlog' => "Label for link on CheckUser Special page. See screenshot '[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]'.",
-	'checkuser-query' => "Fieldset label. See [http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface screenshot titled 'Basic CheckUser interface'].",
-	'checkuser-target' => '{{Identical|IP address or username}}',
-	'checkuser-users' => "Radio button option on CheckUser Special page. See screenshot '[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]'.",
-	'checkuser-edits' => "Radio button option on CheckUser Special page. See screenshot '[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]'.",
-	'checkuser-ips' => "Option on CheckUser Special page. See screenshot '[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]'.",
-	'checkuser-search' => 'Heading of fieldset on log of CheckUser searches. See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".
-
-{{Identical|Search}}',
-	'checkuser-period' => "Field name next to drop-down input box on CheckUser Special page. See screenshot '[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]'.
-
-{{Identical|Duration}}",
-	'checkuser-week-1' => 'Option in drop-down input box "Duration" on CheckUser Special page. See screenshot \'[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]\'.',
-	'checkuser-week-2' => 'Option in drop-down input box "Duration" on CheckUser Special page. See screenshot \'[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]\'.',
-	'checkuser-month' => 'Option in drop-down input box "Duration" on CheckUser Special page. See screenshot \'[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]\'.',
-	'checkuser-all' => 'Option in drop-down input box "Duration" on CheckUser Special page. See screenshot \'[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]\'.
-
-{{Identical|All}}',
-	'checkuser-cidr-res' => 'For an explanation of CIDR see [[WikiPedia:CIDR]].',
-	'checkuser-nomatch-edits' => '* $1 = date
-* $2 = time',
-	'checkuser-check' => 'Button label on CheckUser Special page. See screenshot \'[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Basic CheckUser interface]\'.
-
-Also appears to be used as link to new CheckUser check from the results page of a CheckUser check - see screenshot "Example IP check".',
-	'checkuser-massblock' => '{{Identical|Block selected users}}',
-	'checkuser-massblock-commit' => '{{Identical|Block selected users}}',
-	'checkuser-block-success' => '* $1 is a list of one or more usernames
-* $2 is the number of usernames in $1.',
-	'checkuser-search-form' => 'This message is a search form for the checkuser log.
-* $1 is a drop down box with search types
-* $2 is a text input field for the search pattern
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-search-submit' => 'Button label on log of CheckUser searches. See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".
-
-{{Identical|Search}}',
-	'checkuser-search-initiator' => 'This message is an option in an input box on the search form for the checkuser log.
-It is parameter $1 in the message {{msg-mw|Checkuser-search-form}}.
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".
-
-Initiator means the CheckUser who checks someone\'s information.',
-	'checkuser-search-target' => 'The target of the check. The user checked.',
-	'checkuser-ipeditcount' => "This information is shown on the result page of [[mw:Extension:CheckUser#Basic_interface|Special:CheckUser]] (when doing the ''{{int:Checkuser-users}}'' check), next to the individual listed IPs. See screenshot \"Example user name check\".
-
-\$1 is an estimate of the total number of edits from the respective IP (i.e. the number of edits by all users, not only by the requested user). As the comment in the code says: ''If we get some results, it helps to know if the IP in general has a lot more edits, e.g. “tip of the iceberg”…''",
-	'checkuser-log-return' => 'Link label on log of CheckUser searches. See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-limited' => 'A message shown above CheckUser results if the result list would be longer than the specified limit (5000 entries), and has been truncated.',
-	'checkuser-log-userips' => 'This is an entry in the checkuser log when a checkuser checks from which IP addresses a user has edited.
-* Parameter $1 is the user who did the check
-* Parameter $2 is the user that was checked, with links to talk page, contributions, and block (like this: [[User:Username|Username]] ( [[User talk|Talk]] | [[Special:Contributions/Username|contribs]] | [[Special:Blockip|block]]) )
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-log-ipedits' => 'This is an entry in the checkuser log when a checkuser checks which edits have been done from an IP address.
-* Parameter $1 is the user who did the check
-* Parameter $2 is the IP address that was checked
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-log-ipusers' => 'This is an entry in the checkuser log when a checkuser checks which users have used an IP address.
-*Parameter $1 is the user who did the check
-*Parameter $2 is the IP address
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-log-ipedits-xff' => 'This is an entry in the checkuser log when a checkuser checks which edits have been done from an XFF IP address (XFF means X-Forwarded-For. Some providers use proxies to forward user requests. This effectively means anonymization of requests. To make the requesting user identifiable again, the original requesting IP is transmitted in a separate HTTP header, the XFF header.).
-* Parameter $1 is the user who did the check
-* Parameter $2 is the IP address that was checked
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-log-ipusers-xff' => 'This is an entry in the checkuser log when a checkuser checks which users have used an XFF IP address (XFF means X-Forwarded-For. Some providers use proxies to forward user requests. This effectively means anonymization of requests. To make the requesting user identifiable again, the original requesting IP is transmitted in a separate HTTP header, the XFF header.).
-*Parameter $1 is the user who did the check
-*Parameter $2 is the IP address
-
-See screenshot "[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]".',
-	'checkuser-log-useredits' => "This is an entry in the checkuser log when a checkuser checks which edits have been done from an IP address.
-:'''\$1:''' name of checkuser
-:'''\$2:''' name of user whose edits were inspected
-
-See screenshot \"[http://www.mediawiki.org/wiki/Extension:CheckUser#Basic_interface Example log]\".",
-	'checkuser-autocreate-action' => 'Text of the event displayed in the CheckUser results, corresponding to the automatic creation of a new user account (by CentralAuth).',
-	'checkuser-token-fail' => 'Error message shown when the CSRF token does not match the current session.',
-);
-
-/** Karelian (Karjala)
- * @author Flrn
- */
-$messages['krl'] = array(
-	'checkuser-search' => 'Ečindy',
-	'checkuser-search-submit' => 'Ečči',
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'checkuser-reason' => 'Kakano:',
-	'checkuser-search' => 'Kumi',
-	'checkuser-search-submit' => 'Kumi',
+[http://ws.arin.net/whois/?queryinput=$1 WHOIS]]</span>',
+	'checkuser-token-fail' => 'Session failure. Please try again.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -1637,7 +1491,7 @@ $messages['de'] = array(
 Aus Performance-Gründen werden maximal 5000 Bearbeitungen ausgegeben. Benutze CheckUser ausschließlich in Übereinstimmung mit den Datenschutzrichtlinien.',
 	'checkuser-desc' => 'Ermöglicht die Überprüfung von IP-Adressen sowie weiterer Informationen von Benutzern',
 	'checkuser-logcase' => 'Die Suche im Logbuch unterscheidet zwischen Groß- und Kleinschreibung.',
-	'checkuser' => 'Checkuser',
+	'checkuser' => 'CheckUser',
 	'checkuserlog' => 'Checkuser-Logbuch',
 	'checkuser-contribs' => 'IP-Adressen von Benutzer prüfen',
 	'group-checkuser' => 'Checkuser',
@@ -1646,7 +1500,7 @@ Aus Performance-Gründen werden maximal 5000 Bearbeitungen ausgegeben. Benutze C
 	'right-checkuser-log' => 'Checkuser-Logbuch einsehen',
 	'action-checkuser' => 'IP-Adressen sowie Zusammenhänge zwischen IP-Adressen und angemeldeten Benutzern zu prüfen',
 	'action-checkuser-log' => 'das Checkuser-Logbuch einzusehen',
-	'grouppage-checkuser' => '{{ns:project}}:CheckUser',
+	'grouppage-checkuser' => 'w:c:hilfe:Hilfe:CheckUser',
 	'checkuser-reason' => 'Grund:',
 	'checkuser-reason-api' => 'API: $1',
 	'checkuser-showlog' => 'Logbuch anzeigen',
@@ -1705,6 +1559,19 @@ IP-Adressen werden für eine Woche gesperrt (nur für unangemeldete Benutzer, di
 	'checkuser-create-action' => 'wurde erstellt',
 	'checkuser-email-action' => 'sendete E-Mail an „$1“',
 	'checkuser-reset-action' => 'Anforderung eines neuen Passwortes für „Benutzer:$1“',
+	'checkuser-toollinks' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://network-tools.com/default.asp?prog=trace&host=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
@@ -2080,21 +1947,33 @@ Jen la IP-adresoj uzitaj (maksimume 5000, ordigita laŭ adresoj):',
  */
 $messages['es'] = array(
 	'checkuser-summary' => 'Esta herramienta explora los cambios recientes para obtener las IPs utilizadas por un usuario o para mostrar la información de ediciones/usuarios de una IP.
-También se pueden obtener los usuarios y las ediciones de un cliente IP vía XFF añadiendo "/xff" al final de la IP. IPv4 (CIDR 16-32) y IPv6 (CIDR 64-128) funcionan.
+También se pueden obtener los usuarios y las ediciones de un cliente IP vía XFF añadiendo "/xff" al final de la IP. IPv4 (CIDR 16-32) y IPv6 (CIDR 96-128) funcionan.
 No se muestran más de 5000 ediciones por motivos de rendimiento.
 Usa esta herramienta de acuerdo con las políticas correspondientes.',
-	'checkuser-desc' => 'Permite a los usuarios que tienen los permisos apropiados comprobar las direcciones IP de los usuarios además de otra información.',
+	'checkuser-desc' => 'Otorga a los usuarios el permiso apropiado para habilitar la comprobación de la dirección IP de un usuario y otra información.',
 	'checkuser-logcase' => 'La búsqueda en el registro distingue entre mayúsculas y minúsculas.',
-	'checkuser' => 'Verificador de usuarios',
+	'checkuser' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://www.dnsstuff.com/tools/tracert.ch?ip=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 	'checkuserlog' => 'Registro de verificación de usuarios',
 	'checkuser-contribs' => 'verificar las direcciones IP del usuario',
-	'group-checkuser' => 'Verificadores de usuarios',
-	'group-checkuser-member' => '{{GENDER:$1|verificador de usuarios|verificadora de usuarios}}',
+	'group-checkuser' => 'verificador de usuarios',
+	'group-checkuser-member' => 'verificador de usuarios',
 	'right-checkuser' => 'Comprobar las IPs de los usuarios y obtener otra información relacionada',
 	'right-checkuser-log' => 'Ver el registro de verificación de usuarios',
 	'action-checkuser' => 'Comprobar las IPs de los usuarios y obtener otra información relacionada',
 	'action-checkuser-log' => 'ver el registro de checkuser',
-	'grouppage-checkuser' => '{{ns:project}}:Verificador de usuarios',
+	'grouppage-checkuser' => 'w:c:ayuda:Ayuda:Verificador_de_usuarios',
 	'checkuser-reason' => 'Motivo:',
 	'checkuser-reason-api' => 'API: $1',
 	'checkuser-showlog' => 'Ver registro',
@@ -2103,7 +1982,7 @@ Usa esta herramienta de acuerdo con las políticas correspondientes.',
 	'checkuser-users' => 'Obtener usuarios',
 	'checkuser-edits' => 'Obtener ediciones',
 	'checkuser-ips' => 'Obtener IP',
-	'checkuser-search' => 'Buscar',
+	'checkuser-search' => 'objetivo',
 	'checkuser-period' => 'Duración:',
 	'checkuser-week-1' => 'la semana pasada',
 	'checkuser-week-2' => 'últimas dos semanas',
@@ -2138,23 +2017,36 @@ Las direcciones IP serán bloqueadas durante una semana para usuarios anónimos 
 	'checkuser-too-many' => 'Hay demasiados resultados (estimado), por favor limita el CIDR.
 Aquí se ven las IPs usadas (máximo 5000, ordenadas según dirección):',
 	'checkuser-user-nonexistent' => 'El usuario especificado no existe.',
-	'checkuser-search-form' => 'Encontrar entradas de registros en las que el $1 es $2',
-	'checkuser-search-submit' => 'Buscar',
+	'checkuser-search-form' => 'Encontrar entradas en el registro donde $1 es $2',
+	'checkuser-search-submit' => 'Búsqueda',
 	'checkuser-search-initiator' => 'verificador',
-	'checkuser-search-target' => 'usuario verificado',
+	'checkuser-search-target' => 'objetivo',
 	'checkuser-ipeditcount' => '~$1 de todos los usuarios',
 	'checkuser-log-return' => 'Volver al formulario principal de CheckUser',
 	'checkuser-limited' => "'''Estos resultados han sido truncados por motivos de rendimiento.'''",
-	'checkuser-log-userips' => '$1 obtuvo las direcciones IP de $2',
-	'checkuser-log-ipedits' => '$1 obtuvo las contribuciones de $2',
-	'checkuser-log-ipusers' => '$1 obtuvo los usuarios de $2',
-	'checkuser-log-ipedits-xff' => '$1 obtuvo las contribuciones de XFF de $2',
-	'checkuser-log-ipusers-xff' => '$1 obtuvo los usuarios para XFF $2',
+	'checkuser-log-userips' => '$1 obtiene IPs de $2',
+	'checkuser-log-ipedits' => '$1 obtiene ediciones de $2',
+	'checkuser-log-ipusers' => '$1 obtiene usuarios de $2',
+	'checkuser-log-ipedits-xff' => '$1 obtiene ediciones de XFF $2',
+	'checkuser-log-ipusers-xff' => '$1 obtiene usuarios de XFF $2',
 	'checkuser-log-useredits' => '$1 obtuvo las contribuciones de $2',
 	'checkuser-autocreate-action' => 'fue creada automáticamente',
 	'checkuser-create-action' => 'fue creado',
 	'checkuser-email-action' => 'envió un correo electrónico al usuario «$1»',
 	'checkuser-reset-action' => 'solicitó un recordatorio de contraseña para el usuario «$1»',
+	'checkuser-toollinks' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://www.dnsstuff.com/tools/tracert.ch?ip=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 );
 
 /** Estonian (Eesti)
@@ -2483,7 +2375,7 @@ Le nombre de modifications affichables est limité à {{formatnum:5000}} pour de
 Veuillez utiliser cet outil dans le respect de la charte d’utilisation.',
 	'checkuser-desc' => 'Donne la possibilité aux utilisateurs dûment autorisés de vérifier les adresses IP des utilisateurs ainsi que d’autres informations les concernant',
 	'checkuser-logcase' => 'La recherche dans le journal est sensible à la casse.',
-	'checkuser' => 'Vérificateur d’utilisateur',
+	'checkuser' => 'a envoyé un e-mail à l’utilisateur « $1 »',
 	'checkuserlog' => 'Journal des vérifications d’utilisateurs',
 	'checkuser-contribs' => 'vérifier les adresses IP',
 	'group-checkuser' => 'Vérificateurs d’utilisateurs',
@@ -2492,7 +2384,7 @@ Veuillez utiliser cet outil dans le respect de la charte d’utilisation.',
 	'right-checkuser-log' => 'Visualiser le journal des vérifications d’utilisateurs',
 	'action-checkuser' => "vérifier les adresses IP de l'utilisateur et d'autres informations",
 	'action-checkuser-log' => 'Visualiser le journal des vérifications des utilisateurs',
-	'grouppage-checkuser' => '{{ns:project}}:Vérificateurs d’utilisateurs',
+	'grouppage-checkuser' => "w:c:communaute:Aide:Niveaux d'accès utilisateur#Vérificateurs d’utilisateurs",
 	'checkuser-reason' => 'Motif :',
 	'checkuser-reason-api' => 'API: $1',
 	'checkuser-showlog' => 'Afficher le journal',
@@ -2550,7 +2442,7 @@ Voici un extrait des IP utilisées ({{formatnum:5000}} maximum, triées par adre
 	'checkuser-log-useredits' => '$1 a obtenu des modifications par $2',
 	'checkuser-autocreate-action' => 'a été créé automatiquement',
 	'checkuser-create-action' => 'a été créé',
-	'checkuser-email-action' => 'a envoyé un courriel à l’utilisateur « $1 »',
+	'checkuser-email-action' => 'a envoyé un e-mail à l’utilisateur « $1 »',
 	'checkuser-reset-action' => 'réinitialise le mot de passe de l’utilisateur « $1 »',
 );
 
@@ -3734,10 +3626,22 @@ $messages['it'] = array(
 	'checkuser-summary' => 'Questo strumento analizza le modifiche recenti per recuperare gli indirizzi IP utilizzati da un utente o mostrare contributi e dati di un IP. Utenti e contributi di un client IP possono essere rintracciati attraverso gli header XFF aggiungendo all\'IP il suffisso "/xff". Sono supportati IPv4 (CIDR 16-32) e IPv6 (CIDR 64-128). Non saranno restituite più di 5.000 modifiche, per ragioni di prestazioni. Usa questo strumento in stretta conformità alle policy.',
 	'checkuser-desc' => 'Consente agli utenti con le opportune autorizzazioni di sottoporre a verifica gli indirizzi IP e altre informazioni relative agli utenti',
 	'checkuser-logcase' => "La ricerca nei log è ''case sensitive'' (distingue fra maiuscole e minuscole).",
-	'checkuser' => 'Controllo utenze',
+	'checkuser' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://network-tools.com/default.asp?prog=trace&host=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 	'checkuserlog' => 'Registro dei controlli utente',
 	'checkuser-contribs' => "controlla gli indirizzi IP dell'utente",
-	'group-checkuser' => 'Check users',
+	'group-checkuser' => 'Check user',
 	'group-checkuser-member' => '{{GENDER:$1|Check user}}',
 	'right-checkuser' => "Visualizza gli indirizzi IP usati dall'utente e altre informazioni",
 	'right-checkuser-log' => 'Visualizza il log dei checkuser',
@@ -3804,6 +3708,19 @@ Di seguito sono indicati gli indirizzi IP utilizzati (fino a un massimo di 5000,
 	'checkuser-create-action' => 'è stato creato',
 	'checkuser-email-action' => 'ha inviato una e-mail a "$1"',
 	'checkuser-reset-action' => 'reimposta password per l\'utente "$1"',
+	'checkuser-toollinks' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://network-tools.com/default.asp?prog=trace&host=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 );
 
 /** Japanese (日本語)
@@ -3832,8 +3749,8 @@ IPv4 (16から32ビットのCIDR表記) と IPv6 (96から128ビットのCIDR表
 	'checkuser' => '利用者の調査',
 	'checkuserlog' => '利用者の調査記録',
 	'checkuser-contribs' => '利用者のIPを調査',
-	'group-checkuser' => '利用者調査者',
-	'group-checkuser-member' => '利用者調査者',
+	'group-checkuser' => 'チェックユーザー',
+	'group-checkuser-member' => 'チェックユーザー',
 	'right-checkuser' => '利用者のIPアドレスやその他の情報を調査',
 	'right-checkuser-log' => '利用者調査ログを表示',
 	'grouppage-checkuser' => '{{ns:project}}:利用者調査者',
@@ -4401,6 +4318,14 @@ $messages['kri'] = array(
 $messages['krj'] = array(
 	'checkuser-search' => 'Sagap',
 	'checkuser-search-submit' => 'Sagap',
+);
+
+/** Karelian (Karjala)
+ * @author Flrn
+ */
+$messages['krl'] = array(
+	'checkuser-search' => 'Ečindy',
+	'checkuser-search-submit' => 'Ečči',
 );
 
 /** Colognian (Ripoarisch)
@@ -5369,6 +5294,15 @@ $messages['ne'] = array(
 	'checkuser-log-userips' => '$2को लागि $1 आइ पी ठेगाना पाइयो',
 );
 
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'checkuser-reason' => 'Kakano:',
+	'checkuser-search' => 'Kumi',
+	'checkuser-search-submit' => 'Kumi',
+);
+
 /** Dutch (Nederlands)
  * @author Erwin
  * @author SPQRobin
@@ -5772,16 +5706,28 @@ Ze względu na wydajność, zostanie zwróconych nie więcej niż 5000 edycji.
 Używaj tego narzędzia zgodnie z zasadami.',
 	'checkuser-desc' => 'Umożliwia uprawnionym użytkownikom sprawdzenie adresów IP użytkowników oraz innych informacji',
 	'checkuser-logcase' => 'Szukanie w rejestrze jest czułe na wielkość znaków.',
-	'checkuser' => 'Sprawdź IP użytkownika',
+	'checkuser' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://network-tools.com/default.asp?prog=trace&host=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 	'checkuserlog' => 'Rejestr CheckUser',
-	'checkuser-contribs' => 'sprawdzić adresy IP użytkownika',
+	'checkuser-contribs' => 'CheckUser',
 	'group-checkuser' => 'CheckUser',
-	'group-checkuser-member' => '{{GENDER:$1|checkuser|checkuserka}}',
+	'group-checkuser-member' => 'CheckUser',
 	'right-checkuser' => 'Sprawdzanie adresów IP oraz innych informacji o użytkownikach',
 	'right-checkuser-log' => 'Przeglądanie rejestru checkuser',
 	'action-checkuser' => 'sprawdzania adresów IP uzytkowników i innych informacji',
 	'action-checkuser-log' => 'przeglądania rejestru checkuser',
-	'grouppage-checkuser' => '{{ns:project}}:CheckUser',
+	'grouppage-checkuser' => 'w:c:spolecznosc:Help:Uprawnienia_grup_użytkowników',
 	'checkuser-reason' => 'Powód',
 	'checkuser-reason-api' => 'API: $1',
 	'checkuser-showlog' => 'Pokaż rejestr',
@@ -5842,6 +5788,19 @@ Użytych adresów IP jest (nie więcej niż 5000, posortowane według adresu):',
 	'checkuser-create-action' => 'utworzono',
 	'checkuser-email-action' => 'wysłał e‐mail do użytkownika „$1”',
 	'checkuser-reset-action' => 'reset hasła dla użytkownika „$1”',
+	'checkuser-toollinks' => '<span class="plainlinks">&#91;[[Special:Contributions/$1|contribs]] · 
+[http://whatismyipaddress.com/ip/$1 WHOIS] ·
+[http://www.robtex.com/ip/$1.html#whois rDNS] ·
+[http://network-tools.com/default.asp?prog=trace&host=$1 Traceroute] ·
+[http://www.infosniper.net/index.php?ip_address=$1 Geolocate] ·
+[http://rbls.org/$1 Proxy check] ·
+[http://toolserver.org/~overlordq/scripts/checktor.fcgi?ip=$1 Tor check] ·
+[http://www.google.com/search?safe=off&num=50&hl=en&q=$1 Google] ·
+[http://en.utrace.de/ip-address/$1 uTrace] ·
+[http://community.wikia.com/wiki/Special:MultiLookup?target=$1 MultiLookup] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=User+talk:$1 MWF] ·
+[http://community.wikia.com/wiki/Special:Multiwikifinder?target=Message+Wall:$1 MWF-Wall] ·
+[http://community.wikia.com/index.php?title=Special:Phalanx&type=8&target=$1&wpPhalanxCheckBlocker=$1 Global Block]&#93;</span>',
 );
 
 /** Piedmontese (Piemontèis)
@@ -6396,8 +6355,8 @@ $messages['ru'] = array(
 	'checkuser' => 'Проверить участника',
 	'checkuserlog' => 'Журнал проверки участников',
 	'checkuser-contribs' => 'проверить IP-адреса участника',
-	'group-checkuser' => 'Проверяющие участников',
-	'group-checkuser-member' => '{{GENDER:$1|проверяющий участников|проверяющая участников}}',
+	'group-checkuser' => 'Проверяющие IP',
+	'group-checkuser-member' => 'проверяющий IP',
 	'right-checkuser' => 'проверка IP-адресов и другой информации об участниках',
 	'right-checkuser-log' => 'просмотр журнала проверки участников',
 	'action-checkuser' => 'проверка IP-адресов и другой информации об участниках',
@@ -7965,8 +7924,8 @@ $messages['uk'] = array(
 	'checkuser' => 'Перевірити користувача',
 	'checkuserlog' => 'Журнал перевірки користувачів',
 	'checkuser-contribs' => 'перевірити IP-адреси користувача',
-	'group-checkuser' => "Чек'юзери",
-	'group-checkuser-member' => "чек'юзер",
+	'group-checkuser' => 'перевіряючий IP',
+	'group-checkuser-member' => 'перевіряючий IP',
 	'right-checkuser' => 'Перевірка IP-адрес та іншої інформації користувача',
 	'right-checkuser-log' => 'Перегляд журналу перевірки користувачів',
 	'action-checkuser' => 'перевіряти IP-адреси користувача та іншу інформацію',
@@ -8147,8 +8106,8 @@ $messages['vi'] = array(
 	'checkuser' => 'Kiểm định viên',
 	'checkuserlog' => 'Nhật trình CheckUser',
 	'checkuser-contribs' => 'kiểm tra IP của người dùng',
-	'group-checkuser' => 'Kiểm định viên',
-	'group-checkuser-member' => '{{GENDER:$1}}kiểm định viên',
+	'group-checkuser' => '{{GENDER:$1|kiểm định viên}}',
+	'group-checkuser-member' => '{{GENDER:$1|kiểm định viên}}',
 	'right-checkuser' => 'Kiểm tra địa chỉ IP và các thông tin khác của thành viên',
 	'right-checkuser-log' => 'Xem nhật trình CheckUser',
 	'action-checkuser' => 'kiểm tra địa chỉ IP và các thông tin khác của thành viên',
@@ -8566,4 +8525,3 @@ $messages['zh-hant'] = array(
 	'checkuser-email-action' => '向使用者「$1」發送電郵',
 	'checkuser-reset-action' => '為使用者「$1」重設密碼',
 );
-

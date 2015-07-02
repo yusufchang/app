@@ -18,25 +18,6 @@ $messages['en'] = array(
 	'hero-image-unknown-error' => 'Unknown error occured.',
 );
 
-$messages['qqq'] = array(
-	'hero-image-drop-here' => 'Call to action message displayed as overlay on hero image module during drag action. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-add-image' => 'Call to action message link displayed when hero image not set, after click will open upload image window. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-update-image' => 'Call to action message link displayed when hero image is set, after click will open upload image window. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-dd-image' => 'Information message displayed on hero image module about drag & drop function being enabled. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-position-image' => 'Call to action message, displayed on hero image module after image upload is completed and reposition is enabled. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-delete-btn' => 'vHero image module delete button label. Hero image is a part of main page above the
-	textual content, representing the topic of the wiki.',
-	'hero-image-edit-btn' => 'Hero image module edit button label. Hero image is a part of main page above the
-	textual content, representing the topic of the wiki.',
-	'hero-image-discard-btn' => 'Hero image module discard button label. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-publish-btn' => 'Hero image module publish button label. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-default-title' => 'Hero image module default main title, displayed when title not provided. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-save-image' => 'Message displayed after image upload, together with publish/discard buttons, describes upload image future usage. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-default-description' => 'Hero image module default description, displayed when description not provided. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-error' => 'Hero image module error modal title. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-	'hero-image-unknown-error' => 'Hero image module unknown error message displayed in modal. Hero image is a part of main page above the textual content, representing the topic of the wiki.',
-);
-
 $messages['de'] = array(
 	'hero-image-drop-here' => 'Füge hier ein Bild ein',
 	'hero-image-add-image' => 'Titelbild hochladen',
@@ -96,7 +77,7 @@ $messages['fr'] = array(
 	'hero-image-position-image' => 'faites glisser pour repositionner cette image',
 	'hero-image-delete-btn' => 'Supprimer',
 	'hero-image-edit-btn' => 'Modifier',
-	'hero-image-discard-btn' => 'Retirer',
+	'hero-image-discard-btn' => 'Annuler',
 	'hero-image-publish-btn' => 'Publier',
 	'hero-image-default-title' => 'Nom de votre wikia',
 	'hero-image-save-image' => 'Votre image de couverture sera utilisée pour promouvoir votre page dans les résultats de recherche et autres zones promotionnelles.',
@@ -175,8 +156,8 @@ $messages['nl'] = array(
 
 $messages['pl'] = array(
 	'hero-image-drop-here' => 'upuść obraz tutaj',
-	'hero-image-add-image' => 'Prześlij obraz okładki',
-	'hero-image-update-image' => 'Zaktualizuj obraz okładki',
+	'hero-image-add-image' => 'Prześlij obraz tytułowy',
+	'hero-image-update-image' => 'Zaktualizuj obraz tytułowy',
 	'hero-image-dd-image' => 'lub upuść obraz tutaj',
 	'hero-image-position-image' => 'przeciągnij, aby przesunąć obraz',
 	'hero-image-delete-btn' => 'Usuń',
@@ -225,20 +206,20 @@ $messages['ru'] = array(
 );
 
 $messages['vi'] = array(
-	'hero-image-drop-here' => 'drop an image here',
-	'hero-image-add-image' => 'Upload cover image',
-	'hero-image-update-image' => 'Update cover image',
-	'hero-image-dd-image' => 'or drag and drop here',
-	'hero-image-position-image' => 'drag to reposition this image',
-	'hero-image-delete-btn' => 'Delete',
-	'hero-image-edit-btn' => 'Edit',
-	'hero-image-discard-btn' => 'Discard',
-	'hero-image-publish-btn' => 'Publish',
-	'hero-image-default-title' => "Your wikia's name",
-	'hero-image-save-image' => 'Your cover image will be used to promote your page in search results and in other promotional areas.',
-	'hero-image-default-description' => 'Add a summary that will promote your wikia in searches and on hubs.',
-	'hero-image-error' => 'Error',
-	'hero-image-unknown-error' => 'Unknown error occured.',
+	'hero-image-drop-here' => 'thả hình ảnh ở đây',
+	'hero-image-add-image' => 'Tải lên ảnh bìa',
+	'hero-image-update-image' => 'Cập nhật ảnh bìa',
+	'hero-image-dd-image' => 'hoặc kéo và thả ở đây',
+	'hero-image-position-image' => 'Kéo để điều chỉnh vị trí ảnh bìa',
+	'hero-image-delete-btn' => 'Xóa',
+	'hero-image-edit-btn' => 'Sửa đổi',
+	'hero-image-discard-btn' => 'Hủy thay đổi',
+	'hero-image-publish-btn' => 'Xuất bản',
+	'hero-image-default-title' => 'Tên wikia của bạn',
+	'hero-image-save-image' => 'Ảnh bìa của bạn sẽ được sử dụng để xúc tiến trang web của mình trong các kết quả tìm kiếm và trong những lĩnh vực quảng bá khác.',
+	'hero-image-default-description' => 'Viết một dòng chú thích để xúc tiến wikia của bạn trong tìm kiếm và trên hub.',
+	'hero-image-error' => 'Lỗi',
+	'hero-image-unknown-error' => 'Lỗi không rõ đã xảy ra.',
 );
 
 $messages['zh-hans'] = array(
@@ -274,4 +255,3 @@ $messages['zh-tw'] = array(
 	'hero-image-error' => '錯誤',
 	'hero-image-unknown-error' => '出現未知錯誤。',
 );
-

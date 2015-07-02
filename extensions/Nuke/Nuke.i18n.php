@@ -13,70 +13,31 @@ $messages = array();
  * @author Brion Vibber
  */
 $messages['en'] = array(
-	'nuke'               => 'Mass delete',
-	'action-nuke'        => 'nuke pages',
-	'nuke-desc'          => 'Gives administrators the ability to [[Special:Nuke|mass delete]] pages',
-	'nuke-nopages'       => "No new pages by [[Special:Contributions/$1|$1]] in recent changes.",
-	'nuke-list'          => "The following pages were recently created by [[Special:Contributions/$1|$1]];
-put in a comment and hit the button to delete them.",
+	'nuke' => 'Mass delete',
+	'action-nuke' => 'nuke pages',
+	'nuke-desc' => 'Gives administrators the ability to [[Special:Nuke|mass delete]] pages',
+	'nuke-nopages' => 'No new pages by [[Special:Contributions/$1|$1]] in recent changes.',
+	'nuke-list' => 'The following pages were recently created by [[Special:Contributions/$1|$1]];
+put in a comment and hit the button to delete them.',
 	'nuke-list-multiple' => 'The following pages were recently created;
 put in a comment and hit the button to delete them.',
-	'nuke-defaultreason' => "Mass deletion of pages added by $1",
-	'nuke-multiplepeople'=> 'Mass deletion of recently added pages',
-	'nuke-tools'         => 'This tool allows for mass deletions of pages recently added by a given user or an IP address.
+	'nuke-defaultreason' => 'Mass deletion of pages added by $1',
+	'nuke-multiplepeople' => 'Mass deletion of recently added pages',
+	'nuke-tools' => 'This tool allows for mass deletions of pages recently added by a given user or an IP address.
 Input the username or IP address to get a list of pages to delete, or leave blank for all users.',
-	'nuke-submit-user'   => 'Go',
+	'nuke-submit-user' => 'Go',
 	'nuke-submit-delete' => 'Delete selected',
-	'right-nuke'         => 'Mass delete pages',
-	'nuke-select'        => 'Select: $1',
-	'nuke-userorip'      => 'Username, IP address or blank:',
-	'nuke-maxpages'      => 'Maximum number of pages:',
-	'nuke-editby'        => 'Created by [[Special:Contributions/$1|$1]]',
-	'nuke-deleted'       => "Page '''$1''' has been deleted.",
-	'nuke-not-deleted'   => "Page [[:$1]] '''could not''' be deleted.",
-	'nuke-delete-more'	 => '[[Special:Nuke|Delete more pages]]',
-	'nuke-pattern'       => 'Pattern for the page name:',
-	'nuke-nopages-global'=> 'There are no new pages in [[Special:RecentChanges|recent changes]].',
-	'nuke-viewchanges'   => 'view changes',
-);
-
-/** Message documentation (Message documentation)
- * @author Jeroen De Dauw
- * @author Jon Harald Søby
- * @author Meno25
- * @author Purodha
- * @author SPQRobin
- * @author Siebrand
- * @author The Evil IP address
- * @author Umherirrender
- * @author Yekrats
- */
-$messages['qqq'] = array(
-	'nuke' => 'The Nuke extension allows for sysops to delete a large number of pages ("Mass delete"). 
-For more information, see http://www.mediawiki.org/wiki/Extension:Nuke',
-	'action-nuke' => '{{doc-action|nuke}}',
-	'nuke-desc' => 'The Nuke extension allows for sysops to delete a large number of pages ("Mass delete"). 
-For more information, see http://www.mediawiki.org/wiki/Extension:Nuke
-{{desc}}',
-	'nuke-defaultreason' => 'Reason for deletion in logs. Parameters: $1 is a username or IP address, with a link to their contributions.
-
-{{msg-mw|nuke-multiplepeople}} is used when pages created by multiple people are deleted.',
-	'nuke-multiplepeople' => 'Reason for deletion in logs, when pages created by multiple users were deleted.
-
-{{msg-mw|nuke-defaultreason}} is used when pages created by only 1 user are deleted.',
-	'nuke-submit-user' => '{{Identical|Go}}',
-	'nuke-submit-delete' => 'Submit button to delete the selected pages.',
-	'right-nuke' => '{{doc-right|nuke}}',
-	'nuke-select' => 'Parameter $1 are two links: {{msg-mw|powersearch-toggleall}} and {{msg-mw|powersearch-togglenone}} which respectively selects all pages and de-selects all pages.
-
-{{Identical|Select}}',
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'nuke-submit-user' => 'Fano',
+	'right-nuke' => 'Mass delete pages',
+	'nuke-select' => 'Select: $1',
+	'nuke-userorip' => 'Username, IP address or blank:',
+	'nuke-maxpages' => 'Maximum number of pages:',
+	'nuke-editby' => 'Created by [[Special:Contributions/$1|$1]]',
+	'nuke-deleted' => "Page '''$1''' has been deleted.",
+	'nuke-not-deleted' => "Page [[:$1]] '''could not''' be deleted.",
+	'nuke-delete-more' => '[[Special:Nuke|Delete more pages]]',
+	'nuke-pattern' => 'Pattern for the page name:',
+	'nuke-nopages-global' => 'There are no new pages in [[Special:RecentChanges|recent changes]].',
+	'nuke-viewchanges' => 'view changes',
 );
 
 /** Afrikaans (Afrikaans)
@@ -792,7 +753,7 @@ Kirjoita käyttäjänimi tai IP-osoite, niin saat listan poistettavista sivuista
  */
 $messages['fr'] = array(
 	'nuke' => 'Suppression en masse',
-	'action-nuke' => 'pages nucléaires',
+	'action-nuke' => 'supprimer des pages en masse',
 	'nuke-desc' => 'Donne la possibilité aux administrateurs de [[Special:Nuke|supprimer en masse]] des pages',
 	'nuke-nopages' => 'Aucune nouvelle page créée par [[Special:Contributions/$1|$1]] dans la liste des changements récents.',
 	'nuke-list' => 'Les pages suivantes ont été créées récemment par [[Special:Contributions/$1|$1]]; Indiquer un commentaire et cliquer sur le bouton pour les supprimer.',
@@ -1740,6 +1701,13 @@ $messages['ne'] = array(
 	'nuke-nopages-global' => '[[Special:RecentChanges|नयाँ परिवर्तनहरू]]मा कुनै नयाँ पृष्ठ छैनन।',
 );
 
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'nuke-submit-user' => 'Fano',
+);
+
 /** Dutch (Nederlands)
  * @author SPQRobin
  * @author Siebrand
@@ -2093,7 +2061,7 @@ Mitte 'u nome de l'utende o l'indirizze IP pe avè 'n'elenghe de le pàggene de 
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
-	'nuke' => 'Множественное удаление',
+	'nuke' => 'Инвертировать',
 	'action-nuke' => 'массовое удаление страниц',
 	'nuke-desc' => 'Даёт администраторам возможность [[Special:Nuke|множественного удаления]] страниц',
 	'nuke-nopages' => 'Созданий страниц участником [[Special:Contributions/$1|$1]] не найдено в свежих правках.',
@@ -2691,4 +2659,3 @@ $messages['zh-hant'] = array(
 	'nuke-pattern' => '頁面名稱的模式：',
 	'nuke-nopages-global' => '[[Special:RecentChanges|最近更改]]中沒有新的頁面。',
 );
-

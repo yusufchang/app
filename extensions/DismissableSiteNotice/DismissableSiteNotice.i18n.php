@@ -9,21 +9,9 @@
 $messages = array();
 
 $messages['en'] = array(
-	'sitenotice_id'    => '0', # Do not translate this
+	'sitenotice_id' => '0',
 	'sitenotice_close' => 'dismiss',
-	'sitenotice-desc'  => 'Allows users to close the sitenotice',
-);
-
-/** Message documentation (Message documentation)
- * @author Purodha
- * @author SPQRobin
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'sitenotice_close' => 'Part of the DismissableSiteNotice extension. You can see this on the right side of the [[MediaWiki:Sitenotice|sitenotice]].
-
-The word "dismiss" (or "close") should be in the infinitive mood.',
-	'sitenotice-desc' => '{{desc}}',
+	'sitenotice-desc' => 'Allows users to close the sitenotice',
 );
 
 /** Afrikaans (Afrikaans)
@@ -193,18 +181,18 @@ $messages['ckb'] = array(
 	'sitenotice_close' => 'لایبە',
 );
 
-/** Crimean Turkish (Latin script) (‪Qırımtatarca (Latin)‬)
- * @author Don Alessandro
- */
-$messages['crh-latn'] = array(
-	'sitenotice_close' => 'gizle',
-);
-
 /** Crimean Turkish (Cyrillic script) (‪Къырымтатарджа (Кирилл)‬)
  * @author Don Alessandro
  */
 $messages['crh-cyrl'] = array(
 	'sitenotice_close' => 'гизле',
+);
+
+/** Crimean Turkish (Latin script) (‪Qırımtatarca (Latin)‬)
+ * @author Don Alessandro
+ */
+$messages['crh-latn'] = array(
+	'sitenotice_close' => 'gizle',
 );
 
 /** Czech (Česky)
@@ -280,7 +268,7 @@ $messages['eo'] = array(
  */
 $messages['es'] = array(
 	'sitenotice_close' => 'ocultar',
-	'sitenotice-desc' => 'Permite a los usuarios cerrar el mensaje central.',
+	'sitenotice-desc' => 'Permitir a los usuarios cerrar las noticias del sitio',
 );
 
 /** Estonian (Eesti)
@@ -1111,4 +1099,3 @@ $messages['zh-hant'] = array(
 	'sitenotice_close' => '關閉',
 	'sitenotice-desc' => '容許用戶關閉網站公告',
 );
-

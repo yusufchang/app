@@ -12,14 +12,13 @@ $messages = array();
  * @author Travis Derouin
  */
 $messages['en'] = array(
-	'importfreeimages'                => 'Import free images',
-	'importfreeimages-desc'           => 'Provides a way of [[Special:ImportFreeImages|importing properly licensed photos]] from [http://www.flickr.com flickr]',
-	'importfreeimages_description'    => 'This page allows you to search properly licensed photos from flickr and import them into your wiki.',
-	'importfreeimages_nophotosfound'  => 'No photos were found for your search criteria \'$1\', please try again.',
-	'importfreeimages_owner'          => 'Author',
-	'importfreeimages_importthis'     => 'import this',
-	'importfreeimages_next'           => 'Next $1',
-	
+	'importfreeimages' => 'Import free images',
+	'importfreeimages-desc' => 'Provides a way of [[Special:ImportFreeImages|importing properly licensed photos]] from [http://www.flickr.com flickr]',
+	'importfreeimages_description' => 'This page allows you to search properly licensed photos from flickr and import them into your wiki.',
+	'importfreeimages_nophotosfound' => "No photos were found for your search criteria '$1', please try again.",
+	'importfreeimages_owner' => 'Author',
+	'importfreeimages_importthis' => 'import this',
+	'importfreeimages_next' => 'Next $1',
 	'importfreeimages_size_square' => 'Square',
 	'importfreeimages_size_thumbnail' => 'Thumbnail',
 	'importfreeimages_size_small' => 'Small',
@@ -29,22 +28,6 @@ $messages['en'] = array(
 	'importfreeimages_size_large_square' => 'Large square',
 	'importfreeimages_size_medium_640' => '640 px',
 	'importfreeimages_size_small_320' => '320 px',
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author Jon Harald Søby
- * @author Purodha
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'importfreeimages-desc' => '{{desc}}',
-	'importfreeimages_owner' => '{{Identical|Author}}',
-	'importfreeimages_next' => '{{Identical|Next $1}}',
-	'importfreeimages_size_thumbnail' => '{{Identical|Thumbnail}}',
-	'importfreeimages_size_small' => '{{Identical|Small}}',
-	'importfreeimages_size_medium' => '{{Identical|Medium}}',
-	'importfreeimages_size_large' => '{{Identical|Large}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -332,10 +315,10 @@ $messages['da'] = array(
  * @author Umherirrender
  */
 $messages['de'] = array(
-	'importfreeimages' => 'Import freier Bilder',
+	'importfreeimages' => 'Großes Quadrat',
 	'importfreeimages-desc' => 'Ermöglicht den [[Special:ImportFreeImages|Import freier Bilder]] von [http://www.flickr.com Flickr]',
 	'importfreeimages_description' => 'Diese Seite erlaubt dir, in Flickr nach Bildern unter einer freien Lizenz zu suchen und diese in dein Wiki zu importieren.',
-	'importfreeimages_nophotosfound' => 'Es wurden keine Fotos mit den Suchkriterien „$1“ gefunden, bitte versuche es erneut.',
+	'importfreeimages_nophotosfound' => "Bei der Suche nach '$1' konnten keine Fotos gefunden werden.",
 	'importfreeimages_owner' => 'Urheber',
 	'importfreeimages_importthis' => 'importieren',
 	'importfreeimages_next' => 'Nächste $1',
@@ -343,8 +326,9 @@ $messages['de'] = array(
 	'importfreeimages_size_thumbnail' => 'Vorschaubild',
 	'importfreeimages_size_small' => 'Klein',
 	'importfreeimages_size_medium' => 'Mittel',
-	'importfreeimages_size_large' => 'Groß',
+	'importfreeimages_size_large' => 'Großes Quadrat',
 	'importfreeimages_size_original' => 'Original',
+	'importfreeimages_size_large_square' => 'Großes Quadrat',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
@@ -423,13 +407,13 @@ $messages['eo'] = array(
  * @author Translationista
  */
 $messages['es'] = array(
-	'importfreeimages' => 'Importar imágenes libres',
-	'importfreeimages-desc' => 'Provee una manera de [[Special:ImportFreeImages|importar adecuadamente fotografías licenciadas]] de [http://www.flickr.com flickr]',
-	'importfreeimages_description' => 'Esta página le permite buscar correctamente fotografías licensiadas de flickr e importarlas dentro de su wiki.',
-	'importfreeimages_nophotosfound' => "Ninguna fotografía fue encontrada para sus criterios de búsqueda '$1', por favor intente nuevamente",
+	'importfreeimages' => "o, pulsa <a href='$1'>aquí</a> para volver a los resultados de tu búsqueda",
+	'importfreeimages-desc' => 'Proporciona una forma de [[Special:ImportFreeImages|importar apropiadamente imágenes licenciadas]] desde [http://www.flickr.com flickr]',
+	'importfreeimages_description' => 'Esta página te permite buscar fotos con una licencia adecuada de flickr e importarlas a tu wiki. <br />Pon las etiquetas separadas con comas.',
+	'importfreeimages_nophotosfound' => "No fueron encontradas fotos bajo tu criterio de búsqueda '$1', por favor, inténtalo de nuevo",
 	'importfreeimages_owner' => 'Autor',
-	'importfreeimages_importthis' => 'Importe esto',
-	'importfreeimages_next' => 'Próximo $1',
+	'importfreeimages_importthis' => 'importar esta',
+	'importfreeimages_next' => 'Siguientes $1',
 	'importfreeimages_size_square' => 'Cuadrado',
 	'importfreeimages_size_thumbnail' => 'Miniatura',
 	'importfreeimages_size_small' => 'Pequeño',
@@ -463,13 +447,13 @@ $messages['eu'] = array(
  * @author Persianizer
  */
 $messages['fa'] = array(
-	'importfreeimages' => 'وارد کردن تصاویر آزاد',
+	'importfreeimages' => "یا <a href='$1'>این‌جا</a> کلیک کنید تا به نتایج جستجوی خود باز گردید",
 	'importfreeimages-desc' => 'راهی برای [[Special:ImportFreeImages|وارد کردن تصاویر با اجازه‌نامهٔ مناسب]] از [http://www.flickr.com فلیکر] فراهم می‌آورد',
-	'importfreeimages_description' => 'این صفحه به شما اجازه می‌دهد که در فلیکر به دنبال تصاویر با اجازه‌نامهٔ مناسب بگردید و آن‌ها را در ویکی خود وارد کنید.',
+	'importfreeimages_description' => 'این صفحه به شما اجازه می‌دهد که تصاویر با حق تکثیر مناسب را از فلیکر جستجو کرده و وارد ویکی خود کنید.<br/>تگ‌های مختلف را با کاما جدا کنید.',
 	'importfreeimages_nophotosfound' => "صفحه‌ای برای عبارت جستجوی شما ('$1') پیدا نشد، لطفاً دوباره تلاش کنید.",
-	'importfreeimages_owner' => 'خالق',
-	'importfreeimages_importthis' => 'این را وارد کن',
-	'importfreeimages_next' => '$1 بعدی',
+	'importfreeimages_owner' => 'خالق اثر',
+	'importfreeimages_importthis' => 'این را وارد‌ کن',
+	'importfreeimages_next' => '$1‌تای بعدی',
 	'importfreeimages_size_square' => 'مربع',
 	'importfreeimages_size_thumbnail' => 'بندانگشتی',
 	'importfreeimages_size_small' => 'کوچک',
@@ -485,10 +469,10 @@ $messages['fa'] = array(
  * @author Silvonen
  */
 $messages['fi'] = array(
-	'importfreeimages' => 'Tuo vapaita kuvia',
+	'importfreeimages' => "Tai klikkaa <a href='$1'>tästä</a> palataksesi hakusi tuloksiin",
 	'importfreeimages-desc' => 'Mahdollistaa [[Special:ImportFreeImages|sopivasti lisensoitujen valokuvien tuonnin]] [http://www.flickr.com Flickristä].',
-	'importfreeimages_description' => 'Tämän sivun kautta pystyt etsimään asianomaisesti lisensoituja kuvia Flickrista ja tuomaan niitä wikiisi.',
-	'importfreeimages_nophotosfound' => "Mikään kuva ei täsmää hakukriteeriisi '$1'. Yritä uudelleen.",
+	'importfreeimages_description' => 'Tämän sivun kautta pystyt etsimään asianomaisesti lisensoituja kuvia Flickr:sta ja tuomaan niitä wikiisi.',
+	'importfreeimages_nophotosfound' => "Mitkään valokuvat eivät täsmänneet hakukriteeriisi '$1', ole hyvä ja koita uudestaan.",
 	'importfreeimages_owner' => 'Tekijä',
 	'importfreeimages_importthis' => 'tuo tämä',
 	'importfreeimages_next' => 'Seuraavat $1',
@@ -508,7 +492,7 @@ $messages['fi'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'importfreeimages' => 'Importer des images libres',
+	'importfreeimages' => '640px',
 	'importfreeimages-desc' => 'Fournit un moyen d’importer des photographies sous licence appropriée depuis flickr.',
 	'importfreeimages_description' => 'Cette page vous permet de rechercher des images sous licences appropriées depuis flickr et de les importer dans votre wiki.',
 	'importfreeimages_nophotosfound' => "Aucune photo n’a été trouvée à partir de vos critères de recherches  '$1', veuillez essayer à nouveau.",
@@ -518,9 +502,11 @@ $messages['fr'] = array(
 	'importfreeimages_size_square' => 'Carré',
 	'importfreeimages_size_thumbnail' => 'Miniature',
 	'importfreeimages_size_small' => 'Petit',
-	'importfreeimages_size_medium' => 'Moyen',
-	'importfreeimages_size_large' => 'Grand',
+	'importfreeimages_size_medium' => '640px',
+	'importfreeimages_size_large' => 'Grand carré',
 	'importfreeimages_size_original' => 'Original',
+	'importfreeimages_size_large_square' => 'Grand carré',
+	'importfreeimages_size_medium_640' => '640px',
 );
 
 /** Franco-Provençal (Arpetan)
@@ -760,12 +746,13 @@ $messages['it'] = array(
  * @author 青子守歌
  */
 $messages['ja'] = array(
-	'importfreeimages' => 'フリーの画像をインポート',
-	'importfreeimages-desc' => '[http://www.flickr.com Flickr] から[[Special:ImportFreeImages|適切にライセンスされた写真をインポートする]]手段を提供する',
-	'importfreeimages_description' => 'このページを使うと、Flickr で適切にライセンスされた画像を検索し、あなたのウィキにインポートすることができます。',
-	'importfreeimages_nophotosfound' => '検索条件「$1」に適う写真は見つかりませんでした。もう一度試してください。',
-	'importfreeimages_owner' => '著者',
-	'importfreeimages_importthis' => 'これをインポート',
+	'importfreeimages' => 'ファイル名を入力してください:',
+	'importfreeimages-desc' => '[http://www.flickr.com flickr]から[[Special:ImportFreeImages|フリーなライセンスの写真を取り込む]]機能を提供します。',
+	'importfreeimages_description' => 'このページでは、適切なライセンスを持つ画像をFlickrから検索し、このウィキに取り込むことができます。
+<br />カンマ区切りでタグを複数個あわせて検索します。',
+	'importfreeimages_nophotosfound' => '検索語「$1」では画像が見付かりませんでした。再度検索しなおしてください。',
+	'importfreeimages_owner' => '作者',
+	'importfreeimages_importthis' => 'この画像を取り込む',
 	'importfreeimages_next' => '次の$1件',
 	'importfreeimages_size_square' => '四角',
 	'importfreeimages_size_thumbnail' => 'サムネイル',
@@ -818,6 +805,16 @@ $messages['kn'] = array(
 $messages['ko'] = array(
 	'importfreeimages_owner' => '만든이',
 	'importfreeimages_importthis' => '이 그림 가져오기',
+	'importfreeimages' => '썸네일',
+	'importfreeimages_description' => '이 도구를 통해 Flickr에서 적절한 그림을 찾아 위키에 불러올 수 있습니다.',
+	'importfreeimages_nophotosfound' => "'$1'를(을) 만족하는 그림을 찾을 수 없습니다. 다른 단어로 시도해보세요.",
+	'importfreeimages_next' => '다음 $1장',
+	'importfreeimages_size_square' => '정사각형',
+	'importfreeimages_size_thumbnail' => '썸네일',
+	'importfreeimages_size_small' => '작게',
+	'importfreeimages_size_medium' => '중간 크기',
+	'importfreeimages_size_large' => '크게',
+	'importfreeimages_size_original' => '원본',
 );
 
 /** Colognian (Ripoarisch)
@@ -1043,6 +1040,10 @@ $messages['nn'] = array(
 	'importfreeimages_size_original' => 'Original',
 );
 
+$messages['no'] = array(
+	'importfreeimages' => 'Eller klikk <a href="$1">her</a> for å gå tilbake til søkeresultatene',
+);
+
 /** Northern Sotho (Sesotho sa Leboa)
  * @author Mohau
  */
@@ -1089,7 +1090,7 @@ $messages['pdc'] = array(
  * @author Sp5uhe
  */
 $messages['pl'] = array(
-	'importfreeimages' => 'Import grafik na odpowiednich licencjach',
+	'importfreeimages' => 'Import obrazów na odpowiednich licencjach',
 	'importfreeimages-desc' => 'Umożliwia [[Special:ImportFreeImages|import grafik z odpowiednią licencją]] z [http://www.flickr.com flickra]',
 	'importfreeimages_description' => 'Ta strona pozwala na wyszukiwanie na serwisie flickr zdjęć z odpowiednią licencją i na ich import do wiki.',
 	'importfreeimages_nophotosfound' => 'Żadne zdjęcie nie zostało odnalezione na podstawie kryterium „$1”. Spróbuj ponownie.',
@@ -1562,6 +1563,10 @@ $messages['vo'] = array(
 	'importfreeimages_next' => 'Sököl $1',
 );
 
+$messages['zh-cn'] = array(
+	'importfreeimages' => '匯入自由版權圖片',
+);
+
 /** Simplified Chinese (‪中文(简体)‬)
  * @author Liangent
  * @author PhiLiP
@@ -1603,3 +1608,10 @@ $messages['zh-hant'] = array(
 	'importfreeimages_size_original' => '原始訊息',
 );
 
+$messages['zh-hk'] = array(
+	'importfreeimages' => '匯入自由版權圖片',
+);
+
+$messages['zh-tw'] = array(
+	'importfreeimages' => '匯入自由版權圖片',
+);

@@ -12,48 +12,39 @@ $messages = array();
  * @author Andrew Garrett
  */
 $messages['en'] = array(
-	// Description message
 	'abusefilter-desc' => 'Applies automatic heuristics to edits',
-
-	// Special pages
 	'abusefilter' => 'Abuse filter configuration',
 	'abuselog' => 'Abuse log',
-	'abusefilter-intro' => "Welcome to the Abuse Filter management interface.
+	'abusefilter-intro' => 'Welcome to the Abuse Filter management interface.
 The Abuse Filter is an automated software mechanism of applying automatic heuristics to all actions.
-This interface shows a list of defined filters, and allows them to be modified.",
+This interface shows a list of defined filters, and allows them to be modified.',
 	'abusefilter-mustbeeditor' => 'For security reasons, only users with the right to modify abuse filters may use this interface.',
-
-	// Hooks
 	'abusefilter-warning' => "'''Warning''': This action has been automatically identified as harmful.
 Unconstructive edits will be quickly reverted,
 and egregious or repeated unconstructive editing will result in your account or IP address being blocked.
 If you believe this edit to be constructive, you may click Submit again to confirm it.
 A brief description of the abuse rule which your action matched is: $1",
-	'abusefilter-disallowed' => "This action has been automatically identified as harmful, and therefore disallowed.
+	'abusefilter-disallowed' => 'This action has been automatically identified as harmful, and therefore disallowed.
 If you believe your edit was constructive, please inform an administrator of what you were trying to do.
-A brief description of the abuse rule which your action matched is: $1",
-	'abusefilter-blocked-display' => "This action has been automatically identified as harmful,
+A brief description of the abuse rule which your action matched is: $1',
+	'abusefilter-blocked-display' => 'This action has been automatically identified as harmful,
 and you have been prevented from executing it.
 In addition, to protect {{SITENAME}}, your user account and all associated IP addresses have been blocked from editing.
 If this has occurred in error, please contact an administrator.
-A brief description of the abuse rule which your action matched is: $1",
-	'abusefilter-degrouped' => "This action has been automatically identified as harmful.
+A brief description of the abuse rule which your action matched is: $1',
+	'abusefilter-degrouped' => 'This action has been automatically identified as harmful.
 Consequently, it has been disallowed, and, since your account is suspected of being compromised, all rights have been revoked.
 If you believe this to have been in error, please contact a bureaucrat with an explanation of this action, and your rights may be restored.
-A brief description of the abuse rule which your action matched is: $1",
-	'abusefilter-autopromote-blocked' => "This action has been automatically identified as harmful, and it has been disallowed.
+A brief description of the abuse rule which your action matched is: $1',
+	'abusefilter-autopromote-blocked' => 'This action has been automatically identified as harmful, and it has been disallowed.
 In addition, as a security measure, some privileges routinely granted to established accounts have been temporarily revoked from your account.
-A brief description of the abuse rule which your action matched is: $1",
-
+A brief description of the abuse rule which your action matched is: $1',
 	'abusefilter-blocker' => 'Abuse filter',
 	'abusefilter-blockreason' => 'Automatically blocked by abuse filter.
 Description of matched rule: $1',
 	'abusefilter-degroupreason' => 'Rights automatically stripped by abuse filter.
 Rule description: $1',
-
 	'abusefilter-accountreserved' => 'This account name is reserved for use by the abuse filter.',
-
-	// Permissions
 	'right-abusefilter-modify' => 'Modify abuse filters',
 	'right-abusefilter-view' => 'View abuse filters',
 	'right-abusefilter-log' => 'View the abuse log',
@@ -64,7 +55,6 @@ Rule description: $1',
 	'right-abusefilter-view-private' => 'View abuse filters marked as private',
 	'right-abusefilter-hide-log' => 'Hide entries in the abuse log',
 	'right-abusefilter-hidden-log' => 'View hidden abuse log entries',
-
 	'action-abusefilter-modify' => 'modify abuse filters',
 	'action-abusefilter-view' => 'view abuse filters',
 	'action-abusefilter-log' => 'view the abuse log',
@@ -73,8 +63,6 @@ Rule description: $1',
 	'action-abusefilter-modify-restricted' => 'modify abuse filters with restricted actions',
 	'action-abusefilter-revert' => 'revert all changes by a given abuse filter',
 	'action-abusefilter-view-private' => 'view abuse filters marked as private',
-
-	// Abuse Log
 	'abusefilter-log' => 'Abuse filter log',
 	'abusefilter-log-summary' => 'This log shows a list of all actions caught by the filters.',
 	'abusefilter-log-search' => 'Search the abuse log',
@@ -103,11 +91,9 @@ Filter description: $7 ($8)',
 	'abusefilter-log-linkoncontribs' => 'abuse log',
 	'abusefilter-log-linkoncontribs-text' => 'Abuse log for this user',
 	'abusefilter-log-hidden' => '(entry hidden)',
-	'abusefilter-log-hide' => 'hide or unhide', // @todo FIXME: Message unused?
+	'abusefilter-log-hide' => 'hide or unhide',
 	'abusefilter-log-cannot-see-details' => 'You do not have permission to see details of this entry.',
 	'abusefilter-log-details-hidden' => 'You cannot view the details for this entry because it is hidden from public view.',
-
-	// Hiding log entries
 	'abusefilter-log-hide-legend' => 'Hide log entry',
 	'abusefilter-log-hide-id' => 'Log entry ID:',
 	'abusefilter-log-hide-hidden' => 'Hide this entry from public view',
@@ -115,8 +101,6 @@ Filter description: $7 ($8)',
 	'abusefilter-log-hide-forbidden' => 'You do not have permission to hide abuse log entries.',
 	'abusefilter-logentry-suppress' => 'hid "[[$1]]"',
 	'abusefilter-logentry-unsuppress' => 'unhid "[[$1]]"',
-
-	// Abuse filter management
 	'abusefilter-management' => 'Abuse filter management',
 	'abusefilter-list' => 'All filters',
 	'abusefilter-list-id' => 'Filter ID',
@@ -138,8 +122,6 @@ Filter description: $7 ($8)',
 	'abusefilter-new' => 'Create a new filter',
 	'abusefilter-return' => 'Return to filter management',
 	'abusefilter-status-global' => 'Global',
-
-	// Options form
 	'abusefilter-list-options' => 'Options',
 	'abusefilter-list-options-deleted' => 'Deleted filters:',
 	'abusefilter-list-options-deleted-only' => 'Show only deleted filters',
@@ -148,22 +130,16 @@ Filter description: $7 ($8)',
 	'abusefilter-list-options-disabled' => 'Disabled filters:',
 	'abusefilter-list-options-hidedisabled' => 'Hide disabled filters',
 	'abusefilter-list-options-submit' => 'Update',
-
-	// Abuse filter tools
 	'abusefilter-tools-text' => 'Here are some tools which may be useful in formulating and debugging abuse filters.',
 	'abusefilter-tools-expr' => 'Expression tester',
 	'abusefilter-tools-submitexpr' => 'Evaluate',
 	'abusefilter-tools-reautoconfirm' => 'Restore autoconfirmed status',
 	'abusefilter-tools-reautoconfirm-user' => 'User:',
 	'abusefilter-tools-reautoconfirm-submit' => 'Re-autoconfirm',
-	'abusefilter-reautoconfirm-none' => 'That user has not had {{GENDER:$1|his|her|their}} autoconfirmed status suspended.', # This message supports {{GENDER}}
+	'abusefilter-reautoconfirm-none' => 'That user has not had {{GENDER:$1|his|her|their}} autoconfirmed status suspended.',
 	'abusefilter-reautoconfirm-notallowed' => 'You are not allowed to restore autoconfirmed status.',
-	'abusefilter-reautoconfirm-done' => "Account's autoconfirmed status has been restored", # This message supports {{GENDER}}
-
-	// Abuse filter status
-	'abusefilter-status' => "Of the last $1 {{PLURAL:$1|action|actions}}, $2 ($3%) {{PLURAL:$2|has|have}} reached the condition limit of $4, and $5 ($6%) {{PLURAL:$5|has|have}} matched one of the filters currently enabled.",
-
-	// The edit screen
+	'abusefilter-reautoconfirm-done' => "Account's autoconfirmed status has been restored",
+	'abusefilter-status' => 'Of the last $1 {{PLURAL:$1|action|actions}}, $2 ($3%) {{PLURAL:$2|has|have}} reached the condition limit of $4, and $5 ($6%) {{PLURAL:$5|has|have}} matched one of the filters currently enabled.',
 	'abusefilter-edit-subtitle' => 'Editing filter $1',
 	'abusefilter-edit-oldwarning' => "<strong>You are editing an old version of this filter.
 The statistics quoted are for the most recent version of the filter.
@@ -212,12 +188,12 @@ It reached the limit of matching more than $1% of actions.",
 	'abusefilter-edit-warn-preview' => 'Preview selected message',
 	'abusefilter-edit-warn-edit' => 'Create/Edit selected message',
 	'abusefilter-edit-tag-tag' => 'Tags to apply (one per line):',
-	'abusefilter-edit-denied' => "You may not view details of this filter, because it is hidden from public view.",
+	'abusefilter-edit-denied' => 'You may not view details of this filter, because it is hidden from public view.',
 	'abusefilter-edit-main' => 'Filter parameters',
 	'abusefilter-edit-done-subtitle' => 'Filter edited',
-	'abusefilter-edit-done' => "You have successfully saved your changes to filter $1.",
-	'abusefilter-edit-badsyntax' => "There is a syntax error in the filter you specified.
-The output from the parser was: <pre>$1</pre>",
+	'abusefilter-edit-done' => 'You have successfully saved your changes to filter $1.',
+	'abusefilter-edit-badsyntax' => 'There is a syntax error in the filter you specified.
+The output from the parser was: <pre>$1</pre>',
 	'abusefilter-edit-restricted' => 'You cannot edit this filter, because it contains one or more restricted actions.
 Please ask a user with permission to add restricted actions to make the change for you.',
 	'abusefilter-edit-viewhistory' => "View this filter's history",
@@ -233,8 +209,6 @@ Please ask a user with permission to add restricted actions to make the change f
 	'abusefilter-edit-bad-tags' => 'One or more of the tags you specified is not valid.
 Tags should be short, and they should not contain special characters.',
 	'abusefilter-edit-notallowed' => 'You are not permitted to create or edit abuse filters',
-
-	// Filter editing helpers
 	'abusefilter-edit-builder-select' => 'Select an option to add it at the cursor',
 	'abusefilter-edit-builder-group-op-arithmetic' => 'Arithmetic operators',
 	'abusefilter-edit-builder-op-arithmetic-addition' => 'Addition (+)',
@@ -309,7 +283,7 @@ Tags should be short, and they should not contain special characters.',
 	'abusefilter-edit-builder-vars-user-name' => 'Name of user account',
 	'abusefilter-edit-builder-vars-user-groups' => 'Groups (including implicit) user is in',
 	'abusefilter-edit-builder-vars-user-emailconfirm' => 'Time email address was confirmed',
-	'abusefilter-edit-builder-vars-recent-contributors' => 'Last five contributors to the page',
+	'abusefilter-edit-builder-vars-recent-contributors' => 'Last ten users to contribute to the page',
 	'abusefilter-edit-builder-vars-all-links' => 'All external links in the new text',
 	'abusefilter-edit-builder-vars-added-links' => 'All external links added in the edit',
 	'abusefilter-edit-builder-vars-removed-links' => 'All external links removed in the edit',
@@ -317,7 +291,6 @@ Tags should be short, and they should not contain special characters.',
 	'abusefilter-edit-builder-vars-new-text' => 'New page wikitext, after the edit',
 	'abusefilter-edit-builder-vars-new-text-stripped' => 'New page text, stripped of any markup',
 	'abusefilter-edit-builder-vars-new-html' => 'Parsed HTML source of the new revision',
-	'abusefilter-edit-builder-vars-recent-contributors' => 'Last ten users to contribute to the page',
 	'abusefilter-edit-builder-vars-restrictions-edit' => 'Edit protection level of the page',
 	'abusefilter-edit-builder-vars-restrictions-move' => 'Move protection level of the page',
 	'abusefilter-edit-builder-vars-old-text-stripped' => 'Old page text, stripped of any markup',
@@ -325,9 +298,6 @@ Tags should be short, and they should not contain special characters.',
 	'abusefilter-edit-builder-vars-old-html' => 'Old page wikitext, parsed into HTML',
 	'abusefilter-edit-builder-vars-minor-edit' => 'Whether or not the edit is marked as minor',
 	'abusefilter-edit-builder-vars-file-sha1' => 'SHA1 hash of file contents',
-
-	// Filter history
-	// Message documentation complete up to here. Siebrand 2011-12-08.
 	'abusefilter-filter-log' => 'Recent filter changes',
 	'abusefilter-history' => 'Change history for Abuse Filter #$1',
 	'abusefilter-history-foruser' => 'Changes by $1',
@@ -349,8 +319,6 @@ Tags should be short, and they should not contain special characters.',
 	'abusefilter-history-select-submit' => 'Refine',
 	'abusefilter-history-diff' => 'Changes',
 	'abusefilter-history-error-hidden' => 'The filter you requested is hidden, and you cannot view its history.',
-
-	// Exceptions
 	'abusefilter-exception-unexpectedatend' => 'Unexpected "$2" at character $1.',
 	'abusefilter-exception-expectednotfound' => 'Expected a $2 at character $1, not found (found $3 $4 instead).',
 	'abusefilter-exception-unrecognisedkeyword' => 'Unrecognised keyword $2 at character $1.',
@@ -367,8 +335,6 @@ Tags should be short, and they should not contain special characters.',
 	'abusefilter-exception-overridebuiltin' => 'Illegal overriding of built-in variable "$2" at character $1.',
 	'abusefilter-exception-outofbounds' => 'Requesting non-existent list item $2 (list size = $3) at character $1.',
 	'abusefilter-exception-notlist' => 'Requesting array item of non-array at character $1.',
-
-	// Actions
 	'abusefilter-action-tag' => 'Tag',
 	'abusefilter-action-throttle' => 'Throttle',
 	'abusefilter-action-warn' => 'Warn',
@@ -377,8 +343,6 @@ Tags should be short, and they should not contain special characters.',
 	'abusefilter-action-degroup' => 'Remove from groups',
 	'abusefilter-action-rangeblock' => 'Range-block',
 	'abusefilter-action-disallow' => 'Disallow',
-
-	// Revert interface
 	'abusefilter-revert-title' => 'Revert all changes by filter $1',
 	'abusefilter-revert-intro' => 'This form allows you to revert all changes made by the abuse filter due to filter $1.
 Please exercise care in using this tool.',
@@ -396,8 +360,6 @@ Please check them carefully, and click "confirm" to confirm your selection.',
 	'abusefilter-revert-reason' => 'Automatic revert of all actions taken by the abuse filter due to filter $1.
 Reason given: $2',
 	'abusefilter-revert-reasonfield' => 'Reason for revert:',
-
-	// These messages are for batch checking
 	'abusefilter-test' => 'Test a filter against previous edits',
 	'abusefilter-test-intro' => 'This page allows you to check a filter entered in the box below against the last $1 {{PLURAL:$1|change|changes}}.
 To load an existing filter, type its filter ID into the box below the edit textbox, and click the "Load" button.',
@@ -413,8 +375,6 @@ To load an existing filter, type its filter ID into the box below the edit textb
 	'abusefilter-test-syntaxerr' => 'The filter you entered contained a syntax error.
 You can receive a full explanation by clicking the "Check Syntax" button.',
 	'abusefilter-changeslist-examine' => 'examine',
-
-	// And these messages are for examining specific actions.
 	'abusefilter-examine' => 'Examine individual changes',
 	'abusefilter-examine-intro' => 'This page allows you to examine the variables generated by the Abuse Filter for an individual change, and test it against filters.',
 	'abusefilter-examine-legend' => 'Select changes',
@@ -431,8 +391,6 @@ You can receive a full explanation by clicking the "Check Syntax" button.',
 	'abusefilter-examine-notfound' => 'The change you requested could not be found.',
 	'abusefilter-examine-incompatible' => 'The change you requested is not supported by the Abuse Filter',
 	'abusefilter-examine-noresults' => 'No results were found for the search parameters you provided.',
-
-	// Top navigation interface
 	'abusefilter-topnav' => "'''Abuse Filter navigation'''",
 	'abusefilter-topnav-home' => 'Home',
 	'abusefilter-topnav-test' => 'Batch testing',
@@ -440,15 +398,11 @@ You can receive a full explanation by clicking the "Check Syntax" button.',
 	'abusefilter-topnav-log' => 'Abuse Log',
 	'abusefilter-topnav-tools' => 'Debugging tools',
 	'abusefilter-topnav-import' => 'Import filter',
-
-	// Logging
 	'abusefilter-log-name' => 'Abuse Filter log',
-	'abusefilter-log-header' => "This log shows a summary of changes made to filters.
-For full details, see [[Special:AbuseFilter/history|the list]] of recent filter changes.",
+	'abusefilter-log-header' => 'This log shows a summary of changes made to filters.
+For full details, see [[Special:AbuseFilter/history|the list]] of recent filter changes.',
 	'abusefilter-log-entry-modify' => 'modified $1 ($2)',
 	'abusefilter-log-noresults' => 'No results',
-
-	// Diffs
 	'abusefilter-diff-title' => 'Differences between versions',
 	'abusefilter-diff-item' => 'Item',
 	'abusefilter-diff-version' => 'Version from $1 by $2',
@@ -456,414 +410,10 @@ For full details, see [[Special:AbuseFilter/history|the list]] of recent filter 
 	'abusefilter-diff-pattern' => 'Filter conditions',
 	'abusefilter-diff-invalid' => 'Unable to fetch the requested versions',
 	'abusefilter-diff-backhistory' => 'Back to filter history',
-
-	// Import interface
 	'abusefilter-import-intro' => 'You can use this interface to import filters from other wikis.
 On the source wiki, click "{{int:abusefilter-edit-export}}" under "{{int:abusefilter-tools-subtitle}}" on the editing interface.
 Copy from the textbox that appears, and paste it into this textbox, then click "{{int:abusefilter-import-submit}}".',
 	'abusefilter-import-submit' => 'Import data',
-);
-
-/** Message documentation (Message documentation)
- * @author Aotake
- * @author Bennylin
- * @author ChrisiPK
- * @author Darth Kule
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Hamilton Abreu
- * @author Huji
- * @author Iwan Novirion
- * @author Jon Harald Søby
- * @author Krinkle
- * @author Kwj2772
- * @author Lejonel
- * @author Lloffiwr
- * @author McDutchie
- * @author Meno25
- * @author Mormegil
- * @author Praveenp
- * @author Purodha
- * @author Raymond
- * @author Siebrand
- * @author The Evil IP address
- * @author Translationista
- * @author Umherirrender
- * @author Yekrats
- */
-$messages['qqq'] = array(
-	'abusefilter-desc' => '{{desc}}',
-	'abusefilter' => 'Name of Special:AbuseFilter in Special:SpecialPages and title of special page.',
-	'abuselog' => 'Name of Special:AbuseLog in Special:SpecialPages and title of special page.',
-	'abusefilter-intro' => 'Introduction text for the list of filter rules.',
-	'abusefilter-mustbeeditor' => '"No access" message shown when a user does not have access rights.',
-	'abusefilter-warning' => 'A warning message shown when a user tries to save an edit which matches some abuse filter rule. Parameters:
-* $1 is a short description of the abuse filter rule which triggered this action.',
-	'abusefilter-disallowed' => 'Message given to user because of a triggered filter. Parameters:
-* $1 is a filter description.',
-	'abusefilter-blocked-display' => 'Message given to user because of a triggered filter. Parameters:
-* * $1 is a filter description.',
-	'abusefilter-degrouped' => 'Message given to user because of a triggered filter. Parameters:
-* * $1 is a filter description.',
-	'abusefilter-autopromote-blocked' => 'Message given to user because of a triggered filter. Parameters:
-* $1 is a filter description.',
-	'abusefilter-blocker' => 'Username of reserved user for abuse filter actions.',
-	'abusefilter-blockreason' => 'Message given to user because of a triggered filter. Parameters:
-* $1 is a filter description.',
-	'abusefilter-degroupreason' => 'Reason of removal of the user from all privileged groups performed by Abuse filter.',
-	'abusefilter-accountreserved' => 'Message given when trying to register a reserved account name for AbuseFilter actions.',
-	'right-abusefilter-modify' => '{{doc-right|abusefilter-modify}}',
-	'right-abusefilter-view' => '{{doc-right|abusefilter-view}}',
-	'right-abusefilter-log' => '{{doc-right|abusefilter-log}}',
-	'right-abusefilter-log-detail' => '{{doc-right|abusefilter-log-detail}}',
-	'right-abusefilter-private' => '{{doc-right|abusefilter-private}}',
-	'right-abusefilter-modify-restricted' => '{{doc-right|abusefilter-modify-restricted}}',
-	'right-abusefilter-revert' => '{{doc-right|abusefilter-revert}}',
-	'right-abusefilter-view-private' => '{{doc-right|abusefilter-view-private}}',
-	'right-abusefilter-hide-log' => '{{doc-right|abusefilter-hide-log}}',
-	'right-abusefilter-hidden-log' => '{{doc-right|abusefilter-hidden-log}}',
-	'action-abusefilter-modify' => '{{doc-action|abusefilter-modify}}',
-	'action-abusefilter-view' => '{{doc-action|abusefilter-view}}',
-	'action-abusefilter-log' => '{{doc-action|abusefilter-log}}',
-	'action-abusefilter-log-detail' => '{{doc-action|abusefilter-log-detail}}',
-	'action-abusefilter-private' => '{{doc-action|abusefilter-private}}',
-	'action-abusefilter-modify-restricted' => '{{doc-action|abusefilter-modify-restricted}}',
-	'action-abusefilter-revert' => '{{doc-action|abusefilter-revert}}',
-	'action-abusefilter-view-private' => '{{doc-action|abusefilter-view-private}}',
-	'abusefilter-log' => 'Caption of [[Special:AbuseLog]]',
-	'abusefilter-log-summary' => 'This message is displayed at the top of the log overview page for extension AbuseFilter.',
-	'abusefilter-log-search' => 'Caption of a fieldset for filter definition on [[Special:AbuseLog]]',
-	'abusefilter-log-search-user' => 'Field label in abuse filter log page.
-{{Identical|User}}',
-	'abusefilter-log-search-filter' => 'Field label in abuse filter log page.
-{{Identical|Filter ID}}',
-	'abusefilter-log-search-title' => 'Field label in abuse filter log page.
-{{Identical|Title}}',
-	'abusefilter-log-search-submit' => 'Button text to search log in abuse filter log page.
-{{Identical|Search}}',
-	'abusefilter-log-entry' => 'This message is for a log entry. Parameters:
-* $1 timestamp
-* $2 user
-* $3 action by user
-* $4 link to page the action that triggered the filter was made on
-* $5 actions taken by the filter
-* $6 comments in filter description.',
-	'abusefilter-log-detailedentry-meta' => 'This message is for a log entry. Parameters:
-* $1 timestamp
-* $2 user
-* $3 link to filter
-* $4 action by user
-* $5 link to page the action that triggered the filter was made on
-* $6 actions taken by the filter
-* $7 comments in filter description
-* $8 action details link
-* $9 link to examine the action (optional).',
-	'abusefilter-log-detailedentry-global' => 'Addition in the abuse filter log detail when a filter rule is a global rule. Parameters:
-* $1 is a global filter ID.',
-	'abusefilter-log-detailedentry-local' => 'Addition in the abuse filter log detail when a filter rule is a local rule. Parameters:
-* $1 is a local filter ID.',
-	'abusefilter-log-detailslink' => 'Link text for a link to abuse filter log details.
-{{Identical|Details}}',
-	'abusefilter-log-hidelink' => 'Link text in abuse filter log line to hide (when visible) or show (when hidden) a link to the log entry details.',
-	'abusefilter-log-details-legend' => 'Legend for abuse filter log entry details. Parameters:
-* $1 is a filter ID.',
-	'abusefilter-log-details-var' => 'Caption of a column on a detail view of [[Special:AbuseLog]]
-{{Identical|Variable}}',
-	'abusefilter-log-details-val' => 'Caption of a column on a detail view of [[Special:AbuseLog]]
-{{Identical|Value}}',
-	'abusefilter-log-details-vars' => 'Caption on a detail view of [[Special:AbuseLog]]',
-	'abusefilter-log-details-private' => 'Header for private log details.',
-	'abusefilter-log-details-ip' => 'Row label in private log details.',
-	'abusefilter-log-noactions' => 'Text displayed in Special:AbuseLog when a rule was triggered, but no action was taken.
-{{Identical|None}}',
-	'abusefilter-log-details-diff' => 'Header for differences between two edits in log details.',
-	'abusefilter-log-linkoncontribs' => 'Link text added on [[Special:Contributions]] and other relevant special pages.',
-	'abusefilter-log-linkoncontribs-text' => 'Title for link added on [[Special:Contributions]] and other relevant special pages.',
-	'abusefilter-log-hidden' => 'Text for a hidden log entry.',
-	'abusefilter-log-hide' => 'This message may be unused.',
-	'abusefilter-log-cannot-see-details' => 'Message show instead of log row details for users without permissions to see them.',
-	'abusefilter-log-details-hidden' => 'Message shown instead of log row details when those are hidden.',
-	'abusefilter-log-hide-legend' => 'Legend for form to hide a log entry.',
-	'abusefilter-log-hide-id' => 'Field label in form to hide a log entry.',
-	'abusefilter-log-hide-hidden' => 'Checkbox label in form to hide a log entry.',
-	'abusefilter-log-hide-reason' => '{{Identical|Reason}}',
-	'abusefilter-log-hide-forbidden' => 'Message shown instead of a "hide log entry" form when not having the correct user rights.',
-	'abusefilter-logentry-suppress' => 'Log entry when hiding an abuse filter log entry. Parameters:
-* $1 is a link to the log ID with the log ID as description.',
-	'abusefilter-logentry-unsuppress' => 'Log entry when unhiding an abuse filter log entry. Parameters:
-* $1 is a link to the log ID with the log ID as description.',
-	'abusefilter-management' => 'Title of [[Special:AbuseFilter]]',
-	'abusefilter-list-id' => 'Column header in abuse filter overview for the filter identifier.
-{{Identical|Filter ID}}',
-	'abusefilter-list-status' => 'Column header in abuse filter overview for the filter status.
-{{Identical|Status}}',
-	'abusefilter-list-public' => 'Column header in abuse filter overview for the public filter description.',
-	'abusefilter-list-consequences' => 'Column header in abuse filter overview for the filter consequences.',
-	'abusefilter-list-visibility' => 'Column header in abuse filter overview for the public filter visibility.
-{{Identical|Visibility}}',
-	'abusefilter-list-hitcount' => 'Column header in abuse filter overview for the number of times the filter was triggered.',
-	'abusefilter-list-edit' => 'Probably the verb "to edit" (instead of the noun "an edit").
-{{Identical|Edit}}',
-	'abusefilter-list-details' => '{{Identical|Details}}',
-	'abusefilter-list-lastmodified' => 'Column header in abuse filter overview for the last modified timestamp for a filter.
-{{Identical|Last modified}}',
-	'abusefilter-hidden' => 'Abuse filter status.
-{{Identical|Private}}',
-	'abusefilter-unhidden' => 'Abuse filter status.
-{{Identical|Public}}',
-	'abusefilter-enabled' => 'Abuse filter status.
-{{Identical|Enabled}}',
-	'abusefilter-deleted' => 'Abuse filter status.
-{{Identical|Deleted}}',
-	'abusefilter-disabled' => 'Abuse filter status.
-{{Identical|Disabled}}',
-	'abusefilter-hitcount' => 'Indicates number of times an abuse filter was triggered. Parameters:
-* $1 is the number of hits.',
-	'abusefilter-new' => 'Link text for creating a new abuse filter.',
-	'abusefilter-return' => 'Link displayed when filtering abuse filters without results.',
-	'abusefilter-status-global' => 'Abuse filter status. Means that it is active on all wikis in a farm.',
-	'abusefilter-list-options' => 'Fieldset legend for abuse filter filter options.',
-	'abusefilter-list-options-deleted' => 'Field label in filter form.',
-	'abusefilter-list-options-deleted-only' => 'Radio button label in filter form.',
-	'abusefilter-list-options-deleted-hide' => 'Radio button label in filter form.',
-	'abusefilter-list-options-deleted-show' => 'Radio button label in filter form.',
-	'abusefilter-list-options-disabled' => 'Field label in filter form.',
-	'abusefilter-list-options-hidedisabled' => 'Radio button label in filter form.',
-	'abusefilter-list-options-submit' => 'Submit button text in filter form to update a filtered list.
-{{Identical|Update}}',
-	'abusefilter-tools-text' => 'Introduction test for abuse filter tools.',
-	'abusefilter-tools-expr' => 'Fieldset legend for form to test a filter expression.',
-	'abusefilter-tools-submitexpr' => 'Submit button text to test a filter expression.',
-	'abusefilter-tools-reautoconfirm' => 'Fieldset legend for a form to add a user to the autoconfirmed group again.',
-	'abusefilter-tools-reautoconfirm-user' => 'Field label. See {{msg-mw|group-autoconfirmed}} for concept translation.
-{{Identical|User}}',
-	'abusefilter-tools-reautoconfirm-submit' => 'Submit button text to add a user to the autoconfirmed user group. See {{msg-mw|group-autoconfirmed}} for concept translation.',
-	'abusefilter-reautoconfirm-none' => 'Error text in case a user has not had their autoconfirmed status revoked. See {{msg-mw|group-autoconfirmed}} for concept translation.
-* $1 is the target user name used for GENDER',
-	'abusefilter-reautoconfirm-notallowed' => 'Error text when trying to perform an action the user cannot perform. See {{msg-mw|group-autoconfirmed}} for concept translation.',
-	'abusefilter-reautoconfirm-done' => 'See {{msg-mw|group-autoconfirmed}} for concept translation.
-* $1 is the target user name (optional, used for GENDER).',
-	'abusefilter-status' => 'Status information displayed on top of [[Special:AbuseFilter]]. Parameters:
-* $1 is the number of recent actions
-* $2 is the number of filter runs that reached the limit of $4 conditions (and have had to be terminated)
-* $3 is a percentage: $2 / $1 * 100
-* $4 is the maximum number of conditions allowed
-* $5 is the number of matched actions
-* $6 is a percentage: $5 / $1 * 100',
-	'abusefilter-edit-subtitle' => 'Page subtitle when editing an abuse filter.',
-	'abusefilter-edit-oldwarning' => 'Warning displayed when editing an older version of a filter.',
-	'abusefilter-edit-status-label' => 'Field label for abuse filter statistics.
-{{Identical|Statistics}}',
-	'abusefilter-edit-new' => 'Field value in case an edited filter is new.',
-	'abusefilter-edit-save' => 'Submit button text to save a filter.',
-	'abusefilter-edit-id' => 'Field label for filter identifier.
-{{Identical|Filter ID}}',
-	'abusefilter-edit-description' => 'Field label for publicly viewable abuse filter description.',
-	'abusefilter-edit-flags' => 'Field label for abuse filter flags (checkboxes for "hidden", "enabled" and "deleted").
-{{Identical|Flag}}',
-	'abusefilter-edit-enabled' => 'Checkbox label for a filter flag.',
-	'abusefilter-edit-deleted' => 'Checkbox label for a filter flag.',
-	'abusefilter-edit-hidden' => 'Checkbox label for a filter flag.',
-	'abusefilter-edit-rules' => 'Field label for filter rules.',
-	'abusefilter-edit-notes' => 'Field label for filter notes.',
-	'abusefilter-edit-lastmod' => "Field label for filter's last modified timestamp.",
-	'abusefilter-edit-lastmod-text' => 'This message is used on Special:AbuseFilter to indicate the last modified date, time and user for existing rules. Parameters:
-* $1 is a time and date (duplicated in $3 and $4)
-* $2 is a link to a user page with a user name as link text, followed by a series of related links
-* $3 is the date
-* $4 is the time
-* $5 is the user name which can be used with GENDER',
-	'abusefilter-edit-hitcount' => 'Field label in edit rule form after which the number of filter hits is displayed.',
-	'abusefilter-edit-consequences' => 'Table header in filter version differences.',
-	'abusefilter-edit-action-warn' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-disallow' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-flag' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-blockautopromote' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-degroup' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-block' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-throttle' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-rangeblock' => 'Checkbox label for filter action.',
-	'abusefilter-edit-action-tag' => 'Checkbox label for filter action.',
-	'abusefilter-edit-throttle-count' => 'Field label for entering the number of allowed hits before triggering the filter consequences.',
-	'abusefilter-edit-throttle-period' => 'Field label for entering a time period.',
-	'abusefilter-edit-throttle-seconds' => 'Throttle period in seconds. Parameters:
-* $1 is a number of seconds.',
-	'abusefilter-edit-throttle-groups' => 'Field label for properties to group throttle counts by (for example IP address and username). Throttling is the concept of limiting occurances of a certain action in a given time frame.',
-	'abusefilter-edit-warn-message' => 'Field label for dropdown list with system messages.',
-	'abusefilter-edit-warn-other' => 'Option in dropdown menu to specify no item from the list should be used.',
-	'abusefilter-edit-warn-other-label' => 'Field label for entering a system message key to use as warning text.',
-	'abusefilter-edit-warn-actions' => 'Field label for two action buttons in abuse filter editor. The button texts are {{msg-mw|abusefilter-edit-warn-preview}} and {{msg-mw|abusefilter-edit-warn-edit}}.
-{{Identical|Action}}',
-	'abusefilter-edit-warn-preview' => 'Button text for actions relating to a warning message for an abuse filter.',
-	'abusefilter-edit-warn-edit' => 'Button text for actions relating to a warning message for an abuse filter.',
-	'abusefilter-edit-tag-tag' => 'Field label for multi line field in which tags can be added for a revision in case the abuse filter applies.',
-	'abusefilter-edit-denied' => 'Text used when a user has to access to filter details.',
-	'abusefilter-edit-main' => 'Fieldset legend for edit filter form.',
-	'abusefilter-edit-done-subtitle' => 'Page subtitle when as filter was edited and saved.',
-	'abusefilter-edit-done' => 'Text displayed to a user after editing a filter. Parameters:
-* $1 is a filter ID.',
-	'abusefilter-edit-badsyntax' => 'Message to warn a user that a filter could not be edited for a given reason. Parameters:
-* $1 is a parser error text.',
-	'abusefilter-edit-restricted' => 'Message to warn a user that a filter could not be edited for a given reason.',
-	'abusefilter-edit-viewhistory' => 'Link description for link that leads to a revision overview for a filter.',
-	'abusefilter-edit-history' => 'Field label for {{msg-mw|abusefilter-edit-viewhistory}}.
-{{Identical|History}}',
-	'abusefilter-edit-check' => 'Button text for checking abuse filter syntax.',
-	'abusefilter-edit-badfilter' => 'User warning when referencing a filter ID that does not exist.',
-	'abusefilter-edit-revert' => 'Link text for reverting to an older version of a filter.',
-	'abusefilter-edit-tools' => 'Field label for a list of tool links.',
-	'abusefilter-edit-test-link' => 'Link text for link to a form to test a filter. Accompanying label is {{msg-mw|abusefilter-edit-tools}}.',
-	'abusefilter-edit-export' => 'Link text for link to create  filter. Accompanying label is {{msg-mw|abusefilter-edit-tools}}.',
-	'abusefilter-edit-syntaxok' => 'Status message for filter test.',
-	'abusefilter-edit-syntaxerr' => 'Status message for filter test. Parameters:
-* $1 is the reported error.',
-	'abusefilter-edit-bad-tags' => 'Status message for filter test.',
-	'abusefilter-edit-notallowed' => 'Error message when trying to modify a filter while not allowed.',
-	'abusefilter-edit-builder-select' => 'Default value for dropdown menu that allows inserting abuse filter syntax in the filter definition field.',
-	'abusefilter-edit-builder-group-op-arithmetic' => 'Group entry in dropdown menu.',
-	'abusefilter-edit-builder-op-arithmetic-addition' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-arithmetic}}.',
-	'abusefilter-edit-builder-op-arithmetic-subtraction' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-arithmetic}}.',
-	'abusefilter-edit-builder-op-arithmetic-multiplication' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-arithmetic}}.',
-	'abusefilter-edit-builder-op-arithmetic-divide' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-arithmetic}}.',
-	'abusefilter-edit-builder-op-arithmetic-modulo' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-arithmetic}}.',
-	'abusefilter-edit-builder-op-arithmetic-pow' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-arithmetic}}.',
-	'abusefilter-edit-builder-group-op-comparison' => 'Group entry in dropdown menu.',
-	'abusefilter-edit-builder-op-comparison-equal' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-comparison}}.',
-	'abusefilter-edit-builder-op-comparison-notequal' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-comparison}}.',
-	'abusefilter-edit-builder-op-comparison-lt' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-comparison}}.',
-	'abusefilter-edit-builder-op-comparison-gt' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-comparison}}.',
-	'abusefilter-edit-builder-op-comparison-lte' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-comparison}}.',
-	'abusefilter-edit-builder-op-comparison-gte' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-comparison}}.',
-	'abusefilter-edit-builder-group-op-bool' => 'Group entry in dropdown menu.',
-	'abusefilter-edit-builder-op-bool-not' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-bool}}.',
-	'abusefilter-edit-builder-op-bool-and' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-bool}}.',
-	'abusefilter-edit-builder-op-bool-or' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-bool}}.',
-	'abusefilter-edit-builder-op-bool-xor' => 'Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-bool}}. {{optional}}',
-	'abusefilter-edit-builder-group-misc' => 'Group entry in dropdown menu.',
-	'abusefilter-edit-builder-misc-in' => '{{doc-important|Do not translate "in".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-misc-like' => '{{doc-important|Do not translate "like".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-misc-rlike' => '{{doc-important|Do not translate "rlike".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-misc-irlike' => '{{doc-important|Do not translate "irlike".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-misc-contains' => '{{doc-important|Do not translate "contains".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-misc-tern' => '{{doc-important|Do not change "X ? Y : Z".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-misc-cond' => '{{doc-important|Do not change "if X then Y else Z".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-op-misc}}.',
-	'abusefilter-edit-builder-group-funcs' => 'Group entry in dropdown menu.',
-	'abusefilter-edit-builder-funcs-length' => "{{doc-important|Do not translate \"'''length'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-lcase' => "{{doc-important|Do not translate \"'''lcase'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-ccnorm' => "{{doc-important|Do not translate \"'''ccnorm'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-rmdoubles' => '{{doc-important|Do not translate "\'\'\'rmdoubles\'\'\'".}}
-Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.
-Functional explanation: rmdoubles removes repeated characters in the argument, and returns the result. For example: "foobybboo" will return "fobybo".',
-	'abusefilter-edit-builder-funcs-specialratio' => "{{doc-important|Do not translate \"'''specialratio'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-norm' => "{{doc-important|Do not translate \"'''norm'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-count' => "{{doc-important|Do not translate \"'''count'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-rcount' => '{{doc-important|Do not translate "rcount".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.',
-	'abusefilter-edit-builder-funcs-rmwhitespace' => "{{doc-important|Do not translate \"'''rmwhitespac)'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-rmspecials' => "{{doc-important|Do not translate \"'''rmspecials'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-ip_in_range' => "{{doc-important|Do not translate \"'''ip_in_range'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-contains-any' => "{{doc-important|Do not translate \"'''contains_any'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-substr' => "{{doc-important|Do not translate \"'''substr'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-strpos' => "{{doc-important|Do not translate \"'''strpos'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-funcs-str_replace' => "{{doc-important|Do not translate \"'''str_replace'''\".}} Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-funcs}}.",
-	'abusefilter-edit-builder-group-vars' => 'Group entry in dropdown menu. {{Identical|Variable}}',
-	'abusefilter-edit-builder-vars-accountname' => 'This variable is used only during account creation and contains the username of the newly created account. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-action' => ' Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}. {{Identical|Action}}',
-	'abusefilter-edit-builder-vars-newsize' => 'New size of the page. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-oldsize' => 'Old size of the page. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-article-ns' => 'The namespace that the page for the trigger is supposed to be in. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedfrom-id' => 'Paraphrase: The page ID of the page to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedfrom-ns' => 'Paraphrase: Namespace of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedfrom-text' => 'Paraphrase: Name of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedfrom-prefixedtext' => 'Paraphrase: Full name of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedto-id' => 'Paraphrased: Page ID of the destination of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedto-ns' => 'Paraphrased: Namespace of the destination of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedto-text' => 'Paraphrased: Name of the destination of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-movedto-prefixedtext' => 'Paraphrased: Full name of the destination of the page that is to be moved. Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-restrictions-edit' => 'This variable contains the level of protection required to edit the page. ("Edit" here is not a verb, but an adjective, like "Edit-related protection level"). Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-edit-builder-vars-restrictions-move' => 'This variable contains the level of protection required to move the page. ("Move" here is not a verb, but an adjective, like "Move-related protection level"). Abuse filter syntax option in a dropdown from the group {{msg-mw|abusefilter-edit-builder-group-group-vars}}.',
-	'abusefilter-history' => '"Change history" is the "history of changes"',
-	'abusefilter-history-foruser' => "* $1 is a link to the changing user's page
-* (optional) $2 is the plain text user name",
-	'abusefilter-history-enabled' => '{{Identical|Enabled}}',
-	'abusefilter-history-timestamp' => 'Used in history page of a filter.
-
-{{Identical|Time}}',
-	'abusefilter-history-user' => '{{Identical|User}}',
-	'abusefilter-history-flags' => '{{Identical|Flag}}',
-	'abusefilter-history-comments' => '{{Identical|Comments}}',
-	'abusefilter-history-actions' => '{{Identical|Action}}',
-	'abusefilter-history-deleted' => '{{Identical|Deleted}}',
-	'abusefilter-history-select-user' => '{{Identical|User}}',
-	'abusefilter-exception-unexpectedatend' => "Errormessage from the abuse filter parser.
-
-* $1: Position in the string
-* $2: Unexpected code, i.e. <code>else, then, end, :, '</code>",
-	'abusefilter-exception-expectednotfound' => "Errormessage from the abuse filter parser.
-
-* $1: Position in the string
-* $2: Expected code, i.e. <code>else, then, end, :, '</code>
-* $3: Type of the found code
-* $4: Value of the type",
-	'abusefilter-exception-notenoughargs' => '* $1 is a character position (numeral)
-* $2 is a function name
-* $3 is the number of expected arguments
-* $4 is the number of passed arguments (also supports PLURAL)',
-	'abusefilter-action-tag' => '{{Identical|Tag}}',
-	'abusefilter-action-blockautopromote' => 'That is, to automatically promote the block.',
-	'abusefilter-revert-title' => 'Caption of [[Special:AbuseFilter/revert/1]] (go to [[Special:AbuseFilter]], open a filter, click “Revert actions taken by this filter”)',
-	'abusefilter-revert-preview-item' => 'Parameters:
-* $1 is a localised time and date
-* $2 is the linked user that made a change
-* $3 is the action
-* $4 is the page title of the page that was changed
-* $5 is a (localised) comma separated list of actions
-* $6 is link to the log details with {{msg-mw|abusefilter-log-detailslink}} as link description.',
-	'abusefilter-revert-filter' => '{{Identical|Filter}}',
-	'abusefilter-revert-preview-intro' => '"Confirm" is the contents of {{msg-mw|abusefilter-revert-confirm}}.',
-	'abusefilter-revert-confirm' => '{{Identical|Confirm}}
-This is also used in {{msg-mw|Abusefilter-revert-preview-intro}}. When changing this message, please also remember to change that one.',
-	'abusefilter-revert-reason' => 'Parameters:
-* $1 is a filter ID
-* $2 is a reason',
-	'abusefilter-test-intro' => '"Load" refers to the contents of {{msg-mw|abusefilter-test-load}}.',
-	'abusefilter-test-legend' => 'Caption of the fieldset on [[Special:AbuseFilter/test]]',
-	'abusefilter-test-submit' => 'Caption of the submit button on [[Special:AbuseFilter/test]]',
-	'abusefilter-test-load' => 'Text on a button, and referred to in {{msg-mw|abusefilter-test-intro}}
-{{Identical|Load}}',
-	'abusefilter-test-syntaxerr' => '"Check Syntax" is the same as {{msg-mw|abusefilter-edit-check}}.',
-	'abusefilter-examine-user' => '{{Identical|User}}',
-	'abusefilter-examine-submit' => '{{Identical|Search}}',
-	'abusefilter-topnav-home' => '{{Identical|Home}}',
-	'abusefilter-log-entry-modify' => '* $1 is a link to the filter
-* $2 is a link to the filter change details',
-	'abusefilter-diff-title' => 'Similar to {{msg-mw|Difference}}',
-	'abusefilter-diff-version' => 'Message is used in two scenarios.
-* $1 is new link or old link. Link description is a time stamp
-* $2 is new user link or old user link. Link description is a user name',
-	'abusefilter-diff-info' => "Header for the box containing the basic information about a user account, displayed on the 'user profile' tab of the [[Special:Preferences|user preferences]] special page.",
-	'abusefilter-import-intro' => "Do not ''translate'' <nowiki>{{int:abusefilter-edit-export}}</nowiki>, <nowiki>{{int:abusefilter-tools-subtitle}}</nowiki>, and <nowiki>{{int:abusefilter-import-submit}}</nowiki> unless you absolute must substitute any of them.",
-);
-
-/** Faeag Rotuma (Faeag Rotuma)
- * @author Jose77
- */
-$messages['rtm'] = array(
-	'abusefilter-list-edit' => "A'tū'ạki",
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'abusefilter-log-search-submit' => 'Kumi',
-);
-
-/** Moroccan Spoken Arabic (Maġribi)
- * @author زكريا
- */
-$messages['ary'] = array(
-	'abusefilter-log-search-submit' => 'bheṫ',
-	'abusefilter-log-hide' => 'ĥbbi wlla byyen',
 );
 
 /** Afrikaans (Afrikaans)
@@ -1775,6 +1325,14 @@ $messages['arc'] = array(
 	'abusefilter-diff-info' => 'ܝܕ̈ܥܬܐ ܪ̈ܫܝܬܐ',
 	'abusefilter-diff-pattern' => 'ܬܢܘ̈ܝ ܕܡܨܦܝܢܝܬܐ',
 	'abusefilter-import-submit' => 'ܡܥܠܢܘܬܐ ܕܓܠܝܬ̈ܐ',
+);
+
+/** Moroccan Spoken Arabic (Maġribi)
+ * @author زكريا
+ */
+$messages['ary'] = array(
+	'abusefilter-log-search-submit' => 'bheṫ',
+	'abusefilter-log-hide' => 'ĥbbi wlla byyen',
 );
 
 /** Egyptian Spoken Arabic (مصرى)
@@ -8266,7 +7824,11 @@ Kopiu de la tekstujo kiu aperas, kaj gluu ĝin en ĉi tiun tekstujon, kaj klaku 
  */
 $messages['es'] = array(
 	'abusefilter-desc' => 'Aplicar automáticamente heurísticas para ediciones',
-	'abusefilter' => 'Configuración del filtro antiabusos',
+	'abusefilter' => "'''Atención''': Esta acción ha sido automáticamente identificada como dañina.
+Las ediciones no constructivas serán revertidas rápidamente y
+la repetición de dichas acciones tendrá como consecuencia que su cuenta o dirección IP sean bloqueados.
+Si cree que esta edición es constructiva, puede pulsar de nuevo el botón grabar de nuevo para confirmarlo.
+Una breve explicación acerca de la regla del filtro antiabusos que usted ha disparado es: $1",
 	'abuselog' => 'Registro del filtro antiabusos',
 	'abusefilter-intro' => 'Bienvenido a la interfaz de administración del filtro de ediciones.
 El filtro de ediciones es un mecanismo de software automatizado que aplica heurística a todas las acciones.
@@ -8303,8 +7865,8 @@ Descripción de la regla disparada: $1',
 	'right-abusefilter-modify-restricted' => 'Modificar filtros antiabuso con acciones restringidas',
 	'right-abusefilter-revert' => 'Revertir todos los cambios realizados por un determinado filtro antiabusos',
 	'right-abusefilter-view-private' => 'Ver filtros antiabuso marcados como privados',
-	'right-abusefilter-hide-log' => 'Ocultar entradas en el registro del filtro antiabusos',
-	'right-abusefilter-hidden-log' => 'Ver entradas ocultas en el registro del filtro antiabusos',
+	'right-abusefilter-hide-log' => 'Ocultar entradas en el registro de abusos',
+	'right-abusefilter-hidden-log' => 'Ver entradas ocultas en el registro de abusos',
 	'action-abusefilter-modify' => 'modificar los filtros antiabuso',
 	'action-abusefilter-view' => 'ver los filtros antiabuso',
 	'action-abusefilter-log' => 'ver registro del filtro antiabusos',
@@ -8313,7 +7875,7 @@ Descripción de la regla disparada: $1',
 	'action-abusefilter-modify-restricted' => 'modificar filtros de abuso con acciones restringidas',
 	'action-abusefilter-revert' => 'revertir todos los cambios de un filtro de abuso dado',
 	'action-abusefilter-view-private' => 'ver filtros antiabuso marcados como privados',
-	'abusefilter-log' => 'Registro del filtro antiabusos',
+	'abusefilter-log' => 'mostró "[[$1]]"',
 	'abusefilter-log-summary' => 'Este registro muestra una lista de todas las acciones detectadas por los filtros.',
 	'abusefilter-log-search' => 'Buscar en el registro de abusos',
 	'abusefilter-log-search-user' => 'Usuario:',
@@ -8341,12 +7903,12 @@ Descripción del filtro: $7 ($8)',
 	'abusefilter-log-linkoncontribs' => 'registro del filtro antiabusos',
 	'abusefilter-log-linkoncontribs-text' => 'Registro del filtro antiabusos para este usuario',
 	'abusefilter-log-hidden' => '(entrada oculta)',
-	'abusefilter-log-hide' => 'ocultar o desocultar',
+	'abusefilter-log-hide' => 'ajustar visibilidad',
 	'abusefilter-log-cannot-see-details' => 'No tiene permiso para ver los detalles de esta entrada.',
-	'abusefilter-log-details-hidden' => 'No puede ver los detalles de esta entrada porque ésta es privada.',
+	'abusefilter-log-details-hidden' => 'No puede ver los detalles de esta entrada porque está oculta al público.',
 	'abusefilter-log-hide-legend' => 'Ocultar entrada del registro',
 	'abusefilter-log-hide-id' => 'ID de la entrada del registro:',
-	'abusefilter-log-hide-hidden' => 'Ocultar esta entrada de la vista pública',
+	'abusefilter-log-hide-hidden' => 'Ocultar esta entrada al público',
 	'abusefilter-log-hide-reason' => 'Motivo:',
 	'abusefilter-log-hide-forbidden' => 'No tiene permiso para ocultar entradas del registro de abusos',
 	'abusefilter-logentry-suppress' => 'ocultó "[[$1]]"',
@@ -10109,7 +9671,7 @@ Reglu frágreiðing: $1',
  */
 $messages['fr'] = array(
 	'abusefilter-desc' => 'Applique des heuristiques automatiques aux modifications',
-	'abusefilter' => 'Configuration du filtre antiabus',
+	'abusefilter' => 'Permet aux utilisateurs privilégiés de ne pas être bloqués par les filtres anti-abus (AbuseFilter)',
 	'abuselog' => 'Journal des filtres antiabus',
 	'abusefilter-intro' => 'Bienvenue dans l’interface de gestion des filtres antiabus.
 Le filtre antiabus est un mécanisme logiciel automatisé qui permet d’appliquer des heuristiques prédéfinies à toutes les actions.
@@ -10376,7 +9938,7 @@ Les balises doivent être courtes et ne pas contenir de caractères spéciaux.',
 	'abusefilter-edit-builder-vars-user-age' => 'Âge du compte utilisateur',
 	'abusefilter-edit-builder-vars-user-name' => 'Nom du compte utilisateur',
 	'abusefilter-edit-builder-vars-user-groups' => 'Groupes (y compris implicites) dont l’utilisateur est membre',
-	'abusefilter-edit-builder-vars-user-emailconfirm' => 'Temps depuis la confirmation de l’adresse courriel',
+	'abusefilter-edit-builder-vars-user-emailconfirm' => 'Temps depuis la confirmation de l’adresse e-mail',
 	'abusefilter-edit-builder-vars-recent-contributors' => 'Les dix derniers contributeurs de la page',
 	'abusefilter-edit-builder-vars-all-links' => 'Tous les liens externes dans le nouveau texte',
 	'abusefilter-edit-builder-vars-added-links' => 'Tous les liens externes ajoutés dans la modification',
@@ -15428,7 +14990,7 @@ Til þess að prófa síu sem til er fyrir, settu auðkenni hennar í reitinn h�
  */
 $messages['it'] = array(
 	'abusefilter-desc' => "Applica un'euristica automatica alle modifiche.",
-	'abusefilter' => 'Configurazione del filtro anti abusi',
+	'abusefilter' => '[[Special:Tags|Etichette]] da aggiungere (una per riga):',
 	'abuselog' => 'Registro del filtro anti abusi',
 	'abusefilter-intro' => "Benvenuti nell'interfaccia di gestione del filtro anti abusi.
 Il filtro anti abusi è un sistema automatizzato per l'applicazione di euristiche automatiche a tutte le azioni.
@@ -15599,7 +15161,7 @@ Il suo tempo medio di esecuzione è di $4 ms, e impiega $5 {{PLURAL:$5|condizion
 	'abusefilter-edit-warn-actions' => 'Azioni:',
 	'abusefilter-edit-warn-preview' => 'Anteprima messaggio selezionato',
 	'abusefilter-edit-warn-edit' => 'Crea o modifica il messaggio selezionato',
-	'abusefilter-edit-tag-tag' => 'Etichette da aggiungere (una per riga):',
+	'abusefilter-edit-tag-tag' => '[[Special:Tags|Etichette]] da aggiungere (una per riga):',
 	'abusefilter-edit-denied' => 'I dettagli di questo filtro non sono accessibili in quanto nascosti al pubblico.',
 	'abusefilter-edit-main' => 'Parametri del filtro',
 	'abusefilter-edit-done-subtitle' => 'Filtro modificato',
@@ -22494,6 +22056,13 @@ $messages['ne'] = array(
 	'abusefilter-import-submit' => 'आँकड़ा ल्याउने',
 );
 
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'abusefilter-log-search-submit' => 'Kumi',
+);
+
 /** Dutch (Nederlands)
  * @author Annabel
  * @author GerardM
@@ -23347,6 +22916,10 @@ For utførlege detaljar, sjå [[Special:AbuseFilter/history|lista]] over dei sis
 På kjeldewikien trykkjer du på «{{int:abusefilter-edit-export}}» under «{{int:abusefilter-tools-subtitle}}» på redigeringsgrensesnittet.
 Kopier frå tekstboksen som dukkar opp og lim det inn i tekstboksen her. Trykk so på «{{int:abusefilter-import-submit}}».',
 	'abusefilter-import-submit' => 'Importer data',
+);
+
+$messages['no'] = array(
+	'abusefilter' => 'Uavhengig om endringen var gjort gjennom en tor utgangsnode',
 );
 
 /** Northern Sotho (Sesotho sa Leboa)
@@ -26776,6 +26349,13 @@ Pè avè cchiù dettaglie, vide [[Special:AbuseFilter/history|'a liste]] de le c
 Sus ad \'a wiki de origgene, cazzà "{{int:abusefilter-edit-export}}" sutte "{{int:abusefilter-tools-subtitle}}" sus a le \'nderfazze de le cangiaminde.
 Copià da \'a caselle de teste ce vide, e \'ngolle jidde sus a quiste cambe de teste, cchiù nnande cazze "{{int:abusefilter-import-submit}}".',
 	'abusefilter-import-submit' => "'Mborte date",
+);
+
+/** Faeag Rotuma (Faeag Rotuma)
+ * @author Jose77
+ */
+$messages['rtm'] = array(
+	'abusefilter-list-edit' => "A'tū'ạki",
 );
 
 /** Russian (Русский)
@@ -36101,4 +35681,3 @@ $messages['zh-tw'] = array(
 	'abusefilter-edit-builder-vars-movedfrom-id' => '要移動的源頁面頁面ID',
 	'abusefilter-edit-builder-vars-movedfrom-ns' => '要移動的源名字空間',
 );
-

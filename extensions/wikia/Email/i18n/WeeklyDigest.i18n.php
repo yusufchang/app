@@ -6,11 +6,6 @@ $messages['en'] = array(
 	'emailext-weeklydigest-summary' => 'Since your last visit, Wikia Community members have made improvements to pages that you follow.',
 );
 
-$messages['qqq'] = array(
-	'emailext-weeklydigest-subject' => 'Subject line Weekly Digest email. This email includes links to pages the user is following across Wikia which have been edited in the last week',
-	'emailext-weeklydigest-summary' => 'Line telling the user that the links below are for pages which they follow and have been edited since their last visit to the page',
-);
-
 $messages['de'] = array(
 	'emailext-weeklydigest-subject' => 'Hier kannst du sehen, welche Neuigkeiten es diese Woche auf deinen Lieblingsseiten bei Wikia gegeben hat.',
 	'emailext-weeklydigest-summary' => 'Seit deinem letzten Besuch wurden Seiten, denen du folgst, von Mitglieder der Wikia-Community verbessert.',
@@ -61,8 +56,17 @@ $messages['zh-hans'] = array(
 	'emailext-weeklydigest-summary' => '在您上次访问之后，Wikia社区成员对您关注的页面做了改进。',
 );
 
-$messages['zh-tw'] = array(
-	'emailext-weeklydigest-subject' => '看看維基頁面本周的新内容',
-	'emailext-weeklydigest-summary' => '自你上次訪問之後，Wikia社區成員對你關注的頁面做了改進。',
+$messages['zh-hant'] = array(
+	'emailext-weeklydigest-subject' => '看看您最喜歡的Wikia頁面上本週有什麼新内容',
+	'emailext-weeklydigest-summary' => '自您上次訪問之後，Wikia社區成員對你關注的頁面做了改進。',
 );
 
+$messages['zh-hk'] = array(
+	'emailext-weeklydigest-subject' => '看看您最喜歡的Wikia頁面上本週有什麼新内容',
+	'emailext-weeklydigest-summary' => '自您上次訪問之後，Wikia社區成員對你關注的頁面做了改進。',
+);
+
+$messages['zh-tw'] = array(
+	'emailext-weeklydigest-subject' => '看看您最喜歡的Wikia頁面上本週有什麼新内容',
+	'emailext-weeklydigest-summary' => '自你上次訪問之後，Wikia社區成員對你關注的頁面做了改進。',
+);

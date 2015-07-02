@@ -14,19 +14,6 @@ $messages['en'] = array(
 	'emailext-wallmessage-recent-messages' => '[$1 All recent messages on $2]',
 );
 
-$messages['qqq'] = array(
-	'emailext-wallmessage-owned-subject' => 'Email subject when another user wrote a new message on your wall. $1 is the name of the user who posted the message.',
-	'emailext-wallmessage-following-subject' => "Email subject when a user wrote a new message on another user's wall, and you are following the thread. $1 is the name of the user who posted the message, $2 is the wall owner (user).",
-	'emailext-wallmessage-owned-summary' => 'Text describing that another user wrote a new message on your wall. $1 is url to message author user profile page, $2 is the name of the user who posted the message',
-	'emailext-wallmessage-following-summary' => "Text describing that a user wrote a new message on another user's wall. $1 is url to message author user profile page, $2 is the name of the user who posted the message, $3 is the wall owner (user).",
-	'emailext-wallmessage-anon-owned-subject' => 'Email subject when an anonymous user wrote a new message on your wall.',
-	'emailext-wallmessage-anon-following-subject' => "Email subject when an anonymous user wrote a new message on another user's wall, and you are following the thread. $1 is the wall owner (user).",
-	'emailext-wallmessage-anon-owned-summary' => 'Text describing that an anonymous user wrote a new message on your wall.',
-	'emailext-wallmessage-anon-following-summary' => "Text describing that an anonymous user wrote a new message on another user's wall. $1 is the wall owner (user).",
-	'emailext-wallmessage-full-conversation' => 'Text for button that, when clicked, navigates to the full message wall conversation',
-	'emailext-wallmessage-recent-messages' => "Call to action to view all recent messages on the user's message wall. $1 -> link to message wall, $2 message wall name",
-);
-
 $messages['de'] = array(
 	'emailext-wallmessage-owned-subject' => '$1 hat dir auf der Seite {{SITENAME}} eine neue Nachricht geschickt.',
 	'emailext-wallmessage-following-subject' => '$1 hat $2 auf der Seite {{SITENAME}} eine neue Nachricht geschickt.',
@@ -92,6 +79,19 @@ $messages['ja'] = array(
 	'emailext-wallmessage-anon-following-summary' => "'''ウィキアのファンが$1さんに{{SITENAME}}で新しいメッセージを投稿しました。'''",
 );
 
+$messages['ko'] = array(
+	'emailext-wallmessage-owned-subject' => '$1 님이 {{SITENAME}}에서 귀하에게 메시지를 남겼습니다',
+	'emailext-wallmessage-following-subject' => '$1 님이 {{SITENAME}}에서 $2 님에게 메시지를 남겼습니다',
+	'emailext-wallmessage-owned-summary' => "'''[$1 $2] 님이 [{{SERVER}} {{SITENAME}}]에서 귀하에게 메시지를 남겼습니다.'''",
+	'emailext-wallmessage-following-summary' => "'''[$1 $2] 님이 [{{SERVER}} {{SITENAME}}]에서 $3 님에게 메시지를 남겼습니다.'''",
+	'emailext-wallmessage-anon-owned-subject' => '익명 사용자가 {{SITENAME}}에서 귀하에게 메시지를 남겼습니다',
+	'emailext-wallmessage-anon-following-subject' => '익명 사용자가 {{SITENAME}}의 $1 님에게 메시지를 남겼습니다',
+	'emailext-wallmessage-anon-owned-summary' => "'''익명 사용자가 {{SITENAME}}에서 귀하에게 메시지를 남겼습니다.'''",
+	'emailext-wallmessage-anon-following-summary' => "'''익명 사용자가 {{SITENAME}}의 $1 님에게 메시지를 남겼습니다.'''",
+	'emailext-wallmessage-full-conversation' => '대화 내역 보기',
+	'emailext-wallmessage-recent-messages' => '[$1 $2의 모든 최근 메시지 보기]',
+);
+
 $messages['nl'] = array(
 	'emailext-wallmessage-owned-subject' => '$1 wrote you a new message on {{SITENAME}}',
 	'emailext-wallmessage-following-subject' => '$1 wrote $2 a new message on {{SITENAME}}',
@@ -106,16 +106,16 @@ $messages['nl'] = array(
 );
 
 $messages['pl'] = array(
-	'emailext-wallmessage-owned-subject' => '$1 napisał do ciebie nową wiadomość na {{SITENAME}}',
-	'emailext-wallmessage-following-subject' => '$1 napisał do $2 nową wiadomość na {{SITENAME}}',
-	'emailext-wallmessage-owned-summary' => "'''[$1 $2] napisał do ciebie nową wiadomość na [{{SERVER}} {{SITENAME}}]. Wspaniale!'''",
-	'emailext-wallmessage-following-summary' => "'''[$1 $2] napisał do $3 nową wiadomość na [{{SERVER}} {{SITENAME}}].'''",
+	'emailext-wallmessage-owned-subject' => '$1 {{GENDER:$1|napisał|napisała|napisał(a)}} do Ciebie nową wiadomość na {{SITENAME}}',
+	'emailext-wallmessage-following-subject' => '$1 {{GENDER:$1|napisał|napisała|napisał(a)}} do $2 nową wiadomość na {{SITENAME}}',
+	'emailext-wallmessage-owned-summary' => "'''[$1 $2] {{GENDER:$2|napisał|napisała|napisał(a)}} do Ciebie nową wiadomość na [{{SERVER}} {{SITENAME}}]. Wspaniale!'''",
+	'emailext-wallmessage-following-summary' => "'''[$1 $2] {{GENDER:$2|napisał|napisała|napisał(a)}} do $3 nową wiadomość na [{{SERVER}} {{SITENAME}}].'''",
 	'emailext-wallmessage-full-conversation' => 'Pełna rozmowa',
 	'emailext-wallmessage-recent-messages' => '[$1 Wszystkie najnowsze wiadomości na $2]',
-	'emailext-wallmessage-anon-owned-subject' => 'Fan portalu Wikia napisał do ciebie wiadomość na {{SITENAME}}',
-	'emailext-wallmessage-anon-following-subject' => 'Fan portalu Wikia napisał do $1 wiadomość na {{SITENAME}}',
-	'emailext-wallmessage-anon-owned-summary' => "'''Fan portalu Wikia napisał do ciebie wiadomość na {{SITENAME}}. Hurra!'''",
-	'emailext-wallmessage-anon-following-summary' => "'''Fan portalu Wikia napisał do $1 wiadomość na {{SITENAME}}.'''",
+	'emailext-wallmessage-anon-owned-subject' => 'Fan Wikii napisał do Ciebie wiadomość na {{SITENAME}}',
+	'emailext-wallmessage-anon-following-subject' => 'Fan Wikii napisał do $1 wiadomość na {{SITENAME}}',
+	'emailext-wallmessage-anon-owned-summary' => "'''Fan Wikii napisał do Ciebie wiadomość na {{SITENAME}}. Hurra!'''",
+	'emailext-wallmessage-anon-following-summary' => "'''Fan Wikii napisał do $1 wiadomość na {{SITENAME}}.'''",
 );
 
 $messages['pt'] = array(
@@ -138,10 +138,10 @@ $messages['ru'] = array(
 	'emailext-wallmessage-following-summary' => "'''[$1 $2] оставил(а) участнику $3 новое сообщение на [{{SERVER}} {{SITENAME}}].'''",
 	'emailext-wallmessage-full-conversation' => 'Обсуждение полностью',
 	'emailext-wallmessage-recent-messages' => '[$1 Все недавние сообщения на $2]',
-	'emailext-wallmessage-anon-owned-subject' => 'Фанат Викия оставил вам новое сообщение на {{SITENAME}}',
-	'emailext-wallmessage-anon-following-subject' => 'Фанат Викия оставил участнику $1 новое сообщение на {{SITENAME}}',
-	'emailext-wallmessage-anon-owned-summary' => "'''Фанат Викия оставил вам новое сообщение на {{SITENAME}}. Вот так удача!'''",
-	'emailext-wallmessage-anon-following-summary' => "'''Фанат Викия оставил участнику $1 новое сообщение на {{SITENAME}}.'''",
+	'emailext-wallmessage-anon-owned-subject' => 'Анонимный участник оставил вам новое сообщение на {{SITENAME}}',
+	'emailext-wallmessage-anon-following-subject' => 'Анонимный участник оставил новое сообщение участнику $1 на {{SITENAME}}',
+	'emailext-wallmessage-anon-owned-summary' => "'''Анонимный участник оставил вам новое сообщение на {{SITENAME}}.'''",
+	'emailext-wallmessage-anon-following-summary' => "'''Анонимный участник оставил новое сообщение участнику $1 на {{SITENAME}}.'''",
 );
 
 $messages['zh-hans'] = array(
@@ -157,6 +157,30 @@ $messages['zh-hans'] = array(
 	'emailext-wallmessage-anon-following-summary' => "'''有个Wikia粉丝在{{SITENAME}}上给$1留言了。'''",
 );
 
+$messages['zh-hant'] = array(
+	'emailext-wallmessage-owned-subject' => '$1在{{SITENAME}}上給您留言了',
+	'emailext-wallmessage-following-subject' => '$1在{{SITENAME}}上給$2留言了',
+	'emailext-wallmessage-owned-summary' => "'''[$1 $2]在[{{SERVER}} {{SITENAME}}]上給您留言了。真好！'''",
+	'emailext-wallmessage-following-summary' => "'''[$1 $2]在[{{SERVER}} {{SITENAME}}]給$3留言了。'''",
+	'emailext-wallmessage-anon-owned-subject' => '有個Wikia粉絲在{{SITENAME}}上給你留言了。',
+	'emailext-wallmessage-anon-following-subject' => '有個Wikia粉絲在{{SITENAME}}上給$1留言了。',
+	'emailext-wallmessage-anon-owned-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給你留言了。好棒哦！'''",
+	'emailext-wallmessage-anon-following-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給$1留言了。'''",
+	'emailext-wallmessage-full-conversation' => '完整對話',
+);
+
+$messages['zh-hk'] = array(
+	'emailext-wallmessage-owned-subject' => '$1在{{SITENAME}}上給您留言了',
+	'emailext-wallmessage-following-subject' => '$1在{{SITENAME}}上給$2留言了',
+	'emailext-wallmessage-owned-summary' => "'''[$1 $2]在[{{SERVER}} {{SITENAME}}]上給您留言了。真好！'''",
+	'emailext-wallmessage-following-summary' => "'''[$1 $2]在[{{SERVER}} {{SITENAME}}]給$3留言了。'''",
+	'emailext-wallmessage-anon-owned-subject' => '有個Wikia粉絲在{{SITENAME}}上給你留言了。',
+	'emailext-wallmessage-anon-following-subject' => '有個Wikia粉絲在{{SITENAME}}上給$1留言了。',
+	'emailext-wallmessage-anon-owned-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給你留言了。好棒哦！'''",
+	'emailext-wallmessage-anon-following-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給$1留言了。'''",
+	'emailext-wallmessage-full-conversation' => '完整對話',
+);
+
 $messages['zh-tw'] = array(
 	'emailext-wallmessage-owned-subject' => '$1在{{SITENAME}}上給你留言了',
 	'emailext-wallmessage-following-subject' => '$1在{{SITENAME}}上給$2留言了',
@@ -166,7 +190,6 @@ $messages['zh-tw'] = array(
 	'emailext-wallmessage-recent-messages' => '[$1$2上最近的所有留言]',
 	'emailext-wallmessage-anon-owned-subject' => '有個Wikia粉絲在{{SITENAME}}上給你留言了。',
 	'emailext-wallmessage-anon-following-subject' => '有個Wikia粉絲在{{SITENAME}}上給$1留言了。',
-	'emailext-wallmessage-anon-owned-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給你留言了。好羡慕哦！'''",
+	'emailext-wallmessage-anon-owned-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給你留言了。好棒哦！'''",
 	'emailext-wallmessage-anon-following-summary' => "'''有個Wikia粉絲在{{SITENAME}}上給$1留言了。'''",
 );
-

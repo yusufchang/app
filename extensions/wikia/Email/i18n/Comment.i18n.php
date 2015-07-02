@@ -5,14 +5,7 @@ $messages['en'] = array(
 	'emailext-articlecomment-summary' => 'People are talking about $1 on {{SITENAME}}!',
 	'emailext-blogcomment-summary' => 'People are talking about the $1 post on {{SITENAME}}!',
 	'emailext-comment-link-label' => 'See this comment',
-	'emailext-comment-view-all' => '[$1 View all comments]'
-);
-
-$messages['qqq'] = array(
-	'emailext-articlecomment-summary' => 'Information about an article comment comment.  $1 is the article name',
-	'emailext-blogcomment-summary' => 'Information about a blog post comment comment.  $1 is the blog post name',
-	'emailext-comment-link-label' => 'Label text for a button a user can click to view the comment on the site',
-	'emailext-comment-view-all' => 'A link to the comment section on the blog post or article, plus the link label.  $1 is the link itself, and must remain at the beginning of the string with a space after it.'
+	'emailext-comment-view-all' => '[$1 View all comments]',
 );
 
 $messages['de'] = array(
@@ -50,6 +43,13 @@ $messages['ja'] = array(
 	'emailext-comment-view-all' => '[$1 すべてのコメントを表示]',
 );
 
+$messages['ko'] = array(
+	'emailext-articlecomment-summary' => '사람들이 {{SITENAME}}의 $1 문서에 대한 얘기를 나누고 있습니다!',
+	'emailext-blogcomment-summary' => '사람들이 {{SITENAME}}의 $1 글에 대한 얘기를 나누고 있습니다!',
+	'emailext-comment-link-label' => '해당 댓글 보기',
+	'emailext-comment-view-all' => '[$1 모든 댓글 보기]',
+);
+
 $messages['nl'] = array(
 	'emailext-articlecomment-summary' => 'People are talking about $1 on {{SITENAME}}!',
 	'emailext-blogcomment-summary' => 'People are talking about the $1 post on {{SITENAME}}!',
@@ -78,17 +78,34 @@ $messages['ru'] = array(
 	'emailext-comment-view-all' => '[$1 Просмотреть все комментарии]',
 );
 
+$messages['zh'] = array(
+	'emailext-articlecomment-summary' => '有人在讨论发布在{{SITENAME}}上标题为$1的文章！',
+);
+
 $messages['zh-hans'] = array(
-	'emailext-articlecomment-summary' => '大家都在谈论发布在{{SITENAME}}上标题为$1的文章！',
+	'emailext-articlecomment-summary' => '有人在讨论发布在{{SITENAME}}上标题为$1的文章！',
 	'emailext-blogcomment-summary' => '大家都在谈论发布在{{SITENAME}}上名为$1的博客！',
 	'emailext-comment-link-label' => '查看评论',
 	'emailext-comment-view-all' => '[$1 查看所有评论]',
 );
 
-$messages['zh-tw'] = array(
-	'emailext-articlecomment-summary' => '大家都在談論發佈發佈在{{SITENAME}}上標題為$1的文章！',
-	'emailext-blogcomment-summary' => '大家都在談論發佈在{{SITENAME}}上名為$1的部落格！',
+$messages['zh-hant'] = array(
+	'emailext-articlecomment-summary' => '有人在討論發佈在{{SITENAME}}上標題為$1的文章！',
+	'emailext-blogcomment-summary' => '有人在討論{{SITENAME}}上名為$1的網誌！',
 	'emailext-comment-link-label' => '查看評論',
 	'emailext-comment-view-all' => '[$1 查看所有評論]',
 );
 
+$messages['zh-hk'] = array(
+	'emailext-articlecomment-summary' => '有人在討論發佈在{{SITENAME}}上標題為$1的文章！',
+	'emailext-blogcomment-summary' => '有人在討論{{SITENAME}}上名為$1的網誌！',
+	'emailext-comment-link-label' => '查看評論',
+	'emailext-comment-view-all' => '[$1 查看所有評論]',
+);
+
+$messages['zh-tw'] = array(
+	'emailext-articlecomment-summary' => '有人在討論發佈在{{SITENAME}}上標題為$1的文章！',
+	'emailext-blogcomment-summary' => '有人在討論{{SITENAME}}上名為$1的網誌！',
+	'emailext-comment-link-label' => '查看評論',
+	'emailext-comment-view-all' => '[$1 查看所有評論]',
+);

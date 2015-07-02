@@ -15,11 +15,9 @@ $messages['en'] = array(
 	'abtesting-future-used-ga-slots' => 'List of used GA slots in the future: $1',
 	'abtesting-future-used-ga-slots-tooltip' => 'This list will be updated ONLY when page is refreshed.',
 	'abtesting-checkbox-show-past-experiments' => 'Show past experiments',
-
 	'abtesting-heading-id' => 'ID',
 	'abtesting-heading-name' => 'Name',
 	'abtesting-heading-description' => 'Description',
-
 	'abtesting-heading-start-time' => 'Start Time (UTC)',
 	'abtesting-heading-end-time' => 'End Time (UTC)',
 	'abtesting-heading-ga-slot' => 'GA Slot',
@@ -35,48 +33,51 @@ $messages['en'] = array(
 	'abtesting-heading-control-group' => 'Control Group',
 	'abtesting-heading-ranges' => 'Ranges (0-99)',
 	'abtesting-heading-treatment-groups' => 'Treatment Groups',
-
 	'abtesting-create-experiment' => 'Create New Experiment',
 	'abtesting-add-experiment-title' => 'Add Experiment',
 	'abtesting-edit-experiment-title' => 'Edit Experiment',
 	'abtesting-add-treatment-group' => 'Add Treatment Group',
-
 	'abtesting-edit-button' => 'Edit',
 	'abtesting-save-button' => 'Save',
-
 	'abtesting-flag-set-short' => 'YES',
-
 	'abtesting-ranges-info' => '(0-99)',
 	'action-abtestpanel' => 'configure A/B tests',
 );
 
+$messages['fr'] = array(
+	'abtesting' => "L'extension A/B Testing est utilisée par Wikia pour tester l'effet qu'ont des fonctionnalités ou paramètres différents sur les utilisateurs",
+	'abtesting-desc' => "L'extension A/B Testing est utilisée par Wikia pour tester l'effet qu'ont des fonctionnalités ou paramètres différents sur les utilisateurs",
+);
 
-/**
- * qqq - Documentation for the messages.
- */
-$messages['qqq'] = array(
-	'abtesting' => 'Page title',
-	'abtesting-desc' => 'Description of the A/B Testing extension',
-	'abtesting-currently-used-ga-slots' => 'Label for currently used GA slots',
-	'abtesting-future-used-ga-slots' => 'Label for used GA slots in the future',
-
-	'abtesting-heading-id' => 'Label for the ID field',
-	'abtesting-heading-name' => 'Label for the Name field',
-	'abtesting-heading-description' => 'Label for the Description field',
-
-	'abtesting-heading-start-time' => 'Label for the experiment start time',
-	'abtesting-heading-end-time' => 'Label for the experiement end time',
-	'abtesting-heading-ga-slot' => 'Label for the GA Slot field',
+$messages['ja'] = array(
+	'abtesting' => 'A/B Testing',
+	'abtesting-heading-id' => 'ID',
+	'abtesting-heading-name' => 'Name',
+	'abtesting-heading-description' => 'Description',
+	'abtesting-heading-start-time' => '開始時間 (UTC)',
+	'abtesting-heading-end-time' => 'End Time (UTC)',
+	'abtesting-heading-ga-slot' => 'GA Slot',
+	'abtesting-heading-flag-ga_tracking' => 'GA',
+	'abtesting-heading-flag-dw_tracking' => 'DW',
+	'abtesting-heading-long-flag-ga_tracking' => 'GA tracking',
+	'abtesting-heading-long-flag-dw_tracking' => 'DW tracking',
 	'abtesting-heading-group' => 'Group',
-	'abtesting-heading-control-group' => 'Label for the control group pulldown',
+	'abtesting-heading-control-group' => 'Control Group',
 	'abtesting-heading-ranges' => 'Ranges (0-99)',
-	'abtesting-heading-treatment-groups' => 'Heading for the Treatment Groups section',
-
-	'abtesting-create-experiment' => 'Button for creating a new experiment',
+	'abtesting-heading-treatment-groups' => 'トリートメント　グループ',
 	'abtesting-add-experiment-title' => 'Add Experiment',
-	'abtesting-edit-experiment-title' => 'Edit Experiment',
-	'abtesting-add-treatment-group' => 'Button for adding a new treatment group',
+	'abtesting-edit-button' => 'Edit',
+	'abtesting-save-button' => 'Save',
+	'abtesting-flag-set-short' => 'YES',
+	'abtesting-ranges-info' => '(0-99)',
+);
 
-	'abtesting-edit-button' => 'Edit button',
-	'abtesting-save-button' => 'Save button',
+$messages['ko'] = array(
+	'abtesting' => '저장',
+	'abtesting-save-button' => '저장',
+);
+
+$messages['pl'] = array(
+	'abtesting' => 'Rozszerzenie A/B Testing jest używane przez Wikia do badania funkcji lub ustawień jakie posiadają aktywni użytkownicy',
+	'abtesting-desc' => 'Rozszerzenie A/B Testing jest używane przez Wikia do badania funkcji lub ustawień jakie posiadają aktywni użytkownicy',
 );

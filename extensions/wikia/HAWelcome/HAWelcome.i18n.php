@@ -6,10 +6,10 @@
 $messages = array();
 
 $messages['en'] = array(
-	"welcome-user" => "@latest",
-	"welcome-bot" => "@bot",
-	"welcome-enabled" => "page-user message-anon message-user",
-	"welcome-user-page" => "==About me==
+	'welcome-user' => '@latest',
+	'welcome-bot' => '@bot',
+	'welcome-enabled' => 'page-user message-anon message-user',
+	'welcome-user-page' => "==About me==
 
 ''This is your user page. Please edit this page to tell the community about yourself!''
 
@@ -22,72 +22,46 @@ $messages['en'] = array(
 * Add links to your favorite pages on the wiki here!
 * Favorite page #2
 * Favorite page #3",
-	"welcome-message-user" => "Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
+	'welcome-message-user' => 'Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
 
-Please leave a message on [[$2|my talk page]] if I can help with anything! $3",
-	"welcome-message-anon" => "Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
+Please leave a message on [[$2|my talk page]] if I can help with anything! $3',
+	'welcome-message-anon' => "Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
 
 '''[[Special:Userlogin|Please sign in and create a user name]]'''.
 It is an easy way to keep track of your contributions and helps you communicate with the rest of the community.
 
 Please leave a message on [[$2|my talk page]] if I can help with anything! $3",
-	"welcome-message-log" => "welcoming new contributor",
-	"welcome-message-user-staff" => "==Welcome==
+	'welcome-message-log' => 'welcoming new contributor',
+	'welcome-message-user-staff' => '==Welcome==
 
 Hi,
 
-Welcome to {{SITENAME}} and thank you for your edit to the [[:$1]] page. If you need help, start by checking out our [[Help:Contents|help pages]]. Visit [[w:c:community|Community Central]] to stay informed with our [[w:c:community:Blog:Wikia_Staff_Blog|staff blog]], ask questions on our [[w:c:community:Special:Forum|community forum]], participate in our [[w:c:community:Help:Webinars|webinar series]], or chat live with fellow Wikians. Happy editing! $3",
-	'welcome-message-anon-staff' => "==Welcome==
+Welcome to {{SITENAME}} and thank you for your edit to the [[:$1]] page. If you need help, start by checking out our [[Help:Contents|help pages]]. Visit [[w:c:community|Community Central]] to stay informed with our [[w:c:community:Blog:Wikia_Staff_Blog|staff blog]], ask questions on our [[w:c:community:Special:Forum|community forum]], participate in our [[w:c:community:Help:Webinars|webinar series]], or chat live with fellow Wikians. Happy editing! $3',
+	'welcome-message-anon-staff' => '==Welcome==
 
 Hi,
 
 Welcome to {{SITENAME}} and thank you for your edit to the [[:$1]] page. We encourage all contributors to [[Special:UserLogin|create a user name]], so you can keep track of your contributions, access more Wikia features and get to know the rest of the {{SITENAME}} community.
 
-If you need help, check out our [[Help:Contents|help pages]] first and then visit [[w:c:community|Community Central]] to learn more. Happy editing! $3",
-	'staffsig-text' => "[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|help forum]] | [[w:sblog|blog]])</small>",
-	'hawelcomeedit' => "HAWelcomeEdit",
+If you need help, check out our [[Help:Contents|help pages]] first and then visit [[w:c:community|Community Central]] to learn more. Happy editing! $3',
+	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|help forum]] | [[w:sblog|blog]])</small>',
+	'hawelcomeedit' => 'HAWelcomeEdit',
+	'welcome-message-wall-user' => 'Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
 
-	'welcome-message-wall-user' => "Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
+Please leave me a message if I can help with anything!',
+	'welcome-message-wall-user-staff' => 'Hi,
 
-Please leave me a message if I can help with anything!",
-	'welcome-message-wall-user-staff' => "Hi,
-
-Welcome to {{SITENAME}} and thank you for your edit to the [[:$1]] page. If you need help, start by checking out our [[Help:Contents|help pages]]. Visit [[w:c:community|Community Central]] to stay informed with our [[w:c:community:Blog:Wikia_Staff_Blog|staff blog]], ask questions on our [[w:c:community:Special:Forum|community forum]], participate in our [[w:c:community:Help:Webinars|webinar series]], or chat live with fellow Wikians. Happy editing!",
+Welcome to {{SITENAME}} and thank you for your edit to the [[:$1]] page. If you need help, start by checking out our [[Help:Contents|help pages]]. Visit [[w:c:community|Community Central]] to stay informed with our [[w:c:community:Blog:Wikia_Staff_Blog|staff blog]], ask questions on our [[w:c:community:Special:Forum|community forum]], participate in our [[w:c:community:Help:Webinars|webinar series]], or chat live with fellow Wikians. Happy editing!',
 	'welcome-message-wall-anon' => "Hi, welcome to {{SITENAME}}! Thanks for your edit to the [[:$1]] page.
 
 '''[[Special:Userlogin|Please sign in and create a user name]]'''. It's an easy way to keep track of your contributions and helps you communicate with the rest of the community.
 
 Please leave me a message if I can help with anything!",
-	'welcome-message-wall-anon-staff' => "Hi,
+	'welcome-message-wall-anon-staff' => 'Hi,
 Welcome to {{SITENAME}} and thank you for your edit to the [[:$1]] page. We encourage all contributors to [[Special:UserLogin|create a user name]], so you can keep track of your contributions, access more Wikia features and get to know the rest of the {{SITENAME}} community.
 
-If you need help, check out our [[Help:Contents|help pages]] first and then visit [[w:c:community|Community Central]] to learn more. Happy editing!",
+If you need help, check out our [[Help:Contents|help pages]] first and then visit [[w:c:community|Community Central]] to learn more. Happy editing!',
 	'welcome-description' => 'Sends a welcome message to users after their first edits',
-);
-
-/** Message documentation (Message documentation)
- * @author Josep Maria 15.
- * @author Lloffiwr
- * @author PtM
- * @author Shirayuki
- * @author TK-999
- */
-$messages['qqq'] = array(
-	'welcome-user-page' => 'Parameters:
-* $1 - the name of the user whose page the base layout is being added to',
-	'welcome-message-user-staff' => 'Please translate the link texts but leave the link addresses untranslated. Wikia administrators will localise the link addresses when the localized hubs of the wikis are available.',
-	'welcome-message-anon-staff' => 'Please translate the link texts but leave the link addresses untranslated. Wikia administrators will localise the link addresses when the localized hubs of the wikis are available.',
-	'welcome-message-wall-user' => '$1 is the name of the page the user edited that tirggered the welcome',
-	'welcome-message-wall-user-staff' => '$1 is the name of the page edited to trigger the welcome',
-	'welcome-message-wall-anon' => '$1 is the name of the page the user edited that tirggered the welcome.
-
-$2 is the talk page of the last admin who edited in the wiki.
-
-$3 is the name of the last admin who edited in the wiki.',
-	'welcome-message-wall-anon-staff' => '$1 is the name of the page the user edited that triggered the welcome.
-
-Please translate the link texts but leave the link addresses untranslated. Wikia administrators will localise the link addresses when the localized hubs of the wikis are available.',
-	'welcome-description' => 'The description of the extension displayed on the Special:Version page.',
 );
 
 /** Arabic (العربية)
@@ -183,14 +157,14 @@ Arabat kaout aon kas din ur gemenadenn war [[$2|ma fajenn kaozeadenn]] ma c'hell
 
 Demat, Degemer mat war {{SITENAME}} Ho trugarekaat a reomp da vezañ kemmet ar bajenn [[:$1]].
 
-M'ho peus ezhomm skoazell ha ma n'eus merour ebet amañ e c'hallit gweladenniñ [[wikia:Forum:Community Central Forum|foromoù Wiki Kreiz ar Gumuniezh]] $3", # Fuzzy
+M'ho peus ezhomm skoazell ha ma n'eus merour ebet amañ e c'hallit gweladenniñ [[wikia:Forum:Community Central Forum|foromoù Wiki Kreiz ar Gumuniezh]] $3",
 	'welcome-message-anon-staff' => "==Degemer mat ! ==
 
 Demat, Degemer mat war {{SITENAME}}; Trugarez da vezañ kemmet ar bajenn [[:$1]].
 
 '''[[Special:Userlogin|Please sign in and create a user name]]'''. Un doare aes eo evit mirout roudoù eus ho labourioù hag evel-se e c'hallot mont e darempred gant ar peurrest eus ar gumuniezh.
 
-M'ho peus ezhomm skoazell ha ma n'eus merour ebet amañ e c'hallit gweladenniñ ar [[wikia:Forum:Community Central Forum|foromoù Kreiz ar Gumuniezh]] $3", # Fuzzy
+M'ho peus ezhomm skoazell ha ma n'eus merour ebet amañ e c'hallit gweladenniñ ar [[wikia:Forum:Community Central Forum|foromoù Kreiz ar Gumuniezh]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|forom skoazellañ]] | [[w:sblog|blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => "Demat, Degemer mat war {{SITENAME}} ! Trugarez da vezañ kemmet [[:$1]].
@@ -277,7 +251,7 @@ $messages['cs'] = array(
 
 * Přidejte sem odkazy na své oblíbené stránky
 * Odkaz #2
-* Odkaz #3", # Fuzzy
+* Odkaz #3",
 	'welcome-message-user' => 'Vítejte na {{SITENAME}}! Děkujeme za Vaší úpravu stránky [[:$1]].
 
 Prosím nechejte vzkaz na [[$2|mé diskuzní stránce]], pokud potřebujete s čímkoliv pomoci! $3',
@@ -293,7 +267,7 @@ Prosím nechejte vzkaz na [[$2|mé diskuzní stránce]], pokud potřebujete s č
 Vítejte na {{SITENAME}}! Děkujeme za Vaší úpravu stránky [[:$1]].
 
 Pokud potřebujete pomoci a nejsou zde žádní administrátoři, můžete navštívit [[wikia:Forum:Community Central Forum|fórum na Community
-Central Wiki]] $3', # Fuzzy
+Central Wiki]] $3',
 	'welcome-message-anon-staff' => "==Vítejte==
 
 Vítejte na {{SITENAME}}! Děkujeme za Vaší úpravu stránky [[:$1]].
@@ -302,8 +276,8 @@ Vítejte na {{SITENAME}}! Děkujeme za Vaší úpravu stránky [[:$1]].
 Je to snadný způsob, jak sledovat své příspěvky a komunikovat s komunitou.
 
 Pokud potřebujete pomoci a nejsou zde žádní administrátoři, můžete navštívit [[wikia:Forum:Community Central Forum|fórum na Community
-Central Wiki]] $3", # Fuzzy
-	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|fórum podpory]] | [[w:sblog|blog]])</small>', # Fuzzy
+Central Wiki]] $3",
+	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|fórum podpory]] | [[w:sblog|blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 );
 
@@ -317,47 +291,57 @@ Central Wiki]] $3", # Fuzzy
 $messages['de'] = array(
 	'welcome-user-page' => "== Über mich ==
 
-''Dies ist deine Benutzerseite. Hier kannst du anderen etwas über dich verraten!''
+''Das ist deine Benutzerseite. Hier kannst du den anderen ein paar Informationen über dich verraten!''
 
 == Meine Beiträge ==
 
-* [[Special:Contributions/$1|Benutzerbeiträge]]
+* [[Special:Contributions/{{PAGENAME}}|Benutzerbeiträge]]
 
 == Meine beliebtesten Seiten ==
 
-* Hier kannst du Links zu deinen beliebtesten Seiten im Wiki hinzufügen!
-* Link auf zweite beliebte Seite
-* Link auf dritte beliebte Seite",
-	'welcome-message-user' => 'Hi, {{SITENAME}} freut sich, dass du zu uns gestoßen bist! Danke für deine Bearbeitung auf der Seite [[:$1]].
+* Hier kannst du Links zu deinen beliebtesten Artikeln im Wiki hinzufügen!
+* Link auf Seite #2
+* Link auf Seite #3",
+	'welcome-message-user' => '==Willkommen==
 
-Falls du irgendwelche Hilfe brauchen solltest, kannst du mir gerne eine Nachricht auf [[$2|meiner Diskussionsseite]] hinterlassen! $3',
-	'welcome-message-anon' => "Hi, Willkommen bei {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
+Hi, Willkommen bei {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
 
-'''[[Special:Userlogin|Bitte lege dir ein Benutzerkonto an]]'''. So kannst du ganz einfach deine Beiträge im Überblick behalten und dich besser mit dem Rest der Gemeinschaft verständigen.
+Wenn du Hilfe brauchst, und kein Admin von hier in der Nähe ist, möchtest du vielleicht das [[w:c:de.community:Forum:Übersicht|deutschsprachige Wikia-Forum]] besuchen. Falls du an Neuigkeiten rund um Wikia interessiert bist, wirf doch einen Blick in das [[w:c:de.community:Blog:Wikia_Deutschland_News|Wikia Deutschland Blog]]. $3',
+	'welcome-message-anon' => "Hi, {{SITENAME}} freut sich, dass du zu uns gestoßen bist! Danke für deine Bearbeitung auf der Seite [[:$1]].
 
-Falls du irgendwelche Hilfe brauchst, kannst du mir gerne eine Nachricht auf [[$2|meiner Diskussionsseite]] hinterlassen! $3",
+'''[[Special:Userlogin|Bitte lege dir ein Benutzerkonto an]]'''. So kannst du ganz einfach deine Beiträge im Überblick behalten und dich besser mit dem Rest der Community verständigen.
+
+Falls du irgendwelche Hilfe brauchen solltest, kannst du mir gerne eine Nachricht auf [[$2|meiner Diskussionsseite]] hinterlassen! $3
+
+----
+PS: Mit diesem Benutzerkonto kannst du in jedem Wiki bei [[w:c:de|Wikia]] aktiv sein - du brauchst dich nicht nochmal neu anmelden.",
 	'welcome-message-log' => 'Begrüßung eines neuen Autors',
-	'welcome-message-user-staff' => '== Willkommen ==
+	'welcome-message-user-staff' => '==Willkommen==
 
-Hallo und willkommen auf {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
+Hi, Willkommen bei {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
 
-Falls du Hilfe brauchst, schau dir zuerst die [[Help:Contents|Hilfe-Seiten]] an. Besuche [[w:c:community|die deutsche Wikia-Community]], um über das [[w:c:community:Blog:Wikia_Staff_Blog|Staff-Blog]] auf dem aktuellen Stand zu sein, Fragen im [[w:c:community:Special:Forum|Community-Forum]] zu stellen, an unseren [[w:c:community:Help:Webinars|Webinars]] teilzunehmen oder mit anderen Wikianern zu chatten. Viel Spaß noch! $3',
-	'welcome-message-anon-staff' => '== Willkommen ==
+Wenn du Hilfe brauchst, und kein Admin von hier in der Nähe ist, möchtest du vielleicht das [[w:c:de.community:Forum:Übersicht|deutschsprachige Wikia-Forum]] besuchen. Falls du an Neuigkeiten rund um Wikia interessiert bist, wirf doch einen Blick in das [[w:c:de.community:Blog:Wikia_Deutschland_News|Wikia Deutschland Blog]]. $3',
+	'welcome-message-anon-staff' => "==Willkommen==
 
-Hallo und willkommen auf {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
+Hi, Willkommen bei {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
 
-Wir fänden es gut, wenn du [[Special:UserLogin|dir ein Benutzerkonto anlegst]]. So kannst du ganz einfach deine Beiträge im Überblick behalten, hast mehr Funktionen zur Verfügung und bist für den Rest der Wiki-Gemeinschaft erkennbar.
+'''[[Special:Userlogin|Bitte lege dir ein Benutzerkonto an]]'''. So kannst du ganz einfach deine Beiträge im Überblick behalten und dich besser mit dem Rest der Community verständigen.
 
-Falls du Hilfe brauchst, schau dir zuerst die [[Help:Contents|Hilfe-Seiten]] an und besuche [[w:c:community|die deutsche Wikia-Community]], um mehr zu erfahren. Viel Spaß noch! $3',
-	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|Hilfe]] | [[w:sblog|Blog]])</small>',
+Wenn du Hilfe brauchst, und kein Admin von hier in der Nähe ist, möchtest du vielleicht das [[w:c:de.community:Forum:Übersicht|deutschsprachige Wikia-Forum]] besuchen. Falls du an Neuigkeiten rund um Wikia interessiert bist, wirf doch einen Blick in das [[w:c:de.community:Blog:Wikia_Deutschland_News|Wikia Deutschland Blog]]. $3
+
+----
+PS: Mit diesem Benutzerkonto kannst du in jedem Wiki bei [[w:c:de|Wikia]] aktiv sein - du brauchst dich nicht nochmal neu anmelden.",
+	'staffsig-text' => '$1<staff /> <small>([[w:c:de.c:Special:Forum|Hilfe]] | [[w:c:de.c:Blog:Wikia Deutschland News|Blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
-	'welcome-message-wall-user' => 'Hallo und Willkommen auf {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]]. 
+	'welcome-message-wall-user' => 'Hi, Willkommen im {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]]. 
 
 Viel Spaß im Wiki! Falls ich dir irgendwie helfen kann, hinterlass mir einfach eine Nachricht.',
-	'welcome-message-wall-user-staff' => 'Hallo und willkommen auf {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
+	'welcome-message-wall-user-staff' => 'Hi, Willkommen im {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
 
-Falls du Hilfe brauchst, schau dir zuerst die [[Help:Übersicht|Hilfe-Seiten]] an. Besuche [[w:c:de.community|die deutsche Wikia-Community]], um über das [[w:c:de.community:Blog:Wikia Deutschland News|Staff-Blog]] auf dem aktuellen Stand zu sein, Fragen im [[w:c:de.community:Special:Forum|Community-Forum]] zu stellen oder mit anderen Wikianern zu chatten. Viel Spaß noch!',
-	'welcome-message-wall-anon' => "Hallo und Willkommen auf {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
+Falls du Hilfe brauchst und keine aktiven Admins im Wiki findest, kannst du auch unser [[w:c:de.community:Forum:Index|Forum im Community-Wiki]] besuchen. Wenn du an aktuellen Informationen rund um Wikia interessiert bist, dann solltest du das [[w:c:de.community:Blog:Wikia_Deutschland_News|Wikia Deutschland News-Blog]] lesen.
+
+Viel Spaß im Wiki!',
+	'welcome-message-wall-anon' => "Hi, Willkommen im {{SITENAME}}! Danke für deine Bearbeitung auf der Seite [[:$1]].
 
 '''[[Special:Userlogin|Bitte melde dich an und erstelle ein Benutzerkonto]]'''. So kannst du ganz einfach einen Überblick über deine Beiträge behalten und es hilft sehr dabei, mit dem Rest der Community zu kommunizieren.
 
@@ -366,8 +350,21 @@ Viel Spaß im Wiki! Falls ich dir irgendwie helfen kann, hinterlass mir einfach 
 
 Wir fänden es gut, wenn du [[Special:UserLogin|dir ein Benutzerkonto anlegst]]. So kannst du ganz einfach deine Beiträge im Überblick behalten, hast mehr Funktionen zur Verfügung und bist für den Rest der Wiki-Gemeinschaft erkennbar.
 
-Falls du Hilfe brauchst, schau dir zuerst die [[Help:Contents|Hilfe-Seiten]] an und besuche [[w:c:community|die deutsche Wikia-Community]], um mehr zu erfahren. Viel Spaß noch!',
+Falls du Hilfe brauchst, schau dir zuerst die [[Hilfe:Übersicht|Hilfe-Seiten]] an und besuche [[w:c:de.community|die deutsche Wikia-Community]], um mehr zu erfahren. Viel Spaß noch!',
 	'welcome-description' => 'Sendet eine Willkommensnachricht an Benutzer nach ihren ersten Bearbeitungen',
+	'welcome-user' => "== Über mich ==
+
+''Das ist deine Benutzerseite. Hier kannst du den anderen ein paar Informationen über dich verraten!''
+
+== Meine Beiträge ==
+
+* [[Special:Contributions/{{PAGENAME}}|Benutzerbeiträge]]
+
+== Meine beliebtesten Seiten ==
+
+* Hier kannst du Links zu deinen beliebtesten Artikeln im Wiki hinzufügen!
+* Link auf Seite #2
+* Link auf Seite #3",
 );
 
 /** German (formal address) (Deutsch (Sie-Form)‎)
@@ -402,14 +399,14 @@ Falls Sie irgendwelche Hilfe brauchen, können Sie mir gerne eine Nachricht auf 
 Guten Tag, Willkommen bei {{SITENAME}}! Danke für Ihre Bearbeitung auf der Seite [[:$1]].
 
 Wenn Sie Hilfe brauchen, und kein Admin von hier in der Nähe ist, möchten Sie vielleicht
-die [[wikia:Forum:Community Central Forum|Foren des Community Zentralwikis]] besuchen $3', # Fuzzy
+die [[wikia:Forum:Community Central Forum|Foren des Community Zentralwikis]] besuchen $3',
 	'welcome-message-anon-staff' => "==Willkommen==
 
 Guten Tag, Willkommen bei {{SITENAME}}! Danke für Ihre Bearbeitung der Seite „[[:$1]]“.
 
 '''[[Special:UserLogin|Bitte legen Sie sich ein Benutzerkonto an]]'''. So können Sie ganz einfach Ihre Beiträge im Überblick behalten und sich besser mit dem Rest der Gemeinschaft verständigen.
 
-Wenn Sie Hilfe brauchen, und kein Admin von hier in der Nähe ist, möchten Sie vielleicht die [[wikia:Forum:Community Central Forum|Foren des Community Zentralwikis]] besuchen $3", # Fuzzy
+Wenn Sie Hilfe brauchen, und kein Admin von hier in der Nähe ist, möchten Sie vielleicht die [[wikia:Forum:Community Central Forum|Foren des Community Zentralwikis]] besuchen $3",
 );
 
 /** Zazaki (Zazaki)
@@ -426,6 +423,13 @@ $messages['diq'] = array(
 Persiyayışa pêron rê ez şımarê peşti dana!",
 );
 
+$messages['el'] = array(
+	'welcome-message-user' => 'Γειά σας, καλώς ήρθατε στο {{SITENAME}}! Ευχαριστούμε για τη συνεισφορά σας στη σελίδα [[:$1]].
+
+Παρακαλώ στείλτε μου μύνημα στη [[$2|σελίδα σηζητήσεών μου]] αν μπορώ να βοηθήσω σε κάτι! $3',
+	'welcome-message-log' => 'Καλώς Ήρθατε στο {{SITENAME}}!',
+);
+
 /** Spanish (español)
  * @author Benfutbol10
  * @author Bola
@@ -436,73 +440,74 @@ Persiyayışa pêron rê ez şımarê peşti dana!",
  * @author Vivaelcelta
  */
 $messages['es'] = array(
-	'welcome-user-page' => "==Sobre mí==
+	'welcome-user-page' => "==Sobre mi==
 
 ''Esta es tu página de usuario. ¡Edítala para hablar sobre ti a la comunidad!''
-
-==Mis contribuciones==
-
-* [[Special:Contributions/$1|Contribuciones del usuario]]
 
 ==Mis páginas favoritas==
 
 * ¡Añade aquí los vínculos a las páginas favoritas del wiki!
 * Página favorita #2
 * Página favorita #3",
-	'welcome-message-user' => '¡Hola, bienvenid{{<includeonly>safesubst:</includeonly>GENDER:{{<includeonly>safesubst:</includeonly>#titleparts:{{<includeonly>safesubst:</includeonly>PAGENAME}}|1}}|o|a|o(a)}} a {{SITENAME}}! Muchas gracias por tu edición en [[:$1]].
+	'welcome-message-user' => '==Bienvenido==
 
-¡Por favor, deja un mensaje en [[$2|mi discusión]] si quieres que te ayude con cualquier cosa! $3',
-	'welcome-message-anon' => "¡Hola, bienvenido(a) a {{SITENAME}}! Muchas gracias por tu edición en [[:$1]]. 
+Hola, ¡bienvenido a {{SITENAME}}! Gracias por editar la página [[:$1]].
 
-¿Por qué no '''[[Special:Userlogin|te creas una cuenta y te identificas?]]'''. De esta forma será mucho más fácil saber qué páginas has editado y se te atribuirá tu trabajo en el wiki, además te será de ayuda a la hora de comunicarte con el resto de la comunidad.
+Si necesitas ayuda y no hay administradores locales aquí, quizás quieras visitar los [[w:c:comunidad:Foro:Índice|foros de la Comunidad de Wikia en español]]. $3',
+	'welcome-message-anon' => "==Bienvenido==
 
-Por favor, si tienes alguna duda, no seas tímido, deja un mensaje en [[$2|mi discusión]] para ver si puedo ayudarte con cualquier cosa. $3",
+Hola, bienvenido a {{SITENAME}}. Gracias por editar la página [[:$1]].
+
+'''[[Special:Userlogin|Por favor regístrese y cree un nombre de usuario]]'''. Es una forma sencilla de mantener un registro de sus contribuciones y para ayudar a comunicarnos con el resto de la comunidad.
+
+Si necesita ayuda y no hay administradores locales aquí, quizás quiera visitar los [[w:c:comunidad:Foro:Índice|foros de la Comunidad de Wikia en español]] $3",
 	'welcome-message-log' => 'Bienvenida',
 	'welcome-message-user-staff' => '==Bienvenido==
 
-Hola, ¡bienvenido a {{SITENAME}}! Te agradecemos por tu edición en [[:$1]].
+Hola, ¡bienvenido a {{SITENAME}}! Gracias por editar la página [[:$1]].
 
-Si requieres ayuda y no encuentras administradores activos aquí, te inviramos a visitar la [[Help:Contents|Ayuda]]. Visita la [[w:c:community|Comunidad Central Hispana]] para estar informado con nuestros [[w:c:community:Blog:Wikia_Staff_Blog|blogs]].
+Si necesitas ayuda y no hay administradores locales aquí, quizás quieras visitar los [[w:c:comunidad:Foro:Índice|foros de la Comunidad de Wikia en español]]. $3',
+	'welcome-message-anon-staff' => "==Bienvenido==
 
-Si tienes dudas, siempre puedes preguntar en nuestro [[w:c:community:Special:Forum|foro de ayuda]], ¡te invitamos a participar en nuestras [[w:c:community:Help:Webinars|series web]] o conversar en directo con tus amigos de Wikia!
+Hola, bienvenido a {{SITENAME}}. Gracias por editar la página [[:$1]].
 
-¡Esperamos que te diviertas! $3',
-	'welcome-message-anon-staff' => '==Bienvenido==
+'''[[Special:Userlogin|Por favor regístrese y cree un nombre de usuario]]'''. Es una forma sencilla de mantener un registro de sus contribuciones y para ayudar a comunicarnos con el resto de la comunidad.
 
-Hola.
-
-Bienvenido a {{SITENAME}}. Gracias por editar la página [[:$1]]. Animamos a todos los colaboradores a [[Special:UserLogin|crear una cuenta de usuario]], una forma sencilla de mantener un registro de tus contribuciones, acceder a más características de Wikia y ayudar a darse a conocer en el resto de la comunidad de {{SITENAME}}.
-
-Si necesitas ayuda, siempre puedes visitar la [[Help:Contents|Ayuda]] y si gustas, te invitamos a revisar la [[w:c:community|Comunidad central]] para aprender más. 
-
-¡Que te diviertas! $3',
-	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|foro de ayuda]] | [[w:sblog|blog]])</small>',
+Si necesita ayuda y no hay administradores locales aquí, quizás quiera visitar los [[w:c:comunidad:Foro:Índice|foros de la Comunidad de Wikia en español]] $3",
+	'staffsig-text' => '[[{{ns:user}}:$1|$2]] <staff /> <small>([[w:c:es.c:special:forums|foro de ayuda]] | [[w:c:es.c:Blog:Noticias_de_Wikia|blog del staff]])</small>',
 	'hawelcomeedit' => 'HaWelcomeEdit',
-	'welcome-message-wall-user' => '¡Hola, bienvenido a {{SITENAME}}! Gracias por tu edición en [[:$1]].
+	'welcome-message-wall-user' => 'Hola, ¡bienvenido a {{SITENAME}}! Gracias por tu edición en la página $1.
 
-Por favor, si tienes alguna duda, no seas tímido, deja un mensaje en mi muro para ver si puedo ayudarte con cualquier cosa.',
-	'welcome-message-wall-user-staff' => '¡Hola,
+Por favor, ¡déjame un mensaje si puedo ayudarte con cualquier cosa!',
+	'welcome-message-wall-user-staff' => '¡Hola, bienvenido a {{SITENAME}}! Gracias por tu edición en la página $1.
 
-Bienvenido a {{SITENAME}} y gracias por tu edición en la página [[:$1]]. Si necesitas ayuda, visita las [[w:c:ayuda|páginas de ayuda]]. Visita la [[w:c:comunidad|Comunidad Central]] para mantenerte informado con nuestro [[w:c:comunidad:Blog:Actualizaciones técnicas|blog del personal]], haz preguntas en nuestro [[w:c:comunidad:Special:Forum|foro de la comunidad]], participa en nuestras [[w:c:community:Help:Webinars|series web]], o conversa en directo con tus amigos de Wikia. ¡Que te diviertas!',
-	'welcome-message-wall-anon' => "¡Hola, bienvenido a {{SITENAME}}! Gracias por tu edición en [[:$1]].
+Si necesitas ayuda, y no hay ningún administrador local por aquí, podrías querer visitar los [[w:c:comunidad:Foro:Índice|foros de la Central de Wikia en español]]. También podrías estar interesado en revisar nuestro [[w:c:comunidad:Blog:Noticias_de_Wikia|blog del staff]] para estar al tanto de las últimas novedades y noticias sobre Wikia.
 
-¿Por qué no '''[[Special:Userlogin|te creas una cuenta y te identificas?]]'''. De esta forma será mucho más fácil saber qué páginas has editado y se te atribuirá tu trabajo en el wiki, además te será de ayuda a la hora de comunicarte con el resto de la comunidad.
+No olvides que puedes contactar con el staff de Wikia a través de [[especial:contactar]] y te atenderemos directamente por email.
 
-Por favor, si tienes alguna duda, no seas tímido, deja un mensaje en mi muro para ver si puedo ayudarte con cualquier cosa.",
-	'welcome-message-wall-anon-staff' => "Hola,
+¡Diviértete!',
+	'welcome-message-wall-anon' => "¡Hola, bienvenido a {{SITENAME}}! Gracias por tu edición en la página $1.
 
-¡Bienvenido a {{SITENAME}}! Te agradecemos por tu edición en [[:$1]].
+'''[[Special:Userlogin|Por favor, identifícate o crea una nueva cuenta de usuario]]'''. Es una forma fácil de mantener un registro de todas tus contribuciones y te ayudará a comunicarte con el resto de la comunidad.
 
-¿Qué tal si te '''[[Special:UserLogin|creas una cuenta]]'''?, así, nos será más sencillo saber que páginas has editado y recibirás una atribución por tu trabajo en {{SITENAME}}.
+Por favor, ¡déjame un mensaje si puedo ayudarte con cualquier cosa!",
+	'welcome-message-wall-anon-staff' => "Hola, ¡bienvenido a {{SITENAME}}! Gracias por tu edición en la página [[:$1]].
 
-Además, podrás acceder a muchas otras funcionalidades de Wikia, ¡incluso tendrás la posibilidad de darte a conocer con otros miembros de la comunidad!
+'''[[Special:Userlogin|Por favor, identifícate o crea una nueva cuenta de usuario]]'''. Es una forma fácil de mantener un registro de tus contribuciones y te ayudará a comunicarte con el resto de la comunidad.
 
-Si lo que buscas es ayuda, puedes consultar nuestras [[Help:Contents|páginas de ayuda]], llenas de información.
+No olvides que puedes contactar con el staff de Wikia a través de [[especial:contactar]] y te atenderemos directamente por email.
 
-Si requieres más ayuda, o sigues teniendo dudas, ¡no dudes en visitar la [[w:c:community|Comunidad Central de Wikia en Español]]!
-
-¡Esperamos que te diviertas!",
+Por favor, déjame un mensaje si puedo ayudarte con cualquier cosa.",
 	'welcome-description' => 'Envía un mensaje a todos los usuarios después de realizar su primera edición.',
+	'welcome-user' => "==Sobre mi==
+
+''Esta es tu página de usuario. ¡Edítala para hablar sobre ti a la comunidad!''
+
+==Mis páginas favoritas==
+
+* ¡Añade aquí los vínculos a las páginas favoritas del wiki!
+* Página favorita #2
+* Página favorita #3",
 );
 
 /** Estonian (eesti)
@@ -530,25 +535,22 @@ $messages['fa'] = array(
 ''
 این صفحۀ کاربری شما است. لطفا این صفحه را ویرایش کنید و کمی دربارۀ خودتان به دیگر کاربران بگویید!''
 
-==مشارکت‌های من==
-
-* [[Special:Contributions/{{PAGENAME}}|مشارکت‌های کاربر]]
-
 ==صفحات محبوب من==
 
-*پیوند صفحه‌های محبوب خود را در اینجا قرار دهید!
+*پیوند صفحات محبوب خود را در اینجا قرار دهید
 * صفحۀ محبوب #۲
-* صفحۀ محبوب #۳", # Fuzzy
+* صفحۀ محبوب #۳",
 	'welcome-message-user' => '==خوش‌آمدید==
 سلام، به {{SITENAME}} خوش‌آمدید! متشکر از ویرایش شما در صفحۀ [[:$1]].
 
 اگر کمکی نیاز داشتید می‌توانید در [[$2|صفحۀ بحثم]] از من بپرسید.  $3',
-	'welcome-message-anon' => "سلام، به {{SITENAME}} خوش‌آمدید. از ویرایش شما در صفحهٔ [[:$1]] متشکریم.
+	'welcome-message-anon' => "سلام، به {{SITENAME}} خوش‌آمدید. متشکر از ویرایش شما در صفحۀ [[:$1]].
 
-لطفاً '''[[Special:Userlogin|حساب کاربری ایجاد کنید و به سامانه وارد شوید]]'''. این کار به شما کمک می‌کند که ویرایش‌های خود را نگهداری کنید و به راحتی با دیگر کاربران در ارتباط باشید.
+لطفا '''[[Special:Userlogin|حساب کاربری ایجاد کنید و وارد سیستم شوید]]'''. این کار به شما کمک می‌کند که ویرایش‌های خود را نگهداری کنید و به راحتی با دیگر کاربران در ارتباط باشید.
 
-اگر سوالی داشتید می‌توانید از من در [[$2|صفحهٔ بحثم]] بپرسید! $3",
+اگر سوالی داشتید می‌توانید از من در [[$2|صفحۀ بحثم]] بپرسید! $3",
 	'welcome-message-log' => 'خوش‌آمدگویی کاربر جدید',
+	'welcome-user' => '@latest',
 );
 
 /** Finnish (suomi)
@@ -592,8 +594,8 @@ Hei,
 
 Tervetuloa sivustolle {{SITENAME}} ja kiitos, että muokkasit sivua [[:$1]]. Suosittelemme kaikille osallistujille [[Toiminnot:Kirjaudu_sisään|käyttäjätunnuksen luomista]] jotta voisit helpommin pitää lukua muokkauksistasi, päästä käsiksi useampiin Wikia-ominaisuuksiin sekä tutustua tämän wikin yhteisöön.
 
-Mikäli tarvitset apua, tutustu ensin [[Ohje:Sisällöt|ohjesivuihin]] ja vieraile sitten [[w:c:yhteiso|Yhteisöwikissä]] saadaksesi lisätietoja. Mukavaa muokkaamista! $3', # Fuzzy
-	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:c:yhteiso:foorumi|foorumi]] | [[w:c:yhteiso:wblogi|blogi]])</small>', # Fuzzy
+Mikäli tarvitset apua, tutustu ensin [[Ohje:Sisällöt|ohjesivuihin]] ja vieraile sitten [[w:c:yhteiso|Yhteisöwikissä]] saadaksesi lisätietoja. Mukavaa muokkaamista! $3',
+	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:c:yhteiso:foorumi|foorumi]] | [[w:c:yhteiso:wblogi|blogi]])</small>',
 	'welcome-message-wall-user' => 'Hei, tervetuloa sivustolle {{SITENAME}}! Kiitos muokkauksestasi sivulle [[:$1]].
 
 Voit jättää minulle vapaasti viestiä, jos sinulle tulee vastaan ongelmia!',
@@ -623,57 +625,70 @@ Skriva mær eini boð um eg kann hjálpa tær við nøkrum!',
  * @author Wyz
  */
 $messages['fr'] = array(
-	'welcome-user-page' => "== Sur moi ==
+	'welcome-user-page' => 'Cette page est ta page personnelle. Tu peux y ajouter des informations te concernant !
 
-''Ceci est votre page utilisateur. Vous pouvez y ajouter des informations vous concernant !''
+==Mes pages préférées==
 
-== Mes contributions ==
-
-* [[Special:Contributions/$1|Mes contributions]]
-
-== Mes pages préférées ==
-
-* Vous pouvez placer ici des liens vers vos pages préférées du wiki !
+* Tu peux placer ici des liens vers tes pages du wiki préférées !
 * Lien vers la page #2
-* Lien vers la page #3",
-	'welcome-message-user' => "Bonjour, bienvenue sur {{SITENAME}} ! Merci d'avoir modifié la page [[:$1]].
+* Lien vers la page #3',
+	'welcome-message-user' => "Bonjour et bienvenue sur {{SITENAME}} ! Merci d'avoir modifié la page [[:$1]].
 
-Vous pouvez laisser un message sur ma page de [[$2|discussion]] si je peux vous aider pour quoi que ce soit ! $3",
+N’hésite pas à laisser un message sur ma [[$2|page de discussion]] si je peux t’aider pour quoi que ce soit ! $3",
 	'welcome-message-anon' => "Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]].
 
-'''Veuillez [[Special:Userlogin|vous enregistrer et créér un compte utilisateur]]'''. C’est un moyen simple de garder une une trace de vos contributions et facilite la communication avec le reste de la communauté.
+'''[[Special:Userlogin|Enregistre-toi et crée un compte utilisateur]]'''. C’est un moyen simple de garder une trace de tes contributions et faciliter la communication avec le reste de la communauté.
 
-N’hésitez pas à laisser un message sur [[$2|ma page de discussion]] si je peux vous aider pour quoi que ce soit ! $3",
-	'welcome-message-log' => 'accueil nouveau contributeur',
-	'welcome-message-user-staff' => '== Bienvenue ==
-Bonjour
+N’hésite pas à laisser un message sur [[$2|ma page de discussion]] si je peux t’aider pour quoi que ce soit ! $3",
+	'welcome-message-log' => 'Bienvenue sur {{SITENAME}} !',
+	'welcome-message-user-staff' => "==Bienvenue==
+Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]]. Si tu as besoin d'aide, consulte nos [[Aide:Contenu|pages d'aide]] ou contacte un [[Special:Listusers/sysop|administrateur du wikia]]. S'il n'y a pas d'administrateur actif ici, rends-toi sur le [[w:fr:Accueil|Centre des communautés]] et consulte le [[w:fr:Special:Forum|forum]].
 
-Bienvenue sur {{SITENAME}} et merci pour votre modification de la page [[:$1]]. Si vous avez besoin d’aide, commencez par consulter nos [[Help:Contents|pages d’aide]]. Visitez le [[w:c:community|centre de la communauté]] pour rester informé via le [[w:c:community:Blog:Wikia_Staff_Blog|blog de notre équipe]], posez vos questions sur notre [[w:c:community:Special:Forum|forum de communauté]], participez à nos [[w:c:community:Help:Webinars|séries de webinar]], ou discutez en direct avec d’autres Wikiens. Bonnes modifications! $3',
-	'welcome-message-anon-staff' => '==Bienvenue==
+Tu peux aussi consulter le blog « [[w:fr:Blog:Actualité Wikia|Actualité Wikia]] » pour rester informé des dernières nouvelles et derniers évènements sur Wikia.
 
-Bonjour,
+Tous ces liens sont un bon moyen de commencer à explorer Wikia.
 
-Bienvenue sur {{SITENAME}} et merci d’avoir modifié la page [[:$1]]. Nous encourageons tous les contributeurs à [[Special:UserLogin|créer un nom d’utilisateur]], afin de garder trace de vos contributions, d’accéder à davantage de fonctionnalités de Wikia et de connaître le reste de la communauté de {{SITENAME}}.
+Bonnes modifications ! $3",
+	'welcome-message-anon-staff' => "Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]].
 
-Si vous avez besoin d’aide, consultez d’abord nos [[Help:Contents|pages d’aide]], puis visitez le [[w:c:community|centre de la communauté]] pour en savoir plus. Bonnes modifications! $3',
-	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|forum d’aide]] | [[w:sblog|blog]])</small>',
+Nous encourageons tous les contributeurs à [[Special:UserLogin|créer un compte utilisateur]], tu peux ainsi garder un suivi de tes contributions, accéder à plus de fonctionnalités de Wikia et connaître le reste de la communauté.
+
+Si tu as besoin d'aide, consulte nos [[Aide:Contenu|pages d'aide]] ou contacte un [[Special:ListUsers/sysop|administrateur ici]]. Si aucun administrateur n'est actif, visite le [[w:fr:Accueil|Centre des communautés]] et consulte le [[w:fr:Special:Forum|forum]].
+
+Bonnes modifications ! $3",
+	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:fr:Special:Forum|forum d’aide]] | [[w:fr:Blog:Actualité Wikia|blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]].
 
-Veuillez me laisser un message si je peux vous aider pour quoi que ce soit !',
-	'welcome-message-wall-user-staff' => 'Bonjour,
+Tu peux me laisser un message si je peux t’aider pour quoi que ce soit !',
+	'welcome-message-wall-user-staff' => "Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]]. Si tu as besoin d'aide, consulte nos [[Aide:Contenu|pages d'aide]] ou contacte un [[Special:Listusers/sysop|administrateur du wikia]]. S'il n'y a pas d'administrateur actif ici, rends-toi sur le [[w:fr:Accueil|Centre des communautés]] et consulte le [[w:fr:Special:Forum|forum]].
 
-Bienvenue sur {{SITENAME}} et merci d’avoir modifié la page [[:$1]]. Si vous avez besoin d’aide, commencez par consulter nos [[Help:Contents|pages d’aide]]. Visitez le [[w:c:community|centre de la communauté]] pour rester informé via le [[w:c:community:Blog:Wikia_Staff_Blog|blog de notre équipe]], posez vos questions sur notre [[w:c:community:Special:Forum|forum de communauté]], participez à nos [[w:c:community:Help:Webinars|séries de webinar]], ou discutez en direct avec d’autres Wikiens. Bonnes modifications!',
+Tu peux aussi consulter le blog « [[w:fr:Blog:Actualité Wikia|Actualité Wikia]] » pour rester informé des dernières nouvelles et derniers évènements sur Wikia.
+
+Tous ces liens sont un bon moyen de commencer à explorer Wikia.
+
+Bonnes modifications !",
 	'welcome-message-wall-anon' => "Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]].
 
-'''Veuillez [[Special:Userlogin|vous enregistrer et créer un compte utilisateur]]'''. C’est un moyen simple de garder une trace de vos contributions et faciliter la communication avec le reste de la communauté.
+'''[[Special:Userlogin|Enregistre-toi et crée un compte utilisateur]]'''. C’est un moyen simple de garder une trace de tes contributions et faciliter la communication avec le reste de la communauté.
 
-Veuillez me laisser un message si je peux vous aider pour quoi que ce soit !",
-	'welcome-message-wall-anon-staff' => 'Bonjour,
-Bienvenue sur {{SITENAME}} et merci d’avoir modifié la page [[:$1]]. Nous encourageons tous les contributeurs à [[Special:UserLogin|créer un nom d’utilisateur]], afin de garder trace de vos contributions, d’accéder à davantage de fonctionnalités de Wikia et de connaître le reste de la communauté de {{SITENAME}}.
+Tu peux me laisser un message si je peux t’aider pour quoi que ce soit !",
+	'welcome-message-wall-anon-staff' => "Bonjour et bienvenue sur {{SITENAME}} ! Merci d’avoir modifié la page [[:$1]].
 
-Si vous avez besoin d’aide, consultez d’abord nos [[Help:Contents|pages d’aide]], puis visitez le [[w:c:community|centre de la communauté]] pour en savoir plus. Bonnes modifications!',
-	'welcome-description' => 'Envoie un message d’accueil aux utilisateurs après leurs premières modifications',
+Nous encourageons tous les contributeurs à se [[Special:UserLogin|créer un compte utilisateur]], tu peux ainsi garder un suivi de tes contributions, accéder à plus de fonctionnalités de Wikia et connaître le reste de la communauté.
+
+Si tu as besoin d'aide, consulte nos [[Aide:Contenu|pages d'aide]] ou contacte un [[Special:ListUsers/sysop|administrateur ici]]. Si aucun administrateur n'est actif, visite le [[w:fr:Accueil|Centre des communautés]] et consulte le [[w:fr:Forum|forum]].
+
+Bonnes modifications !",
+	'welcome-description' => 'Envoie un message d’accueil aux utilisateurs après leur première modification',
+	'welcome-user' => 'Cette page est ta page personnelle. Tu peux y ajouter des informations te concernant !
+
+==Mes pages préférées==
+
+* Tu peux placer ici des liens vers tes pages du wiki préférées !
+* Lien vers la page #2
+* Lien vers la page #3',
+	'welcome-bot' => '@bot',
 );
 
 /** Galician (galego)
@@ -747,21 +762,22 @@ $messages['he'] = array(
 ''זה דף המשתמש שלך. כדאי לערוך דף זה כדי שמשתמשים אחרים יוכלו לדעת עליך יותר!''
 
 ==התרומות שלי==
-*[[Special:Contributions/$1|העריכות שלך]]
+*[[Special:Contributions/{{PAGENAME}}|העריכות שלך]]
 
 ==הדפים האהובים עליי==
 * הוסף כאן קישור לדפים האהובים עליך או דפים שיצרת.
 * [[דף אהוב שני]]
-* [[דף אהוב שלישי]]", # Fuzzy
+* [[דף אהוב שלישי]]",
 	'welcome-message-user' => 'שלום, ברוך הבא ל{{SITENAME}}. תודה על תרומתך בדף [[:$1]].
 
-אם אתה זקוק לעזרה כלשהי, אנא השאר הודעה ב[[$2|דף השיחה שלי]], $3',
+במידה ואתה זקוק לעזרה כלשהי, אנא השאר הודעה ב[[$2|דף השיחה שלי]], $3',
 	'welcome-message-anon' => "שלום, ברוך הבא ל{{SITENAME}}. תודה על תרומתך בדף [[:$1]].
 
-'''[[Special:Userlogin|רצוי להירשם לאתר וליצור חשבון]]'''. הרשמה היא דרך נוחה לעקוב אחרי עריכות ועוזרת לך לתקשר עם שאר הקהילה.
+'''[[מיוחד:התחברות לחשבון|רצוי להרשם לאתר וליצור משתמש]]'''. הרשמות היא דרך נוחה לעקוב אחרי עריכות ועוזרת לך לתקשר עם שאר הקהילה.
 
-אם אתה זקוק לעזרה כלשהי, אנא השאר הודעה ב[[$2|דף השיחה שלי]], $3",
+במידה ואתה זקוק לעזרה כלשהי, אנא השאר הודעה ב[[$2|דף השיחה שלי]], $3",
 	'welcome-message-log' => 'ברך משתמש חדש',
+	'welcome-user' => '@latest',
 );
 
 /** Hungarian (magyar)
@@ -795,14 +811,14 @@ Kérlek hagyj üzenetet a [[$2|vitalapomon]], ha segíthetek valamiben. $3",
 
 Szia, üdvözlünk a(z) {{SITENAME}} wikin! Köszönjük a(z) [[:$1]] lapon tett szerkesztésedet.
 
-Ha segítségre van szükséged, és nincsenek helyi adminisztrátorok, látogasd meg a [[wikia:Forum:Community Central Forum|Community Central Wiki fórumait]] $3', # Fuzzy
+Ha segítségre van szükséged, és nincsenek helyi adminisztrátorok, látogasd meg a [[wikia:Forum:Community Central Forum|Community Central Wiki fórumait]] $3',
 	'welcome-message-anon-staff' => "== Üdvözlet ==
 
 Szia, üdvözlünk a(z) {{SITENAME}} wikin! Köszönjük a(z) [[:$1]] lapon tett szerkesztésedet.
 
 '''[[Special:Userlogin|Kérlek regisztrálj egy felhasználónevet, és jelentkezz be.]]'''. Így könnyen tudod majd követni a  szerkesztéseidet, és segít a közösséggel való kommunikációban.
 
-Ha segítségre van szükséged, és nincsenek helyi adminisztrátorok, látogasd meg a [[wikia:Forum:Community Central Forum|Community Central Wiki fórumait]] $3", # Fuzzy
+Ha segítségre van szükséged, és nincsenek helyi adminisztrátorok, látogasd meg a [[wikia:Forum:Community Central Forum|Community Central Wiki fórumait]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|segítségkérési fórum]] | [[w:sblog|blog]])</small>',
 	'welcome-message-wall-user' => 'Szia, üdvözlünk a(z) {{SITENAME}} wikin! Köszönjük a(z) [[:$1]] lapon végzett szerkesztésedet.
 
@@ -811,7 +827,7 @@ Kérlek, hagyj nekem üzenetet, ha segíthetek valamiben.',
 
 Ha segítségre van szükséged, és nincsenek itt helyi adminisztrátorok, meglátogathatod [[wikia:Forum:Community Central Forum|a Community Central fórumait]]. Megtekintheted a [[w:c:community:Blog:Wikia_Staff_Blog|személyzeti]] blogot is, hogy naprakész maradj a Wikia friss híreivel és eseményeivel kapcsolatban.
 
-Jó szerkesztést!', # Fuzzy
+Jó szerkesztést!',
 );
 
 /** Interlingua (interlingua)
@@ -847,15 +863,15 @@ Salute, benvenite a {{SITENAME}}! Gratias pro tu modification del pagina [[:$1]]
 
 Si tu ha besonio de adjuta, e il ha nulle administratores local hic, nos suggere
 visitar le [[wikia:Forum:Community Central Forum|foros in le wiki Community
-Central]] $3', # Fuzzy
+Central]] $3',
 	'welcome-message-anon-staff' => "==Benvenite==
 
 Salute, benvenite a {{SITENAME}}. Gratias pro tu modification del pagina [[:$1]].
 
 '''[[Special:Userlogin|Per favor crea un conto e aperi un session]]'''. Es un modo facile de tener tracia de tu contributiones e te adjuta a communicar con le resto del communitate.
 
-Si tu ha besonio de adjuta, e il ha nulle administratores local hic, nos suggere visitar le [[wikia:Forum:Community Central Forum|foros in le wiki Community Central]] $3", # Fuzzy
-	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|foro de adjuta]] | [[w:sblog|blog]])</small>', # Fuzzy
+Si tu ha besonio de adjuta, e il ha nulle administratores local hic, nos suggere visitar le [[wikia:Forum:Community Central Forum|foros in le wiki Community Central]] $3",
+	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|foro de adjuta]] | [[w:sblog|blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Salute, benvenite a {{SITENAME}}! Gratias pro tu contribution al pagina [[:$1]].
 
@@ -864,7 +880,7 @@ Non hesita de lassar me un message si io pote adjutar te con alcun cosa!',
 
 Si tu ha besonio de adjuta, e il non ha administratores local hic, tu pote visitar le [[wikia:Forum:Community Central Forum|foros in le wiki Community Central]]. Tu pote equalmente leger [[w:c:community:Blog:Wikia_Staff_Blog|le blog de nostre personal]] pro tener te al currente con le ultime novas e eventos in tote Wikia.
 
-Bon redaction!', # Fuzzy
+Bon redaction!',
 	'welcome-message-wall-anon' => "Salute, benvenite a {{SITENAME}}! Gratias pro tu contribution al pagina [[:$1]].
 
 '''[[Special:Userlogin|Per favor aperi un session o crea un conto]]'''. Isto permitte sequer tu contributiones e facilita le communication con le resto del communitate.
@@ -874,7 +890,7 @@ Non hesita de lassar un message si io pote adjutar te con alcun cosa!",
 
 '''[[Special:Userlogin|Per favor aperi un session o crea un conto]]'''. Isto permitte sequer tu contributiones e facilita le communication con le resto del communitate.
 
-Non hesita de lassar un message si io pote adjutar te con alcun cosa!", # Fuzzy
+Non hesita de lassar un message si io pote adjutar te con alcun cosa!",
 );
 
 /** Indonesian (Bahasa Indonesia)
@@ -930,51 +946,81 @@ Jika Anda membutuhkan bantuan, pertama lihatlah [[Help:Contents|halaman bantuan]
 $messages['it'] = array(
 	'welcome-user-page' => "==Qualcosa su di me==
 
-''Questa è la tua pagina utente. Modifica liberamente questa pagina per farti conoscere dalla comunità!''
+''Questa è la tua pagina utente. Modifica liberamente questa pagina per farti conoscere dalla community!''
 
 ==I miei contributi==
 
-* [[Special:Contributions/$1|Contributi utente]]
+* [[Special:Contributions/{{PAGENAME}}|Contributi utente]]
 
 ==Le mie pagine preferite==
 
-* Aggiungi i collegamenti alle tue pagine preferite su questo wiki!
+* Aggiungi i collegamenti alle tue pagine preferite su questa wiki!
 * Pagina preferita n.2
 * Pagina preferita n.3",
-	'welcome-message-user' => 'Ciao, benvenuto su {{SITENAME}}! Grazie per la tua modifica alla pagina [[:$1]].
+	'welcome-message-user' => '== Benvenuto ==
+Ciao $4, benvenuto su {{SITENAME}}! Grazie per la tua modifica sulla pagina [[:$1]].
 
-Lascia pure un messaggio sulla [[$2|mia pagina di discussione]], se posso esserti utile per qualsiasi cosa! $3',
+Lascia un messaggio sulla [[$2|pagina delle mie discussioni]], se posso esserti utile per qualunque problema! $3',
 	'welcome-message-anon' => "== Benvenuto ==
 Ciao, benvenuto su {{SITENAME}}. Grazie per la tua modifica sulla pagina [[:$1]].
 
-'''[[Special:Userlogin|Se lo desideri, puoi registrarti con il tuo nome utente]]'''. È un modo facile e comodo per tenere traccia delle tue collaborazioni e ti aiuta nelle comunicazioni con il resto della comunità.
+'''[[Special:Userlogin|Se lo desideri, puoi registrarti con il tuo nome utente]]'''. È un modo facile e comodo per tenere traccia delle tue collaborazioni e ti aiuta nelle comunicazioni con il resto della community.
 
 Lascia un messaggio sulla [[$2|pagina delle mie discussioni]], se posso esserti utile per qualunque problema! $3",
 	'welcome-message-log' => 'Benvenuto a un nuovo collaboratore',
-	'welcome-message-user-staff' => '==Benvenuto==
+	'welcome-message-user-staff' => "== Benvenuto ==
 
-Ciao, benvenuto/a su {{SITENAME}}! Grazie per la tua modifica alla pagina [[:$1]].
+Ciao, benvenuto su '''{{SITENAME}}'''! Grazie per la tua modifica nella pagina '''\"\$1\"'''.
 
-Se hai bisogno di aiuto e non ci sono amministratori disponibili, visita 
-[[wikia:Forum:Community Central Forum|i forum sul wiki centrale della Community]] $3', # Fuzzy
+Se ricevi questo messaggio, è probabile allora che {{SITENAME}} sia inattiva o non abbia amministratori attivi. Questo significa che qui hanno bisogno di te! Controlla le [[Special:Recentchanges|ultime modifiche]] o la [[Special:Listusers|lista utenti]] per vedere chi è ancora attivo e prova ad offrire il tuo aiuto, oppure contribuisci direttamente alla wiki. Se raggiungerai i requisiti potrai fare richiesta d'adozione della wiki su [[w:it:Wiki della Community:Richieste di adozione|questa pagina]].
+
+Se hai bisogno di aiuto, innanzitutto consulta le nostre [[w:c:it.community:Aiuto:Contenuti|pagine di aiuto]]. Visita inoltre la [[w:c:it.community|Wiki della Community]] per tenerti informato tramite il [[w:it:Blog:Blog ufficiale di Wikia Italia|blog ufficiale di Wikia Italia]], fare domande nel [[w:it:Special:Forum|forum]] o chattare con gli altri utenti.<br>
+Buon editing! \$3",
 	'welcome-message-anon-staff' => "==Benvenuto==
 
 Ciao, benvenuto/a su {{SITENAME}}.
 Grazie per la tua modifica alla pagina [[:$1]].
 
 '''[[Special:UserLogin|Se vuoi, puoi registrarti ed usare un nome utente]]'''.
-E' un modo semplice per tenere traccia dei tuoi contributi e per aiutrti a comunicare con il resto della Community.
+E' un modo semplice per tenere traccia dei tuoi contributi e per aiutarti a comunicare con il resto della community.
 
-Se hai bisogno di aiuto e non ci sono amministratori disponibili, visita i [[wikia:Forum:Community Central Forum|forum sul wiki centrale della Community]] $3", # Fuzzy
+Se hai bisogno di aiuto e non ci sono amministratori disponibili, visita i [[w:c:it.community:Special:Forum|forum sul wiki centrale della Community]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|forum di supporto]] | [[w:sblog|blog]])</small>',
-	'welcome-message-wall-user' => 'Ciao, benvenuto su {{SITENAME}}! Grazie per la tua modifica alla pagina [[:$1]].
+	'welcome-message-wall-user' => 'Ciao, benvenuto su {{SITENAME}}! Grazie per la tua modifica nella pagina [[:$1]].
 
-Lascia pure un messaggio se posso esserti utile per qualsiasi cosa!',
-	'welcome-message-wall-user-staff' => 'Ciao, benvenuto su {{SITENAME}}! Grazie per la tua modifica alla voce [[$1]].
+Lasciami un messaggio se hai bisogno di aiuto!',
+	'welcome-message-wall-user-staff' => "Ciao, benvenuto su '''{{SITENAME}}'''! Grazie per la tua modifica nella pagina '''\"\$1\"'''.
 
-Se hai bisogno di aiuto, e gli amministratori locali non sono presenti, puoi visitare il [[wikia:Forum:Community Central Forum|Forum sulla Comunità Centrale di Wiki]]. È anche possibile controllare il nostro [[w:c:community:Blog:Wikia_Staff_Blog|blog dello Staff]] per seguire le ultime notizie e gli eventi di Wikia.
+Se ricevi questo messaggio, è probabile allora che {{SITENAME}} sia inattiva o non abbia amministratori attivi. Questo significa che qui hanno bisogno di te! Controlla le [[Special:Recentchanges|ultime modifiche]] o la [[Special:Listusers|lista utenti]] per vedere chi è ancora attivo e prova ad offrire il tuo aiuto, oppure contribuisci direttamente alla wiki. Se raggiungerai i requisiti potrai fare richiesta d'adozione della wiki su [[w:it:Wiki della Community:Richieste di adozione|questa pagina]].
 
-Buone modifiche!', # Fuzzy
+Se hai bisogno di aiuto, innanzitutto consulta le nostre [[w:c:it.community:Aiuto:Contenuti|pagine di aiuto]]. Visita inoltre la [[w:c:it.community|Wiki della Community]] per tenerti informato tramite il [[w:it:Blog:Blog ufficiale di Wikia Italia|blog ufficiale di Wikia Italia]], fare domande nel [[w:it:Special:Forum|forum]] o chattare con gli altri utenti.<br>
+Buon editing!",
+	'welcome-user' => "==Qualcosa su di me==
+
+''Questa è la tua pagina utente. Modifica liberamente questa pagina per farti conoscere dalla community!''
+
+==I miei contributi==
+
+* [[Special:Contributions/{{PAGENAME}}|Contributi utente]]
+
+==Le mie pagine preferite==
+
+* Aggiungi i collegamenti alle tue pagine preferite su questa wiki!
+* Pagina preferita n.2
+* Pagina preferita n.3",
+	'welcome-message-wall-anon' => "Ciao, benvenuto su {{SITENAME}}! Grazie per la tua modifica nella pagina $1.
+
+'''[[Special:Userlogin|Per favore registrati e crea il tuo nome utente]]'''. È un modo semplice per tener traccia dei tuoi contributi e ti aiuta a comunicare con il resto della community.
+
+Lasciami un messaggio se hai bisogno di aiuto!",
+	'welcome-message-wall-anon-staff' => "Ciao, benvenuto su '''{{SITENAME}}'''! Grazie per la tua modifica nella pagina '''\"\$1\"'''.
+
+Ti invitiamo a '''[[Special:UserSignup|creare il tuo username]]'''. È un modo semplice per tener traccia dei tuoi contributi, avere accesso ad altre fuzioni di Wikia e comunicare con il resto della community di {{SITENAME}}.
+
+Se ricevi questo messaggio, è probabile allora che {{SITENAME}} sia inattiva o non abbia amministratori attivi. Questo significa che qui hanno bisogno di te! Controlla le [[Special:Recentchanges|ultime modifiche]] o la [[Special:Listusers|lista utenti]] per vedere chi è ancora attivo e prova ad offrire il tuo aiuto, oppure contribuisci direttamente alla wiki. Una volta registrato, se raggiungerai i requisiti potrai fare richiesta d'adozione della wiki su [[w:it:Wiki della Community:Richieste di adozione|questa pagina]].
+
+Se hai bisogno di aiuto, innanzitutto consulta le nostre [[w:c:it.community:Aiuto:Contenuti|pagine di aiuto]]. Visita inoltre la [[w:c:it.community|Wiki della Community]] per tenerti informato tramite il [[w:it:Blog:Blog ufficiale di Wikia Italia|blog ufficiale di Wikia Italia]], fare domande nel [[w:it:Special:Forum|forum]] o chattare con gli altri utenti.<br>
+Buon editing!",
 );
 
 /** Japanese (日本語)
@@ -982,73 +1028,149 @@ Buone modifiche!', # Fuzzy
  * @author Tommy6
  */
 $messages['ja'] = array(
-	'welcome-user-page' => "==自己紹介==
+	'welcome-user-page' => "== 自己紹介 ==
+'''ここは、「{{PAGENAME}}」さんの利用者ページです。'''
 
-'''ここはあなたの利用者ページです。このページを編集してあなた自身のことをみんなに伝えましょう!'''
+上の\"編集\"ボタンをクリックしてこのページを編集してみましょう。
 
-==投稿記録==
+[[File:Placeholder|thumb|220px]]
 
-* [[Special:Contributions/$1|利用者の投稿記録]]
+ここは、「{{PAGENAME}}」さんのユーザーページです。上の「編集」ボタンをクリックしてこのページを編集し、{{PAGENAME}}さん自身のことについてコミュニティに紹介してみましょう！
 
-==お気に入りページ==
+== お気に入りのウィキア ==
+* ウィキアにあるあなたのお気に入りのウィキのリンクを追加してください！
+* お気に入りのページ #2
+* お気に入りのページ #3",
+	'welcome-message-user' => "== ようこそ ==
+こんにちは、{{SITENAME}} へようこそ！! '''$1''' ページへの編集ありがとうございます。
 
-* ウィキのお気に入りのページへのリンクをここに追加してください!
-* お気に入りページ2
-* お気に入りページ3",
-	'welcome-message-user' => 'こんにちは、{{SITENAME}}へようこそ！ [[:$1]]への編集ありがとうございます。
+もし、何か手伝えることがありましたら、お気軽に[[$2|私のトークページ]]までメッセージをお寄せください！ $3",
+	'welcome-message-anon' => '== ようこそ ==
+こんにちは、{{SITENAME}}へようこそ！ [[:$1]]のご編集、ありがとうございます。
 
-もし、何か困ったことがありましたら、お気軽に[[$2|私の会話ページ]]までメッセージをお寄せください。$3',
-	'welcome-message-anon' => 'こんにちは、{{SITENAME}}へようこそ！ [[:$1]]への編集ありがとうございます。
+もしまだアカウントをお持ちでなければ、ぜひ[[Special:Userlogin|アカウントを取得]]してみてください。他のユーザーとのコミュニケーションがとりやすくなり、アカウントユーザーだけが利用できる機能もたくさんあります。
 
-もし、まだアカウントをお持ちでなければ、[[Special:Userlogin|ぜひアカウントを取得してみてください]]。他の方とコミュニケーションがとりやすくなりますし、アカウントユーザーだけが利用できる機能も多くあります。
-
-また、何か困ったことがありましたら、お気軽に[[$2|私の会話ページ]]までメッセージをお寄せください。$3',
+もし何か手伝いできることがありましたら、お気軽に[[$2|私のトークページ]]にてメッセージを残してくださいね！$3',
 	'welcome-message-log' => 'ウィキアへようこそ！',
-	'welcome-message-user-staff' => 'こんにちは、{{SITENAME}}へようこそ！ [[:$1]]への編集ありがとうございます。
+	'welcome-message-user-staff' => '== ようこそ ==
+こんにちは、{{SITENAME}} へようこそ！ [[:$1]]のページをご編集いただき、ありがとうございます。ご不明なことがございましたら、ぜひ[[ヘルプ:コンテンツ|ヘルプページ]]をご覧ください。[[w:c:ja.community|コミュニティセントラル]]では、最新のニュースや今ウィキアで起きている出来事をチェックしていただけます。また、[[w:ja:Special:Forum:|フォーラム]]にて、スタッフや他のユーザーに交流しながら、分からないことを質問してみましょう！
 
-もし、何か困ったことがあり、このウィキローカルの管理者が見当たらない場合には、[[w:ja:Forum:Index|セントラルウィキアのフォーラム]]までメッセージをお寄せください。$3', # Fuzzy
-	'welcome-message-anon-staff' => 'こんにちは、{{SITENAME}}へようこそ！ [[:$1]]への編集ありがとうございます。
+それではどうぞウィキアでの編集をお楽しみください！',
+	'welcome-message-anon-staff' => "== ようこそ ==
 
-もし、まだアカウントをお持ちでなければ、[[Special:Userlogin|ぜひアカウントを取得してみてください]]。他の方とコミュニケーションがとりやすくなりますし、アカウントユーザーだけが利用できる機能も多くあります。
+こんにちは、{{SITENAME}} へようこそ。[[:$1]] をご編集いただきありがとうございます。
 
-もし、何か困ったことがあり、このウィキローカルの管理者が見当たらない場合には、[[w:ja:Forum:Index|セントラルウィキアのフォーラム]]までメッセージをお寄せください。$3', # Fuzzy
+'''[[Special:Userlogin|ユーザー名を作成]]すると、自分の投稿の履歴を確認することができ、また他のコミュニティとのコミュニケーションに役立ちます。
+
+もしご不明な点がある場合には、[[w:c:ja.community:ヘルプ:コンテンツ|ヘルプページ]]をご覧いただくか、[[Special:Listusers/sysop|コミュニティのアドミン]] (管理者)にお問い合わせください。もしアクティブなアドミンがいない場合は、[[w:c:ja.community|コミュニティセントラル]]の[[w:c:ja.community:特別:Forum|フォーラム]]をご覧ください。
+
+英語版では、スタッフや他のウィキア編集者とチャットができる[[w:c:community:Webinars|ウェビナー]]を開催することがありますので、よろしければご参加ください。[[w:c:ja.community:ブログ:ウィキアスタッフブログ|スタッフブログ]]でもウィキアに関する最新のニュースや出来事をご紹介しています。最後に、[[w:c:video:Wikia Video Library|ビデオライブラリ]] をご覧いただくと、特別にライセンスされたビデオをあなたのウィキアコミュニティに加えることができます。
+
+こちらのリンクはすべてウィキアを楽しんでいただくために役立てていただけるものです。
+
+それではどうぞ編集をお楽しみください！",
+	'welcome-user' => '@latest',
+	'welcome-bot' => '@bot',
+	'welcome-message-wall-user' => 'こんにちは、{{SITENAME}}へようこそ！ [[:$1]]ページの編集ありがとうございます。
+
+もし私に何かお役に立てることがあるときは、私のところに伝言を残してください！',
+	'welcome-message-wall-user-staff' => 'こんにちは、{{SITENAME}} へようこそ！ [[:$1]]のページ編集ありがとうございます。もしあなたがヘルプを必要としているのであれば、[[ヘルプ:コンテンツ|ヘルプページ]]を一読するか、[[特別:Listusers/sysop|ローカルの管理者]]に連絡してみてください。もしこのウィキアに活動中の管理者がいないのであれば、[[w:ja:|コミュニティセントラル]]にお立ち寄り、[[w:ja:特別:Forum:|フォーラム]]も覗いてみてください。
+
+
+
+すぐにでもヘルプをお探しですか？ 次回の[[w:Webinars|ウェビナー]] (英語) でスタッフやウィキアの編集者が参加しているチャットに参加してみてください。最新のニュースやウィキアで起きている出来事の最新情報を入手するために[[w:ja:ブログ:ウィキアスタッフブログ|スタッフブログ]] ([[w:Blog:Wikia_Staff_Blog|英語]]) をチェックすることもできます。最後に、プレミアムライセンスの動画を閲覧できる[[w:c:video|ウィキアビデオライブラリ]]も見てください。
+
+これらのリンクはすべて、ウィキアを探索するよい方法です。
+
+それでは楽しい編集を！',
+	'welcome-message-wall-anon' => "こんにちは、{{SITENAME}}へようこそ！　[[:$1]]ページの編集ありがとうございます。
+
+'''[[Special:Userlogin|サインインしてユーザー名の作成をお願いします]]'''。これは自分の投稿の経過を追う簡単な方法でなおかつ、その他のコミュニティとコミュニケーションを取るのに役に立ちます。
+
+もし私に手伝えることがあるときは、私のところに伝言を残してください！",
+	'welcome-message-wall-anon-staff' => "こんにちは、{{SITENAME}} へようこそ！ [[:$1]] ページをご編集いただきありがとうございます。
+
+'''[[Special:Userlogin|ユーザー名を作成]]'''すると、自分の投稿の履歴を確認することができ、また他のコミュニティとのコミュニケーションに役立ちます。
+
+もしご不明な点がある場合には、[[w:c:ja.community:ヘルプ:コンテンツ|ヘルプページ]]をご覧いただくか、[[Special:Listusers/sysop|コミュニティのアドミン(管理者) ]] にお問い合わせください。もしアクティブなアドミンがいない場合は、[[w:c:ja.community|コミュニティセントラル]]の[[w:c:ja.community:特別:Forum|フォーラム]]をご覧ください。
+
+英語版では、スタッフや他のウィキア編集者とチャットができる[[w:c:community:Webinars|ウェビナー]]を開催することがありますので、よろしければご参加ください。[[w:c:ja.community:ブログ:ウィキアスタッフブログ|スタッフブログ]]でもウィキアに関する最新のニュースや出来事をご紹介しています。最後に、[[w:c:video:Wikia Video Library|ビデオライブラリ]] をご覧いただくと、特別にライセンスされたビデオをあなたのウィキアコミュニティに加えることができます。
+
+もし何か手伝いできることがありましたら、お気軽にメッセージを残してくださいね！",
+	'welcome-description' => '初めて編集をしたユーザーにウェルカムメッセージを送信',
 );
 
 /** Korean (한국어)
  * @author Miri-Nae
  */
 $messages['ko'] = array(
-	'welcome-user-page' => '==저에 대해서==
+	'welcome-user-page' => '== 저에 대해서 ==
 
 이 문서는 당신의 사용자 문서입니다. 이 단락에 당신에 대해 소개하는 글을 남겨보세요.
 
-==기여 내역==
+== 기여 내역 ==
 
-* [[특수기능:기여/$1|기여 내역]]
 
-==관심 있는 문서 목록==
 
-* 여기에 관심 있는 문서들을 링크로 추가해보세요.
-* 2번째 관심 문서
-* 3번째 관심 문서', # Fuzzy
-	'welcome-message-user' => '안녕하세요, {{SITENAME}}에 오신 것을 환영합니다! [[:$1]] 문서에 기여를 해주셔서 감사합니다.
+*[[Special:Contributions/{{PAGENAME}}|기여 내역]]
 
-도움이 필요하시다면 제 [[$2|토론 문서]]에 메시지를 남겨주세요! $3',
-	'welcome-message-anon' => "안녕하세요, {{SITENAME}}에 오신 것을 환영합니다! [[:$1]] 문서에 기여를 해주셔서 감사합니다.
+== 관심 있는 문서 목록<br />==
 
-'''[[특수기능:로그인|사용자 계정을 생성하시는 것은 어떨까요]]'''?
-사용자 계정이 있으면 자신의 기여 내역을 확인할 수 있고, 더 많은 커뮤니티에서 더 쉽게 활동할 수 있습니다.
 
-도움이 필요하시다면 제 [[$2|토론 문서]]에 메시지를 남겨주세요! $3", # Fuzzy
-	'welcome-message-log' => '새 기여자 환영하기',
-	'welcome-message-wall-user' => '안녕하세요, {{SITENAME}}에 오신 것을 환영합니다! [[:$1]] 문서에 기여를 해주셔서 감사합니다.
 
-도움이 필요하시다면 제게 메시지를 남겨주세요!',
-	'welcome-message-wall-anon' => "안녕하세요, {{SITENAME}}에 오신 것을 환영합니다! [[:$1]] 문서에 기여를 해주셔서 감사합니다.
+*여기에 관심 있는 문서들을 링크로 추가해보세요.
+*2번째 관심 문서
+*3번째 관심 문서',
+	'welcome-message-user' => '$4님, 안녕하세요.&nbsp;{{SITENAME}}에 오신 것을 환영합니다! [[:$1]] 문서를 편집해주셔서 감사드립니다. 만약 도움이 필요하시다면 [[$2|제 사용자 토론 문서]]에 메시지를 남겨주세요.&nbsp;$3',
+	'welcome-message-anon' => "안녕하세요. {{SITENAME}}에 오신 것을 환영합니다. [[:$1]] 문서를 편집해주셔서 감사드립니다. '''[[Special:Userlogin|먼저 계정을 만드셔서 활동하시는 것을 권해드립니다.]]''' 이는 당신의 기여를 쉽게 추적하고 다른 사용자분들과 쉽게 소통할 수 있는 좋은 방법입니다. 만약 도움이 필요하시다면 [[$2|제 사용자 토론 문서]]에 메시지를 남겨주세요.&nbsp;$3",
+	'welcome-message-log' => '새 사용자 환영',
+	'welcome-message-wall-user' => '안녕하세요. {{SITENAME}}에 오신 것을 환영합니다! [[:$1]] 문서를 편집해주셔서 감사드립니다.
 
-'''[[특수기능:로그인|사용자 계정을 생성하시는 것은 어떨까요]]'''? 사용자 계정이 있으면 자신의 기여 내역을 확인할 수 있고, 더 많은 커뮤니티에서 더 쉽게 활동할 수 있습니다.
+만약 도움이 필요하시다면 제 담벼락에 메시지를 남겨주세요.',
+	'welcome-message-wall-anon' => "안녕하세요. {{SITENAME}}에 오신 것을 환영합니다. $1 문서를 편집해주셔서 감사드립니다.
 
-도움이 필요하시다면 제게 메시지를 남겨주세요!", # Fuzzy
+'''[[Special:Userlogin|먼저 계정을 만드셔서 활동하시는 것을 권해드립니다.]]''' 이는 당신의 기여를 쉽게 추적하고 다른 사용자분들과 쉽게 소통할 수 있는 좋은 방법입니다.
+
+만약 도움이 필요하시다면 제 담벼락에 메시지를 남겨주세요.",
+	'welcome-user' => '== 저에 대해서 ==
+
+이 문서는 당신의 사용자 문서입니다. 이 단락에 당신에 대해 소개하는 글을 남겨보세요.
+
+== 기여 내역 ==
+
+
+
+*[[Special:Contributions/{{PAGENAME}}|기여 내역]]
+
+== 관심 있는 문서 목록<br />==
+
+
+
+*여기에 관심 있는 문서들을 링크로 추가해보세요.
+*2번째 관심 문서
+*3번째 관심 문서',
+	'welcome-message-user-staff' => '==환영합니다!==
+
+안녕하세요. {{SITENAME}}에 오신 것을 환영합니다.
+[[:$1]] 문서를 편집해주셔서 감사드립니다.
+
+만약 도움이 필요한데 이 위키의 관리자가 활동중이 아니라면 [[w:c:ko:포럼:중앙 커뮤니티 포럼|중앙 커뮤니티의 포럼]]을 방문해보세요.',
+	'welcome-message-anon-staff' => "==환영합니다!==
+
+안녕하세요. {{SITENAME}}에 오신 것을 환영합니다.
+[[:$1]] 문서를 편집해주셔서 감사드립니다.
+
+'''[[Special:Userlogin|먼저 계정을 만드셔서 활동하시는 것을 권해드립니다.]]''' 이는 당신의 기여를 쉽게 추적하고 다른 사용자분들과 쉽게 소통할 수 있는 좋은 방법입니다.
+
+만약 도움이 필요한데 이 위키의 관리자가 활동중이 아니라면 [[w:c:ko:포럼:중앙 커뮤니티 포럼|중앙 커뮤니티의 포럼]]을 방문해보세요. $3",
+	'welcome-message-wall-user-staff' => '안녕하세요. {{SITENAME}}에 오신 것을 환영합니다. $1 문서를 편집해주셔서 감사드립니다.
+
+만약 도움이 필요한데 이 위키의 관리자가 활동중이 아니라면 [[w:c:ko:포럼:중앙 커뮤니티 포럼|중앙 커뮤니티의 포럼]]을 방문해보세요. [[w:c:community:Blog:Wikia_Staff_Blog|스태프 블로그 (영어)]]를 주시하시면 위키아의 최근 소식을 알아볼 수 있습니다.',
+	'welcome-message-wall-anon-staff' => "안녕하세요. {{SITENAME}}에 오신 것을 환영합니다. [[:$1]] 문서를 편집해주셔서 감사드립니다.
+
+'''[[Special:Userlogin|먼저 계정을 만드셔서 활동하시는 것을 권해드립니다.]]''' 이는 회원님의 기여를 쉽게 추적하고 다른 사용자분들과 쉽게 소통할 수 있는 좋은 방법입니다.
+
+만약 도움이 필요하시다면 제 담벼락에 메시지를 남겨주세요.",
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -1096,14 +1218,14 @@ $messages['mk'] = array(
 
 Здраво и добредојдовте на {{SITENAME}}! Ви благодариме за вашето уредување на страницата [[:$1]].
 
-Ако ви треба помош, а нема локални администратори, ви препорачуваме да ги посетите [[wikia:Forum:Community Central Forum|форумите на Центарот на Заедницата]] $3', # Fuzzy
+Ако ви треба помош, а нема локални администратори, ви препорачуваме да ги посетите [[wikia:Forum:Community Central Forum|форумите на Центарот на Заедницата]] $3',
 	'welcome-message-anon-staff' => "==Добредојдовте==
 
 Здраво и добредојдовте на {{SITENAME}}. Ви благодариме за вашето уредување на страницата [[:$1]].
 
 '''[[Special:Userlogin|Најавете се и создајте корисничко име]]'''. Вака лесно ќе можеме да ги следиме вашите придонеси, а воедно ја олеснува и вашата комуникација со останатите членови на заедницата.
 
-Ако ви треба помош, а нема локални администратори, ви препорачуваме да ги посетите [[wikia:Forum:Community Central Forum|форумите на Центарот на Заедницата]] $3", # Fuzzy
+Ако ви треба помош, а нема локални администратори, ви препорачуваме да ги посетите [[wikia:Forum:Community Central Forum|форумите на Центарот на Заедницата]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|форум за помош]] | [[w:sblog|блог]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Здраво и добре дојдовте на {{SITENAME}}! Ви благодариме за вашето уредување на страницата [[:$1]].
@@ -1113,7 +1235,7 @@ $messages['mk'] = array(
 
 Доколку ви треба помош, а нема локални администратори, посетете ги [[wikia:Forum:Community Central Forum|форумите на Центарот на заедницата]]. Најнови вести и настани ќе најдете на [[w:c:community:Blog:Wikia_Staff_Blog|Блогот на персоналот]] на Викија.
 
-Ви посакуваме среќно уредување!', # Fuzzy
+Ви посакуваме среќно уредување!',
 	'welcome-message-wall-anon' => "Здраво и добре дојдовте на {{SITENAME}}! Ви благодариме за вашето уредување на страницата [[:$1]].
 
 '''[[Special:Userlogin|Најавете се и создајте корисничко име]]'''. Ова е лесен начин на следење на вашите придонеси и ви овозможува да комуницирате со другите учесници во заедницата.
@@ -1123,8 +1245,8 @@ $messages['mk'] = array(
 
 '''[[Special:Userlogin|Најавете се и создајте корисничко име]]'''. Ова е лесен начин на следење на вашите придонеси и ви овозможува да комуницирате со другите учесници во заедницата.
 
-Оставете ми порака на ако ви треба било каква помош!", # Fuzzy
-	'welcome-description' => 'Испраќа порака за добредојде на корисниците откако ќе го направат првото уредување.', # Fuzzy
+Оставете ми порака на ако ви треба било каква помош!",
+	'welcome-description' => 'Испраќа порака за добредојде на корисниците откако ќе го направат првото уредување.',
 );
 
 /** Malay (Bahasa Melayu)
@@ -1222,14 +1344,14 @@ Hei, velkommen til {{SITENAME}}. Takk for at du har redigert [[:$1]]-siden.
 
 Hvis du trenger hjelp, og det ikke er noen lokale administratorer her, vil
 du kanskjebesøke [[wikia:Forum:Community Central Forum|forumene på Community
-Central Wiki]] $3', # Fuzzy
+Central Wiki]] $3',
 	'welcome-message-anon-staff' => "== Velkommen ==
 
 Hei, velkommen til {{SITENAME}}. Takk for at du har redigert [[:$1]]-siden.
 
 '''[[Special:Userlogin|Registrer deg og opprett et brukernavn]]'''. Det er en enkel måte å holde styring på bidragene dine og hjelper deg med å kommunisere med resten av fellesskapet.
 
-Hvis du trenger hjelp og det ikke er noen lokale administratorer her vil du kanskje besøke [[wikia:Forum:Community Central Forum|forumene på Community Central Wiki]] $3", # Fuzzy
+Hvis du trenger hjelp og det ikke er noen lokale administratorer her vil du kanskje besøke [[wikia:Forum:Community Central Forum|forumene på Community Central Wiki]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|hjelpeforum]] | [[w:sblog|blogg]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Hei, velkommen til {{SITENAME}}! Takk for at du redigerte siden [[:$1]].
@@ -1239,7 +1361,7 @@ Vennligst legg igjen en beskjed hvis jeg kan hjelpe deg med noe!',
 
 Hvis du trenger hjelp, og det ikke er noen lokale administratorer her, vil du kanskje besøke [[wikia:Forum:Community Central Forum|forumene på Fellesskapssentral-wikien]]. Du kan også sjekke [[w:c:community:Blog:Wikia_Staff_Blog|ledelsesbloggen vår]] for å holde deg oppdatert med de siste nyhetene og hendelsene innenfor Wikia.
 
-Gledelig redigering!', # Fuzzy
+Gledelig redigering!',
 	'welcome-message-wall-anon' => "Hei, velkommen til {{SITENAME}}! Takk for at du redigerte siden [[:$1]].
 
 '''[[Special:Userlogin|Vennligst logg inn og opprett et brukernavn]]'''. Det er en enkel måte å holde oversikt over bidragene dine og hjelper deg med å kommunisere med resten av fellesskapet.
@@ -1249,7 +1371,7 @@ Vennligst legg igjen en beskjed hvis jeg kan hjelpe deg med noe!",
 
 '''[[Special:Userlogin|Vennligst logg inn og opprett et brukernavn]]'''. Det er en enkel måte å holde oversikt over bidragene dine og hjelper deg med å kommunisere med resten av fellesskapet.
 
-Vennligst legg igjen en beskjed hvis jeg kan hjelpe deg med noe!", # Fuzzy
+Vennligst legg igjen en beskjed hvis jeg kan hjelpe deg med noe!",
 	'welcome-description' => 'Sender en velkomstbeskjed til brukere etter deres første redigering',
 );
 
@@ -1274,29 +1396,29 @@ $messages['nl'] = array(
 * Voeg hier koppelingen toe naar uw favoriete pagina's op deze wiki!
 * Favoriete pagina #2
 * Favoriete pagina #3",
-	'welcome-message-user' => 'Hallo, welkom bij {{SITENAME}}! Bedankt voor uw bewerking van de pagina [[:$1]].
+	'welcome-message-user' => '== Welkom ==
+Hoi, welkom bij {{SITENAME}}! Bedankt voor je bewerking van de pagina [[:$1]].
 
-Laat gerust een bericht achter op [[$2|mijn overlegpagina]] als ik u ergens mee kan helpen! $3',
-	'welcome-message-anon' => "Hallo, welkom bij {{SITENAME}}. Dank u wel voor uw werk aan de pagina [[:$1]].
+Laat gerust een bericht achter op [[$2|mijn overlegpagina]] als ik je ergens mee kan helpen! $3',
+	'welcome-message-anon' => "Hoi, welkom bij {{SITENAME}}. Dank je wel voor je werk aan de pagina [[:$1]].
 
-'''[[Special:Userlogin|Maak een gebruiker aan of meld u aan]]'''.
-Het is een eenvoudige manier om uw bijdragen te volgen en helpt u bij het onderhouden van contacten met de rest van de gemeenschap.
+'''[[Special:Userlogin|Maak alsjeblieft een gebruiker aan of meld je aan]]'''.
+Het is een eenvoudige manier om je bijdragen te volgen en helpt je bij het onderhouden van contacten met de rest van de gemeenschap.
 
-Laat een bericht achter op [[$2|mijn overleg pagina]] als ik u ergens mee kan helpen! $3",
-	'welcome-message-log' => 'Verwelkomen van nieuwe bijdrager',
-	'welcome-message-user-staff' => "==Welkom==
+Laat alsjeblieft een bericht achter op [[$2|mijn overleg pagina]] als ik je ergens mee kan helpen! $3",
+	'welcome-message-log' => 'Welkom op de {{SITENAME}}!',
+	'welcome-message-user-staff' => '==Welkom==
 
-Hallo,
+Hoi, Welkom bij {{SITENAME}}! Dank je wel voor je bewerking aan de pagina [[:$1]].
 
-welkom bij {{SITENAME}} en dank u wel voor uw bewerking aan de pagina [[:$1]]. Als u hulp zoekt, kijk dan eens naar onze [[Help:Contents|hulppagina's]]. Ga langs bij [[w:c:community|Community Central]] om op de hoogte te blijven via onze [[w:c:community:Blog:Wikia_Staff_Blog|medewerkersblog]], stel vragen op ons [[w:c:community:Special:Forum|gemeenschapsforum]], neem deel aan onze [[w:c:community:Help:Webinars|webinars]] of chat live met mede-Wikianen. Veel plezier met bewerken!
-$3",
-	'welcome-message-anon-staff' => '==Welcome==
+Als je hulp zoekt en er zijn geen lokale beheerders, ga dan naar de [[w:Forum:Index|forums op de Centrale Gemeenschapswiki]] $3',
+	'welcome-message-anon-staff' => "==Welkom==
 
-Hallo,
+Hoi! Welkom bij {{SITENAME}}. Dank je wel voor je bewerking aan de pagina [[:$1]].
 
-Welkom bij {{SITENAME}} en dank u wel voor uw bewerking van de [[:$1]] pagina. We moedigen alle mensen die bijdragen aan om [[Special:UserLogin|een gebruikersnaam aan te maken]], zodat u uw bijdragen kunt bijhouden, u toegang heeft tot meer Wikia mogelijkheden en de rest van de {{SITENAME}} community leert kennen.
+'''[[Special:UserLogin|Meld je alsjeblieft aan of maak een gebruiker aan]]'''. Zo kan je eenvoudig je bewerkingen bijhouden en contact houden met de andere leden van de gemeenschap.
 
-Als u hulp nodig heeft, bekijk dan eerst onze [[Help:Contents|help pages]] en bezoek dan [[w:c:community|Community Central]] om meer te weten te komen. Veel succes met bewerken! $3',
+Als je hulp zoekt en er zijn geen lokale beheerders, ga dan naar de [[MediaWiki:Forum:Community Central Forum|forums op de Centrale Gemeenschapswiki]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|forum voor hulp]] | [[w:sblog|blog]])</small>',
 	'hawelcomeedit' => 'HA Welkom bewerken',
 	'welcome-message-wall-user' => 'Hallo en welkom bij {{SITENAME}}! Dank u wel voor uw bewerking aan de pagina [[:$1]].
@@ -1316,6 +1438,7 @@ Welkom bij {{SITENAME}} en dank u wel voor uw bewerking van de [[:$1]] pagina. W
 
 Als u hulp nodig heeft, bekijk dan eerst onze [[Help:Contents|help pagina's]] en bezoek dan [[w:c:community|de centrale gemeenschap]] om meer te weten te komen. Veel plezier met bewerken!",
 	'welcome-description' => 'Stuurt een welkomstbericht aan gebruikers na hun eerste bewerkingen',
+	'welcome-user' => '@latest',
 );
 
 /** Nederlands (informeel)‎ (Nederlands (informeel)‎)
@@ -1346,14 +1469,14 @@ Laat een bericht achter op [[$2|mijn overleg pagina]] als ik je ergens mee kan h
 
 Hoi! Welkom bij {{SITENAME}}. Dank je wel voor je bewerking aan de pagina [[:$1]].
 
-Als je hulp zoekt en er zijn geen lokale beheerders, ga dan naar de [[wikia:Forum:Community Central Forum|forums op de Centrale Gemeenschapswiki]] $3', # Fuzzy
+Als je hulp zoekt en er zijn geen lokale beheerders, ga dan naar de [[wikia:Forum:Community Central Forum|forums op de Centrale Gemeenschapswiki]] $3',
 	'welcome-message-anon-staff' => "==Welkom==
 
 Hoi! Welkom bij {{SITENAME}}. Dank je wel voor je bewerking aan de pagina [[:$1]].
 
 '''[[Special:UserLogin|Meld je alsjeblieft aan of maak een gebruiker aan]]'''. Zo kan je eenvoudig je bewerkingen bijhouden en contact houden met de andere leden van de gemeenschap.
 
-Als je hulp zoekt en er zijn geen lokale beheerders, ga dan naar de [[wikia:Forum:Community Central Forum|forums op de Centrale Gemeenschapswiki]] $3", # Fuzzy
+Als je hulp zoekt en er zijn geen lokale beheerders, ga dan naar de [[wikia:Forum:Community Central Forum|forums op de Centrale Gemeenschapswiki]] $3",
 );
 
 /** Occitan (occitan)
@@ -1432,56 +1555,80 @@ $messages['pl'] = array(
 	'welcome-user-page' => "== O mnie ==
 ''To Twoja strona użytkownika. Edytuj ją i powiedz społeczności coś o sobie!''
 
-== Moje edycje ==
-* [[Special:Contributions/$1|Edycje]]
+== Mój wkład ==
+* [[Specjalna:Wkład/$1|wkład]]
 
 == Moje ulubione strony ==
 * Dodaj tu linki do swoich ulubionych stron!
 * Drugi link.
 * I trzeci.",
-	'welcome-message-user' => "==Witaj==
-Witaj na {{SITENAME}}. Dzięki za edycję w artykule '''[[:$1]]'''.
+	'welcome-message-user' => '==Witaj==
+Witaj na {{SITENAME}}. Dzięki za dokonanie pierwszej edycji.
 
-Zostaw wiadomość na [[$2|mojej stronie dyskusji]], gdyby potrzebna była Ci jakakolwiek pomoc. $3",
-	'welcome-message-anon' => "==Witaj==
-Witaj na {{SITENAME}}. Dzięki za edycję w artykule '''[[:$1]]'''.
-
-Proszę, [[Special:Userlogin|załóż konto]]. Ułatwi Ci to kontakt ze społecznością projektu i sprawi, że wszystkie Twoje edycje będą trzymane w jednym miejscu.
-
-Zostaw wiadomość na [[$2|mojej stronie dyskusji]], gdyby potrzebna była Ci jakakolwiek pomoc. $3",
-	'welcome-message-log' => 'powitanie',
-	'welcome-message-user-staff' => '== Witaj ==
-Witaj na {{SITENAME}}. Dzięki za dokonanie edycji na stronie [[:$1]].
-
-Jeśli potrzebujesz pomocy, zacznij od odwiedzenia [[Pomoc:Zawartość|stron pomocy]]. Odwiedź [[w:c:spolecznosc|Centrum Społeczności]], by być na bieżąco ze zmianami. Zadawaj pytania na naszym [[w:c:spolecznosc:Specjalna:Forum|forum społeczności]] lub dołącz na czat z innymi Wikianami. Wesołego edytowania! $3', # Fuzzy
-	'welcome-message-anon-staff' => '==Witaj==
-Witaj na {{SITENAME}}. Dzięki za dokonanie edycji na stronie [[:$1]].
+Zostaw wiadomość na [[$2|mojej stronie dyskusji]], gdyby potrzebna była Ci jakakolwiek pomoc. $3',
+	'welcome-message-anon' => '==Witaj==
+Witaj na {{SITENAME}}. Dzięki za dokonanie pierwszej edycji.
 
 Proszę, [[Special:UserLogin|załóż konto]]. Ułatwi Ci to kontakt ze społecznością projektu i sprawi, że wszystkie Twoje edycje będą trzymane w jednym miejscu.
 
-Jeśli potrzebujesz pomocy, zacznij od odwiedzenia [[Pomoc:Zawartość|stron pomocy]], a następnie wejdź na [[w:c:spolecznosc|Centrum Społeczności]] by dowiedzieć się więcej. Wesołego edytowania! $3', # Fuzzy
+Zostaw wiadomość na [[$2|mojej stronie dyskusji]], gdyby potrzebna była Ci jakakolwiek pomoc. $3',
+	'welcome-message-log' => 'Witaj na {{SITENAME}}!',
+	'welcome-message-user-staff' => '== Witaj ==
+Hej, witaj na {{SITENAME}} i dzięki za Twoją edycję na stronie [[:$1]].
+
+Wygląda na to, że [[Specjalna:Administratorzy|lokalna administracja]] jest nieaktywna. Jeśli potrzebujesz pomocy zerknij na [[Pomoc:Zawartość|strony pomocy]].
+
+Możesz też odwiedzić [[w:c:spolecznosc:Centrum Społeczności|Centrum Społeczności]] gdzie znajdziesz blog z [[w:c:spolecznosc:Blog:Wikia_News|nowościami]] oraz zasięgniesz pomocy na [http://spolecznosc.wikia.com/wiki/Specjalna:Chat?useskin=wikia czacie] albo [[w:c:spolecznosc:Specjalna:Forum|forum dyskusyjnym]].
+
+Miłego edytowania! $3',
+	'welcome-message-anon-staff' => "== Witaj ==
+Hej, witaj na {{SITENAME}} i dzięki za Twoją edycję na stronie [[:$1]].
+
+Zalecamy '''[[Special:UserLogin|utworzenie konta]]''' co pozwoli Ci na śledzenie swojego wkładu, udostępni wiele funkcji dostępnych na Wikii oraz umożliwi poznanie lokalnej społeczności.
+
+Wygląda na to, że [[Specjalna:Administratorzy|lokalna administracja]] jest nieaktywna. Jeśli potrzebujesz pomocy zerknij na [[Pomoc:Zawartość|strony pomocy]].
+
+Możesz też odwiedzić [[w:c:spolecznosc:Centrum Społeczności|Centrum Społeczności]] gdzie znajdziesz blog z [[w:c:spolecznosc:Blog:Wikia_News|nowościami]] oraz zasięgniesz pomocy na [http://spolecznosc.wikia.com/wiki/Specjalna:Chat?useskin=wikia czacie] albo [[w:c:spolecznosc:Specjalna:Forum|forum dyskusyjnym]].
+
+Miłego edytowania! $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|forum pomocy]] | [[w:sblog|blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
-	'welcome-message-wall-user' => "Witaj na {{SITENAME}}. Dzięki za edycję w artykule '''[[:$1]]'''.
+	'welcome-message-wall-user' => 'Witaj na {{SITENAME}}. Dzięki za dokonanie pierwszej edycji.
 
-Zostaw wiadomość, gdyby potrzebna była Ci jakakolwiek pomoc.",
-	'welcome-message-wall-user-staff' => "Witaj na {{SITENAME}}. Dzięki za edycję w artykule '''$1'''.
+Zostaw wiadomość, gdyby potrzebna była Ci jakakolwiek pomoc.',
+	'welcome-message-wall-user-staff' => 'Hej, witaj na {{SITENAME}} i dzięki za Twoją edycję na stronie [[:$1]].
 
-Jeśli potrzebujesz pomocy, a brak jest tutaj lokalnych administratorów możesz odwiedzić [[wikia:Forum:Community Central Forum|forum dyskusyjne lokalnej społeczności Wikia]].
-Odwiedź [[w:c:community:Blog:Wikia_Staff_Blog|nasz blog]] aby być na bieżąco z nowościami.
+Wygląda na to, że [[Specjalna:Administratorzy|lokalna administracja]] jest nieaktywna. Jeśli potrzebujesz pomocy zerknij na [[Pomoc:Zawartość|strony pomocy]].
 
-Przyjemnego edytowania!",
-	'welcome-message-wall-anon' => "Witaj na {{SITENAME}}. Dzięki za edycję w artykule '''[[:$1]]'''.
+Możesz też odwiedzić [[w:c:spolecznosc:Centrum Społeczności|Centrum Społeczności]] gdzie znajdziesz blog z [[w:c:spolecznosc:Blog:Wikia_News|nowościami]] oraz zasięgniesz pomocy na [http://spolecznosc.wikia.com/wiki/Specjalna:Chat?useskin=wikia czacie] albo [[w:c:spolecznosc:Specjalna:Forum|forum dyskusyjnym]].
 
-Proszę, [[Special:Userlogin|załóż konto]]. Ułatwi Ci to kontakt ze społecznością projektu i sprawi, że wszystkie Twoje edycje będą trzymane w jednym miejscu.
+Miłego edytowania!',
+	'welcome-message-wall-anon' => 'Witaj na {{SITENAME}}. Dzięki za dokonanie pierwszej edycji.
 
-Zostaw wiadomość, gdyby potrzebna była Ci jakakolwiek pomoc.",
-	'welcome-message-wall-anon-staff' => 'Cześć,
-Witaj na {{SITENAME}} i dziękuję za edycję na stronie [[:$1]] Dzięki za dokonanie pierwszej edycji. Zachęcamy każdego edytora do [[Special:UserLogin|utworzenia profilu użytkownika]], dzięki czemu Twoje edycje będą trzymane w jednym miejscu, uzyskasz dostęp do więcej rozszerzeń Wikii i poznasz resztę społeczności {{SITENAME}}.
+Proszę, [[Special:UserLogin|załóż konto]]. Ułatwi Ci to kontakt ze społecznością projektu i sprawi, że wszystkie Twoje edycje będą trzymane w jednym miejscu.
 
+Zostaw wiadomość, gdyby potrzebna była Ci jakakolwiek pomoc.',
+	'welcome-message-wall-anon-staff' => "Hej, witaj na {{SITENAME}} i dzięki za Twoją edycję na stronie [[:$1]].
 
-Jeśli potrzebujesz pomocy, odwiedź nasze  [[Pomoc:Zawartość|strony pomocy]], a potem odwiedź [[w:c:spolecznosc|Centrum Społeczności]], by dowiedzieć się więcej. Wesołego edytowania!', # Fuzzy
+Zalecamy '''[[Special:UserLogin|utworzenie konta]]''' co pozwoli Ci na śledzenie swojego wkładu, udostępni wiele funkcji dostępnych na Wikii oraz umożliwi poznanie lokalnej społeczności.
+
+Wygląda na to, że [[Specjalna:Administratorzy|lokalna administracja]] jest nieaktywna. Jeśli potrzebujesz pomocy zerknij na [[Pomoc:Zawartość|strony pomocy]].
+
+Możesz też odwiedzić [[w:c:spolecznosc:Centrum Społeczności|Centrum Społeczności]] gdzie znajdziesz blog z [[w:c:spolecznosc:Blog:Wikia_News|nowościami]] oraz zasięgniesz pomocy na [http://spolecznosc.wikia.com/wiki/Specjalna:Chat?useskin=wikia czacie] albo [[w:c:spolecznosc:Specjalna:Forum|forum dyskusyjnym]].
+
+Miłego edytowania!",
 	'welcome-description' => 'Wysyła wiadomość powitalną dla użytkowników po ich pierwszej edycji.',
+	'welcome-user' => "== O mnie ==
+''To Twoja strona użytkownika. Edytuj ją i powiedz społeczności coś o sobie!''
+
+== Mój wkład ==
+* [[Specjalna:Wkład/$1|wkład]]
+
+== Moje ulubione strony ==
+* Dodaj tu linki do swoich ulubionych stron!
+* Drugi link.
+* I trzeci.",
+	'welcome-bot' => '@bot',
 );
 
 /** Piedmontese (Piemontèis)
@@ -1516,14 +1663,14 @@ Për piasì ch'a lassa un mëssagi su [[$2|mia pàgina ëd discussion]] s'i peus
 Cerea, bin ëvnù su {{SITENAME}}! Mersì për soa modìfica a la pàgina [[:$1]].
 
 S'a l'has dabzògn d'agiut, e a-i é gnun aministrator locaj ambelessì, a peul 
-visité le [[wikia:Forum:Community Central Forum|piasse dla Wiki Sentral ëd la Comunità]] $3", # Fuzzy
+visité le [[wikia:Forum:Community Central Forum|piasse dla Wiki Sentral ëd la Comunità]] $3",
 	'welcome-message-anon-staff' => "==Bin ëvnù==
 
 Cerea, bin ëvnù su {{SITENAME}}! Mersì për soa modìfica a la pàgina [[:$1]].
 
 '''[[Special:Userlogin|Për piasì ch'a intra e ch'a crea un nòm utent]]'''. A l'é na manera bel fé ëd ten-e trassa ëd soe contribussion e a-j giuta a comuniché con ël rest ëd la comunità.
 
-S'a l'has dabzògn d'agiut, e a-i é gnun aministrator locaj ambelessì, a peul visité le [[wikia:Forum:Community Central Forum|piasse ëd la Wiki Sentral ëd la Comunità]] $3", # Fuzzy
+S'a l'has dabzògn d'agiut, e a-i é gnun aministrator locaj ambelessì, a peul visité le [[wikia:Forum:Community Central Forum|piasse ëd la Wiki Sentral ëd la Comunità]] $3",
 	'staffsig-text' => "[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|piassa d'agiut]] | [[w:sblog|blog]])</small>",
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => "Cerea, bin ëvnù su {{SITENAME}}! Mersì për soe modìfiche a la pàgina [[:$1]].
@@ -1573,25 +1720,24 @@ $messages['ps'] = array(
  * @author Waldir
  */
 $messages['pt'] = array(
-	'welcome-user-page' => "== Sobre mim ==
-''Esta é a tua página de utilizador. Por favor, edita esta página para contar mais sobre ti para a comunidade!''
+	'welcome-user-page' => "==Sobre mim==
 
-== As minhas contribuições ==
-* [[Special:Contributions/$1|Contribuições deste utilizador]]
+''Esta é a sua página de usuário. Por favor, edite esta página para contar mais sobre você para a comunidade!''
 
-== As minhas páginas preferidas ==
-* Adiciona links para as tuas páginas favoritas deste wiki!
-* Página preferida #2
-* Página preferida #3",
+==Minhas páginas favoritas==
+
+* Adicione links para suas páginas favoritas da wikia!
+* Página favorita #2
+* Página favorita #3",
 	'welcome-message-user' => 'Olá, bem-vindo(a) à {{SITENAME}}! Obrigado pela tua edição na página [[:$1]].
 
 Por favor, deixa uma mensagem na [[$2|minha página de discussão]] se eu posso ajudar-te nalguma coisa! $3',
-	'welcome-message-anon' => "Olá, bem-vindo(a) à {{SITENAME}}! Muito obrigado pela tua edição em [[:$1]]. 
+	'welcome-message-anon' => "Olá, bem-vindo(a) a {{SITENAME}}! Muito obrigado pela sua edição em [[:$1]]. 
 
-Porque não '''[[Special:Userlogin|crias uma conta e te identificas]]'''? Desta forma será muito mais fácil saber as páginas que tu editaste e o teu trabalho será atribuido a ti na wiki, além do mais será de grande ajuda na hora de comunicar-te com o resto da comunidade.
+Porque não '''[[Special:Userlogin|criar uma conta]]'''? É uma maneira mais fácil de saber onde você editou e de se comunicar com o resto da comunidade. 
 
-Por favor, se tiveres alguma dúvida, sente-te à vontade para deixar uma mensagem na [[$2|minha página de discussão]] para ver se eu posso ajudar-te com alguma coisa. $3",
-	'welcome-message-log' => 'boas-vindas a novo colaborador',
+Por favor, se você tiver alguma dúvida, sinta-se à vontade para deixar uma mensagem no [[$2|meu mural de mensagens]]! $3",
+	'welcome-message-log' => 'bem vindo novo contribuidor',
 	'welcome-message-user-staff' => '==Bem-vindo(a)==
 
 Olá,
@@ -1601,7 +1747,7 @@ Bem-vindo(a) à {{SITENAME}} e obrigado pela tua edição na página [[:$1]]. Se
 
 Porque não '''[[Special:Userlogin|crias uma conta e te identificas]]'''?  Desta forma será muito máis fácil saber as páginas que tu editaste e o trabalho será atribuido a ti na wiki, alem do mais será de grande ajuda na hora de comunicar-te com o resto da comunidade.
 
-Se necessitas de ajuda e não encontras administradores locais, talvez queiras visitar os [[wikia:Forum:Community Central Forum|fóruns na Wiki Community Central]] $3", # Fuzzy
+Se necessitas de ajuda e não encontras administradores locais, talvez queiras visitar os [[wikia:Forum:Community Central Forum|fóruns na Wiki Community Central]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|fórum de ajuda]] | [[w:sblog|blogue]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Olá, bem-vindo(a) à {{SITENAME}}! Obrigado pela tua edição na página [[:$1]].
@@ -1619,6 +1765,8 @@ Se tiveres alguma dúvida, deixa-me uma mensagem caso eu possa ajudar com alguma
 !!
 Se precisas de ajuda, primeiro olha as nossas [[Help:Contents|páginas de ajuda]] e depois visita a [[w:c:community|Comunidade Central]] para obter mais informações. Boas contribuições!',
 	'welcome-description' => 'Envia uma mensagem de boas-vindas para utilizadores depois das suas primeiras edições',
+	'welcome-user' => '@latest',
+	'welcome-enabled' => 'page-user message-anon message-user',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -1630,42 +1778,45 @@ Se precisas de ajuda, primeiro olha as nossas [[Help:Contents|páginas de ajuda]
  * @author Jesielt
  */
 $messages['pt-br'] = array(
-	'welcome-user-page' => "== Sobre mim ==
+	'welcome-user-page' => "==Sobre mim==
 
-''Essa é sua página de usuário. Por favor, edite esta página e conte a comunidade algo sobre você!''
+''Esta é sua pagina de usuário. Por favor, edite esta pagina para contar mais sobre voce para a comunidade!''
 
-== Minhas contribuições ==
+==Minhas Páginas favoritas==
 
-* [[Special:Contributions/$1|Contribuições deste usuário]]
+* Adicione links para suas páginas favoritas da wikia!
+* Pagina favorita #2
+* Pagina favorita #3",
+	'welcome-message-user' => 'Olá, bem vindo(a) a {{SITENAME}}! Obrigada por sua edição em [[:$1]].
 
-== Minhas páginas favoritas ==
+Estamos felizes que voce tenha criado uma conta.  Há muito que fazer na Wikirespostas, aquí estão as recomendações das coisas que voce pode fazer:
 
-* Adicione links para as suas páginas favoritas nesta wiki!
-* Página favorita #2
-* Página favorita #3",
-	'welcome-message-user' => 'Olá, bem-vindo a {{SITENAME}}! Obrigado pela sua edição na página [[:$1]].
+* Buscar perguntas [[Especial:Categorias|por categorias]].
+* Visitar o [[Forum:Index|Forum de WikiRespostas]].
+* [[Especial:Randomincategory/Perguntas_sem_respostas|Responder perguntas]]  que ainda não tem respostas.
+* Ver as [[Especial:Páginas_novas|ultimas perguntas]] que foram feitas na WikiRespostas.
 
-Por favor deixe uma mensagem na minha [[$2|página de discussão]] se eu puder ajudar com qualquer coisar! $3',
-	'welcome-message-anon' => "Olá, bem-vindo a {{SITENAME}}! Obrigado pela sua edição na página [[:$1]].
+Por favor, se tiver alguma duvida, sinta-se a vontade para deixar uma mensagem em [[$2|minha discussão]] para ver se posso ajudar em alguma coisa. $3',
+	'welcome-message-anon' => "Ola, benvindo(a) a {{SITENAME}}! Muito obrigado por sua edição em [[:$1]]. 
 
-'''[[Special:Userlogin|Por favor registre-se e crie um nome de usuário]]'''. É um modo fácil de manter registro das suas contribuições, e ajuda na comunicação do resto da comunidade.
+Porque não '''[[Special:Userlogin|cria uma conta e se identifica]]'''?  Desta forma será muito máis fácil saber qué páginas voce editou e o trabalho será atribuido a voce na wiki, alem do mais será de grande ajuda na hora de se comunicar com o resto da comunidade.
 
-Por favor deixe uma mensagem na minha [[$2|página de discussão]] se eu puder ajudar com qualquer coisar! $3",
-	'welcome-message-log' => 'recebendo um novo contribuidor',
+Por favor, se tiver alguma duvida, sinta-se a vontade para deixar uma mensagem em [[$2|minha pagina de discussão]] para ver se posso te ajudar com alguma coisa $3",
+	'welcome-message-log' => 'bem vindo novo contribuidor',
 	'welcome-message-user-staff' => '==Bem-vindo(a)==
 
 Olá, bem-vindo(a) à {{SITENAME}}! Obrigado pela sua edição da página [[:$1]].
 
 Se você necessita de ajuda e não encontra administradores locais, talvez
 queira visitar os [[wikia:Forum:Community Central Forum|fóruns na
-Wiki Community Central]] $3', # Fuzzy
+Wiki Community Central]] $3',
 	'welcome-message-anon-staff' => "==Bem-vindo(a)==
 
 Olá, bem-vindo(a) à {{SITENAME}}! Obrigado pela sua edição da página [[:$1]].
 
 '''[[Special:UserLogin|Por favor, registre-se e crie uma conta de usuário]]'''. É uma forma fácil de registrar as suas contribuições e facilita a comunicação com os demais usuários.
 
-Se você necessita de ajuda e não encontra administradores locais, talvez queira visitar os [[wikia:Forum:Community Central Forum|fóruns na Wiki Community Central]] $3", # Fuzzy
+Se você necessita de ajuda e não encontra administradores locais, talvez queira visitar os [[wikia:Forum:Community Central Forum|fóruns na Wiki Community Central]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|fórum de ajuda]] | [[w:sblog|blogue]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Olá, bem-vindo a {{SITENAME}}! Obrigado pela sua edição na página [[:$1]].
@@ -1675,7 +1826,7 @@ Por favor, se tiver dúvidas, deixe uma mensagem no meu mural para que eu possa 
 
 Se precisar de ajuda e não encontrar nenhum administrador local por aqui, você poderá visitar os [[wikia:Forum:Community Central Forum|os fóruns na Comunidade Central da Wikia]]. Você pode também verificar o nosso [[w:c:community:Blog:Wikia_Staff_Blog|Blog da Staff]] para manter-se atualizado com as últimas notícias e eventos sobre a Wikia.
 
-Divirta-se com as edições!', # Fuzzy
+Divirta-se com as edições!',
 	'welcome-message-wall-anon' => "Olá, bem-vindo a {{SITENAME}}! Obrigado pela sua edição na página [[:$1]].
 
 '''[[Special:Userlogin|Por favor, crie uma conta e identifique-se]]'''. É uma maneira fácil para acompanhar suas contribuições e ajuda você a se comunicar com o resto da Comunidade.
@@ -1685,8 +1836,10 @@ Por favor, deixe-me uma mensagem se eu puder te ajudar com qualquer coisa!",
 
 '''[[Special:Userlogin|Por favor, crie uma conta e identifique-se]]'''. É uma maneira fácil para acompanhar suas contribuições e ajuda você a se comunicar com o resto da Comunidade.
 
-Por favor, deixe-me uma mensagem se eu puder te ajudar com qualquer coisa!", # Fuzzy
+Por favor, deixe-me uma mensagem se eu puder te ajudar com qualquer coisa!",
 	'welcome-description' => 'Envie uma mensagem de boas-vindas para usuários depois das suas primeiras edições',
+	'welcome-user' => '@latest',
+	'welcome-enabled' => 'page-user message-anon message-user',
 );
 
 /** tarandíne (tarandíne)
@@ -1711,10 +1864,6 @@ $messages['ru'] = array(
 
 ''Это ваша страница участника. Пожалуйста, отредактируйте эту страницу, расскажите о себе!''
 
-== Мой вклад ==
-
-* [[Special:Contributions/$1|Вклад участника]]
-
 == Мои избранные страницы ==
 
 * Добавьте сюда ссылки на ваши любимые вики-страницы!
@@ -1728,7 +1877,7 @@ $messages['ru'] = array(
 '''[[Special:Userlogin|Пожалуйста, представьтесь системе, создайте учётную запись]]'''. Это позволит легко следить за вашими изменениями, позволит вам общаться с другими членами сообщества.
 
 Пожалуйста, оставьте сообщение на [[$2|моей странице обсуждения]], если я могу чем-то помочь! $3",
-	'welcome-message-log' => 'приветствие нового автора',
+	'welcome-message-log' => 'Приветствие нового автора',
 	'welcome-message-user-staff' => '== Добро пожаловать ==
 Привет, добро пожаловать на сайт {{SITENAME}}! Спасибо за ваше исправление на странице [[:$1]].
 
@@ -1740,20 +1889,38 @@ $messages['ru'] = array(
 Если вам нужна помощь, сначала проверьте [[Help:Contents|справочные страницы]], а затем посетите [[w:c:community|центральное сообщество]], чтоб узнать больше. Удачных правок! $3',
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|справочный форум]] | [[w:sblog|блог]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
-	'welcome-message-wall-user' => 'Здравствуйте, добро пожаловать {{SITENAME}}! Спасибо за ваши правки на странице [[:$1]].
+	'welcome-message-wall-user' => 'Здравствуйте, добро пожаловать на {{SITENAME}}! Спасибо за вашу правку на странице [[:$1]].
 
-Пожалуйста, оставьте мне сообщение если я могу чем-нибудь помочь!',
-	'welcome-message-wall-user-staff' => 'Здравствуйте.
-Добро пожаловать на {{SITENAME}}! Спасибо за ваши правки на странице [[:$1]]. Если вам нужна помощь, начните со [[Help:Contents|справочных страниц]]. Посетите [[w:c:community|центральное сообщество]], чтоб быть в курсе нашего  [[w:c:community:Blog:Wikia_Staff_Blog|блога]], задавайте вопросы на  [[w:c:community:Special:Forum|форуме]], участвуйте в [[w:c:community:Help:Webinars|сериях вебинаров]] или общайтесь вживую с вики-товарищами. Удачных правок!',
-	'welcome-message-wall-anon' => "Привет, добро пожаловать на {{SITENAME}}! Спасибо за вашу правку на странице [[:$1]].
+Пожалуйста, оставьте мне сообщение, если я могу вам чем-нибудь помочь.
 
-'''[[Special:Userlogin|Пожалуйста, войдите в систему и создайте учётную запись]]'''. Это позволит вам легко следить за вашими правками и общаться с другими членами сообщества.
+Также, если вам нужна помощь:
+* Посетите [[Справка:Содержание|страницы Справки]], где есть ответы на большинство простых вопросов.
+* Изучите справочные видео-курсы в [[w:c:ru.community:Университет_Викия|Университете Викия]]
+* Прочтите [[w:c:ru.community|последние записи в блогах]], чтобы узнать о новых возможностях и обновлениях Викия.
 
-Пожалуйста, оставьте мне сообщение, если я могу чем-то помочь!",
-	'welcome-message-wall-anon-staff' => 'Привет, добро пожаловать на {{SITENAME}}! Спасибо за вашу правку на странице [[:$1]]. Мы призываем всех участников [[Special:UserLogin|создавать учётные записи]], чтоб вы могли следить за своими исправлениями, иметь доступ к дополнительным возможностям и узнать остальных членов сообщества {{SITENAME}}.
+Счастливого редактирования!',
+	'welcome-message-wall-user-staff' => 'Здравствуйте. Добро пожаловать на {{SITENAME}}! Спасибо за вашу правку на странице [[:$1]].
 
-Если вам нужна помощь, сначала проверьте [[Help:Contents|справочные страницы]], а затем посетите [[w:c:community|центральное сообщество]], чтоб узнать больше. Удачных правок!',
+Если вам нужна помощь, а администраторы данной вики отсутствуют:
+* Посетите [[Справка:Содержание|страницы Справки]], где есть ответы на большинство простых вопросов.
+* Изучите справочные видео-курсы в [[w:c:ru.community:Университет_Викия|Университете Викия]]
+* Прочтите [[w:c:ru.community|последние записи в блогах]], чтобы узнать о новых возможностях и обновлениях Викия.
+* [[w:c:ru.community:Служебная:Forum|Наш Форум]] всегда открыт для вас. На нём вы можете задать любой вопрос и получить ответ на него от опытных участников разных википроектов. 
+
+Счастливого редактирования!',
+	'welcome-message-wall-anon' => "Здравствуйте, добро пожаловать на {{SITENAME}}! Спасибо за правку на странице $1.
+
+'''[[Special:Userlogin|Пожалуйста, зарегистрируйтесь и создайте учётную запись]]'''. Так будет проще следить за собственным вкладом в вики и общаться с другими участниками вики-сообщества.
+
+Пожалуйста, оставьте мне сообщение, если я могу вам чем-нибудь помочь.",
+	'welcome-message-wall-anon-staff' => "Здравствуйте, добро пожаловать на {{SITENAME}}! Спасибо за правку на странице [[:$1]].
+
+'''[[Special:Userlogin|Пожалуйста, зарегистрируйтесь и создайте учётную запись]]'''. Так будет проще следить за собственным вкладом в вики и общаться с другими участниками вики-сообщества.
+
+Пожалуйста, оставьте мне сообщение, если я могу вам чем-нибудь помочь.",
 	'welcome-description' => 'Отправляет сообщение с приветствием пользователям после их первых правок',
+	'welcome-user' => '@latest',
+	'welcome-enabled' => 'page-user message-anon message-user',
 );
 
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
@@ -1775,7 +1942,7 @@ $messages['sr-ec'] = array(
 
 * Додаје везе до ваших омиљених страница на викији!
 * Омиљена страница #2
-* Омиљена страница #3", # Fuzzy
+* Омиљена страница #3",
 	'welcome-message-user' => 'Здраво и добро дошли на {{SITENAME}}! Хвала вам на измени на [[:$1]] страници.
 
 Оставите коментар на [[$2|страници за разговор]] ако вам икако могу помоћи! $3',
@@ -1790,7 +1957,7 @@ $messages['sr-ec'] = array(
 
 Здраво и добро дошли на {{SITENAME}}! Хвала вам на измени на [[:$1]] страници.
 
-Ако вам буде затребала помоћ а не нађете администратора, посетите [[wikia:Forum:Community Central Forum|форум на Централној вики заједници]] $3', # Fuzzy
+Ако вам буде затребала помоћ а не нађете администратора, посетите [[wikia:Forum:Community Central Forum|форум на Централној вики заједници]] $3',
 	'welcome-message-anon-staff' => "== Добродошлица ==
 
 Здраво и добро дошли на {{SITENAME}}.
@@ -1799,7 +1966,7 @@ $messages['sr-ec'] = array(
 '''[[Special:UserLogin|Пријавите се и направите корисничко име]]'''.
 То је најлакши начин да приступите својим доприносима и комуницирате с остатком заједнице.
 
-Ако вам буде затребала помоћ а не нађете администратора, посетите [[wikia:Forum:Community Central Forum|форум на Централној вики заједници]] $3", # Fuzzy
+Ако вам буде затребала помоћ а не нађете администратора, посетите [[wikia:Forum:Community Central Forum|форум на Централној вики заједници]] $3",
 );
 
 /** Swedish (svenska)
@@ -1808,11 +1975,11 @@ $messages['sr-ec'] = array(
 $messages['sv'] = array(
 	'welcome-user-page' => "==Om mig==
 
-''Detta är din användarsida. Redigera den här sidan för att berätta för gemenskapen om dig själv!''
+''Detta är din användarsida. Redigera den här sidan för att berätta gemenskapen om dig själv!''
 
-==Mina bidrag==
+==Mina bidrager==
 
-* [[Special:Contributions/$1|Användarbidrag]]
+* [[Special:Contributions/{{PAGENAME}}|Användarbidrager]]
 
 ==Mina favoritsidor==
 
@@ -1824,24 +1991,24 @@ Hej $4, välkommen till {{SITENAME}}! Tack för din ändring till [[:$1]] sidan.
 
 Lämna ett meddelande på [[$2|min diskussionssida]] om jag kan hjälpa till med något! $3',
 	'welcome-message-anon' => "== Välkommen ==
-Hej, välkommen till {{SITENAME}}. Tack för din redigering på sidan [[:$1]].
+Hej, välkommen till {{SITENAME}}. Tack för din ändring till [[:$1]] sidan.
 
-'''[[Special:Userlogin|Logga in och skapa ett användarnamn]]'''. Det är ett enkelt sätt att hålla koll på dina bidrag och hjälper dig att kommunicera med resten av gemenskapen.
+'''[[:Special:UserLogin|Logga in och skapa ett användarnamn]]'''. Det är ett enkelt sätt att hålla koll på era inlägg och hjälper dig att kommunicera med resten av gemenskapet.
 
 Lämna ett meddelande på [[$2|min diskussionssida]] om jag kan hjälpa till med något! $3",
 	'welcome-message-log' => 'välkomna nya bidragsgivare',
 	'welcome-message-user-staff' => '==Välkommen==
 
-Hej!
+Hej, välkommen till {{SITENAME}}! Tack för ditt registera till [[:$1]] sidan.
 
-Välkommen till {{SITENAME}} och tack för din redigering på sidan [[:$1]]. Om du behöver hjälp kan du börja med att gå in på [[Help:Contents|help pages]]. Besök [[w:c:community|gemenskapscentralen]] för att bli informerad med vår [[w:c:community:Blog:Wikia_Staff_Blog|personals blogg]], ställ frågor på vårt [[w:c:community:Special:Forum|gemenskapsforum]], delta i våra [[w:c:community:Help:Webinars|webbkonferenser]] eller chatta direkt med andra Wikianer. Lycka till med redigeringen! $3',
-	'welcome-message-anon-staff' => '==Välkommen==
+Om du behöver hjälp, och det finns inga lokala administratörer här kanske du vill besöka [[wikia:Forum:Community Central Forum|forumen på Community Central Wiki]] $3',
+	'welcome-message-anon-staff' => "==Välkommen==
 
-Hej!
+Hej, välkommen till {{SITENAME}}. Tack för ditt redigera till [[:$1]] sidan.
 
-Välkommen till {{SITENAME}} och tack för din redigering på sidan [[:$1]]. Vi uppmuntrar alla bidragsgivare att [[Special:UserLogin|skapa ett användarnamn]] så du kan hålla reda på alla dina bidrag, få tillgång till fler Wikia-funktioner och lära känna resten av gemenskapen på {{SITENAME}}.
+'''[[Special:Userlogin|Logga in och skapa ett användarnamn]]'''. Det är ett enkelt sätt att hålla koll på era inlägg och hjälper dig att kommunicera med resten av gemenskapet.
 
-Om du behöver hjälp kan du börja med att kolla på våra [[Help:Contents|hjälpsidor]] och sedan besöka [[w:c:community|Gemenskapscentralen]] för att läsa mer. Lycka till med redigeringen! $3',
+Om du behöver hjälp, och det finns inga lokala administratörer här kanske du vill besöka [[wikia:Forum:Community Central Forum|forumen på Community Central Wiki]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|hjälpforum]] | [[w:sblog|blogg]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Hej, välkommen till {{SITENAME}}! Tack för din redigering på sidan [[:$1]].
@@ -1862,6 +2029,19 @@ Välkommen till {{SITENAME}} och tack för din redigering på sidan [[:$1]]. Vi 
 
 Om du behöver hjälp kan du börja med att kolla på våra [[Help:Contents|hjälpsidor]] och sedan besöka [[w:c:community|Gemenskapscentralen]] för att läsa mer. Lycka till med redigeringen!',
 	'welcome-description' => 'Skickar ett välkomstmeddelande till användare efter deras första redigering',
+	'welcome-user' => "==Om mig==
+
+''Detta är din användarsida. Redigera den här sidan för att berätta gemenskapen om dig själv!''
+
+==Mina bidrager==
+
+* [[Special:Contributions/{{PAGENAME}}|Användarbidrager]]
+
+==Mina favoritsidor==
+
+* Lägg till länkar till dina favoritsidor på wikin här!
+* Favoritsida #2
+* Favoritsida #3",
 );
 
 /** Telugu (తెలుగు)
@@ -1913,7 +2093,7 @@ $messages['th'] = array(
 
 * เพิ่มการเชื่อมโยงไปยังหน้าโปรดบนวิกิ นี้!
 * หน้ารายการโปรด #2
-* หน้ารายการโปรด #3", # Fuzzy
+* หน้ารายการโปรด #3",
 	'welcome-message-user' => 'สวัสดี, ยินดีต้อนรับสู่ {{SITENAME}}! ขอบคุณสำหรับการแก้ไขหน้า [[:$1]]
 
 กรุณาฝากข้อความบน [[$2|หน้าพูดคุยของฉัน]] ถ้าฉันสามารถช่วยบางเรื่องได้! $3',
@@ -1928,7 +2108,7 @@ $messages['th'] = array(
 
 สวัสดี, ยินดีต้อนรับสู่ {{SITENAME}}! ขอบคุณสำหรับการแก้ไขหน้า [[:$1]]
 
-ถ้าคุณต้องการให้ช่วย, และไม่มีผู้ดูแลที่นี่ คุณอาจจำเป็นต้องไปที่เยี่ยมชม [[wikia:Forum:Community Central Forum|ฟอรั่มบนศูนย์กลางชุมชนวิกิ]] $3', # Fuzzy
+ถ้าคุณต้องการให้ช่วย, และไม่มีผู้ดูแลที่นี่ คุณอาจจำเป็นต้องไปที่เยี่ยมชม [[wikia:Forum:Community Central Forum|ฟอรั่มบนศูนย์กลางชุมชนวิกิ]] $3',
 	'welcome-message-anon-staff' => "==ยินดีต้อนรับ==
 
 สวัสดี, ยินดีต้อนรับสู่ {{SITENAME}}
@@ -1937,7 +2117,7 @@ $messages['th'] = array(
 '''[[Special:UserLogin|กรุณาเข้าสู่ระบบและสร้างชื่อผู้ใช้]]'''
 มันเป็นทางที่ง่ายในการติดตามผลงานของคุณและให้ความช่วยเหลือการติดต่อกับบุคคลที่เหลือนบนชุมชน
 
-ถ้าคุณต้องการให้ช่วย และไม่มีผู้ดูแลที่นี่ คุณอาจจำเป็นต้องไปที่เยี่ยมชม [[wikia:Forum:Community Central Forum|ฟอรั่มบนศูนย์กลางชุมชนวิกิ]] $3", # Fuzzy
+ถ้าคุณต้องการให้ช่วย และไม่มีผู้ดูแลที่นี่ คุณอาจจำเป็นต้องไปที่เยี่ยมชม [[wikia:Forum:Community Central Forum|ฟอรั่มบนศูนย์กลางชุมชนวิกิ]] $3",
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|กระดานช่วยเหลือ]] | [[w:sblog|บล๊อก]])</small>',
 	'hawelcomeedit' => 'ยินดีต้อนรับสู่ HA',
 );
@@ -1973,7 +2153,7 @@ Mangyaring mag-iwan ng isang mensahe sa [[$2|pahina ko ng talakayan]] kung makak
 Kumusta, maligayang pagdating sa {{SITENAME}}! Salamat sa pamamatnugot mo sa pahinang [[:$1]].
 
 Kung kailangan mo ng tulong, at walang katutubong mga tagapangasiwa dito, maaaring naisin mong
-dalawin ang [[wikia:Forum:Community Central Forum|mga poro sa Wiki ng Pangunahing Pamayanan]] $3', # Fuzzy
+dalawin ang [[wikia:Forum:Community Central Forum|mga poro sa Wiki ng Pangunahing Pamayanan]] $3',
 	'welcome-message-anon-staff' => "==Maligayang pagdating==
 
 Kumusta, maligayang pagdating sa {{SITENAME}}! Salamat sa pamamatnugot mo sa pahinang [[:$1]].
@@ -1981,7 +2161,7 @@ Kumusta, maligayang pagdating sa {{SITENAME}}! Salamat sa pamamatnugot mo sa pah
 '''[[Special:Userlogin|Mangyaring lumagda o lumikha ng isang pangalan ng tagagamit]]'''. Isa itong maginhawang paraan upang masubaybayan ang mga ambag mo at makakatulong sa pakikipag-ugnayan mo sa iba pang mga nasa pamayanan.
 
 Kung kailangan mo ng tulong, at walang katutubong mga tagapangasiwa dito, maaaring naisin mong
-dalawin ang [[wikia:Forum:Community Central Forum|mga poro sa Wiki ng Pangunahing Pamayanan]] $3", # Fuzzy
+dalawin ang [[wikia:Forum:Community Central Forum|mga poro sa Wiki ng Pangunahing Pamayanan]] $3",
 	'staffsig-text' => ' [[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|poro ng tulong]] | [[w:sblog|blog]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
 	'welcome-message-wall-user' => 'Kumusta, maligayang pagdating sa {{SITENAME}}! Salamat sa pamamatnugot mo sa pahina ng [[:$1]].
@@ -1991,7 +2171,7 @@ Mangyaring iwanan ako ng isang mensahe kung makakatulong ako sa anumang bagay!',
 
 Kung kailangan mo ng tulong, at walang katutubong mga tagapangasiwa rito, maaaring naisin mong dalawin ang [[wikia:Forum:Community Central Forum|mga porum na nasa Lunduyang Wiki ng Pamayanan]]. Maaari mo ring tingnan at suriin ang aming [[w:c:community:Blog:Wikia_Staff_Blog|blog ng Tauhan]] upang manatiling nakakaalam sa pinakahuling mga balita at mga kaganapan sa paligid ng Wikia.
 
-Maligayang pamamatnugot!', # Fuzzy
+Maligayang pamamatnugot!',
 	'welcome-message-wall-anon' => "Kumusta, maligayang pagdating sa {{SITENAME}}! Salamat sa pamamatnugot mo sa pahina ng [[:$1]].
 
 '''[[Special:Userlogin|Paki lumagda at lumikha ng isang pangalan ng tagagamit]]'''. Isa itong madaling paraan upang masubaybayan ang mga ambag mo at makatutulong sa iyong makipag-ugnayan sa iba pang nasa pamayanan.
@@ -2001,7 +2181,7 @@ Mangyaring iwanan ako ng isang mensahe kung makakatulong ako sa anumang bagay!",
 
 '''[[Special:Userlogin|Paki lumagda at lumikha ng isang pangalan ng tagagamit]]'''. Isa itong madaling paraan upang masubaybayan ang mga ambag mo at makatutulong sa iyong makipag-ugnayan sa iba pang nasa pamayanan.
 
-Paki iwanan ako ng isang mensahe kung makakatulong ako sa anumang bagay!", # Fuzzy
+Paki iwanan ako ng isang mensahe kung makakatulong ako sa anumang bagay!",
 );
 
 /** Turkish (Türkçe)
@@ -2093,14 +2273,14 @@ $messages['uk'] = array(
 Творчих успіхів! $3',
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|форум допомоги]] | [[w:sblog|блог]])</small>',
 	'hawelcomeedit' => 'HAWelcomeEdit',
-	'welcome-message-wall-user' => 'Привіт, ласкаво просимо на {{SITENAME}}! Дякуємо за редагування сторінки [[:$1]].
+	'welcome-message-wall-user' => 'Вітаємо вас на {{SITENAME}}! Дякуємо за ваші редагування на сторінці [[:$1]].
 
-Будь ласка, повідомте мене, якщо я можу чимось допомогти!',
-	'welcome-message-wall-user-staff' => 'Привіт, ласкаво просимо на {{SITENAME}}! Дякуємо за редагування сторінки [[:$1]].
+Будь ласка, залишіть мені повідомлення, якщо я можу вам допомогти!',
+	'welcome-message-wall-user-staff' => 'Вітаємо вас на {{SITENAME}}! Дякуємо за ваші редагування на сторінці [[:$1]].
 
-Якщо вам потрібна допомога, то для початку перегляньте [[Help:Contents|довідку]]. Відвідайте [[w:c:community|Центральну Спільноту]], щоб бути в курсі останніх подій, задавайте питання на [[w:c:community:Special:Forum|форумі нашої спільноти]], візьміть участь у [[w:c:community:Help:Webinars|вебінарах]] або спілкуйтеся у чаті з іншими учасниками.
+Якщо вам потрібна допомгоа, а місцеві адміністратори відсутні, вы можете відвідати [[wikia:Forum:Community Central Forum|Форум на Центральній вікі]]. Також, ви можете перевірити наш [[w:c:community:Blog:Wikia_Staff_Blog|Staff blog]] щоб бути в курсі останніх новин на Вікія.
 
-Творчих успіхів!',
+Щасливого редагування!',
 	'welcome-message-wall-anon' => "Вітаю, ласкаво просимо до {{SITENAME}}! Дякуємо за редагування сторінки [[:$1]].
 
 '''[[Special:Userlogin|Увійдіть до системи або зареєструйтеся]]'''.
@@ -2141,27 +2321,14 @@ $messages['vi'] = array(
 * Liên kết bài viết trên wiki mà bạn thích tại đây!
 * trang thứ 2
 * trang thứ 3",
-	'welcome-message-user' => 'Chào, hoan nghênh bạn đến {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
-
-Xin vui lòng để lại tin nhắn vào [[$2|trang thảo luận]] của tôi nếu bạn cần trợ giúp về bất cứ điều gì! $3',
-	'welcome-message-anon' => "Chào bạn, hoan nghênh bạn đến {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
-
-'''[[Special:Userlogin|Xin hãy đăng ký và tạo tài khoản mới]]'''.
-
-Đó là cách dễ dàng để giữ lại những đóng góp của bạn và giúp bạn giao tiếp với cộng đồng.
-
-Xin vui lòng để lại tin nhắn vào [[$2|trang thảo luận]] của tôi nếu bạn cần trợ giúp về bất cứ điều gì! $3",
-	'welcome-message-log' => 'Chào mừng thành viên mới',
-	'welcome-message-user-staff' => '==Chào mừng==
+	'welcome-message-user' => '==Hoan nghênh==
 
 Xin chào,
 
-Hoan nghênh vì bạn đã đến thăm {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]]. Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, xin hãy bắt đầu vào [[Help:Contents|trang trợ giúp]] hoặc có lẽ bạn sẽ cần đến [[w:c:community:Special:Forum|diễn đàn cộng đồng wikia]]. Bạn cũng có thể xem qua [[w:c:community:Blog:Wikia_Staff_Blog|blog nhân viên]] của chúng tôi để cập nhật với những tin tức và sự kiện mới nhất và [[w:c:community:Help:Webinars|webinar series]] xung quanh của Wikia. Sửa đổi vui vẻ! $3',
-	'welcome-message-anon-staff' => "==Xin chào==
-<noinclude>
-[[w:c:community|cộng đồng Wikia Tiếng Anh]][[Help:Contents|help pages]]
-</noinclude>
-Chào mừng bạn đến với {{SITENAME}}.
+Hoan nghênh vì bạn đã đến thăm {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]]. Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, xin hãy bắt đầu vào [[Help:Mục lục|trang trợ giúp]] hoặc có lẽ bạn sẽ cần đến [[w:vi:Special:Forum|Diễn đàn Cộng đồng wikia]]. Bạn cũng có thể xem qua [[w:vi:Blog:Trang chủ|blog cộng đồng]] của chúng tôi để cập nhật với những tin tức và sự kiện hoặc tham gia tán gẫu với những Wikian khác. Biên tập vui vẻ! $3',
+	'welcome-message-anon' => "==Xin chào==
+
+Chào bạn
 
 Hoan nghênh bạn đến với {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
 
@@ -2169,28 +2336,99 @@ Hoan nghênh bạn đến với {{SITENAME}}! Cảm ơn bạn đã sửa đổi 
 
 Đó là cách dễ dàng để giữ lại những đóng góp của bạn và giúp bạn giao tiếp với cộng đồng.
 
-Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần giúp đỡ, bạn có thể xem [[Help:Nội dung|trang trợ giúp]]  hoặc có lẽ bạn sẽ cần vào [http://congdong.wikia.com/ Cộng đồng Wikia tiếng Việt]. Biên tập vui vẻ! $3",
+Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần giúp đỡ, bạn có thể vào [[Help:Mục lục|trang trợ giúp]] hoặc có lẽ bạn sẽ cần đến [[w:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]].
+
+Biên tập vui vẻ! $3",
+	'welcome-message-log' => 'Chào mừng thành viên mới',
+	'welcome-message-user-staff' => '==Hoan nghênh==
+
+Xin chào,
+
+Hoan nghênh vì bạn đã đến thăm {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]]. Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, xin hãy bắt đầu vào [[Help:Mục lục|trang trợ giúp]] hoặc có lẽ bạn sẽ cần đến [[w:vi:Special:Forum|Diễn đàn Cộng đồng wikia]]. Bạn cũng có thể xem qua [[w:vi:Blog:Trang chủ|blog cộng đồng]] của chúng tôi để cập nhật với những tin tức và sự kiện hoặc tham gia tán gẫu với những Wikian khác. Biên tập vui vẻ! $3',
+	'welcome-message-anon-staff' => "==Xin chào==
+
+Chào bạn
+
+Hoan nghênh bạn đến với {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
+
+'''[[Special:UserLogin|Xin bạn đăng kí và tạo tài khoản mới]]'''.
+
+Đó là cách dễ dàng để giữ lại những đóng góp của bạn và giúp bạn giao tiếp với cộng đồng.
+
+Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần giúp đỡ, bạn có thể vào [[Help:Mục lục|trang trợ giúp]] hoặc có lẽ bạn sẽ cần đến [[w:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]].
+
+Biên tập vui vẻ! $3",
 	'staffsig-text' => '<noinclude>[[w:forums|help forum]][[w:sblog|blog]]</noinclude>[[{{ns:user}}:$1|$2]]<staff /> <small>(<a href="http://congdong.wikia.com/wiki/Special:Forum">diễn đàn trợ giúp</a> | <a href="http://congdong.wikia.com/wiki/Blog:Trang_chủ">blog</a> | <a href="http://congdong.wikia.com/wiki/Trang_Chính">Cộng đồng Wikia tiếng Việt</a>)</small>',
 	'hawelcomeedit' => 'Sửa đổi thông điệp chào đón',
-	'welcome-message-wall-user' => 'Chào bạn, hoan nghênh bạn đến {{SITENAME}}! Cảm ơn sửa đổi của bạn tại trang [[:$1]].
+	'welcome-message-wall-user' => 'Chào bạn, hoan nghênh bạn đến {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
 
-Xin vui lòng để lại cho tôi một tin nhắn nếu tôi có thể giúp với bất cứ điều gì!',
-	'welcome-message-wall-user-staff' => 'Chào bạn,
+Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, có lẽ bạn sẽ cần đến [[w:vi:Special:Forum|Diễn đàn Cộng đồng Wikia]] trên [[wikia:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]]. Bạn cũng có thể xem qua [[w:vi:Blog:Trang chủ|blog cộng đồng]] của chúng tôi để cập nhật với những tin tức và sự kiện mới nhất xung quanh Wikia hoặc tham gia tán gẫu với các Wikian khác.
 
-Hoan nghênh bạn đến {{SITENAME}} và cảm ơn bạn đã tạo ra sửa đổi ở trang [[:$1]]. Nếu bạn cần trợ giúp, hãy duyệt qua [[Help:Nội dung|các trang trợ giúp]]. Truy cập [[w:c:congdong|Cộng đồng Wikia tiếng Việt]] để cập nhật [[w:c:congdong:Blog:Tin tức Wikia|tin tức]], yêu cầu hỗ trợ từ [[w:c:congdong:Special:Forum|diễn đàn cộng đồng]], và tham gia tán gẫu với các thành viên Wikia khác. Biên tập vui vẻ!',
+Biên tập vui vẻ!',
+	'welcome-message-wall-user-staff' => 'Chào bạn, hoan nghênh bạn đến {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
+
+Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, có lẽ bạn sẽ cần đến [[w:vi:Special:Forum|Diễn đàn Cộng đồng Wikia]] trên [[wikia:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]]. Bạn cũng có thể xem qua [[w:vi:Blog:Trang chủ|blog cộng đồng]] của chúng tôi để cập nhật với những tin tức và sự kiện mới nhất xung quanh Wikia hoặc tham gia tán gẫu với các Wikian khác.
+
+Biên tập vui vẻ!',
 	'welcome-message-wall-anon' => "Chào bạn, hoan nghênh bạn đến với {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
 
-'''[[Special:Userlogin|Xin hãy đăng ký và tạo tài khoản mới]]'''. Đó là cách dễ dàng để giữ lại những đóng góp của bạn và giúp bạn giao tiếp với cộng đồng.
+'''[[Special:UserLogin|Xin hãy đăng kí tài khoản mới]]'''. Đó là cách dễ dàng để giữ lại những đóng góp của bạn và giúp bạn giao tiếp với cộng đồng. Ngoài ra còn giúp bạn che giấu và không để địa chỉ IP của bạn. Ngoài ra còn rất nhiều điều đang chờ đón bạn khi tạo tài khoản mới
 
-Xin vui lòng để lại tin nhắn cho tôi nếu bạn cần sự trợ giúp về bất cứ điều gì!",
+Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, bạn có thể vào [[Help:Mục lục|trang trợ giúp]] hoặc bạn cần đến [[w:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]].
+
+Biên tập vui vẻ!",
 	'welcome-message-wall-anon-staff' => "Chào bạn, hoan nghênh bạn đến với {{SITENAME}}! Cảm ơn bạn đã sửa đổi trang [[:$1]].
 
 '''[[Special:UserLogin|Xin hãy đăng kí tài khoản mới]]'''. Đó là cách dễ dàng để giữ lại những đóng góp của bạn và giúp bạn giao tiếp với cộng đồng. Ngoài ra còn giúp bạn che giấu và không để địa chỉ IP của bạn. Ngoài ra còn rất nhiều điều đang chờ đón bạn khi tạo tài khoản mới
 
-Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, bạn có thể vào [[Help:Contents|trang trợ giúp]] hoặc bạn cần đến [[w:c:community|cộng đồng Wikia]] hoặc [http://vi.wikia.com cộng đồng Wikia tiếng việt]
+Wiki hiện nay không có bảo quản viên, vì thế nên nếu bạn cần trợ giúp, bạn có thể vào [[Help:Mục lục|trang trợ giúp]] hoặc bạn cần đến [[w:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]].
 
-Xin vui lòng để lại tin nhắn cho tôi nếu bạn cần sự trợ giúp về bất cứ điều gì!",
+Biên tập vui vẻ!",
 	'welcome-description' => 'Gửi thư chào đón cho người dùng sau khi có một sửa đổi đầu tiên của họ',
+);
+
+$messages['zh'] = array(
+	'welcome-message-user' => '您好，欢迎来到{{SITENAME}}！ 感谢您对[[:$1]]页面的编辑。
+
+请在[[$2|我的讨论页]]给我留言，希望我能够帮到您！$3',
+	'welcome-message-anon' => "您好，欢迎来到{{SITENAME}}！感谢您编辑[[:$1]]页面。
+
+'''[[Special:Userlogin|建议您登录并创建一个用户名]]'''。
+这样会更方便来追踪您的贡献和帮助您与社区其他成员进行沟通。
+
+如果有我可以帮忙的地方，请在[[$2|我的讨论页]]留言！$3",
+	'welcome-message-user-staff' => '==欢迎==
+
+嗨！欢迎来到{{SITENAME}}，感谢您在页面[[:$1]]的编辑。如果你需要帮助，请访问我们的[[Help:Contents|帮助页面]]。另外可以访问[[w:c:zh.community|社群中心]]，通过[[w:c:zh.community:博客:博客帖子|职员博客]]留下您的信息，或在[[w:c:zh.community:Special:Forum|社区论坛]]提问，或参与Wikia上的维基人聊天。祝编辑愉快！
+$3',
+	'welcome-message-anon-staff' => '==欢迎==
+
+嗨！
+
+欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。我们鼓励所有贡献者[[Special:UserLogin|创建用户名]]，这样您就可以跟踪您的贡献，访问更多Wikia功能并与{{SITENAME}}其他社群成员保持亲近。
+
+如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:zh.community|社区中心]]以了解更多。祝编辑愉快！$3',
+	'welcome-message-wall-user' => '嗨！
+
+欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。如果您需要帮助，请从访问[[Help:Contents|帮助页面]]开始。访问[[w:c:community|社群中心]]以评论我们的[[w:c:zh.community:博客:博客帖子|职员博客]]，在[[w:c:zh.community:Special:Forum|社区中心论坛]]提问问题，或与其他维基人聊天。祝编辑愉快！',
+	'welcome-message-wall-user-staff' => '嗨！
+
+欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。如果您需要帮助，请从访问[[Help:Contents|帮助页面]]开始。访问[[w:c:community|社群中心]]以评论我们的[[w:c:zh.community:博客:博客帖子|职员博客]]，在[[w:c:zh.community:Special:Forum|社区中心论坛]]提问问题，或与其他维基人聊天。祝编辑愉快！',
+	'welcome-message-wall-anon' => '嗨！欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。我们鼓励所有贡献者[[Special:UserLogin|创建用户名]]，这样您就可以跟踪您的贡献，访问更多Wikia功能并与{{SITENAME}}其他社群成员保持亲近。
+
+如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:zh.community|社群中心]]以了解更多。祝编辑愉快！',
+	'welcome-message-wall-anon-staff' => '嗨！欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。我们鼓励所有贡献者[[Special:UserLogin|创建用户名]]，这样您就可以跟踪您的贡献，访问更多Wikia功能并与{{SITENAME}}其他社群成员保持亲近。
+
+如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:zh.community|社群中心]]以了解更多。祝编辑愉快！',
+);
+
+$messages['zh-cn'] = array(
+	'welcome-message-anon' => "您好，欢迎来到{{SITENAME}}！感谢您编辑[[:$1]]页面。
+
+'''[[Special:Userlogin|建议您登录并创建一个用户名]]'''。
+这样会更方便来追踪您的贡献和帮助您与社区其他成员进行沟通。
+
+如果有我可以帮忙的地方，请在[[$2|我的讨论页]]留言！$3",
 );
 
 /** Simplified Chinese (中文（简体）‎)
@@ -2213,19 +2451,20 @@ $messages['zh-hans'] = array(
 * 在此为您喜爱的页面添加链接！
 * 喜爱的页面 #2
 * 喜爱的页面 #3",
-	'welcome-message-user' => '嗨，欢迎来到{{SITENAME}}！ 感谢您对[[:$1]]页面的编辑。
+	'welcome-message-user' => '==欢迎==
 
-请在[[$2|我的讨论页]]处留言，如果我能帮助您什么事情的话！$3',
+嗨！欢迎来到{{SITENAME}}，感谢您在页面[[:$1]]的编辑。如果你需要帮助，请访问我们的[[Help:Contents|帮助页面]]。另外可以访问[[w:c:zh.community|社群中心]]，通过[[w:c:zh.community:博客:博客帖子|职员博客]]留下您的信息，或在[[w:c:zh.community:Special:Forum|社区论坛]]提问，或参与Wikia上的维基人聊天。祝编辑愉快！
+$3',
 	'welcome-message-anon' => "您好，欢迎来到{{SITENAME}}！感谢您编辑[[:$1]]页面。
 
-'''[[Special:Userlogin|请登录并创建一个用户名]]'''。
-这是很容易的方法来跟踪您的贡献和帮助您与社会其他成员进行沟通。
+'''[[Special:Userlogin|建议您登录并创建一个用户名]]'''。
+这样会更方便来追踪您的贡献和帮助您与社区其他成员进行沟通。
 
-请在[[$2|我的讨论页]]留言如果可以帮忙！$3",
+如果有我可以帮忙的地方，请在[[$2|我的讨论页]]留言！$3",
 	'welcome-message-log' => '欢迎新贡献者',
 	'welcome-message-user-staff' => '==欢迎==
 
-嗨！欢迎来到{{SITENAME}}，感谢您在页面[[:$1]]的编辑。如果你需要帮助，请访问我们的[[Help:Contents|帮助页面]]以入门。访问[[w:c:community|社群中心]]，通过[[w:c:community:Blog:Wikia_Staff_Blog|职员博客]]留下您的通告。在[[w:c:community:Special:Forum|社群论坛]]提问，参与我们的[[w:c:community:Help:Webinars|研讨会系列]]或与Wikia上的维基人聊天。祝编辑愉快！
+嗨！欢迎来到{{SITENAME}}，感谢您在页面[[:$1]]的编辑。如果你需要帮助，请访问我们的[[Help:Contents|帮助页面]]。另外可以访问[[w:c:zh.community|社群中心]]，通过[[w:c:zh.community:博客:博客帖子|职员博客]]留下您的信息，或在[[w:c:zh.community:Special:Forum|社区论坛]]提问，或参与Wikia上的维基人聊天。祝编辑愉快！
 $3',
 	'welcome-message-anon-staff' => '==欢迎==
 
@@ -2233,23 +2472,21 @@ $3',
 
 欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。我们鼓励所有贡献者[[Special:UserLogin|创建用户名]]，这样您就可以跟踪您的贡献，访问更多Wikia功能并与{{SITENAME}}其他社群成员保持亲近。
 
-如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:community|社群中心]]以了解更多。祝编辑愉快！$3',
+如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:zh.community|社区中心]]以了解更多。祝编辑愉快！$3',
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /><small>（[[w:forums|帮助论坛]] | [[w:sblog|博客]]）</small>',
 	'hawelcomeedit' => 'HA欢迎编辑',
-	'welcome-message-wall-user' => '嗨，欢迎来到{{SITENAME}}！ 感谢您协助编辑[[:$1]]页。
+	'welcome-message-wall-user' => '嗨！
 
-如果我能帮忙做些什么，请给我留言！',
+欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。如果您需要帮助，请从访问[[Help:Contents|帮助页面]]开始。访问[[w:c:community|社群中心]]以评论我们的[[w:c:zh.community:博客:博客帖子|职员博客]]，在[[w:c:zh.community:Special:Forum|社区中心论坛]]提问问题，或与其他维基人聊天。祝编辑愉快！',
 	'welcome-message-wall-user-staff' => '嗨！
 
-欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。如果您需要帮助，请从了解[[Help:Contents|帮助页面]]开始。访问[[w:c:community|社群中心]]以评论我们的[[w:c:community:Blog:Wikia_Staff_Blog|职员博客]]，在[[w:c:community:Special:Forum|社群论坛]]提问问题，参与我们的[[w:c:community:Help:Webinars|研讨会]]，或与其他维基人聊天。祝编辑愉快！',
-	'welcome-message-wall-anon' => "嗨！欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。
+欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。如果您需要帮助，请从访问[[Help:Contents|帮助页面]]开始。访问[[w:c:community|社群中心]]以评论我们的[[w:c:zh.community:博客:博客帖子|职员博客]]，在[[w:c:zh.community:Special:Forum|社区中心论坛]]提问问题，或与其他维基人聊天。祝编辑愉快！',
+	'welcome-message-wall-anon' => '嗨！欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。我们鼓励所有贡献者[[Special:UserLogin|创建用户名]]，这样您就可以跟踪您的贡献，访问更多Wikia功能并与{{SITENAME}}其他社群成员保持亲近。
 
-'''[[Special:Userlogin|请登录并创建用户名]]'''。这是您跟踪您的贡献和帮助了解其他社群成员的最好方式。
-
-如果我能帮助您什么请留下信息！",
+如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:zh.community|社群中心]]以了解更多。祝编辑愉快！',
 	'welcome-message-wall-anon-staff' => '嗨！欢迎来到{{SITENAME}}，感谢您对页面[[:$1]]的编辑。我们鼓励所有贡献者[[Special:UserLogin|创建用户名]]，这样您就可以跟踪您的贡献，访问更多Wikia功能并与{{SITENAME}}其他社群成员保持亲近。
 
-如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:community|社群中心]]以了解更多。祝编辑愉快！',
+如果您需要帮助，请先访问[[Help:Contents|帮助页面]]，然后访问[[w:c:zh.community|社群中心]]以了解更多。祝编辑愉快！',
 	'welcome-description' => '在用户初次贡献后发一条欢迎消息给他们',
 );
 
@@ -2272,12 +2509,14 @@ $messages['zh-hant'] = array(
 * 在此為您喜愛的頁面增加連結！
 * 最愛的頁面 #2
 * 最愛的頁面 #3",
-	'welcome-message-user' => 'Hi，歡迎來到{{SITENAME}}！ 感謝您對[[:$1]]頁面的編輯。
+	'welcome-message-user' => '==歡迎==
 
-如果我能幫助您的話，請在[[$2|我的討論頁]]留言。$3',
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3',
 	'welcome-message-anon' => "嗨，歡迎來到{{SITENAME}}！感謝您編輯[[:$1]]頁面。
 
-'''[[Special:Userlogin|請登錄并創建一個用戶名]]'''。
+'''[[Special:Userlogin|建議您登錄登創建一個用戶名]]'''。
 這是用來保持跟蹤您貢獻和幫助您與其他社群成員溝通的很好方式。
 
 如果我能幫忙請在[[$2|我的討論頁]]留言！$3",
@@ -2286,29 +2525,28 @@ $messages['zh-hant'] = array(
 
 您好：
 
-歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:Blog:Wikia_Staff_Blog|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3', # Fuzzy
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3',
 	'welcome-message-anon-staff' => '==歡迎==
 
 您好：
 
-歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。我們鼓勵所有的參與者[[Special:UserLogin|註冊一個帳號]]，這樣您能更方便記錄您的貢獻、使用更多Wikia的功能，並認識更多{{SITENAME}}社群。
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。我們鼓勵所有的參與者[[Special:UserLogin|註冊一個帳號]]，這樣您能更方便記錄您的貢獻、使用更多Wikia的功能，並認識更多{{SITENAME}}社群參與者。
 
 
-如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]。祝編輯愉快。 $3', # Fuzzy
+如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]。祝編輯愉快。 $3',
 	'staffsig-text' => '[[{{ns:user}}:$1|$2]]<staff /> <small>([[w:forums|論壇求助]] | [[w:sblog|部落格]])</small>',
 	'hawelcomeedit' => '歡迎工具編輯',
-	'welcome-message-wall-user' => 'Hi，歡迎來到{{SITENAME}}！ 感謝您協助編輯[[:$1]]。
+	'welcome-message-wall-user' => '您好：
 
-如果我能提供幫助，請留言給我！',
-	'welcome-message-wall-user-staff' => '
-您好：
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
+	'welcome-message-wall-user-staff' => '您好：
 
-歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:Blog:Wikia_Staff_Blog|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
-	'welcome-message-wall-anon' => "您好，歡迎來到{{SITENAME}}！感謝您編輯了T[[:$1]]
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
+	'welcome-message-wall-anon' => "您好，歡迎來到{{SITENAME}}！感謝您編輯了[[:$1]]。
 
 建議您'''[[Special:Userlogin|登入創建一個帳號]]'''。這樣您可以更容易記錄您的貢獻，並有助於和社區中的其他人交流。
 
-如果我的協助您，請留言。",
+如果我能協助您，請留言給我。",
 	'welcome-message-wall-anon-staff' => '==歡迎==
 
 您好：
@@ -2316,6 +2554,84 @@ $messages['zh-hant'] = array(
 歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。我們鼓勵所有的參與者[[Special:UserLogin|註冊一個帳號]]，這樣您能更方便記錄您的貢獻、使用更多Wikia的功能，並認識更多{{SITENAME}}社群的人。
 
 
-如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]。祝編輯愉快。', # Fuzzy
+如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]。祝編輯愉快。',
 	'welcome-description' => '在用戶初次貢獻後發給他們歡迎訊息',
+);
+
+$messages['zh-hk'] = array(
+	'welcome-message-user' => '==歡迎==
+
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3',
+	'welcome-message-anon' => "嗨，歡迎來到{{SITENAME}}！感謝您編輯[[:$1]]頁面。
+
+'''[[Special:Userlogin|建議您登錄登創建一個用戶名]]'''。
+這是用來保持跟蹤您貢獻和幫助您與其他社群成員溝通的很好方式。
+
+如果我能幫忙請在[[$2|我的討論頁]]留言！$3",
+	'welcome-message-user-staff' => '==歡迎==
+
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3',
+	'welcome-message-anon-staff' => '==歡迎==
+
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。我們鼓勵所有的參與者[[Special:UserLogin|註冊一個帳號]]，這樣您能更方便記錄您的貢獻、使用更多Wikia的功能，並認識更多{{SITENAME}}社群參與者。
+
+
+如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]。祝編輯愉快。 $3',
+	'welcome-message-wall-user' => '您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
+	'welcome-message-wall-user-staff' => '您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
+	'welcome-message-wall-anon' => "您好，歡迎來到{{SITENAME}}！感謝您編輯了[[:$1]]。
+
+建議您'''[[Special:Userlogin|登入創建一個帳號]]'''。這樣您可以更容易記錄您的貢獻，並有助於和社區中的其他人交流。
+
+如果我能協助您，請留言給我。",
+);
+
+$messages['zh-tw'] = array(
+	'welcome-message-user' => '==歡迎==
+
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3',
+	'welcome-message-anon' => "嗨，歡迎來到{{SITENAME}}！感謝您編輯[[:$1]]頁面。
+
+'''[[Special:Userlogin|建議您登錄登創建一個用戶名]]'''。
+這是用來保持跟蹤您貢獻和幫助您與其他社群成員溝通的很好方式。
+
+如果我能幫忙請在[[$2|我的討論頁]]留言！$3",
+	'welcome-message-user-staff' => '==歡迎==
+
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。 $3',
+	'welcome-message-anon-staff' => '==歡迎==
+
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。我們鼓勵所有的參與者[[Special:UserLogin|註冊一個帳號]]，這樣您能更方便記錄您的貢獻、使用更多Wikia的功能，並認識更多{{SITENAME}}社群參與者。
+
+
+如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]。祝編輯愉快。 $3',
+	'welcome-message-wall-user' => '
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
+	'welcome-message-wall-user-staff' => '
+您好：
+
+歡迎來到{{SITENAME}}並感謝您編輯[[:$1]]。如果您需要幫助，可以參見[[Help:Contents|幫助頁面]]、訪問 [[w:c:zh.community|社區中心]]、看我們的[[w:c:zh.community:博客:博客帖子|職員部落格]]，在 [[w:c:zh.community:Special:Forum|社區中心論壇]]上發問，或與Wikia參與者線上聊天。祝編輯愉快。',
+	'welcome-message-wall-anon' => "您好，歡迎來到{{SITENAME}}！感謝您編輯了[[:$1]]。
+
+建議您'''[[Special:Userlogin|登入創建一個帳號]]'''。這樣您可以更容易記錄您的貢獻，並有助於和社區中的其他人交流。
+
+如果我能協助您，請留言給我。",
 );

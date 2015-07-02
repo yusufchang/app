@@ -26,10 +26,9 @@ $messages['en'] = array(
 	'mwe-upwiz-code-unknown' => 'Unknown language',
 	'mwe-upwiz-step-tutorial' => 'Learn',
 	'mwe-upwiz-step-file' => 'Upload',
-	'mwe-upwiz-step-deeds' => 'Release rights',  // Guillaume wants "Set rights". Disagreement -- NeilK
+	'mwe-upwiz-step-deeds' => 'Release rights',
 	'mwe-upwiz-step-details' => 'Describe',
 	'mwe-upwiz-step-thanks' => 'Use',
-
 	'mwe-upwiz-api-warning-exists' => 'There is [$1 another file] already on the wiki with the same filename',
 	'mwe-upwiz-api-warning-was-deleted' => 'There was a file by this name, "$1", but it was deleted and you can not reupload the file. If your file is different, try renaming it.',
 	'mwe-upwiz-tutorial-error-localized-file-missing' => 'Sorry, we could not find a tutorial in your language. The English one is shown instead.',
@@ -65,8 +64,8 @@ $messages['en'] = array(
 	'mwe-upwiz-secs-remaining' => '$1 {{PLURAL:$1|second|seconds}} remaining',
 	'mwe-upwiz-mins-secs-remaining' => '$1 {{PLURAL:$1|minute|minutes}} $2 {{PLURAL:$2|second|seconds}} remaining',
 	'mwe-upwiz-hrs-mins-secs-remaining' => '$1 {{PLURAL:$1|hour|hours}} $2 {{PLURAL:$2|minute|minutes}} $3 {{PLURAL:$3|second|seconds}} remaining',
-	'mwe-upwiz-deeds-macro-prompt' => "This site requires you to provide copyright information for {{PLURAL:$1|this work|these works}}, to make sure everyone can legally reuse {{PLURAL:$1|it|them}}.",
-	'mwe-upwiz-deeds-custom-prompt' => "Or:",
+	'mwe-upwiz-deeds-macro-prompt' => 'This site requires you to provide copyright information for {{PLURAL:$1|this work|these works}}, to make sure everyone can legally reuse {{PLURAL:$1|it|them}}.',
+	'mwe-upwiz-deeds-custom-prompt' => 'Or:',
 	'mwe-upwiz-source-ownwork' => '{{PLURAL:$1|This file is|These files are}} my own work.',
 	'mwe-upwiz-source-ownwork-assert-any-license' => 'I, $2, the copyright holder of {{PLURAL:$1|this work|these works}}, hereby irrevocably grant anyone the right to use, modify and redistribute {{PLURAL:$1|this work|these works}} for any purpose, and I therefore publish {{PLURAL:$1|it|them}} under the following terms:',
 	'mwe-upwiz-source-ownwork-assert' => 'I, $2, the copyright holder of {{PLURAL:$1|this work|these works}}, hereby irrevocably grant anyone the right to use {{PLURAL:$1|this work|these works}} for any purpose, as long as they credit me and share derivative work under the same terms.',
@@ -188,9 +187,6 @@ Please do not use wikitext or HTML here.',
 	'mwe-upwiz-too-many-files-ok' => 'OK',
 	'mwe-upwiz-too-many-files-text' => 'You can only upload $1 {{PLURAL:$1|file|files}} at once. You tried to upload $2 {{PLURAL:$2|file|files}} in total, so $3 {{PLURAL:$3|file has|files have}} been removed.',
 	'mwe-upwiz-too-many-files' => 'Too many files.',
-
-	/* LICENSES & combinations of licenses */
-	/* may be a good idea to shift to WikimediaLicenseTexts? */
 	'mwe-upwiz-license-cc-by-sa-3.0' => 'Creative Commons Attribution ShareAlike 3.0 ([$2 legal code])',
 	'mwe-upwiz-license-cc-by-sa-3.0-at' => 'Creative Commons Attribution ShareAlike 3.0 Austria ([$2 legal code])',
 	'mwe-upwiz-license-cc-by-sa-3.0-de' => 'Creative Commons Attribution ShareAlike 3.0 Germany ([$2 legal code])',
@@ -212,45 +208,35 @@ Please do not use wikitext or HTML here.',
 	'mwe-upwiz-license-fal' => 'Free Art License',
 	'mwe-upwiz-license-own-pd' => 'All rights waived with Creative Commons Zero license (like public domain)',
 	'mwe-upwiz-license-pd-old-100' => 'Author died more than 100 years ago',
-        'mwe-upwiz-license-pd-old' => 'Author died more than 70 years ago',
-        'mwe-upwiz-license-pd-art' => 'Faithful reproduction of a painting that is in the public domain',
-        'mwe-upwiz-license-pd-us' => 'First published in the United States before 1923',
-        'mwe-upwiz-license-pd-usgov' => 'Original work of the US Federal Government',
-        'mwe-upwiz-license-pd-usgov-nasa' => 'Original work of NASA',
-        'mwe-upwiz-license-pd-usgov-military-navy' => 'Original work of the US Military Navy',
-        'mwe-upwiz-license-pd-ineligible' => 'Too simple to be copyrighted',
-        'mwe-upwiz-license-pd-ineligible-help' => 'Be careful with this one. The image has to be very simple, like a green circle or red square',
-        'mwe-upwiz-license-pd-textlogo' => 'Logo with only simple text (wordmark)',
-        'mwe-upwiz-license-copyrighted-free-use' => 'Copyrighted, but may be used for any purpose, including commercially',
-        'mwe-upwiz-license-attribution' => 'May be used for any purpose, including commercially, if the copyright holder is properly attributed',
+	'mwe-upwiz-license-pd-old' => 'Author died more than 70 years ago',
+	'mwe-upwiz-license-pd-art' => 'Faithful reproduction of a painting that is in the public domain',
+	'mwe-upwiz-license-pd-us' => 'First published in the United States before 1923',
+	'mwe-upwiz-license-pd-usgov' => 'Original work of the US Federal Government',
+	'mwe-upwiz-license-pd-usgov-nasa' => 'Original work of NASA',
+	'mwe-upwiz-license-pd-usgov-military-navy' => 'Original work of the US Military Navy',
+	'mwe-upwiz-license-pd-ineligible' => 'Too simple to be copyrighted',
+	'mwe-upwiz-license-pd-ineligible-help' => 'Be careful with this one. The image has to be very simple, like a green circle or red square',
+	'mwe-upwiz-license-pd-textlogo' => 'Logo with only simple text (wordmark)',
+	'mwe-upwiz-license-copyrighted-free-use' => 'Copyrighted, but may be used for any purpose, including commercially',
+	'mwe-upwiz-license-attribution' => 'May be used for any purpose, including commercially, if the copyright holder is properly attributed',
 	'mwe-upwiz-license-gfdl' => 'GNU Free Documentation License',
 	'mwe-upwiz-license-cc-by-sa-3.0-gfdl' => 'Copyleft, attribution required (GFDL, CC-BY-SA-3.0)',
-
 	'mwe-upwiz-license-cc-head' => 'The copyright holder published {{PLURAL:$1|this work|these works}} with the right Creative Commons license',
 	'mwe-upwiz-license-cc-subhead' => 'Not all Creative Commons licenses are good for this site. Make sure the copyright holder used one of these licenses.',
-
 	'mwe-upwiz-license-flickr-head' => 'The copyright holder published their {{PLURAL:$1|photo or video|photos or videos}} on Flickr with the right license',
 	'mwe-upwiz-license-flickr-subhead' => 'Check the "License" header on the side of the Flickr page. Both the icons and license name that they used have to match one of the choices here.',
-
 	'mwe-upwiz-license-public-domain-usa-head' => 'The copyright has definitely expired in the USA',
 	'mwe-upwiz-license-public-domain-usa-subhead' => '{{SITENAME}} is located in the USA, so the work must be out of copyright in that country.',
-
 	'mwe-upwiz-license-usgov-head' => '{{PLURAL:$1|This work was|These works were}} made by the United States government',
 	'mwe-upwiz-license-misc' => 'Miscellaneous reasons',
-
 	'mwe-upwiz-license-custom-head' => 'Another reason not mentioned above',
 	'mwe-upwiz-license-custom-preview' => 'Preview',
-
-	'mwe-upwiz-license-none-head' => 'I found it on the Internet -- I\'m not sure',
-
+	'mwe-upwiz-license-none-head' => "I found it on the Internet -- I'm not sure",
 	'mwe-upwiz-license-none' => 'I believe {{PLURAL:$1|this work is|these works are}} freely licensed or legally in the public domain. I understand that if I do not add the necessary licensing information in a timely fashion, the {{PLURAL:$1|file|files}} may be deleted.',
-
 	'mwe-upwiz-license-confirm-remove' => 'Are you sure you want to remove {{PLURAL:$1|this upload|these uploads}}?',
 	'mwe-upwiz-license-confirm-remove-title' => 'Confirm remove',
-
 	'mwe-upwiz-license-external' => 'This file is under the following license on $1: <b>$2</b>.',
 	'mwe-upwiz-license-external-invalid' => 'This file is under the following license on $1: <b>$2</b>. Unfortunately, this license is not appropriate for use on this site.',
-
 	'mwe-upwiz-categories' => 'Categories',
 	'mwe-upwiz-categories-add' => 'Add',
 	'mwe-upwiz-category-remove' => 'Remove this category',
@@ -260,28 +246,21 @@ Please do not use wikitext or HTML here.',
 	'mwe-upwiz-thumbnail-failed' => 'The upload succeeded, but the server could not get a preview thumbnail.',
 	'mwe-upwiz-unparseable-filename' => 'Could not understand the file name "$1"',
 	'mwe-upwiz-image-preview' => 'Image preview',
-
 	'mwe-upwiz-subhead-message' => 'Thanks for using our new upload tool!',
 	'mwe-upwiz-subhead-bugs' => '[$1 Known issues]',
 	'mwe-upwiz-subhead-translate' => '[$1 Help with translations]',
 	'mwe-upwiz-subhead-alt-upload' => '[$1 Back to the old form]',
-
-	/* Feedback interface */
 	'mwe-upwiz-feedback-prompt' => '[$1 Leave feedback]',
 	'mwe-upwiz-feedback-title' => 'Leave feedback about Upload Wizard',
 	'mwe-upwiz-feedback-blacklist-report-prompt' => '[$1 Send Feedback]',
 	'mwe-upwiz-feedback-blacklist-info-prompt' => '[$1 More Info]',
-	'mwe-upwiz-feedback-blacklist-line-intro' => "This is the title blacklist entry that matched it:\n\$1",
+	'mwe-upwiz-feedback-blacklist-line-intro' => 'This is the title blacklist entry that matched it:
+$1',
 	'mwe-upwiz-feedback-blacklist-subject' => 'My upload title, "$1" was prohibited.',
-
-	// Error dialog
 	'mwe-upwiz-errordialog-title' => 'There was an error in your submission',
 	'mwe-upwiz-errordialog-ok' => 'OK',
-
 	'mwe-upwiz-error-nosuchcampaign' => 'There is no campaign with name "$1".',
 	'mwe-upwiz-error-campaigndisabled' => 'Campaign "$1" has not been enabled.',
-
-	// Special:UploadCampaigns
 	'mwe-upwiz-campaigns-name' => 'Campaign name',
 	'mwe-upwiz-campaigns-status' => 'Status',
 	'mwe-upwiz-campaigns-enabled' => 'Enabled',
@@ -297,8 +276,6 @@ Please do not use wikitext or HTML here.',
 	'mwe-upwiz-campaigns-confdel' => 'Are you sure you want to delete this campaign?',
 	'mwe-upwiz-campaigns-delete-failed' => 'Could not delete the campaign.',
 	'mwe-upwiz-campaigns-confirm-delete' => 'Are you sure you want to delete this campaign?',
-
-	// Special:UploadCampaign
 	'uploadcampaign-legend' => 'Upload campaign configuration',
 	'uploadcampaign-text' => 'You are modifying an Upload Wizard campaign.',
 	'mwe-upwiz-campaign-name' => 'Campaign name:',
@@ -322,224 +299,15 @@ Please do not use wikitext or HTML here.',
 	'mwe-upwiz-campaign-conf-headerLabelPage' => 'Page containing text to display above the UploadWizard interface. $1 is replaced with the language code:',
 	'mwe-upwiz-campaign-conf-thanksLabelPage' => 'Page containing text to display on top of the "Use" page. $1 is replaced with the language code:',
 	'mwe-upwiz-campaign-conf-idFieldMaxLength' => 'Maximum length of the text in the ID field',
-
-	// Coolcats
 	'mw-coolcats-confirm-new-title' => 'Confirm new category',
 	'mw-coolcats-confirm-new' => 'It looks like you are trying to add a new category, "$1". Be aware:<ul><li>Categories should usually be in English.</li><li>Most new categories should be a subcategory of an existing category.</li></ul>Generally, only experts should create a category.',
 	'mw-coolcats-confirm-new-ok' => 'Add this category anyway',
 	'mw-coolcats-confirm-new-cancel' => 'Never mind',
-
-	// Preferences
 	'prefs-uploads' => 'Uploads',
 	'mwe-upwiz-prefs-def-license' => 'Default license',
 	'mwe-upwiz-prefs-def-license-def' => 'Use whatever the default is',
 	'mwe-upwiz-prefs-license-own' => 'Own work - $1',
 	'mwe-upwiz-prefs-license-thirdparty' => "Someone else's work - $1",
-);
-
-/** Message documentation (Message documentation)
- * @author Amire80
- * @author EugeneZelenko
- * @author Guillom
- * @author Kghbln
- * @author Lloffiwr
- * @author McDutchie
- * @author Mormegil
- * @author Naudefj
- * @author Nemo bis
- * @author Nike
- * @author Nux
- * @author Platonides
- * @author Purodha
- * @author Raymond
- * @author Siebrand
- * @author Strainu
- * @author Umherirrender
- * @author Yekrats
- */
-$messages['qqq'] = array(
-	'uploadwizard' => 'UploadWizard is a wizard to upload multimedia files to a MediaWiki website
-For more information, see //www.mediawiki.org/wiki/UploadWizard',
-	'uploadwizard-desc' => 'Description of extension. It refers to [//blog.wikimedia.org/blog/2009/07/02/ford-foundation-awards-300k-grant-for-wikimedia-commons/ this event], i.e. the development was paid with this $300,000 grant.',
-	'mwe-upwiz-uploadcampaigns' => 'Special page title. Can also be worded as "campaigns for the promotion of uploading".',
-	'mwe-upwiz-uploadcampaign' => 'Special page title.',
-	'right-upwizcampaigns' => '{{doc-right|upwizcampaigns}}
-
-"Upload campaign" can also be worded as "a campaign for the promotion of uploading".',
-	'action-upwizcampaigns' => '{{doc-action|upwizcampaigns}}',
-	'group-upwizcampeditors' => '{{doc-group|upwizcampeditors}}',
-	'group-upwizcampeditors-member' => '{{doc-group|upwizcampeditors|member}}',
-	'grouppage-upwizcampeditors' => '{{doc-group|upwizcampeditors|page}}',
-	'mwe-upwiz-step-tutorial' => '{| align="right"
-| [[file:commons-uw-L524.png|Initial "{{MediaWiki:mwe-upwiz-step-file/en}}" page|thumb|right]]
-| [[file:commons-uw-L521.png|Beginning of "{{MediaWiki:mwe-upwiz-step-tutorial/en}}" page|thumb|right]]
-| [[file:commons-uw-L522.png|Center of "{{MediaWiki:mwe-upwiz-step-tutorial/en}}" page|thumb|right]]
-| [[file:commons-uw-L523.png|End of "{{MediaWiki:mwe-upwiz-step-tutorial/en}}" page|thumb|right]]
-|} This is a short greyed or bolded label, in the top bar of all pages of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-step-file' => '{| align="right"
-| [[file:commons-uw-L524.png|Initial "{{MediaWiki:mwe-upwiz-step-file/en}}" page|thumb|right]]
-| [[file:commons-uw-L521.png|Beginning of "{{MediaWiki:mwe-upwiz-step-tutorial/en}}" page|thumb|right]]
-|} This is a short greyed or bolded label, in the top bar of all pages of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].
-----
-{{Identical|Upload}}',
-	'mwe-upwiz-step-deeds' => '{| align="right"
-| [[file:commons-uw-L524.png|Initial "{{MediaWiki:mwe-upwiz-step-file/en}}" page|thumb|right]]
-| [[file:commons-uw-L529.png|Initial "{{MediaWiki:mwe-upwiz-step-deeds/en}}" page|thumb|right]]
-|} This is a short greyed or bolded label, in the top bar of all pages of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-step-details' => '{| align="right"
-| [[file:commons-uw-L529.png|Initial "{{MediaWiki:mwe-upwiz-step-deeds/en}}" page|thumb|right]]
-| [[file:commons-uw-L52G.png|Initial "{{MediaWiki:mwe-upwiz-step-details/en}}" page|thumb|right]]
-|} This is a short greyed or bolded label, in the top bar of all pages of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-step-thanks' => '{| align="right"
-| [[file:commons-uw-L52G.png|Initial "{{MediaWiki:mwe-upwiz-step-details/en}}" page|thumb|right]]
-| [[file:commons-uw-L52X.png|Initial "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-|} This is a short greyed or bolded label, in the top bar of all pages of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]]. Use the verb for this message.',
-	'mwe-upwiz-help-desk' => 'This should be the same text as it is used in the svg comic on the first page of the Upload Wizard',
-	'mwe-upwiz-help-desk-url' => 'As this is mailny used on Commons, it should remain as such and be overrriden when the UploadWizard is pushed on the local wikis.',
-	'mwe-upwiz-add-file-n' => '{| align="right"
-| [[file:commons-uw-L525.png|The "{{MediaWiki:mwe-upwiz-step-file/en}}" page after 1 file was added|thumb|right]]
-| [[file:commons-uw-L526.png|The "{{MediaWiki:mwe-upwiz-step-file/en}}" page after 2 files were added|thumb|right]]
-|} This is a button label, used in the "{{MediaWiki:mwe-upwiz-step-file/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-add-file-0-free' => 'This message appears on the big button on the first page of the Upload Wizard. Files can be dragged to that button from the operating system\'s file manager. Pressing the button will open a "browse" window to choose a file.',
-	'mwe-upwiz-transported' => '{{Identical|OK}}',
-	'mwe-upwiz-stashed-upload' => '{{Identical|OK}}',
-	'mwe-upwiz-remove' => '{{Identical|Remove}}',
-	'mwe-upwiz-show-thumb' => 'Link text for the control that displays a thumbnail manually, when automatic client-side thumbs are disabled for performance',
-	'mwe-upwiz-show-thumb-tip' => 'The tooltip for the {{msg-mw|mwe-upwiz-show-thumb}} link.',
-	'mwe-upwiz-upload' => '{{Identical|Upload}}',
-	'mwe-upwiz-source-ownwork-assert-note' => '{{doc-important|In this message, $1 is the name of the license, and $2 is the number of uploads for pluralization.}}',
-	'mwe-upwiz-source-thirdparty-accept' => '{{Identical|OK}}',
-	'mwe-upwiz-more-options' => "Text for a 'more options' toggle that opens more of a form so a user can make more detailed descriptions/add more properties for uploaded images.",
-	'mwe-upwiz-fewer-options' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]',
-	'mwe-upwiz-desc' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]
-
-This is followed by a language name in a drop-down language selector.
-{{Identical|Description}}',
-	'mwe-upwiz-desc-add-n' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]',
-	'mwe-upwiz-title' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]
-
-
-{{Identical|Title}}',
-	'mwe-upwiz-date-created' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]',
-	'mwe-upwiz-location' => '{{Identical|Location}} - the location the media exists on the planet, further described by lat and lon',
-	'mwe-upwiz-location-lat' => 'Latitude - the GPS coordinate, expressed in signed decimal degrees.
-{{Identical|Latitude}}',
-	'mwe-upwiz-location-lon' => 'Longitude - the GPS coordinate, expressed in signed decimal degrees.
-{{Identical|Longitude}}',
-	'mwe-upwiz-location-alt' => 'Altitude - the GPS coordinate, expressed in metres.
-{{Identical|Altitude}}',
-	'mwe-upwiz-other' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]
-
-{{Identical|Other information}}',
-	'mwe-upwiz-source' => '{{Identical|Source}}',
-	'mwe-upwiz-thanks-intro' => '[[file:commons-uw-L52R.png|The beginning of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-
-This is used in the beginning of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-thanks-explain' => '[[file:commons-uw-L52R.png|The beginning of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-
-This is used in the beginning of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-thanks-wikitext' => '{| align="right"
-| [[file:commons-uw-L52R.png|The beginning of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-| [[file:commons-uw-L52S.png|The end of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-|} This is used for each field in the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-thanks-url' => '{| align="right"
-| [[file:commons-uw-L52R.png|The beginning of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-| [[file:commons-uw-L52S.png|The end of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-|} This is used for each field in the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-ok' => '{{Identical|OK}}',
-	'mwe-upwiz-cancel' => '{{Identical|Cancel}}',
-	'mwe-upwiz-fileexists-replace-on-page' => 'Parameters:
-* $1 is an image name.
-* $2 is an URL.',
-	'mwe-upwiz-next' => 'Button text for going to the next Upload Wizard stage.
-{{Identical|Next}}',
-	'mwe-upwiz-next-file' => '{{Identical|Continue}}',
-	'mwe-upwiz-next-deeds' => '{{Identical|Next}}',
-	'mwe-upwiz-next-details' => '{{Identical|Next}}',
-	'mwe-upwiz-home' => '[[file:commons-uw-L52S.png|The End of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-
-This is a button label, used at the end in the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-upload-another' => '[[file:commons-uw-L52S.png|The End of the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page|thumb|right]]
-
-This is a button label, used at the end in the "{{MediaWiki:mwe-upwiz-step-thanks/en}}" page of the [[:mw:Extension:UploadWizard|MediaWiki Upload Wizard]].',
-	'mwe-upwiz-error-latitude' => 'Error message shown when an invalid latitude is entered',
-	'mwe-upwiz-error-longitude' => 'Error message shown when an invalid longitude is entered',
-	'mwe-upwiz-error-altitude' => 'Error message shown when an invalid altitude is entered',
-	'mwe-upwiz-error-blank' => '{{Identical|Required}}',
-	'mwe-upwiz-error-title-thumbnail' => 'Appears when thumbnail title is similar to "22px-Example.jpg" - the prefix is what MW adds when downloading pictures as thumbnails.',
-	'mwe-upwiz-too-many-files-ok' => 'OK button text.
-{{Identical|OK}}',
-	'mwe-upwiz-too-many-files-text' => 'Error message informing the user there are too many uploads in a dialog. Each param is a file count.',
-	'mwe-upwiz-too-many-files' => 'Error dialog title',
-	'mwe-upwiz-license-cc-by-sa-3.0' => '{{CreativeCommonsLicense|by-sa|3.0}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-at' => '{{CreativeCommonsLicense|by-sa|3.0|at}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-de' => '{{CreativeCommonsLicense|by-sa|3.0|de}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-ee' => '{{CreativeCommonsLicense|by-sa|3.0|ee}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-es' => '{{CreativeCommonsLicense|by-sa|3.0|es}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-hr' => '{{CreativeCommonsLicense|by-sa|3.0|hr}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-lu' => '{{CreativeCommonsLicense|by-sa|3.0|lu}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-nl' => '{{CreativeCommonsLicense|by-sa|3.0|nl}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-no' => '{{CreativeCommonsLicense|by-sa|3.0|no}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-pl' => '{{CreativeCommonsLicense|by-sa|3.0|pl}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-3.0-ro' => '{{CreativeCommonsLicense|by-sa|3.0|ro}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-3.0' => '{{CreativeCommonsLicense|by|3.0}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-2.5' => '{{CreativeCommonsLicense|by-sa|2.5}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-2.5' => '{{CreativeCommonsLicense|by|2.5}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-sa-2.0' => '{{CreativeCommonsLicense|by-sa|2.0}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-cc-by-2.0' => '{{CreativeCommonsLicense|by|2.0}}
-For more information, see https://www.mediawiki.org/wiki/UploadWizard',
-	'mwe-upwiz-license-pd-us' => 'This is one of the tags for items in the public domain. It means that the work was published first of all in the US, and before 1923. The public domain rules are different for works published first of all outside the US. The template <nowiki>{{PD-1923}}</nowiki> is used on commons for these. See [[commons:Commons:Hirtle_chart]].',
-	'mwe-upwiz-license-cc-head' => 'The word "right" seems to refer to "the right one" in the sense of one that matches or is suitable.',
-	'mwe-upwiz-license-custom-preview' => '{{Identical|Preview}}',
-	'mwe-upwiz-license-confirm-remove-title' => 'Title for dialog box to confirm that you want to abandon an upload that you started',
-	'mwe-upwiz-license-external' => '$1 is a name of a website. $2 is the name of a license.',
-	'mwe-upwiz-license-external-invalid' => '$1 is a name of a website. $2 is the name of a license.',
-	'mwe-upwiz-categories' => '[[File:Commons-uw-L52P.png|right|thumb|Screenshot showing a sample of this message]]
-
-{{Identical|Categories}}',
-	'mwe-upwiz-categories-add' => '{{Identical|Add}}',
-	'mwe-upwiz-thanks-caption' => 'Placeholder text in a plain wiki text example of how to add a thumbnailed image with a caption in MediaWiki in the "Thank you for uploading" screen of the upload wizard.',
-	'mwe-upwiz-help-popup' => '{{Identical|Help}}',
-	'mwe-upwiz-help-popup-title' => '{{Identical|Title}}',
-	'mwe-upwiz-feedback-blacklist-line-intro' => 'Parameters:
-* $1 is an entry from the title blacklist.',
-	'mwe-upwiz-errordialog-ok' => '{{Identical|OK}}',
-	'mwe-upwiz-campaigns-status' => '{{Identical|Status}}',
-	'mwe-upwiz-campaigns-enabled' => '{{Identical|Enabled}}',
-	'mwe-upwiz-campaigns-disabled' => '{{Identical|Disabled}}',
-	'mwe-upwiz-campaigns-edit' => '{{Identical|Edit}}',
-	'mwe-upwiz-campaigns-add' => '{{Identical|Add}}',
-	'mwe-upwiz-campaigns-delete' => '{{Identical|Delete}}',
-	'mwe-upwiz-campaign-conf-autoCategories' => 'List of categories that get added in the background, without the user seeing this until page upload is complete.',
-	'mwe-upwiz-campaign-conf-tutorialTemplate' => '{{doc-important|$1 is a literal in this message, and it not replaced with anything.}}',
-	'mwe-upwiz-campaign-conf-tutorialHelpdeskCoords' => 'The button seems to be:
-*{{msg-mw|mwe-upwiz-help-desk}}
-*{{msg-mw|mwe-upwiz-help-desk-url}}',
-	'mwe-upwiz-campaign-conf-idField' => '{{doc-important|$1 is not a parameter, but displayed as plain text.}}',
-	'mwe-upwiz-campaign-conf-idFieldLabelPage' => '{{doc-important|$1 is not a parameter, but displayed as plain text.}}',
-	'mwe-upwiz-campaign-conf-thanksLabelPage' => '{{doc-important|"$1" is not a parameter, but a literal.}}
-"Use" is the message {{msg-mw|Mwe-upwiz-step-thanks}}',
-	'mw-coolcats-confirm-new-ok' => 'Button text on the category creation dialog for the Upload Wizard. Clicking this button will add the selected non-existing categories to the upload.',
-	'mw-coolcats-confirm-new-cancel' => 'Button text on the category creation dialog for the Upload Wizard. Clicking this button will remove the selected non-existing categories from being added to the upload.',
-	'prefs-uploads' => 'Preferences tab label for UploadWizard preferences related to uploads. See https://commons.wikimedia.org/w/index.php?uselang=en&title=Special:Preferences#mw-prefsection-uploads.
-{{Identical|Upload}}',
-	'mwe-upwiz-prefs-def-license' => 'Form input label',
-	'mwe-upwiz-prefs-def-license-def' => 'Radio button option',
 );
 
 /** Afrikaans (Afrikaans)
@@ -4086,12 +3854,12 @@ $messages['de'] = array(
 	'mwe-upwiz-help-desk-url' => 'Hilfe und Information',
 	'mwe-upwiz-add-file-n' => 'Füge eine weitere Datei hinzu',
 	'mwe-upwiz-add-file-0-free' => 'Eine Mediendatei als Dateispende hier hinterlassen',
-	'mwe-upwiz-transport-started' => 'Starte …',
-	'mwe-upwiz-uploading' => 'Am Hochladen …',
+	'mwe-upwiz-transport-started' => 'Starte…',
+	'mwe-upwiz-uploading' => 'Am Hochladen…',
 	'mwe-upwiz-transported' => 'OK',
 	'mwe-upwiz-stashed-upload' => 'Okay',
 	'mwe-upwiz-getting-metadata' => 'Abruf der Dateiinformationen und -vorschau …',
-	'mwe-upwiz-submitting-details' => 'Übertrage Details und veröffentliche …',
+	'mwe-upwiz-submitting-details' => 'Übertrage Details und veröffentliche…',
 	'mwe-upwiz-published' => 'Veröffentlicht!',
 	'mwe-upwiz-failed' => 'Gescheitert.',
 	'mwe-upwiz-remove' => 'Entfernen',
@@ -4099,7 +3867,7 @@ $messages['de'] = array(
 	'mwe-upwiz-show-thumb' => 'Miniaturansicht anzeigen',
 	'mwe-upwiz-show-thumb-tip' => 'Eine Miniaturansicht für diese Datei laden',
 	'mwe-upwiz-remove-description' => 'Entferne diese Beschreibung',
-	'mwe-upwiz-upload' => 'Hochladen',
+	'mwe-upwiz-upload' => 'Am Hochladen…',
 	'mwe-upwiz-file-all-ok' => 'Das Hochladen aller Dateien war erfolgreich!',
 	'mwe-upwiz-file-some-failed' => 'Das Hochladen einiger Dateien ist fehlgeschlagen.',
 	'mwe-upwiz-file-retry' => 'Das Hochladen der nicht hochgeladenen Dateien erneut versuchen.',
@@ -4107,7 +3875,7 @@ $messages['de'] = array(
 	'mwe-upwiz-skip-tutorial-future' => 'Diesen Schritt zukünftig überspringen',
 	'mwe-upwiz-file-all-failed' => 'Das Hochladen aller Dateien ist fehlgeschlagen.',
 	'mwe-upwiz-upload-count' => '$1 von $2 {{PLURAL:$2|Datei|Dateien}} hochgeladen',
-	'mwe-upwiz-progressbar-uploading' => 'Am Hochladen …',
+	'mwe-upwiz-progressbar-uploading' => 'Am Hochladen…',
 	'mwe-upwiz-finished' => 'Fertig!',
 	'mwe-upwiz-secs-remaining' => 'Noch $1 {{PLURAL:$1|Sekunde|Sekunden}}',
 	'mwe-upwiz-mins-secs-remaining' => 'Noch $1 {{PLURAL:$1|Minute|Minuten}} und $2 {{PLURAL:$2|Sekunde|Sekunden}}',
@@ -4133,8 +3901,8 @@ $messages['de'] = array(
 	'mwe-upwiz-source-thirdparty-cases' => 'Bitte teile uns mit, warum du dir sicher bist, dass du das Recht zur Veröffentlichung {{PLURAL:$1|dieses Werks|dieser Werke}} hast:',
 	'mwe-upwiz-source-thirdparty-accept' => 'Okay',
 	'mwe-upwiz-source-custom' => 'Gib auf der nächsten Seite die Urheberrechtsinformation für jede einzelne Datei an.',
-	'mwe-upwiz-more-options' => 'Kategorien und weitere Informationen hinzufügen …',
-	'mwe-upwiz-fewer-options' => 'weniger Optionen …',
+	'mwe-upwiz-more-options' => 'Kategorien und weitere Informationen hinzufügen…',
+	'mwe-upwiz-fewer-options' => 'weniger Optionen…',
 	'mwe-upwiz-desc' => 'Beschreibung',
 	'mwe-upwiz-desc-add-n' => 'Füge eine Beschreibung in einer anderen Sprache hinzu',
 	'mwe-upwiz-desc-add-0' => 'eine Beschreibung hinzufügen',
@@ -6468,11 +6236,11 @@ $messages['fr'] = array(
 	'mwe-upwiz-uploadcampaign' => 'Configuration de la campagne de versement',
 	'right-upwizcampaigns' => 'Configurer les campagnes Assistant de versement',
 	'action-upwizcampaigns' => 'configurer les campagnes de versement',
-	'group-upwizcampeditors' => 'Éditeurs de campagne de l’Assistant de versement',
-	'group-upwizcampeditors-member' => '{{GENDER:$1|Éditeur de campagne de l’Assistant de versement}}',
-	'grouppage-upwizcampeditors' => '{{ns:project}}:Upload Wizard - Éditeurs de campagne',
+	'group-upwizcampeditors' => "{{GENDER:$1|Contributeur|Contributrice}} de campagnes de l'Assistant d'importation",
+	'group-upwizcampeditors-member' => "{{GENDER:$1|Contributeur|Contributrice}} de campagnes de l'Assistant d'importation",
+	'grouppage-upwizcampeditors' => "w:c:communaute:Aide:Niveaux d'accès utilisateur",
 	'mwe-upwiz-js-off' => 'L’assistant de versement utilise JavaScript pour améliorer l’interface. Puisque votre navigateur ne supporte pas JavaScript ou que JavaScript y a été désactivé, nous vous montrons un formulaire de versement simplifié.',
-	'mwe-upwiz-extension-disabled' => 'Cette page a été désactivée en raison de problèmes techniques temporaires. En attendant, essayez avec le formulaire de téléversement standard.',
+	'mwe-upwiz-extension-disabled' => "Cette page a été désactivée en raison de problèmes techniques temporaires. En attendant, essayez avec le formulaire d'importation standard.",
 	'mwe-upwiz-code-unknown' => 'Langue inconnue',
 	'mwe-upwiz-step-tutorial' => 'Apprendre',
 	'mwe-upwiz-step-file' => 'Importer',
@@ -6487,10 +6255,10 @@ $messages['fr'] = array(
 	'mwe-upwiz-help-desk' => 'Bureau d’aide',
 	'mwe-upwiz-help-desk-url' => 'Bureau d’aide',
 	'mwe-upwiz-add-file-n' => 'Ajouter un autre fichier',
-	'mwe-upwiz-add-file-0-free' => 'Déplacez le fichier à téléverser ici',
+	'mwe-upwiz-add-file-0-free' => 'Sélectionnez un média à donner',
 	'mwe-upwiz-transport-started' => 'Démarrage...',
-	'mwe-upwiz-uploading' => 'Téléversement en cours...',
-	'mwe-upwiz-transported' => 'Téléversement terminé...',
+	'mwe-upwiz-uploading' => 'Importation en cours...',
+	'mwe-upwiz-transported' => 'Importation terminée...',
 	'mwe-upwiz-stashed-upload' => 'OK',
 	'mwe-upwiz-getting-metadata' => 'Récupération des informations et des aperçus des fichiers…',
 	'mwe-upwiz-submitting-details' => 'Soumission des détails et publication...',
@@ -6501,13 +6269,13 @@ $messages['fr'] = array(
 	'mwe-upwiz-show-thumb' => 'Afficher la vignette',
 	'mwe-upwiz-show-thumb-tip' => 'Charger une image de vignette pour ce fichier',
 	'mwe-upwiz-remove-description' => 'Enlever cette description',
-	'mwe-upwiz-upload' => 'Importer',
-	'mwe-upwiz-file-all-ok' => 'Tous les téléversements ont réussi !',
-	'mwe-upwiz-file-some-failed' => 'Certains téléversements ont échoué.',
-	'mwe-upwiz-file-retry' => 'Veuillez réessayer, les téléversements ont échoué...',
+	'mwe-upwiz-upload' => 'Importation en cours...',
+	'mwe-upwiz-file-all-ok' => 'Toutes les importations ont réussi !',
+	'mwe-upwiz-file-some-failed' => 'Certaines importations ont échoué.',
+	'mwe-upwiz-file-retry' => 'Veuillez réessayer, les importations ont échoué...',
 	'mwe-upwiz-next-file-despite-failures' => 'Continuer malgré tout',
 	'mwe-upwiz-skip-tutorial-future' => 'Sauter cette étape à l’avenir.',
-	'mwe-upwiz-file-all-failed' => 'Aucun des téléversements n’a réussi.',
+	'mwe-upwiz-file-all-failed' => 'Aucune des importations n’a réussi.',
 	'mwe-upwiz-upload-count' => '$1 fichier{{PLURAL:$1||s}} sur $2 importé{{PLURAL:$1||s}}',
 	'mwe-upwiz-progressbar-uploading' => 'Versement en cours',
 	'mwe-upwiz-finished' => 'Terminé !',
@@ -6557,14 +6325,14 @@ $messages['fr'] = array(
 	'mwe-upwiz-thanks-wikitext' => '<b>Afin d’utiliser le fichier sur un wiki</b>, vous pouvez copier ce texte dans une page :',
 	'mwe-upwiz-thanks-url' => '<b>Pour créer un lien en HTML</b>, copier cette URL :',
 	'mwe-upwiz-upload-error-bad-filename-extension' => 'Ce wiki n’accepte pas les noms de fichiers avec l’extension « .$1 ».',
-	'mwe-upwiz-upload-error-bad-extension-video-firefogg' => 'Vous avez sélectionné un fichier vidéo pour le téléversement qui n’est pas dans un format libre.
-Vous pouvez installer [$1 Firefogg], une extension Firefox pour le convertir automatiquement, ou utiliser d’autres [$2 systèmes de conversion] pour convertir la vidéo dans un format libre.',
+	'mwe-upwiz-upload-error-bad-extension-video-firefogg' => "Vous avez sélectionné un fichier vidéo pour l'importation qui n’est pas dans un format libre.
+Vous pouvez installer [$1 Firefogg], une extension Firefox pour le convertir automatiquement, ou utiliser d’autres [$2 systèmes de conversion] pour convertir la vidéo dans un format libre.",
 	'mwe-upwiz-upload-error-bad-filename-no-extension' => 'Ce wiki requiert que les fichiers aient une extension — comme « .JPG » à la fin du nom de fichier.',
-	'mwe-upwiz-upload-error-duplicate-filename-error' => 'Vous avez déjà téléversé le fichier « $1 ».',
+	'mwe-upwiz-upload-error-duplicate-filename-error' => 'Vous avez déjà importé le fichier « $1 ».',
 	'mwe-upwiz-allowed-filename-extensions' => 'Les extensions autorisées sont :',
 	'mwe-upwiz-help-allowed-filename-extensions' => 'Extensions de nom de fichier autorisées',
-	'mwe-upwiz-upload-error-duplicate' => 'Ce fichier a déjà été téléversé sur ce wiki.',
-	'mwe-upwiz-upload-error-stashed-anyway' => 'Téléverser malgré tout ?',
+	'mwe-upwiz-upload-error-duplicate' => 'Ce fichier a déjà été importé sur ce wiki.',
+	'mwe-upwiz-upload-error-stashed-anyway' => 'Importer quand même ?',
 	'mwe-upwiz-upload-error-unknown-filename-error' => 'Nous ne pouvons pas lire ou comprendre le nom du fichier « $1 » pour une raison inconnue.',
 	'mwe-upwiz-ok' => 'OK',
 	'mwe-upwiz-cancel' => 'Annuler',
@@ -6581,10 +6349,10 @@ Veuillez vérifier <b><tt>$1</tt></b> si vous n’êtes pas sûr de vouloir le r
 	'mwe-upwiz-next-deeds' => 'Suivant',
 	'mwe-upwiz-next-details' => 'Suivant',
 	'mwe-upwiz-home' => 'Aller à la page d’accueil du wiki',
-	'mwe-upwiz-upload-another' => 'Téléverser plus de fichiers',
+	'mwe-upwiz-upload-another' => "Importer d'autres fichiers",
 	'mwe-prevent-close' => 'Quitter cette page peut vous faire perdre toutes les modifications que vous avez faites.',
-	'mwe-upwiz-prevent-close' => "Vous n'avez pas encore terminé le téléversement et la publication de {{PLURAL:$1|ce fichier|ces fichiers}}.",
-	'mwe-upwiz-files-complete' => 'Le téléversement de vos fichiers est terminé !',
+	'mwe-upwiz-prevent-close' => "Vous n'avez pas encore terminé l'importation et la publication de {{PLURAL:$1|ce fichier|ces fichiers}}.",
+	'mwe-upwiz-files-complete' => "L'importation de vos fichiers est terminée !",
 	'mwe-upwiz-tooltip-author' => 'Le nom de la personne qui a pris la photo, peint le tableau, dessiné le dessin, etc.',
 	'mwe-upwiz-tooltip-source' => "L'endroit d'où vient le fichier numérique, peut être une URL, un livre ou une publication",
 	'mwe-upwiz-tooltip-sign' => "Vous pouvez utiliser votre nom d'utilisateur du wiki ou votre vrai nom. Dans les deux cas, ce sera lié à votre page utilisateur du wiki",
@@ -6682,7 +6450,7 @@ Veuillez ne pas utiliser de code wiki ni de HTML ici.',
 	'mwe-upwiz-license-custom-preview' => 'Aperçu',
 	'mwe-upwiz-license-none-head' => "Je l'ai trouvé sur Internet -- Je ne suis pas sûr",
 	'mwe-upwiz-license-none' => "Je crois que {{PLURAL:$1|cette œuvre est|ces œuvres sont}} sous licence libre ou légalement dans le domaine public. Je comprends que si je n'ajoute pas les informations de licence nécessaires en temps opportun, {{PLURAL:$1|le fichier pourra être supprimé|les fichiers pourront être supprimés}}.",
-	'mwe-upwiz-license-confirm-remove' => 'Êtes-vous sûr de vouloir supprimer {{PLURAL:$1|ce téléversement|ces téléversements}} ?',
+	'mwe-upwiz-license-confirm-remove' => 'Êtes-vous sûr de vouloir supprimer {{PLURAL:$1|ce fichier importé|ces fichiers importés}} ?',
 	'mwe-upwiz-license-confirm-remove-title' => 'Confirmer la suppression',
 	'mwe-upwiz-license-external' => 'Ce fichier est sous la licence suivante sur $1 : <b>$2</b>.',
 	'mwe-upwiz-license-external-invalid' => "Ce fichier est sous la licence suivante sur $1 : <b>$2</b>. Malheureusement, cette licence n'est pas appropriée pour une utilisation sur ce site.",
@@ -6700,7 +6468,7 @@ Veuillez ne pas utiliser de code wiki ni de HTML ici.',
 	'mwe-upwiz-subhead-translate' => '[$1 Aider aux traductions]',
 	'mwe-upwiz-subhead-alt-upload' => '[$1 Retour à l’ancien formulaire]',
 	'mwe-upwiz-feedback-prompt' => '[$1 Faites-nous savoir] ce que vous pensez de l’assistant de versement !',
-	'mwe-upwiz-feedback-title' => "Laissez vos commentaires sur l'assistant de téléversement",
+	'mwe-upwiz-feedback-title' => "Laissez vos commentaires sur l'assistant d'importation",
 	'mwe-upwiz-feedback-blacklist-report-prompt' => '[$1 Envoyer son ressenti]',
 	'mwe-upwiz-feedback-blacklist-info-prompt' => "[$1 Plus d'informations]",
 	'mwe-upwiz-feedback-blacklist-line-intro' => "Voici l'entrée de la liste noire de titre qui a fourni une correspondance:
@@ -6732,7 +6500,7 @@ $1",
 	'mwe-upwiz-campaign-conf-skipTutorial' => 'Passer le tutorial sur les licences',
 	'mwe-upwiz-campaign-conf-autoCategories' => 'Catégories à ajouter aux fichiers automatiquement et silencieusement (séparées par des barres verticales):',
 	'mwe-upwiz-campaign-conf-defaultCategories' => "Catégories par défaut à lister dans l'onglet de description (séparées par des barres verticales):",
-	'mwe-upwiz-campaign-conf-autoWikiText' => 'Texte wiki à ajouter automatiquement à toutes les images téléversées',
+	'mwe-upwiz-campaign-conf-autoWikiText' => 'Wikitexte à ajouter automatiquement à toutes les images importées :',
 	'mwe-upwiz-campaign-conf-ownWorkOption' => 'Comment gérer son travail personnel ou celui des autres :',
 	'mwe-upwiz-campaign-owner-choice' => 'Permet à l’utilisateur de choisir entre son travail personnel et le travail d’autrui',
 	'mwe-upwiz-campaign-owner-own' => 'Permettre seulement le versement de ses travaux personnels',
@@ -22231,4 +21999,3 @@ $1',
 	'mwe-upwiz-prefs-license-own' => '自己的作品 - $1',
 	'mwe-upwiz-prefs-license-thirdparty' => '他人的作品 - $1',
 );
-

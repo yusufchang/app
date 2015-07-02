@@ -12,30 +12,19 @@ $messages = array();
  * @author Tim Starling
  */
 $messages['en'] = array(
-	'imagemap_desc'                 => 'Allows client-side clickable image maps using <code>&lt;imagemap&gt;</code> tag',
-	'imagemap_no_image'             => 'Error: must specify an image in the first line',
-	'imagemap_invalid_image'        => 'Error: image is invalid or non-existent',
-	'imagemap_bad_image'            => 'Error: image is blacklisted on this page',
-	'imagemap_no_link'              => 'Error: no valid link was found at the end of line $1',
-	'imagemap_invalid_title'        => 'Error: invalid title in link at line $1',
-	'imagemap_missing_coord'        => 'Error: not enough coordinates for shape at line $1',
-	'imagemap_unrecognised_shape'   => 'Error: unrecognised shape at line $1, each line must start with one of: default, rect, circle or poly',
-	'imagemap_invalid_coord'        => 'Error: invalid coordinate at line $1, must be a number',
-	'imagemap_invalid_desc'         => 'Error: invalid desc specification, must be one of: <code>$1</code>',
-	'imagemap_description'          => 'About this image',
-	# Note to translators: keep the same order
-	'imagemap_desc_types'           => 'top-right, bottom-right, bottom-left, top-left, none',
-	'imagemap_poly_odd'             => 'Error: found poly with odd number of coordinates on line $1',
-);
-
-/** Message documentation (Message documentation)
- * @author Purodha
- * @author The Evil IP address
- * @author Umherirrender
- */
-$messages['qqq'] = array(
-	'imagemap_desc' => '{{desc}}',
-	'imagemap_desc_types' => '{{optional}}',
+	'imagemap_desc' => 'Allows client-side clickable image maps using <code>&lt;imagemap&gt;</code> tag',
+	'imagemap_no_image' => 'Error: must specify an image in the first line',
+	'imagemap_invalid_image' => 'Error: image is invalid or non-existent',
+	'imagemap_bad_image' => 'Error: image is blacklisted on this page',
+	'imagemap_no_link' => 'Error: no valid link was found at the end of line $1',
+	'imagemap_invalid_title' => 'Error: invalid title in link at line $1',
+	'imagemap_missing_coord' => 'Error: not enough coordinates for shape at line $1',
+	'imagemap_unrecognised_shape' => 'Error: unrecognised shape at line $1, each line must start with one of: default, rect, circle or poly',
+	'imagemap_invalid_coord' => 'Error: invalid coordinate at line $1, must be a number',
+	'imagemap_invalid_desc' => 'Error: invalid desc specification, must be one of: <code>$1</code>',
+	'imagemap_description' => 'About this image',
+	'imagemap_desc_types' => 'top-right, bottom-right, bottom-left, top-left, none',
+	'imagemap_poly_odd' => 'Error: found poly with odd number of coordinates on line $1',
 );
 
 /** Afrikaans (Afrikaans)
@@ -536,17 +525,17 @@ $messages['fa'] = array(
  * @author Tarmo
  */
 $messages['fi'] = array(
-	'imagemap_desc' => 'Mahdollistaa napsautettavien kuvakarttojen tekemisen <code>&lt;imagemap&gt;</code>-elementillä.',
+	'imagemap_desc' => 'Tietoja tästä kuvasta',
 	'imagemap_no_image' => 'Error: kuva pitää määritellä ensimmäisellä rivillä.',
 	'imagemap_invalid_image' => 'Error: kuva ei kelpaa tai sitä ei ole olemassa',
 	'imagemap_bad_image' => 'Virhe: Kuva kuuluu sivuston estolistalle',
 	'imagemap_no_link' => 'Virhe: rivin $1 lopusta ei löytynyt kelvollista linkkiä',
 	'imagemap_invalid_title' => 'Virhe: kelvoton otsikko linkissä rivillä $1',
 	'imagemap_missing_coord' => 'Virhe: rivin $1 muodolle ei ole määritelty riittävästi koordinaatteja',
-	'imagemap_unrecognised_shape' => 'Virhe: rivin $1 muotoa ei tunnistettu, jokaisen rivin tulee alkaa jollakin seuraavista: default, rect, circle tai poly',
-	'imagemap_invalid_coord' => 'Error: kelpaamaton koordinaatti rivillä $1. Koordinaatin täytyy olla numero.',
+	'imagemap_unrecognised_shape' => '&lt;imagemap&gt;: tunnistamaton muoto rivillä $1, jokaisen rivin täytyy alkaa yhdellä seuraavista: default, rect, circle tai poly',
+	'imagemap_invalid_coord' => '&lt;imagemap&gt;: kelvoton koordinaatti rivillä $1, täytyy olla numero',
 	'imagemap_invalid_desc' => 'Virhe: virheellinen kohdemäärittely, kohdemäärittelyn tulee olla yksi seuraavista: <code>$1</code>',
-	'imagemap_description' => 'Kuvan tiedot',
+	'imagemap_description' => 'Tietoja tästä kuvasta',
 	'imagemap_poly_odd' => 'Virhe: löytyi polygoni, jossa pariton määrä koordinaatteja rivillä $1',
 );
 
@@ -568,7 +557,7 @@ $messages['fo'] = array(
  * @author Verdy p
  */
 $messages['fr'] = array(
-	'imagemap_desc' => 'Permet les cartes images clientes cliquables, grâce à la balise <code>&lt;imagemap&gt;</code>',
+	'imagemap_desc' => 'Permet les imagemaps cliquables du côté client, grâce à la balise <code>&lt;imagemap&gt;</code>',
 	'imagemap_no_image' => '&lt;imagemap&gt; : vous devez spécifier une image dans la première ligne',
 	'imagemap_invalid_image' => '&lt;imagemap&gt; : l’image est invalide ou n’existe pas',
 	'imagemap_bad_image' => '&lt;imagemap&gt; : l’image est en liste noire sur cette page',
@@ -854,18 +843,19 @@ $messages['it'] = array(
  * @author Mizusumashi
  */
 $messages['ja'] = array(
-	'imagemap_desc' => '<code>&lt;imagemap&gt;</code>タグによるクライアントサイドのクリッカブルマップ機能を有効にする',
-	'imagemap_no_image' => 'エラー: 最初の行で画像を指定して下さい。',
-	'imagemap_invalid_image' => 'エラー: 画像が無効であるか、存在しません。',
+	'imagemap_desc' => 'この画像について',
+	'imagemap_no_image' => '&lt;画像マップ&gt;: 最初の行で、画像を特定する必要があります。',
+	'imagemap_invalid_image' => '&lt;画像マップ&gt;:画像が存在しないか、不正なものです。',
 	'imagemap_bad_image' => 'エラー: このページでは画像が排除されています',
-	'imagemap_no_link' => 'エラー: 有効なリンクが$1行目の最後に存在しません。',
-	'imagemap_invalid_title' => 'エラー: $1行目のリンクのタイトルが無効です。',
-	'imagemap_missing_coord' => 'エラー: $1行目にある図形の座標指定が不足しています。',
-	'imagemap_unrecognised_shape' => 'エラー: $1行目の図形は認められません。各行は次のどれかで始まる必要があります: default, rect, circle, poly',
-	'imagemap_invalid_coord' => 'エラー: $1行目の座標が無効です。数字を指定して下さい。',
-	'imagemap_invalid_desc' => 'エラー: 無効なdescの指定です。次のどれかを指定して下さい: <code>$1</code>',
-	'imagemap_description' => '画像の詳細',
+	'imagemap_no_link' => '&lt;画像マップ&gt;: $1行目の最後に適切なリンクが見付かりませんでした。',
+	'imagemap_invalid_title' => '&lt;画像マップ&gt;:$1行目のリンクのタイトルが不正です。',
+	'imagemap_missing_coord' => '&lt;画像マップ&gt;: $1行目の座標が画像に対して十分ではありません。',
+	'imagemap_unrecognised_shape' => '&lt;画像マップ&gt;: $1行目の形が認識できません。各行は、最初に次の語のひとつをとらなければなりません。:default, rect, circle, poly',
+	'imagemap_invalid_coord' => '&lt;画像マップ&gt;:　$1行目の座標が不正です。数字を用いてください。',
+	'imagemap_invalid_desc' => '&lt;画像マップ&gt;:説明文が不正です。<tt>$1</tt>のうちのひとつです。',
+	'imagemap_description' => 'この画像について',
 	'imagemap_poly_odd' => 'エラー: $1行目に、奇数個の座標値が指定されたpolyがあります。',
+	'imagemap_desc_types' => '右上、右下、左下、左上、無し',
 );
 
 /** Javanese (Basa Jawa)
@@ -1320,9 +1310,9 @@ $messages['pdc'] = array(
  */
 $messages['pl'] = array(
 	'imagemap_desc' => 'Umożliwia utworzenie obrazka zawierającego klikalną mapę, z użyciem znacznika <code>&lt;imagemap&gt;</code>',
-	'imagemap_no_image' => 'Błąd – należy wpisać grafikę w pierwszej linii',
-	'imagemap_invalid_image' => 'Błąd – grafika jest niepoprawna lub nie istnieje',
-	'imagemap_bad_image' => 'Błąd – ta grafika jest zakazana w tym serwisie',
+	'imagemap_no_image' => 'Błąd – należy wpisać nazwę obrazu w pierwszej linii',
+	'imagemap_invalid_image' => 'Błąd – obraz jest niepoprawny lub nie istnieje',
+	'imagemap_bad_image' => 'Błąd – ten obraz jest niedozwolony w tym serwisie',
 	'imagemap_no_link' => 'Błąd – nie znaleziono poprawnego linku na końcu linii $1',
 	'imagemap_invalid_title' => 'Błąd – niepoprawny tytuł linku w linii $1',
 	'imagemap_missing_coord' => 'Błąd – niewystarczająca liczba współrzędnych dla kształtu zdefiniowanego w linii $1',
@@ -1976,4 +1966,3 @@ $messages['zh-hant'] = array(
 	'imagemap_desc_types' => '右上, 右下, 左下, 左上, 無',
 	'imagemap_poly_odd' => '錯誤：在第 $1 行找到單數的多邊坐標',
 );
-

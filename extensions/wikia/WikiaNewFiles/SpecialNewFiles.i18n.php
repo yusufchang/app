@@ -15,20 +15,6 @@ $messages['en'] = array(
 	'wikianewfiles-more' => 'more...',
 );
 
-/** Message documentation (Message documentation)
- * @author Liuxinyu970226
- */
-$messages['qqq'] = array(
-	'wikianewfiles-title' => 'Title of the special page.',
-	'wikianewfiles-desc' => '{{desc}}',
-	'wikianewfiles-uploadby' => 'Text displayed below a file to indicate which user uploaded the file.
-* $1 is a link to the user page of the user who uploaded the file.
-* $2 is the user name for GENDER support.',
-	'wikianewfiles-postedin' => 'Text displayed below a file to indicate which articles the file is posted in.',
-	'wikianewfiles-more' => 'Text displayed when there are more articles the file is posted in.
-{{Identical|More}}',
-);
-
 /** Arabic (العربية)
  * @author Achraf94
  */
@@ -86,21 +72,21 @@ $messages['ce'] = array(
  * @author Purodha
  */
 $messages['de'] = array(
-	'wikianewfiles-title' => 'Neue Dateien auf diesem Wiki',
-	'wikianewfiles-desc' => 'Erzeugt eine [[Special:NewFiles|Spezialseite]] zum Überschreiben einiger Überschriftsformatierungen',
-	'wikianewfiles-uploadby' => 'von {{GENDER:$2|$1}}',
-	'wikianewfiles-postedin' => 'Gepostet in',
-	'wikianewfiles-more' => 'mehr …',
+	'wikianewfiles-title' => 'Neue Bilder in diesem Wiki',
+	'wikianewfiles-desc' => 'Erweiterung der bestehenden [[Special:NewFiles|Spezialseite zur Anzeige neuer Dateien]]',
+	'wikianewfiles-uploadby' => 'von $1',
+	'wikianewfiles-postedin' => 'Verwendet in',
+	'wikianewfiles-more' => 'mehr...',
 );
 
 /** Spanish (español)
  * @author VegaDark
  */
 $messages['es'] = array(
-	'wikianewfiles-title' => 'Archivos nuevos en el wiki',
+	'wikianewfiles-title' => 'Imágenes nuevas en este wiki',
 	'wikianewfiles-desc' => 'Extiende una [[Special:NewFiles|página especial]] para anular parte del formato del encabezado',
-	'wikianewfiles-uploadby' => 'por {{GENDER:$2|$1}}',
-	'wikianewfiles-postedin' => 'Publicado en',
+	'wikianewfiles-uploadby' => 'por $1',
+	'wikianewfiles-postedin' => 'Publicado&nbsp;en',
 	'wikianewfiles-more' => 'más...',
 );
 
@@ -115,10 +101,10 @@ $messages['eu'] = array(
  * @author Gomoko
  */
 $messages['fr'] = array(
-	'wikianewfiles-title' => 'Nouveaux fichiers sur ce wiki',
-	'wikianewfiles-desc' => 'Étend une [[Special:NewFiles|page spéciale]] pour écraser certaines mises en forme de l’entête',
-	'wikianewfiles-uploadby' => 'par {{GENDER:$2|$1}}',
-	'wikianewfiles-postedin' => 'Posté dans',
+	'wikianewfiles-title' => 'Nouvelles images sur ce wiki',
+	'wikianewfiles-desc' => 'Étend une [[Special:NewFiles|page spéciale]] pour surcharger une partie du formatage des en-têtes',
+	'wikianewfiles-uploadby' => 'par $1',
+	'wikianewfiles-postedin' => 'Publiée sur',
 	'wikianewfiles-more' => 'plus…',
 );
 
@@ -149,6 +135,21 @@ $messages['hu'] = array(
 	'wikianewfiles-title' => 'Új fájlok a wikin',
 );
 
+$messages['it'] = array(
+	'wikianewfiles-title' => 'Nuove immagini nella wiki',
+	'wikianewfiles-desc' => 'Introduce una [[Special:NewFiles|pagina speciale]] per sovrascrivere alcune caratteristiche del layout.',
+	'wikianewfiles-uploadby' => 'caricato da $1',
+	'wikianewfiles-postedin' => 'Pubblicato in',
+	'wikianewfiles-more' => 'altre...',
+);
+
+$messages['ja'] = array(
+	'wikianewfiles-title' => 'このウィキアにある新着ファイル',
+	'wikianewfiles-desc' => '[[Special:NewFiles]] を拡張しヘッダ情報の表示形式を変更します',
+	'wikianewfiles-postedin' => '次のページでアップロード:',
+	'wikianewfiles-more' => 'さらに見る…',
+);
+
 /** Georgian (ქართული)
  * @author DevaMK
  */
@@ -157,6 +158,13 @@ $messages['ka'] = array(
 	'wikianewfiles-uploadby' => 'ამტვირთავი - {{GENDER:$2|$1}}',
 	'wikianewfiles-postedin' => 'გამოყენებულია გვერდში',
 	'wikianewfiles-more' => 'მეტი...',
+);
+
+$messages['ko'] = array(
+	'wikianewfiles-title' => '새로 올라온 그림',
+	'wikianewfiles-uploadby' => '$1 사용자가 올린 그림',
+	'wikianewfiles-postedin' => '포함하는 문서',
+	'wikianewfiles-more' => '더 보기...',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -203,10 +211,10 @@ $messages['ms'] = array(
  * @author Sjoerddebruin
  */
 $messages['nl'] = array(
-	'wikianewfiles-title' => 'Nieuwe bestanden op deze wiki',
-	'wikianewfiles-desc' => 'Voegt functionaliteit toe aan een [[Special:NewFiles|speciale pagina]] zodat kopteksten gewijzigd kunnen worden',
-	'wikianewfiles-uploadby' => 'door {{GENDER:$2|$1}}',
-	'wikianewfiles-postedin' => 'Geplaatst in',
+	'wikianewfiles-title' => "Nieuwe foto's op deze wiki",
+	'wikianewfiles-desc' => 'Breidt een [[Special:NewFiles|speciale pagina uit]] en overschrijft een deel van de opmaak van de hoofding',
+	'wikianewfiles-uploadby' => 'door $1',
+	'wikianewfiles-postedin' => 'Geplaatst&nbsp;in',
 	'wikianewfiles-more' => 'meer...',
 );
 
@@ -234,11 +242,11 @@ $messages['pa'] = array(
  * @author Wedkarski
  */
 $messages['pl'] = array(
-	'wikianewfiles-title' => 'Nowe pliki na tej wiki',
-	'wikianewfiles-desc' => 'Rozszerza [[Special:NewFiles|stronę specjalną]] aby zastąpić niektóre formatowania nagłówków',
-	'wikianewfiles-uploadby' => 'przez {{GENDER:$2|$1}}',
-	'wikianewfiles-postedin' => 'Zamieszczony w',
-	'wikianewfiles-more' => 'więcej…',
+	'wikianewfiles-title' => 'Nowe obrazy',
+	'wikianewfiles-desc' => 'Rozszerzenie [[Special:NewFiles|strony specjalnej]] nadpisujące pierwotne formatowanie nagłówka.',
+	'wikianewfiles-uploadby' => 'dodany przez $1',
+	'wikianewfiles-postedin' => 'Użyto&nbsp;w',
+	'wikianewfiles-more' => 'więcej...',
 );
 
 /** Pashto (پښتو)
@@ -249,13 +257,21 @@ $messages['ps'] = array(
 	'wikianewfiles-more' => 'نور ...',
 );
 
+$messages['pt'] = array(
+	'wikianewfiles-title' => 'Fotos novas nessa wiki',
+	'wikianewfiles-desc' => 'Extende uma [[w:c:Comunidade:Especial:Ficheiros_novos|página especial]] para anular parte da formatação do cabeçalho',
+	'wikianewfiles-uploadby' => 'por $1',
+	'wikianewfiles-postedin' => 'Postado&nbsp;em',
+	'wikianewfiles-more' => 'mais...',
+);
+
 /** Brazilian Portuguese (português do Brasil)
  * @author Cainamarques
  * @author Guilhermemau
  * @author Jefersonmoraes
  */
 $messages['pt-br'] = array(
-	'wikianewfiles-title' => 'Novos arquivos nesta wikia',
+	'wikianewfiles-title' => 'Novas fotos nessa wiki',
 	'wikianewfiles-desc' => 'Amplia uma [[Special:NewFiles|página especial]] para sobrepor a formatação do cabeçalho',
 	'wikianewfiles-uploadby' => 'por {{GENDER:$2|$1}}',
 	'wikianewfiles-postedin' => 'Postado em',
@@ -277,11 +293,11 @@ $messages['roa-tara'] = array(
  * @author Okras
  */
 $messages['ru'] = array(
-	'wikianewfiles-title' => 'Новые файлы в этой вики',
-	'wikianewfiles-desc' => 'Расширяет [[Special:NewFiles|спецстраницу]] для переопределения некоторых форматов заголовка',
-	'wikianewfiles-uploadby' => 'участником {{GENDER:$2|$1}}',
-	'wikianewfiles-postedin' => 'Опубликовано в',
-	'wikianewfiles-more' => 'далее…',
+	'wikianewfiles-title' => 'Новые фото на этой вики',
+	'wikianewfiles-desc' => 'Расширение [[Special:NewFiles|служебной страницы]], которое перемещает некоторые из заголовков',
+	'wikianewfiles-uploadby' => 'от $1',
+	'wikianewfiles-postedin' => 'Опубликовано&nbsp;в',
+	'wikianewfiles-more' => 'больше...',
 );
 
 /** Scots (Scots)
@@ -334,6 +350,14 @@ $messages['vi'] = array(
 	'wikianewfiles-uploadby' => 'bởi {{GENDER:$2|$1}}',
 	'wikianewfiles-postedin' => 'Đăng vào',
 	'wikianewfiles-more' => 'thêm',
+);
+
+$messages['zh'] = array(
+	'wikianewfiles-title' => '本维基上的新图片',
+	'wikianewfiles-desc' => '扩展[[Special:NewFiles|特殊页面]]将重写某些标题格式',
+	'wikianewfiles-uploadby' => '上传者:$1',
+	'wikianewfiles-postedin' => '在&nbsp;中发布',
+	'wikianewfiles-more' => '更多...',
 );
 
 /** Simplified Chinese (中文（简体）‎)

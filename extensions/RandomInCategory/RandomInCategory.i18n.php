@@ -9,41 +9,12 @@
 $messages = array();
 
 $messages['en'] = array(
-	'randomincategory'                => 'Random page in category',
-	'randomincategory-desc'           => '[[Special:Randomincategory|Special page]] to get a random page in category',
-	'randomincategory-toolbox'        => 'Random page',
-	'randomincategory-nocategory'     => 'Category $1 does not exist or is empty',
-	'randomincategory-label'          => 'Category:',
-	'randomincategory-submit'         => 'Go',
-);
-
-/** Message documentation (Message documentation)
- * @author Jon Harald Søby
- * @author Purodha
- * @author SPQRobin
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'randomincategory' => 'Part of the "RandomInCategory" extension. This message is the title of the special page [[Special:Randomincategory]].',
-	'randomincategory-desc' => '{{desc}}',
-	'randomincategory-toolbox' => 'Part of the "RandomInCategory" extension. This message is shown in the toolbox, but only on category pages. It goes directly to a random page in the category you are viewing. You can also go the the special page [[MediaWiki:Randomincategory/{{SUBPAGENAME}}|Special:Randomincategory]] to enter a category name manually.
-
-{{Identical|Random page}}',
-	'randomincategory-nocategory' => 'Part of the "RandomInCategory" extension. This message is an error if you requested a random page in a category which does not exist.',
-	'randomincategory-label' => 'Part of the "RandomInCategory" extension. This message is next to the inputbox to type the name of a category.
-
-{{Identical|Category}}',
-	'randomincategory-submit' => 'Part of the "RandomInCategory" extension. This message is the text of the submit button on the special page [[MediaWiki:Randomincategory/{{SUBPAGENAME}}|Special:Randomincategory]].
-
-{{Identical|Go}}',
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'randomincategory-toolbox' => 'Lau fifili',
-	'randomincategory-submit' => 'Fano',
+	'randomincategory' => 'Random page in category',
+	'randomincategory-desc' => '[[Special:Randomincategory|Special page]] to get a random page in category',
+	'randomincategory-toolbox' => 'Random page',
+	'randomincategory-nocategory' => 'Category $1 does not exist or is empty',
+	'randomincategory-label' => 'Category:',
+	'randomincategory-submit' => 'Go',
 );
 
 /** Afrikaans (Afrikaans)
@@ -287,11 +258,11 @@ $messages['eo'] = array(
  * @author Sanbec
  */
 $messages['es'] = array(
-	'randomincategory' => 'Página aleatoria en categoría',
-	'randomincategory-desc' => '[[Special:Randomincategory|página especial]] para obtener una página al azar en una categoría',
+	'randomincategory' => 'La etiqueta $1 no existe o está vacía',
+	'randomincategory-desc' => '[[Special:Randomincategory|Página especial]] para obtener una página aleatoria dentro de esta etiqueta',
 	'randomincategory-toolbox' => 'Página aleatoria',
-	'randomincategory-nocategory' => 'La categoría $1 no existe o está vacía',
-	'randomincategory-label' => 'Categoría:',
+	'randomincategory-nocategory' => 'La etiqueta $1 no existe o está vacía',
+	'randomincategory-label' => 'Etiqueta:',
 	'randomincategory-submit' => 'Ir',
 );
 
@@ -302,6 +273,11 @@ $messages['eu'] = array(
 	'randomincategory-toolbox' => 'Ausazko orria',
 	'randomincategory-label' => 'Kategoria:',
 	'randomincategory-submit' => 'Joan',
+);
+
+$messages['fa'] = array(
+	'randomincategory' => 'صفحهٔ تصادفی در رده',
+	'randomincategory-toolbox' => 'صفحهٔ تصادفی',
 );
 
 /** Finnish (Suomi)
@@ -544,7 +520,7 @@ $messages['is'] = array(
  * @author Darth Kule
  */
 $messages['it'] = array(
-	'randomincategory' => 'Pagina casuale in una categoria',
+	'randomincategory' => 'Una pagina a caso',
 	'randomincategory-desc' => "[[Special:Randomincategory|Pagina speciale]] che dà una pagina casuale all'interno di una categoria",
 	'randomincategory-toolbox' => 'Una pagina a caso',
 	'randomincategory-nocategory' => 'La categoria $1 non esiste o è vuota',
@@ -596,6 +572,13 @@ $messages['km'] = array(
 $messages['kn'] = array(
 	'randomincategory-label' => 'ವರ್ಗ:',
 	'randomincategory-submit' => 'ಹೋಗು',
+);
+
+$messages['ko'] = array(
+	'randomincategory' => '분류 중 임의 문서',
+	'randomincategory-nocategory' => '"$1" 분류가 존재하지 않거나 비어 있습니다',
+	'randomincategory-label' => '분류:',
+	'randomincategory-submit' => '실행',
 );
 
 /** Krio (Krio)
@@ -776,6 +759,14 @@ $messages['nb'] = array(
  */
 $messages['ne'] = array(
 	'randomincategory-submit' => 'जाउ',
+);
+
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'randomincategory-toolbox' => 'Lau fifili',
+	'randomincategory-submit' => 'Fano',
 );
 
 /** Dutch (Nederlands)
@@ -1155,6 +1146,10 @@ $messages['yi'] = array(
 	'randomincategory-label' => 'קאַטעגאריע:',
 );
 
+$messages['zh'] = array(
+	'randomincategory' => '特定分类中的随机页面',
+);
+
 /** Simplified Chinese (‪中文(简体)‬)
  * @author Gzdavidwong
  * @author Xiaomingyan
@@ -1163,6 +1158,7 @@ $messages['zh-hans'] = array(
 	'randomincategory-toolbox' => '随机页面',
 	'randomincategory-label' => '分类：',
 	'randomincategory-submit' => '提交',
+	'randomincategory' => '特定分类中的随机页面',
 );
 
 /** Traditional Chinese (‪中文(繁體)‬)
@@ -1174,5 +1170,13 @@ $messages['zh-hant'] = array(
 	'randomincategory-toolbox' => '隨機頁面',
 	'randomincategory-label' => '分類：',
 	'randomincategory-submit' => '進入',
+	'randomincategory' => '特定分類中的隨機頁面',
 );
 
+$messages['zh-hk'] = array(
+	'randomincategory' => '特定分類中的隨機頁面',
+);
+
+$messages['zh-tw'] = array(
+	'randomincategory' => '特定分類中的隨機頁面',
+);

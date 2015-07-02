@@ -77,7 +77,7 @@ $messages['en'] = array(
 	'code-rev-modified-r' => 'replaced',
 	'code-rev-modified-d' => 'deleted',
 	'code-rev-modified-m' => 'modified',
-	'code-rev-imagediff'  => 'Image changes',
+	'code-rev-imagediff' => 'Image changes',
 	'code-rev-status' => 'Status:',
 	'code-rev-status-set' => 'Change status',
 	'code-rev-tags' => 'Tags:',
@@ -136,19 +136,14 @@ $messages['en'] = array(
 	'code-batch-tags' => 'Change tags:',
 	'codereview-batch-title' => 'Change all selected revisions',
 	'codereview-batch-submit' => 'Submit',
-
-	'code-releasenotes'     => 'release notes',
-	'code-release-legend'   => 'Generate release notes',
+	'code-releasenotes' => 'release notes',
+	'code-release-legend' => 'Generate release notes',
 	'code-release-startrev' => 'Start rev:',
-	'code-release-endrev'   => 'Last rev:',
-
+	'code-release-endrev' => 'Last rev:',
 	'codereview-subtitle' => 'For $1',
-
 	'codereview-reply-link' => 'reply',
-
 	'codereview-overview-title' => 'Overview',
 	'codereview-overview-desc' => 'Show a graphical overview of this list',
-
 	'codereview-email-subj' => '[$1 $2]: New comment added',
 	'codereview-email-body' => '"$1" posted a comment on $3.
 URL: $2
@@ -160,7 +155,6 @@ $5
 $1\'s comment:
 
 $4',
-
 	'codereview-email-subj2' => '[$1 $2]: Follow-up changes',
 	'codereview-email-body2' => '"$1" made follow-up changes to $2.
 URL: $5
@@ -173,7 +167,6 @@ Follow-up URL: $3
 Follow-up summary by "$1":
 
 $4',
-
 	'codereview-email-subj3' => '[$1 $2]: Revision status changed',
 	'codereview-email-body3' => '"$1" changed the status of $2 to "$4"
 URL: $5
@@ -184,7 +177,6 @@ New status: $4
 Commit summary for $2:
 
 $6',
-
 	'codereview-email-subj4' => '[$1 $2]: New comment added, and revision status changed',
 	'codereview-email-body4' => '"$1" changed the status of $2 to "$4" and commented it.
 URL: $5
@@ -199,7 +191,6 @@ $7
 $1\'s comment:
 
 $6',
-
 	'code-stats' => 'statistics',
 	'code-stats-header' => 'Statistics for repository $1',
 	'code-stats-main' => 'As of $1, the repository has $2 {{PLURAL:$2|revision|revisions}} by [[Special:Code/$3/author|$4 {{PLURAL:$4|author|authors}}]].',
@@ -211,10 +202,8 @@ $6',
 	'code-stats-new-breakdown-path' => 'Breakdown of new revisions per path',
 	'code-stats-new-path' => 'New revisions for path: $1',
 	'code-stats-count' => 'Number of revisions',
-
 	'code-tooltip-withsummary' => 'r$1 [$2] by $3 - $4',
 	'code-tooltip-withoutsummary' => 'r$1 [$2] by $3',
-
 	'repoadmin' => 'Repository Administration',
 	'repoadmin-new-legend' => 'Create a new repository',
 	'repoadmin-new-label' => 'Repository name:',
@@ -226,7 +215,6 @@ $6',
 	'repoadmin-edit-button' => 'OK',
 	'repoadmin-edit-sucess' => 'The repository "[[Special:Code/$1|$1]]" has been successfully modified.',
 	'repoadmin-nav' => 'repository administration',
-
 	'right-repoadmin' => 'Manage code repositories',
 	'right-codereview-use' => 'Use of Special:Code',
 	'right-codereview-add-tag' => 'Add new tags to revisions',
@@ -237,7 +225,6 @@ $6',
 	'right-codereview-link-user' => 'Link authors to wiki users',
 	'right-codereview-associate' => 'Manage revision associations',
 	'right-codereview-review-own' => 'Mark your own revisions as "{{int:code-status-ok}}" or "{{int:code-status-resolved}}"',
-
 	'action-repoadmin' => 'manage code repositories',
 	'action-codereview-use' => 'use of Special:Code',
 	'action-codereview-add-tag' => 'add new tags to revisions',
@@ -248,174 +235,10 @@ $6',
 	'action-codereview-link-user' => 'link authors to wiki users',
 	'action-codereview-associate' => 'manage revision associations',
 	'action-codereview-review-own' => 'mark your own revisions as "{{int:code-status-ok}} or "{{int:code-status-resolved}}"',
-
 	'specialpages-group-developer' => 'Developer tools',
-
 	'group-svnadmins' => 'SVN admins',
 	'group-svnadmins-member' => '{{GENDER:$1|SVN admin}}',
 	'grouppage-svnadmins' => '{{ns:project}}:SVN admins',
-);
-
-/** Message documentation (Message documentation)
- * @author Amire80
- * @author Aotake
- * @author Beta16
- * @author Dalibor Bosits
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Jon Harald Søby
- * @author Kghbln
- * @author Kwj2772
- * @author MaxSem
- * @author McDutchie
- * @author Mormegil
- * @author Nike
- * @author Purodha
- * @author Raymond
- * @author SPQRobin
- * @author Siebrand
- * @author Sp5uhe
- * @author Umherirrender
- * @author Verdy p
- * @author Yekrats
- */
-$messages['qqq'] = array(
-	'code-rev-title' => 'Title of code review page. "$1" is the name of the project being coded followed by a revision number.',
-	'code-comments' => '{{Identical|Comments}}',
-	'code-references' => 'A follow-up revision is a (newer) revision that follows up a previous (older followed-up) revision.',
-	'code-referenced' => 'A followed-up revision is a (older) revision that has been followed up by a (newer) revision.',
-	'code-change-added' => '{{Identical|Added}}',
-	'codereview-desc' => '{{desc}}',
-	'code-need-group-with-rights' => 'Do not translate the word <code>repoadmin</code>.',
-	'code-repo-not-found' => "Message displayed when the requested repository does not exist in the wiki's repo definitions.  $1 is the name that was requested, and will be fully escaped before output.",
-	'code-tags' => '{{Identical|Tag}}',
-	'code-author-total' => 'This is a message shown above the list of contributors. An example can be found at http://www.mediawiki.org/wiki/Special:Code/MediaWiki/author',
-	'code-author-lastcommit' => 'This is a column title in the list of contributors. An example can be found at http://www.mediawiki.org/wiki/Special:Code/MediaWiki/author',
-	'code-field-id' => '{{Identical|Revision}}',
-	'code-field-author' => '{{Identical|Author}}',
-	'code-field-user' => 'Column title (used in a table).',
-	'code-field-message' => 'This is probably a noun instead of verb, a column header.',
-	'code-field-status' => '{{Identical|Status}}',
-	'code-field-timestamp' => '{{Identical|Date}}',
-	'code-field-comments' => '{{Identical|Comments}}',
-	'code-field-path' => '{{Identical|Path}}',
-	'code-field-text' => '{{Identical|Note}}',
-	'code-field-select' => '{{Identical|Select}}',
-	'code-reference-remove' => 'Caption of the button used to remove the selected (with checkboxes) revisions from the follow-up list.',
-	'code-reference-associate' => 'Label text which is followed by a text box in which the user can enter the ID of a revision to mark as a follow-up.
-
-See also: {{msg-mw|Code-references}}',
-	'code-reference-associate-submit' => 'Submit button for marking a revision as a follow-up.',
-	'code-rev-author' => '{{Identical|Author}}',
-	'code-rev-date' => '{{Identical|Date}}',
-	'code-rev-message' => '{{Identical|Comment}}',
-	'code-rev-rev' => '{{Identical|Revision}}',
-	'code-rev-modified-a' => '{{Identical|Added}}',
-	'code-rev-modified-m' => '{{Identical|Modified}}',
-	'code-rev-status' => '{{Identical|Status}}',
-	'code-rev-tags' => '{{Identical|Tag}}',
-	'code-rev-comment-preview' => '{{Identical|Preview}} Caption of the button used to preview a comment.',
-	'code-rev-inline-preview' => '{{Identical|Preview}} Text "Preview" shown before the comment which is currently being previewed.',
-	'code-rev-history-link' => '{{Identical|History}}',
-	'code-status-new' => '{{Identical|New}}',
-	'code-status-reverted' => '{{Identical|Revert}}',
-	'code-status-ok' => '{{Identical|OK}}',
-	'code-signoffs' => 'A "sign-off" is a concept in code review that means that the person doing the sign-off has approved the involved code changes.',
-	'code-signoff-legend' => 'A "sign-off" is a concept in code review that means that the person doing the sign-off has approved the involved code changes.',
-	'code-signoff-submit' => 'Submit button text.
-
-A "sign-off" is a concept in code review that means that the person doing the sign-off has approved the involved code changes.',
-	'code-signoff-strike' => 'Submit button that, when clicked, will cause the selected sign-offs to be struck. Struck sign-offs are visible but displayed <del>with a line through them</del>.',
-	'code-signoff-signoff' => 'Label text which is followed by a checkbox for each sign-off state and a submit button.',
-	'code-signoff-flag-inspected' => 'Type of sign-off indicating the code has been looked at.',
-	'code-signoff-flag-tested' => 'Type of sign-off indicating the code has been tested.',
-	'code-signoff-field-user' => 'Table column header: name of the user that did the sign-off.',
-	'code-signoff-field-flag' => 'Table column header: "type" of sign-off. One of the code-signoff-flag-* messages, such as:
-* {{msg-mw|code-signoff-flag-inspected}}
-* {{msg-mw|code-signoff-flag-tested}}',
-	'code-signoff-field-date' => 'Table column header: timestamp of the sign-off. {{Identical|Date}}',
-	'code-signoff-struckdate' => 'This is displayed in the date column for a struck sign-off. $1 is the timestamp of the sign-off, $2 is the timestamp of when it was struck. Struck is the past tense of verb strike (as in delete).',
-	'code-pathsearch-path' => '{{Identical|Path}}',
-	'code-revfilter-cr_status' => '{{Identical|Status}}',
-	'code-revfilter-cr_author' => '{{Identical|Author}}',
-	'code-rev-submit' => 'Caption of the button used to Save changes when viewing a revision.
-{{Identical|Save changes}}',
-	'code-rev-submit-next' => 'Caption of the button used when viewing a revision to Save changes moving to next unresolved revision.',
-	'code-rev-next' => 'Caption of the button used when viewing a revision to move to the next unresolved revision.',
-	'codereview-batch-submit' => '{{Identical|Submit}}',
-	'codereview-subtitle' => '{{Identical|For $1}}
-----
-$1 = Repository name',
-	'codereview-reply-link' => '{{Identical|Reply}}',
-	'codereview-overview-title' => '{{Identical|Overview}}',
-	'codereview-email-body' => 'Email body for notification about a comment on a revision.
-
-* $1 - username
-* $2 - URL
-* $3 - product name and revision number
-* $4 - comment text
-* $5 - commit summary',
-	'codereview-email-subj2' => 'Subject of an e-mail sent to a user whose revision has been followed upon.
-* <code>$1</code> – Repository name
-* <code>$2</code> – Number of the original revision (which has been followed upon)',
-	'codereview-email-body2' => 'Body of an e-mail sent to a user whose revision has been followed upon.
-* <code>$1</code> – User who created the follow-up revision
-* <code>$2</code> – Number of the revision that has been followed upon.
-* <code>$3</code> – URL to the new revision.
-* <code>$4</code> – Commit message of the new revision.
-* <code>$5</code> – URL to followed revision.
-* <code>$6</code> – Commit message of the followed revision.',
-	'codereview-email-subj3' => '* <code>$1</code> – Repository name
-* <code>$2</code> – Number of the revision',
-	'codereview-email-body3' => '* $1 is a user name
-* $2 is a revision number
-* $3 is the old status
-* $4 is the new status
-* $5 is the full URL to code review
-* $6 is the commit summary for the change',
-	'codereview-email-body4' => '* $1 is a user name
-* $2 is a revision number
-* $3 is the old status
-* $4 is the new status
-* $5 is the full URL to code review
-* $6 is the commit summary for the change
-* $7 is the comment for the change',
-	'code-stats' => '{{Identical|Statistics}}',
-	'code-stats-main' => 'Parameters:
-* $1 - time and date when statistics was cached
-* $2 - total number of revisions
-* $3 - repository name, used only to generate links
-* $4 - total number of authors who commited to this repository
-* $5 - same as $1, but time only (optional)
-* $6 - same as $1, but date only (optional)',
-	'code-stats-status-breakdown' => 'Table header for column containing the number of revisions (commits) having some state (new, ok, reverted etc.)',
-	'repoadmin-new-button' => '{{Identical|Create}}',
-	'repoadmin-edit-button' => '{{Identical|OK}}',
-	'right-repoadmin' => '{{doc-right|repoadmin}}',
-	'right-codereview-use' => '{{doc-right|codereview-use}}',
-	'right-codereview-add-tag' => '{{doc-right|codereview-add-tag}}',
-	'right-codereview-remove-tag' => '{{doc-right|codereview-remove-tag}}',
-	'right-codereview-post-comment' => '{{doc-right|codereview-post-comment}}',
-	'right-codereview-set-status' => '{{doc-right|codereview-set-status}}',
-	'right-codereview-signoff' => '{{doc-right|codereview-signoff}}
-A "sign-off" is a concept in code review that means that the person doing the sign-off has approved the involved code changes.',
-	'right-codereview-link-user' => '{{doc-right|codereview-link-user}}',
-	'right-codereview-associate' => '{{doc-right|codereview-associate}}',
-	'right-codereview-review-own' => '{{doc-right|codereview-review-own}}',
-	'action-repoadmin' => '{{doc-action|repoadmin}}',
-	'action-codereview-use' => '{{doc-action|codreview-use}}',
-	'action-codereview-add-tag' => '{{doc-action|codereview-add-tag}}',
-	'action-codereview-remove-tag' => '{{doc-action|codereview-remove-tag}}',
-	'action-codereview-post-comment' => '{{doc-action|codereview-post-comment}}',
-	'action-codereview-set-status' => '{{doc-action|codereview-set-status}}',
-	'action-codereview-signoff' => '{{doc-action|codereview-signoff}}
-A "sign-off" is a concept in code review that means that the person doing the sign-off has approved the involved code changes.',
-	'action-codereview-link-user' => '{{doc-action|codereview-link-user}}',
-	'action-codereview-associate' => '{{doc-action|codereview-associate}}',
-	'action-codereview-review-own' => '{{doc-action|codereview-review-own}}',
-	'group-svnadmins' => '{{doc-group|svnadmins}}',
-	'group-svnadmins-member' => '{{doc-group|svnadmins|member}}',
-	'grouppage-svnadmins' => '{{doc-group|svnadmins|page}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -2902,7 +2725,7 @@ $messages['da'] = array(
  * @author Umherirrender
  */
 $messages['de'] = array(
-	'code' => 'Codeprüfung',
+	'code' => 'Versionsunterschied',
 	'code-rev-title' => '$1 – Codeprüfung',
 	'code-comments' => 'Kommentare',
 	'code-references' => 'Nachfolgende Revisionen',
@@ -2919,8 +2742,8 @@ $messages['de'] = array(
 	'code-create-repo' => 'Geh zur Spezialseite [[Special:RepoAdmin|RepoAdmin]] um ein Repositorium zu erstellen',
 	'code-need-repoadmin-rights' => 'Die Berechtigung repoadmin ist erforderlich, um ein Repositorium erstellen zu können',
 	'code-need-group-with-rights' => 'Es ist keine Benutzergruppe vorhanden, der die Berechtigung repoadmin zugeordnet ist. Bitte eine hinzufügen, um ein neues Repositorium erstellen zu können.',
-	'code-repo-not-found' => "Repository '''$1''' existiert nicht!",
-	'code-load-diff' => 'Lade Diff …',
+	'code-repo-not-found' => "Repositorium '''$1''' existiert nicht!",
+	'code-load-diff' => 'Lade Versionsunterschied...',
 	'code-notes' => 'Kommentare',
 	'code-statuschanges' => 'Statusänderungen',
 	'code-mycommits' => 'Eigene Commits',
@@ -2978,9 +2801,9 @@ $messages['de'] = array(
 	'code-rev-comment-by' => 'Kommentar von $1',
 	'code-rev-comment-preview' => 'Vorschau',
 	'code-rev-inline-preview' => 'Vorschau:',
-	'code-rev-diff' => 'Diff',
-	'code-rev-diff-link' => 'Diff',
-	'code-rev-diff-too-large' => 'Der Diff ist zu groß, um angezeigt werden zu können.',
+	'code-rev-diff' => 'Versionsunterschied',
+	'code-rev-diff-link' => 'Versionen',
+	'code-rev-diff-too-large' => 'Der Versionsunterschied ist zu groß, um angezeigt werden zu können.',
 	'code-rev-purge-link' => 'Cache löschen',
 	'code-rev-total' => 'Anzahl der Ergebnisse: $1',
 	'code-rev-not-found' => "Revision '''$1''' ist nicht vorhanden!",
@@ -4930,7 +4753,21 @@ $6',
  * @author Zetud
  */
 $messages['fr'] = array(
-	'code' => 'Révision du code',
+	'code' => 'L’utilisateur « $1 » a modifié l’état de $2.
+
+Ancien état : $3
+Nouvel état : $4
+
+L’utilisateur « $1 » a également publié un commentaire sur $2.
+
+Adresse URL complète : $5
+Résumé de la modification :
+
+$7
+
+Commentaire :
+
+$6',
 	'code-rev-title' => '$1 - Révision du code',
 	'code-comments' => 'Commentaires',
 	'code-references' => 'Références vers les révisions',
@@ -5061,17 +4898,21 @@ $messages['fr'] = array(
 	'codereview-overview-title' => 'Vue d’ensemble',
 	'codereview-overview-desc' => 'Affiche une vue d’ensemble graphique de cette liste.',
 	'codereview-email-subj' => '[$1 $2] : nouveau commentaire ajouté',
-	'codereview-email-body' => 'L’utilisateur « $1 » a posté un commentaire sur $3.
+	'codereview-email-body' => 'L’utilisateur « $1 » a modifié l’état de $2.
 
-Lien hypertexte complet : $2
+Ancien état : $3
+Nouvel état : $4
 
+L’utilisateur « $1 » a également publié un commentaire sur $2.
+
+Adresse URL complète : $5
 Résumé de la modification :
 
-$5
+$7
 
 Commentaire :
 
-$4',
+$6',
 	'codereview-email-subj2' => '[$1 $2] : suivi de la modification',
 	'codereview-email-body2' => 'L’utilisateur « $1 » a fait des modifications sur $2.
 
@@ -5100,7 +4941,7 @@ $6',
 Ancien état : $3
 Nouvel état : $4
 
-L’utilisateur « $1 » a également posté un commentaire sur $2.
+L’utilisateur « $1 » a également publié un commentaire sur $2.
 
 Adresse URL complète : $5
 Résumé de la modification :
@@ -5157,7 +4998,7 @@ $6',
 	'specialpages-group-developer' => 'Outils du développeur',
 	'group-svnadmins' => 'Administrateurs SVN',
 	'group-svnadmins-member' => '{{GENDER:$1|administrateur SVN|administratrice SVN}}',
-	'grouppage-svnadmins' => '{{ns:project}}:Administrateurs SVN',
+	'grouppage-svnadmins' => "w:c:communaute:Aide:Niveaux d'accès utilisateur",
 );
 
 /** Franco-Provençal (Arpetan)
@@ -17205,4 +17046,3 @@ $6',
 	'group-svnadmins-member' => '{{GENDER:$1|SVN管理員}}',
 	'grouppage-svnadmins' => '{{ns:project}}:SVN管理員',
 );
-

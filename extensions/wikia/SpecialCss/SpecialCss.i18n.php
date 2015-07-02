@@ -1,16 +1,15 @@
 <?php
-$messages['en'] = [
+$messages = array();
+
+$messages['en'] = array(
 	'specialcss-desc' => 'Admin tool for editing CSS files',
 	'css' => 'Cascading Style Sheets',
 	'action-editinterface' => 'edit the user interface',
 	'special-css-title' => 'CSS Editor',
-
 	'special-css-minor-edit-label' => 'Minor edit',
 	'special-css-summary-placeholder' => 'Add a summary of your edit',
-
 	'special-css-publish-button' => 'Publish',
 	'special-css-compare-button' => 'Show changes',
-
 	'special-css-community-update-by' => '$1 by [$2 $3]',
 	'special-css-community-read-more' => 'Read more',
 	'special-css-community-update-see-all' => 'See all',
@@ -18,12 +17,10 @@ $messages['en'] = [
 	'special-css-community-update-header' => 'CSS Updates',
 	'special-css-wikia-skin-only' => 'Special:CSS is available only in Wikia skin. If you would like to use this feature please switch your preference to the Wikia skin.',
 	'special-css-diff-modal-title' => 'Changes',
-
 	'special-css-saving-internal-error' => 'Error while saving content.',
 	'special-css-merge-error' => "'''Warning!''' Someone else has published a change to this page since you started editing it. You can see the difference between the most recently saved edits and your edits below.",
 	'special-css-save-message' => 'Your changes to wikia.css have been saved.',
 	'special-css-oldid-message' => 'You are editing an old version of this page. If you save it, any changes made since this version will be lost.',
-
 	'special-css-education-item-webinars-header' => 'Wikia CSS Webinar',
 	'special-css-education-item-webinars-link-title' => 'Wikia CSS Webinar',
 	'special-css-education-item-webinars-paragraph' => 'An introduction to using custom CSS on Wikia.',
@@ -36,33 +33,15 @@ $messages['en'] = [
 	'special-css-education-item-com-center-link-title' => 'Got questions?',
 	'special-css-education-item-com-center-paragraph' => 'Get CSS help from other Wikia users.',
 	'special-css-education-item-com-center-link-url' => 'http://community.wikia.com/wiki/Board:Support_Requests_-_Designing_Your_Wiki',
-
 	'special-css-leaveconfirm-message' => 'You have made some unpublished edits. Are you sure you want to leave without publishing them?',
-];
+);
 
-$messages['es'] = [
-	'special-css-community-update-headline' => 'Actualizaciones sobre CSS',
-	'special-css-community-update-header' => 'Actualizaciones sobre CSS',
-	'special-css-education-item-webinars-header' => 'Seminario Virtual sobre CSS en Wikia',
-	'special-css-education-item-webinars-link-title' => 'Seminario Virtual sobre CSS en Wikia',
-	'special-css-education-item-webinars-paragraph' => 'Una introducción sobre el uso del CSS en Wikia.',
-	'special-css-education-item-webinars-link-url' => 'http://community.wikia.com/wiki/File:Intro_to_CSS_%26_Your_Wiki_Webinar',
-	'special-css-education-item-help-header' => 'Ayuda y preguntas frecuentes',
-	'special-css-education-item-help-link-title' => 'Ayuda y preguntas frecuentes',
-	'special-css-education-item-help-paragraph' => 'Guías y prácticas recomendadas para el uso de CSS personalizado.',
-	'special-css-education-item-help-link-url' => 'http://community.wikia.com/wiki/Help:CSS',
-	'special-css-education-item-com-center-header' => '¿Tienes preguntas?',
-	'special-css-education-item-com-center-link-title' => '¿Tienes preguntas?',
-	'special-css-education-item-com-center-paragraph' => 'Obtén ayuda con el CSS de otros miembros de Wikia.',
-	'special-css-education-item-com-center-link-url' => 'http://community.wikia.com/wiki/Board:Support_Requests_-_Designing_Your_Wiki',
-];
-
-$messages['de'] = [
-	'special-css-community-update-headline' => 'Neuigkeiten zu CSS',
+$messages['de'] = array(
+	'special-css-community-update-headline' => 'Wikia CSS-Neuigkeiten',
 	'special-css-community-update-header' => 'Wikia CSS-Neuigkeiten',
 	'special-css-education-item-webinars-header' => 'Wikia CSS-Videos',
 	'special-css-education-item-webinars-link-title' => 'Wikia CSS-Videos',
-	'special-css-education-item-webinars-paragraph' => 'Hier erfährst du, wie du CSS auf Wikia nutzt (en).',
+	'special-css-education-item-webinars-paragraph' => 'Hier erfährst du, wie du CSS auf Wikia nutzt.',
 	'special-css-education-item-webinars-link-url' => 'http://community.wikia.com/wiki/File:Intro_to_CSS_%26_Your_Wiki_Webinar',
 	'special-css-education-item-help-header' => 'Hilfe und FAQs',
 	'special-css-education-item-help-link-title' => 'Hilfe und FAQs',
@@ -70,105 +49,278 @@ $messages['de'] = [
 	'special-css-education-item-help-link-url' => 'http://de.community.wikia.com/wiki/Hilfe:CSS-Anpassungen',
 	'special-css-education-item-com-center-header' => 'Hast du Fragen?',
 	'special-css-education-item-com-center-link-title' => 'Hast du Fragen?',
-	'special-css-education-item-com-center-paragraph' => 'Erhalte Hilfe zu CSS-Anpassungen von anderen Wikia-Benutzern.',
+	'special-css-education-item-com-center-paragraph' => 'Erhalte Hilfe beim Anpassen von CSS von anderen Wikia-Benutzern.',
 	'special-css-education-item-com-center-link-url' => 'http://de.community.wikia.com/wiki/Diskussionsforum:Wiki-Gestaltung',
-];
+	'special-css-title' => 'CSS-Bearbeitungsfenster',
+	'special-css-minor-edit-label' => 'Kleine Bearbeitung',
+	'special-css-summary-placeholder' => 'Zusammenfassung',
+	'special-css-publish-button' => 'Seite Speichern',
+	'special-css-compare-button' => 'Änderungen anzeigen',
+	'special-css-community-update-by' => '$1 von [$2 $3]',
+	'special-css-community-read-more' => 'Mehr',
+	'special-css-community-update-see-all' => 'Alle anzeigen',
+	'special-css-wikia-skin-only' => 'Spezial:CSS ist nur für den Wikia-Skin verfügbar. Wenn du diese Funktion nutzen möchtest, ändere deine Einstellungen zum Wikia-Skin.',
+	'special-css-diff-modal-title' => 'Änderungen',
+	'special-css-saving-internal-error' => 'Es gab einen Fehler während der Speicherung des Inhalts.',
+	'special-css-merge-error' => "'''Achtung!''' Jemand anderes hat diese Seite bearbeitet, nachdem du angefangen hast, sie zu bearbeiten!",
+	'special-css-save-message' => 'Deine Änderungen an Wikia.css wurden gespeichert.',
+	'special-css-oldid-message' => 'Du bearbeitest eine alte Version der Seite. Wenn du sie speicherst, werden alle Änderungen, die seither getätigt wurden, überschrieben.',
+	'special-css-leaveconfirm-message' => 'Du hast einige unveröffentlichte Bearbeitungen getätigt. Bist du sicher, dass du gehen willst, ohne sie zu veröffentlichen?',
+);
 
-$messages['fr'] = [
+$messages['el'] = array(
+	'special-css-title' => 'Επεξεργαστής CSS',
+	'special-css-minor-edit-label' => 'Δευτερεύων επεξεργασία',
+	'special-css-summary-placeholder' => 'Προσθέστε μία περιγραφή της επεξεργασίας σας.',
+	'special-css-publish-button' => 'Δημοσίευση',
+	'special-css-compare-button' => 'Δείτε τροποποιήσεις',
+	'special-css-community-update-by' => '$1 από [$2 $3]',
+	'special-css-community-read-more' => 'Διαβάστε Περισσότερα',
+	'special-css-community-update-see-all' => 'Δείτε τα όλα',
+	'special-css-community-update-headline' => 'Ενημερώσεις CSS',
+	'special-css-community-update-header' => 'Ενημερώσεις CSS',
+	'special-css-wikia-skin-only' => 'Το Ειδικό:CSS είναι διαθέσιμο μόνο στην επιφάνεια Wikia. Αν θέλετε να το χρησιμοποιήσετε, παρακαλούμε αλλάξτε τις προτιμήσεις σας στην επιφάνεια Wikia.',
+	'special-css-diff-modal-title' => 'Tροποποιήσεις',
+	'special-css-saving-internal-error' => 'Σφάλμα κατά την αποθήκευση περιεχομένου.',
+	'special-css-merge-error' => "'''Προσοχή!''' Κάποιος άλλος αποθήκευσε μία αλλαγή στη σελίδα από όταν ξεκινήσατε την επεξεργασία. Μπορείτε να δείτε τη διαφορά μεταξύ των τελευταίων επεξεργασιών και της δική σας επεξεργασίας παρακάτω.",
+	'special-css-save-message' => 'Οι αλλαγές σας στο wikia.css έχουν αποθηκευτεί.',
+	'special-css-oldid-message' => 'Επεξεργάζεστε μία παλιά εκδοχή της σελίδας. Αν την αποθηκεύσετε, όλες οι αλλαγές που έγιναν μετά από αυτή την εκδοχή θα χαθούν.',
+	'special-css-education-item-webinars-header' => 'Webinar του Wikia για CSS',
+	'special-css-education-item-webinars-link-title' => 'Webinar του Wikia για CSS',
+	'special-css-education-item-webinars-paragraph' => 'Μία ένταξη στη χρήση CSS στο Wikia.',
+	'special-css-education-item-help-header' => 'Βοήθεια και ΣΕς',
+	'special-css-education-item-help-link-title' => 'Βοήθεια και ΣΕς',
+	'special-css-education-item-help-paragraph' => 'Οδηγίες και οι καλύτερες εξασκήσεις στη χρήση προσαρμοσμένου CSS.',
+	'special-css-education-item-help-link-url' => 'http://el.community.wikia.com/wiki/%CE%92%CE%BF%CE%AE%CE%B8%CE%B5%CE%B9%CE%B1:CSS',
+	'special-css-education-item-com-center-header' => 'Έχετε απορίες;',
+	'special-css-education-item-com-center-link-title' => 'Έχετε απορίες;',
+	'special-css-education-item-com-center-paragraph' => 'Λάβετε βοήθεια με CSS από άλλους χρήστες του Wikia.',
+	'special-css-education-item-com-center-link-url' => 'http://el.community.wikia.com/wiki/Board:%CE%91%CE%B9%CF%84%CE%AE%CF%83%CE%B5%CE%B9%CF%82_-_%CE%A3%CF%87%CE%B5%CE%B4%CE%B9%CE%AC%CE%B6%CE%BF%CE%BD%CF%84%CE%B1%CF%82_%CF%84%CE%BF_Wikia_%CF%83%CE%B1%CF%82',
+	'special-css-leaveconfirm-message' => 'Έχετε κάνει μερικές ανέκδοτες επεξεργασίες. Είστε σίγουρος ότι θέλετε να αποχωρήσετε χωρίς να τις εκδώσετε;',
+);
+
+$messages['es'] = array(
+	'special-css-community-update-headline' => 'Actualizaciones sobre CSS de Wikia',
+	'special-css-community-update-header' => 'Actualizaciones sobre CSS',
+	'special-css-education-item-webinars-header' => 'Seminario Virtual sobre CSS en Wikia',
+	'special-css-education-item-webinars-link-title' => 'Seminario Virtual sobre CSS en Wikia',
+	'special-css-education-item-webinars-paragraph' => 'Una introducción sobre el uso del CSS en Wikia',
+	'special-css-education-item-webinars-link-url' => 'http://community.wikia.com/wiki/File:Intro_to_CSS_%26_Your_Wiki_Webinar',
+	'special-css-education-item-help-header' => 'Ayuda y preguntas frecuentes',
+	'special-css-education-item-help-link-title' => 'Ayuda y preguntas frecuentes',
+	'special-css-education-item-help-paragraph' => 'Guías y prácticas recomendadas para el uso de CSS personalizado.',
+	'special-css-education-item-help-link-url' => 'http://comunidad.wikia.com/wiki/Ayuda:CSS',
+	'special-css-education-item-com-center-header' => '¿Tienes preguntas?',
+	'special-css-education-item-com-center-link-title' => '¿Tienes preguntas?',
+	'special-css-education-item-com-center-paragraph' => 'Obtén ayuda con el CSS de otros usuarios de Wikia.',
+	'special-css-education-item-com-center-link-url' => 'http://comunidad.wikia.com/wiki/Subforo:Soporte_t%C3%A9cnico_-_dise%C3%B1o',
+	'special-css-title' => 'Editor de CSS',
+	'special-css-minor-edit-label' => 'Edición menor',
+	'special-css-summary-placeholder' => 'Añadir un resumen de tu edición',
+	'special-css-publish-button' => 'Publicar',
+	'special-css-compare-button' => 'Mostrar cambios',
+	'special-css-community-update-by' => '$1 por [$2 $3]',
+	'special-css-community-read-more' => 'Leer más',
+	'special-css-community-update-see-all' => 'Ver todo',
+	'special-css-wikia-skin-only' => 'La página Especial:CSS está disponible solamente para la piel Wikia. Si quieres usar esta funcionalidad cambia la apariencia en tus preferencias.',
+	'special-css-diff-modal-title' => 'Cambios',
+	'special-css-saving-internal-error' => 'Error mientras se guardaba el contenido.',
+	'special-css-merge-error' => "'''¡Atención!''' ¡Alguien más ha cambiado esta página desde que comenzaste a editarla!",
+	'special-css-save-message' => 'Tus cambios en wikia.css han sido guardados.',
+	'special-css-oldid-message' => 'Estás editando una versión antigua de esta página. Si la guardas, cualquier cambio realizado después de esta versión se perderá.',
+	'special-css-leaveconfirm-message' => 'Has hecho algunas ediciones que no se han publicado. ¿Estás seguro de que quieres dejar la página sin publicarlas?',
+);
+
+$messages['fr'] = array(
 	'special-css-community-update-headline' => 'Informations liées au CSS',
 	'special-css-community-update-header' => 'Informations Wikia liées au CSS',
-	'special-css-education-item-webinars-header' => 'Vidéos Wikia liées au CSS',
-	'special-css-education-item-webinars-link-title' => 'Vidéos Wikia liées au CSS',
-	'special-css-education-item-webinars-paragraph' => 'Une introduction à l\'utilisation du CSS personnalisé sur Wikia.',
+	'special-css-education-item-webinars-header' => 'Webinaire CSS Wikia',
+	'special-css-education-item-webinars-link-title' => 'Webinaire CSS Wikia',
+	'special-css-education-item-webinars-paragraph' => 'Une introduction à l’utilisation de CSS personnalisé sur Wikia.',
 	'special-css-education-item-webinars-link-url' => 'http://community.wikia.com/wiki/File:Intro_to_CSS_%26_Your_Wiki_Webinar',
-	'special-css-education-item-help-header' => 'Aide et FAQs',
-	'special-css-education-item-help-link-title' => 'Aide et FAQs',
-	'special-css-education-item-help-paragraph' => 'Guides et bonnes pratiques pour utiliser le CSS personnalisé.',
+	'special-css-education-item-help-header' => 'Aide et FAQ',
+	'special-css-education-item-help-link-title' => 'Aide et FAQ',
+	'special-css-education-item-help-paragraph' => 'Guides et meilleurs pratiques pour l’utilisation de CSS personnalisé.',
 	'special-css-education-item-help-link-url' => 'http://community.wikia.com/wiki/Help:CSS',
 	'special-css-education-item-com-center-header' => 'Vous avez des questions ?',
 	'special-css-education-item-com-center-link-title' => 'Vous avez des questions ?',
-	'special-css-education-item-com-center-paragraph' => 'Obtenez de l\'aide sur le CSS d\'autres utilisateurs de Wikia.',
+	'special-css-education-item-com-center-paragraph' => 'Obtenez de l’aide sur le CSS d’autres utilisateurs de Wikia.',
 	'special-css-education-item-com-center-link-url' => 'http://communaute.wikia.com/wiki/Sous-forum:Aide',
-];
+	'specialcss-desc' => 'Outil administrateur pour modifier les fichiers CSS',
+	'css' => 'Feuilles de style en cascade (CSS)',
+	'action-editinterface' => "modifier l'interface utilisateur",
+	'special-css-title' => 'Éditeur CSS',
+	'special-css-minor-edit-label' => 'Modification mineure',
+	'special-css-summary-placeholder' => 'Ajouter un résumé de vos modifications',
+	'special-css-publish-button' => 'Enregistrer',
+	'special-css-compare-button' => 'Afficher modifications',
+	'special-css-community-update-by' => '$1 de [$2 $3]',
+	'special-css-community-read-more' => 'Lire plus',
+	'special-css-community-update-see-all' => 'Voir tous',
+	'special-css-wikia-skin-only' => 'Special:CSS est disponible uniquement avec l’apparence Wikia. Si vous souhaitez utiliser cette fonctionnalité, veuillez modifier vos préférences pour utiliser l’apparence Wikia.',
+	'special-css-diff-modal-title' => 'Modifications',
+	'special-css-saving-internal-error' => 'Une erreur est survenue à l’enregistrement du contenu.',
+	'special-css-merge-error' => "'''Attention !''' Quelqu’un d’autre a modifié cette page depuis que vous avez commencé à la modifier.",
+	'special-css-save-message' => 'Les modifications que vous avez apportées à wikia.css ont été enregistrées.',
+	'special-css-oldid-message' => 'Vous modifiez une ancienne version de cette page. Si vous l’enregistrez, toute modification effectuée depuis sera perdue.',
+	'special-css-leaveconfirm-message' => 'Vous avez effectué des modifications qui n’ont pas été enregistrées. Êtes-vous sûr(e) de vouloir quitter sans enregistrer ?',
+);
 
-
-$messages['it'] = [
+$messages['it'] = array(
 	'special-css-community-update-headline' => 'Aggiornamenti sul CSS',
 	'special-css-community-update-header' => 'Aggiornamenti sul CSS',
-];
+	'special-css-title' => 'Editor del CSS',
+	'special-css-minor-edit-label' => 'Modifica minore',
+	'special-css-summary-placeholder' => 'Inserisci un riassunto della modifica',
+	'special-css-publish-button' => 'Salva',
+	'special-css-compare-button' => 'Mostra cambiamenti',
+	'special-css-community-update-by' => '$1 di [$2 $3]',
+	'special-css-community-read-more' => 'Per saperne di più',
+	'special-css-community-update-see-all' => 'Vedi tutti',
+	'special-css-wikia-skin-only' => 'Special:CSS è disponibile solo per la skin Wikia. Se vuoi usare questa funzione, per favore imposta la skin Wikia nelle tue preferenze.',
+	'special-css-diff-modal-title' => 'Cambiamenti',
+	'special-css-saving-internal-error' => 'Errore durante il salvataggio del contenuto.',
+	'special-css-merge-error' => "'''Attenzione!''' Qualcuno ha salvato una modifica a questa pagina mentre la stavi modificando tu. Qui sotto puoi vedere la differenza tra le modifiche salvate più recentemente e le tue modifiche.",
+	'special-css-save-message' => 'Le tue modifiche al wikia.css sono state salvate.',
+	'special-css-oldid-message' => 'Stai modificando una vecchia versione di questa pagina. Se la salvi, qualsiasi modifica effettuata da questa versione in poi andrà persa.',
+	'special-css-education-item-webinars-header' => 'Webinar sul CSS di Wikia',
+	'special-css-education-item-webinars-link-title' => 'Webinar sul CSS di Wikia',
+	'special-css-education-item-webinars-paragraph' => "Un'introduzione all'uso del CCS personalizzato su Wikia.",
+	'special-css-education-item-webinars-link-url' => 'http://community.wikia.com/wiki/File:Intro_to_CSS_%26_Your_Wiki_Webinar',
+	'special-css-education-item-help-header' => 'Aiuto e FAQ',
+	'special-css-education-item-help-link-title' => 'Aiuto e FAQ',
+	'special-css-education-item-help-paragraph' => "Guide e buone prassi per l'uso del CCS personalizzato.",
+	'special-css-education-item-help-link-url' => 'http://it.community.wikia.com/wiki/Aiuto:CSS',
+	'special-css-education-item-com-center-header' => 'Hai domande?',
+	'special-css-education-item-com-center-link-title' => 'Hai domande?',
+	'special-css-education-item-com-center-paragraph' => 'Chiedi aiuto sul CSS ad altri utenti di Wikia.',
+	'special-css-education-item-com-center-link-url' => 'http://it.community.wikia.com/wiki/Sottoforum%3ASupporto_-_Aspetto_e_personalizzazione',
+	'special-css-leaveconfirm-message' => 'Alcune modifiche non sono state salvate. Sei sicuro di voler uscire senza salvarle?',
+);
 
-$messages['ru'] = [
-	'special-css-community-update-headline' => 'Обновления CSS',
-	'special-css-community-update-header' => 'Обновления CSS',
-];
+$messages['ja'] = array(
+	'special-css-title' => 'CSSエディタ',
+	'special-css-minor-edit-label' => '細部の編集',
+	'special-css-summary-placeholder' => '編集内容の要約を入力',
+	'special-css-publish-button' => '保存',
+	'special-css-compare-button' => '差分を確認',
+	'special-css-community-update-see-all' => 'すべてを見る',
+	'special-css-community-update-headline' => 'CSSに関するお知らせ',
+	'special-css-community-update-header' => 'CSSに関するお知らせ',
+	'special-css-diff-modal-title' => '差分',
+	'special-css-saving-internal-error' => '保存中にエラーが発生しました。',
+	'special-css-save-message' => 'wikia.css への変更を保存しました。',
+	'special-css-oldid-message' => 'このページの古い版を編集しています。保存すると、この版以降に追加されていた変更がすべて失われます。',
+	'special-css-education-item-help-header' => 'ヘルプ、FAQ',
+	'special-css-education-item-help-link-title' => 'ヘルプ、FAQ',
+	'special-css-education-item-help-paragraph' => 'カスタムCSSの使い方や、効果的な設定の方法についてご案内いたします。',
+	'special-css-education-item-help-link-url' => 'http://ja.community.wikia.com/wiki/Help:CSS',
+	'special-css-education-item-com-center-header' => 'ご質問はこちら',
+	'special-css-education-item-com-center-link-title' => 'ご質問はこちら',
+	'special-css-education-item-com-center-paragraph' => 'CSSについてのご不明な点を、他のウィキアユーザーやスタッフに質問できます。',
+	'special-css-education-item-com-center-link-url' => 'http://ja.community.wikia.com/wiki/%E3%83%9C%E3%83%BC%E3%83%89:%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%83%BB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88_-_%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E3%82%A6%E3%82%A3%E3%82%AD%E3%82%A2%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3',
+);
 
-$messages['pl'] = [
+$messages['ko'] = array(
+	'special-css-title' => 'CSS 편집기',
+	'special-css-minor-edit-label' => '사소한 편집',
+	'special-css-summary-placeholder' => '편집 요약',
+	'special-css-publish-button' => '저장',
+	'special-css-compare-button' => '차이 보기',
+	'special-css-community-read-more' => '더 보기',
+	'special-css-community-update-see-all' => '모두 보기',
+	'special-css-community-update-headline' => 'CSS 업데이트',
+	'special-css-community-update-header' => 'CSS 업데이트',
+	'special-css-save-message' => 'wikia.css에 행한 편집이 저장되었습니다.',
+	'special-css-education-item-webinars-header' => '위키아 CSS 웨비나',
+	'special-css-education-item-webinars-link-title' => '위키아 CSS 웨비나',
+	'special-css-education-item-webinars-paragraph' => '위키아 CSS 사용법 영상.',
+	'special-css-education-item-help-header' => '도움말 및 FAQ',
+	'special-css-education-item-help-link-title' => '도움말 및 FAQ',
+	'special-css-education-item-help-paragraph' => 'CSS 사용법 및 추천 관행.',
+	'special-css-education-item-com-center-header' => '질문이 있으신가요?',
+	'special-css-education-item-com-center-link-title' => '질문이 있으신가요?',
+	'special-css-education-item-com-center-paragraph' => '다른 위키아 사용자들에게서 CSS에 대한 도움을 받아 보세요.',
+);
+
+$messages['pl'] = array(
 	'css' => 'Kaskadowe arkusze stylów',
 	'action-editinterface' => 'edytowania interfejsu użytkownika',
-
-	'special-css-title' => 'CSS Edytor',
-
+	'special-css-title' => 'Edytor CSS',
 	'special-css-publish-button' => 'Publikuj',
-
-	'special-css-community-update-by' => '$1 przez [$2 $3]',
+	'special-css-community-update-by' => '$1 dodany przez [$2 $3]',
 	'special-css-community-read-more' => 'Czytaj więcej',
 	'special-css-community-update-see-all' => 'Zobacz wszystko',
-	'special-css-community-update-headline' => 'Aktualizacje CSS',
+	'special-css-community-update-headline' => 'Aktualizacje CSS od Wikii',
 	'special-css-community-update-header' => 'Aktualizacje CSS',
 	'special-css-oasis-only' => 'Special:CSS jest stroną dostępną tylko w skórce Wikia. Jeśli chcesz używać tej strony zmień ustawienia skórki w swoich preferencjach na Wikia.',
-	'special-css-education-item-webinars-header' => 'CSS_ Wikia Webinars',
-	'special-css-education-item-webinars-link-title' => 'Wikia CSS Webinar',
-	'special-css-education-item-webinars-paragraph' => 'Istrukcje dotyczące używania własnych reguł CSS w Wikii.',
+	'special-css-education-item-webinars-header' => 'Webinar CSS od Wikii',
+	'special-css-education-item-webinars-link-title' => 'Webinar CSS od Wikii',
+	'special-css-education-item-webinars-paragraph' => 'Instrukcje dotyczące używania własnych stylów CSS na Wikii.',
 	'special-css-education-item-help-header' => 'Pomoc / FAQ',
 	'special-css-education-item-help-link-title' => 'Pomoc i najczęściej zadawane pytania',
-	'special-css-education-item-help-paragraph' => 'Przewodniki i najlepsze praktyki dotyczące używania własnych styli CSS.',
-	'special-css-education-item-com-center-header' => 'Społeczność',
+	'special-css-education-item-help-paragraph' => 'Przewodniki i najlepsze praktyki dotyczące używania własnych stylów CSS.',
+	'special-css-education-item-com-center-header' => 'Masz pytania?',
 	'special-css-education-item-com-center-link-title' => 'Masz pytania?',
-	'special-css-education-item-com-center-paragraph' => 'Uzyskaj pomocy dotyczącej CSS od innych użytkowników Wikii.'
-];
+	'special-css-education-item-com-center-paragraph' => 'Uzyskaj pomoc przy CSS od innych użytkowników Wikii.',
+	'special-css-minor-edit-label' => 'Drobna zmiana',
+	'special-css-summary-placeholder' => 'Dodaj opis zmian',
+	'special-css-compare-button' => 'Pokaż zmiany',
+	'special-css-wikia-skin-only' => 'Specjalna:CSS jest stroną dostępną tylko w skórce Wikia. Jeśli chcesz używać tej strony zmień ustawienia skórki w swoich preferencjach.',
+	'special-css-diff-modal-title' => 'Zmiany',
+	'special-css-saving-internal-error' => 'Wystąpił błąd w trakcie zapisywania zawartości.',
+	'special-css-merge-error' => "'''Uwaga!''' Inny użytkownik dokonał zmiany na tej stronie od momentu rozpoczęcia przez Ciebie edycji.",
+	'special-css-save-message' => 'Twoje zmiany w wikia.css zostały zapisane.',
+	'special-css-oldid-message' => 'Edytujesz starszą niż bieżąca wersję tej strony. Jeśli ją zapiszesz, wszystkie zmiany wykonane w międzyczasie zostaną wycofane.',
+	'special-css-education-item-help-link-url' => 'http://spolecznosc.wikia.com/wiki/Pomoc:Zaawansowane_narz%C4%99dzia',
+	'special-css-education-item-com-center-link-url' => 'http://spolecznosc.wikia.com/wiki/Subforum:Pomoc_techniczno-administracyjna',
+	'special-css-leaveconfirm-message' => 'Dokonano nieopublikowanych zmian. Czy chcesz opuścić edytor bez publikowania ich?',
+);
 
+$messages['ru'] = array(
+	'special-css-community-update-headline' => 'Обновления CSS',
+	'special-css-community-update-header' => 'Обновления CSS',
+	'css' => 'Каскадные таблицы стилей',
+	'special-css-title' => 'Редактор CSS',
+	'special-css-minor-edit-label' => 'Малая правка',
+	'special-css-summary-placeholder' => 'Добавьте описание ваших правок',
+	'special-css-publish-button' => 'Записать',
+	'special-css-compare-button' => 'Показать правку',
+	'special-css-community-read-more' => 'Читать дальше',
+	'special-css-community-update-see-all' => 'См. всё',
+	'special-css-wikia-skin-only' => 'Страница Служебная:CSS доступна только в скине Викия. Если вы хотите использовать её, пожалуйста, поменяйте ваш скин на Викия через личные настройки.',
+	'special-css-diff-modal-title' => 'Изменения',
+	'special-css-saving-internal-error' => 'Ошибка при сохранении страницы.',
+	'special-css-save-message' => 'Ваши правки для страницы wikia.css были записаны.',
+	'special-css-oldid-message' => 'Вы редактируйте устаревшую версию этой страницы. После сохранения будут потеряны правки, сделанные в последующих версиях.',
+	'special-css-education-item-webinars-header' => 'Вебинар Викия о CSS',
+	'special-css-education-item-webinars-link-title' => 'Вебинар Викия о CSS',
+	'special-css-education-item-webinars-paragraph' => 'Введение по использованию CSS на Викия.',
+	'special-css-education-item-help-header' => 'Помощь',
+	'special-css-education-item-help-link-title' => 'Помощь',
+	'special-css-education-item-help-paragraph' => 'Справочные страницы о настройке CSS.',
+	'special-css-education-item-com-center-header' => 'Есть вопросы?',
+	'special-css-education-item-com-center-link-title' => 'Есть вопросы?',
+	'special-css-education-item-com-center-paragraph' => 'Помощь по CSS от участников Викия.',
+	'special-css-leaveconfirm-message' => 'Вы сделали несколько правок, но не записали их. Вы уверены, что хотите покинуть страницу и не записывать эти правки?',
+);
 
-$messages['qqq'] = [
-	'specialcss-desc' => '{{desc}}',
-	'css' => 'Name of the link to Special:CSS page on Special:SpacialPages list; more about CSS: https://en.wikipedia.org/wiki/Cascading_Style_Sheets',
-	'action-editinterface' => '{{doc-action|editinterface}}',
-	'special-css-title' => 'Page title visible in the title bar of a browser or on the browser tab',
+$messages['zh'] = array(
+	'css' => 'CSS',
+);
 
-	'special-css-summary-placeholder' => 'Placeholder text for summary field. Disappears when user starts typing',
-	'special-css-minor-edit-label' => 'Label describes minor edit checkbox input',
-	'special-css-edit-summary' => 'Label describes edit summary textarea field',
+$messages['zh-hans'] = array(
+	'css' => 'CSS',
+);
 
-	'special-css-publish-button' => 'Text on the publish button; pressing the button saves new content of CSS file',
-	'special-css-history-button' => 'Text on the history button from dropdown menu; pressing the button shows editing history of CSS file',
-	'special-css-compare-button' => 'Text on the compare changes button from dropdown; pressing the button shows differences of CSS file',
-	'special-css-delete-button' => 'Text on the delete button from dropdown; pressing the button deletes CSS file',
-	'special-css-undelete-button' => 'Text on the undelete button from dropdown; pressing the button undeletes CSS file',
+$messages['zh-hant'] = array(
+	'css' => 'CSS',
+);
 
-	'special-css-community-update-headline' => 'Headline used to get updates content from community blogs. Section under this headline will be taken into update section box.',
-	'special-css-community-update-header' => 'Headline above container with blog posts feed. The feed contains blog posts from a category with posts regarding markup and CSS changes since previous release.',
-	'special-css-community-update-by' => "Post (regarding markup and CSS changes since previous release) detailed informations text: $1 = post's creation time, $2 = link to post's author profile page on community.wikia.com, $3 = post's author username",
-	'special-css-community-read-more' => "Link label below post snippet leading to the full post page; The post page includes information regarding markup and CSS changes",
-	'special-css-community-update-see-all' => 'Link to blog listing with contains all CSS updates',
+$messages['zh-hk'] = array(
+	'css' => 'CSS',
+);
 
-	'special-css-wikia-skin-only' => 'Message displayed to users who use skin different than "Wikia Skin" (i.e. Monobook). This feature is enabled only for "Wikia Skin".',
-
-	'special-css-diff-modal-title' => 'Title for modal with actual changes in CSS file',
-
-	'special-css-saving-internal-error' => 'Error message after publish button informing user that there were some problems while saving CSS file content',
-	'special-css-merge-error' => "Error message after publish button informing user that some else edited this article and there is a conflict.",
-	'special-css-save-message' => 'Notification message at the top of page that says that Css content was saved',
-	'special-css-oldid-message' => 'Notification message at the top of page that says that you are editing old version of content and when you save it all changes made since that version will be lost.',
-
-	'special-css-education-item-webinars-header' => 'Header - link to Wikia Webinars',
-	'special-css-education-item-webinars-link-title' => 'Short message apearing next to the mouse cursor after hovering header which is a link to Wikia Webinars',
-	'special-css-education-item-webinars-paragraph' => 'Short paragraph describing what is the link to Wikia Webinars about',
-	'special-css-education-item-help-header' => 'Header - link to Help / FAQ',
-	'special-css-education-item-help-link-title' => 'Short message apearing next to the mouse cursor after hovering header which is a link to Help/FAQ page',
-	'special-css-education-item-help-paragraph' => 'Short paragraph describing what is the link to Help / FAQ about',
-	'special-css-education-item-com-center-header' => 'Header - link to Community Center',
-	'special-css-education-item-com-center-link-title' => 'Short message apearing next to the mouse cursor after hovering header which is a link to Community Center',
-	'special-css-education-item-com-center-paragraph' => 'Short paragraph describing what is the link to Community
-	Center about',
-
-	'special-css-leaveconfirm-message' => 'Message that is displayed when you are leaving page with not saved changes. Message should ask if user is sure that he want to leave the page.',
-];
+$messages['zh-tw'] = array(
+	'css' => 'CSS',
+);

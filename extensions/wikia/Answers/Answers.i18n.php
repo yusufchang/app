@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Internationalization for Answer extension
  *
@@ -13,7 +12,7 @@
 $messages = array();
 
 $messages['en'] = array(
-	'answers-desc' => 'Wikia\'s Answer site extension',
+	'answers-desc' => "Wikia's Answer site extension",
 	'answer_title' => 'Answer',
 	'answered_by' => 'Answered by',
 	'unregistered' => 'Unregistered',
@@ -23,7 +22,7 @@ $messages['en'] = array(
 	'ask_a_question-widget' => 'Ask a question...',
 	'in_category' => '...in category',
 	'ask_button' => 'Ask',
-	'ask_thanks' => 'Thanks for the rockin\' question!',
+	'ask_thanks' => "Thanks for the rockin' question!",
 	'question_asked_by' => 'Question asked by',
 	'question_asked_by_a_wikia_user' => 'Question asked by a Wikia user',
 	'new_question_comment' => 'new question',
@@ -49,20 +48,20 @@ $messages['en'] = array(
 	'see_all_changes' => 'See all changes',
 	'toolbox_anon_message' => '<i>"Wikianswers leverages the unique characterstics of a wiki to form the very best answers to any question."</i><br /><br /> <b>Jimmy Wales</b><br /> founder of Wikipedia and Wikianswers',
 	'no_questions_found' => 'No questions found',
-	'widget_settings'	=> 'Question Settings',
-	'style_settings'	=> 'Style Settings',
+	'widget_settings' => 'Question Settings',
+	'style_settings' => 'Style Settings',
 	'get_widget_title' => 'Add Questions to your site',
 	'background_color' => 'Background color',
 	'widget_category' => 'Type of Questions',
 	'category' => 'Category Name',
 	'custom_category' => 'Custom Category',
 	'number_of_items' => 'Number of items to show',
-	'width'		=> 'Width',
-	'next_page'		=> 'Next &raquo;',
-	'prev_page'		=> '&laquo; Prev',
-	'see_all'		=> 'See all',
-	'get_code'	=> 'Grab Code',
-	'link_color'	=> 'Question Link Color',
+	'width' => 'Width',
+	'next_page' => 'Next &raquo;',
+	'prev_page' => '&laquo; Prev',
+	'see_all' => 'See all',
+	'get_code' => 'Grab Code',
+	'link_color' => 'Question Link Color',
 	'widget_order' => 'Question Order',
 	'widget_ask_box' => 'Include ask box',
 	'question_redirected_help_page' => 'Why was my question redirected here',
@@ -76,7 +75,7 @@ $messages['en'] = array(
 	'ads_by_google' => 'Ads by Google',
 	'magic_answer_headline' => 'Does this answer your question?',
 	'magic_answer_yes' => 'Yes, use this as a starting point',
-	'magic_answer_no' => 'No, don\'t use this',
+	'magic_answer_no' => "No, don't use this",
 	'magic_answer_credit' => 'Provided by Yahoo Answers',
 	'rephrase' => 'Rephrase this question',
 	'rephrase_this' => '<a href="$1" $2>Reword the question</a>',
@@ -108,28 +107,36 @@ $messages['en'] = array(
 	'auto_friend_request_body' => 'Will you add me as a friend?',
 	'tog-hidefromattribution' => 'Hide my avatar and name from attribution list',
 	'q' => '<!-- -->',
-	'a' => 'Answer:',
+	'a' => "Hello $2, 
+
+The Wikia you created is now available at <$1>.  We hope to see you editing there soon! 
+
+We've added some information and tips on your user talk Page (<$5>) to help you get started. If you have any questions, just reply to this email or browse our help pages at <http://help.wikia.com>. You can also check our Staff blog to keep up-to-date with the latest news and events around Wikia, which can be found here: <http://community.wikia.com/wiki/Blog:Wikia_Staff_Blog>
+
+Good luck with the project,
+
+$3
+Wikia Community Support
+<http://community.wikia.com/wiki/User:$4>",
 	'?' => '?',
 	'answering_tips' => "<h3>Tips for answering:</h3> When contributing an answer, try to be as accurate as you can. If you're getting information from another source such as Wikipedia, put a link to this in the text. And thank you for contributing to {{SITENAME}}!",
 	'header_questionmark_pre' => '',
 	'header_questionmark_post' => '?',
 	'plus_x_more_helpers' => '... plus $1 more helpers',
-	'anwb-step1-headline' => 'What\'s your wiki about?',
+	'anwb-step1-headline' => "What's your wiki about?",
 	'anwb-step1-text' => 'Your Wikianswers site needs a <strong>tagline</strong>.<br /><br />Your tagline will help people find your site from search engines, so try to be clear about what your site is about.',
 	'anwb-step1-example' => 'Answers for all your pro-wrestling questions!',
 	'anwb-choose-logo' => 'Choose your logo',
-	'anwb-step2-text' => 'Next, choose a logo for {{SITENAME}}. It\'s best to upload a picture that you think represents your Answers site.<br />You can skip this step if you don\'t want to do it right now.<br /><br />',
+	'anwb-step2-text' => "Next, choose a logo for {{SITENAME}}. It's best to upload a picture that you think represents your Answers site.<br />You can skip this step if you don't want to do it right now.<br /><br />",
 	'anwb-step2-example' => 'This would be a good logo for a skateboarding answers site.',
 	'anwb-fp-headline' => 'Create some questions!',
-	'anwb-fp-text' => 'Your Answers site should start off with some questions!<br /><br />Add a list of questions, and then provide the answers yourself. It\'s important to get some useful information on the site, so people can find it and ask and answer even more questions.',
-	'anwb-fp-example' => '<strong>Example</strong><br /><br />For a pet care answers site:<br /><br /><ul><li>Should I buy cat litter?</li><li>What\'s the best breed of dog?</li><li>What\'s the best way to train a cat?</li><li></ul><br /><br />For a health care answers site:<br /><br /><ul><li>What are the health benefits of exercise?</li><li>How can I find a good doctor in my area?</li><li>How can I lose weight easily?</li></ul>',
-	'nwb-thatisall-headline' => 'That\'s it - you\'re done!',
-	'anwb-thatisall-text' => 'That\'s it - you\'re ready to roll!<br /><br />Now it\'s time to start writing more questions and answers, so that your site can be found more easily in search engines.<br /><br />The list of questions added in the last step has been put into your questions site. Head in to answer your questions, and start your own answers community!',
-	'anwb-logo-preview' => 'Here\'s a preview of your logo',
+	'anwb-fp-text' => "Your Answers site should start off with some questions!<br /><br />Add a list of questions, and then provide the answers yourself. It's important to get some useful information on the site, so people can find it and ask and answer even more questions.",
+	'anwb-fp-example' => "<strong>Example</strong><br /><br />For a pet care answers site:<br /><br /><ul><li>Should I buy cat litter?</li><li>What's the best breed of dog?</li><li>What's the best way to train a cat?</li><li></ul><br /><br />For a health care answers site:<br /><br /><ul><li>What are the health benefits of exercise?</li><li>How can I find a good doctor in my area?</li><li>How can I lose weight easily?</li></ul>",
+	'nwb-thatisall-headline' => "That's it - you're done!",
+	'anwb-thatisall-text' => "That's it - you're ready to roll!<br /><br />Now it's time to start writing more questions and answers, so that your site can be found more easily in search engines.<br /><br />The list of questions added in the last step has been put into your questions site. Head in to answer your questions, and start your own answers community!",
+	'anwb-logo-preview' => "Here's a preview of your logo",
 	'anwb-save-tagline' => 'Save tagline',
-	'badWords' => 'fuck', // testing a bug
-
-	// toolbox
+	'badWords' => 'fuck',
 	'qa-toolbox-button' => 'Answer a random question',
 	'qa-toolbox-share' => 'Share',
 	'qa-toolbox-tools' => 'Advanced tools»',
@@ -137,8 +144,6 @@ $messages['en'] = array(
 	'qa-toolbox-delete' => 'Delete this question',
 	'qa-toolbox-history' => 'Past versions of this page',
 	'qa-featured-sites' => '-',
-
-	// Skin Chooser
 	'answers_skins' => 'Answers',
 	'answers-bluebell' => 'Bluebell',
 	'answers-leaf' => 'Leaf',
@@ -152,20 +157,17 @@ $messages['en'] = array(
 	'answers-custom' => 'Custom',
 );
 
-/** Message documentation (Message documentation)
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'answers-desc' => '{{desc}}',
-	'answers-category-count-answered' => 'Parameters:
-* $1 is the number of answered questions.',
-	'answers-category-count-unanswered' => 'Parameters:
-* $1 is the number of unanswered questions.',
+$messages['aa'] = array(
+	'a' => '[[help:wiki|Wikis]] are collaborative projects open to all editors and readers.',
 );
 
 /** Afrikaans (Afrikaans) */
 $messages['af'] = array(
 	'research_this' => 'Vors dit na',
+);
+
+$messages['ar'] = array(
+	'a' => 'Answers',
 );
 
 /** Azerbaijani (Azərbaycanca)
@@ -185,6 +187,12 @@ $messages['az'] = array(
 	'facebook_send_request' => 'Birbaşa dostlarına göndər',
 	'ask_friends' => 'Cavab üçün dostlarından kömək istə',
 	'answers_skins' => 'Cavablar',
+);
+
+$messages['bg'] = array(
+	'ads_by_google' => 'Реклами от Google',
+	'you_can' => 'Можете:',
+	'a' => 'Създаване на ново уики',
 );
 
 /** Breton (Brezhoneg)
@@ -222,6 +230,35 @@ $messages['br'] = array(
 	'answers-forest' => 'Koadeg',
 );
 
+$messages['ca'] = array(
+	'a' => "== ¡Benvingut! ==
+
+Hola \$1. Estem molt feliços de tindre a '''\$4''' com a part de la comunitat de Wikia! A més de donar-te les gràcies per unir-te a Wikia, ens agradaria donar-te alguns consells que poden ajudar-te a iniciar el wiki i fer-lo créixer.
+
+=== '''Els quatre primers passos:''' ===
+
+1. '''Crea la teva [[User:\$1|pàgina d'usuari]]''': aquest és el millor lloc per a presentar-te i que els demés puguin conèixer-te (i a més practicar l'edició wiki!).
+
+2. '''Afegeix un logotip''': aprèn a [[w:c:ayuda:Ayuda:Logo|crear un logotip]] i després <span class=\"plainlinks\">[[special:upload/Wiki.png|fes clic ací]]</span> per a afegir-lo al wiki.<div style=\"border: 1px solid black; margin: 0px 0px 5px 10px; padding: 5px; float: right; width: 25%;\"><center>Crea un article en aquest wiki:</center>
+   <createbox>
+width=30
+</createbox></div>
+
+3. '''Crea els teus 10 primers articles''': utilitza la caixa ubicada a la dreta per a crear deu pàgines, començant cada una amb pocs paràgrafs. Per exemple, si estàs iniciant un wiki sobre un programa de TV, podràs crear un article per a cada un dels personatges principals.
+
+4. '''Edita la Portada''': inclou enllaços interns ([[d'aquesta forma]]) als deu articles que acabes de crear i realitzar qualsevol altra modificació que la teva portada necessite.
+
+Una vegada que hages realitzat aquestes 4 tasques, hauràs creat allò que et servirà de gran punt d'inici: el teu wiki lluirà més amigable i estarà preparat per a rebre visitants. Ara podràs invitar a alguns amics per a que t'ajuden a crear les pròximes vint pàgines i a expandir les que ja has creat.
+
+Segueix així! Mentre més pàgines crees i enllaços a altres, més ràpid aconseguiràs que qui busque per \"\$4\" trobe el teu projecte als motors de cerca, llegeixin el teu contingut i s'unisquen a l'edició d'articles.
+
+Si tens més preguntes, hem creat un complet conjunt de [[ayuda:Contenidos|pàgines d'ajuda]] per a que consultes. També pots enviar-nos altre correu electrònic a través d'aquest [[Special:Contact|formulari de contacte]]. No oblides revisar altres wikis de [[w:c:ca:Wikia|Wikia] per a que veges més idees de disseny, organització de pàgines i molts altres detalls. Gaudix-lo! 
+
+I si vols estar al dia amb totes les novetats de Wikia, noves funcionalitats, notícies, concursos o projectes, no oblides subscriure't al nostre [http://lists.wikia.com/mailman/listinfo/wikia-es maillist]!!
+
+Els millors desitjos, [[User:\$2|\$3]] <staff />",
+);
+
 /** German (Deutsch)
  * @author George Animal
  * @author Kghbln
@@ -231,111 +268,104 @@ $messages['br'] = array(
  */
 $messages['de'] = array(
 	'answer_title' => 'Antwort',
-	'answered_by' => 'Beantwortet von',
-	'unregistered' => 'Nicht registriert',
+	'answered_by' => 'Bearbeitet von',
+	'unregistered' => 'Unregistrierte(r) Benutzer',
 	'anonymous_edit_points' => '$1 {{PLURAL:$1|Helfer|Helfer}}',
-	'edit_points' => '{{PLURAL:$1|Bearbeitungspunkt|Bearbeitungspunkte}}',
-	'ask_a_question' => 'Eine Frage stellen...',
-	'ask_a_question-widget' => 'Eine Frage stellen...',
-	'in_category' => '...in der Kategorie',
+	'edit_points' => '{{PLURAL:$1|Punkt|Punkte}}',
+	'ask_a_question' => 'Gib deine Frage ein...',
+	'ask_a_question-widget' => 'Gib deine Frage ein...',
+	'in_category' => '...in Kategorie',
 	'ask_button' => 'Fragen',
-	'ask_thanks' => 'Danke für deine klasse Frage!',
+	'ask_thanks' => 'Danke für diese tolle Frage!',
 	'question_asked_by' => 'Frage gestellt von',
 	'question_asked_by_a_wikia_user' => 'Frage gestellt von einem Wikia Benutzer',
-	'new_question_comment' => 'neue Frage',
-	'answers_toolbox' => 'Wikianswers Toolbox',
-	'improve_this_answer' => 'Diese Antwort verbessern',
-	'answer_this_question' => 'Diese Frage beantworten:',
+	'new_question_comment' => 'Neue Frage',
+	'answers_toolbox' => 'Wikianswers-Toolbox',
+	'improve_this_answer' => 'Verbessere diese Antwort',
+	'answer_this_question' => 'Beantworte diese Frage',
 	'notify_improved' => 'E-Mail bei Verbesserung',
 	'research_this' => 'Das hier recherchieren',
 	'notify_answered' => 'E-Mail bei Antwort',
 	'recent_asked_questions' => 'Zuletzt gestellte Fragen',
-	'recent_answered_questions' => 'Zuletzt gestellte Fragen',
-	'recent_edited_questions' => 'Kürzlich bearbeitete Fragen',
-	'unanswered_category' => 'Offene Fragen',
+	'recent_answered_questions' => 'Zuletzt beantwortete Fragen',
+	'recent_edited_questions' => 'Zuletzt bearbeitete Fragen',
+	'unanswered_category' => 'Unbeantwortete Fragen',
 	'answered_category' => 'Beantwortete Fragen',
 	'related_questions' => 'Ähnliche Fragen',
 	'related_answered_questions' => 'Ähnliche beantwortete Fragen',
-	'recent_unanswered_questions' => 'Aktuelle Offene Fragen',
+	'recent_unanswered_questions' => 'Neue unbeantwortete Fragen',
 	'popular_categories' => 'Beliebte Kategorien',
-	'createaccount-captcha' => 'Bitte gib das Wort unten ein',
-	'inline-register-title' => 'Benachrichtige mich, wenn meine Frage beantwortet wird!',
+	'createaccount-captcha' => 'Bitte gib das folgende Wort ein',
+	'inline-register-title' => 'Benachrichtige mich wenn meine Frage beantwortet wurde!',
 	'inline-welcome' => 'Willkommen bei Wikianswers',
 	'skip_this' => 'Überspringen',
-	'see_all_changes' => 'Alle Änderungen sehen',
+	'see_all_changes' => 'Zeige alle Änderungen',
 	'toolbox_anon_message' => '<i>"Wikianswers nutzt die einzigartigen Merkmale eines Wikis, um die absolut besten Antworten auf alle Fragen zu finden."</i><br /><br /> <b>Jimmy Wales</b><br />Gründer von Wikipedia und Wikianswers',
 	'no_questions_found' => 'Keine Fragen gefunden',
 	'widget_settings' => 'Frage-Einstellungen',
 	'style_settings' => 'Style-Einstellungen',
-	'get_widget_title' => 'Fragen zu deiner Seite hinzufügen',
+	'get_widget_title' => 'Füge Fragen zu deiner Seite hinzu',
 	'background_color' => 'Hintergrundfarbe',
 	'widget_category' => 'Art der Fragen',
-	'category' => 'Kategoriename',
+	'category' => 'lade…',
 	'custom_category' => 'Benutzerdefinierte Kategorie',
-	'number_of_items' => 'Anzahl sichtbarer Elemente',
+	'number_of_items' => 'Anzahl angezeigter Einträge',
 	'width' => 'Breite',
 	'next_page' => 'Nächste &raquo;',
 	'prev_page' => '&laquo; Vorherige',
-	'see_all' => 'Alle zeigen',
+	'see_all' => 'Zeige alle Änderungen',
 	'link_color' => 'Frage-Linkfarbe',
 	'widget_order' => 'Frage-Reihenfolge',
 	'widget_ask_box' => 'Fragefeld einfügen',
 	'question_redirected_help_page' => 'Warum wurde meine Frage hierhin weitergeleitet',
 	'twitter_hashtag' => 'Wikianswers',
 	'twitter_ask' => 'Auf Twitter fragen',
-	'facebook_ask' => 'Auf Facebook fragen',
-	'facebook_send_request' => 'Direkt an Freunde senden',
-	'ask_friends' => 'Bitte deine Freunde beim Beantworten zu helfen:',
-	'facebook_send_request_content' => 'Kannst du helfen das zu beantworten? $1',
-	'facebook_signed_in' => 'Du bist bei Facebook Connect angemeldet',
+	'facebook_ask' => 'Stelle diese Frage in Facebook',
+	'facebook_send_request' => 'Kannst du mir helfen das zu beantworten? $1',
+	'ask_friends' => 'Frage Freunde auf <a href="$1" $2>Twitter</a>',
+	'facebook_send_request_content' => 'Kannst du mir helfen das zu beantworten? $1',
+	'facebook_signed_in' => 'Du bist über Facebook Connect eingeloggt',
 	'ads_by_google' => 'Google-Anzeigen',
-	'magic_answer_headline' => 'Ist deine Frage damit beantwortet?',
-	'magic_answer_yes' => 'Ja, dies als Ausgangspunkt verwenden',
-	'magic_answer_no' => 'Nein, das hier nicht verwenden',
+	'magic_answer_headline' => 'Beantwortet das deine Frage?',
+	'magic_answer_yes' => 'Ja, benutzte das zum Ausbauen',
+	'magic_answer_no' => 'Nein, das passt nicht',
 	'magic_answer_credit' => 'Bereitgestellt von Yahoo Answers',
-	'rephrase' => 'Diese Frage neu formulieren',
-	'rephrase_this' => '<a href="$1" $2>Die Frage umformulieren</a>',
+	'rephrase' => '<a href="$1" $2>Bennene diese Frage um</a>',
+	'rephrase_this' => '<a href="$1" $2>Bennene diese Frage um</a>',
 	'question_not_answered' => 'Diese Frage wurde nicht beantwortet',
 	'you_can' => 'Du kannst:',
-	'answer_this' => '<a href="$1">Diese Frage beantworten</a>, auch wenn du nicht die ganze Antwort weißt',
+	'answer_this' => 'Beantworte diese Frage',
 	'research_this_on_wikipedia' => '<a href="$1">Die Frage recherchieren</a> auf Wikipedia',
-	'receive_email' => '<a href="$1" $2>Eine E-Mail erhalten</a> wenn diese Frage beantwortet wird',
-	'ask_friends_on_twitter' => 'Freunde bei <a href="$1" $2>Twitter</a> fragen',
-	'categorize' => 'Kategorisieren',
-	'categorize_help' => 'Eine Kategorie pro Zeile',
-	'answers_widget_admin_note' => '<b>Administratoren:</b> Wenn du gerne ein Administrator von <a href="http://answers.wikia.com" target="_blank">Wikianswers</a> werden würdest, <a href="http://answers.wikia.com/wiki/Wikianswers:Become_an_admin" target="_blank">klicke hier</a>.',
-	'answers_widget_user_note' => 'Kannst du helfen, indem du ein <a href="http://answers.wikia.com/wiki/Wikianswers:Sign_up_for_a_category" target="_blank">Kategorie-Editor</a> auf <a href="http://answers.wikia.com" target="_blank">Wikianswers</a> wirst?',
-	'answers_widget_anon_note' => '<a href="http://answers.wikia.com" target="_blank">Wikianswers</a> ist ein Q&amp;A-Wiki, wo Antworten nach dem Wiki-Prinzip verbessert werden.',
-	'answers-category-count-answered' => 'Diese Kategorie enthält $1 beantwortete {{PLURAL:$1|Frage|Fragen}}.',
-	'answers-category-count-unanswered' => 'Diese Kategorie enthält $1 unbeantwortete {{PLURAL:$1|Frage|Fragen}}.',
-	'answers_widget_no_questions' => '<a href="http://answers.wikia.com" target="_blank">Wikianswers</a> ist eine Seite, auf der du Fragen stellen und Antworten bearbeiten kannst. Wir zielen darauf ab, die beste Antwort zu jeder Frage zu geben. <a href="http://answers.wikia.com/wiki/Special:Search" target="_blank">Finde</a> und beantworte <a href="http://answers.wikia.com/wiki/Category:Un-answered_questions">unbeantwortete</a> Fragen. Dies ist ein Wiki - also traue dich!',
-	'answers_widget_no_questions_askabout' => '<br /><br />Beginne, indem du eine Frage über "{{PAGENAME}}" stellst',
-	'reword_this' => '<a href="$1" $2>Frage umformulieren</a>',
-	'no_related_answered_questions' => 'Es gibt noch keine ähnliche Fragen. Erhalte stattdessen eine <a href="http://answers.wikia.com/wiki/Special:Randomincategory/answered_questions">zufällig beantwortete Frage</a> oder stelle eine Neue!<br />
-<div class="createbox" align="center">
-<p></p><form name="createbox" action="/index.php" method="get" class="createboxForm">
-<input name="action" value="create" type="hidden">
-<input name="prefix" value="Special:CreateQuestionPage/" type="hidden">
-<input name="editintro" value="" type="hidden">
-<input class="createboxInput" name="title" value="" size="50" type="text">
-<input name="create" class="createboxButton" value="Frage eingeben und klicken" type="submit"></form></div>',
-	'auto_friend_request_body' => 'Willst du mich als Freund hinzufügen?',
-	'tog-hidefromattribution' => 'Verstecke meinen Avatar und meinen Namen auf der Namensnennung-Liste',
-	'a' => 'Antwort:',
-	'answering_tips' => '<h3>Tipps für das Antworten:</h3> Wenn du eine Antwort gibst, versuche so präzise wie möglich zu sein. Wenn du die Informationen aus einer anderen Quelle wie der Wikipedia beziehst, ergänze einen entsprechenden Link im Text. Und vielen Dank für den Beitrag zum {{SITENAME}}!',
-	'plus_x_more_helpers' => '... sowie $1 weitere Helfer',
-	'anwb-step1-headline' => 'Worum geht es in deinem Wiki?',
-	'anwb-choose-logo' => 'Wähle dein Logo',
-	'anwb-step2-text' => 'Als nächstes wähle ein Logo für {{SITENAME}}. Es empfiehlt sich, ein Bild hochzuladen, von dem du der Meinung bist, dass es Deine Antwort-Seite repräsentiert. <br /> Du kannst diesen Schritt überspringen, wenn du es nicht jetzt tun möchtest.',
-	'anwb-step2-example' => 'Dies wäre ein gutes Logo für eine Skateboard-Antwort-Seite.',
-	'anwb-fp-headline' => 'Erstelle ein paar Fragen!',
-	'anwb-logo-preview' => 'Hier ist eine Vorschau deines Logos',
+	'receive_email' => '<a href="$1" $2>Benachrichtige mich via E-Mail</a> wenn diese Frage beantwortet wurde',
+	'ask_friends_on_twitter' => 'Frage Freunde auf <a href="$1" $2>Twitter</a>',
+	'categorize' => 'Kategoriename',
+	'categorize_help' => 'Kategoriename',
+	'answers_widget_admin_note' => '{{int:Answers widget user note}}',
+	'answers_widget_user_note' => 'Stelle deine Fragen auf <a href="http://frag.wikia.com/" target="_blank">Wikianswers</a> oder <a href="http://www.wikia.com/Special:CreateAnswers?uselang=de">erstelle deine eigene Frage-Antwort-Seite</a>!',
+	'answers_widget_anon_note' => '{{int:Answers widget user note}}',
+	'answers-category-count-answered' => 'Diese Kategorie enthält $1 beantwortete Fragen.',
+	'answers-category-count-unanswered' => 'Diese Kategorie enthält $1 unbeantwortete Fragen.',
+	'answers_widget_no_questions' => '<br><br>Mach mit und stelle eine Frage über "{{PAGENAME}}"',
+	'answers_widget_no_questions_askabout' => '<br><br>Mach mit und stelle eine Frage über "{{PAGENAME}}"',
+	'reword_this' => '<a href="$1" $2>Formuliere diese Frage um</a>',
+	'no_related_answered_questions' => 'Es gibt noch keine ähnlichen Fragen.',
+	'auto_friend_request_body' => 'Wirst du mich als Freund hinzufügen?',
+	'tog-hidefromattribution' => 'Meinen Namen und Avatar nicht unter bearbeiteten Artikeln anzeigen',
+	'a' => 'Titel:',
+	'answering_tips' => '<h3>Tipps fürs Beantworten:</h3> Wenn du eine Frage beantwortest, versuche so genau wie möglich zu sein. Wenn du Informationen von einer anderen Seite als Wikipedia beziehst, gib einen Link an. Vielen Dank für deinen Beitrag zu {{SITENAME}}!',
+	'plus_x_more_helpers' => '...sowie $1 weitere Helfer',
+	'anwb-step1-headline' => 'Wovon handelt der Inhalt deiner Seite?',
+	'anwb-choose-logo' => 'Logo auswählen',
+	'anwb-step2-text' => 'Wähle als nächstes ein Logo für {{SITENAME}}. Am besten lädst du ein Bild hoch, von dem du denkst, dass es das Thema am besten rüber bringt.<br />Du kannst diesen Schritt überspringen, wenn du momentan noch kein Logo erstellen möchtest.<br /><br />',
+	'anwb-step2-example' => 'Dies könnte ein gutes Logo für eine Frage-Antwort-Seite zum Thema Skateboard sein.',
+	'anwb-fp-headline' => 'Erstelle einige Fragen!',
+	'anwb-logo-preview' => 'Vorschau des Logos',
 	'qa-toolbox-button' => 'Beantworte eine zufällige Frage',
-	'qa-toolbox-share' => 'Teilen',
+	'qa-toolbox-share' => 'Frage deine Freunde',
 	'qa-toolbox-tools' => 'Erweiterte Optionen »',
 	'qa-toolbox-protect' => 'Schütze diese Frage',
 	'qa-toolbox-delete' => 'Lösche diese Frage',
-	'qa-toolbox-history' => 'Frühere Versionen dieser Seite',
+	'qa-toolbox-history' => 'Versionsgeschichte dieser Seite',
 	'answers_skins' => 'Antworten',
 	'answers-bluebell' => 'Glockenblume',
 	'answers-leaf' => 'Blatt',
@@ -346,7 +376,16 @@ $messages['de'] = array(
 	'answers-moonlight' => 'Mondschein',
 	'answers-carbon' => 'Karbon',
 	'answers-obsession' => 'Besessenheit',
-	'answers-custom' => 'Benutzerdefiniert',
+	'answers-custom' => 'Angepasst',
+	'get_code' => 'Code holen',
+	'q' => 'Momentan sind die Daten für diese Spalte nicht korrekt, darum zeigen wir sie nicht an. Wir arbeiten daran, sie bald wieder verfügbar zu machen!',
+	'anwb-step1-text' => 'Deine Frage-Antwort-Seite benötigt eine <strong>Kurzerklärung</strong> (ein Satz!).<br /><br />Die Kurzerklärung hilft anderen dein Angebot durch Suchmaschinen zu finden - versuche also möglichst präzise zu schreiben, welche Inhalte deine Seite behandelt.',
+	'anwb-step1-example' => '<strong>Beispiel:</strong><br /> Antworten auf alle deine Fragen zum Thema Wrestling!',
+	'anwb-fp-text' => 'Deine Frage-Antwort-Seite sollte mit ein paar Fragen starten!<br /><br />Füge eine Liste von Fragen hinzu und erstelle die ersten Antworten. Es ist wichtig, einige nützliche Informationen auf die Seite zu packen, damit andere sie finden und weitere Fragen stellen und beantworten können.',
+	'anwb-fp-example' => '<strong>Beispiele</strong><br /><br />...für eine Frage-Antwort-Seite über Haustiere:<br /><br /><ul><li>Soll ich Katzenstreu kaufen</li><li>Welches Hundefutter ist das beste</li><li>Wie kann man eine Katze am besten erziehen</li><li></ul><br /><br />...für eine Frage-Antwort-Seite über Gesundheitsthemen:<br /><br /><ul><li>Welche gesundheitlichen Vorteile hat regelmäßiges Joggen</li><li>Wie finde ich einen guten Arzt in meiner Nähe</li><li>Wie kann ich am effektivsten abnehmen</li></ul>',
+	'nwb-thatisall-headline' => 'Das wars auch schon - jetzt kann es losgehen!',
+	'anwb-thatisall-text' => 'Das wars auch schon - jetzt kann es losgehen!<br /><br />Du solltest damit beginnen, noch weitere Fragen und Antworten zu deiner Seite hinzuzufügen, so dass sie besser durch Suchmaschinen gefunden wird.<br /><br />Die Liste der Fragen aus dem letzten Schritt sind bereits auf deiner Frage-Antwort-Seite erstellt worden. Rufe sie auf, beantworte sie und starte deine eigene Community!',
+	'anwb-save-tagline' => 'Kurzerklärung speichern',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
@@ -375,6 +414,10 @@ $messages['el'] = array(
 	'research_this' => 'Αναζητήστε αυτό',
 );
 
+$messages['eo'] = array(
+	'a' => 'Respondoj',
+);
+
 /** Spanish (Español)
  * @author Armando-Martin
  * @author Bola
@@ -382,80 +425,126 @@ $messages['el'] = array(
  */
 $messages['es'] = array(
 	'answer_title' => 'Respuesta',
-	'answered_by' => 'Contestado por',
+	'answered_by' => 'Respondido por',
 	'unregistered' => 'No registrado',
-	'ask_a_question' => 'Haz una pregunta...',
+	'ask_a_question' => 'Pregunta en {{SITENAME}}',
 	'ask_a_question-widget' => 'Haz una pregunta...',
-	'question_asked_by' => 'Pregunta hecha por',
+	'question_asked_by' => 'Pregunta hecha por un usuario de Wikia',
 	'new_question_comment' => 'nueva pregunta',
 	'improve_this_answer' => 'Mejora esta contestación',
-	'answer_this_question' => 'Responde a esta pregunta:',
+	'answer_this_question' => 'Responder esta pregunta',
 	'notify_improved' => 'Envíeme un email cuando la mejore',
 	'research_this' => 'Investigar esto',
 	'notify_answered' => 'Envíame un mail cuando seas contestado',
-	'recent_asked_questions' => 'Preguntas más frecuentes',
-	'recent_answered_questions' => 'Preguntas recién contestadas',
-	'recent_edited_questions' => 'Preguntas recién editadas',
-	'unanswered_category' => 'Preguntas no contestadas',
-	'answered_category' => 'Preguntas contestadas',
+	'recent_asked_questions' => 'Preguntas hechas recientemente',
+	'recent_answered_questions' => 'Preguntas respondidas recientemente',
+	'recent_edited_questions' => 'Preguntas editadas recientemente',
+	'unanswered_category' => 'Preguntas sin respuesta',
+	'answered_category' => 'Preguntas respondidas',
 	'related_questions' => 'Preguntas relacionadas',
-	'related_answered_questions' => 'Preguntas relacionadas que poseen respuesta',
+	'related_answered_questions' => 'Más preguntas',
 	'popular_categories' => 'Categorías populares',
-	'createaccount-captcha' => 'Por favor introduce la palabra descrita debajo',
-	'inline-register-title' => 'Informame cuando mi pregunta sea contestada!',
-	'inline-welcome' => 'Bienvenido a Wikianswers',
-	'skip_this' => 'Omitir esto',
+	'createaccount-captcha' => 'Por favor escribe abajo la palabra',
+	'inline-register-title' => 'Notificarme cuando mi pregunta sea contestada',
+	'inline-welcome' => 'Bienvenido a WikiRespuestas',
+	'skip_this' => 'Saltar esto',
 	'see_all_changes' => 'Ver todos los cambios',
 	'no_questions_found' => 'Ningunas preguntas encontradas',
 	'widget_settings' => 'Configuración de preguntas',
-	'get_widget_title' => 'Añade preguntas a tu página web',
+	'get_widget_title' => 'Añadir pregunta a tu sitio',
 	'background_color' => 'Color de fondo',
 	'widget_category' => 'Tipo de preguntas',
-	'category' => 'Nombre de Categoría',
-	'custom_category' => 'Personalizar categoría',
-	'number_of_items' => 'Número de elementos a mostrar',
+	'category' => 'Hay demasiadas subcategorías para ser desplegadas como un árbol.',
+	'custom_category' => 'Personalizar etiqueta',
+	'number_of_items' => 'Número de items a mostrar',
 	'width' => 'Anchura',
-	'see_all' => 'Ver todos',
+	'see_all' => 'Ver todos los cambios',
 	'get_code' => 'Coger código',
 	'link_color' => 'Color de enlace de la pregunta',
 	'widget_order' => 'Orden de las preguntas',
-	'question_redirected_help_page' => 'Porqué fue mi pregunta redirigida aquí?',
+	'question_redirected_help_page' => '¿Por qué se redirigió mi pregunta aquí?',
 	'twitter_hashtag' => 'WikiRespuestas',
 	'twitter_ask' => 'Preguntar en Twitter',
 	'facebook_ask' => 'Preguntar en Facebook',
 	'facebook_send_request' => 'Mandar directamente a Amigos',
-	'ads_by_google' => 'Anuncios de Google',
-	'magic_answer_headline' => 'Contesta esto a tú pregunta?',
-	'magic_answer_yes' => 'Si, usa esto como punto de partida',
-	'magic_answer_no' => 'No, no use esto',
-	'magic_answer_credit' => 'Proporcionado por Yahoo Answers',
-	'question_not_answered' => 'La pregunta no ha sido respondida aún.',
+	'ads_by_google' => 'Publicidad de Google',
+	'magic_answer_headline' => '¿Esta es la respuesta a tu pregunta?',
+	'magic_answer_yes' => 'Sí, úsala como punto de partida',
+	'magic_answer_no' => 'No, no uses esta',
+	'magic_answer_credit' => 'De Yahoo Answers',
+	'question_not_answered' => 'Esta pregunta no ha sido contestada',
 	'you_can' => 'Puedes:',
-	'answer_this' => '<a href="$1">Responde esta pregunta</a>, incluso si no sabes la respuesta completa',
+	'answer_this' => 'Responder esta pregunta',
 	'research_this_on_wikipedia' => '<a href="$1">Investigar sobre esta pregunta</a> en Wikipedia',
 	'receive_email' => '<a href="$1" $2>Recibir un correo electrónico</a> cuando se responda a esta pregunta',
-	'ask_friends_on_twitter' => 'Pregunta a tus amigos por <a href="$1" $2>Twitter</a>',
-	'quick_action_panel' => 'Panel de Acción Rápida',
+	'ask_friends_on_twitter' => 'Pregunta a tus amigos en <a href="$1" $2>Twitter</a>',
+	'quick_action_panel' => 'Panel de acción rápida',
 	'categorize' => 'Categorizar',
 	'categorize_help' => 'Una categoría por línea',
-	'answers_widget_admin_note' => '<b>Administradores:</b> Si queréis ser administradores de <a href="http://respuestas.wikia.com" target="_blank">WikiRespuestas</a>, <a href="http://respuestas.wikia.com/wiki/WikiRespuestas:Administradores" target="_blank">haz clic aquí</a>.',
-	'answers_widget_user_note' => '¿Quieres ayudarnos <a href="http://respuestas.wikia.com/wiki/C%C3%B3mo_cambio_la_categor%C3%ADa_de_una_pregunta" target="_blank">categorizando preguntas</a> en <a href="http://respuestas.wikia.com" target="_blank">WikiRespuestas</a>?',
-	'answers_widget_anon_note' => '<a href="http://respuestas.wikia.com" target="_blank">WikiRespuestas</a> es un Q&amp;A wiki donde se pueden mejorar las respuestas a las preguntas, con un estilo wiki.',
-	'answers-category-count-answered' => 'Esta categoría contiene $1 {{PLURAL:$1|pregunta respondida|preguntas respondidas}}.',
-	'answers-category-count-unanswered' => 'Esta categoría contiene $1 {{PLURAL:$1|pregunta sin responder|preguntas sin responder}}.',
-	'answers_widget_no_questions' => '<a href="http://respuestas.wikia.com" target="_blank">WikiRespuestas</a> es un sitio donde puedes hacer preguntas y contribuir dando respuestas. Nuestro objetivo es crear la mejor respuesta para cada pregunta. <a href="http://respuestas.wikia.com/wiki/Special:Search" target="_blank">Busca</a> y responde <a href="http://respuestas.wikia.com/wiki/Category:Un-answered_questions">preguntas sin responder</a>. Es un wiki - ¡se valiente!',
-	'answers_widget_no_questions_askabout' => '<br /><br />Comienza preguntando sobre  "{{PAGENAME}}"',
-	'reword_this' => '<a href="$1" $2>Reformula esta pregunta</a>',
+	'answers_widget_admin_note' => '{{int:Answers widget user note}}',
+	'answers_widget_user_note' => 'Haz una pregunta en <a href="http://respuestas.wikia.com/">WikiRespuestas</a> o <a href="http://www.wikia.com/Special:CreateAnswers?uselang=es">comienza tu propio sitio de respuestas</a>.',
+	'answers_widget_anon_note' => '{{int:Answers widget user note}}',
+	'answers-category-count-answered' => 'Esta categoría contiene $1 preguntas respondidas.',
+	'answers-category-count-unanswered' => 'Esta categoría contiene $1 pregunta/s sin responder.',
+	'answers_widget_no_questions' => '<!-- -->',
+	'answers_widget_no_questions_askabout' => '<!-- -->',
+	'reword_this' => '<a href="$1" $2>Reescribe la pregunta</a>',
 	'auto_friend_request_body' => '¿Me añadirás como amigo?',
 	'tog-hidefromattribution' => 'Ocultar mi avatar y nombre en la lista de atribuciones',
-	'a' => 'Respuesta:',
-	'anwb-step1-headline' => 'De qué trata tí Wiki?',
-	'anwb-choose-logo' => 'Elija su logo',
+	'a' => 'media',
+	'anwb-step1-headline' => '¿Sobre qué tema se enfoca tu wiki?',
+	'anwb-choose-logo' => 'Elige tu logo',
+	'anonymous_edit_points' => '$1 {{PLURAL:$1|colaboración|colaboraciones}}',
+	'edit_points' => '{{PLURAL:$1|punto de edición|puntos de edición}}',
+	'in_category' => '... en categoría',
+	'ask_button' => 'Pregunta',
+	'ask_thanks' => '¡Gracias por la magnífica pregunta!',
+	'question_asked_by_a_wikia_user' => 'Pregunta hecha por un usuario de Wikia',
+	'recent_unanswered_questions' => 'Preguntas recientes no respondidas',
+	'ask_friends' => 'Pregunta a tus amigos en <a href="$1" $2>Twitter</a>',
+	'rephrase' => 'Reescribe esta pregunta',
+	'rephrase_this' => 'Reescribe esta pregunta',
+	'no_related_answered_questions' => 'Todavía no hay preguntas relacionadas.',
+	'q' => 'RapiTareas',
+	'header_questionmark_pre' => '¿',
+	'anwb-step1-text' => 'Tu sitio de Wiki Respuestas necesita un <strong>tagline</strong>.<br /><br />El tagline ayudará a que la gente encuentre tu wiki desde los motores de búsqueda, así que intenta ser claro sobre el tema que trata tu wiki.',
+	'anwb-step1-example' => '¡Responde a todas tus preguntas sobre Wrestling!',
+	'anwb-step2-text' => 'Sigamos, elige un logo para {{SITENAME}}. Lo mejor es subir una imagen que pienses que representa tu sitio de Respuestas.<br />Puedes saltarte este paso si no quieres hacerlo ahora, más adelante lo podrás hacer.<br /><br />',
+	'anwb-step2-example' => 'Podría ser un buen logo para un wiki de respuestas sobre monopatines, ¿no estás de acuerdo?',
+	'anwb-fp-headline' => '¡Crea algunas preguntas!',
+	'anwb-fp-text' => '¡Tu wiki de Respuestas debe comenzar con algunas preguntas!<br /><br />Añade una lista de preguntas, y después dales una respuesta tú mismo. Es importante que des algo de información útil para tu wiki, así la gente podrá encontrarlo más fácilmente y preguntar y responder más preguntas.',
+	'anwb-fp-example' => '<strong>Ejemplo</strong><br /><br />Para un wiki de respuestas sobre mascotas:<br /><br /><ul><li>¿Debo comprar un gato pequeño?</li><li>¿Cuál es la mejor forma para alimentar a un perro?</li><li>¿Cómo puedo entrenar a mi gato?</li></ul><br /><br />Para un wiki de respuestas sobre salud:<br /><br /><ul><li>¿Cuáles son los beneficios del ejercicio sobre la salud?</li><li>¿Cómo puedo encontrar a un buen doctor en mi zona?</li><li>¿Cómo puedo perder peso fácilmente?</li></ul>',
+	'nwb-thatisall-headline' => '¡Ya está, lo hiciste!',
+	'anwb-thatisall-text' => '¡Eso es - el wiki ya está listo para revolucionar el mundo de las respuestas!<br /><br />Ahora es el momento de comenzar a escribir más preguntas y respuestas, así te asegurarás de que tu sitio pueda ser encontrado más fácilmente por los motores de búsqueda.<br /><br />La lista de preguntas que añadiste en el paso anterior ha sido incluida en tu sitio de preguntas. ¡Responde a tus propias preguntas, comienza tu propia comunidad de respuestas y demuéstrale a todos que tienes la respuesta que estaban buscando!',
+	'anwb-logo-preview' => 'Aquí tienes una previsualización del logo',
+	'anwb-save-tagline' => 'Guardar tagline',
+	'qa-toolbox-button' => 'Responder una pregunta al azar',
+	'qa-toolbox-share' => 'Compartir',
+	'qa-toolbox-tools' => 'Herramientas avanzadas»',
+	'qa-toolbox-protect' => 'Proteger esta pregunta',
+	'qa-toolbox-delete' => 'Borrar esta pregunta',
+	'qa-toolbox-history' => 'Versiones anteriores de esta página',
+	'answers-custom' => 'Personalizada',
+);
+
+$messages['fa'] = array(
+	'category' => 'رده‌ها',
+	'a' => 'ایجاد ویکی جدید',
 );
 
 /** Finnish (Suomi) */
 $messages['fi'] = array(
 	'research_this' => 'Tutki tätä',
+	'answer_title' => 'Vastaus',
+	'answered_by' => 'Vastannut',
+	'answer_this_question' => 'Vastaa tähän kysymykseen',
+	'answered_category' => 'Vastauksen saaneet kysymykset',
+	'next_page' => 'Seuraava &raquo;',
+	'ads_by_google' => 'Google mainokset',
+	'answer_this' => 'Vastaa tähän kysymykseen',
+	'answers-category-count-answered' => 'Tämä luokka sisältää $1 vastattuja kysymyksiä.',
+	'answers-category-count-unanswered' => 'Tämä luokka sisältää $1 vastaamattomia kysymyksiä.',
+	'a' => 'Luo uusi Wiki',
 );
 
 /** French (Français)
@@ -479,9 +568,9 @@ $messages['fr'] = array(
 	'answers_toolbox' => 'Boîte à outils Wikiréponses',
 	'improve_this_answer' => 'Améliorer cette réponse',
 	'answer_this_question' => 'Répondre à cette question :',
-	'notify_improved' => 'M’envoyer un courriel quand elle est améliorée',
+	'notify_improved' => 'M’envoyer un e-mail quand elle est améliorée',
 	'research_this' => 'Rechercher ceci',
-	'notify_answered' => 'M’envoyer un courriel quand une réponse est donnée',
+	'notify_answered' => 'M’envoyer un e-mail quand une réponse est donnée',
 	'recent_asked_questions' => 'Questions posées récemment',
 	'recent_answered_questions' => 'Questions ayant reçu une réponse récemment',
 	'recent_edited_questions' => 'Questions modifiées récemment',
@@ -503,7 +592,7 @@ $messages['fr'] = array(
 	'get_widget_title' => 'Ajouter des questions à votre site',
 	'background_color' => 'Couleur d’arrière-plan',
 	'widget_category' => 'Type de questions',
-	'category' => 'Nom de catégorie',
+	'category' => "Parcourt dynamiquement l'[[Special:CategoryTree|arborescence des catégories]]",
 	'custom_category' => 'Catégorie personnalisée',
 	'number_of_items' => 'Nombre d’éléments à afficher',
 	'width' => 'Largeur',
@@ -533,7 +622,7 @@ $messages['fr'] = array(
 	'you_can' => 'Vous pouvez :',
 	'answer_this' => '<a href="$1">Répondre à cette question</a>, même si vous ne connaissez qu’une partie de la réponse',
 	'research_this_on_wikipedia' => '<a href="$1">Rechercher cette question</a> sur Wikipédia',
-	'receive_email' => '<a href="$1" $2>Recevoir un courriel</a> quand cette question reçoit une réponse',
+	'receive_email' => '<a href="$1" $2>Recevoir un e-mail</a> quand cette question reçoit une réponse',
 	'ask_friends_on_twitter' => 'Demander à des amis sur <a href="$1" $2>Twitter</a>',
 	'quick_action_panel' => 'Panneau d’action rapide',
 	'categorize' => 'Catégoriser',
@@ -556,7 +645,7 @@ $messages['fr'] = array(
 <input name="create" class="createboxButton" value="Saisissez votre question et cliquez ici" type="submit"></form></div>',
 	'auto_friend_request_body' => 'M’ajouterez-vous en tant qu’ami ?',
 	'tog-hidefromattribution' => 'Masquer mes avatar et nom de la liste des attributions',
-	'a' => 'Réponse :',
+	'a' => "ou (adresse e-mail de l'utilisateur) :",
 	'answering_tips' => '<h3>Conseils pour répondre :</h3> Quand vous soumettez une réponse, essayez d’être aussi précis que possible. Si vous tenez l’information d’une autre source comme Wikipédia, placez un lien vers celle-ci dans le texte. Et merci d’avoir contribué sur {{SITENAME}} !',
 	'plus_x_more_helpers' => '... ainsi que $1 intervenants en plus',
 	'anwb-step1-headline' => 'De quoi parle votre wiki ?',
@@ -589,6 +678,7 @@ $messages['fr'] = array(
 	'answers-carbon' => 'Carbone',
 	'answers-obsession' => 'Obsession',
 	'answers-custom' => 'Personnalisé',
+	'q' => 'Divers outils pour rendre le combat contre le spam et le vandalisme et autres tâches du staff plus simple',
 );
 
 /** Galician (Galego)
@@ -721,6 +811,10 @@ $messages['gl'] = array(
 	'answers-carbon' => 'Carbono',
 	'answers-obsession' => 'Obsesión',
 	'answers-custom' => 'Personalizado',
+);
+
+$messages['he'] = array(
+	'a' => 'Answers',
 );
 
 /** Hungarian (Magyar)
@@ -1042,10 +1136,10 @@ $messages['id'] = array(
  */
 $messages['it'] = array(
 	'answer_title' => 'Risposta',
-	'answered_by' => 'Risposta da',
+	'answered_by' => 'Risposta data da',
 	'unregistered' => 'Non registrato',
-	'anonymous_edit_points' => '$1 {{PLURAL:$1|contributore|contributori}}',
-	'edit_points' => '{{PLURAL:$1|modifica punto|modifica punti}}',
+	'anonymous_edit_points' => '$1 {{PLURAL:$1|collaboratore|collaboratori}}',
+	'edit_points' => '{{PLURAL:$1|punto modifica|punti modifica}}',
 	'ask_a_question' => 'Fai una domanda...',
 	'ask_a_question-widget' => 'Fai una domanda...',
 	'in_category' => '...nella categoria',
@@ -1081,7 +1175,7 @@ $messages['it'] = array(
 	'get_widget_title' => 'Aggiungi Domande al tuo sito',
 	'background_color' => 'Colore di sfondo',
 	'widget_category' => 'Tipo di domande',
-	'category' => 'Nome della categoria',
+	'category' => 'Premi il tasto Invio o Enter quando hai fatto.',
 	'custom_category' => 'Categoria personalizzata',
 	'number_of_items' => 'Numero di elementi da visualizzare',
 	'width' => 'Larghezza',
@@ -1116,12 +1210,12 @@ $messages['it'] = array(
 	'quick_action_panel' => 'Pannello di azione rapida',
 	'categorize' => 'Categorizza',
 	'categorize_help' => 'Una categoria per riga',
-	'answers_widget_admin_note' => '<b>Amministratori:</b> Se vuoi diventare un\'amministratore su <a href="http://answers.wikia.com" target="_blank">Wikirisposte</a>, <a href="http://answers.wikia.com/wiki/Wikianswers:Become_an_admin" target="_blank">clicca qui</a>.',
-	'answers_widget_user_note' => 'Puoi aiutare diventando un <a href="http://answers.wikia.com/wiki/Wikianswers:Sign_up_for_a_category" target="_blank">editore di categorie</a> su <a href="http://answers.wikia.com" target="_blank">Wikirisposte</a>?',
-	'answers_widget_anon_note' => '<a href="http://answers.wikia.com" target="_blank">Wikirisposte</a> è una D&amp;R wiki dove le risposte sono migliorate, in stile wiki.',
+	'answers_widget_admin_note' => '{{int:Answers widget user note}}',
+	'answers_widget_user_note' => '<a href="http://risposte.wikia.com" target="_blank"><b>WikiRisposte</b></a> è una wiki dove le risposte alle varie domande vengono perfezionate in modo collaborativo.',
+	'answers_widget_anon_note' => '{{int:Answers widget user note}}',
 	'answers-category-count-answered' => 'Questa categoria contiene $1 {{PLURAL:$1|domanda|domande}} risolte.',
 	'answers-category-count-unanswered' => 'Questa categoria contiente $1 {{PLURAL:$1|domanda|domande}} senza risposta.',
-	'answers_widget_no_questions' => '<a href="http://answers.wikia.com" target="_blank">Wikirisposte</a> è un sito dove puoi porre domande e contribuire rispondendo. Il nostro obiettivo è fornire le risposte migliori a qualunque domanda. <a href="http://answers.wikia.com/wiki/Special:Search" target="_blank">Trova</a> e rispondi alle domande <a href="http://answers.wikia.com/wiki/Category:Un-answered_questions">senza risposta</a>. È una wiki - quindi sii audace!',
+	'answers_widget_no_questions' => 'Aiutaci a trovare la migliore risposta ad ogni <a href="http://risposte.wikia.com/wiki/Categoria:Domande_senza_risposta" target="_blank">domanda</a> su <b><a href="http://risposte.wikia.com/wiki/WikiRisposte" target="_blank">WikiRisposte</a>.</b><br><br><a href="http://risposte.wikia.com/wiki/Speciale:Ricerca" target="_blank">Trova</a> le <a href="http://risposte.wikia.com/wiki/Categoria:Domande_senza_risposta" target="_blank">domande irrisolte</a> e scrivi la tua risposta.<br><br>Inizia facendo una domanda su "{{PAGENAME}}".',
 	'answers_widget_no_questions_askabout' => '<br /><br />Inizia chiedendo qualcosa su "{{PAGENAME}}"',
 	'reword_this' => '<a href="$1" $2>Riformula questa domanda</a>',
 	'no_related_answered_questions' => 'Non ci sono ancora domande correlate. Ottieni <a href="http://answers.wikia.com/wiki/Special:Randomincategory/answered_questions">una risposta ad una domanda casuale invece</a>, o chiedi una nuova domanda!<br />
@@ -1134,7 +1228,7 @@ $messages['it'] = array(
 	<input name="create" class="createboxButton" value="Digita la tua domanda e clicca qui" type="submit"></form></div>',
 	'auto_friend_request_body' => 'Mi aggiungi come amico?',
 	'tog-hidefromattribution' => 'Nascondi il mio avatar e il mio nome dalla lista di attribuzione',
-	'a' => 'Risposta:',
+	'a' => 'Crea un nuova wiki',
 	'answering_tips' => '<h3>Suggerimenti per rispondere:</h3> Quando fornisci una risposta, cerca di essere il più accurato possibile. Se le tue informazioni provengono da un altro sito come Wikipedia, aggiungi il link della fonte nel testo. Grazie per contribuire a {{SITENAME}}!',
 	'plus_x_more_helpers' => '... oltre a  $1  più aiutanti',
 	'anwb-step1-headline' => 'Di cosa tratta la tua wiki?',
@@ -1167,11 +1261,106 @@ $messages['it'] = array(
 	'answers-carbon' => 'Carbone',
 	'answers-obsession' => 'Ossessione',
 	'answers-custom' => 'Personalizzato',
+	'q' => 'Crea pagina utente',
 );
 
 /** Japanese (日本語) */
 $messages['ja'] = array(
-	'research_this' => 'この質問について調べる',
+	'research_this' => 'ウィキペディアで<a href="$1">この質問について調べる</a>。',
+	'answer_title' => '回答',
+	'answered_by' => '回答したユーザー',
+	'unregistered' => '未登録',
+	'anonymous_edit_points' => '$1 のヘルパー',
+	'edit_points' => '編集ポイント',
+	'ask_a_question' => '新しく質問する場合はここに入力',
+	'ask_a_question-widget' => '新しく質問する場合はここに入力',
+	'in_category' => 'カテゴリ',
+	'ask_button' => '質問する',
+	'question_asked_by' => '質問者: 匿名ユーザー',
+	'question_asked_by_a_wikia_user' => '質問者: 匿名ユーザー',
+	'new_question_comment' => '新しい質問',
+	'answers_toolbox' => 'ツールボックス',
+	'improve_this_answer' => 'この回答を更新する',
+	'answer_this_question' => 'この質問に回答',
+	'notify_improved' => '回答が更新されたらメールで通知する',
+	'notify_answered' => '回答されたらメールで通知する',
+	'recent_asked_questions' => '最新の質問',
+	'recent_answered_questions' => '最新の回答済み質問',
+	'recent_edited_questions' => '最近回答した質問',
+	'unanswered_category' => '回答待ちの質問',
+	'answered_category' => '回答済みの質問',
+	'related_questions' => '関連する質問',
+	'related_answered_questions' => '関連する回答済み質問',
+	'recent_unanswered_questions' => '最新の回答待ち質問',
+	'popular_categories' => '人気カテゴリ',
+	'createaccount-captcha' => '下の文字列を入力してください',
+	'category' => '$1ページ',
+	'custom_category' => 'カスタムカテゴリ',
+	'next_page' => '次 &raquo;',
+	'prev_page' => '&laquo; 前',
+	'see_all' => '全て見る',
+	'question_redirected_help_page' => 'なぜ、私の質問がここにリダイレクトされたのですか。',
+	'rephrase' => '<a href="$1" $2>この質問の言い回しを変える</a>',
+	'rephrase_this' => '<a href="$1" $2>この質問の言い回しを変える</a>',
+	'question_not_answered' => 'この質問への回答はまだありません',
+	'you_can' => '次のことができます:',
+	'answer_this' => 'この質問に回答',
+	'research_this_on_wikipedia' => 'ウィキペディアで<a href="$1">この質問について調べる</a>。',
+	'receive_email' => 'この質問への回答がされたら<a href="$1" $2>メールで通知する</a>。',
+	'answers_widget_admin_note' => '{{int:Answers widget user note}}',
+	'answers_widget_user_note' => '{{SITENAME}}の訪問者による質問を<a href="http://answers.wikia.com">ウィキ・アンサーズ</a>で探して回答してみましょう。',
+	'answers_widget_anon_note' => '{{int:Answers widget user note}}',
+	'answers-category-count-answered' => 'このカテゴリには $1 の回答済みの質問が属しています。',
+	'answers-category-count-unanswered' => 'このカテゴリには $1 の回答待ちの質問が属しています。',
+	'answers_widget_no_questions' => '<div class="emptymwmsg mediawiki_widget-no-questions"></div>',
+	'answers_widget_no_questions_askabout' => '<div class="emptymwmsg mediawiki_widget-no-questions"></div>',
+	'reword_this' => '<a href="$1" $2>この質問の言い回しを変える</a>。',
+	'no_related_answered_questions' => '関連する質問はまだありません。',
+	'tog-hidefromattribution' => '投稿者のリストに自分のアバターと名前を表示しない',
+	'q' => 'クイズの作成記録です。',
+	'a' => '$1 の現在のアバター',
+	'answering_tips' => '<h3>回答する際には:</h3>
+回答を投稿する際には、できるだけ正確なものにするようにしてください。もし、Wikipediaのような外部のサイトからの情報をもとにするのであれば、そのサイトへのリンクをテキスト中に含めるようにしてください。',
+);
+
+$messages['ko'] = array(
+	'answer_title' => '답변',
+	'anonymous_edit_points' => '$1명의 익명 기여자',
+	'edit_points' => '포인트',
+	'ask_a_question' => '{{SITENAME}}에 오신 것을 환영합니다. 무엇을 알고 싶으신가요?',
+	'ask_a_question-widget' => '질문을 입력해주세요...',
+	'ask_button' => '질문하기',
+	'new_question_comment' => '새 질문',
+	'answer_this_question' => '이 질문에 답변하기:',
+	'recent_asked_questions' => '최근에 생성한 질문',
+	'recent_answered_questions' => '최근에 답변이 달린 질문',
+	'recent_edited_questions' => '최근에 편집한 질문',
+	'unanswered_category' => '답변이 등록되지 않은 질문',
+	'answered_category' => '답변이 등록된 질문',
+	'related_questions' => '관련 질문',
+	'related_answered_questions' => '관련된 답변이 달린 질문',
+	'recent_unanswered_questions' => '최근에 생성된 질문',
+	'createaccount-captcha' => '아래에 단어를 입력하세요',
+	'background_color' => '배경색',
+	'category' => '탭으로 보기',
+	'next_page' => '다음 &raquo;',
+	'prev_page' => '&laquo; 이전',
+	'question_redirected_help_page' => '왜 제 질문이 여기로 넘어온거죠',
+	'facebook_ask' => 'Facebook에 문의하기',
+	'facebook_send_request' => 'Facebook 친구들에게 바로 보내기',
+	'facebook_signed_in' => 'Facebook 연동 기능을 사용하여 로그인했습니다.',
+	'ads_by_google' => 'Google 광고',
+	'answer_this' => '이 질문에 답변하기:',
+	'answers-category-count-answered' => '이 분류에는 $1개의 답변이 등록된 질문이 있습니다.',
+	'answers-category-count-unanswered' => '이 분류에는 $1개의 답변이 등록되지 않은 질문이 있습니다.',
+	'no_related_answered_questions' => '관련된 질문이 없습니다.',
+	'q' => '사용자 문서 생성하는 중...',
+	'a' => '새 위키 만들기',
+	'answering_tips' => '<h3>답변 달기 팁:</h3> 답변을 다실 때는 최대한 분명하게 하셔야 합니다. 위키백과와 같은 다른 곳을 출처로 하실 수도 있으며, 이런 경우에는 참조한 곳의 링크를 넣어주시는 것이 좋습니다. {{SITENAME}}에 기여해주셔서 감사합니다!',
+	'qa-toolbox-button' => '임의의 질문에 답변하기',
+	'qa-toolbox-share' => '공유',
+	'qa-toolbox-tools' => '고급 도구»',
+	'qa-toolbox-delete' => '이 질문 삭제하기',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -1277,6 +1466,10 @@ $messages['lt'] = array(
 	'answers-custom' => 'Pasirinktinis',
 );
 
+$messages['lv'] = array(
+	'a' => '$1 Viki',
+);
+
 /** Macedonian (Македонски)
  * @author Bjankuloski06
  */
@@ -1375,7 +1568,7 @@ $messages['mk'] = array(
 	'auto_friend_request_body' => 'Сакаш да ме додадеш за пријател?',
 	'tog-hidefromattribution' => 'Скриј ми го аватарот и името од списокот на заслуги',
 	'q' => '<!-- -->',
-	'a' => 'Одговор:',
+	'a' => 'Викија не содржи именски простор „$1“.',
 	'?' => '?',
 	'answering_tips' => '<h3>Совети за одговарање:</h3> Кога давате одговор, бидете што попрецизни. Ако преземате информации од друг извор како Википедија, ставете врска до тој текст. Ви благодариме што учествувате на {{SITENAME}}!',
 	'header_questionmark_post' => '?',
@@ -1553,8 +1746,8 @@ $messages['nb'] = array(
 	'unregistered' => 'Uregistrert',
 	'anonymous_edit_points' => '$1 {{PLURAL:$1|hjelper|hjelpere}}',
 	'edit_points' => '{{PLURAL:$1|redigeringspoeng|redigeringspoeng}}',
-	'ask_a_question' => 'Still et spørsmål...',
-	'ask_a_question-widget' => 'Still et spørsmål...',
+	'ask_a_question' => 'Spør på WikiSvar',
+	'ask_a_question-widget' => 'Spør på WikiSvar',
 	'in_category' => '... i kategorien',
 	'ask_button' => 'Spør',
 	'ask_thanks' => 'Takk for det fantastiske spørsmålet!',
@@ -1623,13 +1816,13 @@ $messages['nb'] = array(
 	'quick_action_panel' => 'Hurtighandlingspanel',
 	'categorize' => 'Kategorisér',
 	'categorize_help' => 'Én kategori per linje',
-	'answers_widget_admin_note' => '<b>Administratorer:</b> Hvis du ønsker å bli en administrator på <a href="http://answers.wikia.com" target="_blank">WikiSvar</a>, <a href="http://answers.wikia.com/wiki/Wikianswers:Become_an_admin" target="_blank">klikk her</a>.',
-	'answers_widget_user_note' => 'Kan du hjelpe til ved å bli en <a href="http://answers.wikia.com/wiki/Wikianswers:Sign_up_for_a_category" target="_blank">kategoriredaktør</a> på <a href="http://answers.wikia.com" target="_blank">WikiSvar</a>?',
-	'answers_widget_anon_note' => '<a href="http://answers.wikia.com" target="_blank">WikiSvar</a> er en spør-og-svar-wiki hvor svarene forbedres på wiki-vis.',
+	'answers_widget_admin_note' => '<a href="http://svar.wikia.com">WikiSvar</a> trenger flere administratorer. <a href="http://svar.wikia.com/wiki/WikiSvar:Administratorer">Finn ut mer her.</a>',
+	'answers_widget_user_note' => 'Kan du hjelpe til med å bli en <a href="http://svar.wikia.com/wiki/Hvordan_blir_jeg_en_kategoriansvarlig" target="_blank">kategoriansvarlig</a> på <a href="http://svar.wikia.com" target="_blank">WikiSvar</a>?',
+	'answers_widget_anon_note' => '<a href="http://svar.wikia.com" target="_blank">WikiSvar er en spør-og-svar-wiki der alle svar kan forbedres, av hvem som helst.</a>',
 	'answers-category-count-answered' => 'Denne kategorien inneholder $1 besvarte {{PLURAL:$1|spørsmål|spørsmål}}.',
 	'answers-category-count-unanswered' => 'Denne kategorien inneholder $1 ubesvarte {{PLURAL:$1|spørsmål|spørsmål}}.',
-	'answers_widget_no_questions' => '<a href="http://answers.wikia.com" target="_blank">WikiSvar</a> er en side hvor du kan stille spørsmål og bidra med svar. Vi tar sikte på å ha det beste svaret på ethvert spørsmål. <a href="http://answers.wikia.com/wiki/Special:Search" target="_blank">Finn</a> og besvar <a href="http://answers.wikia.com/wiki/Kategori:Ubesvarte_spørsmål">ubesvarte</a> spørsmål. Det er en wiki – så vær modig!',
-	'answers_widget_no_questions_askabout' => '<br /><br />Kom i gang ved å stille spørsmål om «{{PAGENAME}}»',
+	'answers_widget_no_questions' => '<br /><br />Kom i gang ved å stille spørsmål om "{{PAGENAME}}"',
+	'answers_widget_no_questions_askabout' => '<br /><br />Kom i gang ved å stille spørsmål om "{{PAGENAME}}"',
 	'reword_this' => '<a href="$1" $2>Omformuler dette spørsmålet</a>',
 	'no_related_answered_questions' => 'Det er ingen relaterte spørsmål ennå. Få et <a href="http://answers.wikia.com/wiki/Special:Randomincategory/answered_questions">tilfeldig besvart spørsmål istedenfor</a>, eller still et nytt!<br />
 <div class="createbox" align="center">
@@ -1642,7 +1835,7 @@ $messages['nb'] = array(
 	'auto_friend_request_body' => 'Vil du legge meg til som venn?',
 	'tog-hidefromattribution' => 'Skjul avataren og navnet mitt fra henvisningslisten',
 	'q' => '<!-- -->',
-	'a' => 'Svar:',
+	'a' => 'Spør på WikiSvar',
 	'?' => '?',
 	'answering_tips' => '<h3>Tips for besvaring:</h3> Når du bidrar med et svar, forsøk å være så presis som mulig. Hvis du får informasjon fra en annen kilde, slik som Wikia, legg til en lenke til denne i teksten. Og takk for ditt bidrag til {{SITENAME}}!',
 	'header_questionmark_post' => '?',
@@ -1690,7 +1883,7 @@ $messages['nl'] = array(
 	'answered_by' => 'Beantwoord door',
 	'unregistered' => 'Niet-geregistreerd',
 	'anonymous_edit_points' => '$1 {{PLURAL:$1|helper|helpers}}',
-	'edit_points' => '{{PLURAL:$1|bewerkingspunt|bewerkingspuntent}}',
+	'edit_points' => '{{PLURAL:$1|bewerk punt|bewerk punten}}',
 	'ask_a_question' => 'Stel een vraag...',
 	'ask_a_question-widget' => 'Stel een vraag...',
 	'in_category' => '...in categorie',
@@ -1699,7 +1892,7 @@ $messages['nl'] = array(
 	'question_asked_by' => 'Vraag gesteld door',
 	'question_asked_by_a_wikia_user' => 'Vraag gesteld door een Wikia-gebruiker',
 	'new_question_comment' => 'nieuwe vraag',
-	'answers_toolbox' => 'Wikiantwoordenpaneel',
+	'answers_toolbox' => 'Wikianswers toolbox',
 	'improve_this_answer' => 'Dit antwoord verbeteren',
 	'answer_this_question' => 'Deze vraag beantwoorden:',
 	'notify_improved' => 'E-mail mij als een antwoord wordt verbeterd',
@@ -1726,7 +1919,7 @@ $messages['nl'] = array(
 	'get_widget_title' => 'Vragen toevoegen aan uw site',
 	'background_color' => 'Achtergrondkleur',
 	'widget_category' => 'Vraagtypen',
-	'category' => 'Categorienaam',
+	'category' => 'De wijziging die je probeerde te maken is afgebroken door een uitbreidingshook',
 	'custom_category' => 'Aangepaste categorie',
 	'number_of_items' => 'Aantal weer te geven items',
 	'width' => 'Breedte',
@@ -1761,13 +1954,13 @@ $messages['nl'] = array(
 	'quick_action_panel' => 'Snelle handelingen',
 	'categorize' => 'Categorie toewijzen',
 	'categorize_help' => 'Eén categorie per regel',
-	'answers_widget_admin_note' => '<b>Beheerders:</b> als u beheerder wilt worden op <a href="http://answers.wikia.com" target="_blank">Wikiantwoorden</a>, <a href="http://answers.wikia.com/wiki/Wikianswers:Become_an_admin" target="_blank">klik hier</a>.',
-	'answers_widget_user_note' => 'Kunt u helpen door een <a href="http://answers.wikia.com/wiki/Wikianswers:Sign_up_for_a_category" target="_blank">categorieredacteur</a> te worden op <a href="http://answers.wikia.com" target="_blank">WikiAntwoorden</a>?',
-	'answers_widget_anon_note' => '<a href="http://answers.wikia.com" target="_blank">WikiAntwoorden</a> is een vraag en antwoordwiki waar antwoorden op wikiwijze worden verbeterd.',
+	'answers_widget_admin_note' => '{{int:Answers widget user note}}',
+	'answers_widget_user_note' => 'Stel een vraag op <a href="http://antwoorden.wikia.com/wiki/Wikiantwoorden">Wikiantwoorden</a> of <a href="http://www.wikia.com/Special:CreateAnswers?uselang=nl">begin je eigen antwoorden site</a>.',
+	'answers_widget_anon_note' => '{{int:Answers widget user note}}',
 	'answers-category-count-answered' => 'Deze categorie bevat $1 beantwoorde {{PLURAL:$1|vraag|vragen}}.',
 	'answers-category-count-unanswered' => 'Deze categorie bevat $1 onbeantwoorde {{PLURAL:$1|vraag|vragen}}.',
-	'answers_widget_no_questions' => '<a href="http://answers.wikia.com" target="_blank">WikiAntwoorden</a> is een site waar u vragen kunt stellen en kunt bijdragen aan antwoorden. We willen graag het beste antwoord op iedere vraag hebben. <a href="http://answers.wikia.com/wiki/Special:Search" target="_blank">Zoek</a> en beantwoord <a href="http://answers.wikia.com/wiki/Category:Un-answered_questions">vragen</a>. Het is een wiki, dus doe het gewoon!',
-	'answers_widget_no_questions_askabout' => '<br /><br />Begin door een vraag te stellen over "{{PAGENAME}}"',
+	'answers_widget_no_questions' => '<br><br>Begin door een vraag te stellen over "{{PAGENAME}}"',
+	'answers_widget_no_questions_askabout' => '<br><br>Begin door een vraag te stellen over "{{PAGENAME}}"',
 	'reword_this' => '<a href="$1" $2>Vraag herformuleren</a>',
 	'no_related_answered_questions' => 'Er zijn nog geen gerelateerde vragen. Bekijk in plaats daarvan <a href="http://answers.wikia.com/wiki/Special:Randomincategory/answered_questions">een willekeurige beantwoorde vraag</a> of stel een nieuwe vraag!<br />
 <div class="createbox" align="center">
@@ -1779,7 +1972,20 @@ $messages['nl'] = array(
 <input name="create" class="createboxButton" value="Stel uw vraag en klik hier" type="submit"></form></div>',
 	'auto_friend_request_body' => 'Wilt u mij als vriend toevoegen?',
 	'tog-hidefromattribution' => 'Mijn avatar en naam verbergen in de lijst met naamsvermeldingen',
-	'a' => 'Antwoord:',
+	'a' => "== Welkom! ==
+<div style=\"font-size:120%; line-height:1.2em;\">Hallo \$1 -- we zijn erg blij dat '''\$4''' onderdeel is geworden van de Wikia-gemeenschap!
+
+Je hebt nu een hele website tot je beschikking hebt die je met informatie, afbeeldingen en video over je favoriete onderwerp kunt gaan vullen. Maar nu staart een lege pagina je aan. Spannend, toch? Hier volgen wat tips om je op weg te helpen.
+
+* '''Leid je onderwerp in''' op de hoofdpagina. Dit is je gelegenheid om uw lezers aan te geven wat je onderwerp van belang maakt. Schrijf zoveel je wilt. In je beschrijving kan je naar alle belangrijke pagina's op je site verwijzen.
+
+* '''Maak nieuwe pagina's aan''' -- soms zijn een paar zinnen al voldoende als beginnetje. Laat het geen lege pagina's zijn! Een belangrijke werkwijze in een wiki is toevoegen en later verbeteren en verfijnen. Je kunt ook afbeeldingen en video toevoegen om de pagina te vullen en deze interessanter en spannender te maken.
+
+En daarna vooral volhouden! De wiki's waar veel te lezen en te zien is zijn het meest aantrekkelijk, dus blijf vooral informatie toevoegen zodat je meer lezers krijgt en daardoor nieuwe gebruikers die ook bijdragen. Er is veel te doen, maar maak u geen zorgen. Vandaag is uw eerste dag en er is voldoende tijd. Iedere wiki start op dezelfde manier. Beetje voor beetje, de eerste pagina's eerst, om zich in de tijd mogelijk tot een grote, drukke website te ontwikkelen.
+
+Als je vragen hebt, e-mail ons dan via het [[Special:Contact|contactformulier]]. Veel plezier!
+
+-- [[User:\$2|\$3]] <staff /></div>",
 	'answering_tips' => '<h3>Tips voor het beantwoorden:</h3> Als u een antwoord geeft, probeer dan zo precies mogelijk te zijn. Als u uw informatie uit een andere bron heeft gekregen, zoals Wikipedia, plaats dan een verwijzing in de tekst. Dank u wel voor uw bijdragen aan {{SITENAME}}!',
 	'plus_x_more_helpers' => '... en $1 andere hulpjes',
 	'anwb-step1-headline' => 'Waar gaat uw wiki over?',
@@ -1814,12 +2020,106 @@ $messages['nl'] = array(
 	'answers-custom' => 'Aangepast',
 );
 
+$messages['nl-infomal'] = array(
+	'a' => 'Meld je aan',
+);
+
 /** ‪Nederlands (informeel)‬ (‪Nederlands (informeel)‬)
  * @author Siebrand
  */
 $messages['nl-informal'] = array(
 	'answers_widget_user_note' => 'Kan jij helpen door een <a href="http://answers.wikia.com/wiki/Wikianswers:Sign_up_for_a_category" target="_blank">categorieredacteur</a> te worden op <a href="http://answers.wikia.com" target="_blank">WikiaAntwoorden</a>?',
 	'answers_widget_no_questions' => '<a href="http://answers.wikia.com" target="_blank">WikiAntwoorden</a> is een site waar je vragen kunt stellen en kunt bijdragen aan antwoorden. We willen graag het beste antwoord op iedere vraag hebben. <a href="http://answers.wikia.com/wiki/Special:Search" target="_blank">Zoek</a> en beantwoord <a href="http://answers.wikia.com/wiki/Category:Un-answered_questions">vragen</a>. Het is een wiki, dus doe het gewoon!',
+);
+
+$messages['nn'] = array(
+	'ask_a_question' => 'Spør på WikiSvar',
+	'ask_a_question-widget' => 'Spør på WikiSvar',
+	'unanswered_category' => 'Ubesvarte spørsmål',
+	'answers_widget_admin_note' => '<a href="http://svar.wikia.com">WikiSvar</a> treng fleire administratorar. <a href="http://svar.wikia.com/wiki/WikiSvar:Administratorer">Finn ut meir her.</a>',
+	'answers_widget_user_note' => 'Kan du hjelpe med med å bli ein <a href="http://svar.wikia.com/wiki/Hvordan_blir_jeg_en_kategoriansvarlig" target="_blank">kategoriansvarlig</a> på <a href="http://svar.wikia.com" target="_blank">WikiSvar</a>?',
+	'answers_widget_anon_note' => '<a href="http://svar.wikia.com" target="_blank">WikiSvar er ein spør-og-svar-wiki der alle svar kan forbedras, av kven som helst.</a>',
+	'answers_widget_no_questions' => '<br /><br />Kom i gang ved å stille spørsmål om "{{PAGENAME}}"',
+	'answers_widget_no_questions_askabout' => '<br /><br />Kom i gang ved å stille spørsmål om "{{PAGENAME}}"',
+	'a' => 'Spør på WikiSvar',
+);
+
+$messages['no'] = array(
+	'answer_title' => 'Svar',
+	'answered_by' => 'Besvart av',
+	'unregistered' => 'Uregistrert',
+	'anonymous_edit_points' => '$1 {{PLURAL:$1|hjelper|hjelpere}}',
+	'edit_points' => '{{PLURAL:$1|redigeringspoeng|redigeringspoeng}}',
+	'ask_a_question' => 'Spør på WikiSvar',
+	'ask_a_question-widget' => 'Spør på WikiSvar',
+	'in_category' => '...i kategorien',
+	'ask_button' => 'Spør',
+	'ask_thanks' => 'Takk for det råbra spørsmålet!',
+	'question_asked_by' => 'Spørsmål stilt av en Wikia-bruker',
+	'question_asked_by_a_wikia_user' => 'Spørsmål stilt av en Wikia-bruker',
+	'new_question_comment' => 'nytt spørsmål',
+	'answers_toolbox' => 'Wikisvar verktøy',
+	'improve_this_answer' => 'Forbedre dette svaret',
+	'answer_this_question' => '<a href="$1">Svar på dette spørsmålet</a>, selv om du ikke vet hele svaret',
+	'notify_improved' => 'Send meg en e-post når forbedret',
+	'research_this' => '<a href="$1">Undersøk dette spørsmålet</a> på Wikipedia',
+	'notify_answered' => 'Send meg en e-post når besvart',
+	'recent_asked_questions' => 'Nylig stile spørsmål',
+	'recent_answered_questions' => 'Nylig besvarte spørsmål',
+	'recent_edited_questions' => 'Nylig endrede spørsmål',
+	'unanswered_category' => 'Ubesvarte spørsmål',
+	'answered_category' => 'Besvarte spørsmål',
+	'related_questions' => 'Liknende spørsmål',
+	'related_answered_questions' => 'Liknende besvarte spørsmål',
+	'recent_unanswered_questions' => 'Nylig ubesvarte spørsmål',
+	'popular_categories' => 'Populære kategorier',
+	'createaccount-captcha' => 'Vennligst skriv ordet under',
+	'inline-register-title' => 'Meld fra til meg når spørsmålet mitt blir besvart!',
+	'inline-welcome' => 'Velkommen til Wikisvar',
+	'no_questions_found' => 'Ingen spørsmål funnet',
+	'get_widget_title' => 'Legg til spørsmål på siden din',
+	'background_color' => 'Bakgrunnsfarge',
+	'category' => 'Visuell visning',
+	'custom_category' => 'Egendefinert kategori',
+	'number_of_items' => 'Antall objekter å vise',
+	'next_page' => 'Neste &raquo;',
+	'prev_page' => '&laquo; Forrige',
+	'get_code' => 'Få kode',
+	'link_color' => 'Lenkefarge for spørsmål',
+	'question_redirected_help_page' => 'Hvorfor ble spørsmålet mitt videreført hit',
+	'facebook_ask' => 'Spør på Facebook',
+	'facebook_send_request' => 'Kan du hjelpe til med å besvare dette? $1',
+	'ask_friends' => 'Spør venner på <a href="$1" $2>Twitter</a>',
+	'facebook_send_request_content' => 'Kan du hjelpe til med å besvare dette? $1',
+	'facebook_signed_in' => 'Du er logget inn i Facebook Connect',
+	'ads_by_google' => 'Ads fra Google',
+	'magic_answer_headline' => 'Besvarer dette spørsmålet ditt?',
+	'magic_answer_yes' => 'Ja, bruk dette som utgangspunkt',
+	'magic_answer_no' => 'Nei, ikke bruk dette',
+	'magic_answer_credit' => 'Skaffet til rette av Yahoo Answers',
+	'rephrase' => '<a href="$1" $2>Omformuler spørsmålet</a>',
+	'rephrase_this' => '<a href="$1" $2>Omformuler spørsmålet</a>',
+	'question_not_answered' => 'Dette spørsmålet har ikke blitt besvart',
+	'you_can' => 'Du kan:',
+	'answer_this' => '<a href="$1">Svar på dette spørsmålet</a>, selv om du ikke vet hele svaret',
+	'research_this_on_wikipedia' => '<a href="$1">Undersøk dette spørsmålet</a> på Wikipedia',
+	'receive_email' => '<a href="$1" $2>Motta en e-post</a> når dette spørsmålet blir besvart',
+	'ask_friends_on_twitter' => 'Spør venner på <a href="$1" $2>Twitter</a>',
+	'quick_action_panel' => 'Hurtighandlingspanel',
+	'categorize' => 'Én kategori per linje',
+	'categorize_help' => 'Én kategori per linje',
+	'answers_widget_admin_note' => '<a href="http://svar.wikia.com">WikiSvar</a> trenger flere administratorer. <a href="http://svar.wikia.com/wiki/WikiSvar:Administratorer">Finn ut mer her.</a>',
+	'answers_widget_user_note' => 'Kan du hjelpe til med å bli en <a href="http://svar.wikia.com/wiki/Hvordan_blir_jeg_en_kategoriansvarlig" target="_blank">kategoriansvarlig</a> på <a href="http://svar.wikia.com" target="_blank">WikiSvar</a>?',
+	'answers_widget_anon_note' => '<a href="http://svar.wikia.com" target="_blank">WikiSvar er en spør-og-svar-wiki der alle svar kan forbedres, av hvem som helst.</a>',
+	'answers-category-count-answered' => 'Denne kategorien inneholder $1 besvarte spørsmål.',
+	'answers-category-count-unanswered' => 'Denne kategorien inneholder $1 ubesvarte spørsmål.',
+	'answers_widget_no_questions' => '<br /><br />Kom i gang ved å stille spørsmål om «{{PAGENAME}}»',
+	'answers_widget_no_questions_askabout' => '<br /><br />Kom i gang ved å stille spørsmål om «{{PAGENAME}}»',
+	'reword_this' => '<a href="$1" $2>Omformuler dette spørsmålet</a>',
+	'no_related_answered_questions' => 'Det er ingen relaterte spørsmål ennå.',
+	'auto_friend_request_body' => 'Vil du legge meg til som venn?',
+	'q' => 'Hurtighandlingspanel',
+	'a' => 'Opprett en ny Wiki',
 );
 
 /** Occitan (Occitan) */
@@ -1841,52 +2141,52 @@ $messages['pl'] = array(
 	'in_category' => '...w kategorii',
 	'ask_button' => 'Zapytaj',
 	'ask_thanks' => 'Dziękujemy za pytanie!',
-	'question_asked_by' => 'Pytanie zadał',
-	'question_asked_by_a_wikia_user' => 'Pytanie zadana przez użytkownika Wikia',
+	'question_asked_by' => 'Pytanie zadane przez użytkownika Wikii',
+	'question_asked_by_a_wikia_user' => 'Pytanie zadane przez użytkownika Wikii',
 	'new_question_comment' => 'nowe pytanie',
 	'answers_toolbox' => 'Narzędzia Wikianswers',
-	'improve_this_answer' => 'Popraw tą odpowiedź',
+	'improve_this_answer' => 'Rozwiń odpowiedź',
 	'answer_this_question' => 'Odpowiedz na to pytanie:',
-	'notify_improved' => 'Wyślij e-mail przy poprawie',
-	'research_this' => 'Wyszukaj',
-	'notify_answered' => 'Wyślij e-mail przy odpowiedzi',
+	'notify_improved' => 'Powiadom mnie e-mailem o zmianie odpowiedzi',
+	'research_this' => '<a href="$1">Wyszukaj odpowiedzi na to pytanie</a> na Wikipedii',
+	'notify_answered' => 'Wyślij do mnie e-mail, gdy pojawi się odpowiedź',
 	'recent_asked_questions' => 'Ostatnio zadawane pytania',
-	'recent_answered_questions' => 'Ostatnie pytania na które odpowiedziano',
+	'recent_answered_questions' => 'Najnowsze odpowiedzi na pytania',
 	'recent_edited_questions' => 'Ostatnio edytowane pytania',
 	'unanswered_category' => 'Pytania bez odpowiedzi',
 	'answered_category' => 'Pytania z odpowiedziami',
 	'related_questions' => 'Podobne pytania',
-	'related_answered_questions' => 'Odpowiedzi na powiązane pytania',
+	'related_answered_questions' => 'Podobne pytania z odpowiedzią',
 	'recent_unanswered_questions' => 'Ostatnie pytania bez odpowiedzi',
 	'popular_categories' => 'Popularne Kategorie',
-	'createaccount-captcha' => 'Wpisz słowo poniżej',
+	'createaccount-captcha' => 'Wpisz słowo z obrazka',
 	'inline-register-title' => 'Powiadom mnie gdy zostanie udzielona odpowiedź',
 	'inline-welcome' => 'Witamy w Wikianswers',
 	'skip_this' => 'Pomiń',
 	'see_all_changes' => 'Zobacz wszystkie zmiany',
 	'toolbox_anon_message' => '<i>"Wikianswers wykorzystuje unikatowe rozwiązania wiki aby udzielać najlepszych odpowiedzi na każde pytanie"</i><br /><br /> <b>Jimmy Wales</b><br>założyciel Wikipedii i Wikianswers',
-	'no_questions_found' => 'Nie znaleziono pytania',
+	'no_questions_found' => 'Nie znaleziono pytań',
 	'widget_settings' => 'Ustawienia pytań',
 	'style_settings' => 'Ustawienia stylu',
 	'get_widget_title' => 'Dodaj Pytania do swojej strony',
 	'background_color' => 'Kolor tła',
 	'widget_category' => 'Rodzaj Pytań',
-	'category' => 'Nazwa kategorii',
+	'category' => 'Umieść artykuł na alfabetycznej liście kategorii "$1" pod nazwą (opcjonalnie):',
 	'custom_category' => 'Własna Kategoria',
 	'number_of_items' => 'Liczba elementów do wyświetlenia',
 	'width' => 'Szerokość',
 	'next_page' => 'Następne &raquo;',
-	'prev_page' => '&laquo; Poprzednie',
+	'prev_page' => '&laquo; Poprzednia',
 	'see_all' => 'Zobacz wszystkie',
 	'link_color' => 'Kolor linku pytania',
 	'widget_order' => 'Kolejność Pytań',
-	'question_redirected_help_page' => 'Dlaczego moje pytanie przekierowano tutaj',
+	'question_redirected_help_page' => 'Dlaczego moje pytanie zostało tutaj przekierowane',
 	'twitter_hashtag' => 'wikianswers',
 	'twitter_ask' => 'Zapytaj na Twitterze',
 	'facebook_ask' => 'Zapytaj na Facebooku',
-	'facebook_send_request' => 'Wyślij do Znajomych',
+	'facebook_send_request' => 'Możesz pomóc odpowiedzieć na to? $1',
 	'ask_friends' => 'Poproś znajomych aby pomogli odpowiedzieć:',
-	'facebook_send_request_content' => 'Możesz pomóc w odpowiedzi? $1',
+	'facebook_send_request_content' => 'Możesz pomóc odpowiedzieć na to? $1',
 	'ads_by_google' => 'Reklamy Google',
 	'magic_answer_headline' => 'Czy to wystarczająca odpowiedź?',
 	'magic_answer_yes' => 'Tak, użyj tego jako punkt wyjścia',
@@ -1894,12 +2194,32 @@ $messages['pl'] = array(
 	'magic_answer_credit' => 'Dostarczone przez Yahoo Answers',
 	'rephrase' => 'Sformułuj to pytanie inaczej',
 	'rephrase_this' => '<a href="$1" $2>Sformułuj to pytanie inaczej</a>',
-	'question_not_answered' => 'Na to pytanie nie udzielono odpowiedzi',
+	'question_not_answered' => 'Na to pytanie nie została udzielona odpowiedź',
 	'you_can' => 'Możesz:',
 	'answer_this' => '<a href="$1">Odpowiedz na to pytanie</a>, nawet jeśli nie znasz pełnej odpowiedzi',
 	'ask_friends_on_twitter' => 'Zapytaj znajomych na <a href="$1" $2>Twitterze</a>',
-	'categorize' => 'Określ kategorię',
+	'categorize' => 'Dodaj kategorię',
 	'categorize_help' => 'Jedna kategoria na linię',
+	'edit_points' => '{{PLURAL:$1|punkt edycji|punkty edycji|punktów edycji}}',
+	'get_code' => 'Pobierz kod',
+	'widget_ask_box' => 'Wyświetlaj pole na pytania',
+	'facebook_signed_in' => 'Jesteś zalogowany przez Facebook Connect',
+	'research_this_on_wikipedia' => '<a href="$1">Wyszukaj odpowiedzi na to pytanie</a> na Wikipedii',
+	'receive_email' => '<a href="$1" $2>Otrzymaj e-mail</a> gdy zostanie udzielona odpowiedź na to pytanie',
+	'quick_action_panel' => 'Panel szybkiego działania',
+	'reword_this' => '<a href="$1" $2>Przeredaguj to pytanie</a>',
+	'no_related_answered_questions' => 'Nie ma jeszcze podobnych pytań.',
+	'tog-hidefromattribution' => 'Ukryj mój avatar i nazwę użytkownika na liście autorów',
+	'q' => 'Narzędzia',
+	'a' => 'UWAGA! Zastąpiono treść hasła tekstem „$1”',
+	'plus_x_more_helpers' => '...i $1 użytkowników anonimowych',
+	'nwb-thatisall-headline' => 'To wszystko - gotowe!',
+	'qa-toolbox-button' => 'Odpowiedz na losowe pytanie',
+	'qa-toolbox-share' => 'Publikuj',
+	'qa-toolbox-tools' => 'Zaawansowane»',
+	'qa-toolbox-protect' => 'Zabezpiecz to pytanie',
+	'qa-toolbox-delete' => 'Usuń to pytanie',
+	'qa-toolbox-history' => 'Poprzednia wersja tej strony',
 );
 
 /** Piedmontese (Piemontèis) */
@@ -1925,16 +2245,117 @@ $messages['ps'] = array(
 	'answers-sky' => 'اسمان',
 	'answers-forest' => 'ځنګل',
 	'answers-carbon' => 'کاربون',
+	'header_questionmark_post' => '؟',
 );
 
 /** Portuguese (Português) */
 $messages['pt'] = array(
-	'research_this' => 'Investigar isto',
+	'research_this' => '<a href="$1">Pesquisar esta pergunta</a> na Wikipedia',
+	'answer_title' => 'Resposta',
+	'ask_a_question' => 'Faça sua pergunta...',
+	'ask_a_question-widget' => 'Faça sua pergunta...',
+	'in_category' => '...na categoria',
+	'ask_button' => 'Pergunte',
+	'ask_thanks' => 'Obrigado pela otima pergunta!',
+	'question_asked_by' => 'Pergunta feita por um usuário da Wikia',
+	'question_asked_by_a_wikia_user' => 'Pergunta feita por um usuário da Wikia',
+	'new_question_comment' => 'nova pergunta',
+	'answers_toolbox' => 'WikiRespostas toolbox',
+	'improve_this_answer' => 'Melhore esta resposta',
+	'answer_this_question' => 'Responder esta pergunta',
+	'notify_improved' => 'Avise-me por email sobre as alterações da resposta.',
+	'notify_answered' => 'Avise-me por email quando tiver resposta.',
+	'recent_asked_questions' => 'Perguntas Recentes',
+	'recent_answered_questions' => 'Perguntas respondidas recentemente',
+	'recent_edited_questions' => 'Perguntas editadas recentemente',
+	'unanswered_category' => 'Perguntas sem respostas',
+	'answered_category' => 'Perguntas respondidas',
+	'related_answered_questions' => 'Perguntas respondidas relacionadas',
+	'recent_unanswered_questions' => 'Perguntas sem resposta mais recentes',
+	'popular_categories' => 'Categorias mais populares',
+	'next_page' => 'Proxima »',
+	'prev_page' => '« Anteriores',
+	'see_all' => 'Ver todas',
+	'question_redirected_help_page' => 'Por que minha pergunta foi transferida para aqui',
+	'twitter_hashtag' => 'WikiRespostas',
+	'twitter_ask' => 'Faça esta pergunta no Twitter',
+	'ask_friends' => 'Pergunte aos seus amigos no <a href="$1">Twitter</a>',
+	'rephrase' => 'Refazer a pergunta',
+	'question_not_answered' => 'Esta pergunta ainda não foi respondida',
+	'you_can' => 'Voce pode:',
+	'answer_this' => 'Responder esta pergunta',
+	'research_this_on_wikipedia' => '<a href="$1">Pesquisar esta pergunta</a> na Wikipedia',
+	'receive_email' => '<a href="$1">Receba um email</a> quando esta pergunta for respondida',
+	'ask_friends_on_twitter' => 'Pergunte aos seus amigos no <a href="$1">Twitter</a>',
+	'quick_action_panel' => 'Painel de ação rapida',
+	'answers_widget_admin_note' => '<a href="http://respostas.wikia.com" target="_blank">WikiRespostas</a> é uma wiki de Perguntas e Respostas em que todos participam.',
+	'answers_widget_user_note' => '<a href="http://respostas.wikia.com" target="_blank">WikiRespostas</a> é uma wiki de Perguntas e Respostas em que todos participam.',
+	'answers_widget_anon_note' => '<a href="http://respostas.wikia.com" target="_blank">WikiRespostas</a> é uma wiki de Perguntas e Respostas em que todos participam.',
+	'answers-category-count-answered' => 'Esta categoria contem $1 pergunta/s respondida/s',
+	'answers-category-count-unanswered' => 'Esta categoria contem $1 pergunta/s sem resposta.',
+	'answers_widget_no_questions' => '<br><br>Comece fazendo uma pergunta sobre "{{PAGENAME}}"',
+	'answers_widget_no_questions_askabout' => '<br><br>Comece fazendo uma pergunta sobre "{{PAGENAME}}"',
+	'q' => 'Painel de ação rapida',
+	'a' => 'Respostas',
+	'badWords' => 'merda filhodaputa bunda',
 );
 
 /** Brazilian Portuguese (Português do Brasil) */
 $messages['pt-br'] = array(
-	'research_this' => 'Pesquisar isto',
+	'research_this' => '<a href="$1">Pesquisar esta pergunta</a> na Wikipedia',
+	'answer_title' => 'Resposta',
+	'ask_a_question' => 'Faça sua pergunta...',
+	'ask_a_question-widget' => 'Faça sua pergunta...',
+	'in_category' => '...na categoria',
+	'ask_button' => 'Pergunte',
+	'ask_thanks' => 'Obrigado pela otima pergunta!',
+	'question_asked_by' => 'Pergunta feita por um usuário da Wikia',
+	'question_asked_by_a_wikia_user' => 'Pergunta feita por um usuário da Wikia',
+	'new_question_comment' => 'nova pergunta',
+	'answers_toolbox' => 'WikiRespostas toolbox',
+	'improve_this_answer' => 'Melhore esta resposta',
+	'answer_this_question' => 'Responder esta pergunta',
+	'notify_improved' => 'Avise-me por email sobre as alterações da resposta.',
+	'notify_answered' => 'Avise-me por email quando tiver resposta.',
+	'recent_asked_questions' => 'Perguntas Recentes',
+	'recent_answered_questions' => 'Perguntas respondidas recentemente',
+	'recent_edited_questions' => 'Perguntas editadas recentemente',
+	'unanswered_category' => 'Perguntas sem respostas',
+	'answered_category' => 'Perguntas respondidas',
+	'related_answered_questions' => 'Perguntas respondidas relacionadas',
+	'recent_unanswered_questions' => 'Perguntas sem resposta mais recentes',
+	'popular_categories' => 'Categorias mais populares',
+	'next_page' => 'Proxima »',
+	'prev_page' => '« Anteriores',
+	'see_all' => 'Ver todas',
+	'question_redirected_help_page' => 'Por que minha pergunta foi transferida para aqui',
+	'twitter_hashtag' => 'WikiRespostas',
+	'twitter_ask' => 'Faça esta pergunta no Twitter',
+	'ask_friends' => 'Pergunte aos seus amigos no <a href="$1">Twitter</a>',
+	'rephrase' => 'Refazer a pergunta',
+	'question_not_answered' => 'Esta pergunta ainda não foi respondida',
+	'you_can' => 'Voce pode:',
+	'answer_this' => 'Responder esta pergunta',
+	'research_this_on_wikipedia' => '<a href="$1">Pesquisar esta pergunta</a> na Wikipedia',
+	'receive_email' => '<a href="$1">Receba um email</a> quando esta pergunta for respondida',
+	'ask_friends_on_twitter' => 'Pergunte aos seus amigos no <a href="$1">Twitter</a>',
+	'quick_action_panel' => 'Painel de ação rapida',
+	'answers_widget_admin_note' => '<a href="http://respostas.wikia.com" target="_blank">WikiRespostas</a> é uma wiki de Perguntas e Respostas em que todos participam.',
+	'answers_widget_user_note' => '<a href="http://respostas.wikia.com" target="_blank">WikiRespostas</a> é uma wiki de Perguntas e Respostas em que todos participam.',
+	'answers_widget_anon_note' => '<a href="http://respostas.wikia.com" target="_blank">WikiRespostas</a> é uma wiki de Perguntas e Respostas em que todos participam.',
+	'answers-category-count-answered' => 'Esta categoria contem $1 pergunta/s respondida/s',
+	'answers-category-count-unanswered' => 'Esta categoria contem $1 pergunta/s sem resposta.',
+	'answers_widget_no_questions' => '<br><br>Comece fazendo uma pergunta sobre "{{PAGENAME}}"',
+	'answers_widget_no_questions_askabout' => '<br><br>Comece fazendo uma pergunta sobre "{{PAGENAME}}"',
+	'q' => 'Painel de ação rapida',
+	'a' => 'Respostas',
+	'badWords' => 'merda filhodaputa bunda',
+);
+
+$messages['ro'] = array(
+	'unanswered_category' => 'Unanswered questions',
+	'answered_category' => 'Answered questions',
+	'a' => 'Answered questions',
 );
 
 /** Tarandíne (Tarandíne) */
@@ -1953,8 +2374,8 @@ $messages['ru'] = array(
 	'unregistered' => 'Аноним',
 	'anonymous_edit_points' => '$1 {{PLURAL:$1|помощник|помощника|помощников}}',
 	'edit_points' => '{{PLURAL:$1|очко редактирования|очка редактирования|очков редактирования}}',
-	'ask_a_question' => 'Задать вопрос ...',
-	'ask_a_question-widget' => 'Задать вопрос ...',
+	'ask_a_question' => 'Задать вопрос…',
+	'ask_a_question-widget' => 'Задать вопрос…',
 	'in_category' => '...в категории',
 	'ask_button' => 'Спросить',
 	'ask_thanks' => 'Спасибо за хороший вопрос!',
@@ -1970,7 +2391,7 @@ $messages['ru'] = array(
 	'recent_asked_questions' => 'Свежие вопросы',
 	'recent_answered_questions' => 'Свежие ответы',
 	'recent_edited_questions' => 'Свежие правки в вопросах',
-	'unanswered_category' => 'Вопросы без ответов',
+	'unanswered_category' => 'Un-answered questions',
 	'answered_category' => 'Вопросы с ответами',
 	'related_questions' => 'Вопросы, близкие по теме',
 	'related_answered_questions' => 'Ответы, близкие по теме',
@@ -1988,7 +2409,7 @@ $messages['ru'] = array(
 	'get_widget_title' => 'Добавить вопросы на ваш сайт',
 	'background_color' => 'Цвет фона',
 	'widget_category' => 'Тип вопросов',
-	'category' => 'Название категории',
+	'category' => 'Нажмите Enter, когда закончите.',
 	'custom_category' => 'Настройка категории',
 	'number_of_items' => 'Количество элементов для отображения',
 	'width' => 'Ширина',
@@ -2041,7 +2462,7 @@ $messages['ru'] = array(
 	<input name="create" class="createboxButton" value="Type your question and click here" type="submit"></form></div>',
 	'auto_friend_request_body' => 'Вы добавите меня в друзья?',
 	'tog-hidefromattribution' => 'Скрыть мой аватар и моё имя из списка атрибуции',
-	'a' => 'Ответ:',
+	'a' => 'Участники вики<br />(>10 правок)',
 	'answering_tips' => '<h3>Советы для отвечающих:</h3> При ответах старайтесь быть настолько точными, насколько это возможно. Если вы используете информацию из других источников, например, Википедии, то обязательно поставьте ссылку. Благодарим вас за вклад в {{SITENAME}}!',
 	'plus_x_more_helpers' => '... плюс $1 помощников',
 	'anwb-step1-headline' => 'О чём будет ваша вики?',
@@ -2074,6 +2495,7 @@ $messages['ru'] = array(
 	'answers-carbon' => 'Углерод',
 	'answers-obsession' => 'Одержимость',
 	'answers-custom' => 'Настройка',
+	'q' => 'Итого',
 );
 
 /** Serbian (Cyrillic script) (‪Српски (ћирилица)‬)
@@ -2094,7 +2516,7 @@ $messages['sr-ec'] = array(
  */
 $messages['sv'] = array(
 	'answer_title' => 'Svar',
-	'answered_by' => 'Besvarad av',
+	'answered_by' => 'Besvaras av',
 	'unregistered' => 'Oregistrerad',
 	'anonymous_edit_points' => '$1 {{PLURAL:$1|hjälpare|hjälpare}}',
 	'edit_points' => '{{PLURAL:$1|redigeringspoäng|redigeringspoäng}}',
@@ -2115,8 +2537,8 @@ $messages['sv'] = array(
 	'recent_asked_questions' => 'Nyligen ställda frågor',
 	'recent_answered_questions' => 'Nyligen besvarade frågor',
 	'recent_edited_questions' => 'Nyligen redigerade frågor',
-	'unanswered_category' => 'Obesvarade frågor',
-	'answered_category' => 'Besvarade frågor',
+	'unanswered_category' => 'Un-answered questions',
+	'answered_category' => 'Answered questions',
 	'related_questions' => 'Relaterade frågor',
 	'related_answered_questions' => 'Relaterade besvarade frågor',
 	'recent_unanswered_questions' => 'Nyligen obesvarade frågor',
@@ -2175,7 +2597,7 @@ $messages['sv'] = array(
 	'answers-category-count-unanswered' => 'Denna kategori innehåller $1 {{PLURAL:$1|obesvarad fråga|obesvarade frågor}}.',
 	'answers_widget_no_questions' => '<a href="http://answers.wikia.com" target="_blank">Wikianswers</a> är en webbplats där du kan ställa frågor och bidra med svar. Vi siktar mot att skapa det bästa svaret på någon fråga. <a href="http://answers.wikia.com/wiki/Special:Search" target="_blank">Hitta</a> och svara på<a href="http://answers.wikia.com/wiki/Category:Un-answered_questions">obesvarade</a> frågor. Det är en wiki - så vara djärv!',
 	'answers_widget_no_questions_askabout' => '<br /><br />Komma igång med att ställa en fråga om "{{PAGENAME}}"',
-	'reword_this' => '<a href="$1" $2>Omformulera frågan</a>',
+	'reword_this' => '<a href="$1" $2>Omformulera denna fråga</a>',
 	'no_related_answered_questions' => 'Det finns inga relaterade frågor ännu. Skaffa en <a href="http://answers.wikia.com/wiki/Special:Randomincategory/answered_questions">slumpmässig besvarad fråga istället</a>, eller ställ en ny fråga!<br />
 	<div class="createbox" align="center">
 	<p></p><form name="createbox" action="/index.php" method="get" class="createboxForm">
@@ -2186,7 +2608,7 @@ $messages['sv'] = array(
 	<input name="create" class="createboxButton" value="Skriv in din fråga och klicka här" type="submit"></form></div>',
 	'auto_friend_request_body' => 'Vill du lägga till mig som vän?',
 	'tog-hidefromattribution' => 'Dölj min avatar och namn från attributionslistan',
-	'a' => 'Svar:',
+	'a' => 'Skapa en ny Wiki',
 	'answering_tips' => '<h3>Tips för att besvara:</h3> När bidrar med ett svar, försök vara så exakt som möjligt. Om du hämtar information från en annan källa, som Wikipedia, lägg till en länk till sidan i texten. Och tack för att bidrar till {{SITENAME}}!',
 	'plus_x_more_helpers' => '... plus $1 mer hjälpare',
 	'anwb-step1-headline' => 'Vad handlar din wiki om?',
@@ -2254,6 +2676,7 @@ $messages['tt-cyrl'] = array(
 /** Ukrainian (Українська) */
 $messages['uk'] = array(
 	'research_this' => 'Дослідити',
+	'a' => 'Завантаження...',
 );
 
 /** Veps (Vepsän kel')
@@ -2270,6 +2693,40 @@ $messages['vep'] = array(
 	'answers-spring' => "Keväz'",
 	'answers-forest' => 'Mec',
 	'answers-moonlight' => 'Kudmavauktuz',
+);
+
+$messages['vi'] = array(
+	'tog-hidefromattribution' => 'Ẩn hình đại diện và tên của tôi khỏi danh sách cấp quyền',
+	'a' => 'Xin chào, chúng tôi thật vui mừng khi có {{SITENAME}} là một phần của Cộng đồng Wikia!
+
+Có nhiều việc để làm hiện giờ, và đây là một số hướng dẫn và liên kết hữu ích để khởi động wiki của bạn:
+*Kiểm tra [[Special:WikiFeatures|Tính năng wiki]] để xem qua những tính năng mà bạn thích và kích hoạt chúng trên wiki của mình, bao gồm cả Tán gẫu, Thành tích và nhiều hơn nữa.
+*Tùy chỉnh diện mạo của wiki bằng cách truy cập [[Special:ThemeDesigner|Thiết kế chủ đề]], nơi mà bạn có thể thêm màu sắc và kiểu dáng cho nền ảnh và biểu trưng.
+*Đến thăm [[w:vi:Trang Chính|Cộng đồng Wikia tiếng Việt]] để xem qua [[w:vi:Blog:Trang chủ|blog cập nhật thông tin]], đặt câu hỏi trên [[w:vi:Special:Forum|diễn đàn cộng đồng]], hoặc tham gia [[w:vi:Special:Chat|tán gẫu trực tuyến]] với các thành viên Wikia khác.
+*Sau cùng, hãy tham khảo [[Help:Mục lục|những trang trợ giúp]] để học cách sử dụng Wikia, bao gồm [[Help:Trang mới|cách tạo trang mới cho wiki]], [[Help:Thu hút thành viên mới|thu hút thành viên mới]], và [[Help:Quyền truy cập của thành viên|cấp quyền bảo quản viên]].
+*Bạn cũng có thể sử dụng tất cả những công cụ này trên Bảng điều khiển bảo quản viên của mình, truy cập bằng cách nhấp vào chữ "Bảo quản viên" trên thanh công cụ phía dưới.
+
+Tất cả những liên kết ở trên đều là những nơi tuyệt vời để bắt đầu khám phá, và biên tập vui vẻ!',
+);
+
+$messages['zh'] = array(
+	'ask_a_question' => '發問一條問題',
+	'ask_a_question-widget' => '發問一條問題',
+	'unanswered_category' => '未回答的問題',
+	'answered_category' => '已回答的問題',
+	'category' => '子分類太多，無法顯示。',
+	'answers_widget_admin_note' => '{{int:Answers widget user note}}',
+	'answers_widget_user_note' => '尋找由{{SITENAME}}讀者在<a href="http://zh.answers.wikia.com">{{SITENAME}}</a>上發問的問題！',
+	'answers_widget_anon_note' => '{{int:Answers widget user note}}',
+	'answers_widget_no_questions' => '<br><br>立即發問一條關於「{{PAGENAME}}」的問題。',
+	'answers_widget_no_questions_askabout' => '<br><br>立即發問一條關於「{{PAGENAME}}」的問題。',
+	'q' => '创建用户页面',
+	'a' => '新頁面: $1',
+);
+
+$messages['zh-cn'] = array(
+	'category' => '分类树',
+	'a' => '新頁面: $1',
 );
 
 /** Simplified Chinese (‪中文(简体)‬)
@@ -2298,5 +2755,55 @@ $messages['zh-hans'] = array(
 	'next_page' => '下一页 &raquo;',
 	'prev_page' => '&laquo; 上一页',
 	'ads_by_google' => 'Google广告',
+	'q' => '创建用户页面',
+	'a' => '==欢迎您==
+
+嘿！
+
+我们很高兴$4能成为Wikia社区的一员！还有很多事情要做；这里有一些有用提示和链接，能让您的维基运转起来：
+
+*查看[[Special：WikiFeatures|维基功能]，看看您可以在您的维基上开启哪些功能，包括聊天、成就及更多功能。
+*到[[w:c:zh.community|社区中心]]来看看，通过我们的[[w:c:zh.community:Category:社区中心博客|社区中心博客]]了解最新信息、在我们的[[w:c:zh.community:Special:Forum|社区论坛]]提问、参与我们的[[w:c:community:Help:Webinars|网络研讨会系列]]（英文）或与其他wikia用户在线聊天
+*最后，请访问我们的[[Help:Contents|帮助页面]]了解如何使用Wikia的所有功能
+
+上面列出的所有链接都是开始探索的好起点。祝你玩得开心！
+
+-- [[User:$2|$3]] <staff />',
 );
 
+$messages['zh-hant'] = array(
+	'popular_categories' => '熱門分類',
+	'category' => '子分類',
+	'q' => '創建用戶頁面',
+	'a' => '==歡迎你！==
+嘿，你好！
+
+你好！我們很高興Wikia Messaging能成爲Wikia社區的一部分！還有很多事情要做。這裡有一些有用的提示和連接，能讓你的維基開始運轉：
+
+*查看[[Special:WikiFeatures|維基功能]]，看看你可以在你的維基上開啓哪些功能，包括聊天、成就及更多其他功能。
+*到[[w:c:zh.community|社區中心]]來看看，透過我們的[[w:c:zh.community:Category:社区中心博客|社區中心網誌]]了解最新資訊、在我們的[[w:c:zh.community:Special:Forum|社區論壇]]提問、參與我們的[[w:c:community:Help:Webinars|網路研討會系列]]（英文）或與其他Wikia使用者[[w:c:zh.community:Special:Chat|線上聊天]]。
+*最後，請訪問我們的[[Help:Contents|幫助頁面]]了解如何使用Wikia的所有功能
+
+上面列出的所有連接都是開始探索的好起點。祝你使用愉快！
+
+ -- [[User:$2|$3]]  <staff />',
+);
+
+$messages['zh-hk'] = array(
+	'popular_categories' => '熱門分類',
+	'category' => '分類樹',
+	'q' => '創建用戶頁面',
+	'a' => '清空全部內容',
+);
+
+$messages['zh-sg'] = array(
+	'category' => '子分类太多，无法显示。',
+	'a' => '为完成登入动作，请输入新的密码。这动作可能会使你跳离编辑页面，可能会损失编辑结果。',
+);
+
+$messages['zh-tw'] = array(
+	'popular_categories' => '熱門分類',
+	'category' => '分類樹',
+	'q' => '創建用戶頁面',
+	'a' => '新頁面: $1',
+);

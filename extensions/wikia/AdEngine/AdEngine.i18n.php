@@ -1,27 +1,13 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'adengine-advertisement' => 'advertisement',
-	'adengine-exitstitial-title-template' => 'You\'re leaving $1…',
+	'adengine-exitstitial-title-template' => "You're leaving $1…",
 	'adengine-exitstitial-redirecting' => 'Your browser will redirect you to the page you requested in a few seconds.',
 	'adengine-exitstitial-go-back' => 'Want to go back?',
 	'adengine-exitstitial-button' => 'Skip this Ad',
-	'adengine-desc' => 'Wikia\'s Ad Engine',
-);
-
-/** Message documentation (Message documentation)
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'adengine-advertisement' => 'Text displayed above the ad',
-	'adengine-exitstitial-title-template' => 'Title of the box showing up when you click on link to outside the wiki. Parameters:
-* $1 is a site title',
-	'adengine-exitstitial-redirecting' => 'Text displayed in the box showing up when you click on link to outside the wiki',
-	'adengine-exitstitial-go-back' => 'Text of the link/button that you can close the box with and get back to the content',
-	'adengine-exitstitial-button' => 'Text of the link/button that you can close the box with and get directly to the link target',
-	'adengine-desc' => '{{desc}}',
+	'adengine-desc' => "Wikia's Ad Engine",
 );
 
 /** Arabic (العربية)
@@ -160,10 +146,10 @@ $messages['cy'] = array(
  */
 $messages['de'] = array(
 	'adengine-advertisement' => 'Anzeige',
-	'adengine-exitstitial-title-template' => 'Du verlässt $1 …',
-	'adengine-exitstitial-redirecting' => 'Dein Browser leitet dich in wenigen Sekunden auf die angeforderte Seite weiter.',
-	'adengine-exitstitial-go-back' => 'Zurück gehen?',
-	'adengine-exitstitial-button' => 'Diese Anzeige überspringen',
+	'adengine-exitstitial-title-template' => 'Du verlässt $1...',
+	'adengine-exitstitial-redirecting' => 'Dein Browser wird dich zur gewünschten Seite in wenigen Sekunden weiterleiten.',
+	'adengine-exitstitial-go-back' => 'Zur letzten Seite zurückkehren?',
+	'adengine-exitstitial-button' => 'Werbung überspringen',
 	'adengine-desc' => 'Anzeigenengine von Wikia',
 );
 
@@ -441,7 +427,7 @@ $messages['lb'] = array(
  * @author Migraghvi
  */
 $messages['lez'] = array(
-	'adengine-exitstitial-title-template' => 'Куь акъечlза', # Fuzzy
+	'adengine-exitstitial-title-template' => 'Куь акъечlза',
 	'adengine-exitstitial-redirecting' => 'Куь браузерди рукъурда тlaлабнай чъинал са кьве секудла',
 	'adengine-exitstitial-go-back' => 'Элкъвена хквез кӀанзавани?',
 	'adengine-exitstitial-button' => 'Реклама кими авун',

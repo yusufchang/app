@@ -11,3 +11,7 @@ $messages = array();
 $messages['en'] = array(
 	'widgetframework-desc' => 'Wikia widget framework',
 );
+
+$messages['fr'] = array(
+	'widgetframework-desc' => 'Framework de widget de Wikia',
+);

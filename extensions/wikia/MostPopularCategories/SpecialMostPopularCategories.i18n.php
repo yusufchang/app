@@ -165,8 +165,8 @@ $messages['fo'] = array(
  * @author Peter17
  */
 $messages['fr'] = array(
-	'mostpopularcategories-desc' => 'Obtenir la liste des catégories les plus populaires',
-	'mostpopularcategories' => 'Catégories les plus populaires',
+	'mostpopularcategories-desc' => 'Récupère la liste des catégories les plus populaires',
+	'mostpopularcategories' => 'Récupère la liste des catégories les plus populaires',
 );
 
 /** Scottish Gaelic (Gàidhlig)

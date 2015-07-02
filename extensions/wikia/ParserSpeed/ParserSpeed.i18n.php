@@ -29,23 +29,33 @@ $messages['en'] = array(
 	'parserspeed-arg-size' => 'Temp arg. size',
 );
 
-/**
- * @author Daniel Grunwell (grunny)
- */
-$messages['qqq'] = array(
-	'parserspeed' => 'Extension name',
-	'parserspeed-desc' => '{{desc}}',
-	'right-parserspeed' => '{{doc-right|parserspeed}}',
-	'action-parserspeed' => '{{doc-action|parserspeed}}',
-	'parserspeed-namespace' => 'Column name on Parser Speed table.',
-	'parserspeed-title' => 'Column name on Parser Speed table.',
-	'parserspeed-average' => 'Column name on Parser Speed table.',
-	'parserspeed-minimum' => 'Column name on Parser Speed table.',
-	'parserspeed-maximum' => 'Column name on Parser Speed table.',
-	'parserspeed-wikitext' => 'Column name on Parser Speed table.',
-	'parserspeed-html' => 'Column name on Parser Speed table.',
-	'parserspeed-expensive-functions' => 'Column name on Parser Speed table.',
-	'parserspeed-nodes' => 'Column name on Parser Speed table.',
-	'parserspeed-expand-size' => 'Column name on Parser Speed table.',
-	'parserspeed-arg-size' => 'Column name on Parser Speed table.',
+$messages['fr'] = array(
+	'parserspeed' => 'Vitesse du parseur',
+	'parserspeed-desc' => 'Collecte des données sur les performances du parseur et fournit une page spéciale pour visualiser ces informations',
+	'parserspeed-namespace' => 'Espace de noms',
+	'parserspeed-average' => 'Temps parsage moy.',
+	'parserspeed-minimum' => 'Temps parsage min.',
+	'parserspeed-maximum' => 'Temps parsage max.',
+	'parserspeed-wikitext' => 'Taille wikitexte',
+	'parserspeed-html' => 'Taille HTML',
+	'parserspeed-expensive-functions' => 'Appels dispendieux',
+	'parserspeed-nodes' => 'Nombre de nœuds',
+	'parserspeed-expand-size' => 'Taille après rendu',
+	'parserspeed-arg-size' => 'Taille param. modèles',
+);
+
+$messages['pl'] = array(
+	'parserspeed' => 'Rozmiar wikitekstu',
+	'parserspeed-desc' => 'Gromadzi dane o wydajności parsera i udostępnia specjalną stronę, aby podejrzeć te informacje',
+	'parserspeed-namespace' => 'Przestrzeń nazw',
+	'parserspeed-title' => 'Artykuł',
+	'parserspeed-average' => 'Średni czas parsowania',
+	'parserspeed-minimum' => 'Min. czas parsowania',
+	'parserspeed-maximum' => 'Max. czas parsowania',
+	'parserspeed-wikitext' => 'Rozmiar wikitekstu',
+	'parserspeed-html' => 'Rozmiar HTML',
+	'parserspeed-expensive-functions' => 'Trudne funkcje',
+	'parserspeed-nodes' => 'Ilość węzłów',
+	'parserspeed-expand-size' => 'Rozszerzony rozmiar',
+	'parserspeed-arg-size' => 'Rozmiar arg.',
 );

@@ -11,14 +11,6 @@ $messages['en'] = array(
 	'imgplc-notinhistory-video' => 'You cannot add a video in history mode.',
 );
 
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'imgplc-desc' => '{{desc}}',
-	'imgplc-image' => '{{Identical|Image}}',
-);
-
 /** Afrikaans (Afrikaans)
  * @author Naudefj
  */
@@ -214,7 +206,7 @@ $messages['fo'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'imgplc-desc' => 'Crée des substituts aux images/vidéos',
+	'imgplc-desc' => 'Crée des emplacements pour les images/vidéos',
 	'imgplc-add-image' => 'Ajouter une image',
 	'imgplc-add-video' => 'Ajouter une vidéo',
 	'imgplc-placeholder' => 'Espace réservé',
@@ -339,7 +331,7 @@ $messages['ko'] = array(
 	'imgplc-add-video' => '동영상 추가',
 	'imgplc-placeholder' => '플레이스홀더',
 	'imgplc-image' => '그림',
-	'imgplc-notinhistory' => '역사 모드에서 그림을 추가할 수 없습니다.',
+	'imgplc-notinhistory' => '문서 역사에는 파일을 추가할 수 없습니다.',
 );
 
 /** Colognian (Ripoarisch)
@@ -441,7 +433,7 @@ $messages['nl'] = array(
 	'imgplc-add-video' => 'Video toevoegen',
 	'imgplc-placeholder' => 'Plaatshouder',
 	'imgplc-image' => 'Afbeelding',
-	'imgplc-notinhistory' => 'U kunt geen afbeelding toevoegen in geschiedenismodus.',
+	'imgplc-notinhistory' => 'Je kunt geen afbeelding toevoegen in geschiedenismodus.',
 	'imgplc-notinhistory-video' => 'U kunt geen video toevoegen in geschiedenismodus.',
 );
 
@@ -460,6 +452,11 @@ $messages['nn'] = array(
 	'imgplc-placeholder' => 'Plasshaldar',
 	'imgplc-image' => 'Bilete',
 	'imgplc-notinhistory' => 'Du kan ikkje leggja til bilete i historikkmodus.',
+);
+
+$messages['no'] = array(
+	'imgplc-placeholder' => 'Plassholder',
+	'imgplc-image' => 'Bilde',
 );
 
 /** Occitan (occitan)

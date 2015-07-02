@@ -18,23 +18,6 @@ $messages['en'] = array(
 	'emailext-forumreply-unfollow-text' => 'No longer interested in receiving these updates? Click [$1 here] to unfollow [$2 this discussion] on [{{SERVER}} {{SITENAME}}].',
 );
 
-$messages['qqq'] = array(
-	'group-translator-member' => 'The display name for a member of the translator group',
-	'group-translator' => 'The display name for the translator group',
-	'grouppage-translator' => 'A URL describing this group.  Should not need any i18n since its just a URL',
-	'email-desc' => 'The description for this extension',
-	'emailext-anonymous-editor' => 'Phrase used in place of a username when the page was edited by an anonymous (logged out) user.',
-	'emailext-no-reply-name' => 'Name for sender of "no reply" email address',
-	'emailext-fans-tagline' => 'Tagline for the footer of the email',
-	'emailext-fanverse-tagline' => 'Trademarked tagline for Wikia.',
-	'emailext-watchedpage-notice' => "Informs the user who the intended recipient of the email is. $1 is the recipient's email address.",
-	'emailext-update-frequency' => 'Provides a link for users to update their email preferences',
-	'emailext-unsubscribe' => 'Provides a link for users to opt out of emails altogether. $1 is the unsubscribe link.',
-	'emailext-unfollow-text' => 'Asks the user if they want to stop following this page and provides a link to unfollow the page. $1 -> unfollow url, $2 article title',
-	'emailext-salutation' => "Email greeting. $1 is the recipient's username.",
-	'emailext-forumreply-unfollow-text' => 'Asks the user if they want to stop following this discussion and provides a link to unfollow the discussion. $1 -> unfollow url, $2 discussion url',
-);
-
 $messages['de'] = array(
 	'emailext-desc' => 'Eine Erweiterung, die die Zustellung von E-Mails abwickelt',
 	'emailext-anonymous-editor' => 'Ein Wikia-Fan',
@@ -106,6 +89,19 @@ $messages['ja'] = array(
 	'emailext-forumreply-unfollow-text' => 'このような更新情報の受信をご希望でない場合は、[$1 こちら]をクリックして[{{SERVER}} {{SITENAME}}]の[$2 このスレッド]のフォローを解除してください。',
 );
 
+$messages['ko'] = array(
+	'emailext-desc' => '이메일 전송을 관리하는 확장 기능',
+	'emailext-anonymous-editor' => '익명 사용자',
+	'emailext-fans-tagline' => '팬을 위한 팬에 의한 위키아 커뮤니티',
+	'emailext-fanverse-tagline' => '팬을 위한 팬에 의한 위키아 커뮤니티',
+	'emailext-recipient-notice' => '받는이: $1 / 보낸이: 위키아',
+	'emailext-update-frequency' => '종류에 따른 이메일 알림 여부를 설정하시려면 귀하의 [{{fullurl:Special:Preferences|#mw-prefsection-emailv2}} 환경 설정] 페이지에 들러 주세요.',
+	'emailext-unsubscribe' => '위키아에서 보내는 모든 이메일 알림을 받지 않으시려면 [$1 이곳]을 들러 주세요.',
+	'emailext-unfollow-text' => '더 이상 이에 관한 이메일 알림을 받고 싶지 않으신가요? [$1 이곳]에서 {{SITENAME}}의 $2 문서를 주시 해제하실 수 있습니다.',
+	'emailext-salutation' => '안녕하세요, $1 님!',
+	'emailext-forumreply-unfollow-text' => '더 이상 이에 관한 이메일 알림을 받고 싶지 않으신가요? [$1 이곳]에서 [{{SERVER}} {{SITENAME}}]의 [$2 토론]을 주시 해제하실 수 있습니다.',
+);
+
 $messages['nl'] = array(
 	'emailext-desc' => 'An extension to handle delivering email',
 	'emailext-anonymous-editor' => 'A Wikia fan',
@@ -122,16 +118,16 @@ $messages['nl'] = array(
 
 $messages['pl'] = array(
 	'emailext-desc' => 'Rozszerzenie służące do obsługi dostarczania wiadomości e-mail',
-	'emailext-anonymous-editor' => 'Fan portalu Wikia',
-	'emailext-no-reply-name' => 'No Reply',
+	'emailext-anonymous-editor' => 'Fan Wikii',
+	'emailext-no-reply-name' => 'Nie odpowiadaj',
 	'emailext-fans-tagline' => 'The Social Universe for Fans by Fans',
 	'emailext-fanverse-tagline' => 'The Social Universe for Fans by Fans',
 	'emailext-recipient-notice' => 'Wiadomość e-mail została wysłana do $1 z portalu Wikia',
-	'emailext-update-frequency' => 'Jeśli chcesz zmienić rodzaj lub częstotliwość otrzymywanych wiadomości e-mail, przejdź do strony zawierającej Twoje  [{{fullurl:Special:Preferences|#mw-prefsection-emailv2}} Ustawienia].',
+	'emailext-update-frequency' => 'Jeśli chcesz zmienić rodzaj lub częstotliwość otrzymywanych wiadomości e-mail, przejdź do strony zawierającej Twoje  [{{fullurl:Special:Preferences|#mw-prefsection-emailv2}} preferencje].',
 	'emailext-unsubscribe' => 'Aby zrezygnować z otrzymywania wiadomości od Wikia, kliknij [$1 tutaj].',
-	'emailext-unfollow-text' => 'Nie jesteś już zainteresowany otrzymywaniem powiadomień? Kliknij [$1 tutaj], aby zrezygnować ze śledzenia $2 na {{SITENAME}}.',
+	'emailext-unfollow-text' => 'Nie chcesz już otrzymywać tych powiadomień? Kliknij [$1 tutaj], aby zrezygnować ze śledzenia $2 na {{SITENAME}}.',
 	'emailext-salutation' => 'Cześć $1,',
-	'emailext-forumreply-unfollow-text' => 'Nie jesteś już zainteresowany otrzymywaniem powiadomień? Kliknij [$1 tutaj], aby przestać śledzić  [$2 tą dyskusję] na [{{SERVER}} {{SITENAME}}].',
+	'emailext-forumreply-unfollow-text' => 'Nie chcesz już otrzymywać powiadomień? Kliknij [$1 tutaj], aby przestać śledzić  [$2 tę dyskusję] na [{{SERVER}} {{SITENAME}}].',
 );
 
 $messages['pt'] = array(
@@ -151,11 +147,11 @@ $messages['pt'] = array(
 
 $messages['ru'] = array(
 	'emailext-desc' => 'Расширение для доставки электронных сообщений',
-	'emailext-anonymous-editor' => 'Фанат Викия',
+	'emailext-anonymous-editor' => 'Анонимный участник',
 	'emailext-no-reply-name' => 'Не отвечать',
 	'emailext-fans-tagline' => 'Социальная вселенная — создана фанатами для фанатов',
 	'emailext-fanverse-tagline' => 'Социальная вселенная – создана фанатами для фанатов',
-	'emailext-recipient-notice' => 'Это электронное сообщение отправлено на $1 c Викия.',
+	'emailext-recipient-notice' => 'Это электронной письмо было отправлено на $1 c Викия.',
 	'emailext-update-frequency' => 'Чтобы изменить параметры электронной почты или частоту получения сообщений, посетите страницу [{{fullurl:Special:Preferences|#mw-prefsection-emailv2}} «Настройки»].',
 	'emailext-unsubscribe' => 'Чтобы отписаться от всех электронных сообщений от Викия, нажмите [$1 здесь].',
 	'emailext-unfollow-text' => 'Не хотите больше получать эти сообщения? Перейдите [$1 по ссылке], чтобы перестать следить за страницей «$2» на {{SITENAME}}.',
@@ -177,18 +173,41 @@ $messages['zh-hans'] = array(
 	'emailext-forumreply-unfollow-text' => '不想再收到这类更新？点击 [$1 这里] 取消关注[{{SERVER}} {{SITENAME}}]网站上的[$2 这个讨论]。',
 );
 
+$messages['zh-hant'] = array(
+	'emailext-desc' => '用來處理發送郵件的擴展功能',
+	'emailext-anonymous-editor' => 'Wikia粉絲',
+	'emailext-no-reply-name' => '不要回覆這封郵件',
+	'emailext-fans-tagline' => '全球粉絲社交帝國',
+	'emailext-fanverse-tagline' => '全球粉絲社交帝國',
+	'emailext-recipient-notice' => 'Wikia已經發送電子郵件至$1',
+	'emailext-unsubscribe' => '如果您希望取消訂閱所有的Wikia電子郵件，請點擊[$1 這裡]。',
+	'emailext-unfollow-text' => '不想再接收這類更新内容？點擊[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
+	'emailext-forumreply-unfollow-text' => '不想再收到這類更新的訊息？按一下[$1這裡]取消在[{{SERVER}} {{SITENAME}}]監視[$2 這個討論]。',
+);
+
+$messages['zh-hk'] = array(
+	'emailext-desc' => '用來處理發送郵件的擴展功能',
+	'emailext-anonymous-editor' => 'Wikia粉絲',
+	'emailext-no-reply-name' => '不要回覆這封郵件',
+	'emailext-fans-tagline' => '全球粉絲社交帝國',
+	'emailext-fanverse-tagline' => '全球粉絲社交帝國',
+	'emailext-recipient-notice' => 'Wikia已經發送電子郵件至$1',
+	'emailext-unsubscribe' => '如果您希望取消訂閱所有的Wikia電子郵件，請點擊[$1 這裡]。',
+	'emailext-unfollow-text' => '不想再接收這類更新内容？點擊[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
+	'emailext-forumreply-unfollow-text' => '不想再收到這類更新的訊息？按一下[$1這裡]取消在[{{SERVER}} {{SITENAME}}]監視[$2 這個討論]。',
+);
+
 $messages['zh-tw'] = array(
 	'emailext-desc' => '用來處理發送郵件的擴展功能',
 	'emailext--anonymous-editor' => 'Wikia粉絲',
-	'emailext-no-reply-name' => '請勿回復',
+	'emailext-no-reply-name' => '不要回覆這封郵件',
 	'emailext-fans-tagline' => '全球粉絲社交帝國',
 	'emailext-fanverse-tagline' => '全球粉絲社交帝國',
 	'emailext-recipient-notice' => 'Wikia已經發送電子郵件至$1',
 	'emailext-update-frequency' => '如果您需要更改電子郵件地址或接收方式，請訪問您的[{{fullurl:Special:Preferences|#mw-prefsection-emailv2}} 首選項]頁面。',
 	'emailext-unsubscribe' => '如果您希望取消訂閱所有的Wikia電子郵件，請點擊[$1 這裡]。',
-	'emailext-unfollow-text' => '不想再接收這類更新内容？点击[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
+	'emailext-unfollow-text' => '不想再接收這類更新内容？點擊[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
 	'emailext-salutation' => '$1，你好！',
 	'emailext-anonymous-editor' => 'Wikia粉絲',
-	'emailext-forumreply-unfollow-text' => '不想再收到這類更新？按一下[$1這裡]取消[{{SERVER}} {{SITENAME}}]的[$2 讨论電郵]。',
+	'emailext-forumreply-unfollow-text' => '不想再收到這類更新的訊息？按一下[$1這裡]取消在[{{SERVER}} {{SITENAME}}]監視[$2 這個討論]。',
 );
-

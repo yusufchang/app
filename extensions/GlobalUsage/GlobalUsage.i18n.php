@@ -12,70 +12,16 @@ $messages = array();
  * @author Bryan Tong Minh
  */
 $messages['en'] = array(
-	'globalusage'      => 'Global file usage',
-	'globalusage-for'  => 'Global usage for "$1"',
+	'globalusage' => 'Global file usage',
+	'globalusage-for' => 'Global usage for "$1"',
 	'globalusage-desc' => '[[Special:GlobalUsage|Special page]] to view global file usage',
-	'globalusage-ok'   => 'Search',
+	'globalusage-ok' => 'Search',
 	'globalusage-text' => 'Search global file usage',
 	'globalusage-no-results' => '[[:$1]] is not used on other wikis.',
 	'globalusage-on-wiki' => 'Usage on $2',
 	'globalusage-of-file' => 'The following other wikis use this file:',
 	'globalusage-more' => 'View [[{{#Special:GlobalUsage}}/$1|more global usage]] of this file.',
 	'globalusage-filterlocal' => 'Do not show local usage',
-);
-
-/** Message documentation (Message documentation)
- * @author Hamilton Abreu
- * @author Jon Harald Søby
- * @author Nghtwlkr
- * @author Purodha
- * @author Raymond
- * @author The Evil IP address
- * @author Umherirrender
- * @author Vriullop
- * @author Yekrats
- */
-$messages['qqq'] = array(
-	'globalusage' => 'Header of a section that lists all the places where one shared file has been used. "Global" refers to the usage, not to the file. "File" is singular. Used while viewing the file description page ([[commons:File:Triangle.Right.ly.png|example at Commons]]). Appears at the top of the page as a link to a section anchor, and at the bottom as the section header.',
-	'globalusage-for' => 'Title of [[Special:GlobalUsage]]
-* $1 - name of the searched file, with namespace',
-	'globalusage-desc' => 'For more information, see [[mw:Extension:GlobalUsage]]
-{{desc}}',
-	'globalusage-ok' => '{{Identical|Search}}
-Button on [[Special:GlobalUsage]]',
-	'globalusage-text' => 'Label on [[Special:GlobalUsage]]',
-	'globalusage-no-results' => 'Used for empty result on [[Special:GlobalUsage]]
-* $1 - name of the file (with namespace)',
-	'globalusage-on-wiki' => 'Shown in the list of global usages. Example: [[Commons:Special:GlobalUsage/Example.jpg]] and [[Commons:File:Example.jpg]]
-
-* $1 the file name, but unused in this message
-* $2 the project name given as a domain, e.g. en.wikipedia.org',
-	'globalusage-of-file' => 'Used on a image page.
-The number of following wikis is unknown. By a empty result, no message is shown.',
-	'globalusage-more' => 'Used on an image page, when more global usage results are available. Example: [[Commons:File:Example.jpg]]
-* $1 - name of the file (without namespace)',
-	'globalusage-filterlocal' => 'Filteroption for [[Special:GlobalUsage]]',
-);
-
-/** Karelian (Karjala)
- * @author Flrn
- */
-$messages['krl'] = array(
-	'globalusage-ok' => 'Ečindy',
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'globalusage-ok' => 'Kumi',
-);
-
-/** толышә зывон (толышә зывон)
- * @author Гусейн
- */
-$messages['tly'] = array(
-	'globalusage-ok' => 'Нәве',
 );
 
 /** Afrikaans (Afrikaans)
@@ -579,11 +525,11 @@ $messages['fo'] = array(
  * @author Verdy p
  */
 $messages['fr'] = array(
-	'globalusage' => 'Usage global du fichier',
+	'globalusage' => "Rechercher l'utilisation globale du fichier",
 	'globalusage-for' => 'Usage global pour « $1 »',
-	'globalusage-desc' => '[[Special:GlobalUsage|Page spéciale]] pour voir l’usage global d’une image',
+	'globalusage-desc' => "[[Special:GlobalUsage|Page spéciale]] pour afficher l'utilisation globale d'un fichier",
 	'globalusage-ok' => 'Rechercher',
-	'globalusage-text' => 'Rechercher l’usage global du fichier',
+	'globalusage-text' => "Rechercher l'utilisation globale du fichier",
 	'globalusage-no-results' => '[[:$1]] n’est pas utilisé sur d’autres wikis.',
 	'globalusage-on-wiki' => 'Utilisation sur $2',
 	'globalusage-of-file' => 'Les autres wikis suivants utilisent cette image :',
@@ -897,14 +843,14 @@ $messages['is'] = array(
  * @author Nemo bis
  */
 $messages['it'] = array(
-	'globalusage' => 'Uso globale del file',
+	'globalusage' => 'Anche le wiki seguenti usano questo file:',
 	'globalusage-for' => 'Uso globale di "$1"',
 	'globalusage-desc' => "[[Special:GlobalUsage|Pagina speciale]] per vedere l'utilizzo globale dei file",
 	'globalusage-ok' => 'Ricerca',
 	'globalusage-text' => "Mostra l'uso globale del file",
 	'globalusage-no-results' => '[[:$1]] non è usato in altri wiki.',
 	'globalusage-on-wiki' => 'Usato nelle seguenti pagine di $2:',
-	'globalusage-of-file' => 'Anche i wiki seguenti usano questo file:',
+	'globalusage-of-file' => 'Anche le wiki seguenti usano questo file:',
 	'globalusage-more' => "Visualizza l'[[{{#Special:GlobalUsage}}/$1|utilizzo globale]] di questo file.",
 	'globalusage-filterlocal' => "Non mostrare l'uso locale",
 );
@@ -1022,6 +968,13 @@ $messages['kri'] = array(
  */
 $messages['krj'] = array(
 	'globalusage-ok' => 'Sagap',
+);
+
+/** Karelian (Karjala)
+ * @author Flrn
+ */
+$messages['krl'] = array(
+	'globalusage-ok' => 'Ečindy',
 );
 
 /** Colognian (Ripoarisch)
@@ -1246,6 +1199,13 @@ $messages['nb'] = array(
 	'globalusage-of-file' => 'Følgende andre wikier bruker denne filen:',
 	'globalusage-more' => 'Vis [[{{#Special:GlobalUsage}}/$1|mer global bruk]] av denne filen.',
 	'globalusage-filterlocal' => 'Ikke vis lokal bruk',
+);
+
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'globalusage-ok' => 'Kumi',
 );
 
 /** Dutch (Nederlands)
@@ -1815,6 +1775,13 @@ $messages['tl'] = array(
 	'globalusage-filterlocal' => 'Huwag ipakita ang lokal na paggamit',
 );
 
+/** толышә зывон (толышә зывон)
+ * @author Гусейн
+ */
+$messages['tly'] = array(
+	'globalusage-ok' => 'Нәве',
+);
+
 /** Turkish (Türkçe)
  * @author Joseph
  * @author Vito Genovese
@@ -1973,4 +1940,3 @@ $messages['zh-hant'] = array(
 	'globalusage-more' => '檢視本檔案的[[{{#Special:GlobalUsage}}/$1|更多全域使用情況]]。',
 	'globalusage-filterlocal' => '勿顯示本地使用情況',
 );
-

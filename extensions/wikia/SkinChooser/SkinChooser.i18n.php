@@ -57,7 +57,7 @@ $messages['cs'] = array(
 $messages['de'] = array(
 	'skinchooser-desc' => 'Ermöglicht Benutzern in ihren Einstellungen Skins zu wählen',
 	'new-look' => 'Wikia',
-	'site-layout' => 'Seitenlayouts',
+	'site-layout' => 'Layout',
 );
 
 /** Spanish (español)
@@ -105,7 +105,7 @@ $messages['fo'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'skinchooser-desc' => 'Permet aux utilisateurs de choisir des habillages dans leurs préférences',
+	'skinchooser-desc' => "Permet aux utilisateurs de choisir l'apparence à utiliser dans leurs préférences",
 	'new-look' => 'Wikia',
 	'site-layout' => 'Apparences du site',
 );
@@ -153,7 +153,7 @@ $messages['it'] = array(
  * @author Tommy6
  */
 $messages['ja'] = array(
-	'skinchooser-desc' => '利用者の個人設定での外装選択を可能にします。',
+	'skinchooser-desc' => '利用者が個人設定で外装を変更できるようにする',
 	'new-look' => 'ウィキア',
 	'site-layout' => 'サイトの外装',
 );
@@ -169,8 +169,8 @@ $messages['kn'] = array(
  * @author Miri-Nae
  */
 $messages['ko'] = array(
-	'new-look' => '위키아',
-	'site-layout' => '사이트 배치',
+	'new-look' => '위키아 기본 스킨',
+	'site-layout' => '스킨',
 );
 
 /** Northern Luri (لوری مینجایی)

@@ -8,20 +8,13 @@
 $messages = array();
 
 $messages['en'] = array(
-	'wikiaconfirmemail-error-empty-code'     => 'Empty confirmation code',
-	'wikiaconfirmemail-error-invalid-code'     => 'Invalid confirmation code',
-	'wikiaconfirmemail-error-user-not-match' => 'Oops, this confirmation link doesn\'t match up with the username you entered. Make sure you\'re entering the right username. If you want to log in with a different account, click [[{{ns:special}}:UserLogin|here]]',
+	'wikiaconfirmemail-error-empty-code' => 'Empty confirmation code',
+	'wikiaconfirmemail-error-invalid-code' => 'Invalid confirmation code',
+	'wikiaconfirmemail-error-user-not-match' => "Oops, this confirmation link doesn't match up with the username you entered. Make sure you're entering the right username. If you want to log in with a different account, click [[{{ns:special}}:UserLogin|here]]",
 	'wikiaconfirmemail-login-button' => 'Confirm and log in',
 	'wikiaconfirmemail-heading' => 'Almost there!',
-	'wikiaconfirmemail-subheading' => 'Log in with your username and password so we know that you\'ve received the email.',
+	'wikiaconfirmemail-subheading' => "Log in with your username and password so we know that you've received the email.",
 	'wikiaconfirmemail-username' => 'Username',
-);
-
-/** Message documentation (Message documentation)
- * @author Liuxinyu970226
- */
-$messages['qqq'] = array(
-	'wikiaconfirmemail-username' => '{{Identical|Username}}',
 );
 
 /** Arabic (العربية)
@@ -186,7 +179,7 @@ $messages['fr'] = array(
 	'wikiaconfirmemail-error-user-not-match' => 'Oups, ce lien de confirmation ne correspond pas au nom d’utilisateur que vous avez saisi. Assurez-vous d’avoir saisi le bon nom d’utilisateur. Si vous souhaitez vous connecter avec un compte différent, cliquez [[{{ns:special}}:UserLogin|ici]].',
 	'wikiaconfirmemail-login-button' => 'Confirmer et se connecter',
 	'wikiaconfirmemail-heading' => 'On y est presque !',
-	'wikiaconfirmemail-subheading' => 'Connectez-vous avec vos nom d’utilisateur et mot de passe afin que nous sachions que vous avez reçu le courriel.',
+	'wikiaconfirmemail-subheading' => "Connectez-vous avec vos noms d’utilisateur et mot de passe afin que nous sachions que vous avez reçu l'e-mail.",
 	'wikiaconfirmemail-username' => 'Nom d’utilisateur',
 );
 
@@ -236,6 +229,14 @@ $messages['ia'] = array(
 	'wikiaconfirmemail-username' => 'Nomine de usator',
 );
 
+$messages['ja'] = array(
+	'wikiaconfirmemail-error-user-not-match' => '申し訳ありません。この確認リンクはあなたが入力したユーザー名と一致していません。正しいユーザー名の入力を確認してください。もし別のアカウントでログインしたい場合は、 <a href="{{fullurl:{{ns:special}}:UserLogin}}">こちら</a>をクリックしてください。',
+	'wikiaconfirmemail-login-button' => '確認とログイン',
+	'wikiaconfirmemail-heading' => 'あと一歩です！',
+	'wikiaconfirmemail-subheading' => 'メールを受信したのがご本人であることを確認するため、ユーザー名とパスワードを入力してログインしてください。',
+	'wikiaconfirmemail-username' => 'ユーザー名',
+);
+
 /** Korean (한국어)
  * @author Gusdud25
  * @author Miri-Nae
@@ -243,6 +244,9 @@ $messages['ia'] = array(
 $messages['ko'] = array(
 	'wikiaconfirmemail-error-user-not-match' => '어이쿠! 이 확인 링크는 로그인한 아이디하고 맞지각 않습니다. 올바른 아이디로 다시 접속하세요. 만약 다른 계정으로 로그인하기를 원한다면 [[{{ns:special}}:UserLogin|here]]를 누르게나.',
 	'wikiaconfirmemail-username' => '사용자 이름',
+	'wikiaconfirmemail-login-button' => '인증 및 로그인',
+	'wikiaconfirmemail-heading' => '조금만 더 진행하면 됩니다!',
+	'wikiaconfirmemail-subheading' => '기존의 사용자 이름/비밀번호로 로그인해서, 이메일을 받았다는 사실을 인증해 주세요.',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)

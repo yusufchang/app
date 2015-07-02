@@ -13,9 +13,9 @@ $messages['en'] = array(
 	'lookupcontribstitle' => 'Lookup Contribs',
 	'lookupcontribsrecentcontributions' => 'Recent contributions for $1',
 	'lookupcontribsfinalcontributions' => 'Final contributions for $1',
-	'lookupcontribshelp' => 'This special page can be used to display user\'s contributions on multiple Wikias.
-For displaying the list, give username below.',
-	'lookupcontribusernotspecify' => 'You haven\'t specified a user yet',
+	'lookupcontribshelp' => "This special page can be used to display user's contributions on multiple Wikias.
+For displaying the list, give username below.",
+	'lookupcontribusernotspecify' => "You haven't specified a user yet",
 	'lookupcontribsselectuser' => 'Select user:',
 	'lookupcontribsselectfor' => 'Select for:',
 	'lookupcontribsdisplaymode' => 'Display mode:',
@@ -41,7 +41,7 @@ Check given username for possible typos.</p>',
 	'lookupcontribscontribslink' => 'Contribs link',
 	'lookupcontribsdetails' => 'See details for:',
 	'lookupcontribslastedited' => 'Last edited',
-	'lookupcontribsrecordspager' => 'Showing \'\'\'$1\'\'\' to \'\'\'$2\'\'\' of \'\'\'$3\'\'\' records.',
+	'lookupcontribsrecordspager' => "Showing '''$1''' to '''$2''' of '''$3''' records.",
 	'lookupcontribsnbrresult' => 'Number of result:',
 	'lookupcontribsnext' => 'next',
 	'lookupcontribsprevious' => 'previous',
@@ -51,7 +51,7 @@ Check given username for possible typos.</p>',
 	'lookupcontribscontribs' => 'contribs',
 	'lookupcontribshist' => 'hist',
 	'lookupcontribsdiff' => 'diff',
-	'right-lookupcontribs' => 'View user\'s global edits',
+	'right-lookupcontribs' => "View user's global edits",
 	'lookupcontribsshowpages' => 'All pages ($1 namespaces)',
 	'lookupcontribscontent' => 'content',
 	'lookupcontribscontribtitleforuser' => 'Contributions for user:',
@@ -59,37 +59,6 @@ Check given username for possible typos.</p>',
 	'lookupcontribsfinal' => 'final',
 	'lookupcontribsall' => 'all',
 	'action-lookupcontribs' => "lookup a user's contributions on multiple wikis",
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author Liuxinyu970226
- * @author Shirayuki
- * @author Siebrand
- * @author Umherirrender
- */
-$messages['qqq'] = array(
-	'lookupcontribs-desc' => '{{desc}}',
-	'lookupcontribslinks' => '{{Identical|Contribution link}}',
-	'lookupcontribsgo' => '{{Identical|Go}}',
-	'lookupcontribswiki' => '{{Identical|Wiki}}',
-	'lookupcontribswikidbname' => '{{Identical|Database name}}',
-	'lookupcontribswikiurl' => '{{Identical|URL}}',
-	'lookupcontribswikititle' => '{{Identical|Title}}',
-	'lookupcontribscontribslink' => '{{Identical|Contribution link}}',
-	'lookupcontribsnext' => '{{Identical|Next}}',
-	'lookupcontribsprevious' => '{{Identical|Previous}}',
-	'lookupcontribspageremoved' => '{{Identical|Removed}}',
-	'lookupcontribsrestore' => '{{Identical|Restore}}',
-	'lookupcontribslog' => '{{Identical|Log}}',
-	'lookupcontribscontribs' => '{{Identical|Contribution}}',
-	'lookupcontribsdiff' => '{{Identical|Diff}}',
-	'right-lookupcontribs' => '{{doc-right|lookupcontribs|ns=Wikia}}',
-	'lookupcontribsshowpages' => '',
-	'lookupcontribscontent' => '{{Identical|Content}}',
-	'lookupcontribsnormal' => '{{Identical|Recent}}',
-	'lookupcontribsall' => '{{Identical|All}}',
-	'action-lookupcontribs' => '{{doc-action|lookupcontribs}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -456,7 +425,7 @@ Bitte überprüfe den angegebenen Benutzernamen auf mögliche Tippfehler.</p>',
 	'lookupcontribscontribs' => 'Beiträge',
 	'lookupcontribshist' => 'Versionen',
 	'lookupcontribsdiff' => 'Unterschied',
-	'right-lookupcontribs' => 'Globale Bearbeitungen eines Benutzer anzeigen',
+	'right-lookupcontribs' => 'Globale Bearbeitungen des Benutzer anzeigen',
 	'lookupcontribsshowpages' => 'Alle Seiten ($1 Namensräume)',
 	'lookupcontribscontent' => 'Inhalt',
 	'lookupcontribscontribtitleforuser' => 'Bearbeitungen für Benutzer:',
@@ -957,7 +926,7 @@ $messages['it'] = array(
  * @author Tommy6
  */
 $messages['ja'] = array(
-	'lookupcontribs' => '全体の投稿記録を見る',
+	'lookupcontribs' => '全ページ（$1名前空間）',
 	'lookupcontribstitle' => '全体の投稿履歴を見る',
 	'lookupcontribsrecentcontributions' => '$1の最近の投稿記録',
 	'lookupcontribsfinalcontributions' => '$1の最後の投稿記録',
@@ -1013,7 +982,7 @@ $messages['kn'] = array(
 $messages['ko'] = array(
 	'lookupcontribs' => '계정 활동 목록',
 	'lookupcontribstitle' => '계정 활동 목록',
-	'lookupcontribsfinalcontributions' => '$1 사용자의 가장 최근 활동 기록',
+	'lookupcontribsfinalcontributions' => '$1 사용자의 가장 최근 편집',
 	'lookupcontribsselectuser' => '검색할 계정:',
 	'lookupcontribsselectmodefinal' => '해당 사용자의 가장 최근 편집',
 	'lookupcontribsfullurls' => '전체 URL',
@@ -1032,9 +1001,10 @@ $messages['ko'] = array(
 	'lookupcontribscontribs' => '기여',
 	'lookupcontribshist' => '역사',
 	'lookupcontribsdiff' => '차이',
-	'right-lookupcontribs' => '해당 사용자의 전역 편집 보기',
+	'right-lookupcontribs' => '사용자의 위키아 전체 기여를 조회',
 	'lookupcontribsshowpages' => '모든 문서 ($1 이름공간)',
 	'lookupcontribscontribtitleforuser' => '활동 기록:',
+	'lookupcontribsfinal' => '$1 사용자의 가장 최근 편집',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -1329,7 +1299,7 @@ $messages['nl'] = array(
 	'lookupcontribsfinalcontributions' => 'Laatste bijdragen voor $1',
 	'lookupcontribshelp' => "Deze speciale pagina kan gebruikt worden om gebruikersbijdragen op meerdere Wikia's weer te geven.
 Geef hieronder een gebruikersnaam op om de lijst weer te geven.",
-	'lookupcontribusernotspecify' => 'U hebt nog geen gebruiker opgegeven',
+	'lookupcontribusernotspecify' => 'Je hebt nog geen gebruiker opgegeven',
 	'lookupcontribsselectuser' => 'Selecteer gebruiker:',
 	'lookupcontribsselectfor' => 'Selecteren voor:',
 	'lookupcontribsdisplaymode' => 'Weergavemodus:',
@@ -2154,6 +2124,11 @@ $messages['yi'] = array(
 	'lookupcontribscontent' => 'אינהאַלט',
 );
 
+$messages['zh'] = array(
+	'lookupcontribs' => '查看',
+	'lookupcontribsgo' => '查看',
+);
+
 /** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Hydra
@@ -2231,7 +2206,7 @@ $messages['zh-hant'] = array(
 	'lookupcontribswikioptions' => '選項',
 	'lookupcontribscontribslink' => '貢獻連結',
 	'lookupcontribsdetails' => '查看詳細資料：',
-	'lookupcontribslastedited' => '最近編輯於：$1', # Fuzzy
+	'lookupcontribslastedited' => '最近編輯於：$1',
 	'lookupcontribsrecordspager' => "顯示第 '''$1''' 至 '''$2''' 筆，共 '''$3''' 筆記錄。",
 	'lookupcontribsnbrresult' => '結果筆數：',
 	'lookupcontribsnext' => '下一頁',

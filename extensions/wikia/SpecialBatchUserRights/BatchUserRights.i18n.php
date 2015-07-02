@@ -16,17 +16,10 @@ For security reasons, the list of addable groups is set in the extension configu
 Please ask a system administrator if you need to allow batch-adding of other groups.',
 	'batchuserrights-single-progress-update' => 'Added {{PLURAL:$1|group|groups}} to <strong>$2</strong>.',
 	'batchuserrights-add-groups' => 'Adding {{PLURAL:$1|one user|$1 users}} to the following {{PLURAL:$2|group|groups}}: <strong>$3</strong>.',
-	'batchuserrights-userload-error' => "Could not load the user \"'''$1'''\".",
-	'batchuserrights-no-groups' => "You did not choose any groups.
+	'batchuserrights-userload-error' => "Could not load the user \"'''\$1'''\".",
+	'batchuserrights-no-groups' => 'You did not choose any groups.
 This will not accomplish anything.
-The rest of the page will be allowed to run just so that you can easily see if any of the usernames could not be loaded.",
-);
-
-/** Message documentation (Message documentation)
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'batchuserrights-desc' => '{{desc}}',
+The rest of the page will be allowed to run just so that you can easily see if any of the usernames could not be loaded.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -99,7 +92,7 @@ $messages['br'] = array(
  * @author CERminator
  */
 $messages['bs'] = array(
-	'batchuserrights-desc' => 'Omogućava dodavanje jednog ili više korisnika u grupu putem jedne akcije', # Fuzzy
+	'batchuserrights-desc' => 'Omogućava dodavanje jednog ili više korisnika u grupu putem jedne akcije',
 	'batchuserrights-userload-error' => "Nisam mogao učitati korisnika \"'''\$1'''\".",
 );
 
@@ -358,7 +351,7 @@ $messages['it'] = array(
  * @author Barrel0116
  */
 $messages['ja'] = array(
-	'batchuserrights' => '利用者の権限を一括処理',
+	'batchuserrights' => 'ユーザーの権限を一括処理',
 );
 
 /** Korean (한국어)
@@ -368,7 +361,7 @@ $messages['ko'] = array(
 	'batchuserrights' => '일괄 사용자 권한',
 	'batchuserrights-names' => '이 그룹에 추가할 사용자 이름 (줄마다 하나):',
 	'batchuserrights-single-progress-update' => '<strong>$2</strong> 사용자에게 {{PLURAL:$1|그룹|그룹들}}을 추가했습니다.',
-	'batchuserrights-add-groups' => '사용자 $1명을 다음 그룹에 추가했습니다: <strong>$3</strong>', # Fuzzy
+	'batchuserrights-add-groups' => '사용자 $1명을 다음 그룹에 추가했습니다: <strong>$3</strong>',
 	'batchuserrights-userload-error' => "\"'''\$1'''\" 사용자를 불러올 수 없습니다.",
 	'batchuserrights-no-groups' => '그룹을 선택하지 않았습니다.
 아무것도 수행하지 않습니다.
@@ -453,18 +446,20 @@ Resten av siden vil få lov til å kjøre slik at du enkelt kan se om noen av br
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'batchuserrights' => 'Gebruikersrechtenbeheer (en masse)',
+	'batchuserrights' => 'Je hebt geen groepen gekozen.
+Nu wordt er niets uitgevoerd.
+De rest van de pagina kan uitgevoerd worden zodat je eenvoudig kunt zien of een van de gebruikersnamen niet geladen kon worden.',
 	'batchuserrights-desc' => 'Maakt het toevoegen van meerdere gebruikers aan een groep in één handeling mogelijk',
 	'batchuserrights-names' => 'Gebruikersnamen om deze groep aan toe te voegen (één per regel):',
-	'batchuserrights-intro' => 'Via deze pagina kunt u meerdere gebruikers tegelijkertijd aan een groep toevoegen.
+	'batchuserrights-intro' => 'Via deze pagina kan je meerdere gebruikers tegelijkertijd aan een groep toevoegen.
 Om beveiligingsredenen wordt de lijst met beschikbare groepen ingesteld in de instellingen van de uitbreiding en deze groepen kunnen niet vanuit de wiki gewijzigd worden.
-Vraag hulp van een systeembeheerder als u de beschikbare groepen wilt wijzigen.',
+Vraag hulp van een systeembeheerder als je de beschikbare groepen wilt wijzigen.',
 	'batchuserrights-single-progress-update' => 'De {{PLURAL:$1|groep is|groepen zijn}} toegevoegd aan <strong>$2</strong>.',
 	'batchuserrights-add-groups' => 'Bezig met het toevoegen van {{PLURAL:$1|één gebruiker|$1 gebruikers}} aan de volgende {{PLURAL:$2|groep|groepen}}: <strong>$3</strong>.',
 	'batchuserrights-userload-error' => "De gebruiker \"'''\$1'''\" kon niet geladen worden.",
-	'batchuserrights-no-groups' => 'U hebt geen groepen gekozen.
+	'batchuserrights-no-groups' => 'Je hebt geen groepen gekozen.
 Nu wordt er niets uitgevoerd.
-De rest van de pagina kan uitgevoerd worden zodat u eenvoudig kunt zien of een van de gebruikersnamen niet geladen kon worden.',
+De rest van de pagina kan uitgevoerd worden zodat je eenvoudig kunt zien of een van de gebruikersnamen niet geladen kon worden.',
 );
 
 /** Nederlands (informeel)‎ (Nederlands (informeel)‎)

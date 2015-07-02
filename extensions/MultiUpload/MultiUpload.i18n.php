@@ -17,7 +17,7 @@ $messages['en'] = array(
 	'multipleupload-ignoreallwarnings' => "Ignore '''all warnings''' and save the files anyway.",
 	'multipleupload-saveallfiles' => 'Save all files',
 	'multipleupload-addresswarnings' => 'Please address any warnings before reuploading files.',
-	'multipleupload-page' => "{{ns:project}}:File deletion policy",
+	'multipleupload-page' => '{{ns:project}}:File deletion policy',
 	'multipleupload-text' => "Upload multiple files here.
 
 Choose 'Browse' and select each file you wish to upload.
@@ -31,40 +31,9 @@ Inappropriate files will be deleted immediately, see the [[{{MediaWiki:Multipleu
 	'multiupload-no-files' => 'Please select at least one file to upload',
 	'multiupload-blank' => 'No file selected',
 	'multiupload-source' => 'Source files',
-	'multiupload-description' => 'File description', // duplicate of upload-description
-	'multiupload-options' => 'Upload options', // duplicate of upload-options
+	'multiupload-description' => 'File description',
+	'multiupload-options' => 'Upload options',
 	'multiupload-successful-upload' => 'Successful upload',
-);
-
-/** Message documentation (Message documentation)
- * @author Bennylin
- * @author Fryed-peach
- * @author Jon Harald Søby
- * @author Lloffiwr
- * @author Purodha
- * @author Siebrand
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'multipleupload' => '',
-	'multiupload-desc' => '{{desc}}',
-	'multipleupload-addresswarnings' => "'Address' here means 'deal with' or 'fix'.",
-	'multipleupload-text' => 'Plural is supported for $1.',
-	'multiupload-toolbox' => '{{Identical|Uploadmultiple}}',
-);
-
-/** Karelian (Karjala)
- * @author Flrn
- */
-$messages['krl'] = array(
-	'multipleupload' => 'Panna fajlit',
-);
-
-/** Goan Konkani (Latin script) (Konknni)
- * @author Deepak D'Souza
- */
-$messages['gom-latn'] = array(
-	'multipleupload' => 'fayleo dhadd',
 );
 
 /** Afrikaans (Afrikaans)
@@ -378,24 +347,29 @@ Upassende filer bliver slettet øjeblikkeligt - se [[{{MediaWiki:Multipleupload-
  * @author Umherirrender
  */
 $messages['de'] = array(
-	'multipleupload' => 'Mehrere Dateien hochladen',
+	'multipleupload' => "Diese Seite dient zum gleichzeitigen Hochladen mehrerer Dateien.
+
+Klicke auf ''Durchsuchen…'' und wähle alle Dateien aus, die du hochladen möchtest.
+
+Du kannst gleichzeitig zwischen 1 und $1 Dateien hochladen. Falls sinnvoll kannst du wahlweise auch einen '''Ziel-Dateinamen''' vorgeben und eine '''Beschreibung''' für deine Dateien.
+
+Ungeeignete Inhalte werden sofort gelöscht, siehe die [[{{MediaWiki:Multipleupload-page}}|Löschrichtlinien]].",
 	'multiupload-desc' => 'Ergänzt eine [[Special:MultipleUpload|Spezialseite]] über die mehrerer Dateien gleichzeitig hochgeladen werden können',
 	'multipleupload-ignoreallwarnings' => "Ignoriere '''alle Warnungen''' und speichere die Dateien.",
 	'multipleupload-saveallfiles' => 'Alle Dateien speichern',
 	'multipleupload-addresswarnings' => 'Bitte vor dem erneuten Hochladen dieser Dateien jede Warnung bearbeiten und ausräumen.',
 	'multipleupload-page' => '{{ns:project}}:Dateilöschrichtlinien',
-	'multipleupload-text' => "Gleichzeitiges Hochladen mehrerer Dateien.
+	'multipleupload-text' => "Diese Seite dient zum gleichzeitigen Hochladen mehrerer Dateien.
 
-Klicke auf „Durchsuchen“ und wähle alle Dateien aus, die du hochladen möchtest.
-Du kannst zwischen 1 und $1 Dateien gleichzeitig hochladen.
+Klicke auf ''Durchsuchen…'' und wähle alle Dateien aus, die du hochladen möchtest.
 
-Wahlweise kannst du auch einen '''Ziel-Dateinamen''' vorgeben und eine '''Beschreibung''' für deine Dateien eingeben.
+Du kannst gleichzeitig zwischen 1 und $1 Dateien hochladen. Falls sinnvoll kannst du wahlweise auch einen '''Ziel-Dateinamen''' vorgeben und eine '''Beschreibung''' für deine Dateien.
 
-Ungeeignete Dateien werden sofort gelöscht, siehe die [[{{MediaWiki:Multipleupload-page}}|Löschrichtlinien]].",
+Ungeeignete Inhalte werden sofort gelöscht, siehe die [[{{MediaWiki:Multipleupload-page}}|Löschrichtlinien]].",
 	'multiupload-fileuploaded' => 'Datei hochgeladen.',
 	'multiupload-toolbox' => 'Mehrere Dateien hochladen',
 	'multiupload-no-files' => 'Bitte wähle mindestens eine Datei zum Hochladen aus',
-	'multiupload-blank' => 'Keine Datei ausgewählt',
+	'multiupload-blank' => 'Keine Datei gewählt',
 	'multiupload-source' => 'Quelldateien',
 	'multiupload-description' => 'Dateibeschreibung',
 	'multiupload-options' => 'Hochladeoptionen',
@@ -513,11 +487,11 @@ Malkonvenaj dosieroj estos tuj forigita. Vidu la [[{{MediaWiki:Multipleupload-pa
  * @author Sanbec
  */
 $messages['es'] = array(
-	'multipleupload' => 'Subir múltiples archivos',
+	'multipleupload' => "Ignorar '''todas las advertencias''' y guardar el archivo de todas formas.",
 	'multiupload-desc' => 'Permite [[Special:MultipleUpload|subir varios archivos de una sola vez]] a los usuarios',
-	'multipleupload-ignoreallwarnings' => "Ignorar '''todos los avisos''' y guardar los archivos.",
+	'multipleupload-ignoreallwarnings' => "Ignorar '''todas las advertencias''' y guardar el archivo de todas formas.",
 	'multipleupload-saveallfiles' => 'Guardar todos los archivos',
-	'multipleupload-addresswarnings' => 'Haz caso de los avisos antes de volver a subir los archivos.',
+	'multipleupload-addresswarnings' => 'Por favor soluciona cualquier advertencia antes de volver a subir archivos.',
 	'multipleupload-page' => '{{ns:project}}:Política de borrado de archivos',
 	'multipleupload-text' => "Sube varios archivos desde aquí.
 
@@ -527,7 +501,7 @@ Puedes introducir un '''Nombre de archivo de destino''' opcional y proporcionar 
 
 Los archivos inapropiados se eliminarán inmediatamente: mira la [[{{MediaWiki:Multipleupload-page}}|política de borrado de archivos]].",
 	'multiupload-fileuploaded' => 'Archivo subido.',
-	'multiupload-toolbox' => 'Subir varios archivos',
+	'multiupload-toolbox' => 'Subir varios archivos a la vez',
 	'multiupload-no-files' => 'Por favor seleccione al menos un archivo a cargar',
 	'multiupload-blank' => 'Ningún archivo seleccionado',
 	'multiupload-source' => 'Archivos de origen',
@@ -592,7 +566,7 @@ $messages['fa'] = array(
  * @author Nike
  */
 $messages['fi'] = array(
-	'multipleupload' => 'Tallenna useita tiedostoja',
+	'multipleupload' => 'Lataa tiedostoja',
 	'multiupload-desc' => 'Käyttäjät voivat [[Special:MultipleUpload|tallentaa monta tiedostoa kerralla]].',
 	'multipleupload-ignoreallwarnings' => "Ohita '''kaikki varoitukset''' ja tallenna tiedostot kaikesta huolimatta.",
 	'multipleupload-saveallfiles' => 'Tallenna kaikki tiedostot',
@@ -620,26 +594,20 @@ Sopimattomat tiedostot poistetaan välittömästi; katso [[{{MediaWiki:Multipleu
  * @author Urhixidur
  */
 $messages['fr'] = array(
-	'multipleupload' => 'Importer (téléverser) plusieurs fichiers',
-	'multiupload-desc' => 'Permet aux utilisateurs d’importer (téléverser), [[Special:MultipleUpload|en une seule fois, plusieurs fichiers]]',
+	'multipleupload' => 'Importer plusieurs fichiers',
+	'multiupload-desc' => 'Permet aux utilisateurs d’[[Special:MultipleUpload|importer plusieurs fichiers à la fois]]',
 	'multipleupload-ignoreallwarnings' => "Ignorer '''tous les avertissements''' et sauvegarder les fichiers malgré tout.",
 	'multipleupload-saveallfiles' => 'Sauvegarder tous les fichiers',
-	'multipleupload-addresswarnings' => 'Vérifiez les avertissements affichés avant d’importer (téléverser) à nouveau les fichiers.',
+	'multipleupload-addresswarnings' => 'Vérifiez les avertissements affichés avant d’importer les fichiers à nouveau.',
 	'multipleupload-page' => '{{ns:project}}:Règles de suppression de fichiers',
-	'multipleupload-text' => "Importez (Téléversez) plusieurs fichiers ici.
-
-Choisissez « Rechercher » et sélectionnez chaque fichier que vous voulez importer. Vous pouvez importer de 1 à $1 fichiers à la fois.
-
-Vous pouvez optionnellement spécifier la '''destination du fichier''' et remplir le '''Sommaire''' pour décrire votre image.
-
-Les images non pertinentes pourront être supprimées immédiatement. Voyez la page des [[{{MediaWiki:Multipleupload-page}}|Règles de suppression d’images]].",
-	'multiupload-fileuploaded' => 'Fichier importé (téléversé).',
-	'multiupload-toolbox' => 'Importer (téléverser) plusieurs fichiers',
-	'multiupload-no-files' => 'Sélectionnez au moins un fichier à téléverser',
+	'multipleupload-text' => '<div style="" class="emptymwmsg mediawiki_multipleupload-text"></div>',
+	'multiupload-fileuploaded' => 'Fichier importé.',
+	'multiupload-toolbox' => 'Importer plusieurs fichiers',
+	'multiupload-no-files' => 'Sélectionnez au moins un fichier à importer',
 	'multiupload-blank' => 'Aucun fichier sélectionné',
 	'multiupload-source' => 'Fichiers source',
 	'multiupload-description' => 'Description du fichier',
-	'multiupload-options' => "Options d'import",
+	'multiupload-options' => "Options d'importation",
 	'multiupload-successful-upload' => 'Import effectué avec succès',
 );
 
@@ -686,6 +654,13 @@ Os ficheiros inapropiados eliminaranse inmediatamente: vexa a [[{{MediaWiki:Mult
 	'multiupload-toolbox' => 'Cargar múltiples arquivos',
 	'multiupload-no-files' => 'Por favor, seleccione polo menos un ficheiro para cargalo',
 	'multiupload-blank' => 'Non se seleccionou ningún ficheiro',
+);
+
+/** Goan Konkani (Latin script) (Konknni)
+ * @author Deepak D'Souza
+ */
+$messages['gom-latn'] = array(
+	'multipleupload' => 'fayleo dhadd',
 );
 
 /** Swiss German (Alemannisch)
@@ -905,7 +880,7 @@ $messages['io'] = array(
  */
 $messages['it'] = array(
 	'multipleupload' => 'Carica file multipli',
-	'multiupload-desc' => 'Permetti agli utenti di [[Special:MultipleUpload|caricare più file contemporaneamente]]',
+	'multiupload-desc' => 'Descrizione del file',
 	'multipleupload-ignoreallwarnings' => "Ignora '''tutti gli avvertimenti''' e salva comunque i file.",
 	'multipleupload-saveallfiles' => 'Salva tutti i file',
 	'multipleupload-addresswarnings' => 'Per favore occupati degli avvertimenti prima di ricaricare file.',
@@ -922,6 +897,10 @@ File inappropriati verranno cancellati immediatamente, leggi le [[{{MediaWiki:Mu
 	'multiupload-toolbox' => 'Carica file multipli',
 	'multiupload-no-files' => 'Per favore seleziona almeno un file da caricare',
 	'multiupload-blank' => 'Nessun file selezionato',
+	'multiupload-source' => 'File sorgente',
+	'multiupload-description' => 'Descrizione del file',
+	'multiupload-options' => 'Opzioni di caricamento',
+	'multiupload-successful-upload' => 'Caricati con successo',
 );
 
 /** Japanese (日本語)
@@ -930,23 +909,25 @@ File inappropriati verranno cancellati immediatamente, leggi le [[{{MediaWiki:Mu
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'multipleupload' => '複数ファイルをアップロード',
-	'multiupload-desc' => '利用者が[[Special:MultipleUpload|複数のファイルを一度にアップロード]]できるようにする',
-	'multipleupload-ignoreallwarnings' => "'''すべての警告'''を無視し、ファイルを保存します。",
-	'multipleupload-saveallfiles' => 'すべてのファイルを保存する',
-	'multipleupload-addresswarnings' => 'ファイルを再アップロードする前に、すべての警告に対処してください。',
-	'multipleupload-page' => '{{ns:project}}:ファイル削除の方針',
-	'multipleupload-text' => "ここで複数のファイルをアップロードしてください。
+	'multipleupload' => '複数ファイルのアップロード',
+	'multiupload-desc' => 'ファイルの説明',
+	'multipleupload-ignoreallwarnings' => '全ての警告を無視してファイルを保存する',
+	'multipleupload-saveallfiles' => 'ファイルを保存',
+	'multipleupload-addresswarnings' => '再アップロードする前に、警告の内容をご確認ください。',
+	'multipleupload-page' => '{{ns:project}}:方針',
+	'multipleupload-text' => '複数のファイルを一度にアップロードできます。
 
-「参照」からあなたがアップロードしたいファイルを選んでいってください。1から$1個までのファイルを同時にアップロードできます。
+「Browse」というボタンを押し、アップロードするファイルを選択してください。一度に$1個までアップロードできます。
 
-任意で'''掲載するファイル名'''や、ファイルの概要を述べた'''要約'''を入力することができます。
+「掲載するファイル名」や、ファイルの説明文を入れる「ファイルの概要」をここで入力することもできます。
 
-不適切なファイルはすぐに削除されます。[[{{MediaWiki:Multipleupload-page}}|ファイル削除の方針]]をご覧ください。",
-	'multiupload-fileuploaded' => 'ファイルをアップロードしました。',
-	'multiupload-toolbox' => '複数のファイルをアップロード',
+不適切な画像は、削除されることがあります。プロジェクトの[[{{MediaWiki:Multipleupload-page}}|ファイル削除の方針]]をご確認ください。',
+	'multiupload-fileuploaded' => 'ファイルをアップロードしました',
+	'multiupload-toolbox' => '複数ファイルのアップロード',
 	'multiupload-no-files' => 'アップロードするファイルを少なくとも1つ選択してください',
 	'multiupload-blank' => 'ファイルが選択されていません',
+	'multiupload-description' => 'ファイルの説明',
+	'multiupload-options' => 'アップロード・オプション',
 );
 
 /** Javanese (Basa Jawa)
@@ -997,13 +978,35 @@ $messages['km'] = array(
  * @author 아라
  */
 $messages['ko'] = array(
-	'multipleupload' => '여러 파일을 올리기',
+	'multipleupload' => '여러 파일 올리기',
 	'multipleupload-saveallfiles' => '모든 파일 저장',
 	'multipleupload-page' => '{{ns:project}}:파일 삭제 정책',
 	'multiupload-fileuploaded' => '파일이 올려졌습니다.',
-	'multiupload-toolbox' => '파일 다중 올리기',
+	'multiupload-toolbox' => '여러 파일 올리기',
 	'multiupload-no-files' => '하나 이상의 올릴 파일을 선택하세요',
 	'multiupload-blank' => '선택한 파일이 없음',
+	'multiupload-desc' => '파일의 설명',
+	'multipleupload-ignoreallwarnings' => '모든 경고를 무시하고 올리기',
+	'multipleupload-addresswarnings' => '파일을 다시 올리기 전에 일어날 수 있는 모든 문제를 해결하는 것이 좋습니다.',
+	'multipleupload-text' => "이 기능을 이용하여 여러 개의 파일을 올릴 수 있습니다.
+
+'파일 선택'을 눌러 올릴 파일을 선택하세요.
+이 기능을 이용하여 한 번에 1개에서 $1개 파일까지 올릴 수 있습니다.
+
+올릴 파일의 '''새 이름'''을 지정하거나 '''편집 요약''' 란에 파일에 대한 간략한 설명을 적을 수도 있습니다.
+
+위키에 적합하지 않은 파일은 삭제될 수 있습니다. [[{{MediaWiki:Multipleupload-page}}|파일 삭제 정책]]을 참고하세요.",
+	'multiupload-source' => '원본 파일',
+	'multiupload-description' => '파일의 설명',
+	'multiupload-options' => '올리기 설정',
+	'multiupload-successful-upload' => '여러 파일 올리기 성공',
+);
+
+/** Karelian (Karjala)
+ * @author Flrn
+ */
+$messages['krl'] = array(
+	'multipleupload' => 'Panna fajlit',
 );
 
 /** Colognian (Ripoarisch)
@@ -1314,7 +1317,7 @@ Los imatges pas pertinents poiràn èsser escafadas immediatament. Vejatz la pag
  */
 $messages['pl'] = array(
 	'multipleupload' => 'Prześlij wiele plików',
-	'multiupload-desc' => 'Pozwala użytkownikom na [[Special:MultipleUpload|przesyłanie kilku plików za jednym razem]]',
+	'multiupload-desc' => 'Opis plików',
 	'multipleupload-ignoreallwarnings' => 'Ignoruj <b>wszystkie ostrzeżenia</b> i zapisz pliki.',
 	'multipleupload-saveallfiles' => 'Zapisz wszystkie pliki',
 	'multipleupload-addresswarnings' => 'Rozwiąż wszystkie problemy, zanim prześlesz pliki.',
@@ -1331,6 +1334,10 @@ Nieprawidłowe pliki będą natychmiast usuwane, zobacz [[{{MediaWiki:Multipleup
 	'multiupload-toolbox' => 'Prześlij wiele plików',
 	'multiupload-no-files' => 'Wybierz co najmniej jeden plik do przesłania',
 	'multiupload-blank' => 'Nie wybrano pliku',
+	'multiupload-source' => 'Pliki źródłowe',
+	'multiupload-description' => 'Opis plików',
+	'multiupload-options' => 'Opcje przesyłania',
+	'multiupload-successful-upload' => 'Przesłanie plików powiodło się',
 );
 
 /** Piedmontese (Piemontèis)
@@ -1488,6 +1495,7 @@ $messages['ru'] = array(
 	'multiupload-toolbox' => 'Загрузка нескольких файлов',
 	'multiupload-no-files' => 'Пожалуйста, выберите по крайней мере один файл для загрузки',
 	'multiupload-blank' => 'Нет выбранных файлов',
+	'multiupload-successful-upload' => 'Файлы успешно загружены на вики',
 );
 
 /** Sakha (саха тыла)
@@ -1948,6 +1956,24 @@ $messages['vo'] = array(
 	'multiupload-toolbox' => 'Löpükön ragivis mödik',
 );
 
+$messages['zh'] = array(
+	'multipleupload' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+	'multipleupload-text' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+);
+
+$messages['zh-cn'] = array(
+	'multipleupload' => "大量上传档案！
+
+使用'''浏览'''按钮选择要上传档案的位置。可同时上传1至$1个档案。 你可以选择输入'''目标档案名'''和'''档案描述'''来简述此档案。不当的档案将可能被刪除，详见[[{{MediaWiki:Multipleupload-page}}|档案刪除政策]]。",
+	'multipleupload-text' => "大量上传档案！
+
+使用'''浏览'''按钮选择要上传档案的位置。可同时上传1至$1个档案。 你可以选择输入'''目标档案名'''和'''档案描述'''来简述此档案。不当的档案将可能被刪除，详见[[{{MediaWiki:Multipleupload-page}}|档案刪除政策]]。",
+);
+
 /** Simplified Chinese (‪中文（简体）‬)
  * @author Gzdavidwong
  * @author Liangent
@@ -1955,19 +1981,17 @@ $messages['vo'] = array(
  * @author Wrightbus
  */
 $messages['zh-hans'] = array(
-	'multipleupload' => '上传多个文件',
+	'multipleupload' => "大量上传档案！
+
+使用'''浏览'''按钮选择要上传档案的位置。可同时上传1至$1个档案。 你可以选择输入'''目标档案名'''和'''档案描述'''来简述此档案。不当的档案将可能被刪除，详见[[{{MediaWiki:Multipleupload-page}}|档案刪除政策]]。",
 	'multiupload-desc' => '允许用户[[Special:MultipleUpload|一次性上传多个文件]]',
 	'multipleupload-ignoreallwarnings' => "忽略'''所有警告'''并继续保存文件。",
 	'multipleupload-saveallfiles' => '保存所有文件',
 	'multipleupload-addresswarnings' => '在重新上传文件前，请先处理所有警告。',
 	'multipleupload-page' => '{{ns:project}}:文件刪除方针',
-	'multipleupload-text' => "您可在此处上传多个文件。
+	'multipleupload-text' => "大量上传档案！
 
-选择“浏览”，然后选择您要上传的文件。您可以一次性上传1到$1个文件。
-
-作为可选项，您可以指定“目标文件名”，并为您的文件提供'''摘要'''描述。
-
-不合适的文件会被立即删除，参见[[{{MediaWiki:Multipleupload-page}}|文件删除方针]]。",
+使用'''浏览'''按钮选择要上传档案的位置。可同时上传1至$1个档案。 你可以选择输入'''目标档案名'''和'''档案描述'''来简述此档案。不当的档案将可能被刪除，详见[[{{MediaWiki:Multipleupload-page}}|档案刪除政策]]。",
 	'multiupload-fileuploaded' => '文件已上传。',
 	'multiupload-toolbox' => '上传多个文件',
 	'multiupload-no-files' => '请至少上传一个文件',
@@ -1980,23 +2004,46 @@ $messages['zh-hans'] = array(
  * @author Wrightbus
  */
 $messages['zh-hant'] = array(
-	'multipleupload' => '上傳多個檔案',
+	'multipleupload' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
 	'multiupload-desc' => '允許用戶在[[Special:MultipleUpload|同一時間上傳多個檔案]]',
 	'multipleupload-ignoreallwarnings' => "忽略'''所有警告'''並繼續儲存檔案。",
 	'multipleupload-saveallfiles' => '儲存所有檔案',
 	'multipleupload-addresswarnings' => '在從新上傳檔案前，請先回應所有警告。',
 	'multipleupload-page' => '{{ns:project}}:文件刪除方針',
-	'multipleupload-text' => "你可以在這裡上傳多個檔案。
+	'multipleupload-text' => "大量上傳檔案！
 
-點選「瀏覽…」並選擇你要上傳的檔案。
-你可以選擇在同一時間上傳一個到 $1 個檔案。
-
-你亦可為要上傳的檔案重定一個'''目標檔名'''，並為每個檔案提供'''總結'''，用以描述各檔。
-
-所有不合適的檔案都會被立即刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
 	'multiupload-fileuploaded' => '檔案已上傳。',
 	'multiupload-toolbox' => '上傳多個檔案',
 	'multiupload-no-files' => '請選擇最少一個檔案進行上傳',
 	'multiupload-blank' => '沒有選擇檔案',
 );
 
+$messages['zh-hk'] = array(
+	'multipleupload' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+	'multipleupload-text' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+);
+
+$messages['zh-sg'] = array(
+	'multipleupload' => "大量上传档案！
+
+使用'''浏览'''按钮选择要上传档案的位置。可同时上传1至$1个档案。 你可以选择输入'''目标档案名'''和'''档案描述'''来简述此档案。不当的档案将可能被刪除，详见[[{{MediaWiki:Multipleupload-page}}|档案刪除政策]]。",
+	'multipleupload-text' => "大量上传档案！
+
+使用'''浏览'''按钮选择要上传档案的位置。可同时上传1至$1个档案。 你可以选择输入'''目标档案名'''和'''档案描述'''来简述此档案。不当的档案将可能被刪除，详见[[{{MediaWiki:Multipleupload-page}}|档案刪除政策]]。",
+);
+
+$messages['zh-tw'] = array(
+	'multipleupload' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+	'multipleupload-text' => "大量上傳檔案！
+
+使用'''瀏覽'''按鈕選擇要上傳檔案的位置。可同時上傳1至$1個檔案。 你可以選擇輸入'''目標檔案名'''和'''檔案描述'''來簡述此檔案。不當的檔案將可能被刪除，詳見[[{{MediaWiki:Multipleupload-page}}|檔案刪除政策]]。",
+);

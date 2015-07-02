@@ -9,50 +9,22 @@
 $messages = array();
 
 $messages['en'] = array(
-	'antispoof-desc'          => 'Blocks the creation of accounts with mixed-script, confusing and similar usernames',
-	'antispoof-conflict-top'  => 'The name "$1" is too similar to {{PLURAL:$2|the existing account|the following $2 accounts}}:',
-	'antispoof-conflict-item' => '$1', # do not translate or duplicate this message to other languages
+	'antispoof-desc' => 'Blocks the creation of accounts with mixed-script, confusing and similar usernames',
+	'antispoof-conflict-top' => 'The name "$1" is too similar to {{PLURAL:$2|the existing account|the following $2 accounts}}:',
+	'antispoof-conflict-item' => '$1',
 	'antispoof-conflict-bottom' => 'Please choose another name.',
-	'antispoof-name-illegal'  => 'The name "$1" is not allowed to prevent confusing or spoofed usernames: $2.
+	'antispoof-name-illegal' => 'The name "$1" is not allowed to prevent confusing or spoofed usernames: $2.
 Please choose another name.',
-	'antispoof-badtype'       => 'Bad data type',
-	'antispoof-empty'         => 'Empty string',
-	'antispoof-blacklisted'   => 'Contains blacklisted character',
-	'antispoof-combining'     => 'Begins with combining mark',
-	'antispoof-unassigned'    => 'Contains unassigned or deprecated character',
-	'antispoof-noletters'     => 'Does not contain any letters',
-	'antispoof-mixedscripts'  => 'Contains incompatible mixed scripts',
-	'antispoof-tooshort'      => 'Canonicalized name too short',
-	'antispoof-ignore'        => 'Ignore spoofing checks',
-
+	'antispoof-badtype' => 'Bad data type',
+	'antispoof-empty' => 'Empty string',
+	'antispoof-blacklisted' => 'Contains blacklisted character',
+	'antispoof-combining' => 'Begins with combining mark',
+	'antispoof-unassigned' => 'Contains unassigned or deprecated character',
+	'antispoof-noletters' => 'Does not contain any letters',
+	'antispoof-mixedscripts' => 'Contains incompatible mixed scripts',
+	'antispoof-tooshort' => 'Canonicalized name too short',
+	'antispoof-ignore' => 'Ignore spoofing checks',
 	'right-override-antispoof' => 'Override the spoofing checks',
-);
-
-/** Message documentation (Message documentation)
- * @author Beau
- * @author Siebrand
- * @author Titoxd
- * @author Umherirrender
- */
-$messages['qqq'] = array(
-	'antispoof-desc' => 'Used in [[Special:Version]] as the description for [[mw:Extension:AntiSpoof|Extension:AntiSpoof]]',
-	'antispoof-conflict-top' => 'Account creation error message because attempted username is too similar to existing username(s). Parameters:
-* $1 is the username that someone wanted to create
-* $2 are the usernames that already existed that triggered the error.',
-	'antispoof-conflict-bottom' => 'Suggestion for user that tried to create a user with a name that was not accepted.',
-	'antispoof-name-illegal' => 'Account creation error message because a user account creation rule was violated. Parameters:
-* $1 is the username that someone wanted to create
-* $2 is the error message. One of {{msg-mw|antispoof-badtype}}, {{msg-mw|antispoof-empty}}, {{msg-mw|antispoof-blacklisted}} and others.',
-	'antispoof-badtype' => 'Reason for failed account creation.',
-	'antispoof-empty' => 'Reason for failed account creation.',
-	'antispoof-blacklisted' => 'Reason for failed account creation.',
-	'antispoof-combining' => 'Reason for failed account creation.',
-	'antispoof-unassigned' => 'Reason for failed account creation.',
-	'antispoof-noletters' => 'Reason for failed account creation.',
-	'antispoof-mixedscripts' => 'Reason for failed account creation.',
-	'antispoof-tooshort' => 'Reason for failed account creation.',
-	'antispoof-ignore' => 'This is a checkbox shown on [[Special:UserLogin|a signup page]] when a user with both [[MediaWiki:Right-createaccount/qqq|createaccount]] and [[MediaWiki:Right-override-antispoof/qqq|override-antispoof]] rights tries to register a new user account. It allows to register a username that would otherwise be blocked by the [[mw:Extension:AntiSpoof|AntiSpoof extension]].',
-	'right-override-antispoof' => '{{doc-right|override-antispoof}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -1190,7 +1162,7 @@ $messages['ja'] = array(
 	'antispoof-desc' => '文字体系が混在している利用者名、既存の利用者名と紛らわしい類似する利用者名のアカウント作成をブロックする',
 	'antispoof-conflict-top' => '指定した名前 "$1" は{{PLURAL:$2|既存のアカウント|以下の$2アカウント}}と類似しすぎています:',
 	'antispoof-conflict-bottom' => '別の名前を使用してください。',
-	'antispoof-name-illegal' => '指定した名前 "$1" は成りすまし防止のため使用できません: $2。別の名前を使用してください。',
+	'antispoof-name-illegal' => '名前 "$1" は紛らわしいユーザー名や成りすましのユーザー名を防ぐため許可されていません: $2。別の名前を選んでください。',
 	'antispoof-badtype' => 'データタイプが異常です。',
 	'antispoof-empty' => '文字列が空です',
 	'antispoof-blacklisted' => '許可されていない文字が含まれています。',
@@ -2712,4 +2684,3 @@ $messages['zh-hk'] = array(
 	'antispoof-combining' => '以結合標記開始',
 	'antispoof-noletters' => '沒有包含任何字母',
 );
-

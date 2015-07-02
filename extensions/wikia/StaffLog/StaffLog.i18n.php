@@ -1,13 +1,12 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'stafflog-desc' => 'Centralised logging for staff',
 	'stafflog' => 'StaffLog',
 	'stafflog-blockmsg' => '$1 $2 tried to block staff user $3 on wiki $4. Reason: $5',
-	'stafflog-piggybackloginmsg' => '$1 Piggyback - user $2 login as $3', // @todo FIXME: event contains 4 parameters.
-	'stafflog-piggybacklogoutmsg' => '$1 Piggyback - user $2 logout from $3 acount', // @todo FIXME: event contains 4 parameters.
+	'stafflog-piggybackloginmsg' => '$1 Piggyback - user $2 login as $3',
+	'stafflog-piggybacklogoutmsg' => '$1 Piggyback - user $2 logout from $3 acount',
 	'right-stafflog' => 'Can view the stafflog',
 	'stafflog-wiki-status-change' => '$1 changed the status of $2 to $3. Reason: $4',
 	'stafflog-filter-label' => 'Filter',
@@ -19,41 +18,6 @@ $messages['en'] = array(
 	'stafflog-filter-type-renameuser' => 'User renames',
 	'stafflog-filter-type-wikifactory' => 'Wiki status',
 	'action-stafflog' => 'view the centralized staff log',
-);
-
-/** Message documentation (Message documentation)
- * @author Erdemaslancan
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'stafflog-desc' => '{{desc}}',
-	'stafflog' => 'Log name.',
-	'stafflog-blockmsg' => 'Log entry. Parameters:
-* $1 is the user ID of the acting user
-* $2 is the user name of the acting user
-* $3 is the blocked user name
-* $4 is the blocked wiki name at which the block attempt took place
-* $5 is the block reason.',
-	'stafflog-piggybackloginmsg' => 'Log entry. Parameters:
-* $1 is the user ID of the acting user
-* $2 is the user name of the acting user
-* $3 is the user ID of the "victim"
-* $4 is the user name of the "victim".',
-	'stafflog-piggybacklogoutmsg' => 'Log entry. Parameters:
-* $1 is the user ID of the acting user
-* $2 is the user name of the acting user
-* $3 is the user ID of the "victim"
-* $4 is the user name of the "victim".',
-	'right-stafflog' => '{{doc-right|stafflog}}',
-	'stafflog-wiki-status-change' => 'Log entry. Parameters:
-* $1 is the name of the acting user,
-* $2 is the name of the wiki of which the status was changed,
-* $3 is the new status of the wiki,
-* $4 is the reason of the change.',
-	'stafflog-filter-label' => '{{Identical|Filter}}',
-	'stafflog-filter-user' => '{{Identical|User}}',
-	'stafflog-filter-apply' => '{{Identical|Apply filter}}',
-	'action-stafflog' => '{{doc-action|stafflog}}',
 );
 
 /** Old English (Ænglisc)
@@ -173,7 +137,7 @@ $messages['de'] = array(
 	'stafflog-blockmsg' => '$1 $2 versuchte Mitarbeiter „$3“ auf Wiki „$4“ zu sperren. Grund: $5',
 	'stafflog-piggybackloginmsg' => '$1 Huckepack - $2-Anmeldung als $3',
 	'stafflog-piggybacklogoutmsg' => '$1 Huckepack - $2-Abmeldung von $3-Benutzerkonto',
-	'right-stafflog' => 'Kann das Staff-Log einsehen',
+	'right-stafflog' => 'Kann das Mitarbeiterlogbuch einsehen',
 	'stafflog-wiki-status-change' => '$1 veränderte den Status des  $2 zu $3. Grund:$4',
 	'stafflog-filter-label' => 'Filter',
 	'stafflog-filter-user' => 'Benutzer:',
@@ -245,8 +209,8 @@ $messages['fa'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'stafflog-desc' => 'Identification centralisée pour le personnel',
-	'stafflog' => 'StaffLog',
+	'stafflog-desc' => 'Connexion centralisée pour le staff',
+	'stafflog' => 'Connexion centralisée pour le staff',
 	'stafflog-blockmsg' => '$1 $2 a essayé de bloquer l’employé $3 sur le wiki $4. Motif : $5',
 	'stafflog-piggybackloginmsg' => '$1 Accès superposé - utilisateur $2 connecté en tant que $3',
 	'stafflog-piggybacklogoutmsg' => '$1 Accès superposé - utilisateur $2 déconnecté du compte $3',
@@ -519,7 +483,7 @@ $messages['pl'] = array(
 	'stafflog-blockmsg' => '$1 $2 próbował zablokować użytkownika z grupy Staff $3 na wiki $4. Powód: $5',
 	'stafflog-piggybackloginmsg' => 'Podłączenie $1 - użytkownik $2 zalogowany jako $3',
 	'stafflog-piggybacklogoutmsg' => 'Podłączenie $1 - użytkownik $2 wylogowany z konta $3',
-	'right-stafflog' => 'Może wyświetlić stafflog',
+	'right-stafflog' => 'Może wyświetlać Staff-Log',
 	'stafflog-wiki-status-change' => '$1 zmienił status  $2  na  $3 . Przyczyna: $4',
 	'stafflog-filter-label' => 'Filtr',
 	'stafflog-filter-user' => 'Użytkownik:',

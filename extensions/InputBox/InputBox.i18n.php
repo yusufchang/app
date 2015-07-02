@@ -1,12 +1,4 @@
 <?php
-
-/**
- * Messages file for the InputBox extension
- *
- * @file
- * @ingroup Extensions
- */
-
 /**
  * Get all extension messages
  *
@@ -15,37 +7,14 @@
 $messages = array();
 
 $messages['en'] = array(
-	'inputbox-desc'           => 'Allow inclusion of predefined HTML forms',
-	'inputbox-error-no-type'  => 'You have not specified the type of input box to create.',
+	'inputbox-desc' => 'Allow inclusion of predefined HTML forms',
+	'inputbox-error-no-type' => 'You have not specified the type of input box to create.',
 	'inputbox-error-bad-type' => 'Input box type "$1" not recognised.
 Please specify "create", "comment", "search", "search2" or "fulltext".',
-	'tryexact'                => 'Try exact match',
-	'searchfulltext'          => 'Search full text',
-	'createarticle'           => 'Create page',
-	'inputbox-ns-main'        => 'Main',
-);
-
-/** Message documentation (Message documentation)
- * @author Lloffiwr
- * @author Meno25
- * @author SPQRobin
- * @author Siebrand
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'inputbox-desc' => '{{desc}}',
-	'inputbox-error-bad-type' => '{{doc-important|"create", "comment", "search", "search2" and "fulltext" should not be translated.}}',
-	'tryexact' => 'Part of the "Inputbox" extension. This message is the text of the button to search the page you typed in the inputbox. If the page with the exact name exists, you will go directly to that page.',
-	'searchfulltext' => 'Part of the "Inputbox" extension. This message is the text of the button to search the page you typed in the inputbox. This button always goes to the search page, even if the page with the exact name exists.',
-	'createarticle' => 'Part of the "Inputbox" extension. This message is the text of the button to create the page you typed in the inputbox.',
-	'inputbox-ns-main' => 'Probably refers to the main namespace.',
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'createarticle' => 'Talaga tohi tala',
+	'tryexact' => 'Try exact match',
+	'searchfulltext' => 'Search full text',
+	'createarticle' => 'Create page',
+	'inputbox-ns-main' => 'Main',
 );
 
 /** Afrikaans (Afrikaans)
@@ -315,18 +284,18 @@ $messages['co'] = array(
 	'createarticle' => "Creà l'articulu",
 );
 
-/** Crimean Turkish (Latin script) (‪Qırımtatarca (Latin)‬)
- * @author Don Alessandro
- */
-$messages['crh-latn'] = array(
-	'createarticle' => 'Saifeni yarat',
-);
-
 /** Crimean Turkish (Cyrillic script) (‪Къырымтатарджа (Кирилл)‬)
  * @author Don Alessandro
  */
 $messages['crh-cyrl'] = array(
 	'createarticle' => 'Саифени ярат',
+);
+
+/** Crimean Turkish (Latin script) (‪Qırımtatarca (Latin)‬)
+ * @author Don Alessandro
+ */
+$messages['crh-latn'] = array(
+	'createarticle' => 'Saifeni yarat',
 );
 
 /** Czech (Česky)
@@ -398,7 +367,7 @@ $messages['de'] = array(
 	'inputbox-error-no-type' => 'Es wurde kein Eingabefeldtyp angegeben.',
 	'inputbox-error-bad-type' => 'Der Eingabefeldtyp „$1“ ist unbekannt.
 Bitte „create“, „comment“, „search“, „search2“ oder „fulltext“ angeben.',
-	'tryexact' => 'Exakte Suche durchführen',
+	'tryexact' => 'Schnelle Suche',
 	'searchfulltext' => 'Volltextsuche',
 	'createarticle' => 'Seite erstellen',
 	'inputbox-ns-main' => 'Seiten',
@@ -492,7 +461,7 @@ $messages['es'] = array(
 Por favor, especifica «create», «comment», «search» «search2» o "fulltext".',
 	'tryexact' => 'Buscar título exacto',
 	'searchfulltext' => 'Buscar por texto completo',
-	'createarticle' => 'Crear artículo',
+	'createarticle' => 'Crear página',
 	'inputbox-ns-main' => 'Principal',
 );
 
@@ -535,7 +504,7 @@ $messages['fa'] = array(
 لطفاً یکی از موارد «create»، «comment»، «search»، «search2» یا «fulltext» را مشخص کنید.',
 	'tryexact' => 'مطابقت نظیر به نظیر را بیازما',
 	'searchfulltext' => 'جستجوی کل متن',
-	'createarticle' => 'ایجاد صفحه',
+	'createarticle' => 'ایجاد مقاله',
 	'inputbox-ns-main' => 'اصلی',
 );
 
@@ -894,7 +863,7 @@ $messages['it'] = array(
 	'inputbox-error-bad-type' => '"$1" non è un tipo di inputbox riconosciuto. Scegliere il tipo tra "create", "comment", "search", "search2" e "fulltext".',
 	'tryexact' => 'Cerca corrispondenza esatta',
 	'searchfulltext' => 'Ricerca nel testo',
-	'createarticle' => 'Crea voce',
+	'createarticle' => 'Crea pagina',
 	'inputbox-ns-main' => 'Principale',
 );
 
@@ -909,7 +878,7 @@ $messages['ja'] = array(
 	'inputbox-error-bad-type' => '"$1" というタイプの入力ボックスは定義されていません。"create"・"comment"・"search"・"search2"・"fulltext" が指定可能です。',
 	'tryexact' => '一致する項目を検索',
 	'searchfulltext' => '全文検索',
-	'createarticle' => '項目を作成',
+	'createarticle' => 'ページを作成',
 	'inputbox-ns-main' => '(標準)',
 );
 
@@ -1307,6 +1276,13 @@ $messages['nds-nl'] = array(
 /** Nepali (नेपाली) */
 $messages['ne'] = array(
 	'createarticle' => 'लेख थाल्नुहोस्',
+);
+
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'createarticle' => 'Talaga tohi tala',
 );
 
 /** Dutch (Nederlands)
@@ -2042,6 +2018,14 @@ $messages['yue'] = array(
 	'createarticle' => '建立文章',
 );
 
+$messages['zh'] = array(
+	'createarticle' => '创建新条目',
+);
+
+$messages['zh-cn'] = array(
+	'createarticle' => '创建新条目',
+);
+
 /** Simplified Chinese (‪中文(简体)‬)
  * @author Liangent
  * @author PhiLiP
@@ -2076,15 +2060,22 @@ $messages['zh-hant'] = array(
 	'inputbox-ns-main' => '主',
 );
 
+$messages['zh-hk'] = array(
+	'createarticle' => '創建新條目',
+);
+
+$messages['zh-sg'] = array(
+	'createarticle' => '创建新条目',
+);
+
 /** Chinese (Taiwan) (‪中文(台灣)‬)
  * @author Ffaarr
  */
 $messages['zh-tw'] = array(
-	'createarticle' => '創建頁面',
+	'createarticle' => '創建新條目',
 );
 
 /** Zulu (isiZulu) */
 $messages['zu'] = array(
 	'searchfulltext' => 'Sesha ukubhala konke',
 );
-

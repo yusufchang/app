@@ -1,20 +1,8 @@
 <?php
-
-/* Internationalisation file for Charinsert extension
-*/
-
 $messages = array();
 
 $messages['en'] = array(
 	'charinsert-desc' => 'Allows creation of JavaScript box for [[MediaWiki:Edittools|inserting non-standard characters]]',
-);
-
-/** Message documentation (Message documentation)
- * @author Meno25
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'charinsert-desc' => '{{desc}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -164,7 +152,7 @@ $messages['eo'] = array(
  * @author Remember the dot
  */
 $messages['es'] = array(
-	'charinsert-desc' => 'Permite la creación de una caja JavaScript para [[MediaWiki:Edittools|insertar caracteres inusuales]]',
+	'charinsert-desc' => 'Permite la creación de cajas de JavaScript para [[MediaWiki:Edittools|insertar caracteres que no son normales]]',
 );
 
 /** Estonian (Eesti)
@@ -718,4 +706,3 @@ $messages['zh-hans'] = array(
 $messages['zh-hant'] = array(
 	'charinsert-desc' => '允許增加[[MediaWiki:Edittools|插入非標準文字]]的JavaScript控制項',
 );
-

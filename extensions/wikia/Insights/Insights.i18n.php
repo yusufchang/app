@@ -4,118 +4,49 @@ $messages = array();
 $messages['en'] = array(
 	'insights' => 'Insights',
 	'insights-desc' => 'Insights description',
-
 	'insights-landing-title' => 'Welcome to Insights',
 	'insights-landing-lead' => 'Spend your time efficiently and make informed decisions about which articles you should edit with these insights. This feature is currently in beta. Love it? Hate it? Have ideas? Please submit your thoughts via [[Special:Contact/feedback]].',
-
 	'insights-list-no-items' => 'Great work! There are no articles in this queue that need attention.',
 	'insights-list-header-page' => 'Page',
 	'insights-list-header-pageviews' => 'Page views',
 	'insights-last-edit' => 'Last edited by $1, $2',
-
 	'insights-list-subtitle-uncategorizedpages' => 'Pages without categories',
 	'insights-list-description-uncategorizedpages' => 'Add categories to these pages. Good categorization is vital to a successfully organized wikia!',
 	'insights-notification-message-inprogress-uncategorizedpages' => 'This page needs categories added. ',
 	'insights-notification-message-fixed-uncategorizedpages' => 'Awesome, this page is now categorized.',
 	'insights-notification-next-item-uncategorizedpages' => 'Go to the next uncategorized article.',
-
 	'insights-list-subtitle-withoutimages' => 'Pages without images',
 	'insights-list-description-withoutimages' => 'Articles with images are read more often, shared more often, and perform better in search engines than those without images. Even adding a loosely related image can help.',
 	'insights-notification-message-inprogress-withoutimages' => 'This page needs an image. ',
 	'insights-notification-message-fixed-withoutimages' => 'Great, the page looks much better!',
 	'insights-notification-next-item-withoutimages' => ' Go to the next article that could use one.',
-
 	'insights-list-subtitle-deadendpages' => 'Pages without links',
 	'insights-list-description-deadendpages' => 'These pages should link to other articles on your wikia. Well-linked articles help readers discover more information about your topic and improve search engine rankings.',
 	'insights-notification-message-inprogress-deadendpages' => 'This page needs links to other pages. ',
 	'insights-notification-message-fixed-deadendpages' => 'Yay, this page is now linked!',
 	'insights-notification-next-item-deadendpages' => 'Go to the next article that needs links.',
-
 	'insights-list-subtitle-wantedpages' => 'Wanted pages',
 	'insights-list-description-wantedpages' => "There are redlinks pointing to these pages, but the pages don't exist! Create the article or make it a redirect to the correct article to help readers navigate your community.",
 	'insights-notification-message-inprogress-wantedpages' => 'This page needs to be created. ',
 	'insights-notification-message-fixed-wantedpages' => 'Thanks for making this page!',
 	'insights-notification-next-item-wantedpages' => 'Create another article.',
-
 	'insights-list-subtitle-nonportableinfoboxes' => 'Non-portable infoboxes',
-	'insights-list-description-nonportableinfoboxes' => 'The following infoboxes are built with tables or divs, and should be converted to use the new [[Help:PortableInfoboxes|infobox markup]] so they render appropriately to all visitors. If you\'re stuck you can also [[w:c:community:Thread:841717|visit our forum thread and ask questions there]].',
+	'insights-list-description-nonportableinfoboxes' => "The following infoboxes are built with tables or divs, and should be converted to use the new [[Help:PortableInfoboxes|infobox markup]] so they render appropriately to all visitors. If you're stuck you can also [[w:c:community:Thread:841717|visit our forum thread and ask questions there]].",
 	'insights-notification-message-inprogress-nonportableinfoboxes' => 'This infobox needs to be updated with the new infobox markup.',
 	'insights-notification-message-fixed-nonportableinfoboxes' => 'Awesome! The infobox on this page has been converted.',
 	'insights-notification-next-item-nonportableinfoboxes' => 'Convert the next infobox.',
-
 	'insights-sort-label' => 'Sort by',
 	'insights-sort-pv7' => 'Page views, last week',
 	'insights-sort-pv28' => 'Page views, last 4 weeks',
 	'insights-sort-pvDiff' => 'Recent increase in page views',
 	'insights-sort-title' => 'Alphabetical',
-
 	'insights-notification-message-alldone' => 'Congratulations! There are no more items in this queue.',
 	'insights-notification-message-fixit' => "Let's fix it.",
 	'insights-notification-list-button' => 'Go back to the list.',
 	'insights-notification-see-more' => 'See more insights.',
-
 	'insights-wanted-by' => '$1 referral links',
 	'insights-used-on' => 'Used on $1 articles',
-
 	'insights-module-see-more' => 'See more insights',
-);
-
-$messages['qqq'] = array(
-	'insights' => 'Name of the insights page',
-	'insights-desc' => 'Insights description',
-
-	'insights-landing-title' => 'A title of the Insights landing page appearing as an h1 element.',
-	'insights-landing-lead' => 'A lead for the Insights special page with a general description, appearing below the title.',
-
-	'insights-list-no-items' => 'A message that is shown when there are no items to work on left on a list',
-	'insights-list-header-page' => 'A header of an Insights list table for a column with a title and last revision data',
-	'insights-list-header-pageviews' => 'A header of an Insights list table for a column with a number of views of an article',
-	'insights-last-edit' => 'Information who and when made last edit for chosen article on the list',
-
-	'insights-list-subtitle-uncategorizedpages' => 'A title of a subpage with a list of uncategorized pages',
-	'insights-list-description-uncategorizedpages' => 'A description for a subpage with a list of uncategorized pages',
-	'insights-notification-message-inprogress-uncategorizedpages' => 'Message displayed on notification banner informing user that category should be added to the page',
-	'insights-notification-message-fixed-uncategorizedpages' => 'Message displayed on notification banner informing user that category was added to the page',
-	'insights-notification-next-item-uncategorizedpages' => 'Link text to redirect to next uncategorized page',
-
-	'insights-list-subtitle-withoutimages' => 'A title of a subpage with a list of pages without images',
-	'insights-list-description-withoutimages' => 'A description for a subpage with a list of pages without images',
-	'insights-notification-message-inprogress-withoutimages' => 'Message displayed on notification banner informing user that image should be added to the page',
-	'insights-notification-message-fixed-withoutimages' => 'Message displayed on notification banner informing user that image was added to the page',
-	'insights-notification-next-item-withoutimages' => ' Link text to redirect to next page without image',
-
-	'insights-list-subtitle-deadendpages' => 'A title of a subpage with a list of pages with no links',
-	'insights-list-description-deadendpages' => 'A description for a subpage with a list of pages with no links',
-	'insights-notification-message-inprogress-deadendpages' => 'Message displayed on notification banner informing user that the page needs links',
-	'insights-notification-message-fixed-deadendpages' => 'Message displayed on notification banner informing user that links were added to the page',
-	'insights-notification-next-item-deadendpages' => 'Link text to redirect to next page without links',
-
-	'insights-list-subtitle-wantedpages' => 'A title of a subpage with a list of wanted pages',
-	'insights-list-description-wantedpages' => 'A description for a subpage with a list of wanted pages',
-	'insights-notification-message-inprogress-wantedpages' => 'Message displayed on notification banner informing user that page should be created',
-	'insights-notification-message-fixed-wantedpages' => 'Message displayed on notification banner informing user that page was created',
-	'insights-notification-next-item-wantedpages' => 'Link text to redirect to next not existing page',
-
-	'insights-list-subtitle-unconvertedinfoboxes' => 'A title of list of pages with old (unconverted, non-portable) infoboxes',
-	'insights-list-description-unconvertedinfoboxes' => 'The description of what the list of old infoboxes is.',
-	'insights-notification-message-inprogress-unconvertedinfoboxes' => 'A hint that is displayed if a currently visited page needs conversion of an infobox.',
-	'insights-notification-message-fixed-unconvertedinfoboxes' => 'A message shown if an old infobox has been converted to the new syntax.',
-	'insights-notification-next-item-unconvertedinfoboxes' => 'A text of a link that leads to the next article that need infobox conversion.',
-
-	'insights-sort-pv7' => 'Sorting option by page views in last week',
-	'insights-sort-pv28' => 'Sorting option by page views in last 4 weeks',
-	'insights-sort-pvDiff' => 'Sorting option by recent increase in page views',
-	'insights-sort-title' => 'Alphabetical sorting option',
-
-	'insights-notification-message-alldone' => 'Message displayed on notification banner informing user that there is no more articles to fix in current Insight type',
-	'insights-notification-message-fixit' => 'Text encouraging user to fix an issue',
-	'insights-notification-list-button' => 'Text on button that redirects to list of insights',
-	'insights-notification-see-more' => 'Link text to redirect to Insights main page to see more Insight types',
-
-	'insights-wanted-by' => 'An information on how many other articles links to the one displayed above. $1 is a number of articles.',
-	'insights-used-on' => 'An information on how many articles uses the given template. $1 is the number',
-
-	'insights-module-see-more' => 'A text for a link to see more Insights lists',
 );
 
 $messages['de'] = array(
@@ -205,30 +136,30 @@ $messages['es'] = array(
 );
 
 $messages['fr'] = array(
-	'insights' => 'Suggestions',
+	'insights' => 'Augmentation récente des pages vues',
 	'insights-desc' => 'Présentation des Suggestions',
 	'insights-landing-title' => 'Bienvenue dans les Suggestions',
 	'insights-landing-lead' => 'Utilisez votre temps de manière efficace. Grâce aux Suggestions, vous savez sur quels articles vous concentrer et quoi modifier. Cette fonctionnalité est en version bêta actuellement. Vous aimez ? Vous détestez ? Vous avez des idées ? Merci de nous les soumettre via [[Special:Contact/feedback]].',
 	'insights-last-edit' => 'Dernière modification par $1, $2',
 	'insights-list-no-items' => "Super ! Aucun article de cette liste n'a besoin d'attention.",
 	'insights-list-subtitle-uncategorizedpages' => 'Pages sans catégories',
-	'insights-list-description-uncategorizedpages' => 'Ajoutez des catégories à cette page. Une bonne classification est cruciale pour bien organiser son wikia.',
-	'insights-notification-message-inprogress-uncategorizedpages' => 'Cette page a besoin de catégories. Ajoutons-en.',
-	'insights-notification-message-fixed-uncategorizedpages' => 'Génial, cette page est désormais classifiée.',
-	'insights-notification-next-item-uncategorizedpages' => 'Aller au prochain article non classifié.',
+	'insights-list-description-uncategorizedpages' => 'Ajoutez des catégories à cette page. Une bonne catégorisation est cruciale pour bien organiser son wikia.',
+	'insights-notification-message-inprogress-uncategorizedpages' => "Cette page a besoin d'être catégorisée.",
+	'insights-notification-message-fixed-uncategorizedpages' => 'Génial, cette page est désormais catégorisée.',
+	'insights-notification-next-item-uncategorizedpages' => 'Aller au prochain article sans catégories.',
 	'insights-list-subtitle-withoutimages' => 'Pages sans images',
 	'insights-list-description-withoutimages' => "Pour que votre article ait plus de chances d'être lu et partagé, et qu'il bénéficie d'une meilleure visibilité dans les résultats de recherche, ajoutez des images.",
-	'insights-notification-message-inprogress-withoutimages' => "Cette page a besoin d'une image. Ajoutons-en une !",
+	'insights-notification-message-inprogress-withoutimages' => "Cette page a besoin d'une image.",
 	'insights-notification-message-fixed-withoutimages' => 'Génial, cette page est beaucoup mieux !',
 	'insights-notification-next-item-withoutimages' => " Aller au prochain article qui pourrait bénéficier d'une image.",
 	'insights-list-subtitle-deadendpages' => 'Pages sans liens',
 	'insights-list-description-deadendpages' => "Ces pages devraient contenir des liens vers d'autres articles de votre wikia. Les articles contenant beaucoup de liens permettent aux lecteurs de découvrir des informations sur votre thème et d'améliorer les résultats de recherche.",
-	'insights-notification-message-inprogress-deadendpages' => "Cette page a besoin de liens vers d'autres pages. Ajoutons-en !",
+	'insights-notification-message-inprogress-deadendpages' => "Cette page a besoin de liens vers d'autres pages.",
 	'insights-notification-message-fixed-deadendpages' => 'Génial, cette page contient maintenant des liens !',
 	'insights-notification-next-item-deadendpages' => 'Aller à la prochaine page qui a besoin de liens.',
 	'insights-list-subtitle-wantedpages' => 'Pages demandées',
 	'insights-list-description-wantedpages' => "Il y a des liens vers ces pages, mais ces dernières n'existent pas ! Créez un article ou re-dirigez vers l'article correct pour aider les lecteurs à naviguer dans votre communauté.",
-	'insights-notification-message-inprogress-wantedpages' => "Cette page a besoin d'être créée. Créons-la !",
+	'insights-notification-message-inprogress-wantedpages' => "Cette page a besoin d'être créée.",
 	'insights-notification-message-fixed-wantedpages' => "Merci d'avoir créé cette page !",
 	'insights-notification-next-item-wantedpages' => 'Créer un autre article.',
 	'insights-list-subtitle-popularpages' => 'Pages populaires',
@@ -245,6 +176,9 @@ $messages['fr'] = array(
 	'insights-notification-see-more' => 'Voir plus de suggestions',
 	'insights-wanted-by' => "$1 liens pointant vers l'article",
 	'insights-module-see-more' => 'Voir plus de suggestions',
+	'insights-list-header-page' => 'Pages vues',
+	'insights-list-header-pageviews' => 'Pages vues',
+	'insights-notification-message-fixit' => ' Le corriger.',
 );
 
 $messages['it'] = array(
@@ -333,6 +267,46 @@ $messages['ja'] = array(
 	'insights-module-see-more' => 'その他の分析情報を見る',
 );
 
+$messages['ko'] = array(
+	'insights' => '문서 현황',
+	'insights-landing-title' => '문서 현황 페이지에 오신 것을 환영합니다',
+	'insights-landing-lead' => '아래 문서 현황 목록을 이용해 무슨 문서를 편집해야 할 지 효율적으로 파악하고 적절한 의견을 내어 보세요. 이 기능은 현재 베타 상태에 있습니다. 이 기능의 좋은 점, 싫은 점, 바뀌었으면 하는 점 등이 있으시다면 “[[Special:Contact/feedback|특수기능:문의/feedback]]”을 통해 알려 주세요.',
+	'insights-list-no-items' => '축하드려요! 이 목록에 해당하는 문서가 하나도 존재하지 않습니다.',
+	'insights-list-header-page' => '조회수',
+	'insights-list-header-pageviews' => '조회수',
+	'insights-last-edit' => '$2, $1에 의해 마지막으로 편집됨',
+	'insights-list-subtitle-uncategorizedpages' => '분류 없는 문서',
+	'insights-list-description-uncategorizedpages' => '문서에 분류를 추가해 주세요. 분류는 체계적으로 정리된 위키아의 필수 요소입니다!',
+	'insights-notification-message-inprogress-uncategorizedpages' => '이 문서에는 분류가 필요합니다.',
+	'insights-notification-message-fixed-uncategorizedpages' => '만세! 드디어 이 문서에 분류가 추가되었습니다.',
+	'insights-notification-next-item-uncategorizedpages' => '분류가 필요한 다음 문서로 이동',
+	'insights-list-subtitle-withoutimages' => '그림 없는 문서',
+	'insights-list-description-withoutimages' => '문서에 그림이 있으면 더 많은 사람들이 읽고, 공유할 수 있으며 검색 엔진에서 상위 노출이 더욱 쉬워집니다. 반드시 내용과 완벽히 연관된 그림을 넣어야 할 필요는 없습니다.',
+	'insights-notification-message-inprogress-withoutimages' => '이 문서에는 그림이 필요합니다.',
+	'insights-notification-message-fixed-withoutimages' => '멋져요! 이렇게 보니 더 낫군요.',
+	'insights-notification-next-item-withoutimages' => '그림이 필요한 다음 문서로 이동',
+	'insights-list-subtitle-deadendpages' => '링크 없는 문서',
+	'insights-list-description-deadendpages' => '이 문서로 향하는 링크를 위키아 내 다른 문서 어딘가에 추가해 주세요. 문서를 적절히 링크하면 독자들이 더 쉽게 정보를 얻을 수 있고, 검색 엔진 상위 노출에도 유리해집니다.',
+	'insights-notification-message-inprogress-deadendpages' => '이 문서에는 링크가 필요합니다.',
+	'insights-notification-message-fixed-deadendpages' => '만세! 드디어 이 문서에 링크가 걸렸습니다.',
+	'insights-notification-next-item-deadendpages' => '링크가 필요한 다음 문서로 이동',
+	'insights-list-subtitle-wantedpages' => '필요한 문서',
+	'insights-list-description-wantedpages' => '문서로 향하는 링크는 있지만, 막상 그 문서가 존재하지는 않는 링크입니다. 문서를 생성하거나 다른 적절한 문서로 향하는 넘겨주기 페이지를 만들어 주세요!',
+	'insights-notification-message-inprogress-wantedpages' => '이 커뮤니티에는 이 문서가 필요합니다.',
+	'insights-notification-message-fixed-wantedpages' => '문서가 생성되었습니다! 커뮤니티에 기여해 주셔서 감사합니다.',
+	'insights-notification-next-item-wantedpages' => '또 다른 문서 생성하기',
+	'insights-sort-label' => '정렬:',
+	'insights-sort-pv7' => '지난 한 주간 조회수 순',
+	'insights-sort-pv28' => '지난 4주간 조회수 순',
+	'insights-sort-pvDiff' => '최근 조회수 증가량 순',
+	'insights-notification-message-alldone' => '축하드려요! 더 이상 이 목록에 해당하는 문서가 존재하지 않습니다.',
+	'insights-notification-message-fixit' => '함께 고쳐 봅시다.',
+	'insights-notification-list-button' => '목록으로 돌아가기',
+	'insights-notification-see-more' => '문서 현황 더 보기',
+	'insights-wanted-by' => '가리키는 링크 $1개',
+	'insights-module-see-more' => '더 자세한 현황 보기',
+);
+
 $messages['nl'] = array(
 	'insights' => 'Insights',
 	'insights-desc' => 'Insights description',
@@ -377,30 +351,30 @@ $messages['nl'] = array(
 );
 
 $messages['pl'] = array(
-	'insights' => 'Podpowiedzi',
+	'insights' => 'Ostatni wzrost liczby wyświetleń',
 	'insights-desc' => 'Opis Podpowiedzi',
 	'insights-landing-title' => 'Witamy w Podpowiedziach',
-	'insights-landing-lead' => 'Spędzaj czas wydajnie i świadomie podejmuj decyzje o tym, które artykuły powinieneś edytować używając podpowiedzi. Ta funkcja jest obecnie w fazie beta. Podoba ci się? Wkurza cię? Masz jakieś sugestie? Podziel się swoimi odczuciami poprzez [[Special:Contact/feedback]].',
+	'insights-landing-lead' => 'Spędzaj czas wydajnie i świadomie podejmuj decyzje o tym, które artykuły powinieneś edytować używając podpowiedzi. Ta funkcja jest obecnie w fazie beta. Podoba ci się? Wkurza cię? Masz jakieś sugestie? Podziel się swoimi odczuciami poprzez [[Special:Contact/feedback|Specjalna:Kontakt/feedback]].',
 	'insights-last-edit' => 'Ostatnio edytowane przez $1, $2',
 	'insights-list-no-items' => 'Dobra robota! Nie ma w kolejce artykułów, które wymagają uwagi.',
 	'insights-list-subtitle-uncategorizedpages' => 'Strony bez kategorii',
 	'insights-list-description-uncategorizedpages' => 'Dodaj kategorie do stron. Poprawne określenie kategorie pomoże Ci w organizacji wikii!',
-	'insights-notification-message-inprogress-uncategorizedpages' => 'Ta strona wymaga dodania kategorii. Czas to naprawić.',
+	'insights-notification-message-inprogress-uncategorizedpages' => 'Ta strona wymaga dodania kategorii.',
 	'insights-notification-message-fixed-uncategorizedpages' => 'Świetnie! Strona posiada teraz kategorię.',
 	'insights-notification-next-item-uncategorizedpages' => 'Przejdź do następnego artykułu bez kategorii.',
 	'insights-list-subtitle-withoutimages' => 'Strony bez obrazów',
 	'insights-list-description-withoutimages' => 'Artykuły zawierające obrazy są częściej czytane, częściej udostępniane i osiągają lepsze wyniki w wyszukiwarkach niż te pozbawione obrazów. Nawet dodanie luźno powiązanego obrazu może być pomocne.',
-	'insights-notification-message-inprogress-withoutimages' => 'Ta strona potrzebuje obrazu. Czas to naprawić.',
+	'insights-notification-message-inprogress-withoutimages' => 'Ta strona potrzebuje obrazu.',
 	'insights-notification-message-fixed-withoutimages' => 'Świetnie! Strona wygląda teraz znacznie lepiej.',
 	'insights-notification-next-item-withoutimages' => ' Przejdź do następnego artykułu, któremu też przyda się obraz.',
 	'insights-list-subtitle-deadendpages' => 'Strona bez odnośników',
-	'insights-list-description-deadendpages' => 'Te strony powinny zawierać odnośniki do innych artykułów na twojej wikia. Dobrze powiązane artykuły pomagają czytelnikom odnaleźć więcej informacji i poprawiają pozycje w wyszukiwarkach.',
-	'insights-notification-message-inprogress-deadendpages' => 'Tej stronie brakuje odnośników do innych stron. Czas to naprawić.',
+	'insights-list-description-deadendpages' => 'Te strony powinny zawierać odnośniki do innych artykułów na twojej wikii. Dobrze powiązane artykuły pomagają czytelnikom odnaleźć więcej informacji i poprawiają pozycje w wyszukiwarkach.',
+	'insights-notification-message-inprogress-deadendpages' => 'Tej stronie brakuje odnośników do innych stron.',
 	'insights-notification-message-fixed-deadendpages' => 'Hurra! Ta strona zawiera teraz  odnośniki.',
 	'insights-notification-next-item-deadendpages' => 'Przejdź do kolejnego artykułu, któremu przydadzą się odnośniki.',
 	'insights-list-subtitle-wantedpages' => 'Szukane strony',
 	'insights-list-description-wantedpages' => 'Istnieją redlinki kierujące do tych stron, ale te strony nie istnieją! Stwórz artykuł, albo przekieruj do właściwego artykułu, aby pomóc czytelnikom poruszać się po twojej społeczności.',
-	'insights-notification-message-inprogress-wantedpages' => 'Ta strona powinna powstać. Czas to naprawić.',
+	'insights-notification-message-inprogress-wantedpages' => 'Ta strona powinna powstać.',
 	'insights-notification-message-fixed-wantedpages' => 'Dziękujemy za stworzenie strony!',
 	'insights-notification-next-item-wantedpages' => 'Utwórz kolejny artykuł.',
 	'insights-list-subtitle-popularpages' => 'Popularne strony',
@@ -417,6 +391,12 @@ $messages['pl'] = array(
 	'insights-notification-see-more' => 'Zobacz więcej podpowiedzi.',
 	'insights-wanted-by' => '$1 linków',
 	'insights-module-see-more' => 'Zobacz więcej podpowiedzi',
+	'insights-list-header-page' => 'Wyświetlenia strony',
+	'insights-list-header-pageviews' => 'Wyświetlenia strony',
+	'insights-sort-pv7' => 'Wyświetlenia strony, ostatni tydzień',
+	'insights-sort-pv28' => 'Wyświetlenia strony, ostatnie 4 tygodnie',
+	'insights-sort-pvDiff' => 'Ostatni wzrost liczby wyświetleń',
+	'insights-notification-message-fixit' => 'Czas to naprawić.',
 );
 
 $messages['pt'] = array(
@@ -590,4 +570,3 @@ $messages['zh-tw'] = array(
 	'insights-wanted-by' => '$1 個推介連結',
 	'insights-module-see-more' => '查看更多問題頁面列表',
 );
-

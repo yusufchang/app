@@ -14,38 +14,30 @@ $messages = array();
  *  @author Markus Krötzsch
  */
 $messages['en'] = array(
-	'smw-desc'              => 'Making your wiki more accessible - for machines \'\'and\'\' humans ([http://semantic-mediawiki.org/wiki/Help:User_manual online documentation])',
-	'smw_viewasrdf'         => 'RDF feed',
-	'smw_finallistconjunct' => ', and', // used in "A, B, and C"
-	'smw_factbox_head'      => 'Facts about $1',
-	'smw_isspecprop'        => 'This property is a special property in this wiki.',
-	'smw_isknowntype'       => 'This type is among the standard datatypes of this wiki.',
-	'smw_isaliastype'       => 'This type is an alias for the datatype "$1".',
-	'smw_isnotype'          => 'This type "$1" is not a standard datatype in the wiki, and has not been given a user definition either.',
-	'smw_concept_description' => 'Description of concept "$1"', // used in the namespace "Concept:"
+	'smw-desc' => "Making your wiki more accessible - for machines ''and'' humans ([http://semantic-mediawiki.org/wiki/Help:User_manual online documentation])",
+	'smw_viewasrdf' => 'RDF feed',
+	'smw_finallistconjunct' => ', and',
+	'smw_factbox_head' => 'Facts about $1',
+	'smw_isspecprop' => 'This property is a special property in this wiki.',
+	'smw_isknowntype' => 'This type is among the standard datatypes of this wiki.',
+	'smw_isaliastype' => 'This type is an alias for the datatype "$1".',
+	'smw_isnotype' => 'This type "$1" is not a standard datatype in the wiki, and has not been given a user definition either.',
+	'smw_concept_description' => 'Description of concept "$1"',
 	'smw_no_concept_namespace' => 'Concepts can only be defined on pages in the Concept: namespace.',
-	'smw_multiple_concepts'   => 'Each concept page can have only one concept definition.',
-	'smw_concept_cache_miss'  => 'The concept "$1" can not be used at the moment, since the wiki configuration requires it to be computed off-line.
+	'smw_multiple_concepts' => 'Each concept page can have only one concept definition.',
+	'smw_concept_cache_miss' => 'The concept "$1" can not be used at the moment, since the wiki configuration requires it to be computed off-line.
 If the problem does not go away after some time, ask your site administrator to make this concept available.',
-	'smw_noinvannot'        => 'Values cannot be assigned to inverse properties.',
-	'version-semantic'      => 'Semantic extensions',
-
-	// URIs that should not be used in objects in cases where users can provide URIs
-	'smw_uri_blacklist' => " http://www.w3.org/1999/02/22-rdf-syntax-ns#\n http://www.w3.org/2000/01/rdf-schema#\n http://www.w3.org/2002/07/owl#",
-	'smw_baduri'        => 'URIs of the form "$1" are not allowed.',
-
-	// Link to RSS feeds
+	'smw_noinvannot' => 'Values cannot be assigned to inverse properties.',
+	'version-semantic' => 'Semantic extensions',
+	'smw_uri_blacklist' => ' http://www.w3.org/1999/02/22-rdf-syntax-ns#
+ http://www.w3.org/2000/01/rdf-schema#
+ http://www.w3.org/2002/07/owl#',
+	'smw_baduri' => 'URIs of the form "$1" are not allowed.',
 	'smw_rss_link' => 'RSS',
-	// Link to CSV files
 	'smw_csv_link' => 'CSV',
-	// Link to DSV files
 	'smw_dsv_link' => 'DSV',
-	// Link to JSON files
 	'smw_json_link' => 'JSON',
-	// Link to RDF files
 	'smw_rdf_link' => 'RDF',
-
-	// Names for result formats:
 	'smw_printername_auto' => 'Automatic',
 	'smw_printername_count' => 'Count results',
 	'smw_printername_csv' => 'CSV export',
@@ -62,273 +54,217 @@ If the problem does not go away after some time, ask your site administrator to 
 	'smw_printername_template' => 'Template',
 	'smw_printername_rdf' => 'RDF export',
 	'smw_printername_category' => 'Category',
-
-	// Messages for query parameter descriptions
-	'smw_paramdesc_limit'	=> 'The maximum number of results to return',
+	'smw_paramdesc_limit' => 'The maximum number of results to return',
 	'smw_paramdesc_offset' => 'The offset of the first result',
-	'smw_paramdesc_headers'	=> 'Display the headers/property names',
-	'smw_paramdesc_mainlabel'	=> 'The label to give to the main page name',
-	'smw_paramdesc_link'	=> 'Show values as links',
-	'smw_paramdesc_intro'	=> 'The text to display before the query results, if there are any',
-	'smw_paramdesc_outro'	=> 'The text to display after the query results, if there are any',
-	'smw_paramdesc_default'	=> 'The text to display if there are no query results',
-	'smw_paramdesc_searchlabel'	=> 'The text for the link to results',
-	'smw_paramdesc_sep'	=> 'The separator for values',
+	'smw_paramdesc_headers' => 'Display the headers/property names',
+	'smw_paramdesc_mainlabel' => 'The label to give to the main page name',
+	'smw_paramdesc_link' => 'Show values as links',
+	'smw_paramdesc_intro' => 'The text to display before the query results, if there are any',
+	'smw_paramdesc_outro' => 'The text to display after the query results, if there are any',
+	'smw_paramdesc_default' => 'The text to display if there are no query results',
+	'smw_paramdesc_searchlabel' => 'The text for the link to results',
+	'smw_paramdesc_sep' => 'The separator for values',
 	'smw-paramdesc-distribution' => 'Instead of displaying all values, count their occurances, and show these.',
 	'smw-paramdesc-distributionsort' => 'Sort the value distribution by occurance count.',
 	'smw-paramdesc-distributionlimit' => 'Limit the value distribution to the count of only some values.',
-	'smw_paramdesc_template'	=> 'The name of a template with which to display the printouts',
-	'smw_paramdesc_columns'	=> 'The number of columns in which to display results (default is $1)',
-	'smw_paramdesc_userparam'	=> 'A value passed into each template call, if a template is used',
-	'smw_paramdesc_introtemplate'	=> 'The name of a template to display before the query results, if there are any',
-	'smw_paramdesc_outrotemplate'	=> 'The name of a template to display after the query results, if there are any',
-	'smw_paramdesc_embedformat'	=> 'The HTML tag used to define headings',
-	'smw_paramdesc_embedonly'	=> 'Display no headings',
-	'smw-paramdesc-table-class'	=> 'An additional CSS class to set for the table',
-	'smw_paramdesc_rsstitle'	=> 'The text to be used as the title of the feed',
-	'smw_paramdesc_rssdescription'	=> 'The text to be used as the description of the feed',
-	'smw_paramdesc_rdfsyntax'	=> 'The RDF syntax to be used',
-	'smw-paramdesc-csv-sep'		=> 'The separator to use',
-	'smw-paramdesc-dsv-separator'	=> 'The separator to use',
-	'smw-paramdesc-dsv-filename'	=> 'The name for the DSV file',
+	'smw_paramdesc_template' => 'The name of a template with which to display the printouts',
+	'smw_paramdesc_columns' => 'The number of columns in which to display results (default is $1)',
+	'smw_paramdesc_userparam' => 'A value passed into each template call, if a template is used',
+	'smw_paramdesc_introtemplate' => 'The name of a template to display before the query results, if there are any',
+	'smw_paramdesc_outrotemplate' => 'The name of a template to display after the query results, if there are any',
+	'smw_paramdesc_embedformat' => 'The HTML tag used to define headings',
+	'smw_paramdesc_embedonly' => 'Display no headings',
+	'smw-paramdesc-table-class' => 'An additional CSS class to set for the table',
+	'smw_paramdesc_rsstitle' => 'The text to be used as the title of the feed',
+	'smw_paramdesc_rssdescription' => 'The text to be used as the description of the feed',
+	'smw_paramdesc_rdfsyntax' => 'The RDF syntax to be used',
+	'smw-paramdesc-csv-sep' => 'The separator to use',
+	'smw-paramdesc-dsv-separator' => 'The separator to use',
+	'smw-paramdesc-dsv-filename' => 'The name for the DSV file',
 	'smw-smwdoc-description' => 'Shows a table of all parameters that can be used for the specified result format together with default values and descriptions.',
-	'smw-smwdoc-par-format'	=> 'The result format to display parameter documentation for.',
+	'smw-smwdoc-par-format' => 'The result format to display parameter documentation for.',
 	'smw-smwdoc-par-parameters' => 'Which parameters to show. "specific" for those added by the format, "base" for those available in all formats, and "all" for both.',
 	'smw-paramdesc-sort' => 'Property to sort the query by',
 	'smw-paramdesc-order' => 'Order of the query sort',
 	'smw-paramdesc-searchlabel' => 'Text for continuing the search (default is «… further results»)',
 	'smw_paramdesc_named_args' => 'Name the arguments passed to the template',
-
-	// Messages and strings for inline queries
-	'smw_iq_disabled'    => "Semantic queries have been disabled for this wiki.",
+	'smw_iq_disabled' => 'Semantic queries have been disabled for this wiki.',
 	'smw_iq_moreresults' => '… further results',
 	'smw_nonright_importtype' => '$1 can only be used for pages with namespace "$2".',
-	'smw_wrong_importtype'    => '$1 can not be used for pages in the namespace "$2".',
-	'smw_no_importelement'    => 'Element "$1" not available for import.',
-
-	// Messages and strings for basic datatype processing
-	'smw_parseerror'    => 'The given value was not understood.', // generic error, "something" went wrong
-	'smw_decseparator'  => '.',
+	'smw_wrong_importtype' => '$1 can not be used for pages in the namespace "$2".',
+	'smw_no_importelement' => 'Element "$1" not available for import.',
+	'smw_parseerror' => 'The given value was not understood.',
+	'smw_decseparator' => '.',
 	'smw_kiloseparator' => ',',
-	'smw_notitle'       => '"$1" cannot be used as a page name in this wiki.',
-	'smw_noproperty'    => '"$1" cannot be used as a property name in this wiki.',
+	'smw_notitle' => '"$1" cannot be used as a page name in this wiki.',
+	'smw_noproperty' => '"$1" cannot be used as a property name in this wiki.',
 	'smw_wrong_namespace' => 'Only pages in namespace "$1" are allowed here.',
-	'smw_unknowntype'   => 'Unsupported type "$1" defined for property.',
-	'smw_manytypes'     => 'More than one type defined for property.',
-	'smw_emptystring'   => 'Empty strings are not accepted.',
-	'smw_maxstring'     => 'String representation $1 is too long.',
-	'smw_notinenum'     => '"$1" is not in the list of possible values ($2) for this property.',
-	'smw_noboolean'     => '"$1" is not recognized as a Boolean (true/false) value.',
-	'smw_true_words'    => 'true,t,yes,y', // comma-separated synonyms for Boolean TRUE besides '1', primary value first
-	'smw_false_words'   => 'false,f,no,n', // comma-separated synonyms for Boolean FALSE besides '0', primary value first
-	'smw_nofloat'       => '"$1" is not a number.',
-	'smw_infinite'      => 'Numbers as large as "$1" are not supported.',
-	'smw_unitnotallowed'=> '"$1" is not declared as a valid unit of measurement for this property.',
+	'smw_unknowntype' => 'Unsupported type "$1" defined for property.',
+	'smw_manytypes' => 'More than one type defined for property.',
+	'smw_emptystring' => 'Empty strings are not accepted.',
+	'smw_maxstring' => 'String representation $1 is too long.',
+	'smw_notinenum' => '"$1" is not in the list of possible values ($2) for this property.',
+	'smw_noboolean' => '"$1" is not recognized as a Boolean (true/false) value.',
+	'smw_true_words' => 'true,t,yes,y',
+	'smw_false_words' => 'false,f,no,n',
+	'smw_nofloat' => '"$1" is not a number.',
+	'smw_infinite' => 'Numbers as large as "$1" are not supported.',
+	'smw_unitnotallowed' => '"$1" is not declared as a valid unit of measurement for this property.',
 	'smw_nounitsdeclared' => 'No units of measurement were declared for this property.',
-	'smw_novalues'      => 'No values specified.',
-
-	// Currently unused, floats silently store units.  'smw_unexpectedunit' => 'this property supports no unit conversion',
-
-	// some links for online maps; can be translated to different language versions of services, but need not
-
-	// Messages for datetime parsing
+	'smw_novalues' => 'No values specified.',
 	'smw_nodatetime' => 'The date "$1" was not understood.',
-
-	// Errors and notices related to queries
-	'smw_toomanyclosing'    => 'There appear to be too many occurrences of "$1" in the query.',
+	'smw_toomanyclosing' => 'There appear to be too many occurrences of "$1" in the query.',
 	'smw_noclosingbrackets' => 'Some use of "<nowiki>[[</nowiki>" in your query was not closed by a matching "]]".',
-	'smw_misplacedsymbol'   => 'The symbol "$1" was used in a place where it is not useful.',
-	'smw_unexpectedpart'    => 'The part "$1" of the query was not understood.
+	'smw_misplacedsymbol' => 'The symbol "$1" was used in a place where it is not useful.',
+	'smw_unexpectedpart' => 'The part "$1" of the query was not understood.
 Results might not be as expected.',
-	'smw_emptysubquery'     => 'Some subquery has no valid condition.',
+	'smw_emptysubquery' => 'Some subquery has no valid condition.',
 	'smw_misplacedsubquery' => 'Some subquery was used in a place where no subqueries are allowed.',
-	'smw_valuesubquery'     => 'Subqueries not supported for values of property "$1".',
-	'smw_badqueryatom'      => 'Some part "<nowiki>[[…]]</nowiki>" of the query was not understood.',
-	'smw_propvalueproblem'  => 'The value of property "$1" was not understood.',
-	'smw_noqueryfeature'    => 'Some query feature was not supported in this wiki and part of the query was dropped ($1).',
-	'smw_noconjunctions'    => 'Conjunctions in queries are not supported in this wiki and part of the query was dropped ($1).',
-	'smw_nodisjunctions'    => 'Disjunctions in queries are not supported in this wiki and part of the query was dropped ($1).',
-	'smw_querytoolarge'     => 'The following query conditions could not be considered due to the wikis restrictions in query size or depth: $1.',
-	'smw_notemplategiven'   => 'Provide a value for the parameter "template" for this query format to work.',
-
-	// Messages from the database backend
-	'smw_db_sparqlqueryproblem'   => 'The query result could not be obtained from the SPARQL database. This error might be temporary or indicate a bug in the database software.',
-	'smw_db_sparqlqueryincomplete'=> 'Answering the query turned out to be too difficult and was aborted. Some results could be missing. If possible, try using a simpler query instead.',
-
-	// Messages for pages of types and properties
-	'smw_type_header'             => 'Properties of type "$1"',
-	'smw_typearticlecount'        => 'Showing $1 {{PLURAL:$1|property|properties}} using this type.',
-	'smw_attribute_header'        => 'Pages using the property "$1"',
-	'smw_attributearticlecount'   => 'Showing $1 {{PLURAL:$1|page|pages}} using this property.',
-	'smw_subproperty_header'      => 'Subproperties',
+	'smw_valuesubquery' => 'Subqueries not supported for values of property "$1".',
+	'smw_badqueryatom' => 'Some part "<nowiki>[[…]]</nowiki>" of the query was not understood.',
+	'smw_propvalueproblem' => 'The value of property "$1" was not understood.',
+	'smw_noqueryfeature' => 'Some query feature was not supported in this wiki and part of the query was dropped ($1).',
+	'smw_noconjunctions' => 'Conjunctions in queries are not supported in this wiki and part of the query was dropped ($1).',
+	'smw_nodisjunctions' => 'Disjunctions in queries are not supported in this wiki and part of the query was dropped ($1).',
+	'smw_querytoolarge' => 'The following query conditions could not be considered due to the wikis restrictions in query size or depth: $1.',
+	'smw_notemplategiven' => 'Provide a value for the parameter "template" for this query format to work.',
+	'smw_db_sparqlqueryproblem' => 'The query result could not be obtained from the SPARQL database. This error might be temporary or indicate a bug in the database software.',
+	'smw_db_sparqlqueryincomplete' => 'Answering the query turned out to be too difficult and was aborted. Some results could be missing. If possible, try using a simpler query instead.',
+	'smw_type_header' => 'Properties of type "$1"',
+	'smw_typearticlecount' => 'Showing $1 {{PLURAL:$1|property|properties}} using this type.',
+	'smw_attribute_header' => 'Pages using the property "$1"',
+	'smw_attributearticlecount' => 'Showing $1 {{PLURAL:$1|page|pages}} using this property.',
+	'smw_subproperty_header' => 'Subproperties',
 	'smw_subpropertyarticlecount' => 'This property has the following $1 {{PLURAL:$1|subproperty|subproperties}}:',
-	'smw_concept_header'          => 'Pages of concept "$1"',
-	'smw_conceptarticlecount'     => 'Showing $1 {{PLURAL:$1|page|pages}} belonging to that concept.',
-
-	// Messages used in RSS feeds
+	'smw_concept_header' => 'Pages of concept "$1"',
+	'smw_conceptarticlecount' => 'Showing $1 {{PLURAL:$1|page|pages}} belonging to that concept.',
 	'smw_rss_description' => '$1 RSS feed',
-
-	// Group name for SMW special pages
 	'specialpages-group-smw_group' => 'Semantic MediaWiki',
-
-	// Messages for Export RDF Special
-	'exportrdf'               => 'Export pages to RDF', // name of this special
-	'smw_exportrdf_docu'      => 'This page allows you to obtain data from a page in RDF format.
+	'exportrdf' => 'Export pages to RDF',
+	'smw_exportrdf_docu' => 'This page allows you to obtain data from a page in RDF format.
 To export pages, enter the titles in the text box below, one title per line.',
 	'smw_exportrdf_recursive' => 'Recursively export all related pages.
 Note that the result could be large!',
 	'smw_exportrdf_backlinks' => 'Also export all pages that refer to the exported pages.
 Generates browsable RDF.',
-	'smw_exportrdf_lastdate'  => 'Do not export pages that were not changed since the given point in time.',
-	'smw_exportrdf_submit'  => 'Export',
-
-	// Messages for Properties Special
-	'properties'             => 'Properties',
-	'smw_properties_docu'    => 'The following properties are used in the wiki.',
-	'smw_property_template'  => '$1 of type $2 ($3)', // <propname> of type <type> (<count>)
-	'smw_property_template_notype' => '$1 ($2)', // <propname> (<count>)
-	'smw_propertylackspage'  => 'All properties should be described by a page!',
-	'smw_propertylackstype'  => 'No type was specified for this property (assuming type $1 for now).',
+	'smw_exportrdf_lastdate' => 'Do not export pages that were not changed since the given point in time.',
+	'smw_exportrdf_submit' => 'Export',
+	'properties' => 'Properties',
+	'smw_properties_docu' => 'The following properties are used in the wiki.',
+	'smw_property_template' => '$1 of type $2 ($3)',
+	'smw_property_template_notype' => '$1 ($2)',
+	'smw_propertylackspage' => 'All properties should be described by a page!',
+	'smw_propertylackstype' => 'No type was specified for this property (assuming type $1 for now).',
 	'smw_propertyhardlyused' => 'This property is hardly used within the wiki!',
-
-	// Messages for Unused Properties Special
 	'unusedproperties' => 'Unused properties',
 	'smw_unusedproperties_docu' => 'The following properties exist although no other page makes use of them.',
-	'smw_unusedproperty_template' => '$1 of type $2', // <propname> of type <type>
-
-	// Messages for Wanted Properties Special
-	'wantedproperties'            => 'Wanted properties',
-	'smw_wantedproperties_docu'   => 'The following properties are used in the wiki but do not yet have a page for describing them.',
-	'smw_wantedproperty_template' => '$1 ($2 {{PLURAL:$2|use|uses}})', // <propname> (<count> uses)
-
-	// Messages for the refresh button
-	'smw_purge'     => 'Refresh',
-
-	// Messages for (data)Types Special
-	'types'          => 'Types',
+	'smw_unusedproperty_template' => '$1 of type $2',
+	'wantedproperties' => 'Wanted properties',
+	'smw_wantedproperties_docu' => 'The following properties are used in the wiki but do not yet have a page for describing them.',
+	'smw_wantedproperty_template' => '$1 ($2 {{PLURAL:$2|use|uses}})',
+	'smw_purge' => 'Refresh',
+	'types' => 'Types',
 	'smw_types_docu' => 'The following is a list of all datatypes that can be assigned to properties.',
-	'smw_typeunits'  => 'Units of measurement of type "$1": $2',
-
-	/*Messages for SemanticStatistics Special*/
+	'smw_typeunits' => 'Units of measurement of type "$1": $2',
 	'semanticstatistics' => 'Semantic statistics',
-	'smw_semstats_text'  => 'This wiki contains \'\'\'$1\'\'\' property {{PLURAL:$1|value|values}} for a total of \'\'\'$2\'\'\' [[Special:Properties|{{PLURAL:$2|property|different properties}}]].
-\'\'\'$3\'\'\' {{PLURAL:$3|property has|properties have}} an own page, and the intended datatype is specified for \'\'\'$4\'\'\' of those.
+	'smw_semstats_text' => "This wiki contains '''$1''' property {{PLURAL:$1|value|values}} for a total of '''$2''' [[Special:Properties|{{PLURAL:$2|property|different properties}}]].
+'''$3''' {{PLURAL:$3|property has|properties have}} an own page, and the intended datatype is specified for '''$4''' of those.
 Some of the existing properties might be [[Special:UnusedProperties|unused properties]].
-Properties that still lack a page are found on the [[Special:WantedProperties|list of wanted properties]].',
-
-	// Name of the URI Resolver Special (no content)
+Properties that still lack a page are found on the [[Special:WantedProperties|list of wanted properties]].",
 	'smw_uri_doc' => 'The URI resolver implements the <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG finding on httpRange-14</a>.
 It takes care that humans do not turn into websites.',
-
-	// Messages for ask Special
-	'ask'                   => 'Semantic search',
-	'smw_ask_doculink'      => 'http://semantic-mediawiki.org/wiki/Help:Semantic_search',
-	'smw_ask_sortby'        => 'Sort by column (optional)',
-	'smw_ask_ascorder'      => 'Ascending',
-	'smw_ask_descorder'     => 'Descending',
-	'smw_ask_submit'        => 'Find results',
-	'smw_ask_editquery'     => '[Edit query]',
+	'ask' => 'Semantic search',
+	'smw_ask_doculink' => 'http://semantic-mediawiki.org/wiki/Help:Semantic_search',
+	'smw_ask_sortby' => 'Sort by column (optional)',
+	'smw_ask_ascorder' => 'Ascending',
+	'smw_ask_descorder' => 'Descending',
+	'smw_ask_submit' => 'Find results',
+	'smw_ask_editquery' => '[Edit query]',
 	'smw_add_sortcondition' => '[Add sorting condition]',
-	'smw_ask_hidequery'     => 'Hide query',
-	'smw_ask_help'          => 'Querying help',
-	'smw_ask_queryhead'     => 'Query',
-	'smw_ask_printhead'     => 'Additional data to display',
-	'smw_ask_printdesc'     => '(add one property name per line)',
-	'smw_ask_format_as'     => 'Format as:',
-	'smw_ask_defaultformat'	=> 'default',
-	'smw_ask_otheroptions'  => 'Other options',
-	'smw_ask_show_embed'	=> 'Show embed code',
-	'smw_ask_hide_embed'	=> 'Hide embed code',
-	'smw_ask_embed_instr'	=> 'To embed this query inline into a wiki page use the code below.',
-
-	// Messages for Query Creator Special
-	'querycreator'             => 'Query Creator',
-	'smw_qc_addmainlabel'      => 'Add main label',
-	'smw_qc_show_addnal_opts'  => 'Show more options',
-	'smw_qc_hide_addnal_opts'  => 'Show less options',
-	'smw_qc_otheropt'          => 'Other options',
-	'smw_qc_intro'             => 'Intro:',
-	'smw_qc_outro'             => 'Outro:',
-	'smw_qc_default'           => 'Default:',
-	'smw_qc_formatopt'         => 'Format options',
-	'smw_qc_query_help'        => 'Enter a query using the form below. Select wiki pages based on
+	'smw_ask_hidequery' => 'Hide query',
+	'smw_ask_help' => 'Querying help',
+	'smw_ask_queryhead' => 'Query',
+	'smw_ask_printhead' => 'Additional data to display',
+	'smw_ask_printdesc' => '(add one property name per line)',
+	'smw_ask_format_as' => 'Format as:',
+	'smw_ask_defaultformat' => 'default',
+	'smw_ask_otheroptions' => 'Other options',
+	'smw_ask_show_embed' => 'Show embed code',
+	'smw_ask_hide_embed' => 'Hide embed code',
+	'smw_ask_embed_instr' => 'To embed this query inline into a wiki page use the code below.',
+	'querycreator' => 'Query Creator',
+	'smw_qc_addmainlabel' => 'Add main label',
+	'smw_qc_show_addnal_opts' => 'Show more options',
+	'smw_qc_hide_addnal_opts' => 'Show less options',
+	'smw_qc_otheropt' => 'Other options',
+	'smw_qc_intro' => 'Intro:',
+	'smw_qc_outro' => 'Outro:',
+	'smw_qc_default' => 'Default:',
+	'smw_qc_formatopt' => 'Format options',
+	'smw_qc_query_help' => 'Enter a query using the form below. Select wiki pages based on
 Categories (<strong>[[{{ns:category}}:Actor]]</strong>), 
 Properties (<strong>[[Located in::Germany]]</strong>), 
 Names(<strong>[[Germany]]</strong>) and Namespaces (<strong>[[{{ns:help}}:+]]</strong>)',
-
-	//Generic messages for Query UI
-	'smw_qui_property'      => '<strong>Property</strong>',
-	'smw_qui_prop'          => 'Property:',
-	'smw_qui_labl'          => 'Label:',
-	'smw_qui_formt'         => 'Format:',
-	'smw_qui_limt'          => 'Limit:',
-	'smw_qui_shownresults'  => 'show in results',
-	'smw_qui_noquery'       => 'No query has been specified',
-	'smw_qui_invalidprop'   => '"$1" may not be a valid property',
+	'smw_qui_property' => '<strong>Property</strong>',
+	'smw_qui_prop' => 'Property:',
+	'smw_qui_labl' => 'Label:',
+	'smw_qui_formt' => 'Format:',
+	'smw_qui_limt' => 'Limit:',
+	'smw_qui_shownresults' => 'show in results',
+	'smw_qui_noquery' => 'No query has been specified',
+	'smw_qui_invalidprop' => '"$1" may not be a valid property',
 	'smw_qui_invalidformat' => 'The chosen format "$1" does not exist for this wiki',
-	'smw_qui_nosort'        => 'No sorting',
-	'smw_qui_ascorder'      => 'Ascending',
-	'smw_qui_descorder'     => 'Descending',
-	'smw_qui_randorder'     => 'Random',
-	'smw_qui_addnprop'      => 'add property',
-	'smw_qui_delete'        => 'Remove',
-	'smw_qui_rescol'		=> 'Query-matches',
-	'smw_qui_options'		=> 'options',
-	'smw_qui_addcategory'	=> 'add category',
-	'smw_qui_addrescol'		=> 'add query-matches',
-	'smw_qui_ok'			=> 'Ok',
-	'smw_qui_cancel'		=> 'Cancel',
-	'smw_qui_category'		=> '<strong>Category</strong>',
-	'smw_qui_label'			=> 'Label',
-	'smw_prp_options'		=> 'Property Options',
-	'smw_qui_catopts'		=> 'Category Options',
-	'smw_qui_mainlabopts'   => 'Result Options',
-	'smw_qui_dlabel'		=> 'Label:',
-	'smw_qui_dcategory'		=> 'Category:',
-	'smw_qui_dcatyes'		=> 'Show text when category is present:',
-	'smw_qui_dcatno'		=> 'Show text when category is absent:',
-
-	// Messages for the search by property special
-	'searchbyproperty'      => 'Search by property',
-	'smw_sbv_docu'          => 'Search for all pages that have a given property and value.',
-	# unused / Siebrand 2009-04-25
-	# 'smw_sbv_noproperty'    => 'Enter a property.',
-	'smw_sbv_novalue'       => 'Enter a valid value for the property, or view all property values for "$1".',
+	'smw_qui_nosort' => 'No sorting',
+	'smw_qui_ascorder' => 'Ascending',
+	'smw_qui_descorder' => 'Descending',
+	'smw_qui_randorder' => 'Random',
+	'smw_qui_addnprop' => 'add property',
+	'smw_qui_delete' => 'Remove',
+	'smw_qui_rescol' => 'Query-matches',
+	'smw_qui_options' => 'options',
+	'smw_qui_addcategory' => 'add category',
+	'smw_qui_addrescol' => 'add query-matches',
+	'smw_qui_ok' => 'Ok',
+	'smw_qui_cancel' => 'Cancel',
+	'smw_qui_category' => '<strong>Category</strong>',
+	'smw_qui_label' => 'Label',
+	'smw_prp_options' => 'Property Options',
+	'smw_qui_catopts' => 'Category Options',
+	'smw_qui_mainlabopts' => 'Result Options',
+	'smw_qui_dlabel' => 'Label:',
+	'smw_qui_dcategory' => 'Category:',
+	'smw_qui_dcatyes' => 'Show text when category is present:',
+	'smw_qui_dcatno' => 'Show text when category is absent:',
+	'searchbyproperty' => 'Search by property',
+	'smw_sbv_docu' => 'Search for all pages that have a given property and value.',
+	'smw_sbv_novalue' => 'Enter a valid value for the property, or view all property values for "$1".',
 	'smw_sbv_displayresult' => 'A list of all pages that have property "$1" with value "$2"',
 	'smw_sbv_displayresultfuzzy' => 'A list of all pages that have property "$1" with value "$2".
 Since there have been only a few results, also nearby values are displayed.',
-	'smw_sbv_property'      => 'Property:',
-	'smw_sbv_value'         => 'Value:',
-	'smw_sbv_submit'        => 'Find results',
-
-	// Messages for the browsing special
-	'browse'                     => 'Browse wiki',
-	'smw_browselink'             => 'Browse properties',
-	'smw_browse_article'         => 'Enter the name of the page to start browsing from.',
-	'smw_browse_go'              => 'Go',
-	'smw_browse_more'            => '…',
-	'smw_browse_show_incoming'   => 'show properties that link here',
-	'smw_browse_hide_incoming'   => 'hide properties that link here',
-	'smw_browse_no_outgoing'     => 'This page has no properties.',
-	'smw_browse_no_incoming'     => 'No properties link to this page.',
-	'smw_inverse_label_default'  => '$1 of',
-	'smw_inverse_label_property' => 'Inverse property label', # this is the name of a special property
-
-	// Messages for the page property special
-	'pageproperty'  => 'Page property search',
-	'smw_pp_docu'   => 'Search for all the values of a property on a given page.
+	'smw_sbv_property' => 'Property:',
+	'smw_sbv_value' => 'Value:',
+	'smw_sbv_submit' => 'Find results',
+	'browse' => 'Browse wiki',
+	'smw_browselink' => 'Browse properties',
+	'smw_browse_article' => 'Enter the name of the page to start browsing from.',
+	'smw_browse_go' => 'Go',
+	'smw_browse_more' => '…',
+	'smw_browse_show_incoming' => 'show properties that link here',
+	'smw_browse_hide_incoming' => 'hide properties that link here',
+	'smw_browse_no_outgoing' => 'This page has no properties.',
+	'smw_browse_no_incoming' => 'No properties link to this page.',
+	'smw_inverse_label_default' => '$1 of',
+	'smw_inverse_label_property' => 'Inverse property label',
+	'pageproperty' => 'Page property search',
+	'smw_pp_docu' => 'Search for all the values of a property on a given page.
 Enter both a page and a property.',
-	'smw_pp_from'   => 'From page',
-	'smw_pp_type'   => 'Property',
+	'smw_pp_from' => 'From page',
+	'smw_pp_type' => 'Property',
 	'smw_pp_submit' => 'Find results',
-
-	// Generic messages for result navigation in all kinds of search pages
-	'smw_result_prev'      => 'Previous',
-	'smw_result_next'      => 'Next',
-	'smw_result_results'   => 'Results',
+	'smw_result_prev' => 'Previous',
+	'smw_result_next' => 'Next',
+	'smw_result_results' => 'Results',
 	'smw_result_noresults' => 'No results.',
-
-	// Messages for SMWAdmin
 	'smwadmin' => 'Admin functions for Semantic MediaWiki',
 	'smw_smwadmin_setupsuccess' => 'The storage engine was set up successfully.',
 	'smw_smwadmin_return' => 'Return to $1',
@@ -373,164 +309,16 @@ Estimated progress of current update:',
 	'smw_smwadmin_smwhomepage' => 'The complete user documentation to Semantic MediaWiki is at <b><a href="http://semantic-mediawiki.org">semantic-mediawiki.org</a></b>.',
 	'smw_smwadmin_mediazilla' => 'Bugs can be reported to <a href="https://bugzilla.wikimedia.org/">Bugzilla</a>.',
 	'smw_smwadmin_questions' => 'If you have further questions or suggestions, join the discussion on <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=semediawiki-user">Semantic MediaWiki user forum</a>.',
-
-	// Messages for Admin Links page
 	'smw_adminlinks_datastructure' => 'Data structure',
 	'smw_adminlinks_displayingdata' => 'Data display',
 	'smw_adminlinks_inlinequerieshelp' => 'Inline queries help',
-
-	// Messages for automated property creation
 	'smw-createproperty-isproperty' => 'This is a property of type $1.',
 	'smw-createproperty-allowedvals' => 'The allowed {{PLURAL:$1|value for this property is|values for this property are}}:',
-	
-	// Category QP
 	'smw-paramdesc-category-delim' => 'The delimiter',
 	'smw-paramdesc-category-template' => 'A template to format the items with',
 	'smw-paramdesc-category-userparam' => 'A parameter to pass to the template',
-	
-	// Messages for info parser function.
 	'smw-info-par-message' => 'Message to display.',
 	'smw-info-par-icon' => 'Icon to show, either "info" or "warning".',
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Helix84
- * @author Jon Harald Søby
- * @author Kghbln
- * @author Markus Krötzsch
- * @author McDutchie
- * @author Meno25
- * @author Pietrodn
- * @author Purodha
- * @author Siebrand
- * @author Umherirrender
- * @author Тест
- */
-$messages['qqq'] = array(
-	'smw-desc' => '{{desc}}',
-	'smw_finallistconjunct' => 'The last separator in a list. For example a list could look like this: "A, B, and C". The comma might not be appropriate in your language.
-
-{{Identical|And}}',
-	'smw_rss_link' => '{{optional}}',
-	'smw_csv_link' => '{{optional}}',
-	'smw_json_link' => '{{optional}}',
-	'smw_rdf_link' => '{{optional}}',
-	'smw_printername_auto' => '{{Identical|Automatic}}',
-	'smw_printername_count' => 'This is the name of the result format [http://semantic-mediawiki.org/wiki/Help:Count_format count].',
-	'smw_printername_table' => '{{Identical|Table}}',
-	'smw_printername_template' => '{{Identical|Template}}',
-	'smw_printername_category' => '{{Identical|Category}}',
-	'smw_paramdesc_limit' => 'A description of the "limit" parameter for inline queries',
-	'smw_paramdesc_headers' => 'A description of the "headers" parameter for inline queries',
-	'smw_paramdesc_mainlabel' => 'A description of the "mainlabel" parameter for inline queries',
-	'smw_paramdesc_link' => 'A description of the "link" parameter for inline queries',
-	'smw_paramdesc_intro' => 'A description of the "intro" parameter for inline queries',
-	'smw_paramdesc_outro' => 'A description of the "outro" parameter for inline queries',
-	'smw_paramdesc_default' => 'A description of the "default" parameter for inline queries',
-	'smw_paramdesc_searchlabel' => 'A description of the "searchlabel" parameter for inline queries',
-	'smw_paramdesc_sep' => 'A description of the "sep" (value separator) parameter for inline queries',
-	'smw_paramdesc_template' => 'A description of the "template" parameter for inline queries',
-	'smw_paramdesc_columns' => 'A description of the "columns" parameter for inline queries',
-	'smw_paramdesc_embedformat' => 'A description of the "embedformat" parameter for the "embedded" format inline queries',
-	'smw_paramdesc_embedonly' => 'A description of the "embedonly" parameter for the "embedded" format for inline queries',
-	'smw_paramdesc_rsstitle' => 'A description of the "title" parameter for the "rss" format for inline queries',
-	'smw_paramdesc_rssdescription' => 'A description of the "description" parameter for the "rss" format for inline queries',
-	'smw-smwdoc-description' => 'Short description of the smwdoc parser hook.',
-	'smw-smwdoc-par-format' => 'Description of the format parameter of the smwdoc parser hook.',
-	'smw-smwdoc-par-parameters' => 'Description of the parameters parameter of the smwdoc parser hook. {{doc-important|Do not translate "specific", "base" and "all".}}',
-	'smw_paramdesc_named_args' => 'This allows you to specify that you want named arguments in the template formatting the results (if any) instead of numerical ones',
-	'smw_decseparator' => "{{optional}}
-This message is as a separator symbol for decimal digits in numbers, like \".\" in English 1,234.23. It is used for formatting number output '''and''' for reading user input. Therefore it should be carefully considered whether to change an existing value, since existing installations may depend on this value for their content to be read properly.
-
-Note that spaces and space-like HTML entities are always ignored when reading numbers.",
-	'smw_kiloseparator' => "{{optional}}
-This message is as a separator symbol for thousands in numbers, like \",\" in English 1,234.23. It is used for formatting number output '''and''' for reading user input. Therefore it should be carefully considered whether to change an existing value, since existing installations may depend on this value for their content to be read properly.
-
-Note that spaces and space-like HTML entities are always ignored when reading numbers, whether or not a space symbol is used here.",
-	'smw_subpropertyarticlecount' => '[[bugzilla:15207|Bug on Bugzilla about this message]] has been fixed at [[mw:Special:Code/MediaWiki/40793|r40793]].',
-	'smw_rss_description' => '{{optional}}',
-	'specialpages-group-smw_group' => '{{optional}}',
-	'smw_exportrdf_submit' => '{{Identical|Export}}',
-	'properties' => 'This is the title of the special page showing all properties.
-{{Identical|Property}}',
-	'smw_property_template' => 'Used on [[Special:Properties]]
-* $1 link to Property page
-* $2 link to Type page
-* $3 Number of times the property is used',
-	'smw_property_template_notype' => 'Used on [[Special:Properties]]
-* $1 link to Property page
-* $2 Number of times the property is used',
-	'types' => '{{Identical|Type}}',
-	'smw_typeunits' => 'This message is used in the tooltip on Special:Types when a property supports custom units of measurement. The parameter $1 then is the type name, and $2 is a list of unit names.',
-	'smw_uri_doc' => "This message sketches the (very technical) function of this unlisted special page.
-It probably does not need translation in most cases. The special page as such is used in all URIs used by Semantic MediaWiki.
-When somebody resolves such a URI, the special page will redirect to the according wiki page or to the according metadata export (OWL/RDF/XML).
-This is controlled by the HTTP request header. Semantic Web crawlers and browsers can thus request more metadata on a particular subject, while humans are referred to readable pages.
-This method is called ''content negotiation''.",
-	'smw_ask_submit' => '{{Identical|Find results}}',
-	'smw_ask_defaultformat' => '{{Identical|Default}}',
-	'smw_qc_intro' => 'initial text that is prepended to the output, if at least some results exist',
-	'smw_qc_outro' => 'text that is appended to the output, if at least some results exist',
-	'smw_qc_query_help' => 'You may translate "Actor", "Located in" and "Germany".',
-	'smw_qui_property' => 'Describes a textbox where a property is expected to be typed in.
-{{Identical|Property}}',
-	'smw_qui_prop' => '{{Identical|Property}}',
-	'smw_qui_labl' => '{{Identical|Label}}',
-	'smw_qui_formt' => '{{Identical|Format}}',
-	'smw_qui_limt' => '{{Identical|Limit}}',
-	'smw_qui_shownresults' => 'Message next to a checkbox indicating if an item should be shown in the results or not',
-	'smw_qui_invalidprop' => 'Parameters:
-* $1 is a property name',
-	'smw_qui_nosort' => 'Option in a drop-down menu indicating that user does not want any sorting to be done',
-	'smw_qui_addnprop' => 'Clicking on this message creates a new form to add more properties',
-	'smw_qui_delete' => 'Removes/deletes a form option.
-{{Identical|Remove}}',
-	'smw_qui_rescol' => 'Label for the main result column. See http://semantic-mediawiki.org/wiki/Help:Displaying_information#The_main_result_column/ for further information. The text appears as a label next to an text-box',
-	'smw_qui_options' => '{{Identical|Options}}',
-	'smw_qui_ok' => 'Ok button.
-{{Identical|OK}}',
-	'smw_qui_cancel' => 'Cancel button.
-{{Identical|Cancel}}',
-	'smw_qui_category' => '{{Identical|Category}}',
-	'smw_qui_label' => '{{Identical|Label}}',
-	'smw_prp_options' => 'Advanced options for property (title for a new modal window)',
-	'smw_qui_dlabel' => '{{Identical|Label}}',
-	'smw_qui_dcategory' => '{{identical|Category}}',
-	'smw_sbv_property' => '{{Identical|Property}}',
-	'smw_sbv_value' => '{{Identical|Value}}',
-	'smw_sbv_submit' => '{{Identical|Find results}}',
-	'smw_browse_go' => '{{Identical|Go}}',
-	'smw_browse_more' => '{{optional}}',
-	'smw_inverse_label_property' => 'Can as well be translated as "Name of", or "Denomination of the inverse propery". The inverse property is one having both its direction, and its source/target sets inverted. For example, the property "is child of" is the inverse propery of "is parent of".',
-	'smw_pp_docu' => '"fillers" can be translated as "values", if you so wish.',
-	'smw_pp_type' => '{{Identical|Property}}',
-	'smw_pp_submit' => '{{Identical|Find results}}',
-	'smw_result_prev' => '{{Identical|Previous}}',
-	'smw_result_next' => '{{Identical|Next}}',
-	'smw_result_results' => '{{Identical|Result}}',
-	'smw_result_noresults' => '{{Identical|Sorry, no results}}',
-	'smw_smwadmin_announcedocu' => 'Do not alter or translate link targets',
-	'smw-info-par-message' => 'Short description of the message parameter behaviour.',
-	'smw-info-par-icon' => 'Short description of the icon parameter behaviour.',
-);
-
-/** Niuean (ko e vagahau Niuē)
- * @author Jose77
- */
-$messages['niu'] = array(
-	'smw_browse_go' => 'Fano',
-);
-
-/** толышә зывон (толышә зывон)
- * @author Гусейн
- */
-$messages['tly'] = array(
-	'smw_finallistconjunct' => ', ијән',
-	'smw_printername_list' => 'Сијоһи',
-	'smw_printername_template' => 'Ғәлиб',
-	'smw_printername_category' => 'Категоријә',
 );
 
 /** Afrikaans (Afrikaans)
@@ -2422,10 +2210,10 @@ Falls sich das Problem nicht in angemessener Zeit von selbst erledigt, bitte dei
 	'smw-smwdoc-par-parameters' => 'Die anzuzeigenden Parameter: „specific“ für die vom jeweiligen Ergebnisformat bereitgestellten, „base“ für die für alle Ergebnisformate verfügbaren und „all“ zur Anzeige aller.',
 	'smw-paramdesc-sort' => 'Das Attribut nach dem die Abfrage sortiert werden soll',
 	'smw-paramdesc-order' => 'Die Sortierreihenfolge für die Ergebnisse der Abfrage',
-	'smw-paramdesc-searchlabel' => 'Der Text zum Anzeigen weiterer Abfrageergebnisse (Standard ist „… weitere Ergebnisse“)',
+	'smw-paramdesc-searchlabel' => 'Der Text zum Anzeigen weiterer Abfrageergebnisse (Standard ist „…weitere Ergebnisse“)',
 	'smw_paramdesc_named_args' => 'Die an die Vorlage zu übergebenden Argumente angeben',
 	'smw_iq_disabled' => 'Semantische Abfragen wurden in diesem Wiki deaktiviert.',
-	'smw_iq_moreresults' => '… weitere Ergebnisse',
+	'smw_iq_moreresults' => '…weitere Ergebnisse',
 	'smw_nonright_importtype' => 'Das Element „$1“ kann nur für Seiten im Namensraum „$2“ verwendet werden.',
 	'smw_wrong_importtype' => 'Das Element „$1“ kann nicht für Seiten im Namensraum „$2“ verwendet werden.',
 	'smw_no_importelement' => 'Das Element „$1“ steht leider nicht zum Importieren zur Verfügung.',
@@ -2502,7 +2290,7 @@ Falls sich das Problem nicht in angemessener Zeit von selbst erledigt, bitte dei
 
 Einige der vorhandenen Attribute könnten [[Special:UnusedProperties|verwaiste Attribute]] sein. Attribute, für die noch eine Seite angelegt werden sollte, sind in der [[Special:WantedProperties|Liste gewünschter Attribute]] aufgeführt.",
 	'smw_uri_doc' => 'Der URI-Auflöser setzt die Empfehlungen „<a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG finding on httpRange-14</a>“ um. Er sorgt dafür, dass Menschen nicht zu Webseiten werden.',
-	'ask' => 'Semantische Suche',
+	'ask' => 'Danke für diese tolle Frage!',
 	'smw_ask_sortby' => 'Sortiere nach Spalte (optional)',
 	'smw_ask_ascorder' => 'Aufsteigend',
 	'smw_ask_descorder' => 'Absteigend',
@@ -3133,8 +2921,8 @@ $messages['eo'] = array(
 $messages['es'] = array(
 	'smw-desc' => "Haciendo tu wiki más accesible - para máquinas ''y'' humanos ([http://semantic-mediawiki.org/wiki/Help:User_manual documentación en línea])",
 	'smw_viewasrdf' => 'Ver como RDF',
-	'smw_finallistconjunct' => ' y',
-	'smw_factbox_head' => 'Hechos relativos a $1 — Búsqueda de páginas similares con <span class="smwsearchicon">+</span>.',
+	'smw_finallistconjunct' => ', y',
+	'smw_factbox_head' => 'Datos relacionados a $1 — Búsqueda de páginas similares con <span class="smwsearchicon">+</span>.',
 	'smw_isspecprop' => 'Esta propiedad es una propiedad especial en este wiki.',
 	'smw_isknowntype' => 'Este tipo está entre los tipos de datos standar de este wiki.',
 	'smw_isaliastype' => 'Este tipo es un alias para el tipo de datos "$1".',
@@ -3164,16 +2952,16 @@ Si el problema persiste después de pasado algún tiempo, solicita al administra
 	'smw_paramdesc_headers' => 'Muestra los nombres de encabezados/propiedades',
 	'smw_paramdesc_mainlabel' => 'La etiqueta a asignar al nombre de la página principal',
 	'smw_paramdesc_link' => 'Mostrar los valores como vínculos',
-	'smw_paramdesc_intro' => 'El texto a mostrar antes de los resultados de la consulta, si los hubiere',
-	'smw_paramdesc_outro' => 'El texto a mostrar después de los resultados de la consulta, si los hubiere',
+	'smw_paramdesc_intro' => 'El nombre de una plantilla que se muestra antes de los resultados de la consulta, si los hay',
+	'smw_paramdesc_outro' => 'El nombre de una plantilla que se muestra después de los resultados de la consulta, si los hay',
 	'smw_paramdesc_default' => 'El texto a mostrar si no hay resultados de consulta',
 	'smw_paramdesc_searchlabel' => 'El texto en el vínculo de los resultados',
 	'smw_paramdesc_sep' => 'El separador para los valores',
 	'smw_paramdesc_template' => 'El nombre de la plantilla con la que se mostrará la vista de impresión',
 	'smw_paramdesc_columns' => 'El número de columnas donde se muestran los resultados (el predeterminado es $1)',
-	'smw_paramdesc_userparam' => 'Un valor pasado en cada llamada de plantilla,si una plantilla es usada',
-	'smw_paramdesc_introtemplate' => 'El nombre de una plantilla a mostrar antes de los resultados de la consulta, si hay alguna',
-	'smw_paramdesc_outrotemplate' => 'El nombre de una plantilla a mostrar después de los resultados de la consulta, si hay alguna',
+	'smw_paramdesc_userparam' => 'Un parámetro que pasa por cada entrada de plantillas, si se usa una plantilla',
+	'smw_paramdesc_introtemplate' => 'El nombre de una plantilla que se muestra antes de los resultados de la consulta, si los hay',
+	'smw_paramdesc_outrotemplate' => 'El nombre de una plantilla que se muestra después de los resultados de la consulta, si los hay',
 	'smw_paramdesc_embedformat' => 'La etiqueta HTML usada para definir encabezados',
 	'smw_paramdesc_embedonly' => 'No mostrar encabezados',
 	'smw_paramdesc_rsstitle' => 'Texto a ser usado como título del canal',
@@ -3210,9 +2998,9 @@ Los resultados podrían no ser como esperabas.',
 	'smw_valuesubquery' => 'Subconsultas no soportadas para valores de propiedad "$1".',
 	'smw_badqueryatom' => 'Alguna parte "<nowiki>[[…]]</nowiki>" de la interrogante no fue entendida.',
 	'smw_propvalueproblem' => 'El valor de propiedad "$1" no fue entendida.',
-	'smw_noqueryfeature' => 'Alguna característica de la consulta no tiene soporte en esta wiki, y parte de ella se ha eliminado ($1).',
-	'smw_noconjunctions' => 'Las conjunciones no tienen soporte en esta wiki: parte de la consulta se ha eliminado ($1).',
-	'smw_nodisjunctions' => 'Las disjunciones en consultas no tienen soporte en esta wiki: parte de la consulta se ha eliminado ($1).',
+	'smw_noqueryfeature' => 'Alguna característica de la consulta no tiene soporte en este wiki, y parte de ella se ha eliminado ($1).',
+	'smw_noconjunctions' => 'Las conjunciones no tienen soporte en este wiki: parte de la consulta se ha eliminado ($1).',
+	'smw_nodisjunctions' => 'Las disjunciones en consultas no tienen soporte en este wiki: parte de la consulta se ha eliminado ($1).',
 	'smw_querytoolarge' => 'Las siguientes condiciones de consulta no podrían ser consideradas debido a las restricciones de los wikia en tamaño o profundidad de consultas: $1.',
 	'smw_notemplategiven' => 'Proveer un valor para el parámetro "plantilla" para este formato de consulta para funcionar.',
 	'smw_type_header' => 'Atributos de tipo “$1”',
@@ -3224,17 +3012,19 @@ Los resultados podrían no ser como esperabas.',
 	'smw_concept_header' => 'Páginas de concepto "$1"',
 	'smw_conceptarticlecount' => 'Mostrando $1 {{PLURAL:$1|página|páginas}} pertenecientes al concepto.',
 	'exportrdf' => 'Exportar el artículo como RDF',
-	'smw_exportrdf_docu' => ' En esta página, las partes de contenido de un artículo pueden ser exportadas a formato RDF. Introduzca el nombre de las páginas deseadas en el cuadro de texto que se encuentra debajo, <i>un nombre por línea </i>.<p/>',
-	'smw_exportrdf_recursive' => 'Exportar igualmente todas las páginas pertinentes de forma recurrente. Esta posibilidad puede conseguir un gran número de resultados !',
+	'smw_exportrdf_docu' => 'En esta página, las partes de contenido de un artículo pueden ser exportadas a formato RDF. 
+Para exportar páginas, introduzca el nombre de las páginas deseadas en el cuadro de texto que se encuentra debajo, un nombre por línea.',
+	'smw_exportrdf_recursive' => 'Exportar igualmente todas las páginas pertinentes de forma recurrente.
+Nota: ¡Esta opción puede tener un gran número de resultados!',
 	'smw_exportrdf_backlinks' => 'Exportar igualmente todas las páginas que reenvían a páginas exportadas. Resulta un RDF en el que se facilita la navegación.',
 	'smw_exportrdf_lastdate' => 'No exportar páginas que no fueron cambiadas desde el punto dado en el tiempo.',
 	'smw_exportrdf_submit' => 'Exportar',
 	'properties' => 'Propiedades',
-	'smw_properties_docu' => 'Las siguientes propiedades son usadas en el Wiki.',
+	'smw_properties_docu' => 'Las siguientes propiedades son usadas en el wiki.',
 	'smw_property_template' => '$1 de tipo $2 ($3)',
-	'smw_propertylackspage' => 'Todas las propiedades deberían ser descritas por una página!',
+	'smw_propertylackspage' => '¡Todas las propiedades deberían ser descritas por una página!',
 	'smw_propertylackstype' => 'Ningún tipo fue especificada para esta propiedad (asumiendo tipo $1 por ahora).',
-	'smw_propertyhardlyused' => 'Esta propiedad es dificilmente usada dentro del wiki!',
+	'smw_propertyhardlyused' => '¡Esta propiedad es difícilmente usada dentro del wiki!',
 	'unusedproperties' => 'Propiedades no usadas',
 	'smw_unusedproperties_docu' => 'Las siguientes propiedades existen a pesar que ninguna otra página haga uso de ellas.',
 	'smw_unusedproperty_template' => '$1 de tipo $2',
@@ -3246,13 +3036,13 @@ Los resultados podrían no ser como esperabas.',
 	'smw_types_docu' => 'Los tipos de datos siguientes pueden ser asignados a los atributos. Cada tipo de datos tiene su propio artículo, en el que puede figurar información más precisa.',
 	'smw_typeunits' => 'Unidades de medida de tipo "$1": $2',
 	'semanticstatistics' => 'Estadísticas de semántica',
-	'smw_semstats_text' => "Esta wiki contiene '''$1''' {{PLURAL:$1|valor de propiedad|valores de propiedades}} sobre un total de '''$2''' [[Special:Properties|{{PLURAL:$2|propiedad|propiedades diferentes}}]].
+	'smw_semstats_text' => "Este wiki contiene '''$1''' {{PLURAL:$1|valor de propiedad|valores de propiedades}} sobre un total de '''$2''' [[Special:Properties|{{PLURAL:$2|propiedad|propiedades diferentes}}]].
 '''$3''' {{PLURAL:$3|propiedad tiene|propiedades tienen}} su propia página, y el tipo de datos previstos se ha especificado para '''$4''' de ellas.
 Algunas de las propiedades existentes pueden estar [[Special:UnusedProperties|sin uso]].
 Las propiedades faltantes pueden encontrarse en la [[Special:WantedProperties|lista de propiedades requeridas]].",
 	'smw_uri_doc' => 'El traductor de URI implementa <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG finding on httpRange-14</a>. Esto se preocupa de cosas que los humanos no lo hacen en los sitios web..',
-	'ask' => 'Búsqueda semántica',
-	'smw_ask_sortby' => 'Ordenar por columna',
+	'ask' => '¡Gracias por la magnífica pregunta!',
+	'smw_ask_sortby' => 'Ordenar por columna (opcional)',
 	'smw_ask_ascorder' => 'Ascendente',
 	'smw_ask_descorder' => 'Descendente',
 	'smw_ask_submit' => 'Buscar resultados',
@@ -3260,7 +3050,7 @@ Las propiedades faltantes pueden encontrarse en la [[Special:WantedProperties|li
 	'smw_add_sortcondition' => '[Agregar condición de orden]',
 	'smw_ask_hidequery' => 'Ocultar pregunta',
 	'smw_ask_help' => 'Consultando ayuda',
-	'smw_ask_queryhead' => 'consulta',
+	'smw_ask_queryhead' => 'Consulta',
 	'smw_ask_printhead' => 'Datos adicionales a mostrar',
 	'smw_ask_printdesc' => '(añade un nombre de propiedad por línea)',
 	'smw_ask_format_as' => 'Formatear como:',
@@ -3268,11 +3058,11 @@ Las propiedades faltantes pueden encontrarse en la [[Special:WantedProperties|li
 	'smw_ask_otheroptions' => 'Otras opciones',
 	'smw_ask_show_embed' => 'Mostrar código embebido',
 	'smw_ask_hide_embed' => 'Ocultar código embebido',
-	'smw_ask_embed_instr' => 'Para incluír esta consulta en línea dentro de una wiki use el código siguiente:',
+	'smw_ask_embed_instr' => 'Para incluir esta consulta en línea dentro de un wiki use el código siguiente:',
 	'searchbyproperty' => 'Buscar por atributo',
 	'smw_sbv_docu' => 'Buscar por todas las páginas que tiene un atributo y valor dado.',
-	'smw_sbv_novalue' => 'Por favor introduzca un valor, o ver todos los valores de atributo para $1.',
-	'smw_sbv_displayresult' => 'Una lista de todas las páginas que tienen un atributo $1 con el valor $2.',
+	'smw_sbv_novalue' => 'Por favor introduzca un valor, o ver todos los valores de atributo para "$1".',
+	'smw_sbv_displayresult' => 'Una lista de todas las páginas que tienen un atributo "$1" con el valor "$2".',
 	'smw_sbv_displayresultfuzzy' => 'Lista de todas las páginas que tienen la propiedad "$1" con valor "$2".
 En el caso de existir muy pocos resultados, se muestran también los valores aproximados.',
 	'smw_sbv_property' => 'Propiedad:',
@@ -3323,8 +3113,11 @@ Ud puede conceder estos permisos adicionales de usuario para crear y borrar tabl
 See the Semantic MediaWiki homepage for <a href="http://semantic-mediawiki.org/wiki/Registry">further information about this service</a>.',
 	'smw_smwadmin_announcebutton' => 'Presione el botón siguiente para enviar la URL de su wiki al servicio.
 El servicio no registrará wikis que no sean de acceso público, y solamente guardará información públicamente accesible.',
-	'smw_smwadmin_datarefresh' => 'Reparación de datos y actualización',
-	'smw_smwadmin_datarefreshdocu' => 'Es posible restaurar toda la información de MediaWiki Semántica basándose en los contenidos actuales de la wiki.
+	'smw_smwadmin_datarefresh' => 'Es posible restaurar toda la información de MediaWiki Semántica basándose en los contenidos actuales del wiki.
+Esto puede ser útil para reparar la información destruida o para volver a cargar la información si el formato interno ha cambiado a causa de alguna actualización de software.
+La actualización se ejecuta página a página y no se completará de inmediato.
+Lo siguiente muestra es hay una actualización en progreso y le permite iniciar o detener actualizaciones (a menos que esta característica haya sido inhabilitada por el administrador del sitio).',
+	'smw_smwadmin_datarefreshdocu' => 'Es posible restaurar toda la información de MediaWiki Semántica basándose en los contenidos actuales del wiki.
 Esto puede ser útil para reparar la información destruida o para volver a cargar la información si el formato interno ha cambiado a causa de alguna actualización de software.
 La actualización se ejecuta página a página y no se completará de inmediato.
 Lo siguiente muestra es hay una actualización en progreso y le permite iniciar o detener actualizaciones (a menos que esta característica haya sido inhabilitada por el administrador del sitio).',
@@ -6286,7 +6079,7 @@ $messages['it'] = array(
 Alcune delle proprietà esistenti possono essere [[Special:UnusedProperties|proprietà non utilizzate]].
 Le proprietà che ancora non hanno una pagina si possono trovare nell'[[Special:WantedProperties|elenco delle proprietà senza descrizione]].",
 	'smw_uri_doc' => 'Il risolutore di URI implementa il <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG finding on httpRange-14</a>. Fa in modo che gli esseri umani non diventino siti Web.',
-	'ask' => 'Ricerca semantica',
+	'ask' => 'Fai una domanda...',
 	'smw_ask_sortby' => 'Ordina per colonna (opzionale)',
 	'smw_ask_ascorder' => 'Crescente',
 	'smw_ask_descorder' => 'Decrescente',
@@ -6521,7 +6314,7 @@ $messages['ja'] = array(
 	'semanticstatistics' => '意味的統計',
 	'smw_semstats_text' => "このウィキには、計 '''$2'''種の[[Special:Properties|{{PLURAL:$2|プロパティ}}]]と '''$1'''個の{{PLURAL:$1|プロパティ値}}があります。'''$3'''個の{{PLURAL:$3|プロパティ}}には専用のページがあり、うち '''$4'''個にはデータ型が指定されています。既存のプロパティには[[Special:UnusedProperties|使われていないプロパティ]]があるかもしれません。解説ページがまだ存在しないプロパティは[[Special:WantedProperties|望まれているプロパティ一覧]]に載っています。",
 	'smw_uri_doc' => 'URIリゾルバーは <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG での httpRange-14 に関する議論成果</a>を実装しています。これは人間がウェブサイトに向かわないように取り計らいます。',
-	'ask' => '意味的検索',
+	'ask' => '質問する',
 	'smw_ask_sortby' => '列ごとに整列 (任意選択)',
 	'smw_ask_ascorder' => '昇順',
 	'smw_ask_descorder' => '降順',
@@ -6841,6 +6634,7 @@ $messages['ko'] = array(
 	'smw_attributearticlecount' => '이 속성을 사용하여 보여주 $1 페이지입니다.',
 	'exportrdf' => 'RDF로 문서 내보내기',
 	'smw_pp_type' => '부동산',
+	'ask' => '질문하기',
 );
 
 /** Krio (Krio)
@@ -8060,7 +7854,7 @@ Enkelte av de eksisterende egenskapene kan være [[Special:UnusedProperties|ubru
 Egenskaper som fortsatt mangler en egen side finnes på [[Special:WantedProperties|listen over ønskede egenskaper]].",
 	'smw_uri_doc' => 'URI-løseren implementerer <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">finning av W3C TAG-er på «httpRange-14»</a>.
 Den sørger for at mennesker ikke gjøres til nettsteder.',
-	'ask' => 'Semantisk søk',
+	'ask' => 'Spør på WikiSvar',
 	'smw_ask_sortby' => 'Sorter etter kolonne (valgfritt)',
 	'smw_ask_ascorder' => 'Stigende',
 	'smw_ask_descorder' => 'Synkende',
@@ -8204,6 +7998,13 @@ Anslått fremdrift for gjeldende oppdatering:',
 	'smw-paramdesc-category-userparam' => 'En parameter som gis til malen',
 	'smw-info-par-message' => 'Melding å vise frem.',
 	'smw-info-par-icon' => 'Ikon for å vise frem enten "info" eller "advarsel".',
+);
+
+/** Niuean (ko e vagahau Niuē)
+ * @author Jose77
+ */
+$messages['niu'] = array(
+	'smw_browse_go' => 'Fano',
 );
 
 /** Dutch (Nederlands)
@@ -8361,7 +8162,7 @@ Het resultaat kan groot zijn!",
 Een aantal van de bestaande eigenschappen is wellicht [[Special:UnusedProperties|ongebruikt]].
 Eigenschappen waar nog geen pagina voor is zijn te vinden op de [[Special:WantedProperties|lijst met gewenste eigenschappen]].",
 	'smw_uri_doc' => 'De URI-resolver implementeert de <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG finding on httpRange-14</a>. Het zorgt ervoor dat mensen niet veranderen in websites.',
-	'ask' => 'Semantisch zoeken',
+	'ask' => 'Stel een vraag...',
 	'smw_ask_sortby' => 'Sorteren op kolom (optioneel)',
 	'smw_ask_ascorder' => 'Oplopend',
 	'smw_ask_descorder' => 'Aflopend',
@@ -8614,7 +8415,7 @@ Somme av dei eksisterande eigenskapane kan vera [[Special:UnusedProperties|unytt
 Eigenskapar som framleis ikkje har ei eiga sida finst på [[Special:WantedProperties|lista over ynskte eigenskapar]].",
 	'smw_uri_doc' => "URI-løysaren implementerer ''<a href=\"http://www.w3.org/2001/tag/issues.html#httpRange-14\">finning av W3C TAG-ar på «httpRange-14»</a>''.
 Han syter for at menneske ikkje vert til nettsider.",
-	'ask' => 'Semantisk søk',
+	'ask' => 'Spør på WikiSvar',
 	'smw_ask_sortby' => 'Sorter etter kolonne (valfritt)',
 	'smw_ask_ascorder' => 'Stigande',
 	'smw_ask_descorder' => 'Søkkjande',
@@ -8702,6 +8503,10 @@ Estimert framdrift på den noverande oppdateringa:',
 	'smw_smwadmin_questions' => 'Om du har fleire spørsmål eller forslag, bli med i diskusjonen på <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=semediawiki-user">Semantic MediaWiki-brukarforumet</a>.',
 	'smw-createproperty-isproperty' => 'Dette er ein eigenskap av typen $1.',
 	'smw-createproperty-allowedvals' => 'Dei tillatne verdiane for denne eigenskapen er:',
+);
+
+$messages['no'] = array(
+	'ask' => 'Takk for det råbra spørsmålet!',
 );
 
 /** Occitan (Occitan)
@@ -8942,10 +8747,10 @@ $messages['pl'] = array(
 	'smw_isknowntype' => 'Ten typ danych należy do standardowych typów dla tej wiki.',
 	'smw_isaliastype' => 'Ten typ danych to alias typu „$1”.',
 	'smw_isnotype' => 'Typ danych „$1” nie jest standardowy dla tej wiki i nie został również zdefiniowany przez użytkownika.',
-	'smw_concept_description' => 'Opis koncepcji „$1”',
-	'smw_no_concept_namespace' => 'Koncepcje można definiować tylko w przestrzeni nazw Koncepcja:',
-	'smw_multiple_concepts' => 'Każda strona koncepcji może mieć tylko jedną definicję koncepcji.',
-	'smw_concept_cache_miss' => 'Koncepcja „$1” w chwili obecnej nie może zostać użyta, ponieważ konfiguracja wiki wymaga aby została ona przeliczona offline. Jeśli problem nie ustąpi po jakimś czasie, skontaktuj się z administratorem witryny.',
+	'smw_concept_description' => 'Opis pojęcia „$1”',
+	'smw_no_concept_namespace' => 'Pojęcia można definiować tylko w przestrzeni nazw Pojęcie:',
+	'smw_multiple_concepts' => 'Każda strona pojęcia może mieć tylko jedną definicję pojęcia.',
+	'smw_concept_cache_miss' => 'Pojęcie „$1” w chwili obecnej nie może zostać użyte, ponieważ konfiguracja wiki wymaga aby zostało ona przeliczone offline. Jeśli problem nie ustąpi po jakimś czasie, skontaktuj się z administratorem witryny.',
 	'smw_noinvannot' => 'Nie można przypisać wartości właściwościom odwrotnym.',
 	'version-semantic' => 'Rozszerzenia semantyczne',
 	'smw_baduri' => 'Niestety, URI z przestrzeni „$1” nie są w tym miejscu dostępne.',
@@ -9036,24 +8841,24 @@ Wyniki mogą być inne od oczekiwanych.',
 	'smw_attributearticlecount' => 'Pokazano $1 {{PLURAL:$1|stronę używającą|strony używające|stron używających}} tego atrybutu.',
 	'smw_subproperty_header' => 'Podwłasności',
 	'smw_subpropertyarticlecount' => 'Ta własność ma {{PLURAL:$1|podwłasność|$1 następujące podwłasności:|$1 następujących podwłasności:}}',
-	'smw_concept_header' => 'Strony koncepcji „$1”',
-	'smw_conceptarticlecount' => '{{PLURAL:$1|Wyświetlona jest jedna strona należąca|Wyświetlone zostały $1 strony należące|Wyświetlonych zostało $1 stron należących}} do tej koncepcji.',
+	'smw_concept_header' => 'Strony pojęcia „$1”',
+	'smw_conceptarticlecount' => '{{PLURAL:$1|Wyświetlona jest jedna strona należąca|Wyświetlone zostały $1 strony należące|Wyświetlonych zostało $1 stron należących}} do tego pojęcia.',
 	'exportrdf' => 'Eksport stron do RDF',
 	'smw_exportrdf_docu' => 'Ta strona pozwala eksportować fragmenty artykułu w formacie RDF.  Aby wyeksportować artykuły, wpisz ich tytuły w poniższym polu tekstowym, po jednym tytule w wierszu.',
 	'smw_exportrdf_recursive' => 'Rekursywny eksport wszystkich powiązanych stron.  Zwróć uwagę, że wynik może być olbrzymi!',
 	'smw_exportrdf_backlinks' => 'Eksportuj także wszystkie strony, które odwołują się do eksportowanych stron.  Tworzy przeglądalny RDF.',
 	'smw_exportrdf_lastdate' => 'Nie eksportuj stron, które nie były zmieniane od podanego czasu.',
 	'smw_exportrdf_submit' => 'Eksport',
-	'properties' => 'Właściwości',
+	'properties' => 'Własności',
 	'smw_properties_docu' => 'Następujące własności są wykorzystywane w wiki.',
 	'smw_property_template' => '$1 typu $2 ($3)',
 	'smw_propertylackspage' => 'Wszystkie własności powinny być opisane stroną!',
 	'smw_propertylackstype' => 'Nie określono żadnego typu dla tej własności (tymczasowo przypisano typ $1).',
 	'smw_propertyhardlyused' => 'Ta własność jest rzadko używana w przestrzeni wiki!',
-	'unusedproperties' => 'Niewykorzystywane własności',
+	'unusedproperties' => 'Nieużywane własności',
 	'smw_unusedproperties_docu' => 'Następujące własności istnieją, mimo że żadne inne strony ich nie wykorzystują.',
 	'smw_unusedproperty_template' => '$1 typu $2',
-	'wantedproperties' => 'Pożądane własności',
+	'wantedproperties' => 'Potrzebne własności',
 	'smw_wantedproperties_docu' => 'Następujące własności są wykorzystywane na wiki, ale nie mają jeszcze opisującej ich strony.',
 	'smw_wantedproperty_template' => '$1 (wykorzystane {{PLURAL:$2|raz|$2 razy}})',
 	'smw_purge' => 'Odśwież',
@@ -9062,7 +8867,7 @@ Wyniki mogą być inne od oczekiwanych.',
 	'smw_typeunits' => 'Jednostka danych typu „$1” to $2',
 	'semanticstatistics' => 'Statystyka semantyczna',
 	'smw_semstats_text' => "Ta wiki zawiera '''$1''' {{PLURAL:$1|wartość|wartości}} własności z ogólnej liczby '''$2''' [[Special:Properties|{{PLURAL:$2|właściwości|różnych właściwości}}]].
-'''$3''' {{PLURAL:$3|właściwość ma swoją własną stronę|właściwości mają swoje własne strony}}. a typ danych został określony dla '''$4''' z nich.
+'''$3''' {{PLURAL:$3|właściwość ma swoją własną stronę|właściwości mają swoje własne strony}}, a typ danych został określony dla '''$4''' z nich.
 Niektóre z istniejących właściwości mogą [[Special:UnusedProperties|być obecnie niewykorzystywane]].
 Właściwości, które nie posiadają swojej strony odnaleźć można na stronie [[Special:WantedProperties|spisu brakujących właściwości]].",
 	'smw_uri_doc' => 'Resolver URI implementuje <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C TAG finding on httpRange-14</a>. Dzięki temu ludzie nie zamieniają się w strony WWW.',
@@ -9162,6 +8967,25 @@ Przewidywany postęp bieżącej aktualizacji:',
 	'smw_adminlinks_inlinequerieshelp' => 'Pomoc dotycząca wewnętrznych zapytań',
 	'smw-createproperty-isproperty' => 'To jest własność typu $1.',
 	'smw-createproperty-allowedvals' => '{{PLURAL:$1|Dopuszczalna wartość dla tej własności to|Dopuszczalne wartości dla tej własności to:}}',
+	'smw-paramdesc-table-class' => 'Dodatkowe klasy CSS do ustawienia tabeli',
+	'querycreator' => 'Kreator zapytań',
+	'smw_qc_show_addnal_opts' => 'Pokaż więcej opcji',
+	'smw_qc_hide_addnal_opts' => 'Pokaż mniej opcji',
+	'smw_qc_default' => 'Domyślnie:',
+	'smw_qc_formatopt' => 'Opcje formatowania',
+	'smw_qc_query_help' => 'Wpisz zapytanie korzystając z poniższego formularza. Wybierz strony oparte na
+Kategoriach (<strong>[[:{{ns:category}}:Aktor]]</strong>), 
+Własnościach (<strong>[[Located in::Niemcy]]</strong>), 
+Nazwach (<strong>[[Niemcy]]</strong>) i Przestrzeniach nazw (<strong>[[{{ns:help}}:+]]</strong>)',
+	'smw_qui_prop' => 'Własność:',
+	'smw_qui_labl' => 'Etykieta:',
+	'smw_qui_addnprop' => 'dodaj własność',
+	'smw_qui_options' => 'opcje',
+	'smw_qui_addcategory' => 'dodaj kategorię',
+	'smw_qui_dlabel' => 'Etykieta:',
+	'smw_qui_dcategory' => 'Kategoria:',
+	'smw_qui_dcatyes' => 'Pokaż tekst kiedy kategoria jest obecna:',
+	'smw_qui_dcatno' => 'Pokaż tekst kiedy kategoria jest nieobecna:',
 );
 
 /** Piedmontese (Piemontèis)
@@ -9580,7 +9404,7 @@ Gera um RDF navegável.',
 Algumas das propriedades existentes podem ser [[Special:UnusedProperties|propriedades não usadas]].
 As propriedades que não têm uma página própria podem ser encontradas na [[Special:WantedProperties|lista de propriedades em falta]].",
 	'smw_uri_doc' => 'O resolvedor de URIs implementa a <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">descoberta TAG da W3C sobre o httpRange-14</a>. Certifica-se de que os seres humanos não se tornem em sites da internet.',
-	'ask' => 'Pesquisa semântica',
+	'ask' => 'Obrigado pela otima pergunta!',
 	'smw_ask_sortby' => 'Ordenar por coluna (opcional)',
 	'smw_ask_ascorder' => 'Ascendente',
 	'smw_ask_descorder' => 'Descendente',
@@ -9862,7 +9686,7 @@ Algumas das propriedades existentes podem estar [[Special:UnusedProperties|sem u
 As propriedades que não possuem uma página poderão ser encontradas na [[Special:WantedProperties|lista de propriedades em falta]].",
 	'smw_uri_doc' => 'O resolvedor de URIs implementa a <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">descoberta TAG da W3C sobre o httpRange-14</a>. 
 Ele certifica-se de que os seres humanos não se tornem em sites da internet.',
-	'ask' => 'Pesquisa semântica',
+	'ask' => 'Obrigado pela otima pergunta!',
 	'smw_ask_sortby' => 'Ordenar por coluna (opcional)',
 	'smw_ask_ascorder' => 'Ascendente',
 	'smw_ask_descorder' => 'Descendente',
@@ -10259,7 +10083,7 @@ $messages['ru'] = array(
 Некоторые из существующих свойств могут [[Special:UnusedProperties|не использоваться]].
 Свойства, для которых не созданы страницы описания, перечислены в [[Special:WantedProperties|списке неописанных свойств]].",
 	'smw_uri_doc' => 'Преобразователь URI осуществляет <a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">W3C поиск http тэгов с использованием Range-14</a>. Данная возможность упрощает поиск семантической информации.',
-	'ask' => 'Семантический поиск',
+	'ask' => 'Задать вопрос…',
 	'smw_ask_sortby' => 'Сортировать по столбцу (необязательно)',
 	'smw_ask_ascorder' => 'По возрастанию',
 	'smw_ask_descorder' => 'По убыванию',
@@ -11333,7 +11157,7 @@ Varje datatyp har en sida där ytterligare information kan uppges.',
 Några av de existerande egenskaperna kan vara [[Special:UnusedProperties|oanvända egenskaper]].
 Egenskaper som fortfarande saknar en egen sida finns på [[Special:WantedProperties|listan över önskade egenskaper]].",
 	'smw_uri_doc' => "URI-lösaren implementerar ''<a href=\"http://www.w3.org/2001/tag/issues.html#httpRange-14\">W3C TAG fynden i httpRange-14</a>''. Den ser till så att människor inte blir webbsidor.",
-	'ask' => 'Semantisk sökning',
+	'ask' => 'Frågade av',
 	'smw_ask_sortby' => 'Sortera efter kolumn (valfritt)',
 	'smw_ask_ascorder' => 'Stigande',
 	'smw_ask_descorder' => 'Sjunkande',
@@ -11771,6 +11595,16 @@ Tinatayang progreso ng pangkasalukuyang pagsasapanahon:',
 	'smw_adminlinks_inlinequerieshelp' => 'Tulong sa mga katanungang nasa guhit',
 	'smw-createproperty-isproperty' => 'Isa itong pag-aari ng uring $1.',
 	'smw-createproperty-allowedvals' => 'Ang pinahihintulutang {{PLURAL:$1|halaga para sa pag-aaring ito ay|mga halaga para sa pag-aaring ito ay}}:',
+);
+
+/** толышә зывон (толышә зывон)
+ * @author Гусейн
+ */
+$messages['tly'] = array(
+	'smw_finallistconjunct' => ', ијән',
+	'smw_printername_list' => 'Сијоһи',
+	'smw_printername_template' => 'Ғәлиб',
+	'smw_printername_category' => 'Категоријә',
 );
 
 /** Turkish (Türkçe)
@@ -12434,6 +12268,10 @@ $messages['yi'] = array(
 	'smw_exportrdf_submit' => 'עקספארטירן',
 	'smw_qui_ok' => 'יא',
 	'smw_result_prev' => 'פֿריערדיקער',
+);
+
+$messages['zh'] = array(
+	'ask' => '發問一條問題',
 );
 
 /** Chinese (China) (‪中文(中国大陆)‬)
@@ -13213,4 +13051,3 @@ $messages['zh-tw'] = array(
 	'smw-createproperty-isproperty' => '這是$1型態的性質。',
 	'smw-createproperty-allowedvals' => '此屬性的可用型態為：',
 );
-

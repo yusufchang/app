@@ -8,14 +8,12 @@
 $messages = array();
 
 $messages['en'] = array(
-	'managewikiahome-desc' => 'Internal tool to manage corporate pages\'s visualization aka. remix feature',
+	'managewikiahome-desc' => "Internal tool to manage corporate pages's visualization aka. remix feature",
 	'managewikiahome' => 'Manage Wikia Home',
 	'manage-wikia-home-wrong-rights' => "You are probably logged-out or you don't have permissions to use this special page.",
-
 	'manage-wikia-home-wikis-in-slots-heading' => 'Slots setup',
 	'manage-wikia-home-wikis-in-slots-total' => 'Total amount of slots: $1',
 	'manage-wikia-home-visualization-wikis' => 'Corporate wikis with visualization:',
-
 	'manage-wikia-home-hubs-slot-heading' => 'Hubs slots setup',
 	'manage-wikia-home-hubs-slot-success' => 'Hubs slots have been saved.',
 	'manage-wikia-home-hubs-slot-error' => 'There was an error while saving. Please try again.',
@@ -24,34 +22,27 @@ $messages['en'] = array(
 	'manage-wikia-home-hubs-slot-description' => 'Hub description',
 	'manage-wikia-home-hubs-slot-more-links' => '"More in..." links',
 	'manage-wikia-home-hubs-slot-empty-option' => '-- Empty slot --',
-
 	'manage-wikia-home-wikis-in-slots-success' => 'Numbers slots has been changed.',
 	'manage-wikia-home-collections-success' => 'Collections have been saved.',
 	'manage-wikia-home-collections-add-success' => 'Wiki added successfully to the collection.',
 	'manage-wikia-home-collections-add-failure-already-exists' => 'Wiki already exists in this collection.',
-	'manage-wikia-home-collections-add-failure-image' => '$1 can\'t be added to this collection because its main image has been rejected.',
+	'manage-wikia-home-collections-add-failure-image' => "$1 can't be added to this collection because its main image has been rejected.",
 	'manage-wikia-home-collections-remove-success' => 'Wiki removed successfully from the collection.',
 	'manage-wikia-home-collections-invalid-action' => 'That action does not exist.',
-
 	'manage-wikia-home-marketing-invalid-width' => 'Image width should be $maxWidth px.',
 	'manage-wikia-home-marketing-invalid-height' => 'Image height should be $maxHeight px.',
 	'manage-wikia-home-marketing-invalid-size' => 'Image size should be $maxWidth x $maxHeight px.',
 	'manage-wikia-home-marketing-not-complete' => 'To use marketing slot, all fields need to be filled.',
-
 	'manage-wikia-home-verticals-proportions' => 'Number of wikis per vertical',
-
 	'manage-wikia-home-error-invalid-total-no-of-slots' => "Invalid slots amount in total ($1). Please make sure sum of each hub's slots equals total amount of slots ($2).",
 	'manage-wikia-home-error-negative-slots-number-not-allowed' => 'Negative number of slots is not allowed',
 	'manage-wikia-home-error-wikifactory-failure' => 'Something went wrong during saving the variables. Please try again.',
 	'manage-wikia-home-collections-validation-error' => 'There was an error while saving, please check what you entered.',
-
 	'manage-wikia-home-change-button' => 'Change',
-
 	'manage-wikia-home-wikis-in-visualization-heading' => 'List of wikis in visualization',
 	'manage-wikia-home-wiki-name-filter' => 'Start typing wiki name and the list will get shorter:',
 	'manage-wikia-home-wiki-filter' => 'Filter',
 	'manage-wikia-home-wiki-filter-reset' => 'Clear',
-
 	'manage-wikia-home-wiki-list-download' => 'Download complete list',
 	'manage-wikia-home-wiki-list-download-tooltip' => 'Comma separated values (CSV file) with UTF-8 encoding.',
 	'manage-wikia-home-wiki-list-id' => 'Id',
@@ -72,7 +63,6 @@ $messages['en'] = array(
 	'manage-wikia-home-wiki-list-all-verticals' => 'All verticals',
 	'manage-wikia-home-modal-title' => "Change wiki's status",
 	'manage-wikia-home-modal-title-collection' => 'Edit wiki in collection',
-
 	'manage-wikia-home-modal-content-add-blocked' => 'Do you want to exclude this wiki from appearing in the wiki visualization?',
 	'manage-wikia-home-modal-content-remove-blocked' => 'Do you want to include this wiki in the wiki visualization?',
 	'manage-wikia-home-modal-content-add-promoted' => 'Do you want to promote this wiki in the wiki visualization?',
@@ -82,17 +72,15 @@ $messages['en'] = array(
 	'manage-wikia-home-modal-content-add-collection' => 'Do you want to add this wiki to the collection?',
 	'manage-wikia-home-modal-content-remove-collection' => 'Do you want to remove this wiki from the collection?',
 	'manage-wikia-home-modal-content-add-blocked-wiki-warning' => 'You cannot add blocked wikis to a collection.',
-	'manage-wikia-home-modal-content-blocked-wiki-in-collection-warning' => 'This wiki shouldn\'t be in collection because it is blocked. It will be removed from the collection.',
+	'manage-wikia-home-modal-content-blocked-wiki-in-collection-warning' => "This wiki shouldn't be in collection because it is blocked. It will be removed from the collection.",
 	'manage-wikia-home-modal-content-blocked-wiki-title' => 'This wiki is blocked',
 	'manage-wikia-home-modal-content-removed-blocked-in-collection' => 'This wiki is currently part of a collection and cannot be blocked.',
 	'manage-wikia-home-modal-too-many-wikis-in-collection' => 'You can not add more wikis to this collection.',
 	'manage-wikia-home-modal-button-no' => 'No',
 	'manage-wikia-home-modal-button-yes' => 'Yes',
 	'manage-wikia-home-modal-button-okay' => 'Okay',
-
 	'manage-wikia-home-collections-setup-header' => 'Collections setup',
 	'manage-wikia-home-collections-setup-save-button' => 'Save',
-
 	'manage-wikia-home-collections-enabled-field-label' => 'Enabled',
 	'manage-wikia-home-collections-name-field-label' => 'Collection name',
 	'manage-wikia-home-collections-sponsor-url-field-label' => 'Sponsor URL',
@@ -100,11 +88,9 @@ $messages['en'] = array(
 	'manage-wikia-home-collections-sponsor-image-field-label' => 'Sponsor image',
 	'manage-wikia-home-collections-wikis-in-collection' => 'Wikis: $1 of $2',
 	'manage-wikia-home-collections-invalid-wikis-number' => 'This collection will not be visible on the corporate main page until there {{PLURAL:$1|is one wiki|are $1 wikis}} assigned to it.',
-
 	'manage-wikia-home-collection-hero-image-tooltip' => 'This image should be $1px × $2px',
 	'manage-wikia-home-collection-sponsor-image-tooltip' => 'This image should be $1px × $2px',
 	'manage-wikia-home-collection-add-file-button' => 'Add a photo',
-
 	'manage-wikia-home-stats-header' => 'Corporate main page stats',
 	'manage-wikia-home-stats-text' => 'Those stats are displayed on all corporate sites without separation per language.',
 	'manage-wikia-home-stats-visitors-label' => 'Monthly visitors',
@@ -112,144 +98,8 @@ $messages['en'] = array(
 	'manage-wikia-home-stats-edits-default-label' => 'Changes today fallback',
 	'manage-wikia-home-stats-total-pages-label' => 'Total Pages fallback',
 	'manage-wikia-home-stats-success' => 'Stats updated successfully!',
-	'manage-wikia-home-stats-failure' => 'Data wasn\'t saved. Please correct errors in form and try again. ',
-	'manage-wikia-home-stats-permissions-error' => 'Data wasn\'t saved. Please make sure you have correct rights to edit this form. '
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'managewikiahome-desc' => '{{desc}}',
-	'managewikiahome' => "Page title visible as browser window's title; Content of <title /> tag in HTML",
-	'manage-wikia-home-wrong-rights' => "A message displayed to a user if he doesn't have rights to use this special page",
-	'manage-wikia-home-wikis-in-slots-heading' => "Header of slots' configuration container; this container have input fields which we use to configure amounts of images per vertical we're showing in the visualization on corporate main page",
-	'manage-wikia-home-wikis-in-slots-total' => 'Text describing how many slots are available to use in configuration.
-
-Parameters:
-* $1 - number; amount of slots',
-	'manage-wikia-home-visualization-wikis' => 'A label next to selectbox with a list of wikis where visualization is enabled (corporate wikis)',
-	'manage-wikia-home-hubs-slot-heading' => 'Header for Wikia homepage hubs slots management section',
-	'manage-wikia-home-hubs-slot-success' => 'Message after successful save.',
-	'manage-wikia-home-hubs-slot-error' => 'Message when error occured.',
-	'manage-wikia-home-hubs-slot' => 'Determines which hub slot from hubs section on wikia homepage will be edited',
-	'manage-wikia-home-hubs-slot-name' => 'Label for select list with hub wiki names.',
-	'manage-wikia-home-hubs-slot-description' => 'Label for textarea field to shortly describe hub.',
-	'manage-wikia-home-hubs-slot-more-links' => 'Label for textarea field to add links in "More in ..." hub section on wikia homepage',
-	'manage-wikia-home-hubs-slot-empty-option' => "Option in select field in hubs slots section to don't display slot on wikia homepage",
-	'manage-wikia-home-wikis-in-slots-success' => 'Success information after successful change in slots configuration',
-	'manage-wikia-home-collections-success' => 'Success information after successful change in collections configuration',
-	'manage-wikia-home-collections-add-success' => 'Message informing about wiki successfully being added to a collection (themed group of 17 wikis displayed on Home Page like www.wikia.com).',
-	'manage-wikia-home-collections-add-failure-already-exists' => 'Error message informing, that the given Wiki already exists in collection (themed group of 17 wikis displayed on Home Page like www.wikia.com) to which it is being added',
-	'manage-wikia-home-collections-add-failure-image' => 'Parametrized message informing, that the wiki cannot be added to collection (themed group of 17 wikis displayed on Home Page like www.wikia.com) because it has a rejected main image. Parameters:
-* $1 is a wiki name.',
-	'manage-wikia-home-collections-remove-success' => 'Confirmation message that Wiki was removed successfully from a collection (themed group of 17 wikis displayed on Home Page like www.wikia.com).',
-	'manage-wikia-home-collections-invalid-action' => 'Error message informing that the requested action does not exist',
-	'manage-wikia-home-verticals-proportions' => "Header above slots configuration's input fields; in the form below this header we can configure how many slots are assigned to a vertical; later we fill those slots with a wiki image from a specific vertical",
-	'manage-wikia-home-error-invalid-total-no-of-slots' => "An error which is displayed when set numbers in total doesn't equal required number of all slots; first parameter is the sum of entered numbers and second one is the required number",
-	'manage-wikia-home-error-negative-slots-number-not-allowed' => 'An error which is displayed when any of set numbers is negative',
-	'manage-wikia-home-error-wikifactory-failure' => 'An error which is displayed when an WikiFactory error occurs',
-	'manage-wikia-home-collections-validation-error' => "An error message which is displayed when the data passed through collection's configuration form is invalid",
-	'manage-wikia-home-change-button' => "A label on a submitting form button; the form is to change visualization slots' configuration.
-{{Identical|Change}}",
-	'manage-wikia-home-wikis-in-visualization-heading' => "A heading above table with wikis' data",
-	'manage-wikia-home-wiki-name-filter' => 'Text above filtering input text describing what the input text is for',
-	'manage-wikia-home-wiki-filter' => 'A label (verb) on a submitting form button; the form is filtering list of wikis in visualization.
-{{Identical|Filter}}',
-	'manage-wikia-home-wiki-filter-reset' => 'A label on a reseting form button, which reset all filters.
-{{Identical|Clear}}',
-	'manage-wikia-home-wiki-list-download' => 'Label for button that downloads complete wiki list.',
-	'manage-wikia-home-wiki-list-download-tooltip' => 'Tooltip for button that downloads complete wiki list - explains format (CSV) and encoding (UTF-8).',
-	'manage-wikia-home-wiki-list-id' => 'Table column header which describes column containing wiki Id.
-{{Identical|ID}}',
-	'manage-wikia-home-wiki-list-vertical' => 'Table column header which describes column containing wiki vertical name.
-{{Identical|Vertical}}',
-	'manage-wikia-home-wiki-list-headline' => 'Table column header which describes column containing wiki name.
-{{Identical|Wiki name}}',
-	'manage-wikia-home-wiki-list-blocked' => 'Table column header which describes column containing information if wiki is blocked.
-{{Identical|Blocked}}',
-	'manage-wikia-home-wiki-list-promoted' => 'Table column header which describes column containing information if wiki is promoted',
-	'manage-wikia-home-wiki-list-official' => 'Table column header which describes column containing information if wiki is official.
-{{Identical|Official}}',
-	'manage-wikia-home-wiki-list-collection' => 'Table column header which describes column containing possibility to adding and removing wiki from collection.
-{{Identical|Collection}}',
-	'manage-wikia-home-wiki-list-blocked-no' => "'No' in column Blocked on table; indicates wiki status that it's NOT blocked from showing in wikis visualization on corporate main pages.
-{{Identical|No}}",
-	'manage-wikia-home-wiki-list-blocked-yes' => "'Yes' in column Blocked on table; indicates wiki status that it IS blocked from showing in wikis visualization on corporate main pages.
-{{Identical|Yes}}",
-	'manage-wikia-home-wiki-list-promoted-no' => "'No' in column Promoted on table; indicates wiki status that it's NOT promoted in wikis visualization on corporate main pages.
-{{Identical|No}}",
-	'manage-wikia-home-wiki-list-promoted-yes' => "'Yes' in column Promoted on table; indicates wiki status that it IS promoted in wikis visualization on corporate main pages.
-{{Identical|Yes}}",
-	'manage-wikia-home-wiki-list-official-no' => "'No' in column Official on table; indicates wiki status that it's NOT official in wikis visualization on corporate main pages.
-{{Identical|No}}",
-	'manage-wikia-home-wiki-list-official-yes' => "'Yes' in column Official on table; indicates wiki status that it IS official in wikis visualization on corporate main pages.
-{{Identical|Yes}}",
-	'manage-wikia-home-wiki-list-disabled-collection' => 'If collection is disabled, checkbox for selecting wiki in collection is not active',
-	'manage-wikia-home-wiki-list-all-collections' => 'Label on filtering select field to show all wikis (not only belonged to collections).
-{{Identical|All collections}}',
-	'manage-wikia-home-wiki-list-all-verticals' => 'Label on filtering select field to show wikis for all verticals',
-	'manage-wikia-home-modal-title' => 'blocking/unblocking/promoting/demoting modal title',
-	'manage-wikia-home-modal-title-collection' => 'add/remove wiki in collections modal title',
-	'manage-wikia-home-modal-content-add-blocked' => 'change wiki status question (when wiki is blocked)',
-	'manage-wikia-home-modal-content-remove-blocked' => 'change wiki status question (when wiki is unblocked)',
-	'manage-wikia-home-modal-content-add-promoted' => 'change wiki status question (when wiki is promoted)',
-	'manage-wikia-home-modal-content-remove-promoted' => 'change wiki status question (when wiki is demoted)',
-	'manage-wikia-home-modal-content-add-official' => 'change wiki status question (when official mark is added to wiki)',
-	'manage-wikia-home-modal-content-remove-official' => 'change wiki status question (when official mark is removed from wiki)',
-	'manage-wikia-home-modal-content-add-collection' => 'add wiki to selected collection',
-	'manage-wikia-home-modal-content-remove-collection' => 'remove wiki from selected collection',
-	'manage-wikia-home-modal-content-add-blocked-wiki-warning' => 'warning information that it is impossible to add blocked wiki to collection',
-	'manage-wikia-home-modal-content-blocked-wiki-in-collection-warning' => 'warning information that wiki is blocked and it is in collection, so it will be removed',
-	'manage-wikia-home-modal-content-blocked-wiki-title' => 'information that wiki is blocked',
-	'manage-wikia-home-modal-content-removed-blocked-in-collection' => 'warning information that it is impossible to set wiki as blocked because it is in collection.',
-	'manage-wikia-home-modal-too-many-wikis-in-collection' => 'Error indicating too many wikis selected for a collection',
-	'manage-wikia-home-modal-button-no' => "'No' button on blocking/unblocking modal.
-{{Identical|No}}",
-	'manage-wikia-home-modal-button-yes' => "'Yes' button on blocking/unblocking modal.
-{{Identical|Yes}}",
-	'manage-wikia-home-modal-button-okay' => "'Okay' button on modal, which inform that wiki can not be added to collection because is blocked.
-{{Identical|OK}}",
-	'manage-wikia-home-collections-setup-header' => "A header above collections' configuration",
-	'manage-wikia-home-collections-setup-save-button' => "A label on the submit button; clicking this button saves changes in collections' configuration.
-{{Identical|Save}}",
-	'manage-wikia-home-collections-enabled-field-label' => 'A label before checkbox; the checkbox is to indicate status of a collection (enabled/disabled).
-{{Identical|Enabled}}',
-	'manage-wikia-home-collections-name-field-label' => "A label next to a collection's name field; in this field you put a collection's name.
-{{Identical|Collection name}}",
-	'manage-wikia-home-collections-sponsor-url-field-label' => "A label next to collection's sponsor URL field; in the field you put the sponsor URL address",
-	'manage-wikia-home-collections-sponsor-hero-image-field-label' => "A label next to collection's bigger image field (the big image covers all wikis images on corporate main page for some time then it fades out); in the field you put an image name.
-
-Hero graphic is a term used in web design for a specific type of banner image. A hero graphic is large banner image, prominently placed on a web page, generally front and center.",
-	'manage-wikia-home-collections-sponsor-image-field-label' => "A label next to collection's smaller image field (the smaller image covers statistic section on corporate main page for a specific wikis' set); in the field you put an image name",
-	'manage-wikia-home-collections-wikis-in-collection' => 'It says how many wikis are in the collections; 
-* $1 = actual number of wikis assigned to a collection
-* $2 = maximum number of wikis per collection
-
-Has plural support if needed in your language.',
-	'manage-wikia-home-collections-invalid-wikis-number' => 'Information about status of a collection; it appears only if the number of wikis assigned to a collection is invalid.
-
-Parameters:
-* $1 - number of wikis (integer). Supports PLURAL.',
-	'manage-wikia-home-collection-hero-image-tooltip' => 'Image size information under the big image field; the big image covers all wikis images on corporate main page.
-
-Parameters:
-* $1 - width of the image
-* $2 - its height',
-	'manage-wikia-home-collection-sponsor-image-tooltip' => 'Image size information under the smaller image field. Parameters:
-* $1 - width of the image
-* $2 - its height',
-	'manage-wikia-home-collection-add-file-button' => 'A label on buttons which open the image uploader.
-{{Identical|Add photo}}',
-	'manage-wikia-home-stats-header' => 'Header for corporate main page stats management section',
-	'manage-wikia-home-stats-text' => 'Message which informs user that stats in this section works globally without separation per language.',
-	'manage-wikia-home-stats-visitors-label' => "Label for 'Monthly visitors' form field.",
-	'manage-wikia-home-stats-mobile-percentage-label' => "Label for '% Mobile Visitors' form field.",
-	'manage-wikia-home-stats-edits-default-label' => "Label for 'Changes today' form field which is fallback on main page used when something wrong happen in the code.",
-	'manage-wikia-home-stats-total-pages-label' => "Label for 'Total Pages' form field which is fallback on main page used when something wrong happen in the code.",
-	'manage-wikia-home-stats-success' => 'Message after successful save.',
-	'manage-wikia-home-stats-failure' => "Message which informs user that there data weren't saved because of errors in the form.",
+	'manage-wikia-home-stats-failure' => "Data wasn't saved. Please correct errors in form and try again. ",
+	'manage-wikia-home-stats-permissions-error' => "Data wasn't saved. Please make sure you have correct rights to edit this form. ",
 );
 
 /** Arabic (العربية)
@@ -921,13 +771,13 @@ $messages['fr'] = array(
 	'manage-wikia-home-wrong-rights' => 'Vous êtes sans doute déconnecté ou n’avez pas les droits pour utiliser cette page spéciale.',
 	'manage-wikia-home-wikis-in-slots-heading' => 'Paramétrage des emplacements',
 	'manage-wikia-home-wikis-in-slots-total' => 'Nombre total d’emplacements : $1',
-	'manage-wikia-home-visualization-wikis' => "Wikis ''corporate'' avec visualisation :",
-	'manage-wikia-home-hubs-slot-heading' => 'Paramétrage des emplacements centraux',
-	'manage-wikia-home-hubs-slot-success' => 'Les emplacements centraux ont été enregistrés.',
+	'manage-wikia-home-visualization-wikis' => 'Wikis corporate avec visualisation :',
+	'manage-wikia-home-hubs-slot-heading' => 'Paramétrage des emplacements des portails',
+	'manage-wikia-home-hubs-slot-success' => 'Les emplacements des portails ont été enregistrés.',
 	'manage-wikia-home-hubs-slot-error' => 'Une erreur s’est produite lors de l’enregistrement. Veuillez réessayer.',
-	'manage-wikia-home-hubs-slot' => 'Emplacement $1',
-	'manage-wikia-home-hubs-slot-name' => 'Nom du centre',
-	'manage-wikia-home-hubs-slot-description' => 'Description du centre',
+	'manage-wikia-home-hubs-slot' => 'Les emplacements des portails ont été enregistrés.',
+	'manage-wikia-home-hubs-slot-name' => 'Nom du portail',
+	'manage-wikia-home-hubs-slot-description' => 'Description du portail',
 	'manage-wikia-home-hubs-slot-more-links' => 'Liens "Davantage en…"',
 	'manage-wikia-home-hubs-slot-empty-option' => '-- Emplacement vide --',
 	'manage-wikia-home-wikis-in-slots-success' => 'Le nombre d’emplacements a été modifié.',
@@ -941,14 +791,14 @@ $messages['fr'] = array(
 	'manage-wikia-home-marketing-invalid-height' => 'La hauteur de l’image devrait être de $maxHeight px.',
 	'manage-wikia-home-marketing-invalid-size' => 'La taille de l’image devrait être de $maxWidth x $maxHeight px.',
 	'manage-wikia-home-marketing-not-complete' => 'Pour utiliser l’emplacement marketing, tous les champs doivent être remplis.',
-	'manage-wikia-home-verticals-proportions' => 'Nombre de wikis par colonne',
+	'manage-wikia-home-verticals-proportions' => 'Nombre de wikis par thème',
 	'manage-wikia-home-error-invalid-total-no-of-slots' => 'Nombre d’emplacements non valide au total ($1). Assurez-vous que la somme de chaque groupe d’emplacements équivaut au nombre total d’emplacements ($2).',
 	'manage-wikia-home-error-negative-slots-number-not-allowed' => 'Un nombre négatif d’emplacements est interdit',
 	'manage-wikia-home-error-wikifactory-failure' => 'Quelque chose s’est mal passé pendant l’enregistrement des variables. Veuillez réessayer.',
 	'manage-wikia-home-collections-validation-error' => 'Il y a eu une erreur pendant l’enregistrement, veuillez vérifier ce que vous avez saisi.',
 	'manage-wikia-home-change-button' => 'Modification',
 	'manage-wikia-home-wikis-in-visualization-heading' => 'Liste des wikis en visualisation',
-	'manage-wikia-home-wiki-name-filter' => 'Commencez à saisir le nom du wiki et la liste se raccourcira :',
+	'manage-wikia-home-wiki-name-filter' => 'Commencez à saisir le nom du wikia et la liste se raccourcira :',
 	'manage-wikia-home-wiki-filter' => 'Filtre',
 	'manage-wikia-home-wiki-filter-reset' => 'Effacer',
 	'manage-wikia-home-wiki-list-download' => 'Télécharger la liste complète',
@@ -967,22 +817,22 @@ $messages['fr'] = array(
 	'manage-wikia-home-wiki-list-official-no' => 'Non',
 	'manage-wikia-home-wiki-list-official-yes' => 'Oui',
 	'manage-wikia-home-wiki-list-disabled-collection' => 'Collection désactivée',
-	'manage-wikia-home-wiki-list-all-collections' => 'Toutes les collections',
-	'manage-wikia-home-wiki-list-all-verticals' => 'Tous les thèmes',
-	'manage-wikia-home-modal-title' => 'Modifier l’état du wiki',
+	'manage-wikia-home-wiki-list-all-collections' => 'Toutes',
+	'manage-wikia-home-wiki-list-all-verticals' => 'Tous',
+	'manage-wikia-home-modal-title' => 'Modifier l’état du wikia',
 	'manage-wikia-home-modal-title-collection' => 'Modifier le wiki dans la collection',
-	'manage-wikia-home-modal-content-add-blocked' => 'Voulez-vous exclure ce wiki de l’affichage dans la visualisation des wikis ?',
+	'manage-wikia-home-modal-content-add-blocked' => 'Voulez-vous exclure ce wikia de l’affichage dans la visualisation des wikias ?',
 	'manage-wikia-home-modal-content-remove-blocked' => 'Voulez-vous inclure ce wiki dans la visualisation des wikis ?',
-	'manage-wikia-home-modal-content-add-promoted' => 'Voulez-vous promouvoir ce wiki dans la visualisation des wikis ?',
+	'manage-wikia-home-modal-content-add-promoted' => 'Voulez-vous promouvoir ce wikia dans la visualisation des wikias ?',
 	'manage-wikia-home-modal-content-remove-promoted' => 'Voulez-vous retirer ce wiki de la visualisation des wikis ?',
 	'manage-wikia-home-modal-content-add-official' => 'Voulez-vous ajouter un logo officiel pour ce wiki dans la visualisation des wikis ?',
 	'manage-wikia-home-modal-content-remove-official' => 'Voulez-vous supprimer le logo officiel de ce wiki dans la visualisation des wikis ?',
-	'manage-wikia-home-modal-content-add-collection' => 'Voulez-vous ajouter ce wiki à la collection ?',
-	'manage-wikia-home-modal-content-remove-collection' => 'Voulez-vous supprimer ce wiki de la collection ?',
-	'manage-wikia-home-modal-content-add-blocked-wiki-warning' => 'Vous ne pouvez pas ajouter de wikis bloqués à une collection',
-	'manage-wikia-home-modal-content-blocked-wiki-in-collection-warning' => 'Ce wiki ne devrait pas être dans une collection car il est bloqué. Il sera supprimé de la collection',
-	'manage-wikia-home-modal-content-blocked-wiki-title' => 'Ce wiki est bloqué',
-	'manage-wikia-home-modal-content-removed-blocked-in-collection' => 'Ce wiki fait actuellement partie d’une collection et ne peut pas être bloqué.',
+	'manage-wikia-home-modal-content-add-collection' => 'Voulez-vous ajouter ce wikia à la collection ?',
+	'manage-wikia-home-modal-content-remove-collection' => 'Voulez-vous supprimer ce wikia de la collection ?',
+	'manage-wikia-home-modal-content-add-blocked-wiki-warning' => 'Vous ne pouvez pas ajouter de wikias bloqués à une collection',
+	'manage-wikia-home-modal-content-blocked-wiki-in-collection-warning' => 'Ce wikia ne devrait pas être dans une collection car il est bloqué. Il sera supprimé de la collection.',
+	'manage-wikia-home-modal-content-blocked-wiki-title' => 'Ce wikia est bloqué',
+	'manage-wikia-home-modal-content-removed-blocked-in-collection' => 'Ce wikia fait actuellement partie d’une collection et ne peut pas être bloqué.',
 	'manage-wikia-home-modal-too-many-wikis-in-collection' => 'Vous ne pouvez plus ajouter de wikis à cette collection.',
 	'manage-wikia-home-modal-button-no' => 'Non',
 	'manage-wikia-home-modal-button-yes' => 'Oui',
@@ -996,15 +846,15 @@ $messages['fr'] = array(
 	'manage-wikia-home-collections-sponsor-image-field-label' => 'Image du sponsor',
 	'manage-wikia-home-collections-wikis-in-collection' => 'Wikis : $1 sur $2',
 	'manage-wikia-home-collections-invalid-wikis-number' => 'Cette collection ne sera pas visible sur la page d’accueil du portail jusqu’à ce {{PLURAL:$1|qu’un wiki lui soit affecté|que $1 wikis lui soient affectés}}.',
-	'manage-wikia-home-collection-hero-image-tooltip' => 'Cette image devrait faire $1px x $2px',
-	'manage-wikia-home-collection-sponsor-image-tooltip' => 'Cette image devrait faire $1px x $2px',
+	'manage-wikia-home-collection-hero-image-tooltip' => 'Cette image doit faire $1px x $2px',
+	'manage-wikia-home-collection-sponsor-image-tooltip' => 'Cette image doit faire $1px x $2px',
 	'manage-wikia-home-collection-add-file-button' => 'Ajouter une image',
-	'manage-wikia-home-stats-header' => 'Statistiques de la page d’accueil de l’entreprise',
-	'manage-wikia-home-stats-text' => 'Ces statistiques sont affichées sur tous les sites d’entreprise sans séparation par langue.',
+	'manage-wikia-home-stats-header' => 'Statistiques de la page d’accueil du site corporate',
+	'manage-wikia-home-stats-text' => 'Ces statistiques sont affichées sur tous les sites corporate sans considération de la langue.',
 	'manage-wikia-home-stats-visitors-label' => 'Visiteurs mensuels',
 	'manage-wikia-home-stats-mobile-percentage-label' => '% de visiteurs sur mobile',
-	'manage-wikia-home-stats-edits-default-label' => 'Secours des modifications du jour',
-	'manage-wikia-home-stats-total-pages-label' => 'Secours du total des pages',
+	'manage-wikia-home-stats-edits-default-label' => 'Nombre de modifs du jour',
+	'manage-wikia-home-stats-total-pages-label' => 'Nombre total de pages',
 	'manage-wikia-home-stats-success' => 'Statistiques bien mises à jour !',
 	'manage-wikia-home-stats-failure' => 'Les données n’ont pas été enregistrées. Veuillez corriger les erreurs dans le formulaire et réessayer.',
 	'manage-wikia-home-stats-permissions-error' => 'Les données n’ont pas été enregistrées. Veuillez vous assurer d’avoir droits requis pour modifier ce formulaire.',
@@ -1620,7 +1470,7 @@ $messages['oc'] = array(
  */
 $messages['pl'] = array(
 	'managewikiahome' => 'Zarządzenie Wikia Home',
-	'manage-wikia-home-wrong-rights' => 'Jesteś wylogowany lub nie masz uprawnień aby edytować tą stronę.',
+	'manage-wikia-home-wrong-rights' => 'Jesteś wylogowany lub nie masz uprawnień aby edytować tę stronę.',
 	'manage-wikia-home-wikis-in-slots-heading' => 'Ustawienie slotów',
 	'manage-wikia-home-wikis-in-slots-total' => 'Ilość slotów: $1',
 	'manage-wikia-home-visualization-wikis' => 'Wiki z włączonymi wizualizacjami:',

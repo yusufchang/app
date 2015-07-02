@@ -22,7 +22,7 @@ Article '''$1''' could not be found.
 
 * You can try article [[$2]]
 * You can use the search box on the left side of the page
-* To go on to the main page of this site, click the link: [{{SERVER}} {{SITENAME}}]"
+* To go on to the main page of this site, click the link: [{{SERVER}} {{SITENAME}}]",
 );
 
 /** Tunisian Arabic (تونسي/Tûnsî)
@@ -184,15 +184,14 @@ $messages['cs'] = array(
  */
 $messages['de'] = array(
 	'our404handler-desc' => 'Unser 404-Handler für nicht vorhandene Seitentricks',
-	'our404handler' => 'Fehler 404: Seite nicht gefunden!',
+	'our404handler' => 'Die Seite nach der du gesucht hast, konnte nicht gefunden werden.',
 	'our404handler-oops' => 'Dies sind nicht die Seiten, die du gesucht hast. Versuche eine andere.',
 	'message404' => "'''Es tut uns leid, aber die Seite, die du angefordert hast, existiert nicht.'''
+Der Artikel '''$0''' konnte nicht gefunden werden.
 
-Der Artikel '''$1''' konnte nicht gefunden werden.
-
-* Vielleicht hilft dir der Artikel [[$2]] weiter
-* Du kannst das Suchfeld auf der linken Seite benutzen
-* Um zur Hauptseite zu gelangen, klicke auf diesen Link: [{{SERVER}} {{SITENAME}}]",
+* Vielleicht hilft der Artikel [[$1]] weiter.
+* Du kannst das Suchfeld benutzen.
+* Um auf die Hauptseite zu wechseln, klicke den folgenden Link: [{{SERVER}} {{SITENAME}}]",
 );
 
 /** German (formal address) (Deutsch (Sie-Form)‎)
@@ -248,15 +247,9 @@ Article '''$1''' could not be found.
  */
 $messages['es'] = array(
 	'our404handler-desc' => 'Nuestro manejador 404 de páginas inexistentes',
-	'our404handler' => 'Error 404: No se encontró la página.',
+	'our404handler' => 'Esta no es el tipo de páginas que estás buscando. Sal de aquí, por favor.',
 	'our404handler-oops' => 'Aquí no están las páginas que buscas. Puedes seguir tu camino.',
-	'message404' => "'''Lo sentimos mucho, pero por alguna razón la página que buscas no existe.'''
-
-No se encontró el artículo '''$1'''.
-
-* Puedes intentarlo con el artículo [[$2]]
-* Puedes usar el cuadro de búsqueda en el lado izquierdo de la página
-* Para ir a la portada de este sitio, pulsa en el vínculo: [{{SERVER}} {{SITENAME}}]",
+	'message404' => "''Por alguna razón la página por la que preguntaste no existe.''' El artículo '''$1''' no pudo ser encontrado. * Puedes reintentarlo con el artículo [[$2]] * Puedes usar el cajón de búsqueda en el lado izquierdo de la página * Para ir a la portada de este sitio, haz click en el vínculo: [{{SERVER}} {{SITENAME}}]",
 );
 
 /** Estonian (eesti)
@@ -320,9 +313,9 @@ $messages['fo'] = array(
  * @author Polytherion
  */
 $messages['fr'] = array(
-	'our404handler-desc' => 'Notre gestionnaire 404 pour les astuces de pages non existantes',
-	'our404handler' => 'Erreur 404 : Page non-trouvée !',
-	'our404handler-oops' => "Ceci ne sont pas les pages que vous cherchez. Circulez, s'il-vous-plaît.",
+	'our404handler-desc' => 'Personnalisation des erreurs 404 (pages non existantes)',
+	'our404handler' => "Cette page n'est pas celle que vous recherchez. Veuillez circuler !",
+	'our404handler-oops' => "Cette page n'est pas celle que vous recherchez. Veuillez circuler !",
 	'message404' => "'''Désolé, mais pour une raison ou une autre la page demandée n'existe pas.'''
 
 Article '''$1''' introuvable.
@@ -626,16 +619,17 @@ Artikkelen '''$1''' ble ikke funnet.
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'our404handler' => 'Fout 404: De pagina is niet aangetroffen!',
-	'our404handler-oops' => "Dit zijn niet de pagina's waar u naar op zoek bent.
+	'our404handler' => "Dit zijn niet de pagina's waar je naar op zoek bent.
 Probeer het nog eens.",
-	'message404' => "'''Het spijt ons, maar op een of andere manier hebt u een pagina opgevraagd die niet bestaat.'''
+	'our404handler-oops' => "Dit zijn niet de pagina's waar je naar op zoek bent.
+Probeer het nog eens.",
+	'message404' => "'''Het spijt ons, maar op een of andere manier heb je een pagina opgevraagd die niet bestaat.'''
 
 Pagina \"'''\$1'''\" is niet aangetroffen.
 
-* U kunt de pagina \"[[\$2]]\" proberen
-* U kunt het zoekveld gebruiken links op de pagina
-* U kunt naar de hoofdpagina van deze site gaan: [{{SERVER}} {{SITENAME}}]",
+* Je kunt de pagina \"[[\$2]]\" proberen
+* Je kunt het zoekveld gebruiken links op de pagina
+* Je kunt naar de hoofdpagina van deze site gaan: [{{SERVER}} {{SITENAME}}]",
 );
 
 /** Nederlands (informeel)‎ (Nederlands (informeel)‎)

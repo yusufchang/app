@@ -6,23 +6,14 @@
 $messages = array();
 
 $messages['en'] = array(
-	//info
 	'toplists-desc' => 'Top 10 lists',
-
-	//rights
 	'right-toplists-create-edit-list' => 'Create and edit Top 10 list pages',
 	'right-toplists-create-item' => 'Create and add items to a Top 10 list page',
 	'right-toplists-edit-item' => 'Edit items in a Top 10 list page',
 	'right-toplists-delete-item' => 'Delete items from a Top 10 list page',
-
-	//special pages
 	'createtoplist' => 'Create a new Top 10 list',
 	'edittoplist' => 'Edit Top 10 list',
-
-	//category
 	'toplists-category' => 'Top 10 Lists',
-
-	//errors
 	'toplists-error-invalid-title' => 'The supplied text is not valid.',
 	'toplists-error-invalid-picture' => 'The selected picture is not valid.',
 	'toplists-error-title-exists' => 'This page already exists. You can go to <a href="$2" target="_blank">$1</a> or supply a different name.',
@@ -30,8 +21,8 @@ $messages['en'] = array(
 	'toplists-error-article-blocked' => 'You are not allowed to create a page with this name. Sorry.',
 	'toplists-error-article-not-exists' => '"$1" does not exist. Do you want to <a href="$2" target="_blank">create it</a>?',
 	'toplists-error-picture-not-exists' => '"$1" does not exist. Do you want to <a href="$2" target="_blank">upload it</a>?',
-	'toplists-error-duplicated-entry' => 'You can\'t use the same name more than once.',
-	'toplists-error-empty-item-name' => 'The name of an existing item can\'t be empty.',
+	'toplists-error-duplicated-entry' => "You can't use the same name more than once.",
+	'toplists-error-empty-item-name' => "The name of an existing item can't be empty.",
 	'toplists-item-cannot-delete' => 'Deletion of this item failed.',
 	'toplists-error-image-already-exists' => 'An image with the same name already exists.',
 	'toplists-error-add-item-anon' => 'Anonymous users are not allowed to add items to lists. Please <a class="ajaxLogin" id="login" href="$1">Log in</a> or <a href="$2">register a new account</a>.',
@@ -39,8 +30,6 @@ $messages['en'] = array(
 	'toplists-error-add-item-list-not-exists' => 'The "$1" Top 10 list does not exist.',
 	'toplists-upload-error-unknown' => 'An error occurred while processing the upload request. Please try again.',
 	'action-toplists-create-edit-list' => 'create and edit Top 10 list pages',
-
-	//editor
 	'toplists-editor-title-label' => 'List name',
 	'toplists-editor-title-placeholder' => 'Enter a name for the list',
 	'toplists-editor-related-article-label' => 'Related page <small>(optional, but selects an image)</small>',
@@ -59,23 +48,17 @@ $messages['en'] = array(
 	'toplists-items-created' => '$1 {{PLURAL:$1|item|items}} created',
 	'toplists-items-updated' => '$1 {{PLURAL:$1|item|items}} updated',
 	'toplists-items-nochange' => 'No items changed',
-
-	//image browser/selector
 	'toplits-image-browser-no-picture-selected' => 'No picture selected',
 	'toplits-image-browser-clear-picture' => 'Clear picture',
 	'toplits-image-browser-selected-picture' => 'Currently selected: $1',
 	'toplists-image-browser-upload-btn' => 'Choose',
 	'toplists-image-browser-upload-label' => 'Upload your own',
-
-	//article edit summaries
 	'toplists-list-creation-summary' => 'Creating a list, $1',
 	'toplists-list-update-summary' => 'Updating a list, $1',
 	'toplists-item-creation-summary' => 'Creating a list item',
 	'toplists-item-update-summary' => 'Updating a list item',
 	'toplists-item-remove-summary' => 'Item removed from list',
 	'toplists-item-restored' => 'Item restored',
-
-	//list view
 	'toplists-list-related-to' => 'Related to:',
 	'toplists-list-votes-num' => '{{PLURAL:$1|1<br />vote|$1<br />votes}}',
 	'toplists-list-created-by' => 'by [[User:$1|$1]]',
@@ -84,70 +67,30 @@ $messages['en'] = array(
 	'toplists-list-add-item-label' => 'Add item',
 	'toplists-list-add-item-name-label' => 'Keep the list going...',
 	'toplists-list-item-voted' => 'Voted',
-
-	//createpage dialog
 	'toplists-createpage-dialog-label' => 'Top 10 list',
-
-	//watchlist emails
 	'toplists-email-subject' => 'A Top 10 list has been changed',
-	'toplists-email-body' => "Hello from Wikia!
+	'toplists-email-body' => 'Hello from Wikia!
 
-The list <a href=\"$1\">$2</a> on Wikia has been changed.
+The list <a href="$1">$2</a> on Wikia has been changed.
 
  $3
 
 Head to Wikia to check out the changes! $1
 
-- Wikia\n\nYou can <a href=\"$4\">unsubscribe</a> from changes to the list.",
+- Wikia
 
-	//time
+You can <a href="$4">unsubscribe</a> from changes to the list.',
 	'toplists-seconds' => '$1 {{PLURAL:$1|second|seconds}}',
 	'toplists-minutes' => '$1 {{PLURAL:$1|minute|minutes}}',
 	'toplists-hours' => '$1 {{PLURAL:$1|hour|hours}}',
 	'toplists-days' => '$1 {{PLURAL:$1|day|days}}',
 	'toplists-weeks' => '$1 {{PLURAL:$1|week|weeks}}',
-
-	//FB connect article vote message
 	'toplists-msg-fb-OnRateArticle-link' => '$ARTICLENAME',
-	'toplists-msg-fb-OnRateArticle-short' =>  'has voted on a Top 10 list on $WIKINAME!', // @todo FIXME: If possible add username as a variable here.
+	'toplists-msg-fb-OnRateArticle-short' => 'has voted on a Top 10 list on $WIKINAME!',
 	'toplists-msg-fb-OnRateArticle' => '$TEXT',
-
-	//Create list call to action
 	'toplists-create-heading' => '<em>New!</em> Create Your Own Top Ten',
 	'toplists-create-button-msg' => 'Create a list',
-
 	'toplists-oasis-only' => 'Creating and editing Top 10 lists is not available in Monobook. If you would like to use this feature, please switch your preference to the Wikia skin.',
-);
-
-/** Message documentation (Message documentation)
- * @author Liuxinyu970226
- * @author Purodha
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'toplists-desc' => '{{desc}}',
-	'right-toplists-create-edit-list' => '{{doc-right|toplists-create-edit-list}}',
-	'right-toplists-create-item' => '{{doc-right|toplists-create-item}}',
-	'right-toplists-edit-item' => '{{doc-right|toplists-edit-item}}',
-	'right-toplists-delete-item' => '{{doc-right|toplists-delete-item}}',
-	'toplists-category' => 'The name for the category that lists all the Top 10 Lists on a wiki',
-	'action-toplists-create-edit-list' => '{{doc-action|toplists-create-edit}}',
-	'toplists-editor-remove-item-tooltip' => '{{Identical|Remove item}}',
-	'toplists-create-button' => '{{Identical|Create list}}',
-	'toplists-cancel-button' => '{{Identical|Cancel}}',
-	'toplits-image-browser-selected-picture' => '$1 is the title of the image page.',
-	'toplists-image-browser-upload-btn' => '{{Identical|Choose}}',
-	'toplists-list-votes-num' => '{{Identical|Vote}}',
-	'toplists-list-created-by' => '{{Identical|By}}',
-	'toplists-list-vote-up' => 'Keep this as short as possible. Everything exceeding allowed lenght will be cutted out!',
-	'toplists-seconds' => '{{Identical|Second}}',
-	'toplists-minutes' => '{{Identical|Minute}}',
-	'toplists-hours' => '{{Identical|Hour}}',
-	'toplists-days' => '{{Identical|Day}}',
-	'toplists-weeks' => '{{Identical|Week}}',
-	'toplists-create-button-msg' => '{{Identical|Create list}}',
-	'toplists-oasis-only' => 'Displayed to users who try to edit or create Top 10 lists in a skin other than the Wikia skin.',
 );
 
 /** Arabic (العربية)
@@ -589,7 +532,7 @@ $messages['de'] = array(
 	'toplists-editor-drag-item-tooltip' => 'Klicken und ziehen um die Reihenfolge zu ändern',
 	'toplists-editor-add-item-label' => 'Neuen Eintrag hinzufügen',
 	'toplists-editor-add-item-tooltip' => 'Füge einen neuen Eintrag zur Liste hinzu',
-	'toplists-create-button' => 'Liste erstellen',
+	'toplists-create-button' => 'Erstelle eine Liste',
 	'toplists-update-button' => 'Liste speichern',
 	'toplists-cancel-button' => 'Abbrechen',
 	'toplists-items-removed' => '$1 {{PLURAL:$1|Eintrag|Einträge}} entfernt',
@@ -610,10 +553,10 @@ $messages['de'] = array(
 	'toplists-list-related-to' => 'Verwandt zu:',
 	'toplists-list-votes-num' => '{{PLURAL:$1|1<br />Stimme|$1<br />Stimmen}}',
 	'toplists-list-created-by' => 'von [[User:$1|$1]]',
-	'toplists-list-vote-up' => 'Zustimmen',
+	'toplists-list-vote-up' => 'Abstimmen',
 	'toplists-list-hotitem-count' => '$1 {{PLURAL:$1|Stimme|Stimmen}} in $2',
 	'toplists-list-add-item-label' => 'Eintrag hinzufügen',
-	'toplists-list-add-item-name-label' => 'Führe die Liste fort...',
+	'toplists-list-add-item-name-label' => 'Ergänze die Liste..',
 	'toplists-list-item-voted' => 'Abgestimmt',
 	'toplists-createpage-dialog-label' => 'Top 10 Liste',
 	'toplists-email-subject' => 'Eine Top 10 Liste wurde geändert',
@@ -634,8 +577,8 @@ Du kannst die Änderungsbenachrichtigungen zu dieser Liste <a href="$4">abbestel
 	'toplists-days' => '$1 {{PLURAL:$1|Tag|Tage}}',
 	'toplists-weeks' => '$1 {{PLURAL:$1|Woche|Wochen}}',
 	'toplists-msg-fb-OnRateArticle-short' => 'hat bei einer Top 10 Liste abgestimmt ($WIKINAME)!',
-	'toplists-create-heading' => '<em>Neu!</em> Erstelle deine eigene Top 10 Liste',
-	'toplists-create-button-msg' => 'Liste erstellen',
+	'toplists-create-heading' => '<em>Neu!</em> Erstelle deine eigene Top 10-Liste',
+	'toplists-create-button-msg' => 'Erstelle eine Liste',
 	'toplists-oasis-only' => 'Das Erstellen und Bearbeiten von Top-10-Listen ist im Monobook-Skin nicht verfügbar. Wenn du diese Funktion nutzen willst, wechsele in deinen Einstellungen zum Wikia-Skin.',
 );
 
@@ -919,7 +862,7 @@ $messages['fr'] = array(
 	'toplists-error-title-spam' => 'Le texte fourni contient quelques mots reconnus comme indésirables.',
 	'toplists-error-article-blocked' => 'Vous n’êtes pas autorisé à créer une page avec ce nom. Désolé.',
 	'toplists-error-article-not-exists' => 'L’article « $1 » n’existe pas. Voulez-vous <a href="$2" target="_blank">le créer</a> ?',
-	'toplists-error-picture-not-exists' => 'Le fichier « $1 » n’existe pas. Voulez-vous <a href="$2" target="_blank">le téléverser</a> ?',
+	'toplists-error-picture-not-exists' => 'Le fichier « $1 » n’existe pas. Voulez-vous <a href="$2" target="_blank">l’importer</a> ?',
 	'toplists-error-duplicated-entry' => 'Vous ne pouvez pas utiliser le même nom plus d’une fois.',
 	'toplists-error-empty-item-name' => 'Le nom d’un élément existant ne peut pas être vide.',
 	'toplists-item-cannot-delete' => 'La suppression de cet élément a échoué.',
@@ -940,7 +883,7 @@ $messages['fr'] = array(
 	'toplists-editor-drag-item-tooltip' => 'Faites glisser pour changer l’ordre',
 	'toplists-editor-add-item-label' => 'Ajouter un nouvel élément',
 	'toplists-editor-add-item-tooltip' => 'Ajouter un nouvel élément à la liste',
-	'toplists-create-button' => 'Créer une liste',
+	'toplists-create-button' => 'Créer la liste',
 	'toplists-update-button' => 'Enregistrer la liste',
 	'toplists-cancel-button' => 'Annuler',
 	'toplists-items-removed' => '{{PLURAL:$1|Un élément supprimé|$1 éléments supprimés}}',
@@ -951,7 +894,7 @@ $messages['fr'] = array(
 	'toplits-image-browser-clear-picture' => 'Effacer l’image',
 	'toplits-image-browser-selected-picture' => 'Image actuellement sélectionnée : $1',
 	'toplists-image-browser-upload-btn' => 'Choisir',
-	'toplists-image-browser-upload-label' => 'Téléversez la vôtre',
+	'toplists-image-browser-upload-label' => 'Importer la vôtre',
 	'toplists-list-creation-summary' => 'Création d’une liste, $1',
 	'toplists-list-update-summary' => 'Mise à jour d’une liste, $1',
 	'toplists-item-creation-summary' => 'Création d’un élément de liste',
@@ -1262,6 +1205,7 @@ Tu pote <a href="$4">cancellar le subscription</a> al cambios in iste lista.',
  */
 $messages['it'] = array(
 	'toplists-create-button-msg' => 'Crea una lista',
+	'edittoplist' => 'Modifica Lista Top 10',
 );
 
 /** Japanese (日本語)
@@ -1287,7 +1231,7 @@ $messages['ja'] = array(
 	'toplists-error-empty-item-name' => '項目名は空欄にできません。',
 	'toplists-item-cannot-delete' => '項目の削除に失敗しました。',
 	'toplists-error-image-already-exists' => '同名の画像が既にあります。',
-	'toplists-error-add-item-anon' => '未登録利用者はリストへ項目を追加できません。<a class="ajaxLogin" id="login" href="$1">ログイン</a>するか<a href="$2">アカウントを作成</a>してください。',
+	'toplists-error-add-item-anon' => '未登録利用者はリストへ項目を追加できません。<a class="ajaxLogin" id="login" href="$1">ログイン</a>するか<a class="ajaxLogin" id="signup" href="$2">アカウントを作成</a>してください。',
 	'toplists-error-add-item-permission' => '権限エラー: 新しい項目を作成する権限がありません。',
 	'toplists-error-add-item-list-not-exists' => '投票リスト「$1」は存在しません。',
 	'toplists-upload-error-unknown' => 'アップロード処理中にエラーが発生しました。もう一度お試しください。',
@@ -1349,22 +1293,65 @@ $1
 	'toplists-msg-fb-OnRateArticle-short' => 'さんが $WIKINAME の投票リストで投票しました。',
 	'toplists-create-heading' => '新しいリストを作成する',
 	'toplists-create-button-msg' => 'リストを作成',
+	'toplists-msg-fb-OnRateArticle' => 'さんが $WIKINAME の投票リストで投票しました。',
 );
 
 /** Korean (한국어)
  * @author Miri-Nae
  */
 $messages['ko'] = array(
-	'toplists-desc' => '상위 10개 목록',
-	'toplists-category' => '상위 10개 목록',
+	'toplists-desc' => '상위 10 목록',
+	'toplists-category' => '상위 10 목록',
 	'toplists-cancel-button' => '취소',
-	'toplists-createpage-dialog-label' => '상위 10개 목록',
+	'toplists-createpage-dialog-label' => '상위 10 목록',
 	'toplists-seconds' => '$1초',
 	'toplists-minutes' => '$1분',
 	'toplists-hours' => '$1시간',
 	'toplists-days' => '$1일',
 	'toplists-weeks' => '$1주',
 	'toplists-oasis-only' => '모노북 스킨에는 상위 10 목록이 적용되지 않습니다. 이 기능을 체험하고 싶으시다면 스킨을 위키아 스킨으로 바꿔주세요.',
+	'createtoplist' => '상위 10 목록 생성하기',
+	'edittoplist' => '상위 10 목록 편집',
+	'toplists-error-invalid-title' => '입력하신 이름을 사용할 수 없습니다.',
+	'toplists-error-invalid-picture' => '선택하신 그림을 사용하실 수 없습니다.',
+	'toplists-error-title-exists' => '입력하신 이름을 가진 목록이 존재합니다. <a href="$2" target="_blank">$1</a>에서 확인해보시고 다른 이름으로 시도해주세요.',
+	'toplists-error-title-spam' => '입력하신 이름에 스팸으로 의심되는 문구가 포함되어 있습니다.',
+	'toplists-error-article-blocked' => '입력하신 이름으로는 목록 생성이 허용되어 있지 않습니다.',
+	'toplists-error-article-not-exists' => '"$1"이(가) 존재하지 않습니다. 이 이름으로 새 목록을 <a href="$2" target="_blank">생성</a>하실 수 있습니다.',
+	'toplists-error-picture-not-exists' => '"$1"이(가) 존재하지 않습니다. 이 이름으로 새로운 그림을 <a href="$2" target="_blank">올릴</a> 수 있습니다.',
+	'toplists-error-duplicated-entry' => '입력하신 이름을 가진 항목이 이미 존재합니다.',
+	'toplists-error-empty-item-name' => '이미 존재하는 항목의 이름은 빈칸으로 될 수 없습니다.',
+	'toplists-error-image-already-exists' => '같은 이름을 가진 그림이 이미 존재합니다.',
+	'toplists-error-add-item-anon' => '익명 사용자에게는 항목 추가가 허용되어 있지 않습니다. <a class="ajaxLogin" id="login" href="$1">로그인</a>하시거나 <a class="ajaxLogin" id="signup" href="$2">계정을 만들고</a> 나서 이용해주세요.',
+	'toplists-error-add-item-permission' => '권한 오류: 회원님의 계정에는 새 항목을 만들 수 있는 권한이 없습니다.',
+	'toplists-error-add-item-list-not-exists' => '"$1" 상위 10 목록은 존재하지 않습니다.',
+	'toplists-editor-title-label' => '목록 이름',
+	'toplists-editor-title-placeholder' => '목록 이름 입력',
+	'toplists-editor-related-article-label' => '관련 문서 <small>(필요한 경우에만. 그림 자동 수집)</small>',
+	'toplists-editor-related-article-placeholder' => '존재하는 문서 이름 입력',
+	'toplists-editor-description-label' => '간단한 설명',
+	'toplists-editor-description-placeholder' => '목록 설명 입력',
+	'toplists-editor-image-browser-tooltip' => '그림 넣기',
+	'toplists-editor-remove-item-tooltip' => '항목 제거',
+	'toplists-editor-drag-item-tooltip' => '항목 순서를 바꾸려면 드래그',
+	'toplists-editor-add-item-label' => '새 항목 추가',
+	'toplists-editor-add-item-tooltip' => '새 항목 추가',
+	'toplists-create-button' => '목록 생성',
+	'toplists-image-browser-upload-btn' => '고르기',
+	'toplists-email-subject' => '위키아에서 만드신 상위 10 목록에 변경점이 있습니다.',
+	'toplists-email-body' => '안녕하세요. 위키아입니다.
+
+위키아에서 만드신 상위 10 목록 <a href="$1">$2</a>에 변경점이 있습니다.
+
+ $3
+
+변경점을 확인하시려면 다음 링크를 참조하세요. $1
+
+- 위키아 드림
+
+더 이상 이 알림 메일을 수신하고 싶지 않으시다면 <a href="$4">여기</a>를 클릭하세요.',
+	'toplists-create-heading' => '<em>새로운 기능!</em> 회원님만의 상위 10 목록을 만들어보세요',
+	'toplists-create-button-msg' => '목록 생성',
 );
 
 /** Colognian (Ripoarisch)
@@ -1691,17 +1678,17 @@ $messages['nl'] = array(
 	'toplists-category' => 'Top 10-lijsten',
 	'toplists-error-invalid-title' => 'De opgegeven tekst wordt niet opgeslagen.',
 	'toplists-error-invalid-picture' => 'De geselecteerde afbeelding is niet geldig.',
-	'toplists-error-title-exists' => 'Deze pagina bestaat al. U kunt naar <a href="$2" target="_blank">$1</a> gaan of een andere naam opgeven.',
+	'toplists-error-title-exists' => 'Deze pagina bestaat al. Je kunt naar <a href="$2" target="_blank">$1</a> gaan of een andere naam opgeven.',
 	'toplists-error-title-spam' => 'De opgegeven tekst bevat woorden die zijn herkend als spam.',
 	'toplists-error-article-blocked' => 'Een pagina aanmaken met deze naam is helaas niet toegestaan.',
-	'toplists-error-article-not-exists' => '"$1" bestaat niet. Wilt u deze <a href="$2" target="_blank">aanmaken</a>?',
-	'toplists-error-picture-not-exists' => '"$1" bestaat niet. Wilt u het bestand <a href="$2" target="_blank">uploaden</a>?',
-	'toplists-error-duplicated-entry' => 'U kunt dezelfde naam niet opnieuw gebruiken.',
+	'toplists-error-article-not-exists' => '"$1" bestaat niet. Wil je deze <a href="$2" target="_blank">aanmaken</a>?',
+	'toplists-error-picture-not-exists' => '"$1" bestaat niet. Wil je het bestand <a href="$2" target="_blank">uploaden</a>?',
+	'toplists-error-duplicated-entry' => 'Je kunt dezelfde naam niet opnieuw gebruiken.',
 	'toplists-error-empty-item-name' => 'De naam van een bestaand item kan niet leeg zijn.',
 	'toplists-item-cannot-delete' => 'Het verwijderen van dit item is mislukt.',
 	'toplists-error-image-already-exists' => 'Er bestaat al een afbeelding met die naam.',
 	'toplists-error-add-item-anon' => 'Anonieme gebruikers mogen geen items toevoegen aan lijsten. <a class="ajaxLogin" id="login" href="$1">Meld u aan</a> of <a href="$2">registreer een nieuwe gebruiker</a>.',
-	'toplists-error-add-item-permission' => 'Rechtenprobleem: uw gebruiker heeft geen rechten om nieuwe items aan te maken.',
+	'toplists-error-add-item-permission' => 'Rechtenprobleem: je gebruiker heeft geen rechten om nieuwe items aan te maken.',
 	'toplists-error-add-item-list-not-exists' => 'De Top 10 lijst "$1" bestaat niet.',
 	'toplists-upload-error-unknown' => 'Er is een fout opgetreden bij het verwerken van de uploadverzoek. Probeer het nog een keer.',
 	'action-toplists-create-edit-list' => 'Top-10 lijsten aan te maken en te bewerken',
@@ -1754,14 +1741,14 @@ Ga naar Wikia om de wijzigingen te bekijken! $1
 
 - Wikia
 
-U kunt <a href="$4">uitschrijven</a> van wijzigingen op deze lijst.',
+Je kunt <a href="$4">uitschrijven</a> van wijzigingen op deze lijst.',
 	'toplists-seconds' => '$1 {{PLURAL:$1|seconde|seconden}}',
 	'toplists-minutes' => '$1 {{PLURAL:$1|minuut|minuten}}',
 	'toplists-hours' => '$1 {{PLURAL:$1|uur|uren}}',
 	'toplists-days' => '$1 {{PLURAL:$1|dag|dagen}}',
 	'toplists-weeks' => '$1 {{PLURAL:$1|week|weken}}',
 	'toplists-msg-fb-OnRateArticle-short' => 'heeft gestemd op een Top 10 lijst op $WIKINAME!',
-	'toplists-create-heading' => '<em>Nieuw!</em> Maak uw eigen Top 10 aan',
+	'toplists-create-heading' => '<em>Nieuw!</em> Maak je eigen Top 10 aan',
 	'toplists-create-button-msg' => 'Lijst aanmaken',
 	'toplists-oasis-only' => 'Het aanmaken en bewerken van Top 10-lijsten is niet mogelijk in deze vormgeving. Als u deze optie wilt gebruiken, kan dat alleen in de vormgeving "Wikia", die u kunt instelling in uw voorkeuren.',
 );
@@ -1813,10 +1800,10 @@ $messages['oc'] = array(
  */
 $messages['pl'] = array(
 	'toplists-desc' => 'Listy Top 10',
-	'right-toplists-create-edit-list' => 'Ttwórz i edytuj listy Top 10',
-	'right-toplists-create-item' => 'Dodawaj elementy do list Top 10',
-	'right-toplists-edit-item' => 'Edytuj elementy na listach Top 10',
-	'right-toplists-delete-item' => 'Usuwaj elementy z listy Top 10',
+	'right-toplists-create-edit-list' => 'Tworzenie i dodawanie List Top 10',
+	'right-toplists-create-item' => 'Tworzenie i dodawanie wpisów do List Top 10',
+	'right-toplists-edit-item' => 'Edytowanie wpisów na Listach Top 10',
+	'right-toplists-delete-item' => 'Usuwanie wpisów z List Top 10',
 	'createtoplist' => 'Utwórz nową listę Top 10',
 	'edittoplist' => 'Edytuj listę Top 10',
 	'toplists-category' => 'Listy Top 10',
@@ -1871,8 +1858,8 @@ $messages['pl'] = array(
 	'toplists-list-vote-up' => 'Zagłosuj',
 	'toplists-list-hotitem-count' => '$1 {{PLURAL:$1|głos|głosy|głosów}} w $2',
 	'toplists-list-add-item-label' => 'Dodaj element',
-	'toplists-list-add-item-name-label' => 'Przechowanie stanów listy...',
-	'toplists-list-item-voted' => 'Głosowało',
+	'toplists-list-add-item-name-label' => 'Dodaj do listy...',
+	'toplists-list-item-voted' => 'Zagłosowano',
 	'toplists-createpage-dialog-label' => 'Lista Top 10',
 	'toplists-email-subject' => 'Zmieniono listę Top 10',
 	'toplists-email-body' => 'Witaj!
@@ -2010,7 +1997,7 @@ $messages['ps'] = array(
 	'toplists-createpage-dialog-label' => 'د سر 10 لړليکونه',
 	'toplists-seconds' => '$1 {{PLURAL:$1|ثانيه|ثانيې}}',
 	'toplists-minutes' => '$1 {{PLURAL:$1|دقيقه|دقيقې}}',
-	'toplists-hours' => '$1 {{PLURAL:$1|گړۍ|گړۍ}}', # Fuzzy
+	'toplists-hours' => '$1 {{PLURAL:$1|گړۍ|گړۍ}}',
 	'toplists-days' => '$1 {{PLURAL:$1|ورځ|ورځې}}',
 	'toplists-weeks' => '$1 {{PLURAL:$1|اونۍ|اونۍ}}',
 	'toplists-create-button-msg' => 'يو لړليک جوړول',
@@ -2321,15 +2308,15 @@ $messages['ru'] = array(
 	'toplists-list-item-voted' => 'Проголосовало',
 	'toplists-createpage-dialog-label' => 'Список топ-10',
 	'toplists-email-subject' => 'Был изменен список топ-10',
-	'toplists-email-body' => 'Привет из Викии!
+	'toplists-email-body' => 'Привет из Вики!
 
-Список <a href="$1">$2</a> на Викии был изменён.
+Список <a href="$1">$2</a> на Вики был изменён.
 
  $3
 
-Бегом в Викию, и проверьте изменения! $1
+Бегом в Вики, и проверьте изменения! $1
 
-- Wikia
+- Команда Викия
 
 Вы можете <a href="$4">отписаться</a> от изменений в списке.',
 	'toplists-seconds' => '$1 {{PLURAL:$1|секунда|секунды|секунд}}',

@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -22,4 +21,8 @@ $messages['en'] = array(
 	'userrollback-invalid-time' => 'Invalid time provided.',
 	'userrollback-task-added' => 'Background task has been added to revert edits by these users. Further information can be found in TaskManager log.',
 	'userrollback-task-add-error' => 'These was an error in adding the background task to fulfill the request.',
+);
+
+$messages['ru'] = array(
+	'userrollback-form-back' => 'Назад',
 );

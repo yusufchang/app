@@ -7,12 +7,6 @@ $messages['en'] = array(
 	'emailext-categoryadd-see-all-pages' => 'See all pages in [$1 $2].',
 );
 
-$messages['qqq'] = array(
-	'emailext-categoryadd-subject' => 'Subject of email sent when a new category is added to a category page a user is watching. $1 -> category page name',
-	'emailext-categoryadd-details' => "Line informing the user a new page has been added to a category they're following",
-	'emailext-categoryadd-see-all-pages' => 'Line which links to the category page the user is watching. Call to Action is to see all pages in that category. $1 -> category page name, $2 -> category page url',
-);
-
 $messages['de'] = array(
 	'emailext-categoryadd-subject' => 'Auf {{SITENAME}} wurde eine Seite zu $1 hinzugefügt!',
 	'emailext-categoryadd-details' => 'Einer Kategorie, der du auf {{SITENAME}} folgst, wurde eine Seite hinzugefügt.',
@@ -67,15 +61,33 @@ $messages['ru'] = array(
 	'emailext-categoryadd-footer-1' => 'Посмотреть все страницы данной категории — [$1 $2].',
 );
 
+$messages['zh'] = array(
+	'emailext-categoryadd-subject' => '{{SITENAME}}上的分类$1中添加了新的页面！',
+	'emailext-categoryadd-see-all-pages' => '查看分类 [$1 $2] 中的所有页面。',
+);
+
 $messages['zh-hans'] = array(
-	'emailext-categoryadd-subject' => '{{SITENAME}}网站的$1页面上添加了一个新的类别！',
-	'emailext-categoryadd-details' => '{{SITENAME}}网站上您关注的类别中添加了一个新的页面。',
+	'emailext-categoryadd-subject' => '{{SITENAME}}上的分类$1中添加了新的页面！',
+	'emailext-categoryadd-details' => '您在{{SITENAME}}上关注的一个类别中添加了一个新的页面。',
 	'emailext-categoryadd-footer-1' => '查看[$1 $2]类的所有页面。',
+	'emailext-categoryadd-see-all-pages' => '查看分类 [$1 $2] 中的所有页面。',
+);
+
+$messages['zh-hant'] = array(
+	'emailext-categoryadd-subject' => '{{SITENAME}}上的分類$1中添加了新的頁面！',
+	'emailext-categoryadd-details' => '您在{{SITENAME}}上關注的一個類別中添加了一個新的頁面。',
+	'emailext-categoryadd-see-all-pages' => '查看分類 [$1 $2] 中的所有頁面。',
+);
+
+$messages['zh-hk'] = array(
+	'emailext-categoryadd-subject' => '{{SITENAME}}上的分類$1中添加了新的頁面！',
+	'emailext-categoryadd-details' => '您在{{SITENAME}}上關注的一個類別中添加了一個新的頁面。',
+	'emailext-categoryadd-see-all-pages' => '查看分類 [$1 $2] 中的所有頁面。',
 );
 
 $messages['zh-tw'] = array(
-	'emailext-categoryadd-subject' => '{{SITENAME}}網路的$1頁面上添加了一個新的類別！',
-	'emailext-categoryadd-details' => '{{SITENAME}}網路上你關注的類別中添加了一個新的頁面。',
+	'emailext-categoryadd-subject' => '{{SITENAME}}上的分類$1中添加了新的頁面！',
+	'emailext-categoryadd-details' => '您在{{SITENAME}}上關注的一個類別中添加了一個新的頁面。',
 	'emailext-categoryadd-footer-1' => '查看[$1 $2]類的所有頁面。',
+	'emailext-categoryadd-see-all-pages' => '查看分類 [$1 $2] 中的所有頁面。',
 );
-

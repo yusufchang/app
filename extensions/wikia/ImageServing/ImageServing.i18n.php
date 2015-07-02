@@ -12,14 +12,6 @@ $messages['en'] = array(
 	'mostlinkedfilesincontent' => 'Most linked-to files in content namespaces',
 );
 
-/** Message documentation (Message documentation)
- * @author Purodha
- */
-$messages['qqq'] = array(
-	'imageserving-desc' => '{{desc}}',
-	'mostlinkedfilesincontent' => 'The name of the special page showing the list of the most popular images on pages in content namespaces',
-);
-
 /** Arabic (العربية)
  * @author Achraf94
  */
@@ -144,6 +136,10 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'imageserving-desc' => '視覚的な要件に基づいてページの指定された配列から画像を選択します。',
+);
+
+$messages['ko'] = array(
+	'mostlinkedfilesincontent' => '문서에 가장 많이 사용된 파일 목록',
 );
 
 /** Colognian (Ripoarisch)

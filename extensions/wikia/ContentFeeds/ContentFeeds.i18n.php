@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -10,18 +9,7 @@ $messages['en'] = array(
 	'contentfeeds-firstfewarticles-tag-title' => 'Title',
 	'contentfeeds-firstfewarticles-tag-next' => 'Next',
 	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'Error: Page title is required',
-	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'Error: Page body is required'
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'contentfeeds-desc' => "Description of extension as listed on [[Special:Version]].
-For an explanation of 'rich information' see [[:w:en:Media richness theory|Wikipedia]].",
-	'contentfeeds-newimages-rss-desc' => 'Outputs information about the source of the feed entry for attribution reasons. $1 is the URL of the page',
-	'contentfeeds-firstfewarticles-tag-title' => '{{Identical|Title}}',
-	'contentfeeds-firstfewarticles-tag-next' => '{{Identical|Next}}',
+	'contentfeeds-firstfewarticles-tag-empty-body-error' => 'Error: Page body is required',
 );
 
 /** Afrikaans (Afrikaans)
@@ -351,7 +339,7 @@ $messages['ko'] = array(
 	'contentfeeds-firstfewarticles-tag-title' => '제목',
 	'contentfeeds-firstfewarticles-tag-next' => '다음',
 	'contentfeeds-firstfewarticles-tag-empty-title-error' => '오류: 문서 제목 필요',
-	'contentfeeds-firstfewarticles-tag-empty-body-error' => '오류: 문서 내용 필요',
+	'contentfeeds-firstfewarticles-tag-empty-body-error' => '오류: 문서 본문 필요',
 );
 
 /** Colognian (Ripoarisch)
@@ -464,7 +452,7 @@ $messages['nl'] = array(
 	'contentfeeds-desc' => 'Biedt rijke en bijgewerkte informatie via verschillende labels of "feeds"',
 	'contentfeeds-newimages-rss-title' => 'RSS-feed voor {{#Special:NewFiles}}',
 	'contentfeeds-newimages-rss-desc' => 'Feed van $1',
-	'contentfeeds-firstfewarticles-tag-header' => "Maak uw eerste pagina's aan!",
+	'contentfeeds-firstfewarticles-tag-header' => "Maak je eerste pagina's aan!",
 	'contentfeeds-firstfewarticles-tag-title' => 'Titel',
 	'contentfeeds-firstfewarticles-tag-next' => 'Volgende',
 	'contentfeeds-firstfewarticles-tag-empty-title-error' => 'Fout: paginanaam is verplicht',

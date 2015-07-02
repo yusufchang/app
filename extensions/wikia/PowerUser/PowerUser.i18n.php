@@ -1,14 +1,10 @@
 <?php
+$messages = array();
 
-$messages = [];
-
-$messages['en'] = [
+$messages['en'] = array(
 	'poweruser-ext-desc' => 'Manages data on PowerUsers of wikia',
-];
+);
 
-/** Message documentation (Message documentation)
- * @author Adam Karmiński <adamk@wikia-inc.com>
- */
-$messages['qqq'] = [
-	'poweruser-ext-desc' => '{{desc}}',
-];
+$messages['fr'] = array(
+	'poweruser-ext-desc' => '&nbsp;',
+);

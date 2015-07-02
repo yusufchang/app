@@ -20,16 +20,7 @@ $messages['en'] = array(
 	'dump-database-request-already-submitted' => 'Dump has been requested recently (less than 7 days ago)',
 	'dump-database-request-requested' => 'Request for database dump sent',
 	'dump-database-info-more' => 'Please <a href="http://community.wikia.com/wiki/Help:Database_download">see</a> for more info',
-	'dump-database-last-unknown' => 'Unknown'
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'dump-database' => '{{Identical|Database dump}}',
-	'dump-database-last-unknown' => 'Used when the time of the last database dump request is not known, or if there have been no requests.
-{{Identical|Unknown}}',
+	'dump-database-last-unknown' => 'Unknown',
 );
 
 /** Afrikaans (Afrikaans)
@@ -223,18 +214,18 @@ $messages['da'] = array(
  * @author The Evil IP address
  */
 $messages['de'] = array(
-	'dump-database' => 'Datenbank-Dumps',
-	'dump-database-info' => 'Datenbank-Dumps können als persönliches Backup (Wikia produziert automatisch separate Backups aller Wikis) oder für Wartungsbots genutzt werden',
+	'dump-database' => 'Ein Dump wurde vor weniger als 7 Tagen angefordert.',
+	'dump-database-info' => 'Bitte siehe <a href="http://hilfe.wikia.com/wiki/Hilfe:Dumps">hier</a> für weitere Infos.',
 	'dump-database-curr-pages' => 'Aktuelle Seiten',
 	'dump-database-curr-pages-info' => '(Diese Version eignet sich normalerweise am besten für Bots)',
 	'dump-database-full-pages' => 'Aktuelle Seiten und Versionsgeschichte',
 	'dump-database-full-pages-info' => '(Warnung: Diese Datei könnte sehr groß sein)',
-	'dump-database-request' => 'Ein Update beantragen',
+	'dump-database-request' => 'Ein Dump wurde vor weniger als 7 Tagen angefordert.',
 	'dump-database-request-info' => '(Dumps werden normalerweise wöchentlich generiert)',
 	'dump-database-request-submit' => 'Anfrage absenden',
-	'dump-database-request-already-submitted' => 'Dump wurde kürzlich (weniger als 7 Tagen) angefordert',
+	'dump-database-request-already-submitted' => 'Ein Dump wurde vor weniger als 7 Tagen angefordert.',
 	'dump-database-request-requested' => 'Anfrage nach Datenbank-Dump gesendet',
-	'dump-database-info-more' => 'Bitte siehe <a href="http://community.wikia.com/wiki/Help:Database_download">hier</a> für weitere Infos.',
+	'dump-database-info-more' => 'Bitte siehe <a href="http://hilfe.wikia.com/wiki/Hilfe:Dumps">hier</a> für weitere Infos.',
 	'dump-database-last-unknown' => 'Unbekannt',
 );
 
@@ -332,8 +323,8 @@ $messages['fi'] = array(
  * @author Peter17
  */
 $messages['fr'] = array(
-	'dump-database' => 'Dumps de la base de données',
-	'dump-database-info' => 'Les dumps de la base de données peuvent être utilisés comme sauvegarde personnelle (Wikia produit automatiquement des sauvegardes séparées de tous les wikis) ou pour les robots de maintenance',
+	'dump-database' => 'Inconnue',
+	'dump-database-info' => 'Consultez <a href="http://communaute.wikia.com/wiki/Aide:Télécharger_la_base_de_données">cette page</a> pour plus d\'informations',
 	'dump-database-curr-pages' => 'Pages actuelles',
 	'dump-database-curr-pages-info' => '(Cette version est généralement la meilleure pour une utilisation pour un bot)',
 	'dump-database-full-pages' => 'Pages actuelles et historique',
@@ -343,8 +334,8 @@ $messages['fr'] = array(
 	'dump-database-request-submit' => 'Envoyer la requête',
 	'dump-database-request-already-submitted' => 'La création d’une archive a été récemment demandée (il y a moins de 7 jours)',
 	'dump-database-request-requested' => 'Requête pour un dump de la base de donnée envoyée',
-	'dump-database-info-more' => 'Voyez <a href="http://community.wikia.com/wiki/Help:Database_download">ceci</a> pour plus d\'informations',
-	'dump-database-last-unknown' => 'Inconnu',
+	'dump-database-info-more' => 'Consultez <a href="http://communaute.wikia.com/wiki/Aide:Télécharger_la_base_de_données">cette page</a> pour plus d\'informations',
+	'dump-database-last-unknown' => 'Inconnue',
 );
 
 /** Galician (galego)
@@ -456,18 +447,19 @@ $messages['it'] = array(
  * @author Tommy6
  */
 $messages['ja'] = array(
-	'dump-database' => 'データベースダンプ',
-	'dump-database-info' => 'データベースダンプは、個人的なバックアップ（ウィキアでは全てのウィキのバックアップを自動的に取っています）やメンテナンスボット用として利用できます。',
+	'dump-database' => 'データベースダンプをリクエストする',
+	'dump-database-info' => '詳しくは<a href="http://ja.community.wikia.com/wiki/Help:データベースのダウンロード">Help:データベースのダウンロード</a>をご覧ください。',
 	'dump-database-curr-pages' => '最新のページ',
 	'dump-database-curr-pages-info' => '（ボットで利用する場合には通常最も適したものとなります）',
 	'dump-database-full-pages' => '最新ページとその履歴',
 	'dump-database-full-pages-info' => '（警告: このファイルは非常に大きなサイズになることがあります）',
-	'dump-database-request' => '更新をリクエスト',
+	'dump-database-request' => 'データベースダンプをリクエストする',
 	'dump-database-request-info' => '（ダンプは通常1週間ごとに生成されます）',
-	'dump-database-request-submit' => 'リクエストを送信',
+	'dump-database-request-submit' => 'データベースダンプをリクエストする',
 	'dump-database-request-already-submitted' => 'ダンプは最近（7日未満前）要求されています',
 	'dump-database-request-requested' => 'データベースダンプのリクエストを送信しました',
-	'dump-database-info-more' => '詳しくは<a href="http://community.wikia.com/wiki/Help:Database_download">データベースダウンロード</a>をご覧ください。',
+	'dump-database-info-more' => '詳しくは<a href="http://ja.community.wikia.com/wiki/Help:データベースのダウンロード">Help:データベースのダウンロード</a>をご覧ください。',
+	'dump-database-last-unknown' => '不明',
 );
 
 /** Kannada (ಕನ್ನಡ)
@@ -642,8 +634,8 @@ $messages['oc'] = array(
  * @author Sp5uhe
  */
 $messages['pl'] = array(
-	'dump-database' => 'Zrzuty bazy danych',
-	'dump-database-info' => 'Zrzuty bazy danych mogą być używane jako osobista kopia zapasowa (Wikia tworzy kopie zapasowe wszystkich wiki automatycznie) lub przez boty',
+	'dump-database' => 'Zobacz <a href="http://spolecznosc.wikia.com/wiki/Pomoc:Pobieranie_bazy_danych">tę stronę</a> aby uzyskać więcej informacji.',
+	'dump-database-info' => 'Zobacz <a href="http://spolecznosc.wikia.com/wiki/Pomoc:Pobieranie_bazy_danych">tę stronę</a> aby uzyskać więcej informacji.',
 	'dump-database-curr-pages' => 'Obecne strony',
 	'dump-database-curr-pages-info' => '(Ta wersja jest najlepsza dla używania przez boty)',
 	'dump-database-full-pages' => 'Obecne strony i historia',
@@ -653,7 +645,7 @@ $messages['pl'] = array(
 	'dump-database-request-submit' => 'Wyślij zapytanie',
 	'dump-database-request-already-submitted' => 'Zrzut był pobierany niedawno (mniej niż 7 dni temu)',
 	'dump-database-request-requested' => 'Prośba o zrzut bazy danych przesłana',
-	'dump-database-info-more' => 'Zobacz <a href="http://community.wikia.com/wiki/Help:Database_download">tę stronę</a> aby uzyskać więcej informacji.',
+	'dump-database-info-more' => 'Zobacz <a href="http://spolecznosc.wikia.com/wiki/Pomoc:Pobieranie_bazy_danych">tę stronę</a> aby uzyskać więcej informacji.',
 	'dump-database-last-unknown' => 'Brak danych',
 );
 
@@ -761,8 +753,8 @@ $messages['roa-tara'] = array(
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
-	'dump-database' => 'Дампы базы данных',
-	'dump-database-info' => 'Дампы базы данных могут быть использованы в качестве личной резервной копии (Викия создаёт отдельные резервные копии для всех вики автоматически) или для обслуживающих ботов',
+	'dump-database' => 'Дата неизвестна',
+	'dump-database-info' => 'Пожалуйста, <a href="http://spravka.wikia.com/wiki/%D0%A1%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0:%D0%91%D0%B0%D0%B7%D0%B0_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D0%B2%D0%B8%D0%BA%D0%B8">см. дополнительные сведения</a>',
 	'dump-database-curr-pages' => 'Текущие страницы',
 	'dump-database-curr-pages-info' => '(Эта версия, как правило, наиболее удобна для бота)',
 	'dump-database-full-pages' => 'Текущие страницы и история',
@@ -772,8 +764,8 @@ $messages['ru'] = array(
 	'dump-database-request-submit' => 'Отправить запрос',
 	'dump-database-request-already-submitted' => 'Резервная копия была запрошена недавно (менее 7 дней назад).',
 	'dump-database-request-requested' => 'Запрос на дамп базы данных отправлен',
-	'dump-database-info-more' => 'Пожалуйста, <a href="http://community.wikia.com/wiki/Help:Database_download">см. дополнительные сведения</a>',
-	'dump-database-last-unknown' => 'Неизвестно',
+	'dump-database-info-more' => 'Пожалуйста, <a href="http://spravka.wikia.com/wiki/%D0%A1%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0:%D0%91%D0%B0%D0%B7%D0%B0_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D0%B2%D0%B8%D0%BA%D0%B8">см. дополнительные сведения</a>',
+	'dump-database-last-unknown' => 'Дата неизвестна',
 );
 
 /** Sinhala (සිංහල)

@@ -14,16 +14,7 @@ $messages['en'] = array(
 	'apiexplorer' => 'API Explorer',
 	'apiexplorer-desc' => 'Page for interactively exploring the documentation of the MediaWiki API',
 	'apiexplorer-intro' => "This page shows documentation for the current wiki's API. Please click on a function below to see more info about what parameters can be used in each call. Also see [http://www.mediawiki.org/wiki/API:Main_page the general MediaWiki API documentation].",
-
 	'apiexplorer-loading' => 'Loading functions...',
-);
-
-/** Message documentation (Message documentation)
- * @author Sean Colombo
- */
-$messages['qqq'] = array(
-	'apiexplorer-desc' => 'Description of the extension (for Special:Version, etc.).',
-	'apiexplorer-intro' => 'The intro at the top of the page to acquiant new users with what the page does.',
 );
 
 /** Arabic (العربية)
@@ -68,10 +59,10 @@ $messages['br'] = array(
  * @author Kghbln
  */
 $messages['de'] = array(
-	'apiexplorer' => 'API-Explorer',
+	'apiexplorer' => 'Funktionen werden geladen…',
 	'apiexplorer-desc' => 'Ergänzt eine Spezialseite, mit der das interaktive Nutzen der Dokumentation zur API möglich ist',
 	'apiexplorer-intro' => 'Diese Seite zeigt die Dokumention zur API dieses Wikis. Bitte unten auf eine der Funktionen klicken, um mehr Informationen zu den mit jedem Aufruf verfügbaren Parametern zu erhalten. Siehe hierzu auch die [http://www.mediawiki.org/wiki/API:Main_page allgemeine Dokumentation zur API von MediaWiki].',
-	'apiexplorer-loading' => 'Funktionen werden geladen …',
+	'apiexplorer-loading' => 'Funktionen werden geladen…',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -170,6 +161,11 @@ $messages['ia'] = array(
 	'apiexplorer-loading' => 'Carga functiones...',
 );
 
+$messages['ko'] = array(
+	'apiexplorer' => 'API 탐색기',
+	'apiexplorer-intro' => '이곳에서는 현재 위키에 대한 API 정보를 확인할 수 있습니다. 무슨 매개변수를 사용할 수 있는지에 대한 더 많은 정보를 보시려면 아래에서 원하는 항목을 클릭해 주세요. [http://www.mediawiki.org/wiki/API:Main_page 일반 미디어위키 API 문서]를 참고할 수도 있습니다.',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
@@ -231,8 +227,9 @@ $messages['nl'] = array(
  * @author Woytecr
  */
 $messages['pl'] = array(
-	'apiexplorer' => 'Eksplorator API',
+	'apiexplorer' => 'Strona służąca do interaktywnego przeglądania dokumentacji MediaWiki API',
 	'apiexplorer-loading' => 'Ładowanie funkcji...',
+	'apiexplorer-desc' => 'Strona służąca do interaktywnego przeglądania dokumentacji MediaWiki API',
 );
 
 /** Piedmontese (Piemontèis)
@@ -251,9 +248,9 @@ $messages['pms'] = array(
  * @author Engineering
  */
 $messages['ru'] = array(
-	'apiexplorer' => 'API Explorer',
-	'apiexplorer-desc' => 'Страница для интерактивного изучения документации MediaWiki API',
-	'apiexplorer-intro' => 'На этой странице отображена документации по API текущей вики. Пожалуйста, нажмите на функцию ниже, чтобы увидеть больше информации о том, какие параметры можно использовать при каждом вызове. Также см. [http://www.mediawiki.org/wiki/API:Main_page общую документацию по MediaWiki API].',
+	'apiexplorer' => 'Загрузка функций...',
+	'apiexplorer-desc' => 'Страница для интерактивного изучения документации по MediaWiki API',
+	'apiexplorer-intro' => 'На этой странице показана документация для API текущей вики. Пожалуйста, нажмите на функцию ниже, чтобы увидеть больше информации о том, какие параметры могут быть использованы при каждом вызове. См. также [http://www.mediawiki.org/wiki/API:Main_page общая документация по MediaWiki API].',
 	'apiexplorer-loading' => 'Загрузка функций...',
 );
 
@@ -281,3 +278,22 @@ $messages['uk'] = array(
 	'apiexplorer-loading' => 'Завантаження функцій...',
 );
 
+$messages['zh'] = array(
+	'apiexplorer' => 'API 浏览器',
+);
+
+$messages['zh-hans'] = array(
+	'apiexplorer' => 'API 浏览器',
+);
+
+$messages['zh-hant'] = array(
+	'apiexplorer' => 'API 瀏覽器',
+);
+
+$messages['zh-hk'] = array(
+	'apiexplorer' => 'API 瀏覽器',
+);
+
+$messages['zh-tw'] = array(
+	'apiexplorer' => 'API 瀏覽器',
+);

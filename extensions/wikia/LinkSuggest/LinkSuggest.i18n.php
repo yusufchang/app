@@ -1,18 +1,10 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'linksuggest-desc' => 'Suggests links to editors on edit view',
 	'tog-disablelinksuggest' => 'Do not show link suggest in Source mode',
-	'tog-redirected-from' => '&ndash; redirected from $1'
-);
-
-/** Message documentation (Message documentation)
- * @author Hamilton Abreu
- */
-$messages['qqq'] = array(
-	'tog-disablelinksuggest' => '{{Related|Source mode (wikia)}}',
+	'tog-redirected-from' => '&ndash; redirected from $1',
 );
 
 /** Afrikaans (Afrikaans)
@@ -43,7 +35,7 @@ $messages['az'] = array(
  * @author EugeneZelenko
  */
 $messages['be-tarask'] = array(
-	'tog-disablelinksuggest' => 'Не паказваць прапановы спасылак', # Fuzzy
+	'tog-disablelinksuggest' => 'Не паказваць прапановы спасылак',
 );
 
 /** Breton (brezhoneg)
@@ -84,7 +76,7 @@ $messages['cs'] = array(
  */
 $messages['de'] = array(
 	'linksuggest-desc' => 'Schlägt Autoren Links in der Bearbeitungsansicht vor',
-	'tog-disablelinksuggest' => 'Keine Link-Vorschläge im Quellcodemodus anzeigen',
+	'tog-disablelinksuggest' => 'Keine Link-Vorschläge anzeigen',
 	'tog-redirected-from' => '&ndash; Weitergeleitet von $1',
 );
 
@@ -93,7 +85,7 @@ $messages['de'] = array(
  */
 $messages['es'] = array(
 	'linksuggest-desc' => 'Sugiere enlaces a los editores en modo de edición',
-	'tog-disablelinksuggest' => 'No mostrar sugerencias de vínculos en modo fuente.',
+	'tog-disablelinksuggest' => 'No mostrar sugerencias de vínculos',
 	'tog-redirected-from' => '&ndash; redirigido desde $1',
 );
 
@@ -120,7 +112,7 @@ $messages['fi'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'linksuggest-desc' => 'Propose des liens aux contributeurs en édition',
+	'linksuggest-desc' => 'Suggère des liens aux contributeurs en modification',
 	'tog-disablelinksuggest' => 'Ne pas afficher la suggestion de lien en mode source',
 	'tog-redirected-from' => '&ndash; Redirigé depuis $1',
 );
@@ -138,14 +130,14 @@ $messages['gl'] = array(
  * @author MacTire02
  */
 $messages['gv'] = array(
-	'tog-disablelinksuggest' => 'Ny taishbyney kiangley-choyrlaghey', # Fuzzy
+	'tog-disablelinksuggest' => 'Ny taishbyney kiangley-choyrlaghey',
 );
 
 /** Hebrew (עברית)
  * @author Rotemliss
  */
 $messages['he'] = array(
-	'tog-disablelinksuggest' => 'ביטול הצגת הצעות לקישורים', # Fuzzy
+	'tog-disablelinksuggest' => 'ביטול הצגת הצעות לקישורים',
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -203,7 +195,7 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'linksuggest-desc' => '編集画面で編集者に対しリンクの提案を行う',
-	'tog-disablelinksuggest' => 'ソースモードでの編集時のリンク補完を使わない',
+	'tog-disablelinksuggest' => 'ソースモードでの編集時リンク補完を使わない',
 	'tog-redirected-from' => '&ndash; $1からのリダイレクト',
 );
 
@@ -211,7 +203,7 @@ $messages['ja'] = array(
  * @author គីមស៊្រុន
  */
 $messages['km'] = array(
-	'tog-disablelinksuggest' => 'កុំបង្ហាញសំណើតំណភ្ជាប់', # Fuzzy
+	'tog-disablelinksuggest' => 'កុំបង្ហាញសំណើតំណភ្ជាប់',
 );
 
 /** Korean (한국어)
@@ -219,6 +211,7 @@ $messages['km'] = array(
  */
 $messages['ko'] = array(
 	'tog-disablelinksuggest' => '소스 모드에서 링크 제안을 보이지 않기',
+	'tog-redirected-from' => '&ndash; $1에서 넘어옴',
 );
 
 /** Colognian (Ripoarisch)
@@ -239,7 +232,7 @@ $messages['ky'] = array(
 /** Ladino (Ladino)
  */
 $messages['lad'] = array(
-	'tog-disablelinksuggest' => 'No amostrar avisos de atadijos', # Fuzzy
+	'tog-disablelinksuggest' => 'No amostrar avisos de atadijos',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -299,7 +292,7 @@ $messages['nl'] = array(
  * @author Harald Khan
  */
 $messages['nn'] = array(
-	'tog-disablelinksuggest' => 'Ikkje vis lenkjeframlegg', # Fuzzy
+	'tog-disablelinksuggest' => 'Ikkje vis lenkjeframlegg',
 );
 
 /** Occitan (occitan)
@@ -374,7 +367,7 @@ $messages['roa-tara'] = array(
  */
 $messages['ru'] = array(
 	'linksuggest-desc' => 'Предлагает ссылки на редакторы в режиме редактирования',
-	'tog-disablelinksuggest' => 'Не показывать предложения ссылок в режиме Исходного кода',
+	'tog-disablelinksuggest' => 'Не показывать предложения ссылок',
 	'tog-redirected-from' => '&ndash; перенаправление с $1',
 );
 
@@ -390,7 +383,7 @@ $messages['sr-ec'] = array(
  * @author Kandar
  */
 $messages['su'] = array(
-	'tog-disablelinksuggest' => 'Sumputkeun usulan tutumbu', # Fuzzy
+	'tog-disablelinksuggest' => 'Sumputkeun usulan tutumbu',
 );
 
 /** Swedish (svenska)

@@ -1,14 +1,28 @@
 <?php
+$messages = array();
 
-$messages = [];
-
-$messages['en'] = [
+$messages['en'] = array(
 	'recommendations-desc' => 'Recoomendations extension',
-	'recommendations-header' => 'Recommended Content'
-];
+	'recommendations-header' => 'Recommended Content',
+);
 
-$messages['qqq'] = [
-	'recommendations-desc' => '{{desc}}',
-	'recommendations-header' => 'Header on the top of recommendation module,
-	describing that this module contains related content.'
-];
+$messages['de'] = array(
+	'recommendations-header' => 'Empfohlene Inhalte',
+);
+
+$messages['es'] = array(
+	'recommendations-header' => 'Contenido recomendado',
+);
+
+$messages['fr'] = array(
+	'recommendations-desc' => '&nbsp;',
+	'recommendations-header' => 'Contenu lié',
+);
+
+$messages['ko'] = array(
+	'recommendations-header' => '추천 콘텐츠',
+);
+
+$messages['ru'] = array(
+	'recommendations-header' => 'Популярные страницы',
+);

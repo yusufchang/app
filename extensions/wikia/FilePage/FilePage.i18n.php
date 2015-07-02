@@ -7,7 +7,6 @@ $messages = array();
 
 $messages['en'] = array(
 	'filepage-desc' => 'Modification of the standard MediaWiki file page for video support',
-	/* video page */
 	'video-page-file-list-header' => 'Appears on these pages',
 	'video-page-global-file-list-header' => 'Appears on these wikis',
 	'video-page-from-provider' => 'From $1',
@@ -23,48 +22,11 @@ $messages['en'] = array(
 	'video-page-default-description-header-and-text' => '==Description==
 Enter the description here.',
 	'video-page-file-list-pagination' => '$1 of $2',
-
-	/* file page */
 	'file-page-replace-button' => 'Replace',
 	'file-page-tab-about' => 'About',
 	'file-page-tab-history' => 'File History',
 	'file-page-tab-metadata' => 'Metadata',
 	'file-page-more-links' => 'See full list',
-);
-
-/** Message documentation (Message documentation)
- * @author Liuxinyu970226
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'filepage-desc' => '{{desc}}',
-	'video-page-file-list-header' => 'Heading for file list on Video File Page',
-	'video-page-global-file-list-header' => 'Heading for global usage list on Video File Page',
-	'video-page-from-provider' => 'The provider is where we got the video content from.  Some current examples are IGN and Ooyala. Parameters:
-* $1 is the provider name.',
-	'video-page-expires' => 'After the date specified, the video content will no longer be available to view. Parameters:
-* $1 is a date',
-	'video-page-regional-restrictions-viewable' => 'Message shown when a video has viewing restricted by region and is currently viewable',
-	'video-page-regional-restrictions-unviewable' => 'Message shown when a video has viewing restricted by region but is currently not viewable',
-	'video-page-views' => 'Shows total number of views (plays) of the video. Parameters:
-* $1 - a number of views (integer)
-{{Identical|View}}',
-	'video-page-see-more-info' => 'Label to uncollapse UI that shows more info',
-	'video-page-see-less-info' => 'Label to collapse UI that shows more info',
-	'video-page-description-heading' => 'Description heading.
-{{Identical|Description}}',
-	'video-page-description-zero-state' => 'Placeholder file page content that states there is no description',
-	'video-page-add-description-link-text' => 'This is a link that takes you to the edit page where you can add a description for a video or image. The description, once added, will be a section in the file page content.',
-	'video-page-file-list-pagination' => 'Pagination for file listing.  e.g. 1 of 2.  $1 is current page, $2 is total pages',
-	'file-page-replace-button' => 'Replace button label, hidden in menu button
-{{Identical|Replace}}',
-	'file-page-tab-about' => 'Navigation tab label for the "about" section on a File Page.
-{{Identical|About}}',
-	'file-page-tab-history' => 'Navigation tab label for the "File History" section on a File Page.',
-	'file-page-tab-metadata' => 'Navigation tab label for the "Metadata" section on a File Page.
-{{Identical|Metadata}}',
-	'file-page-more-links' => 'A link to the full list of pages that have links to the file on this file page',
 );
 
 /** Arabic (العربية)
@@ -226,26 +188,26 @@ $messages['da'] = array(
  */
 $messages['de'] = array(
 	'filepage-desc' => 'Abwandlung der Standard-MediaWiki-Dateiseite für die Videounterstützung',
-	'video-page-file-list-header' => 'Erscheint auf diesen Seiten',
-	'video-page-global-file-list-header' => 'Erscheint auf diesen Wikis',
+	'video-page-file-list-header' => 'Wird in diesen Seiten verwendet',
+	'video-page-global-file-list-header' => 'Wird in diesen Wikis verwendet',
 	'video-page-from-provider' => 'Von $1',
-	'video-page-expires' => 'Inhalt läuft am $1 ab',
+	'video-page-expires' => 'Inhalt läuft am $1 aus',
 	'video-page-regional-restrictions-viewable' => 'Dieses Video ist nur regional beschränkt abrufbar',
 	'video-page-regional-restrictions-unviewable' => 'Dieses Video ist in deinem Land nicht verfügbar',
-	'video-page-views' => '{{PLURAL:$1|Ein Aufruf|$1 Aufrufe}}',
+	'video-page-views' => '$1 Aufrufe',
 	'video-page-see-more-info' => 'Mehr Informationen anzeigen',
 	'video-page-see-less-info' => 'Weniger Informationen anzeigen',
 	'video-page-description-heading' => 'Beschreibung',
-	'video-page-description-zero-state' => 'Es ist noch keine Beschreibung vorhanden.',
-	'video-page-add-description-link-text' => 'Eine Beschreibung hinzufügen.',
-	'video-page-default-description-header-and-text' => '== Beschreibung ==
-Hier die Beschreibung eingeben.',
+	'video-page-description-zero-state' => 'Es gibt bislang noch keine Beschreibung für diese Datei.',
+	'video-page-add-description-link-text' => 'Gib eine Beschreibung an.',
+	'video-page-default-description-header-and-text' => '==Beschreibung==
+Gib hier eine Beschreibung an.',
 	'video-page-file-list-pagination' => '$1 von $2',
 	'file-page-replace-button' => 'Ersetzen',
-	'file-page-tab-about' => 'Über',
+	'file-page-tab-about' => 'Beschreibung',
 	'file-page-tab-history' => 'Dateiversionen',
-	'file-page-tab-metadata' => 'Metadaten',
-	'file-page-more-links' => 'Siehe die vollständige Liste',
+	'file-page-tab-metadata' => 'Meta-Daten',
+	'file-page-more-links' => 'Komplette Liste anzeigen',
 );
 
 /** Esperanto (Esperanto)
@@ -263,21 +225,21 @@ $messages['es'] = array(
 	'filepage-desc' => 'Modificación de la página de archivo de MediaWiki para añadir compatibilidad con vídeos',
 	'video-page-file-list-header' => 'Aparece en estas páginas',
 	'video-page-global-file-list-header' => 'Aparece en estos wikis',
-	'video-page-from-provider' => 'De $1',
-	'video-page-expires' => 'Expira el $1',
+	'video-page-from-provider' => 'Desde $1',
+	'video-page-expires' => 'El contenido expira el $1',
 	'video-page-regional-restrictions-viewable' => 'Este vídeo está restringido en algunas regiones',
 	'video-page-regional-restrictions-unviewable' => 'Este video no es visible en su ubicación',
-	'video-page-views' => '$1 {{PLURAL:$1|Vista|Vistas}}',
+	'video-page-views' => 'Visto $1 {{PLURAL:$1|vez|veces}}',
 	'video-page-see-more-info' => 'Mostrar más información',
 	'video-page-see-less-info' => 'Mostrar menos información',
 	'video-page-description-heading' => 'Descripción',
-	'video-page-description-zero-state' => 'Todavía no hay ninguna descripción.',
+	'video-page-description-zero-state' => 'Aún no hay ninguna descripción.',
 	'video-page-add-description-link-text' => 'Añadir una descripción.',
 	'video-page-default-description-header-and-text' => '==Descripción==
-Escribe la descripción aquí.',
+Introduce la descripción aquí.',
 	'video-page-file-list-pagination' => '$1 de $2',
 	'file-page-replace-button' => 'Reemplazar',
-	'file-page-tab-about' => 'Acerca de',
+	'file-page-tab-about' => 'Acerca del archivo',
 	'file-page-tab-history' => 'Historial del archivo',
 	'file-page-tab-metadata' => 'Metadatos',
 	'file-page-more-links' => 'Ver lista completa',
@@ -384,21 +346,21 @@ Skriva eina frágreiðing her.',
  */
 $messages['fr'] = array(
 	'filepage-desc' => 'Modification de la page de fichier standard de MediaWiki pour le support des vidéos',
-	'video-page-file-list-header' => 'Apparaît sur ces pages',
-	'video-page-global-file-list-header' => 'Apparaît sur ces wikis',
+	'video-page-file-list-header' => 'Affichée sur ces pages',
+	'video-page-global-file-list-header' => 'Présente sur ces wikis',
 	'video-page-from-provider' => 'De $1',
 	'video-page-expires' => 'Le contenu expire le $1',
 	'video-page-regional-restrictions-viewable' => "Des restrictions régionales s'appliquent à cette vidéo",
 	'video-page-regional-restrictions-unviewable' => "Cette vidéo n'est pas consultable d'où vous vous trouvez",
-	'video-page-views' => '$1 {{PLURAL:$1|vue|vues}}',
+	'video-page-views' => '$1 vues',
 	'video-page-see-more-info' => "Afficher plus d'informations",
 	'video-page-see-less-info' => "Afficher moins d'informations",
 	'video-page-description-heading' => 'Description',
-	'video-page-description-zero-state' => "Il n'y a pas encore de description.",
+	'video-page-description-zero-state' => "Il n'y a pas encore de description pour ce fichier.",
 	'video-page-add-description-link-text' => 'Ajouter une description.',
 	'video-page-default-description-header-and-text' => '==Description==
 Saisissez la description ici.',
-	'video-page-file-list-pagination' => '$1 sur $2',
+	'video-page-file-list-pagination' => '$1 de $2',
 	'file-page-replace-button' => 'Remplacer',
 	'file-page-tab-about' => 'À propos',
 	'file-page-tab-history' => 'Historique du fichier',
@@ -519,26 +481,26 @@ Masukkan deskripsi di sini.',
  */
 $messages['it'] = array(
 	'filepage-desc' => 'Modifica della pagina file MediaWiki standard per supporto video',
-	'video-page-file-list-header' => 'Appare su queste pagine',
-	'video-page-global-file-list-header' => 'Appare su queste wiki',
+	'video-page-file-list-header' => 'Appare in queste pagine',
+	'video-page-global-file-list-header' => 'Appare in queste wiki',
 	'video-page-from-provider' => 'Da $1',
 	'video-page-expires' => 'Il contenuto scade il $1',
 	'video-page-regional-restrictions-viewable' => 'Questo video è limitato per regione',
 	'video-page-regional-restrictions-unviewable' => 'Questo video non è visualizzabile nella tua regione',
-	'video-page-views' => '$1 {{PLURAL:$1|Visualizzazione|Visualizzazioni}}',
-	'video-page-see-more-info' => 'Visualizza ulteriori informazioni',
+	'video-page-views' => '$1 visualizzazioni',
+	'video-page-see-more-info' => 'Mostra più informazioni',
 	'video-page-see-less-info' => 'Mostra meno informazioni',
 	'video-page-description-heading' => 'Descrizione',
-	'video-page-description-zero-state' => "Non c'è ancora nessuna descrizione.",
+	'video-page-description-zero-state' => "Non c'è ancora alcuna descrizione per questo file.",
 	'video-page-add-description-link-text' => 'Aggiungi una descrizione.',
-	'video-page-default-description-header-and-text' => '== Descrizione ==
-Aggiungi la descrizione qui.',
+	'video-page-default-description-header-and-text' => '==Descrizione==
+Inserisci qui la descrizione.',
 	'video-page-file-list-pagination' => '$1 di $2',
 	'file-page-replace-button' => 'Sostituisci',
-	'file-page-tab-about' => 'Chi siamo',
-	'file-page-tab-history' => 'Cronologia file',
+	'file-page-tab-about' => 'A proposito',
+	'file-page-tab-history' => 'Cronologia del file',
 	'file-page-tab-metadata' => 'Metadati',
-	'file-page-more-links' => 'Vedi elenco completo',
+	'file-page-more-links' => 'Vedi lista completa',
 );
 
 /** Japanese (日本語)
@@ -598,26 +560,26 @@ $messages['kn'] = array(
  * @author 아라
  */
 $messages['ko'] = array(
-	'video-page-file-list-header' => '다음 페이지에서 사용 중입니다',
-	'video-page-global-file-list-header' => '다음 위키에서 사용 중입니다',
-	'video-page-from-provider' => '제공: $1',
-	'video-page-expires' => '콘텐츠 만료일: $1',
+	'video-page-file-list-header' => '이 파일을 사용하는 문서',
+	'video-page-global-file-list-header' => '이 파일을 사용하는 위키',
+	'video-page-from-provider' => '$1 제공',
+	'video-page-expires' => '$1에 제공 만료될 예정임',
 	'video-page-regional-restrictions-viewable' => '이 동영상은 지역적으로 제한되어 있습니다',
 	'video-page-regional-restrictions-unviewable' => '이 동영상은 당신의 지역에서는 볼 수 없습니다',
-	'video-page-views' => '$1번 {{PLURAL:$1|조회}}',
-	'video-page-see-more-info' => '더 많은 정보 보기',
-	'video-page-see-less-info' => '간단한 정보 보기',
+	'video-page-views' => '$1회 조회됨',
+	'video-page-see-more-info' => '자세히',
+	'video-page-see-less-info' => '간단히',
 	'video-page-description-heading' => '설명',
-	'video-page-description-zero-state' => '아직 파일 설명이 없습니다.',
-	'video-page-add-description-link-text' => '설명을 추가하세요.',
-	'video-page-default-description-header-and-text' => '==설명==
-여기에 설명을 입력하세요.',
-	'video-page-file-list-pagination' => '$1 / $2',
-	'file-page-replace-button' => '바꾸기',
-	'file-page-tab-about' => '소개',
+	'video-page-description-zero-state' => '아직 이 파일에 대한 설명이 없습니다.',
+	'video-page-add-description-link-text' => '설명 추가하기',
+	'video-page-default-description-header-and-text' => '== 파일의 설명 ==
+여기에 이 파일에 대한 설명을 입력하세요.',
+	'video-page-file-list-pagination' => '$2 중 $1',
+	'file-page-replace-button' => '대체',
+	'file-page-tab-about' => '파일 정보',
 	'file-page-tab-history' => '파일 역사',
-	'file-page-tab-metadata' => '메타 데이터',
-	'file-page-more-links' => '전체 목록 보기',
+	'file-page-tab-metadata' => '메타데이터',
+	'file-page-more-links' => '모두 보기',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -823,14 +785,14 @@ $messages['pl'] = array(
 	'video-page-expires' => 'Wygasa $1',
 	'video-page-regional-restrictions-viewable' => 'Ten film ograniczony regionalnie',
 	'video-page-regional-restrictions-unviewable' => 'Ten film nie jest dostępny z Twojej lokalizacji',
-	'video-page-views' => '$1 {{PLURAL:$1|Wyświetlenie|Wyświetlenia|Wyświetleń}}',
+	'video-page-views' => '$1 Wyświetleń',
 	'video-page-see-more-info' => 'Więcej informacji',
 	'video-page-see-less-info' => 'Mniej informacji',
 	'video-page-description-heading' => 'Opis',
 	'video-page-description-zero-state' => 'Dla tego pliku nie dodano jeszcze opisu.',
-	'video-page-add-description-link-text' => 'Dodaj opis',
-	'video-page-default-description-header-and-text' => '== Opis ==
-Wprowadź opis tutaj.',
+	'video-page-add-description-link-text' => 'Dodaj opis.',
+	'video-page-default-description-header-and-text' => '==Opis==
+Dodaj opis w tym miejscu.',
 	'video-page-file-list-pagination' => '$1 z $2',
 	'file-page-replace-button' => 'Zastąp',
 	'file-page-tab-about' => 'Opis',
@@ -938,26 +900,26 @@ Mitte 'a descrizione aqquà.",
  */
 $messages['ru'] = array(
 	'filepage-desc' => 'Модификация стандартной файловой страницы MediaWiki для поддержки видео',
-	'video-page-file-list-header' => 'Присутствует на этих страницах',
-	'video-page-global-file-list-header' => 'Появляется в следующих проектах',
-	'video-page-from-provider' => 'Из $1',
-	'video-page-expires' => 'Содержимое истекает $1',
+	'video-page-file-list-header' => 'Используется на следующих страницах',
+	'video-page-global-file-list-header' => 'Используется на следующих вики-проектах',
+	'video-page-from-provider' => 'От $1',
+	'video-page-expires' => 'Видео доступно до $1',
 	'video-page-regional-restrictions-viewable' => 'Это видео имеет региональные ограничения',
 	'video-page-regional-restrictions-unviewable' => 'Это видео не предназначено для просмотра в вашем регионе',
-	'video-page-views' => '$1 {{PLURAL:$1|просмотр|просмотров}}',
-	'video-page-see-more-info' => 'Показать подробнее',
-	'video-page-see-less-info' => 'Показать меньше',
+	'video-page-views' => '$1 {{PLURAL:$1|просмотр|просмотра|просмотров}}',
+	'video-page-see-more-info' => 'Показать больше информации',
+	'video-page-see-less-info' => 'Показать меньше информации',
 	'video-page-description-heading' => 'Описание',
-	'video-page-description-zero-state' => 'Описание пока отсутствует.',
+	'video-page-description-zero-state' => 'Описание отсутствует.',
 	'video-page-add-description-link-text' => 'Добавить описание.',
-	'video-page-default-description-header-and-text' => '== Описание ==
-Введите описание здесь.',
+	'video-page-default-description-header-and-text' => '==Описание==
+Добавьте сюда описание файла.',
 	'video-page-file-list-pagination' => '$1 из $2',
 	'file-page-replace-button' => 'Заменить',
-	'file-page-tab-about' => 'О приложении',
-	'file-page-tab-history' => 'Посмотреть историю',
+	'file-page-tab-about' => 'О файле',
+	'file-page-tab-history' => 'История файла',
 	'file-page-tab-metadata' => 'Метаданные',
-	'file-page-more-links' => 'Просмотреть полный список',
+	'file-page-more-links' => 'См. полный список',
 );
 
 /** Slovenian (slovenščina)

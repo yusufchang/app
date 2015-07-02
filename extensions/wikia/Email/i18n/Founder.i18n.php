@@ -24,29 +24,6 @@ $messages['en'] = array(
 	'emailext-founder-new-member-link-label' => 'Send a message',
 );
 
-$messages['qqq'] = array(
-	'emailext-founder-active-subject' => 'Subject of the email sent to founders when there is increased edit activity on the wiki',
-	'emailext-founder-subject' => 'Subject of the email sent to founders on an edit to their wiki.  $1 -> page title, $2 -> author',
-	'emailext-founder-anon-subject' => 'Subject of the email sent to founder on an anonymous edit to their wiki.  $1 -> page title',
-	'emailext-founder-summary' => 'Summary text in the body of the email.  $1 -> page URL, $2 -> page title',
-	'emailext-founder-active-summary' => 'Summary text in the body of the email when there is increased edit activity on the wiki',
-	'emailext-founder-body' => 'Body text of the email.  $1 -> author profile page URL, $2 -> author name',
-	'emailext-founder-link-label' => 'Button label linking to diff page of changes to the article changed',
-	'emailext-founder-active-link-label' => 'Button label linking to the wiki activity page',
-	'emailext-founder-footer-article' => 'Footer text with link inviting user to see changes since last edit.  $1 -> diff URL, $2 -> page title',
-	'emailext-founder-footer-all-changes' => 'Foot text with link inviting user to see all changes on the page.  $1 -> history page URL, $2 -> page title',
-	'emailext-founder-encourage' => 'Encouragement text for the founder to support the user who just edited.  $1 -> author profile URL, $2-> author name',
-	'emailext-founder-anon-encourage' => 'Text explaining what an anonymous edit is',
-	'emailext-founder-multi-encourage' => 'Text letting the founder know a contributor has made multiple edits.  $1 -> author profile URL, $2 -> author name',
-	'emailext-founder-new-update' => 'Text shown next to a wiki change related to a new page.  $1 -> new page URL, $2 -> new page title',
-	'emailext-founder-edit-update' => 'Text shown next to a wiki change related to an edited page.  $1 -> new page URL, $2 -> new page title',
-	'emailext-founder-active-footer-1' => 'Instructional text shown to a wiki founder who has gotten a lot of recent edit activity',
-	'emailext-founder-active-footer-2' => 'Encouragement text shown to a wiki founder who has gotten a lot of recent edit activity',
-	'emailext-founder-new-member-subject' => 'Subject of the email send to founders when a user registers on their wiki. $1 -> new username',
-	'emailext-founder-new-member-details' => 'Text encouraging the founder to reach out to the new member and encourage them to get involved on the wiki. $1 -> new username',
-	'emailext-founder-new-member-link-label' => "Button label linking to the new member's talk page where the founder can welcome them to the wiki",
-);
-
 $messages['de'] = array(
 	'emailext-founder-subject' => '$1 auf {{SITENAME}} wurde von $2 bearbeitet.',
 	'emailext-founder-anon-subject' => '$1 auf {{SITENAME}} wurde bearbeitet.',
@@ -254,11 +231,17 @@ $messages['ru'] = array(
 	'emailext-founder-active-footer-2' => 'Так держать! Продолжайте строить активное сообщество фанатов!',
 );
 
+$messages['zh'] = array(
+	'emailext-founder-body' => '这是[$1 $2]第一次编辑您的Wiki。协助他们，让他们觉得自己也是社区的一份子，并鼓励他们不断增加好的内容！',
+	'emailext-founder-new-update' => '创建了 [$1 $2]',
+	'emailext-founder-new-member-link-label' => '发送讯息',
+);
+
 $messages['zh-hans'] = array(
 	'emailext-founder-subject' => '{{SITENAME}}上的$1已被$2编辑过',
 	'emailext-founder-anon-subject' => '{{SITENAME}}上的$1已被编辑过',
 	'emailext-founder-summary' => '[{{SERVER}} {{SITENAME}}]上的[$1 $2]已被编辑过。',
-	'emailext-founder-body' => '这是[$1 $2]第一次编辑您的Wikia。帮个忙，让他们觉得自己也是社区的一部分，并鼓励他们不断发布好的东西！',
+	'emailext-founder-body' => '这是[$1 $2]第一次编辑您的Wiki。协助他们，让他们觉得自己也是社区的一份子，并鼓励他们不断增加好的内容！',
 	'emailext-founder-link-label' => '比较修改内容',
 	'emailext-founder-footer-article' => '到[$1 $2]查看更新内容',
 	'emailext-founder-footer-all-changes' => '查看对[$1 $2]做的所有更改',
@@ -267,36 +250,67 @@ $messages['zh-hans'] = array(
 	'emailext-founder-multi-encourage' => '[$1 $ 2]已经在您的维基上做了很多修改。感谢他们的贡献。这就是社区建设的意义所在！',
 	'emailext-founder-new-member-subject' => '$1 刚刚加入{{SITENAME}}。恭喜！',
 	'emailext-founder-new-member-details' => '请花几分钟时间来欢迎$1，鼓励他们的参与。参与的人越多越好，这样您维基的增长速度才会更快！',
-	'emailext-founder-new-member-link-label' => '发送邮件',
+	'emailext-founder-new-member-link-label' => '发送讯息',
 	'emailext-founder-active-subject' => '{{SITENAME}}的人气指数在不断上涨！',
 	'emailext-founder-active-summary' => '恭喜您，今天{{SITENAME}}上好热闹呀！下面是一些最新更新内容：',
 	'emailext-founder-active-link-label' => '最近所有活动',
-	'emailext-founder-new-update' => '[$1 $2]已创建',
+	'emailext-founder-new-update' => '创建了 [$1 $2]',
 	'emailext-founder-edit-update' => '[$1 $2]已更新',
 	'emailext-founder-active-footer-1' => '如果您还没有看的话，您会看到您的的社区活动页面改进很多。既然有这么多更新内容，别忘了您可以把电子邮件的偏好设置改为摘要模式。这样，您每天就会收到一封电子邮件，邮件中会列出一天中您的维基上进行的所有活动。',
 	'emailext-founder-active-footer-2' => '为创建这样一个活跃的粉丝社区加油！',
 );
 
+$messages['zh-hant'] = array(
+	'emailext-founder-subject' => '{{SITENAME}}上的$1已被$2編輯',
+	'emailext-founder-anon-subject' => '{{SITENAME}}上的$1已被編輯',
+	'emailext-founder-summary' => '[{{SERVER}} {{SITENAME}}]上的[$1 $2]已被編輯。',
+	'emailext-founder-body' => '這是[$1 $2]第一次編輯您的Wiki。協助他們，讓他們覺得自己也是社區的一份子，並鼓勵他們不斷增加好的內容！',
+	'emailext-founder-link-label' => '比較修改內容',
+	'emailext-founder-footer-article' => '到[$1 $2]查看更新的內容',
+	'emailext-founder-footer-all-changes' => '查看[$1 $2]的所有更改',
+	'emailext-founder-encourage' => '這是[$1 $2]第一次編輯您的Wiki。協助他們，讓他們覺得自己也是社區的一份子，並鼓勵他們不斷增加好的內容！',
+	'emailext-founder-multi-encourage' => '[$1 $ 2]已經在您的Wiki上做了很多修改。去感謝他們的貢獻，這就是社區構建！',
+	'emailext-founder-new-update' => '創建了 [$1 $2]',
+	'emailext-founder-new-member-subject' => '$1 剛剛加入了{{SITENAME}}。恭喜！',
+	'emailext-founder-new-member-details' => '請花一點時間來歡迎$1，鼓勵他們的參與。參與的人越多越好，這樣您的Wiki的增長速度才會更快！',
+	'emailext-founder-new-member-link-label' => '發送訊息',
+);
+
+$messages['zh-hk'] = array(
+	'emailext-founder-subject' => '{{SITENAME}}上的$1已被$2編輯',
+	'emailext-founder-anon-subject' => '{{SITENAME}}上的$1已被編輯',
+	'emailext-founder-summary' => '[{{SERVER}} {{SITENAME}}]上的[$1 $2]已被編輯。',
+	'emailext-founder-body' => '這是[$1 $2]第一次編輯您的Wiki。協助他們，讓他們覺得自己也是社區的一份子，並鼓勵他們不斷增加好的內容！',
+	'emailext-founder-link-label' => '比較修改內容',
+	'emailext-founder-footer-article' => '到[$1 $2]查看更新的內容',
+	'emailext-founder-footer-all-changes' => '查看[$1 $2]的所有更改',
+	'emailext-founder-encourage' => '這是[$1 $2]第一次編輯您的Wiki。協助他們，讓他們覺得自己也是社區的一份子，並鼓勵他們不斷增加好的內容！',
+	'emailext-founder-multi-encourage' => '[$1 $ 2]已經在您的Wiki上做了很多修改。去感謝他們的貢獻，這就是社區構建！',
+	'emailext-founder-new-update' => '創建了 [$1 $2]',
+	'emailext-founder-new-member-subject' => '$1 剛剛加入了{{SITENAME}}。恭喜！',
+	'emailext-founder-new-member-details' => '請花一點時間來歡迎$1，鼓勵他們的參與。參與的人越多越好，這樣您的Wiki的增長速度才會更快！',
+	'emailext-founder-new-member-link-label' => '發送訊息',
+);
+
 $messages['zh-tw'] = array(
-	'emailext-founder-subject' => '{{SITENAME}}上的$1已經被$2編輯過',
+	'emailext-founder-subject' => '{{SITENAME}}上的$1已被$2編輯',
 	'emailext-founder-anon-subject' => '{{SITENAME}}上的$1已經被編輯過',
-	'emailext-founder-summary' => '[{{SERVER}} {{SITENAME}}]上的$1已經被[$1 $2]編輯過',
-	'emailext-founder-body' => '這是[$1 $2]第一次編輯你的維基。幫助他們，讓他們感覺自己也是社區的一部分，並鼓勵他們不斷發佈好的東西！',
+	'emailext-founder-summary' => '[{{SERVER}} {{SITENAME}}]上的[$1 $2]已被編輯。',
+	'emailext-founder-body' => '這是[$1 $2]第一次編輯您的Wiki。協助他們，讓他們覺得自己也是社區的一份子，並鼓勵他們不斷增加好的內容！',
 	'emailext-founder-link-label' => '對比更改内容',
-	'emailext-founder-footer-article' => '到[$1 $2]查看更新内容',
-	'emailext-founder-footer-all-changes' => '查看對[$1 $2]做的所有更改',
-	'emailext-founder-encourage' => '這是[$1 $2]第一次編輯你的維基。幫助他們，讓他們感覺自己也是社區的一部分，並鼓勵他們不斷發佈好的東西！',
+	'emailext-founder-footer-article' => '到[$1 $2]查看更新的內容',
+	'emailext-founder-footer-all-changes' => '查看[$1 $2]的所有更改',
+	'emailext-founder-encourage' => '這是[$1 $2]第一次編輯您的Wiki。協助他們，讓他們覺得自己也是社區的一份子，並鼓勵他們不斷增加好的內容！',
 	'emailext-founder-anon-encourage' => 'Wikia的粉絲是那些不登入註冊帳戶就進行編輯的用戶。去看看這個神秘的朋友把什麽添加到你的維基了！',
-	'emailext-founder-multi-encourage' => '[$1 $2]已經在你的維基上作了很多編輯工作。感激他們做出的貢獻。這就是社區建設的意義所在！',
+	'emailext-founder-multi-encourage' => '[$1 $ 2]已經在您的Wiki上做了很多修改。去感謝他們的貢獻，這就是社區構建！',
 	'emailext-founder-new-member-subject' => '$1剛剛加入{{SITENAME}}。恭喜！',
-	'emailext-founder-new-member-details' => '請花幾分鐘來歡迎$1，鼓勵他的參與。參與的人越多越好，這樣你維基的增長速度才會更快！',
-	'emailext-founder-new-member-link-label' => '發送郵件',
+	'emailext-founder-new-member-details' => '請花一點時間來歡迎$1，鼓勵他們的參與。參與的人越多越好，這樣您的Wiki的增長速度才會更快！',
+	'emailext-founder-new-member-link-label' => '發送訊息',
 	'emailext-founder-active-subject' => '{{SITENAME}}的人氣指數在不斷上漲！',
 	'emailext-founder-active-summary' => '祝賀您，今天{{SITENAME}}上好熱鬧呀！這裡列出一些最新更新内容：',
 	'emailext-founder-active-link-label' => '最近的所有活動',
-	'emailext-founder-new-update' => '[$1 $2]已經創建',
+	'emailext-founder-new-update' => '創建了 [$1 $2]',
 	'emailext-founder-edit-update' => '[$1 $2]已經更新',
 	'emailext-founder-active-footer-1' => '如果你還沒有注意到的話，你會看到你的社區活動頁面改進很多。由於有這麽多更新内容，別忘了你可以把電子郵件的偏好設置更改為摘要模式。這樣，每天你都會收到一個電子郵件，郵件中會列出一天中你在維基上進行的所有活動。',
 	'emailext-founder-active-footer-2' => '為創建這樣一個活躍的粉絲社區加油！',
 );
-

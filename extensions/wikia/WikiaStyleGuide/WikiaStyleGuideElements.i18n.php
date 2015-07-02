@@ -12,23 +12,7 @@ $messages['en'] = array(
 	'wikiastyleguide-dropdown-all' => 'All',
 	'wikiastyleguide-dropdown-select-all' => 'Select All',
 	'wikiastyleguide-dropdown-selected-items-list' => '$1 and $2 more',
-	
 	'wikiastyleguide-tooltip-icon-question-mark' => '?',
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'wikiastyleguide-desc' => '{{desc}}',
-	'wikiastyleguide-dropdown-all' => 'This is for a custom multiple choice dropdown (essentially a more powerful and more easily styled <select> element). Text shown when all items are selected.
-{{Identical|All}}',
-	'wikiastyleguide-dropdown-select-all' => 'Shown next to checkbox in toolbar. Used for selecting all other checkboxes.
-{{Identical|Select all}}',
-	'wikiastyleguide-dropdown-selected-items-list' => 'This text shown in the the dropdown when not all items selected can be dispalyed. $1 is the number of elements displayed, $2 is the number of elements not displayed.
-
-This is for a custom multiple choice dropdown (essentially a more powerful and more easily styled <select> element).',
-	'wikiastyleguide-tooltip-icon-question-mark' => 'An icon indicating a tooltip. When you hover over it a tooltip is shown. Translate this message only if the symbol commonly used to convey "help" in your language is different than a question mark (?).',
 );
 
 /** Arabic (العربية)
@@ -91,7 +75,7 @@ $messages['de'] = array(
 	'wikiastyleguide-desc' => 'WikiaStyleGuide-Erweiterung',
 	'wikiastyleguide-dropdown-all' => 'Alle',
 	'wikiastyleguide-dropdown-select-all' => 'Alle auswählen',
-	'wikiastyleguide-dropdown-selected-items-list' => '$1 und $2 weitere',
+	'wikiastyleguide-dropdown-selected-items-list' => '$1 und $2 mehr',
 );
 
 /** Spanish (español)
@@ -137,7 +121,7 @@ $messages['fr'] = array(
 	'wikiastyleguide-desc' => 'Extension WikiaStyleGuide',
 	'wikiastyleguide-dropdown-all' => 'Tous',
 	'wikiastyleguide-dropdown-select-all' => 'Tout sélectionner',
-	'wikiastyleguide-dropdown-selected-items-list' => '$1 et $2 restants',
+	'wikiastyleguide-dropdown-selected-items-list' => '$1 et $2 autres',
 );
 
 /** Galician (galego)
@@ -156,6 +140,13 @@ $messages['hu'] = array(
 	'wikiastyleguide-dropdown-all' => 'Összes',
 	'wikiastyleguide-dropdown-select-all' => 'Összes kijelölése',
 	'wikiastyleguide-dropdown-selected-items-list' => '$1 és $2 további',
+);
+
+$messages['it'] = array(
+	'wikiastyleguide-dropdown-all' => 'Tutti',
+	'wikiastyleguide-dropdown-select-all' => 'Seleziona tutti',
+	'wikiastyleguide-dropdown-selected-items-list' => '$1 e altri $2',
+	'wikiastyleguide-tooltip-icon-question-mark' => '?',
 );
 
 /** Japanese (日本語)

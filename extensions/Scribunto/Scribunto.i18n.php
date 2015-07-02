@@ -22,7 +22,6 @@ $messages['en'] = array(
 	'scribunto-error-long' => 'Script errors:
 
 $1',
-
 	'scribunto-console-intro' => '* The module exports are available as the variable "p", including unsaved modifications.
 * Precede a line with "=" to evaluate it as an expression, or use print().
 * Use mw.log() in module code to send messages to this console.',
@@ -33,8 +32,6 @@ $1',
 	'scribunto-console-clear' => 'Clear',
 	'scribunto-console-cleared' => 'The console state was cleared because the module was updated.',
 	'scribunto-console-cleared-session-lost' => 'The console state was cleared because the session data was lost.',
-
-
 	'scribunto-common-error-category' => 'Pages with script errors',
 	'scribunto-common-nosuchmodule' => 'Script error: No such module.',
 	'scribunto-common-nofunction' => 'Script error: You must specify a function to call.',
@@ -57,64 +54,6 @@ $1',
 	'scribunto-luastandalone-gone' => 'Lua error: Internal error: The interpreter has already exited.',
 	'scribunto-luastandalone-signal' => 'Lua error: Internal error: The interpreter has terminated with signal "$2".',
 	'scribunto-luastandalone-exited' => 'Lua error: Internal error: The interpreter exited with status $2.',
-);
-
-/** Message documentation (Message documentation)
- * @author Amire80
- * @author Mormegil
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'scribunto-desc' => '{{desc}}',
-	'scribunto-ignore-errors' => 'Label for a checkbox on the edit page. When clicked, parse errors are ignored on save.',
-	'scribunto-line' => 'Reference to a code location. Parameters:
-* $1 is a line number.',
-	'scribunto-module-line' => 'Reference to a code location. Parameters:
-* $1 is a module (may also be {{msg-mw|Scribunto-console-current-src}});
-* $2 is a line number.',
-	'scribunto-parser-error' => 'Error message.',
-	'scribunto-parser-dialog-title' => 'Error message.',
-	'scribunto-error-short' => 'Error message. Parameters:
-* $1 are the error details.',
-	'scribunto-error-long' => 'Error message. Parameters:
-* $1 are the error details.',
-	'scribunto-console-intro' => 'An explanatory message shown to module programmers in the debug console, where they can run Lua commands and see how they work.
-
-"Module exports" are the names that are exported. See the chapter [http://www.lua.org/pil/15.2.html Privacy] in the book "Programming in Lua".',
-	'scribunto-console-current-src' => 'Name of the fictional Lua module created in the debugging console. May appear e.g. in Lua error messages (like $1 in {{msg-mw|Scribunto-module-line}})',
-	'scribunto-console-cleared' => 'Message displayed in the console when the module source has been changed.',
-	'scribunto-console-cleared-session-lost' => 'Message displayed in the console when the session has expired.',
-	'scribunto-common-error-category' => 'Tracking category for pages with errors from #invoke',
-	'scribunto-common-nosuchmodule' => 'Error message displayed when referencing a non-existing module.',
-	'scribunto-common-nofunction' => 'Error message displayed when not specifying a function to call.',
-	'scribunto-common-nosuchfunction' => 'Error message displayed when referencing a non-existing function.',
-	'scribunto-common-timeout' => 'Error message displayed when script execution has passed a threshold.',
-	'scribunto-common-oom' => 'Error message displayed when the script requires more memory than the threshold.',
-	'scribunto-common-backtrace' => 'A backtrace is a list of the function calls that are currently active in a thread. This message is followed by a backtrace.',
-	'scribunto-lua-in-function' => 'Reference to a function name. Parameters:
-* $1 is a function name.',
-	'scribunto-lua-in-main' => 'Part of the backtrace creation routines. Refers to the main part of the code.',
-	'scribunto-lua-in-function-at' => 'Part of the backtrace creation routines. Parameters:
-* $1 is a function name;
-* $2 is a line number.',
-	'scribunto-lua-backtrace-line' => '{{optional}}',
-	'scribunto-lua-error-location' => 'Error message. Parameters:
-* $1 is ...;
-* $2 is ....',
-	'scribunto-lua-error' => 'Error message. Parameters:
-* $2 is ....',
-	'scribunto-lua-noreturn' => 'Error message.',
-	'scribunto-lua-notarrayreturn' => 'Error message.',
-	'scribunto-luastandalone-proc-error' => 'Exception message.',
-	'scribunto-luastandalone-decode-error' => 'Exception message.',
-	'scribunto-luastandalone-write-error' => 'Exception message.',
-	'scribunto-luastandalone-read-error' => 'Exception message.',
-	'scribunto-luastandalone-gone' => 'Exception message.',
-	'scribunto-luastandalone-signal' => 'Exception message. Parameters:
-* $2 is an exit status.',
-	'scribunto-luastandalone-exited' => 'Exception message. Parameters:
-* $2 is an exit status.',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -386,7 +325,7 @@ $messages['fi'] = array(
  */
 $messages['fr'] = array(
 	'scribunto-desc' => "Cadre pour l'intégration des langages de script dans des pages de MediaWiki",
-	'scribunto-ignore-errors' => "Permettre l'enregistrement de code avec des erreurs",
+	'scribunto-ignore-errors' => 'Publier même avec des erreurs de code',
 	'scribunto-line' => 'à la ligne $1',
 	'scribunto-module-line' => 'dans $1 à la ligne $2',
 	'scribunto-parser-error' => 'Erreur de script',
@@ -575,7 +514,7 @@ $1',
  */
 $messages['hu'] = array(
 	'scribunto-desc' => 'Keretrendszer a parancsnyelvek MediaWiki-lapokba történő beágyazására',
-	'scribunto-ignore-errors' => 'Hagyja figylemen kívül a kódhibákat', # Fuzzy
+	'scribunto-ignore-errors' => 'Hagyja figylemen kívül a kódhibákat',
 	'scribunto-line' => 'a(z) $1. sorban',
 	'scribunto-module-line' => 'a(z) $1 modulban a(z) $2. sorban',
 	'scribunto-parser-error' => 'Parancsfájl-hiba',
@@ -760,7 +699,7 @@ $1',
  */
 $messages['jv'] = array(
 	'scribunto-desc' => 'Rangka kerja kanggo nyisipaké basa skrip nèng kaca MediaWiki',
-	'scribunto-ignore-errors' => 'Bènaké kasalahan kodhé', # Fuzzy
+	'scribunto-ignore-errors' => 'Bènaké kasalahan kodhé',
 	'scribunto-line' => 'nèng larik $1',
 	'scribunto-module-line' => 'nèng $1 larik $2',
 	'scribunto-parser-error' => 'Kasalahan skrip',
@@ -1091,9 +1030,21 @@ $1',
 	'scribunto-console-title' => 'Konsola debugowania',
 	'scribunto-console-current-src' => 'wejście z konsoli',
 	'scribunto-console-previous-src' => 'poprzednie wejście z konsoli',
-	'scribunto-console-clear' => 'Wyczyść',
+	'scribunto-console-clear' => 'Wyczyszczono stan konsoli ponieważ moduł został zaktualizowany.',
 	'scribunto-common-backtrace' => 'Backtrace:',
-	'scribunto-lua-in-function' => 'w funkcji „$1”',
+	'scribunto-lua-in-function' => 'w funkcji na $1:$2',
+	'scribunto-console-cleared' => 'Wyczyszczono stan konsoli ponieważ moduł został zaktualizowany.',
+	'scribunto-console-cleared-session-lost' => 'Wyczyszczono stan konsoli z powodu utracenia danych sesji.',
+	'scribunto-common-error-category' => 'Strony z błędami skryptów',
+	'scribunto-common-nosuchmodule' => 'Błąd skryptu: Podany moduł nie istnieje.',
+	'scribunto-common-nofunction' => 'Błąd skryptu: Musisz podać funkcję do wywołania.',
+	'scribunto-common-nosuchfunction' => 'Błąd skryptu: Podana funkcja nie istnieje.',
+	'scribunto-common-timeout' => 'Osiągnięto limit czasu wykonania skryptu.',
+	'scribunto-common-oom' => 'Przekroczono limit maksymalnej pamięci dla skryptu.',
+	'scribunto-lua-in-main' => 'w głównym bloku',
+	'scribunto-lua-in-function-at' => 'w funkcji na $1:$2',
+	'scribunto-lua-error-location' => 'Błąd Lua $1: $2.',
+	'scribunto-lua-error' => 'Błąd Lua: $2.',
 );
 
 /** Piedmontese (Piemontèis)
@@ -1230,7 +1181,7 @@ $1",
  */
 $messages['ru'] = array(
 	'scribunto-desc' => 'Сресдтво для включения скриптовых языков на страницах MediaWiki',
-	'scribunto-ignore-errors' => 'Разрешить сохранение кода с ошибками',
+	'scribunto-ignore-errors' => 'Игнорировать ошибки',
 	'scribunto-line' => 'на строке $1',
 	'scribunto-module-line' => 'в $1 на строке $2',
 	'scribunto-parser-error' => 'Ошибка скрипта',
@@ -1372,6 +1323,7 @@ $1',
 	'scribunto-lua-error' => 'Помилка Lua: $2.',
 	'scribunto-luastandalone-proc-error' => 'Помилка Lua: Неможливо створити процес.',
 	'scribunto-luastandalone-decode-error' => 'Помилка Lua: Внутрішня помилка: Не вдається декодувати повідомлення.',
+	'scribunto-ignore-errors' => 'Ігнорувати помилки',
 );
 
 /** Vietnamese (Tiếng Việt)

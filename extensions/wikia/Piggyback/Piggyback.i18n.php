@@ -1,12 +1,11 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'piggybac-desc' => 'Allows logging on as another user',
 	'piggyback' => 'Piggyback',
 	'piggyback-otherusername' => 'Other username:',
-	'piggyback-nosuchuser'  => 'There is no user by the name "$1".
+	'piggyback-nosuchuser' => 'There is no user by the name "$1".
 User names are case sensitive.
 Check your spelling.',
 	'piggyback-wronguser' => '$1 is not your user name',
@@ -17,15 +16,6 @@ Check your spelling.',
 	'action-piggyback' => 'log on as another user',
 	'log-name-piggyback' => 'Piggyback log',
 	'log-description-piggyback' => 'This log is a record of account piggybacks.',
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'action-piggyback' => '{{doc-action|piggyback}}',
-	'log-name-piggyback' => '{{doc-logpage}}',
-	'log-description-piggyback' => 'Appears on top of Special:Log/piggyback.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -172,7 +162,7 @@ $messages['fi'] = array(
  */
 $messages['fr'] = array(
 	'piggybac-desc' => 'Permet de s’identifier avec le compte d’un autre utilisateur',
-	'piggyback' => 'Accès superposé',
+	'piggyback' => '&nbsp;',
 	'piggyback-otherusername' => 'Autre nom d’utilisateur :',
 	'piggyback-nosuchuser' => "Il n'existe pas d’utilisateur nommé « $1 ».
 Les noms d’utilisateur sont sensibles à la casse.
@@ -260,6 +250,10 @@ $messages['ja'] = array(
 	'piggyback-nosuchuser' => '「$1」という利用者は存在しません。
 利用者名の大文字小文字は区別されます。
 入力に間違いがないか確認してください。',
+	'piggyback' => '「$1」という利用者は存在しません。
+利用者名の大文字小文字は区別されます。
+入力に間違いがないか確認してください。',
+	'log-name-piggyback' => 'ピギーバックのログ',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -349,16 +343,16 @@ Sjekk stavemåten.',
  */
 $messages['nl'] = array(
 	'piggybac-desc' => 'Maakt het mogelijk aan te melden als een andere gebruiker',
-	'piggyback' => 'Piggyback',
+	'piggyback' => '$1 is niet jouw gebruikersnaam',
 	'piggyback-otherusername' => 'Andere gebruikersnaam:',
 	'piggyback-nosuchuser' => 'De gebruiker "$1" bestaat niet.
 Gebruikersnamen zijn hoofdlettergevoelig.
-Controleer uw schrijfwijze.',
-	'piggyback-wronguser' => '$1 is niet uw gebruikersnaam',
-	'piggyback-loginprompt' => 'Voer uw gebruikersnaam en wachtwoord opnieuw in.',
-	'piggyback-firstlogout' => 'Meld eerst af om weer te werken met uw eigen gebruiker.',
-	'piggyback-itisyou' => 'U kunt piggyback niet op uzelf gebruiken.',
-	'piggyback-issysopto' => 'U kunt piggyback niet gebruiken om aan te melden als een andere gebruiker met het recht piggyback.',
+Controleer je schrijfwijze.',
+	'piggyback-wronguser' => '$1 is niet jouw gebruikersnaam',
+	'piggyback-loginprompt' => 'Voer je gebruikersnaam en wachtwoord opnieuw in.',
+	'piggyback-firstlogout' => 'Meld eerst af om weer te werken met je eigen gebruiker.',
+	'piggyback-itisyou' => 'Je kunt piggyback niet op jezelf gebruiken.',
+	'piggyback-issysopto' => 'Je kunt piggyback niet gebruiken om aan te melden als een andere gebruiker met het recht piggyback.',
 	'action-piggyback' => 'aanmelden als een andere gebruiker',
 	'log-name-piggyback' => 'Logboek piggyback',
 	'log-description-piggyback' => 'Dit logboek bevat een overzicht van alle piggybackhandelingen.',
@@ -376,6 +370,17 @@ Controleer je schrijfwijze.',
 	'piggyback-firstlogout' => 'Meld eerst af om weer te werken met je eigen gebruiker.',
 	'piggyback-itisyou' => 'Je kunt piggyback niet op jezelf gebruiken.',
 	'piggyback-issysopto' => 'Je kunt piggyback niet gebruiken om aan te melden als een andere gebruiker met het recht piggyback.',
+);
+
+$messages['no'] = array(
+	'piggyback' => 'Transporter',
+	'piggyback-otherusername' => 'Annet brukernavn:',
+	'piggyback-nosuchuser' => 'Det er ingen bruker med navnet «$1». Brukernavnet reagerer på store/små bokstaver. Sjekk rettskrivingen din.',
+	'piggyback-wronguser' => '$1 er ikke brukernavnet ditt',
+	'piggyback-loginprompt' => 'Vennligst skriv ditt brukernavn og passord igjen',
+	'piggyback-firstlogout' => 'Vennligst logg ut tilbake til brukeren din først',
+	'piggyback-itisyou' => 'Du kan ikke transportere deg selv',
+	'piggyback-issysopto' => 'Du kan ikke transportere brukere med transportrettigheter',
 );
 
 /** Occitan (occitan)

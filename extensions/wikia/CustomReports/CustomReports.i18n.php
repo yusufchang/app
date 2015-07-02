@@ -1,16 +1,12 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'custom-reports-desc' => 'Allows priveleged users to see various custom reports.',
 	'report-no-data' => 'No data.',
-
 	'report-xaxis' => 'Date',
-
 	'report-name-new_wikis' => 'New wikis by day',
 	'report-yaxis-new_wikis' => 'Wikis',
-
 	'report-name-founderemails' => 'Founder Emails',
 	'report-name-founderemails_sent' => 'Founder Emails: E-mails sent by day',
 	'report-yaxis-founderemails_sent' => 'E-mails sent',
@@ -22,7 +18,6 @@ $messages['en'] = array(
 	'report-yaxis-founderemails_clicks_per_sent' => 'Clicks/Sent (%25)',
 	'report-name-founderemails_opens_per_sent' => 'Founder Emails: Open rate by day',
 	'report-yaxis-founderemails_opens_per_sent' => 'Opens/sent (%25)',
-
 	'report-name-allemails' => 'All e-mails',
 	'report-name-allemails_sent' => 'All e-mails: E-mails sent by day',
 	'report-yaxis-allemails_sent' => 'E-mails Sent',
@@ -34,7 +29,6 @@ $messages['en'] = array(
 	'report-yaxis-allemails_clicks_per_sent' => 'Clicks/sent (%25)',
 	'report-name-allemails_opens_per_sent' => 'All e-mails: Open rate by day',
 	'report-yaxis-allemails_opens_per_sent' => 'Opens/sent (%25)',
-
 	'report-name-new_users' => 'New Users',
 	'report-name-total_users' => 'Total Users by day',
 	'report-yaxis-total_users' => 'Total Users',
@@ -44,4 +38,8 @@ $messages['en'] = array(
 	'report-yaxis-temp_users' => 'Temp Users',
 	'report-name-facebook_users' => 'Facebook Users by day',
 	'report-yaxis-facebook_users' => 'Facebook Users',
+);
+
+$messages['fr'] = array(
+	'custom-reports-desc' => 'Permet aux utilisateurs privilégiés de voir des états personnalisés',
 );

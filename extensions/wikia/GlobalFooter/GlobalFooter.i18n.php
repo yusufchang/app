@@ -28,20 +28,6 @@ $messages['en'] = array(
 		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
 );
 
-$messages['qqq'] = array(
-	'global-footer-vertical-tv-link' => 'URL to tv hub wiki',
-	'global-footer-vertical-comics-link' => 'URL to comics hub wiki',
-	'global-footer-vertical-movies-link' => 'URL to movies hub wiki',
-	'global-footer-vertical-music-link' => 'URL to music hub wiki',
-	'global-footer-vertical-books-link' => 'URL to books hub wiki',
-	'global-footer-vertical-games-link' => 'URL to games hub wiki',
-	'global-footer-vertical-lifestyle-link' => 'URL to lifestyle hub wiki',
-	'global-footer-desc' => '{{desc}}',
-	'shared-Oasis-footer-wikia-links' => 'All global footer links written in wiki text',
-	'shared-Monobook-footer-wikia-links' => 'All global footer links written
-	in wiki text displayed on Monobook skin',
-);
-
 $messages['ca'] = array(
 	'shared-Oasis-footer-wikia-links' => "*http://ca.wikia.com/wiki/Sobre_nosaltres|<span>Sobre Wikia</span>
 		*http://ca.wikia.com|<span>Comunitat Central</span>
@@ -105,23 +91,23 @@ $messages['es'] = array(
 		*http://www.wikia.com/Sitemap|Mapa del sitio
 		*http://es.wikia.com/Licencia|CC-BY-SA',
 	'shared-Monobook-footer-wikia-links' => '* [http://es.wikia.com/Pol%C3%ADtica_de_Privacidad Política de Privacidad]
-		* [http://es.wikia.com/Sobre_nosotros Sobre Wikia]
-		* [http://es.wikia.com/T%C3%A9rminos_de_Uso Términos de Uso]
-		* [[Special:Contact|Contactar]]
-		* [http://mediakit.wikia.com/wiki/Contact Publicidad]',
+* [http://es.wikia.com/Sobre_nosotros Sobre Wikia]
+* [http://es.wikia.com/T%C3%A9rminos_de_Uso Términos de Uso]
+* [[Special:Contact|Contactar]]
+* [http://mediakit.wikia.com/wiki/Contact Publicidad]',
 	'global-footer-desc' => 'GlobalFooter',
 );
 
 $messages['fa'] = array(
 	'shared-Oasis-footer-wikia-links' => '*http://www.wikia.com/About_Us|<span>دربارهٔ ما</span>
-		*http://www.community.wikia.com|<span>جامعهٔ مرکزی</span>
-		*http://www.wikia.com/Careers|فرصت‌های شغلی
-		*http://www.wikia.com/Advertising|تبلیغات
-		*http://api.wikia.com/|<span>API</span>
-		*Special:Contact|تماس با ما
-		*http://www.wikia.com/Terms_of_Use|شرایط استفاده
-		*http://www.wikia.com/Privacy_Policy|سیاست حفظ اسرار
-		*_LICENSE_',
+*http://www.community.wikia.com|<span>جامعهٔ مرکزی</span>
+*http://www.wikia.com/Careers|فرصت‌های شغلی
+*http://www.wikia.com/Advertising|تبلیغات
+*http://api.wikia.com/|<span>API</span>
+*Special:Contact|تماس با ما
+*http://www.wikia.com/Terms_of_Use|شرایط استفاده
+*http://www.wikia.com/Privacy_Policy|سیاست حفظ اسرار
+*_LICENSE_',
 );
 
 $messages['fi'] = array(
@@ -133,6 +119,11 @@ $messages['fi'] = array(
 		*http://www.wikia.com/Terms_of_Use|Käyttöehdot
 		*http://www.wikia.com/Privacy_Policy|Yksityisyyssäädökset
 		*_LICENSE_',
+	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Yksityisyys]
+* [http://www.wikia.com/wiki/Wikia:About Tietoa Wikiasta]
+* [http://www.wikia.com/wiki/Wikia:Terms_of_use Käyttöehdot]
+* [[Special:Contact|Ota yhteyttä]]
+* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Mainosta]',
 );
 
 $messages['fr'] = array(
@@ -152,14 +143,14 @@ $messages['fr'] = array(
 		*http://fr.wikia.com/Politique_de_confidentialité|Politique de confidentialité
 		*http://www.wikia.com/Sitemap|Plan du site
 		*http://fr.wikia.com/Licence|Sous licence CC-BY-SA",
-	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Confidentialité]
-		* [http://fr.wikia.com/À_propos À propos de Wikia]
-		* [http://fr.wikia.com/Conditions_d\'utilisation Conditions d\'utilisation]<span style="color: #ff0000"> (Mises à jour)</span>
-		* [[Special:Contact|Nous contacter]]
-		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Publicité]',
-	'global-footer-vertical-comics-link' => 'http://comicshub.wikia.com/wiki/Comics_Hub',
-	'global-footer-vertical-music-link' => 'http://musichub.wikia.com/wiki/Music_Hub',
-	'global-footer-desc' => 'GlobalFooter',
+	'shared-Monobook-footer-wikia-links' => "* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Confidentialité]
+* [http://fr.wikia.com/À_propos À propos de Wikia]
+* [http://fr.wikia.com/Conditions_d'utilisation Conditions d'utilisation]
+* [[Special:Contact|Nous contacter]]
+* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Publicité]",
+	'global-footer-vertical-comics-link' => 'http://portail-divertissement.wikia.com/wiki/Portail_divertissement',
+	'global-footer-vertical-music-link' => 'http://portail-divertissement.wikia.com/wiki/Portail_divertissement',
+	'global-footer-desc' => '&nbsp;',
 );
 
 $messages['gl'] = array(
@@ -178,10 +169,10 @@ $messages['it'] = array(
 		*http://www.wikia.com/Sitemap|Mappa del sito
 		* http://www.wikia.com/Special:CreateWiki |Crea una wiki',
 	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Privacy]
-		* [http://www.wikia.com/wiki/Wikia:About About Wikia]
-		* [http://it.community.wikia.com/wiki/Wiki_della_Community:Termini_di_utilizzo Termini di utilizzo]<span style="color: #ff0000"> (Aggiornati)</span>
-		* [[Special:Contact|Contact]]
-		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
+* [http://www.wikia.com/wiki/Wikia:About About Wikia]
+* [http://it.community.wikia.com/wiki/Wiki_della_Community:Termini_di_utilizzo Termini di utilizzo]<span style="color: #ff0000"> (Aggiornati)</span>
+* [[Special:Contact|Contact]]
+* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
 	'global-footer-vertical-tv-link' => 'http://tvhub.wikia.com/wiki/TV_Hub',
 	'global-footer-vertical-comics-link' => 'http://comicshub.wikia.com/wiki/Comics_Hub',
 	'global-footer-vertical-movies-link' => 'http://movieshub.wikia.com/wiki/Movies_Hub',
@@ -212,11 +203,11 @@ $messages['ja'] = array(
 	'global-footer-vertical-music-link' => 'http://musichub.wikia.com/wiki/Music_Hub',
 	'global-footer-vertical-lifestyle-link' => 'http://lifestylehub.wikia.com/wiki/Lifestyle_Hub',
 	'global-footer-desc' => 'GlobalFooter',
-	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Privacy]
-		* [http://www.wikia.com/wiki/Wikia:About About Wikia]
-		* [http://www.wikia.com/wiki/Wikia:Terms_of_use Terms of use]
-		* [[Special:Contact|Contact]]
-		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
+	'shared-Monobook-footer-wikia-links' => '* [http://ja.wikia.com/プライバシーポリシー プライバシー]
+* [http://ja.wikia.com/ウィキアについて ウィキアについて]
+* [http://ja.wikia.com/利用規約 利用規約]
+* [[Special:Contact|お問い合わせ]]
+* [http://www.wikia.com/Advertising 広告]',
 );
 
 $messages['ko'] = array(
@@ -279,10 +270,10 @@ $messages['pl'] = array(
 		*http://www.wikia.com/Sitemap|Mapa strony
 		*_LICENSE_',
 	'shared-Monobook-footer-wikia-links' => '* [http://pl.wikia.com/Polityka_Prywatności Polityka Prywatności]
-		* [http://pl.wikia.com/O_nas O Wikii]
-		* [http://pl.wikia.com/Zasady_Użytkowania Zasady Użytkowania]<span style="color: #ff0000"> (Zaktualizowane)</span>
-		* [[Special:Contact|Kontakt]]
-		* [http://www.wikia.com/Advertising Reklama]',
+* [http://pl.wikia.com/O_nas O Wikii]
+* [http://pl.wikia.com/Zasady_Użytkowania Zasady Użytkowania]
+* [[Special:Contact|Kontakt]]
+* [http://www.wikia.com/Advertising Reklama]',
 	'global-footer-desc' => 'GlobalFooter',
 );
 
@@ -325,10 +316,10 @@ $messages['ru'] = array(
 		*http://www.wikia.com/Sitemap|Карта сайта
 		*_LICENSE_',
 	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Privacy]
-		* [http://www.wikia.com/wiki/Wikia:About About Wikia]
-		* [http://ru.community.wikia.com/wiki/%D0%92%D0%B8%D0%BA%D0%B8%D1%8F:%D0%A3%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F_%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F Условия использования]
-		* [[Special:Contact|Contact]]
-		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
+* [http://www.wikia.com/wiki/Wikia:About About Wikia]
+* [http://ru.community.wikia.com/wiki/%D0%92%D0%B8%D0%BA%D0%B8%D1%8F:%D0%A3%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F_%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F Условия использования]
+* [[Special:Contact|Contact]]
+* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
 	'global-footer-vertical-tv-link' => 'http://ru.tvhub.wikia.com/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB_%D0%A2%D0%B5%D0%BB%D0%B5%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5',
 	'global-footer-vertical-comics-link' => 'http://ru.comicshub.wikia.com/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB_%D0%9A%D0%BE%D0%BC%D0%B8%D0%BA%D1%81%D1%8B',
 	'global-footer-vertical-movies-link' => 'http://ru.movieshub.wikia.com/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB_%D0%9A%D0%B8%D0%BD%D0%BE',
@@ -351,6 +342,26 @@ $messages['vi'] = array(
 		*_LICENSE_',
 );
 
+$messages['zh'] = array(
+	'global-footer-vertical-tv-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-comics-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-movies-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-music-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-books-link' => 'http://zh.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-games-link' => 'http://zh.gameshub.wikia.com/wiki/%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-lifestyle-link' => 'http://zh.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+);
+
+$messages['zh-cn'] = array(
+	'global-footer-vertical-tv-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-comics-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-movies-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-music-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-books-link' => 'http://zh.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-games-link' => 'http://zh.gameshub.wikia.com/wiki/%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-lifestyle-link' => 'http://zh.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+);
+
 $messages['zh-hans'] = array(
 	'shared-Oasis-footer-wikia-links' => '*http://zh.wikia.com/wiki/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC|<span>关于我们</span>
 		*http://zh.community.wikia.com/wiki/Help:内容|帮助
@@ -362,19 +373,39 @@ $messages['zh-hans'] = array(
 		*http://www.wikia.com/Special:CreateWiki|<span>创建维基</span>
 		*http://www.wikia.com/Sitemap|网站地图
 		*_LICENSE_',
-	'global-footer-vertical-tv-link' => 'http://tvhub.wikia.com/wiki/TV_Hub',
-	'global-footer-vertical-comics-link' => 'http://comicshub.wikia.com/wiki/Comics_Hub',
-	'global-footer-vertical-movies-link' => 'http://movieshub.wikia.com/wiki/Movies_Hub',
-	'global-footer-vertical-music-link' => 'http://musichub.wikia.com/wiki/Music_Hub',
-	'global-footer-vertical-books-link' => 'http://bookshub.wikia.com/wiki/Books_Hub',
-	'global-footer-vertical-games-link' => 'http://gameshub.wikia.com/wiki/Games_Hub',
-	'global-footer-vertical-lifestyle-link' => 'http://lifestylehub.wikia.com/wiki/Lifestyle_Hub',
+	'global-footer-vertical-tv-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-comics-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-movies-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-music-link' => 'http://zh.entertainmenthub.wikia.com/wiki/%E5%A8%B1%E4%B9%90%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-books-link' => 'http://zh.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-games-link' => 'http://zh.gameshub.wikia.com/wiki/%E6%B8%B8%E6%88%8F%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-lifestyle-link' => 'http://zh.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
 	'global-footer-desc' => 'GlobalFooter',
 	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Privacy]
 		* [http://www.wikia.com/wiki/Wikia:About About Wikia]
 		* [http://www.wikia.com/wiki/Wikia:Terms_of_use Terms of use]
 		* [[Special:Contact|Contact]]
 		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
+);
+
+$messages['zh-hant'] = array(
+	'global-footer-vertical-tv-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-comics-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-movies-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-music-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-books-link' => 'http://zh-tw.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-games-link' => 'http://zh-tw.gameshub.wikia.com/wiki/遊戲中心',
+	'global-footer-vertical-lifestyle-link' => 'http://zh-tw.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+);
+
+$messages['zh-hk'] = array(
+	'global-footer-vertical-tv-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-comics-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-movies-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-music-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-books-link' => 'http://zh-tw.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-games-link' => 'http://zh-tw.gameshub.wikia.com/wiki/遊戲中心',
+	'global-footer-vertical-lifestyle-link' => 'http://zh-tw.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
 );
 
 $messages['zh-tw'] = array(
@@ -388,13 +419,13 @@ $messages['zh-tw'] = array(
 		*http://www.wikia.com/Special:CreateWiki|<span>創建維基</span>
 		*http://www.wikia.com/Sitemap|網站地圖
 		*_LICENSE_',
-	'global-footer-vertical-tv-link' => 'http://tvhub.wikia.com/wiki/TV_Hub',
-	'global-footer-vertical-comics-link' => 'http://comicshub.wikia.com/wiki/Comics_Hub',
-	'global-footer-vertical-movies-link' => 'http://movieshub.wikia.com/wiki/Movies_Hub',
-	'global-footer-vertical-music-link' => 'http://musichub.wikia.com/wiki/Music_Hub',
-	'global-footer-vertical-books-link' => 'http://bookshub.wikia.com/wiki/Books_Hub',
-	'global-footer-vertical-games-link' => 'http://gameshub.wikia.com/wiki/Games_Hub',
-	'global-footer-vertical-lifestyle-link' => 'http://lifestylehub.wikia.com/wiki/Lifestyle_Hub',
+	'global-footer-vertical-tv-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-comics-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-movies-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-music-link' => 'http://zh-tw.entertainmenthub.wikia.com/wiki/%E5%A8%9B%E6%A8%82%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-books-link' => 'http://zh-tw.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
+	'global-footer-vertical-games-link' => 'http://zh-tw.gameshub.wikia.com/wiki/遊戲中心',
+	'global-footer-vertical-lifestyle-link' => 'http://zh-tw.lifestylehub.wikia.com/wiki/%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BF%83',
 	'global-footer-desc' => 'GlobalFooter',
 	'shared-Monobook-footer-wikia-links' => '* [http://www.wikia.com/wiki/Wikia:Privacy_Policy Privacy]
 		* [http://www.wikia.com/wiki/Wikia:About About Wikia]
@@ -402,4 +433,3 @@ $messages['zh-tw'] = array(
 		* [[Special:Contact|Contact]]
 		* [http://www.wikia.com/wiki/Wikia:Advertising_on_Wikia Advertise]',
 );
-

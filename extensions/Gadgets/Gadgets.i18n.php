@@ -15,31 +15,26 @@ $messages = array();
  * @author Daniel Kinzler, brightbyte.de
  */
 $messages['en'] = array(
-	# for Special:Version
-	'gadgets-desc'      => 'Lets users select custom [[Special:Gadgets|CSS and JavaScript gadgets]] in their [[Special:Preferences|preferences]]',
-
-	# for Special:Preferences
-	'prefs-gadgets'     => 'Gadgets',
+	'gadgets-desc' => 'Lets users select custom [[Special:Gadgets|CSS and JavaScript gadgets]] in their [[Special:Preferences|preferences]]',
+	'prefs-gadgets' => 'Gadgets',
 	'gadgets-prefstext' => 'Below is a list of special gadgets you can enable for your account.
 These gadgets are mostly based on JavaScript, so JavaScript has to be enabled in your browser for them to work.
 Note that these gadgets will have no effect on this preferences page.
 
 Also note that these special gadgets are not part of the MediaWiki software, and are usually developed and maintained by users on your local wiki.
 Local administrators can edit the [[MediaWiki:Gadgets-definition|definitions]] and [[Special:Gadgets|descriptions]] of available gadgets.',
-
-	# for Special:Gadgets
-	'gadgets'           => 'Gadgets',
-	'gadgets-definition' => '', # do not translate or duplicate this message to other languages
-	'gadgets-title'     => 'Gadgets',
-	'gadgets-pagetext'  => "Below is a list of special gadgets users can enable on their [[Special:Preferences|preferences page]], as defined by the [[MediaWiki:Gadgets-definition|definitions]].
+	'gadgets' => 'Gadgets',
+	'gadgets-definition' => '',
+	'gadgets-title' => 'Gadgets',
+	'gadgets-pagetext' => "Below is a list of special gadgets users can enable on their [[Special:Preferences|preferences page]], as defined by the [[MediaWiki:Gadgets-definition|definitions]].
 This overview provides easy access to the system message pages that define each gadget's description and code.",
-	'gadgets-uses'      => 'Uses',
+	'gadgets-uses' => 'Uses',
 	'gadgets-required-rights' => 'Requires the following {{PLURAL:$2|right|rights}}:
 
 $1',
 	'gadgets-required-skins' => 'Available on the {{PLURAL:$2|$1 skin|following skins: $1}}.',
-	'gadgets-default'   => 'Enabled for everyone by default.',
-	'gadgets-export'    => 'Export',
+	'gadgets-default' => 'Enabled for everyone by default.',
+	'gadgets-export' => 'Export',
 	'gadgets-export-title' => 'Gadget export',
 	'gadgets-not-found' => 'Gadget "$1" not found.',
 	'gadgets-export-text' => 'To export the $1 gadget, click on "{{int:gadgets-export-download}}" button, save the downloaded file,
@@ -47,40 +42,6 @@ go to Special:Import on destination wiki and upload it. Then add the following t
 <pre>$2</pre>
 You must have appropriate permissions on destination wiki (including the right to edit system messages) and import from file uploads must be enabled.',
 	'gadgets-export-download' => 'Download',
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author Jon Harald Søby
- * @author Kghbln
- * @author Lloffiwr
- * @author Mormegil
- * @author Purodha
- * @author SPQRobin
- * @author Siebrand
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'gadgets-desc' => '{{desc}}',
-	'prefs-gadgets' => 'In Gadgets extension. The name of a tab in [[Special:Preferences]] where user set their preferences for the extension.
-
-{{Identical|Gadgets}}',
-	'gadgets-prefstext' => 'In Gadgets extension. This is the explanation text displayed under the Gadgets tab in [[Special:Preferences]].',
-	'gadgets' => '{{Identical|Gadgets}}',
-	'gadgets-title' => '{{Identical|Gadgets}}',
-	'gadgets-uses' => "This is used as a verb in third-person singular. It appears in front of a script name. Example: \"''Uses: Gadget-UTCLiveClock.js''\"
-
-See [http://meta.wikimedia.org/wiki/Special:Gadgets Gadgets page in meta.wikimedia.org]",
-	'gadgets-required-rights' => 'Parameters:
-* $1 - a list in wikitext.
-* $2 - the number of items in list $1 for PLURAL use.',
-	'gadgets-required-skins' => 'Parameters:
-* $1 - a comma separated list.
-* $2 - the number of items in list $1 for PLURAL use.',
-	'gadgets-export' => 'Used on [[Special:Gadgets]]. This is a verb, not noun.
-{{Identical|Export}}',
-	'gadgets-export-download' => 'Use the verb for this message. Submit button.
-{{Identical|Download}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -2212,9 +2173,13 @@ $messages['pl'] = array(
 	'gadgets-prefstext' => 'Poniżej znajduje się lista specjalnych gadżetów, które możesz włączyć dla swojego konta użytkownika.
 Gadżety najczęściej wykorzystują JavaScript, więc by działały musisz mieć w swojej przeglądarce włączoną obsługę JavaScriptu. Gadżety nie mają wpływu na tę stronę preferencji.
 
-Gadżety nie są częścią oprogramowania MediaWiki i najprawdopodobniej zostały stworzone przez użytkowników tego wiki.
+Gadżety nie są częścią oprogramowania MediaWiki i najprawdopodobniej zostały stworzone przez użytkowników tej wiki.
 Lokalni administratorzy mogą edytować dostępne gadżety używając stron [[MediaWiki:Gadgets-definition|Definicje gadżetów]] oraz [[Special:Gadgets|Gadżety]].',
-	'gadgets' => 'Gadżety',
+	'gadgets' => 'Poniżej znajduje się lista specjalnych gadżetów, które możesz włączyć dla swojego konta użytkownika.
+Gadżety najczęściej wykorzystują JavaScript, więc by działały musisz mieć w swojej przeglądarce włączoną obsługę JavaScriptu. Gadżety nie mają wpływu na tę stronę preferencji.
+
+Gadżety nie są częścią oprogramowania MediaWiki i najprawdopodobniej zostały stworzone przez użytkowników tej wiki.
+Lokalni administratorzy mogą edytować dostępne gadżety używając stron [[MediaWiki:Gadgets-definition|Definicje gadżetów]] oraz [[Special:Gadgets|Gadżety]].',
 	'gadgets-title' => 'Gadżety',
 	'gadgets-pagetext' => 'Poniżej znajduje się lista specjalnych gadżetów, które użytkownicy mogą włączyć na swojej [[Special:Preferences|stronie preferencji]]. Lista ta jest zdefiniowana na stronie [[MediaWiki:Gadgets-definition|definicji]].
 Poniższy przegląd ułatwia dostęp do komunikatów systemu, które definiują opis i kod każdego z gadżetów.',
@@ -3199,4 +3164,3 @@ $1',
 您必須具有適當的權限 （包括編輯系統訊息的權利） 的目標維基上，必須啟用匯入的檔案上傳。',
 	'gadgets-export-download' => '下載',
 );
-

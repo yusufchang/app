@@ -76,9 +76,9 @@ $messages['en'] = array(
 	'sotd-status-4' => 'Accepted',
 	'sotd-action-unknown' => 'You performed an unknown action:',
 	'sotd-back-to-page' => '[[$1|Back to the page]]',
-	'sotd-already-exists' => "Sorry, the song you chose is already nominated.
+	'sotd-already-exists' => 'Sorry, the song you chose is already nominated.
 	
-	[[$1|Nominate a different song]]",
+	[[$1|Nominate a different song]]',
 	'sotd-thank-you' => "'''Thanks!''' Your nomination was added to the suggestions for our '''[[LyricWiki:Song of the Day|Song of the Day]]'''.
 
 	This is your personal token to your nomination: '''$1'''<br/>
@@ -92,8 +92,6 @@ $messages['de'] = array(
 	'sotd-artist' => 'Künstler',
 	'sotd-song' => 'Titel',
 	'sotd-reason' => 'Grund',
-	# 'sotd-audio' => 'Audio',
-	# 'sotd-video' => 'Video',
 	'sotd-prefdate' => 'Bevorzugtes Datum',
 	'sotd-thisyear' => 'Dieses Jahr',
 	'sotd-nextyear' => 'Nächstes Jahr',
@@ -112,7 +110,6 @@ $messages['de'] = array(
 	'sotd-button-retry' => 'Wiederholen',
 	'sotd-button-refresh' => 'Aktualisieren',
 	'sotd-button-review' => 'Überarbeiten',
-	# 'sotd-button-ok' => 'OK',
 	'sotd-error-title' => 'Bitte behebe zunächst {{PLURAL:$1|diesen|diese}} Fehler:',
 	'sotd-error-artist-undefined' => 'Bitte gib den Namen eines Künstlers ein',
 	'sotd-error-artist-unknown' => 'Die Seite des Künstlers existiert nicht',
@@ -143,11 +140,9 @@ $messages['de'] = array(
 	'sotd-edit-toolate' => 'Die Nominierung hat bereits einen finalen Status. Sie kann nicht mehr bearbeitet oder entfernt werden.',
 	'sotd-deletion-success' => 'Nominierung erfolgreich entfernt.',
 	'sotd-deletion-failure' => 'Die Nominierung konnte nicht entfernt werden.',
-	# 'sotd-manage-id' => 'ID',
 	'sotd-manage-nomination' => 'Nominierung',
 	'sotd-manage-nominatedby' => 'Nominiert von',
 	'sotd-manage-reason' => 'Grund',
-	# 'sotd-manage-links' => 'Links',
 	'sotd-manage-prefdate' => 'Bevorzugtes Datum',
 	'sotd-manage-noprefdate' => 'Keines',
 	'sotd-manage-status' => 'Aktueller Status',
@@ -161,12 +156,17 @@ $messages['de'] = array(
 	'sotd-status-4' => 'Angenommen',
 	'sotd-action-unknown' => 'Du hast eine unbekannte Aktion ausgeführt:',
 	'sotd-back-to-page' => '[[$1|Zurück zur Seite]]',
-	'sotd-already-exists' => "Entschuldigung, der von dir gewählte Song ist bereits nominiert.
+	'sotd-already-exists' => 'Entschuldigung, der von dir gewählte Song ist bereits nominiert.
 	
-	[[$1|Einen anderen Song nominieren]]",
+	[[$1|Einen anderen Song nominieren]]',
 	'sotd-thank-you' => "'''Danke!''' Deine Nominierung wurde zu den Vorschlägen für unseren '''[[LyricWiki:Song of the Day|Song des Tages]]''' hinzugefügt.
 
 	Dies ist dein persönlicher Token zu deiner Nominierung: '''$1'''<br/>
 	Er erlaubt es dir, deine Nominierung zu beobachten, bearbeiten oder zurückzuziehen. Bitte bewahre den Token auf, wenn du eine dieser Aktionen ausführen möchtest.<br/>
 	Denk dran, dass Veränderungen nur möglich sind, bis deine Nominierung gesichtet und zur Warteliste hinzugefügt worden ist.",
+);
+
+$messages['zh'] = array(
+	'sotd' => '链接',
+	'sotd-manage-links' => '链接',
 );

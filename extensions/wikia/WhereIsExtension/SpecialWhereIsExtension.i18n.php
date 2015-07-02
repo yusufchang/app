@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WhereIsExtension
  *
@@ -21,30 +20,18 @@
 $messages = array();
 
 $messages['en'] = array(
-	'whereisextension-desc'     => 'Provides a list of wikis with enabled extensions',
-	'whereisextension'			=> 'Where is extension',	//the name displayed on Special:SpecialPages
-	'whereisextension-submit'	=> 'Search',
-	'whereisextension-list'		=> 'List of wikis with matched criteria ($1)',
-	'whereisextension-isset'	=> 'is set to',
-	'whereisextension-filter'	=> 'Filter',
-	'whereisextension-all-groups'	=> 'All groups',
-	'whereisextension-name-contains'	=> 'variable name contains',
+	'whereisextension-desc' => 'Provides a list of wikis with enabled extensions',
+	'whereisextension' => 'Where is extension',
+	'whereisextension-submit' => 'Search',
+	'whereisextension-list' => 'List of wikis with matched criteria ($1)',
+	'whereisextension-isset' => 'is set to',
+	'whereisextension-filter' => 'Filter',
+	'whereisextension-all-groups' => 'All groups',
+	'whereisextension-name-contains' => 'variable name contains',
 	'whereisextension-search-like-value' => 'Like:',
 	'whereisextension-search-type' => 'Type:',
-	'whereisextension-search-type-bool' => "Boolean",
-	'whereisextension-search-type-full' => "Like",
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'whereisextension-desc'   => '{{desc}}',
-	'whereisextension-submit' => '{{Identical|Search}}',
-	'whereisextension-filter' => 'Used as some kind of fieldset description.
-{{Identical|Filter}}',
-	'whereisextension-search-type' => '{{Identical|Type}}',
+	'whereisextension-search-type-bool' => 'Boolean',
+	'whereisextension-search-type-full' => 'Like',
 );
 
 /** Afrikaans (Afrikaans)
@@ -533,7 +520,7 @@ $messages['pdc'] = array(
  * @author Sp5uhe
  */
 $messages['pl'] = array(
-	'whereisextension' => 'Rozszerzenie do wyszukiwania',
+	'whereisextension' => 'Wyszukiwanie rozszerzeń',
 	'whereisextension-submit' => 'Szukaj',
 	'whereisextension-list' => 'Lista wiki, które odpowiadają kryteriom',
 	'whereisextension-isset' => 'jest ustawiona na',
@@ -740,6 +727,10 @@ $messages['vi'] = array(
 	'whereisextension-search-type-full' => 'Giống như',
 );
 
+$messages['zh'] = array(
+	'whereisextension' => '扩展功能位置',
+);
+
 /** Simplified Chinese (‪中文（简体）‬)
  * @author Hydra
  */
@@ -747,5 +738,17 @@ $messages['zh-hans'] = array(
 	'whereisextension-submit' => '搜寻',
 	'whereisextension-search-type' => '类型：',
 	'whereisextension-search-type-full' => '喜欢',
+	'whereisextension' => '扩展功能位置',
 );
 
+$messages['zh-hant'] = array(
+	'whereisextension' => '擴展功能位置',
+);
+
+$messages['zh-hk'] = array(
+	'whereisextension' => '擴展功能位置',
+);
+
+$messages['zh-tw'] = array(
+	'whereisextension' => '擴展功能位置',
+);

@@ -4,7 +4,7 @@ $messages = array();
 $messages['en'] = array(
 	'ircgate-desc' => 'Lets users insert IRC login form on any page',
 	'ircgate-username' => 'Username:',
-	'ircgate-channel'  => 'Channel:',
+	'ircgate-channel' => 'Channel:',
 	'ircgate-channellist' => '* #wikia
 *group: International
 * #wikia-de
@@ -18,15 +18,7 @@ $messages['en'] = array(
 *group: Off topic
 * #wikia-social
 * #wikia-overflow
-*group-end'
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- */
-$messages['qqq'] = array(
-	'ircgate-desc' => '{{desc}}',
-	'ircgate-username' => '{{Identical|Username}}',
+*group-end',
 );
 
 /** Afrikaans (Afrikaans)
@@ -168,7 +160,84 @@ $messages['diq'] = array(
 $messages['es'] = array(
 	'ircgate-desc' => 'Permite a los usuarios insertar un formulario de inicio de sesión de IRC en cualquier página',
 	'ircgate-username' => 'Nombre de usuario:',
-	'ircgate-channel' => 'Canal:',
+	'ircgate-channel' => '*group: General
+* #wikia-es
+* ##wikia
+* #wikia-vstf
+*group-end
+*group: Canales hispanos
+* #dragonball-es
+* #gta-es
+* #inciclopedia
+* #pkmn
+* #ssbb-es
+* #starwars-es
+* #wikia-animalcrossing-es
+* #wikia-bleach-es
+* #wikia-burijji
+* #wikia-digimon-es
+* #wikia-dofus-es
+* #wikia-driver
+* #wikia-es-todoanime
+* #wikia-evangelion
+* #wikia-eyeshield21-es
+* #wikia-harrypotter-es
+* #wikia-harvestmoon-es
+* #wikia-jewelpet-es
+* #wikia-kid-vs-kat
+* #wikia-kirby-es
+* #wikia-lego-es
+* #wikia-marvel
+* #wikia-mermaidmelody-es
+* #wikia-naruto-es
+* #wikia-onepiece-es
+* #wikia-protegidos
+* #wikia-seriesspain
+* #wikia-southpark-es
+* #wikia-transformice-es
+* #wikia-wcw
+* #wikidex
+* #yu-gi-oh-es 
+*group-end',
+	'ircgate-channellist' => '*group: General
+* #wikia-es
+* ##wikia
+* #wikia-vstf
+*group-end
+*group: Canales hispanos
+* #dragonball-es
+* #gta-es
+* #inciclopedia
+* #pkmn
+* #ssbb-es
+* #starwars-es
+* #wikia-animalcrossing-es
+* #wikia-bleach-es
+* #wikia-burijji
+* #wikia-digimon-es
+* #wikia-dofus-es
+* #wikia-driver
+* #wikia-es-todoanime
+* #wikia-evangelion
+* #wikia-eyeshield21-es
+* #wikia-harrypotter-es
+* #wikia-harvestmoon-es
+* #wikia-jewelpet-es
+* #wikia-kid-vs-kat
+* #wikia-kirby-es
+* #wikia-lego-es
+* #wikia-marvel
+* #wikia-mermaidmelody-es
+* #wikia-naruto-es
+* #wikia-onepiece-es
+* #wikia-protegidos
+* #wikia-seriesspain
+* #wikia-southpark-es
+* #wikia-transformice-es
+* #wikia-wcw
+* #wikidex
+* #yu-gi-oh-es 
+*group-end',
 );
 
 /** Basque (euskara)

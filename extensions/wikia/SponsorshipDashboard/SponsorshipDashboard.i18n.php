@@ -69,7 +69,7 @@ $messages['en'] = array(
 	'sponsorship-dashboard-serie-namespace-Category_talk' => 'Category talk pages',
 	'sponsorship-dashboard-serie-namespace-Top_10_list' => 'Category talk pages',
 	'sponsorship-dashboard-serie-namespace-User_blog_comment' => 'User blog comments',
-	'sponsorship-dashboard-serie-namespace-User_blog' => 'User blog pages',    
+	'sponsorship-dashboard-serie-namespace-User_blog' => 'User blog pages',
 	'sponsorship-dashboard-description-activity' => 'Contributor activity by month',
 	'sponsorship-dashboard-description-engagement' => 'Total hours spent per day',
 	'sponsorship-dashboard-description-participation' => 'Unique editors by month',
@@ -103,7 +103,7 @@ $messages['en'] = array(
 	'sponsorship-dashboard-from-label' => 'Start Date',
 	'sponsorship-dashboard-to-label' => 'End Date',
 	'sponsorship-dashboard-error-nodataforcurrentweek' => 'Error: No data for current week',
-	'not-allowed' => 'Sorry. You don\'t have permission to view this page',
+	'not-allowed' => "Sorry. You don't have permission to view this page",
 	'sponsorshipdashboard' => 'Sponsorship Dashboard',
 	'sponsorship-dashboard-city-select' => 'Select Wikia hub:',
 	'sponsorship-dashboard-report-01' => 'User Engagement',
@@ -212,31 +212,7 @@ $messages['en'] = array(
 	'sponsorship-dashboard-compleat' => '% complete',
 	'sponsorship-dashboard-select-all' => 'select all',
 	'sponsorship-dashboard-deselect-all' => 'deselect all',
-	'sponsorship-dashboard-download' => 'extra actions'
-);
-
-/** Message documentation (Message documentation)
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'sponsorship-dashboard-serie-bounces' => 'A bounce is a single-page visit or a visit in which the person left a site from the entrance (landing) page.',
-	'sponsorship-dashboard-serie-entranceRate' => 'The percentage of visits to a page that is the first visit to the site.',
-	'sponsorship-dashboard-serie-exitRate' => 'The percentage of visitors that leave a site from a given page based on the number of visits to that page (or pageviews in some cases).',
-	'sponsorship-dashboard-serie-visitBounceRate' => 'Bounce rate is the percentage of single-page visits or visits in which the person left a site from the entrance (landing) page.',
-	'sponsorship-dashboard-serie-entrances' => 'The number of visitors that enter a site at a given page.',
-	'sponsorship-dashboard-serie-exits' => 'The number of visitors that leave a site from a given page.',
-	'sponsorship-dashboard-report-new-source-gapi' => '"GA" stands for Google Analytics.',
-	'sponsorship-dashboard-report-new-source-gapi-custom' => '"GA" stands for Google Analytics.',
-	'sponsorship-dashboard-source-in-case-of-empty' => 'This is a label for a text input element',
-	'sponsorship-dashboard-source-gapi-force-account' => '"GA" stands for Google Analytics.',
-);
-
-/** Tati (Tati)
- * @author Erdemaslancan
- */
-$messages['ttt'] = array(
-	'sponsorship-dashboard-user-type-0' => 'WikiaKarber',
-	'sponsorship-dashboard-empty-description' => '$1',
+	'sponsorship-dashboard-download' => 'extra actions',
 );
 
 /** Afrikaans (Afrikaans)
@@ -806,7 +782,7 @@ $messages['diq'] = array(
  * @author VegaDark
  */
 $messages['es'] = array(
-	'sponsorship-dashboard' => '[[Special:SponsorshipDashboard|Página especial]] para las métricas de patrocinios y relacionados',
+	'sponsorship-dashboard' => '[[Special:SponsorshipDashboard|Página especial]] para métricas de patrocinio',
 	'sponsorship-dashboard-serie-A' => 'Total de editores registrados en el mes actual (todos los espacios de nombres)',
 	'sponsorship-dashboard-serie-B' => 'Total de editores registrados en el mes actual (espacios de contenido)',
 	'sponsorship-dashboard-serie-C' => 'Número de editores registrados que editaron más de 5 veces en el mes actual (espacios de contenido)',
@@ -902,7 +878,7 @@ $messages['es'] = array(
 	'sponsorship-dashboard-error-nodataforcurrentweek' => 'Error: No hay datos para la semana actual',
 	'not-allowed' => 'Lo sentimos. No tienes permiso para ver esta página',
 	'sponsorshipdashboard' => 'Panel de patrocinio',
-	'sponsorship-dashboard-city-select' => 'Selecciona una categoría de Wikia:',
+	'sponsorship-dashboard-city-select' => 'Selecciona un hub:',
 	'sponsorship-dashboard-report-01' => 'Compromiso del Usuario',
 	'sponsorship-dashboard-report-02' => 'Métricas de crecimiento',
 	'sponsorship-dashboard-report-03' => 'Investigación de mercado',
@@ -1336,7 +1312,7 @@ $messages['fr'] = array(
 	'sponsorship-dashboard-to-label' => 'Date de fin',
 	'sponsorship-dashboard-error-nodataforcurrentweek' => 'Erreur : Pas de données pour la semaine en cours',
 	'not-allowed' => 'Désolé, vous ne disposez pas des droits pour afficher cette page.',
-	'sponsorshipdashboard' => 'Tableau de bord de parrainage',
+	'sponsorshipdashboard' => '&nbsp;',
 	'sponsorship-dashboard-city-select' => 'Sélectionnez un concentrateur Wikia :',
 	'sponsorship-dashboard-report-01' => 'Engagement d’utilisateur',
 	'sponsorship-dashboard-report-02' => 'Chiffres de croissance',
@@ -2103,6 +2079,27 @@ $messages['kiu'] = array(
 	'sponsorship-dashboard-empty-description' => '$1',
 );
 
+$messages['ko'] = array(
+	'sponsorship-dashboard' => '종류',
+	'sponsorship-dashboard-serie-pageviews' => '총 조회수',
+	'sponsorship-dashboard-description-traffic' => '조회수',
+	'sponsorship-dashboard-variables' => '종류',
+	'sponsorship-dashboard-overview-label' => '간편 선택',
+	'sponsorship-dashboard-overview-enddate' => '간편 선택',
+	'sponsorship-dashboard-overview-startdate' => '간편 선택',
+	'sponsorship-dashboard-from-label' => '시작 날짜',
+	'sponsorship-dashboard-to-label' => '종료 날짜',
+	'not-allowed' => '이 문서를 볼 수 있는 권한이 없습니다.',
+	'sponsorship-dashboard-description' => '조회수',
+	'sponsorship-dashboard-source-Variables' => '종류',
+	'sponsorship-dashboard-download-chart' => '도표를 .png 파일로 내려받기',
+	'sponsorship-dashboard-from-checkbox-show-trends' => '추세 그래프로 표시',
+	'sponsorship-dashboard-download-csv' => 'CSV 파일로 내려받기',
+	'sponsorship-dashboard-select-all' => '모두 선택',
+	'sponsorship-dashboard-deselect-all' => '모두 선택 해제',
+	'sponsorship-dashboard-download' => '추가 동작',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
@@ -2794,7 +2791,7 @@ $messages['nb'] = array(
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'sponsorship-dashboard' => '[[Special:SponsorshipDashboard|Speciale pagina]] sponsoringsgerelateerde statistieken',
+	'sponsorship-dashboard' => 'aantal topresultaten',
 	'sponsorship-dashboard-serie-A' => 'Totale aantal geregistreerde bewerkers in huidige maand (alle naamruimten)',
 	'sponsorship-dashboard-serie-B' => 'Totale aantal geregistreerde bewerkers in huidige maand (inhoudsnaamruimten)',
 	'sponsorship-dashboard-serie-C' => 'Aantal geregistreerde bewerkers dat in huidige maand meer dan vijf bewerkingen heeft gemaakt (inhoudsnaamruimten)',
@@ -2858,9 +2855,9 @@ $messages['nl'] = array(
 	'sponsorship-dashboard-description-activity' => 'Gebruikersactiviteit per maand',
 	'sponsorship-dashboard-description-engagement' => 'Totaal aantal uren besteed per dag',
 	'sponsorship-dashboard-description-participation' => 'Unieke bewerkers per maand',
-	'sponsorship-dashboard-description-source' => 'Hoe uw gebruikers uw wiki vinden',
+	'sponsorship-dashboard-description-source' => 'Hoe je gebruikers je wiki vinden',
 	'sponsorship-dashboard-description-competitors' => 'Verkeer van de concurrentie',
-	'sponsorship-dashboard-description-interests' => "Wiki's die uw gebruikers ook bezoeken",
+	'sponsorship-dashboard-description-interests' => "Wiki's die jouw gebruikers ook bezoeken",
 	'sponsorship-dashboard-description-keywords' => 'Trefwoorden gebruikt op zoekmachines',
 	'sponsorship-dashboard-description-visitors' => 'Nieuwe en terugkerende bezoekers',
 	'sponsorship-dashboard-description-traffic' => "Bekeken pagina's",
@@ -2888,7 +2885,7 @@ $messages['nl'] = array(
 	'sponsorship-dashboard-from-label' => 'Begindatum',
 	'sponsorship-dashboard-to-label' => 'Einddatum',
 	'sponsorship-dashboard-error-nodataforcurrentweek' => 'Fout: er zijn geen gegevens gevonden voor de huidige week',
-	'not-allowed' => 'U hebt geen rechten om deze pagina te bekijken',
+	'not-allowed' => 'Je hebt geen rechten om deze pagina te bekijken',
 	'sponsorshipdashboard' => 'Sponsoringdashboard',
 	'sponsorship-dashboard-city-select' => 'Selecteer een Wikia-hub:',
 	'sponsorship-dashboard-report-01' => 'Gebruikersbetrokkenheid',
@@ -2909,7 +2906,7 @@ $messages['nl'] = array(
 	'sponsorship-dashboard-user-name' => 'Gebruikersnaam',
 	'sponsorship-dashboard-user-type' => 'Gebruikerstype',
 	'sponsorship-dashboard-report-new' => 'nieuwe rapportage',
-	'sponsorship-dashboard-description' => 'Beschrijving',
+	'sponsorship-dashboard-description' => 'Hoe je gebruikers je wiki vinden',
 	'sponsorship-dashboard-users-user-id' => 'Gebruikers-ID',
 	'sponsorship-dashboard-users-name' => 'Naam',
 	'sponsorship-dashboard-users-status' => 'Uitgeschakeld',
@@ -4099,6 +4096,14 @@ $messages['tt-cyrl'] = array(
 	'sponsorship-dashboard-empty-description' => '$1',
 );
 
+/** Tati (Tati)
+ * @author Erdemaslancan
+ */
+$messages['ttt'] = array(
+	'sponsorship-dashboard-user-type-0' => 'WikiaKarber',
+	'sponsorship-dashboard-empty-description' => '$1',
+);
+
 /** Vietnamese (Tiếng Việt)
  * @author Xiao Qiao
  * @author XiaoQiaoGrace
@@ -4141,4 +4146,3 @@ $messages['zh-hans'] = array(
 	'sponsorship-dashboard-report-date-daily' => '每日',
 	'sponsorship-dashboard-compleat' => '%已完成',
 );
-

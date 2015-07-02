@@ -14,26 +14,16 @@
 $messages = array();
 
 $messages['en'] = array(
-	'interwikiedit-desc'            => 'Special:InterwikiEdit for web-based handling of interwiki links',
-	'interwikiedit'                 => 'Interwiki Editor',
-	'iwedit-title'                  => 'Interwiki Editor',
-	'iwedit-language-interwikis'    => 'language interwikis only',
-	'iwedit-all-interwikis'         => 'all interwikis',
-	'iwedit-update'                 => 'Update',
-	'iwedit-error'                  => 'An error occurred.',
-	'iwedit-success'                => 'Link creation successful.',
-	'iwedit-local'                  => 'Local-only interwiki? (i.e. not global)',
-	'iwedit-trans'                  => 'Enable scary transclusion',
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author LWChris
- * @author Translationista
- */
-$messages['qqq'] = array(
-	'interwikiedit-desc' => '{{desc}}',
-	'iwedit-update' => '{{Identical|Update}}',
+	'interwikiedit-desc' => 'Special:InterwikiEdit for web-based handling of interwiki links',
+	'interwikiedit' => 'Interwiki Editor',
+	'iwedit-title' => 'Interwiki Editor',
+	'iwedit-language-interwikis' => 'language interwikis only',
+	'iwedit-all-interwikis' => 'all interwikis',
+	'iwedit-update' => 'Update',
+	'iwedit-error' => 'An error occurred.',
+	'iwedit-success' => 'Link creation successful.',
+	'iwedit-local' => 'Local-only interwiki? (i.e. not global)',
+	'iwedit-trans' => 'Enable scary transclusion',
 );
 
 /** Afrikaans (Afrikaans)
@@ -377,8 +367,8 @@ $messages['ja'] = array(
 	'iwedit-language-interwikis' => '言語間インターウィキのみ',
 	'iwedit-all-interwikis' => '全てのインターウィキ',
 	'iwedit-update' => '更新',
-	'iwedit-error' => 'エラーが発生しました。',
-	'iwedit-success' => 'リンクの作成に成功しました。',
+	'iwedit-error' => '<p>エラーが発生しました。</p>',
+	'iwedit-success' => '<p>リンクの作成に成功しました。</p>',
 );
 
 /** Kazakh (Cyrillic script) (қазақша (кирил)‎)
@@ -488,7 +478,7 @@ $messages['nb'] = array(
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'interwikiedit' => 'Interwikitabel bewerken',
+	'interwikiedit' => 'Bewerk interlanguage links',
 	'iwedit-title' => 'Interwikitabel bewerken',
 	'iwedit-language-interwikis' => "alleen taalinterwiki's",
 	'iwedit-all-interwikis' => "alle interwiki's",
@@ -652,7 +642,7 @@ $messages['sr-ec'] = array(
  */
 $messages['sv'] = array(
 	'interwikiedit-desc' => 'Special:InterwikiEdit för webbaserad hantering av interwikilänkar',
-	'interwikiedit' => 'Interwiki-redigerare',
+	'interwikiedit' => 'Redigera interimspråket länkar',
 	'iwedit-title' => 'Interwikiredigerare',
 	'iwedit-language-interwikis' => 'bara språkinterwikis',
 	'iwedit-all-interwikis' => 'alla interwikis',

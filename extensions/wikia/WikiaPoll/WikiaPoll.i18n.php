@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -19,49 +18,10 @@ $messages['en'] = array(
 	'wikiapoll-publish-label' => 'Publish',
 	'wikiapoll-error-duplicate' => 'A poll with that name already exists.',
 	'wikiapoll-error-invalid-title' => 'Question text is invalid.',
-
-	//WikiaMobile
 	'wikiamobile-wikiapoll-open-poll' => 'What do you think?',
 	'wikiamobile-wikiapoll-thanks-voting' => 'Thanks for voting!',
 	'wikiamobile-wikiapoll-poll' => 'Poll',
-	'wikiamobile-wikiapoll-user-voted' => 'You voted for "$1"'
-);
-
-/** Message documentation (Message documentation)
- * @author Liuxinyu970226
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'wikiapoll-desc' => '{{desc}}',
-	'wikiapoll-people-voted' => 'Parameters:
-* $1 is the number of users that have voted.',
-	'wikiapoll-question' => 'Used as a title. Parameter:
-* $1 is the poll question without a question mark.',
-	'wikiapoll-thanks-for-vote' => 'Thank you to voting user.
-{{Identical|Thank}}',
-	'wikiapoll-vote' => 'Button text to vote in a poll.
-{{Identical|Vote}}',
-	'wikiapoll-votes' => 'Parameter:
-* $1 is the number of votes cast.
-{{Identical|Vote}}',
-	'wikiapoll-createpoll-headline' => 'Headline for Create Poll Special Page.
-{{Identical|Create poll}}',
-	'wikiapoll-editpoll-headline' => 'Headline for Edit Poll Special Page
-{{Identical|Edit poll}}',
-	'wikiapoll-question-label' => 'Form Label for Special Page.
-{{Identical|Question}}',
-	'wikiapoll-addnewitem-label' => 'Special Page text next to button for a new item to a poll',
-	'wikiapoll-cancel-label' => 'Cancel button label.
-{{Identical|Cancel}}',
-	'wikiapoll-publish-label' => 'Create/Edit Poll button label for confirming changes.
-{{Identical|Publish}}',
-	'wikiapoll-error-duplicate' => 'Error message when user tries to create a poll that already exists',
-	'wikiapoll-error-invalid-title' => 'Error message when title of poll is invalid/empty',
-	'wikiamobile-wikiapoll-open-poll' => 'Text on a button to open poll in a modal',
-	'wikiamobile-wikiapoll-thanks-voting' => 'Message displayed to a user after voting',
-	'wikiamobile-wikiapoll-poll' => 'Title of a modal.
-{{Identical|Poll}}',
-	'wikiamobile-wikiapoll-user-voted' => 'Message displayed to a user after voting instead of wikiamobile-wikiapoll-open-poll button',
+	'wikiamobile-wikiapoll-user-voted' => 'You voted for "$1"',
 );
 
 /** Afrikaans (Afrikaans)
@@ -193,7 +153,7 @@ $messages['ca'] = array(
 	'wikiapoll-people-voted' => '{{PLURAL:$1| $1 persona| $1 persones}} han votat',
 	'wikiapoll-question' => '$1?',
 	'wikiapoll-thanks-for-vote' => 'Gràcies!',
-	'wikiapoll-vote' => 'Vota!',
+	'wikiapoll-vote' => '{{PLURAL:$1|$1 vot|$1 vots}}',
 	'wikiapoll-votes' => '{{PLURAL:$1|$1 vot|$1 vots}}',
 	'wikiapoll-createpoll-headline' => 'Crea una enquesta',
 	'wikiapoll-editpoll-headline' => "Edita l'enquesta",
@@ -201,7 +161,7 @@ $messages['ca'] = array(
 	'wikiapoll-addnewitem-label' => 'Afegeix un element nou',
 	'wikiapoll-cancel-label' => 'Anuŀla',
 	'wikiapoll-publish-label' => 'Publica',
-	'wikiapoll-error-duplicate' => 'Ja existeix una enquesta amb aquest nom.',
+	'wikiapoll-error-duplicate' => 'Una enquesta amb aquest nom ja existeix.',
 	'wikiapoll-error-invalid-title' => 'Text de la pregunta no és vàlid.',
 	'wikiamobile-wikiapoll-open-poll' => 'Què et sembla?',
 	'wikiamobile-wikiapoll-thanks-voting' => 'Gràcies per votar!',
@@ -255,8 +215,8 @@ $messages['cy'] = array(
  * @author PtM
  */
 $messages['de'] = array(
-	'wikiapoll-desc' => 'Bietet eine einfache Möglichkeit zum Erstellen und Verwalten von Umfragen',
-	'wikiapoll-people-voted' => '{{PLURAL:$1|$1 Person hat|$1 Leute haben}} abgestimmt',
+	'wikiapoll-desc' => 'Diese Erweiterung bietet einen einfache Möglichkeit Umfragen zu erstellen und zu verwalten.',
+	'wikiapoll-people-voted' => '{{PLURAL:$1|$1 Nutzer hat|$1 Nutzer haben}} abgestimmt',
 	'wikiapoll-question' => '$1?',
 	'wikiapoll-thanks-for-vote' => 'Danke!',
 	'wikiapoll-vote' => 'Abstimmen!',
@@ -264,7 +224,7 @@ $messages['de'] = array(
 	'wikiapoll-createpoll-headline' => 'Umfrage erstellen',
 	'wikiapoll-editpoll-headline' => 'Umfrage bearbeiten',
 	'wikiapoll-question-label' => 'Frage',
-	'wikiapoll-addnewitem-label' => 'Neuen Eintrag hinzufügen',
+	'wikiapoll-addnewitem-label' => 'Antwort hinzufügen',
 	'wikiapoll-cancel-label' => 'Abbrechen',
 	'wikiapoll-publish-label' => 'Veröffentlichen',
 	'wikiapoll-error-duplicate' => 'Eine Umfrage mit diesem Namen ist bereits vorhanden.',
@@ -409,7 +369,7 @@ $messages['fr'] = array(
 	'wikiapoll-publish-label' => 'Publier',
 	'wikiapoll-error-duplicate' => 'Un sondage portant ce nom existe déjà.',
 	'wikiapoll-error-invalid-title' => 'L’intitulé de la question n’est pas valide.',
-	'wikiamobile-wikiapoll-open-poll' => "Qu'en pensez-vous ?",
+	'wikiamobile-wikiapoll-open-poll' => 'Que pensez-vous ?',
 	'wikiamobile-wikiapoll-thanks-voting' => "Merci d'avoir voté !",
 	'wikiamobile-wikiapoll-poll' => 'Sondage',
 	'wikiamobile-wikiapoll-user-voted' => 'Vous avez voté pour $1',
@@ -501,7 +461,7 @@ $messages['it'] = array(
 	'wikiapoll-thanks-for-vote' => 'Grazie!',
 	'wikiapoll-vote' => 'Vota!',
 	'wikiapoll-votes' => '{{PLURAL:$1|$1 voto|$1 voti}}',
-	'wikiapoll-createpoll-headline' => 'Crea sondaggio',
+	'wikiapoll-createpoll-headline' => 'Crea Sondaggio',
 	'wikiapoll-editpoll-headline' => 'Modifica sondaggio',
 	'wikiapoll-question-label' => 'Domanda',
 	'wikiapoll-addnewitem-label' => 'Aggiungi nuovo elemento',
@@ -533,7 +493,10 @@ $messages['ko'] = array(
 	'wikiapoll-addnewitem-label' => '새 항목 추가',
 	'wikiapoll-cancel-label' => '취소',
 	'wikiapoll-publish-label' => '저장',
-	'wikiamobile-wikiapoll-poll' => '설문 조사',
+	'wikiamobile-wikiapoll-poll' => '설문조사',
+	'wikiamobile-wikiapoll-open-poll' => '어떻게 생각하세요?',
+	'wikiamobile-wikiapoll-thanks-voting' => '설문에 참여해주셔서 감사합니다.',
+	'wikiamobile-wikiapoll-user-voted' => '$1에 투표하셨습니다.',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)

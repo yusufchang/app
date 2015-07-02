@@ -1,38 +1,19 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
 	'tagsreport' => 'Tags report',
-	'tagsreport-desc' => 'List of articles which use special tags in text (like \'dpl\', \'youtube\')',
-	'tagsreporttitle'  => 'Tags report', 
+	'tagsreport-desc' => "List of articles which use special tags in text (like 'dpl', 'youtube')",
+	'tagsreporttitle' => 'Tags report',
 	'tagsreportselecttag' => 'Select tag:',
 	'tagsreportgo' => 'Show',
-	'tagsreportnotspecify' => 'You haven\'t selected any special tag yet',
+	'tagsreportnotspecify' => "You haven't selected any special tag yet",
 	'tagsreportnoresults' => 'No results found',
 	'tagsreportmainnspace' => 'Main',
 	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|page|pages}})',
 	'tagsreportpagesfound' => 'Found <strong>$1</strong> {{PLURAL:$1|page|pages}}, which contain special tag (DPL, YouTube, etc.)',
 	'tagsreportgenerated' => 'Generated on $1 at $2',
-	'tagsreportpageremoved' => 'Page #$1 has been removed'
-);
-
-/** Message documentation (Message documentation)
- * @author EugeneZelenko
- * @author LWChris
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'tagsreport-desc' => '{{desc}}',
-	'tagsreportselecttag' => '{{Identical|Select tag}}',
-	'tagsreportgo' => '{{Identical|Show}}',
-	'tagsreportmainnspace' => '{{Identical|Main}}',
-	'tagsreportgenerated' => 'Parameters:
-* $1 is a date.
-* $2 is a time.',
-	'tagsreportpageremoved' => 'Shown when page can not be listed because it has been removed.
-* $1 is page id',
+	'tagsreportpageremoved' => 'Page #$1 has been removed',
 );
 
 /** Afrikaans (Afrikaans)
@@ -87,8 +68,8 @@ $messages['be-tarask'] = array(
 	'tagsreportnoresults' => 'Нічога ня знойдзена',
 	'tagsreportmainnspace' => 'Галоўная',
 	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|старонка|старонкі|старонак}})',
-	'tagsreportpagesfound' => '{{PLURAL:$1|Знойдзеная <strong>$1</strong> старонка, якая ўтрымлівае|Знойдзеныя <strong>$1</strong> старонкі, якія ўтрымліваюць|Знойдзеныя <strong>$1</strong> старонак, якія ўтрымліваюць}} спэцыяльныя тэгі (dpl, youtube, і г.д.)', # Fuzzy
-	'tagsreportgenerated' => 'Створаная $1 $2', # Fuzzy
+	'tagsreportpagesfound' => '{{PLURAL:$1|Знойдзеная <strong>$1</strong> старонка, якая ўтрымлівае|Знойдзеныя <strong>$1</strong> старонкі, якія ўтрымліваюць|Знойдзеныя <strong>$1</strong> старонак, якія ўтрымліваюць}} спэцыяльныя тэгі (dpl, youtube, і г.д.)',
+	'tagsreportgenerated' => 'Створаная $1 $2',
 );
 
 /** Bulgarian (български)
@@ -113,7 +94,7 @@ $messages['br'] = array(
 	'tagsreportnoresults' => "N'eus bet kavet disoc'h ebet",
 	'tagsreportmainnspace' => 'Pennañ',
 	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|pajenn|pajennoù}})',
-	'tagsreportpagesfound' => 'Kavet <strong>$1</strong> pajennoù, zo enno ur valizenn arbennik (dpl, youtube, ...)', # Fuzzy
+	'tagsreportpagesfound' => 'Kavet <strong>$1</strong> pajennoù, zo enno ur valizenn arbennik (dpl, youtube, ...)',
 	'tagsreportgenerated' => "Krouet d'an $1 da $2",
 	'tagsreportpageremoved' => 'Lamet eo bet ar bajenn #$1',
 );
@@ -206,7 +187,7 @@ $messages['diq'] = array(
  * @author VegaDark
  */
 $messages['es'] = array(
-	'tagsreport' => 'Informe de etiquetas',
+	'tagsreport' => '<strong>$1</strong> páginas',
 	'tagsreport-desc' => "Lista de artículos que usan etiquetas especiales en el texto (como 'dpl', 'youtube')",
 	'tagsreporttitle' => 'Informe de etiquetas',
 	'tagsreportselecttag' => 'Seleccionar etiqueta:',
@@ -214,7 +195,7 @@ $messages['es'] = array(
 	'tagsreportnotspecify' => 'No has seleccionado ninguna etiqueta especial aún',
 	'tagsreportnoresults' => 'No se han encontrado resultados',
 	'tagsreportmainnspace' => 'Principal',
-	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|página|páginas}})',
+	'tagsreportpages' => '<strong>$1</strong> páginas',
 	'tagsreportpagesfound' => '<strong>$1</strong> {{PLURAL:$1|página encontrada|páginas encontradas}}, que contengan alguna etiqueta especial (dpl, youtube, etc.)',
 	'tagsreportgenerated' => 'Generado el $1 a $2',
 	'tagsreportpageremoved' => 'La página #$1 ha sido borrada',
@@ -296,8 +277,8 @@ $messages['he'] = array(
 	'tagsreportnoresults' => 'לא נמצאו תוצאות',
 	'tagsreportmainnspace' => 'ראשי',
 	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|עמוד|עמודים}})',
-	'tagsreportpagesfound' => "נמצאו <strong>$1</strong>  דפים שכוללים תגים מיוחדים (dpl, youtube, וכו'.)", # Fuzzy
-	'tagsreportgenerated' => 'נוצר ב־$1 $2', # Fuzzy
+	'tagsreportpagesfound' => "נמצאו <strong>$1</strong>  דפים שכוללים תגים מיוחדים (dpl, youtube, וכו'.)",
+	'tagsreportgenerated' => 'נוצר ב־$1 $2',
 );
 
 /** Hungarian (magyar)
@@ -368,7 +349,7 @@ $messages['it'] = array(
  * @author Tommy6
  */
 $messages['ja'] = array(
-	'tagsreport' => 'タグリポート',
+	'tagsreport' => '<strong>$1</strong> のページ',
 	'tagsreporttitle' => 'タグリポート',
 	'tagsreportselecttag' => 'タグを選択:',
 	'tagsreportgo' => '表示',
@@ -395,10 +376,13 @@ $messages['kn'] = array(
 $messages['ko'] = array(
 	'tagsreport' => '태그 목록',
 	'tagsreporttitle' => '태그 목록',
-	'tagsreportnotspecify' => '아직 아무런 특수 태그도 선택하지 않았습니다',
-	'tagsreportpages' => '(<strong>$1</strong>개)',
-	'tagsreportpagesfound' => '특수 태그를 포함하는 문서 <strong>$1</strong>개 발견 (DPL, 유튜브 등)',
+	'tagsreportnotspecify' => '아직 아무 태그도 선택하지 않았습니다',
+	'tagsreportpages' => '특수 태그(DPL, 유튜브 등)를 사용 중인 문서 <strong>$1</strong>개를 찾았습니다.',
+	'tagsreportpagesfound' => '특수 태그(DPL, 유튜브 등)를 사용 중인 문서 <strong>$1</strong>개를 찾았습니다.',
 	'tagsreportgenerated' => '$1 $2에 생성됨',
+	'tagsreportgo' => '보기',
+	'tagsreportnoresults' => '결과를 찾을 수 없습니다',
+	'tagsreportmainnspace' => '일반',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -513,11 +497,11 @@ $messages['nb'] = array(
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'tagsreport' => 'Labelrapportage',
+	'tagsreport' => 'Je hebt nog geen special label geselecteerd.',
 	'tagsreporttitle' => 'Labelrapportage',
 	'tagsreportselecttag' => 'Label selecteren:',
 	'tagsreportgo' => 'Weergeven',
-	'tagsreportnotspecify' => 'U hebt nog geen special label geselecteerd.',
+	'tagsreportnotspecify' => 'Je hebt nog geen special label geselecteerd.',
 	'tagsreportnoresults' => 'Geen resultaten gevonden',
 	'tagsreportmainnspace' => 'Hoofdnaamruimte',
 	'tagsreportpages' => "(<strong>$1</strong> {{PLURAL:$1|pagina|pagina's}})",
@@ -556,16 +540,16 @@ $messages['oc'] = array(
  * @author Sovq
  */
 $messages['pl'] = array(
-	'tagsreport' => 'Rejestr znaczników',
+	'tagsreport' => 'Odnaleziono <strong>$1</strong> {{PLURAL:$1|stronę|strony|stron}}, zawierających specjalne znaczniki (DPL, YouTube, etc.)',
 	'tagsreport-desc' => 'Lista stron używających specjalnych tagów w tekście (jak "dpl" czy "youtube")',
 	'tagsreporttitle' => 'Rejestr znaczników',
 	'tagsreportselecttag' => 'Wybierz znacznik:',
 	'tagsreportgo' => 'Pokaż',
-	'tagsreportnotspecify' => 'Żaden specjalny znacznik nie został jeszcze wybrany',
-	'tagsreportnoresults' => 'Nic nie znaleziono',
-	'tagsreportmainnspace' => 'Główny',
-	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|strona|strony|stron}})',
-	'tagsreportpagesfound' => 'Znaleziono <strong>$1</strong> {{PLURAL:$1|stronę|strony|strony}}, gdzie znajduje się znacznik specjalny (DPL, YouTube, etc.)',
+	'tagsreportnotspecify' => 'Nie wybrano znacznika',
+	'tagsreportnoresults' => 'Brak wyników',
+	'tagsreportmainnspace' => 'Główna',
+	'tagsreportpages' => 'Odnaleziono <strong>$1</strong> {{PLURAL:$1|stronę|strony|stron}}, zawierających specjalne znaczniki (DPL, YouTube, etc.)',
+	'tagsreportpagesfound' => 'Odnaleziono <strong>$1</strong> {{PLURAL:$1|stronę|strony|stron}}, zawierających specjalne znaczniki (DPL, YouTube, etc.)',
 	'tagsreportgenerated' => 'Utworzono $1 o $2',
 	'tagsreportpageremoved' => 'Strona #$1 została usunięta',
 );
@@ -696,16 +680,16 @@ $messages['sr-ec'] = array(
  * @author WikiPhoenix
  */
 $messages['sv'] = array(
-	'tagsreport' => 'Taggrapport',
+	'tagsreport' => 'Hittade <strong>$1</strong> sidor, som innehåller speciella taggar (&lt;dpl&gt;, &lt;youtube&gt;, m.m.)',
 	'tagsreport-desc' => "Lista över artikel som använder specialtaggar i text (som 'dpl', 'youtube')",
 	'tagsreporttitle' => 'Taggrapport',
 	'tagsreportselecttag' => 'Välj tagg:',
 	'tagsreportgo' => 'Visa',
-	'tagsreportnotspecify' => 'Du har inte valt någon speciell tagg ännu',
+	'tagsreportnotspecify' => '<i>Du har inte valt någon speciell tagg än</i>',
 	'tagsreportnoresults' => 'Inga resultat hittades',
 	'tagsreportmainnspace' => 'Huvud',
-	'tagsreportpages' => '(<strong>$1</strong> {{PLURAL:$1|sida|sidor}})',
-	'tagsreportpagesfound' => 'Hittade <strong>$1</strong> {{PLURAL:$1|sida|sidor}}, som innehåller speciella taggar (DPL, YouTube, etc.)',
+	'tagsreportpages' => 'Hittade <strong>$1</strong> sidor, som innehåller speciella taggar (&lt;dpl&gt;, &lt;youtube&gt;, m.m.)',
+	'tagsreportpagesfound' => 'Hittade <strong>$1</strong> sidor, som innehåller speciella taggar (&lt;dpl&gt;, &lt;youtube&gt;, m.m.)',
 	'tagsreportgenerated' => 'Skapad den $1, $2',
 	'tagsreportpageremoved' => 'Sidan #$1 har tagits bort',
 );

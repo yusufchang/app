@@ -11,16 +11,6 @@ $messages['en'] = array(
 	'emailext-blogpost-unfollow-text' => "No longer interested in receiving these updates? Click [$1 here] to unfollow $2's blog on {{SITENAME}}.",
 );
 
-$messages['qqq'] = array(
-	'emailext-blogpost-user-subject' => 'Subject for the user blog email being sent.  $1 is the user who wrote the post and $2 is the post title',
-	'emailext-blogpost-list-subject' => 'Subject for the blog list email being sent.  $1 is the user who wrote the post, $2 is the blog listing page name and $3 is the post title',
-	'emailext-blogpost-user-summary' => "Information about the post on a user's blog.  $1 is a link to the user's blog page and $2 is the user's name",
-	'emailext-blogpost-list-summary' => 'Information about the post on the blog listing.  $1 is the link to the listing and $2 is the title of the blog listing page.',
-	'emailext-blogpost-link-label' => 'Label text for a button a user can click to view the post',
-	'emailext-blogpost-view-all' => 'A link to the listing page with all recent posts.  $1 is the link itself, and must remain at the beginning of the string with a space after it and $2 is the name of the listing page',
-	'emailext-blogpost-unfollow-text' => 'Asks the user if they want to stop following this blog and provides a link to unfollow the blog. $1 -> unfollow url, $2 blog author name',
-);
-
 $messages['de'] = array(
 	'emailext-blogpost-user-subject' => '$1 hat einen neuen Beitrag geschrieben: $2',
 	'emailext-blogpost-list-subject' => '$1 hat auf $2 einen neuen Beitrag geschrieben: $3',
@@ -121,13 +111,32 @@ $messages['zh-hans'] = array(
 	'emailext-blogpost-unfollow-text' => '不想再接收这类更新内容？点击[$1 这里]取消对{{SITENAME}}上$2页面的关注。',
 );
 
-$messages['zh-tw'] = array(
-	'emailext-blogpost-user-subject' => '$1 撰寫了「$2」的新文章',
-	'emailext-blogpost-list-subject' => '$1在$2頁面撰寫了「$3」的新文章',
-	'emailext-blogpost-user-summary' => '在[{{SERVER}} {{SITENAME}}]網站的[$1 $2的部落格]頁面有一篇新文章。快來看看吧！',
-	'emailext-blogpost-list-summary' => '在[{{SERVER}} {{SITENAME}}]網站的 [$1 $2]頁面有一篇新文章。快來看看吧！',
+$messages['zh-hant'] = array(
+	'emailext-blogpost-user-subject' => '$1 撰寫了標題為「$2」的新文章。',
+	'emailext-blogpost-list-subject' => '$1在$2頁面撰寫了標題為「$3」的新文章',
+	'emailext-blogpost-user-summary' => '在[{{SERVER}} {{SITENAME}}]的[$1 $2的網誌]頁面有一篇新文章。快來看看吧！',
+	'emailext-blogpost-list-summary' => '在[{{SERVER}} {{SITENAME}}]的 [$1 $2]頁面有一篇新文章。快來看看吧！',
 	'emailext-blogpost-link-label' => '閱讀全文',
-	'emailext-blogpost-view-all' => '[$1 最近在$2的所有部落格文章]',
-	'emailext-blogpost-unfollow-text' => '不想再收到這類更新内容？点击[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
+	'emailext-blogpost-view-all' => '[$1 最近在$2的所有網誌文章]',
+	'emailext-blogpost-unfollow-text' => '不想再收到這類更新内容？點擊[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
 );
 
+$messages['zh-hk'] = array(
+	'emailext-blogpost-user-subject' => '$1 撰寫了標題為「$2」的新文章。',
+	'emailext-blogpost-list-subject' => '$1在$2頁面撰寫了標題為「$3」的新文章',
+	'emailext-blogpost-user-summary' => '在[{{SERVER}} {{SITENAME}}]的[$1 $2的網誌]頁面有一篇新文章。快來看看吧！',
+	'emailext-blogpost-list-summary' => '在[{{SERVER}} {{SITENAME}}]的 [$1 $2]頁面有一篇新文章。快來看看吧！',
+	'emailext-blogpost-link-label' => '閱讀全文',
+	'emailext-blogpost-view-all' => '[$1 最近在$2的所有網誌文章]',
+	'emailext-blogpost-unfollow-text' => '不想再收到這類更新内容？點擊[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
+);
+
+$messages['zh-tw'] = array(
+	'emailext-blogpost-user-subject' => '$1 撰寫了標題為「$2」的新文章。',
+	'emailext-blogpost-list-subject' => '$1在$2頁面撰寫了「$3」的新文章',
+	'emailext-blogpost-user-summary' => '在[{{SERVER}} {{SITENAME}}]的[$1 $2的網誌]頁面有一篇新文章。快來看看吧！',
+	'emailext-blogpost-list-summary' => '在[{{SERVER}} {{SITENAME}}]的 [$1 $2]頁面有一篇新文章。快來看看吧！',
+	'emailext-blogpost-link-label' => '閱讀全文',
+	'emailext-blogpost-view-all' => '[$1 最近在$2的所有網誌文章]',
+	'emailext-blogpost-unfollow-text' => '不想再收到這類更新内容？點擊[$1 這裡]取消對{{SITENAME}}上$2頁面的關注。',
+);

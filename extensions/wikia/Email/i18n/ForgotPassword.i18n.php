@@ -10,15 +10,6 @@ $messages['en'] = array(
 	'emailext-password-signature' => 'The Wikia Community Team',
 );
 
-$messages['qqq'] = array(
-	'emailext-password-subject' => 'Subject of the forgot password email',
-	'emailext-password-summary' => 'Summary text for the forgot password email',
-	'emailext-password-intro' => 'Text shown just above the new temporary password',
-	'emailext-password-unrequested' => "Instructions for what to do if you didn't request a new password",
-	'emailext-password-questions' => 'Text on how to contact support.  The link here should be updated to point at the Wikia contact page for the appropriate language',
-	'emailext-password-signature' => 'The signature for this email',
-);
-
 $messages['de'] = array(
 	'emailext-password-subject' => 'Wikia-Passwort zurücksetzen',
 	'emailext-password-summary' => 'Du scheinst Probleme bei der Anmeldung zu haben. Das tut uns wirklich leid! Wir würden dir gerne einfach dein Passwort schicken, aber aus Sicherheitsgründen musst du dich erst mit einem temporären Passwort anmelden.',
@@ -100,13 +91,27 @@ $messages['ru'] = array(
 	'emailext-password-signature' => 'Команда сообщества Викия',
 );
 
+$messages['zh'] = array(
+	'emailext-password-questions' => '有疑问或顾虑？请随时[http://zh.community.wikia.com/wiki/Special:Contact/account-issue 联系我们]。',
+);
+
 $messages['zh-hans'] = array(
 	'emailext-password-subject' => '请重置您的Wikia密码',
 	'emailext-password-summary' => '看来您好像无法登录。真抱歉！尽管我们很想给您发送密码，但为了安全起见，我们需要您用一个临时密码登录。',
 	'emailext-password-intro' => '请在下方查看临时密码：',
 	'emailext-password-unrequested' => '如果您没有申请新密码，不用担心！您的帐户很安全。您可以忽略此邮件并用您的旧密码登入Wikia。',
-	'emailext-password-questions' => '有疑问或顾虑？请随时http://zh.community.wikia.com/wiki/Special:联系我们/account-issue]。',
+	'emailext-password-questions' => '有疑问或顾虑？请随时[http://zh.community.wikia.com/wiki/Special:Contact/account-issue 联系我们]。',
 	'emailext-password-signature' => 'Wikia社区团队',
+);
+
+$messages['zh-hant'] = array(
+	'emailext-password-questions' => '有疑問或顧慮？請隨時[http://zh.community.wikia.com/wiki/Special:Contact/account-issue 聯繫我們]。',
+	'emailext-password-signature' => 'Wikia社區團隊',
+);
+
+$messages['zh-hk'] = array(
+	'emailext-password-questions' => '有疑問或顧慮？請隨時[http://zh.community.wikia.com/wiki/Special:Contact/account-issue 聯繫我們]。',
+	'emailext-password-signature' => 'Wikia社區團隊',
 );
 
 $messages['zh-tw'] = array(
@@ -114,7 +119,6 @@ $messages['zh-tw'] = array(
 	'emailext-password-summary' => '看起來你好象在登入時遇到麻煩。真抱歉！儘管我們很想要給你發送密碼，但出於安全方面的考量，我們需要你使用臨時密碼登入。',
 	'emailext-password-intro' => '請查看下面的臨時密碼：',
 	'emailext-password-unrequested' => '如果你沒有申請新的密碼，不要擔心！您的帳戶安全而可靠。你可以忽略這封電子郵件，並用你的舊密碼登入Wikia。',
-	'emailext-password-questions' => '有問題或疑慮？請隨時[http://zh.community.wikia.com/wiki/Special:聯繫我們/account-issue]。',
+	'emailext-password-questions' => '有疑問或顧慮？請隨時[http://zh.community.wikia.com/wiki/Special:Contact/account-issue 聯繫我們]。',
 	'emailext-password-signature' => 'Wikia社區團隊',
 );
-

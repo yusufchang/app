@@ -9,8 +9,8 @@
 $messages = array();
 
 $messages['en'] = array(
-	'centralhelpsearch-desc'        => 'Allow inclusion of a form to search Community Central Help',
-	'centralhelpsearch-placeholder' => 'Search Help...'
+	'centralhelpsearch-desc' => 'Allow inclusion of a form to search Community Central Help',
+	'centralhelpsearch-placeholder' => 'Search Help...',
 );
 
 /** Arabic (العربية)
@@ -170,7 +170,7 @@ $messages['id'] = array(
  */
 $messages['it'] = array(
 	'centralhelpsearch-desc' => "Permetti l'inclusione di un form per cercare su Community Central Help",
-	'centralhelpsearch-placeholder' => 'Cerca aiuto&hellip;',
+	'centralhelpsearch-placeholder' => 'Cerca aiuto...',
 );
 
 /** Japanese (日本語)
@@ -261,7 +261,7 @@ $messages['oc'] = array(
  */
 $messages['pl'] = array(
 	'centralhelpsearch-desc' => 'Umożliwia włączenie formularza służącego do wyszukiwania w Centrum Pomocy',
-	'centralhelpsearch-placeholder' => 'Wyszukiwanie w Centrum Pomocy...',
+	'centralhelpsearch-placeholder' => 'Przeszukaj strony pomocy...',
 );
 
 /** Piedmontese (Piemontèis)

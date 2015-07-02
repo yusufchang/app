@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -10,14 +9,12 @@ $messages['en'] = array(
 	'imagereview-header-rejected' => 'Rejected images awaiting staff review',
 	'imagereview-header-invalid' => 'Invalid images awaiting staff review',
 	'imagereview-noresults' => 'No images found.',
-
 	'imagereview-state-0' => 'Unreviewed',
 	'imagereview-state-1' => 'In review',
 	'imagereview-state-2' => 'Approved',
 	'imagereview-state-3' => 'Deleted',
 	'imagereview-state-4' => 'Rejected',
 	'imagereview-state-5' => 'Questionable',
-
 	'imagereview-label-ok' => 'Mark as OK',
 	'imagereview-label-delete' => 'Delete',
 	'imagereview-label-questionable' => 'Questionable',
@@ -25,7 +22,6 @@ $messages['en'] = array(
 	'imagereview-option-ok' => 'OK',
 	'imagereview-option-delete' => 'Del',
 	'imagereview-option-questionable' => 'Q',
-
 	'imagereview-imagepage-header' => 'Image Review history',
 	'imagereview-imagepage-not-in-queue' => 'Warning: this image has not been added to the review queue.',
 	'imagereview-imagepage-table-header-reviewer' => 'Reviewer',
@@ -33,17 +29,64 @@ $messages['en'] = array(
 	'imagereview-imagepage-table-header-time' => 'Time',
 );
 
-$messages['qqq'] = array(
-	'imagereview-desc' => '{{desc}}',
-	'imagereview-label-ok' => 'Label tooltip content for option to mark an image as OK.',
-	'imagereview-label-delete' => 'Label tooltip content for option to mark an image for deletion.',
-	'imagereview-label-questionable' => 'Label tooltip content for option to mark an image as questionable.',
-	'imagereview-gotoimage' => 'Tooltip for link to go to image page',
-	'imagereview-option-ok' => 'Text of option to mark an image as OK.',
-	'imagereview-option-delete' => 'Text of option to mark an image for deletion.',
-	'imagereview-option-questionable' => 'Text of option to mark an image as questionable.',
+$messages['de'] = array(
+	'imagereview-reason' => 'Verletzung der [[wikia:Terms of Use|Nutzungsbedingungen]] von Wikia',
+	'imagereview-header' => 'Bilder, die noch nicht überprüft wurden',
+	'imagereview-header-questionable' => 'Fragwürdige Bilder, die von den Mitarbeitern noch geprüft werden müssen',
+	'imagereview-header-rejected' => 'Zurückgewiesene Bilder, die von Mitarbeitern noch überprüft werden müssen',
+	'imagereview-noresults' => 'Keine Bilder gefunden.',
+	'imagereview-state-0' => 'Noch nicht überprüft',
+	'imagereview-state-1' => 'Wird überprüft',
+	'imagereview-state-2' => 'Zugelassen',
+	'imagereview-state-3' => 'Gelöscht',
+	'imagereview-state-4' => 'Zurückgewiesen',
+	'imagereview-state-5' => 'Fragwürdig',
+	'imagereview-imagepage-header' => 'Bilderüberprüfungsversionsgeschichte',
+	'imagereview-imagepage-not-in-queue' => 'Warnung: Dieses Bild wurde noch nicht zur Überprüfung durch einen Mitarbeiter übermittelt',
+	'imagereview-imagepage-table-header-reviewer' => 'Prüfer',
+	'imagereview-imagepage-table-header-state' => 'Status',
+	'imagereview-imagepage-table-header-time' => 'Datum',
+);
+
+$messages['fr'] = array(
+	'imagereview-reason' => "En violation des [[wikia:Terms of Use|Conditions d'utilisation]] de Wikia",
+	'imagereview-header' => 'Images en attente de vérification',
+	'imagereview-header-questionable' => 'Images discutables en attente de vérification par le staff',
+	'imagereview-header-rejected' => 'Images rejetées en attente de vérification par le staff',
+	'imagereview-noresults' => 'Aucune image trouvée.',
+	'imagereview-state-0' => 'Non vérifiée',
+	'imagereview-state-1' => 'En cours de vérification',
+	'imagereview-state-2' => 'Approuvée',
+	'imagereview-state-3' => 'Supprimée',
+	'imagereview-state-4' => 'Rejetée',
+	'imagereview-state-5' => 'Discutable',
+	'imagereview-imagepage-header' => "Historique des vérifications d'image",
+	'imagereview-imagepage-not-in-queue' => "Attention : cette image n'a pas été ajoutée à la file des vérifications.",
+	'imagereview-imagepage-table-header-reviewer' => 'Vérifiée par',
+	'imagereview-imagepage-table-header-state' => 'Statut',
+	'imagereview-imagepage-table-header-time' => 'Date',
 );
 
 $messages['pl'] = array(
-	'imagereview-reason' => "Naruszenie [[wikia:Terms of Use|Regulaminu]] serwisu Wikia",
+	'imagereview-reason' => 'Naruszenie [[w:c:pl:Zasady Użytkowania|Zasad Użytkowania]] Wikii',
+	'imagereview-header' => 'Obrazy oczekujące na przegląd',
+	'imagereview-header-questionable' => 'Wątpliwe obrazy czekające na przegląd',
+	'imagereview-header-rejected' => 'Odrzucone obrazy czekające na przegląd',
+	'imagereview-noresults' => 'Nie znaleziono obrazów.',
+	'imagereview-state-0' => 'Nie przejrzany',
+	'imagereview-state-1' => 'W trakcie przeglądu',
+	'imagereview-state-2' => 'Zatwierdzony',
+	'imagereview-state-3' => 'Usunięty',
+	'imagereview-state-4' => 'Odrzucony',
+	'imagereview-state-5' => 'Wątpliwy',
+	'imagereview-imagepage-header' => 'Historia przeglądu obrazów',
+	'imagereview-imagepage-not-in-queue' => 'Uwaga: ten obraz nie został dodany do kolejki obrazów oczekujących na przegląd.',
+	'imagereview-imagepage-table-header-reviewer' => 'Przeglądający',
+	'imagereview-imagepage-table-header-state' => 'Status',
+	'imagereview-imagepage-table-header-time' => 'Data',
+);
+
+$messages['ru'] = array(
+	'imagereview-reason' => 'Нарушение [[wikia:Terms of Use|Условий использования]]',
+	'imagereview-noresults' => 'Изображения не найдены.',
 );

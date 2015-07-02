@@ -13,33 +13,12 @@ $messages['en'] = array(
 	'quickstats-header-views' => 'Views',
 	'quickstats-header-edits' => 'Edits',
 	'quickstats-header-photos' => 'Photos',
-	'quickstats-date-format' => 'M d',	// follow this guide: http://php.net/manual/en/function.date.php
+	'quickstats-date-format' => 'M d',
 	'quickstats-totals-label' => 'Totals',
 	'quickstats-see-more-stats-link' => '[[Special:Insights|See more stats]]',
 	'quickstats-number-shortening' => '$1K',
 	'quickstats-number-shortening-millions' => '$1M',
 	'quickstats-number-shortening-billions' => '$1B',
-);
-
-/** Message documentation (Message documentation)
- * @author Caliburn
- * @author Shirayuki
- * @author 아라
- */
-$messages['qqq'] = array(
-	'quickstats-header-label' => 'Header of the "Quick Stats" section of the [[Special:AdminDashboard|Admin Dashboard]].',
-	'quickstats-header-date' => '{{Identical|Date}}',
-	'quickstats-header-views' => '{{Identical|View}}',
-	'quickstats-header-edits' => '{{Identical|Edit}}',
-	'quickstats-header-photos' => '{{Identical|Photo}}',
-	'quickstats-date-format' => 'Follow this guide: http://php.net/manual/en/function.date.php.',
-	'quickstats-totals-label' => '{{Identical|Total}}',
-	'quickstats-see-more-stats-link' => 'Link to [[Special:WikiStats]] under the "quick stats" chart in the [[Special:AdminDashboard|Admin Dashboard]].',
-	'quickstats-number-shortening' => 'This is a shortend number abbreviation shown in a stats table. Number larger than 10.000 are rendered using this message (as thousands rounded up to the first decimal fraction). K stands for thousands (1.000)
-
-{{Identical|$1k}}',
-	'quickstats-number-shortening-millions' => 'This is a shortend number abbreviation shown in a stats table. Number between 1.000.000 and 999.999.999.999 are rendered using this message (as millions rounded up to the first decimal fraction). M stands for millions (1.000.000)',
-	'quickstats-number-shortening-billions' => 'This is a shortend number abbreviation shown in a stats table. Number larger than 1.000.000.000 are rendered using this message (as billions rounded up to the first decimal fraction). B stands for billions (1.000.000.000)',
 );
 
 /** Afrikaans (Afrikaans)
@@ -462,14 +441,14 @@ $messages['eo'] = array(
  * @author VegaDark
  */
 $messages['es'] = array(
-	'quickstats-header-label' => 'Estadísticas rápidas',
+	'quickstats-header-label' => 'Panel de información rápida',
 	'quickstats-header-date' => 'Fecha',
-	'quickstats-header-views' => 'Páginas vistas',
+	'quickstats-header-views' => 'Impresiones',
 	'quickstats-header-edits' => 'Ediciones',
 	'quickstats-header-photos' => 'Imágenes',
 	'quickstats-totals-label' => 'Total',
-	'quickstats-see-more-stats-link' => '[[Special:Insights|Ver más estadísticas]]',
-	'quickstats-number-shortening' => '$1K',
+	'quickstats-see-more-stats-link' => '[[Special:WikiStats|Ver más estadísticas]]',
+	'quickstats-number-shortening' => '$1m',
 	'quickstats-number-shortening-millions' => '$1M',
 	'quickstats-number-shortening-billions' => '$1B',
 );
@@ -573,6 +552,7 @@ $messages['fr'] = array(
 	'quickstats-number-shortening' => '$1K',
 	'quickstats-number-shortening-millions' => '$1M',
 	'quickstats-number-shortening-billions' => '$1 Mrd',
+	'quickstats-date-format' => 'd M',
 );
 
 /** Western Frisian (Frysk)
@@ -664,7 +644,7 @@ $messages['hi'] = array(
 	'quickstats-header-edits' => 'संपादन',
 	'quickstats-header-photos' => 'तस्वीरें',
 	'quickstats-totals-label' => 'योग',
-	'quickstats-see-more-stats-link' => '[[विशिष्ट:विकीआँकड़े|देखना अधिक आँकड़े]]', # Fuzzy
+	'quickstats-see-more-stats-link' => '[[विशिष्ट:विकीआँकड़े|देखना अधिक आँकड़े]]',
 	'quickstats-number-shortening' => '$1के',
 	'quickstats-number-shortening-millions' => '$1मिलियन',
 	'quickstats-number-shortening-billions' => '$1बिलियन',
@@ -753,16 +733,17 @@ $messages['inh'] = array(
  * @author Ximo17
  */
 $messages['it'] = array(
-	'quickstats-header-label' => 'Quick Stats - Statistiche',
+	'quickstats-header-label' => 'Statistiche in breve',
 	'quickstats-header-date' => 'Data',
-	'quickstats-header-views' => 'Visite',
+	'quickstats-header-views' => 'Visualizzazioni',
 	'quickstats-header-edits' => 'Modifiche',
-	'quickstats-header-photos' => 'Foto',
+	'quickstats-header-photos' => 'Immagini',
 	'quickstats-totals-label' => 'Totale',
-	'quickstats-see-more-stats-link' => '[[Special:Insights|Visualizza statistiche complete]]',
+	'quickstats-see-more-stats-link' => '[[Special:WikiStats|Vedi altre statistiche]]',
 	'quickstats-number-shortening' => '$1K',
 	'quickstats-number-shortening-millions' => '$1 mln',
 	'quickstats-number-shortening-billions' => '$1B',
+	'quickstats-date-format' => 'd M',
 );
 
 /** Japanese (日本語)
@@ -777,7 +758,7 @@ $messages['ja'] = array(
 	'quickstats-header-photos' => '新規画像数',
 	'quickstats-date-format' => 'n月j日',
 	'quickstats-totals-label' => '合計',
-	'quickstats-see-more-stats-link' => '[[Special:Insights|さらに詳しい統計をみる]]',
+	'quickstats-see-more-stats-link' => '[[Special:WikiStats|さらに詳しい統計をみる]]',
 	'quickstats-number-shortening' => '$1K',
 	'quickstats-number-shortening-millions' => '$1M',
 	'quickstats-number-shortening-billions' => '$1B',
@@ -816,14 +797,14 @@ $messages['kn'] = array(
  * @author 한글화담당
  */
 $messages['ko'] = array(
-	'quickstats-header-label' => '간단한 통계',
+	'quickstats-header-label' => '위키 통계',
 	'quickstats-header-date' => '날짜',
-	'quickstats-header-views' => '보기',
+	'quickstats-header-views' => '조회',
 	'quickstats-header-edits' => '편집',
-	'quickstats-header-photos' => '사진',
+	'quickstats-header-photos' => '파일',
 	'quickstats-date-format' => 'M d일',
-	'quickstats-totals-label' => '합계',
-	'quickstats-see-more-stats-link' => '[[Special:Insights|더 많은 통계 보기]]',
+	'quickstats-totals-label' => '총계',
+	'quickstats-see-more-stats-link' => '[[Special:WikiStats|자세히 보기]]',
 	'quickstats-number-shortening' => '$1천',
 	'quickstats-number-shortening-millions' => '$1백만',
 	'quickstats-number-shortening-billions' => '$1B',
@@ -895,7 +876,7 @@ $messages['lrc'] = array(
 	'quickstats-header-edits' => 'ويرايشت',
 	'quickstats-header-photos' => 'عسكيا',
 	'quickstats-totals-label' => 'همه',
-	'quickstats-see-more-stats-link' => '[[Special:ويكی امار|آماريا بيشتر بوينيتو]]', # Fuzzy
+	'quickstats-see-more-stats-link' => '[[Special:ويكی امار|آماريا بيشتر بوينيتو]]',
 	'quickstats-number-shortening' => '$1ك',
 	'quickstats-number-shortening-millions' => '$1 م',
 	'quickstats-number-shortening-billions' => '$1 ب',
@@ -1258,16 +1239,17 @@ $messages['roa-tara'] = array(
  * @author Kuzura
  */
 $messages['ru'] = array(
-	'quickstats-header-label' => 'Статистика Вики',
+	'quickstats-header-label' => 'Статистика вики',
 	'quickstats-header-date' => 'Дата',
 	'quickstats-header-views' => 'Просмотров',
 	'quickstats-header-edits' => 'Правок',
 	'quickstats-header-photos' => 'Фото',
 	'quickstats-totals-label' => 'Итого',
-	'quickstats-see-more-stats-link' => '[[Special:Insights|Ещё статистика]]',
+	'quickstats-see-more-stats-link' => '[[Special:WikiStats|Ещё статистика]]',
 	'quickstats-number-shortening' => '$1K',
 	'quickstats-number-shortening-millions' => '$1милл.',
 	'quickstats-number-shortening-billions' => '$1миллиард',
+	'quickstats-date-format' => 'd M',
 );
 
 /** Sanskrit (संस्कृतम्)

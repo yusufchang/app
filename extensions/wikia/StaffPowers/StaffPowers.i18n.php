@@ -13,15 +13,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'staffpowers-desc' => 'Gives Staff various superpowers like unblockable.',
-	'staffpowers-ipblock-abort' => 'Blocking Wikia Staff, Wikia Helpers, or members of our Volunteer Spam Task Force user team (VSTF) is not possible. Please use the [[Special:Contact|contact form]] to report any issues or problems with our staff.'
-);
-
-/** Message documentation (Message documentation)
- * @author Lloffiwr
- */
-$messages['qqq'] = array(
-	'staffpowers-desc' => '{{desc}}',
-	'staffpowers-ipblock-abort' => "Do not translate (but do add additional text if you like) <nowiki>[[Special:Contact</nowiki>'''|optional additional text'''<nowiki>]]</nowiki>.",
+	'staffpowers-ipblock-abort' => 'Blocking Wikia Staff, Wikia Helpers, or members of our Volunteer Spam Task Force user team (VSTF) is not possible. Please use the [[Special:Contact|contact form]] to report any issues or problems with our staff.',
 );
 
 /** Arabic (العربية)
@@ -53,7 +45,7 @@ $messages['cs'] = array(
  */
 $messages['de'] = array(
 	'staffpowers-desc' => 'Gibt Mitarbeitern verschiedene Superkräfte wie unsperrbar.',
-	'staffpowers-ipblock-abort' => 'Sperren von Wikia-Personal, Wikia-Helfern oder Mitgliedern des VSTF-Teams (Spam-Task-Force-Volunteer) ist nicht möglich. Bitte benutze das [[Special:Contact|Kontaktformular]], um irgendwelche Fragen oder Probleme mit einem unserer Mitarbeiter zu melden.',
+	'staffpowers-ipblock-abort' => 'Dieser Benutzer ist Mitarbeiter von Wikia und kann nicht gesperrt werden. Falls es irgendwelche Problemen gibt, [[Special:Contact|melde dich bei uns]].',
 );
 
 /** Spanish (español)
@@ -62,7 +54,7 @@ $messages['de'] = array(
  */
 $messages['es'] = array(
 	'staffpowers-desc' => 'Otorga al Staff varios privilegios como imbloqueable.',
-	'staffpowers-ipblock-abort' => 'No es posible bloquear al Staff de Wikia, a los Helpers ni a los miembros del VSTF. Por favor utiliza el [[Special:Contact|formulario de contacto]] para informar de cualquier problema con  nuestro staff.',
+	'staffpowers-ipblock-abort' => 'Este usuario es un miembro del staff de Wikia y no puede ser bloqueado. Para problemas con las funcionalidades u otros temas, por favor <a href="/index.php?title=Special:Contact">contacta con nosotros</a>.',
 );
 
 /** French (français)
@@ -71,7 +63,7 @@ $messages['es'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'staffpowers-desc' => 'Donne à l’équipe divers super-pouvoirs comme l’impossibilité de bloquer.',
+	'staffpowers-desc' => "Donne à l’équipe divers super-pouvoirs comme l’impossibilité d'être bloqué.",
 	'staffpowers-ipblock-abort' => 'Bloquer des membres du staff de Wikia, des Assistant ou des membres de l’équipe VSTF n’est pas possible. Veuillez utiliser le [[Special:Contact|formulaire de contact]] pour signaler tout problème avec notre équipe.',
 );
 
@@ -248,5 +240,5 @@ $messages['zh-hans'] = array(
  */
 $messages['zh-hant'] = array(
 	'staffpowers-ipblock-abort' => '您無法封禁Wikia 工作人員、 Wikia Helper或VSTF成員
-，如有問題，請使用[[special:Contact|contact 表單]]向我們的工作人員報告。', # Fuzzy
+，如有問題，請使用[[special:Contact|contact 表單]]向我們的工作人員報告。',
 );

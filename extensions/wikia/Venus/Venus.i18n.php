@@ -13,8 +13,6 @@ $messages['en'] = array(
 	'venus-wikia' => 'Wikia',
 );
 
-$messages['qqq'] = array(
-	'venus-desc' => '{{desc}}',
-	'venus-article-infobox-see-more' => 'Label for button to expand infobox and show all its content',
-	'venus-wikia' => 'Alt and title for Wikia logo link on Global Navigation and Global Footer',
+$messages['fr'] = array(
+	'venus-desc' => 'Apparence Venus pour Wikia',
 );

@@ -6,11 +6,6 @@ $messages['en'] = array(
 	'cookie-policy-notification-message' => 'Wikia uses cookies to give you the best experience on our websites. By continuing to use Wikia, we assume that you accept our use of cookies. [[homepage:Privacy_Policy#Cookies| Read more about cookies]]',
 );
 
-$messages['qqq'] = array(
-	'cookie-policy-description' => 'Description for this extension.',
-	'cookie-policy-notification-message' => 'Note letting users know that we use cookies on our site. Per European Union law.',
-);
-
 $messages['de'] = array(
 	'cookie-policy-description' => 'In der EU gibt es ein Gesetz, dass von uns verlangt, Benutzer unserer Webseite bei ihrem ersten Besuch darüber zu informieren, dass wir Cookies nutzen. Diese Erweiterung ermöglicht es Wikia diesem Gesetz Folge zu leisten.',
 	'cookie-policy-notification-message' => 'Durch das weitere Nutzen von Wikia erklärst du dich mit der Nutzung von Cookies einverstanden. [http://de.wikia.com/Datenschutz#Cookies Weitere Informationen]',
@@ -23,7 +18,7 @@ $messages['es'] = array(
 
 $messages['fr'] = array(
 	'cookie-policy-description' => "Dans l'Union européenne, une loi stipule que l'utilisateur doit être averti de l'utilisation des cookies sur un site lorsqu'il le visite pour la première fois. Cette extension permet à Wikia d'être en conformité avec cette loi.",
-	'cookie-policy-notification-message' => "Wikia utilise des cookies pour vous offrir la meilleure expérience sur notre site. En continuant d'utiliser Wikia, nous considérons que vous acceptez que nous utilisions des cookies. [[homepage:fr:Politique de confidentialité#Cookies|En savoir plus sur les cookies]]",
+	'cookie-policy-notification-message' => "Nous utilisons des cookies pour vous offrir la meilleure expérience possible. En continuant d'utiliser Wikia, vous acceptez que nous utilisions des cookies. [[homepage:fr:Politique de confidentialité#Cookies|En savoir plus sur les cookies]]",
 );
 
 $messages['it'] = array(
@@ -43,7 +38,7 @@ $messages['nl'] = array(
 
 $messages['pl'] = array(
 	'cookie-policy-description' => 'Prawo europejskie wymaga informowania użytkowników przy pierwszej wizycie o tym w jaki sposób są wykorzystywane ciasteczka. To rozszerzenie pozwala Wikii na działanie w zgodzie z tym prawem.',
-	'cookie-policy-notification-message' => 'Wikia używa ciasteczek, aby dostarczyć Ci najlepsze doznania na naszych stronach. Jeśli dalej będziesz korzystać w Wikii uznamy, że zgadzasz nie na nasze wykorzystanie cookies. [[w:c:pl:Polityka Prywatności#Cookies|Dowiedz się więcej]]',
+	'cookie-policy-notification-message' => 'Wikia używa ciasteczek, aby zwiększyć wygodę korzystania z naszych stron. Jeśli dalej będziesz korzystać z Wikii uznamy, że zgadzasz się na nasze wykorzystywanie ciasteczek. [[w:c:pl:Polityka Prywatności#Cookies|Dowiedz się więcej]]',
 );
 
 $messages['pt'] = array(
@@ -53,7 +48,7 @@ $messages['pt'] = array(
 
 $messages['ru'] = array(
 	'cookie-policy-description' => 'В Европейском союзе бы принят закон о том, что когда пользователь впервые посещает веб-сайт, его должны уведомить о рассылке cookies. Это расширение выполняет требование данного закона внутри Викия.',
-	'cookie-policy-notification-message' => 'Викия использует cookies, чтобы продолжать совершенствоваться и предлагать пользователям самый современный контент. Поэтому, посещая Викия, вы соглашаетесь на рассылку cookies. [[homepage:Privacy_Policy#Cookies|Подробнее о cookies]]',
+	'cookie-policy-notification-message' => 'Мы используем cookies, чтобы сделать Вашу работу с Викия простой и удобной. Поэтому, посещая Викия, вы соглашаетесь на использование cookies. [[homepage:Privacy_Policy#Cookies|Подробнее о cookies]]',
 );
 
 $messages['zh-hans'] = array(
@@ -65,4 +60,3 @@ $messages['zh-tw'] = array(
 	'cookie-policy-description' => '在歐盟國家，法律規定網路網站點在對第一次進行網路訪問的使用者記錄cookie的時候，需要對其進行告知。這項擴展功能允許Wikia符合相關的法律規定。',
 	'cookie-policy-notification-message' => 'Wikia使用cookie提供最好的用戶使用經驗。通過不斷地訪問Wikia，您將同意接受使用我們的cookie。[[homepage:Privacy_Policy#Cookies|了解更多cookie的相關內容]]',
 );
-

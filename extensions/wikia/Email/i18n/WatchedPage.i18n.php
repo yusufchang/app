@@ -20,24 +20,6 @@ $messages['en'] = array(
 	'emailext-watchedpage-view-all-changes' => "[$1 View all changes to '''$2''']",
 );
 
-$messages['qqq'] = array(
-	'emailext-watchedpage-article-edited-subject' => 'Subject line for watched article email when article was edited. $1 -> article name, $2 -> username of user who edited the article',
-	'emailext-watchedpage-article-edited-subject-anonymous' => 'Subject line for watched article email edited by an anonymous user. $1 -> article name',
-	'emailext-watchedpage-article-unprotected-subject' => 'Subject line for watched article email when article was unprotected. $1 -> article name, $2 -> username of user who edited the article',
-	'emailext-watchedpage-article-renamed-subject' => 'Subject line for watched article email when article was renamed. $1 -> article name, $2 -> username of user who edited the article',
-	'emailext-watchedpage-article-deleted-subject' => 'Subject line for watched article email when article was deleted. $1 -> article name, $2 -> username of user who edited the article',
-	'emailext-watchedpage-article-edited' => 'Message to the user that an article they are following has been edited. $1 -> article url, $2 -> article title',
-	'emailext-watchedpage-article-protected' => 'Message to the user that an article they are following has been protected. $1 -> article url, $2 -> article title',
-	'emailext-watchedpage-article-unprotected' => 'Message to the user that an article they are following has been unprotected. $1 -> article url, $2 -> article title',
-	'emailext-watchedpage-article-renamed' => 'Message to the user that an article they are following has been renamed. $1 -> article url, $2 -> article title',
-	'emailext-watchedpage-article-deleted' => 'Message to the user that an article they are following has been deleted. $1 -> article url, $2 -> article title',
-	'emailext-watchedpage-no-summary' => 'Message shown when the editor did not leave an edit summary',
-	'emailext-watchedpage-diff-button-text' => 'Text for button that, when clicked, navigates to the diff page referencing this change.',
-	'emailext-watchedpage-deleted-button-text' => 'Text for button that, when clicked, navigates to the deleted page.',
-	'emailext-watchedpage-article-link-text' => 'Call to action to visit the article page. $1 -> article url, $2 -> article title.',
-	'emailext-watchedpage-view-all-changes' => 'Call to action to visit history of the article page. $1 -> article history url, $2 -> article title',
-);
-
 $messages['de'] = array(
 	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}: Der Artikel „$1“ wurde von $2 bearbeitet',
 	'emailext-watchedpage-article-edited-subject-anonymous' => '$1 wurde auf {{SITENAME}} bearbeitet',
@@ -138,6 +120,25 @@ $messages['ja'] = array(
 	'emailext-watchedpage-salutation' => '$1さん',
 );
 
+$messages['ko'] = array(
+	'emailext-watchedpage-article-edited-subject' => '$2 님이 {{SITENAME}}의 $1 문서를 편집했습니다',
+	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}의 $1 문서가 편집되었습니다',
+	'emailext-watchedpage-article-protected-subject' => '$2 님이 {{SITENAME}}의 $1 문서를 보호했습니다',
+	'emailext-watchedpage-article-unprotected-subject' => '$2 님이 {{SITENAME}}의 $1 문서를 보호 해제했습니다',
+	'emailext-watchedpage-article-renamed-subject' => '$2 님이 {{SITENAME}}의 $1 문서를 보호했습니다',
+	'emailext-watchedpage-article-deleted-subject' => '$2 님이 {{SITENAME}}의 $1 문서를 삭제했습니다',
+	'emailext-watchedpage-article-edited' => "'''[{{SERVER}} {{SITENAME}}]의 [$1 $2] 문서에 편집이 있었습니다. 직접 가서 확인해 보시는 건 어떨까요?'''",
+	'emailext-watchedpage-article-protected' => "'''[{{SERVER}} {{SITENAME}}]의 [$1 $2] 문서가 보호되었습니다. 직접 가서 확인해 보시는 건 어떨까요?'''",
+	'emailext-watchedpage-article-unprotected' => "'''[{{SERVER}} {{SITENAME}}]의 [$1 $2] 문서가 보호 해제되었습니다. 직접 가서 확인해 보시는 건 어떨까요?'''",
+	'emailext-watchedpage-article-renamed' => "'''[{{SERVER}} {{SITENAME}}]의 [$1 $2] 문서가 이동되었습니다. 직접 가서 확인해 보시는 건 어떨까요?'''",
+	'emailext-watchedpage-article-deleted' => "'''[{{SERVER}} {{SITENAME}}]의 [$1 $2] 문서가 삭제되었습니다.'''",
+	'emailext-watchedpage-no-summary' => '편집 요약이 없습니다',
+	'emailext-watchedpage-diff-button-text' => '이전 판과 비교',
+	'emailext-watchedpage-deleted-button-text' => '문서 역사 보기',
+	'emailext-watchedpage-article-link-text' => "[$1 '''$2''' 문서의 가장 최근 판과 비교하기]",
+	'emailext-watchedpage-view-all-changes' => "[$1 '''$2''' 문서의 역사 보기]",
+);
+
 $messages['nl'] = array(
 	'emailext-watchedpage-article-edited-subject' => '$1 on {{SITENAME}} has been edited by $2',
 	'emailext-watchedpage-article-edited-subject-anonymous' => '$1 on {{SITENAME}} has been edited',
@@ -159,21 +160,21 @@ $messages['nl'] = array(
 );
 
 $messages['pl'] = array(
-	'emailext-watchedpage-article-edited-subject' => 'Użytkownik $2 dokonał edycji $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-edited-subject' => '{{GENDER:$2|$2 dokonał|$2 dokonała|Użytkownik $2 dokonał}} edycji $1 na {{SITENAME}}',
 	'emailext-watchedpage-article-edited-subject-anonymous' => 'Dokonano edycji $1 na {{SITENAME}}',
-	'emailext-watchedpage-article-edited' => "'''Dokonano edycji [$1 $2] na [{{SERVER}} {{SITENAME}}]. Sprawdź!'''",
+	'emailext-watchedpage-article-edited' => '{{GENDER:$2|$2 dokonał|$2 dokonała|Użytkownik $2 dokonał}} edycji $1 na {{SITENAME}}',
 	'emailext-watchedpage-diff-button-text' => 'Porównaj zmiany',
 	'emailext-watchedpage-article-link-text' => "[$1 Przejdź do '''$2''' i zobacz co się zmieniło]",
 	'emailext-watchedpage-view-all-changes' => "[$1 Zobacz wszystkie zmiany '''$2''']",
 	'emailext-watchedpage-no-summary' => 'Brak podsumowania zmian',
-	'emailext-watchedpage-article-protected-subject' => 'Użytkownik $2 zabezpieczył $1 na {{SITENAME}}',
-	'emailext-watchedpage-article-unprotected-subject' => 'Użytkownik $2 usunął zabezpieczenie $1 na {{SITENAME}}',
-	'emailext-watchedpage-article-renamed-subject' => 'Użytkownik $2 zmienił nazwę $1 na {{SITENAME}}',
-	'emailext-watchedpage-article-deleted-subject' => 'Użytkownik $2 usunął $1 na {{SITENAME}}',
-	'emailext-watchedpage-article-protected' => "'''Zabezpieczono [$1 $2] na [{{SERVER}} {{SITENAME}}]. Sprawdź!'''",
-	'emailext-watchedpage-article-unprotected' => "'''Usunięto zabezpieczenie [$1 $2] na [{{SERVER}} {{SITENAME}}]. Sprawdź!'''",
-	'emailext-watchedpage-article-renamed' => "'''Dokonano zmiany nazwy [$1 $2] na [{{SERVER}} {{SITENAME}}]. Sprawdź!'''",
-	'emailext-watchedpage-article-deleted' => "'''Usunięto [$1 $2] na [{{SERVER}} {{SITENAME}}]. Sprawdź!'''",
+	'emailext-watchedpage-article-protected-subject' => '{{GENDER:$2|$2 zabezpieczył|$2 zabezpieczyła|Użytkownik $2 zabezpieczył}} $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-unprotected-subject' => '{{GENDER:$2|$2 usunął|$2 usunęła|Użytkownik $2 usunął}} zabezpieczenie $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-renamed-subject' => '{{GENDER:$2|$2 zmienił|$2 zmieniła|Użytkownik $2 zmienił}} nazwę $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-deleted-subject' => '{{GENDER:$2|$2 usunął|$2 usunęła|Użytkownik $2 usunął}} $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-protected' => '{{GENDER:$2|$2 zabezpieczył|$2 zabezpieczyła|Użytkownik $2 zabezpieczył}} $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-unprotected' => '{{GENDER:$2|$2 usunął|$2 usunęła|Użytkownik $2 usunął}} zabezpieczenie $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-renamed' => '{{GENDER:$2|$2 zmienił|$2 zmieniła|Użytkownik $2 zmienił}} nazwę $1 na {{SITENAME}}',
+	'emailext-watchedpage-article-deleted' => "'''Usunięto [$1 $2] na [{{SERVER}} {{SITENAME}}].'''",
 	'emailext-watchedpage-deleted-button-text' => 'Zobacz historię artykułu',
 	'emailext-watchedpage-salutation' => 'Cześć $1,',
 );
@@ -203,9 +204,9 @@ $messages['ru'] = array(
 	'emailext-watchedpage-article-edited-subject-anonymous' => 'Страница «$1» на {{SITENAME}} была отредактирована',
 	'emailext-watchedpage-article-edited' => "'''Страница [$1 $2] на [{{SERVER}} {{SITENAME}}] была отредактирована. Посмотрите правки!'''",
 	'emailext-watchedpage-diff-button-text' => 'Сравнить изменения',
-	'emailext-watchedpage-article-link-text' => "[$1 Для просмотра новых правок перейдите к «'''$2'''».]",
-	'emailext-watchedpage-view-all-changes' => "[$1 Просмотрите все правки статьи «'''$2'''».]",
-	'emailext-watchedpage-no-summary' => 'Участник не дал пояснений к данной правке.',
+	'emailext-watchedpage-article-link-text' => "[$1 Для просмотра самой страницы перейдите к «'''$2'''».]",
+	'emailext-watchedpage-view-all-changes' => "[$1 Посмотрите все правки страницы «'''$2'''».]",
+	'emailext-watchedpage-no-summary' => 'Участник не добавил описание этой правке.',
 	'emailext-watchedpage-article-protected-subject' => '$2 установил(а) защиту страницы $1 на {{SITENAME}}',
 	'emailext-watchedpage-article-unprotected-subject' => '$2 изменил(а) защиту страницы $1 на {{SITENAME}}',
 	'emailext-watchedpage-article-renamed-subject' => '$2 переименовал(а) страницу $1 на {{SITENAME}}',
@@ -218,10 +219,16 @@ $messages['ru'] = array(
 	'emailext-watchedpage-salutation' => 'Здравствуйте, $1!',
 );
 
+$messages['zh'] = array(
+	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}上的$1 已被编辑',
+	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1 已被编辑',
+	'emailext-watchedpage-article-edited' => '{{SITENAME}}上的$1 已被编辑',
+);
+
 $messages['zh-hans'] = array(
-	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}网站上题为$1的文章已被$2编辑',
-	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1已被编辑过',
-	'emailext-watchedpage-article-edited' => "'''[{{SERVER}} {{SITENAME}}]网站上题为[$1 $2]的文章已被编辑。快来查看吧！'''",
+	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}上的$1 已被编辑',
+	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1 已被编辑',
+	'emailext-watchedpage-article-edited' => '{{SITENAME}}上的$1 已被编辑',
 	'emailext-watchedpage-diff-button-text' => '查看更改之处',
 	'emailext-watchedpage-article-link-text' => "[$1 前往'''$2'''查看新内容]",
 	'emailext-watchedpage-view-all-changes' => "[$1 查看对'''$2'''所做的所有更改]",
@@ -238,23 +245,60 @@ $messages['zh-hans'] = array(
 	'emailext-watchedpage-salutation' => '$1，您好！',
 );
 
+$messages['zh-hant'] = array(
+	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}上題為$1的文章已被$2編輯',
+	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1 已被編輯',
+	'emailext-watchedpage-article-protected-subject' => '{{SITENAME}}上題爲$1的文章已被$2保護',
+	'emailext-watchedpage-article-unprotected-subject' => '{{SITENAME}}上題爲$1的文章已被$2取消保護',
+	'emailext-watchedpage-article-renamed-subject' => '{{SITENAME}}上題爲$1的文章已被$2重新命名',
+	'emailext-watchedpage-article-deleted-subject' => '{{SITENAME}}上題爲$1的文章已被$2刪除',
+	'emailext-watchedpage-article-edited' => "'''[{{SERVER}} {{SITENAME}}]上題為[$1 $2]的文章已被編輯。快來查看吧！'''",
+	'emailext-watchedpage-article-protected' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被保護。快來查看吧！'''",
+	'emailext-watchedpage-article-unprotected' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被取消保護。快來查看吧！'''",
+	'emailext-watchedpage-article-renamed' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被重新命名。快來查看吧！'''",
+	'emailext-watchedpage-article-deleted' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被刪除。'''",
+	'emailext-watchedpage-no-summary' => '沒有編輯摘要',
+	'emailext-watchedpage-diff-button-text' => '查看更改之處',
+	'emailext-watchedpage-deleted-button-text' => '查看文章歷史記錄',
+	'emailext-watchedpage-article-link-text' => "[$1 前往'''$2'''查看新內容]",
+	'emailext-watchedpage-view-all-changes' => "[$1 查看對'''$2'''所做的所有更改]",
+);
+
+$messages['zh-hk'] = array(
+	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}上題為$1的文章已被$2編輯',
+	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1 已被編輯',
+	'emailext-watchedpage-article-protected-subject' => '{{SITENAME}}上題爲$1的文章已被$2保護',
+	'emailext-watchedpage-article-unprotected-subject' => '{{SITENAME}}上題爲$1的文章已被$2取消保護',
+	'emailext-watchedpage-article-renamed-subject' => '{{SITENAME}}上題爲$1的文章已被$2重新命名',
+	'emailext-watchedpage-article-deleted-subject' => '{{SITENAME}}上題爲$1的文章已被$2刪除',
+	'emailext-watchedpage-article-edited' => "'''[{{SERVER}} {{SITENAME}}]上題為[$1 $2]的文章已被編輯。快來查看吧！'''",
+	'emailext-watchedpage-article-protected' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被保護。快來查看吧！'''",
+	'emailext-watchedpage-article-unprotected' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被取消保護。快來查看吧！'''",
+	'emailext-watchedpage-article-renamed' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被重新命名。快來查看吧！'''",
+	'emailext-watchedpage-article-deleted' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被刪除。'''",
+	'emailext-watchedpage-no-summary' => '沒有編輯摘要',
+	'emailext-watchedpage-diff-button-text' => '查看更改之處',
+	'emailext-watchedpage-deleted-button-text' => '查看文章歷史記錄',
+	'emailext-watchedpage-article-link-text' => "[$1 前往'''$2'''查看新內容]",
+	'emailext-watchedpage-view-all-changes' => "[$1 查看對'''$2'''所做的所有更改]",
+);
+
 $messages['zh-tw'] = array(
-	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}網站上題爲$1的文章已被$2編輯',
-	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1已經被編輯過',
-	'emailext-watchedpage-article-edited' => "'''[{{SERVER}} {{SITENAME}}]網站上題爲[$1 $2]的文章已被編輯。快來查看吧！'''",
+	'emailext-watchedpage-article-edited-subject' => '{{SITENAME}}上題為$1的文章已被$2編輯',
+	'emailext-watchedpage-article-edited-subject-anonymous' => '{{SITENAME}}上的$1 已被編輯',
+	'emailext-watchedpage-article-edited' => "'''[{{SERVER}} {{SITENAME}}]上題為[$1 $2]的文章已被編輯。快來查看吧！'''",
 	'emailext-watchedpage-diff-button-text' => '查看更改之處',
 	'emailext-watchedpage-article-link-text' => "[$1 前往'''$2'''查看新内容]",
 	'emailext-watchedpage-view-all-changes' => "[$1 查看对'''$2'''所做的所有更改]",
-	'emailext-watchedpage-no-summary' => '沒有編輯概要',
-	'emailext-watchedpage-article-protected-subject' => '{{SITENAME}}網站上題爲$1的文章已被$2保護',
-	'emailext-watchedpage-article-unprotected-subject' => '{{SITENAME}}網站上題爲$1的文章已被$2取消保護',
-	'emailext-watchedpage-article-renamed-subject' => '{{SITENAME}}網站上題爲$1的文章已被$2重新命名',
-	'emailext-watchedpage-article-deleted-subject' => '{{SITENAME}}網站上題爲$1的文章已被$2刪除',
-	'emailext-watchedpage-article-protected' => "'''[{{SERVER}} {{SITENAME}}]網站上題爲[$1 $2]的文章已被保護。快來查看吧！'''",
-	'emailext-watchedpage-article-unprotected' => "'''[{{SERVER}} {{SITENAME}}]網站上題爲[$1 $2]的文章已被取消保護。快來查看吧！'''",
-	'emailext-watchedpage-article-renamed' => "'''[{{SERVER}} {{SITENAME}}]網站上題爲[$1 $2]的文章已被重新命名。快來查看吧！'''",
-	'emailext-watchedpage-article-deleted' => "'''[{{SERVER}} {{SITENAME}}]網站上題爲[$1 $2]的文章已被刪除。'''",
-	'emailext-watchedpage-deleted-button-text' => '查看文章紀錄',
+	'emailext-watchedpage-no-summary' => '沒有編輯摘要',
+	'emailext-watchedpage-article-protected-subject' => '{{SITENAME}}上題爲$1的文章已被$2保護',
+	'emailext-watchedpage-article-unprotected-subject' => '{{SITENAME}}上題爲$1的文章已被$2取消保護',
+	'emailext-watchedpage-article-renamed-subject' => '{{SITENAME}}上題爲$1的文章已被$2重新命名',
+	'emailext-watchedpage-article-deleted-subject' => '{{SITENAME}}上題爲$1的文章已被$2刪除',
+	'emailext-watchedpage-article-protected' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被保護。快來查看吧！'''",
+	'emailext-watchedpage-article-unprotected' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被取消保護。快來查看吧！'''",
+	'emailext-watchedpage-article-renamed' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被重新命名。快來查看吧！'''",
+	'emailext-watchedpage-article-deleted' => "'''[{{SERVER}} {{SITENAME}}]上題爲[$1 $2]的文章已被刪除。'''",
+	'emailext-watchedpage-deleted-button-text' => '查看文章歷史記錄',
 	'emailext-watchedpage-salutation' => '$1，您好！',
 );
-

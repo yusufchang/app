@@ -9,11 +9,8 @@ $messages['en'] = array(
 	'exacttarget-updates-description' => 'Sends push updates to ExactTarget.com on various hooks. Aim is to keep data in ExactTarget fresh',
 );
 
-/**
- * Message documentation
- */
-$messages['qqq'] = array(
-	'exacttarget-updates-description' => '{{desc}}',
+$messages['fr'] = array(
+	'exacttarget-updates-description' => "Envoie des mises à jour de type push à ExactTarget.com via divers points d'entrée. Le but est que les données de ExactTarget restent à jour.",
 );
 
 /** Polish (polski)

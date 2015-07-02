@@ -1,5 +1,4 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
@@ -39,8 +38,6 @@ $messages['en'] = array(
 	'wikiaquiz-error-invalid-quiz' => 'Quiz name is invalid.',
 	'wikiaquiz-error-invalid-article' => 'Article ID is invalid.',
 	'wikiaquiz-error-invalid-article-with-details' => 'Article is invalid: $1',
-
-	// game itself
 	'wikiaquiz-game-start-button' => 'Start Game',
 	'wikiaquiz-game-cadence-3' => 'Ready',
 	'wikiaquiz-game-cadence-2' => 'Set',
@@ -59,70 +56,12 @@ $messages['en'] = array(
 	'wikiaquiz-game-email-placeholder' => 'yourname@youremail.com',
 	'wikiaquiz-game-email-button' => 'Send me free stuff',
 	'wikiaquiz-game-email-valid-please' => 'Please enter a valid email address.',
-	'wikiaquiz-game-email-token-mismatch' => 'Oops! Token doesn\'t match',
+	'wikiaquiz-game-email-token-mismatch' => "Oops! Token doesn't match",
 	'wikiaquiz-game-email-subject' => 'Thanks for your submission!',
-	'wikiaquiz-game-email-body' => 'This is a confirmation email. We have received your submission and will notify you if you\'re a winner!',
+	'wikiaquiz-game-email-body' => "This is a confirmation email. We have received your submission and will notify you if you're a winner!",
 	'wikiaquiz-game-email-error' => 'There was an error while sending this email: $1',
 	'wikiaquiz-game-challenge' => 'Challenge your friends to play!',
 	'wikiaquiz-game-mute' => 'Mute',
-);
-
-/** Message documentation (Message documentation)
- * @author LWChris
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'wikiaquiz-desc' => '{{desc}}',
-	'wikiaquiz-createquiz-headline' => 'Headline for Create Quiz Special Page.',
-	'wikiaquiz-editquiz-headline' => 'Headline for Edit Quiz Special Page.',
-	'wikiaquiz-createquizarticle-headline' => 'Headline for Create QuizArticle Special Page.',
-	'wikiaquiz-editquizarticle-headline' => 'Headline for Edit Quiz Article Special Page.',
-	'wikiaquiz-title-label' => 'Form Label for Title.
-{{Identical|Title}}',
-	'wikiaquiz-titlescreentext-label' => 'Form Label for Title Screen Images.',
-	'wikiaquiz-fbrecommendationtext-label' => 'Form Label for Facebook recommendation description.',
-	'wikiaquiz-moreinfoheading-label' => 'Form Label for More Info Heading.',
-	'wikiaquiz-requireemail-label' => 'Label for checkbox for required email address.',
-	'wikiaquiz-moreinfolinks-label' => 'Form Label for More Info Links.',
-	'wikiaquiz-moreinfoarticle-label' => 'Form Label for More info Article.
-{{Identical|Article}}',
-	'wikiaquiz-moreinfolinktext-label' => 'Form Label for More info Link Text.',
-	'wikiaquiz-question-label' => 'Form Label for Question.
-{{Identical|Question}}',
-	'wikiaquiz-image-label' => 'Form Label for Image.',
-	'wikiaquiz-explanation-label' => 'Form Label for Answer Explanation.',
-	'wikiaquiz-quiz-label' => 'Form Label for Quiz.',
-	'wikiaquiz-questions-label' => 'Form Label for Questions.
-{{Identical|Question}}',
-	'wikiaquiz-answers-label' => 'Form Label for Answers.
-{{Identical|Answer}}',
-	'wikiaquiz-answer-label' => 'Form Label for Answer.
-{{Identical|Answer}}',
-	'wikiaquiz-correct-label' => 'Form Label for Correct.',
-	'wikiaquiz-addnewitem-label' => 'Special Page text next to button for a new item to a quiz.',
-	'wikiaquiz-cancel-label' => 'Cancel button label.
-{{Identical|Cancel}}',
-	'wikiaquiz-publish-label' => 'Create/Edit Quiz button label for confirming changes.
-{{Identical|Publish}}',
-	'wikiaquiz-error-duplicate-quiz' => 'Error message when user tries to create a quiz that already exists.',
-	'wikiaquiz-error-duplicate-question' => 'Error message when user tries to create a question that already exists.',
-	'wikiaquiz-error-invalid-question' => 'Error message when question is invalid/empty.',
-	'wikiaquiz-error-invalid-image' => 'Error message when image is invalid.',
-	'wikiaquiz-error-missing-answers' => 'Error message when no answer given.',
-	'wikiaquiz-error-invalid-correct-answer' => 'Error message when no correct answer given.',
-	'wikiaquiz-error-invalid-article-with-details' => 'Error message when article is invalid, with details.',
-	'wikiaquiz-game-start-button' => '{{Identical|Start game}}',
-	'wikiaquiz-game-cadence-3' => 'First part of "Ready - Set - Go!" (sports countdown)',
-	'wikiaquiz-game-cadence-2' => 'Second part of "Ready - Set - Go!" (sports countdown)',
-	'wikiaquiz-game-cadence-1' => 'Third part of "Ready - Set - Go!" (sports countdown)',
-	'wikiaquiz-game-question-label' => '{{Identical|Question}}',
-	'wikiaquiz-game-finish-button' => '{{Identical|Finish}}',
-	'wikiaquiz-game-continue-button' => '{{Identical|Continue}}',
-	'wikiaquiz-game-thanks' => '$1 is the name of wiki main page',
-	'wikiaquiz-game-email-token-mismatch' => "Shown when hidden token (to prevent hijacking) sent to the backend doesn't match the one stored in user's session",
-	'wikiaquiz-game-email-subject' => 'Subject of an email sent to the user when quiz is completed',
-	'wikiaquiz-game-email-body' => 'Body of an email sent to the user when quiz is completed',
-	'wikiaquiz-game-email-error' => 'Message shown when there was an error when sending an email. $1 is an error message.',
 );
 
 /** Arabic (العربية)
@@ -480,7 +419,7 @@ $messages['de'] = array(
 	'wikiaquiz-game-email-placeholder' => 'deinname@deinemail.de',
 	'wikiaquiz-game-email-button' => 'Schick mir Gratisgeschenke',
 	'wikiaquiz-game-email-valid-please' => 'Bitte eine gültige E-Mail-Adresse abgeben',
-	'wikiaquiz-game-email-token-mismatch' => 'Upps! Token stimmt nicht überein.',
+	'wikiaquiz-game-email-token-mismatch' => 'Hoppla! Token stimmt nicht überein.',
 	'wikiaquiz-game-email-subject' => 'Danke für deine Einsendung!',
 	'wikiaquiz-game-email-body' => 'Das ist eine Bestätigungsmail. Wir haben deine Einsendung erhalten und werden dich benachrichtigen, falls du gewonnen hast.',
 	'wikiaquiz-game-email-error' => 'Beim Senden dieser e-Mail ist ein Fehler aufgetreten:$1',
@@ -658,7 +597,7 @@ $messages['fo'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'wikiaquiz-desc' => 'Fournit un moyen facile de créer et de gérer des quizz',
+	'wikiaquiz-desc' => 'Fournit un moyen facile de créer et de gérer des quiz',
 	'wikiaquiz-createquiz-headline' => 'Créer un quizz',
 	'wikiaquiz-editquiz-headline' => 'Modifier le quizz',
 	'wikiaquiz-createquizarticle-headline' => 'Créer les questions et les réponses du quizz',
@@ -668,7 +607,7 @@ $messages['fr'] = array(
 	'wikiaquiz-fbrecommendationtext-label' => 'Description de la recommandation de Facebook',
 	'wikiaquiz-titlescreenimages-label' => 'Images de l’écran de titre',
 	'wikiaquiz-moreinfoheading-label' => 'En-tête « Plus d’informations »',
-	'wikiaquiz-requireemail-label' => 'Demander au joueur de saisir une adresse de courriel à la fin du jeu',
+	'wikiaquiz-requireemail-label' => 'Demander au joueur de saisir une adresse e-mail à la fin du jeu',
 	'wikiaquiz-moreinfolinks-label' => "Liens « Plus d'informations »",
 	'wikiaquiz-moreinfoarticle-label' => 'Article',
 	'wikiaquiz-moreinfolinktext-label' => 'Texte du lien',
@@ -708,14 +647,14 @@ $messages['fr'] = array(
 	'wikiaquiz-game-your-score' => 'VOTRE SCORE EST DE',
 	'wikiaquiz-game-continue-button' => 'Continuer',
 	'wikiaquiz-game-thanks' => 'Merci d’avoir participé !',
-	'wikiaquiz-game-provide-email' => 'Veuillez saisir votre adresse de courriel',
-	'wikiaquiz-game-email-placeholder' => 'votrenom@votrecourriel.com',
+	'wikiaquiz-game-provide-email' => 'Veuillez saisir votre adresse e-mail',
+	'wikiaquiz-game-email-placeholder' => 'votrenom@votreadresse.com',
 	'wikiaquiz-game-email-button' => 'M’envoyer des choses gratuites',
-	'wikiaquiz-game-email-valid-please' => 'Veuillez saisir une adresse de courriel valide.',
+	'wikiaquiz-game-email-valid-please' => 'Veuillez saisir une adresse e-mail valide.',
 	'wikiaquiz-game-email-token-mismatch' => 'Oups ! Le jeton ne correspond pas',
 	'wikiaquiz-game-email-subject' => 'Merci pour votre participation !',
-	'wikiaquiz-game-email-body' => 'Ceci est un courriel de confirmation. Nous avons reçu votre participation et nous vous avertirons si vous avez gagné !',
-	'wikiaquiz-game-email-error' => 'Une erreur est survenue à l’envoi de ce courriel : $1',
+	'wikiaquiz-game-email-body' => 'Ceci est un e-mail de confirmation. Nous avons reçu votre participation et nous vous avertirons si vous avez gagné !',
+	'wikiaquiz-game-email-error' => 'Une erreur est survenue à l’envoi de cet e-mail : $1',
 	'wikiaquiz-game-challenge' => 'Défiez vos amis d’y participer !',
 	'wikiaquiz-game-mute' => 'Muet',
 );
@@ -999,6 +938,8 @@ $messages['it'] = array(
 	'wikiaquiz-game-continue-button' => 'Continua',
 	'wikiaquiz-game-thanks' => 'Grazie per aver giocato!',
 	'wikiaquiz-game-mute' => 'Muto',
+	'wikiaquiz-answer-label' => 'Risposta',
+	'wikiaquiz-correct-label' => 'Correggere?',
 );
 
 /** Japanese (日本語)
@@ -1125,7 +1066,7 @@ $messages['ko'] = array(
 	'wikiaquiz-game-question-label' => '질문',
 	'wikiaquiz-game-next-button' => '다음 질문',
 	'wikiaquiz-game-finish-button' => '완료',
-	'wikiaquiz-game-correct-label' => '맞습니다!',
+	'wikiaquiz-game-correct-label' => '정답입니다!',
 	'wikiaquiz-game-incorrect-label' => '틀렸습니다.',
 	'wikiaquiz-game-congratulations' => '$1님, 수고하셨습니다!',
 	'wikiaquiz-game-congratulations-anon' => '수고하셨습니다!',

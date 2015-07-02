@@ -30,7 +30,7 @@ $messages['en'] = array(
 	'dpl_log_7' => "Error: If you include more than one category, you cannot use 'addfirstcategorydate=true' or 'ordermethod=categoryadd'!",
 	'dpl_log_8' => 'Error: You cannot add more than one type of date at a time!',
 	'dpl_log_9' => "Error: You can use '$0' with 'ordermethod=[...,]$1' only!",
-	'dpl_log_10' => "Error: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'Error: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "Error: Cannot perform logical operations on the Uncategorized pages (f.e. with the 'category' parameter) because the $0 view does not exist on the database! Help: have the database administrator execute this query: <code>$1</code>.",
 	'dpl_log_12' => 'Error: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "Warning: Unknown parameter '$0' is ignored. Help: available parameters: <code>$1</code>.",
@@ -44,13 +44,6 @@ $messages['en'] = array(
 	'dpl_log_21' => 'Query: <code>$0</code>',
 	'dpl_articlecount' => 'There {{PLURAL:$1|is one article|are $1 articles}} in this heading.',
 	'dpl_description' => 'A flexible report generator for MediaWiki. See [http://semeb.com/dpldemo] for the manual and examples',
-);
-
-/** Message documentation (Message documentation)
- * @author Purodha
- */
-$messages['qqq'] = array(
-	'intersection-desc' => '{{desc}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -215,7 +208,7 @@ $messages['de'] = array(
 	'dpl_log_8' => 'Fehler: Es ist nur eine einzige Art der Datumsangabe möglich.',
 	'dpl_log_9' => "Fehler: Sie können '$0' nur in Verbindung mit 'ordermethod=[...,]$1' benutzen.",
 	'dpl_log_10' => "Fehler: Die Indexangabe bei 'dominantsection' muss zwischen 1 und  der Anzahl der Argumente von 'includepage' liegen ($0 in diesem Fall).",
-	'dpl_log_11' => "Fehler: Abfragen auf unkategorisierte Seiten sind nicht möglich, da die Datenbank nicht dafür eingerichtet wurde. Ein Administrator kann dies ändern.",
+	'dpl_log_11' => 'Fehler: Abfragen auf unkategorisierte Seiten sind nicht möglich, da die Datenbank nicht dafür eingerichtet wurde. Ein Administrator kann dies ändern.',
 	'dpl_log_12' => 'Fehler: Die Angabe von "openreferences" ist nicht vereinbar mit bestimmten anderen Optionen, die Sie angegegeben haben. Details dazu stehen im DPL-Manual.',
 	'dpl_log_13' => "Warnung: Der unbekannte Parameter '$0' wird ignoriert. Hilfe: Verfügbare Parameter: <code>$1</code>.",
 	'dpl_log_14' => "Warnung: Parameter '$0': Der Wert '$1' ist unzulässig. Es wird der Defaultwert benutzt: '$2'. Hilfe: <code>$0= $3</code>.",
@@ -226,7 +219,9 @@ $messages['de'] = array(
 	'dpl_log_19' => "Warnung: 'debug=$0' steht nicht an erster Stelle in der DPL-Anweisung. Die Einstellung wird erst wirksam, nachdem die vorausgehenden Parameter geprüft und verarbeitet sind.",
 	'dpl_log_20' => "Warnung: Endlosschleife beim Inkludieren von Inhalten der Seite '$0'.",
 	'dpl_log_21' => 'Datenbank-Abfrage: <code>$0</code>',
-	'dpl_articlecount' => 'Diese Gruppe enthält {{PLURAL:$1|einen|$1}} Artikel.'
+	'dpl_articlecount' => 'Diese Gruppe enthält {{PLURAL:$1|einen|$1}} Artikel.',
+	'dpl-desc' => 'Eine hochflexible Funktionalität für das Auslesen von MediaWiki-Daten',
+	'dpl_description' => 'Eine hochflexible Funktionalität für das Auslesen von MediaWiki-Daten. Siehe [http://semeb.com/dpldemo] (englisch) für weitergehende Informationen und Beispiele.',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -327,7 +322,7 @@ $messages['fr'] = array(
 	'dpl_log_7' => "ERREUR : Si vous incluez plus d’une catégorie, vous ne pouvez pas utiliser 'addfirstcategorydate=true' ou 'ordermethod=categoryadd' !",
 	'dpl_log_8' => 'ERREUR : Vous ne pouvez pas utiliser plus d’un type de date à la fois !',
 	'dpl_log_9' => "ERREUR : Vous ne pouvez utiliser '$0' qu’avec 'ordermethod=[...,]$1' !",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "ERREUR : Ne peut pas effectuer d’opérations logiques sur les pages sans catégories (avec la paramètre 'category') car la vue $0 n’existe pas dans la base de données ! Aide : demander à un administrateur de la base de données d'effectuer : <code>$1</code>.",
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "AVERTISSEMENT : Le paramètre inconnu '$0' est ignoré. Aide : paramètres disponibles : <code>$1</code>.",
@@ -339,7 +334,8 @@ $messages['fr'] = array(
 	'dpl_log_19' => "AVERTISSEMENT : 'debug=$0' n’est pas en première position dans l’élément DPL. Les nouveaux réglages de débogage ne seront appliqués qu’après que les paramètres précédents aient été vérifiés.",
 	'dpl_log_20' => "AVERTISSEMENT : Une boucle d’inclusion infinie est créée par la page '$0'.",
 	'dpl_log_21' => 'REQUÊTE : <code>$0</code>',
-	'dpl_articlecount' => 'Il y a {{PLURAL:$1|un article|$1 articles}} dans cette section.'
+	'dpl_articlecount' => 'Il y a {{PLURAL:$1|un article|$1 articles}} dans cette section.',
+	'dpl-desc' => "Un générateur d'états très flexible pour MediaWiki",
 );
 
 /** Franco-Provençal (Arpetan)
@@ -402,7 +398,7 @@ $messages['he'] = array(
 	'dpl_log_7' => "שגיאה: אם אתם מכלילים יותר מקטגוריה אחת, אינכם יכולים להשתמש ב־'addfirstcategorydate=true' או ב־'ordermethod=categoryadd'!",
 	'dpl_log_8' => 'שגיאה: אינכם יכולים להוסיף יותר מסוג אחד של תאריך בו זמנית!',
 	'dpl_log_9' => "?????: ????????? ?????? ??'$0' ?? 'ordermethod=[...,]$1' ????!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "שגיאה: לא ניתן לבצע פעולות לוגיות על דפים ללא קטגוריות (למשל, עם הפרמטר 'קטגוריה') כיוון שתצוגת $0 אינה קיימת במסד הנתונים! עזרה: מנהל מסד הנתונים צריך להריץ את השאילתה: <code>$1</code>.",
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "אזהרה: בוצעה התעלמות מהפרמטר הלא ידוע '$0'. עזרה: פרמטרים זמינים: <code>$1</code>.",
@@ -414,7 +410,7 @@ $messages['he'] = array(
 	'dpl_log_19' => "אזהרה: 'debug=$0w הוא לא במקום הראשון ברכיב ה־DPL. הגדרות ניפוי השגיאות החדשות לא יחולו לפני שכל הפרמטרים הקודמים ינותחו וייבדקו.",
 	'dpl_log_20' => "אזהרה: לולאת הכללה אינסופית נוצרה בדף '$0'.",
 	'dpl_log_21' => 'שאילתה: <code>$0</code>',
-	'dpl_articlecount' => '{{PLURAL:$1|ישנם $1 דפים|ישנו דף אחד}} תחת כותרת זו.'
+	'dpl_articlecount' => '{{PLURAL:$1|ישנם $1 דפים|ישנו דף אחד}} תחת כותרת זו.',
 );
 
 /** Hindi (हिन्दी)
@@ -493,7 +489,7 @@ $messages['id'] = array(
 	'dpl_log_7' => "KESALAHAN: Jika Anda memberikan lebih dari satu kategori, Anda tidak dapat menggunakan 'addfirstcategorydate=true' atau 'ordermethod=categoryadd'!",
 	'dpl_log_8' => 'KESALAHAN: Anda tidak dapat memberikan lebih dari satu jenis tanggal dalam satu waktu!',
 	'dpl_log_9' => "KESALAHAN: Anda dapat menggunakan '$0' hanya dengan 'ordermethod=[...,]$1'!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "KESALAHAN: Tidak dapat melakukan operasi logika pada halaman yang tak terkategori (misalnya dengan parameter 'kategori') karena view $0 tidak ada di basis data! Bantuan: mintalah admin basis data untuk menjalankan kueri berikut: <code>$1</code>.",
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "KESALAHAN: Paramater yang tak dikenal '$0' diabaikan. Bantuan: parameter yang tersedia: <code>$1</code>.",
@@ -505,7 +501,7 @@ $messages['id'] = array(
 	'dpl_log_19' => "KESALAHAN: 'debug=$0' tidak pada posisi pertama pada elemen DPL. Aturan debug tidak diterapkan sebelum semua variabel sebelumnya telah diparsing dan dicek.",
 	'dpl_log_20' => "KESALAHAN: Suatu lingkaran transklusi tak hingga ditimbulkan oleh halaman '$0'.",
 	'dpl_log_21' => 'KUERI: <code>$0</code>',
-	'dpl_articlecount' => 'Terdapat {{PLURAL:$1|artikel|artikel}} dalam judul ini.'
+	'dpl_articlecount' => 'Terdapat {{PLURAL:$1|artikel|artikel}} dalam judul ini.',
 );
 
 /** Ido (Ido)
@@ -535,9 +531,9 @@ $messages['it'] = array(
 	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
 	'dpl_log_6' => "ERRORE: L'uso dei parametri 'addfirstcategorydate=true' e 'ordermethod=categoryadd' richiede l'inserimento di una o più categorie.",
 	'dpl_log_7' => "ERRORE: L'inserimento di più categorie impedisce l'uso dei parametri 'addfirstcategorydate=true' e 'ordermethod=categoryadd'.",
-	'dpl_log_8' => 'ERRORE: Non è consentito l\'uso contemporaneo di più tipi di data.',
+	'dpl_log_8' => "ERRORE: Non è consentito l'uso contemporaneo di più tipi di data.",
 	'dpl_log_9' => "ERRORE: L'uso del parametro '$0' è consentito unicamente con 'ordermethod=[...,]$1'.",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "ERRORE: Impossibile effettuare operazioni logiche sulle pagine prive di categoria (ad es. con il parametro 'category') in quanto il database non contiene la vista $0. Suggerimento: chiedere all'amministratore del database di eseguire la seguente query: <code>$1</code>.",
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "ATTENZIONE: Il parametro non riconosciuto '$0' è stato ignorato. Suggerimento: i parametri disponibili sono: <code>$1</code>.",
@@ -548,7 +544,7 @@ $messages['it'] = array(
 	'dpl_log_18' => "ATTENZIONE: Il parametro 'headingmode=$0' non ha alcun effetto quando è specificato 'ordermethod' su un solo componente. Verrà utilizzato il valore '$1'. Suggerimento: è posibile utilizzare i valori diversi da $1 per il parametro 'headingmode' nel caso di 'ordermethod' su più componenti. Il primo componente viene usato per generare i titoli di sezione. Ad es. 'ordermethod=category,<i>comp</i>' (dove <i>comp</i> è un altro componente) per avere titoli di sezione basati sulla categoria.",
 	'dpl_log_19' => "ATTENZIONE: Il parametro 'debug=$0' non è il primo elemento della sezione DPL. Le nuove impostazioni di debug non verranno applicate prima di aver completato il parsing e la verifica di tutti i parametri che lo precedono.",
 	'dpl_log_21' => 'QUERY: <code>$0</code>',
-	'dpl_articlecount' => 'Questa sezione contiene {{PLURAL:$1|una voce|$1 voci}}.'
+	'dpl_articlecount' => 'Questa sezione contiene {{PLURAL:$1|una voce|$1 voci}}.',
 );
 
 /** Japanese (日本語)
@@ -698,6 +694,17 @@ $messages['ms'] = array(
 	'intersection_noincludecats' => 'Error: Anda hendaklah memasukkan sekurang-kurangnya sebuah kategori atau menyatakan sebuah ruang nama!',
 );
 
+/** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
+ * @author Jon Harald Søby
+ */
+$messages['nb'] = array(
+	'intersection-desc' => 'Gir en punktliste over de nyeste elementene i en kategori, eller elementer som er felles i flere kategorier',
+	'intersection_toomanycats' => 'Dynamisk sideliste: For mange kategorier!',
+	'intersection_toofewcats' => 'Dynamisk sidelist: For få kategorier!',
+	'intersection_noresults' => 'Dynamisk sideliste: Ingen resultater!',
+	'intersection_noincludecats' => 'Dynamisk sideliste: Du må inkludere minst én kategori, eller oppgi et navnerom!',
+);
+
 /** Low German (Plattdüütsch)
  * @author Slomox
  */
@@ -727,7 +734,7 @@ $messages['nl'] = array(
 	'dpl_log_6' => "FOUT: Als u meer dan één categorie opneemt, kunt u 'addfirstcategorydate=true' of 'ordermethod=categoryadd' niet gebruiken!",
 	'dpl_log_8' => 'FOUT: U kunt niet meer dan één type of datum tegelijk gebruiken!',
 	'dpl_log_9' => "FOUT: U kunt '$0' alleen met 'ordermethod=[...,]$1' gebruiken!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_14' => "WAARSCHUWING: Verkeerde parameter '$0': '$1'! Nu wordt de standaard gebruikt: '$2'. Hulp: <code>$0= $3</code>.",
 	'dpl_log_16' => 'WAARSCHUWING: Geen resultaten!',
@@ -735,7 +742,7 @@ $messages['nl'] = array(
 	'dpl_log_18' => "WAARSCHUWING: 'headingmode=$0' heeft geen effect met 'ordermethod' op een enkele component. Nu wordt gebruikt: '$1'. Hulp: u kunt een niet-$1 'headingmode'-waarde gebruiken met 'ordermethod' op meerdere componenten. De eerste component wordt gebruikt als kop. Bijvoorbeeld 'ordermethod=category,<i>comp</i>' (<i>comp</i> is een ander component) voor categoriekoppen.",
 	'dpl_log_19' => "WAARSCHUWING: 'debug=$0' is niet de eerste positie in het DPL-element. De nieuwe debuginstellingen zijn niet toegepast voor alle voorgaande parameters zijn verwerkt en gecontroleerd.",
 	'dpl_log_21' => 'QUERY: <code>$0</code>',
-	'dpl_articlecount' => 'Er {{PLURAL:$1|is één pagina|zijn $1 pagina\'s}} onder deze kop.'
+	'dpl_articlecount' => "Er {{PLURAL:$1|is één pagina|zijn $1 pagina's}} onder deze kop.",
 );
 
 /** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
@@ -747,17 +754,6 @@ $messages['nn'] = array(
 	'intersection_toofewcats' => 'Feil: For få kategoriar!',
 	'intersection_noresults' => 'Feil: Ingen resultat!',
 	'intersection_noincludecats' => 'Feil: Du må inkludera minst éin kategori, eller oppgje eit namnerom!',
-);
-
-/** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
- * @author Jon Harald Søby
- */
-$messages['nb'] = array(
-	'intersection-desc' => 'Gir en punktliste over de nyeste elementene i en kategori, eller elementer som er felles i flere kategorier',
-	'intersection_toomanycats' => 'Dynamisk sideliste: For mange kategorier!',
-	'intersection_toofewcats' => 'Dynamisk sidelist: For få kategorier!',
-	'intersection_noresults' => 'Dynamisk sideliste: Ingen resultater!',
-	'intersection_noincludecats' => 'Dynamisk sideliste: Du må inkludere minst én kategori, eller oppgi et navnerom!',
 );
 
 /** Occitan (Occitan)
@@ -843,25 +839,25 @@ $messages['ru'] = array(
 	'intersection_toofewcats' => 'Error: слишком мало категорий!',
 	'intersection_noresults' => 'Error: нет результатов!',
 	'intersection_noincludecats' => 'Error: вы должны включить хотя бы одну категорию или указать пространство имён!',
-	'dpl_log_1' => "ОШИБКА: неправильный «$0»-параметр: «$1»! Подсказка:  <code>$0= <i>пустая строка</i> (Основное)$3</code>.",
+	'dpl_log_1' => 'ОШИБКА: неправильный «$0»-параметр: «$1»! Подсказка:  <code>$0= <i>пустая строка</i> (Основное)$3</code>.',
 	'dpl_log_3' => 'ОШИБКА: слишком много категорий! Максимум: $0. Подсказка: увеличте <code>ExtDynamicPageList::$maxCategoryCount</code> чтобы разрешить больше категорий или установите <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> для снятия ограничения. (Устанавливайте переменные в <code>LocalSettings.php</code>, после подключения <code>DynamicPageList.php</code>.)',
 	'dpl_log_4' => 'ОШИБКА: слишком мало категорий! Минимум: $0. Подсказка: уменьшите <code>ExtDynamicPageList::$minCategoryCount</code> чтобы разрешить меньше категорий. (Устанавливайте переменную в <code>LocalSettings.php</code>, после подключения <code>DynamicPageList.php</code>.)',
 	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
-	'dpl_log_6' => "ОШИБКА: вы должны включить хотя бы одну категорию, если вы хотите использовать «addfirstcategorydate=true» или «ordermethod=categoryadd»!",
-	'dpl_log_7' => "ОШИБКА: если вы включаете больше одной категории, то вы не можете использовать «addfirstcategorydate=true» или «ordermethod=categoryadd»!",
+	'dpl_log_6' => 'ОШИБКА: вы должны включить хотя бы одну категорию, если вы хотите использовать «addfirstcategorydate=true» или «ordermethod=categoryadd»!',
+	'dpl_log_7' => 'ОШИБКА: если вы включаете больше одной категории, то вы не можете использовать «addfirstcategorydate=true» или «ordermethod=categoryadd»!',
 	'dpl_log_8' => 'ОШИБКА: вы не можете добавить более одного типа данных за раз!',
-	'dpl_log_9' => "ОШИБКА: вы можете использовать «$0» только с «ordermethod=[...,]$1»!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_9' => 'ОШИБКА: вы можете использовать «$0» только с «ordermethod=[...,]$1»!',
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
-	'dpl_log_13' => "ПРЕДУПРЕЖДЕНИЕ: неизвестный параметр «$0» проигнорирован. Подсказка: доступные параметры: <code>$1</code>.",
-	'dpl_log_14' => "ПРЕДУПРЕЖДЕНИЕ: неправильный параметр «$0»: «$1»! Использование параметра по умолчанию: «$2». Подсказка: <code>$0= $3</code>.",
-	'dpl_log_15' => "ПРЕДУПРЕЖДЕНИЕ: неправильный параметр «$0»: «$1»! Использование параметра по умолчанию: «$2» (без ограничений). Подсказка: <code>$0= <i>пустая строка</i> (без ограничений) | n</code>, с <code>n</code> равным положительному целому числу.",
+	'dpl_log_13' => 'ПРЕДУПРЕЖДЕНИЕ: неизвестный параметр «$0» проигнорирован. Подсказка: доступные параметры: <code>$1</code>.',
+	'dpl_log_14' => 'ПРЕДУПРЕЖДЕНИЕ: неправильный параметр «$0»: «$1»! Использование параметра по умолчанию: «$2». Подсказка: <code>$0= $3</code>.',
+	'dpl_log_15' => 'ПРЕДУПРЕЖДЕНИЕ: неправильный параметр «$0»: «$1»! Использование параметра по умолчанию: «$2» (без ограничений). Подсказка: <code>$0= <i>пустая строка</i> (без ограничений) | n</code>, с <code>n</code> равным положительному целому числу.',
 	'dpl_log_16' => 'ПРЕДУПРЕЖДЕНИЕ: не найдено!',
-	'dpl_log_17' => "ПРЕДУПРЕЖДЕНИЕ: Добавление* параметров («adduser», «addeditdate», и др.) не действительны с «mode=category». Только пространства имён или названия могут просматриваться в этом режиме.",
-	'dpl_log_18' => "ПРЕДУПРЕЖДЕНИЕ: «headingmode=$0» не действителен с «ordermethod» в одном компоненте. Использование: «$1». Подсказка: вы можете использоватьe не-$1 «headingmode» значения с «ordermethod» во множестве компонентов. Первый компонент используется для заголовков. Например, «ordermethod=category,<i>comp</i>» (<i>comp</i> является другим компонентом) для заголовков категорий.",
-	'dpl_log_19' => "ПРЕДУПРЕЖДЕНИЕ: «debug=$0» не находится на первом месте в DPL-элементе. Новые настройки отладки не будут применены пока все предыдущие параметры не будут разобраны и проверены.",
+	'dpl_log_17' => 'ПРЕДУПРЕЖДЕНИЕ: Добавление* параметров («adduser», «addeditdate», и др.) не действительны с «mode=category». Только пространства имён или названия могут просматриваться в этом режиме.',
+	'dpl_log_18' => 'ПРЕДУПРЕЖДЕНИЕ: «headingmode=$0» не действителен с «ordermethod» в одном компоненте. Использование: «$1». Подсказка: вы можете использоватьe не-$1 «headingmode» значения с «ordermethod» во множестве компонентов. Первый компонент используется для заголовков. Например, «ordermethod=category,<i>comp</i>» (<i>comp</i> является другим компонентом) для заголовков категорий.',
+	'dpl_log_19' => 'ПРЕДУПРЕЖДЕНИЕ: «debug=$0» не находится на первом месте в DPL-элементе. Новые настройки отладки не будут применены пока все предыдущие параметры не будут разобраны и проверены.',
 	'dpl_log_21' => 'ЗАПРОС: <code>$0</code>',
-	'dpl_articlecount' => 'В этом заголовке $1 {{PLURAL:$1|статья|статьи|статей}}.'
+	'dpl_articlecount' => 'В этом заголовке $1 {{PLURAL:$1|статья|статьи|статей}}.',
 );
 
 /** Yakut (Саха тыла)
@@ -893,7 +889,7 @@ $messages['sk'] = array(
 	'dpl_log_7' => "CHYBA: Ak zahrniete viac ako jednu kategóriu, nemôete pouit 'addfirstcategorydate=true' alebo 'ordermethod=categoryadd'!",
 	'dpl_log_8' => 'CHYBA: Nemôete naraz pridat viac ako jeden typ dátumu!',
 	'dpl_log_9' => "CHYBA: '$0' môete pouit iba s 'ordermethod=[...,]$1'!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "CHYBA: Nie je momoné vykonávat logické operácie na nekategorizovaných kategóriách (napr. s parametrom 'Kategória') lebo neexistuje na databázu pohlad $0! Pomocník: nech admin databázy vykoná tento dotaz: <code>$1</code>.",
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "VAROVANIE: Neznámy parameter '$0' ignorovaný. Pomocník: dostupné parametre: <code>$1</code>.",
@@ -904,7 +900,37 @@ $messages['sk'] = array(
 	'dpl_log_18' => "VAROVANIE: 'headingmode=$0' nepracuje s 'ordermethod' na jednom komponente. Pouitie: '$1'. Pomocník: môete pouit not-$1 hodnoty 'headingmode' s 'ordermethod' na viaceré komponenty. Prvý komponent sa pouíva na nadpisy. Napr. 'ordermethod=category,<i>comp</i>' (<i>comp</i> je iný komponent) pre nadpisy kategórií.",
 	'dpl_log_19' => "VAROVANIE: 'debug=$0' nie je na prvej pozícii v prvku DPL. Nové ladiacie nastavenia nebudú pouíté skôr ne budú parsované a skontrolované vetky predchádzajúce.",
 	'dpl_log_21' => 'DOTAZ: <code>$0</code>',
-	'dpl_articlecount' => 'V tomto nadpise {{PLURAL:$1|je jeden clánok|sú $1 clánky|je $1 clánkov}}.'
+	'dpl_articlecount' => 'V tomto nadpise {{PLURAL:$1|je jeden clánok|sú $1 clánky|je $1 clánkov}}.',
+);
+
+$messages['sr'] = array(
+	'intersection-desc' => 'Даје редни списак најскорије додатих чланака у једну или више категорија.',
+	'intersection_toomanycats' => 'Грешка: Превише категорија!',
+	'intersection_toofewcats' => 'Грешка:Премало категорија!',
+	'intersection_noresults' => 'Грешка: Нема резулатата!',
+	'intersection_noincludecats' => 'Грешка: Потребно је укључити бар једну категорију или одредити именски простор!',
+	'dpl_log_1' => "ГРЕШКА: Погреан '$0' параметар: '$1'! Помоћ:  <code>$0= <i>погрешан стринг</i> (Главно)$3</code>. (Еквиваленти са магичним речима су такође дозвољени.)",
+	'dpl_log_2' => "ГРЕШКА: Погрешан '$0' параметар: '$1'! Помоћ:  <code>$0= <i>пуно име странице</i></code>. (Магичне речи су дозвољене.)",
+	'dpl_log_3' => 'ГРЕШКА: Превише категорија! Максимум је: $0. Помоћ: повећајте <code>ExtDynamicPageList::$maxCategoryCount</code> како бисте поставили више категорија или промените <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> за без граница. (Подесите варијаблу у <code>LocalSettings.php</code>, након укључивања <code>DynamicPageList.php</code>.)',
+	'dpl_log_4' => 'ГРЕШКА: Премало категорија! Минимум је: $0. Помоћ: повећајте <code>ExtDynamicPageList::$minCategoryCount</code> како бисте поставили мање категорија. (Подесите варијаблу у <code>LocalSettings.php</code>, након укључивања <code>DynamicPageList.php</code>.)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "ГРЕШКА: Морате укључити бар једну категорију уколико желите да користите 'addfirstcategorydate=true' или 'ordermethod=categoryadd'!",
+	'dpl_log_7' => "ГРЕШКА: Уколико укључујете више од једне категорије, не можете користити 'addfirstcategorydate=true' или 'ordermethod=categoryadd'!",
+	'dpl_log_8' => 'ГРЕШКА: Не можете додати више од једног типа датума!',
+	'dpl_log_9' => "ГРЕШКА: Можете користити '$0' са 'ordermethod=[...,]$1' искључиво!",
+	'dpl_log_10' => "ГРЕШКА: Немогуће извршити операцију на некатегоризованим страницама (нпр. са 'category' параметром) зато што $0 преглед не постоји у бази података! Помоћ: нека администратор базе изврши овај упит: <code>$1</code>.",
+	'dpl_log_11' => "ERROR: Cannot perform logical operations on the Uncategorized pages (f.e. with the 'category' parameter) because the $0 view does not exist on the database! Help: have the database administrator execute this query: <code>$1</code>.",
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "ПАЖЊА: Непознат параметар '$0' је игнорисан. Помоћ: доступни параметри су: <code>$1</code>.",
+	'dpl_log_14' => "ПАЖЊА: Погрешан '$0' параметар: '$1'! Користи се основни: '$2'. Помоћ: <code>$0= $3</code>.",
+	'dpl_log_15' => "ПАЖЊА: Погрешан '$0' параметар: '$1'! Користи се основни: '$2' (без границе). Помоћ: <code>$0= <i>празан стринг</i> (без границе) | n</code>, с <code>n</code> је позитиван интегер.",
+	'dpl_log_16' => 'ПАЖЊА: Нема резултата!',
+	'dpl_log_17' => "ПАЖЊА: Додавање* параметара ('adduser', 'addeditdate', итд.)' и 'includepage' нема ефекта са 'mode=category'. Искључиво име странице/именски простор могу да се виде у овом моду.",
+	'dpl_log_18' => "ПАЖЊА: 'headingmode=$0' нема ефекта са 'ordermethod' на једној компоненти. Користи се: '$1'. Помоћ: не морате користити-$1 'headingmode' податке 'ordermethod' на више компоненти. Прва компонента се користи за наслов. Нпр. 'ordermethod=category,<i>компонента</i>' (<i>компонента</i> је друга компонента) за наслове категорија.",
+	'dpl_log_29' => "ПАЖЊА: 'debug=$0' није на првом месту у DPL елементу. Нова дебаг подешавања нису примењена пре свих параметара који су проверени",
+	'dpl_log_20' => "ПАЖЊА: Бесконачна петљаса странице '$0'.",
+	'dpl_log_21' => 'УПИТ: <code>$0</code>',
+	'dpl_articlecount' => 'У овом наслову се тренутно налази {{PLURAL:$1|један чланак|$1 чланка|$1 чланака}}.',
 );
 
 /** Serbian Cyrillic ekavian (ћирилица)
@@ -937,10 +963,8 @@ $messages['sr-ec'] = array(
 	'dpl_log_29' => "ПАЖЊА: 'debug=$0' није на првом месту у DPL елементу. Нова дебаг подешавања нису примењена пре свих параметара који су проверени",
 	'dpl_log_20' => "ПАЖЊА: Бесконачна петљаса странице '$0'.",
 	'dpl_log_21' => 'УПИТ: <code>$0</code>',
-	'dpl_articlecount' => 'У овом наслову се тренутно налази {{PLURAL:$1|један чланак|$1 чланка|$1 чланака}}.'
+	'dpl_articlecount' => 'У овом наслову се тренутно налази {{PLURAL:$1|један чланак|$1 чланка|$1 чланака}}.',
 );
-
-$messages['sr'] = $messages['sr-ec'];
 
 $messages['sr-el'] = array(
 	'dpl_log_1' => "GREŠKA: Pogrean '$0' parametar: '$1'! Pomoć:  <code>$0= <i>pogrešan string</i> (Glavno)$3</code>. (Ekvivalenti sa magičnim rečima su takođe dozvoljeni.)",
@@ -952,7 +976,7 @@ $messages['sr-el'] = array(
 	'dpl_log_7' => "GREŠKA: Ukoliko uključujete više od jedne kategorije, ne možete koristiti 'addfirstcategorydate=true' ili 'ordermethod=categoryadd'!",
 	'dpl_log_8' => 'GREŠKA: Ne možete dodati više od jednog tipa datuma!',
 	'dpl_log_9' => "GREŠKA: Možete koristiti '$0' sa 'ordermethod=[...,]$1' isključivo!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_11' => "GREŠKA: Nemoguće izvršiti operaciju na nekategorizovanim stranicama (npr. sa 'category' parametrom) zato što $0 pregled ne postoji u bazi podataka! Pomoć: neka administrator baze izvrši ovaj upit: <code>$1</code>.",
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "PAŽNJA: Nepoznat parametar '$0' je ignorisan. Pomoć: dostupni parametri su: <code>$1</code>.",
@@ -964,7 +988,7 @@ $messages['sr-el'] = array(
 	'dpl_log_19' => "PAŽNJA: 'debug=$0' nije na prvom mestu u DPL elementu. Nova debag podešavanja nisu primenjena pre svih parametara koji su provereni",
 	'dpl_log_20' => "PAŽNJA: Beskonačna petljasa stranice '$0'.",
 	'dpl_log_21' => 'UPIT: <code>$0</code>',
-	'dpl_articlecount' => 'U ovom naslovu se trenutno nalazi {{PLURAL:$1|jedan članak|$1 članka|$1 članaka}}'
+	'dpl_articlecount' => 'U ovom naslovu se trenutno nalazi {{PLURAL:$1|jedan članak|$1 članka|$1 članaka}}',
 );
 
 /** Seeltersk (Seeltersk)
@@ -1102,7 +1126,7 @@ $messages['yue'] = array(
 	'dpl_log_7' => "錯誤: 如果你包含多過一個分類，你唔可以用 'addfirstcategorydate=true' 或者 'ordermethod=categoryadd'!",
 	'dpl_log_8' => '錯誤: 你唔可以響一個時間度加入多個一種嘅日期!',
 	'dpl_log_9' => "錯誤: 你只可以用 'ordermethod=[...,]$1' 響 '$0' 上!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "警告: 不明嘅參數 '$0' 被忽略。 幫助: 可用嘅參數: <code>$1</code>。",
 	'dpl_log_14' => "警告: 錯誤嘅 '$0' 參數: '$1'! 用緊預設嘅: '$2'。 幫助: <code>$0= $3</code>。",
@@ -1112,10 +1136,36 @@ $messages['yue'] = array(
 	'dpl_log_18' => "警告: 響單一部件中， 'ordermethod' 度用 'headingmode=$0' 係冇作用嘅。 用緊: '$1'。 幫助: 你可以用非$1 'headingmode' 數值，響多個部件中用 'ordermethod' 。第一個部件係用嚟做標題。例如響分類標題度用 'ordermethod=category,<i>comp</i>' (<i>comp</i>係另外一個部件) 。",
 	'dpl_log_19' => "警告: 'debug=$0' 唔係第一個響DPL元素嘅第一位。新嘅除錯設定響所有參數都能夠處理同檢查之前都唔會應用。",
 	'dpl_log_21' => '查訽: <code>$0</code>',
-	'dpl_articlecount' => '響呢個標題度有$1篇文。'
+	'dpl_articlecount' => '響呢個標題度有$1篇文。',
 );
 
-$messages['zh-yue'] = $messages['yue'];
+$messages['zh-cn'] = array(
+	'intersection-desc' => '输出一个点列最近在分类中的项目，或者系数个分类的一个联系',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分类!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分类!',
+	'intersection_noresults' => 'DynamicPageList: 没有结果!',
+	'intersection_noincludecats' => 'DynamicPageList: 您需要去包含最少一个分类，或者指定一个空间名!',
+	'dpl-desc' => '一个给MediaWiki的高弹性报告产生器',
+	'dpl_log_1' => "错误: 错误的 '$0' 参数: '$1'! 帮助:  <code>$0= <i>空白字符串</i> (主)$3</code>。",
+	'dpl_log_3' => '错误: 过多分类! 最大值: $0。 帮助: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 的值去指定更多的分类或设定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (当加上 <code>DynamicPageList.php</code>后，在<code>LocalSettings.php</code>中设定变量。)',
+	'dpl_log_4' => '错误: 过少分类! 最小值: $0。 帮助: 减少 <code>ExtDynamicPageList::$minCategoryCount</code> 的值去指定更少的分类。 (当加上 <code>DynamicPageList.php</code>后，在<code>LocalSettings.php</code>中设定一个合适的变量。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "错误: 如果您想用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd' ，您需要包含最少一个分类!",
+	'dpl_log_7' => "错误: 如果您包含多一个分类，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '错误: 您不可以在一个时间里加入多于一种的日期!',
+	'dpl_log_9' => "错误: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明的参数 '$0' 被忽略。 帮助: 可用的参数: <code>$1</code>。",
+	'dpl_log_14' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2'。 帮助: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2' (没有上限)。 帮助: <code>$0= <i>空白字符串</i> (没有上限) | n</code>, <code>n</code>是一个正整数。",
+	'dpl_log_16' => '警告: 无结果!',
+	'dpl_log_17' => "警告: 加入* 参数 ('adduser', 'addeditdate', 等)' 是对 'mode=category' 没有作用。只有页面空间名／标题才可以在这个模式度看到。",
+	'dpl_log_18' => "警告: 在单一部件中， 'ordermethod' 用 'headingmode=$0' 是没有作用的。 正在使用: '$1'。 帮助: 你可以用非$1 'headingmode' 数值，在多个部件中用 'ordermethod' 。第一个部是用来作标题。例如在分类标题中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一个部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 不是第一个在DPL元素嘅第一位置。新的除错设定在所有参数都能处理和检查前都不会应用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '在这个标题中有$1篇条目。',
+);
 
 /** Simplified Chinese (‪中文(简体)‬)
  * @author Shinjiman
@@ -1135,7 +1185,7 @@ $messages['zh-hans'] = array(
 	'dpl_log_7' => "错误: 如果您包含多一个分类，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
 	'dpl_log_8' => '错误: 您不可以在一个时间里加入多于一种的日期!',
 	'dpl_log_9' => "错误: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "警告: 不明的参数 '$0' 被忽略。 帮助: 可用的参数: <code>$1</code>。",
 	'dpl_log_14' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2'。 帮助: <code>$0= $3</code>。",
@@ -1145,13 +1195,8 @@ $messages['zh-hans'] = array(
 	'dpl_log_18' => "警告: 在单一部件中， 'ordermethod' 用 'headingmode=$0' 是没有作用的。 正在使用: '$1'。 帮助: 你可以用非$1 'headingmode' 数值，在多个部件中用 'ordermethod' 。第一个部是用来作标题。例如在分类标题中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一个部件) 。",
 	'dpl_log_19' => "警告: 'debug=$0' 不是第一个在DPL元素嘅第一位置。新的除错设定在所有参数都能处理和检查前都不会应用。",
 	'dpl_log_21' => '查訽: <code>$0</code>',
-	'dpl_articlecount' => '在这个标题中有$1篇条目。'
+	'dpl_articlecount' => '在这个标题中有$1篇条目。',
 );
-
-
-$messages['zh-cn'] = $messages['zh-hans'];
-$messages['zh-my'] = $messages['zh-hans'];
-$messages['zh-sg'] = $messages['zh-hans'];
 
 /** Traditional Chinese (‪中文(繁體)‬)
  * @author Shinjiman
@@ -1171,7 +1216,7 @@ $messages['zh-hant'] = array(
 	'dpl_log_7' => "錯誤: 如果您包含多一個分類，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
 	'dpl_log_8' => '錯誤: 您不可以在一個時間裡加入多於一種的日期!',
 	'dpl_log_9' => "錯誤: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
-	'dpl_log_10' => "ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
 	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
 	'dpl_log_13' => "警告: 不明的參數 '$0' 被忽略。 說明: 可用的參數: <code>$1</code>。",
 	'dpl_log_14' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2'。 說明: <code>$0= $3</code>。",
@@ -1181,9 +1226,173 @@ $messages['zh-hant'] = array(
 	'dpl_log_18' => "警告: 在單一部件中， 'ordermethod' 用 'headingmode=$0' 是沒有作用的。 正在使用: '$1'。 說明: 你可以用非$1 'headingmode' 數值，在多個部件中用 'ordermethod' 。第一個部是用來作標題。例如在分類標題中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一個部件) 。",
 	'dpl_log_19' => "警告: 'debug=$0' 不是第一個在DPL元素嘅第一位置。新的除錯設定在所有參數都能處理和檢查前都不會應用。",
 	'dpl_log_21' => '查訽: <code>$0</code>',
-	'dpl_articlecount' => '在這個標題中有$1篇條目。'
+	'dpl_articlecount' => '在這個標題中有$1篇條目。',
 );
 
-$messages['zh-hk'] = $messages['zh-hant'];
-$messages['zh-mo'] = $messages['zh-hant'];
-$messages['zh-tw'] = $messages['zh-hant'];
+$messages['zh-hk'] = array(
+	'intersection-desc' => '輸出一個點列最近在分類中的項目，或者係數個分類的一個聯繫',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分類!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分類!',
+	'intersection_noresults' => 'DynamicPageList: 沒有結果!',
+	'intersection_noincludecats' => 'DynamicPageList: 您需要去包含最少一個分類，或者指定一個空間名!',
+	'dpl-desc' => '一個給MediaWiki的高彈性報告產生器',
+	'dpl_log_1' => "錯誤: 錯誤的 '$0' 參數: '$1'! 說明:  <code>$0= <i>空白字串</i> (主)$3</code>。",
+	'dpl_log_3' => '錯誤: 過多分類! 最大值: $0。 說明: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 的值去指定更多的分類或設定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (當加上 <code>DynamicPageList.php</code>後，在<code>LocalSettings.php</code>中設定變數。)',
+	'dpl_log_4' => '錯誤: 過少分類! 最小值: $0。 說明: 減少 <code>ExtDynamicPageList::$minCategoryCount</code> 的值去指定更少的分類。 (當加上 <code>DynamicPageList.php</code>後，在<code>LocalSettings.php</code>中設定一個合適的變數。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "錯誤: 如果您想用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd' ，您需要包含最少一個分類!",
+	'dpl_log_7' => "錯誤: 如果您包含多一個分類，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '錯誤: 您不可以在一個時間裡加入多於一種的日期!',
+	'dpl_log_9' => "錯誤: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明的參數 '$0' 被忽略。 說明: 可用的參數: <code>$1</code>。",
+	'dpl_log_14' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2'。 說明: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2' (沒有上限)。 說明: <code>$0= <i>空白字串</i> (沒有上限) | n</code>, <code>n</code>是一個正整數。",
+	'dpl_log_16' => '警告: 無結果!',
+	'dpl_log_17' => "警告: 加入* 參數 ('adduser', 'addeditdate', 等)' 是對 'mode=category' 沒有作用。只有頁面空間名／標題才可以在這個模式度看到。",
+	'dpl_log_18' => "警告: 在單一部件中， 'ordermethod' 用 'headingmode=$0' 是沒有作用的。 正在使用: '$1'。 說明: 你可以用非$1 'headingmode' 數值，在多個部件中用 'ordermethod' 。第一個部是用來作標題。例如在分類標題中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一個部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 不是第一個在DPL元素嘅第一位置。新的除錯設定在所有參數都能處理和檢查前都不會應用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '在這個標題中有$1篇條目。',
+);
+
+$messages['zh-mo'] = array(
+	'intersection-desc' => '輸出一個點列最近在分類中的項目，或者係數個分類的一個聯繫',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分類!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分類!',
+	'intersection_noresults' => 'DynamicPageList: 沒有結果!',
+	'intersection_noincludecats' => 'DynamicPageList: 您需要去包含最少一個分類，或者指定一個空間名!',
+	'dpl-desc' => '一個給MediaWiki的高彈性報告產生器',
+	'dpl_log_1' => "錯誤: 錯誤的 '$0' 參數: '$1'! 說明:  <code>$0= <i>空白字串</i> (主)$3</code>。",
+	'dpl_log_3' => '錯誤: 過多分類! 最大值: $0。 說明: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 的值去指定更多的分類或設定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (當加上 <code>DynamicPageList.php</code>後，在<code>LocalSettings.php</code>中設定變數。)',
+	'dpl_log_4' => '錯誤: 過少分類! 最小值: $0。 說明: 減少 <code>ExtDynamicPageList::$minCategoryCount</code> 的值去指定更少的分類。 (當加上 <code>DynamicPageList.php</code>後，在<code>LocalSettings.php</code>中設定一個合適的變數。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "錯誤: 如果您想用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd' ，您需要包含最少一個分類!",
+	'dpl_log_7' => "錯誤: 如果您包含多一個分類，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '錯誤: 您不可以在一個時間裡加入多於一種的日期!',
+	'dpl_log_9' => "錯誤: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明的參數 '$0' 被忽略。 說明: 可用的參數: <code>$1</code>。",
+	'dpl_log_14' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2'。 說明: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2' (沒有上限)。 說明: <code>$0= <i>空白字串</i> (沒有上限) | n</code>, <code>n</code>是一個正整數。",
+	'dpl_log_16' => '警告: 無結果!',
+	'dpl_log_17' => "警告: 加入* 參數 ('adduser', 'addeditdate', 等)' 是對 'mode=category' 沒有作用。只有頁面空間名／標題才可以在這個模式度看到。",
+	'dpl_log_18' => "警告: 在單一部件中， 'ordermethod' 用 'headingmode=$0' 是沒有作用的。 正在使用: '$1'。 說明: 你可以用非$1 'headingmode' 數值，在多個部件中用 'ordermethod' 。第一個部是用來作標題。例如在分類標題中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一個部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 不是第一個在DPL元素嘅第一位置。新的除錯設定在所有參數都能處理和檢查前都不會應用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '在這個標題中有$1篇條目。',
+);
+
+$messages['zh-my'] = array(
+	'intersection-desc' => '输出一个点列最近在分类中的项目，或者系数个分类的一个联系',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分类!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分类!',
+	'intersection_noresults' => 'DynamicPageList: 没有结果!',
+	'intersection_noincludecats' => 'DynamicPageList: 您需要去包含最少一个分类，或者指定一个空间名!',
+	'dpl-desc' => '一个给MediaWiki的高弹性报告产生器',
+	'dpl_log_1' => "错误: 错误的 '$0' 参数: '$1'! 帮助:  <code>$0= <i>空白字符串</i> (主)$3</code>。",
+	'dpl_log_3' => '错误: 过多分类! 最大值: $0。 帮助: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 的值去指定更多的分类或设定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (当加上 <code>DynamicPageList.php</code>后，在<code>LocalSettings.php</code>中设定变量。)',
+	'dpl_log_4' => '错误: 过少分类! 最小值: $0。 帮助: 减少 <code>ExtDynamicPageList::$minCategoryCount</code> 的值去指定更少的分类。 (当加上 <code>DynamicPageList.php</code>后，在<code>LocalSettings.php</code>中设定一个合适的变量。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "错误: 如果您想用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd' ，您需要包含最少一个分类!",
+	'dpl_log_7' => "错误: 如果您包含多一个分类，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '错误: 您不可以在一个时间里加入多于一种的日期!',
+	'dpl_log_9' => "错误: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明的参数 '$0' 被忽略。 帮助: 可用的参数: <code>$1</code>。",
+	'dpl_log_14' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2'。 帮助: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2' (没有上限)。 帮助: <code>$0= <i>空白字符串</i> (没有上限) | n</code>, <code>n</code>是一个正整数。",
+	'dpl_log_16' => '警告: 无结果!',
+	'dpl_log_17' => "警告: 加入* 参数 ('adduser', 'addeditdate', 等)' 是对 'mode=category' 没有作用。只有页面空间名／标题才可以在这个模式度看到。",
+	'dpl_log_18' => "警告: 在单一部件中， 'ordermethod' 用 'headingmode=$0' 是没有作用的。 正在使用: '$1'。 帮助: 你可以用非$1 'headingmode' 数值，在多个部件中用 'ordermethod' 。第一个部是用来作标题。例如在分类标题中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一个部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 不是第一个在DPL元素嘅第一位置。新的除错设定在所有参数都能处理和检查前都不会应用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '在这个标题中有$1篇条目。',
+);
+
+$messages['zh-sg'] = array(
+	'intersection-desc' => '输出一个点列最近在分类中的项目，或者系数个分类的一个联系',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分类!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分类!',
+	'intersection_noresults' => 'DynamicPageList: 没有结果!',
+	'intersection_noincludecats' => 'DynamicPageList: 您需要去包含最少一个分类，或者指定一个空间名!',
+	'dpl-desc' => '一个给MediaWiki的高弹性报告产生器',
+	'dpl_log_1' => "错误: 错误的 '$0' 参数: '$1'! 帮助:  <code>$0= <i>空白字符串</i> (主)$3</code>。",
+	'dpl_log_3' => '错误: 过多分类! 最大值: $0。 帮助: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 的值去指定更多的分类或设定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (当加上 <code>DynamicPageList.php</code>后，在<code>LocalSettings.php</code>中设定变量。)',
+	'dpl_log_4' => '错误: 过少分类! 最小值: $0。 帮助: 减少 <code>ExtDynamicPageList::$minCategoryCount</code> 的值去指定更少的分类。 (当加上 <code>DynamicPageList.php</code>后，在<code>LocalSettings.php</code>中设定一个合适的变量。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "错误: 如果您想用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd' ，您需要包含最少一个分类!",
+	'dpl_log_7' => "错误: 如果您包含多一个分类，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '错误: 您不可以在一个时间里加入多于一种的日期!',
+	'dpl_log_9' => "错误: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明的参数 '$0' 被忽略。 帮助: 可用的参数: <code>$1</code>。",
+	'dpl_log_14' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2'。 帮助: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 错误的 '$0' 参数: '$1'! 正在使用默认值: '$2' (没有上限)。 帮助: <code>$0= <i>空白字符串</i> (没有上限) | n</code>, <code>n</code>是一个正整数。",
+	'dpl_log_16' => '警告: 无结果!',
+	'dpl_log_17' => "警告: 加入* 参数 ('adduser', 'addeditdate', 等)' 是对 'mode=category' 没有作用。只有页面空间名／标题才可以在这个模式度看到。",
+	'dpl_log_18' => "警告: 在单一部件中， 'ordermethod' 用 'headingmode=$0' 是没有作用的。 正在使用: '$1'。 帮助: 你可以用非$1 'headingmode' 数值，在多个部件中用 'ordermethod' 。第一个部是用来作标题。例如在分类标题中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一个部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 不是第一个在DPL元素嘅第一位置。新的除错设定在所有参数都能处理和检查前都不会应用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '在这个标题中有$1篇条目。',
+);
+
+$messages['zh-tw'] = array(
+	'intersection-desc' => '輸出一個點列最近在分類中的項目，或者係數個分類的一個聯繫',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分類!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分類!',
+	'intersection_noresults' => 'DynamicPageList: 沒有結果!',
+	'intersection_noincludecats' => 'DynamicPageList: 您需要去包含最少一個分類，或者指定一個空間名!',
+	'dpl-desc' => '一個給MediaWiki的高彈性報告產生器',
+	'dpl_log_1' => "錯誤: 錯誤的 '$0' 參數: '$1'! 說明:  <code>$0= <i>空白字串</i> (主)$3</code>。",
+	'dpl_log_3' => '錯誤: 過多分類! 最大值: $0。 說明: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 的值去指定更多的分類或設定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (當加上 <code>DynamicPageList.php</code>後，在<code>LocalSettings.php</code>中設定變數。)',
+	'dpl_log_4' => '錯誤: 過少分類! 最小值: $0。 說明: 減少 <code>ExtDynamicPageList::$minCategoryCount</code> 的值去指定更少的分類。 (當加上 <code>DynamicPageList.php</code>後，在<code>LocalSettings.php</code>中設定一個合適的變數。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "錯誤: 如果您想用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd' ，您需要包含最少一個分類!",
+	'dpl_log_7' => "錯誤: 如果您包含多一個分類，您不可以用 'addfirstcategorydate=true' 或 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '錯誤: 您不可以在一個時間裡加入多於一種的日期!',
+	'dpl_log_9' => "錯誤: 你只可以用 'ordermethod=[...,]$1' 在 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明的參數 '$0' 被忽略。 說明: 可用的參數: <code>$1</code>。",
+	'dpl_log_14' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2'。 說明: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 錯誤的 '$0' 參數: '$1'! 正在使用預設值: '$2' (沒有上限)。 說明: <code>$0= <i>空白字串</i> (沒有上限) | n</code>, <code>n</code>是一個正整數。",
+	'dpl_log_16' => '警告: 無結果!',
+	'dpl_log_17' => "警告: 加入* 參數 ('adduser', 'addeditdate', 等)' 是對 'mode=category' 沒有作用。只有頁面空間名／標題才可以在這個模式度看到。",
+	'dpl_log_18' => "警告: 在單一部件中， 'ordermethod' 用 'headingmode=$0' 是沒有作用的。 正在使用: '$1'。 說明: 你可以用非$1 'headingmode' 數值，在多個部件中用 'ordermethod' 。第一個部是用來作標題。例如在分類標題中用 'ordermethod=category,<i>comp</i>' (<i>comp</i>是另外一個部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 不是第一個在DPL元素嘅第一位置。新的除錯設定在所有參數都能處理和檢查前都不會應用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '在這個標題中有$1篇條目。',
+);
+
+$messages['zh-yue'] = array(
+	'intersection-desc' => '輸出一個點列最近響分類嘅項目，或者係幾個分類嘅一個聯繫',
+	'intersection_toomanycats' => 'DynamicPageList: 太多分類!',
+	'intersection_toofewcats' => 'DynamicPageList: 太少分類!',
+	'intersection_noresults' => 'DynamicPageList: 無結果!',
+	'intersection_noincludecats' => 'DynamicPageList: 你需要去包含最少一個分類，或者指定一個空間名!',
+	'dpl-desc' => '一個畀MediaWiki嘅高彈性報告產生器',
+	'dpl_log_1' => "錯誤: 錯嘅 '$0' 參數: '$1'! 幫助:  <code>$0= <i>空字串</i> (主)$3</code>。",
+	'dpl_log_3' => '錯誤: 太多分類! 最大值: $0。 幫助: 增加 <code>ExtDynamicPageList::$maxCategoryCount</code> 嘅值去指定更多嘅分類或者設定 <code>ExtDynamicPageList::$allowUnlimitedCategories=true</code> 以解除限制。 (當加上 <code>DynamicPageList.php</code>之後，響<code>LocalSettings.php</code>度設定變數。)',
+	'dpl_log_4' => '錯誤: 太少分類! 最小值: $0. 幫助: 減少 <code>ExtDynamicPageList::$minCategoryCount</code> 嘅值去指定更少嘅分類。 (當加上 <code>DynamicPageList.php</code>之後，響<code>LocalSettings.php</code>度設定一個合適嘅變數。)',
+	'dpl_log_5' => "ERROR: No selection criteria found! You must use at least one of the following parameters: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby or their 'not' variants",
+	'dpl_log_6' => "錯誤: 如果你想去用 'addfirstcategorydate=true' 或者 'ordermethod=categoryadd' ，你需要包含最少一個分類!",
+	'dpl_log_7' => "錯誤: 如果你包含多過一個分類，你唔可以用 'addfirstcategorydate=true' 或者 'ordermethod=categoryadd'!",
+	'dpl_log_8' => '錯誤: 你唔可以響一個時間度加入多個一種嘅日期!',
+	'dpl_log_9' => "錯誤: 你只可以用 'ordermethod=[...,]$1' 響 '$0' 上!",
+	'dpl_log_10' => 'ERROR: the index for the dominant section must be between 1 and the number of arguments of includepage ($0 in this case)',
+	'dpl_log_12' => 'ERROR: specifying "openreferences" is incompatible with some other option you specified. See the manual for details.',
+	'dpl_log_13' => "警告: 不明嘅參數 '$0' 被忽略。 幫助: 可用嘅參數: <code>$1</code>。",
+	'dpl_log_14' => "警告: 錯誤嘅 '$0' 參數: '$1'! 用緊預設嘅: '$2'。 幫助: <code>$0= $3</code>。",
+	'dpl_log_15' => "警告: 錯誤嘅 '$0' 參數: '$1'! 用緊預設嘅: '$2' (冇上限)。 幫助: <code>$0= <i>空字串</i> (冇上限) | n</code>, <code>n</code>係一個正整數。",
+	'dpl_log_16' => '警告: 無結果!',
+	'dpl_log_17' => "警告: 加入* 參數 ('adduser', 'addeditdate', 等)' 係對 'mode=category' 冇作用嘅。只有頁空間名／標題至可以響呢個模式度睇到。",
+	'dpl_log_18' => "警告: 響單一部件中， 'ordermethod' 度用 'headingmode=$0' 係冇作用嘅。 用緊: '$1'。 幫助: 你可以用非$1 'headingmode' 數值，響多個部件中用 'ordermethod' 。第一個部件係用嚟做標題。例如響分類標題度用 'ordermethod=category,<i>comp</i>' (<i>comp</i>係另外一個部件) 。",
+	'dpl_log_19' => "警告: 'debug=$0' 唔係第一個響DPL元素嘅第一位。新嘅除錯設定響所有參數都能夠處理同檢查之前都唔會應用。",
+	'dpl_log_21' => '查訽: <code>$0</code>',
+	'dpl_articlecount' => '響呢個標題度有$1篇文。',
+);

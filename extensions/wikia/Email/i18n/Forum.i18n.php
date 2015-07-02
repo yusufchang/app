@@ -11,16 +11,6 @@ $messages['en'] = array(
 	'emailext-forum-reply-view-all' => '[$1 See the entire discussion.]',
 );
 
-$messages['qqq'] = array(
-	'emailext-forum-subject' => 'Subject for email that is fired when new thread is created. $1 -> Forum board name where thread was created.',
-	'emailext-forum-summary' => 'Message to the user that new forum thread was created. $1 -> thread url, $2 -> thread name',
-	'emailext-forum-button-label' => 'Text for button that, when clicked, navigates to the new forum thread.',
-	'emailext-forum-reply-subject' => 'Information about the new replies in thread. It goes to an email subject. $1 is the thread subject.',
-	'emailext-forum-reply-summary' => 'Information about the new replies in thread. $1 is the thread subject.',
-	'emailext-forum-reply-link-label' => 'Link to the post, permalink.',
-	'emailext-forum-reply-view-all' => 'Link to the thread page.',
-);
-
 $messages['de'] = array(
 	'emailext-forum-subject' => 'Im Forum $1 auf der Seite {{SITENAME}} wurde eine neue Diskussion gestartet.',
 	'emailext-forum-summary' => "'''Im Forum [$1 $2] auf der Seite [{{SERVER}} {{SITENAME}}] wurde eine neue Diskussion gestartet.'''",
@@ -69,6 +59,16 @@ $messages['ja'] = array(
 	'emailext-forum-reply-summary' => "'''[{{SERVER}} {{SITENAME}}]の[$2 $1]に新しい返信があります。'''",
 	'emailext-forum-reply-link-label' => '返信を読む',
 	'emailext-forum-reply-view-all' => '[$1 スレッド全体を見る]',
+);
+
+$messages['ko'] = array(
+	'emailext-forum-subject' => '{{SITENAME}}의 $1에 새 토론이 있습니다',
+	'emailext-forum-summary' => "'''[{{SERVER}} {{SITENAME}}]의 [$1 $2]에 새 토론이 있습니다.'''",
+	'emailext-forum-button-label' => '토론 보기',
+	'emailext-forum-reply-subject' => '{{SITENAME}}의 $1 토론에 새 댓글이 있습니다',
+	'emailext-forum-reply-summary' => "'''[{{SERVER}} {{SITENAME}}]의 [$2 $1] 토론에 새 댓글이 있습니다.'''",
+	'emailext-forum-reply-link-label' => '댓글 보기',
+	'emailext-forum-reply-view-all' => '[$1 토론 내용 전체 보기]',
 );
 
 $messages['nl'] = array(
@@ -121,13 +121,32 @@ $messages['zh-hans'] = array(
 	'emailext-forum-reply-view-all' => '[$1 查看完整讨论]',
 );
 
-$messages['zh-tw'] = array(
-	'emailext-forum-subject' => '在{{SITENAME}}網站的$1論壇上,大家正在對一個新的話題進行討論。',
-	'emailext-forum-summary' => "'''在[{{SERVER}} {{SITENAME}}]網站的[$1 $2]網頁，大家正在對一個新的話題進行討論。'''",
-	'emailext-forum-button-label' => '查看討論',
-	'emailext-forum-reply-subject' => '{{SITENAME}}的$1有新的回覆郵件。',
-	'emailext-forum-reply-summary' => "'''[{{SERVER}} {{SITENAME}}]的[$2 $1]有新的回覆郵件。'''",
-	'emailext-forum-reply-link-label' => '閲讀回覆郵件',
-	'emailext-forum-reply-view-all' => '[$1 查看整個討論內容]',
+$messages['zh-hant'] = array(
+	'emailext-forum-subject' => '在{{SITENAME}}的$1論壇上,大家正在對一個新的話題進行討論。',
+	'emailext-forum-summary' => "'''在[{{SERVER}} {{SITENAME}}]的[$1 $2]上，大家正在討論一個新的話題。'''",
+	'emailext-forum-button-label' => '查看討論內容',
+	'emailext-forum-reply-subject' => '{{SITENAME}}上的$1有新的回覆。',
+	'emailext-forum-reply-summary' => "'''[{{SERVER}} {{SITENAME}}]上的[$2 $1]有新的回覆。'''",
+	'emailext-forum-reply-link-label' => '閱讀回覆',
+	'emailext-forum-reply-view-all' => '[$1 查看完整討論。]',
 );
 
+$messages['zh-hk'] = array(
+	'emailext-forum-subject' => '在{{SITENAME}}的$1論壇上,大家正在對一個新的話題進行討論。',
+	'emailext-forum-summary' => "'''在[{{SERVER}} {{SITENAME}}]的[$1 $2]上，大家正在討論一個新的話題。'''",
+	'emailext-forum-button-label' => '查看討論內容',
+	'emailext-forum-reply-subject' => '{{SITENAME}}上的$1有新的回覆。',
+	'emailext-forum-reply-summary' => "'''[{{SERVER}} {{SITENAME}}]上的[$2 $1]有新的回覆。'''",
+	'emailext-forum-reply-link-label' => '閱讀回覆',
+	'emailext-forum-reply-view-all' => '[$1 查看完整討論。]',
+);
+
+$messages['zh-tw'] = array(
+	'emailext-forum-subject' => '在{{SITENAME}}的$1論壇上,大家正在對一個新的話題進行討論。',
+	'emailext-forum-summary' => "'''在[{{SERVER}} {{SITENAME}}]的[$1 $2]上，大家正在討論一個新的話題。'''",
+	'emailext-forum-button-label' => '查看討論',
+	'emailext-forum-reply-subject' => '{{SITENAME}}上的$1有新的回覆。',
+	'emailext-forum-reply-summary' => "'''[{{SERVER}} {{SITENAME}}]上的[$2 $1]有新的回覆。'''",
+	'emailext-forum-reply-link-label' => '閲讀回覆',
+	'emailext-forum-reply-view-all' => '[$1 查看整個討論內容]',
+);

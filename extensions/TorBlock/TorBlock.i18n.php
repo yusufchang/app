@@ -12,7 +12,7 @@ $messages = array();
  * @author Andrew Garrett
  */
 $messages['en'] = array(
-	'torblock-desc'    => 'Allows tor exit nodes to be blocked from editing a wiki',
+	'torblock-desc' => 'Allows tor exit nodes to be blocked from editing a wiki',
 	'torblock-blocked' => 'Your IP address, <tt>$1</tt>, has been automatically identified as a tor exit node.
 Editing through tor is blocked to prevent abuse.',
 	'torblock-isexitnode' => 'The IP address $1 is blocked as a Tor exit node.',
@@ -20,20 +20,6 @@ Editing through tor is blocked to prevent abuse.',
 	'tag-tor-description' => 'If this tag is set, an edit was made from a Tor exit node.',
 	'tag-tor' => 'Made through tor',
 	'abusefilter-edit-builder-vars-tor-exit-node' => 'Whether or not the change was made through a tor exit node',
-);
-
-/** Message documentation (Message documentation)
- * @author Fryed-peach
- * @author Mormegil
- * @author Purodha
- * @author The Evil IP address
- * @author Umherirrender
- */
-$messages['qqq'] = array(
-	'torblock-desc' => '{{desc}}',
-	'right-torunblocked' => '{{doc-right|torunblocked}}
-
-Users with this right are not affected by automatic blocking by [[mw:Extension:TorBlock|Extension:TorBlock]] (and can therefore edit using tor).',
 );
 
 /** Afrikaans (Afrikaans)
@@ -802,6 +788,10 @@ Redigering via TOR er blokkert for å hindre misbruk.',
 	'abusefilter-edit-builder-vars-tor-exit-node' => 'Om endringa vart gjort gjennom eit Tor-utgangsknutepunkt.',
 );
 
+$messages['no'] = array(
+	'abusefilter-edit-builder-vars-tor-exit-node' => 'Uavhengig om endringen var gjort gjennom en tor utgangsnode',
+);
+
 /** Occitan (Occitan)
  * @author Cedric31
  */
@@ -1225,4 +1215,3 @@ $messages['zh-hant'] = array(
 	'tag-tor' => '經 Tor 編輯',
 	'abusefilter-edit-builder-vars-tor-exit-node' => '修改是否經過一個 Tor 節點完成',
 );
-

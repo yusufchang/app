@@ -1,27 +1,18 @@
 <?php
-
 $messages = array();
 
 $messages['en'] = array(
-	'category-exhibition-desc'              => 'New look to category page',
-	'category-exhibition-sorttype'			=> 'Sorting type:',
-	'category-exhibition-alphabetical'		=> 'Alphabetical',
-	'category-exhibition-mostvisited'		=> 'Most visited',
-	'category-exhibition-recentedits'		=> 'Recently edited',
-	'category-exhibition-page-header'		=> 'Pages in category "$1"',
-	'category-exhibition-subcategories-header'	=> 'Subcategories',
-	'category-exhibition-media-header'		=> 'Media in category "$1"',
-	'category-exhibition-blogs-header'		=> 'Blog posts',
-	'category-exhibition-display-old'		=> 'Category List view',
-	'category-exhibition-display-new'		=> 'Category Exhibition view'
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- */
-$messages['qqq'] = array(
-	'category-exhibition-desc' => '{{desc}}',
-	'category-exhibition-subcategories-header' => '{{Identical|Subcategory}}',
+	'category-exhibition-desc' => 'New look to category page',
+	'category-exhibition-sorttype' => 'Sorting type:',
+	'category-exhibition-alphabetical' => 'Alphabetical',
+	'category-exhibition-mostvisited' => 'Most visited',
+	'category-exhibition-recentedits' => 'Recently edited',
+	'category-exhibition-page-header' => 'Pages in category "$1"',
+	'category-exhibition-subcategories-header' => 'Subcategories',
+	'category-exhibition-media-header' => 'Media in category "$1"',
+	'category-exhibition-blogs-header' => 'Blog posts',
+	'category-exhibition-display-old' => 'Category List view',
+	'category-exhibition-display-new' => 'Category Exhibition view',
 );
 
 /** Afrikaans (Afrikaans)
@@ -427,15 +418,16 @@ $messages['kn'] = array(
  * @author 관인생략
  */
 $messages['ko'] = array(
-	'category-exhibition-sorttype' => '정렬 기준:',
-	'category-exhibition-alphabetical' => '알파벳순',
-	'category-exhibition-mostvisited' => '가장 많이 방문함',
-	'category-exhibition-recentedits' => '최근 수정',
-	'category-exhibition-page-header' => '"$1" 분류에 속하는 문서',
+	'category-exhibition-sorttype' => '정렬 순서:',
+	'category-exhibition-alphabetical' => '가나다순',
+	'category-exhibition-mostvisited' => '방문순',
+	'category-exhibition-recentedits' => '최근 편집순',
+	'category-exhibition-page-header' => "'$1' 분류에 속해있는 문서",
 	'category-exhibition-subcategories-header' => '하위 분류',
-	'category-exhibition-media-header' => '"$1" 분류에 속하는 미디어',
-	'category-exhibition-blogs-header' => '블로그 게시물',
+	'category-exhibition-media-header' => "'$1' 분류에 속해있는 파일",
+	'category-exhibition-blogs-header' => '블로그 글',
 	'category-exhibition-display-old' => '분류 목록 보기',
+	'category-exhibition-display-new' => '분류 갤러리 보기',
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -844,4 +836,29 @@ $messages['zh-hant'] = array(
 	'category-exhibition-recentedits' => '最近修改',
 	'category-exhibition-blogs-header' => '部落格文章',
 	'category-exhibition-display-new' => '分類展示',
+	'category-exhibition-desc' => '為分類頁面提供嶄新面貌',
+	'category-exhibition-mostvisited' => '最多訪問',
+	'category-exhibition-page-header' => '分類"$1"中的頁面',
+	'category-exhibition-subcategories-header' => '子分類',
+	'category-exhibition-media-header' => '分類"$1"中的媒體文件',
+	'category-exhibition-display-old' => '列表顯示分類',
+);
+
+$messages['zh-hk'] = array(
+	'category-exhibition-desc' => '為分類頁面提供嶄新面貌',
+	'category-exhibition-mostvisited' => '最多訪問',
+	'category-exhibition-page-header' => '分類"$1"中的頁面',
+	'category-exhibition-subcategories-header' => '子分類',
+	'category-exhibition-media-header' => '分類"$1"中的媒體文件',
+	'category-exhibition-blogs-header' => '網誌文章',
+	'category-exhibition-display-old' => '列表顯示分類',
+);
+
+$messages['zh-tw'] = array(
+	'category-exhibition-desc' => '為分類頁面提供嶄新面貌',
+	'category-exhibition-mostvisited' => '最多訪問',
+	'category-exhibition-page-header' => '分類"$1"中的頁面',
+	'category-exhibition-subcategories-header' => '子分類',
+	'category-exhibition-media-header' => '分類"$1"中的媒體文件',
+	'category-exhibition-display-old' => '列表顯示分類',
 );

@@ -20,14 +20,7 @@ $messages = array();
 
 $messages['en'] = array(
 	'communitymessages-desc' => 'Helper extension for Community Messages',
-	'communitymessages-notice-msg' => '[[Special:WikiActivity|Community Messages has been updated]].'
-);
-
-/** Message documentation (Message documentation)
- */
-$messages['qqq'] = array(
-	'communitymessages-desc' => 'A description of this extension',
-	'communitymessages-notice-msg' => 'A message about updating Community Messages',
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|Community Messages has been updated]].',
 );
 
 /** Tunisian Arabic (تونسي/Tûnsî)
@@ -67,7 +60,7 @@ $messages['az'] = array(
  */
 $messages['bar'] = array(
 	'communitymessages-desc' => 'Hüfs-Daweiterrung fyr Gmoahschoftsnoochrichten',
-	'communitymessages-notice-msg' => 'De Gmoahschoftsnoochrichten san aktualisierd worn.', # Fuzzy
+	'communitymessages-notice-msg' => 'De Gmoahschoftsnoochrichten san aktualisierd worn.',
 );
 
 /** Breton (brezhoneg)
@@ -102,7 +95,7 @@ $messages['cs'] = array(
  * @author Quedel
  */
 $messages['de'] = array(
-	'communitymessages-desc' => 'Hilfs-Erweiterung für Community-Nachrichten',
+	'communitymessages-desc' => 'Hilfserweiterung für Community-Nachrichten',
 	'communitymessages-notice-msg' => '[[Special:WikiActivity|Community-Nachrichten wurden aktualisiert]].',
 );
 
@@ -112,7 +105,7 @@ $messages['de'] = array(
  */
 $messages['es'] = array(
 	'communitymessages-desc' => 'Extensión de ayuda para mensajes de la comunidad',
-	'communitymessages-notice-msg' => '[[Special:WikiActivity|Se han actualizado los mensajes de la comunidad]].',
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|Los mensajes de la comunidad han sido actualizados]].',
 );
 
 /** Basque (euskara)
@@ -213,8 +206,12 @@ $messages['id'] = array(
  * @author Pietrodn
  */
 $messages['it'] = array(
-	'communitymessages-desc' => 'Estensione di supporto per i messaggi della comunità',
+	'communitymessages-desc' => 'Estensione di supporto per i messaggi della community',
 	'communitymessages-notice-msg' => '[[Special:WikiActivity|I messaggi della community sono stati aggiornati]].',
+);
+
+$messages['ja'] = array(
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|コミュニティメッセージが更新されています]]。',
 );
 
 /** Georgian (ქართული)
@@ -228,7 +225,7 @@ $messages['ka'] = array(
  * @author Miri-Nae
  */
 $messages['ko'] = array(
-	'communitymessages-notice-msg' => '[[Special:WikiActivity|커뮤니티 코너가 업데이트되었습니다]].',
+	'communitymessages-notice-msg' => '[[Special:WikiActivity|커뮤니티 코너에 변경점이 있습니다.]]',
 );
 
 /** Colognian (Ripoarisch)

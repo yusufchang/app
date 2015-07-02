@@ -9,96 +9,46 @@
 $messages = array();
 
 $messages['en'] = array(
-	'ogg-desc'             => 'Handler for Ogg Theora and Vorbis files, with JavaScript player',
-	'ogg-short-audio'      => 'Ogg $1 sound file, $2',
-	'ogg-short-video'      => 'Ogg $1 video file, $2',
-	'ogg-short-general'    => 'Ogg $1 media file, $2',
-	'ogg-long-audio'       => 'Ogg $1 sound file, length $2, $3',
-	'ogg-long-video'       => 'Ogg $1 video file, length $2, $4×$5 pixels, $3',
+	'ogg-desc' => 'Handler for Ogg Theora and Vorbis files, with JavaScript player',
+	'ogg-short-audio' => 'Ogg $1 sound file, $2',
+	'ogg-short-video' => 'Ogg $1 video file, $2',
+	'ogg-short-general' => 'Ogg $1 media file, $2',
+	'ogg-long-audio' => 'Ogg $1 sound file, length $2, $3',
+	'ogg-long-video' => 'Ogg $1 video file, length $2, $4×$5 pixels, $3',
 	'ogg-long-multiplexed' => 'Ogg multiplexed audio/video file, $1, length $2, $4×$5 pixels, $3 overall',
-	'ogg-long-general'     => 'Ogg media file, length $2, $3',
-	'ogg-long-error'       => 'Invalid ogg file: $1',
-	'ogg-play'             => 'Play',
-	'ogg-pause'            => 'Pause',
-	'ogg-stop'             => 'Stop',
-	'ogg-play-video'       => 'Play video',
-	'ogg-play-sound'       => 'Play sound',
-	'ogg-no-player'        => 'Sorry, your system does not appear to have any supported player software.
+	'ogg-long-general' => 'Ogg media file, length $2, $3',
+	'ogg-long-error' => 'Invalid ogg file: $1',
+	'ogg-play' => 'Play',
+	'ogg-pause' => 'Pause',
+	'ogg-stop' => 'Stop',
+	'ogg-play-video' => 'Play video',
+	'ogg-play-sound' => 'Play sound',
+	'ogg-no-player' => 'Sorry, your system does not appear to have any supported player software.
 Please <a href="http://www.mediawiki.org/wiki/Extension:OggHandler/Client_download">download a player</a>.',
-	'ogg-no-xiphqt'        => 'You do not appear to have the XiphQT component for QuickTime.
+	'ogg-no-xiphqt' => 'You do not appear to have the XiphQT component for QuickTime.
 QuickTime cannot play Ogg files without this component.
 Please <a href="http://www.mediawiki.org/wiki/Extension:OggHandler/Client_download">download XiphQT</a> or choose another player.',
-
 	'ogg-player-videoElement' => 'Native browser support',
 	'ogg-player-oggPlugin' => 'Browser plugin',
-	'ogg-player-cortado'   => 'Cortado (Java)', # only translate this message to other languages if you have to change it
-	'ogg-player-vlc-mozilla' => 'VLC', # only translate this message to other languages if you have to change it
-	'ogg-player-vlc-activex' => 'VLC (ActiveX)', # only translate this message to other languages if you have to change it
-	'ogg-player-quicktime-mozilla' => 'QuickTime', # only translate this message to other languages if you have to change it
-	'ogg-player-quicktime-activex' => 'QuickTime (ActiveX)', # only translate this message to other languages if you have to change it
-	'ogg-player-totem'     => 'Totem', # only translate this message to other languages if you have to change it
-	'ogg-player-kmplayer'  => 'KMPlayer', # only translate this message to other languages if you have to change it
-	'ogg-player-kaffeine'  => 'Kaffeine', # only translate this message to other languages if you have to change it
-	'ogg-player-mplayerplug-in' => 'mplayerplug-in', # only translate this message to other languages if you have to change it
+	'ogg-player-cortado' => 'Cortado (Java)',
+	'ogg-player-vlc-mozilla' => 'VLC',
+	'ogg-player-vlc-activex' => 'VLC (ActiveX)',
+	'ogg-player-quicktime-mozilla' => 'QuickTime',
+	'ogg-player-quicktime-activex' => 'QuickTime (ActiveX)',
+	'ogg-player-totem' => 'Totem',
+	'ogg-player-kmplayer' => 'KMPlayer',
+	'ogg-player-kaffeine' => 'Kaffeine',
+	'ogg-player-mplayerplug-in' => 'mplayerplug-in',
 	'ogg-player-thumbnail' => 'Still image only',
 	'ogg-player-soundthumb' => 'No player',
-	'ogg-player-selected'  => '(selected)',
-	'ogg-use-player'       => 'Use player:',
-	'ogg-more'             => 'More…',
-	'ogg-dismiss'          => 'Close',
-	'ogg-download'         => 'Download file',
-	'ogg-desc-link'        => 'About this file',
+	'ogg-player-selected' => '(selected)',
+	'ogg-use-player' => 'Use player:',
+	'ogg-more' => 'More…',
+	'ogg-dismiss' => 'Close',
+	'ogg-download' => 'Download file',
+	'ogg-desc-link' => 'About this file',
 	'ogg-oggThumb-version' => 'OggHandler requires oggThumb version $1 or later.',
-	'ogg-oggThumb-failed'  => 'oggThumb failed to create the thumbnail.',
-);
-
-/** Message documentation (Message documentation)
- * @author Aotake
- * @author BrokenArrow
- * @author EugeneZelenko
- * @author Fryed-peach
- * @author Jon Harald Søby
- * @author Lloffiwr
- * @author Meno25
- * @author Mormegil
- * @author Purodha
- * @author Siebrand
- * @author Umherirrender
- */
-$messages['qqq'] = array(
-	'ogg-desc' => '{{desc}}',
-	'ogg-short-general' => 'File details for generic (non-audio, non-video) Ogg files, short version.
-Parameters are: 
-* $1 file type, e.g. Vorbis, Speex
-* $2 ?',
-	'ogg-long-audio' => 'File details for Ogg files, shown after the filename in the image description page.
-Parameters are: 
-* $1 file codec, f.e. Vorbis, Speex
-* $2 file duration, f.e. 1m34s
-* $3 file sampling rate, f.e. 97kbps',
-	'ogg-play' => '{{Identical|Play}}',
-	'ogg-player-videoElement' => 'Message used in JavaScript. 
-
-For definition of "native support" see [http://en.wiktionary.org/wiki/native_support Wiktionary].',
-	'ogg-player-cortado' => '{{optional}}',
-	'ogg-player-vlc-mozilla' => '{{optional}}',
-	'ogg-player-vlc-activex' => '{{optional}}',
-	'ogg-player-quicktime-mozilla' => '{{optional}}',
-	'ogg-player-quicktime-activex' => '{{optional}}',
-	'ogg-player-totem' => '{{optional}}',
-	'ogg-player-kmplayer' => '{{optional}}',
-	'ogg-player-kaffeine' => '{{optional}}',
-	'ogg-player-mplayerplug-in' => '{{optional}}',
-	'ogg-more' => '{{Identical|More...}}',
-	'ogg-dismiss' => '{{Identical|Close}}',
-	'ogg-download' => '{{Identical|Download}}',
-);
-
-/** Albaamo innaaɬiilka (Albaamo innaaɬiilka)
- * @author Ulohnanne
- */
-$messages['akz'] = array(
-	'ogg-more' => 'Maatàasasi...',
+	'ogg-oggThumb-failed' => 'oggThumb failed to create the thumbnail.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -131,6 +81,13 @@ $messages['af'] = array(
 	'ogg-dismiss' => 'Sluit',
 	'ogg-download' => 'Laai lêer af',
 	'ogg-desc-link' => 'Aangaande die lêer',
+);
+
+/** Albaamo innaaɬiilka (Albaamo innaaɬiilka)
+ * @author Ulohnanne
+ */
+$messages['akz'] = array(
+	'ogg-more' => 'Maatàasasi...',
 );
 
 /** Gheg Albanian (Gegë)
@@ -848,7 +805,7 @@ $messages['de'] = array(
 	'ogg-player-soundthumb' => 'Kein Player',
 	'ogg-player-selected' => '(ausgewählt)',
 	'ogg-use-player' => 'Abspielsoftware:',
-	'ogg-more' => 'Optionen …',
+	'ogg-more' => 'Optionen…',
 	'ogg-dismiss' => 'Schließen',
 	'ogg-download' => 'Datei speichern',
 	'ogg-desc-link' => 'Über diese Datei',
@@ -2862,11 +2819,11 @@ $messages['pl'] = array(
 	'ogg-short-audio' => 'Plik dźwiękowy Ogg $1, $2',
 	'ogg-short-video' => 'Plik wideo Ogg $1, $2',
 	'ogg-short-general' => 'Plik multimedialny Ogg $1, $2',
-	'ogg-long-audio' => '(plik dźwiękowy Ogg $1, długość $2, $3)',
+	'ogg-long-audio' => 'plik dźwiękowy Ogg $1, długość $2, $3',
 	'ogg-long-video' => 'plik wideo Ogg $1, długość $2, rozdzielczość $4×$5, $3',
-	'ogg-long-multiplexed' => '(plik audio/wideo Ogg, $1, długość $2, rozdzielczość $4×$5, ogółem $3)',
-	'ogg-long-general' => '(plik multimedialny Ogg, długość $2, $3)',
-	'ogg-long-error' => '(niepoprawny plik Ogg: $1)',
+	'ogg-long-multiplexed' => 'plik audio/wideo Ogg, $1, długość $2, rozdzielczość $4×$5, ogółem $3',
+	'ogg-long-general' => 'plik multimedialny Ogg, długość $2, $3',
+	'ogg-long-error' => 'niepoprawny plik Ogg: $1',
 	'ogg-play' => 'Odtwórz',
 	'ogg-pause' => 'Pauza',
 	'ogg-stop' => 'Stop',
@@ -4266,4 +4223,3 @@ $messages['zh-hant'] = array(
 	'ogg-oggThumb-version' => 'OggHandler 需要 oggThumb $1 或者之後的版本',
 	'ogg-oggThumb-failed' => 'oggThumb 無法建立縮圖。',
 );
-

@@ -15,30 +15,14 @@ $messages['en'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Talk page created automatically',
 	'sharedhelp-searchprofile' => 'Help pages',
 	'sharedhelp-searchprofile-tooltip' => 'Search Help pages',
-
-	#Special:SharedHelp
 	'shared_help_info' => 'Questions? Ask in the [[w:Special:Forum|Community Forum]].',
-	'shared_help_edit_info' => 'The help text within the box is stored at [[w:Help:$1|Help:$1]] on Wikia $2. See [[Help:Shared Help]] for more info.
+	'shared_help_edit_info' => "The help text within the box is stored at [[w:Help:$1|Help:$1]] on Wikia $2. See [[Help:Shared Help]] for more info.
 
-Any changes that apply to \'\'all\'\' wikis should be made to the Wikia $2 copy. [[w:Help_talk:$1|Suggest changes here]].
+Any changes that apply to ''all'' wikis should be made to the Wikia $2 copy. [[w:Help_talk:$1|Suggest changes here]].
 
-Text should be placed on this page if you wish to explain usage, style and policy guidelines which apply only to {{SITENAME}}. Text added in this edit box will be displayed above the boxed help text.',
+Text should be placed on this page if you wish to explain usage, style and policy guidelines which apply only to {{SITENAME}}. Text added in this edit box will be displayed above the boxed help text.",
 	'shared_help_search_info' => 'To search for help with editing, please visit [http://c.wikia.com/wiki/Special:Search?search=$1 Community Central]',
 	'shared_help_was_redirect' => 'This page is a redirect to $1',
-);
-
-/** Message documentation (Message documentation)
- * @author TK-999
- * @author The Evil IP address
- */
-$messages['qqq'] = array(
-	'sharedhelp-desc' => '{{desc}}',
-	'sharedhelp-searchprofile' => 'Search profile link name displayed in left sidebar on search',
-	'sharedhelp-searchprofile-tooltip' => 'Tooltip for search profile link',
-	'shared_help_info' => 'Message displayed on top of help pages',
-	'shared_help_edit_info' => 'Edit information message on help pages in edit mode. Parameters: $1 - PAGENAME the transcluded page is stored on. $2 - SITENAME the transcluded page is stored on.',
-	'shared_help_search_info' => 'Information about where to find editing help',
-	'shared_help_was_redirect' => 'Information about redirect target. Parameters: $1 - PAGENAME of redirect destination.',
 );
 
 /** Arabic (العربية)
@@ -83,12 +67,12 @@ $messages['ca'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Pàgina de discussió creada automàticament',
 	'sharedhelp-searchprofile' => "Pàgines d'ajuda",
 	'sharedhelp-searchprofile-tooltip' => "Cercar pàgines d'ajuda",
-	'shared_help_info' => 'Preguntes? Pregunta al [[w:c:ca:Special:Forum|Fòrum comunitari]].', # Fuzzy
+	'shared_help_info' => 'Preguntes? Pregunta al [[w:c:ca:Special:Forum|Fòrum comunitari]].',
 	'shared_help_edit_info' => "El text dins d'aquesta caixa està emmagatzemat a [[w:c:comunidad:Ayuda:$1|Ajuda:$1]] al wiki $2. Vegeu [[Ajuda:Ajuda compartida]] per més informació.
 
 Qualsevol canvi que vulguis fer a ''tots'' els wikis s'ha de fer a la còpia del wiki $2. [[w:c:comunidad:Ayuda_discusión:$1|Suggeriu canvis aquí]].
 
-Només has d'afegir text en aquesta pàgina si vols especificar les polítiques i directrius de {{SITENAME}}. El text que afegiu en aquesta caixa d'edició es mostrarà a sobre de l'ajuda compartida.", # Fuzzy
+Només has d'afegir text en aquesta pàgina si vols especificar les polítiques i directrius de {{SITENAME}}. El text que afegiu en aquesta caixa d'edició es mostrarà a sobre de l'ajuda compartida.",
 	'shared_help_search_info' => "Per buscar ajuda sobre l'edició, si us plau visita la [http://c.wikia.com/wiki/Special:Search?search=$1 Community Central]",
 	'shared_help_was_redirect' => 'Aquesta pàgina és una redirecció cap a $1',
 );
@@ -115,14 +99,14 @@ $messages['de'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Diskussionsseite automatisch erstellt',
 	'sharedhelp-searchprofile' => 'Hilfeseiten',
 	'sharedhelp-searchprofile-tooltip' => 'Hilfeseiten durchsuchen',
-	'shared_help_info' => 'Fragen? Stelle sie im [[w:Special:Forum|Gemeinschaftsforum]].',
-	'shared_help_edit_info' => "Der Hilfetext innerhalb des Kastens ist gespeichert unter [[w:Help:$1|Help:$1]] auf Wikia $2. Siehe [[Help:Shared Help]] für weitere Informationen.
+	'shared_help_info' => 'Fragen? Stellt sie auf unserem [[w:de:Special:Forum|Community-Forum]].',
+	'shared_help_edit_info' => "Dieser Artikel wird direkt aus dem Artikel [[w:c:hilfe:Hilfe:$1|Hilfe:$1]] der [[w:c:hilfe|Wikia-Hilfe]] eingebunden. Siehe [[Hilfe:Zentrale Hilfe]] für mehr Informationen.
 
-Jegliche Änderungen, die sich auf ''alle'' Wikis auswirken, sollten an der Wikia-$2-Kopie durchgeführt werden. [[w:Help_talk:$1|Schlage hier Änderungen vor]].
+Jede Änderung, die in ''allen'' Wikis sichtbar sein soll, sollte in der Wikia-Hilfe durchgeführt werden. [[w:c:hilfe:Hilfe_Diskussion:$1|Änderungsvorschläge bitte hier]].
 
-Text sollte auf diese Seite platziert werden, falls du die Verwendung, Gestaltungs- und Grundsatzrichtlinien erklären möchtest, die sich nur auf {{SITENAME}} beziehen. Text, der in diesem Bearbeitungsfeld hinzugefügt wird, erscheint oberhalb des Kastens mit dem Hilfetext.",
-	'shared_help_search_info' => 'Um nach Bearbeitungshilfe zu suchen, besuche bitte [http://c.wikia.com/wiki/Special:Search?search=$1 Community Central].',
-	'shared_help_was_redirect' => 'Diese Seite ist eine Weiterleitung nach $1',
+Auf dieser Seite solltest du einen eigenen Text oder Kommentare hinzufügen, die speziell für {{SITENAME}} gelten. Der Text wird dann oberhalb des zentralen Hilfetextes angezeigt.",
+	'shared_help_search_info' => 'Wenn du Hilfe beim Editieren brauchst, besuche bitte die [http://hilfe.wikia.com/wiki/Special:Search?search=$1 Wikia Hilfe].',
+	'shared_help_was_redirect' => 'Diese Seite ist eine Weiterleitung zu $1',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -142,13 +126,13 @@ $messages['es'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Página de discusión creada automáticamente',
 	'sharedhelp-searchprofile' => 'Páginas de ayuda',
 	'sharedhelp-searchprofile-tooltip' => 'Buscar páginas de ayuda',
-	'shared_help_info' => '¿Tienes preguntas? Hazlas en el [[w:Special:Forum|Foro de la comunidad]].',
-	'shared_help_edit_info' => "El texto de ayuda dentro de la caja está en [[w:Help:$1|Ayuda:$1]] en $2 Wiki. Véase [[Help:Shared Help|Ayuda compartida]] para obtener más información.
+	'shared_help_info' => '¿Preguntas? Pregunte en el [[w:es:Special:Forum|Foro de la comunidad]].',
+	'shared_help_edit_info' => "El texto de ayuda dentro de la caja proviene de [[w:c:ayuda:Ayuda:$1|Ayuda:$1]] de Ayuda de Wikia. Puedes ver [[Help:Shared Help]] para más información.
 
-Cualquier cambio que se aplique a '''todos''' los wikis deben hacerse en $2 Wiki. [[w:Help_talk:$1|Sugiere cambios aquí]].
+Cualquier cambio que quiera aplicarse a ''todos'' los wikis debería ser realizados a la copia ubicada en Ayuda de Wikia. [[w:c:ayuda:Ayuda_Discusión:$1|Puedes sugerir cambios aquí]].
 
-El texto debe colocarse en esta página si deseas explicar las su uso, estilo y política que se aplican solo a {{SITENAME}}. El texto añadido en esta caja de edición aparecerá encima de la caja de texto de ayuda.",
-	'shared_help_search_info' => 'Para buscar ayuda con la edición, visita [http://c.wikia.com/wiki/Special:Search?search=$1 de la Comunidad Central]',
+Deberías añadir textos a esta página si deseas explicar usos, estilos y políticas sólo aplicables a {{SITENAME}}. Los textos añadidos en esta caja de edición se mostrarán debajo del texto de ayuda encajado.",
+	'shared_help_search_info' => 'Para buscar ayuda sobre edición, puedes visitar la [http://ayuda.wikia.com/wiki/Special:Search?search=$1 Ayuda de Wikia]',
 	'shared_help_was_redirect' => 'Esta página es una redirección a $1',
 );
 
@@ -157,6 +141,7 @@ El texto debe colocarse en esta página si deseas explicar las su uso, estilo y 
  */
 $messages['fa'] = array(
 	'sharedhelp-searchprofile-tooltip' => 'جستجوی صفحات راهنما',
+	'shared_help_info' => 'این متن در راهنمای ویکیا ذخیره شده‌است. [$1 تغییر در متن را در این‌جا پیشنهاد دهید].',
 );
 
 /** Finnish (suomi)
@@ -168,12 +153,12 @@ $messages['fi'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Keskustelusivu luotiin automaattisesti',
 	'sharedhelp-searchprofile' => 'Ohjesivut',
 	'sharedhelp-searchprofile-tooltip' => 'Etsi ohjesivuja',
-	'shared_help_info' => 'Kysymyksiä tai huolia? Apua löytyy [[w:c:yhteiso:Toiminnot:Forum|Yhteisöwikin foorumeista]].', # Fuzzy
-	'shared_help_edit_info' => "Tämän laatikon ohjeteksti säilytetään $2n sivulla [[w:c:yhteiso:Ohje:$1|Ohje:$1]]. Katso [[Ohje:Jaetut ohjeet]] saadaksesi lisätietoa.
+	'shared_help_info' => 'Kysymyksiä tai huolia? Apua löytyy [[w:fi:|Yhteisöwikistä]].',
+	'shared_help_edit_info' => "Tämän laatikon ohjeteksti säilytetään $2n sivulla [[w:fi:Ohje:$1|Ohje:$1]]. Katso [[Ohje:Jaetut ohjeet]] saadaksesi lisätietoa.
 
-'''Kaikkia wikioita''' koskevat muutokset tulee tehdä $2n kappaleelle. [[w:c:yhteiso:Keskustelu_ohjeesta:$1|Ehdota muutoksista täällä]].
+'''Kaikkia wikioita''' koskevat muutokset tulee tehdä $2n kappaleelle. [[w:fi:Keskustelu_ohjeesta:$1|Ehdota muutoksista täällä]].
 
-Mikäli haluat lisätä vain sivustoa {{SITENAME}} koskevia ohjeita liittyen esimerkiksi käyttöön, käytäntöön tai tyyliin, voit muokata tätä sivua. Tähän laatikkoon lisätty teksti näkyy jaetun ohjesivun sisällön yläpuolella.", # Fuzzy
+Mikäli haluat lisätä vain sivustoa {{SITENAME}} koskevia ohjeita liittyen esimerkiksi käyttöön, käytäntöön tai tyyliin, voit muokata tätä sivua. Tähän laatikkoon lisätty teksti näkyy jaetun ohjesivun sisällön yläpuolella.",
 	'shared_help_search_info' => 'Mikäli haluat hakea neuvoja muokkaamiseen, siirry [http://yhteiso.wikia.com/wiki/Special:Search?search=$1 Yhteisöwikiin]',
 	'shared_help_was_redirect' => 'Tämä sivu on ohjaus sivulle $1',
 );
@@ -185,18 +170,18 @@ Mikäli haluat lisätä vain sivustoa {{SITENAME}} koskevia ohjeita liittyen esi
  * @author Yumeki
  */
 $messages['fr'] = array(
-	'sharedhelp-desc' => 'Prend des pages de [[w:Help:Contents|Community Central]] et les insère dans l’espace de nom {{ns:help}} de ce wiki',
+	'sharedhelp-desc' => 'Prend des pages de l’aide Wikia et les insère dans l’espace de nom {{ns:help}} de ce wiki',
 	'sharedhelp-autotalkcreate-summary' => 'Page de discussion créée automatiquement',
 	'sharedhelp-searchprofile' => "Pages d'aide",
 	'sharedhelp-searchprofile-tooltip' => "Rechercher dans les pages d'aide",
-	'shared_help_info' => 'Des questions ? Posez-les sur le [[w:Special:Forum|forum de la communauté]].',
-	'shared_help_edit_info' => "Le texte d'aide dans l'encadré se trouve sur [[w:Help:$1|Help:$1]] sur le wiki $2. Consultez [[Help:Shared Help]] pour plus d'informations.
+	'shared_help_info' => 'Vous avez des questions ? Posez-les sur le [[w:fr:Special:Forum|forum de la communauté]].',
+	'shared_help_edit_info' => "Le texte d'aide dans l'encadré se trouve sur [[w:fr:Aide:$1|Aide:$1]] sur le wiki $2. Consultez [[w:fr:Aide:Aide partagée|cette page]] pour plus d'informations.
 
-Toute modification qui s'applique à ''tous'' les wikis doit être effectuée sur la copie sur le wiki $2. [[w:Help_talk:$1|Suggérez des modifications ici]].
+Toute modification qui s'applique à ''tous'' les wikis doit être effectuée sur la copie sur le wiki $2. [[w:fr:Discussion aide:$1|Suggérez des modifications ici]].
 
 Du texte devrait être mis sur cette page si vous souhaitez expliquer l'utilisation, le style et les règles qui s'appliquent uniquement à {{SITENAME}}. Le texte ajouté dans cette zone sera affiché au-dessus du texte d’aide encadré.",
-	'shared_help_search_info' => 'Pour trouver de l’aide sur comment modifier, veuillez visiter le [http://fr.c.wikia.com/wiki/Special:Search?search=$1 wiki des communautés]',
-	'shared_help_was_redirect' => 'Cette page est une redirection vers $1',
+	'shared_help_search_info' => 'Si vous recherchez de l’aide, veuillez visiter le [http://communaute.wikia.com/wiki/Special:Search?search=$1 Centre des communautés].',
+	'shared_help_was_redirect' => 'Cette page redirige vers $1',
 );
 
 /** Galician (galego)
@@ -251,9 +236,16 @@ $messages['id'] = array(
 $messages['it'] = array(
 	'sharedhelp-desc' => "Prende le pagine dall'[[w:Help:Contents|Community Central]] e le inserisce nel namespace {{ns:help}} su questa wiki",
 	'sharedhelp-autotalkcreate-summary' => 'Pagina di discussione creata automaticamente',
-	'shared_help_info' => 'Hai delle domande? Chiedile su [[w:Special:Forum|Forum della comunità]].',
-	'shared_help_search_info' => 'Per chiedere aiuto con le modifiche, visita [http://c.wikia.com/wiki/Special:Search?search=$1 Centrale della comunità]',
-	'shared_help_was_redirect' => 'Questa pagina è una redirezione di $1',
+	'shared_help_info' => 'Domande? Chiedi al [[w:it:Special:Forum|Forum della Community]].',
+	'shared_help_search_info' => 'Per effettuare una ricerca tra le pagine di aiuto, consulta la [http://it.community.wikia.com/wiki/Speciale:Ricerca?fulltext=Search&ns12=1 Wiki della Community]',
+	'shared_help_was_redirect' => 'Questa pagina è un reindirizzamento a $1',
+	'sharedhelp-searchprofile' => 'Pagine di aiuto',
+	'sharedhelp-searchprofile-tooltip' => 'Cerca nelle pagine di aiuto',
+	'shared_help_edit_info' => "La versione originale di questa pagina si trova in [[w:c:it.community:aiuto:$1|Aiuto:$1]] nella Wiki della Community. Vedi [[Aiuto:Aiuto condiviso]] per maggiori informazioni.
+
+Per applicare qualsiasi modifica a '''tutte''' le wiki, si deve modificare la versione originale nella Wiki della Community. [[w:c:it.community:Discussioni_aiuto:$1|Suggerisci le modifiche qui]].
+
+Se invece si vogliono spiegare le linee guida sull'uso, lo stile e la politica che si applicano solo a {{SITENAME}}, si deve inserire il testo in questa pagina. Il testo inserito in questa finestra di modifica apparirà sopra al testo dell'aiuto condiviso.",
 );
 
 /** Japanese (日本語)
@@ -261,10 +253,18 @@ $messages['it'] = array(
  * @author Tommy6
  */
 $messages['ja'] = array(
-	'sharedhelp-desc' => '[[w:Help:Contents|Community Central]] のページをこのウィキの {{ns:help}} 名前空間に挿入する。',
-	'sharedhelp-autotalkcreate-summary' => 'ノートページの自動作成',
+	'sharedhelp-desc' => '[[w:c:Help|Help Wikia]] のページをこのウィキの {{ns:help}} 名前空間に挿入する。',
+	'sharedhelp-autotalkcreate-summary' => 'トークページの自動作成',
 	'sharedhelp-searchprofile' => 'ヘルプページ',
 	'sharedhelp-searchprofile-tooltip' => 'ヘルプの検索',
+	'shared_help_info' => '質問ですか？ [[w:ja:Special:Forum|コミュニティフォーラム]]にて質問してみてください。',
+	'shared_help_edit_info' => '枠線内にあるヘルプは、Wikia $2 の [[w:c:ja.community:Help:$1|Help:$1]] に保存されています。詳しくは[[w:ja:Help:共有ヘルプ|Help:共有ヘルプ]]をご覧ください。
+
+Wikia $2 での変更は、「すべて」のウィキアに対して適用されます。もし、記事の間違いや、何らかの変更が必要と思われる場合は、まずは、[[w:ja:Help_talk:$1|こちら]]にご提案いただければと思います。
+
+{{SITENAME}} に特有の使用方法、スタイル、ポリシー、ガイドラインなどの説明が必要な場合は、このページを編集してください。枠線で囲まれた共有ヘルプの上にその内容が追加されます。',
+	'shared_help_search_info' => 'ヘルプの検索を行いたい場合は、[http://help.wikia.com/wiki/Special:Search?search=$1 Help Wikia]をご利用ください。ヘルプの全文を検索できます。',
+	'shared_help_was_redirect' => 'このページは $1 へのリダイレクトです',
 );
 
 /** Kannada (ಕನ್ನಡ)
@@ -279,6 +279,15 @@ $messages['kn'] = array(
  */
 $messages['ko'] = array(
 	'sharedhelp-searchprofile' => '도움말',
+	'sharedhelp-autotalkcreate-summary' => '토론 문서를 자동으로 생성',
+	'shared_help_info' => '질문이 있으신가요? [[w:ko:특수기능:포럼|커뮤니티 포럼]]에서 도움을 구해 보세요.',
+	'shared_help_edit_info' => "상자 안에 있는 도움말은 위키아 도움말에 있는 [[w:c:ko.help:Help:$1|Help:$1]] 문서를 그대로 보여주고 있습니다. 이에 대해서는 [[Help:Shared Help]] 문서를 참고하십시오.
+
+'''모든 위키에 적용'''되는 도움말 내용의 수정은 위키아 도움말에서만 이루어져야 합니다. 내용에 관한 토론은 [[w:c:ko.help:Help_talk:$1|여기]]에서 해주세요.
+
+{{SITENAME}}에 특별히 적용되는 도움말 용례나 지침 등을 이 곳에 적어주세요. 이 곳에 입력된 내용은 상자 안에 있는 도움말 위에 보여지게 됩니다.",
+	'shared_help_search_info' => '위키아 도움말의 유지 및 관리에 관심이 있으시다면 [http://ko.help.wikia.com/wiki/Special:Search?search=$1 위키아 도움말]을 방문해보세요.',
+	'shared_help_was_redirect' => '이 문서는 $1 문서로 넘겨주는 문서입니다.',
 );
 
 /** Colognian (Ripoarisch)
@@ -353,7 +362,7 @@ Teks seharusnya terletak di halaman ini jika anda ingin menerangkan penggunaan, 
  * @author Nghtwlkr
  */
 $messages['nb'] = array(
-	'sharedhelp-desc' => 'Tar sider fra [[w:Help:Contents|Community Central]] og setter dem inn i {{ns:help}}-navnerommet på denne wikien', # Fuzzy
+	'sharedhelp-desc' => 'Tar sider fra [[w:Help:Contents|Community Central]] og setter dem inn i {{ns:help}}-navnerommet på denne wikien',
 	'sharedhelp-autotalkcreate-summary' => 'Diskusjonsside opprettet automatisk',
 	'sharedhelp-searchprofile' => 'Hjelpesider',
 	'sharedhelp-searchprofile-tooltip' => 'Søk i hjelpesidene',
@@ -367,12 +376,12 @@ $messages['nl'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Overlegpagina automatisch aangemaakt',
 	'sharedhelp-searchprofile' => "Hulppagina's",
 	'sharedhelp-searchprofile-tooltip' => "Hulppagina's zoeken",
-	'shared_help_info' => 'Vragen? Stel ze in het [[w:Special:Forum|Communityforum]].',
-	'shared_help_edit_info' => "De hulptekst binnen het venster is opgeslagen in [[w:Help:$1|Help:$1]] op Wikia $2. Zie [[Help:Shared Help|Gedeelde hulp]] voor meer informatie.
+	'shared_help_info' => 'Vragen? Stel ze op het [[w:nl:Special:Forum|community forum]].',
+	'shared_help_edit_info' => "De hulp tekst binnen deze box is opgeslagen op [[w:c:hulp:Help:$1|Help:$1]] op Hulp Wikia.
 
-Alle wijzigingen die van toepassing zijn op ''alle'' wiki's moeten gemaakt worden in de copy van Wikia $2. [[w:Help_talk:$1|Stel hier wijzigingen voor]].
+Veranderingen die aan ''alle'' Wiki's gemaakt moeten worden, moeten worden gemaakt op de Wikia Hulp kopie.
 
-Plaats tekst op deze pagina als u het gebruik wilt uitleggen, of stijl en beleid dat alleen van toepassing is op {{SITENAME}}. Tekst die wordt toegevoegd aan dit venster wordt weergegeven boven het venster met hulptekst.",
+Tekst zou hier alleen geplaatst moeten worden als je gebruik, stijl en beleid richtlijnen wil uitleggen die alleen gelden op de {{SITENAME}} wiki. Tekst toegevoegd in deze bewerk box zullen worden weergeven boven de hulp tekst box.",
 	'shared_help_search_info' => 'Ga als u hulp nodig heeft bij bewerken naar [http://c.wikia.com/wiki/Special:Search?search=$1 Community Central]',
 	'shared_help_was_redirect' => 'Deze pagina is een doorverwijzing naar $1',
 );
@@ -401,9 +410,15 @@ $messages['pl'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Strona dyskusji utworzona automatycznie',
 	'sharedhelp-searchprofile' => 'Strony pomocy',
 	'sharedhelp-searchprofile-tooltip' => 'Przeszukaj strony pomocy',
-	'shared_help_info' => 'Masz jakieś pytania? Zadaj je na [[w:c:spolecznosc:Specjalna:Forum|Forum Społeczności]].', # Fuzzy
+	'shared_help_info' => 'Masz pytania? Zadaj je na [[w:pl:Special:Forum|forum społecznościowym]].',
 	'shared_help_search_info' => 'Jeżeli szukasz pomocy z edytowaniem, odwiedź [http://pl.c.wikia.com/wiki/Special:Search?search=$1 Centrum Społeczności]',
 	'shared_help_was_redirect' => 'Ta strona jest przekierowaniem do $1',
+	'shared_help_edit_info' => 'Zawartość tej strony lub jej część może znajdować się w [[w:c:spolecznosc:Help:$1|Pomoc:$1]] w $2.
+Odwiedź artykuł [[Pomoc:Wspólna pomoc]] aby dowiedzieć się więcej.
+
+Wszelkie zmiany, które powinny pojawić się na wszystkich wiki, powinny być wykonane w $2. [[w:c:spolecznosc:Help_talk:$1|Zasugeruj zmiany]]
+
+Jeśli chcesz aby ta strona zawierała dodatkowe informacje widoczne jedynie na {{SITENAME}} możesz dodać do niej zawartość. Tekst dodany w ten sposób wyświetlony zostanie powyżej zawartości ze współdzielonej pomocy.',
 );
 
 /** Piedmontese (Piemontèis)
@@ -433,6 +448,7 @@ $messages['pt'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Página de discussão criada automaticamente',
 	'sharedhelp-searchprofile' => 'Páginas de ajuda',
 	'sharedhelp-searchprofile-tooltip' => 'Pesquisar nas páginas de ajuda',
+	'shared_help_info' => 'Dúvidas? Pergunte no [[w:pt:Special:Forum|Fórum da Comunidade]].',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -444,6 +460,7 @@ $messages['pt-br'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Página de discussão criada automaticamente',
 	'sharedhelp-searchprofile' => 'Páginas de ajuda',
 	'sharedhelp-searchprofile-tooltip' => 'Pesquisar páginas de ajuda',
+	'shared_help_info' => 'Dúvidas? Pergunte no [[w:pt:Special:Forum|Fórum da Comunidade]].',
 );
 
 /** tarandíne (tarandíne)
@@ -469,14 +486,14 @@ $messages['ru'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Страница обсуждения создана автоматически',
 	'sharedhelp-searchprofile' => 'Страницы справки',
 	'sharedhelp-searchprofile-tooltip' => 'Поиск по Справке',
-	'shared_help_info' => 'Вопросы? Спросите на [[w:Special:Forum|Форуме сообщества]].',
-	'shared_help_edit_info' => "Справочный текст в рамке хранится в [[w:Help:$1|Help:$1]] в Викии $2. См. [[Help:Shared Help]] для получения дополнительной информации.
+	'shared_help_info' => 'Остались вопросы? Спросите на [[w:ru:Special:Forum|форумe Вики Сообществa]].',
+	'shared_help_edit_info' => 'Текст справки с этой страницы находится на [[w:c:ru.community:Справка:$1|Справка:$1]] на Вики Сообщества. Подробнее смотрите [[Справка:Общая Справка]].
 
-Любые изменения, относящееся ко ''всем'' вики, должны быть внесены в копию Викии $2. [[w:Help_talk:$1|Предложите изменения здесь]].
+Если хотите внести изменения в текст именно этой статьи, [[w:c:ru.community:Справка:Общая Справка/предложения по справке|предложите свои правки здесь]].
 
-Текст должен быть размещён на этой странице, если вы хотите объяснить использование, стиль и правила, которые применяются только к {{SITENAME}}. Текст, добавленный в это поле ввода, будет отображаться над справочным текстом в рамке.",
+Текст может быть размещён на этой странице только в случае, если вы хотите дополнить справку некоторыми разделами, относящимися к {{SITENAME}}. Текст, добавленный вами, появится над рамкой с текстом общей справки.',
 	'shared_help_search_info' => 'Для поиска справки по редактированию, пожалуйста, посетите [http://c.wikia.com/wiki/Special:Search? поиск = $1 Community Central]',
-	'shared_help_was_redirect' => 'Эта страница является перенаправлением на $1',
+	'shared_help_was_redirect' => 'Это страница-перенаправление на $1',
 );
 
 /** Swedish (svenska)
@@ -538,7 +555,11 @@ $messages['vi'] = array(
 	'sharedhelp-autotalkcreate-summary' => 'Thảo luận trang tự động tạo ra',
 	'sharedhelp-searchprofile' => 'Trang trợ giúp',
 	'sharedhelp-searchprofile-tooltip' => 'Trang trợ giúp tìm kiếm',
-	'shared_help_info' => 'Muốn hỏi? Hãy yêu cầu trên [[w:Special:Forum|Diễn đàn cộng đồng]].',
+	'shared_help_info' => 'Có thắc mắc? Hãy đặt câu hỏi tại [[w:vi:Special:Forum|Diễn đàn Cộng đồng]].',
+);
+
+$messages['zh'] = array(
+	'shared_help_info' => '对帮助内容有疑问？赶快去[[w:zh:Special:Forum|社区论坛]]提问吧。',
 );
 
 /** Simplified Chinese (中文（简体）‎)
@@ -552,7 +573,7 @@ $messages['zh-hans'] = array(
 	'sharedhelp-autotalkcreate-summary' => '讨论页已自动创建',
 	'sharedhelp-searchprofile' => '帮助页面',
 	'sharedhelp-searchprofile-tooltip' => '搜索帮助页面',
-	'shared_help_info' => '有问题？[[w:Special:Forum|欢迎点此询问]]。',
+	'shared_help_info' => '对帮助内容有疑问？赶快去[[w:zh:Special:Forum|社区论坛]]提问吧。',
 	'shared_help_edit_info' => "框内的帮助文本保存在Wikia站点$2上的[[w:Help:$1|Help:$1]]。更多信息参见[[Help:Shared Help]]。
 任何请求''所有''wiki的更改应该在Wikia站点$2拷贝中进行。[[w:Help_talk:$1|在此提议更改]]。
 如果您希望说明用途、样式和只用于{{SITENAME}}的方针与指引文本应放在此页。在此编辑框加入的文本将显示在上方的帮助文本框。",
@@ -565,8 +586,17 @@ $messages['zh-hans'] = array(
  * @author LNDDYL
  */
 $messages['zh-hant'] = array(
-	'sharedhelp-desc' => '自[[w:c:Help|Wikia幫助]]獲取頁面並嵌入到這個維基的 {{ns:help}}命名空間', # Fuzzy
+	'sharedhelp-desc' => '自[[w:c:Help|Wikia幫助]]獲取頁面並嵌入到這個維基的 {{ns:help}}命名空間',
 	'sharedhelp-autotalkcreate-summary' => '討論頁已自動建立',
 	'sharedhelp-searchprofile' => '幫助頁面',
 	'sharedhelp-searchprofile-tooltip' => '搜尋使用說明頁面',
+	'shared_help_info' => '對幫助內容有疑問？趕快去[[w:zh:Special:Forum|社區論壇]]提問吧。',
+);
+
+$messages['zh-hk'] = array(
+	'shared_help_info' => '對幫助內容有疑問？趕快去[[w:zh:Special:Forum|社區論壇]]提問吧。',
+);
+
+$messages['zh-tw'] = array(
+	'shared_help_info' => '對幫助內容有疑問？趕快去[[w:zh:Special:Forum|社區論壇]]提問吧。',
 );

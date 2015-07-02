@@ -9,28 +9,14 @@
 $messages = array();
 
 $messages['en'] = array(
-	"taskmanager" => "Display and manage background tasks",
-	"taskmanager-desc" => "Display and manage background tasks",
-	"taskmanager_title" => "Display and manage background tasks",
-	"taskmanager_tasklist" => "Return to Task List",
-	'right-taskmanager' => "Can display background tasks",
-	'right-taskmanager-action' => "Can manage background tasks",
+	'taskmanager' => 'Display and manage background tasks',
+	'taskmanager-desc' => 'Display and manage background tasks',
+	'taskmanager_title' => 'Display and manage background tasks',
+	'taskmanager_tasklist' => 'Return to Task List',
+	'right-taskmanager' => 'Can display background tasks',
+	'right-taskmanager-action' => 'Can manage background tasks',
 	'taskmanager-invert' => 'Invert selection',
 	'action-taskmanager' => 'display and manage background tasks',
-);
-
-/** Message documentation (Message documentation)
- * @author Shirayuki
- * @author Siebrand
- */
-$messages['qqq'] = array(
-	'taskmanager' => '{{Identical|Display and manage background task}}',
-	'taskmanager-desc' => '{{desc}}',
-	'taskmanager_title' => '{{Identical|Display and manage background task}}',
-	'right-taskmanager' => '{{doc-right|taskmanager}}',
-	'right-taskmanager-action' => '{{doc-right|taskmanager-action}}',
-	'action-taskmanager' => '{{doc-action|taskmanager}}
-{{Identical|Display and manage background task}}',
 );
 
 /** Afrikaans (Afrikaans)
@@ -173,8 +159,8 @@ $messages['fi'] = array(
  * @author Wyz
  */
 $messages['fr'] = array(
-	'taskmanager' => "Afficher et gérer les tâches d'arrière-plan",
-	'taskmanager-desc' => 'Afficher et gérer les tâches d’arrière-plan',
+	'taskmanager' => 'Affiche et gère les tâches en arrière-plan',
+	'taskmanager-desc' => 'Affiche et gère les tâches en arrière-plan',
 	'taskmanager_title' => "Afficher et gérer les tâches d'arrière-plan",
 	'taskmanager_tasklist' => 'Retourner à la liste des tâches',
 	'right-taskmanager' => 'Peut afficher les tâches en arrière-plan',
@@ -286,6 +272,7 @@ $messages['ko'] = array(
 	'taskmanager' => '백그라운드 작업 관리',
 	'taskmanager_title' => '백그라운드 작업 관리',
 	'action-taskmanager' => '백그라운드 작업 관리',
+	'taskmanager-desc' => '백그라운드 작업 관리',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -372,8 +359,8 @@ $messages['pl'] = array(
 	'taskmanager-desc' => 'Pokaż i zarządzaj zadaniami w tle',
 	'taskmanager_title' => 'Zarządzanie zadaniami uruchamianymi w tle',
 	'taskmanager_tasklist' => 'Wróc do listy zadań',
-	'right-taskmanager' => 'Może wyświetlić zadania w tle',
-	'right-taskmanager-action' => 'Może zarządzać zadaniami w tle',
+	'right-taskmanager' => 'Wyświetlanie zadań działających w tle',
+	'right-taskmanager-action' => 'Zarządzanie zadaniami działającymi w tle',
 	'taskmanager-invert' => 'Odwróć zaznaczenie',
 	'action-taskmanager' => 'pokaż i zarządzaj zadaniami uruchamianymi w tle',
 );
