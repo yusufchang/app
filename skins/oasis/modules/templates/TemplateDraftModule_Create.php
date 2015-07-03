@@ -3,12 +3,12 @@
 	<p class="templatedraft-module-subtitle"><?= wfMessage( 'templatedraft-module-subtitle-create' )->parse() ?></p>
 	<p><?= wfMessage( 'templatedraft-module-content-create' )->escaped() ?></p>
 	<a href="<?= $draftUrl ?>" title="<?= wfMessage( 'templatedraft-module-button-title-create' )->escaped() ?>" target="_blank">
-		<button class="templatedraft-module-button" type="button" data-id="templatedraft-module-button-create">
+		<button class="templatedraft-module-button" type="button">
 			<?= wfMessage( 'templatedraft-module-button-create' )->escaped() ?>
 		</button>
 	</a>
 	<p class="templatedraft-module-closelink">
-		<a class="templatedraft-module-closelink-link" data-id="templatedraft-module-closelink">
+		<a class="templatedraft-module-closelink-link">
 			<?= wfMessage( 'templatedraft-module-closelink-create' )->escaped() ?>
 		</a>
 	</p>
