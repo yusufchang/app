@@ -37,15 +37,16 @@ $wgGroupPermissions['voldev']['templatedraft'] = true;
  * Controllers
  */
 $wgAutoloadClasses['TemplateDraftController'] = __DIR__ . '/controllers/TemplateDraftController.class.php';
+$wgAutoloadClasses['TemplateClassificationController'] = __DIR__ . '/controllers/TemplateClassificationController.class.php';
 
 /**
  * Hooks
  */
 $wgAutoloadClasses['TemplateDraftHooks'] = __DIR__ . '/TemplateDraftHooks.class.php';
+$wgHooks['SkinAfterBottomScripts'][] = 'TemplateDraftHooks::onSkinAfterBottomScripts';
+$wgHooks['GetRailModuleList'][] = 'TemplateDraftHooks::onGetRailModuleList';
 $wgHooks['EditFormPreloadText'][] = 'TemplateDraftHooks::onEditFormPreloadText';
 $wgHooks['EditPageLayoutShowIntro'][] = 'TemplateDraftHooks::onEditPageLayoutShowIntro';
-$wgHooks['GetRailModuleList'][] = 'TemplateDraftHooks::onGetRailModuleList';
-$wgHooks['SkinAfterBottomScripts'][] = 'TemplateDraftHooks::onSkinAfterBottomScripts';
 
 /**
  * Helpers
