@@ -229,6 +229,8 @@ class ArticleAsJson extends WikiaService {
 				self::linkifyMediaCaption( $parser, $media );
 			}
 
+			self::handleTables( $text );
+
 			$text = json_encode( [
 				'content' => $text,
 				'media' => self::$media,
@@ -238,6 +240,15 @@ class ArticleAsJson extends WikiaService {
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	public static function handleTables( &$text ) {
+		$openTableRE = '/(\<[^>\/]*table[^>]*>)/';
+		$closeTableRE = '/(\<\/[^>]*table[^>]*>)/';
+		preg_replace_callback( $openTableRE, function ( $matches ) {
+
+		}, $text );
+		lizbug($matches);
 	}
 
 	public static function onShowEditLink( Parser &$this, &$showEditLink ) {
