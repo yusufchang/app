@@ -248,7 +248,6 @@ class ArticleAsJson extends WikiaService {
 		preg_replace_callback( $openTableRE, function ( $matches ) {
 
 		}, $text );
-		lizbug($matches);
 	}
 
 	public static function onShowEditLink( Parser &$this, &$showEditLink ) {
