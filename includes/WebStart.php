@@ -1,7 +1,4 @@
 <?php
-
-usleep(100000);
-
 /**
  * This does the initial setup for a web request.
  * It does some security checks, starts the profiler and loads the
@@ -71,6 +68,9 @@ if ( ini_get( 'register_globals' ) ) {
 header( 'X-Content-Type-Options: nosniff' );
 
 $wgRequestTime = microtime(true);
+
+usleep(100000);
+
 # getrusage() does not exist on the Microsoft Windows platforms, catching this
 if ( function_exists ( 'getrusage' ) ) {
 	$wgRUstart = getrusage();
