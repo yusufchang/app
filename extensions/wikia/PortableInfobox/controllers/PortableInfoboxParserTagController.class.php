@@ -80,10 +80,11 @@ class PortableInfoboxParserTagController extends WikiaController {
 
 		$data = $infoboxNode->getRenderData();
 		//save for later api usage
-		$this->saveToParserOutput( $parser->getOutput(), $infoboxNode );
+		$this->saveToParserOutput( $parser->getOutput(), $infoboxNode, $frame->getTitle()->getText() );
 
 		$theme = $this->getThemeWithDefault( $params, $frame );
 		$layout = $this->getLayout( $params );
+
 		return ( new PortableInfoboxRenderService() )->renderInfobox( $data, $theme, $layout );
 	}
 
@@ -127,16 +128,17 @@ class PortableInfoboxParserTagController extends WikiaController {
 		return strtr( $text, $this->markers );
 	}
 
-	protected function saveToParserOutput( \ParserOutput $parserOutput, Nodes\NodeInfobox $raw ) {
+	protected function saveToParserOutput( \ParserOutput $parserOutput, Nodes\NodeInfobox $raw, $name ) {
 		if ( $raw ) {
 			$infoboxes = $parserOutput->getProperty( PortableInfoboxDataService::INFOBOXES_PROPERTY_NAME );
-			$infoboxes[ ] = [ 'data' => $raw->getRenderData(), 'sources' => $raw->getSource() ];
+			$infoboxes[] = [ 'name' => $name, 'data' => $raw->getData(), 'sources' => $raw->getSource() ];
 			$parserOutput->setProperty( PortableInfoboxDataService::INFOBOXES_PROPERTY_NAME, $infoboxes );
 		}
 	}
 
 	private function handleError( $message ) {
 		$renderedValue = '<strong class="error"> ' . $message . '</strong>';
+
 		return [ $renderedValue, 'markerType' => 'nowiki' ];
 	}
 

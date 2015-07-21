@@ -25,7 +25,7 @@ class PortableInfoboxDataService {
 	/**
 	 * Returns infobox data
 	 *
-	 * @return array in format [ 'data' => [], 'sources' => [] ] or [] will be returned
+	 * @return array in format [ 'data' => [], 'name'=> '', 'sources' => [] ] or [] will be returned
 	 */
 	public function getData() {
 		if ( $this->title && $this->title->exists() ) {
