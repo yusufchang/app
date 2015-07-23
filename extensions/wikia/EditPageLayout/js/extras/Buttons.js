@@ -22,6 +22,20 @@
 	/**
 	 * Editor right rail buttons
 	 */
+	buttons.InsertInteractiveMap = {
+		type: 'button',
+		labelId: 'wikia-editor-media-interactive-map',
+		titleId: 'wikia-editor-media-interactive-map-tooltip',
+		className: 'RTEInteractiveMapButton',
+		forceLogin: true,
+		clicksource: function () {
+			require(['wikia.maps.utils'], function(utils){
+				utils.triggerAction(utils.getActionConfig('createMap', config));
+				utils.track(utils.trackerActions.CLICK_LINK_BUTTON, 'create-map-clicked', 0);
+			});
+		},
+		ckcommand: 'addinteractivemap'
+	};
 
 	buttons.InsertImage = {
 		type: 'button',
