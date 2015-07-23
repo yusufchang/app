@@ -26,6 +26,7 @@ $messages['en'] = array(
 	'editpagelayout-edit-summary-label' => 'Edit summary',
 	'editpagelayout-subject-headline-label' => 'Subject/headline:',
 
+	'wikia-editor-media-interactivemaps' => 'Map',
 	'wikia-editor-media-image' => 'Photo',
 	'wikia-editor-media-gallery' => 'Gallery',
 	'wikia-editor-media-slideshow' => 'Slideshow',
@@ -33,6 +34,7 @@ $messages['en'] = array(
 	'wikia-editor-media-video' => 'Video',
 	'wikia-editor-media-mut' => 'Video',
 
+	'wikia-editor-media-interactivemaps-tooltip' => 'Add Map',
 	'wikia-editor-media-image-tooltip' => 'Add Photo',
 	'wikia-editor-media-gallery-tooltip' => 'Add Gallery',
 	'wikia-editor-media-slideshow-tooltip' => 'Add Slideshow',

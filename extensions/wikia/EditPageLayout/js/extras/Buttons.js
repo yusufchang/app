@@ -24,9 +24,9 @@
 	 */
 	buttons.InsertInteractiveMap = {
 		type: 'button',
-		labelId: 'wikia-editor-media-interactive-map',
-		titleId: 'wikia-editor-media-interactive-map-tooltip',
-		className: 'RTEInteractiveMapButton',
+		labelId: 'wikia-editor-media-interactivemaps',
+		titleId: 'wikia-editor-media-interactivemaps-tooltip',
+		className: 'RTEInteractiveMapsButton',
 		forceLogin: true,
 		clicksource: function () {
 			require(['wikia.maps.utils'], function(utils){
@@ -35,6 +35,7 @@
 			});
 		},
 		ckcommand: 'addinteractivemap'
+
 	};
 
 	buttons.InsertImage = {

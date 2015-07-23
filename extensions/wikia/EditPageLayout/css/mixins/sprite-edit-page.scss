@@ -247,6 +247,13 @@
 		$image-width: 25px;
 		$image-height: 21px;
 	}
+	// @autosprite-image-details: photo.png@951,0,dbdd2f15f1f1b072a34cb14659168ae7 <- this must be redefined
+	@if $imageName == 'interactivemaps' {
+	  $image-x: 951px;
+	  $image-y: 0px;
+	  $image-width: 25px;
+	  $image-height: 21px;
+	}
 	// @autosprite-image-details: photo_small.png@988,0,de9d9975ec45db1d95aa998701cd7dd5
 	@if $imageName == 'photo_small' {
 		$image-x: 988px;

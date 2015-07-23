@@ -139,6 +139,9 @@
 	.RTEImageButton.cke_button_big .cke_icon {
 		@include sprite-edit-page('photo', 48px, 32px);
 	}
+	.RTEInteractiveMapsButton.cke_button_big .cke_icon {
+	  @include sprite-edit-page('interactivemaps', 48px, 32px);
+	}
 	.RTEGalleryButton.cke_button_big .cke_icon {
 		@include sprite-edit-page('gallery', 48px, 32px);
 	}

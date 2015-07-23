@@ -3,7 +3,8 @@
 		var WE = window.WikiaEditor,
 				items;
 
-		items = [ 
+		items = [
+			'InsertInteractiveMap',
 			'InsertImage',
 			'InsertGallery',
 			'InsertSlideshow',

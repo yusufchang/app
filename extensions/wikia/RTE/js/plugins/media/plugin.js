@@ -28,6 +28,23 @@ CKEDITOR.plugins.add('rte-media', {
 			}
 		});
 
+		editor.addCommand('addinteractivemap', {
+			exec: function () {
+				require(['wikia.maps.utils'], function(utils){
+					utils.triggerAction(utils.getActionConfig('createMap', config));
+					utils.track(utils.trackerActions.CLICK_LINK_BUTTON, 'create-map-clicked', 0);
+				});
+			},
+		});
+
+		// register "Interactive maps" toolbar button
+		editor.ui.addButton('InteractiveMaps', {
+			//label: editor.lang.image.photo,
+			//title: editor.lang.image.add,
+			className: 'RTEInteractiveMapsButton',
+			command: 'addInteractiveMap'
+		});
+
 		// register "Image" toolbar button
 		editor.ui.addButton('Image', {
 			label: editor.lang.image.photo,
