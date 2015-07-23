@@ -7,6 +7,12 @@
 <a class="skiplink sitenav" rel="nofollow" href="#GlobalNavigation"><?= wfMsg( 'oasis-skip-to-site-navigation' ); ?></a>
 </div>
 <?= $afterBodyHtml ?>
+<?php
+if ( WikiaPageType::isMainPage() ) {
+	$wg->SuppressWikiHeader = true;
+	//$wg->SuppressPageHeader = true;
+}
+?>
 
 <div id="ad-skin" class="wikia-ad noprint"></div>
 
@@ -29,6 +35,10 @@
 
 			if ( empty( $wg->SuppressWikiHeader ) ) {
 				echo $app->renderView( 'WikiHeader', 'Index' );
+			}
+
+			if ( WikiaPageType::isMainPage() ) {
+				echo $app->renderView( 'CuratedDesktop', 'index' );
 			}
 		?>
 		<?php

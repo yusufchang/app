@@ -1,0 +1,96 @@
+.curated-wrapper--top {
+	display: flex;
+
+	.wordmark-wrapper {
+		flex: 1;
+
+		.wordmark {
+			width: 100%;
+			display: block;
+			text-align: center;
+			padding: 20px 0;
+
+			img {
+				margin: 20px 0;
+			}
+		}
+	}
+
+	.sy-box {
+		flex: 1
+	}
+}
+
+.curated-wrapper--bottom {
+	width: 100%;
+
+	&::after {
+		clear: both;
+		content: " ";
+		display: block;
+		height: 0;
+		overflow: hidden; // (BugId:11677)
+		visibility: hidden;
+	}
+
+	.curated-item-wrapper {
+		float: left;
+		width: 20%;
+		display: none;
+
+		&[data-section="0"] {
+			display: block;
+		}
+
+		.curated-item {
+			padding: 2px;
+			position: relative;
+			cursor: pointer;
+			background-size: cover;
+			display: block;
+			color: inherit;
+			-webkit-filter: grayscale(.5);
+			filter: grayscale(.5);
+			transition-duration: .2s;
+
+			&:hover {
+				-webkit-filter: none;
+				filter: none;
+			}
+		}
+
+		.label {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.9));
+			padding: 15px;
+			font-weight: bold;
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+.featured-cc {
+	a {
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center center;
+	}
+}
+
+// initial loading state
+.featured-cc.loading {
+	flex: 1;
+	li:first-child img {
+		width: 100%;
+	}
+	li:not(:first-child) {
+		display: none;
+	}
+}
+
