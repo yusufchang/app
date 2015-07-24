@@ -154,10 +154,10 @@ class CuratedContentSpecialController extends WikiaSpecialPageController {
 
 	public function save() {
 		global $wgCityId, $wgUser;
-		if ( !$wgUser->isAllowed( 'curatedcontent' ) ) {
-			$this->displayRestrictionError();
-			return false; // skip rendering
-		}
+//		if ( !$wgUser->isAllowed( 'curatedcontent' ) ) {
+//			$this->displayRestrictionError();
+//			return false; // skip rendering
+//		}
 
 		$this->response->setFormat( 'json' );
 

@@ -4,7 +4,7 @@ class ActivityFeedAPIProxy implements iAPIProxy {
 
 	var $APIparams;
 
-	public function __construct($includeNS = null, $userName = null) {
+	public function __construct($includeNS = null, $userName = null, $extraParams=[]) {
 		$this->APIparams = array();
 		$this->APIparams['action'] = 'query';
 		$this->APIparams['list'] = 'recentchanges';
@@ -12,6 +12,10 @@ class ActivityFeedAPIProxy implements iAPIProxy {
 		$this->APIparams['rcshow'] = '!bot';
 		if (!is_null($includeNS)) $this->APIparams['rcnamespace'] = $includeNS;
 		if (!empty($userName)) $this->APIparams['rcuser'] = $userName;
+
+		foreach($extraParams as $paramName => $param) {
+			$this->APIparams[$paramName] = $param;
+		}
 	}
 
 	public function get($limit, $start = null) {

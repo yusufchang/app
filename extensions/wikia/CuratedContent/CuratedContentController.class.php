@@ -559,6 +559,132 @@ class CuratedContentController extends WikiaController {
 
 		return true;
 	}
+
+	public function getDemoData() {
+		$this->response->setFormat(WikiaResponse::FORMAT_JSON);
+		$this->response->setHeader( 'Access-Control-Allow-Origin', '*' );
+		$this->response->setCacheValidity( WikiaResponse::CACHE_STANDARD );
+
+		$featured = $this->createFeatured();
+		$optional = $this->createOptional();
+		$this->response->setVal('data', ['featured' => $featured, 'items' => $optional]);
+	}
+
+	private function createFeatured() {
+		$feedProxy = new ActivityFeedAPIProxy('0|6', null, ['type'=>'json']);
+		$featuredArticles = [];
+		$result = $feedProxy->get(20)['results'];
+		foreach ($result as $entry) {
+			$pageId = $entry['pageid'];
+			$imageId = $this->getImageIdForPageByPageId($pageId);
+			$title = $entry['title'];
+			if (($entry['type'] == 'edit' || $entry['type'] == 'new') && !array_key_exists($pageId, $featuredArticles) && $imageId) {
+				$featuredArticles[$pageId] = [
+					'title' => $title,
+					'label' => $this->labelizeTitle($title),
+					'article_id' => $pageId,
+					'type' => $this->getTypeFromNamespace($entry['ns']),
+					'image_id' => $imageId,
+					'image_url' => CuratedContentHelper::findImageUrl( $imageId ),
+					'article_local_url' => $this->getArticeLocalUrl($pageId)
+				];
+			}
+		}
+
+		$featured = [];
+		foreach ($featuredArticles as $pageId => $item) {
+			$featured[] = $item;
+		}
+		return $featured;
+	}
+
+	private function getTypeFromNamespace($ns) {
+		switch ($ns) {
+			case NS_FILE:
+				return 'file';
+			case NS_MAIN:
+				return 'article';
+			default:
+				return 'article';
+		}
+	}
+
+	private function getImageIdForPageByPageId($pageid) {
+		$imageTitle = CuratedContentHelper::findFirstImageTitleFromArticle($pageid);
+		if ($imageTitle instanceof Title) {
+			return $imageTitle->getArticleID();
+		} else {
+			return null;
+		}
+	}
+
+	private function labelizeTitle($title) {
+		$label = str_replace('_', ' ', $title);
+		$label = str_replace('.jpg', '' , $label);
+		$label = str_replace('.png', ' ', $label);
+		$label = str_replace('.PNG', ' ', $label);
+
+		return $label;
+
+	}
+
+	private function createOptional() {
+		$optional = [];
+
+		$oFauxRequest = new FauxRequest(
+			array(
+				"action"	=> "query",
+				"list"		=> "allcategories",
+				"acmin"		=> 10,
+				"aclimit"	=> 1000,
+				"acprop"	=> "size|id",
+				"format"	=> "json"
+			)
+		);
+
+		$api = new ApiMain( $oFauxRequest );
+		$api->execute();
+		$result = $api->GetResultData();
+		foreach($result['query']['allcategories'] as $entry) {
+			$imageId = $this->getImageIdForPageByPageId($entry['pageid']);
+			$pageName = $entry['*'];
+			$articleName = Title::newFromText($pageName, NS_CATEGORY)->getFullText();
+			$subcategoriesCount = $entry['subcats'];
+			if ($subcategoriesCount > 4 && $subcategoriesCount < 36 && $imageId) {
+				$optional[] = [
+					'title' => $pageName,
+					'title_raw' => $articleName,
+					'label' => $this->labelizeTitle($pageName),
+					'image_id' => $imageId,
+					'type' => 'category',
+					'article_id' => $entry['pageid'],
+					'image_url' => CuratedContentHelper::findImageUrl( $imageId ),
+					'article_local_url' => $this->getArticeLocalUrl($entry['pageid'])
+				];
+			}
+		}
+
+		return $optional;
+	}
+
+	private function getArticeLocalUrl($pageid) {
+		$title = Title::newFromID( $pageid );
+			if ( !empty( $title ) ) {
+				return $title->getLocalURL();
+			}
+		return null;
+	}
+
+	public function saveDemoData() {
+		$this->response->setFormat(WikiaResponse::FORMAT_JSON);
+		$this->response->setHeader( 'Access-Control-Allow-Origin', '*' );
+		$this->response->setCacheValidity( WikiaResponse::CACHE_STANDARD );
+
+		$sections = $this->request->getArray( 'sections', [] );
+		$data = $this->sendRequest('CuratedContentSpecial', 'save', ['sections' => $sections])->getData();
+		$this->response->setVal('status', 'OK');
+		$this->response->setVal('data', $data);
+	}
 }
 
 class CuratedContentWrongAPIVersionException extends WikiaException {
