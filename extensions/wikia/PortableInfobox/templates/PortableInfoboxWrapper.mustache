@@ -1,5 +1,5 @@
 <aside class="portable-infobox{{#theme}} {{theme}}{{/theme}}{{#layout}} {{layout}}{{/layout}}">{{{content}}}</aside>
-<div id="NATIVE_FLITE_POLL" style="display: none;">
+<div id="NATIVE_FLITE_POLL" class="portable-infobox portable-infobox-theme-default" style="display: none;">
 	{{#flitePollId}}
 		<script>
 			(function() {
@@ -31,8 +31,7 @@
 					console.log("scroll down");
 				} else {
 					console.log("scroll up");
-					$('.item-type-image').hide();
-					$('.item-type-title').hide();
+					$('.portable-infobox').hide();
 					adsobox.show("slow");
 				}
 				lastScrollTop = nowScrollTop;

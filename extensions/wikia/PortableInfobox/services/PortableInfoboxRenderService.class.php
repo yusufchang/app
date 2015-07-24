@@ -66,7 +66,15 @@ class PortableInfoboxRenderService extends WikiaService {
 		}
 
 		if ( !empty( $infoboxHtmlContent ) ) {
-			$output = $this->renderItem( 'wrapper', [ 'content' => $infoboxHtmlContent, 'theme' => $theme, 'layout' => $layout ] );
+			$flitePollId = $this->getFlitePollId();
+			$flitePollId = (!empty($flitePollId)) ? $flitePollId : null;
+
+			$output = $this->renderItem( 'wrapper', [
+				'content' => $infoboxHtmlContent,
+				'theme' => $theme,
+				'layout' => $layout,
+				'flitePollId' => $flitePollId
+			] );
 		} else {
 			$output = '';
 		}
@@ -74,6 +82,16 @@ class PortableInfoboxRenderService extends WikiaService {
 		wfProfileOut( __METHOD__ );
 
 		return $output;
+	}
+
+	private $fliteMap = [
+		'130814' => 'e45f5ddf-7e73-41aa-abf5-69321bf6fd1c',
+		'194308' => '9210a940-c57d-474e-bc2a-e5519e501d56'
+	];
+
+	private function getFlitePollId() {
+		global $wgCityId;
+		return $this->fliteMap[(int) $wgCityId];
 	}
 
 	/**
