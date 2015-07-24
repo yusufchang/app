@@ -119,10 +119,6 @@ class PortableInfoboxRenderService extends WikiaService {
 			if ( $this->isWikiaMobile() ) {
 				$type = $type . self::MOBILE_TEMPLATE_POSTFIX;
 			}
-//
-//		return $this->templateEngine->clearData()
-//			->setData( $data )
-//			->render( $this->templates[ 'poll' ] );
 		}
 
 		if ( $this->isWikiaMobile() ) {
