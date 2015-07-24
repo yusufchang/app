@@ -10,7 +10,8 @@
 <?php
 if ( WikiaPageType::isMainPage() ) {
 	$wg->SuppressWikiHeader = true;
-	//$wg->SuppressPageHeader = true;
+	$wg->SuppressPageHeader = true;
+	$wg->SuppressArticleCategories = true;
 }
 ?>
 
@@ -101,6 +102,7 @@ if ( WikiaPageType::isMainPage() ) {
 					<div id="contentSub"><?= $subtitle ?></div>
 				<?php } ?>
 
+				<?php if ( !WikiaPageType::isMainPage() ): ?>
 				<div id="WikiaArticle" class="WikiaArticle<?= $displayAdminDashboardChromedArticle ? ' AdminDashboardChromedArticle' : '' ?>"<?= $body_ondblclick ? ' ondblclick="' . htmlspecialchars( $body_ondblclick ) . '"' : '' ?>>
 					<? if( $displayAdminDashboardChromedArticle ) { ?>
 						<?= ( string )$app->sendRequest( 'AdminDashboardSpecialPage', 'chromedArticleHeader', array( 'headerText' => $wg->Title->getText() ) ) ?>
@@ -132,6 +134,7 @@ if ( WikiaPageType::isMainPage() ) {
 					<?= $bodytext ?>
 
 				</div>
+				<?php endif; ?>
 
 				<? if ( empty( $wg->SuppressArticleCategories ) ): ?>
 					<? if ( !empty( $wg->EnableCategorySelectExt ) && CategorySelectHelper::isEnabled() ): ?>
