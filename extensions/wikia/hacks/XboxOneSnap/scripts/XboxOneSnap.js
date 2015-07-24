@@ -15,6 +15,7 @@ console.log('Xbox One Snap loaded!');
 	}
 
 	if (1 || window.navigator.userAgent.indexOf('Xbox One') > 0) {
+		onResizeHandler();
 		window.onresize = onResizeHandler;
 	}
 })();
