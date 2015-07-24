@@ -72,8 +72,3 @@
 		</div>
 	</div>
 </div>
-<pre style="display: none">
-	<?php s($featured); ?>
-	<?php s($curated); ?>
-	<?php s($optional); ?>
-</pre>
