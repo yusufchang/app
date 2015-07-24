@@ -2501,3 +2501,10 @@ $config['template_draft'] = [
 		'//extensions/wikia/TemplateDraft/scripts/templateDraftTracking.js'
 	]
 ];
+
+$config['xbox_one_snap_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => [
+		'//extensions/wikia/hacks/XboxOneSnap/scripts/XboxOneSnap.js'
+	]
+];
