@@ -7,10 +7,11 @@ console.log('Xbox One Snap loaded!');
 
 	function onResizeHandler () {
 		var widthTreshold = 500,
-			queryString = (window.location.search ? window.location.search + '&' : '?') + 'useskin=mercury';
+			wl = window.location,
+			queryString = (wl.search ? wl.search + '&' : '?') + 'useskin=mercury';
 
 		if (window.innerWidth <= widthTreshold) {
-			window.location.replace(window.location.origin + window.location.pathname + queryString);
+			wl.replace(wl.protocol + '//' + wl.host + wl.pathname + queryString + wl.hash);
 		}
 	}
 
