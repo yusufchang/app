@@ -55,6 +55,20 @@ class PipelineEventProducer {
 		return true;
 	}
 
+	/**
+	 * @param WikiPage $article
+	 *
+	 * @return bool
+	 */
+	static public function onAfterArticlePurge( &$article ) {
+		$revision = $article->getRevision();
+		if ( $revision ) {
+			self::sendInfoboxes( $article, $revision );
+		}
+
+		return true;
+	}
+
 	protected static function sendInfoboxes( $article, Revision $revision ) {
 		if ( $article instanceof WikiPage ) {
 			$msg = self::prepareMessage( $article->getId() );

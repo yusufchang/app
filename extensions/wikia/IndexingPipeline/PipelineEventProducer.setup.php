@@ -20,4 +20,5 @@ $wgHooks['NewRevisionFromEditComplete'][] = 'PipelineEventProducer::onNewRevisio
 $wgHooks['ArticleDeleteComplete'][] = 'PipelineEventProducer::onArticleDeleteComplete';
 $wgHooks['ArticleUndelete'][] = 'PipelineEventProducer::onArticleUndelete';
 $wgHooks['TitleMoveComplete'][] = 'PipelineEventProducer::onTitleMoveComplete';
+$wgHooks['AfterArticlePurge'][] = 'PipelineEventProducer::onAfterArticlePurge';
 

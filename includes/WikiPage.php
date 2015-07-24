@@ -926,6 +926,8 @@ class WikiPage extends Page {
 
 			MessageCache::singleton()->replace( $this->mTitle->getDBkey(), $text );
 		}
+		wfRunHooks( 'AfterArticlePurge', [ &$this ] );
+
 		return true;
 	}
 
@@ -2130,7 +2132,7 @@ class WikiPage extends Page {
 
 		# Clear the cached article id so the interface doesn't act like we exist
 		$this->mTitle->resetArticleID( 0 );
-		
+
 		# Wikia change here
 		$this->setCachedLastEditTime( wfTimestampNow() );
 		# Wikia 
