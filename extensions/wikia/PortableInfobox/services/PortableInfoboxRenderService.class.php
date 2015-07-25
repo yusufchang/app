@@ -85,8 +85,10 @@ class PortableInfoboxRenderService extends WikiaService {
 	}
 
 	private $fliteMap = [
+		'530' => 'a79af738-a4dc-4947-967b-45151560ac3d',
+		'1706' => 'bcf573c8-47c4-4245-80ee-8f12c5b2b769',
 		'130814' => 'e45f5ddf-7e73-41aa-abf5-69321bf6fd1c',
-		'194308' => '9210a940-c57d-474e-bc2a-e5519e501d56'
+		'194308' => '9210a940-c57d-474e-bc2a-e5519e501d56',
 	];
 
 	private function getFlitePollId() {
