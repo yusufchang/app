@@ -1,42 +1,87 @@
-<aside class="portable-infobox{{#theme}} {{theme}}{{/theme}}{{#layout}} {{layout}}{{/layout}}">{{{content}}}</aside>
-<div id="NATIVE_FLITE_POLL" class="portable-infobox portable-infobox-theme-default" style="display: none;">
-	{{#flitePollId}}
-		<script>
-			(function() {
-				var guid = "{{flitePollId}}", o = window, r = "", m, s = "http:", e = encodeURIComponent, x = 0, f = document.createElement("script");
-				o.FLITE=o.FLITE || {};
-				o.FLITE.config = o.FLITE.config || {};
-				o.FLITE.config[guid] = o.FLITE.config[guid] || {};
-				o.FLITE.config[guid].cb = Math.random();
-				o.FLITE.config[guid].ts = (+ new Date());
-				try{ r = (top===self && top.location) ? top.location.href : document.referrer || (top.location && top.location.href) || "";}catch(er){x=1}
-				try{ s = o.location && o.location.protocol === "https:"? o.location.protocol : s;}catch(er){x+=2}
-				try{ m = r.match(new RegExp("[A-Za-z]+:[/][/][A-Za-z0-9.-]+")); } catch(er) {x+=4}
-				f.src = [s,"//r.flite.com/syndication/uscript.js?i=",e(guid),"&v=3","&x=us",x,"&cb=",o.FLITE.config[guid].cb,"&d=",e((m && m[0]) || r), "&tz=", (new Date()).getTimezoneOffset()].join("");
-				document.write(f.outerHTML);
-			})();
-		</script>
-	{{/flitePollId}}
-</div>
-{{#flitePollId}}
-<script>
-	window.onload = function() {
-		var lastScrollTop = 0, delta = 200;
-		$(window).scroll(function() {
-			var adsobox = $('#NATIVE_FLITE_POLL'),
-					nowScrollTop = $(this).scrollTop();
-
-			if (!adsobox.is(":visible") && Math.abs(lastScrollTop - nowScrollTop) >= delta) {
-				if (nowScrollTop > lastScrollTop) {
-					console.log("scroll down");
-				} else {
-					console.log("scroll up");
-					$('.portable-infobox').hide();
-					adsobox.show("slow");
-				}
-				lastScrollTop = nowScrollTop;
+<div class="flip-container portable-infobox" style="background: none;">
+	<div class="flipper">
+		<style>
+			.flipper {
+				transition: 0.6s;
+				transform-style: preserve-3d;
+				position: relative;
 			}
-		});
-	};
-</script>
-{{/flitePollId}}
+
+			.flipper.flip {
+				transform: rotateY(180deg);
+			}
+
+			#INFOBOX, #NATIVE_FLITE_POLL {
+				backface-visibility: hidden;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			#INFOBOX {
+				z-index: 2;
+				/* for firefox 31 */
+				transform: rotateY(0deg);
+			}
+
+			#NATIVE_FLITE_POLL {
+				transform: rotateY(180deg);
+			}
+		</style>
+		<aside id="INFOBOX" class="portable-infobox{{#theme}} {{theme}}{{/theme}}{{#layout}} {{layout}}{{/layout}}" style="margin: 0;">{{{content}}}</aside>
+		<div id="NATIVE_FLITE_POLL" class="portable-infobox" style="margin: 0;">
+			<div class="portable-infobox-back">Back to infobox</div>
+			{{#flitePollId}}
+				<script>
+					(function() {
+						var guid = "{{flitePollId}}", o = window, r = "", m, s = "http:", e = encodeURIComponent, x = 0, f = document.createElement("script");
+						o.FLITE=o.FLITE || {};
+						o.FLITE.config = o.FLITE.config || {};
+						o.FLITE.config[guid] = o.FLITE.config[guid] || {};
+						o.FLITE.config[guid].cb = Math.random();
+						o.FLITE.config[guid].ts = (+ new Date());
+						try{ r = (top===self && top.location) ? top.location.href : document.referrer || (top.location && top.location.href) || "";}catch(er){x=1}
+						try{ s = o.location && o.location.protocol === "https:"? o.location.protocol : s;}catch(er){x+=2}
+						try{ m = r.match(new RegExp("[A-Za-z]+:[/][/][A-Za-z0-9.-]+")); } catch(er) {x+=4}
+						f.src = [s,"//r.flite.com/syndication/uscript.js?i=",e(guid),"&v=3","&x=us",x,"&cb=",o.FLITE.config[guid].cb,"&d=",e((m && m[0]) || r), "&tz=", (new Date()).getTimezoneOffset()].join("");
+						document.write(f.outerHTML);
+					})();
+				</script>
+			{{/flitePollId}}
+			<div class="portable-infobox-back">Back to infobox</div>
+		</div>
+		{{#flitePollId}}
+		<script>
+			window.onload = function() {
+				var lastScrollTop = 0,
+					delta = 100,
+					adsobox = $('#NATIVE_FLITE_POLL'),
+					infobox = $('#INFOBOX'),
+					fliper = adsobox.parent(),
+					flipcontainer = adsobox.parent().parent(),
+					flipped = false;
+
+				flipcontainer.height(infobox.height());
+
+				$(window).scroll(function() {
+					var nowScrollTop = $(this).scrollTop();
+
+					if (!flipped && Math.abs(lastScrollTop - nowScrollTop) >= delta) {
+						if (nowScrollTop < lastScrollTop) {
+							fliper.addClass("flip");
+							flipcontainer.height(adsobox.height());
+							flipped = true;
+						}
+						lastScrollTop = nowScrollTop;
+					}
+				});
+
+				$(".portable-infobox-back").on("click", function () {
+					fliper.removeClass("flip");
+					flipcontainer.height(infobox.height());
+				});
+			};
+		</script>
+		{{/flitePollId}}
+	</div>
+</div>
