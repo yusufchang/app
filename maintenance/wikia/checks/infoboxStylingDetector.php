@@ -22,17 +22,22 @@ class InfoboxStylingDetector extends Maintenance {
 	public function execute() {
 		global $wgCityId, $wgSitename, $wgServer;
 
-		$titles = [ Title::newFromText( 'Wikia.css', NS_MEDIAWIKI ), Title::newFromText( 'Common.css', NS_MEDIAWIKI ), Title::newFromText( 'Monobook.css', NS_MEDIAWIKI ) ];
+		$stylesheets = [
+			'Wikia.css',
+			'Common.css',
+			'Monobook.css'
+		];
 
-		/* @var $title Title */
-		foreach ( $titles as $title ) {
+		foreach ( $stylesheets as $stylesheet ) {
+			$title = Title::newFromText( $stylesheet, NS_MEDIAWIKI );
+
+			$this->processArticleFromTitle( $title );
+
 			$subpages = $title->getSubpages();
-
 			foreach ( $subpages as $subpage ) {
 				$this->processArticleFromTitle( $subpage );
 			}
 
-			$this->processArticleFromTitle( $title );
 		}
 	}
 
@@ -42,9 +47,9 @@ class InfoboxStylingDetector extends Maintenance {
 		$article = Article::newFromTitle( $title, RequestContext::getMain() );
 		if ( $article ) {
 			$content = $article->getContent();
-			preg_match( '/\.portable\-infobox/', '', $matches );
-			if ( $matches ) {
-				echo sprintf( "%20s,%20s", $wgServer, $title->getText() );
+			preg_match_all( '/\.portable\-infobox/', $content, $matches );
+			if ( !empty( $matches[0] ) ) {
+				echo sprintf( "%-90s, Lines: %10s\n", $title->getFullUrl(), count( $matches[0] ) );
 			}
 		}
 	}
