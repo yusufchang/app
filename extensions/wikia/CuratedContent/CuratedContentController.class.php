@@ -440,14 +440,35 @@ class CuratedContentController extends WikiaController {
 
 		if ( !empty( $wgWikiaCuratedContent ) && is_array( $wgWikiaCuratedContent )  ) {
 			foreach ( $wgWikiaCuratedContent as $section ) {
-				// sections
-				if ( !empty( $section['title'] ) && empty( $section['featured'] ) ) {
+				// update information about node type
+				$section['node_type'] = 'section';
+
+				// rename $section['title'] to $section['label']
+				$section['label'] = $section['title'];
+				unset( $section['title'] );
+
+				if ( !empty( $section['label'] ) && empty( $section['featured'] ) ) {
+					// load image for curated content sections (not optional, not featured)
 					$section['image_url'] = CuratedContentHelper::findImageUrl( $section['image_id'] );
+
+					$section['section'] = 'curated';
+				}
+				if ( empty( $section['label'] ) ) {
+					$section['section'] = 'optional';
+				}
+				if ( !empty( $section['featured'] ) ) {
+					$section['section'] = 'featured';
 				}
 
-				// items
 				foreach ( $section['items'] as $i => $item ) {
-					$section['items'][$i]['image_url'] = CuratedContentHelper::findImageUrl( $section['image_id'] );
+					// load image for all items
+					$section['items'][$i]['image_url'] = CuratedContentHelper::findImageUrl( $item['image_id'] );
+
+					// update information about node type
+					$section['items'][$i]['node_type'] = 'item';
+
+					// update article url
+					$section['items'][$i]['article_url'] = CuratedContentHelper::getArticleUrl( $section['items'][$i]['article_id'], $section['items'][$i]['title'] );
 				}
 
 				$data[] = $section;

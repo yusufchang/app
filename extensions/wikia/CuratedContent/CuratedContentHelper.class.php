@@ -147,6 +147,26 @@ class CuratedContentHelper {
 		return $imageUrl;
 	}
 
+	/**
+	 * @see MercuryApi processCuratedContentItem for notes
+	 */
+	public static function getArticleUrl( $articleId, $articleTitle ) {
+		if ( !empty( $articleId ) ) {
+			$title = Title::newFromID( $articleId );
+
+			if ( !empty( $title ) ) {
+				return $title->getLocalURL();
+			}
+		} else if ( $articleId === 0 ) {
+			// Categories which don't have content have wgArticleID set to 0
+			// In order to generate link for them
+			// we can simply replace $1 inside /wiki/$1 to category title (Category:%name%)
+			global $wgArticlePath;
+			return str_replace( "$1",  $articleTitle, $wgArticlePath );
+		}
+		return null;
+	}
+
 	public static function getTypeFromNamespaceId( $namespaceId ) {
 		switch ( $namespaceId ) {
 			case NS_MAIN:

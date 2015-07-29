@@ -7,6 +7,13 @@
 <a class="skiplink sitenav" rel="nofollow" href="#GlobalNavigation"><?= wfMsg( 'oasis-skip-to-site-navigation' ); ?></a>
 </div>
 <?= $afterBodyHtml ?>
+<?php
+if ( WikiaPageType::isMainPage() ) {
+	$wg->SuppressWikiHeader = true;
+	$wg->SuppressPageHeader = true;
+	$wg->SuppressArticleCategories = true;
+}
+?>
 
 <div id="ad-skin" class="wikia-ad noprint"></div>
 
@@ -29,6 +36,10 @@
 
 			if ( empty( $wg->SuppressWikiHeader ) ) {
 				echo $app->renderView( 'WikiHeader', 'Index' );
+			}
+
+			if ( WikiaPageType::isMainPage() ) {
+				echo $app->renderView( 'CuratedDesktop', 'index' );
 			}
 		?>
 		<?php
@@ -91,6 +102,7 @@
 					<div id="contentSub"><?= $subtitle ?></div>
 				<?php } ?>
 
+				<?php if ( !WikiaPageType::isMainPage() ): ?>
 				<div id="WikiaArticle" class="WikiaArticle<?= $displayAdminDashboardChromedArticle ? ' AdminDashboardChromedArticle' : '' ?>"<?= $body_ondblclick ? ' ondblclick="' . htmlspecialchars( $body_ondblclick ) . '"' : '' ?>>
 					<? if( $displayAdminDashboardChromedArticle ) { ?>
 						<?= ( string )$app->sendRequest( 'AdminDashboardSpecialPage', 'chromedArticleHeader', array( 'headerText' => $wg->Title->getText() ) ) ?>
@@ -122,6 +134,7 @@
 					<?= $bodytext ?>
 
 				</div>
+				<?php endif; ?>
 
 				<? if ( empty( $wg->SuppressArticleCategories ) ): ?>
 					<? if ( !empty( $wg->EnableCategorySelectExt ) && CategorySelectHelper::isEnabled() ): ?>

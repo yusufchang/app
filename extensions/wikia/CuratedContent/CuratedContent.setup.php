@@ -18,6 +18,7 @@ $wgAutoloadClasses['CuratedContentValidator'] = __DIR__ . '/CuratedContentValida
 $wgAutoloadClasses['CuratedContentController'] = __DIR__ . '/CuratedContentController.class.php';
 $wgAutoloadClasses['CuratedContentWrongAPIVersionException'] = __DIR__ . '/CuratedContentController.class.php';
 $wgAutoloadClasses['CuratedContentModel'] =  __DIR__ . '/CuratedContentModel.class.php' ;
+$wgAutoloadClasses['CuratedDesktopController'] =  __DIR__ . '/../CuratedDesktop/CuratedDesktopController.class.php' ;
 /**
  * message files
  */

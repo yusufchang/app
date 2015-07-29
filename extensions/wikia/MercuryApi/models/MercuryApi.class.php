@@ -337,22 +337,8 @@ class MercuryApi {
 	 * @return mixed
 	 */
 	public function processCuratedContentItem( $item ) {
-		if ( !empty( $item['article_id'] ) ) {
-			$title = Title::newFromID( $item['article_id'] );
-
-			if ( !empty( $title ) ) {
-				$item['article_local_url'] = $title->getLocalURL();
-				return $item;
-			}
-		} else if ( $item['article_id'] === 0 ) {
-			// Categories which don't have content have wgArticleID set to 0
-			// In order to generate link for them
-			// we can simply replace $1 inside /wiki/$1 to category title (Category:%name%)
-			global $wgArticlePath;
-			$item['article_local_url'] = str_replace( "$1",  $item['title'], $wgArticlePath );
-			return $item;
-		}
-		return null;
+		$item['article_local_url'] = CuratedContentHelper::getArticleUrl( $item['article_id'], $item['title'] );
+		return empty( $item['article_local_url'] ) ? null : $item;
 	}
 
 	public function processTrendingArticlesData( $data ) {
