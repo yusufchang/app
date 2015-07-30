@@ -137,15 +137,15 @@ function ArticleCommentsAjax() {
 			// send array as JSON
 			$json = json_encode($data);
 			$response = new AjaxResponse($json);
-			$response->setCacheDuration(0);
 			$response->setContentType('application/json; charset=utf-8');
 		}
 		else {
 			// send text as text/html
 			$response = new AjaxResponse($data);
-			$response->setCacheDuration(0);
 			$response->setContentType('text/html; charset=utf-8');
 		}
+
+		$response->setCacheDuration(0);
 
 		wfProfileOut(__METHOD__);
 		return $response;

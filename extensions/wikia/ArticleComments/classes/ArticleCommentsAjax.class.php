@@ -78,6 +78,7 @@ class ArticleCommentsAjax {
 	 * @return String -- html -> textarea
 	 */
 	static public function axEdit() {
+		jtrace();
 		global $wgRequest;
 
 		$articleId = $wgRequest->getVal( 'article', false );
