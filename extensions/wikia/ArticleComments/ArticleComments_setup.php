@@ -137,6 +137,7 @@ function ArticleCommentsAjax() {
 			// send array as JSON
 			$json = json_encode($data);
 			$response = new AjaxResponse($json);
+			$response->setCacheDuration(0);
 			$response->setContentType('application/json; charset=utf-8');
 		}
 		else {
