@@ -125,7 +125,7 @@ JSMessages::registerPackage( 'WikiaMobileComments', array(
 $wgAjaxExportList[] = 'ArticleCommentsAjax';
 
 function ArticleCommentsAjax() {
-	global $wgUser, $wgRequest;
+	global $wgRequest;
 	$method = $wgRequest->getVal('method', false);
 
 	if (method_exists('ArticleCommentsAjax', $method)) {
