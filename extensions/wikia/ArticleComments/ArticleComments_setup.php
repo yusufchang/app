@@ -142,6 +142,7 @@ function ArticleCommentsAjax() {
 		else {
 			// send text as text/html
 			$response = new AjaxResponse($data);
+			$response->setCacheDuration(0);
 			$response->setContentType('text/html; charset=utf-8');
 		}
 
