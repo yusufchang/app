@@ -401,6 +401,15 @@ class SolrLyricsApiHandler {
 			$song->highlights = $highlights->getField( self::INDEX_FIELD_NAME_LYRICS );
 		}
 
+// TODO: REMOVE! THIS IS TEMPORARY AS PART OF LYR-245
+if((strtolower($song->artist->name) == "the weeknd") && (strtolower($song->name) == "earned it")){
+	$song->writer = "BALSHE, AHMAD / TESFAYE, ABEL / MOCCIO, STEPHAN / QUENNEVILLE, JASON";
+	$song->copyright = "Lyrics \U00a9 Warner/Chappell Music, Inc., Universal Music Publishing Group";
+} else {
+	$song->writer = "WRITER";
+	$song->copyright = "COPYRIGHT";
+}
+
 		return $song;
 	}
 
