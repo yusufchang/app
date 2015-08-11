@@ -11,6 +11,7 @@
 namespace Flags;
 
 use Flags\Models\FlagType;
+use Flags\Views\FlagView;
 
 class FlagsHelper {
 
@@ -120,6 +121,56 @@ class FlagsHelper {
 		}
 
 		return $flagFromPost;
+	}
+
+	/**
+	 * Sends a request for all instances of flags for the given page.
+	 * A result of the request is transformed into a set of wikitext templates calls
+	 * that are supposed to be injected into Parser before expanding templates.
+	 * @param $pageId
+	 * @return ParserOutput|null
+	 */
+	public function getFlagsForParserOutputFromDB( $pageId ) {
+		$app = \F::app();
+
+		$response = $app->sendRequest( 'FlagsApiController',
+			'getFlagsForPage',
+			[
+				'page_id' => $pageId,
+			]
+		)->getData();
+
+		if ( $response[\FlagsApiController::FLAGS_API_RESPONSE_STATUS] ) {
+			$flags = $response[\FlagsApiController::FLAGS_API_RESPONSE_DATA];
+
+			return $this->getParsedFlags( $flags, $pageId );
+		}
+
+		return null;
+	}
+
+	/**
+	 * Wrap and parse flags
+	 *
+	 * @param Array $flags
+	 * @param int $pageId
+	 * @return ParserOutput
+	 */
+	public function getParsedFlags( $flags, $pageId ) {
+		$templatesCalls = [];
+
+		$flagView = new FlagView();
+
+		foreach ( $flags as $flag ) {
+			$templatesCalls[] = $flagView->wrapSingleFlag(
+				$flag['flag_type_id'],
+				$flag['flag_targeting'],
+				$flag['flag_view'],
+				$flag['params']
+			);
+		}
+
+		return $flagView->renderFlags( $templatesCalls, $pageId );
 	}
 
 	/**

@@ -50,7 +50,7 @@ class FlagsController extends WikiaController {
 		$wgLang->getLangObj();
 	}
 
-	public function modifyParserOutputWithFlags( ParserOutput $parserOutput, $pageId, $currentFlags = [] ) {
+	public function modifyParserOutputWithFlags( ParserOutput $parserOutput, $flagsParserOutput ) {
 		// Don't output Flags in Mercury for now
 		if ( $this->wg->ArticleAsJson ) {
 			return $parserOutput;
@@ -62,12 +62,6 @@ class FlagsController extends WikiaController {
 		 * First, get ParserOutput for flags for the article.
 		 * If it's null - return the original $parserOutput.
 		 */
-		if ( !empty( $currentFlags ) ) {
-			$flagsParserOutput = $this->getFlagsForParserOutput( $currentFlags, $pageId );
-		} else {
-			$flagsParserOutput = $this->getFlagsForParserOutputFromDB( $pageId );
-		}
-
 		if ( $flagsParserOutput === null ) {
 			/**
 			 * If there is __FLAGS__ magic word present in the content
@@ -210,7 +204,8 @@ class FlagsController extends WikiaController {
 				$parserOptions = ParserOptions::newFromUser( $this->wg->User );
 				$parserOutput = $wikiPage->getParserOutput( $parserOptions, null, false );
 
-				$parserOutput = $this->modifyParserOutputWithFlags( $parserOutput, $pageId, $currentFlags );
+				$flagsParserOutput = $this->getFlagsForParserOutput( $currentFlags, $pageId );
+				$parserOutput = $this->modifyParserOutputWithFlags( $parserOutput, $flagsParserOutput );
 
 				self::$parsed = true;
 
@@ -253,7 +248,7 @@ class FlagsController extends WikiaController {
 	 * @param $pageId
 	 * @return ParserOutput|null
 	 */
-	private function getFlagsForParserOutput( $currentFlags, $pageId ) {
+	public function getFlagsForParserOutput( $currentFlags, $pageId ) {
 		$flagsOnPage = [];
 
 		foreach ( $this->editFlags as $flagTypeId => $flag ) {
@@ -268,54 +263,7 @@ class FlagsController extends WikiaController {
 			}
 		}
 
-		return $this->getParsedFlags( $flagsOnPage, $pageId );
-	}
-
-	/**
-	 * Sends a request for all instances of flags for the given page.
-	 * A result of the request is transformed into a set of wikitext templates calls
-	 * that are supposed to be injected into Parser before expanding templates.
-	 * @param $pageId
-	 * @return ParserOutput|null
-	 */
-	private function getFlagsForParserOutputFromDB( $pageId ) {
-		try {
-			$response = $this->requestGetFlagsForPage( $pageId );
-
-			if ( $this->getResponseStatus( $response ) ) {
-				$flags = $this->getResponseData( $response );
-
-				return $this->getParsedFlags( $flags, $pageId );
-			}
-
-			return null;
-		} catch ( Exception $exception ) {
-			$this->logResponseException( $exception, $response->getRequest() );
-		}
-	}
-
-	/**
-	 * Wrap and parse flags
-	 *
-	 * @param Array $flags
-	 * @param int $pageId
-	 * @return ParserOutput
-	 */
-	private function getParsedFlags( $flags, $pageId ) {
-		$templatesCalls = [];
-
-		$flagView = new FlagView();
-
-		foreach ( $flags as $flag ) {
-			$templatesCalls[] = $flagView->wrapSingleFlag(
-				$flag['flag_type_id'],
-				$flag['flag_targeting'],
-				$flag['flag_view'],
-				$flag['params']
-			);
-		}
-
-		return $flagView->renderFlags( $templatesCalls, $pageId );
+		return $this->getFlagsHelper()->getParsedFlags( $flagsOnPage, $pageId );
 	}
 
 	/**
@@ -361,19 +309,7 @@ class FlagsController extends WikiaController {
 		&& $this->wg->User->matchEditToken( $this->getVal( 'edit_token' ) );
 	}
 
-	/**
-	 * Sends a request to the FlagsApiController to get data on flags for the given page.
-	 * @param int $pageId
-	 * @return WikiaResponse
-	 */
-	private function requestGetFlagsForPage( $pageId ) {
-		return $this->sendRequestAcceptExceptions( 'FlagsApiController',
-			'getFlagsForPage',
-			[
-				'page_id' => $pageId,
-			]
-		);
-	}
+
 
 	/**
 	 * Sends a request to the FlagsApiController to get data on flag types

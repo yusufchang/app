@@ -82,25 +82,107 @@ class Hooks {
 	 * @return bool
 	 */
 	public static function onBeforeParserCacheSave( \ParserOutput $parserOutput, \Page $article ) {
+		global $wgCityId;
+
+		$app = \F::app();
+
+		$pageId = $article->getId();
+
+		$flags = $app->sendRequest( 'FlagsApiController',
+			'getFlagsForPageForEdit',
+			[
+				'page_id' => $pageId,
+			]
+		)->getData()[\FlagsApiController::FLAGS_API_RESPONSE_DATA];
+
+		$flagViews = [];
+
+		foreach ( $flags as $flag ) {
+			$flagViews[$flag['flag_view']] = $flag['flag_type_id'];
+		}
+
+		$templates = $parserOutput->getTemplates();
+
+		$newFlags = array_intersect_key( $flagViews, $templates[NS_TEMPLATE] );
+
+		if ( !empty( $flagViews ) && !empty( $newFlags ) ) {
+			$content = $article->getRawText();
+			$firstTemplate = null;
+
+			$flagsExtractor = new FlagsExtractor();
+
+			if ( !$flagsExtractor->isTagAdded( FlagsExtractor::FLAGS_DEFAULT_TAG, $content ) ) {
+				$firstTemplate = $flagsExtractor->findFirstTemplateFromList( $newFlags, $content );
+				$position = $flagsExtractor->findTemplatePosition( $firstTemplate, 0 );
+				if ( $position === 2 ) {
+					$firstTemplate = null;
+				}
+			}
+
+			$actionParams = [
+				'wiki_id' => $wgCityId,
+				'page_id' => $pageId
+			];
+
+			foreach ( $newFlags as $view => $flagTypeId ) {
+				$actions = [ FlagsExtractor::ACTION_ADD_FIRST_FLAG, FlagsExtractor::ACTION_REMOVE_FIRST_FLAG  ];
+				$actionParams['flag_type_id'] = $flagTypeId;
+
+				if ( $view === $firstTemplate ) {
+					$actions[] = FlagsExtractor::ACTION_REPLACE_FIRST_FLAG;
+				}
+
+				$flagsExtractor->init( $content, $view, $actions, $actionParams );
+				$template = $flagsExtractor->getTemplate()[0];
+
+				if ( isset( $flags[$flagTypeId]['flag_id'] ) ) {
+					$flagsToUpdate[] = [
+						'flag_id' => $flags[$flagTypeId]['flag_id'],
+						'params' => $template['params'],
+					];
+				} else {
+					$flagsToAdd[] = [
+						'flag_type_id' => $flagTypeId,
+						'params' => $template['params'],
+					];
+				}
+
+				$content = $flagsExtractor->getText();
+			}
+
+			/**
+			 * Send requests
+			 */
+
+			if ( !empty( $flagsToAdd ) ) {
+				$responseData = $app->sendRequest( 'FlagsApiController',
+					'addFlagsToPage',
+					[
+						'wiki_id' => $wgCityId,
+						'page_id' => $pageId,
+						'flags' => $flagsToAdd,
+					]
+				)->getData();
+
+			}
+
+			if ( !empty( $flagsToUpdate ) ) {
+				$responseData = $app->sendRequest( 'FlagsApiController',
+					'updateFlagsForPage',
+					[
+						'wiki_id' => $wgCityId,
+						'page_id' => $pageId,
+						'flags' => $flagsToUpdate,
+					]
+				)->getData();
+
+			}
+		}
+
 		if ( ! \FlagsController::$parsed ) {
 			$parserOutput = ( new \FlagsController )
 				->modifyParserOutputWithFlags( $parserOutput, $article->getID() );
 		}
-
-		return true;
-	}
-
-	/**
-	 * Modifies ParserOutput
-	 * @param \LinksUpdate $linksUpdate
-	 * @return bool
-	 */
-	public static function onLinksUpdate( \LinksUpdate $linksUpdate ) {
-		$linksUpdate->mParserOutput = ( new \FlagsController )
-			->modifyParserOutputWithFlags(
-				$linksUpdate->getParserOutput(),
-				$linksUpdate->getTitle()->getArticleID()
-			);
 
 		return true;
 	}
@@ -111,19 +193,22 @@ class Hooks {
 	 * @return bool
 	 */
 	public static function onArticlePreviewAfterParse( \ParserOutput $parserOutput, \Title $title ) {
+		$flagsParserOutput = ( new FlagsHelper() )->getFlagsForParserOutputFromDB( $title->getArticleID() );
 		$parserOutput = ( new \FlagsController )
-			->modifyParserOutputWithFlags( $parserOutput, $title->getArticleID() );
+			->modifyParserOutputWithFlags( $parserOutput, $flagsParserOutput );
 
 		return true;
 	}
 
 	public static function onBeforeRefreshLinksForTitleUpdate( \ParserOutput $parserOutput, \Revision $revision ) {
+		$flagsParserOutput = ( new FlagsHelper() )->getFlagsForParserOutputFromDB( $revision->getPage() );
 		$parserOutput = ( new \FlagsController )
-			->modifyParserOutputWithFlags( $parserOutput, $revision->getPage() );
+			->modifyParserOutputWithFlags( $parserOutput, $flagsParserOutput );
 
 		return true;
 	}
 
+	// TODO: REMOVE
 	public static function onLinksUpdateInsertTemplates( $pageId, Array $templates ) {
 		$app = \F::app();
 
