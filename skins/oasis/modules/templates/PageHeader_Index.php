@@ -7,6 +7,12 @@ if ( !empty( $wg->EnableMonetizationModuleExt ) ) {
 	}
 }
 
+if ( WikiaPageType::isMainPage() ) {
+	?>
+	<a id="CuratedContentTool" class="button" href="#"><img src="<?= wfBlankImgUrl(); ?>" class="sprite addRelatedVideo"/>Curated Content Tool</a>
+	<?php
+}
+
 $runNjord = ( !empty( $wg->EnableNjordExt ) && WikiaPageType::isMainPage() );
 if ( $runNjord ) {
 	// edit button with actions dropdown
