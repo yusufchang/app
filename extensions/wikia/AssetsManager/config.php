@@ -361,7 +361,9 @@ $config['oasis_nojquery_shared_js'] = array(
 		'//skins/oasis/js/FirefoxFindFix.js',
 		'//skins/oasis/js/tabs.js',
 		'//skins/oasis/js/Tracking.js',
+		'//resources/wikia/libraries/Ponto/ponto.js',
 		'//skins/oasis/js/MercuryCuratedContentTool.js',
+		'//skins/oasis/js/MercuryCuratedContentToolPontoBridge.js',
 
 		'//skins/shared/scripts/onScroll.js',
 
