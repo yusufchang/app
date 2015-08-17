@@ -1,14 +1,18 @@
-/* global wgNamespaceIds, wgFormattedNamespaces, mw, wgServer, wgScript */
+/* global mw, wgServer, wgScript */
 /* jshint maxlen: false */
 /* jshint loopfunc: false */
 /* jshint camelcase: false */
 'use strict';
 
-require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages'], function (window, $, nirvana, tracker, msg) {
+require(
+	['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages'],
+	function (window, $, nirvana, tracker, msg)
+{
 	// usefull shortcuts
 	$.fn.removeError = function () {
 		return this.removeClass('error').popover('destroy');
 	};
+
 	$.fn.addError = function (message) {
 		return this.addClass('error')
 			.popover('destroy')
@@ -17,7 +21,6 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 
 	$(function () {
 		mw.loader.using(['jquery.autocomplete', 'jquery.ui.sortable', 'wikia.aim', 'wikia.yui'], function () {
-
 
 			var d = document,
 				item = mw.config.get('itemTemplate'),
@@ -64,6 +67,7 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 					// validate form on init
 					checkForm();
 				},
+
 				addNew = function (row, elem) {
 					var cat;
 
@@ -84,8 +88,8 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 				/**
 				 * Validate input elements
 				 *
-				 * @param elements
-				 * @param options array consists of ['checkEmpty', 'required', 'limit']
+				 * @param {jQuery} elements
+				 * @param {array} options array consists of ['checkEmpty', 'required', 'limit']
 				 */
 				checkInputs = function (elements, options) {
 					var cachedVals = [],
@@ -124,6 +128,7 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 						}
 					});
 				},
+
 				checkImages = function () {
 					$ul.find('.image.error').removeError();
 
@@ -137,6 +142,7 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 						$lastSection.parent().find('.image').removeError();
 					}
 				},
+
 				checkForm = function () {
 					$save.removeClass();
 
@@ -169,11 +175,13 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 						return true;
 					}
 				},
+
 				track = tracker.buildTrackingFunction({
 					action: Wikia.Tracker.ACTIONS.CLICK,
 					category: 'special-curated-content',
 					trackingMethod: 'analytics'
 				}),
+
 				onImageLoadFail = function ($image) {
 					$image
 						.addError(imageMissingError)
@@ -184,14 +192,15 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 					$image.stopThrobbing();
 					checkForm();
 				},
+
 				loadImage = function ($image, imgTitle, catImage) {
 					$image.startThrobbing();
 
 					nirvana.getJson(
-						'CuratedContentSpecial',
+						'CuratedContent',
 						'getImage',
 						{
-							file: imgTitle
+							title: imgTitle
 						}
 					).done(
 						function (data) {
@@ -200,7 +209,9 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 									.removeError()
 									.css('backgroundImage', 'url(' + data.url + ')')
 									.data('id', data.id)
-									.attr('data-id', data.id);
+									.attr('data-id', data.id)
+									.data('crop', '')
+									.removeAttr('data-crop');
 
 								if (!catImage) {
 									$image.siblings().last().addClass('photo-remove');
@@ -238,8 +249,8 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 							// This has to happen inside setTimeout because updating value from autocomplete
 							// happens after blur event so value passed to loadImage is wrong.
 							// With setTimeout we are waiting for correct value to appear inside input
-							setTimeout(function() {
-								loadImage($imageForSection, $(self).val())
+							setTimeout(function () {
+								loadImage($imageForSection, $(self).val());
 							}, 500);
 						}
 					} else {
@@ -273,7 +284,8 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 				return {
 					title: $lia.find('.item-input').val(),
 					label: $lia.find('.name').val(),
-					image_id: $lia.find('.image').data('id') || 0
+					image_id: $lia.find('.image').data('id') || 0,
+					image_crop: $lia.find('.image').data('crop') || ''
 				};
 			}
 
@@ -281,6 +293,7 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 				var $lia = $(li),
 					name = $lia.find('.section-input').val() || '',
 					imageId = $lia.find('.image').data('id') || 0,
+					imageCrop = $lia.find('.image').data('crop') || '',
 					featured = $lia.hasClass('featured') || false,
 					items = [],
 					result = {};
@@ -292,12 +305,92 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 				result = {
 					title: name,
 					image_id: imageId,
+					image_crop: imageCrop,
 					items: items
 				};
+
 				if (featured) {
 					result.featured = true;
 				}
+
 				return result;
+			}
+
+			function gerErrorMessageFromErrReason(errReason) {
+				if (errReason === 'articleNotFound') {
+					return articleNotFoundError;
+				}
+				if (errReason === 'emptyLabel') {
+					return emptyLabelError;
+				}
+				if (errReason === 'tooLongLabel') {
+					return tooLongLabelError;
+				}
+				if (errReason === 'videoNotSupportProvider') {
+					return videoNotSupportedError;
+				}
+				if (errReason === 'notSupportedType') {
+					return notSupportedType;
+				}
+				if (errReason === 'noCategoryInTag') {
+					return noCategoryInTag;
+				}
+				if (errReason === 'imageMissing') {
+					return imageMissingError;
+				}
+				if (errReason === 'duplicatedLabel') {
+					return duplicateError;
+				}
+				return errReason;
+			}
+
+			function checkItemsForErrors($items, errTitle, errReason, reasonMessage) {
+				$items.each(function () {
+					if (this.value === errTitle) {
+						var $itemWithError;
+
+						switch (errReason) {
+							case 'missingImage':
+								$itemWithError = $(this).parent().find('.image');
+								break;
+							case 'emptyLabel':
+							case 'tooLongLabel':
+								$itemWithError = $(this).next();
+								break;
+							default:
+								$itemWithError = $(this);
+						}
+						if ($itemWithError) {
+							$itemWithError.addError(reasonMessage);
+							return false;
+						}
+					}
+					return true;
+				});
+			}
+
+			function checkSectionsForErrors($sections, errTitle, errReason, reasonMessage) {
+				$sections.each(function () {
+					if (this.value === errTitle) {
+						var $itemWithError;
+
+						switch (errReason) {
+							case 'missingImage':
+								$itemWithError = $(this).parent().find('.image');
+								break;
+							case 'duplicatedLabel':
+							// intended fall
+							case 'tooLongLabel':
+								$itemWithError = $(this);
+								break;
+						}
+						if ($itemWithError) {
+							$itemWithError.addError(reasonMessage);
+							return false;
+						}
+					}
+					return true;
+				});
 			}
 
 			window._gaq.push(['_setSampleRate', '100']);
@@ -324,83 +417,40 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 						}
 						data.push(sectionData);
 					});
+
 					nirvana.sendRequest({
 						controller: 'CuratedContentSpecial',
 						method: 'save',
 						data: {
 							sections: data
 						}
-					}).done(
-						function (data) {
-							function getReasonMessage(errReason) {
-								if (errReason === 'articleNotFound') {
-									return articleNotFoundError;
-								}
-								if (errReason === 'emptyLabel') {
-									return emptyLabelError;
-								}
-								if (errReason === 'tooLongLabel') {
-									return tooLongLabelError;
-								}
-								if (errReason === 'videoNotSupportProvider') {
-									return videoNotSupportedError;
-								}
-								if (errReason === 'notSupportedType') {
-									return notSupportedType;
-								}
-								if (errReason === 'noCategoryInTag') {
-									return noCategoryInTag;
-								}
-								if (errReason === 'imageMissing') {
-									return imageMissingError;
-								}
-								return errReason;
-							}
+					}).done(function (data) {
+						if (data.error) {
+							var $items = $form.find('.item-input'),
+								$sections = $form.find('.section-input');
 
-							if (data.error) {
-								var items = $form.find('.item-input, .section-input');
+							[].forEach.call(data.error, function (err) {
+								var errTitle = err.title,
+									errReason = err.reason,
+									reasonMessage = gerErrorMessageFromErrReason(errReason);
 
-								$.each(data.error, function() {
-									var errTitle = this.title,
-										errReason = this.reason,
-										reasonMessage = getReasonMessage(errReason);
+								checkItemsForErrors($items, errTitle, errReason, reasonMessage);
+								checkSectionsForErrors($sections, errTitle, errReason, reasonMessage);
+							});
 
-									items.each(function () {
-										if (this.value === errTitle) {
-											var $itemWithError;
-
-											switch (errReason) {
-												case 'missingImage':
-													$itemWithError = $(this).parent().find('.image');
-													break;
-												case 'emptyLabel':
-												case 'tooLongLabel':
-													$itemWithError = $(this).next();
-													break;
-												default:
-													$itemWithError = $(this);
-											}
-
-											$itemWithError.addError(reasonMessage);
-											return false;
-										}
-										return true;
-									});
-								});
-
-								$save.addClass('err');
-								$save.attr('disabled', true);
-								track({label: 'save-error'});
-							} else if (data.status) {
-								$save.addClass('ok');
-								track({label: 'save'});
-							}
-						}).fail(function () {
 							$save.addClass('err');
+							$save.attr('disabled', true);
 							track({label: 'save-error'});
-						}).then(function () {
-							$form.stopThrobbing();
-						});
+						} else if (data.status) {
+							$save.addClass('ok');
+							track({label: 'save'});
+						}
+					}).fail(function () {
+						$save.addClass('err');
+						track({label: 'save-error'});
+					}).then(function () {
+						$form.stopThrobbing();
+					});
 				}
 			});
 
@@ -408,7 +458,12 @@ require(['wikia.window', 'jquery', 'wikia.nirvana', 'wikia.tracker', 'JSMessages
 				on('click', '.photo-remove', function () {
 					var $this = $(this),
 						$line = $this.parent(),
-						$image = $line.find('.image').removeAttr('data-id');
+						$image = $line
+							.find('.image')
+							.data('id', 0)
+							.removeAttr('data-id')
+							.data('crop', '')
+							.removeAttr('data-crop');
 
 					$this.removeClass('photo-remove');
 					loadImage($image, $line.find('.item-input').val(), true);

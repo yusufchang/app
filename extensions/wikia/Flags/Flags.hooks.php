@@ -21,14 +21,18 @@ class Hooks {
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
 		$helper = new FlagsHelper();
 		/* Assets for flags view */
-		if ( $helper->shouldDisplayFlags()
-			|| $out->getTitle()->isSpecial( 'Flags' ) ) {
+		if ( $helper->shouldDisplayFlags() ) {
 			\Wikia::addAssetsToOutput( 'flags_view_scss' );
 		}
 		/* Assets for flags edit form */
 		if ( $helper->areFlagsEditable() ) {
 			\Wikia::addAssetsToOutput( 'flags_editform_js' );
 			$out->addModules( 'ext.wikia.Flags.EditFormMessages' );
+		}
+
+		if ( $out->getTitle()->isSpecial( 'Flags' ) ) {
+			\Wikia::addAssetsToOutput( 'flags_special_scss' );
+			\Wikia::addAssetsToOutput( 'flags_special_js' );
 		}
 
 		if ( $skin->getTitle()->getNamespace() === NS_TEMPLATE ) {
@@ -299,7 +303,6 @@ class Hooks {
 	public static function getCommonParams( $flagType, $flagParamsNames ) {
 		return [
 			'template' => $flagType['flag_view'],
-			'template_url' => $flagType['flag_view_url'],
 			'flag_type_id' => $flagType['flag_type_id'],
 			'flag_old_params' => $flagType['flag_params_names'],
 			'flag_new_params' => $flagParamsNames
