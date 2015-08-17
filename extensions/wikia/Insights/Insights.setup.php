@@ -55,6 +55,7 @@ $wgAutoloadClasses['InsightsUncategorizedModel'] = $dir . 'models/InsightsUncate
 $wgAutoloadClasses['InsightsUnconvertedInfoboxesModel'] = $dir . 'models/InsightsUnconvertedInfoboxesModel.php';
 $wgAutoloadClasses['InsightsWantedpagesModel'] = $dir . 'models/InsightsWantedpagesModel.php';
 $wgAutoloadClasses['InsightsWithoutimagesModel'] = $dir . 'models/InsightsWithoutimagesModel.php';
+$wgAutoloadClasses['InsightsCuratedMainPageModel'] = $dir . 'models/InsightsCuratedMainPageModel.php';
 
 /**
  * The right rail module

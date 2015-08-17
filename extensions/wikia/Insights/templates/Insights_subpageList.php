@@ -33,7 +33,7 @@
 		<?php endif ?>
 
 		<div class="insights-content">
-			<?php if ( !empty( $content ) ) : ?>
+			<?php if ( !empty( $content ) && $subpage !== 'curatedmainpage' ) : ?>
 				<table class="insights-list" data-type="<?= Sanitizer::encodeAttribute( $subpage ) ?>">
 					<tr>
 						<th class="insights-list-header insights-list-first-column"><?= wfMessage( 'insights-list-header-page' )->escaped() ?></th>
@@ -86,6 +86,15 @@
 				<?php if ( $paginatorBar ) : ?>
 					<?= $paginatorBar ?>
 				<?php endif ?>
+			<?php elseif ( $subpage === 'curatedmainpage' ) : ?>
+				<p>
+					<?php if ( $content['isCuratedContentEnabled'] ) {
+						echo wfMessage( 'insights-notification-message-curatedmainpage-enabled' )->escaped();
+					} else {
+						echo wfMessage( 'insights-notification-message-curatedmainpage-disabled' )->escaped();
+					}
+					?>
+				</p>
 			<?php elseif (!empty( $flagTypes ) ) : ?>
 				<p>
 					<?= wfMessage( 'insights-list-no-flag-types' )->escaped(); ?>

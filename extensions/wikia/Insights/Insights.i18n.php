@@ -22,6 +22,11 @@ $messages['en'] = array(
 	'insights-notification-message-fixed-uncategorizedpages' => 'Awesome, this page is now categorized.',
 	'insights-notification-next-item-uncategorizedpages' => 'Go to the next uncategorized article.',
 
+	'insights-list-subtitle-curatedmainpage' => 'Curated Main Page',
+	'insights-list-description-curatedmainpage' => 'New portable main page',
+	'insights-notification-message-curatedmainpage-enabled' => 'Curated Main Page is currently enabled',
+	'insights-notification-message-curatedmainpage-disabled' => 'Curated Main Page is currently disabled',
+
 	'insights-list-subtitle-withoutimages' => 'Pages without images',
 	'insights-list-description-withoutimages' => 'Articles with images are read more often, shared more often, and perform better in search engines than those without images. Even adding a loosely related image can help.',
 	'insights-notification-message-inprogress-withoutimages' => 'This page needs an image. ',
