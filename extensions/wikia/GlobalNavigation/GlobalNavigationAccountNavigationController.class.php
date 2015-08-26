@@ -15,6 +15,7 @@ class GlobalNavigationAccountNavigationController extends WikiaController {
 		global $wgUser;
 
 		$this->isAnon = $wgUser->isAnon();
+		$this->enableNewAuthModal = true;//$this->app->wg->EnableNewAuthModal;
 		$this->username = $wgUser->getName();
 		$this->avatarContainerAdditionalClass = '';
 		$this->profileAvatar = '';
