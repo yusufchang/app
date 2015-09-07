@@ -137,8 +137,9 @@ $more-z-index: 10000;
 			}
 
 			.label {
-				border: 0;
-				color: #fff;
+				background: linear-gradient(-135deg, transparent 17px, #00b7e0 0) top right, linear-gradient(-45deg, transparent 17px, #00b7e0 0) bottom right;
+				background-size: 100% 50%;
+				background-repeat: no-repeat;
 			}
 		}
 
