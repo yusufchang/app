@@ -52,7 +52,7 @@ define('ext.wikia.adEngine.template.floor', [
 				height: params.height
 			}),
 			$floor = $('#' + floorId),
-			isFloorPresent = $floor.exists(),
+			isFloorPresent = $floor.length > 0,
 			gptEventMock = {
 				size: {
 					width: params.width,
@@ -70,18 +70,6 @@ define('ext.wikia.adEngine.template.floor', [
 
 			$floor.removeClass('hidden');
 		}
-
-		if (!isFloorPresent) {
-			$floor = $(floorHtml);
-			$floor.addClass('hidden');
-			$(doc.body).append($floor);
-		}
-
-		$floor.find('a.close').click(function (event) {
-			event.preventDefault();
-			$floor.addClass('hidden');
-		});
-		$floor.find('.ad').html(iframe);
 
 		if (params.onClick) {
 			$(iframe).on('load', function () {
@@ -103,6 +91,18 @@ define('ext.wikia.adEngine.template.floor', [
 				});
 			});
 		}
+
+		if (!isFloorPresent) {
+			$floor = $(floorHtml);
+			$floor.addClass('hidden');
+			$(doc.body).append($floor);
+		}
+
+		$floor.find('a.close').click(function (event) {
+			event.preventDefault();
+			$floor.addClass('hidden');
+		});
+		$floor.find('.ad').html(iframe);
 
 		if (!async) {
 			showFloor();

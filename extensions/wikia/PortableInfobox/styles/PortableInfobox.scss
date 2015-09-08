@@ -14,6 +14,11 @@
 	// (placing it within portable-infobox class makes it strong enough) //
 
 .portable-infobox {
+	
+	.pi-item-spacing {
+		padding: $infobox-item-margin $infobox-item-margin * 2;
+	}
+
 	.pi-secondary-font {
 		font-size: 12px;
 		font-weight: bold;
@@ -57,10 +62,6 @@
 
 // **********  Common elements styling ********** //
 
-.pi-item-spacing {
-	padding: $infobox-item-margin $infobox-item-margin * 2;
-}
-
 .pi-secondary-background {
 	background-color: $infobox-section-header-background;
 }
@@ -91,6 +92,11 @@
 .pi-group {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+}
+
+.pi-data:last-of-type + .pi-group {
+	border-top-style: solid;
+	border-top-width: 1px;
 }
 
 .pi-data {
