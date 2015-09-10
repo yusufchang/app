@@ -86,7 +86,8 @@ class Hooks {
 		global $wgCityId, $wgJsMimeType;
 
 		$title = $rawAction->getTitle();
-
+		var_dump( $title );
+		exit;
 		if ( $title->isJsPage() || $rawAction->getContentType() == $wgJsMimeType ) {
 			$pageId = $title->getArticleID();
 			$latestRevId = $title->getLatestRevID();

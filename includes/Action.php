@@ -219,6 +219,8 @@ abstract class Action {
 	 * @return Title
 	 */
 	public final function getTitle() {
+		var_dump(__METHOD__."this shouldn't invoke...");
+		return 3;
 		return $this->page->getTitle();
 	}
 
