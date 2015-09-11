@@ -156,7 +156,7 @@ ve.init.mw.Target.static.citationToolsLimit = 5;
 
 ve.init.mw.Target.static.toolbarGroups = [
 	// History
-	{ include: [ 'undo', 'redo' ] },
+	{ include: [ 'undo' ] },
 	// Format
 	{
 		classes: [ 've-test-toolbar-format' ],
@@ -167,6 +167,9 @@ ve.init.mw.Target.static.toolbarGroups = [
 		promote: [ 'paragraph' ],
 		demote: [ 'preformatted', 'blockquote', 'heading1' ]
 	},
+	// Link
+	{ include: [ 'bold', 'italic', 'link' ] },
+
 	// Style
 	{
 		classes: [ 've-test-toolbar-style' ],
@@ -174,39 +177,25 @@ ve.init.mw.Target.static.toolbarGroups = [
 		icon: 'textStyle',
 		indicator: 'down',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
-		include: [ { group: 'textStyle' }, 'language', 'clear' ],
-		forceExpand: [ 'bold', 'italic', 'clear' ],
-		promote: [ 'bold', 'italic' ],
-		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
+		include: [ 'superscript', 'subscript', 'strikethrough', 'underline', 'clear', 'outdent', 'indent', 'clear' ]
 	},
-	// Link
-	{ include: [ 'link' ] },
-	// Cite
-	{
-		classes: [ 've-test-toolbar-cite' ],
-		type: 'list',
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-cite-label' ),
-		indicator: 'down',
-		include: [ { group: 'cite' }, 'reference', 'reference/existing' ],
-		demote: [ 'reference', 'reference/existing' ]
-	},
-	// Structure
-	{
-		classes: [ 've-test-toolbar-structure' ],
-		type: 'list',
-		icon: 'listBullet',
-		indicator: 'down',
-		include: [ { group: 'structure' } ],
-		demote: [ 'outdent', 'indent' ]
-	},
+
+	// // Structure
+	// {
+	// 	classes: [ 've-test-toolbar-structure' ],
+	// 	type: 'list',
+	// 	icon: 'listBullet',
+	// 	indicator: 'down',
+	// 	include: [ { group: 'structure' } ],
+	// 	demote: [ 'outdent', 'indent' ]
+	// },
 	// Insert
 	{
 		classes: [ 've-test-toolbar-insert' ],
+		type: 'list',
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		indicator: 'down',
-		include: '*',
-		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
-		promote: [ 'media', 'transclusion' ]
+		include: [ 'media', 'transclusion', { group: 'structure' } ]
 	},
 	// Table
 	{
@@ -217,8 +206,6 @@ ve.init.mw.Target.static.toolbarGroups = [
 		include: [ { group: 'table' } ],
 		demote: [ 'deleteTable' ]
 	},
-	// SpecialCharacter
-	{ include: [ 'specialCharacter' ] }
 ];
 
 ve.init.mw.Target.static.importRules = {
