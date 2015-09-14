@@ -133,4 +133,6 @@ $messages = array_merge( $messages, array(
 ***w:c:routes|Routes de France
 ***w:c:fr.encyclopedie|Encyclopédie
 ",
+
+'tog-enableuserjs' => 'Activer le code javascript personnel ([[Aide:Css_et_JS_personnels|En savoir plus]])',
 ) );
