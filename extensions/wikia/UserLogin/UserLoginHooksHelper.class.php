@@ -25,7 +25,10 @@ class UserLoginHooksHelper {
 	// show request form for Special:ConfirmEmail
 	public static function onConfirmEmailShowRequestForm( EmailConfirmation &$pageObj, &$show ) {
 		$show = false;
-		if ( Sanitizer::validateEmail( $pageObj->getUser()->getEmail() ) ) {
+		if (
+			Sanitizer::validateEmail( $pageObj->getUser()->getEmail() )
+			|| !empty( $pageObj->getUser()->getNewEmail() )
+		) {
 			$userLoginHelper = new UserLoginHelper();
 			$userLoginHelper->showRequestFormConfirmEmail( $pageObj );
 		} else {
@@ -52,9 +55,9 @@ class UserLoginHooksHelper {
 
 	// get email authentication for Preferences::profilePreferences
 	public static function onGetEmailAuthentication( User &$user, IContextSource $context, &$disableEmailPrefs, &$emailauthenticated ) {
-		if ( $user->getEmail() ) {
+		$optionNewEmail = $user->getNewEmail();
+		if ( $user->getEmail() || $optionNewEmail ) {
 			$emailTimestamp = $user->getEmailAuthenticationTimestamp();
-			$optionNewEmail = $user->getGlobalAttribute( 'new_email' );
 			$msgKeyPrefixEmail = ( empty( $optionNewEmail ) && !$emailTimestamp ) ? 'usersignup-user-pref-unconfirmed-' : 'usersignup-user-pref-';
 			if ( empty( $optionNewEmail ) && $emailTimestamp ) {
 				$lang = $context->getLanguage();
@@ -94,9 +97,9 @@ class UserLoginHooksHelper {
 	public static function onSetUserEmail( User $user, $newEmail, &$result, &$info ) {
 		$app = F::app();
 		$oldEmail = $user->getEmail();
-		$optionNewEmail = $user->getGlobalAttribute( 'new_email' );
+		$optionNewEmail = $user->getNewEmail();
 		if ( ( empty( $optionNewEmail ) &&  $newEmail != $oldEmail ) || ( !empty( $optionNewEmail ) &&  $newEmail != $optionNewEmail ) ) {
-			$user->setGlobalAttribute( 'new_email', $newEmail );
+			$user->setNewEmail( $newEmail );
 			$user->invalidateEmail();
 			if ( $app->wg->EmailAuthentication ) {
 				$userLoginHelper = new UserLoginHelper();
@@ -124,7 +127,7 @@ class UserLoginHooksHelper {
 		$app = F::app();
 
 		if ( $app->checkSkin( 'wikiamobile' ) ) {
-			$vars['wgLoginToken'] = UserLoginHelper::getLoginToken();
+			$vars['wgLoginToken'] = UserLoginHelper::readLoginToken();
 		}
 
 		// Max and min password lengths for JS validation
