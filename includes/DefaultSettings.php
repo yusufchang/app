@@ -1327,9 +1327,6 @@ $wgDBClusterTimeout = 10;
  */
 $wgDBAvgStatusPoll = 2000;
 
-/** Set to true if using InnoDB tables */
-$wgDBtransactions = false;
-
 /**
  * Set to true to engage MySQL 4.1/5.0 charset-related features;
  * for now will just cause sending of 'SET NAMES=utf8' on connect.
@@ -4534,6 +4531,14 @@ $wgUpgradeKey = false;
  * Default: 13 weeks = about three months
  */
 $wgRCMaxAge = 13 * 7 * 24 * 3600;
+
+/**
+ * Wikia change: Recentchanges items are periodically purged; keep the number of rows at the stable level
+ *
+ * @see PLATFORM-1393
+ * @see PLATFORM-1460
+ */
+$wgRCMaxRows = 20000;
 
 /**
  * Filter $wgRCLinkDays by $wgRCMaxAge to avoid showing links for numbers
