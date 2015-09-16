@@ -13,24 +13,14 @@ define('ext.wikia.adEngine.adLogicPageParams', [
 ], function (adContext, pvCounter, log, doc, loc, win, lookups, abTest, krux) {
 	'use strict';
 
-	var logGroup = 'ext.wikia.adEngine.adLogicPageParams',
+	var context = {},
 		hostname = loc.hostname,
+		logGroup = 'ext.wikia.adEngine.adLogicPageParams',
 		maxNumberOfCategories = 3,
-		skin = adContext.getContext().targeting.skin,
-		context = {};
+		skin = adContext.getContext().targeting.skin;
 
 	function updateContext() {
 		context = adContext.getContext();
-	}
-
-	function getDartHubName() {
-		if (context.targeting.wikiVertical === 'Entertainment') {
-			return 'ent';
-		}
-		if (context.targeting.wikiVertical === 'Gaming') {
-			return 'gaming';
-		}
-		return 'life';
 	}
 
 	function getDomain() {
@@ -197,6 +187,13 @@ define('ext.wikia.adEngine.adLogicPageParams', [
 		return win.innerWidth > win.innerHeight ? '4:3' : '3:4';
 	}
 
+	function getVerticalName(targeting) {
+		if (getHostname() === 'showcase' || context.opts.showcase === true) {
+			return 'showcase';
+		}
+		return targeting.mappedVerticalName;
+	}
+
 	/**
 	 * Returns page level params
 	 * @param {Object} options
@@ -213,6 +210,7 @@ define('ext.wikia.adEngine.adLogicPageParams', [
 			zone2,
 			params,
 			targeting = context.targeting,
+			mappedVertical = getVerticalName(targeting),
 			pvs = pvCounter.get();
 
 		options = options || {};
@@ -221,16 +219,18 @@ define('ext.wikia.adEngine.adLogicPageParams', [
 
 		if (targeting.pageIsHub) {
 			site = 'hub';
-			zone1 = '_' + getDartHubName() + '_hub';
+			zone1 = '_' + mappedVertical + '_hub';
 			zone2 = 'hub';
 		} else {
-			site = targeting.wikiCategory;
+			site = mappedVertical;
 			zone1 = dbName;
 			zone2 = targeting.pageType || 'article';
 		}
 
 		params = {
 			s0: site,
+			s0v: targeting.wikiVertical,
+			s0c: targeting.newWikiCategories,
 			s1: zone1,
 			s2: zone2,
 			ab: getAb(),
