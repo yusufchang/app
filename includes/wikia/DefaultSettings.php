@@ -80,6 +80,7 @@ $wgAutoloadClasses['WikiaLocalRegistry'] = $IP . '/includes/wikia/nirvana/WikiaL
 $wgAutoloadClasses['WikiaDispatcher'] = $IP . '/includes/wikia/nirvana/WikiaDispatcher.class.php';
 $wgAutoloadClasses['WikiaDispatchableObject'] = $IP . '/includes/wikia/nirvana/WikiaDispatchableObject.class.php';
 $wgAutoloadClasses['WikiaController'] = $IP . '/includes/wikia/nirvana/WikiaController.class.php';
+$wgAutoloadClasses['WikiaParserTagController'] = $IP . '/includes/wikia/nirvana/WikiaParserTagController.class.php';
 $wgAutoloadClasses['WikiaService'] = $IP . '/includes/wikia/nirvana/WikiaService.class.php';
 $wgAutoloadClasses['WikiaModel'] = $IP . '/includes/wikia/nirvana/WikiaModel.class.php';
 $wgAutoloadClasses['WikiaSpecialPageController'] = $IP . '/includes/wikia/nirvana/WikiaSpecialPageController.class.php';
@@ -263,6 +264,8 @@ $wgAutoloadClasses[ 'WikiDataSource'                  ] = "$IP/includes/wikia/Wi
 $wgAutoloadClasses[ 'CurlMultiClient'                 ] = "$IP/includes/wikia/CurlMultiClient.php";
 $wgAutoloadClasses[ 'DateFormatHelper'                ] = "$IP/includes/wikia/DateFormatHelper.php";
 $wgAutoloadClasses[ 'CategoryHelper'                  ] = "$IP/includes/wikia/helpers/CategoryHelper.class.php";
+$wgAutoloadClasses[ 'WikiaTagBuilderHelper'           ] = "$IP/includes/wikia/helpers/WikiaTagBuilderHelper.class.php";
+$wgAutoloadClasses[ 'WikiaIFrameTagBuilderHelper'     ] = "$IP/includes/wikia/helpers/WikiaIFrameTagBuilderHelper.class.php";
 $wgAutoloadClasses[ 'Wikia\\Measurements\\Driver'     ] = "$IP/includes/wikia/measurements/Drivers.php";
 $wgAutoloadClasses[ 'Wikia\\Measurements\\Drivers'    ] = "$IP/includes/wikia/measurements/Drivers.php";
 $wgAutoloadClasses[ 'Wikia\\Measurements\\NewrelicDriver' ] = "$IP/includes/wikia/measurements/Drivers.php";
@@ -427,6 +430,7 @@ $wgAutoloadClasses['UserAllowedRequirementTrait'] = $IP . '/includes/wikia/trait
 $wgAutoloadClasses['UserAllowedRequirementThrowsErrorTrait'] = $IP . '/includes/wikia/traits/UserAllowedRequirementTrait.php';
 $wgAutoloadClasses['IncludeMessagesTrait'] = $IP . '/includes/wikia/traits/IncludeMessagesTrait.php';
 $wgAutoloadClasses['PowerUserTrait'] = $IP . '/includes/wikia/traits/PowerUserTrait.php';
+$wgAutoloadClasses['GlobalUserDataTrait'] = $IP . '/includes/wikia/traits/GlobalUserDataTrait.php';
 $wgAutoloadClasses['TitleTrait'] = $IP . '/includes/wikia/traits/TitleTrait.php';
 
 // Profiler classes
@@ -539,6 +543,7 @@ $wgAutoloadClasses[ "WikiaValidatorImageSize"       ] = "$IP/includes/wikia/vali
 $wgAutoloadClasses[ "WikiaValidatorDependent"       ] = "$IP/includes/wikia/validators/WikiaValidatorDependent.class.php";
 $wgAutoloadClasses[ 'WikiaValidatorRestrictiveUrl'  ] = "$IP/includes/wikia/validators/WikiaValidatorRestrictiveUrl.class.php";
 $wgAutoloadClasses[ 'WikiaValidatorUsersUrl'        ] = "$IP/includes/wikia/validators/WikiaValidatorUsersUrl.class.php";
+$wgAutoloadClasses[ 'WikiaValidatorAlwaysTrue'      ] = "$IP/includes/wikia/validators/WikiaValidatorAlwaysTrue.class.php";
 include_once("$IP/includes/wikia/validators/WikiaValidatorsExceptions.php");
 
 /**
@@ -579,7 +584,7 @@ global $wgAPIPropModules;
 $wgAPIPropModules[ "info"         ] = "WikiaApiQueryPageinfo";
 $wgAPIPropModules[ "wklasteditors"] = "WikiaApiQueryLastEditors";
 
-/*
+/**
  * reqistered API modules
  */
 global $wgAPIModules;
@@ -625,6 +630,7 @@ include_once( "$IP/extensions/wikia/Thumbnails/Thumbnails.setup.php" );
 include_once( "$IP/extensions/wikia/InstantGlobals/InstantGlobals.setup.php" );
 include_once( "$IP/extensions/wikia/UserTools/UserTools.setup.php" );
 include_once( "$IP/extensions/wikia/BannerNotifications/BannerNotifications.setup.php" );
+include_once( "$IP/extensions/wikia/AuthModal/AuthModal.setup.php" );
 include_once( "$IP/extensions/wikia/LatestPhotos/LatestPhotos.setup.php" );
 include_once( "$IP/extensions/wikia/PowerUser/PowerUser.setup.php" );
 include_once( "$IP/extensions/wikia/AutoFollow/AutoFollow.setup.php" );
@@ -733,7 +739,7 @@ include_once( "$IP/extensions/wikia/CreateNewWiki/CreateWikiLocalJob.php" );
 require_once( "{$IP}/extensions/wikia/Tasks/Tasks.setup.php");
 require_once( "{$IP}/includes/wikia/tasks/autoload.php");
 
-/*
+/**
  * @name wgWikiaStaffLanguages
  * array of language codes supported by ComTeam
  */
@@ -771,6 +777,7 @@ $wgWikiFactoryTags = array();
  * external databases
  */
 $wgFlagsDB = 'portable_flags';
+$wgContentReviewDB = 'content_review';
 $wgExternalDatawareDB = 'dataware';
 $wgExternalArchiveDB = 'archive';
 $wgStatsDB = 'stats';
@@ -805,14 +812,14 @@ $wgEnableGroupedArticleCommentsRC = true;
  */
 $wgUseWikiaSearchUI = false;
 
-/*
+/**
  * @name: $wgSpecialPagesRequiredLogin
  * list of restricted special pages (dbkey) displayed on Special:SpecialPages which required login
  * @see Login friction project
  */
 $wgSpecialPagesRequiredLogin = array('Resetpass', 'MyHome', 'Preferences', 'Watchlist', 'Upload', 'CreateBlogPage', 'CreateBlogListingPage', 'MultipleUpload');
 
-/*
+/**
  * @name: $wgArticleCommentsMaxPerPage
  * max comments per page under article
  * @see Article comments
@@ -821,7 +828,7 @@ $wgArticleCommentsMaxPerPage = 5;
 
 $wgMaxThumbnailArea = 0.9e7;
 
-/*
+/**
  * @name $wgWikiaMaxNameChars
  * soft enforced limit of length for new username
  * @see rt#39263
@@ -885,7 +892,7 @@ $wgSessionsInLibmemcached = false;
 $wgSolidCacheType = CACHE_MEMCACHED;
 $wgWikiFactoryCacheType = CACHE_MEMCACHED;
 
-/*
+/**
  * @name $wgWikiaHideImportsFromIrc
  * hides Special:Import imports from IRC feed.
  * @see rt#43025
@@ -1004,7 +1011,6 @@ $wgMemCachedTimeout = 500000; //Data timeout in microseconds
 
 $wgAssetsManagerQuery = '/__am/%4$d/%1$s/%3$s/%2$s';
 //$wgAssetsManagerQuery = '/index.php?action=ajax&rs=AssetsManagerEntryPoint&__am&type=%1$s&cb=%4$d&params=%3$s&oid=%2$s';
-$wgSassExecutable = '/var/lib/gems/1.8/bin/sass';
 
 /**
  * global user_options
@@ -1480,6 +1486,13 @@ $wgAdDriverRubiconRTPCountries = null;
 $wgAdDriverKruxCountries = null;
 
 /**
+ * @name $wgAdDriverScrollHandlerCountries
+ * List of countries scroll handler will be enabled on
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverScrollHandlerCountries = null;
+
+/**
  * @name $wgHighValueCountries
  * List of countries defined as high-value for revenue purposes
  * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
@@ -1499,6 +1512,20 @@ $wgAdDriverTurtleCountries = null;
  * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
  */
 $wgAdDriverOpenXCountries = null;
+
+/**
+ * @name $wgAdDriverSourcePointCountries
+ * List of countries to call ads through SourcePoint
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverSourcePointCountries = null;
+
+/**
+ * @name $wgAdDriverSourcePointDetectionCountries
+ * List of countries to call SourcePoint detection scripts
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverSourcePointDetectionCountries = null;
 
 /**
  * trusted proxy service registry
@@ -1625,38 +1652,38 @@ $wgNirvanaAccessRules = [
 	],
 ];
 
-/*
+/**
  * @name $wgEnableLyricsApi
  * Enables Lyrics API extension (new Lyrics Wikia API)
  */
 $wgEnableLyricsApi = false;
 
-/*
+/**
  * @name $wgLyricsItunesAffiliateToken
  * iTunes affiliate token needed in new Lyrics API
  */
 $wgLyricsItunesAffiliateToken = '';
 
-/*
+/**
  * @name wgEnableSpecialSearchCaching
  * Enables caching of search results on CDN
  */
 $wgEnableSpecialSearchCaching = true;
 
-/*
+/**
  * @name wgEnableBuckyExt
  * Enables real user performance reporting via Bucky
  */
 $wgEnableBuckyExt = true;
 
-/*
+/**
  * @name wgBuckySampling
  * Sets the sampling rate for Bucky reporting, sampling applied at each page view.
  * Unit: percent (100 = all, 1 = 1%, 0.1 = 0.1%)
  */
 $wgBuckySampling = 10;
 
-/*
+/**
  * @name wgBuckyEnabledSkins
  * List of skins where Bucky reporting should be enabled
  */
@@ -1676,25 +1703,25 @@ $wgBuckyEnabledSkins = [
  */
 $wgMemcacheStatsSampling = 1;
 
-/*
+/**
  * @name wgXhprofUDPHost
  * Host that xhprof data should be reported to (if set to null will use $wgUDPProfilerHost)
  */
 $wgXhprofUDPHost = null;
 
-/*
+/**
  * @name wgXhprofUDPPort
  * Port that xhprof data should be reported to
  */
 $wgXhprofUDPPort = '3911';
 
-/*
+/**
  * @name wgXhprofMinimumTime
  * Threshold for total time spent in function to be reported (set to 0 to report all entries)
  */
 $wgXhprofMinimumTime = 0.001;
 
-/*
+/**
  * @name wgProfilerSendViaScribe
  * Enables sending profiler reports via Scribe
  */
@@ -1772,3 +1799,18 @@ $wgAdDriverIncontentPlayerSlotCountries = null;
  * flag for using (possibly external) service for managing a user's preferences
  */
 $wgPreferencesUseService = false;
+
+/**
+ * @name $wgEnableRobotsTxtExt
+ *
+ * Enables extension that generates robots.txt
+ */
+$wgEnableRobotsTxtExt = false;
+
+/**
+ * @name $wgEnableFliteTagExt
+ *
+ * Enables FliteTag extension which makes it possible to use <flite> tag within an article content
+ */
+$wgEnableFliteTagExt = false;
+
