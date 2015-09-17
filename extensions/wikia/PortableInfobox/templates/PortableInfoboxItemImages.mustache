@@ -1,5 +1,6 @@
 <div class="infobox-tabber">
 	{{#images}}
+		<div class="infobox-tabber-item">
 	<figure class="pi-item pi-image image-tabber">
 		<a href="{{url}}" class="image image-thumbnail{{#isVideo}} video video-thumbnail small{{/isVideo}}"
 		   title="{{alt}}">
@@ -14,9 +15,11 @@
 			{{#caption}}<figcaption class="pi-item-spacing pi-caption">{{{caption}}}</figcaption>{{/caption}}
 		</a>
 	</figure>
+	<div class="tabber-pagination"></div>
+		</div>
 	{{/images}}
 	<div class="navigation">
-		<a class="prev">prev</a>
-		<a class="next">next</a>
+		<a class="prev"><</a>
+		<a class="next">></a>
 	</div>
 </div>

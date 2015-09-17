@@ -1,18 +1,30 @@
-var current = 0,
-	images = $('.image-tabber'),
-	lastElem = images.length-1,
-	cleanClassName = 'pi-item pi-image image-tabber';
+require([
+	'wikia.window', 'wikia.document', 'wikia.tracker', 'jquery'
+], function(win, doc, tracker, $) {
 
-images[current].className += " active";
+	var current = 0,
+		cleanClassName = 'infobox-tabber-item',
+		active = ' active',
+		images = $('.' + cleanClassName),
+		lastElem = images.length-1;
 
-$('.next').click(function() {
-	images[current].className = cleanClassName;
-	current === lastElem ? current = 0 : current++;
-	images[current].className += " active";
-});
+	if ( images[current] ) {
+		images[current].className += active;
+	}
 
-$('.prev').click(function() {
-	images[current].className = cleanClassName;
-	current === 0 ? current = lastElem : current--;
-	images[current].className += " active";
+	$('.prev, .next').click(handleArrowClick);
+
+	function handleArrowClick() {
+		images[current].className = cleanClassName;
+		this.className === 'prev' ? handleNextArrow() : handlePrevArrow();
+		images[current].className += active;
+	}
+
+	function handleNextArrow() {
+		current === lastElem ? current = 0 : current++;
+	}
+
+	function handlePrevArrow() {
+		current === 0 ? current = lastElem : current--;
+	}
 });

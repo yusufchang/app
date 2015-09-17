@@ -150,25 +150,32 @@
 
 // **********  Styles for tabber  ********** //
 .infobox-tabber {
-	.image-tabber {
-		display: none;
-
-		&.active {
+	.active {
+		.image-tabber {
 			display: block;
+		}
+
+		.tabber-pagination {
+			background-color: black;
+			border-color: black;
 		}
 	}
 
-	.image-thumbnail {
-		&:hover {
-			text-decoration: none;
-		}
+	.image-tabber {
+		display: none;
 	}
 
 	.pi-caption {
+		bottom: 40px;
 		color: white;
 		font-size: 18px;
 		font-style: normal;
 		font-weight: bold;
+		position: relative;
+
+		&:hover {
+			text-decoration: none;
+		}
 	}
 
 	.navigation {
@@ -178,6 +185,15 @@
 	.next {
 		right: 10px;
 		position: absolute;
+	}
+
+	.tabber-pagination {
+		border: 1px solid #000;
+		border-radius: 5px;
+		cursor: pointer;
+		display: inline-block;
+		height: 8px;
+		width: 8px;
 	}
 }
 
