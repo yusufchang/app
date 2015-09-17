@@ -148,6 +148,40 @@
 	}
 }
 
+// **********  Styles for tabber  ********** //
+.infobox-tabber {
+	.image-tabber {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	.image-thumbnail {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.pi-caption {
+		color: white;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: bold;
+	}
+
+	.navigation {
+		margin: 10px;
+	}
+
+	.next {
+		right: 10px;
+		position: absolute;
+	}
+}
+
+
 // **********  Overwrite default infobox styles for STACKED layout type  ********** //
 
 .pi-layout-stacked {

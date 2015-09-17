@@ -10,6 +10,7 @@ class PortableInfoboxRenderService extends WikiaService {
 		'title' => 'PortableInfoboxItemTitle.mustache',
 		'header' => 'PortableInfoboxItemHeader.mustache',
 		'image' => 'PortableInfoboxItemImage.mustache',
+		'images' => 'PortableInfoboxItemImages.mustache',
 		'image-mobile' => 'PortableInfoboxItemImageMobile.mustache',
 		'data' => 'PortableInfoboxItemData.mustache',
 		'group' => 'PortableInfoboxItemGroup.mustache',
@@ -147,16 +148,27 @@ class PortableInfoboxRenderService extends WikiaService {
 	 */
 	private function renderItem( $type, array $data ) {
 		$helper = new PortableInfoboxRenderServiceHelper();
-
+//
+//		if ( $type === 'image' ) {
+//			$data = $helper->extendImageData( $data );
+//			if ( !$data ) {
+//				return false;
+//			}
+//
+//			if ( $helper->isWikiaMobile() ) {
+//				$type = $type . self::MOBILE_TEMPLATE_POSTFIX;
+//			}
+//		}
 		if ( $type === 'image' ) {
+			$images = [];
+			//foreach
 			$data = $helper->extendImageData( $data );
-			if ( !$data ) {
-				return false;
-			}
+			$images[] = $data;
+			$images[] = $data;
+			$images[] = $data;
 
-			if ( $helper->isWikiaMobile() ) {
-				$type = $type . self::MOBILE_TEMPLATE_POSTFIX;
-			}
+			$data = [ 'images' => $images ];
+			$type = 'images';
 		}
 
 		if ( $helper->isWikiaMobile() ) {
