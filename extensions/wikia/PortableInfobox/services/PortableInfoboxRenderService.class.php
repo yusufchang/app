@@ -148,27 +148,22 @@ class PortableInfoboxRenderService extends WikiaService {
 	 */
 	private function renderItem( $type, array $data ) {
 		$helper = new PortableInfoboxRenderServiceHelper();
-//
-//		if ( $type === 'image' ) {
-//			$data = $helper->extendImageData( $data );
-//			if ( !$data ) {
-//				return false;
-//			}
-//
-//			if ( $helper->isWikiaMobile() ) {
-//				$type = $type . self::MOBILE_TEMPLATE_POSTFIX;
-//			}
-//		}
-		if ( $type === 'image' ) {
-			$images = [];
-			//foreach
-			$data = $helper->extendImageData( $data );
-			$images[] = $data;
-			$images[] = $data;
-			$images[] = $data;
 
-			$data = [ 'images' => $images ];
-			$type = 'images';
+		if ( $type === 'image' ) {
+			$data = $helper->extendImageData( $data );
+			if ( !$data ) {
+				return false;
+			}
+
+			if ( $helper->isWikiaMobile() ) {
+				$type = $type . self::MOBILE_TEMPLATE_POSTFIX;
+			}
+		}
+		if ( $type === 'images' ) {
+			for($i = 0; $i < count($data); $i++) {
+				$data[$i] = $helper->extendImageData( $data[$i] );	
+			}
+			$data = [ 'images' => $data ];
 		}
 
 		if ( $helper->isWikiaMobile() ) {

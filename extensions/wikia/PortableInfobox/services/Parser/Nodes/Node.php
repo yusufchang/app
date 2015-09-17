@@ -155,6 +155,10 @@ class Node {
 		return $value;
 	}
 
+	protected function getRawValue( \SimpleXMLElement $xmlNode ) {
+		return $this->getRawInfoboxData( $this->getXmlAttribute( $xmlNode, self::DATA_SRC_ATTR_NAME ) );
+	}
+
 	protected function getRawValueWithDefault( \SimpleXMLElement $xmlNode ) {
 		$value = $this->getRawInfoboxData( $this->getXmlAttribute( $xmlNode, self::DATA_SRC_ATTR_NAME ) );
 		if ( !$value && $xmlNode->{self::DEFAULT_TAG_NAME} ) {

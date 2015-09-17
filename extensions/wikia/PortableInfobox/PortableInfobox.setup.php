@@ -34,7 +34,8 @@ $wgInfoboxParserNodes = [
 	'NodeInfobox',
 	'NodeData',
 	'NodeTitle',
-	'NodeUnimplemented'
+	'NodeUnimplemented',
+	'NodeImages'
 ];
 $wgAutoloadClasses[ 'Wikia\\PortableInfobox\\Parser\\Nodes\\NodeFactory' ] = $dir . 'services/Parser/Nodes/NodeFactory.class.php';
 foreach ( $wgInfoboxParserNodes as $parserNode ) {
