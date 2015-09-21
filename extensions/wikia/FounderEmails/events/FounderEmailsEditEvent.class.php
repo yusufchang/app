@@ -28,6 +28,10 @@ class FounderEmailsEditEvent extends FounderEmailsEvent {
 	const FIRST_EDIT = 1;
 	const MULTIPLE_EDITS = 2;
 
+	static private $usersToSkip = [
+		929702 /* CreateWiki script */,
+		22439 /* Wikia */
+	];
 
 	public function __construct( Array $data = array() ) {
 		parent::__construct( 'edit' );
@@ -343,8 +347,7 @@ class FounderEmailsEditEvent extends FounderEmailsEvent {
 			$editor = $currentUser->getName() == $editorName ? $currentUser : User::newFromName( $editorName, false );
 		}
 
-		$config = FounderEmailsEvent::getConfig( 'edit' );
-		if ( in_array( 'staff', $editor->getGroups() ) || in_array( $editor->getId(), $config['skipUsers'] ) ) {
+		if ( in_array( 'staff', $editor->getGroups() ) || in_array( $editor->getId(), self::$usersToSkip ) ) {
 			// page edited by founder, staff member or excluded user, skipping..
 			return true;
 		}

@@ -25,7 +25,6 @@ class FounderEmailsCompleteDigestEvent extends FounderEmailsEvent {
 	 */
 	public function process ( Array $events ) {
 		global $wgTitle;
-		wfProfileIn( __METHOD__ );
 
 		$wgTitle = Title::newMainPage();
 		$founderEmailObj = FounderEmails::getInstance();
@@ -64,7 +63,5 @@ class FounderEmailsCompleteDigestEvent extends FounderEmailsEvent {
 				F::app()->sendRequest( self::EMAIL_CONTROLLER, 'handle', $emailParams );
 			}
 		}
-
-		wfProfileOut( __METHOD__ );
 	}
 }

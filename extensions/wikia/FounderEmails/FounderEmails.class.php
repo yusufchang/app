@@ -25,15 +25,10 @@ class FounderEmails {
 	 * @return User
 	 */
 	public function getWikiFounder( $wikiId = 0 ) {
-		global $wgCityId, $wgFounderEmailsDebugUserId;
+		global $wgCityId;
 
 		$wikiId = !empty( $wikiId ) ? $wikiId : $wgCityId;
-
-		if ( empty( $wgFounderEmailsDebugUserId ) ) {
-			$wikiFounder = User::newFromId( WikiFactory::getWikiById( $wikiId )->city_founding_user );
-		} else {
-			$wikiFounder = User::newFromId( $wgFounderEmailsDebugUserId );
-		}
+		$wikiFounder = User::newFromId( WikiFactory::getWikiById( $wikiId )->city_founding_user );
 
 		return $wikiFounder;
 	}
@@ -47,7 +42,6 @@ class FounderEmails {
 	 *
 	 * @return array
 	 */
-
 	public function getFoundersWithPreference( $prefPrefix ) {
 		$prefixLength = strlen( $prefPrefix ) + 2;
 		$db = wfGetDB( DB_SLAVE, array(), 'wikicities' );

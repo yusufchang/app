@@ -16,76 +16,55 @@ $wgExtensionCredits['specialpage'][] = array(
 	'descriptionmsg' => 'founderemails-desc'
 );
 
-/**
- * messages file
- */
+/** Messages */
+
 $wgExtensionMessagesFiles['FounderEmails'] = dirname( __FILE__ ) . '/FounderEmails.i18n.php';
 
-/**
- * extension config
- */
-$wgFounderEmailsEvents = [
-	'edit'       => [
-		'className'  => 'FounderEmailsEditEvent',
-		'hookName'   => 'RecentChange_save',
-		'skipUsers'  => [ 929702 /* CreateWiki script */, 22439 /* Wikia */ ]
-	],
-	'register'   => [
-		'className'  => 'FounderEmailsRegisterEvent',
-		'hookName'   => 'AddNewAccount'
-	],
-	'daysPassed' => [
-		'className'  => 'FounderEmailsDaysPassedEvent',
-		'hookName'   => 'CreateWikiLocalJob-complete',
-		'days'       => [ 0, 3, 10 ]
-	],
-	'completeDigest' => [
-		'className'  => 'FounderEmailsCompleteDigestEvent',
-		'hookName'   => null
-	],
-	'viewsDigest' => [
-		'className'  => 'FounderEmailsViewsDigestEvent',
-		'hookName'   => null
-	]
+/** Extension config */
+
+// These keys allow the FounderEmailEvent::newFromType factory method to create new
+// instances based on one of the short keys listed here.
+$wgFounderEmailsTypes = [
+	'edit' => FounderEmailsEditEvent::class,
+	'register' => FounderEmailsRegisterEvent::class,
+	'daysPassed' => FounderEmailsDaysPassedEvent::class,
+	'completeDigest' => FounderEmailsCompleteDigestEvent::class,
+	'viewsDigest' => FounderEmailsViewsDigestEvent::class,
 ];
 
-/**
- * setup functions
- */
-$wgExtensionFunctions[] = 'wfFounderEmailsInit';
-
-function wfFounderEmailsInit() {
-	global $wgHooks, $wgAutoloadClasses, $wgFounderEmailsEvents, $wgDefaultUserOptions, $wgCityId;
-
-	$dir = dirname( __FILE__ ) . '/';
-
-	/**
-	 * classes
-	 */
-	$wgAutoloadClasses['FounderEmails'] = $dir . 'FounderEmails.class.php';
-	$wgAutoloadClasses['FounderEmailsEvent'] = $dir . 'FounderEmailsEvent.class.php';
-
-	// add event classes & hooks
-	foreach ( $wgFounderEmailsEvents as $event ) {
-		$wgAutoloadClasses[$event['className']] = $dir . 'events/' . $event['className'] . '.class.php';
-		if ( !empty( $event['hookName'] ) ) {
-			$wgHooks[$event['hookName']][] = $event['className'] . '::register';
-		}
-	}
-
-	$wgHooks['GetPreferences'][] = 'FounderEmails::onGetPreferences';
-	$wgHooks['UserRights'][] = 'FounderEmails::onUserRightsChange';
-
-	// Set default for the toggle (applied to all new user accounts).  This is safe even if this user isn't a founder yet.
-	// $wgDefaultUserOptions["founderemailsenabled"] = 1;  // Old preference not used any more
-	$wgDefaultUserOptions["founderemails-joins-$wgCityId"] = 0;
-	$wgDefaultUserOptions["founderemails-edits-$wgCityId"] = 0;
-	$wgDefaultUserOptions["founderemails-views-digest-$wgCityId"] = 0;
-	$wgDefaultUserOptions["founderemails-complete-digest-$wgCityId"] = 0;
-}
-
 $dir = dirname( __FILE__ ) . '/';
+
+/** Autoload classdes */
+
+$wgAutoloadClasses['FounderEmails'] = $dir . 'FounderEmails.class.php';
+$wgAutoloadClasses['FounderEmailsEvent'] = $dir . 'FounderEmailsEvent.class.php';
+
+$wgAutoloadClasses['FounderEmailsEditEvent'] = $dir . 'events/FounderEmailsEditEvent.class.php';
+$wgAutoloadClasses['FounderEmailsRegisterEvent'] = $dir . 'events/FounderEmailsRegisterEvent.class.php';
+$wgAutoloadClasses['FounderEmailsDaysPassedEvent'] = $dir . 'events/FounderEmailsDaysPassedEvent.class.php';
+$wgAutoloadClasses['FounderEmailsCompleteDigestEvent'] = $dir . 'events/FounderEmailsCompleteDigestEvent.class.php';
+$wgAutoloadClasses['FounderEmailsViewsDigestEvent'] = $dir . 'events/FounderEmailsViewsDigestEvent.class.php';
+
 $wgAutoloadClasses['FounderEmailsController'] = $dir . 'FounderEmailsController.class.php';
 $wgAutoloadClasses['SpecialFounderEmails'] = $dir . 'SpecialFounderEmails.class.php';
+
+/** Hooks */
+
+$wgHooks['RecentChange_save'][] = 'FounderEmailsEditEvent::register';
+$wgHooks['AddNewAccount'][] = 'FounderEmailsRegisterEvent::register';
+$wgHooks['CreateWikiLocalJob-complete'][] = 'FounderEmailsDaysPassedEvent::register';
+
+$wgHooks['GetPreferences'][] = 'FounderEmails::onGetPreferences';
+$wgHooks['UserRights'][] = 'FounderEmails::onUserRightsChange';
+
+/** Options */
+
+global $wgCityId;
+$wgDefaultUserOptions["founderemails-joins-$wgCityId"] = 0;
+$wgDefaultUserOptions["founderemails-edits-$wgCityId"] = 0;
+$wgDefaultUserOptions["founderemails-views-digest-$wgCityId"] = 0;
+$wgDefaultUserOptions["founderemails-complete-digest-$wgCityId"] = 0;
+
+/** Special Pages */
 
 $wgSpecialPages['FounderEmails'] = 'SpecialFounderEmails';

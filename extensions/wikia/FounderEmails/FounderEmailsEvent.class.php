@@ -1,29 +1,11 @@
 <?php
 
 abstract class FounderEmailsEvent {
-
-	const CATEGORY_DEFAULT = 'FounderEmails';
-	const CATEGORY_0_DAY = 'FounderEmails0Day';
-	const CATEGORY_3_DAY = 'FounderEmails3Day';
-	const CATEGORY_10_DAY = 'FounderEmails10Day';
-	const CATEGORY_REGISTERED = 'FounderEmailsRegisterd';
-	const CATEGORY_FIRST_EDIT_USER = 'FounderEmailsFirstEditUser';
-	const CATEGORY_FIRST_EDIT_ANON = 'FounderEmailsFirstEditAnon';
-	const CATEGORY_EDIT_USER = 'FounderEmailsEditUser';
-	const CATEGORY_EDIT_ANON = 'FounderEmailsEditAnon';
-	const CATEGORY_EDIT_HIGH_ACTIVITY = 'FounderEmailsHighActivity';
-	const CATEGORY_VIEWS_DIGEST = 'FounderEmailsViewsDigest';
-	const CATEGORY_COMPLETE_DIGEST = 'FounderEmailsCompleteDigest';
-
 	private $id = 0;
 	protected $mType = null;
-	protected $mData = array();
-	protected $mConfig = null;
+	protected $mData = [];
 
 	protected function __construct( $type ) {
-		global $wgFounderEmailsEvents;
-
-		$this->mConfig = $wgFounderEmailsEvents[$type];
 		$this->mType = $type;
 	}
 
@@ -33,26 +15,13 @@ abstract class FounderEmailsEvent {
 	 * @return FounderEmailsEvent
 	 */
 	static public function newFromType( $eventType ) {
-		global $wgFounderEmailsEvents;
+		global $wgFounderEmailsTypes;
 
-		wfProfileIn( __METHOD__ );
+		$className = $wgFounderEmailsTypes[$eventType];
 
-		$sClassName = $wgFounderEmailsEvents[$eventType]['className'];
+		$oEvent = new $className();
 
-		$oEvent = new $sClassName();
-
-		wfProfileOut( __METHOD__ );
 		return $oEvent;
-	}
-
-	static public function getConfig( $eventType = null ) {
-		global $wgFounderEmailsEvents;
-
-		if ( is_null( $eventType ) ) {
-			return $wgFounderEmailsEvents;
-		}
-
-		return isset( $wgFounderEmailsEvents[$eventType] ) ? $wgFounderEmailsEvents[$eventType] : [];
 	}
 
 	public function getID() {
@@ -112,7 +81,6 @@ abstract class FounderEmailsEvent {
 	public function create() {
 		global $wgWikicitiesReadOnly, $wgExternalSharedDB, $wgCityId;
 
-		wfProfileIn( __METHOD__ );
 		if ( !$wgWikicitiesReadOnly ) {
 			$dbw = wfGetDB( DB_MASTER, array(), $wgExternalSharedDB );
 			$dbw->insert(
@@ -130,7 +98,6 @@ abstract class FounderEmailsEvent {
 		} else {
 			$this->id = 0;
 		}
-		wfProfileOut( __METHOD__ );
 
 		return $this->id;
 	}
@@ -140,7 +107,7 @@ abstract class FounderEmailsEvent {
 	 * This used to allow for a language override, but we should send FounderEmails in the wiki "content" language
 	 *
 	 * @param String $sMsgKey mediawiki message name
-	 * @param type $params FounderEmail specific string replacements for $XYZ
+	 * @param array $params FounderEmail specific string replacements for $XYZ
 	 * @return String The message text
 	 */
 
@@ -157,5 +124,4 @@ abstract class FounderEmailsEvent {
 		$params['$USERNAME'] = $user_name;
 		$params['$UNSUBSCRIBEURL'] = $unsubscribe_url;
 	}
-
 }

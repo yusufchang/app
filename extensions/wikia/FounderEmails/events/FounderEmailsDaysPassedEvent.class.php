@@ -2,6 +2,8 @@
 
 class FounderEmailsDaysPassedEvent extends FounderEmailsEvent {
 
+	static private $daysPastToCheck = [ 0, 3, 10 ];
+
 	public function __construct( Array $data = array() ) {
 		parent::__construct( 'daysPassed' );
 		$this->setData( $data );
@@ -79,8 +81,6 @@ class FounderEmailsDaysPassedEvent extends FounderEmailsEvent {
 	}
 
 	public static function register( $wikiParams, $debugMode = false ) {
-		global $wgFounderEmailsEvents;
-
 		$founderEmailObj = FounderEmails::getInstance();
 
 		$wikiFounder = $founderEmailObj->getWikiFounder();
@@ -89,9 +89,7 @@ class FounderEmailsDaysPassedEvent extends FounderEmailsEvent {
 
 		$wikiFounder->saveSettings();
 
-		foreach ( $wgFounderEmailsEvents['daysPassed']['days'] as $activateDay ) {
-
-
+		foreach ( self::$daysPastToCheck as $activateDay ) {
 			// Send the 0 day email, queue the rest
 			$doProcess = $activateDay == 0 ? true : false;
 			$eventData = array(
