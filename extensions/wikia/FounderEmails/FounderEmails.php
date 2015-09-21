@@ -60,6 +60,8 @@ $wgHooks['UserRights'][] = 'FounderEmails::onUserRightsChange';
 /** Options */
 
 global $wgCityId;
+
+// Set default for the toggle (applied to all new user accounts).  This is safe even if this user isn't a founder yet.
 $wgDefaultUserOptions["founderemails-joins-$wgCityId"] = 0;
 $wgDefaultUserOptions["founderemails-edits-$wgCityId"] = 0;
 $wgDefaultUserOptions["founderemails-views-digest-$wgCityId"] = 0;
