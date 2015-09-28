@@ -67,13 +67,14 @@ class ApprovedraftAction extends FormlessAction {
 	 * @throws PermissionsException
 	 */
 	private function approveDraft( Title $draftTitle ) {
+		global $wgEnableInsightsInfoboxes;
+
 		// Get Title object of parent page
-		$helper = new TemplateDraftHelper();
-		$parentTitle = $helper->getParentTitle( $draftTitle );
+		$parentTitle = TemplateDraftHelper::getParentTitle( $draftTitle );
 
 		// Check edit rights
-		if ( !$parentTitle->userCan( 'templatedraft' ) ) {
-			throw new PermissionsException( 'edit' );
+		if ( !$parentTitle->userCan( 'templatedraft' ) || !$parentTitle->userCan( 'edit' ) ) {
+			throw new ErrorPageError( 'badaccess', 'templatedraft-protect-edit' );
 		}
 
 		// Get contents of draft page
@@ -88,7 +89,7 @@ class ApprovedraftAction extends FormlessAction {
 		);
 
 		// Get WikiPage object of parent page
-		$page = WikiPage::newFromID( $parentTitle->getArticleID() );
+		$page = WikiPage::factory( $parentTitle );
 		// Save to parent page
 		$page->doEdit( $draftContent, wfMessage( 'templatedraft-approval-summary' )->inContentLanguage()->plain() );
 
@@ -96,17 +97,16 @@ class ApprovedraftAction extends FormlessAction {
 		$draftPage = WikiPage::newFromID( $draftTitle->getArticleID() );
 		$draftPage->doDeleteArticle( wfMessage( 'templatedraft-draft-removal-summary' )->inContentLanguage()->plain() );
 
-		// Update Insights list
-		$model = InsightsHelper::getInsightModel( InsightsUnconvertedInfoboxesModel::INSIGHT_TYPE );
-		if ( $model instanceof InsightsQuerypageModel ) {
+		// Update Infoboxes Insights list if enabled
+		if ( $wgEnableInsightsInfoboxes ) {
+			$model = new InsightsUnconvertedInfoboxesModel();
 			$model->updateInsightsCache( $parentTitle->getArticleID() );
 		}
 
 		// Show a confirmation message to a user after redirect
 		BannerNotificationsController::addConfirmation(
 			wfMessage( 'templatedraft-approval-success-confirmation' )->escaped(),
-			BannerNotificationsController::CONFIRMATION_CONFIRM,
-			true
+			BannerNotificationsController::CONFIRMATION_CONFIRM
 		);
 	}
 
