@@ -3,7 +3,6 @@
 namespace Email\Controller;
 
 use Email\EmailController;
-use Email\Tracking\TrackingCategories;
 
 /**
  * Class ForgotPasswordController
@@ -14,9 +13,34 @@ use Email\Tracking\TrackingCategories;
  */
 class ForgotPasswordController extends EmailController {
 
-	const TRACKING_CATEGORY = TrackingCategories::TEMPORARY_PASSWORD;
-
 	protected $tempPass;
+
+	/**
+	 * @see EmailController::assertCanAccessController
+	 * @throws \Email\Fatal
+	 */
+	public function assertCanAccessController() {
+		global $wgTheSchwartzSecretToken;
+
+		$token = $this->getVal('secret');
+		if( isset( $token ) && $token == $wgTheSchwartzSecretToken ) {
+			return;
+		}
+
+		parent::assertCanAccessController();
+	}
+
+	/**
+	 * A redefinition of our parent's assertCanEmail which removes assertions:
+	 *
+	 * - assertUserWantsEmail : Even if a user says they don't want email, they should get this
+	 * - assertUserNotBlocked : Even if a user is blocked they should still get these emails
+	 *
+	 * @throws \Email\Fatal
+	 */
+	public function assertCanEmail() {
+		$this->assertUserHasEmail();
+	}
 
 	public function initEmail() {
 		$userService = new \UserService();
