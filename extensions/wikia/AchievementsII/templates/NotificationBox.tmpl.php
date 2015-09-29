@@ -25,5 +25,5 @@ $badgeName = htmlspecialchars($badge->getName());
 			setTimeout(function() {$('.AchievementsNotification').slideUp('slow');}, 10000);
 		});
 	});
-</script> 
+</script>
 
