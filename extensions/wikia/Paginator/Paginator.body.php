@@ -175,6 +175,10 @@ class Paginator extends Service{
 			return '';
 		}
 
+		echo '<pre>';
+		debug_print_backtrace();
+		exit;
+
 		$aData = $this->getBarData();
 		$aData['paginatorId'] = strip_tags( trim( stripslashes( $paginatorId ) ) );
 		$aData['url'] = $url;
