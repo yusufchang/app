@@ -11,12 +11,30 @@ describe('AdContext', function () {
 			abTesting: {},
 			geo: {
 				getCountryCode: function () {
-					return 'CY';
+					return 'CURRENT_COUNTRY';
 				},
 				getRegionCode: function () {
-					return 'RR';
+					return 'CURRENT_REGION';
 				},
-				isProperGeo: function() {
+				getContinentCode: function() {
+					return 'CURRENT_CONTINENT';
+				},
+				isProperGeo: function(countryList) {
+					if (!countryList) {
+						return false;
+					}
+					if (countryList.indexOf('CURRENT_COUNTRY') > -1) {
+						return true;
+					}
+					if (countryList.indexOf('CURRENT_COUNTRY-CURRENT_REGION') > -1) {
+						return true;
+					}
+					if (countryList.indexOf('XX-CURRENT_CONTINENT') > -1) {
+						return true;
+					}
+					if (countryList.indexOf('XX') > -1) { //global
+						return true;
+					}
 					return false;
 				},
 				isProperRegion: function () {
@@ -197,13 +215,13 @@ describe('AdContext', function () {
 			var adContext;
 			mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
 
-			mocks.instantGlobals = {wgAdDriverKruxCountries: ['CY']};
+			mocks.instantGlobals = {wgAdDriverKruxCountries: ['CURRENT_COUNTRY']};
 			adContext = getModule();
 			expect(adContext.getContext().targeting.enableKruxTargeting).toBeTruthy();
 
 			mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
 			mocks.instantGlobals = {
-				wgAdDriverKruxCountries: ['CY', 'ZZ'],
+				wgAdDriverKruxCountries: ['CURRENT_COUNTRY', 'ZZ'],
 				wgSitewideDisableKrux: false
 			};
 			adContext = getModule();
@@ -211,7 +229,7 @@ describe('AdContext', function () {
 
 			mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
 			mocks.instantGlobals = {
-				wgAdDriverKruxCountries: ['CY', 'ZZ'],
+				wgAdDriverKruxCountries: ['CURRENT_COUNTRY', 'ZZ'],
 				wgSitewideDisableKrux: true
 			};
 			adContext = getModule();
@@ -219,7 +237,7 @@ describe('AdContext', function () {
 
 			mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
 			mocks.instantGlobals = {
-				wgAdDriverKruxCountries: ['CY', 'ZZ', 'YY'],
+				wgAdDriverKruxCountries: ['CURRENT_COUNTRY', 'ZZ', 'YY'],
 				wgSitewideDisableKrux: 0
 			};
 			adContext = getModule();
@@ -227,7 +245,7 @@ describe('AdContext', function () {
 
 			mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
 			mocks.instantGlobals = {
-				wgAdDriverKruxCountries: ['CY', 'ZZ'],
+				wgAdDriverKruxCountries: ['CURRENT_COUNTRY', 'ZZ'],
 				wgSitewideDisableKrux: 1
 			};
 			adContext = getModule();
@@ -239,7 +257,7 @@ describe('AdContext', function () {
 		var adContext;
 
 		mocks.win = {};
-		mocks.instantGlobals = {wgAdDriverTurtleCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverTurtleCountries: ['CURRENT_COUNTRY', 'ZZ']};
 		adContext = getModule();
 		expect(adContext.getContext().providers.turtle).toBeTruthy();
 
@@ -252,7 +270,7 @@ describe('AdContext', function () {
 		var adContext;
 
 		mocks.win = {};
-		mocks.instantGlobals = {wgAdDriverOpenXCountries: ['AA', 'CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverOpenXCountries: ['AA', 'CURRENT_COUNTRY', 'ZZ']};
 		adContext = getModule();
 		expect(adContext.getContext().providers.openX).toBeTruthy();
 
@@ -278,7 +296,7 @@ describe('AdContext', function () {
 		var adContext;
 
 		mocks.win = {ads: {context: {slots: {invisibleHighImpact: true}}}};
-		mocks.instantGlobals = {wgAdDriverHighImpactSlotCountries: ['HH', 'CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverHighImpactSlotCountries: ['HH', 'CURRENT_COUNTRY', 'ZZ']};
 		adContext = getModule();
 		expect(adContext.getContext().slots.invisibleHighImpact).toBeTruthy();
 
@@ -298,7 +316,7 @@ describe('AdContext', function () {
 	it('enables scroll handler when country in instantGlobals.wgAdDriverScrollHandlerCountries', function () {
 		var adContext;
 
-		mocks.instantGlobals = {wgAdDriverScrollHandlerCountries: ['HH', 'CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverScrollHandlerCountries: ['HH', 'CURRENT_COUNTRY', 'ZZ']};
 		adContext = getModule();
 		expect(adContext.getContext().opts.enableScrollHandler).toBeTruthy();
 
@@ -336,7 +354,7 @@ describe('AdContext', function () {
 	it('enables krux when country in instantGlobals.wgAdDriverKruxCountries', function () {
 		var adContext;
 		mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
-		mocks.instantGlobals = {wgAdDriverKruxCountries: ['AA', 'CY', 'BB']};
+		mocks.instantGlobals = {wgAdDriverKruxCountries: ['AA', 'CURRENT_COUNTRY', 'BB']};
 		adContext = getModule();
 		expect(adContext.getContext().targeting.enableKruxTargeting).toBeTruthy();
 
@@ -349,19 +367,19 @@ describe('AdContext', function () {
 		var adContext;
 
 		mocks.win = {ads: {context: {targeting: {wikiDirectedAtChildren: false, enableKruxTargeting: true}}}};
-		mocks.instantGlobals = {wgAdDriverKruxCountries: ['CY']};
+		mocks.instantGlobals = {wgAdDriverKruxCountries: ['CURRENT_COUNTRY']};
 		adContext = getModule();
 		expect(adContext.getContext().targeting.enableKruxTargeting).toBeTruthy();
 
 		mocks.win = {ads: {context: {targeting: {wikiDirectedAtChildren: true, enableKruxTargeting: true}}}};
-		mocks.instantGlobals = {wgAdDriverKruxCountries: ['CY']};
+		mocks.instantGlobals = {wgAdDriverKruxCountries: ['CURRENT_COUNTRY']};
 		adContext = getModule();
 		expect(adContext.getContext().targeting.enableKruxTargeting).toBeFalsy();
 	});
 
 	it('disables krux when url param noexternals=1 is set', function () {
 		mocks.win = {ads: {context: {targeting: {enableKruxTargeting: true}}}};
-		mocks.instantGlobals = {wgAdDriverKruxCountries: ['AA', 'CY', 'BB']};
+		mocks.instantGlobals = {wgAdDriverKruxCountries: ['AA', 'CURRENT_COUNTRY', 'BB']};
 		spyOn(mocks.querystring, 'getVal').and.callFake(function (param) {
 			return param === 'noexternals' ?  '1' : '0';
 		});
@@ -371,28 +389,28 @@ describe('AdContext', function () {
 
 	it('disables SourcePoint when url is not set (e.g. for mercury skin)', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointDetection: true}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CURRENT_COUNTRY', 'ZZ']};
 
 		expect(getModule().getContext().opts.sourcePoint).toBe(undefined);
 	});
 
 	it('enables SourcePoint when country in instant var', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointUrl: '//foo.bar', sourcePointDetection: true}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CURRENT_COUNTRY', 'ZZ']};
 
 		expect(getModule().getContext().opts.sourcePoint).toBeTruthy();
 	});
 
 	it('enables SourcePoint when region in instant var', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointUrl: '//foo.bar', sourcePointDetection: true}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CY-RR']};
+		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CURRENT_COUNTRY-CURRENT_REGION']};
 
 		expect(getModule().getContext().opts.sourcePoint).toBeTruthy();
 	});
 
 	it('enables SourcePoint when country and region in instant var (country overwrites region)', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointUrl: '//foo.bar', sourcePointDetection: true}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CY-EE', 'CY']};
+		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CURRENT_COUNTRY-EE', 'CURRENT_COUNTRY']};
 
 		expect(getModule().getContext().opts.sourcePoint).toBeTruthy();
 	});
@@ -400,7 +418,7 @@ describe('AdContext', function () {
 	it('disables SourcePoint when country and region in instant var and both are invalid',
 		function () {
 			mocks.win = {ads: {context: {opts: {sourcePointUrl: '//foo.bar', sourcePointDetection: true}}}};
-			mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CY-EE', 'YY']};
+			mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CURRENT_COUNTRY-EE', 'YY']};
 
 			expect(getModule().getContext().opts.sourcePoint).toBeFalsy();
 		}
@@ -408,7 +426,7 @@ describe('AdContext', function () {
 
 	it('disables SourcePoint when detection is disabled', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointUrl: '//foo.bar'}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverSourcePointCountries: ['CURRENT_COUNTRY', 'ZZ']};
 
 		expect(getModule().getContext().opts.sourcePoint).toBeFalsy();
 	});
@@ -423,21 +441,21 @@ describe('AdContext', function () {
 	});
 
 	it('disables SourcePoint detection when url is not set (e.g. for mercury skin)', function () {
-		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY', 'ZZ']};
 
 		expect(getModule().getContext().opts.sourcePointDetection).toBe(undefined);
 	});
 
 	it('enables SourcePoint detection when instantGlobals.wgAdDriverSourcePointDetectionCountries', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY', 'ZZ']};
 
 		expect(getModule().getContext().opts.sourcePointDetection).toBeTruthy();
 	});
 
 	it('disables SourcePoint detection when url param noexternals=1 is set', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
-		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY', 'ZZ']};
 		spyOn(mocks.querystring, 'getVal').and.callFake(function (param) {
 			return param === 'noexternals' ?  '1' : '0';
 		});
@@ -454,10 +472,22 @@ describe('AdContext', function () {
 		expect(getModule().getContext().opts.sourcePointDetection).toBeTruthy();
 	});
 
+	it('enables SourcePoint detection when instantGlobals.wgAdDriverSourcePointDetectionCountries is enabled for continent', function () {
+		mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
+		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['XX-CURRENT_CONTINENT']};
+		expect(getModule().getContext().opts.sourcePointDetection).toBeTruthy();
+
+		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['XX-NOT_PROPER_CONTINENT']};
+		expect(getModule().getContext().opts.sourcePointDetection).toBeFalsy();
+
+		mocks.instantGlobals = {wgAdDriverSourcePointDetectionCountries: ['XX']};
+		expect(getModule().getContext().opts.sourcePointDetection).toBeTruthy();
+	});
+
 	it('enables incontent_player slot when country in instatnGlobals.wgAdDriverIncontentPlayerSlotCountries', function () {
 		var adContext;
 
-		mocks.instantGlobals = {wgAdDriverIncontentPlayerSlotCountries: ['HH', 'CY', 'ZZ']};
+		mocks.instantGlobals = {wgAdDriverIncontentPlayerSlotCountries: ['HH', 'CURRENT_COUNTRY', 'ZZ']};
 		adContext = getModule();
 		expect(adContext.getContext().slots.incontentPlayer).toBeTruthy();
 
@@ -487,8 +517,8 @@ describe('AdContext', function () {
 	it('enables recoveredAdsMessage when country in instant var and SourcePoint detection is on', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
 		mocks.instantGlobals = {
-			wgAdDriverSourcePointDetectionCountries: ['CY'],
-			wgAdDriverAdsRecoveryMessageCountries: ['CY', 'ZZ']
+			wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY'],
+			wgAdDriverAdsRecoveryMessageCountries: ['CURRENT_COUNTRY', 'ZZ']
 		};
 
 		expect(getModule().getContext().opts.recoveredAdsMessage).toBeTruthy();
@@ -497,8 +527,8 @@ describe('AdContext', function () {
 	it('enables recoveredAdsMessage when region in instant var and SourcePoint detection is on', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
 		mocks.instantGlobals = {
-			wgAdDriverSourcePointDetectionCountries: ['CY'],
-			wgAdDriverAdsRecoveryMessageCountries: ['CY-RR']
+			wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY'],
+			wgAdDriverAdsRecoveryMessageCountries: ['CURRENT_COUNTRY-CURRENT_REGION']
 		};
 
 		expect(getModule().getContext().opts.recoveredAdsMessage).toBeTruthy();
@@ -507,8 +537,8 @@ describe('AdContext', function () {
 	it('enables recoveredAdsMessage when country and region in instant var (country overwrites region)', function () {
 		mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
 		mocks.instantGlobals = {
-			wgAdDriverSourcePointDetectionCountries: ['CY'],
-			wgAdDriverAdsRecoveryMessageCountries: ['CY-EE', 'CY']
+			wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY'],
+			wgAdDriverAdsRecoveryMessageCountries: ['CURRENT_COUNTRY-EE', 'CURRENT_COUNTRY']
 		};
 
 		expect(getModule().getContext().opts.recoveredAdsMessage).toBeTruthy();
@@ -518,8 +548,8 @@ describe('AdContext', function () {
 		function () {
 			mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
 			mocks.instantGlobals = {
-				wgAdDriverSourcePointDetectionCountries: ['CY'],
-				wgAdDriverAdsRecoveryMessageCountries: ['CY-EE', 'YY']
+				wgAdDriverSourcePointDetectionCountries: ['CURRENT_COUNTRY'],
+				wgAdDriverAdsRecoveryMessageCountries: ['CURRENT_COUNTRY-EE', 'YY']
 			};
 
 			expect(getModule().getContext().opts.recoveredAdsMessage).toBeFalsy();
@@ -531,7 +561,7 @@ describe('AdContext', function () {
 			mocks.win = {ads: {context: {opts: {sourcePointDetectionUrl: '//foo.bar'}}}};
 			mocks.instantGlobals = {
 				wgAdDriverSourcePointDetectionCountries: ['YY'],
-				wgAdDriverAdsRecoveryMessageCountries: ['CY']
+				wgAdDriverAdsRecoveryMessageCountries: ['CURRENT_COUNTRY']
 			};
 
 			expect(getModule().getContext().opts.recoveredAdsMessage).toBeFalsy();
