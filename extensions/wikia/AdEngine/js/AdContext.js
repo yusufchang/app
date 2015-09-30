@@ -30,22 +30,6 @@ define('ext.wikia.adEngine.adContext', [
 		return context.targeting.mercuryPageCategories.map(function (item) { return item.title; });
 	}
 
-	function isProperCountry(countryList) {
-		return !!(countryList && countryList.indexOf && countryList.indexOf(geo.getCountryCode()) > -1);
-	}
-
-	function isProperRegion(countryList) {
-		return !!(
-			countryList &&
-			countryList.indexOf &&
-			countryList.indexOf(geo.getCountryCode() + '-' + geo.getRegionCode()) > -1
-		);
-	}
-
-	function isProperGeo(countryList) {
-		return isProperCountry(countryList) || isProperRegion(countryList);
-	}
-
 	function isUrlParamSet(param) {
 		return !!parseInt(qs.getVal(param, '0'), 10);
 	}
@@ -73,18 +57,18 @@ define('ext.wikia.adEngine.adContext', [
 		// SourcePoint detection integration
 		if (!noExternals && context.opts.sourcePointDetectionUrl) {
 			context.opts.sourcePointDetection = isUrlParamSet('sourcepointdetection') ||
-				isProperCountry(instantGlobals.wgAdDriverSourcePointDetectionCountries);
+				geo.isProperGeo(instantGlobals.wgAdDriverSourcePointDetectionCountries);
 		}
 
 		// SourcePoint integration
 		if (context.opts.sourcePointDetection && context.opts.sourcePointUrl) {
 			context.opts.sourcePoint = isUrlParamSet('sourcepoint') ||
-				isProperGeo(instantGlobals.wgAdDriverSourcePointCountries);
+				geo.isProperGeo(instantGlobals.wgAdDriverSourcePointCountries);
 		}
 
 		// Recoverable ads message
 		if (context.opts.sourcePointDetection && !context.opts.sourcePoint) {
-			context.opts.recoveredAdsMessage = isProperGeo(instantGlobals.wgAdDriverAdsRecoveryMessageCountries);
+			context.opts.recoveredAdsMessage = geo.isProperGeo(instantGlobals.wgAdDriverAdsRecoveryMessageCountries);
 		}
 
 		// Showcase.*
@@ -114,21 +98,21 @@ define('ext.wikia.adEngine.adContext', [
 		// INVISIBLE_HIGH_IMPACT slot
 		context.slots.invisibleHighImpact = (
 			context.slots.invisibleHighImpact &&
-			isProperCountry(instantGlobals.wgAdDriverHighImpactSlotCountries)
+			geo.isProperGeo(instantGlobals.wgAdDriverHighImpactSlotCountries)
 		) || isUrlParamSet('highimpactslot');
 
 		// INCONTENT_PLAYER slot
-		context.slots.incontentPlayer = isProperCountry(instantGlobals.wgAdDriverIncontentPlayerSlotCountries) ||
+		context.slots.incontentPlayer = geo.isProperGeo(instantGlobals.wgAdDriverIncontentPlayerSlotCountries) ||
 			isUrlParamSet('incontentplayer');
 
 		context.opts.scrollHandlerConfig = instantGlobals.wgAdDriverScrollHandlerConfig;
-		context.opts.enableScrollHandler = isProperCountry(instantGlobals.wgAdDriverScrollHandlerCountries) ||
+		context.opts.enableScrollHandler = geo.isProperGeo(instantGlobals.wgAdDriverScrollHandlerCountries) ||
 			isUrlParamSet('scrollhandler');
 
 		// Krux integration
 		context.targeting.enableKruxTargeting = !!(
 			context.targeting.enableKruxTargeting &&
-			isProperCountry(instantGlobals.wgAdDriverKruxCountries) &&
+			geo.isProperGeo(instantGlobals.wgAdDriverKruxCountries) &&
 			!instantGlobals.wgSitewideDisableKrux &&
 			!context.targeting.wikiDirectedAtChildren &&
 			!noExternals
