@@ -170,6 +170,7 @@ $config['adengine2_tracking_js'] = array(
 	'assets' => array(
 		'//extensions/wikia/AdEngine/js/AdTracker.js',
 		'//extensions/wikia/AdEngine/js/AdContext.js',
+		'//extensions/wikia/AdEngine/js/slot/adSlot.js',
 		'//extensions/wikia/AdEngine/js/utils/AdLogicZoneParams.js',
 	),
 );
@@ -751,6 +752,7 @@ $config['mobile_base_ads_js'] = array(
 		'//extensions/wikia/AdEngine/js/provider/openX.js',
 		'//extensions/wikia/AdEngine/js/provider/openX.targeting.js',
 		'//extensions/wikia/AdEngine/js/provider/paidAssetDrop.js',
+		'//extensions/wikia/AdEngine/js/recovery/helper.js',
 		'//extensions/wikia/AdEngine/js/provider/remnantGptMobile.js',
 		'//extensions/wikia/AdEngine/js/slot/adSlot.js',
 		'//extensions/wikia/AdEngine/js/utils/AdLogicZoneParams.js',
@@ -821,6 +823,7 @@ $config['interactivemaps_ads_js'] = array(
 		'//extensions/wikia/AdEngine/js/provider/gpt/adSizeConverter.js',
 		'//extensions/wikia/AdEngine/js/provider/gpt/googleTag.js',
 		'//extensions/wikia/AdEngine/js/provider/gpt/helper.js',
+		'//extensions/wikia/AdEngine/js/recovery/helper.js',
 		'//extensions/wikia/AdEngine/js/SlotTweaker.js',
 		'//extensions/wikia/AdEngine/InteractiveMaps/ads.js'
 	)
@@ -2242,6 +2245,7 @@ $config[ 'global_navigation_scss' ] = [
 		'//extensions/wikia/GlobalNavigation/styles/GlobalNavigationUserLoginDropdown.scss',
 		'//extensions/wikia/GlobalNavigation/styles/GlobalNavigationNotifications.scss',
 		'//extensions/wikia/GlobalNavigation/styles/GlobalNavigationInverse.scss',
+		'//extensions/wikia/GlobalNavigation/styles/GoogleSearchAPI.scss',
 		'//skins/shared/styles/transparent-out.scss'
 	]
 ];
@@ -2262,6 +2266,7 @@ $config[ 'global_navigation_js' ] = [
 		'//extensions/wikia/GlobalNavigation/scripts/GlobalNavigationLazyLoad.js',
 		'//extensions/wikia/GlobalNavigation/scripts/GlobalNavigationHubsMenu.js',
 		'//extensions/wikia/GlobalNavigation/scripts/GlobalNavigationSearch.js',
+		'//extensions/wikia/GlobalNavigation/scripts/GoogleSearchAPI.js',
 		'//extensions/wikia/GlobalNavigation/scripts/SearchSuggestions.js',
 		'//extensions/wikia/GlobalNavigation/scripts/GlobalNavigationInverseTransition.js',
 		'//extensions/wikia/GlobalNavigation/scripts/GlobalNavigationAccountNavigation.js',
