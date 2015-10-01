@@ -1797,7 +1797,7 @@ $wgPreferenceServiceShadowWrite = true;
  *
  * Enables extension that generates robots.txt
  */
-$wgEnableRobotsTxtExt = false;
+$wgEnableRobotsTxtExt = true;
 
 /**
  * @name $wgEnableFliteTagExt
