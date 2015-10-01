@@ -103,29 +103,11 @@ class GlobalFooterController extends WikiaController {
 	}
 
 	private function generateSitemapLinks() {
-		$sitemapLinks = [];
-
-		if ( WikiaPageType::isCorporatePage() || $this->wg->CityId === COMMUNITY_CENTRAL_CITY_ID ) {
-			$useGlobalSitemap = true;
-		} elseif ( WikiaPageType::isMainPage() ) {
-			$useGlobalSitemap = true;
-			$useLocalSitemap = true;
-		} else {
-			$useLocalSitemap = true;
-		}
-
-		if ( $useGlobalSitemap ) {
-			$sitemapLinks[] = parseItem(
+		// SEO-84 Every page to link to global sitemap (and remove the local sitemap link)
+		return [
+			parseItem(
 				'*' . self::SITEMAP_GLOBAL . '|' . wfMessage( 'global-footer-global-sitemap' )->escaped()
-			);
-		}
-
-		if ( $useLocalSitemap ) {
-			$sitemapLinks[] = parseItem(
-				'*' . self::SITEMAP_LOCAL . '|' . wfMessage( 'global-footer-local-sitemap' )->escaped()
-			);
-		}
-
-		return $sitemapLinks;
+			)
+		];
 	}
 }
