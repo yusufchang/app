@@ -2426,6 +2426,7 @@ class User {
 			$this->warning("calling getOption", [
 				"class" => "user",
 				"type" => "getoption",
+				"option" => $oname,
 				"source" => wfBacktrace(true),
 			]);
 		}
@@ -4003,6 +4004,9 @@ class User {
 			}
 			// Wikia change - end
 		}
+
+		wfRunHooks( 'UserMatchEditToken' ); # Wikia change
+
 		return $val == $sessionToken;
 	}
 
