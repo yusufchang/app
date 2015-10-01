@@ -1265,6 +1265,13 @@ $wgAdDriverEnableOpenXBidder = false;
 $wgAdDriverOpenXBidderCountries = null;
 
 /**
+ * @name $wgAdDriverOpenXBidderCountriesMobile
+ * Enables OpenX bidder on mobile in these countries.
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverOpenXBidderCountriesMobile = null;
+
+/**
  * @name $wgAdPageLevelCategoryLangs
  * Enables DART category page param for these content languages
  * "Utility" var, don't change it here.
@@ -1525,6 +1532,13 @@ $wgAdDriverSourcePointCountries = null;
  * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
  */
 $wgAdDriverSourcePointDetectionCountries = null;
+
+/**
+ * @name $wgAdDriverSourcePointDetectionMobileCountries
+ * List of countries to call SourcePoint detection scripts on Mercury
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverSourcePointDetectionMobileCountries = null;
 
 /**
  * trusted proxy service registry
