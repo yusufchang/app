@@ -640,6 +640,7 @@ include_once( "$IP/extensions/wikia/Rail/Rail.setup.php" );
 include_once( "$IP/extensions/wikia/PageShare/PageShare.setup.php" );
 include_once( "$IP/extensions/wikia/PaidAssetDrop/PaidAssetDrop.setup.php" );
 include_once( "$IP/extensions/wikia/CreateNewWiki/CreateNewWiki_global_setup.php" );
+include_once( "$IP/extensions/wikia/Security/Security.setup.php" );
 
 /**
  * @name $wgSkipSkins
@@ -1274,6 +1275,13 @@ $wgAdDriverEnableOpenXBidder = false;
 $wgAdDriverOpenXBidderCountries = null;
 
 /**
+ * @name $wgAdDriverOpenXBidderCountriesMobile
+ * Enables OpenX bidder on mobile in these countries.
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverOpenXBidderCountriesMobile = null;
+
+/**
  * @name $wgAdPageLevelCategoryLangs
  * Enables DART category page param for these content languages
  * "Utility" var, don't change it here.
@@ -1814,7 +1822,7 @@ $wgPreferenceServiceShadowWrite = true;
  *
  * Enables extension that generates robots.txt
  */
-$wgEnableRobotsTxtExt = false;
+$wgEnableRobotsTxtExt = true;
 
 /**
  * @name $wgEnableFliteTagExt
