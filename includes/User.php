@@ -1099,14 +1099,14 @@ class User {
 			return false;
 		}
 
-                // Wikia change start
-                global $wgExternalAuthType;
-                if ( $wgExternalAuthType ) { // in other words: unless Uncyclopedia
-                    $extUser = ExternalUser::newFromCookie();
-                    if ( $extUser ) {
-                            $extUser->linkToLocal( $sId );
-                    }
-                }
+		// Wikia change start
+		global $wgExternalAuthType;
+		if ( $wgExternalAuthType ) { // in other words: unless Uncyclopedia
+			$extUser = ExternalUser::newFromCookie();
+			if ( $extUser ) {
+					$extUser->linkToLocal( $sId );
+			}
+		}
 
 		$passwordCorrect = FALSE;
 		// wikia change end
@@ -1392,6 +1392,14 @@ class User {
 	public static function getDefaultOptions() {
 		global $wgNamespacesToBeSearchedDefault, $wgDefaultUserOptions, $wgContLang, $wgDefaultSkin;
 
+		static $defOpt = null;
+		if ( !defined( 'MW_PHPUNIT_TEST' ) && $defOpt !== null ) {
+			// Disabling this for the unit tests, as they rely on being able to change $wgContLang
+			// mid-request and see that change reflected in the return value of this function.
+			// Which is insane and would never happen during normal MW operation
+			// Owen backported this from MW 1.25
+			return $defOpt;
+		}
 		$defOpt = $wgDefaultUserOptions;
 		# default language setting
 		$variant = $wgContLang->getDefaultVariant();
@@ -1402,6 +1410,7 @@ class User {
 		}
 		$defOpt['skin'] = $wgDefaultSkin;
 
+		// Owen fixed this (see above)
 		// FIXME: Ideally we'd cache the results of this function so the hook is only run once,
 		// but that breaks the parser tests because they rely on being able to change $wgContLang
 		// mid-request and see that change reflected in the return value of this function.
@@ -1500,9 +1509,9 @@ class User {
 		wfRunHooks( 'GetBlockedStatus', array( &$this ) );
 
 		if ( !empty($this->mBlockedby) ) {
-		    $this->mBlock->mBy = $this->mBlockedby;
-		    $this->mBlock->mReason = $this->mBlockreason;
-        }
+			$this->mBlock->mBy = $this->mBlockedby;
+			$this->mBlock->mReason = $this->mBlockreason;
+		}
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -2109,6 +2118,7 @@ class User {
 		if( $this->mId ) {
 			global $wgMemc, $wgSharedDB; # Wikia
 			$wgMemc->delete( $this->getCacheKey() );
+			$this->userPreferences()->deleteFromCache( $this->getId() );
 			// Wikia: and save updated user data in the cache to avoid memcache miss and DB query
 			$this->saveToCache();
 			if( !empty( $wgSharedDB ) ) {
@@ -2134,13 +2144,13 @@ class User {
 			$this->mTouched = self::newTouchedTimestamp();
 
 			#<Wikia>
-            global $wgExternalSharedDB, $wgSharedDB;
-            if( isset( $wgSharedDB ) ) {
-                    $dbw = wfGetDB( DB_MASTER, array(), $wgExternalSharedDB );
-            }
-            else {
-                    $dbw = wfGetDB( DB_MASTER );
-            }
+			global $wgExternalSharedDB, $wgSharedDB;
+			if( isset( $wgSharedDB ) ) {
+				$dbw = wfGetDB( DB_MASTER, array(), $wgExternalSharedDB );
+			}
+			else {
+				$dbw = wfGetDB( DB_MASTER );
+			}
 			#</Wikia>
 
 			$touched = $dbw->timestamp( $this->mTouched );
@@ -2425,6 +2435,7 @@ class User {
 			$this->warning("calling getOption", [
 				"class" => "user",
 				"type" => "getoption",
+				"option" => $oname,
 				"source" => wfBacktrace(true),
 			]);
 		}
@@ -2683,32 +2694,41 @@ class User {
 	 * @return string
 	 */
 	public function getGlobalAttribute( $attribute, $default = null ) {
-		if ( $this->shouldLogAttribute( $attribute ) ) {
-			$this->logAttribute( $attribute );
+
+		// There are currently 2 attributes we want to get from the attribute
+		// service directly every time. "avatar" and "location". These are attributes
+		// which can be updated by clients other than MW. By talking to the service
+		// we make sure to skip MW's user cache which may have a stale value for
+		// that attribute. Check to see if we should be using the service here before
+		// falling back to the getOptionHelper which uses the user cache.
+		if ( $this->shouldGetAttributeFromService( $attribute ) ) {
+			return $this->userAttributes()->getAttribute( $this->getId(), $attribute, $default );
 		}
 
 		return $this->getOptionHelper($attribute, $default);
 	}
 
 	/**
-	 * Returns true if 1.) User is logged in and 2.) The attribute is one used by clients other
-	 * than MW (eg, the avatar service or discussion app).
 	 * @param $attributeName
 	 * @return bool
 	 */
-	private function shouldLogAttribute( $attributeName ) {
-		return $this->isLoggedIn() && in_array( $attributeName, UserAttributes::$ATTRIBUTES_USED_BY_OUTSIDE_CLIENTS );
-	}
+	private function shouldGetAttributeFromService( $attributeName ) {
+		global $wgEnableReadsFromAttributeService;
 
-	/**
-	 * See SOC-1315 for more details
-	 * @param $attributeName
-	 */
-	private function logAttribute( $attributeName ) {
-		$this->info( 'USER_ATTRIBUTES get_attribute_call', [
-			'attributeName' => $attributeName,
-			'userId' => $this->getId()
-		] );
+		if ( empty( $wgEnableReadsFromAttributeService ) ) {
+			return false;
+		}
+
+		// User is anonymous or nonexistant
+		if ( $this->getId() == 0 ) {
+			return false;
+		}
+
+		if ( !in_array( $attributeName, UserAttributes::$ATTRIBUTES_USED_BY_OUTSIDE_CLIENTS ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -3505,32 +3525,6 @@ class User {
 			$this->mPassword = '';
 		}
 
-		// wikia change begin
-		/**
-		 * @author Krzysztof Krzyżaniak (eloy)
-		 * trap for BugId: 4013
-		 */
-		if( $this->mEmail == "devbox@wikia-inc.com" || $this->mEmail == "devbox+test@wikia-inc.com" ) {
-			// gather everything we know about request
-			global $wgCommandLineMode;
-			$log = "MOLI TRAP@devbox: ";
-			if( $wgCommandLineMode && !empty($argv)) {
-				$log .= $argv[ 0 ];
-				openlog( "trap", LOG_PID | LOG_PERROR, LOG_LOCAL6 );
-				syslog( LOG_WARNING, "$log");
-				closelog();
-			}
-			else {
-				global $wgTitle;
-				if (is_object($wgTitle)) {
-					$log .= $wgTitle->getFullUrl();
-					error_log( $log );
-				}
-			}
-		}
-
-		// wikia change end
-
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->update( 'user',
 			array( /* SET */
@@ -3993,6 +3987,9 @@ class User {
 			}
 			// Wikia change - end
 		}
+
+		wfRunHooks( 'UserMatchEditToken' ); # Wikia change
+
 		return $val == $sessionToken;
 	}
 
@@ -4686,16 +4683,16 @@ class User {
 	public function incEditCount() {
 		global $wgMemc, $wgCityId, $wgEnableEditCountLocal;
 		if( !$this->isAnon() ) {
-            // wikia change, load always from first cluster when we use
-            // shared users database
-            // @author Lucas Garczewski (tor)
-            global $wgExternalSharedDB, $wgSharedDB;
-            if( isset( $wgSharedDB ) ) {
-                    $dbw = wfGetDB( DB_MASTER, array(), $wgExternalSharedDB );
-            }
-            else {
-                    $dbw = wfGetDB( DB_MASTER );
-            }
+			// wikia change, load always from first cluster when we use
+			// shared users database
+			// @author Lucas Garczewski (tor)
+			global $wgExternalSharedDB, $wgSharedDB;
+			if( isset( $wgSharedDB ) ) {
+				$dbw = wfGetDB( DB_MASTER, array(), $wgExternalSharedDB );
+			}
+			else {
+				$dbw = wfGetDB( DB_MASTER );
+			}
 
 			$dbw->update( '`user`',
 				array( 'user_editcount=user_editcount+1' ),
@@ -4904,12 +4901,12 @@ class User {
 			}
 
 			$this->loadAttributes();
+			$this->preferenceCorrection()->compareAndCorrect($this->getId(), $this->mOptions);
 		}
 
 		$this->mOptionsLoaded = true;
 
 		wfRunHooks( 'UserLoadOptions', array( $this, &$this->mOptions ) );
-		$this->preferenceCorrection()->compareAndCorrect($this->getId(), $this->mOptions);
 	}
 
 	private function loadAttributes() {
