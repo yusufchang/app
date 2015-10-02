@@ -67,6 +67,9 @@ module.exports = function (config) {
 			//helper modules
 			'resources/wikia/modules/dom.js',
 
+			// Import Scripts
+			'resources/wikia/modules/importScriptHelper.js',
+
 			// Performance
 			'extensions/wikia/Bucky/js/spec/bucky.mock.js',
 			'extensions/wikia/Bucky/js/bucky_resources_timing.js',
