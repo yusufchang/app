@@ -1265,7 +1265,7 @@ $wgAmazonMatchCountriesMobile = null;
  * @name $wgEnableOpenXBidder
  * Enables OpenX bidder
  */
-$wgAdDriverEnableOpenXBidder = false;
+$wgAdDriverEnableOpenXBidder = true;
 
 /**
  * @name $wgAdDriverOpenXBidderCountries
@@ -1273,6 +1273,13 @@ $wgAdDriverEnableOpenXBidder = false;
  * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
  */
 $wgAdDriverOpenXBidderCountries = null;
+
+/**
+ * @name $wgAdDriverOpenXBidderCountriesMobile
+ * Enables OpenX bidder on mobile in these countries.
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverOpenXBidderCountriesMobile = null;
 
 /**
  * @name $wgAdPageLevelCategoryLangs
@@ -1535,6 +1542,13 @@ $wgAdDriverSourcePointCountries = null;
  * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
  */
 $wgAdDriverSourcePointDetectionCountries = null;
+
+/**
+ * @name $wgAdDriverSourcePointDetectionMobileCountries
+ * List of countries to call SourcePoint detection scripts on Mercury
+ * ONLY UPDATE THROUGH WIKI FACTORY ON COMMUNITY - it's an instant global.
+ */
+$wgAdDriverSourcePointDetectionMobileCountries = null;
 
 /**
  * trusted proxy service registry
@@ -1801,7 +1815,7 @@ $wgAdDriverIncontentPlayerSlotCountries = null;
  * manage a user's preferences externally
  */
 $wgPreferenceServiceRead = false;
-$wgPreferenceServiceShadowWrite = true;
+$wgPreferenceServiceShadowWrite = true && $wgWikiaDatacenter != WIKIA_DC_RES;
 
 /**
  * @name $wgEnableRobotsTxtExt
