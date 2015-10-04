@@ -700,6 +700,9 @@ class WikiaPhotoGallery extends ImageGallery {
 			return '';
 		}
 
+		$parserUniqPrefix = $this->mParser->mUniqPrefix;
+		wfRunHooks( 'PhotoGalleryRenderGallery', [ $this->mFiles, $parserUniqPrefix ] );
+
 		// Route to the mobile gallery or the new MediaGallery
 		if ( F::app()->checkSkin( 'wikiamobile' ) ) {
 			$html = $this->renderWikiaMobileMediaGroup();

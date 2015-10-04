@@ -46,6 +46,12 @@ class PortableInfoboxHooks {
 		return true;
 	}
 
+	static public function onRenderGallery( $files, $parserUniqPrefix ) {
+		\Wikia\PortableInfobox\Helpers\PortableInfoboxDataBag::getInstance()->setGalleryFiles( $parserUniqPrefix, $files );
+
+		return true;
+	}
+
 	static public function onWgQueryPages( &$queryPages = [ ] ) {
 		$queryPages[] = [ 'AllinfoboxesQueryPage', 'AllInfoboxes' ];
 

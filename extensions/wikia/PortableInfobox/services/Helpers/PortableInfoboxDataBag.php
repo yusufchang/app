@@ -9,6 +9,7 @@ namespace Wikia\PortableInfobox\Helpers;
 class PortableInfoboxDataBag {
 	private static $instance = null;
 	private $galleries = [ ];
+	public $galleryFiles = [ ];
 
 	private function __construct() {
 	}
@@ -33,6 +34,21 @@ class PortableInfoboxDataBag {
 	public function getGallery( $marker ) {
 		if ( isset( $this->galleries[ $marker ] ) ) {
 			return $this->galleries[ $marker ];
+		}
+
+		return null;
+	}
+
+	public function setGalleryFiles( $parserUniqPrefix, $files ) {
+		$this->galleryFiles[ $parserUniqPrefix ] = $files;
+	}
+
+	/**
+	 * Retrieve files from a gallery identified by Parser marker id prefix
+	 */
+	public function getGalleryFiles( $parserUniqPrefix ) {
+		if ( isset( $this->galleryFiles[ $parserUniqPrefix ] ) ) {
+			return $this->galleryFiles[ $parserUniqPrefix ];
 		}
 
 		return null;

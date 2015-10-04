@@ -98,21 +98,17 @@ class NodeImage extends Node {
 	}
 
 	private function getGalleryItems( $imageData ) {
-		preg_match( '/.(UNIQ.*QINU)./U', $imageData, $galleryMarkers );
+		preg_match( '/.(UNIQ.{16})/U', $imageData, $galleryMarkers );
 		$galleryImages = array();
 
 		foreach ( $galleryMarkers as $marker ) {
-			$galleryWikitext = PortableInfoboxDataBag::getInstance()->getGallery( $marker );
-			$galleryLines = preg_split('/\r\n|\n|\r/', $galleryWikitext);
+			$galleryFiles = PortableInfoboxDataBag::getInstance()->getGalleryFiles( $marker );
 
-			foreach ( $galleryLines as $galleryImage) {
-				$galleryOut = explode('|', $galleryImage, 3);
-
-				//TODO: take care about params like link=, linktext= etc. which one is caption?
-				//see mre here: http://community.wikia.com/wiki/Help:Galleries,_Slideshows,_and_Sliders/wikitext
-				//maybe regexing HTML will be more effective?
-				if ( !empty( $galleryOut[0] ) ) {
-					$galleryImages[] = [ 'key' => $galleryOut[ 0 ], 'caption' => $galleryOut[ 1 ], 'alt' => $galleryOut[ 2 ] ];
+			foreach ( $galleryFiles as $index => $galleryFile ) {
+				$fileTitle = $galleryFile[0]->getText();
+				if ( !empty( $fileTitle ) ) {
+					$parsedCaption = $this->getExternalParser()->parse( $galleryFile[3] );
+					$galleryImages[] = [ 'key' => $fileTitle, 'caption' => $parsedCaption, 'alt' => null ];
 				}
 			}
 		}
