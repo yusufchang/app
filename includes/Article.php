@@ -15,7 +15,7 @@
  * Note: edit user interface and cache support functions have been
  * moved to separate EditPage and HTMLFileCache classes.
  *
- * @internal documentation reviewed 15 Mar 2010
+ * internal documentation reviewed 15 Mar 2010
  *
  * //Wikia Change Start - helping PHP lint
  * @property Title mTitle
@@ -218,6 +218,12 @@ class Article extends Page {
 			return $text;
 		} else {
 			$this->fetchContent();
+			// Wikia: Temporary Investigation for PLATFORM-1355
+			if(empty($this->mContent)) {
+					Wikia\Logger\WikiaLogger::instance()->error( __METHOD__ . ' empty content PLAT1355', [
+						'page_id' => $this->mPage->getID()
+				] );
+			}
 			wfProfileOut( __METHOD__ );
 
 			return $this->mContent;
