@@ -291,7 +291,7 @@ class ContentReviewStatusesService extends \WikiaService {
 		if ( !empty( $revisionId ) ) {
 			$data['diffLink'] = $this->createRevisionLink( $title, $revisionId, $liveRevisionId );
 			if ( $statusKey === self::STATUS_REJECTED ) {
-				$data['reasonLink'] = $this->createRevisionTalkpageLink( $title );
+				$data['reasonLink'] = $this->createRevisionTalkpageLink( $title, $revisionId );
 			}
 		} elseif ( !empty( $liveRevisionId ) ) {
 			$data['diffLink'] = $this->createRevisionLink( $title, $liveRevisionId );
@@ -310,10 +310,13 @@ class ContentReviewStatusesService extends \WikiaService {
 		return \Html::element( 'a', [ 'href' => $title->getFullURL( $params ) ], "#{$revisionId}" );
 	}
 
-	private function createRevisionTalkpageLink( \Title $title ) {
-		return \Html::element(
-			'a',
-			[ 'href' => $title->getTalkPage() ],
+	private function createRevisionTalkpageLink( \Title $title, $revisionId ) {
+		$talkageSection = wfMessage( 'content-review-rejection-explanation-title' )->params( $revisionId )->escaped();
+		$talkpageTitle = $title->getTalkPage();
+		$talkpageTitle->setFragment( "#{$talkageSection}" );
+
+		return Linker::linkKnown(
+			$talkpageTitle,
 			wfMessage( 'content-review-rejection-reason-link' )->escaped()
 		);
 	}
