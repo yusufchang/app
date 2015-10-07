@@ -315,7 +315,7 @@ class ContentReviewStatusesService extends \WikiaService {
 		$talkpageTitle = $title->getTalkPage();
 		$talkpageTitle->setFragment( "#{$talkageSection}" );
 
-		return Linker::linkKnown(
+		return \Linker::linkKnown(
 			$talkpageTitle,
 			wfMessage( 'content-review-rejection-reason-link' )->escaped()
 		);
