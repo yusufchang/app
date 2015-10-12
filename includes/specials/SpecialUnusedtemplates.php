@@ -31,7 +31,9 @@
  */
 class UnusedtemplatesPage extends QueryPage {
 
-	function __construct( $name = 'Unusedtemplates' ) {
+	const UNUSED_TEMPLATES_PAGE_NAME = 'Unusedtemplates';
+
+	function __construct( $name = self::UNUSED_TEMPLATES_PAGE_NAME ) {
 		parent::__construct( $name );
 	}
 

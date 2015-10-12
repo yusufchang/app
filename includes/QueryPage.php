@@ -292,6 +292,9 @@ abstract class QueryPage extends SpecialPage {
 		# Do query
 		$res = $this->reallyDoQuery( $limit, false );
 		$num = false;
+
+		wfRunHooks( 'QueryPageUseResultsBeforeRecache', [ $this->getName(), $res ] );
+
 		if ( $res ) {
 			$num = $dbr->numRows( $res );
 			# Fetch results
