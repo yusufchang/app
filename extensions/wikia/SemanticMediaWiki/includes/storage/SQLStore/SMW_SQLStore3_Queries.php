@@ -920,6 +920,7 @@ throw new MWException("Debug -- this code might be dead.");
 			break;
 			case SMWSQLStore3Query::Q_DISJUNCTION:
 				if ( $this->m_qmode !== SMWQuery::MODE_DEBUG ) {
+					\Wikia\Logger\WikiaLogger::instance()->info( 'SMW temp table query', [ 'dbtrxlevel' => $this->m_dbs->trxLevel(), 'method' => __METHOD__ ] );
 					$this->m_dbs->query( $this->getCreateTempIDTableSQL( $this->m_dbs->tableName( $query->alias ) ), 'SMW::executeQueries' );
 				}
 
