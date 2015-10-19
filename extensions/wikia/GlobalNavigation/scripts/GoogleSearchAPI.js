@@ -5,10 +5,11 @@
  */
 $(function () {
 	'use strict';
+/*
 	if (!window.wgGoogleSearchTest) {
 		return;
 	}
-
+*/
     var $wikiaSite = $('.WikiaSiteWrapper'),
         searchId = '006230450596576500385:kcgbfm7zpa8'; //'005745855109319432328:coaj7jf_wgs';//window.wgGoogleSearchParam;
 
@@ -17,7 +18,7 @@ $(function () {
 	//	return;
 	//}
 
-	$wikiaSite.before('<gcse:searchresults-only></gcse:searchresults-only>');
+	//$wikiaSite.before('<gcse:searchresults-only></gcse:searchresults-only>');
 	$.loadGoogleSearchAPI(searchId);
 
 	$('#searchForm').submit( function (evt) {
@@ -31,10 +32,10 @@ $(function () {
 		evt.preventDefault();
 
 		//get info of local or global and modify query scope
-		//if ($selectedOption.val() === 'local') {
-		//	searchQuery += ' site:' + window.location.hostname;
-		//}
-        //
+		if ($selectedOption.val() === 'local') {
+			searchQuery += ' site:' + window.location.hostname;
+		}
+                window.location.href = 'http://ja.destiny.mari.wikia-dev.com/wiki/特別:検索?q=hello'; 
 		////Invoke google search
 		//$googleInput.val(searchQuery);
 		//$googleButton.trigger('click');

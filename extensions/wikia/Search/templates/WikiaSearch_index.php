@@ -1,6 +1,7 @@
+<gcse:searchresults-only></gcse:searchresults-only>
 <section class="Search this-wiki WikiaGrid clearfix search-tracking">
 	<form class="WikiaSearch" id="search-v2-form" action="<?=$specialSearchUrl; ?>#">
-		<div class="SearchInput">
+	<?php if (!empty($results)): ?><div class="SearchInput">
 			<?php if ( !empty( $advancedSearchBox ) ) : ?>
 				<p class="advanced-link"><a href="#" id="advanced-link"><?= wfMessage( 'searchprofile-advanced' ) ?></a></p>
 				<?php endif ?>
@@ -15,7 +16,7 @@
 				<?php echo $advancedSearchBox; ?>
 			<?php endif ?>
 		</div>
-
+<?php endif; ?>
 		<?php echo $tabs; ?>
 
 		<div class="results-wrapper grid-3 alpha">
