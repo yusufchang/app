@@ -10,14 +10,14 @@ $(function () {
 	}
 
     var $wikiaSite = $('.WikiaSiteWrapper'),
-        searchId = window.wgGoogleSearchParam;
+        searchId = '006230450596576500385:kcgbfm7zpa8'; //'005745855109319432328:coaj7jf_wgs';//window.wgGoogleSearchParam;
 
 	//The html class is defined in Oasis_Index.php. Better check if it exists.
-	if ($wikiaSite.length === 0) {
-		return;
-	}
+	//if ($wikiaSite.length === 0) {
+	//	return;
+	//}
 
-	$wikiaSite.before('<gcse:search></gcse:search>');
+	$wikiaSite.before('<gcse:searchresults-only></gcse:searchresults-only>');
 	$.loadGoogleSearchAPI(searchId);
 
 	$('#searchForm').submit( function (evt) {
@@ -31,12 +31,12 @@ $(function () {
 		evt.preventDefault();
 
 		//get info of local or global and modify query scope
-		if ($selectedOption.val() === 'local') {
-			searchQuery += ' site:' + window.location.hostname;
-		}
-
-		//Invoke google search
-		$googleInput.val(searchQuery);
-		$googleButton.trigger('click');
+		//if ($selectedOption.val() === 'local') {
+		//	searchQuery += ' site:' + window.location.hostname;
+		//}
+        //
+		////Invoke google search
+		//$googleInput.val(searchQuery);
+		//$googleButton.trigger('click');
 	});
 });
