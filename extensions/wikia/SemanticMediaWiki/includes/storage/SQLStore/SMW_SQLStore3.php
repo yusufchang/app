@@ -352,6 +352,7 @@ class SMWSQLStore3 extends SMWStore {
 
 		$dbr = wfGetDB( DB_SLAVE, 'smw' );
 		$dbr->clearFlag( DBO_TRX );
+		$dbr->commit(); // Clear any open transactions
 		$qe = new SMWSQLStore3QueryEngine( $this, $dbr );
 		$result = $qe->getQueryResult( $query );
 		wfProfileOut( 'SMWSQLStore3::getQueryResult (SMW)' );

@@ -1010,6 +1010,7 @@ class SMWSQLStore2 extends SMWStore {
 
 		$dbr = wfGetDB( DB_SLAVE, 'smw' );
 		$dbr->clearFlag( DBO_TRX );
+		$dbr->commit(); // Clear any open transactions
 		$qe = new SMWSQLStore2QueryEngine( $this, $dbr );
 		$result = $qe->getQueryResult( $query );
 		wfProfileOut( 'SMWSQLStore2::getQueryResult (SMW)' );
@@ -1074,6 +1075,7 @@ class SMWSQLStore2 extends SMWStore {
 		wfProfileIn( "SMWSQLStore2::getUnusedPropertiesSpecial (SMW)" );
 		$db = wfGetDB( DB_SLAVE, 'smw' );
 		$db->clearFlag( DBO_TRX );
+		$db->commit(); // Clear any open transactions
 
 		// we use a temporary table for executing this costly operation on the DB side
 		$smw_tmp_unusedprops = $db->tableName( 'smw_tmp_unusedprops' );
