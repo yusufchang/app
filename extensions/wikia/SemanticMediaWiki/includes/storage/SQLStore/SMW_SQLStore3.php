@@ -351,6 +351,7 @@ class SMWSQLStore3 extends SMWStore {
 		wfProfileIn( 'SMWSQLStore3::getQueryResult (SMW)' );
 
 		$dbr = wfGetDB( DB_SLAVE, 'smw' );
+		\Wikia\Logger\WikiaLogger::instance()->info( 'SMW temp table query', [ 'dbtrxlevel' => $dbr->trxLevel(), 'method' => __METHOD__ ] );
 		$dbr->clearFlag( DBO_TRX );
 		$qe = new SMWSQLStore3QueryEngine( $this, $dbr );
 		$result = $qe->getQueryResult( $query );
