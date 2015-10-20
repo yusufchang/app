@@ -5,20 +5,19 @@
  */
 $(function () {
 	'use strict';
-/*
 	if (!window.wgGoogleSearchTest) {
 		return;
 	}
-*/
-    var $wikiaSite = $('.WikiaSiteWrapper'),
-        searchId = '006230450596576500385:kcgbfm7zpa8'; //'005745855109319432328:coaj7jf_wgs';//window.wgGoogleSearchParam;
+
+	var $wikiaSite = $('.WikiaSiteWrapper'),
+		searchId = window.wgGoogleSearchParam;
 
 	//The html class is defined in Oasis_Index.php. Better check if it exists.
-	//if ($wikiaSite.length === 0) {
-	//	return;
-	//}
+	if ($wikiaSite.length === 0) {
+		return;
+	}
 
-	//$wikiaSite.before('<gcse:searchresults-only></gcse:searchresults-only>');
+	$wikiaSite.before('<gcse:search></gcse:search>');
 	$.loadGoogleSearchAPI(searchId);
 
 	$('#searchForm').submit( function (evt) {
@@ -27,7 +26,8 @@ $(function () {
 			$googleInput = $('.gsc-input'),
 			$googleButton = $('.gsc-search-button'),
 			$selectElement = $('#searchSelect'),
-			$selectedOption = $selectElement.find('option:selected');
+			$selectedOption = $selectElement.find('option:selected'),
+		    currentUrlPath = window.location.pathname;
 
 		evt.preventDefault();
 
@@ -35,9 +35,13 @@ $(function () {
 		if ($selectedOption.val() === 'local') {
 			searchQuery += ' site:' + window.location.hostname;
 		}
-                window.location.href = 'http://ja.destiny.mari.wikia-dev.com/wiki/特別:検索?q=hello'; 
-		////Invoke google search
-		//$googleInput.val(searchQuery);
-		//$googleButton.trigger('click');
+
+		//Manually trigger page view
+		currentUrlPath += '?q=' + encodeURIComponent(searchQuery);
+		window.guaTrackPageview(currentUrlPath);
+
+		//Invoke google search
+		$googleInput.val(searchQuery);
+		$googleButton.trigger('click');
 	});
 });
