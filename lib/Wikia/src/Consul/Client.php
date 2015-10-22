@@ -20,7 +20,7 @@ class Client {
 	protected $logger;
 
 	/* @var \SensioLabs\Consul\Services\Health $api */
-	protected $api;
+	public $api;
 
 	function __construct() {
 		$this->logger = WikiaLogger::instance();
