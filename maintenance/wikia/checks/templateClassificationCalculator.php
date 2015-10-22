@@ -22,25 +22,24 @@ class TemplateClassificationCalculator extends Maintenance {
 	}
 
 	public function execute() {
-		echo 'Start' . PHP_EOL;
-		global $wgCityId;
+		global $wgCityId, $wgContentNamespaces;
 		$db = wfGetDB( DB_SLAVE );
 		$this->consul = (new \Wikia\Consul\Client())->api;
 
 		echo 'Running Query' . PHP_EOL;
-		$pages = ( new \WikiaSQL() )
-					->SELECT('p2.page_id as temp_id','tl_title','COUNT(*)')
-					->FROM('page')->AS_('p')
-					->INNER_JOIN('templatelinks')->AS_('t')
-					->ON('t.tl_from','p.page_id')
-					->INNER_JOIN('page')->AS_('p2')
-					->ON('p2.page_title','t.tl_title')
-					->WHERE('p.page_namespace')->EQUAL_TO(NS_MAIN)
-					->AND_('p2.page_namespace')->EQUAL_TO(NS_TEMPLATE)
-					->GROUP_BY('tl_title')
-					->HAVING( 'COUNT(*)' )->GREATER_THAN( 0 )
-					->ORDER_BY('COUNT(*)')->DESC()
-				->runLoop( $db, function ( &$pages, $row ) {
+
+		$sql = ( new \WikiaSQL() )
+			->SELECT()->DISTINCT('p2.page_id as temp_id', 'tl_title')
+			->FROM('page')->AS_('p')
+			->INNER_JOIN('templatelinks')->AS_('t')
+			->ON('t.tl_from','p.page_id')
+			->INNER_JOIN('page')->AS_('p2')
+			->ON('p2.page_title','t.tl_title')
+			->WHERE('p.page_namespace')->IN($wgContentNamespaces)
+			->AND_('p2.page_namespace')->EQUAL_TO(NS_TEMPLATE)
+			->AND_('p.page_id')->NOT_EQUAL_TO(Title::newMainPage()->getArticleID());
+
+		$pages = $sql->runLoop( $db, function ( &$pages, $row ) {
 					$pages[] = [
 						'page_id' => $row->temp_id,
 						'title' => $row->tl_title
