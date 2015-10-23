@@ -65,9 +65,9 @@ class TemplateClassificationCalculator extends Maintenance {
 				}
 			}
 
-			echo sprintf("%12s%30s",
+			echo sprintf("%12s%60s",
 				implode('/', [$currentPage, $pageCount]),
-				implode('', [ '(', $wgCityId, ',', $page['page_id'] , ',"', $class, '")' ] )) . PHP_EOL;
+				implode('', [ '(', $wgCityId, ',', $page['page_id'] , ',"', $class, '","', $page['title'], '")' ] )) . PHP_EOL;
 
 			$currentPage++;
 		}
