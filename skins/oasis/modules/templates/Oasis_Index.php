@@ -60,6 +60,20 @@
 
 <?= $headItems ?>
 
+<!-- ADEN-2587 - not meant for production BEGIN -->
+<script type="text/javascript">
+	window._taboola = window._taboola || [];
+	_taboola.push({article:'auto'});
+	!function (e, f, u) {
+		e.async = 1;
+		e.src = u;
+		f.parentNode.insertBefore(e, f);
+	}(document.createElement('script'),
+		document.getElementsByTagName('script')[0],
+		'//cdn.taboola.com/libtrc/wikia-network/loader.js');
+</script>
+<!-- ADEN-2587 - not meant for production END -->
+
 </head>
 <body class="<?= implode(' ', $bodyClasses) ?>"<?= $itemType ?>>
 <? if ( BodyController::isResponsiveLayoutEnabled() || BodyController::isOasisBreakpoints() ): ?>
@@ -101,6 +115,13 @@
 <script type="text/javascript">/*<![CDATA[*/ if (typeof AdEngine_trackPageInteractive === 'function') {wgAfterContentAndJS.push(AdEngine_trackPageInteractive);} /*]]>*/</script>
 <?php } ?>
 <?= $bottomScripts ?>
+
+<!-- ADEN-2587 - not meant for production BEGIN -->
+<script type="text/javascript">
+	window._taboola = window._taboola || [];
+	_taboola.push({flush: true});
+</script>
+<!-- ADEN-2587 - not meant for production END -->
 
 </body>
 

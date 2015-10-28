@@ -3,6 +3,19 @@
 <? endif; ?>
 	<div id="WikiaRail" class="WikiaRail<?= !empty($isGridLayoutEnabled) ? ' grid-2' : '' ?>">
 
+<!-- ADEN-2587 - not meant for production BEGIN -->
+<div id="taboola-right-rail-thumbnails"></div>
+<script type="text/javascript">
+	window._taboola = window._taboola || [];
+	_taboola.push({
+		mode: 'thumbnails-rr',
+		container: 'taboola-right-rail-thumbnails',
+		placement: 'Right Rail Thumbnails - Gaming',
+		target_type: 'mix'
+	});
+</script>
+<!-- ADEN-2587 - not meant for production END -->
+
 		<?php
 		// sort in reverse order (highest priority displays first)
 		krsort($railModuleList);
