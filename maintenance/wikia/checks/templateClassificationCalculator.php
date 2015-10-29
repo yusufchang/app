@@ -79,8 +79,8 @@ class TemplateClassificationCalculator extends Maintenance {
 		$response = $this->consul->service(
 			'template-classification-storage',
 			[
-				'dc' => 'sjc-dev',
-				'tag' => 'internal',
+				'dc' => 'sjc',
+				'tag' => 'prod',
 				'passing' => true
 			]
 		)->json();
