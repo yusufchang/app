@@ -62,6 +62,23 @@
 
 </head>
 <body class="<?= implode(' ', $bodyClasses) ?>"<?= $itemType ?>>
+
+<!-- ADEN-2591 not meant for production START -->
+<script type="text/javascript">
+	(function() {
+		var ARTICLE_URL = window.location.href;
+		var CONTENT_ID = 'everything';
+		document.write(
+			'<scr'+'ipt '+
+			'src="//survey.g.doubleclick.net/survey?site=_ltvovxgnp5p3wkkemdja6sd2wm'+
+			'&amp;url='+encodeURIComponent(ARTICLE_URL)+
+			(CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
+			'&amp;random='+(new Date).getTime()+
+			'" type="text/javascript">'+'\x3C/scr'+'ipt>');
+	})();
+</script>
+<!-- ADEN-2591 not meant for production END -->
+
 <? if ( BodyController::isResponsiveLayoutEnabled() || BodyController::isOasisBreakpoints() ): ?>
 	<div class="background-image-gradient"></div>
 <? endif ?>
