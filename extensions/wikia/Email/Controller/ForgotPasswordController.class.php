@@ -3,6 +3,7 @@
 namespace Email\Controller;
 
 use Email\EmailController;
+use Email\Fatal;
 
 /**
  * Class ForgotPasswordController
@@ -43,10 +44,10 @@ class ForgotPasswordController extends EmailController {
 	}
 
 	public function initEmail() {
-		$userService = new \UserService();
 		$this->tempPass = $this->request->getVal( 'tempPass' );
-		if ( empty( $this->tempPass ) ) {
-			$this->tempPass = $userService->resetPassword( $this->targetUser );
+
+		if ( empty($this->tempPass) ) {
+			throw new Fatal('Required temporary password has been left empty');
 		}
 	}
 
