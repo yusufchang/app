@@ -18,16 +18,18 @@
 		?>
 
 		<!-- ADEN-2587 - not meant for production BEGIN -->
-		<div id="taboola-right-rail-thumbnails"></div>
-		<script type="text/javascript">
-			window._taboola = window._taboola || [];
-			_taboola.push({
-				mode: 'thumbnails-rr',
-				container: 'taboola-right-rail-thumbnails',
-				placement: 'Right Rail Thumbnails - Gaming',
-				target_type: 'mix'
-			});
-		</script>
+		<div id="NATIVE_TABOOLA_RAIL">
+			<div id="taboola-right-rail-thumbnails"></div>
+			<script type="text/javascript">
+				window._taboola = window._taboola || [];
+				_taboola.push({
+					mode: 'thumbnails-rr',
+					container: 'taboola-right-rail-thumbnails',
+					placement: 'Right Rail Thumbnails - Gaming',
+					target_type: 'mix'
+				});
+			</script>
+		</div>
 		<!-- ADEN-2587 - not meant for production END -->
 
 		<? if ($loadLazyRail): ?>

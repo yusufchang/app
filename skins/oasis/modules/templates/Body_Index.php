@@ -126,16 +126,18 @@
 					<?= $bodytext ?>
 
 <!-- ADEN-2587 - not meant for production BEGIN -->
-<div id="taboola-below-article-thumbnails"></div>
-<script type="text/javascript">
-	window._taboola = window._taboola || [];
-	_taboola.push({
-		mode: 'thumbnails-c',
-		container: 'taboola-below-article-thumbnails',
-		placement: 'Below Article Thumbnails - Gaming',
-		target_type: 'mix'
-	});
-</script>
+<div id="NATIVE_TABOOLA_ARTICLE">
+	<div id="taboola-below-article-thumbnails"></div>
+	<script type="text/javascript">
+		window._taboola = window._taboola || [];
+		_taboola.push({
+			mode: 'thumbnails-c',
+			container: 'taboola-below-article-thumbnails',
+			placement: 'Below Article Thumbnails - Gaming',
+			target_type: 'mix'
+		});
+	</script>
+</div>
 <!-- ADEN-2587 - not meant for production END -->
 
 				</div>
