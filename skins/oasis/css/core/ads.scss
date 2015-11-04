@@ -236,8 +236,21 @@ body >a >img[src$="noad.gif"] {
 	}
 }
 
-#NATIVE_TABOOLA {
-	max-width: 700px;
+// Taboola
+.trc_rbox_container .trc_rbox_header .trc_rbox_header_span {
+	color: $color-page-opposite;
+}
+
+.trc_related_container .trc_rbox_header .trc_header_ext .logoDiv a {
+	color: $color-links;
+}
+
+.trc_rbox_container .trc_rbox_div .video-label-box .video-title {
+	color: $color-text;
+}
+
+.trc_rbox_container .trc_rbox_div .video-label-box .branding {
+	color: $color-alternate-text;
 }
 
 .wikia-ad-interactive-map {
