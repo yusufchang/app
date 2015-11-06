@@ -96,38 +96,36 @@
 				<?php } ?>
 
 				<!-- ADEN-2591 not meant for production START -->
-				<div class="p402_premium">
-					<div id="WikiaArticle" class="WikiaArticle<?= $displayAdminDashboardChromedArticle ? ' AdminDashboardChromedArticle' : '' ?>"<?= $body_ondblclick ? ' ondblclick="' . htmlspecialchars( $body_ondblclick ) . '"' : '' ?>>
-						<? if( $displayAdminDashboardChromedArticle ) { ?>
-							<?= ( string )$app->sendRequest( 'AdminDashboardSpecialPage', 'chromedArticleHeader', array( 'headerText' => $wg->Title->getText() ) ) ?>
-						<? } ?>
+				<div id="WikiaArticle" class="WikiaArticle p402_premium<?= $displayAdminDashboardChromedArticle ? ' AdminDashboardChromedArticle' : '' ?>"<?= $body_ondblclick ? ' ondblclick="' . htmlspecialchars( $body_ondblclick ) . '"' : '' ?>>
+					<? if( $displayAdminDashboardChromedArticle ) { ?>
+						<?= ( string )$app->sendRequest( 'AdminDashboardSpecialPage', 'chromedArticleHeader', array( 'headerText' => $wg->Title->getText() ) ) ?>
+					<? } ?>
 
-						<div class="home-top-right-ads">
-						<?php
-							if ( !WikiaPageType::isCorporatePage() && !$wg->EnableVideoPageToolExt && WikiaPageType::isMainPage() ) {
-								echo $app->renderView( 'Ad', 'Index', [
-									'slotName' => 'HOME_TOP_RIGHT_BOXAD',
-									'pageTypes' => ['homepage_logged', 'corporate', 'all_ads']
-								] );
-							}
-						?>
-						</div>
-						<?php
-						if ( $runNjord ) {
-							echo $app->renderView( 'Njord', 'Summary' );
-							echo $app->renderView( $headerModuleName, $headerModuleAction, $headerModuleParams );
-
+					<div class="home-top-right-ads">
+					<?php
+						if ( !WikiaPageType::isCorporatePage() && !$wg->EnableVideoPageToolExt && WikiaPageType::isMainPage() ) {
+							echo $app->renderView( 'Ad', 'Index', [
+								'slotName' => 'HOME_TOP_RIGHT_BOXAD',
+								'pageTypes' => ['homepage_logged', 'corporate', 'all_ads']
+							] );
 						}
-						?>
-						<?php
-						// for InfoBox-Testing
-						if ( $wg->EnableInfoBoxTest ) {
-							echo $app->renderView( 'ArticleInfoBox', 'Index' );
-						} ?>
-
-						<?= $bodytext ?>
-
+					?>
 					</div>
+					<?php
+					if ( $runNjord ) {
+						echo $app->renderView( 'Njord', 'Summary' );
+						echo $app->renderView( $headerModuleName, $headerModuleAction, $headerModuleParams );
+
+					}
+					?>
+					<?php
+					// for InfoBox-Testing
+					if ( $wg->EnableInfoBoxTest ) {
+						echo $app->renderView( 'ArticleInfoBox', 'Index' );
+					} ?>
+
+					<?= $bodytext ?>
+
 				</div>
 				<script type="text/javascript">
 					try { _402_Show(); } catch(e) {}
