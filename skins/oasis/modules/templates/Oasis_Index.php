@@ -70,7 +70,7 @@
 		var CONTENT_ID = 'everything';
 		document.write(
 			'<scr'+'ipt '+
-			'src="//survey.g.doubleclick.net/survey?site=_ltvovxgnp5p3wkkemdja6sd2wm'+
+			'src="//survey.g.doubleclick.net/survey?site=_grm5podgin6cup4wmqjqct4h5e'+
 			'&amp;url='+encodeURIComponent(ARTICLE_URL)+
 			(CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
 			'&amp;random='+(new Date).getTime()+
