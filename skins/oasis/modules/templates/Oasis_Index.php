@@ -66,6 +66,18 @@
 <!-- ADEN-2591 not meant for production START -->
 <script type="text/javascript">
 	(function() {
+		var infoboxes = document.getElementsByClassName('portable-infobox');
+		Object.keys(infoboxes).forEach(function(key) {
+			if( infoboxes[key] ) {
+				console.log(infoboxes[key]);
+				console.log(infoboxes[key].classList);
+				pis[infoboxes].classList.add('p402_hide');
+				console.log(infoboxes[key].classList);
+			}
+		});
+		console.log('PIs UPDATED!');
+	})();
+	(function() {
 		var ARTICLE_URL = window.location.href;
 		var CONTENT_ID = 'everything';
 		document.write(
@@ -75,6 +87,8 @@
 			(CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
 			'&amp;random='+(new Date).getTime()+
 			'" type="text/javascript">'+'\x3C/scr'+'ipt>');
+
+		console.log('GCS ADDED!');
 	})();
 </script>
 <!-- ADEN-2591 not meant for production END -->
