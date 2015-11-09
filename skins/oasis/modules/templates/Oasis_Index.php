@@ -109,13 +109,9 @@
 		var infoboxes = document.getElementsByClassName('portable-infobox');
 		Object.keys(infoboxes).forEach(function(key) {
 			if( infoboxes[key] ) {
-				console.log(infoboxes[key]);
-				console.log(infoboxes[key].classList);
-				pis[infoboxes].classList.add('p402_hide');
-				console.log(infoboxes[key].classList);
+				infoboxes[key].classList.add('p402_hide');
 			}
 		});
-		console.log('PIs UPDATED!');
 	})();
 	(function() {
 		var ARTICLE_URL = window.location.href;
@@ -127,8 +123,6 @@
 			(CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
 			'&amp;random='+(new Date).getTime()+
 			'" type="text/javascript">'+'\x3C/scr'+'ipt>');
-
-		console.log('GCS ADDED!');
 	})();
 </script>
 <!-- ADEN-2591 not meant for production END -->
