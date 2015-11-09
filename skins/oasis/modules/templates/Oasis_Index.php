@@ -108,7 +108,7 @@
 	(function() {
 		var infoboxes = document.getElementsByClassName('portable-infobox');
 		Object.keys(infoboxes).forEach(function(key) {
-			if( infoboxes[key] && infoboxes[key].hasOwnProperty('classList') ) {
+			if( infoboxes[key] && infoboxes[key].classList ) {
 				infoboxes[key].classList.add('p402_hide');
 			}
 		});
