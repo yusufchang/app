@@ -63,6 +63,22 @@
 </head>
 <body class="<?= implode(' ', $bodyClasses) ?>"<?= $itemType ?>>
 
+<!-- ADEN-2591 not meant for production START -->
+<script type="text/javascript">
+	(function() {
+		var ARTICLE_URL = window.location.href;
+		var CONTENT_ID = 'everything';
+		document.write(
+			'<scr'+'ipt '+
+			'src="//survey.g.doubleclick.net/survey?site=_ltvovxgnp5p3wkkemdja6sd2wm'+
+			'&amp;url='+encodeURIComponent(ARTICLE_URL)+
+			(CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
+			'&amp;random='+(new Date).getTime()+
+			'" type="text/javascript">'+'\x3C/scr'+'ipt>');
+	})();
+</script>
+<!-- ADEN-2591 not meant for production END -->
+
 <? if ( BodyController::isResponsiveLayoutEnabled() || BodyController::isOasisBreakpoints() ): ?>
 	<div class="background-image-gradient"></div>
 <? endif ?>
@@ -102,30 +118,6 @@
 <script type="text/javascript">/*<![CDATA[*/ if (typeof AdEngine_trackPageInteractive === 'function') {wgAfterContentAndJS.push(AdEngine_trackPageInteractive);} /*]]>*/</script>
 <?php } ?>
 <?= $bottomScripts ?>
-
-<!-- ADEN-2591 not meant for production START -->
-<script type="text/javascript">
-	(function() {
-		var infoboxes = document.getElementsByClassName('portable-infobox');
-		Object.keys(infoboxes).forEach(function(key) {
-			if( infoboxes[key] && infoboxes[key].classList ) {
-				infoboxes[key].classList.add('p402_hide');
-			}
-		});
-	})();
-	(function() {
-		var ARTICLE_URL = window.location.href;
-		var CONTENT_ID = 'everything';
-		document.write(
-			'<scr'+'ipt '+
-			'src="//survey.g.doubleclick.net/survey?site=_ltvovxgnp5p3wkkemdja6sd2wm'+
-			'&amp;url='+encodeURIComponent(ARTICLE_URL)+
-			(CONTENT_ID ? '&amp;cid='+encodeURIComponent(CONTENT_ID) : '')+
-			'&amp;random='+(new Date).getTime()+
-			'" type="text/javascript">'+'\x3C/scr'+'ipt>');
-	})();
-</script>
-<!-- ADEN-2591 not meant for production END -->
 
 </body>
 
