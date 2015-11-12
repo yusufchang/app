@@ -54,20 +54,21 @@ class TemplateClassificationCalculator extends Maintenance {
 
 			$response = Http::get(implode('', [ 'http://', $node , '/', $wgCityId, '/', $page['page_id'], '/', 'providers' ] ) );
 
-			$class = 'other';
+			$class = 'unclassified';
 			$json = json_decode($response);
 			foreach($json as $entry) {
 				if($entry->provider == 'auto_type_matcher') {
 					$types = $entry->types;
 					if(count($types === 1)) {
 						$class = $types[0];
+					} elseif(count($types > 1)) {
+						$class = 'other';
 					}
 				}
 			}
 
-			echo sprintf("%12s%60s",
-				implode('/', [$currentPage, $pageCount]),
-				implode('', [ '(', $wgCityId, ',', $page['page_id'] , ',"', $class, '","', $page['title'], '")' ] )) . PHP_EOL;
+			echo sprintf("INSERT INTO template_classification_stats_nov_12 VALUES ('%s','%s','%s','%s');",
+				$wgCityId, $page['page_id'], mysql_escape_string($class), mysql_escape_string($page['title']) ) . PHP_EOL;
 
 			$currentPage++;
 		}
