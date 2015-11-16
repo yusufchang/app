@@ -20,6 +20,7 @@ define('ext.wikia.adEngine.lookup.rubiconFastlane', [
 			},
 			mercury: {}
 		},
+		rubiconSlots = [],
 		called = false;
 
 	function onResponse() {
@@ -41,14 +42,12 @@ define('ext.wikia.adEngine.lookup.rubiconFastlane', [
 
 		win.rubicontag.cmd.push(function () {
 			var slot = win.rubicontag.defineSlot(
-					'wikia_gpt' + slotPath + '/gpt/' + slotName,
-					sizes,
-					'wikia_gpt' + slotPath + '/gpt/' + slotName
+				'wikia_gpt' + slotPath + '/gpt/' + slotName,
+				sizes,
+				'wikia_gpt' + slotPath + '/gpt/' + slotName
 			).setPosition('atf');
+			rubiconSlots.push(slot);
 			slots[slotName] = slot;
-			win.rubicontag.run(onResponse, {
-				slots:[slot]
-			});
 		});
 	}
 
@@ -57,6 +56,11 @@ define('ext.wikia.adEngine.lookup.rubiconFastlane', [
 		Object.keys(definedSlots).forEach(function (slotName) {
 			defineSlot(slotName, definedSlots[slotName]);
 		});
+		win.rubicontag.cmd.push(function () {
+			win.rubicontag.run(onResponse, {
+				slots: rubiconSlots
+			});
+		});
 	}
 
 	function call(skin) {
@@ -64,6 +68,11 @@ define('ext.wikia.adEngine.lookup.rubiconFastlane', [
 
 		var rubicon = doc.createElement('script'),
 			node = doc.getElementsByTagName('script')[0];
+
+		if (called) {
+			log(['call', 'Already called'], 'debug', logGroup);
+			return;
+		}
 
 		win.rubicontag = win.rubicontag || {};
 		win.rubicontag.cmd = win.rubicontag.cmd || [];
@@ -86,11 +95,15 @@ define('ext.wikia.adEngine.lookup.rubiconFastlane', [
 	}
 
 	function getSlotParams(slotName) {
-		var targeting;
+		var targeting,
+			params = {};
 		if (rubiconResponse && slots[slotName]) {
 			targeting = slots[slotName].getAdServerTargeting();
-			console.log('Targeting', slotName, targeting);
-			return targeting;
+			targeting.forEach(function (t) {
+				params[t.key] = t.values[0];
+			});
+			log(['getSlotParams', slotName, params], 'debug', logGroup);
+			return params;
 		}
 		return {};
 	}
