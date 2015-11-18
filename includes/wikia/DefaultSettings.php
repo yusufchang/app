@@ -663,7 +663,6 @@ $wgSkipSkins = array(
 		'lyricsminimal',
 		'memalpha',
 		'music',
-		'nostalgia',
 		'politics',
 		'psn',
 		'restaurants',
