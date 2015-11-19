@@ -58,7 +58,7 @@ class LinkSuggest {
 		// trim passed query and replace spaces by underscores
 		// - this is how MediaWiki store article titles in database
 		$query = urldecode( trim( $request->getText('query') ) );
-		$query = str_replace(' ', '_', $query);
+		$query = mbereg_replace(' ', '_', $query);
 
 		if ( $isMobile ) {
 			$key = wfMemcKey( __METHOD__, md5( $query.'_'.$request->getText('format').$request->getText('nospecial', '') ), 'WikiaMobile' );
@@ -93,10 +93,10 @@ class LinkSuggest {
 			$namespaceName = $queryParts[0];
 
 			// try to get the index by canonical name first
-			$namespace = MWNamespace::getCanonicalIndex(strtolower($namespaceName));
+			$namespace = MWNamespace::getCanonicalIndex( mb_convert_case( $namespaceName, MB_CASE_LOWER) );
 			if ( $namespace == null ) {
 				// if we failed, try looking through localized namespace names
-				$namespace = array_search(ucfirst($namespaceName), $wgContLang->getNamespaces());
+				$namespace = array_search( mb_convert_case( $namespaceName, MB_CASE_TITLE), $wgContLang->getNamespaces() );
 				if (empty($namespace)) {
 					// getting here means our "namespace" is not real and can only be part of the title
 					$query = $namespaceName . ':' . $query;
@@ -142,7 +142,7 @@ class LinkSuggest {
 		$results = array();
 		$exactMatchRow = null;
 
-		$queryLower = strtolower($query);
+		$queryLower = mb_convert_case( $query, MB_CASE_LOWER);
 		$sql1Measurement = T::start([ __FUNCTION__ , "sql-1" ]);
 		$res = $db->select(
 			array( 'querycache', 'page' ),
@@ -172,12 +172,12 @@ class LinkSuggest {
 			 * It uses fact that page titles can't start with lowercase letter.
 			 */
 			$pageTitlePrefilter = "";
-			if( strlen($queryLower) >= 2 ) {
+			if ( mb_strlen( $queryLower) >= 2 ) {
 				$pageTitlePrefilter = "(
-							( page_title " . $db->buildLike(strtoupper($queryLower[0]) . strtolower($queryLower[1]) , $db->anyString() ) . " ) OR
-							( page_title " . $db->buildLike(strtoupper($queryLower[0]) . strtoupper($queryLower[1]) , $db->anyString() ) . " ) ) AND ";
-			} else if( strlen($queryLower) >= 1 ) {
-				$pageTitlePrefilter = "( page_title " . $db->buildLike(strtoupper($queryLower[0]) , $db->anyString() ) . " ) AND ";
+							( page_title " . $db->buildLike( mb_convert_case( $queryLower[0], MB_CASE_UPPER) . $queryLower[1] , $db->anyString() ) . " ) OR
+							( page_title " . $db->buildLike( mb_convert_case( $queryLower[0], MB_CASE_UPPER) . mb_convert_case( $queryLower[1], MB_CASE_UPPER) , $db->anyString() ) . " ) ) AND ";
+			} else if( mb_strlen( $queryLower) >= 1 ) {
+				$pageTitlePrefilter = "( page_title " . $db->buildLike( mb_convert_case( $queryLower[0], MB_CASE_UPPER) , $db->anyString() ) . " ) AND ";
 			}
 			// TODO: use $db->select helper method
 			$sql = "SELECT page_len, page_id, page_title, rd_title, page_namespace, rd_namespace, page_is_redirect
@@ -242,7 +242,7 @@ class LinkSuggest {
 				ksort($specialPagesByAlpha, SORT_STRING);
 				array_walk( $specialPagesByAlpha,
 					function($val,$key) use (&$results, $query) {
-						if (strtolower(substr($key, 0, strlen($query))) === strtolower($query)) {
+						if ( mb_convert_case( mb_substr( $key, 0, mb_strlen( $query ) ), MB_CASE_LOWER) === mb_convert_case( $query, MB_CASE_LOWER) ) {
 							$results[] = self::formatTitle('-1', $key);
 						}
 					}
@@ -329,7 +329,7 @@ class LinkSuggest {
 		global $wgLinkSuggestLimit;
 		while(($row = $db->fetchObject($res)) && count($results) < $wgLinkSuggestLimit ) {
 
-			if (strtolower($row->page_title) == $query) {
+			if ( mb_convert_case( $row->page_title, MB_CASE_LOWER) == $query) {
 				$exactMatchRow = $row;
 				continue;
 			}
