@@ -645,7 +645,6 @@ $wgSkipSkins = array(
 		'armchairgm',
 		'cars',
 		'chick',
-		'cologneblue_view',
 		'corporate',
 		'corporatebase',
 		'corporatehome',
@@ -686,7 +685,6 @@ $wgSkipSkins = array(
  * Remove them only from SkinChooser but let use it if in prefs or ?useskin
  */
 $wgSkipOldSkins = array(
-		'cologneblue',
 		'modern',
 		'myskin',
 		'simple',
