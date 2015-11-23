@@ -90,6 +90,10 @@ class EmergencyBroadcastSystemController extends WikiaController {
 			}
 		}
 
-		return sprintf( $formUrls[ $language ], $context->getUser()->getName(), parse_url( $wgServer, PHP_URL_HOST ) );
+		return sprintf(
+			$formUrls[ $language ],
+			$context->getUser()->getName(),
+			parse_url( $wgServer, PHP_URL_HOST )
+		);
 	}
 }
