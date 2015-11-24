@@ -208,6 +208,9 @@ class RequestContext implements IContextSource {
 		if ( $this->user === null && $wgEnableHeliosExt ) {
 			$this->user = \Wikia\Helios\User::newFromToken( $this->getRequest() );
 			$authPath['helios'] = ($this->user !== null ? 'OK' : 'FAIL');
+			if ( $this->user !== null && $this->user instanceof User ) {
+				wfRunHooks( 'UserLoadFromHeliosToken', array( $this->user ) );
+			}
 		}
 		// Wikia change - end
 		// Wikia change - begin - @author: wladek
@@ -225,8 +228,6 @@ class RequestContext implements IContextSource {
 
 		$this->logAuthenticationMethod($this->user, $authPath);
 
-		// Replace the user object according to the context, e.g. Piggyback.
-		wfRunHooks( 'RequestContextOverrideUser', [ &$this->user, $this->getRequest() ] );
 		return $this->user;
 	}
 

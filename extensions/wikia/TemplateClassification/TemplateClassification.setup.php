@@ -10,6 +10,7 @@
  * The extension is a MediaWiki client of the TemplateClassification Service.
  *
  * @author Adam Karmiński <adamk@wikia-inc.com>
+ * @author Kamil Koterba <kamil@wikia-inc.com>
  * @copyright (c) 2015 Wikia, Inc.
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
@@ -17,9 +18,12 @@
 $wgExtensionCredits['other'][] = [
 	'name'				=> 'Template Classification',
 	'version'			=> '1.0',
-	'author'			=> 'Adam Karmiński',
+	'author'			=> [
+		'Adam Karmiński',
+		'Kamil Koterba',
+	],
 	'url'               => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/TemplateClassification',
-	'descriptionmsg'    => 'tc-desc',
+	'descriptionmsg'    => 'template-classification-description',
 ];
 
 /**
@@ -38,11 +42,22 @@ $wgAutoloadClasses['Wikia\TemplateClassification\UnusedTemplates\Handler'] = __D
  */
 $wgAutoloadClasses['TemplateClassificationController'] = __DIR__ . '/TemplateClassificationController.class.php';
 $wgAutoloadClasses['Wikia\TemplateClassification\Permissions'] = __DIR__ . '/Permissions.class.php';
+$wgAutoloadClasses['TemplatesSpecialController'] = __DIR__ . '/specials/TemplatesSpecialController.class.php';
+
+/**
+ * Special page
+ */
+$wgSpecialPages['Templates'] = 'TemplatesSpecialController';
 
 /**
  * View
  */
 $wgAutoloadClasses['Wikia\TemplateClassification\View'] = __DIR__ . '/TemplateClassificationView.php';
+
+/**
+ * Other
+ */
+$wgAutoloadClasses['Wikia\TemplateClassification\Logger'] = __DIR__ . '/Logger.class.php';
 
 /**
  * Messages
@@ -53,8 +68,6 @@ JSMessages::registerPackage( 'TemplateClassificationModal', [
 	'template-classification-edit-modal-*',
 ] );
 
-/**
- * Mock backend
- */
-$wgAutoloadClasses['TemplateClassificationMockApiController'] = __DIR__ . '/TemplateClassificationMockApiController.class.php';
-$wgAutoloadClasses['TemplateClassificationMockService'] = __DIR__ . '/TemplateClassificationMockService.class.php';
+JSMessages::registerPackage( 'TemplateClassificationTypes', [
+	'template-classification-type-*',
+] );

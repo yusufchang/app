@@ -2,11 +2,11 @@
 
 namespace Wikia\Helios;
 
-use LoginForm;
 use Wikia\DependencyInjection\Injector;
 use Wikia\Logger\WikiaLogger;
 use Wikia\Service\Helios\ClientException;
 use Wikia\Service\Helios\HeliosClient;
+use Wikia\Service\User\Auth\CookieHelper;
 
 /**
  * A helper class for dealing with user-related objects.
@@ -16,6 +16,7 @@ class User {
 	const ACCESS_TOKEN_COOKIE_NAME = 'access_token';
 	const ACCESS_TOKEN_HEADER_NAME = 'X-Wikia-AccessToken';
 	const AUTH_METHOD_NAME = 'auth_method';
+	const STATUS_NAME = 'status';
 	const MERCURY_ACCESS_TOKEN_COOKIE_NAME = 'sid';
 	const AUTH_TYPE_FAILED = 0;
 	const AUTH_TYPE_NORMAL_PW = 1;
@@ -54,6 +55,7 @@ class User {
 	 */
 	public static function getAccessToken( \WebRequest $request ) {
 		// A cookie takes precedence over an HTTP header.
+		// FIXME: replace with CookieHelper
 		$token = $request->getCookie( self::ACCESS_TOKEN_COOKIE_NAME, '' );
 
 		// No access token in the cookie, try the HTTP header.
@@ -155,12 +157,12 @@ class User {
 
 		$result = false;
 		$authMethod = self::AUTH_TYPE_FAILED;
+		$status = \WikiaResponse::RESPONSE_CODE_ERROR;
 		$throwException = null;
 
 		// Authenticate with username and password.
 		try {
-			$loginInfo = $heliosClient->login( $username, $password );
-
+			list($status, $loginInfo) = $heliosClient->login( $username, $password );
 			if ( !empty( $loginInfo->error ) ) {
 				if ( $loginInfo->error === 'access_denied' ) {
 					$logger->info(
@@ -188,13 +190,14 @@ class User {
 			'result' => $result,
 			'exception' => $throwException,
 			self::AUTH_METHOD_NAME => $authMethod,
+			self::STATUS_NAME => $status,
 		];
 
 		if ( $throwException ) {
 			throw $throwException;
 		}
 
-		if ( !empty( $loginInfo ) && $authMethod != self::AUTH_TYPE_RESET_PW ) {
+		if ( isset( $loginInfo->access_token ) && $authMethod != self::AUTH_TYPE_RESET_PW ) {
 			self::setAccessTokenCookie( $loginInfo->access_token );
 		}
 
@@ -216,6 +219,14 @@ class User {
 		return $authMethod == self::AUTH_TYPE_RESET_PW;
 	}
 
+	public static function checkAuthenticationStatus( $username, $password, $status ) {
+		if ( empty( self::$authenticationCache[$username][$password][self::STATUS_NAME] ) ) {
+			return false;
+		}
+
+		return self::$authenticationCache[$username][$password][self::STATUS_NAME] == $status;
+	}
+
 	/**
 	 * Set the access_token cookie with the token value passed.
 	 *
@@ -223,12 +234,7 @@ class User {
 	 */
 	public static function setAccessTokenCookie( $accessToken ) {
 		$response = \RequestContext::getMain()->getRequest()->response();
-		$response->setcookie(
-			self::ACCESS_TOKEN_COOKIE_NAME,
-			$accessToken,
-			time() + self::ACCESS_TOKEN_COOKIE_TTL,
-			\WebResponse::NO_COOKIE_PREFIX
-		);
+		self::getCookieHelper()->setAuthenticationCookieWithToken( $accessToken, $response );
 	}
 
 	public static function onUserLogout() {
@@ -254,6 +260,7 @@ class User {
 	 * Clear the access token cookie by setting a time in the past
 	 */
 	public static function clearAccessTokenCookie() {
+		// FIXME: replace with CookieHelper::clearAuthenticationCookie
 		self::clearCookie( self::ACCESS_TOKEN_COOKIE_NAME );
 
 		/*
@@ -323,23 +330,6 @@ class User {
 			}
 
 			$result = $heliosResult;
-		}
-
-		return true;
-	}
-
-	public static function onLoginSuccessModifyRetval($username, $password, &$retval) {
-		if ( isset( self::$authenticationCache[$username][$password][self::AUTH_METHOD_NAME] ) ) {
-			$resultData = self::$authenticationCache[$username][$password];
-
-			switch ($resultData[ self::AUTH_METHOD_NAME ]) {
-				case self::AUTH_TYPE_RESET_PW:
-					$retval = \LoginForm::RESET_PASS;
-					break;
-				case self::AUTH_TYPE_NORMAL_PW:
-					$retval = \LoginForm::SUCCESS;
-					break;
-			}
 		}
 
 		return true;
@@ -479,4 +469,12 @@ class User {
 	public static function getHeliosClient() {
 		return Injector::getInjector()->get(HeliosClient::class);
 	}
+
+	/**
+	 * @return \Wikia\Service\User\Auth\CookieHelper
+	 */
+	private static function getCookieHelper() {
+		return Injector::getInjector()->get(CookieHelper::class);
+	}
+
 }

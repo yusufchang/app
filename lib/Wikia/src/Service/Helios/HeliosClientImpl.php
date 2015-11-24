@@ -104,7 +104,7 @@ class HeliosClientImpl implements HeliosClient
 			return \Http::request( $options['method'], $uri, $options );
 		} );
 
-		$this->status = $request->status;
+		$this->status = $request->getStatus();
 		return $this->processResponseOutput( $request );
 	}
 
@@ -149,7 +149,7 @@ class HeliosClientImpl implements HeliosClient
 			[ 'method'	=> 'POST' ]
 		);
 
-		return $response;
+		return [$this->status, $response];
 	}
 
 	/**
@@ -162,20 +162,6 @@ class HeliosClientImpl implements HeliosClient
 			[
 				'code' => $token,
 				'noblockcheck' => 1,
-			]
-		);
-	}
-
-	/**
-	 * A shortcut method for refresh token requests.
-	 */
-	public function refreshToken( $token )
-	{
-		return $this->request(
-			'token',
-			[
-				'grant_type'	=> 'refresh_token',
-				'refresh_token'	=> $token
 			]
 		);
 	}
@@ -196,6 +182,24 @@ class HeliosClientImpl implements HeliosClient
 			[],
 			[ 'method' => 'DELETE',
 				'headers' => array( Constants::HELIOS_AUTH_HEADER => $userId ) ]
+		);
+	}
+
+	/**
+	 * Generate a token for a user.
+	 * Warning: Assumes the user is already authenticated.
+	 *
+	 * @param $userId integer - the current user id
+	 *
+	 * @return array - JSON string deserialized into an associative array
+	 */
+	public function generateToken( $userId )
+	{
+		return $this->request(
+			sprintf('users/%s/tokens', $userId),
+			[],
+			[],
+			[ 'method' => 'POST' ]
 		);
 	}
 
