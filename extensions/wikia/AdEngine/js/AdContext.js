@@ -73,7 +73,9 @@ define('ext.wikia.adEngine.adContext', [
 
 		// Recoverable ads message
 		if (context.opts.sourcePointDetection && !context.opts.sourcePointRecovery && context.opts.showAds) {
-			context.opts.recoveredAdsMessage = geo.isProperGeo(instantGlobals.wgAdDriverAdsRecoveryMessageCountries);
+			context.opts.recoveredAdsMessage = geo.isProperGeo(instantGlobals.wgAdDriverAdsRecoveryMessageCountries) &&
+			//TODO: add i18n and remove this restriction
+			['pl', 'en', 'de', 'mx', 'es'].indexOf(w.wgUserLanguage) >= 0;
 		}
 
 		// Google Consumer Surveys
