@@ -30,6 +30,13 @@ class TemplateDraftController extends WikiaController {
 					TemplateClassificationService::USER_PROVIDER,
 					$wgUser->getId()
 				);
+
+				wfRunHooks( 'TemplateClassification::TemplateClassified', [
+					$parentTitle->getArticleID(),
+					$parentTitle,
+					TemplateClassificationService::TEMPLATE_INFOBOX,
+				] );
+
 			} catch ( Swagger\Client\ApiException $e ) {
 				// Do not worry if you're not able to classify the template.
 			}

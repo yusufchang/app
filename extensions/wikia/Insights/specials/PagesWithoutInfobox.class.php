@@ -91,11 +91,11 @@ class PagesWithoutInfobox extends PageQueryPage {
 	public function reallyDoQuery( $limit = false, $offset = false ) {
 		global $wgCityId, $wgContentNamespaces;
 
-		$tc = new TemplateClassificationService();
+		$tc = new UserTemplateClassificationService();
 
 		$infoboxTemplates = [];
 		foreach( $tc->getTemplatesOnWiki( $wgCityId ) as $pageId => $templateType ) {
-			if ( $templateType === TemplateClassificationService::TEMPLATE_INFOBOX ) {
+			if ( $tc->isInfoboxType( $templateType ) ) {
 				$templateTitle = Title::newFromID( $pageId );
 				if ( $templateTitle instanceof Title ) {
 					$infoboxTemplates[] = $templateTitle->getDBkey();

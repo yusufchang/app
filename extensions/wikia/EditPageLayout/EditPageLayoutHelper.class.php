@@ -165,18 +165,28 @@ class EditPageLayoutHelper {
 
 	/**
 	 * Check if edited page is a code page
-	 * (page to edit CSS, JS or Lua code)
+	 * (page to edit CSS, JS, Lua code or an infobox template)
 	 *
 	 * @param Title $articleTitle page title
 	 * @return bool
 	 */
 	static public function isCodePage( Title $articleTitle ) {
-		$namespace = $articleTitle->getNamespace();
+		global $wgCityId, $wgEnableTemplateClassificationExt, $wgEnableTemplateDraftExt;
 
-		return ( $articleTitle->isCssOrJsPage()
-			|| $articleTitle->isCssJsSubpage()
-			|| in_array( $namespace, [ NS_MODULE, NS_TEMPLATE ] )
-		);
+		if ( $articleTitle->inNamespace( NS_MODULE ) ) {
+			return true;
+		} elseif ( $articleTitle->inNamespace( NS_TEMPLATE ) ) {
+			// Is template being converted to a portable infobox?
+			if ( $wgEnableTemplateDraftExt && TemplateConverter::isConversion()	) {
+				return true;
+			} elseif ( $wgEnableTemplateClassificationExt ) {
+				$templateType = ( new UserTemplateClassificationService() )
+					->getType( $wgCityId, $articleTitle->getArticleID() );
+				return $templateType === TemplateClassificationService::TEMPLATE_INFOBOX;
+			}
+		}
+
+		return $articleTitle->isCssOrJsPage() || $articleTitle->isCssJsSubpage();
 	}
 
 	/**

@@ -68,11 +68,17 @@ abstract class ResourceLoaderGlobalWikiModule extends ResourceLoaderWikiModule {
 		global $wgCityId;
 		wfProfileIn(__METHOD__);
 		$title = null;
+
 		$realTitleText = isset($options['title']) ? $options['title'] : $titleText;
+		list( $titleText, $namespace ) = $this->parseTitle( $realTitleText );
+
+		if ( $options['type'] === 'script' && $namespace != NS_USER && Wikia::isUsingSafeJs() ) {
+			return $this->createScriptTitle( $titleText, $options );
+		}
+
 		if ( !empty( $options['city_id'] ) && $wgCityId != $options['city_id'] ) {
-			list( $text, $namespace ) = $this->parseTitle($realTitleText);
-			if ( $text !== false ) {
-				$title = GlobalTitle::newFromTextCached($text, $namespace, $options['city_id']);
+			if ( $titleText !== false ) {
+				$title = GlobalTitle::newFromTextCached($titleText, $namespace, $options['city_id']);
 			}
 			$title = $this->resolveRedirect($title);
 		} else {
@@ -81,6 +87,56 @@ abstract class ResourceLoaderGlobalWikiModule extends ResourceLoaderWikiModule {
 		}
 
 		wfProfileOut(__METHOD__);
+		return $title;
+	}
+
+	/**
+	 * Create title for scripts. Only NS_MEDIAWIKI is allowed for javascript pages.
+	 *
+	 * @param string $titleText
+	 * @param array $options
+	 * @return GlobalTitle|null|Title
+	 * @throws MWException
+	 */
+	private function createScriptTitle( $titleText, $options ) {
+		global $wgCityId;
+
+		$title = null;
+		$external = false;
+		$targetCityId = (int) $options['city_id'];
+
+		if ( $targetCityId !== 0 && $wgCityId !== $targetCityId && $titleText !== false ) {
+			$external = true;
+			$title = GlobalTitle::newFromTextCached( $titleText, NS_MEDIAWIKI, $targetCityId );
+		} else {
+			$title = Title::newFromText( $titleText, NS_MEDIAWIKI );
+		}
+
+		// TODO: After scripts transition on dev wiki is done, remove this if statement (CE-3093)
+		if ( $targetCityId === Wikia\ContentReview\Helper::DEV_WIKI_ID && ( !$title || !$title->exists() ) ) {
+			$title = $this->devWikiFallback( $titleText, $external );
+		}
+
+		$title = $this->resolveRedirect( $title );
+
+		return $title;
+	}
+
+	/**
+	 * While scripts on dev.wikia.com will be moved to NS_MEDIAWIKI we need this fallback till transition is completed.
+	 *
+	 * @param string $titleText
+	 * @param bool|false $external
+	 * @return Title
+	 * @throws MWException
+	 */
+	private function devWikiFallback( $titleText, $external = false ) {
+		if ( $external ) {
+			$title = GlobalTitle::newFromTextCached( $titleText, NS_MAIN, Wikia\ContentReview\Helper::DEV_WIKI_ID );
+		} else {
+			$title = Title::newFromText( $titleText );
+		}
+
 		return $title;
 	}
 

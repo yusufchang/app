@@ -199,6 +199,14 @@ $config['adengine2_ox_bidder_js'] = array(
 	),
 );
 
+$config['adengine2_rubicon_fastlane_js'] = array(
+	'skin' => [ 'oasis' ],
+	'type' => AssetsManager::TYPE_JS,
+	'assets' => array(
+		'//extensions/wikia/AdEngine/js/lookup/rubiconFastlane.js',
+	),
+);
+
 $config['adengine2_ads_recovery_message_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
 	'skin' => [ 'oasis', 'wikiamobile' ],
@@ -441,7 +449,9 @@ $config['user_signup_js'] = [
  */
 $config['oasis_user_js'] = array(
 	'type' => AssetsManager::TYPE_JS,
-	'assets' => []
+	'assets' => [
+		'//extensions/wikia/EmergencyBroadcastSystem/js/EmergencyBroadcastSystem.js'
+	]
 );
 
 /** GameGuides */
@@ -748,6 +758,7 @@ $config['mobile_base_ads_js'] = array(
 		'//extensions/wikia/AdEngine/js/config/mobile.js',
 		'//extensions/wikia/AdEngine/js/lookup/amazonMatch.js',
 		'//extensions/wikia/AdEngine/js/lookup/openXBidder.js',
+		'//extensions/wikia/AdEngine/js/lookup/rubiconFastlane.js',
 		'//extensions/wikia/AdEngine/js/lookup/services.js',
 		'//extensions/wikia/AdEngine/js/provider/directGptMobile.js',
 		'//extensions/wikia/AdEngine/js/provider/factoryWikiaGpt.js',
@@ -1816,19 +1827,19 @@ $config['categoryselect_edit_js'] = array(
 
 /* FilePage */
 $config['wikia_file_page_js'] = array(
-	'type'=> AssetsManager::TYPE_JS,
+	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
 		'//extensions/wikia/FilePage/scripts/WikiaFilePage.js',
 	)
 );
 $config['file_page_tabbed_js'] = array(
-	'type'=> AssetsManager::TYPE_JS,
+	'type' => AssetsManager::TYPE_JS,
 	'assets' => array(
 		'//extensions/wikia/FilePage/scripts/FilePageTabbed.js',
 	)
 );
 $config['file_page_tabbed_css'] = array(
-	'type' =>AssetsManager::TYPE_SCSS,
+	'type' => AssetsManager::TYPE_SCSS,
 	'assets' => array(
 		'//extensions/wikia/FilePage/css/FilePageTabbed.scss',
 	)

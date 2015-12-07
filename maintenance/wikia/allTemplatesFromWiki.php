@@ -70,7 +70,7 @@ class allTemplatesFromWiki extends Maintenance {
 			try {
 				self::getPipeline()->publish( implode( '.', [ self::TEMPLATE_MESSAGE_PREFIX ] ), $msg );
 			} catch ( Exception $e ) {
-				print( "Error while pushing template with ID:". $template[ 'page_id' ] );
+				print( "Error while pushing template with ID:" . $template[ 'page_id' ] . PHP_EOL );
 				\Wikia\Logger\WikiaLogger::instance()->error( __METHOD__, [
 					'exception' => $e,
 					'event_name' => 'push templates to rabbit'
@@ -79,6 +79,8 @@ class allTemplatesFromWiki extends Maintenance {
 			}
 		}
 
+		// In case there was even a single failure, retry all failed messages
+		// TODO: Check if we need to move beyond recursive call
 		if(!empty($retries)) {
 			self::$pipe = null;
 			$this->pushDataToRabbit($retries);
