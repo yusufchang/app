@@ -11,9 +11,11 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 	 *
 	 */
 	public function index() {
+		Wikia::addAssetsToOutput( 'special_dashboard_scss' );
+		Wikia::addAssetsToOutput( 'special_dashboard_js' );
 		$this->wg->Out->setPageTitle("DIANANANANNANANAN");
 
-		$this->zmienna = "fuhsjbfhesffhbejshfjesb";
+		$this->portability = 60;
 
 		// links
 		$this->urlThemeDesigner = Title::newFromText('ThemeDesigner', NS_SPECIAL)->getFullURL();

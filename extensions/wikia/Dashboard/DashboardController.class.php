@@ -2,10 +2,11 @@
 
 class DashboardController extends WikiaController {
 
+
 	// Render the Dashboard chrome
 	public function executeChrome () {
-		global $wgRequest, $wgTitle;
-
+//		global $wgRequest, $wgTitle;
+//
 //		$this->tab = $wgRequest->getVal("tab", "");
 //		if(empty($this->tab) && $this->isAdminDashboardTitle()) {
 //			$this->tab = 'general';
@@ -15,8 +16,8 @@ class DashboardController extends WikiaController {
 //			$this->tab = 'advanced';
 //		}
 
-		$this->response->addAsset('extensions/wikia/AdminDashboard/css/AdminDashboard.scss');
-		$this->response->addAsset('extensions/wikia/AdminDashboard/js/AdminDashboard.js');
+		$this->response->addAsset('extensions/wikia/Dashboard/css/Dashboard.scss');
+		$this->response->addAsset('extensions/wikia/Dashboard/js/Dashboard.js');
 
 //		//$this->isAdminDashboard = $this->isAdminDashboardTitle();
 //		//$this->adminDashboardUrl = Title::newFromText('AdminDashboard', NS_SPECIAL)->getFullURL("tab=$this->tab");
@@ -24,16 +25,17 @@ class DashboardController extends WikiaController {
 //		$this->adminDashboardUrlAdvanced = Title::newFromText('AdminDashboard', NS_SPECIAL)->getFullURL("tab=advanced");
 	}
 
+
 //	public function executeRail () {
 //		if (!$this->isAdminDashboardTitle()) {
 //			$this->skipRendering();
 //		}
 //	}
-//
-//	private function isAdminDashboardTitle() {
-//		global $wgTitle;
-//		$adminDashboardTitle = SpecialPage::getTitleFor( 'AdminDashboard' );
-//		return $wgTitle->getText() == $adminDashboardTitle->getText();
-//	}
+
+	private function isDashboardTitle() {
+		global $wgTitle;
+		$DashboardTitle = SpecialPage::getTitleFor( 'Dashboard' );
+		return $wgTitle->getText() == $DashboardTitle->getText();
+	}
 
 }
