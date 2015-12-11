@@ -1,0 +1,12 @@
+.article-snippet {
+	background: rgba(255,255,255,0.8);
+	height: 250px;
+	display: block;
+	overflow: hidden;
+	position: fixed;
+	width: 400px;
+
+	img {
+		max-height: 150px;
+	}
+}

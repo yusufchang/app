@@ -2745,3 +2745,11 @@ $config['article_snippet_popover_js'] = [
 		'//extensions/wikia/ArticleSnippet/scripts/articleSnippetPopover.js',
 	],
 ];
+
+$config['article_snippet_popover_scss'] = [
+	'type' => AssetsManager::TYPE_SCSS,
+	'skin' => 'oasis',
+	'assets' => [
+		'//extensions/wikia/ArticleSnippet/styles/ArticleSnippet.scss',
+	],
+];

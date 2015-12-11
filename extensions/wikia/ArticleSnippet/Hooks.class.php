@@ -16,6 +16,7 @@ class Hooks extends \ContextSource {
 	 */
 	public function onBeforePageDisplay( \OutputPage $outputPage, \Skin $skin ) {
 		\Wikia::addAssetsToOutput( 'article_snippet_popover_js' );
+		\Wikia::addAssetsToOutput( 'article_snippet_popover_scss' );
 		return true;
 	}
 }
