@@ -3,7 +3,7 @@
 use Wikia\Logger\WikiaLogger;
 
 class NotContentPageException extends Exception {
-	protected $code = 301;
+	protected $code = 307;
 }
 
 class MercuryApiController extends WikiaController {
@@ -415,7 +415,7 @@ class MercuryApiController extends WikiaController {
 			$title = $this->wg->Title;
 		} catch ( NotContentPageException $exception ) {
 			$title = $this->wg->Title;
-			$this->response->setCode(307);
+			$this->response->setCode($exception->getCode());
 			$this->response->redirect( '/index.php?title=' . $title->getFullText() . '&useskin=wikiamobile' );
 			return;
 		}
