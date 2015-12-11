@@ -22,7 +22,7 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 
 		$this->statsData = [
 			'portability' => $this->portabilityGauge->getPortabilityPercent(),
-			'templateTypes' => $this->templateTypesChart->getTemplateTypeWithCounts()
+			'templateTypes' => $this->templateTypesChart->getTemplateTypesWithCounts()
 		];
 	}
 }
