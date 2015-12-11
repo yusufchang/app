@@ -2,6 +2,10 @@
 
 use Wikia\Logger\WikiaLogger;
 
+class NotContentPageException extends Exception {
+	protected $code = 301;
+}
+
 class MercuryApiController extends WikiaController {
 
 	const PARAM_ARTICLE_ID = 'id';
@@ -200,8 +204,9 @@ class MercuryApiController extends WikiaController {
 
 	/**
 	 * @return Title Article Title
-	 * @throws NotFoundApiException
 	 * @throws BadRequestApiException
+	 * @throws NotContentPageException
+	 * @throws NotFoundApiException
 	 */
 	private function getTitleFromRequest() {
 		$articleId = $this->request->getInt( self::PARAM_ARTICLE_ID, null );
@@ -222,7 +227,11 @@ class MercuryApiController extends WikiaController {
 			$title = Title::newFromId( $articleId );
 		}
 
-		if ( !$title instanceof Title || !$title->isKnown() || !$title->isContentPage() ) {
+		if ( !$title->isContentPage() ) {
+			throw new NotContentPageException();
+		}
+
+		if ( !$title instanceof Title || !$title->isKnown() ) {
 			$title = false;
 		}
 
@@ -404,6 +413,9 @@ class MercuryApiController extends WikiaController {
 			);
 
 			$title = $this->wg->Title;
+		} catch ( NotContentPageException $exception ) {
+			$title = $this->wg->Title;
+			$this->response->redirect( '/index.php?title=' . $title->getFullText() . '&useskin=wikiamobile' );
 		}
 
 		$data['adsContext'] = $this->mercuryApi->getAdsContext( $title );
