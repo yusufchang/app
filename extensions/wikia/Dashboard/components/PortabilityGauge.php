@@ -21,27 +21,26 @@ class PortabilityGauge {
 		return self::$instance;
 	}
 
+	/**
+	 * Returns portability percentage for current wiki
+	 * @return float
+	 */
 	public function getPortabilityPercent() {
-		global $wgPortableMetricDB;
+		global $wgCityId, $wgPortableMetricDB;
 		$db = wfGetDB( DB_SLAVE, [], $wgPortableMetricDB );
 
-		//to jest pierwsze lepsze query - zmien na obliczanie portabilności z artykulwow
-		//przeklasyfikowanych w przeciągu ostatnich 10dni wagowo po pageviewsach
-
 		$result = ( new \WikiaSQL() )
-			->SELECT( 'wiki_id', 'page_id' )
+			->SELECT( 'sum((portable_b||curatedcontent_b)*pageviews)/sum(pageviews)*100' )->AS_( 'portability' )
 			->FROM( 'articlestats' )
-			->WHERE( 'wiki_id' )->EQUAL_TO( '3035' )
-			->runLoop( $db, function( &$flagsWithTypes, $row ) {
-				var_dump($row);
-			} );
+			->JOIN( 'articledata' )
+			->ON( 'articlestats.wiki_id', 'articledata.wiki_id' )
+			->AND_( 'articlestats.page_id', 'articledata.page_id' )
+			->WHERE( 'articledata.wiki_id' )->EQUAL_TO( $wgCityId )
+			->run( $db, function( \ResultWrapper $queryResult ) {
+				return $queryResult->fetchObject()->portability;
+			}, 0);
 
-		//tu skonczylam, dalej nie działa!
-		var_dump($result);
-
-		die;
-
-		return $result;
+		return (float)$result;
 	}
 
 }
