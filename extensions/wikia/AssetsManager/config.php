@@ -2736,3 +2736,12 @@ $config['polldaddy_tag_wikiamobile'] = [
 		'//extensions/wikia/PolldaddyTag/scripts/wikiamobile.js'
 	]
 ];
+
+$config['article_snippet_popover_js'] = [
+	'type' => AssetsManager::TYPE_JS,
+	'skin' => 'oasis',
+	'assets' => [
+		'//extensions/wikia/ArticleSnippet/scripts/articleSnippet.run.js',
+		'//extensions/wikia/ArticleSnippet/scripts/articleSnippetPopover.js',
+	],
+];

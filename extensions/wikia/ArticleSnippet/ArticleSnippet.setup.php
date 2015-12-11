@@ -15,3 +15,14 @@ $wgExtensionCredits['other'][] = [
 	'url'               => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/ArticleSnippet',
 	'descriptionmsg'    => 'article-snippet-desc',
 ];
+
+/**
+ * API
+ */
+$wgAutoloadClasses['ArticleSnippetApiController'] = __DIR__ . '/controllers/ArticleSnippetApiController.class.php';
+
+/**
+ * Hooks
+ */
+$wgAutoloadClasses['Wikia\ArticleSnippet\Hooks'] = __DIR__ . '/Hooks.class.php';
+$wgExtensionFunctions[] = 'Wikia\ArticleSnippet\Hooks::register';
