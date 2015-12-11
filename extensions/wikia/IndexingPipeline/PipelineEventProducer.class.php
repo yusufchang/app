@@ -118,6 +118,7 @@ class PipelineEventProducer {
 	 *
 	 * @param integer $pageId The affected template's pageId
 	 * @param Title $title The affected template's Title object
+	 *
 	 * @return bool
 	 */
 	public static function onTemplateClassified( $pageId, Title $title, $templateType ) {
@@ -226,5 +227,33 @@ class PipelineEventProducer {
 		}
 
 		return $pageNamespace;
+	}
+
+	static public function onAfterArticlePurge( WikiPage &$article ) {
+		$revision = $article->getRevision();
+		if ( $revision ) {
+			self::sendInfoboxes( $article, $revision );
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param Article $article
+	 * @param Revision $revision
+	 */
+	protected static function sendInfoboxes( $article, Revision $revision ) {
+		if ( $article instanceof WikiPage ) {
+			$msg = self::prepareMessage( $article->getId(), $revision->getId(), [ ] );
+			$data = PortableInfoboxDataService::newFromTitle( $article->getTitle() )->getData();
+			foreach ( $data as $order => $infobox ) {
+				$msg->order = $order;
+				$msg->name = $infobox[ 'name' ];
+				$msg->data = $infobox[ 'data' ];
+				self::publish( 'infobox._output._new', $msg );
+			}
+			$msg = self::prepareMessage( $article->getId(), $revision->getId(), [ ] );
+			self::publish( 'infobox._output._delete', $msg );
+		}
 	}
 }

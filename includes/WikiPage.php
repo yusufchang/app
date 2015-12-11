@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Abstract class for type hinting (accepts WikiPage, Article, ImagePage, CategoryPage)
  */
-abstract class Page {}
+abstract class Page {
+}
 
 /**
  * Class representing a MediaWiki article and history.
@@ -83,6 +85,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 	/**
 	 * Constructor and clear the article
+	 *
 	 * @param $title Title Reference to a Title object.
 	 */
 	public function __construct( Title $title ) {
@@ -93,6 +96,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Create a WikiPage object of the appropriate class for the given title.
 	 *
 	 * @param $title Title
+	 *
 	 * @return WikiPage object of the appropriate type
 	 */
 	public static function factory( Title $title ) {
@@ -131,10 +135,11 @@ class WikiPage extends Page implements IDBAccessObject {
 	public static function newFromID( $id, $from = 'fromdb' ) {
 		$from = self::convertSelectType( $from );
 		$db = wfGetDB( $from === self::READ_LATEST ? DB_MASTER : DB_SLAVE );
-		$row = $db->selectRow( 'page', self::selectFields(), array( 'page_id' => $id ), __METHOD__ );
+		$row = $db->selectRow( 'page', self::selectFields(), [ 'page_id' => $id ], __METHOD__ );
 		if ( !$row ) {
 			return null;
 		}
+
 		return self::newFromRow( $row, $from );
 	}
 
@@ -142,17 +147,20 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Constructor from a database row
 	 *
 	 * @since 1.20
+	 *
 	 * @param $row object: database row containing at least fields returned
 	 *        by selectFields().
 	 * @param $from string|int: source of $data:
 	 *        - "fromdb" or WikiPage::READ_NORMAL: from a slave DB
 	 *        - "fromdbmaster" or WikiPage::READ_LATEST: from the master DB
 	 *        - "forupdate" or WikiPage::READ_LOCKING: from the master DB using SELECT FOR UPDATE
+	 *
 	 * @return WikiPage
 	 */
 	public static function newFromRow( $row, $from = 'fromdb' ) {
 		$page = self::factory( Title::newFromRow( $row ) );
 		$page->loadFromRow( $row, $from );
+
 		return $page;
 	}
 
@@ -160,19 +168,20 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Convert 'fromdb', 'fromdbmaster' and 'forupdate' to READ_* constants.
 	 *
 	 * @param $type object|string|int
+	 *
 	 * @return mixed
 	 */
 	private static function convertSelectType( $type ) {
 		switch ( $type ) {
-		case 'fromdb':
-			return self::READ_NORMAL;
-		case 'fromdbmaster':
-			return self::READ_LATEST;
-		case 'forupdate':
-			return self::READ_LOCKING;
-		default:
-			// It may already be an integer or whatever else
-			return $type;
+			case 'fromdb':
+				return self::READ_NORMAL;
+			case 'fromdbmaster':
+				return self::READ_LATEST;
+			case 'forupdate':
+				return self::READ_LOCKING;
+			default:
+				// It may already be an integer or whatever else
+				return $type;
 		}
 	}
 
@@ -187,7 +196,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @return Array
 	 */
 	public function getActionOverrides() {
-		return array();
+		return [ ];
 	}
 
 	/**
@@ -222,7 +231,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @return array
 	 */
 	public static function selectFields() {
-		return array(
+		return [
 			'page_id',
 			'page_namespace',
 			'page_title',
@@ -234,24 +243,26 @@ class WikiPage extends Page implements IDBAccessObject {
 			'page_touched',
 			'page_latest',
 			'page_len',
-		);
+		];
 	}
 
 	/**
 	 * Fetch a page record with the given conditions
+	 *
 	 * @param $dbr DatabaseBase object
 	 * @param $conditions Array
 	 * @param $options Array
+	 *
 	 * @return mixed Database result resource, or false on failure
 	 */
-	protected function pageData( $dbr, $conditions, $options = array() ) {
+	protected function pageData( $dbr, $conditions, $options = [ ] ) {
 		$fields = self::selectFields();
 
-		wfRunHooks( 'ArticlePageDataBefore', array( &$this, &$fields ) );
+		wfRunHooks( 'ArticlePageDataBefore', [ &$this, &$fields ] );
 
 		$row = $dbr->selectRow( 'page', $fields, $conditions, __METHOD__, $options );
 
-		wfRunHooks( 'ArticlePageDataAfter', array( &$this, &$row ) );
+		wfRunHooks( 'ArticlePageDataAfter', [ &$this, &$row ] );
 
 		return $row;
 	}
@@ -263,12 +274,13 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @param $dbr DatabaseBase object
 	 * @param $title Title object
 	 * @param $options Array
+	 *
 	 * @return mixed Database result resource, or false on failure
 	 */
-	public function pageDataFromTitle( $dbr, $title, $options = array() ) {
-		return $this->pageData( $dbr, array(
+	public function pageDataFromTitle( $dbr, $title, $options = [ ] ) {
+		return $this->pageData( $dbr, [
 			'page_namespace' => $title->getNamespace(),
-			'page_title'     => $title->getDBkey() ), $options );
+			'page_title' => $title->getDBkey() ], $options );
 	}
 
 	/**
@@ -277,10 +289,11 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @param $dbr DatabaseBase
 	 * @param $id Integer
 	 * @param $options Array
+	 *
 	 * @return mixed Database result resource, or false on failure
 	 */
-	public function pageDataFromId( $dbr, $id, $options = array() ) {
-		return $this->pageData( $dbr, array( 'page_id' => $id ), $options );
+	public function pageDataFromId( $dbr, $id, $options = [ ] ) {
+		return $this->pageData( $dbr, [ 'page_id' => $id ], $options );
 	}
 
 	/**
@@ -303,7 +316,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		}
 
 		if ( $from === self::READ_LOCKING ) {
-			$data = $this->pageDataFromTitle( wfGetDB( DB_MASTER ), $this->mTitle, array( 'FOR UPDATE' ) );
+			$data = $this->pageDataFromTitle( wfGetDB( DB_MASTER ), $this->mTitle, [ 'FOR UPDATE' ] );
 		} elseif ( $from === self::READ_LATEST ) {
 			$data = $this->pageDataFromTitle( wfGetDB( DB_MASTER ), $this->mTitle );
 		} elseif ( $from === self::READ_NORMAL ) {
@@ -330,6 +343,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Load the object from a database row
 	 *
 	 * @since 1.20
+	 *
 	 * @param $data object: database row containing at least fields returned
 	 *        by selectFields()
 	 * @param $from string|int One of the following:
@@ -349,10 +363,10 @@ class WikiPage extends Page implements IDBAccessObject {
 			# Old-fashioned restrictions
 			$this->mTitle->loadRestrictions( $data->page_restrictions );
 
-			$this->mCounter     = intval( $data->page_counter );
-			$this->mTouched     = wfTimestamp( TS_MW, $data->page_touched );
-			$this->mIsRedirect  = intval( $data->page_is_redirect );
-			$this->mLatest      = intval( $data->page_latest );
+			$this->mCounter = intval( $data->page_counter );
+			$this->mTouched = wfTimestamp( TS_MW, $data->page_touched );
+			$this->mIsRedirect = intval( $data->page_is_redirect );
+			$this->mLatest = intval( $data->page_latest );
 		} else {
 			$lc->addBadLinkObj( $this->mTitle );
 
@@ -404,6 +418,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Tests if the article text represents a redirect
 	 *
 	 * @param $text mixed string containing article contents, or boolean
+	 *
 	 * @return bool
 	 */
 	public function isRedirect( $text = false ) {
@@ -426,6 +441,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( !$this->mDataLoaded ) {
 			$this->loadPageData();
 		}
+
 		return !$this->mIsRedirect;
 	}
 
@@ -437,6 +453,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( !$this->mDataLoaded ) {
 			$this->loadPageData();
 		}
+
 		return $this->mTouched;
 	}
 
@@ -448,6 +465,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( !$this->mDataLoaded ) {
 			$this->loadPageData();
 		}
+
 		return (int)$this->mLatest;
 	}
 
@@ -495,6 +513,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( $this->mLastRevision ) {
 			return $this->mLastRevision;
 		}
+
 		return null;
 	}
 
@@ -505,6 +524,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *      Revision::FOR_PUBLIC       to be displayed to all users
 	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
 	 *      Revision::RAW              get the text regardless of permissions
+	 *
 	 * @return String|false The text of the current revision
 	 */
 	public function getText( $audience = Revision::FOR_PUBLIC ) {
@@ -512,6 +532,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( $this->mLastRevision ) {
 			return $this->mLastRevision->getText( $audience );
 		}
+
 		return false;
 	}
 
@@ -525,6 +546,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( $this->mLastRevision ) {
 			return $this->mLastRevision->getRawText();
 		}
+
 		return false;
 	}
 
@@ -536,12 +558,15 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( !$this->mTimestamp ) {
 			$this->loadLastEdit();
 		}
+
 		return wfTimestamp( TS_MW, $this->mTimestamp );
 	}
 
 	/**
 	 * Set the page timestamp (use only to avoid DB queries)
+	 *
 	 * @param $ts string MW timestamp of last article revision
+	 *
 	 * @return void
 	 */
 	public function setTimestamp( $ts ) {
@@ -553,6 +578,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *      Revision::FOR_PUBLIC       to be displayed to all users
 	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
 	 *      Revision::RAW              get the text regardless of permissions
+	 *
 	 * @return int user ID for the user that made the last article revision
 	 */
 	public function getUser( $audience = Revision::FOR_PUBLIC ) {
@@ -569,6 +595,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *      Revision::FOR_PUBLIC       to be displayed to all users
 	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
 	 *      Revision::RAW              get the text regardless of permissions
+	 *
 	 * @return string username of the user that made the last article revision
 	 */
 	public function getUserText( $audience = Revision::FOR_PUBLIC ) {
@@ -585,6 +612,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *      Revision::FOR_PUBLIC       to be displayed to all users
 	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
 	 *      Revision::RAW              get the text regardless of permissions
+	 *
 	 * @return string Comment stored for the last article revision
 	 */
 	public function getComment( $audience = Revision::FOR_PUBLIC ) {
@@ -618,19 +646,22 @@ class WikiPage extends Page implements IDBAccessObject {
 	protected function getCachedLastEditTime() {
 		global $wgMemc;
 		$key = wfMemcKey( 'page-lastedit', md5( $this->mTitle->getPrefixedDBkey() ) );
+
 		return $wgMemc->get( $key );
 	}
 
 	/**
 	 * Set the cached timestamp for the last time the page changed.
 	 * This is only used to help handle slave lag by comparing to page_touched.
+	 *
 	 * @param $timestamp string
+	 *
 	 * @return void
 	 */
 	public function setCachedLastEditTime( $timestamp ) {
 		global $wgMemc;
 		$key = wfMemcKey( 'page-lastedit', md5( $this->mTitle->getPrefixedDBkey() ) );
-		$wgMemc->set( $key, wfTimestamp( TS_MW, $timestamp ), 60*15 );
+		$wgMemc->set( $key, wfTimestamp( TS_MW, $timestamp ), 60 * 15 );
 	}
 
 	/**
@@ -639,6 +670,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *
 	 * @param $editInfo Object or false: object returned by prepareTextForEdit(),
 	 *        if false, the current database state will be used
+	 *
 	 * @return Boolean
 	 */
 	public function isCountable( $editInfo = false ) {
@@ -655,24 +687,25 @@ class WikiPage extends Page implements IDBAccessObject {
 		}
 
 		switch ( $wgArticleCountMethod ) {
-		case 'any':
-			return true;
-		case 'comma':
-			if ( $text === false ) {
-				$text = $this->getRawText();
-			}
-			return strpos( $text,  ',' ) !== false;
-		case 'link':
-			if ( $editInfo ) {
-				// ParserOutput::getLinks() is a 2D array of page links, so
-				// to be really correct we would need to recurse in the array
-				// but the main array should only have items in it if there are
-				// links.
-				return (bool)count( $editInfo->output->getLinks() );
-			} else {
-				return (bool)wfGetDB( DB_SLAVE )->selectField( 'pagelinks', 1,
-					array( 'pl_from' => $this->getId() ), __METHOD__ );
-			}
+			case 'any':
+				return true;
+			case 'comma':
+				if ( $text === false ) {
+					$text = $this->getRawText();
+				}
+
+				return strpos( $text, ',' ) !== false;
+			case 'link':
+				if ( $editInfo ) {
+					// ParserOutput::getLinks() is a 2D array of page links, so
+					// to be really correct we would need to recurse in the array
+					// but the main array should only have items in it if there are
+					// links.
+					return (bool)count( $editInfo->output->getLinks() );
+				} else {
+					return (bool)wfGetDB( DB_SLAVE )->selectField( 'pagelinks', 1,
+						[ 'pl_from' => $this->getId() ], __METHOD__ );
+				}
 		}
 	}
 
@@ -683,6 +716,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * If this page doesn't have an entry there, call insertRedirect()
 	 *
 	 * @param int $flags
+	 *
 	 * @return Title|mixed object, or null if this page is not a redirect
 	 */
 	public function getRedirectTarget( $flags = 0 ) {
@@ -698,8 +732,8 @@ class WikiPage extends Page implements IDBAccessObject {
 		$useMasterDb = $flags & Title::GAID_FOR_UPDATE;
 		$dbr = $useMasterDb ? wfGetDB( DB_MASTER ) : wfGetDB( DB_SLAVE );
 		$row = $dbr->selectRow( 'redirect',
-			array( 'rd_namespace', 'rd_title', 'rd_fragment', 'rd_interwiki' ),
-			array( 'rd_from' => $this->getId() ),
+			[ 'rd_namespace', 'rd_title', 'rd_fragment', 'rd_interwiki' ],
+			[ 'rd_from' => $this->getId() ],
 			__METHOD__
 		);
 
@@ -727,24 +761,26 @@ class WikiPage extends Page implements IDBAccessObject {
 			return null;
 		}
 		$this->insertRedirectEntry( $retval );
+
 		return $retval;
 	}
 
 	/**
 	 * Insert or update the redirect table entry for this page to indicate
 	 * it redirects to $rt .
+	 *
 	 * @param $rt Title redirect target
 	 */
 	public function insertRedirectEntry( $rt ) {
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->replace( 'redirect', array( 'rd_from' ),
-			array(
-				'rd_from'      => $this->getId(),
+		$dbw->replace( 'redirect', [ 'rd_from' ],
+			[
+				'rd_from' => $this->getId(),
 				'rd_namespace' => $rt->getNamespace(),
-				'rd_title'     => $rt->getDBkey(),
-				'rd_fragment'  => $rt->getFragment(),
+				'rd_title' => $rt->getDBkey(),
+				'rd_fragment' => $rt->getFragment(),
 				'rd_interwiki' => $rt->getInterwiki(),
-			),
+			],
 			__METHOD__
 		);
 	}
@@ -762,7 +798,9 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Get the Title object or URL to use for a redirect. We use Title
 	 * objects for same-wiki, non-special redirects and URLs for everything
 	 * else.
+	 *
 	 * @param $rt Title Redirect target
+	 *
 	 * @return mixed false, Title object of local target, or string with URL
 	 */
 	public function getRedirectURL( $rt ) {
@@ -777,6 +815,7 @@ class WikiPage extends Page implements IDBAccessObject {
 				// This can be hard to reverse and may produce loops,
 				// so they may be disabled in the site configuration.
 				$source = $this->mTitle->getFullURL( 'redirect=no' );
+
 				return $rt->getFullURL( 'rdfrom=' . urlencode( $source ) );
 			} else {
 				// External pages pages without "local" bit set are not valid
@@ -817,16 +856,16 @@ class WikiPage extends Page implements IDBAccessObject {
 			$realNameField = 'MIN(user_real_name) AS user_real_name';
 		}
 
-		$tables = array( 'revision', 'user' );
+		$tables = [ 'revision', 'user' ];
 
-		$fields = array(
+		$fields = [
 			'rev_user as user_id',
 			'rev_user_text AS user_name',
 			$realNameField,
 			'MAX(rev_timestamp) AS timestamp',
-		);
+		];
 
-		$conds = array( 'rev_page' => $this->getId() );
+		$conds = [ 'rev_page' => $this->getId() ];
 
 		// The user who made the top revision gets credited as "this page was last edited by
 		// John, based on contributions by Tom, Dick and Harry", so don't include them twice.
@@ -839,23 +878,26 @@ class WikiPage extends Page implements IDBAccessObject {
 
 		$conds[] = "{$dbr->bitAnd( 'rev_deleted', Revision::DELETED_USER )} = 0"; // username hidden?
 
-		$jconds = array(
-			'user' => array( 'LEFT JOIN', 'rev_user = user_id' ),
-		);
+		$jconds = [
+			'user' => [ 'LEFT JOIN', 'rev_user = user_id' ],
+		];
 
-		$options = array(
-			'GROUP BY' => array( 'rev_user', 'rev_user_text' ),
+		$options = [
+			'GROUP BY' => [ 'rev_user', 'rev_user_text' ],
 			'ORDER BY' => 'timestamp DESC',
-		);
+		];
 
 		$res = $dbr->select( $tables, $fields, $conds, __METHOD__, $options, $jconds );
+
 		return new UserArrayFromResult( $res );
 	}
 
 	/**
 	 * Get the last N authors
+	 *
 	 * @param $num Integer: number of revisions to get
 	 * @param $revLatest String: the latest rev_id, selected from the master (optional)
+	 *
 	 * @return array Array of authors, duplicates not removed
 	 */
 	public function getLastNAuthors( $num, $revLatest = 0 ) {
@@ -866,22 +908,23 @@ class WikiPage extends Page implements IDBAccessObject {
 		$db = wfGetDB( DB_SLAVE );
 
 		do {
-			$res = $db->select( array( 'page', 'revision' ),
-				array( 'rev_id', 'rev_user_text' ),
-				array(
+			$res = $db->select( [ 'page', 'revision' ],
+				[ 'rev_id', 'rev_user_text' ],
+				[
 					'page_namespace' => $this->mTitle->getNamespace(),
 					'page_title' => $this->mTitle->getDBkey(),
 					'rev_page = page_id'
-				), __METHOD__,
-				array(
+				], __METHOD__,
+				[
 					'ORDER BY' => 'rev_timestamp DESC',
 					'LIMIT' => $num
-				)
+				]
 			);
 
 			if ( !$res ) {
 				wfProfileOut( __METHOD__ );
-				return array();
+
+				return [ ];
 			}
 
 			$row = $db->fetchObject( $res );
@@ -894,13 +937,14 @@ class WikiPage extends Page implements IDBAccessObject {
 			}
 		} while ( $continue );
 
-		$authors = array( $row->rev_user_text );
+		$authors = [ $row->rev_user_text ];
 
 		foreach ( $res as $row ) {
 			$authors[] = $row->rev_user_text;
 		}
 
 		wfProfileOut( __METHOD__ );
+
 		return $authors;
 	}
 
@@ -909,16 +953,17 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *
 	 * @param $parserOptions ParserOptions to check
 	 * @param $oldid int
+	 *
 	 * @return boolean
 	 */
 	public function isParserCacheUsed( ParserOptions $parserOptions, $oldid ) {
 		global $wgEnableParserCache;
 
 		return $wgEnableParserCache
-			&& $parserOptions->getStubThreshold() == 0
-			&& $this->mTitle->exists()
-			&& ( $oldid === null || $oldid === 0 || $oldid === $this->getLatest() )
-			&& $this->mTitle->isWikitextPage();
+			   && $parserOptions->getStubThreshold() == 0
+			   && $this->mTitle->exists()
+			   && ( $oldid === null || $oldid === 0 || $oldid === $this->getLatest() )
+			   && $this->mTitle->isWikitextPage();
 	}
 
 	/**
@@ -926,9 +971,11 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * The parser cache will be used if possible.
 	 *
 	 * @since 1.19
+	 *
 	 * @param $parserOptions ParserOptions to use for the parse operation
 	 * @param $oldid Revision ID to get the text from, passing null or 0 will
 	 *               get the current revision (default value)
+	 *
 	 * @return ParserOutput or false if the revision was not found
 	 */
 	public function getParserOutput( ParserOptions $parserOptions, $oldid = null, $fromCache = true ) {
@@ -944,6 +991,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			$parserOutput = ParserCache::singleton()->get( $this, $parserOptions );
 			if ( $parserOutput !== false ) {
 				wfProfileOut( __METHOD__ );
+
 				return $parserOutput;
 			}
 		}
@@ -962,6 +1010,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 	/**
 	 * Do standard deferred updates after page view
+	 *
 	 * @param $user User The relevant user
 	 */
 	public function doViewUpdates( User $user ) {
@@ -980,7 +1029,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		$user->clearNotification( $this->mTitle );
 
 		# wikia changes begin
-		wfRunHooks( 'AfterViewUpdates', array( $this ) );
+		wfRunHooks( 'AfterViewUpdates', [ $this ] );
 		# wikia changes end
 	}
 
@@ -990,7 +1039,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	public function doPurge() {
 		global $wgUseSquid;
 
-		if( !wfRunHooks( 'ArticlePurge', array( &$this ) ) ){
+		if ( !wfRunHooks( 'ArticlePurge', [ &$this ] ) ) {
 			return false;
 		}
 
@@ -1017,6 +1066,9 @@ class WikiPage extends Page implements IDBAccessObject {
 
 			MessageCache::singleton()->replace( $this->mTitle->getDBkey(), $text );
 		}
+
+		wfRunHooks( 'AfterArticlePurge', [ &$this ] );
+
 		return true;
 	}
 
@@ -1028,25 +1080,26 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Best if all done inside a transaction.
 	 *
 	 * @param $dbw DatabaseBase
+	 *
 	 * @return int The newly created page_id key, or false if the title already existed
 	 */
 	public function insertOn( $dbw ) {
 		wfProfileIn( __METHOD__ );
 
 		$page_id = $dbw->nextSequenceValue( 'page_page_id_seq' );
-		$dbw->insert( 'page', array(
-			'page_id'           => $page_id,
-			'page_namespace'    => $this->mTitle->getNamespace(),
-			'page_title'        => $this->mTitle->getDBkey(),
-			'page_counter'      => 0,
+		$dbw->insert( 'page', [
+			'page_id' => $page_id,
+			'page_namespace' => $this->mTitle->getNamespace(),
+			'page_title' => $this->mTitle->getDBkey(),
+			'page_counter' => 0,
 			'page_restrictions' => '',
-			'page_is_redirect'  => 0, # Will set this shortly...
-			'page_is_new'       => 1,
-			'page_random'       => wfRandom(),
-			'page_touched'      => $dbw->timestamp(),
-			'page_latest'       => 0, # Fill this in shortly...
-			'page_len'          => 0, # Fill this in shortly...
-		), __METHOD__, 'IGNORE' );
+			'page_is_redirect' => 0, # Will set this shortly...
+			'page_is_new' => 1,
+			'page_random' => wfRandom(),
+			'page_touched' => $dbw->timestamp(),
+			'page_latest' => 0, # Fill this in shortly...
+			'page_len' => 0, # Fill this in shortly...
+		], __METHOD__, 'IGNORE' );
 
 		$affected = $dbw->affectedRows();
 
@@ -1071,6 +1124,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *                      on.
 	 * @param $lastRevIsRedirect Boolean: if given, will optimize adding and
 	 *                           removing rows in redirect table.
+	 *
 	 * @return bool true on success, false on failure
 	 * @private
 	 */
@@ -1081,11 +1135,11 @@ class WikiPage extends Page implements IDBAccessObject {
 		$len = strlen( $text );
 		$rt = Title::newFromRedirectRecurse( $text );
 
-		$conditions = array( 'page_id' => $this->getId() );
+		$conditions = [ 'page_id' => $this->getId() ];
 
 		if ( !is_null( $lastRevision ) ) {
 			# An extra check against threads stepping on each other
-			$conditions['page_latest'] = $lastRevision;
+			$conditions[ 'page_latest' ] = $lastRevision;
 		}
 
 		// Wikia change - begin
@@ -1097,7 +1151,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		 * WikiPage::updateRevisionOn() should set it to a non-zero value.
 		 * It needs to link to a revision with a valid revision.rev_page.
 		 */
-		Wikia\Util\Assert::true( $revision->getId() > 0 , 'PLATFORM-1311', [
+		Wikia\Util\Assert::true( $revision->getId() > 0, 'PLATFORM-1311', [
 			'reason' => __METHOD__ . ' tried to set page_latest to zero',
 			'page_id' => $this->getId(),
 			'name' => $this->getTitle()->getPrefixedDBkey(),
@@ -1106,13 +1160,13 @@ class WikiPage extends Page implements IDBAccessObject {
 
 		$now = wfTimestampNow();
 		$dbw->update( 'page',
-			array( /* SET */
-				'page_latest'      => $revision->getId(),
-				'page_touched'     => $dbw->timestamp( $now ),
-				'page_is_new'      => ( $lastRevision === 0 ) ? 1 : 0,
-				'page_is_redirect' => $rt !== null ? 1 : 0,
-				'page_len'         => $len,
-			),
+			[ /* SET */
+			  'page_latest' => $revision->getId(),
+			  'page_touched' => $dbw->timestamp( $now ),
+			  'page_is_new' => ( $lastRevision === 0 ) ? 1 : 0,
+			  'page_is_redirect' => $rt !== null ? 1 : 0,
+			  'page_len' => $len,
+			],
 			$conditions,
 			__METHOD__ );
 
@@ -1128,6 +1182,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		}
 
 		wfProfileOut( __METHOD__ );
+
 		return $result;
 	}
 
@@ -1139,6 +1194,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *                       or NULL if this is not a redirect
 	 * @param $lastRevIsRedirect If given, will optimize adding and
 	 *                           removing rows in redirect table.
+	 *
 	 * @return bool true on success, false on failure
 	 * @private
 	 */
@@ -1157,7 +1213,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			$this->insertRedirectEntry( $redirectTitle );
 		} else {
 			// This is not a redirect, remove row from redirect table
-			$where = array( 'rd_from' => $this->getId() );
+			$where = [ 'rd_from' => $this->getId() ];
 			$dbw->delete( 'redirect', $where, __METHOD__ );
 		}
 
@@ -1175,22 +1231,24 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *
 	 * @param $dbw Database object
 	 * @param $revision Revision object
+	 *
 	 * @return mixed
 	 */
 	public function updateIfNewerOn( $dbw, $revision ) {
 		wfProfileIn( __METHOD__ );
 
 		$row = $dbw->selectRow(
-			array( 'revision', 'page' ),
-			array( 'rev_id', 'rev_timestamp', 'page_is_redirect' ),
-			array(
+			[ 'revision', 'page' ],
+			[ 'rev_id', 'rev_timestamp', 'page_is_redirect' ],
+			[
 				'page_id' => $this->getId(),
-				'page_latest=rev_id' ),
+				'page_latest=rev_id' ],
 			__METHOD__ );
 
 		if ( $row ) {
 			if ( wfTimestamp( TS_MW, $row->rev_timestamp ) >= $revision->getTimestamp() ) {
 				wfProfileOut( __METHOD__ );
+
 				return false;
 			}
 			$prev = $row->rev_id;
@@ -1204,6 +1262,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		$ret = $this->updateRevisionOn( $dbw, $revision, $prev, $lastRevIsRedirect );
 
 		wfProfileOut( __METHOD__ );
+
 		return $ret;
 	}
 
@@ -1211,8 +1270,10 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Get the text that needs to be saved in order to undo all revisions
 	 * between $undo and $undoafter. Revisions must belong to the same page,
 	 * must exist and must not be deleted
+	 *
 	 * @param $undo Revision
 	 * @param $undoafter Revision Must be an earlier revision than $undo
+	 *
 	 * @return mixed string on success, false on failure
 	 */
 	public function getUndoText( Revision $undo, Revision $undoafter = null ) {
@@ -1242,6 +1303,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @param $text String: new text of the section
 	 * @param $sectionTitle String: new section's subject, only if $section is 'new'
 	 * @param $edittime String: revision timestamp or null to use the current revision
+	 *
 	 * @return string Complete article text, or null if error
 	 */
 	public function replaceSection( $section, $text, $sectionTitle = '', $edittime = null ) {
@@ -1256,6 +1318,7 @@ class WikiPage extends Page implements IDBAccessObject {
 				if ( $oldtext === false ) {
 					wfDebug( __METHOD__ . ": no page text\n" );
 					wfProfileOut( __METHOD__ );
+
 					return null;
 				}
 			} else {
@@ -1264,8 +1327,9 @@ class WikiPage extends Page implements IDBAccessObject {
 
 				if ( !$rev ) {
 					wfDebug( "WikiPage::replaceSection asked for bogus section (page: " .
-						$this->getId() . "; section: $section; edittime: $edittime)\n" );
+							 $this->getId() . "; section: $section; edittime: $edittime)\n" );
 					wfProfileOut( __METHOD__ );
+
 					return null;
 				}
 
@@ -1275,7 +1339,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			if ( $section == 'new' ) {
 				# Inserting a new section
 				$subject = $sectionTitle ? wfMsgForContent( 'newsectionheaderdefaultlevel', $sectionTitle ) . "\n\n" : '';
-				if ( wfRunHooks( 'PlaceNewSection', array( $this, $oldtext, $subject, &$text ) ) ) {
+				if ( wfRunHooks( 'PlaceNewSection', [ $this, $oldtext, $subject, &$text ] ) ) {
 					$text = strlen( trim( $oldtext ) ) > 0
 						? "{$oldtext}\n\n{$subject}{$text}"
 						: "{$subject}{$text}";
@@ -1289,12 +1353,15 @@ class WikiPage extends Page implements IDBAccessObject {
 		}
 
 		wfProfileOut( __METHOD__ );
+
 		return $text;
 	}
 
 	/**
 	 * Check flags and add EDIT_NEW or EDIT_UPDATE to them as needed.
+	 *
 	 * @param $flags Int
+	 *
 	 * @return Int updated $flags
 	 */
 	function checkFlags( $flags ) {
@@ -1356,7 +1423,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *  Compatibility note: this function previously returned a boolean value indicating success/failure
 	 */
 	public function doEdit( $text, $summary, $flags = 0, $baseRevId = false, $user = null,
-							$forcePatrolled = false) {
+		$forcePatrolled = false ) {
 		global $wgUser, $wgUseAutomaticEditSummaries;
 
 		# Low-level sanity check
@@ -1367,7 +1434,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		wfProfileIn( __METHOD__ );
 
 		$user = is_null( $user ) ? $wgUser : $user;
-		$status = Status::newGood( array() );
+		$status = Status::newGood( [ ] );
 
 		// Load the data from the master database if needed.
 		// The caller may already loaded it from the master or even loaded it using
@@ -1376,9 +1443,9 @@ class WikiPage extends Page implements IDBAccessObject {
 
 		$flags = $this->checkFlags( $flags );
 
-		if ( !wfRunHooks( 'ArticleSave', array( &$this, &$user, &$text, &$summary,
-			$flags & EDIT_MINOR, null, null, &$flags, &$status ) ) )
-		{
+		if ( !wfRunHooks( 'ArticleSave', [ &$this, &$user, &$text, &$summary,
+										   $flags & EDIT_MINOR, null, null, &$flags, &$status ] )
+		) {
 			wfDebug( __METHOD__ . ": ArticleSave hook aborted save!\n" );
 
 			if ( $status->isOK() ) {
@@ -1386,6 +1453,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			}
 
 			wfProfileOut( __METHOD__ );
+
 			return $status;
 		}
 
@@ -1420,7 +1488,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 		if ( $flags & EDIT_UPDATE ) {
 			# Update article, but only if changed.
-			$status->value['new'] = false;
+			$status->value[ 'new' ] = false;
 
 			if ( !$oldid ) {
 				# Article gone missing
@@ -1428,24 +1496,25 @@ class WikiPage extends Page implements IDBAccessObject {
 				$status->fatal( 'edit-gone-missing' );
 
 				wfProfileOut( __METHOD__ );
+
 				return $status;
 			}
 
-			$revision = new Revision( array(
-				'page'       => $this->getId(),
-				'comment'    => $summary,
+			$revision = new Revision( [
+				'page' => $this->getId(),
+				'comment' => $summary,
 				'minor_edit' => $isminor,
-				'text'       => $text,
-				'parent_id'  => $oldid,
-				'user'       => $user->getId(),
-				'user_text'  => $user->getName(),
-				'timestamp'  => $now
-			) );
+				'text' => $text,
+				'parent_id' => $oldid,
+				'user' => $user->getId(),
+				'user_text' => $user->getName(),
+				'timestamp' => $now
+			] );
 
 			$changed = ( strcmp( $text, $oldtext ) != 0 );
 
 			if ( $changed ) {
-				$dbw->begin(__METHOD__);
+				$dbw->begin( __METHOD__ );
 				$revisionId = $revision->insertOn( $dbw );
 
 				# Update page
@@ -1458,31 +1527,31 @@ class WikiPage extends Page implements IDBAccessObject {
 				$ok = $this->updateRevisionOn( $dbw, $revision, $oldid, $oldIsRedirect );
 
 				// wikia changes begin
-				wfRunHooks( 'ArticleDoEdit', array( $dbw, $this->mTitle, $revision, $flags ) );
+				wfRunHooks( 'ArticleDoEdit', [ $dbw, $this->mTitle, $revision, $flags ] );
 				// wikia changes end
 
 				if ( !$ok ) {
 					/* Belated edit conflict! Run away!! */
 					$status->fatal( 'edit-conflict' );
 
-					\Wikia\Logger\WikiaLogger::instance()->error('PLATFORM-1311', [
+					\Wikia\Logger\WikiaLogger::instance()->error( 'PLATFORM-1311', [
 						'reason' => 'ArticleDoEdit rollback - updateRevisionOn failed',
 						'exception' => new Exception(),
 						'name' => $this->mTitle->getPrefixedDBkey(),
 						'rev_id' => $revisionId,
 						'page_id' => $this->getId(),
-					]);
+					] );
 
 					$revisionId = 0;
-					$dbw->rollback(__METHOD__);
+					$dbw->rollback( __METHOD__ );
 				} else {
 					global $wgUseRCPatrol;
-					wfRunHooks( 'NewRevisionFromEditComplete', array( $this, $revision, $baseRevId, $user, false ) );
+					wfRunHooks( 'NewRevisionFromEditComplete', [ $this, $revision, $baseRevId, $user, false ] );
 					# Update recentchanges
 					if ( !( $flags & EDIT_SUPPRESS_RC ) ) {
 						# Mark as patrolled if the user can do so
 						$patrolled = $wgUseRCPatrol && !count(
-							$this->mTitle->getUserPermissionsErrors( 'autopatrol', $user ) );
+								$this->mTitle->getUserPermissionsErrors( 'autopatrol', $user ) );
 						# Add RC row to the DB
 						$rc = RecentChange::notifyEdit( $now, $this->mTitle, $isminor, $user, $summary,
 							$oldid, $this->getTimestamp(), $bot, '', $oldsize, $newsize,
@@ -1495,7 +1564,7 @@ class WikiPage extends Page implements IDBAccessObject {
 						}
 					}
 					$user->incEditCount();
-					$dbw->commit(__METHOD__);
+					$dbw->commit( __METHOD__ );
 				}
 			} else {
 				// Bug 32948: revision ID must be set to page {{REVISIONID}} and
@@ -1506,12 +1575,13 @@ class WikiPage extends Page implements IDBAccessObject {
 			// Now that ignore_user_abort is restored, we can respond to fatal errors
 			if ( !$status->isOK() ) {
 				wfProfileOut( __METHOD__ );
+
 				return $status;
 			}
 
 			# Update links tables, site stats, etc.
-			$this->doEditUpdates( $revision, $user, array( 'changed' => $changed,
-				'oldcountable' => $oldcountable ) );
+			$this->doEditUpdates( $revision, $user, [ 'changed' => $changed,
+													  'oldcountable' => $oldcountable ] );
 
 			if ( !$changed ) {
 				$status->warning( 'edit-no-change' );
@@ -1522,48 +1592,49 @@ class WikiPage extends Page implements IDBAccessObject {
 			}
 		} else {
 			# Create new article
-			$status->value['new'] = true;
+			$status->value[ 'new' ] = true;
 
-			$dbw->begin(__METHOD__);
+			$dbw->begin( __METHOD__ );
 
 			# Add the page record; stake our claim on this title!
 			# This will return false if the article already exists
 			$newid = $this->insertOn( $dbw );
 
 			if ( $newid === false ) {
-				\Wikia\Logger\WikiaLogger::instance()->error('PLATFORM-1311', [
+				\Wikia\Logger\WikiaLogger::instance()->error( 'PLATFORM-1311', [
 					'reason' => 'ArticleDoEdit rollback - insertOn failed',
 					'exception' => new Exception(),
 					'name' => $this->mTitle->getPrefixedDBkey(),
-				]);
+				] );
 
 				$dbw->rollback();
 				$status->fatal( 'edit-already-exists' );
 
 				wfProfileOut( __METHOD__ );
+
 				return $status;
 			}
 
 			# Save the revision text...
-			$revision = new Revision( array(
-				'page'       => $newid,
-				'comment'    => $summary,
+			$revision = new Revision( [
+				'page' => $newid,
+				'comment' => $summary,
 				'minor_edit' => $isminor,
-				'text'       => $text,
-				'user'       => $user->getId(),
-				'user_text'  => $user->getName(),
-				'timestamp'  => $now
-			) );
+				'text' => $text,
+				'user' => $user->getId(),
+				'user_text' => $user->getName(),
+				'timestamp' => $now
+			] );
 			$revisionId = $revision->insertOn( $dbw );
 
 			# Update the page record with revision data
 			$this->updateRevisionOn( $dbw, $revision, 0 );
 
 			// wikia changes begin
-			wfRunHooks( 'ArticleDoEdit', array( $dbw, $this->mTitle, $revision, $flags ) );
+			wfRunHooks( 'ArticleDoEdit', [ $dbw, $this->mTitle, $revision, $flags ] );
 			// wikia changes end
 
-			wfRunHooks( 'NewRevisionFromEditComplete', array( $this, $revision, false, $user ) );
+			wfRunHooks( 'NewRevisionFromEditComplete', [ $this, $revision, false, $user ] );
 
 			# Update recentchanges
 			if ( !( $flags & EDIT_SUPPRESS_RC ) ) {
@@ -1571,10 +1642,10 @@ class WikiPage extends Page implements IDBAccessObject {
 
 				# Mark as patrolled if the user can do so
 				$patrolled = ( $wgUseRCPatrol || $wgUseNPPatrol ) && !count(
-					$this->mTitle->getUserPermissionsErrors( 'autopatrol', $user ) );
+						$this->mTitle->getUserPermissionsErrors( 'autopatrol', $user ) );
 				# Add RC row to the DB
 				$rc = RecentChange::notifyNew( $now, $this->mTitle, $isminor, $user, $summary, $bot,
-					'', strlen( $text ), $revisionId, $patrolled || $forcePatrolled);
+					'', strlen( $text ), $revisionId, $patrolled || $forcePatrolled );
 
 				# Log auto-patrolled edits
 				if ( $patrolled ) {
@@ -1582,13 +1653,13 @@ class WikiPage extends Page implements IDBAccessObject {
 				}
 			}
 			$user->incEditCount();
-			$dbw->commit(__METHOD__);
+			$dbw->commit( __METHOD__ );
 
 			# Update links, etc.
-			$this->doEditUpdates( $revision, $user, array( 'created' => true ) );
+			$this->doEditUpdates( $revision, $user, [ 'created' => true ] );
 
-			wfRunHooks( 'ArticleInsertComplete', array( &$this, &$user, $text, $summary,
-				$flags & EDIT_MINOR, null, null, &$flags, $revision ) );
+			wfRunHooks( 'ArticleInsertComplete', [ &$this, &$user, $text, $summary,
+												   $flags & EDIT_MINOR, null, null, &$flags, $revision ] );
 		}
 
 		# Do updates right now unless deferral was requested
@@ -1597,21 +1668,24 @@ class WikiPage extends Page implements IDBAccessObject {
 		}
 
 		// Return the new revision (or null) to the caller
-		$status->value['revision'] = $revision;
+		$status->value[ 'revision' ] = $revision;
 
-		wfRunHooks( 'ArticleSaveComplete', array( &$this, &$user, $text, $summary,
-			$flags & EDIT_MINOR, null, null, &$flags, $revision, &$status, $baseRevId ) );
+		wfRunHooks( 'ArticleSaveComplete', [ &$this, &$user, $text, $summary,
+											 $flags & EDIT_MINOR, null, null, &$flags, $revision, &$status, $baseRevId ] );
 
 		# Promote user to any groups they meet the criteria for
 		$user->addAutopromoteOnceGroups( 'onEdit' );
 
 		wfProfileOut( __METHOD__ );
+
 		return $status;
 	}
 
 	/**
 	 * Get parser options suitable for rendering the primary article wikitext
+	 *
 	 * @param User|string $user User object or 'canonical'
+	 *
 	 * @return ParserOptions
 	 */
 	public function makeParserOptions( $user ) {
@@ -1635,17 +1709,17 @@ class WikiPage extends Page implements IDBAccessObject {
 		$user = is_null( $user ) ? $wgUser : $user;
 		// @TODO fixme: check $user->getId() here???
 		if ( $this->mPreparedEdit
-			&& $this->mPreparedEdit->newText == $text
-			&& $this->mPreparedEdit->revid == $revid
+			 && $this->mPreparedEdit->newText == $text
+			 && $this->mPreparedEdit->revid == $revid
 		) {
 			// Already prepared
 			return $this->mPreparedEdit;
 		}
 
 		$popts = ParserOptions::newFromUserAndLang( $user, $wgContLang );
-		wfRunHooks( 'ArticlePrepareTextForEdit', array( $this, $popts ) );
+		wfRunHooks( 'ArticlePrepareTextForEdit', [ $this, $popts ] );
 
-		$edit = (object)array();
+		$edit = (object)[ ];
 		$edit->revid = $revid;
 		$edit->newText = $text;
 		$edit->pst = $wgParser->preSaveTransform( $text, $this->mTitle, $user, $popts );
@@ -1665,6 +1739,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Every 100th edit, prune the recent changes table.
 	 *
 	 * @private
+	 *
 	 * @param $revision Revision object
 	 * @param $user User object that did the revision
 	 * @param $options Array of options, following indexes are used:
@@ -1675,12 +1750,12 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *     revision, only used in changed is true and created is false
 	 *   - null: don't change the article count
 	 */
-	public function doEditUpdates( Revision $revision, User $user, array $options = array() ) {
+	public function doEditUpdates( Revision $revision, User $user, array $options = [ ] ) {
 		global $wgEnableParserCache;
 
 		wfProfileIn( __METHOD__ );
 
-		$options += array( 'changed' => true, 'created' => false, 'oldcountable' => null );
+		$options += [ 'changed' => true, 'created' => false, 'oldcountable' => null ];
 		$text = $revision->getText();
 
 		# Parse the text
@@ -1703,9 +1778,9 @@ class WikiPage extends Page implements IDBAccessObject {
 		$u = new LinksUpdate( $this->mTitle, $editInfo->output );
 		$u->doUpdate();
 
-		wfRunHooks( 'ArticleEditUpdates', array( &$this, &$editInfo, $options['changed'] ) );
+		wfRunHooks( 'ArticleEditUpdates', [ &$this, &$editInfo, $options[ 'changed' ] ] );
 
-		if ( wfRunHooks( 'ArticleEditUpdatesDeleteFromRecentchanges', array( &$this ) ) ) {
+		if ( wfRunHooks( 'ArticleEditUpdatesDeleteFromRecentchanges', [ &$this ] ) ) {
 			if ( 0 == mt_rand( 0, 99 ) ) {
 				// Flush old entries from the `recentchanges` table
 				// Wikia: use a job backported from MediaWiki 1.25 (@see PLATFORM-965)
@@ -1715,6 +1790,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 		if ( !$this->mTitle->exists() ) {
 			wfProfileOut( __METHOD__ );
+
 			return;
 		}
 
@@ -1722,14 +1798,14 @@ class WikiPage extends Page implements IDBAccessObject {
 		$title = $this->mTitle->getPrefixedDBkey();
 		$shortTitle = $this->mTitle->getDBkey();
 
-		if ( !$options['changed'] ) {
+		if ( !$options[ 'changed' ] ) {
 			$good = 0;
 			$total = 0;
-		} elseif ( $options['created'] ) {
+		} elseif ( $options[ 'created' ] ) {
 			$good = (int)$this->isCountable( $editInfo );
 			$total = 1;
-		} elseif ( $options['oldcountable'] !== null ) {
-			$good = (int)$this->isCountable( $editInfo ) - (int)$options['oldcountable'];
+		} elseif ( $options[ 'oldcountable' ] !== null ) {
+			$good = (int)$this->isCountable( $editInfo ) - (int)$options[ 'oldcountable' ];
 			$total = 0;
 		} else {
 			$good = 0;
@@ -1742,12 +1818,12 @@ class WikiPage extends Page implements IDBAccessObject {
 		# If this is another user's talk page, update newtalk.
 		# Don't do this if $options['changed'] = false (null-edits) nor if
 		# it's a minor edit and the user doesn't want notifications for those.
-		if ( $options['changed']
-			&& $this->mTitle->getNamespace() == NS_USER_TALK
-			&& $shortTitle != $user->getTitleKey()
-			&& !( $revision->isMinor() && $user->isAllowed( 'nominornewtalk' ) )
+		if ( $options[ 'changed' ]
+			 && $this->mTitle->getNamespace() == NS_USER_TALK
+			 && $shortTitle != $user->getTitleKey()
+			 && !( $revision->isMinor() && $user->isAllowed( 'nominornewtalk' ) )
 		) {
-			if ( wfRunHooks( 'ArticleEditUpdateNewTalk', array( &$this ) ) ) {
+			if ( wfRunHooks( 'ArticleEditUpdateNewTalk', [ &$this ] ) ) {
 				$other = User::newFromName( $shortTitle, false );
 				if ( !$other ) {
 					wfDebug( __METHOD__ . ": invalid username\n" );
@@ -1766,7 +1842,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			MessageCache::singleton()->replace( $shortTitle, $text );
 		}
 
-		if( $options['created'] ) {
+		if ( $options[ 'created' ] ) {
 			self::onArticleCreate( $this->mTitle );
 		} else {
 			self::onArticleEdit( $this->mTitle );
@@ -1789,16 +1865,16 @@ class WikiPage extends Page implements IDBAccessObject {
 		wfProfileIn( __METHOD__ );
 
 		$dbw = wfGetDB( DB_MASTER );
-		$revision = new Revision( array(
-			'page'       => $this->getId(),
-			'text'       => $text,
-			'comment'    => $comment,
+		$revision = new Revision( [
+			'page' => $this->getId(),
+			'text' => $text,
+			'comment' => $comment,
 			'minor_edit' => $minor ? 1 : 0,
-		) );
+		] );
 		$revision->insertOn( $dbw );
 		$this->updateRevisionOn( $dbw, $revision );
 
-		wfRunHooks( 'NewRevisionFromEditComplete', array( $this, $revision, false, $user ) );
+		wfRunHooks( 'NewRevisionFromEditComplete', [ $this, $revision, false, $user ] );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -1812,6 +1888,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @param &$cascade Integer. Set to false if cascading protection isn't allowed.
 	 * @param $expiry Array: per restriction type expiration
 	 * @param $user User The user updating the restrictions
+	 *
 	 * @return bool true on success
 	 */
 	public function doUpdateRestrictions( array $limit, array $expiry, &$cascade, $reason, User $user ) {
@@ -1841,12 +1918,12 @@ class WikiPage extends Page implements IDBAccessObject {
 		$dbw = wfGetDB( DB_MASTER );
 
 		foreach ( $restrictionTypes as $action ) {
-			if ( !isset( $expiry[$action] ) ) {
-				$expiry[$action] = $dbw->getInfinity();
+			if ( !isset( $expiry[ $action ] ) ) {
+				$expiry[ $action ] = $dbw->getInfinity();
 			}
-			if ( !isset( $limit[$action] ) ) {
-				$limit[$action] = '';
-			} elseif ( $limit[$action] != '' ) {
+			if ( !isset( $limit[ $action ] ) ) {
+				$limit[ $action ] = '';
+			} elseif ( $limit[ $action ] != '' ) {
 				$protect = true;
 			}
 
@@ -1856,13 +1933,13 @@ class WikiPage extends Page implements IDBAccessObject {
 				$isProtected = true;
 			}
 
-			if ( $limit[$action] != $current ) {
+			if ( $limit[ $action ] != $current ) {
 				$changed = true;
-			} elseif ( $limit[$action] != '' ) {
+			} elseif ( $limit[ $action ] != '' ) {
 				# Only check expiry change if the action is actually being
 				# protected, since expiry does nothing on an not-protected
 				# action.
-				if ( $this->mTitle->getRestrictionExpiry( $action ) != $expiry[$action] ) {
+				if ( $this->mTitle->getRestrictionExpiry( $action ) != $expiry[ $action ] ) {
 					$changed = true;
 				}
 			}
@@ -1888,17 +1965,17 @@ class WikiPage extends Page implements IDBAccessObject {
 			$logAction = 'protect';
 		}
 
-		$encodedExpiry = array();
+		$encodedExpiry = [ ];
 		$protectDescription = '';
 		foreach ( $limit as $action => $restrictions ) {
-			$encodedExpiry[$action] = $dbw->encodeExpiry( $expiry[$action] );
+			$encodedExpiry[ $action ] = $dbw->encodeExpiry( $expiry[ $action ] );
 			if ( $restrictions != '' ) {
 				$protectDescription .= $wgContLang->getDirMark() . "[$action=$restrictions] (";
-				if ( $encodedExpiry[$action] != 'infinity' ) {
+				if ( $encodedExpiry[ $action ] != 'infinity' ) {
 					$protectDescription .= wfMsgForContent( 'protect-expiring',
-						$wgContLang->timeanddate( $expiry[$action], false, false ) ,
-						$wgContLang->date( $expiry[$action], false, false ) ,
-						$wgContLang->time( $expiry[$action], false, false ) );
+						$wgContLang->timeanddate( $expiry[ $action ], false, false ),
+						$wgContLang->date( $expiry[ $action ], false, false ),
+						$wgContLang->time( $expiry[ $action ], false, false ) );
 				} else {
 					$protectDescription .= wfMsgForContent( 'protect-expiry-indefinite' );
 				}
@@ -1909,13 +1986,13 @@ class WikiPage extends Page implements IDBAccessObject {
 		$protectDescription = trim( $protectDescription );
 
 		if ( $id ) { # Protection of existing page
-			if ( !wfRunHooks( 'ArticleProtect', array( &$this, &$user, $limit, $reason ) ) ) {
+			if ( !wfRunHooks( 'ArticleProtect', [ &$this, &$user, $limit, $reason ] ) ) {
 				return Status::newGood();
 			}
 
 			# Only restrictions with the 'protect' right can cascade...
 			# Otherwise, people who cannot normally protect can "protect" pages via transclusion
-			$editrestriction = isset( $limit['edit'] ) ? array( $limit['edit'] ) : $this->mTitle->getRestrictions( 'edit' );
+			$editrestriction = isset( $limit[ 'edit' ] ) ? [ $limit[ 'edit' ] ] : $this->mTitle->getRestrictions( 'edit' );
 
 			# The schema allows multiple restrictions
 			if ( !in_array( 'protect', $editrestriction ) && !in_array( 'sysop', $editrestriction ) ) {
@@ -1925,18 +2002,18 @@ class WikiPage extends Page implements IDBAccessObject {
 			# Update restrictions table
 			foreach ( $limit as $action => $restrictions ) {
 				if ( $restrictions != '' ) {
-					$dbw->replace( 'page_restrictions', array( array( 'pr_page', 'pr_type' ) ),
-						array( 'pr_page' => $id,
-							'pr_type' => $action,
-							'pr_level' => $restrictions,
-							'pr_cascade' => ( $cascade && $action == 'edit' ) ? 1 : 0,
-							'pr_expiry' => $encodedExpiry[$action]
-						),
+					$dbw->replace( 'page_restrictions', [ [ 'pr_page', 'pr_type' ] ],
+						[ 'pr_page' => $id,
+						  'pr_type' => $action,
+						  'pr_level' => $restrictions,
+						  'pr_cascade' => ( $cascade && $action == 'edit' ) ? 1 : 0,
+						  'pr_expiry' => $encodedExpiry[ $action ]
+						],
 						__METHOD__
 					);
 				} else {
-					$dbw->delete( 'page_restrictions', array( 'pr_page' => $id,
-						'pr_type' => $action ), __METHOD__ );
+					$dbw->delete( 'page_restrictions', [ 'pr_page' => $id,
+														 'pr_type' => $action ], __METHOD__ );
 				}
 			}
 
@@ -1959,40 +2036,40 @@ class WikiPage extends Page implements IDBAccessObject {
 			$latest = $this->getLatest();
 			# Update page record
 			$dbw->update( 'page',
-				array( /* SET */
-					'page_touched' => $dbw->timestamp(),
-					'page_restrictions' => '',
-					'page_latest' => $nullRevId
-				), array( /* WHERE */
-					'page_id' => $id
-				), __METHOD__
+				[ /* SET */
+				  'page_touched' => $dbw->timestamp(),
+				  'page_restrictions' => '',
+				  'page_latest' => $nullRevId
+				], [ /* WHERE */
+					 'page_id' => $id
+				], __METHOD__
 			);
 
-			wfRunHooks( 'NewRevisionFromEditComplete', array( $this, $nullRevision, $latest, $user ) );
-			wfRunHooks( 'ArticleProtectComplete', array( &$this, &$user, $limit, $reason ) );
+			wfRunHooks( 'NewRevisionFromEditComplete', [ $this, $nullRevision, $latest, $user ] );
+			wfRunHooks( 'ArticleProtectComplete', [ &$this, &$user, $limit, $reason ] );
 		} else { # Protection of non-existing page (also known as "title protection")
 			# Cascade protection is meaningless in this case
 			$cascade = false;
 
-			if ( $limit['create'] != '' ) {
+			if ( $limit[ 'create' ] != '' ) {
 				$dbw->replace( 'protected_titles',
-					array( array( 'pt_namespace', 'pt_title' ) ),
-					array(
+					[ [ 'pt_namespace', 'pt_title' ] ],
+					[
 						'pt_namespace' => $this->mTitle->getNamespace(),
 						'pt_title' => $this->mTitle->getDBkey(),
-						'pt_create_perm' => $limit['create'],
+						'pt_create_perm' => $limit[ 'create' ],
 						'pt_timestamp' => $dbw->encodeExpiry( wfTimestampNow() ),
-						'pt_expiry' => $encodedExpiry['create'],
+						'pt_expiry' => $encodedExpiry[ 'create' ],
 						'pt_user' => $user->getId(),
 						'pt_reason' => $reason,
-					), __METHOD__
+					], __METHOD__
 				);
 			} else {
 				$dbw->delete( 'protected_titles',
-					array(
+					[
 						'pt_namespace' => $this->mTitle->getNamespace(),
 						'pt_title' => $this->mTitle->getDBkey()
-					), __METHOD__
+					], __METHOD__
 				);
 			}
 		}
@@ -2000,9 +2077,9 @@ class WikiPage extends Page implements IDBAccessObject {
 		$this->mTitle->flushRestrictions();
 
 		if ( $logAction == 'unprotect' ) {
-			$logParams = array();
+			$logParams = [ ];
 		} else {
-			$logParams = array( $protectDescription, $cascade ? 'cascade' : '' );
+			$logParams = [ $protectDescription, $cascade ? 'cascade' : '' ];
 		}
 
 		# Update the protection log
@@ -2015,7 +2092,9 @@ class WikiPage extends Page implements IDBAccessObject {
 	/**
 	 * Take an array of page restrictions and flatten it to a string
 	 * suitable for insertion into the page_restrictions field.
+	 *
 	 * @param $limit Array
+	 *
 	 * @return String
 	 */
 	protected static function flattenRestrictions( $limit ) {
@@ -2023,7 +2102,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			throw new MWException( 'WikiPage::flattenRestrictions given non-array restriction set' );
 		}
 
-		$bits = array();
+		$bits = [ ];
 		ksort( $limit );
 
 		foreach ( $limit as $action => $restrictions ) {
@@ -2041,21 +2120,22 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *
 	 * @param $reason string delete reason for deletion log
 	 * @param $suppress bitfield
-	 * 	Revision::DELETED_TEXT
-	 * 	Revision::DELETED_COMMENT
-	 * 	Revision::DELETED_USER
-	 * 	Revision::DELETED_RESTRICTED
+	 *    Revision::DELETED_TEXT
+	 *    Revision::DELETED_COMMENT
+	 *    Revision::DELETED_USER
+	 *    Revision::DELETED_RESTRICTED
 	 * @param $id int article ID
 	 * @param $commit boolean defaults to true, triggers transaction end
 	 * @param &$error Array of errors to append to
 	 * @param $user User The deleting user
+	 *
 	 * @return boolean true if successful
 	 */
 	public function doDeleteArticle(
 		$reason, $suppress = false, $id = 0, $commit = true, &$error = '', User $user = null
 	) {
 		return $this->doDeleteArticleReal( $reason, $suppress, $id, $commit, $error, $user )
-			== WikiPage::DELETE_SUCCESS;
+			   == WikiPage::DELETE_SUCCESS;
 	}
 
 	/**
@@ -2064,14 +2144,15 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *
 	 * @param $reason string delete reason for deletion log
 	 * @param $suppress bitfield
-	 * 	Revision::DELETED_TEXT
-	 * 	Revision::DELETED_COMMENT
-	 * 	Revision::DELETED_USER
-	 * 	Revision::DELETED_RESTRICTED
+	 *    Revision::DELETED_TEXT
+	 *    Revision::DELETED_COMMENT
+	 *    Revision::DELETED_USER
+	 *    Revision::DELETED_RESTRICTED
 	 * @param $id int article ID
 	 * @param $commit boolean defaults to true, triggers transaction end
 	 * @param &$error Array of errors to append to
 	 * @param $user User The deleting user
+	 *
 	 * @return int: One of WikiPage::DELETE_* constants
 	 */
 	public function doDeleteArticleReal(
@@ -2086,7 +2167,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		}
 
 		$user = is_null( $user ) ? $wgUser : $user;
-		if ( ! wfRunHooks( 'ArticleDelete', array( &$this, &$user, &$reason, &$error ) ) ) {
+		if ( !wfRunHooks( 'ArticleDelete', [ &$this, &$user, &$reason, &$error ] ) ) {
 			return WikiPage::DELETE_HOOK_ABORTED;
 		}
 
@@ -2122,36 +2203,37 @@ class WikiPage extends Page implements IDBAccessObject {
 		//
 		// In the future, we may keep revisions and mark them with
 		// the rev_deleted field, which is reserved for this purpose.
-		$dbw->insertSelect( 'archive', array( 'page', 'revision' ),
-			array(
-				'ar_namespace'  => 'page_namespace',
-				'ar_title'      => 'page_title',
-				'ar_comment'    => 'rev_comment',
-				'ar_user'       => 'rev_user',
-				'ar_user_text'  => 'rev_user_text',
-				'ar_timestamp'  => 'rev_timestamp',
+		$dbw->insertSelect( 'archive', [ 'page', 'revision' ],
+			[
+				'ar_namespace' => 'page_namespace',
+				'ar_title' => 'page_title',
+				'ar_comment' => 'rev_comment',
+				'ar_user' => 'rev_user',
+				'ar_user_text' => 'rev_user_text',
+				'ar_timestamp' => 'rev_timestamp',
 				'ar_minor_edit' => 'rev_minor_edit',
-				'ar_rev_id'     => 'rev_id',
-				'ar_parent_id'  => 'rev_parent_id',
-				'ar_text_id'    => 'rev_text_id',
-				'ar_text'       => '\'\'', // Be explicit to appease
-				'ar_flags'      => '\'\'', // MySQL's "strict mode"...
-				'ar_len'        => 'rev_len',
-				'ar_page_id'    => 'page_id',
-				'ar_deleted'    => $bitfield,
-				'ar_sha1'       => 'rev_sha1'
-			), array(
+				'ar_rev_id' => 'rev_id',
+				'ar_parent_id' => 'rev_parent_id',
+				'ar_text_id' => 'rev_text_id',
+				'ar_text' => '\'\'', // Be explicit to appease
+				'ar_flags' => '\'\'', // MySQL's "strict mode"...
+				'ar_len' => 'rev_len',
+				'ar_page_id' => 'page_id',
+				'ar_deleted' => $bitfield,
+				'ar_sha1' => 'rev_sha1'
+			], [
 				'page_id' => $id,
 				'page_id = rev_page'
-			), __METHOD__
+			], __METHOD__
 		);
 
 		# Now that it's safely backed up, delete it
-		$dbw->delete( 'page', array( 'page_id' => $id ), __METHOD__ );
+		$dbw->delete( 'page', [ 'page_id' => $id ], __METHOD__ );
 		$ok = ( $dbw->affectedRows() > 0 ); // getArticleId() uses slave, could be laggy
 
 		if ( !$ok ) {
 			$dbw->rollback();
+
 			return WikiPage::DELETE_NO_REVISIONS;
 		}
 
@@ -2162,8 +2244,8 @@ class WikiPage extends Page implements IDBAccessObject {
 		$hookAddedLogEntry = false;
 
 		# @todo mediawiki merge 1.19: $log doesn't exist there
-		wfRunHooks('ArticleDoDeleteArticleBeforeLogEntry', array(&$this, &$logtype, $this->mTitle, $reason, &$hookAddedLogEntry));
-		if( !$hookAddedLogEntry ) {
+		wfRunHooks( 'ArticleDoDeleteArticleBeforeLogEntry', [ &$this, &$logtype, $this->mTitle, $reason, &$hookAddedLogEntry ] );
+		if ( !$hookAddedLogEntry ) {
 			# if hook above didn't log anything log it as default
 
 			$logEntry = new ManualLogEntry( $logtype, 'delete' );
@@ -2184,7 +2266,8 @@ class WikiPage extends Page implements IDBAccessObject {
 			$dbw->commit();
 		}
 
-		wfRunHooks( 'ArticleDeleteComplete', array( &$this, &$user, $reason, $id ) );
+		wfRunHooks( 'ArticleDeleteComplete', [ &$this, &$user, $reason, $id ] );
+
 		return WikiPage::DELETE_SUCCESS;
 	}
 
@@ -2194,49 +2277,49 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @param $id Int: page_id value of the page being deleted
 	 */
 	public function doDeleteUpdates( $id ) {
-		DeferredUpdates::addUpdate( new SiteStatsUpdate( 0, 1, - (int)$this->isCountable(), -1 ) );
+		DeferredUpdates::addUpdate( new SiteStatsUpdate( 0, 1, -(int)$this->isCountable(), -1 ) );
 
 		$dbw = wfGetDB( DB_MASTER );
 
 		# Delete restrictions for it
-		$dbw->delete( 'page_restrictions', array ( 'pr_page' => $id ), __METHOD__ );
+		$dbw->delete( 'page_restrictions', [ 'pr_page' => $id ], __METHOD__ );
 
 		# Fix category table counts
-		$cats = array();
-		$res = $dbw->select( 'categorylinks', 'cl_to', array( 'cl_from' => $id ), __METHOD__ );
+		$cats = [ ];
+		$res = $dbw->select( 'categorylinks', 'cl_to', [ 'cl_from' => $id ], __METHOD__ );
 
 		foreach ( $res as $row ) {
 			$cats [] = $row->cl_to;
 		}
 
-		$this->updateCategoryCounts( array(), $cats );
+		$this->updateCategoryCounts( [ ], $cats );
 
 		# If using cascading deletes, we can skip some explicit deletes
 		if ( !$dbw->cascadingDeletes() ) {
-			$dbw->delete( 'revision', array( 'rev_page' => $id ), __METHOD__ );
+			$dbw->delete( 'revision', [ 'rev_page' => $id ], __METHOD__ );
 
 			# Delete outgoing links
-			$dbw->delete( 'pagelinks', array( 'pl_from' => $id ), __METHOD__ );
-			$dbw->delete( 'imagelinks', array( 'il_from' => $id ), __METHOD__ );
-			$dbw->delete( 'categorylinks', array( 'cl_from' => $id ), __METHOD__ );
-			$dbw->delete( 'templatelinks', array( 'tl_from' => $id ), __METHOD__ );
-			$dbw->delete( 'externallinks', array( 'el_from' => $id ), __METHOD__ );
-			$dbw->delete( 'langlinks', array( 'll_from' => $id ), __METHOD__ );
-			$dbw->delete( 'iwlinks', array( 'iwl_from' => $id ), __METHOD__ );
-			$dbw->delete( 'redirect', array( 'rd_from' => $id ), __METHOD__ );
-			$dbw->delete( 'page_props', array( 'pp_page' => $id ), __METHOD__ );
+			$dbw->delete( 'pagelinks', [ 'pl_from' => $id ], __METHOD__ );
+			$dbw->delete( 'imagelinks', [ 'il_from' => $id ], __METHOD__ );
+			$dbw->delete( 'categorylinks', [ 'cl_from' => $id ], __METHOD__ );
+			$dbw->delete( 'templatelinks', [ 'tl_from' => $id ], __METHOD__ );
+			$dbw->delete( 'externallinks', [ 'el_from' => $id ], __METHOD__ );
+			$dbw->delete( 'langlinks', [ 'll_from' => $id ], __METHOD__ );
+			$dbw->delete( 'iwlinks', [ 'iwl_from' => $id ], __METHOD__ );
+			$dbw->delete( 'redirect', [ 'rd_from' => $id ], __METHOD__ );
+			$dbw->delete( 'page_props', [ 'pp_page' => $id ], __METHOD__ );
 		}
 
 		# If using cleanup triggers, we can skip some manual deletes
 		if ( !$dbw->cleanupTriggers() ) {
 			# Clean up recentchanges entries...
 			$dbw->delete( 'recentchanges',
-				array( 'rc_type != ' . RC_LOG,
-					'rc_namespace' => $this->mTitle->getNamespace(),
-					'rc_title' => $this->mTitle->getDBkey() ),
+				[ 'rc_type != ' . RC_LOG,
+				  'rc_namespace' => $this->mTitle->getNamespace(),
+				  'rc_title' => $this->mTitle->getDBkey() ],
 				__METHOD__ );
 			$dbw->delete( 'recentchanges',
-				array( 'rc_type != ' . RC_LOG, 'rc_cur_id' => $id ),
+				[ 'rc_type != ' . RC_LOG, 'rc_cur_id' => $id ],
 				__METHOD__ );
 		}
 
@@ -2270,6 +2353,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 *    success        : 'summary' (str), 'current' (rev), 'target' (rev)
 	 *
 	 * @param $user User The user performing the rollback
+	 *
 	 * @return array of errors, each error formatted as
 	 *   array(messagekey, param1, param2, ...).
 	 * On success, the array is empty.  This array can also be passed to
@@ -2285,12 +2369,12 @@ class WikiPage extends Page implements IDBAccessObject {
 		$rollbackErrors = $this->mTitle->getUserPermissionsErrors( 'rollback', $user );
 		$errors = array_merge( $editErrors, wfArrayDiff2( $rollbackErrors, $editErrors ) );
 
-		if ( !$user->matchEditToken( $token, array( $this->mTitle->getPrefixedText(), $fromP ) ) ) {
-			$errors[] = array( 'sessionfailure' );
+		if ( !$user->matchEditToken( $token, [ $this->mTitle->getPrefixedText(), $fromP ] ) ) {
+			$errors[] = [ 'sessionfailure' ];
 		}
 
 		if ( $user->pingLimiter( 'rollback' ) || $user->pingLimiter() ) {
-			$errors[] = array( 'actionthrottledtext' );
+			$errors[] = [ 'actionthrottledtext' ];
 		}
 
 		# If there were errors, bail out now
@@ -2309,6 +2393,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * rollback to the DB. Therefore, you should only call this function direct-
 	 * ly if you want to use custom permissions checks. If you don't, use
 	 * doRollback() instead.
+	 *
 	 * @param $fromP String: Name of the user whose edits to rollback.
 	 * @param $summary String: Custom summary. Set to default summary if empty.
 	 * @param $bot Boolean: If true, mark all reverted edits as bot.
@@ -2322,26 +2407,27 @@ class WikiPage extends Page implements IDBAccessObject {
 		$dbw = wfGetDB( DB_MASTER );
 
 		if ( wfReadOnly() ) {
-			return array( array( 'readonlytext' ) );
+			return [ [ 'readonlytext' ] ];
 		}
 
 		# Get the last editor
 		$current = $this->getRevision();
 		if ( is_null( $current ) ) {
 			# Something wrong... no page?
-			return array( array( 'notanarticle' ) );
+			return [ [ 'notanarticle' ] ];
 		}
 
 		$from = str_replace( '_', ' ', $fromP );
 		# User name given should match up with the top revision.
 		# If the user was deleted then $from should be empty.
 		if ( $from != $current->getUserText() ) {
-			$resultDetails = array( 'current' => $current );
-			return array( array( 'alreadyrolled',
-				htmlspecialchars( $this->mTitle->getPrefixedText() ),
-				htmlspecialchars( $fromP ),
-				htmlspecialchars( $current->getUserText() )
-			) );
+			$resultDetails = [ 'current' => $current ];
+
+			return [ [ 'alreadyrolled',
+					   htmlspecialchars( $this->mTitle->getPrefixedText() ),
+					   htmlspecialchars( $fromP ),
+					   htmlspecialchars( $current->getUserText() )
+					 ] ];
 		}
 
 		# Get the last edit not by this guy...
@@ -2349,39 +2435,39 @@ class WikiPage extends Page implements IDBAccessObject {
 		$user = intval( $current->getRawUser() );
 		$user_text = $dbw->addQuotes( $current->getRawUserText() );
 		$s = $dbw->selectRow( 'revision',
-			array( 'rev_id', 'rev_timestamp', 'rev_deleted' ),
-			array( 'rev_page' => $current->getPage(),
-				"rev_user != {$user} OR rev_user_text != {$user_text}"
-			), __METHOD__,
-			array( 'USE INDEX' => 'page_timestamp',
-				'ORDER BY' => 'rev_timestamp DESC' )
-			);
+			[ 'rev_id', 'rev_timestamp', 'rev_deleted' ],
+			[ 'rev_page' => $current->getPage(),
+			  "rev_user != {$user} OR rev_user_text != {$user_text}"
+			], __METHOD__,
+			[ 'USE INDEX' => 'page_timestamp',
+			  'ORDER BY' => 'rev_timestamp DESC' ]
+		);
 		if ( $s === false ) {
 			# No one else ever edited this page
-			return array( array( 'cantrollback' ) );
+			return [ [ 'cantrollback' ] ];
 		} elseif ( $s->rev_deleted & Revision::DELETED_TEXT || $s->rev_deleted & Revision::DELETED_USER ) {
 			# Only admins can see this text
-			return array( array( 'notvisiblerev' ) );
+			return [ [ 'notvisiblerev' ] ];
 		}
 
-		$set = array();
+		$set = [ ];
 		if ( $bot && $guser->isAllowed( 'markbotedits' ) ) {
 			# Mark all reverted edits as bot
-			$set['rc_bot'] = 1;
+			$set[ 'rc_bot' ] = 1;
 		}
 
 		if ( $wgUseRCPatrol ) {
 			# Mark all reverted edits as patrolled
-			$set['rc_patrolled'] = 1;
+			$set[ 'rc_patrolled' ] = 1;
 		}
 
 		if ( count( $set ) ) {
 			$dbw->update( 'recentchanges', $set,
-				array( /* WHERE */
-					'rc_cur_id' => $current->getPage(),
-					'rc_user_text' => $current->getUserText(),
-					"rc_timestamp > '{$s->rev_timestamp}'",
-				), __METHOD__
+				[ /* WHERE */
+				  'rc_cur_id' => $current->getPage(),
+				  'rc_user_text' => $current->getUserText(),
+				  "rc_timestamp > '{$s->rev_timestamp}'",
+				], __METHOD__
 			);
 		}
 
@@ -2398,17 +2484,17 @@ class WikiPage extends Page implements IDBAccessObject {
 		# Wikia change begin - @author: Macbre
 		# MyHome: store ID of the rollbacked revision
 		$nextRev = $target->getNext();
-		if ($nextRev instanceof Revision) {
-			Wikia::setVar('RollbackedRevId', $nextRev->getId());
+		if ( $nextRev instanceof Revision ) {
+			Wikia::setVar( 'RollbackedRevId', $nextRev->getId() );
 		}
 		# Wikia change end
 
 		# Allow the custom summary to use the same args as the default message
-		$args = array(
+		$args = [
 			$target->getUserText(), $from, $s->rev_id,
 			$wgContLang->timeanddate( wfTimestamp( TS_MW, $s->rev_timestamp ) ),
 			$current->getId(), $wgContLang->timeanddate( $current->getTimestamp() )
-		);
+		];
 		$summary = wfMsgReplaceArgs( $summary, $args );
 
 		# Save
@@ -2424,22 +2510,22 @@ class WikiPage extends Page implements IDBAccessObject {
 
 		# Actually store the edit
 		$status = $this->doEdit( $target->getText(), $summary, $flags, $target->getId(), $guser );
-		if ( !empty( $status->value['revision'] ) ) {
-			$revId = $status->value['revision']->getId();
+		if ( !empty( $status->value[ 'revision' ] ) ) {
+			$revId = $status->value[ 'revision' ]->getId();
 		} else {
 			$revId = false;
 		}
 
-		wfRunHooks( 'ArticleRollbackComplete', array( $this, $guser, $target, $current ) );
+		wfRunHooks( 'ArticleRollbackComplete', [ $this, $guser, $target, $current ] );
 
-		$resultDetails = array(
+		$resultDetails = [
 			'summary' => $summary,
 			'current' => $current,
-			'target'  => $target,
-			'newid'   => $revId
-		);
+			'target' => $target,
+			'newid' => $revId
+		];
 
-		return array();
+		return [ ];
 	}
 
 	/**
@@ -2530,6 +2616,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Purge caches on page update etc
 	 *
 	 * @param $title Title object
+	 *
 	 * @todo:  verify that $title is always a Title object (and never false or null), add Title hint to parameter $title
 	 */
 	public static function onArticleEdit( $title ) {
@@ -2541,7 +2628,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			->title( $title );
 		// Invalidate caches of articles which include this page and those
 		// that redirect to it
-		$task->call( 'purge', ['templatelinks', 'redirect'] );
+		$task->call( 'purge', [ 'templatelinks', 'redirect' ] );
 		$task->queue();
 		// Wikia Change End
 
@@ -2561,18 +2648,18 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * @return Array of Title objects
 	 */
 	public function getHiddenCategories() {
-		$result = array();
+		$result = [ ];
 		$id = $this->mTitle->getArticleID();
 
 		if ( $id == 0 ) {
-			return array();
+			return [ ];
 		}
 
 		$dbr = wfGetDB( DB_SLAVE );
-		$res = $dbr->select( array( 'categorylinks', 'page_props', 'page' ),
-			array( 'cl_to' ),
-			array( 'cl_from' => $id, 'pp_page=page_id', 'pp_propname' => 'hiddencat',
-				'page_namespace' => NS_CATEGORY, 'page_title=cl_to' ),
+		$res = $dbr->select( [ 'categorylinks', 'page_props', 'page' ],
+			[ 'cl_to' ],
+			[ 'cl_from' => $id, 'pp_page=page_id', 'pp_propname' => 'hiddencat',
+			  'page_namespace' => NS_CATEGORY, 'page_title=cl_to' ],
 			__METHOD__ );
 
 		if ( $res !== false ) {
@@ -2585,12 +2672,14 @@ class WikiPage extends Page implements IDBAccessObject {
 	}
 
 	/**
-	* Return an applicable autosummary if one exists for the given edit.
-	* @param $oldtext String: the previous text of the page.
-	* @param $newtext String: The submitted text of the page.
-	* @param $flags Int bitmask: a bitmask of flags submitted for the edit.
-	* @return string An appropriate autosummary, or an empty string.
-	*/
+	 * Return an applicable autosummary if one exists for the given edit.
+	 *
+	 * @param $oldtext String: the previous text of the page.
+	 * @param $newtext String: The submitted text of the page.
+	 * @param $flags Int bitmask: a bitmask of flags submitted for the edit.
+	 *
+	 * @return string An appropriate autosummary, or an empty string.
+	 */
 	public static function getAutosummary( $oldtext, $newtext, $flags ) {
 		global $wgContLang;
 
@@ -2604,12 +2693,13 @@ class WikiPage extends Page implements IDBAccessObject {
 			$truncatedtext = $wgContLang->truncate(
 				str_replace( "\n", ' ', $newtext ),
 				max( 0, 250
-					- strlen( wfMsgForContent( 'autoredircomment' ) )
-					- strlen( $rt->getFullText() )
+						- strlen( wfMsgForContent( 'autoredircomment' ) )
+						- strlen( $rt->getFullText() )
 				) );
 
 			# wikia changes begin
 			Wikia::setVar( 'AutoSummaryType', 'autoredircomment' );
+
 			# wikia changes end
 
 			return wfMsgForContent( 'autoredircomment', $rt->getFullText(), $truncatedtext );
@@ -2625,6 +2715,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 			# wikia changes begin
 			Wikia::setVar( 'AutoSummaryType', 'autosumm-new' );
+
 			# wikia changes end
 
 			return wfMsgForContent( 'autosumm-new', $truncatedtext );
@@ -2635,6 +2726,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 			# wikia changes begin
 			Wikia::setVar( 'AutoSummaryType', 'autosumm-blank' );
+
 			# wikia changes end
 
 			return wfMsgForContent( 'autosumm-blank' );
@@ -2647,6 +2739,7 @@ class WikiPage extends Page implements IDBAccessObject {
 
 			# wikia changes begin
 			Wikia::setVar( 'AutoSummaryType', 'autosumm-replace' );
+
 			# wikia changes end
 
 			return wfMsgForContent( 'autosumm-replace', $truncatedtext );
@@ -2661,6 +2754,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Auto-generates a deletion reason
 	 *
 	 * @param &$hasHistory Boolean: whether the page has a history
+	 *
 	 * @return mixed String containing deletion reason or empty string, or boolean false
 	 *    if no revision occurred
 	 */
@@ -2683,7 +2777,7 @@ class WikiPage extends Page implements IDBAccessObject {
 		if ( $contents == '' ) {
 			$prev = $rev->getPrevious();
 
-			if ( $prev )	{
+			if ( $prev ) {
 				$contents = $prev->getText();
 				$blank = true;
 			}
@@ -2694,9 +2788,9 @@ class WikiPage extends Page implements IDBAccessObject {
 		// Find out if there was only one contributor
 		// Only scan the last 20 revisions
 		$res = $dbw->select( 'revision', 'rev_user_text',
-			array( 'rev_page' => $this->getID(), $dbw->bitAnd( 'rev_deleted', Revision::DELETED_USER ) . ' = 0' ),
+			[ 'rev_page' => $this->getID(), $dbw->bitAnd( 'rev_deleted', Revision::DELETED_USER ) . ' = 0' ],
 			__METHOD__,
-			array( 'LIMIT' => 20 )
+			[ 'LIMIT' => 20 ]
 		);
 
 		if ( $res === false ) {
@@ -2764,9 +2858,9 @@ class WikiPage extends Page implements IDBAccessObject {
 		global $wgSkipCountForCategories;
 
 		/* Used by CategoryService */
-		wfRunHooks( 'ArticleUpdateCategoryCounts', array( &$this, $added, $deleted ));
+		wfRunHooks( 'ArticleUpdateCategoryCounts', [ &$this, $added, $deleted ] );
 
-		if( is_array( $wgSkipCountForCategories ) ) {
+		if ( is_array( $wgSkipCountForCategories ) ) {
 			$added = array_diff( $added, $wgSkipCountForCategories );
 			$deleted = array_diff( $deleted, $wgSkipCountForCategories );
 		}
@@ -2787,24 +2881,24 @@ class WikiPage extends Page implements IDBAccessObject {
 			return;
 		}
 
-		$insertRows = array();
+		$insertRows = [ ];
 
 		foreach ( $insertCats as $cat ) {
-			$insertRows[] = array(
+			$insertRows[] = [
 				'cat_id' => $dbw->nextSequenceValue( 'category_cat_id_seq' ),
 				'cat_title' => $cat
-			);
+			];
 		}
 		$dbw->insert( 'category', $insertRows, __METHOD__, 'IGNORE' );
 
-		$addFields    = array( 'cat_pages = cat_pages + 1' );
-		$removeFields = array( 'cat_pages = cat_pages - 1' );
+		$addFields = [ 'cat_pages = cat_pages + 1' ];
+		$removeFields = [ 'cat_pages = cat_pages - 1' ];
 
 		if ( $ns == NS_CATEGORY ) {
-			$addFields[]    = 'cat_subcats = cat_subcats + 1';
+			$addFields[] = 'cat_subcats = cat_subcats + 1';
 			$removeFields[] = 'cat_subcats = cat_subcats - 1';
 		} elseif ( $ns == NS_FILE ) {
-			$addFields[]    = 'cat_files = cat_files + 1';
+			$addFields[] = 'cat_files = cat_files + 1';
 			$removeFields[] = 'cat_files = cat_files - 1';
 		}
 
@@ -2812,7 +2906,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			$dbw->update(
 				'category',
 				$addFields,
-				array( 'cat_title' => $added ),
+				[ 'cat_title' => $added ],
 				__METHOD__
 			);
 		}
@@ -2821,7 +2915,7 @@ class WikiPage extends Page implements IDBAccessObject {
 			$dbw->update(
 				'category',
 				$removeFields,
-				array( 'cat_title' => $deleted ),
+				[ 'cat_title' => $deleted ],
 				__METHOD__
 			);
 		}
@@ -2847,24 +2941,24 @@ class WikiPage extends Page implements IDBAccessObject {
 		# Get templates from templatelinks
 		$id = $this->mTitle->getArticleID();
 
-		$tlTemplates = array();
+		$tlTemplates = [ ];
 
 		$dbr = wfGetDB( DB_SLAVE );
-		$res = $dbr->select( array( 'templatelinks' ),
-			array( 'tl_namespace', 'tl_title' ),
-			array( 'tl_from' => $id ),
+		$res = $dbr->select( [ 'templatelinks' ],
+			[ 'tl_namespace', 'tl_title' ],
+			[ 'tl_from' => $id ],
 			__METHOD__
 		);
 
 		foreach ( $res as $row ) {
-			$tlTemplates["{$row->tl_namespace}:{$row->tl_title}"] = true;
+			$tlTemplates[ "{$row->tl_namespace}:{$row->tl_title}" ] = true;
 		}
 
 		# Get templates from parser output.
-		$poTemplates = array();
+		$poTemplates = [ ];
 		foreach ( $parserOutput->getTemplates() as $ns => $templates ) {
 			foreach ( $templates as $dbk => $id ) {
-				$poTemplates["$ns:$dbk"] = true;
+				$poTemplates[ "$ns:$dbk" ] = true;
 			}
 		}
 
@@ -2902,7 +2996,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	public function createUpdates( $rev ) {
 		wfDeprecated( __METHOD__, '1.18' );
 		global $wgUser;
-		$this->doEditUpdates( $rev, $wgUser, array( 'created' => true ) );
+		$this->doEditUpdates( $rev, $wgUser, [ 'created' => true ] );
 	}
 
 	/**
@@ -2910,12 +3004,14 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * so we can do things like signatures and links-in-context.
 	 *
 	 * @deprecated in 1.19; use Parser::preSaveTransform() instead
+	 *
 	 * @param $text String article contents
 	 * @param $user User object: user doing the edit
 	 * @param $popts ParserOptions object: parser options, default options for
 	 *               the user loaded if null given
+	 *
 	 * @return string article contents with altered wikitext markup (signatures
-	 * 	converted, {{subst:}}, templates, etc.)
+	 *    converted, {{subst:}}, templates, etc.)
 	 */
 	public function preSaveTransform( $text, User $user = null, ParserOptions $popts = null ) {
 		global $wgParser, $wgUser;
@@ -2939,6 +3035,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 */
 	public function isBigDeletion() {
 		wfDeprecated( __METHOD__, '1.19' );
+
 		return $this->mTitle->isBigDeletion();
 	}
 
@@ -2950,6 +3047,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	 */
 	public function estimateRevisionCount() {
 		wfDeprecated( __METHOD__, '1.19' );
+
 		return $this->mTitle->estimateRevisionCount();
 	}
 
@@ -2957,15 +3055,17 @@ class WikiPage extends Page implements IDBAccessObject {
 	 * Update the article's restriction field, and leave a log entry.
 	 *
 	 * @deprecated since 1.19
+	 *
 	 * @param $limit Array: set of restriction keys
 	 * @param $reason String
 	 * @param &$cascade Integer. Set to false if cascading protection isn't allowed.
 	 * @param $expiry Array: per restriction type expiration
 	 * @param $user User The user updating the restrictions
+	 *
 	 * @return bool true on success
 	 */
 	public function updateRestrictions(
-		$limit = array(), $reason = '', &$cascade = 0, $expiry = array(), User $user = null
+		$limit = [ ], $reason = '', &$cascade = 0, $expiry = [ ], User $user = null
 	) {
 		global $wgUser;
 
@@ -2980,6 +3080,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	public function quickEdit( $text, $comment = '', $minor = 0 ) {
 		wfDeprecated( __METHOD__, '1.18' );
 		global $wgUser;
+
 		return $this->doQuickEdit( $text, $wgUser, $comment, $minor );
 	}
 
@@ -2989,6 +3090,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	public function viewUpdates() {
 		wfDeprecated( __METHOD__, '1.18' );
 		global $wgUser;
+
 		return $this->doViewUpdates( $wgUser );
 	}
 
@@ -2998,6 +3100,7 @@ class WikiPage extends Page implements IDBAccessObject {
 	public function useParserCache( $oldid ) {
 		wfDeprecated( __METHOD__, '1.18' );
 		global $wgUser;
+
 		return $this->isParserCacheUsed( ParserOptions::newFromUser( $wgUser ), $oldid );
 	}
 }
@@ -3110,21 +3213,21 @@ class PoolWorkArticleView extends PoolCounterWork {
 			$text = $rev->getText();
 		}
 
-		$time = - microtime( true );
+		$time = -microtime( true );
 		$this->parserOutput = $wgParser->parse( $text, $this->page->getTitle(),
 			$this->parserOptions, true, true, $this->revid );
 		$time += microtime( true );
 
 		# <Wikia>
 		$this->parserOutput->setPerformanceStats( 'time', $time );
-		Transaction::addEvent( Transaction::EVENT_ARTICLE_PARSE, array(
+		Transaction::addEvent( Transaction::EVENT_ARTICLE_PARSE, [
 			'real' => $time,
 			'article' => $this->page->getTitle()->getPrefixedDBkey(),
-			'input_length' => strlen($text),
-			'options_used' => implode(',',$this->parserOutput->getUsedOptions()),
-			'options_hash' => $this->parserOptions->optionsHash($this->parserOutput->getUsedOptions()),
+			'input_length' => strlen( $text ),
+			'options_used' => implode( ',', $this->parserOutput->getUsedOptions() ),
+			'options_hash' => $this->parserOptions->optionsHash( $this->parserOutput->getUsedOptions() ),
 			'output_cacheable' => $this->parserOutput->isCacheable() && !$this->parserOutput->containsOldMagic(),
-		));
+		] );
 		# </Wikia>
 
 		# Timing hack
@@ -3135,8 +3238,9 @@ class PoolWorkArticleView extends PoolCounterWork {
 
 		# PLATFORM-1355 (investigate blank pages)
 		# Check to see if Input exists but Output is just a Parser Performance dump with no other content
-		if ( !empty($text) && $this->page->getTitle()->getNamespace() != NS_MAIN &&
-			 preg_match("/^\n<!-- \nNewPP/s", $this->parserOutput->mText) === 1 ) {
+		if ( !empty( $text ) && $this->page->getTitle()->getNamespace() != NS_MAIN &&
+			 preg_match( "/^\n<!-- \nNewPP/s", $this->parserOutput->mText ) === 1
+		) {
 
 			\Wikia\Logger\WikiaLogger::instance()->error(
 				__METHOD__ . ' empty content PLAT1355'
@@ -3171,9 +3275,11 @@ class PoolWorkArticleView extends PoolCounterWork {
 
 		if ( $this->parserOutput === false ) {
 			wfDebug( __METHOD__ . ": parser cache miss\n" );
+
 			return false;
 		} else {
 			wfDebug( __METHOD__ . ": parser cache hit\n" );
+
 			return true;
 		}
 	}
@@ -3187,11 +3293,13 @@ class PoolWorkArticleView extends PoolCounterWork {
 		if ( $this->parserOutput === false ) {
 			wfDebugLog( 'dirty', "dirty missing\n" );
 			wfDebug( __METHOD__ . ": no dirty cache\n" );
+
 			return false;
 		} else {
 			wfDebug( __METHOD__ . ": sending dirty output\n" );
 			wfDebugLog( 'dirty', "dirty output {$this->cacheKey}\n" );
 			$this->isDirty = true;
+
 			return true;
 		}
 	}
@@ -3201,6 +3309,7 @@ class PoolWorkArticleView extends PoolCounterWork {
 	 */
 	function error( $status ) {
 		$this->error = $status;
+
 		return false;
 	}
 }

@@ -20,3 +20,4 @@ $wgHooks['ArticleDeleteComplete'][] = 'PipelineEventProducer::onArticleDeleteCom
 $wgHooks['ArticleUndelete'][] = 'PipelineEventProducer::onArticleUndelete';
 $wgHooks['TitleMoveComplete'][] = 'PipelineEventProducer::onTitleMoveComplete';
 $wgHooks['UserTemplateClassification::TemplateClassified'][] = 'PipelineEventProducer::onTemplateClassified';
+$wgHooks['AfterArticlePurge'][] = 'PipelineEventProducer::onAfterArticlePurge';

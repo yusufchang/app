@@ -80,7 +80,7 @@ class PortableInfoboxParserTagController extends WikiaController {
 
 		$data = $infoboxNode->getRenderData();
 		//save for later api usage
-		$this->saveToParserOutput( $parser->getOutput(), $infoboxNode );
+		$this->saveToParserOutput( $parser->getOutput(), $infoboxNode, $frame->getTitle()->getText() );
 
 		$theme = $this->getThemeWithDefault( $params, $frame );
 		$layout = $this->getLayout( $params );
@@ -91,7 +91,7 @@ class PortableInfoboxParserTagController extends WikiaController {
 	/**
 	 * @desc Renders Infobox
 	 *
-	 * @param String $text
+	 * @param String $textF
 	 * @param Array $params
 	 * @param Parser $parser
 	 * @param PPFrame $frame
@@ -128,12 +128,12 @@ class PortableInfoboxParserTagController extends WikiaController {
 		return strtr( $text, $this->markers );
 	}
 
-	protected function saveToParserOutput( \ParserOutput $parserOutput, Nodes\NodeInfobox $raw ) {
+	protected function saveToParserOutput( \ParserOutput $parserOutput, Nodes\NodeInfobox $raw, $name = "" ) {
 		// parser output stores this in page_props table, therefore we can reuse the data in data provider service
 		// (see: PortableInfoboxDataService.class.php)
 		if ( $raw ) {
 			$infoboxes = json_decode( $parserOutput->getProperty( PortableInfoboxDataService::INFOBOXES_PROPERTY_NAME ), true );
-			$infoboxes[] = [ 'data' => $raw->getRenderData(), 'sources' => $raw->getSource() ];
+			$infoboxes[] = [ 'data' => $raw->getRenderData(), 'sources' => $raw->getSource(), 'name' => $name ];
 			$parserOutput->setProperty( PortableInfoboxDataService::INFOBOXES_PROPERTY_NAME, json_encode( $infoboxes ) );
 		}
 	}
