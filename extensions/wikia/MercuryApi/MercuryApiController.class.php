@@ -415,7 +415,9 @@ class MercuryApiController extends WikiaController {
 			$title = $this->wg->Title;
 		} catch ( NotContentPageException $exception ) {
 			$title = $this->wg->Title;
+			$this->response->setCode(307);
 			$this->response->redirect( '/index.php?title=' . $title->getFullText() . '&useskin=wikiamobile' );
+			return;
 		}
 
 		$data['adsContext'] = $this->mercuryApi->getAdsContext( $title );
