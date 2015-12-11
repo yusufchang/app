@@ -4,7 +4,7 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 	private $portabilityGauge;
 
 	public function __construct() {
-		parent::__construct('Dashboard', '', false);
+		parent::__construct( 'Dashboard', '', false );
 
 		$this->portabilityGauge = Wikia\Dashboard\Components\PortabilityGauge::getInstance();
 	}
@@ -16,16 +16,12 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 	public function index() {
 		Wikia::addAssetsToOutput( 'special_dashboard_scss' );
 		Wikia::addAssetsToOutput( 'special_dashboard_js' );
-		$this->wg->Out->setPageTitle("DIANANANANNANANAN");
+		$this->wg->Out->setPageTitle( wfMessage( 'special-dashboard-page-title' )->plain() );
 
-		$this->portability = 60;
-
-		$this->portabilityGauge->getPortabilityPercent();
-
+		$this->statsData = [
+			'portability' => $this->portabilityGauge->getPortabilityPercent(),
+			'template_types' => $this->portabilityGauge->getPortabilityPercent(),
+		];
+		$this->portability = $this->portabilityGauge->getPortabilityPercent();
 	}
-
-	public function GetSpecialPage () {
-
-	}
-
 }

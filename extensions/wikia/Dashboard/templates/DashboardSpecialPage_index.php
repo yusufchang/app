@@ -12,7 +12,6 @@
 <!-- http://bl.ocks.org/tomerd/1499279 -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
-<script type="text/javascript" src="js/Gauge.js"></script>
 
 <script>
 

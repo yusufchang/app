@@ -16,7 +16,8 @@ $wgExtensionCredits['specialpage'][] = array(
 	"descriptionmsg" => "dshboard-desc",
 	'authors' => [
 		'Diana Falkowska',
-		'Nikodem Hynek'
+		'Nikodem Hynek',
+		'Sebastian Marzjan'
 	],
 	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/Dashboard'
 );
@@ -28,6 +29,7 @@ $wgAutoloadClasses['DashboardSpecialPageController'] =  $dir . 'DashboardSpecial
 $wgAutoloadClasses['DashboardController'] =  $dir . 'DashboardController.class.php';
 $wgAutoloadClasses['Wikia\Dashboard\Components\PortabilityGauge'] =  $dir . 'components/PortabilityGauge.php';
 
+$wgExtensionMessagesFiles['SpecialDashboard'] = $dir.'SpecialDashboard.i18n.php';
 
 $wgSpecialPages[ 'Dashboard'] = 'DashboardSpecialPageController';
 $wgSpecialPageGroups['Dashboard'] = 'wikia';

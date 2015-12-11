@@ -2,15 +2,15 @@
 
 namespace Wikia\Dashboard\Components;
 
-class PortabilityGauge {
-	const CLASSNAME = 'portability-gauge';
+class TemplateTypesChart {
+	const CLASSNAME = 'template-types-chart';
 	private static $instance = null;
 
 	private function __construct() {
 	}
 
 	/**
-	 * @return null|PortabilityGauge
+	 * @return null|TemplateTypesChart
 	 */
 	public static function getInstance() {
 		if ( is_null( self::$instance ) ) {
@@ -20,7 +20,7 @@ class PortabilityGauge {
 	}
 
 	/**
-	 * Returns portability percentage for current wiki
+	 * Returns template types for current wiki with their shares
 	 * @return float
 	 */
 	public function getPortabilityPercent() {
