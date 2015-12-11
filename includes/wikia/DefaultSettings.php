@@ -763,6 +763,7 @@ $wgWikiFactoryTags = array();
  * external databases
  */
 $wgFlagsDB = 'portable_flags';
+$wgPortableMetricDB = 'portablemetricdb';
 $wgContentReviewDB = 'content_review';
 $wgExternalDatawareDB = 'dataware';
 $wgExternalArchiveDB = 'archive';
