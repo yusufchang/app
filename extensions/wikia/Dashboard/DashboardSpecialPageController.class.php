@@ -7,19 +7,18 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 	public function __construct() {
 		parent::__construct( 'Dashboard', '', false );
 
+		Wikia::addAssetsToOutput( 'special_dashboard_scss' );
+		Wikia::addAssetsToOutput( 'special_dashboard_js' );
+		$this->wg->Out->setPageTitle( wfMessage( 'special-dashboard-page-title' )->plain() );
+
 		$this->portabilityGauge = Wikia\Dashboard\Components\PortabilityGauge::getInstance();
 		$this->templateTypesChart = Wikia\Dashboard\Components\TemplateTypesChart::getInstance();
 	}
 
 	/**
 	 * @brief Displays the main menu for the dashboard
-	 *
 	 */
 	public function index() {
-		Wikia::addAssetsToOutput( 'special_dashboard_scss' );
-		Wikia::addAssetsToOutput( 'special_dashboard_js' );
-		$this->wg->Out->setPageTitle( wfMessage( 'special-dashboard-page-title' )->plain() );
-
 		$this->statsData = [
 			'portability' => $this->portabilityGauge->getPortabilityPercent(),
 			'templateTypes' => $this->templateTypesChart->getTemplateTypesWithCounts()

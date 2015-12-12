@@ -4,6 +4,7 @@
  *
  * @author Diana Falkowska
  * @author Nikodem Hynek
+ * @author Sebastian Marzjan
  */
 
 /**

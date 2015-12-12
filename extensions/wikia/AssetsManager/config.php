@@ -2741,8 +2741,8 @@ $config['polldaddy_tag_wikiamobile'] = [
 $config['special_dashboard_js'] = [
 		'type' => AssetsManager::TYPE_JS,
 		'assets' => [
-				'//extensions/wikia/Dashboard/js/Dashboard.js',
-				'//extensions/wikia/Dashboard/js/Gauge.js'
+			'//extensions/wikia/Dashboard/js/Gauge.js',
+			'//extensions/wikia/Dashboard/js/Chart.js'
 		]
 ];
 

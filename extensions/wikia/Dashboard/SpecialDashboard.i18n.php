@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Internationalisation file for the SpecialPromote extension.
- *
- * @addtogroup Languages
- */
-
 $messages = array();
 
 $messages['en'] = array(
