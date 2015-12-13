@@ -28,3 +28,26 @@ polyline {
 	stroke-width: 1px;
 	fill: none;
 }
+
+/* Gridster styles */
+.gridster {
+	width: 940px;
+	margin: 0 auto;
+
+	ul {
+		list-style-type: none;
+	}
+
+	li {
+		background-color: rgba(10, 95, 163, 0.3);
+		border: 1px solid black;
+		text-align: center;
+		cursor: pointer;
+		-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+		box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
+		&:hover {
+			background-color: rgba(10, 95, 163, 0.1);
+		}
+	}
+}

@@ -24,7 +24,6 @@ class TemplateTypesChart {
 	 * @return array
 	 */
 	public function getTemplateTypesWithCounts() {
-
 		global $wgCityId;
 		$db = wfGetDB( DB_SLAVE, [], 'templateclassification' );
 		$types = [];

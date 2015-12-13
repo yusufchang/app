@@ -2742,7 +2742,8 @@ $config['special_dashboard_js'] = [
 		'type' => AssetsManager::TYPE_JS,
 		'assets' => [
 			'//extensions/wikia/Dashboard/js/Gauge.js',
-			'//extensions/wikia/Dashboard/js/Chart.js'
+			'//extensions/wikia/Dashboard/js/Chart.js',
+			'//extensions/wikia/Dashboard/js/jquery.gridster.js',
 		]
 ];
 

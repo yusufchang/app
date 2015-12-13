@@ -20,7 +20,7 @@ $wgExtensionCredits['specialpage'][] = array(
 		'Nikodem Hynek',
 		'Sebastian Marzjan'
 	],
-	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/Dashboard'
+	'url' => 'https://github.com/Wikia/app/tree/special-dashboard/extensions/wikia/Dashboard'
 );
 
 $dir = dirname(__FILE__) . '/';
