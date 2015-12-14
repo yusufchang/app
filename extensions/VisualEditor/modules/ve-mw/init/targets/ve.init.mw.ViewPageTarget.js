@@ -591,7 +591,7 @@ ve.init.mw.ViewPageTarget.prototype.onSave = function (
 			} );
 			this.revid = newid;
 		}
-		this.saveDialog.reset();
+		//this.saveDialog.reset();
 		this.replacePageContent(
 			html,
 			categoriesHtml,
@@ -855,9 +855,13 @@ ve.init.mw.ViewPageTarget.prototype.onNoChanges = function () {
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.ViewPageTarget.prototype.onToolbarSaveButtonClick = function () {
-	if ( this.edited || this.restoring ) {
-		this.showSaveDialog();
-	}
+	this.toolbarSaveButton.setLabelContent("Saving")
+	var saveOptions = this.getSaveOptions();
+	this.save( this.docToSave, saveOptions );
+	this.saveDeferred = $.Deferred();
+	this.saveDeferred.then( function() {
+		clearInterval(this.ii);
+	}.bind( this ) );
 };
 
 /**
@@ -1007,11 +1011,11 @@ ve.init.mw.ViewPageTarget.prototype.getSaveFields = function () {
 			}
 		} );
 	ve.extendObject( fields, {
-		wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
-		wpCaptchaClass: this.saveDialog.$( '#wpCaptchaClass' ).val(),
-		wpCaptchaId: this.saveDialog.$( '#wpCaptchaId' ).val(),
-		wpCaptchaWord: this.saveDialog.$( '#wpCaptchaWord' ).val(),
-		'g-recaptcha-response': this.captchaResponse
+		wpSummary: '', //this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : this.initialEditSummary,
+		//wpCaptchaClass: this.saveDialog.$( '#wpCaptchaClass' ).val(),
+		//wpCaptchaId: this.saveDialog.$( '#wpCaptchaId' ).val(),
+		//wpCaptchaWord: this.saveDialog.$( '#wpCaptchaWord' ).val(),
+		//'g-recaptcha-response': this.captchaResponse
 	} );
 	if ( this.recreating ) {
 		fields.wpRecreate = true;
@@ -1192,6 +1196,7 @@ ve.init.mw.ViewPageTarget.prototype.attachToolbarCancelButton = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ViewPageTarget.prototype.showSaveDialog = function () {
+	debugger;
 	this.emit( 'saveWorkflowBegin' );
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).then( function ( win ) {
 		var currentWindow = this.getSurface().getContext().getInspectors().getCurrentWindow(),
