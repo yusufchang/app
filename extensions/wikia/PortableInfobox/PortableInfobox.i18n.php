@@ -1,4 +1,10 @@
 <?php
+$magicWords = array();
+
+$magicWords['en'] = array(
+	'piq' => array( 0, 'piq' )
+);
+
 $messages = array();
 
 $messages['en'] = array(

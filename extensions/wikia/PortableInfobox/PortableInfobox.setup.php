@@ -16,9 +16,18 @@ $wgExtensionCredits[ 'parserhook' ][] = [
 	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/PortableInfobox'
 ];
 
+$wgExtensionCredits[ 'parserhook' ][] = [
+	'path' => __FILE__,
+	'name' => 'Portable Infobox Query',
+	'descriptionmsg' => 'portable-infobox-desc',
+	'author' => 'Adam Robak',
+	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/PortableInfobox'
+];
+
 $wgAutoloadClasses[ 'PortableInfoboxQueryService' ] = $dir . 'services/PortableInfoboxQueryService.class.php';
 $wgAutoloadClasses[ 'PortableInfoboxRenderService' ] = $dir . 'services/PortableInfoboxRenderService.class.php';
 $wgAutoloadClasses[ 'PortableInfoboxErrorRenderService' ] = $dir . 'services/PortableInfoboxErrorRenderService.class.php';
+$wgAutoloadClasses[ 'PortableInfoboxSearchService' ] = $dir . 'services/PortableInfoboxSearchService.class.php';
 
 // parser
 $wgAutoloadClasses[ 'Wikia\\PortableInfobox\\Parser\\ExternalParser' ] = $dir . 'services/Parser/ExternalParser.php';
@@ -56,12 +65,14 @@ $wgAutoloadClasses[ 'ApiQueryPortableInfobox' ] = $dir . 'controllers/ApiQueryPo
 $wgAutoloadClasses[ 'PortableInfoboxHooks' ] = $dir . 'PortableInfoboxHooks.class.php';
 $wgAutoloadClasses[ 'ApiQueryAllinfoboxes' ] = $dir . 'controllers/ApiQueryAllinfoboxes.class.php';
 $wgAutoloadClasses[ 'PortableInfoboxBuilderController' ] = $dir . 'controllers/PortableInfoboxBuilderController.class.php';
+$wgAutoloadClasses[ 'PortableInfoboxQuery' ] = $dir . 'controllers/PortableInfoboxQuery.class.php';
 
 // query pages
 $wgAutoloadClasses[ 'AllinfoboxesQueryPage' ] = $dir . 'querypage/AllinfoboxesQueryPage.php';
 
 // hooks
 $wgHooks[ 'ParserFirstCallInit' ][] = 'PortableInfoboxParserTagController::parserTagInit';
+$wgHooks[ 'ParserFirstCallInit' ][] = 'PortableInfoboxQuery::parserFunctionInit';
 $wgHooks[ 'ParserTagHooksBeforeInvoke' ][] = 'PortableInfoboxHooks::onParserTagHooksBeforeInvoke';
 $wgHooks[ 'BeforePageDisplay' ][] = 'PortableInfoboxHooks::onBeforePageDisplay';
 $wgHooks[ 'ParserAfterTidy' ][] = 'PortableInfoboxParserTagController::replaceInfoboxMarkers';
