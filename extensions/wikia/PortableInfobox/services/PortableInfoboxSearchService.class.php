@@ -26,7 +26,8 @@ class PortableInfoboxSearchService {
 		return !empty( $result[ 'hits' ][ 'hits' ] ) ? array_map( function ( $row ) {
 			$result = $row[ '_source' ];
 			$result[ '_id' ] = $row[ '_id' ];
-			unset( $row[ '_from' ] );
+			unset( $result[ '_from' ] );
+			unset( $result[ 'data' ] );
 
 			return $result;
 		}, $result[ 'hits' ][ 'hits' ] ) : [ ];
