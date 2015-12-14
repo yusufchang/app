@@ -28,6 +28,7 @@ $dir = dirname(__FILE__) . '/';
 $wgAutoloadClasses['DashboardSpecialPageController'] =  $dir . 'DashboardSpecialPageController.class.php';
 $wgAutoloadClasses['Wikia\Dashboard\Components\PortabilityGauge'] =  $dir . 'components/PortabilityGauge.php';
 $wgAutoloadClasses['Wikia\Dashboard\Components\TemplateTypesChart'] =  $dir . 'components/TemplateTypesChart.php';
+$wgAutoloadClasses['Wikia\Dashboard\Components\WAMGauge'] =  $dir . 'components/WAMGauge.php';
 
 $wgExtensionMessagesFiles['SpecialDashboard'] = $dir.'SpecialDashboard.i18n.php';
 
