@@ -15,9 +15,9 @@ class PortableInfoboxCrawler extends Maintenance {
 		$redirects = [];
 
 		// for harry potter
-		//$templates = $this->getClassifiedInfoboxes();
+		$templates = $this->getClassifiedInfoboxes();
 		// for james bond
-		$templates = $this->getPortableInfoboxes();
+		//$templates = $this->getPortableInfoboxes();
 
 		foreach ( $templates as $title ) {
 			$redirectTitles = $title->getRedirectsHere( NS_TEMPLATE );
@@ -30,8 +30,8 @@ class PortableInfoboxCrawler extends Maintenance {
 			}
 		}
 
-		$graph = '<graphs/jamesbond>';
-		$file = fopen('jamesbond.nq', 'w');
+		$graph = '<graphs/harrypotter>';
+		$file = fopen('harrypotter.nq', 'w');
 
 		foreach ($templates as $templateTitle ) {
 			$templateTitleText = $templateTitle->getText();
@@ -42,16 +42,17 @@ class PortableInfoboxCrawler extends Maintenance {
 
 			if ( !$templateTitle->isRedirect() ) {
 				// for harry potter
-				//$infoboxSource = $this->getClassifiedInfoboxSources($templateTitle, $templateTitleText, $extractor );
+				$infoboxSource = $this->getClassifiedInfoboxSources($templateTitle, $templateTitleText, $extractor );
 				// for james bond
-				$infoboxSource = $this->getPortableInfoboxSource( $templateTitle );
-
+				//$infoboxSource = $this->getPortableInfoboxSource( $templateTitle );
+/*
 				if ( empty ( $infoboxSource ) ) {
 					$infoboxSource = $this->getClassifiedInfoboxSources( $templateTitle, $templateTitleText, $extractor );
 					if ( empty ( $infoboxSource ) ) {
 						continue;
 					}
 				}
+*/
 
 				$schema[$templateTitleText] = $infoboxSource;
 				$schema[$templateTitleText]['pagesCount'] = 0;
@@ -66,6 +67,13 @@ class PortableInfoboxCrawler extends Maintenance {
 			foreach ( $pages as $page ) {
 				$subject = "$wgCityId:$page->page_id";
 
+				$pageTitle = addslashes($page->page_title);
+
+				$nqRow = "$subject <wikia:pagename> \"$pageTitle\" $graph .\n";
+				$nqRow .= "$subject <wikia:infoboxtype> \"$prefix\" $graph .\n";
+
+				fwrite($file, $nqRow);
+
 				$title = Title::newFromText( $page->page_title );
 				$schema[$templateTitleText]['pagesCount']++;
 
@@ -76,7 +84,12 @@ class PortableInfoboxCrawler extends Maintenance {
 					$data = $extractor->getTemplate();
 
 					if ( !isset( $data[0] ) ) {
-						continue;
+						$extractor->init($content, $prefix);
+						$data = $extractor->getTemplate();
+
+						if ( !isset( $data[0] ) ) {
+							continue;
+						}
 					}
 
 					foreach ($data[0]['params'] as $key => $param) {
@@ -186,8 +199,14 @@ class PortableInfoboxCrawler extends Maintenance {
 			$content = $article->fetchContent();
 			$extractor->init( $content, $templateTitleText );
 			$source = $extractor->getTemplate();
-			if ( !empty( $source ) ) {
-				$infoboxSource = $source['params'];
+
+			if ( empty( $source ) ) {
+				$extractor->init($content, $templateTitle->getDBkey());
+				$source = $extractor->getTemplate();
+			}
+
+			if ( !empty( $source ) && isset($source[0]['params']) ) {
+				$infoboxSource = $source[0]['params'];
 			}
 		}
 
