@@ -1,12 +1,13 @@
 define('ext.wikia.articleSnippet.popover',
-	['jquery', 'wikia.nirvana', 'wikia.window'],
-	function ($, nirvana, w) {
+	['jquery', 'wikia.nirvana', 'wikia.window', 'wikia.loader', 'wikia.mustache', 'wikia.cache'],
+	function ($, nirvana, w, loader, mustache, cache) {
 		'use strict';
 
 		var $target,
 			linkContent,
 			snippetId,
-			$snippetElement;
+			$snippetElement,
+			templateCacheKey = 'articleSnippetTemplate';
 
 		function init() {
 			$('#WikiaArticle').on('mouseenter', 'a:not(.new)', getArticleSnippet);
@@ -74,10 +75,34 @@ define('ext.wikia.articleSnippet.popover',
 		}
 
 		function createSnippetElement(snippetData) {
-			$('#WikiaArticle').append( '<div id="' + snippetId + '" class="article-snippet"></div>' );
+			var template = cache.get(templateCacheKey);
+
+			if (!template) {
+				$.when(
+					loader({
+						type: loader.MULTI,
+						resources: {
+							mustache: '//extensions/wikia/ArticleSnippet/templates/ArticleSnippetPopover.mustache'
+						}
+					})
+				).done(function (resources) {
+					var template = resources.mustache[0];
+					cache.set(templateCacheKey, template, cache.CACHE_STANDARD);
+					renderTemplate(template, snippetData);
+				});
+			} else {
+				renderTemplate(template, snippetData);
+			}
+		}
+
+		function renderTemplate(template, snippetData) {
+			$('#WikiaArticle').append(mustache.render(template, {
+				snippetId: snippetId,
+				title: snippetData.title,
+				imageUrl: snippetData.image,
+				highlights: snippetData.highlights
+			}));
 			$snippetElement = $('#' + snippetId);
-			$snippetElement.append('<h3>' + snippetData.title + '</h3>');
-			$snippetElement.append('<img src="' + snippetData.image + '">');
 		}
 
 		function stripLinkContent(linkContent) {

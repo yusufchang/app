@@ -59,17 +59,22 @@ class ArticleSnippetApiController extends WikiaApiController {
 				$this->articleSnippet['image'] = $field['data'][0]['url'];
 			} elseif ( $field['type'] === 'data' )
 			{
-				$this->articleSnippet['highlights'][] = $field['data'];
+				$this->articleSnippet['highlights'][] = array_map( [ new self(), 'stripTags' ], $field['data'] );
 			} elseif ( $field['type'] === 'group' )
 			{
 				foreach ( $field['data']['value'] as $subfield ) {
 					if ( $subfield['type'] === 'data' ) {
-						$this->articleSnippet['highlights'][] = $subfield['data'];
+						$this->articleSnippet['highlights'][] = array_map( [ new self(), 'stripTags' ], $subfield['data'] );
 					}
 				}
 			}
 		}
 
 		return $this->articleSnippet;
+	}
+
+	public function stripTags( $string ) {
+		$string = preg_replace( '/<br\s?\/?>/', ', ', $string );
+		return strip_tags($string);
 	}
 }
