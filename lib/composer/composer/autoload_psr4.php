@@ -21,5 +21,6 @@ return array(
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'FluentSql\\' => array($vendorDir . '/wikia/fluent-sql-php/src'),
     'Facebook\\' => array($vendorDir . '/facebook/php-sdk-v4/src/Facebook'),
+    'Elasticsearch\\' => array($vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch'),
     'DI\\' => array($vendorDir . '/php-di/php-di/src/DI'),
 );

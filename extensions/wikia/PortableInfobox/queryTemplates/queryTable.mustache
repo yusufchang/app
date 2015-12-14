@@ -1,0 +1,20 @@
+<table class="wikitable pi-query--table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			{{#keys}}
+				<th>{{.}}</th>
+			{{/keys}}
+		</tr>
+	</thead>
+	<tbody>
+		{{#data}}
+			<tr>
+				<th>{{title}}</th>
+				{{#cols}}
+					<td>{{{.}}}</td>
+				{{/cols}}
+			</tr>
+	{{/data}}
+	</tbody>
+</table>

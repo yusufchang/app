@@ -46,7 +46,7 @@ class PIQTranslator {
 		$out = [ ];
 		foreach ( $this->data as $d ) {
 			$out[] = [ 'title' => $d[ 'title' ], 'cols' =>
-			// get data for keys
+				// get data for keys
 				array_map( function ( $key ) use ( $d ) {
 					return !empty( $d[ $key ] ) ? $d[ $key ] : "";
 				}, $filteredKeys )

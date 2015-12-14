@@ -1,0 +1,75 @@
+@import 'skins/shared/color';
+@import "skins/shared/mixins/gradient";
+@import 'skins/shared/mixins/flexbox';
+@import 'skins/shared/mixins/ellipses';
+@import 'extensions/wikia/PortableInfobox/styles/PortableInfoboxVariables';
+
+.WikiaArticle {
+	.pi-query--list,
+	.pi-query--gallery {
+		list-style: none;
+		margin: 0;
+
+		li {
+			margin: 0;
+		}
+	}
+
+	.pi-query--list {
+		li {
+			padding: $infobox-item-margin $infobox-item-margin * 2;
+
+			&:nth-child(even) {
+				background-color: $infobox-background;
+			}
+		}
+
+		img,
+		figcaption {
+			display: inline-block;
+		}
+
+		img {
+			padding-right: $infobox-item-margin * 2;
+		}
+	}
+
+	.pi-query--gallery {
+		@include flexbox;
+		@include flex-direction(row);
+		@include flex-wrap(wrap);
+
+		box-sizing: border-box;
+		overflow: hidden;
+		width: 100%;
+
+		li {
+			@include flex-basis(25%);
+		}
+
+		a {
+			display: block;
+			position: relative;
+		}
+
+		img {
+			height: auto !important;
+			width: 100% !important;
+		}
+
+		figcaption {
+			@include ellipses;
+			@include linear-gradient(transparent, top, transparent, 0%, rgba(0, 0, 0, .7), 100%);
+
+			bottom: 0;
+			box-sizing: border-box;
+			color: white;
+			font-size: 16px;
+			font-weight: bold;
+			left: 0;
+			padding: $infobox-item-margin * 4 $infobox-item-margin * 2 $infobox-item-margin * 2;
+			position: absolute;
+			width: 100%;
+		}
+	}
+}

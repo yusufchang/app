@@ -3,6 +3,8 @@
 @import 'skins/shared/mixins/flexbox';
 @import 'skins/shared/mixins/transform';
 @import 'extensions/wikia/PortableInfobox/styles/PortableInfoboxVariables';
+// TODO: include this only on pages where pi query widgets are used
+@import 'extensions/wikia/PortableInfobox/styles/PortableInfoboxQueryWidgets';
 
 .portable-infobox {
 	background-color: $infobox-background;
