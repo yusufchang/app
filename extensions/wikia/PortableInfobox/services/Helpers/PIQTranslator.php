@@ -7,6 +7,8 @@
  * Time: 13:21
  */
 class PIQTranslator {
+	const IMG_REGEX = '/^\/(?<bucket>[^\/]+)\/(images\/|avatars\/)?(?<relativePath>.*?)\/revision\/(?<revision>latest|\d+)(\/(?<thumbnailDefinition>.*))?/';
+	private $imgSize = 200;
 
 	public static function transform( $result ) {
 		return new self( $result );
@@ -14,6 +16,12 @@ class PIQTranslator {
 
 	protected function __construct( $result ) {
 		$this->data = $result;
+	}
+
+	public function withImage( $size ) {
+		$this->imgSize = $size;
+
+		return $this;
 	}
 
 	public function toDataTable() {
@@ -40,5 +48,30 @@ class PIQTranslator {
 		}
 
 		return [ 'keys' => $filteredKeys, 'data' => $out ];
+	}
+
+	public function toList() {
+		return array_map( function ( $row ) {
+			list( $wid, $pageid, $order ) = explode( '_', $row[ '_id' ] );
+			$title = Title::newFromID( $pageid );
+			$url = $title && $title->exists() ? $title->getFullURL() : "";
+
+			return [
+				'title' => $row[ 'title' ],
+				'url' => $url,
+				'image' => $this->cropImage( $row[ 'image' ] )
+			];
+		}, $this->data );
+	}
+
+	protected function cropImage( $imageUrl ) {
+		preg_match( self::IMG_REGEX, parse_url( $imageUrl )[ 'path' ], $imgInfo );
+		// make it vignette compatible
+		$imgInfo[ 'relative-path' ] = $imgInfo[ 'relativePath' ];
+		$thumb = VignetteRequest::fromConfigMap( $imgInfo );
+
+		return $thumb ? $thumb->thumbnail()
+			->width( $this->imgSize )->height( $this->imgSize )
+			->topCropDown()->url() : "";
 	}
 }
