@@ -44,7 +44,6 @@ class PortableInfoboxCrawler extends Maintenance {
 			$pages = $templateTitle->getIndirectLinks();
 
 			foreach ( $pages as $page ) {
-				$nqRow = '';
 				$subject = "$wgCityId:$page->page_id";
 
 				$title = Title::newFromText( $page->page_title );
@@ -72,28 +71,10 @@ class PortableInfoboxCrawler extends Maintenance {
 								$linkTitle = Title::newFromText( $linkTitle );
 
 								if ( !empty( $linkTitle ) ) {
-									$linkData = PortableInfoboxDataService::newFromTitle( $linkTitle )->getData();
-						//			$linkData = 'harrypotter';
-
-									if ( !empty ( $linkData ) ) {
-										$linkedArticle = \Article::newFromTitle( $linkTitle, \RequestContext::getMain() );
-										if ( !$linkedArticle || !$linkedArticle->exists() ) {
-											continue;
-										}
-
-										$linkedContent = $linkedArticle->fetchContent();
-
-										foreach ( $templatesText as $titleText ) {
-											$extractor->init( $linkedContent, $titleText );
-											$linkedInfobox = $extractor->getTemplate();
-											if ( !empty( $linkedInfobox ) ) {
-												$articleId = $linkedArticle->getID();
-												$object = "$wgCityId:$articleId";
-												$nqRow .= "$subject $predicate $object $graph .\n";
-												break;
-											}
-										}
-									}
+									$articleId = $linkTitle->getArticleID();
+									$object = "$wgCityId:$articleId";
+									$nqRow = "$subject $predicate $object $graph .\n";
+									fwrite( $file, $nqRow );
 								}
 							}
 						} else {
@@ -104,14 +85,15 @@ class PortableInfoboxCrawler extends Maintenance {
 									$o = str_replace("\n", ' ', $object );
 									$o = addslashes( $o );
 
-									$nqRow .= "$subject $predicate \"$o\" $graph .\n";
+									$nqRow = "$subject $predicate \"$o\" $graph .\n";
+									fwrite( $file, $nqRow );
 								}
 							}
 						}
 					}
 				}
 
-				fwrite( $file, $nqRow );
+
 			}
 			var_dump("=============");
 		}
@@ -171,6 +153,14 @@ class PortableInfoboxCrawler extends Maintenance {
 
 		foreach ( $templates as $title ) {
 			$templateText[] = $title->getText();
+
+			$redirects = $title->getRedirectsHere( NS_TEMPLATE );
+
+			if ( !empty($redirects)) {
+				foreach( $redirects as $redirect ) {
+					$templateText[] = $redirect->getText();
+				}
+			}
 		}
 
 		return $templateText;
