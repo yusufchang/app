@@ -29,6 +29,7 @@ $wgAutoloadClasses['DashboardSpecialPageController'] =  $dir . 'DashboardSpecial
 $wgAutoloadClasses['Wikia\Dashboard\Components\PortabilityGauge'] =  $dir . 'components/PortabilityGauge.php';
 $wgAutoloadClasses['Wikia\Dashboard\Components\TemplateTypesChart'] =  $dir . 'components/TemplateTypesChart.php';
 $wgAutoloadClasses['Wikia\Dashboard\Components\WAMGauge'] =  $dir . 'components/WAMGauge.php';
+$wgAutoloadClasses['Wikia\Dashboard\Components\TopUsersBubble'] =  $dir . 'components/TopUsersBubble.php';
 
 $wgExtensionMessagesFiles['SpecialDashboard'] = $dir.'SpecialDashboard.i18n.php';
 

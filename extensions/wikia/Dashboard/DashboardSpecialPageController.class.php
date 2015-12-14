@@ -4,6 +4,7 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 	private $portabilityGauge;
 	private $templateTypesChart;
 	private $WAMGauge;
+	private $topUsersBubble;
 
 	public function __construct() {
 		parent::__construct( 'Dashboard', '', false );
@@ -15,6 +16,7 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 		$this->portabilityGauge = Wikia\Dashboard\Components\PortabilityGauge::getInstance();
 		$this->templateTypesChart = Wikia\Dashboard\Components\TemplateTypesChart::getInstance();
 		$this->WAMGauge = Wikia\Dashboard\Components\WAMGauge::getInstance();
+		$this->topUsersBubble = Wikia\Dashboard\Components\TopUsersBubble::getInstance();
 	}
 
 	/**
@@ -24,7 +26,8 @@ class DashboardSpecialPageController extends WikiaSpecialPageController {
 		$this->statsData = [
 			'portability' => $this->portabilityGauge->getPortabilityPercent(),
 			'templateTypes' => $this->templateTypesChart->getTemplateTypesWithCounts(),
-			'WAMScore' => $this->WAMGauge->getWAMScore()
+			'WAMScore' => $this->WAMGauge->getWAMScore(),
+			'topUsers' => $this->topUsersBubble->getTopUsers()
 		];
 	}
 }
