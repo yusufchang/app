@@ -72,20 +72,20 @@
 				background: #fff;
 				border: 2px solid $color-wikiahome-community;
 				border-radius: 50%;
-				height: 13%;
+				height: 8px;
 				position: absolute;
-				top: 20%;
+				top: 12px;
 				transform-origin: bottom;
-				width: 13%;
+				width: 8px;
 			}
 
 			.dot-left {
-				left: 24%;
+				left: 15px;
 			}
 
 			.dot-right {
 				animation-delay: -.5s;
-				right: 24%;
+				right: 15px;
 			}
 		}
 
