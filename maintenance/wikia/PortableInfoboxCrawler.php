@@ -12,6 +12,7 @@ class PortableInfoboxCrawler extends Maintenance {
 		global $wgCityId;
 
 		$schema = [];
+		$redirects = [];
 
 		// for harry potter
 		//$templates = $this->getClassifiedInfoboxes();
@@ -19,11 +20,12 @@ class PortableInfoboxCrawler extends Maintenance {
 		$templates = $this->getPortableInfoboxes();
 
 		foreach ( $templates as $title ) {
-			$redirects = $title->getRedirectsHere( NS_TEMPLATE );
+			$redirectTitles = $title->getRedirectsHere( NS_TEMPLATE );
 
-			if ( !empty($redirects)) {
-				foreach( $redirects as $redirect ) {
+			if ( !empty($redirectTitles)) {
+				foreach( $redirectTitles as $redirect ) {
 					$templates[] = $redirect;
+					$redirects[$redirect->getDBkey()] = $title->getDBkey();
 				}
 			}
 		}
@@ -53,6 +55,10 @@ class PortableInfoboxCrawler extends Maintenance {
 
 				$schema[$templateTitleText] = $infoboxSource;
 				$schema[$templateTitleText]['pagesCount'] = 0;
+			} else {
+				if ( isset( $redirects[$prefix])) {
+					$prefix = $redirects[$prefix];
+				}
 			}
 
 			$pages = $templateTitle->getIndirectLinks();
