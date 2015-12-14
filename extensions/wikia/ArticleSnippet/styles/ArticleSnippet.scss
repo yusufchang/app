@@ -1,9 +1,17 @@
+@import "skins/shared/mixins/clearfix";
+
+$snippet-background-color: #F2F6FA;
+$snippet-font-color: #092344;
+
 .article-snippet {
-	background: #F2F6FA;
+	@include clearfix;
+
+	background: $snippet-background-color;
+	color: $snippet-font-color;
 	display: block;
-	max-width: 350px;
+	max-width: 400px;
 	overflow: hidden;
-	padding: 5px 10px 0px;
+	padding: 5px 10px;
 	position: fixed;
 
 	-webkit-box-shadow: 5px 5px 12px 0px rgba(197,206,217,1);
@@ -36,7 +44,7 @@
 		margin-bottom: 10px;
 
 		.article-snippet-item-label {
-			flex-basis: 120px;
+			flex-basis: 140px;
 			font-size: 1em;
 			font-weight: bold;
 			line-height: 1.4em;

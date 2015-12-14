@@ -7,32 +7,44 @@ define('ext.wikia.articleSnippet.popover',
 			linkContent,
 			snippetId,
 			$snippetElement,
-			templateCacheKey = 'articleSnippetTemplate';
+			templateCacheKey = 'articleSnippetTemplate',
+			timeout;
 
 		function init() {
-			$('#WikiaArticle').on('mouseenter', 'a:not(.new)', getArticleSnippet);
+			$('#WikiaArticle').on({
+				mouseenter: getArticleSnippet,
+				mouseleave: resetLoader
+			}, 'a.mw-redirect, a:not([class])');
 		}
 
 		function getArticleSnippet(e) {
 			$target = $(e.currentTarget);
+			$target.attr('title', '');
 			linkContent = $target.html();
 			snippetId = 'ArticleSnippet' + stripLinkContent(linkContent);
 			$snippetElement = $('#' + snippetId);
 
 			if ($snippetElement.length === 0) {
-				if (!$(linkContent).is('*')) {
-					nirvana.getJson(
-						'ArticleSnippetApi',
-						'getArticleSnippet',
-						{
-							'pageTitle': encodeURIComponent(linkContent),
-						},
-						function (response) {
-							$.when(
-								processArticleSnippet(response)
-							).done(showArticleSnippet(e));
-						}
-					);
+				if (!$(linkContent).is('*') && !$target.data('no-snippet')) {
+					timeout = setTimeout(function () {
+						showLoader(e);
+						timeout = setTimeout(function() {
+							nirvana.getJson(
+								'ArticleSnippetApi',
+								'getArticleSnippet',
+								{
+									'pageTitle': encodeURIComponent(linkContent),
+								},
+								function (response) {
+									if (processArticleSnippet(response)) {
+										showArticleSnippet(e);
+									} else {
+										resetLoader(e);
+									}
+								}
+							);
+						}, 500);
+					}, 500);
 				}
 			} else {
 				showArticleSnippet(e);
@@ -40,11 +52,10 @@ define('ext.wikia.articleSnippet.popover',
 		}
 
 		function showArticleSnippet(e) {
-			$target.attr('title', '');
-
 			moveArticleSnippet(e);
 			$snippetElement.show();
 			bindSnippetActionsToTarget($target);
+			resetLoader();
 		}
 
 		function processArticleSnippet(data) {
@@ -53,6 +64,10 @@ define('ext.wikia.articleSnippet.popover',
 			if ($.isPlainObject(data.articleSnippet)) {
 				snippetData = data.articleSnippet;
 				createSnippetElement(snippetData);
+				return true;
+			} else {
+				$target.data('no-snippet', 'true');
+				return false;
 			}
 		}
 
@@ -66,8 +81,9 @@ define('ext.wikia.articleSnippet.popover',
 		function moveArticleSnippet(e) {
 			var x = e.clientX,
 				y = e.clientY;
-			$snippetElement.css('top', (y + 20) + 'px');
-			$snippetElement.css('left', (x + 20) + 'px');
+			$snippetElement
+				.css('top', (y + 20) + 'px')
+				.css('left', (x + 20) + 'px');
 		}
 
 		function hideArticleSnippet(e) {
@@ -96,13 +112,22 @@ define('ext.wikia.articleSnippet.popover',
 		}
 
 		function renderTemplate(template, snippetData) {
-			$('#WikiaArticle').append(mustache.render(template, {
-				snippetId: snippetId,
-				title: snippetData.title,
-				imageUrl: snippetData.image,
-				highlights: snippetData.highlights
-			}));
-			$snippetElement = $('#' + snippetId);
+			if ( $snippetElement.length === 0 ) {
+				$snippetElement = $(mustache.render(template, {
+					snippetId: snippetId,
+					title: snippetData.title,
+					imageUrl: snippetData.image,
+					highlights: snippetData.highlights
+				})).appendTo('#WikiaArticle');
+			}
+		}
+
+		function showLoader(e) {
+			$target.css('cursor', 'progress');
+		}
+
+		function resetLoader(e) {
+			$target.css('cursor', 'pointer');
 		}
 
 		function stripLinkContent(linkContent) {
