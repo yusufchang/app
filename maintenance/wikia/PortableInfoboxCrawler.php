@@ -12,13 +12,12 @@ class PortableInfoboxCrawler extends Maintenance {
 		global $wgCityId;
 
 		$schema = [];
-		$templates = [];
-		$templatesText = [];
 
 		// for harry potter
 		//$templates = $this->getClassifiedInfoboxes();
 		// for james bond
 		$templates = $this->getPortableInfoboxes();
+		$templatesText = $this->getTemplatesText($templates);
 
 		$graph = '<graphs/jamesbond>';
 		$file = fopen('jamesbond.nq', 'w');
