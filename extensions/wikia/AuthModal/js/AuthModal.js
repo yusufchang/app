@@ -11,8 +11,15 @@ define('AuthModal', ['jquery', 'wikia.window'], function ($, window) {
 			close();
 		}
 		$('.WikiaSiteWrapper').append(
-			'<div class="auth-blackout visible"><div class="auth-modal loading">' +
-				'<a class="close" href="#"></div></div>'
+			'<div class="auth-blackout visible">' +
+				'<div class="auth-modal loading">' +
+					'<a class="close" href="#"></a>' +
+					'<div class="wikia-logo-blocker">' +
+						'<div class="dot dot-left"></div>' +
+						'<div class="dot dot-right"></div>' +
+					'</div>' +
+				'</div>' +
+			'</div>'
 		);
 		isOpen = true;
 		$blackout = $('.auth-blackout');
