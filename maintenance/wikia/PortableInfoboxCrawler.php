@@ -17,7 +17,16 @@ class PortableInfoboxCrawler extends Maintenance {
 		//$templates = $this->getClassifiedInfoboxes();
 		// for james bond
 		$templates = $this->getPortableInfoboxes();
-		$templatesText = $this->getTemplatesText($templates);
+
+		foreach ( $templates as $title ) {
+			$redirects = $title->getRedirectsHere( NS_TEMPLATE );
+
+			if ( !empty($redirects)) {
+				foreach( $redirects as $redirect ) {
+					$templates[] = $redirect;
+				}
+			}
+		}
 
 		$graph = '<graphs/jamesbond>';
 		$file = fopen('jamesbond.nq', 'w');
@@ -29,17 +38,22 @@ class PortableInfoboxCrawler extends Maintenance {
 
 			$extractor = new \Flags\FlagsExtractor();
 
-			// for harry potter
-			//$infoboxSource = $this->getClassifiedInfoboxSources($templateTitle, $templateTitleText, $extractor );
-			// for james bond
-			$infoboxSource = $this->getPortableInfoboxSource($templateTitle);
+			if ( !$templateTitle->isRedirect() ) {
+				// for harry potter
+				//$infoboxSource = $this->getClassifiedInfoboxSources($templateTitle, $templateTitleText, $extractor );
+				// for james bond
+				$infoboxSource = $this->getPortableInfoboxSource( $templateTitle );
 
-			if ( empty ($infoboxSource)) {
-				continue;
+				if ( empty ( $infoboxSource ) ) {
+					$infoboxSource = $this->getClassifiedInfoboxSources( $templateTitle, $templateTitleText, $extractor );
+					if ( empty ( $infoboxSource ) ) {
+						continue;
+					}
+				}
+
+				$schema[$templateTitleText] = $infoboxSource;
+				$schema[$templateTitleText]['pagesCount'] = 0;
 			}
-
-			$schema[$templateTitleText] = $infoboxSource;
-			$schema[$templateTitleText]['pagesCount'] = 0;
 
 			$pages = $templateTitle->getIndirectLinks();
 
@@ -153,14 +167,6 @@ class PortableInfoboxCrawler extends Maintenance {
 
 		foreach ( $templates as $title ) {
 			$templateText[] = $title->getText();
-
-			$redirects = $title->getRedirectsHere( NS_TEMPLATE );
-
-			if ( !empty($redirects)) {
-				foreach( $redirects as $redirect ) {
-					$templateText[] = $redirect->getText();
-				}
-			}
 		}
 
 		return $templateText;
