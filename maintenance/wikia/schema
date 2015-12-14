@@ -1,0 +1,160 @@
+Infobox character 
+	image
+	name
+	alias
+	rank
+	age
+	birth_date
+	birth_place
+	death_date
+	death_place
+	hair
+	eyes
+	height
+	weight
+	distinguishing_features
+	known_relatives
+	nationality
+	occupation
+	affiliation
+	status
+	role
+	portrayed
+	first_appearance_book
+	last_appearance_book
+	first_appearance_film
+	last_appearance_film
+	pagesCount
+
+
+Infobox Aircraft 
+	image
+	model
+	manufacturer
+	production
+	role
+	crew
+	length
+	empty weight
+	gross weight
+	rotor diameter
+	powerplant
+	maximum speed 
+	maximum speed
+	range
+	pagesCount
+
+
+Infobox game 
+	image
+	title
+	developer
+	publisher
+	writer
+	composer
+	designer
+	engine
+	released
+	genre
+	modes
+	platforms
+	preceded by
+	followed by
+	pagesCount
+
+
+Infobox Organization 
+	image
+	name
+	prominent members
+	headquarters
+	first_appearance_book
+	last_appearance_book
+	first_appearance_film
+	last_appearance_film
+	pagesCount
+
+
+Infobox Vehicle 
+	image
+	model
+	manufacturer
+	production
+	class
+	engine
+	torque
+	transmission
+	power
+	top speed
+	acceleration
+	brakes
+	dimensions
+	weight
+	pagesCount
+
+
+People 
+	image
+	name
+	born
+	died
+	age
+	nationality
+	occupation
+	known for
+	spouse
+	relatives
+	awards
+	pagesCount
+
+
+BondMovie 
+	image
+	bond
+	director
+	producer
+	writer
+	screenplay
+	cinematographer
+	editing
+	music
+	song
+	composer
+	performer
+	budget
+	gross
+	distributor
+	released
+	runtime
+	preceded_by
+	followed_by
+	pagesCount
+
+
+Infobox/actor 
+	image
+	name
+	place of birth
+	birth
+	death
+	gender
+	nationality
+	occupation
+	pagesCount
+
+
+Bondbook 
+	image
+	author
+	publisher
+	titles
+	cover
+	hardbackUK
+	hardbackUS
+	paperbackUK
+	paperbackUS
+	preceded
+	followed
+	pagesCount
+
+

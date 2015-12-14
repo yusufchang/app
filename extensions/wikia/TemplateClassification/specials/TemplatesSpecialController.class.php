@@ -63,7 +63,7 @@ class TemplatesSpecialController extends WikiaSpecialPageController {
 	 *
 	 * @return array
 	 */
-	private function getClassifiedTemplates( $allTemplates ) {
+	public function getClassifiedTemplates( $allTemplates ) {
 		$classifiedTemplates = [];
 
 		try {
@@ -84,7 +84,7 @@ class TemplatesSpecialController extends WikiaSpecialPageController {
 	 * @return bool|mixed
 	 * @throws \FluentSql\Exception\SqlException
 	 */
-	private function getAllTemplates() {
+	public function getAllTemplates() {
 		$db = wfGetDB( DB_SLAVE );
 
 		$templates = ( new \WikiaSQL() )
@@ -115,13 +115,15 @@ class TemplatesSpecialController extends WikiaSpecialPageController {
 	 * @param array $classifiedTemplates
 	 * @return array
 	 */
-	private function filterTemplatesByName( $allTemplates, $classifiedTemplates ) {
+	public function filterTemplatesByName( $allTemplates, $classifiedTemplates ) {
 		$templates = [];
 
 		$pageId = array_search(
 			strtolower( $this->templateName ),
 			array_map( 'strtolower', array_column( $allTemplates, 'title', 'page_id' ) )
 		);
+
+		var_dump($pageId);
 
 		if ( $pageId ) {
 			$templates[$pageId] = $this->prepareTemplate( $pageId, $allTemplates[$pageId] );
@@ -172,7 +174,7 @@ class TemplatesSpecialController extends WikiaSpecialPageController {
 	 * @param array $classifiedTemplates
 	 * @return array
 	 */
-	private function getTemplatesByType( $allTemplates, $classifiedTemplates ) {
+	public function getTemplatesByType( $allTemplates, $classifiedTemplates ) {
 		$templates = [];
 		$templateIds = array_keys( $classifiedTemplates, $this->type );
 
