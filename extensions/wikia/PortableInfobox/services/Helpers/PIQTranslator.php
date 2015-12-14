@@ -31,22 +31,14 @@ class PIQTranslator {
 
 		$out = [ ];
 		foreach ( $this->data as $d ) {
-			$out[] = [ 'title' => $d[ 'title' ], 'cols' => array_combine( $filteredKeys,
-				// get data for keys
+			$out[] = [ 'title' => $d[ 'title' ], 'cols' =>
+			// get data for keys
 				array_map( function ( $key ) use ( $d ) {
 					return !empty( $d[ $key ] ) ? $d[ $key ] : "";
 				}, $filteredKeys )
-			) ];
+			];
 		}
 
 		return [ 'keys' => $filteredKeys, 'data' => $out ];
 	}
-
-	//	public function toList() {
-	//		return array_map( function ( $d ) {
-	//			return [
-	//				'title' => $d[ 'title' ]
-	//			];
-	//		}, $this->data );
-	//	}
 }

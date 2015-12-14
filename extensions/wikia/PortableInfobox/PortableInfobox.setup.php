@@ -77,6 +77,7 @@ $wgHooks[ 'ParserFirstCallInit' ][] = 'PortableInfoboxQuery::parserFunctionInit'
 $wgHooks[ 'ParserTagHooksBeforeInvoke' ][] = 'PortableInfoboxHooks::onParserTagHooksBeforeInvoke';
 $wgHooks[ 'BeforePageDisplay' ][] = 'PortableInfoboxHooks::onBeforePageDisplay';
 $wgHooks[ 'ParserAfterTidy' ][] = 'PortableInfoboxParserTagController::replaceInfoboxMarkers';
+$wgHooks[ 'ParserAfterTidy' ][] = 'PortableInfoboxQuery::replacePIQMarkers';
 $wgHooks[ 'ImageServing::buildAndGetIndex' ][] = 'PortableInfoboxHooks::onImageServingCollectImages';
 $wgHooks[ 'wgQueryPages' ][] = 'PortableInfoboxHooks::onWgQueryPages';
 $wgHooks[ 'AllInfoboxesQueryRecached' ][] = 'PortableInfoboxHooks::onAllInfoboxesQueryRecached';
