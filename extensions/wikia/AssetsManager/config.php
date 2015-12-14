@@ -2743,6 +2743,7 @@ $config['special_dashboard_js'] = [
 		'assets' => [
 			'//extensions/wikia/Dashboard/js/Gauge.js',
 			'//extensions/wikia/Dashboard/js/Chart.js',
+			'//extensions/wikia/Dashboard/js/LiquidFillGauge.js',
 			'//extensions/wikia/Dashboard/js/jquery.gridster.js',
 		]
 ];

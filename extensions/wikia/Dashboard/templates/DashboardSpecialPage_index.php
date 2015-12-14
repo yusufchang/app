@@ -1,3 +1,12 @@
+<div>
+	<p>WAM score</p>
+	<svg id="gaugeWAM" width="19%" height="200"></svg>
+</div>
+<div>
+	<p>Portability</p>
+	<svg id="gaugePortability" width="19%" height="200"></svg>
+</div>
+
 <!--Poukładaj te kafelki tak, żeby już na starcie fajnie wyglądały, a nie dopiero po pobawieniu się nimi-->
 <div class="gridster">
 	<ul>
@@ -58,4 +67,31 @@
 			}).data('gridster');
 		});
 	})
+</script>
+
+<script type="text/javascript">
+	var gaugeWAMconfig = liquidFillGaugeDefaultSettings();
+	gaugeWAMconfig.textVertPosition = 0.8;
+	gaugeWAMconfig.waveAnimateTime = 5000;
+	gaugeWAMconfig.waveHeight = 0.15;
+	gaugeWAMconfig.waveOffset = 0.25;
+	gaugeWAMconfig.valueCountUp = false;
+	gaugeWAMconfig.displayPercent = false;
+	var gaugeWAM = loadLiquidFillGauge("gaugeWAM", 50, gaugeWAMconfig);
+	var gaugePortabilityconfig = liquidFillGaugeDefaultSettings();
+	gaugePortabilityconfig.circleThickness = 0.15;
+	gaugePortabilityconfig.circleColor = "#808015";
+	gaugePortabilityconfig.textColor = "#555500";
+	gaugePortabilityconfig.waveTextColor = "#FFFFAA";
+	gaugePortabilityconfig.waveColor = "#AAAA39";
+	gaugePortabilityconfig.textVertPosition = 0.8;
+	gaugePortabilityconfig.waveAnimateTime = 1000;
+	gaugePortabilityconfig.waveHeight = 0.05;
+	gaugePortabilityconfig.waveAnimate = true;
+	gaugePortabilityconfig.waveRise = false;
+	gaugePortabilityconfig.waveHeightScaling = false;
+	gaugePortabilityconfig.waveOffset = 0.25;
+	gaugePortabilityconfig.textSize = 0.75;
+	gaugePortabilityconfig.waveCount = 3;
+	var gaugePortability = loadLiquidFillGauge("gaugePortability", getStatsData('portability'), gaugePortabilityconfig);
 </script>
