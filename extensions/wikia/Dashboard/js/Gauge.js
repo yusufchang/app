@@ -32,7 +32,7 @@ function Gauge(placeholderName, configuration)
 	{
 		this.body = d3.select("#" + this.placeholderName)
 			.append("svg:svg")
-			.attr("class", "gauge")
+			.attr("class", "gauge ")
 			.attr("width", this.config.size)
 			.attr("height", this.config.size);
 

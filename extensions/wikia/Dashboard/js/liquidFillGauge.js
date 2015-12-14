@@ -105,7 +105,7 @@ function loadLiquidFillGauge(elementId, value, config) {
 
 	// Center the gauge within the parent SVG.
 	var gaugeGroup = gauge.append("g")
-		.attr('transform','translate('+locationX+','+locationY+')');
+		.attr('transform','translate(0,9)');
 
 	// Draw the outer circle.
 	var gaugeCircleArc = d3.svg.arc()
