@@ -1,6 +1,7 @@
 <?php
 
 use Swagger\Client\ApiException;
+use Wikia\TemplateClassification\Logger;
 
 class UserTemplateClassificationService extends TemplateClassificationService {
 
@@ -92,12 +93,17 @@ class UserTemplateClassificationService extends TemplateClassificationService {
 	 * @param int $pageId
 	 * @param string $templateType
 	 * @param string $origin
-	 * @throws BadRequestApiException
+	 * @param string $provider
+	 * @throws ApiException
 	 */
-	public function classifyTemplate( $wikiId, $pageId, $templateType, $origin ) {
+	public function classifyTemplate( $wikiId, $pageId, $templateType, $origin, $provider = self::USER_PROVIDER ) {
 		$this->checkTemplateType( $templateType );
 
-		parent::classifyTemplate( $wikiId, $pageId, $templateType, self::USER_PROVIDER, $origin );
+		$oldType = $this->getType( $wikiId, $pageId );
+
+		parent::classifyTemplate( $wikiId, $pageId, $templateType, $origin, $provider );
+
+		( new Logger() )->logClassificationChange( $pageId, $templateType, $oldType );
 
 		$title = Title::newFromID( $pageId );
 		wfRunHooks( 'UserTemplateClassification::TemplateClassified', [ $pageId, $title, $templateType ] );
