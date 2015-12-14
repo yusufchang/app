@@ -3,7 +3,7 @@
 $messages = array();
 
 $messages['en'] = array(
-	'special-dashboard-page-title' => 'DAT is the awesomest special page OMG OMG'
+	'special-dashboard-page-title' => 'Your wiki dashboard'
 );
 
 $messages['qqq'] = array(

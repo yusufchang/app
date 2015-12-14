@@ -1,28 +1,32 @@
 <script src='http://d3js.org/d3.v2.js'></script>
+<script src='http://d3js.org/d3.v3.min.js'></script>
 
-<div>
-	<p>Users stats</p>
-	<div id="mostActiveUsers"></div>
-</div>
 
 <!--Poukładaj te kafelki tak, żeby już na starcie fajnie wyglądały, a nie dopiero po pobawieniu się nimi-->
 <div class="gridster">
 	<ul>
-		<li data-row="2" data-col="2" data-sizex="2" data-sizey="2">
+		<li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
 			<p>Portability:</p>
 			<svg id="gaugePortability" width="19%" height="200"></svg>
 		</li>
-		<li data-row="4" data-col="4" data-sizex="2" data-sizey="2">
+
+		<li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
 			<span class="dashboard-element gauge" id="portabilityGaugeContainer"></span>
 		</li>
 
+		<li data-row="3" data-col="1" data-sizex="2" data-sizey="2">
+			<p>WAM Score:</p>
+			<svg id="gaugeWAM" width="19%" height="200" ></svg>
+		</li>
+
 		<li data-row="5" data-col="1" data-sizex="4" data-sizey="3">
+			<p>Template types distribution:</p>
 			<span class="dashboard-element chart" id="templateTypesChart"></span>
 		</li>
 
-		<li data-row="5" data-col="4" data-sizex="2" data-sizey="2">
-			<p>WAM Score:</p>
-			<svg id="gaugeWAM" width="19%" height="200" ></svg>
+		<li data-row="4" data-col="3" data-sizex="4" data-sizey="4">
+			<p>Most active users:</p>
+			<div id="mostActiveUsers"></div>
 		</li>
 	</ul>
 </div>
@@ -76,7 +80,7 @@
 	gaugePortabilityconfig.waveOffset = 0.25;
 	gaugePortabilityconfig.textSize = 0.75;
 	gaugePortabilityconfig.waveCount = 3;
-	var gaugePortability = loadLiquidFillGauge("gaugePortability2", getStatsData('portability'), gaugePortabilityconfig);
+	var gaugePortability = loadLiquidFillGauge("gaugePortability", getStatsData('portability'), gaugePortabilityconfig);
 
 	/* users bubble*/
 	var diameter = 560,

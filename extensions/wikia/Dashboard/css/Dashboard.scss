@@ -24,7 +24,7 @@ path.slice {
 
 polyline {
 	opacity: .5;
-	stroke: black;
+	stroke: white;
 	stroke-width: 1px;
 	fill: none;
 }
@@ -72,4 +72,20 @@ polyline {
 
 #portabilityGaugeContainer {
 	margin-top: 10px;
+}
+
+#mostActiveusers {
+	margin-left: 30px;
+}
+
+.chart g {
+	fill: white;
+}
+
+.chart {
+	margin-top: 50px;
+}
+
+.gridster li:hover {
+	background-color: rgba(255, 0, 0, 0.1);
 }
