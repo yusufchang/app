@@ -64,6 +64,14 @@ class PIQTranslator {
 		}, $this->data );
 	}
 
+	public function toInfoboxList() {
+		return array_map( function ( $row ) {
+			list( $wid, $pageid, $order ) = explode( '_', $row[ '_id' ] );
+
+			return PortableInfoboxDataService::newFromPageID( $pageid )->getData()[ $order ][ 'data' ];
+		}, $this->data );
+	}
+
 	protected function cropImage( $imageUrl ) {
 		preg_match( self::IMG_REGEX, parse_url( $imageUrl )[ 'path' ], $imgInfo );
 		// make it vignette compatible
