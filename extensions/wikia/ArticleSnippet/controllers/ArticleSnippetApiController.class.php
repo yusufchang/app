@@ -56,7 +56,7 @@ class ArticleSnippetApiController extends WikiaApiController {
 
 		foreach ( $data[0]['data'] as $field ) {
 			if ( $field['type'] === 'title' ) {
-				$this->articleSnippet['title'] = $field['data']['value'];
+				$this->articleSnippet['title'] = $this->stripTags( $field['data']['value'] );
 
 			} elseif ( $field['type'] === 'image' ) {
 				$this->articleSnippet['image'] = $field['data'][0]['url'];
