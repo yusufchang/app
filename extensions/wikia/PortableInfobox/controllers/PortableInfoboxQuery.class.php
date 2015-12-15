@@ -75,7 +75,7 @@ class PortableInfoboxQuery {
 			case 'infoboxTiles':
 				return [
 					'content' => array_reduce(
-						PIQTranslator::transform( $query )->toInfoboxData(),
+						PIQTranslator::transform( $query )->toInfoboxList(),
 						'PortableInfoboxQuery::renderInfoboxTilesHTML',
 						''
 					)

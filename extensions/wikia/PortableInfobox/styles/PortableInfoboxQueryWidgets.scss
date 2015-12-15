@@ -83,8 +83,11 @@
 	}
 
 	.pi-query--table {
+		border-collapse: collapse;
+
 		th,
 		td {
+			border: 0;
 			padding: $infobox-item-margin $infobox-item-margin * 2;
 			text-align: left;
 		}
@@ -93,7 +96,7 @@
 			background-color: $infobox-section-header-background;
 		}
 
-		td:nth-child(even) {
+		tr:nth-child(even) td {
 			background-color: $infobox-background;
 		}
 	}
