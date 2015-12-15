@@ -10,7 +10,7 @@ class PortableInfoboxQuery {
 		'table' => 'queryTable.mustache',
 		'list' => 'queryList.mustache',
 		'gallery' => 'queryGallery.mustache',
-		'infoboxTiles' => 'queryInfoboxtiles.mustache'
+		'infoboxTiles' => 'queryInfoboxTiles.mustache'
 	];
 
 	const PARSER_TAG_NAME = 'piq';
@@ -76,11 +76,16 @@ class PortableInfoboxQuery {
 				return [
 					'content' => array_reduce(
 						PIQTranslator::transform( $query )->toInfoboxList(),
-						'PortableInfoboxQuery::renderInfoboxTilesHTML',
+						function ( $html, $infoboxData ) {
+							if ( !empty( $infoboxData ) ) {
+								return $html . ( new PortableInfoboxRenderService() )->renderInfobox( $infoboxData, null, null );
+							}
+
+							return $html;
+						},
 						''
 					)
 				];
-				return '';
 			case 'list':
 				return [ 'items' => PIQTranslator::transform( $query )->withImage( self::LIST_IMAGE_THUMB )->toList() ];
 			case 'gallery':

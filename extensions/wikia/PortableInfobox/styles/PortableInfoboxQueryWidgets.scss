@@ -92,12 +92,46 @@
 			text-align: left;
 		}
 
-		th {
+		thead th {
 			background-color: $infobox-section-header-background;
 		}
 
-		tr:nth-child(even) td {
-			background-color: $infobox-background;
+		tr:nth-child(even) {
+			td,
+			th {
+				background-color: $infobox-background;
+			}
+		}
+	}
+
+	.pi-query--tiles {
+		position: relative;
+
+		&:before {
+			box-shadow: inset -15px 0 20px -15px #999999;
+			content: "";
+			height: 100%;
+			pointer-events: none;
+			position: absolute;
+			right: 0;
+			width: 20px;
+			z-index: 2;
+		}
+
+		& > div {
+			overflow: auto;
+			white-space: nowrap;
+		}
+
+		.portable-infobox {
+			display: inline-block;
+			float: none;
+			margin: 0;
+			vertical-align: top;
+
+			&:not(:first-child) {
+				margin-left: $infobox-item-margin * 2;
+			}
 		}
 	}
 }
