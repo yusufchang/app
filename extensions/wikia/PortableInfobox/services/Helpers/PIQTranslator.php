@@ -15,7 +15,13 @@ class PIQTranslator {
 	}
 
 	protected function __construct( $result ) {
-		$this->data = $result;
+		//filter out all no main ns articles from results
+		$this->data = array_filter( $result, function ( $row ) {
+			list( $wid, $pageid, $order ) = explode( '_', $row[ '_id' ] );
+			$title = Title::newFromID( $pageid );
+
+			return $title && $title->exists() && $title->inNamespace( NS_MAIN );
+		} );
 	}
 
 	public function withImage( $size ) {
