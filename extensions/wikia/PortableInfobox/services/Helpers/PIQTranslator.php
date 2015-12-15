@@ -8,7 +8,7 @@
  */
 class PIQTranslator {
 	const IMG_REGEX = '/^\/(?<bucket>[^\/]+)\/(images\/|avatars\/)?(?<relativePath>.*?)\/revision\/(?<revision>latest|\d+)(\/(?<thumbnailDefinition>.*))?/';
-	private $imgSize = 200;
+	private $imgSize = 176;
 
 	public static function transform( $result ) {
 		return new self( $result );

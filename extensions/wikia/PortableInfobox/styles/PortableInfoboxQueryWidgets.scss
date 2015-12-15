@@ -17,11 +17,19 @@
 
 	.pi-query--list {
 		li {
-			padding: $infobox-item-margin $infobox-item-margin * 2;
-
 			&:nth-child(even) {
 				background-color: $infobox-background;
 			}
+
+			&:hover {
+				background-color: $infobox-section-header-background;
+			}
+		}
+
+		a {
+			display: block;
+			padding: $infobox-item-margin $infobox-item-margin * 2;
+			text-decoration: none;
 		}
 
 		img,
@@ -40,21 +48,22 @@
 		@include flex-wrap(wrap);
 
 		box-sizing: border-box;
-		overflow: hidden;
 		width: 100%;
 
 		li {
 			@include flex-basis(25%);
+			box-sizing: border-box;
+			padding-bottom: 1px;
+
+			&:not(:nth-child(4n+1)) {
+				padding-left: 1px;
+			}
 		}
 
 		a {
 			display: block;
+			overflow: hidden;
 			position: relative;
-		}
-
-		img {
-			height: auto !important;
-			width: 100% !important;
 		}
 
 		figcaption {
@@ -70,6 +79,22 @@
 			padding: $infobox-item-margin * 4 $infobox-item-margin * 2 $infobox-item-margin * 2;
 			position: absolute;
 			width: 100%;
+		}
+	}
+
+	.pi-query--table {
+		th,
+		td {
+			padding: $infobox-item-margin $infobox-item-margin * 2;
+			text-align: left;
+		}
+
+		th {
+			background-color: $infobox-section-header-background;
+		}
+
+		td:nth-child(even) {
+			background-color: $infobox-background;
 		}
 	}
 }

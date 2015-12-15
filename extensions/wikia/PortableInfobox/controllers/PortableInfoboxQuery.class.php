@@ -3,9 +3,11 @@
 class PortableInfoboxQuery {
 	const TEMPLATE_PATH = 'extensions/wikia/PortableInfobox/queryTemplates/';
 	const DEFAULT_WIDGET_TYPE = 'table';
+	const LIST_IMAGE_THUMB = 30;
+
 
 	private static $widgetTemplates = [
-		self::DEFAULT_WIDGET_TYPE => 'queryTable.mustache',
+		'table' => 'queryTable.mustache',
 		'list' => 'queryList.mustache',
 		'gallery' => 'queryGallery.mustache',
 		'infoboxTiles' => 'queryInfoboxtiles.mustache'
@@ -71,16 +73,18 @@ class PortableInfoboxQuery {
 			case self::DEFAULT_WIDGET_TYPE:
 				return PIQTranslator::transform( $query )->toDataTable();
 			case 'infoboxTiles':
-//				return [
-//					'content' => array_reduce(
-//						PIQTranslator::transform( $query )->toInfoboxData(),
-//						'PortableInfoboxQuery::renderInfoboxTilesHTML',
-//						''
-//					)
-//				];
+				return [
+					'content' => array_reduce(
+						PIQTranslator::transform( $query )->toInfoboxData(),
+						'PortableInfoboxQuery::renderInfoboxTilesHTML',
+						''
+					)
+				];
 				return '';
-			default:
-				return [ 'items' => $query ];
+			case 'list':
+				return [ 'items' => PIQTranslator::transform( $query )->withImage( self::LIST_IMAGE_THUMB )->toList() ];
+			case 'gallery':
+				return [ 'items' => PIQTranslator::transform( $query )->toList() ];
 		}
 	}
 
