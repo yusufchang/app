@@ -127,6 +127,7 @@ define('ext.wikia.articleSnippet.popover',
 		}
 
 		function resetLoader(e) {
+			clearTimeout(timeout);
 			$target.css('cursor', 'pointer');
 		}
 
