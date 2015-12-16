@@ -2,7 +2,6 @@
 
 // Return template type for given template from Template Classification Service
 $wgAutoloadClasses['ExternalTemplateTypesProvider'] = __DIR__ . '/ExternalTemplateTypesProvider.class.php';
-$wgAutoloadClasses['AutomaticTemplateTypes'] = __DIR__ . '/AutomaticTemplateTypes.class.php';
 
 $wgAutoloadClasses['RecognizedTemplatesProvider'] = __DIR__ . '/RecognizedTemplatesProvider.class.php';
 
@@ -20,7 +19,12 @@ $wgAutoloadClasses['ReferencesTemplate'] = __DIR__ . '/handlers/ReferencesTempla
 $wgAutoloadClasses['ScrollboxTemplate'] = __DIR__ . '/handlers/ScrollboxTemplate.class.php';
 $wgAutoloadClasses['NavigationTemplate'] = __DIR__ . '/handlers/NavigationTemplate.class.php';
 
+// other handlers
+$wgAutoloadClasses['DataTables'] = __DIR__ . '/handlers/DataTables.class.php';
+
 // hooks
 $wgHooks['Parser::FetchTemplateAndTitle'][] = 'TemplateTypesParser::onFetchTemplateAndTitle';
+$wgHooks['Parser::FetchTemplateAndTitle'][] = 'DataTables::markTranscludedTables';
 $wgHooks['Parser::getTemplateDom'][] = 'TemplateTypesParser::onGetTemplateDom';
 $wgHooks['Parser::endBraceSubstitution'][] = 'TemplateTypesParser::onEndBraceSubstitution';
+$wgHooks['ParserAfterTidy'][] = 'DataTables::markDataTables';
