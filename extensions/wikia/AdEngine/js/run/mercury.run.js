@@ -32,7 +32,7 @@ require([
 	win.loadCustomAd = customAdsLoader.loadCustomAd;
 
 	if (geo.isProperGeo(instantGlobals.wgAmazonMatchCountriesMobile)) {
-		amazon.call();
+		amazon.call(skin);
 	}
 
 	mercuryListener.onLoad(function () {

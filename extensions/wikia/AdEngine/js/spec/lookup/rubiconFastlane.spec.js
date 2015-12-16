@@ -1,7 +1,8 @@
 /*global beforeEach, describe, it, modules, expect, spyOn*/
 describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	'use strict';
-	function noop() {}
+	function noop() {
+	}
 
 	var slotParams = {},
 		mocks = {
@@ -84,10 +85,17 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 			}
 		};
 
+	function getFactory() {
+		return modules['ext.wikia.adEngine.lookup.lookupFactory'](
+			mocks.adTracker,
+			mocks.log
+		);
+	}
+
 	function getRubiconFastlane() {
 		return modules['ext.wikia.adEngine.lookup.rubiconFastlane'](
 			mocks.adContext,
-			mocks.adTracker,
+			getFactory(),
 			mocks.adLogicZoneParams,
 			mocks.doc,
 			mocks.log,
