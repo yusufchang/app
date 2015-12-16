@@ -114,9 +114,7 @@ class BrokenRenameFixSpecialController extends WikiaSpecialPageController {
 	 */
 	private function setFormData() {
 		$this->editToken = $this->wg->User->getEditToken();
-		$this->actionUrl = $this->specialPage->getTitle()->getLocalURL( [
-			self::PAR => self::BRF_FORM_SUBMIT
-		] );
+		$this->actionUrl = $this->specialPage->getTitle( self::BRF_FORM_SUBMIT )->getFullURL();
 	}
 
 	/**
