@@ -42,7 +42,7 @@ class InfoIconTemplate {
 				$title,
 				$file,
 				[],
-				[ 'template-type' => AutomaticTemplateTypes::TEMPLATE_INFOICON ]
+				[ 'template-type' => TemplateClassificationService::TEMPLATE_INFOICON ]
 			);
 		}
 
