@@ -1815,6 +1815,8 @@ class Linker {
 	 * @return String: HTML output
 	 */
 	public static function formatTemplates( $templates, $preview = false, $section = false ) {
+		global $wgCityId;
+
 		wfProfileIn( __METHOD__ );
 
 		$outText = '';
@@ -1844,6 +1846,16 @@ class Linker {
 			// Wikia change - end
 
 			usort( $templates, array( 'Title', 'compare' ) );
+
+			/**
+			 * Wikia change begin
+			 * @author Adam Karmiński <adamk@wikia-inc.com>
+			 */
+			$tcs = new UserTemplateClassificationService();
+			/**
+			 * Wikia change end
+			 */
+
 			foreach ( $templates as $titleObj ) {
 				$r = $titleObj->getRestrictions( 'edit' );
 				if ( in_array( 'sysop', $r ) ) {
@@ -1868,7 +1880,18 @@ class Linker {
 						array( 'action' => 'edit' )
 					);
 				}
-				$outText .= '<li>' . self::link( $titleObj ) . ' (' . $editLink . ') ' . $protected . '</li>';
+
+				/**
+				 * Wikia change begin
+				 * @author Adam Karmiński <adamk@wikia-inc.com>
+				 */
+				$articleId = $titleObj->getArticleID();
+				$type = $tcs->getType( $wgCityId, $articleId );
+				/**
+				 * Wikia change end
+				 */
+
+				$outText .= '<li>' . self::link( $titleObj ) . ' (' . $editLink . ') ' . $protected . ' ' . $type . '</li>';
 			}
 			$outText .= '</ul>';
 		}
