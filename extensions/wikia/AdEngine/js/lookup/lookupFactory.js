@@ -1,27 +1,35 @@
 /*global define*/
 define('ext.wikia.adEngine.lookup.lookupFactory', [
+	'ext.wikia.adEngine.adContext',
 	'ext.wikia.adEngine.adTracker',
 	'wikia.log'
-], function (adTracker, log) {
+], function (adContext, adTracker, log) {
 	'use strict';
 
 	function create(module) {
 		var called = false,
 			response = false,
-			timing;
+			timing,
+			context = adContext.getContext();
 
-		function call(skin) {
+		function call() {
 			log('call', 'debug', module.logGroup);
 
-			if (!Object.keys || (typeof module.isEnabled === 'function' && !module.isEnabled())) {
-				log(['call', 'Module is not enabled/supported', module.name], 'debug', module.logGroup);
+			if (!Object.keys) {
+				log(['call', 'Module is not supported in IE8', module.name], 'debug', module.logGroup);
+				return;
+			}
+
+			if (typeof module.isEnabled === 'function' && !module.isEnabled()) {
+				log(['call', 'Module is not enabled', module.name], 'debug', module.logGroup);
 				return;
 			}
 
 			timing = adTracker.measureTime(module.name, {}, 'start');
 			timing.track();
 
-			module.call(skin, onResponse);
+			// in mercury ad context is being reloaded after XHR call that's why at this point we don't have skin
+			module.call(context.targeting.skin || 'mercury', onResponse);
 			called = true;
 		}
 

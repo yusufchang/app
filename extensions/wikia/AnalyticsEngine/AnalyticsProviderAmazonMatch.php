@@ -25,7 +25,7 @@ class AnalyticsProviderAmazonMatch implements iAnalyticsProvider {
 		var ac = globals[$instantGlobalName];
 
 		if (geo.isProperGeo(ac)) {
-			amazon.call('oasis');
+			amazon.call();
 		}
 	});
 CODE;

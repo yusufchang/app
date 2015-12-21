@@ -87,6 +87,7 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 
 	function getFactory() {
 		return modules['ext.wikia.adEngine.lookup.lookupFactory'](
+			mocks.adContext,
 			mocks.adTracker,
 			mocks.log
 		);
@@ -127,8 +128,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 
 	it('Returns truthy status after initialise', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toBeTruthy();
 	});
@@ -136,8 +138,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	it('Define all 7 slots for oasis skin', function () {
 		spyOn(mocks.win.rubicontag, 'defineSlot').and.callThrough();
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(mocks.win.rubicontag.defineSlot.calls.count()).toEqual(7);
 	});
@@ -145,8 +148,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	it('Define all 3 slots for mercury skin', function () {
 		spyOn(mocks.win.rubicontag, 'defineSlot').and.callThrough();
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(mocks.win.rubicontag.defineSlot.calls.count()).toEqual(3);
 	});
@@ -154,8 +158,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	it('Define /TOP/ slot as atf', function () {
 		spyOn(mocks.slot, 'setPosition');
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(mocks.slot.setPosition.calls.argsFor(0)[0]).toEqual('atf');
 	});
@@ -163,8 +168,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	it('Define not-/TOP/ slot as btf', function () {
 		spyOn(mocks.slot, 'setPosition');
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(mocks.slot.setPosition.calls.argsFor(2)[0]).toEqual('btf');
 	});
@@ -172,24 +178,27 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	it('Do not define position on mobile', function () {
 		spyOn(mocks.slot, 'setPosition');
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(mocks.slot.setPosition).not.toHaveBeenCalled();
 	});
 
 	it('Returns empty parameters list on not defined slot', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.getSlotParams('TOP_LEADERBOARD')).toEqual({});
 	});
 
 	it('Returns parameters list on defined slot', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.getSlotParams('MOBILE_TOP_LEADERBOARD')).toEqual({
 			rpflKey: ['1_tier', '3_tier']
@@ -198,16 +207,18 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 
 	it('Sets FPI.src to mobile on mercury', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(slotParams.src).toEqual('mobile');
 	});
 
 	it('Sets FPI.src to gpt on oasis', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(slotParams.src).toEqual('gpt');
 	});
@@ -215,8 +226,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 	it('Sets FPI.s1 to dbName when it is in top1k', function () {
 		mocks.targeting.wikiIsTop1000 = true;
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(slotParams.s1).toEqual('_dragonball');
 	});
@@ -231,8 +243,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 
 	it('Sets other FPI based on AdLogicZoneParams', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(slotParams.s0).toEqual('life');
 		expect(slotParams.s2).toEqual('article');
@@ -242,8 +255,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 
 	it('Fastlane should be enabled for life wiki with rubiconFastlaneOnAllVerticals=0 on Oasis', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(true);
 	});
@@ -254,8 +268,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 		};
 
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(true);
 	});
@@ -266,8 +281,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 		};
 
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(false);
 	});
@@ -281,16 +297,18 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 		};
 
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'oasis';
 
-		rubiconFastlane.call('oasis');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(true);
 	});
 
 	it('Fastlane should be enabled for life wiki with rubiconFastlaneOnAllVerticals=0 on Mercury', function () {
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(true);
 	});
@@ -301,8 +319,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 		};
 
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(true);
 	});
@@ -313,8 +332,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 		};
 
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(false);
 	});
@@ -328,8 +348,9 @@ describe('ext.wikia.adEngine.lookup.rubiconFastlane', function () {
 		};
 
 		var rubiconFastlane = getRubiconFastlane();
+		mocks.targeting.skin = 'mercury';
 
-		rubiconFastlane.call('mercury');
+		rubiconFastlane.call();
 
 		expect(rubiconFastlane.wasCalled()).toEqual(true);
 	});

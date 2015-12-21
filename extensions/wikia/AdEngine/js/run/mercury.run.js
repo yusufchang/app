@@ -32,15 +32,15 @@ require([
 	win.loadCustomAd = customAdsLoader.loadCustomAd;
 
 	if (geo.isProperGeo(instantGlobals.wgAmazonMatchCountriesMobile)) {
-		amazon.call(skin);
+		amazon.call();
 	}
 
 	mercuryListener.onLoad(function () {
 		if (geo.isProperGeo(instantGlobals.wgAdDriverOpenXBidderCountriesMobile)) {
-			oxBidder.call(skin);
+			oxBidder.call();
 		}
 		if (geo.isProperGeo(instantGlobals.wgAdDriverRubiconFastlaneCountriesMobile)) {
-			rubiconFastlane.call(skin);
+			rubiconFastlane.call();
 		}
 	});
 });

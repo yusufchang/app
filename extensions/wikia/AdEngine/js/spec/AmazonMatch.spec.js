@@ -10,6 +10,7 @@ describe('Method ext.wikia.adEngine.lookup.amazonMatch', function () {
 
 	function getFactory() {
 		return modules['ext.wikia.adEngine.lookup.lookupFactory'](
+			mocks.adContext,
 			mocks.adTracker,
 			mocks.log
 		);
@@ -24,13 +25,21 @@ describe('Method ext.wikia.adEngine.lookup.amazonMatch', function () {
 		);
 	}
 
-	function init(skin, amazonMatch, tokens) {
+	function init(amazonMatch, tokens) {
 		spyOn(mocks.window.amznads, 'getTokens').and.returnValue(tokens);
-		amazonMatch.call(skin);
+		amazonMatch.call();
 		expect(typeof mocks.window.amznads.renderAd).toBe('function');
 	}
 
 	mocks = {
+		targeting: noop,
+		adContext: {
+			getContext: function () {
+				return {
+					targeting: mocks.targeting
+				};
+			}
+		},
 		adTracker: {
 			measureTime: function () {
 				return {
@@ -126,10 +135,11 @@ describe('Method ext.wikia.adEngine.lookup.amazonMatch', function () {
 	Object.keys(testCases).forEach(function (k) {
 		it('filters out correct amazon slots #' + k, function () {
 			var amazonMatch = getModule(),
-				testCase = testCases[k],
-				skin = testCase.skin;
+				testCase = testCases[k];
 
-			init(skin, amazonMatch, testCase.input);
+			mocks.targeting.skin = testCase.skin;
+
+			init(amazonMatch, testCase.input);
 
 			expect(amazonMatch.getSlotParams('TOP_LEADERBOARD').amznslots).toEqual(testCase.expected.leaderboard);
 			expect(amazonMatch.getSlotParams('HOME_TOP_LEADERBOARD').amznslots).toEqual(testCase.expected.leaderboard);
@@ -151,7 +161,8 @@ describe('Method ext.wikia.adEngine.lookup.amazonMatch', function () {
 	it('returns empty amznslots when already rendered', function () {
 		var amazonMatch = getModule();
 
-		init('mercury', amazonMatch, ['a3x5p14']);
+		mocks.targeting.skin = 'mercury';
+		init(amazonMatch, ['a3x5p14']);
 
 		expect(amazonMatch.getSlotParams('MOBILE_TOP_LEADERBOARD').amznslots).toEqual(['a3x5p14']);
 		mocks.window.amznads.renderAd(mocks.document);
@@ -160,7 +171,8 @@ describe('Method ext.wikia.adEngine.lookup.amazonMatch', function () {
 
 	it('switch the flag when response from Amazon recieved', function () {
 		var amazonMatch = getModule();
-		init('oasis', amazonMatch, ['a3x5p14']);
+		mocks.targeting.skin = 'oasis';
+		init(amazonMatch, ['a3x5p14']);
 		expect(amazonMatch.hasResponse()).toEqual(true);
 	});
 });
