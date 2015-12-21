@@ -27,6 +27,7 @@ define('ext.wikia.adEngine.lookup.amazonMatch', [
 		},
 		rendered = false,
 		paramPattern = /^a([0-9]x[0-9])p([0-9]+)$/,
+		amazonId = '3115',
 		priceMap = {},
 		slots = [];
 
@@ -43,7 +44,7 @@ define('ext.wikia.adEngine.lookup.amazonMatch', [
 			if (!win.amznads.getAdsCallback || !renderAd) {
 				return;
 			}
-			win.amznads.getAdsCallback('3115', onResponse);
+			win.amznads.getAdsCallback(amazonId, onResponse);
 			win.amznads.renderAd = function (doc, adId) {
 				renderAd(doc, adId);
 				rendered = true;

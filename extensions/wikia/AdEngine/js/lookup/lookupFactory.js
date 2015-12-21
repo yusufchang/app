@@ -13,8 +13,13 @@ define('ext.wikia.adEngine.lookup.lookupFactory', [
 		function call(skin) {
 			log('call', 'debug', module.logGroup);
 
-			if (!Object.keys || (typeof module.isEnabled === 'function' && !module.isEnabled())) {
-				log(['call', 'Module is not enabled/supported', module.name], 'debug', module.logGroup);
+			if (!Object.keys) {
+				log(['call', 'Module is not supported in IE8', module.name], 'debug', module.logGroup);
+				return;
+			}
+
+			if (typeof module.isEnabled === 'function' && !module.isEnabled()) {
+				log(['call', 'Module is not enabled', module.name], 'debug', module.logGroup);
 				return;
 			}
 
