@@ -8,9 +8,14 @@
 
 $wgExtensionCredits[ 'specialpage' ][] = [
 	'name' => 'GlobalNavigation',
-	'author' => 'Damian "kvas" Jóźwiak',
-	'description' => 'GlobalNavigation',
-	'version' => 1.0
+	'author' => [
+		'Damian "kvas" Jóźwiak',
+		'Bogna "bognix" Knychała',
+		'Bartosz "V." Bentkowski',
+	],
+	'descriptionmsg' => 'global-navigation-desc',
+	'version' => 1.0,
+	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/GlobalNavigation'
 ];
 
 // controller classes
@@ -24,3 +29,4 @@ $wgHooks['ResourceLoaderGetConfigVarsWithContext'][] = 'GlobalNavigationHooks::o
 $wgHooks['OutputPageParserOutput'][] = 'GlobalNavigationHooks::onOutputPageParserOutput';
 
 $wgExtensionMessagesFiles[ 'GlobalNavigation' ] = __DIR__ . '/GlobalNavigation.i18n.php';
+

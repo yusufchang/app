@@ -267,6 +267,12 @@ ___________________________________________________________
 ',
 'rcshowhideenhanced' => '$1 enhanced recent changes',
 'prefsnologintext'	=> 'You must be <span class="plainlinks">[{{fullurl:Special:UserLogin|$1}} logged in]</span> to set user preferences.',
+'recentchanges-on-wikia-title' => 'Recent changes across Wikia',
+'recentchanges-on-wikia-content' => "Introducing Template Types — Organize your templates by type to make [[Special:Templates|template management]] simpler and to improve how they display on mobile phones. [[Help:Template Types|Learn more]] or '''[[Special:Insights/templateswithouttype|Get started now!]]'''
+
+Tabbed images and collapsible groups are now available for [[Help:Infobox|Portable Infoboxes]].
+
+Is your content portable? Learn more about future-proofing content at [[w:c:portability|Portability.wikia.com]].",
 'recentchangestext' => '<div style="border:solid 3px #e9e9e9; margin-bottom:0.3em;">
 <div style="padding-left:0.5em; padding-right:0.5em;">
 This special page lets you track the most recent changes to the wiki.
@@ -321,10 +327,6 @@ Your account has been created. Don't forget to change your {{SITENAME}} [[Specia
 'group-voldev-member' => 'Volunteer Developer',
 'grouppage-voldev' => 'w:c:dev:Volunteer_Developers',
 
-# AjaxLogin
-'ajaxLogin1' => 'To complete your log in, you must enter a new password.  This will take you away from this edit page and you may lose your current edit.',
-'ajaxLogin2' => 'Are you sure? You may lose your edits if you leave this page now.',
-
 #new registration aka LoginFriction aka Signup
 
 'signup-password' => 'Password - ',
@@ -336,7 +338,7 @@ Your account has been created. Don't forget to change your {{SITENAME}} [[Specia
 'prefs-help-email' => 'We loathe spam even more than you do. We will NOT sell your email address.',
 'prefs-help-mailmesg' => 'E-mail',
 'prefs-help-blurmesg' => 'Blurry word',
-'prefs-help-terms' => 'By creating an account, you agree to the [[w:Terms of Use| Wikia\'s Terms of Use]]',
+'prefs-help-terms' => 'By creating an account, you agree to the {{#NewWindowLink: homepage:Terms of use | Wikia\'s Terms of Use}}',
 'prefs-help-birthday' => 'Why do I need to provide this?',
 'prefs-help-birthmesg' => 'Why do I need to provide my birthday?',
 'prefs-help-birthinfo' => 'Wikia requires all users to provide their real date of birth as both a safety precaution and as a means of preserving the integrity of the site while complying with federal regulations.',
@@ -529,7 +531,6 @@ div.wikiaDialog h2,
 'wikicities-nav' => 'wikia',
 'searchsuggest' => 'Search suggest',
 'tog-searchsuggest' => 'Use search suggest',
-'tog-htmlemails' => 'Enable receipt of HTML emails',
 'tagline-url'   => 'From [{{SERVER}} {{SITENAME}}], a [http://www.wikia.com Wikia] wiki.',
 'tagline-url-interwiki' => 'From [[wikia:c:$1|{{SITENAME}}]], a [[wikia:|Wikia]] wiki.',
 'showall' => 'Show All', #ticet #699 messages
@@ -894,6 +895,15 @@ hu',
 'hub-Wikia' => 'Wikia',
 'hub-Food_and_Drink' => 'Food and Drink',
 
+# vertical names
+'vertical-tv' => 'TV',
+'vertical-games' => 'Games',
+'vertical-books' => 'Books',
+'vertical-comics' => 'Comics',
+'vertical-lifestyle' => 'Lifestyle',
+'vertical-music' => 'Music',
+'vertical-movies' => 'Movies',
+
 # Mobile skin
 'oasis-mobile-site' => 'Mobile site',
 'mobile-show' => 'Show',
@@ -903,29 +913,6 @@ hu',
 
 # Local Wiki Email Preference
 'prefs-wikiemail' => '{{SITENAME}} Email Options',
-
-# Facebook Profile Sync and Connect
-'fb-sync-button' => 'Sync my profile',
-'fb-sync-realname' => 'Real Name',
-'fb-sync-birthday' => 'Birthday',
-'fb-sync-relationshipstatus' => 'Relationship Status',
-'fb-sync-languages' => 'Languages',
-'fb-sync-hometown' => 'Hometown',
-'fb-sync-currentlocation' => 'Current Location',
-'fb-sync-education' => 'Education',
-'fb-sync-work' => 'Work History',
-'fb-sync-work-at' => ' at ',
-'fb-sync-educationwith' => ' with: ',
-'fb-sync-gender' => 'Gender',
-'fb-sync-religiousviews' => 'Religious Views',
-'fb-sync-politicalviews' => 'Political Views',
-'fb-sync-website' => 'Website',
-'fb-sync-interestedin' => 'Interested in',
-'fb-sync-save' => 'Save in my Wikia profile',
-'fb-sync-permissionerror' => 'Please grant Wikia access to Facebook in order to sync your profile.',
-'fb-sync-success-message' => 'Your profile has been synced with Facebook.',
-
-
 
 #unsubscribe email
 'unsubscribe-email' => 'If you no longer want to receive email from Wikia you can unsubscribe here: $1',
@@ -1056,4 +1043,17 @@ hu',
 
 'shared-News_box' => '[http://www.wikia.com/Hiring Wikia is now hiring for several open positions]',
 
-));
+'usesitejs-disabled-warning' => 'Custom JavaScript is disabled on this wikia.',
+'tog-enableuserjs' => 'Enable personal JavaScript ([[Help:Personal_CSS_and_JS#JavaScript|Learn more]])',
+
+# wikia.wikibits.js mesages for import scripts notifications
+'import-article-missing-single' => '$1 was not found (requested by user-supplied javascript)',
+'import-article-missing-multiple' => '$1 $2 were not found (requested by user-supplied javascript)',
+'import-article-missing-more-single' => '(and one more article)',
+'import-article-missing-more-multiple' => '(and $1 more articles)',
+'import-article-not-js-single' => '$1 was not loaded as it\'s not a JS page (requested by user-supplied javascript). Please make sure the article title has .js extension.',
+'import-article-not-js-multiple' => '$1 $2 were not loaded as they\'re not JS pages (requested by user-supplied javascript). Please make sure the articles titles have .js extension.',
+
+'wikia-pagetitle-brand' => 'Wikia',
+'wikia-pagetitle-sitename' => '{{SITENAME}}',
+) );

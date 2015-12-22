@@ -3,6 +3,16 @@
  * Author: Inez Korczyński (inez@wikia.com)
  */
 
+$wgExtensionCredits[ 'other' ][ ] = array(
+	'name' => 'JSVariables',
+	'author' => 'Inez Korczyński (inez@wikia.com)',
+	'descriptionmsg' => 'jsvariables-desc',
+	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/JSVariables',
+);
+
+//i18n
+$wgExtensionMessagesFiles[ 'JSVariables' ] = __DIR__ . '/JSVariables.i18n.php';
+
 $wgHooks['MakeGlobalVariablesScript'][] = 'wfMakeGlobalVariablesScript';
 $wgHooks['WikiaSkinTopScripts'][] = 'wfJSVariablesTopScripts';
 
@@ -39,6 +49,14 @@ function wfJSVariablesTopScripts(Array &$vars, &$scripts) {
 		$vars['wgUserName'] = null;
 	} else {
 		$vars['wgUserName'] = $user->getName();
+
+		/*
+		 * Remove when SOC-217 ABTest is finished
+		 */
+		$vars['wgNotConfirmedEmail'] = $user->getGlobalPreference( UserLoginSpecialController::NOT_CONFIRMED_LOGIN_OPTION_NAME );
+		/*
+		 * End remove
+		 */
 	}
 	if ($out->isArticle()) {
 		$vars['wgArticleId'] = $out->getWikiPage()->getId();
@@ -46,6 +64,9 @@ function wfJSVariablesTopScripts(Array &$vars, &$scripts) {
 	$vars['wgCategories'] = $out->getCategories();
 	$vars['wgPageName'] = $title->getPrefixedDBKey();
 	$vars['wikiaPageType'] = WikiaPageType::getPageType();
+	$vars['wikiaPageIsCorporate'] = WikiaPageType::isCorporatePage();
+	$vars['wgArticleType'] = WikiaPageType::getArticleType();
+	$vars['wgNamespaceNumber'] = $title->getNamespace();
 
 	// missing in 1.19
 	$skin = RequestContext::getMain()->getSkin();
@@ -78,9 +99,9 @@ function wfJSVariablesTopScripts(Array &$vars, &$scripts) {
  */
 function wfMakeGlobalVariablesScript(Array &$vars, OutputPage $out) {
 	wfProfileIn(__METHOD__);
-	global $wgMemc, $wgEnableAjaxLogin, $wgPrivateTracker, $wgExtensionsPath,
+	global $wgMemc, $wgPrivateTracker, $wgExtensionsPath,
 		$wgArticle, $wgSitename, $wgDisableAnonymousEditing, $wgCityId,
-		$wgGroupPermissions, $wgBlankImgUrl, $wgCookieDomain, $wgCookiePath, $wgResourceBasePath;
+		$wgGroupPermissions, $wgBlankImgUrl, $wgCookieDomain, $wgCookiePath, $wgEnableNewAuthModal, $wgResourceBasePath;
 
 	$skin = $out->getSkin();
 	$title = $out->getTitle();
@@ -94,21 +115,10 @@ function wfMakeGlobalVariablesScript(Array &$vars, OutputPage $out) {
 		$vars['wgCatId'] = 0;
 	}
 
-	$skinName = get_class($skin);
-	if (is_array($wgEnableAjaxLogin) && in_array($skinName, $wgEnableAjaxLogin)) {
-		$vars['wgEnableAjaxLogin'] = true;
-	}
-
 	$vars['wgBlankImgUrl'] = $wgBlankImgUrl;
 
 	if (!empty($wgPrivateTracker)) {
 		$vars['wgPrivateTracker'] = true;
-	}
-
-	// TODO: load it on-demand using JSMessages
-	if($vars['wgIsArticle'] == false && !empty($vars['wgEnableAjaxLogin'])) {
-		$vars['ajaxLogin1'] = wfMsg('ajaxLogin1');
-		$vars['ajaxLogin2'] = wfMsg('ajaxLogin2');
 	}
 
 	// TODO: use wgMainPageTitle instead?
@@ -146,6 +156,9 @@ function wfMakeGlobalVariablesScript(Array &$vars, OutputPage $out) {
 	$vars['wgCookieDomain'] = $wgCookieDomain;
 	$vars['wgCookiePath'] = $wgCookiePath;
 
+	$vars['wgEnableNewAuthModal'] = $wgEnableNewAuthModal;
+
 	wfProfileOut(__METHOD__);
 	return true;
 }
+

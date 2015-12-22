@@ -14,54 +14,82 @@ require(
 		'wikia.geo',
 		'wikia.cache',
 		'wikia.tracker',
+		'BannerNotification'
 	],
-	function ($, mw, w, geo, cache, tracker) {
+	function ($, mw, w, geo, cache, tracker, BannerNotification) {
 		'use strict';
 
-		/**
-		 * An array of language codes for which we want to look for a native wikia
-		 * @type {Array}
-		 */
-		var supportedLanguages = ['ja'],
-			// Get user's geographic data and a country code
-			targetLanguage = getTargetLanguage();
+		// Get user's geographic data and a country code
+		var targetLanguage = getTargetLanguage(),
+			contentLanguage = w.wgContentLanguage,
+		// Cache version
+			cacheVersion = '1.02',
+		// LinkTitle from Cache
+			linkTitle = retrieveLinkTitle();
 
 		function init() {
-			if (targetLanguage !== false && targetLanguage != w.wgContentLanguage) {
+			var interlangExist = false;
+			if (targetLanguage !== false && shouldShowWikiaInYourLangWithTargetAndContentLanguage(targetLanguage, contentLanguage)) {
 				// Check local browser cache to see if a request has been sent
 				// in the last month and if the notification has been shown to him.
 				// Both have to be !== true to continue.
-				if (cache.get('wikiaInYourLangRequestSent') !== true && cache.get('wikiaInYourLangNotificationShown') !== true) {
-					// Update JS cache and set the notification shown indicator to true
-					var ttl = 60 * 60 * 24 * 30; // Cache for a month
-					cache.set('wikiaInYourLangRequestSent', true, ttl);
-
-					getNativeWikiaInfo();
-				} else if (typeof cache.get(targetLanguage + 'WikiaInYourLangMessage') === 'string') {
-					displayNotification(cache.get(targetLanguage + 'WikiaInYourLangMessage'));
+				if (cache.get(getWIYLRequestSentKey()) !== true &&
+					cache.get(getWIYLNotificationShownKey()) !== true) {
+					interlangExist = getInterlangFromArticleInterlangList();
+					if (!interlangExist) {
+						getNativeWikiaInfo();
+					}
+				} else if (typeof cache.get(getWIYLMessageKey()) === 'string') {
+					displayNotification(cache.get(getWIYLMessageKey()));
 				}
 			}
 		}
 
+		// Per request we should unify dialects like pt and pt-br
+		// @see CE-1220
+		function shouldShowWikiaInYourLangWithTargetAndContentLanguage(targetLanguage, contentLanguage) {
+			var targetLanguageLangCode = targetLanguage.split('-')[0],
+			    contentLanguageLangCode = contentLanguage.split('-')[0];
+			return targetLanguageLangCode !== contentLanguageLangCode;
+		}
+
 		function getTargetLanguage() {
 			var browserLanguage = window.navigator.language || window.navigator.userLanguage,
-				geoCountryCode = geo.getCountryCode().toLowerCase();
+				geoCountryCode = geo.getCountryCode().toLowerCase(),
+				targetLanguage;
 
-			// Check if a browser's language is one of the supported languages
-			if (typeof browserLanguage === 'string' && $.inArray(browserLanguage.substr(0, 2), supportedLanguages) !== -1) {
-				targetLanguage = browserLanguage.substr(0, 2);
-				// Check if the country code is one of the supported languages
-			} else if ($.inArray(geoCountryCode, supportedLanguages) !== -1) {
+			if (w.wgUserName !== null) {
+				// Check if a user is logged and if so - use a lang from settings
+				targetLanguage = w.wgUserLanguage;
+			} else if (typeof browserLanguage === 'string') {
+				// Check if a browser's language is accessible
+				targetLanguage = browserLanguage.split('-')[0];
+			} else if (typeof geoCountryCode === 'string') {
+				// Check if a langcode from Geo cookie is accessible
 				targetLanguage = geoCountryCode;
-				// If neither - return an empty string
 			} else {
+				// If neither - return false
 				targetLanguage = false;
 			}
-
 			return targetLanguage;
 		}
 
-		function getNativeWikiaInfo() {
+		function getInterlangFromArticleInterlangList() {
+			var i, interlangData;
+			if (Array.isArray(w.wgArticleInterlangList)) {
+				for(i = 0; i < w.wgArticleInterlangList.length; i++) {
+					interlangData = w.wgArticleInterlangList[i].split(':');
+					if (targetLanguage === interlangData[0]) {
+						//we have interlang for this user. Pass the interlang article title
+						getNativeWikiaInfo(interlangData[1]);
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		function getNativeWikiaInfo(interlangTitle) {
 			/**
 			 * Sends a request to the WikiaInYourLangController via Nirvana.
 			 * Response consists of:
@@ -77,73 +105,150 @@ require(
 				format: 'json',
 				type: 'GET',
 				data: {
-					targetLanguage: targetLanguage
+					targetLanguage: targetLanguage,
+					articleTitle: w.wgPageName,
+					interlangTitle: interlangTitle
 				},
 				callback: function (results) {
 					if (results.success === true) {
+						// Save link address if it is different from this article title
+						saveLinkTitle(results.linkAddress);
+						// Re-initialize linkTitle with linkAddress
+						linkTitle = retrieveLinkTitle();
+
 						// Display notification
 						displayNotification(results.message);
 
+						// Update JS cache and set the notification shown indicator to true
+						// Cache for a day
+						cache.set(getWIYLRequestSentKey(), true, cache.CACHE_STANDARD);
+
 						// Save the message in cache to display until a user closes it
-						cache.set(targetLanguage + 'WikiaInYourLangMessage', results.message);
+						// Cache for a day
+						cache.set(
+							getWIYLMessageKey(),
+							results.message,
+							cache.CACHE_STANDARD
+						);
 					}
 				}
 			});
 		}
 
 		function displayNotification(message) {
-			w.GlobalNotification.show(message, 'notify');
-
+			var bannerNotification = new BannerNotification(message, 'notify').show(),
+				label = getTrackingLabel('notification-view'),
 			// Track a view of the notification
-			var trackingParams = {
-				trackingMethod: 'ga',
-				category: 'wikia-in-your-lang',
-				action: tracker.ACTIONS.VIEW,
-				label: targetLanguage + '-notification-view',
-			};
+				trackingParams = {
+					trackingMethod: 'analytics',
+					category: 'wikia-in-your-lang',
+					action: tracker.ACTIONS.VIEW,
+					label: label
+				};
 
 			tracker.track(trackingParams);
 
 			// Bind tracking of clicks on a link and events on close
-			bindEvents();
+			bindEvents(bannerNotification);
 		}
 
-		function bindEvents() {
-			$('.global-notification.notify').click(function (event) {
-				if (event.target.parentElement.className.indexOf('close') !== -1) {
-					onNotificationClosed();
-				} else if (event.target.id.indexOf('wikia-in-your-lang-link') !== -1) {
-					onLinkClick();
-				}
-			})
+		function bindEvents(bannerNotification) {
+			bannerNotification
+				.onClose(onNotificationClosed);
+			bannerNotification
+				.$element
+				.on('click', '.text', onLinkClick);
 		}
 
 		function onNotificationClosed() {
 			// Track closing of a notification
-			var trackingParams = {
-				trackingMethod: 'ga',
-				category: 'wikia-in-your-lang',
-				action: tracker.ACTIONS.CLOSE,
-				label: targetLanguage + '-notification-close',
-			};
+			var label = getTrackingLabel('notification-close'),
+				trackingParams = {
+					trackingMethod: 'analytics',
+					category: 'wikia-in-your-lang',
+					action: tracker.ACTIONS.CLOSE,
+					label: label,
+				};
 			tracker.track(trackingParams);
 
-			cache.set(targetLanguage + 'WikiaInYourLangMessage', null);
-			cache.set('wikiaInYourLangNotificationShown', true);
+			cache.set(getWIYLMessageKey(), null);
+			// Cache for a month
+			cache.set(getWIYLNotificationShownKey(), true, cache.CACHE_LONG);
 		}
 
 		function onLinkClick() {
 			// Track a click on a notification link
-			var trackingParams = {
-				trackingMethod: 'ga',
-				category: 'wikia-in-your-lang',
-				action: tracker.ACTIONS.CLICK_LINK_TEXT,
-				label: targetLanguage + '-notification-link-click',
-			};
-
+			var label = getTrackingLabel('notification-link-click'),
+				trackingParams = {
+					trackingMethod: 'analytics',
+					category: 'wikia-in-your-lang',
+					action: tracker.ACTIONS.CLICK_LINK_TEXT,
+					label: label,
+				};
 			tracker.track(trackingParams);
 		}
 
-		$(init);
+		function getWIYLRequestSentKey() {
+			return 'wikiaInYourLangRequestSent' + linkTitle + cacheVersion;
+		}
+
+		function getWIYLNotificationShownKey() {
+			return 'wikiaInYourLangNotificationShown' + linkTitle + cacheVersion;
+		}
+
+		function getWIYLMessageKey() {
+			return targetLanguage + 'WikiaInYourLangMessage' + linkTitle + cacheVersion;
+		}
+
+		function getWIYLLinkTitlesKey() {
+			return targetLanguage + 'WikiaInYourLangLinkTitles' + cacheVersion;
+		}
+
+		function saveLinkTitle(linkAddress) {
+			var articleTitle = w.wgPageName,
+				linkAddressAry = linkAddress.match(/.+\.com\/wiki\/(.*)/),
+				listOfCachedTitles = {},
+				linkTitle = '';
+
+			if ( linkAddressAry && linkAddressAry.length > 1 ) {
+				linkTitle = linkAddressAry[1];
+			} else {
+				linkTitle = 'main';
+			}
+
+			listOfCachedTitles = cache.get(getWIYLLinkTitlesKey());
+			if ( !listOfCachedTitles ) {
+				listOfCachedTitles = {};
+			}
+			listOfCachedTitles[articleTitle] = linkTitle;
+
+			cache.set(getWIYLLinkTitlesKey(),listOfCachedTitles, cache.CACHE_LONG);
+		}
+
+		/**
+		 * Retrieve linkTitle for this articleTitle from cache.
+		 * articleTitle is a current article title of this wiki.
+		 * linkTitle is wikia-in-your-lang link's article title, which may or may not be the same as the articleTitle.
+		 * listOfCachedTitles is a map of articleTitle => linkTitle
+		 * @returns {string} wikia-in-your-lang link's article title
+		 */
+		function retrieveLinkTitle() {
+			var articleTitle = w.wgPageName,
+				listOfCachedTitles = cache.get(getWIYLLinkTitlesKey());
+			return (listOfCachedTitles && listOfCachedTitles[articleTitle]) ? listOfCachedTitles[articleTitle] : '';
+		}
+
+		function getTrackingLabel(postfix) {
+			var label = targetLanguage;
+			if ( linkTitle.length > 0 && linkTitle != 'main' ) {
+				label += '-article';
+			}
+			label += '-' + postfix;
+			return label;
+		}
+
+		if (!w.wikiaPageIsCorporate) {
+			$(init);
+		}
 	}
 );

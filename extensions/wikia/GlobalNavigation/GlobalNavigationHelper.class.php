@@ -11,31 +11,15 @@ class GlobalNavigationHelper {
 	 */
 	private $wikiCorporateModel;
 
+	/**
+	 * @var WikiaLogoHelper
+	 */
+	private $wikiaLogoHelper;
+
 
 	public function __construct() {
 		$this->wikiCorporateModel = new WikiaCorporateModel();
-	}
-
-	/**
-	 * @desc gets corporate page URL for given language.
-	 * Firstly, it checks using GlobalTitle method.
-	 * If entry for given language doesn't exist it checks in $wgLangToCentralMap variable
-	 * If it doesn't exist it fallbacks to english version (default lang) using GlobalTitle method
-	 *
-	 * @param string $lang - language
-	 * @return string - Corporate Wikia Domain for given language
-	 */
-	public function getCentralUrlForLang( $lang ) {
-		global $wgLangToCentralMap;
-		$title = $this->getCentralWikiUrlForLangIfExists( $lang );
-		if ( $title ) {
-			return $title->getServer();
-		} else if ( !empty( $wgLangToCentralMap[ $lang ] ) ) {
-			return $wgLangToCentralMap[ $lang ];
-		} else {
-			$var = $this->getCentralWikiUrlForLangIfExists( self::DEFAULT_LANG );
-			return $var->getServer();
-		}
+		$this->wikiaLogoHelper = new WikiaLogoHelper();
 	}
 
 	/**
@@ -46,12 +30,16 @@ class GlobalNavigationHelper {
 	 * @return string - central wiki url
 	 */
 	public function getCentralUrlFromGlobalTitle( $lang ) {
-		$title = $this->getCentralWikiUrlForLangIfExists($lang);
+		$out = '/';
+
+		$title = $this->wikiaLogoHelper->getCentralWikiUrlForLangIfExists($lang);
 		if ($title) {
-			return $title->getServer();
-		} else {
-			return $this->getCentralWikiUrlForLangIfExists(self::DEFAULT_LANG)->getServer();
+			$out = $title->getServer();
+		} else if ( $title =$this->wikiaLogoHelper->getCentralWikiUrlForLangIfExists( self::DEFAULT_LANG ) ) {
+			$out = $title->getServer();
 		}
+
+		return $out;
 	}
 
 	/**
@@ -97,22 +85,6 @@ class GlobalNavigationHelper {
 		} else {
 			return $wgLanguageCode;
 		}
-	}
-
-	/**
-	 * @desc get central wiki URL for given language.
-	 * If wiki in given language doesn't exist GlobalTitle method is throwing an exception and this method returns false
-	 *
-	 * @param String $lang - language code
-	 * @return bool|GlobalTitle
-	 */
-	protected function getCentralWikiUrlForLangIfExists( $lang ) {
-		try {
-			$title = GlobalTitle::newMainPage( $this->wikiCorporateModel->getCorporateWikiIdByLang( $lang ) );
-		} catch ( Exception $ex ) {
-			return false;
-		}
-		return $title;
 	}
 
 	protected function createCNWUrlFromGlobalTitle() {

@@ -11,31 +11,6 @@ class ServiceTest extends WikiaBaseTest {
 
 	/**
 	 * @group Slow
-	 * @slowExecutionTime 0.04016 ms
-	 * @group UsingDB
-	 */
-	function testAvatarService() {
-		$anonName = '10.10.10.10';
-		$userName = 'WikiaBot';
-
-		$this->mockGlobalVariable('wgDevBoxImageServerOverride', 'images.foo.wikia-dev.com');
-
-		// users
-		$this->assertRegExp('/width="32"/', AvatarService::render($userName, 32));
-		$this->assertRegExp('/\/20px-/', AvatarService::render($userName, 16));
-		$this->assertRegExp('/User:WikiaBot/', AvatarService::renderLink($userName));
-		$this->assertRegExp('/^<img src="http:\/\/images/', AvatarService::renderAvatar($userName));
-		$this->assertRegExp('/^http:\/\/images/', AvatarService::getAvatarUrl($userName));
-
-		// anons
-		$this->assertRegExp('/Special:Contributions\//', AvatarService::getUrl($anonName));
-		$this->assertRegExp('/^<img src="/', AvatarService::renderAvatar($anonName));
-		$this->assertRegExp('/\/20px-/', AvatarService::renderAvatar($anonName, 20));
-		$this->assertRegExp('/Special:Contributions/', AvatarService::renderLink($anonName));
-	}
-
-	/**
-	 * @group Slow
 	 * @slowExecutionTime 0.35311 ms
 	 * @group UsingDB
 	 */

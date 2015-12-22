@@ -1,5 +1,7 @@
 <?php
 
+use Wikia\Logger\WikiaLogger;
+
 /**
  * WikiaBaseException
  *
@@ -60,11 +62,12 @@ class WikiaException extends WikiaBaseException {
 
 			// log on devboxes to /tmp/debug.log
 			wfDebug($exceptionClass . ": {$message}\n");
+			wfDebug($this->getTraceAsString());
 
-			\Wikia\Logger\WikiaLogger::instance()->error($exceptionClass, [
+			WikiaLogger::instance()->error($exceptionClass, [
 				'err' => $message,
 				'errno' => $code,
-				'exception' => $this,
+				'exception' => $previous instanceof Exception ? $previous : $this,
 			]);
 		}
 	}
@@ -90,7 +93,6 @@ class WikiaDispatchedException extends WikiaException {
 	 *
 	 * @link  http://pl2.php.net/manual/en/exception.construct.php
 	 * @param string $message
-	 * @param int $code
 	 * @param Exception $original
 	 */
 	public function __construct($message = '',  Exception $original = null) {
@@ -130,32 +132,16 @@ class WikiaDispatchedException extends WikiaException {
 	 * Override WikiaException report() and write exceptions to error_log
 	 */
 	function report() {
-		global $wgRequest;
-		$info = '';
-
-		if ( !empty( $this->_original ) ) {
-			$file = $this->_original->getFile();
-			$line = $this->_original->getLine();
-			$message = $this->_original->getMessage();
-
-			$info = "exception has occurred at line {$line} of {$file}: {$message}";
-		} else {
-			$info = "unknown exception has occurred";
-		}
-
-		$url = '[no URL]';
-
-		if ( isset( $wgRequest ) ) {
-			$url = $wgRequest->getFullRequestURL();
-		}
-
-		// Display normal mediawiki eror page for mediawiki exceptions
+		// Display normal mediawiki error page for mediawiki exceptions
 		if ( $this->_original instanceof MWException ) {
 			$this->_original->report();
 		}
-
+		// Wikia-specific exceptions will be sent to Logstash
 		else {
-			trigger_error("[REPORT: {$this->getMessage()}] WikiaDispatcher reports an {$info}  (URL: {$url}) [REPORT: End]", E_USER_ERROR);
+			WikiaLogger::instance()->error(__CLASS__, [
+				'err' => $this->getMessage(),
+				'exception' => $this->getOriginal(),
+			]);
 		}
 	}
 }
@@ -191,32 +177,37 @@ abstract class WikiaHttpException extends WikiaBaseException {
  * subclasses each matching a specific HTTP status code
  */
 
-abstract class BadRequestException extends WikiaHttpException {
+class BadRequestException extends WikiaHttpException {
 	protected $code = 400;
 	protected $message = 'Bad request';
 }
 
-abstract class ForbiddenException extends WikiaHttpException {
+class UnauthorizedException extends WikiaHttpException {
+	protected $code = 401;
+	protected $message = 'Unauthorized';
+}
+
+class ForbiddenException extends WikiaHttpException {
 	protected $code = 403;
 	protected $message = 'Forbidden';
 }
 
-abstract class NotFoundException extends WikiaHttpException {
+class NotFoundException extends WikiaHttpException {
 	protected $code = 404;
 	protected $message = 'Not found';
 }
 
-abstract class MethodNotAllowedException extends WikiaHttpException {
+class MethodNotAllowedException extends WikiaHttpException {
 	protected $code = 405;
 	protected $message = 'Method not allowed';
 }
 
-abstract class NotImplementedException extends WikiaHttpException {
+class NotImplementedException extends WikiaHttpException {
 	protected $code = 501;
 	protected $message = 'Not implemented';
 }
 
-abstract class InvalidDataException extends WikiaHttpException {
+class InvalidDataException extends WikiaHttpException {
 	protected $code = 555;//custom HTTP status, 500 cannot be used as it makes us fallback to IOWA
 	protected $message = 'Invalid data';
 }
@@ -224,13 +215,13 @@ abstract class InvalidDataException extends WikiaHttpException {
 class ControllerNotFoundException extends NotFoundException {
 	function __construct($name) {
 		parent::__construct("Controller not found: $name");
-	}	
+	}
 }
 
 class MethodNotFoundException extends NotFoundException {
 	function __construct($name) {
 		parent::__construct("Method not found: $name");
-	}	
+	}
 }
 
 class PermissionsException extends ForbiddenException {

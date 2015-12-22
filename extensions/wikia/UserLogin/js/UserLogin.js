@@ -1,50 +1,47 @@
-/*global WikiaEditor:true */
-var UserLogin = {
-	forceLoggedIn: false,
+/*global WikiaEditor:true, UserLoginModal */
+(function () {
+	'use strict';
 
-	refreshIfAfterForceLogin: function() {
-		if (this.forceLoggedIn) {
-			Wikia.Querystring().addCb().goTo();
-		}
-	},
+	var UserLogin = {
+		forceLoggedIn: false,
 
-	rteForceLogin: function() {
-		'use strict';
+		refreshIfAfterForceLogin: function () {
+			if (this.forceLoggedIn) {
+				Wikia.Querystring().addCb().goTo();
+			}
+		},
 
-		var UserLoginModal = window.UserLoginModal;
-
-		if ( !window.wgComboAjaxLogin ) {
+		rteForceLogin: function () {
 			//prevent onbeforeunload from being called when user is loging in
-			window.onbeforeunload = function() {};
-			UserLoginModal.show( {
-				origin: 'editor',
-				persistModal: true,
-				callback: function() {
-					window.WikiaEditor && WikiaEditor.reloadEditor();
-				}
-			} );
-		} else {
-			showComboAjaxForPlaceHolder( '', false, '', false, true );
-		}
-	},
+			window.onbeforeunload = function () {};
+			require(['AuthModal'], function (authModal) {
+				authModal.load({
+					origin: 'editor',
+					url: '/signin?redirect=' + encodeURIComponent(window.location.href),
+					onAuthSuccess: function () {
+						if (window.WikiaEditor) {
+							WikiaEditor.reloadEditor();
+						}
+					}
+				});
+			});
+		},
 
-	isForceLogIn: function() {
-		'use strict';
-
-		var UserLoginModal = window.UserLoginModal;
-
-		if ( window.wgUserName == null ) {
-			//prevent onbeforeunload from being called when user is loging in
-			window.onbeforeunload = function() {};
-			if ( !window.wgComboAjaxLogin ) {
-				UserLoginModal.show( {
-					origin: 'editor'
-				} );
-				return true;
-			} else if ( showComboAjaxForPlaceHolder( '', false, '', false, true ) ) {
+		isForceLogIn: function () {
+			if (window.wgUserName === null) {
+				//prevent onbeforeunload from being called when user is logging in
+				window.onbeforeunload = function () {};
+				require(['AuthModal'], function (authModal) {
+					authModal.load({
+						origin: 'editor',
+						url: '/signin?redirect=' + encodeURIComponent(window.location.href),
+					});
+				});
 				return true;
 			}
+			return false;
 		}
-		return false;
-	}
-};
+	};
+
+	window.UserLogin = UserLogin;
+})();

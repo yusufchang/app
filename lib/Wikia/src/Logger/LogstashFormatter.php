@@ -42,6 +42,11 @@ class LogstashFormatter extends \Monolog\Formatter\LogstashFormatter implements 
 				unset($record['context']['exception']);
 			}
 
+			if (!empty($record['context']['@root'])) {
+				$message = array_merge($record['context']['@root'], $message);
+				unset($record['context']['@root']);
+			}
+
 			$message['@context'] = $record['context'];
 		}
 
@@ -56,6 +61,7 @@ class LogstashFormatter extends \Monolog\Formatter\LogstashFormatter implements 
 		$data = array(
 			'class' => get_class($e),
 			'message' => $e->getMessage(),
+			'code' => $e->getCode(),
 			'file' => $e->getFile().':'.$e->getLine(),
 		);
 

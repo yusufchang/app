@@ -199,6 +199,7 @@ class BackupDumper {
 		$this->initProgress( $history );
 
 		$db = $this->backupDb();
+
 		$exporter = new WikiExporter( $db, $history, WikiExporter::STREAM, $text );
 		$exporter->dumpUploads = $this->dumpUploads;
 		$exporter->dumpUploadFileContents = $this->dumpUploadFileContents;
@@ -259,6 +260,15 @@ class BackupDumper {
 	 * @return DatabaseBase
 	 */
 	function backupDb() {
+		global $wgLBFactoryConf, $wgDBadminuser, $wgDBadminpassword;
+
+		LBFactory::destroyInstance();
+
+		if ( !empty( $wgDBadminuser ) && !empty( $wgDBadminpassword ) ) {
+			$wgLBFactoryConf['serverTemplate']['user'] = $wgDBadminuser;
+			$wgLBFactoryConf['serverTemplate']['password'] = $wgDBadminpassword;
+		}
+
 		$this->lb = wfGetLBFactory()->newMainLB();
 		$db = $this->lb->getConnection( DB_SLAVE, 'backup' );
 

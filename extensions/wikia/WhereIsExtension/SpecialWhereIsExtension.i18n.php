@@ -21,6 +21,7 @@
 $messages = array();
 
 $messages['en'] = array(
+	'whereisextension-desc'     => 'Provides a list of wikis with enabled extensions',
 	'whereisextension'			=> 'Where is extension',	//the name displayed on Special:SpecialPages
 	'whereisextension-submit'	=> 'Search',
 	'whereisextension-list'		=> 'List of wikis with matched criteria ($1)',
@@ -30,8 +31,11 @@ $messages['en'] = array(
 	'whereisextension-name-contains'	=> 'variable name contains',
 	'whereisextension-search-like-value' => 'Like:',
 	'whereisextension-search-type' => 'Type:',
-	'whereisextension-search-type-bool' => "Boolean",
-	'whereisextension-search-type-full' => "Like",
+	'whereisextension-search-type-bool' => 'Boolean',
+	'whereisextension-search-type-full' => 'Like',
+	'whereisextension-edit' => 'edit',
+	'whereisextension-select-all' => 'select all',
+	'whereisextension-deselect-all' => 'deselect all',
 );
 
 /** Message documentation (Message documentation)
@@ -39,10 +43,14 @@ $messages['en'] = array(
  * @author Siebrand
  */
 $messages['qqq'] = array(
+	'whereisextension-desc'   => '{{desc}}',
 	'whereisextension-submit' => '{{Identical|Search}}',
 	'whereisextension-filter' => 'Used as some kind of fieldset description.
 {{Identical|Filter}}',
 	'whereisextension-search-type' => '{{Identical|Type}}',
+	'whereisextension-edit' => 'A link to edit a value of a variable.',
+	'whereisextension-select-all' => 'A link to select all wikis on a list with a given variable.',
+	'whereisextension-deselect-all' => 'A link to deselect all wikis on a list with a given variable.',
 );
 
 /** Afrikaans (Afrikaans)

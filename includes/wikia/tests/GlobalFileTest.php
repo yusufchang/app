@@ -4,6 +4,7 @@
  * Set of unit tests for GlobalFile class
  *
  * @author macbre
+ * @group GlobalFile
  */
 class GlobalFileTest extends WikiaBaseTest {
 
@@ -19,9 +20,14 @@ class GlobalFileTest extends WikiaBaseTest {
 		// assume we're in production environment
 		$this->mockGlobalVariable('wgDevelEnvironment', false);
 		$this->mockGlobalVariable('wgDevBoxImageServerOverride', false);
+		$this->mockGlobalVariable('wgEnableVignette', false);
 
 		$this->mockGlobalVariable('wgImagesDomainSharding', 'images%s.wikia.nocookie.net');
 		$this->mockGlobalVariable('wgCdnStylePath', sprintf('http://slot1.images.wikia.nocookie.net/__cb%s/common', self::DEFAULT_CB));
+	}
+
+	private function getSelectRowMock() {
+		return $this->getMethodMock( 'DatabaseBase', 'selectRow' );
 	}
 
 	/**
@@ -30,8 +36,7 @@ class GlobalFileTest extends WikiaBaseTest {
 	 * @dataProvider newFromTextProvider
 	 */
 	public function testNewFromText($row, $cityId, $path, $exists, $width, $height, $crop, $mime, $url) {
-		$mockSelectRow = $this->getMethodMock( 'DatabaseMysql', 'selectRow' );
-		$mockSelectRow
+		$this->getSelectRowMock()
 			->expects( $this->any() )
 			->method( 'selectRow' )
 			->will( $this->returnCallback( function( $table, $vars, $conds, $fname ) use ($row) {
@@ -41,6 +46,9 @@ class GlobalFileTest extends WikiaBaseTest {
 					return $this->getCurrentInvocation()->callOriginal();
 				}
 			}));
+
+		$this->mockGlobalVariable('wgCityId', $cityId);
+		$this->mockGlobalVariable('wgUploadPath', "http://images.wikia.com/{$path}/images");
 
 		$file = GlobalFile::newFromText('Gzik.jpg', $cityId);
 		$title = $file->getTitle();
@@ -119,8 +127,7 @@ class GlobalFileTest extends WikiaBaseTest {
 	 * @group UsingDB
 	 */
 	public function testNewFromTextDbNameMatch($row, $cityId) {
-		$mockSelectRow = $this->getMethodMock( 'DatabaseMysql', 'selectRow' );
-		$mockSelectRow
+		$this->getSelectRowMock()
 			->expects( $this->any() )
 			->method( 'selectRow' )
 			->will( $this->returnCallback( function( $table, $vars, $conds, $fname ) use ($row) {

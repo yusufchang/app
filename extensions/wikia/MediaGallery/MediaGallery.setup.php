@@ -14,6 +14,8 @@ $wgExtensionCredits['other'][] = array(
 		'James Sutterfield',
 		'Armon Rabiyan',
 	),
+	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/MediaGallery',
+	'descriptionmsg' => 'mediagallery-desc'
 );
 
 $dir = dirname(__FILE__) . '/';
@@ -27,7 +29,6 @@ $wgAutoloadClasses['MediaGalleryModel'] =  $dir . 'MediaGalleryModel.class.php';
 $wgAutoloadClasses['MediaGalleryHooks'] =  $dir . 'MediaGalleryHooks.class.php';
 $wgHooks['OutputPageBeforeHTML'][] = 'MediaGalleryHooks::onOutputPageBeforeHTML';
 $wgHooks['OasisSkinAssetGroups'][] = 'MediaGalleryHooks::onOasisSkinAssetGroups';
-$wgHooks['VenusAssetsPackages'][] = 'MediaGalleryHooks::onVenusAssetsPackages';
 $wgHooks['MakeGlobalVariablesScript'][] = 'MediaGalleryHooks::onMakeGlobalVariablesScript';
 $wgHooks['WikiFeatures::afterToggleFeature'][] = 'MediaGalleryHooks::afterToggleFeature';
 

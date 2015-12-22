@@ -6,13 +6,14 @@ CMD_PHPUNIT=php run-test.php \
 	--configuration=phpunit.xml
 
 # command to run karma
-CMD_KARMA=karma start \
+CMD_KARMA=../node_modules/karma/bin/karma start \
 	--single-run \
 	--no-auto-watch \
 	--reporters progress,junit,coverage
 
 # set up an environment
 export SERVER_DBNAME=firefly
+unexport MW_INSTALL_PATH
 
 all help:
 	# Consult README.md file
@@ -28,12 +29,17 @@ prepare:
 # runs unit tests
 phpunit: prepare
 	${CMD_PHPUNIT} \
-		--exclude-group Infrastructure,Integration,Broken,Stub,Monitoring,Hack
+		--exclude-group Infrastructure,Integration,Broken,Stub,Monitoring,Hack,ExternalIntegration
 
 # runs integration tests only
 phpunit-infrastructure: prepare
 	${CMD_PHPUNIT} \
 		--group Infrastructure,Integration
+
+# runs external partners api integration tests only
+phpunit-externals: prepare
+	${CMD_PHPUNIT} \
+		--group ExternalIntegration
 
 # runs all (i.e. both unit and integration) tests from a given directory or a file
 phpunit-single: prepare
@@ -44,7 +50,7 @@ phpunit-single: prepare
 # runs fast unit tests only
 phpunit-fast: prepare
 	${CMD_PHPUNIT} \
-		--exclude-group Slow,Infrastructure,Integration,Broken,Stub,Monitoring,Hack,UsingDB
+		--exclude-group Slow,Infrastructure,Integration,Broken,Stub,Monitoring,Hack,UsingDB,ExternalIntegration
 
 # lists all slow test cases with execution time
 phpunit-slow-list: prepare

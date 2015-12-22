@@ -15,6 +15,7 @@ $wgExtensionCredits['specialpage'][] = array(
 	'author' => 'Tomasz Odrobny',
 	'descriptionmsg' => 'piggyback-desc',
 	'version' => '0.0.1',
+	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/Piggyback'
 );
 
 $dir = dirname(__FILE__) . '/';
@@ -22,7 +23,7 @@ $dir = dirname(__FILE__) . '/';
 
 $wgAutoloadClasses['Piggyback'] = $dir . 'Piggyback_body.php'; # Tell MediaWiki to load the extension body.
 $wgAutoloadClasses['PBLoginForm']  = $dir . 'Piggyback_body.php'; # Tell MediaWiki to load the extension body.
-$wgAutoloadClasses['PiggybackTemplate'] = $dir . 'Piggyback_form.php'; # Tell MediaWiki to load the extension body.
+$wgAutoloadClasses['PBHooks']  = $dir . 'Piggyback_body.php';
 
 $wgExtensionMessagesFiles['Piggyback'] = $dir . 'Piggyback.i18n.php';
 $wgExtensionMessagesFiles['PiggybackAliases'] = $dir . 'Piggyback.alias.php';
@@ -36,6 +37,9 @@ $wgLogTypes[] = 'piggyback';
 //permissions
 $wgAvailableRights[] = 'piggyback';
 $wgGroupPermissions['util']['piggyback'] = true;
+
+$wgHooks['LoginFormAuthenticateModifyRetval'][] = 'PBHooks::onLoginFormAuthenticateModifyRetval';
+$wgHooks['UserSetCookies'][] = 'PBHooks::onUserSetCookies';
 
 /*
  * event for logout (back to parent user)

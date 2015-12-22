@@ -48,31 +48,72 @@ class UserLoginFacebookForm extends UserLoginForm {
 		return $userEmail;
 	}
 
-	function addNewAccount() {
-		return UserLoginHelper::callWithCaptchaDisabled(function() {
+	/**
+	 * Create a new user account wrapping the code with method callWithCaptchaDisabled to disable
+	 * captcha checking.
+	 *
+	 * @return User A new user object
+	 */
+	public function addNewAccount() {
+		return UserLoginHelper::callWithCaptchaDisabled( function() {
 			return $this->addNewAccountInternal();
-		});
+		} );
 	}
 
-	public function initUser( User $user, $autocreate ) {
+	/**
+	 * Initialize the user object
+	 *
+	 * @param User $user
+	 * @param bool $autocreate
+	 * @return User
+	 */
+	public function initUser( User &$user, $autocreate ) {
 
-		$user = parent::initUser( $user, $autocreate, $this->hasConfirmedEmail );
+		$ret = parent::initUser( $user, $autocreate, $this->hasConfirmedEmail );
 
-		if ( $user instanceof User ) {
+		if ( $ret ) {
 
 			$this->connectWithFacebook( $user );
-			$user->saveSettings();
+			$this->saveUserGender( $user );
 
 			if ( $this->hasConfirmedEmail ) {
 				$this->confirmUser( $user );
-				$user->setCookies();
+				UserLoginHelper::setCookiesForFacebookUser( $user, $this->getRequest()->response() );
 				$this->addNewUserToLog( $user );
 			} else {
 				$this->sendConfirmationEmail( $user );
 			}
 		}
 
-		return $user;
+		return $ret;
+	}
+
+	/**
+	 * Connects given Wikia account with FB account and sets FB feed preferences
+	 * @param User $user Wikia account
+	 * @return bool true on success
+	 */
+	private function connectWithFacebook( User $user ) {
+		$fbId = FacebookClient::getInstance()->getUserId();
+
+		$fbClientFactory = new \FacebookClientFactory();
+		$status = $fbClientFactory->connectToFacebook( $user->getId(), $fbId );
+
+		return $status->isGood();
+	}
+
+	/**
+	 * Save a user's gender from facebook if one is available. Facebook will return the
+	 * following values for a user's gender: 'male', 'female', null.
+	 * @param User $user
+	 */
+	private function saveUserGender( User $user ) {
+		$fbUserInfo = FacebookClient::getInstance()->getUserInfo();
+		$gender = $fbUserInfo->getProperty( 'gender' );
+		if ( !is_null( $gender ) ) {
+			$user->setGlobalAttribute( 'gender', $gender );
+			$user->saveSettings();
+		}
 	}
 
 	/**
@@ -102,24 +143,6 @@ class UserLoginFacebookForm extends UserLoginForm {
 	private function sendConfirmationEmail() {
 		$userLoginHelper = new UserLoginHelper();
 		$userLoginHelper->sendConfirmationEmail( $this->mUsername );
-	}
-
-	/**
-	 * Connects given Wikia account with FB account and sets FB feed preferences
-	 *
-	 * @param User $user Wikia account
-	 * @return bool true on success
-	 */
-	private function connectWithFacebook( User $user ) {
-		$fbId = FacebookClient::getInstance()->getUserId();
-
-		if ( F::app()->wg->EnableFacebookClientExt ) {
-			$mapping = \FacebookMapModel::createUserMapping( $user->getId(), $fbId );
-			return !empty( $mapping );
-		}
-
-		FBConnectDB::addFacebookID( $user, $fbId );
-		return true;
 	}
 
 	/**

@@ -13,7 +13,13 @@ class WikiaInYourLangController extends WikiaController {
 	 * Takes the currentUrl and targetLanguage parameters from the Request object.
 	 */
 	public function getNativeWikiaInfo() {
+		global $wgWikiaEnvironment;
+
 		wfProfileIn( __METHOD__ );
+		/**
+		 * Set a default success value to false
+		 */
+		$this->response->setVal( 'success', false );
 		/**
 		 * URL of the posting wikia
 		 * @var string
@@ -25,10 +31,12 @@ class WikiaInYourLangController extends WikiaController {
 		 */
 		$sCurrentSitename = $this->wg->Sitename;
 		/**
-		 * The language code for the wfMessage
+		 * A language code's core for the wfMessage
 		 * @var string
 		 */
 		$sTargetLanguage = $this->request->getVal( 'targetLanguage' );
+		$sArticleTitle = $this->request->getVal( 'articleTitle', false );
+		$sInterlangTitle = $this->request->getVal('interlangTitle', null);
 
 		/**
 		 * Steps to get the native wikia's ID:
@@ -38,39 +46,55 @@ class WikiaInYourLangController extends WikiaController {
 		 */
 		$sWikiDomain = $this->getWikiDomain( $sCurrentUrl );
 		if ( $sWikiDomain !== false ) {
+			/**
+			 * Get native domain and include it in the response
+			 */
 			$sNativeWikiDomain = $this->getNativeWikiDomain( $sWikiDomain, $sTargetLanguage );
-			$iNativeWikiId = $this->getWikiIdByDomain( $sNativeWikiDomain );
+			$this->response->setVal( 'nativeDomain', $sNativeWikiDomain );
+			$oNativeWiki = $this->getNativeWikiByDomain( $sNativeWikiDomain );
+			$this->response->setVal( 'linkAddress', $oNativeWiki->city_url );
 
 			/**
 			 * If a wikia is found - send a response with its url and sitename.
 			 * Send success=false otherwise.
 			 */
-			if ( $iNativeWikiId > 0 ) {
-				$oNativeWiki = WikiFactory::getWikiById( $iNativeWikiId );
+			if ( is_object( $oNativeWiki ) ) {
+				/**
+				 * Check for false-positives - see CE-1216
+				 * Per request we should unify dialects like pt and pt-br
+				 * @see CE-1220
+				 */
+				if ( $this->isNativeWikiaValid( $oNativeWiki, $sTargetLanguage ) ) {
+					$aMessageParams = [
+						$sCurrentSitename,
+						$oNativeWiki->city_url,
+						$oNativeWiki->city_title,
+					];
+					$isMainPageLink = true;
+					$articleURL = null;
+					if ( $sInterlangTitle && strlen($sInterlangTitle) ) { //If main page, then $sInterlang is ''
+						$articleURL = $this->getArticleURL( $sInterlangTitle, $oNativeWiki->city_id );
+					} else {
+						$articleURL = $this->getArticleURL( $sArticleTitle, $oNativeWiki->city_id );
+					}
+					if ( $articleURL ) {
+						$aMessageParams[1] = $articleURL;
+						$this->response->setVal( 'linkAddress', $articleURL );
+						$isMainPageLink = false;
+					}
 
-				$aMessageParams = [
-					$sCurrentSitename,
-					$oNativeWiki->city_url,
-					$oNativeWiki->city_title,
-				];
-
-				$sMessage = $this->prepareMessage( $sTargetLanguage, $aMessageParams );
-
-				$this->response->setVal( 'success', true );
-				$this->response->setVal( 'message', $sMessage );
-			} else {
-				$this->response->setVal( 'success', false );
-				$this->response->setVal( 'error', 'A native wikia not found.' );
+					$aMessages = $this->prepareMessage( $sTargetLanguage, $aMessageParams, $isMainPageLink );
+					$this->response->setVal( 'success', true );
+					$this->response->setVal( 'message', $aMessages['desktop'] );
+					$this->response->setVal( 'messageMobile', $aMessages['mobile'] );
+				}
 			}
-		} else {
-			$this->response->setVal( 'success', false );
-			$this->response->setVal( 'error', 'An invalid URL passed for parsing.' );
 		}
 
 		/**
-		 * Cache the response aggresively
+		 * Cache the response for a day
 		 */
-		$this->response->setCacheValidity( WikiaResponse::CACHE_LONG );
+		$this->response->setCacheValidity( WikiaResponse::CACHE_STANDARD );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -80,7 +104,7 @@ class WikiaInYourLangController extends WikiaController {
 	 * Using preg_match to handle all languages
 	 * e.g. get pad.wikia.com from zh.pad.wikia.com
 	 * @param  string $sCurrentUrl A full URL to parse
-	 * @return string              The retrieved domain
+	 * @return string The retrieved domain
 	 */
 	public function getWikiDomain( $sCurrentUrl ) {
 		$aParsed = parse_url( $sCurrentUrl );
@@ -89,17 +113,19 @@ class WikiaInYourLangController extends WikiaController {
 
 		if ( isset( $aParsed['host'] ) ) {
 			$sHost = $aParsed['host'];
-			$regExp = "/(([a-z]{2,3}|[a-z]{2}\-[a-z]{2})\.)?([^\.]+\.)(.*)/i";
+			$regExp = "/(sandbox.{3}\.|preview\.|verify\.)?(([a-z]{2,3}|[a-z]{2}\-[a-z]{2})\.)?([^\.]+\.)([^\.]+\.)(.*)/i";
 			/**
 			 * preg_match returns similar array as a third parameter:
 			 * [
-			 * 	0 => zh.example.wikia.com,
-			 * 	1 => (zh. | empty),
-			 * 	2 => (zh | empty),
-			 * 	3 => example.
-			 * 	4 => ( wikia.com | adamk.wikia-dev.com )
+			 *  0 => sandbox-s3.zh.example.wikia.com,
+			 *  1 => (sandbox-s3. | preview. | verify. | empty)
+			 *  2 => (zh. | empty),
+			 *  3 => (zh | empty),
+			 *  4 => example.
+			 *  5 => ( wikia | adamk)
+			 *  6 => (com | wikia-dev.com)
 			 * ]
-			 * [3] is a domain without the language prefix
+			 * [4] is a domain without the language prefix
 			 * @var Array
 			 */
 			$aMatches = [];
@@ -109,30 +135,38 @@ class WikiaInYourLangController extends WikiaController {
 			 * This allows the extension to work on devboxes
 			 */
 			if ( $iMatchesCount == 1 ) {
-				$sWikiDomain = $aMatches[3] . self::WIKIAINYOURLANG_WIKIA_DOMAIN;
+				$sWikiDomain = $aMatches[4] . self::WIKIAINYOURLANG_WIKIA_DOMAIN;
 			}
 		}
 
+		if ( !$sWikiDomain ) {
+			$this->response->setVal( 'error', 'An invalid URL passed for parsing.' );
+		}
 		return $sWikiDomain;
 	}
 
 	/**
 	 * Concats a lang code with a domain
-	 * @param  string $sWikiDomain     A domain (host) (e.g. community.wikia.com)
+	 * @param  string $sWikiDomain A domain (host) (e.g. community.wikia.com)
 	 * @param  string $sTargetLanguage A lang code (e.g. ja)
-	 * @return string                  A native wikia URL (e.g. ja.community.wikia.com)
+	 * @return string A native wikia URL (e.g. ja.community.wikia.com)
 	 */
 	private function getNativeWikiDomain( $sWikiDomain, $sTargetLanguage ) {
-		$sNativeWikiDomain = $sTargetLanguage . '.' . $sWikiDomain;
-		return $sNativeWikiDomain;
+		if ( $sTargetLanguage !== 'en' ) {
+			$sNativeWikiDomain = $sTargetLanguage . '.' . $sWikiDomain;
+			return $sNativeWikiDomain;
+		}
+		else {
+			return $sWikiDomain;
+		}
 	}
 
 	/**
 	 * Retrieves a wikia's ID from a database using its domain
 	 * @param  string $sWikiDomain  A domain (host) (e.g. ja.community.wikia.com)
-	 * @return int                  A wikia's ID or 0 if not found.
+	 * @return ResultWrapper|bool A wikia's object or false if not found.
 	 */
-	private function getWikiIdByDomain( $sWikiDomain ) {
+	private function getNativeWikiByDomain( $sWikiDomain ) {
 		$oDB = wfGetDB( DB_SLAVE, array(), $this->wg->ExternalSharedDB );
 
 		$oRow = $oDB->selectRow(
@@ -143,18 +177,79 @@ class WikiaInYourLangController extends WikiaController {
 		);
 
 		if ( $oRow !== false ) {
-			return $oRow->city_id;
+			$iNativeWikiId = $oRow->city_id;
+			$oNativeWiki = WikiFactory::getWikiById( $iNativeWikiId );
+			if ( is_object( $oNativeWiki ) ) {
+				return $oNativeWiki;
+			} else {
+				$this->response->setVal( 'error', "A native wikia with id={$iNativeWikiId} not found." );
+				return false;
+			}
 		} else {
-			return 0;
+			$this->response->setVal( 'error', "A native wikia not found." );
+			return false;
 		}
 	}
 
-	private function prepareMessage( $sTargetLanguage, $aMessageParams ) {
-		$sMsg = wfMessage( 'wikia-in-your-lang-available' )
+	/**
+	 * Checks if a native wikia is not:
+	 * - closed
+	 * - in a different language than the target one
+	 * @param object $oWiki A native wikia city_list row
+	 * @param string $sTargetLanguage The target language code
+	 * @return bool
+	 */
+	private function isNativeWikiaValid( $oWiki, $sTargetLanguage ) {
+		if ( $oWiki->city_public === WikiFactory::CLOSE_ACTION ) {
+			$this->response->setVal( 'error', "A native wikia is closed." );
+			return false;
+		}
+
+		if ( $oWiki->city_lang != $sTargetLanguage ) {
+			$this->response->setVal( 'error', "A native wikia matches the original." );
+			return false;
+		}
+
+		return true;
+	}
+
+	private function prepareMessage( $sTargetLanguage, $aMessageParams, $isMainPageLink ) {
+		if ( $isMainPageLink ) {
+			$sMsg = wfMessage( 'wikia-in-your-lang-available' )
+				->params( $aMessageParams )
+				->inLanguage( $sTargetLanguage )
+				->parse();
+		} else {
+			$sMsg = wfMessage( 'wikia-in-your-lang-article-available' )
+				->params( $aMessageParams )
+				->inLanguage( $sTargetLanguage )
+				->parse();
+		}
+
+		$sMsgMobile = wfMessage( 'wikia-in-your-lang-available-for-mobile' )
 			->params( $aMessageParams )
 			->inLanguage( $sTargetLanguage )
 			->parse();
 
-		return $sMsg;
+		return ['desktop' => $sMsg, 'mobile' => $sMsgMobile];
+	}
+
+	private function getArticleURL( $sArticleTitle, $cityId ) {
+		$sArticleAnchor = null;
+		$articleURL = null;
+
+		if ( $sArticleTitle !== false ) {
+			$sArticleTitle = str_replace( ' ', '_', $sArticleTitle );
+			list($sArticleTitle, $sArticleAnchor) = explode('#', $sArticleTitle);
+			$title = GlobalTitle::newFromText( $sArticleTitle, NS_MAIN, $cityId );
+
+			if ( !is_null( $title ) && $title->exists() ) {
+				$articleURL = $title->getFullURL();
+			}
+			if ( $sArticleAnchor ) {
+				$articleURL = $articleURL . '#' . $sArticleAnchor;
+			}
+		}
+		return $articleURL;
 	}
 }

@@ -122,7 +122,7 @@ class GlobalTitle extends Title {
 			throw new \Exception( 'Invalid $city_id.' );
 		}
 
-		$memkey = sprintf( "GlobalTitle:%d:%d", $id, $city_id );
+		$memkey = wfSharedMemcKey( "GlobalTitle", $id, $city_id );
 		$res = $wgMemc->get( $memkey );
 		if ( empty($res) && WikiFactory::isPublic($city_id) ) {
 			$dbname = ( $dbname ) ? $dbname : WikiFactory::IDtoDB($city_id);
@@ -288,7 +288,7 @@ class GlobalTitle extends Title {
 	 * Get a real URL referring to this title
 	 *
 	 * @param string $query an optional query string
-	 * @param string $variant language variant of url (for sr, zh..)
+	 * @param string|bool $variant language variant of url (for sr, zh..)
 	 *
 	 * @return string the URL
 	 */
@@ -320,7 +320,7 @@ class GlobalTitle extends Title {
 	 * getInternalUrl from Title is not working corretly with GlobalTitle so it is fixed by getting FullURL
 	 *
 	 * @param string $query an optional query string
-	 * @param string $query2 (deprecated) language variant of url (for sr, zh..)
+	 * @param string|bool $query2 (deprecated) language variant of url (for sr, zh..)
 	 *
 	 * @return string
 	 */
@@ -332,7 +332,7 @@ class GlobalTitle extends Title {
 	 * local url doesn't make sense in this context. we always return full URL
 	 *
 	 * @param string $query an optional query string
-	 * @param string $variant language variant of url (for sr, zh..)
+	 * @param string|bool $variant language variant of url (for sr, zh..)
 	 *
 	 * @return string
 	 */
@@ -415,6 +415,28 @@ class GlobalTitle extends Title {
 		if ( !is_string($text) ) {
 			$text = false;
 		}
+		return $text;
+	}
+
+	/**
+	 * Returns text from revision id
+	 *
+	 * @param int $revisionId
+	 * @return false|String
+	 */
+	public function getRevisionText( $revisionId ) {
+		$db = wfGetDB( DB_SLAVE, [], $this->getDatabaseName() );
+		$revision = Revision::loadRawRevision( $revisionId, $db );
+
+		/**
+		 * If no records were found - return an empty string.
+		 */
+		if ( !$revision ) {
+			return '';
+		}
+
+		$text = $this->getContentByTextId( $revision->getTextId() );
+
 		return $text;
 	}
 
@@ -604,11 +626,10 @@ class GlobalTitle extends Title {
 		return preg_replace( '!^' . $articlePath . '/!i', '', $path );
 	}
 
-
 	/**
 	 * check if page exists
 	 *
-	 * @return 0/1
+	 * @return int 0/1
 	 */
 	public function exists() {
 		$this->loadAll();
@@ -650,28 +671,16 @@ class GlobalTitle extends Title {
 		/**
 		 * don't do this twice
 		 */
-		if( $this->mServer ) {
-			return $this->mServer;
-		}
-
-		$server = WikiFactory::getVarValueByName( "wgServer", $this->mCityId );
-
-		/**
-		 * special handling for dev boxes
-		 *
-		 * @author macbre
-		 */
-		global $wgDevelEnvironment;
-		if (!empty($wgDevelEnvironment)) {
-			$this->mServer = WikiFactory::getLocalEnvURL($server);
+		if ( $this->mServer ) {
 			return $this->mServer;
 		}
 
 		/**
 		 * get value from city_variables
 		 */
-		if( $server ) {
-			$this->mServer = $server;
+		$server = WikiFactory::getVarValueByName( "wgServer", $this->mCityId );
+		if ( $server ) {
+			$this->mServer = self::normalizeEnvURL( $server );
 			return $server;
 		}
 
@@ -687,13 +696,30 @@ class GlobalTitle extends Title {
 			$city = WikiFactory::getWikiByID( $this->mCityId, true );
 		}
 
-		if( $city ) {
+		if ( $city ) {
 			$server = rtrim( $city->city_url, "/" );
-			$this->mServer = $server;
+			$this->mServer = self::normalizeEnvURL( $server );
 			return $server;
 		}
 
 		return false;
+	}
+
+	/**
+	 *
+	 * Normalizes URL passed to this method to generate environment-specific paths
+	 *
+	 * @param $server
+	 * @return string
+	 */
+	private static function normalizeEnvURL( $server ) {
+		global $wgWikiaEnvironment;
+
+		if ( !in_array( $wgWikiaEnvironment, [ WIKIA_ENV_PROD, WIKIA_ENV_INTERNAL ] ) ) {
+			return WikiFactory::getLocalEnvURL( $server );
+		}
+
+		return $server;
 	}
 
 	/**
@@ -821,11 +847,7 @@ class GlobalTitle extends Title {
 	 * @return string
 	 */
 	private function memcKey() {
-		global $wgSharedKeyPrefix, $wgDevelEnvironmentName;
-
-		$parts = array( $wgSharedKeyPrefix, "globaltitle", $this->mCityId, Wikia::getEnvironmentName() );
-
-		return implode(":", $parts);
+		return wfSharedMemcKey( 'globaltitle', $this->mCityId );
 	}
 
 	/**

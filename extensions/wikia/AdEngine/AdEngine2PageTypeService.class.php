@@ -43,14 +43,15 @@ class AdEngine2PageTypeService {
 			|| $this->wg->Request->getBool( 'noads', false )
 			|| $this->wg->ShowAds === false
 			|| $this->wg->EnableAdEngineExt === false
-			|| !$this->app->checkSkin( ['oasis', 'wikiamobile', 'venus'] )
+			|| !$this->app->checkSkin( [ 'oasis', 'wikiamobile' ] )
 		) {
 			$pageLevel = self::PAGE_TYPE_NO_ADS;
 			return $pageLevel;
 		}
 
-		$runAds = WikiaPageType::isSearch()
+		$runAds = WikiaPageType::isFilePage()
 			|| WikiaPageType::isForum()
+			|| WikiaPageType::isSearch()
 			|| WikiaPageType::isWikiaHub();
 
 		if ( !$runAds ) {
@@ -70,9 +71,10 @@ class AdEngine2PageTypeService {
 					|| ( defined( 'NS_PROJECT' ) && $namespace == NS_PROJECT )
 
 					// Chosen special pages:
-					|| $title->isSpecial( 'Videos' )
 					|| $title->isSpecial( 'Leaderboard' )
-					|| $title->isSpecial( 'Maps' );
+					|| $title->isSpecial( 'Maps' )
+					|| $title->isSpecial( 'Newimages' )
+					|| $title->isSpecial( 'Videos' );
 			}
 		}
 
@@ -82,7 +84,7 @@ class AdEngine2PageTypeService {
 		}
 
 		$user = $this->wg->User;
-		if ( !$user->isLoggedIn() || $user->getOption( 'showAds' ) ) {
+		if ( !$user->isLoggedIn() || $user->getGlobalPreference( 'showAds' ) ) {
 			// Only leaderboard, medrec and invisible on corporate sites for anonymous users
 			if ( WikiaPageType::isCorporatePage() ) {
 				$pageLevel = self::PAGE_TYPE_CORPORATE;

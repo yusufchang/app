@@ -4,6 +4,7 @@ $wgExtensionCredits['specialpage'][] = [
 	'name' => 'Theme designer',
 	'author' => [ 'Christian Williams', 'Inez Korczyński', 'Maciej Brencz' ],
 	'descriptionmsg' => 'themedesigner-desc',
+	'url' => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/ThemeDesigner'
 ];
 
 $dir = __DIR__;
@@ -15,7 +16,6 @@ $wgAutoloadClasses[ 'UploadWordmarkFromFile' ] = "{$dir}/UploadWordmarkFromFile.
 $wgAutoloadClasses['ThemeDesignerController'] = "$dir/ThemeDesignerController.class.php";
 $wgAutoloadClasses['SpecialThemeDesigner'] = "$dir/SpecialThemeDesigner.class.php";
 $wgAutoloadClasses['SpecialThemeDesignerPreview'] = "$dir/SpecialThemeDesignerPreview.class.php";
-$wgAutoloadClasses['Theme'] = "$dir/SpecialThemeDesignerPreview.class.php";
 $wgAutoloadClasses['ThemeDesignerHooks'] = "$dir/ThemeDesignerHooks.class.php";
 
 // special pages

@@ -11,20 +11,15 @@ $wgExtensionCredits['specialpage'][] = array(
 	'name'           => 'WikiaNewFiles',
 	'author'         => 'Garth Webb',
 	'descriptionmsg' => 'wikianewfiles-desc',
-	'url'            => 'http://www.wikia.com',
+	'url'            => 'https://github.com/Wikia/app/tree/dev/extensions/wikia/WikiaNewFiles',
 );
 
-$dir = dirname( __FILE__ );
-
 // Translations
-$wgExtensionMessagesFiles["WikiaNewFiles"] =  "{$dir}/SpecialNewFiles.i18n.php";
-
-//Fix BugzId: 4310
-$wgExtensionMessagesFiles['WikiaNewFilesAliases'] = "{$dir}/SpecialNewFiles.alias.php";
+$wgExtensionMessagesFiles['WikiaNewFiles'] =  __DIR__ . '/SpecialNewFiles.i18n.php';
+$wgExtensionMessagesFiles['WikiaNewFilesAliases'] = __DIR__ . '/SpecialNewFiles.alias.php';
 
 // Autoloaded classes
-$wgAutoloadClasses['WikiaNewFiles'] = "{$dir}/WikiaNewFiles.class.php";
-
-require_once( "{$dir}/SpecialNewFiles.php" );
+$wgAutoloadClasses['WikiaNewFiles'] = __DIR__ . '/WikiaNewFiles.class.php';
+$wgAutoloadClasses['WikiaNewFilesModel'] = __DIR__ . '/WikiaNewFilesModel.class.php';
 
 $wgSpecialPages['Newimages'] = 'WikiaNewFiles';

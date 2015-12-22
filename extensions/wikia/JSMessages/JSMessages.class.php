@@ -48,7 +48,7 @@ class JSMessages {
 	/**
 	 * Add a package to be available in JS
 	 *
-	 * @param string $name - package name
+	 * @param string $package - package name
 	 * @param int $mode - how to emit messages (inline / external)
 	 */
 	static public function enqueuePackage($package, $mode) {
@@ -108,9 +108,6 @@ class JSMessages {
 
 		$ret = array();
 		foreach( $messageKeys as $msg ) {
-			if ( is_array( $msg ) ) {
-				var_dump( $msg );
-			}
 			if (substr($msg, 0, $patternLen) === $pattern) {
 				$ret[$msg] = wfmsgExt($msg, array('language' => $langCode));
 			}

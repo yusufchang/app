@@ -1,5 +1,7 @@
 <?php
 
+use Wikia\Logger\WikiaLogger;
+
 /**
  * Class FacebookClientHooks
  */
@@ -14,6 +16,9 @@ class FacebookClientHooks {
 	 * fbReturnToTitle
 	 * fbScriptLangCode
 	 *
+	 * @param $vars
+	 *
+	 * @return bool
 	 */
 	public static function MakeGlobalVariablesScript( &$vars ) {
 		global $fbScript, $fbAppId, $fbLogo;
@@ -43,30 +48,23 @@ class FacebookClientHooks {
 	}
 
 	/**
-	 * Add Facebook SDK loading code at the bottom of the page
-	 *
-	 * Fixes IE issue (RT #140425)
-	 *
-	 * @param $skin Skin
-	 * @param $scripts
-	 *
+	 * Add Facebook div at the bottom of the page so we don't get JS console messages from FB about it.
+	 * @param Skin $skin
+	 * @param string $html
 	 * @return bool
 	 */
-	static function SkinAfterBottomScripts( $skin, &$scripts ) {
-		global $fbScript, $wgNoExternals;
-
-		if ( !empty( $fbScript ) && empty( $wgNoExternals ) ) {
-			$scripts .= '<div id="fb-root"></div>';
-		}
+	public static function onGetHTMLAfterBody($skin, &$html) {
+		$html .= '<div id="fb-root"></div>';
 
 		return true;
 	}
 
+
 	/**
 	 * Create disconnect button and other things in pref
 	 *
-	 * @param $user User
-	 *
+	 * @param User $user
+	 * @param array $preferences
 	 * @return bool
 	 */
 	static function GetPreferences( $user, &$preferences ) {
@@ -102,16 +100,15 @@ class FacebookClientHooks {
 	 * @return bool
 	 */
 	public static function onSkinAssetGroups( &$assetsArray ) {
-		$title = F::app()->wg->Title;
+		$app = F::app();
+		$title = $app->wg->Title;
 
 		// Special:Preferences
-		if ( $title instanceof Title && $title->isSpecial( 'Preferences' ) ) {
+		if ( $title instanceof Title &&
+			$title->isSpecial( 'Preferences' ) &&
+			$app->wg->User->isLoggedIn()
+		) {
 			$assetsArray[] = 'facebook_client_preferences_js';
-		}
-
-		// Special:FacebookConnect
-		if ( $title instanceof Title && $title->isSpecial( 'FacebookConnect' ) ) {
-			$assetsArray[] = 'facebook_client_special_connect';
 		}
 
 		return true;
@@ -125,6 +122,10 @@ class FacebookClientHooks {
 
 	/**
 	 * Handle confirmation message from Facebook Connect
+	 *
+	 * @param $html
+	 *
+	 * @return bool
 	 */
 	public static function onSkinTemplatePageBeforeUserMsg( &$html ) {
 		if ( F::app()->checkSkin( 'oasis' ) ) {
@@ -132,10 +133,19 @@ class FacebookClientHooks {
 			$fbStatus = F::app()->wg->Request->getVal( 'fbconnected' );
 
 			if ( $fbStatus  == '1' ) {
-				// check if current user is connected to facebook
-				$map = FacebookClient::getInstance()->getMapping();
+				try {
+					// check if current user is connected to facebook
+					$map = FacebookClient::getInstance()->getMapping();
+				} catch ( Exception $e ) {
+					WikiaLogger::instance()->error( 'Could not find mapping ', [
+						'issue' => 'SOC-1112',
+						'error' => $e->getMessage(),
+					] );
+				}
 				if ( !empty( $map ) ) {
-					NotificationsController::addConfirmation( wfMessage( 'fbconnect-connect-msg' )->plain() );
+					BannerNotificationsController::addConfirmation(
+						wfMessage( 'fbconnect-connect-msg' )->escaped()
+					);
 				}
 			}
 		}
@@ -143,5 +153,29 @@ class FacebookClientHooks {
 		return true;
 	}
 
+	/**
+	 * @param Skin $skin
+	 * @param string $text
+	 *
+	 * @return bool
+	 * @throws WikiaException
+	 */
+	public static function onSkinAfterBottomScripts( $skin, &$text ) {
 
+		$script = AssetsManager::getInstance()->getURL( 'facebook_client_fbtags_js' );
+		$text .= Html::linkedScript( $script[0] );
+
+		return true;
+	}
+
+	/**
+	 * @param User $user
+	 *
+	 * @return bool
+	 */
+	public static function onUserLogout( &$user ) {
+		// Clean up any facebook cookies/data
+		FacebookClient::getInstance()->logout();
+		return true;
+	}
 }

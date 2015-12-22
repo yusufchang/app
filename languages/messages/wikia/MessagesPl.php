@@ -156,6 +156,15 @@ Zmień [[Special:Preferences#prefsection-1|swoje preferencje]], aby używać wid
 'hub-Lifestyle' => 'Lifestyle',
 'hub-Wikia' => 'Wikia',
 
+# vertical names
+'vertical-tv' => 'TV',
+'vertical-games' => 'Gry',
+'vertical-books' => 'Książki',
+'vertical-comics' => 'Komiksy',
+'vertical-lifestyle' => 'Lifestyle',
+'vertical-music' => 'Muzyka',
+'vertical-movies' => 'Filmy',
+
 
 	'shared-Globalnavigation' => "*w:c:pl:Gry|Gry|video-games-vertical-color
 
@@ -247,4 +256,14 @@ Zmień [[Special:Preferences#prefsection-1|swoje preferencje]], aby używać wid
 ***w:c:pl.bionicle|Bionicle
 ***w:c:pl.vocaloid|Vocaloid
 ",
+
+'tog-enableuserjs' => 'Włącz osobisty kod JavaScript ([[Pomoc:Osobiste_CSS_i_JS|Dowiedz się więcej]])',
+'wikia-pagetitle' => '$1 – Wikia',
+
+'recentchanges-on-wikia-title' => 'Ostatnie zmiany na Wikii',
+'recentchanges-on-wikia-content' => "Przedstawiamy Typy Szablonów — Grupuj swoje szablony według typów i spraw by [[Special:Templates|zarządzanie szablonami]] było łatwiejsze co umożliwi lepsze ich wyświetlanie na urządzeniach mobilnych. [[Help:Template Types|Dowiedz się więcej]] lub '''[[Special:Insights/templateswithouttype|Zacznij teraz!]]'''
+
+Obrazy w zakładkach oraz rozwijane grupy są teraz dostępne dla [[Pomoc:Infoboksy|Przenośnych infoboksów]].
+
+Czy treści na twojej stronie są przyjazne dla urządzeń mobilnych? Dowiedz się jak zadbać, aby treści twoich stronach były w przyszłości przyjazne urządzeniom mobilnym na [[w:c:portability|Portability.wikia.com]].",
 ) );

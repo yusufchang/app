@@ -70,7 +70,7 @@ $wgAutoloadLocalClasses = array(
 	'DumpOutput' => 'includes/Export.php',
 	'DumpPipeOutput' => 'includes/Export.php',
 	'EditPage' => 'includes/EditPage.php',
-	'EmailNotification' => 'includes/UserMailer.php',
+	'EmailNotification' => 'includes/EmailNotification.php',
 	'EnhancedChangesList' => 'includes/ChangesList.php',
 	'ErrorPageError' => 'includes/Exception.php',
 	'ExplodeIterator' => 'includes/StringUtils.php',
@@ -178,6 +178,7 @@ $wgAutoloadLocalClasses = array(
 	'ProtectionForm' => 'includes/ProtectionForm.php',
 	'QueryPage' => 'includes/QueryPage.php',
 	'QuickTemplate' => 'includes/SkinTemplate.php',
+	'RawMessage' => 'includes/Message.php',
 	'RCCacheEntry' => 'includes/ChangesList.php',
 	'RdfMetaData' => 'includes/Metadata.php',
 	'ReadOnlyError' => 'includes/Exception.php',
@@ -399,15 +400,19 @@ $wgAutoloadLocalClasses = array(
 	'IContextSource' => 'includes/context/IContextSource.php',
 	'RequestContext' => 'includes/context/RequestContext.php',
 
+	# includes/dao
+	'IDBAccessObject' => 'includes/dao/IDBAccessObject.php',
+
 	# includes/db
 	'Blob' => 'includes/db/DatabaseUtility.php',
 	'ChronologyProtector' => 'includes/db/LBFactory.php',
 	'CloneDatabase' => 'includes/db/CloneDatabase.php',
 	'Database' => 'includes/db/DatabaseMysql.php',
 	'DatabaseBase' => 'includes/db/Database.php',
-	'DatabaseIbm_db2' => 'includes/db/DatabaseIbm_db2.php',
 	'DatabaseMssql' => 'includes/db/DatabaseMssql.php',
 	'DatabaseMysql' => 'includes/db/DatabaseMysql.php',
+	'DatabaseMysqlBase' => 'includes/db/DatabaseMysqlBase.php',
+	'DatabaseMysqli' => 'includes/db/DatabaseMysqli.php',
 	'DatabaseOracle' => 'includes/db/DatabaseOracle.php',
 	'DatabasePostgres' => 'includes/db/DatabasePostgres.php',
 	'DatabaseSqlite' => 'includes/db/DatabaseSqlite.php',
@@ -434,7 +439,7 @@ $wgAutoloadLocalClasses = array(
 	'LoadMonitor_MySQL' => 'includes/db/LoadMonitor.php',
 	'LoadMonitor_Null' => 'includes/db/LoadMonitor.php',
 	'MySQLField' => 'includes/db/DatabaseMysql.php',
-	'MySQLMasterPos' => 'includes/db/DatabaseMysql.php',
+	'MySQLMasterPos' => 'includes/db/DatabaseMysqlBase.php',
 	'ORAField' => 'includes/db/DatabaseOracle.php',
 	'ORAResult' => 'includes/db/DatabaseOracle.php',
 	'PostgresField' => 'includes/db/DatabasePostgres.php',
@@ -890,13 +895,8 @@ $wgAutoloadLocalClasses = array(
 	'WithoutInterwikiPage' => 'includes/specials/SpecialWithoutinterwiki.php',
 
 	# includes/templates
-	/**
 	'UserloginTemplate' => 'includes/templates/Userlogin.php',
 	'UsercreateTemplate' => 'includes/templates/Usercreate.php',
-	*/
-	'UsercreateTemplate' => 'includes/templates/wikia/Userlogin.php',
-	'UserloginTemplate' => 'includes/templates/wikia/Userlogin.php',
-	'UserAjaxCreateTemplate' => 'includes/templates/wikia/UserAjaxCreate.php',
 
 	# includes/upload
 	'UploadBase' => 'includes/upload/UploadBase.php',
@@ -916,6 +916,9 @@ $wgAutoloadLocalClasses = array(
 	'UploadStashNotLoggedInException' => 'includes/upload/UploadStash.php',
 	'UploadStashWrongOwnerException' => 'includes/upload/UploadStash.php',
 	'UploadStashNoSuchKeyException' => 'includes/upload/UploadStash.php',
+
+	# includes/wikia/interfaces
+	'Wikia\Interfaces\IRequest' => 'includes/wikia/interfaces/IRequest.php',
 
 	# languages
 	'FakeConverter' => 'languages/Language.php',

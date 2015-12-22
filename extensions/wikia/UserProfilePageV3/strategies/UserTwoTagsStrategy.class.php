@@ -8,12 +8,12 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 	 * @var array
 	 */
 	protected $groupsRank = array(
-		'sysop' => 7,
-		'helper' => 6,
-		'adminmentor' => 5,
-		'vstf' => 4,
-		'voldev' => 3,
-		'council' => 2,
+		'sysop' => 8,
+		'helper' => 7,
+		'vstf' => 5,
+		'voldev' => 4,
+		'council' => 3,
+		'threadmoderator' => 2,
 		'chatmoderator' => 1,
 	);
 
@@ -28,7 +28,7 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 		$tags = array();
 		if( $this->isBlocked() ) {
 		//blocked user has only one tag displayed "Blocked"
-			$tags[] = wfMsg('user-identity-box-group-blocked');
+			$tags[] = wfMessage('user-identity-box-group-blocked')->escaped();
 		} else {
 			$firstTag = $this->getFirstTag();
 			$secondTag = $this->getSecondTag();
@@ -57,7 +57,7 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 		}
 
 		if( !is_null($groupNameSuffix) ) {
-			$tag = wfMsg('user-identity-box-group-' . $groupNameSuffix);
+			$tag = wfMessage('user-identity-box-group-' . $groupNameSuffix)->escaped();
 		}
 		wfProfileOut(__METHOD__);
 
@@ -71,7 +71,7 @@ class UserTwoTagsStrategy extends UserTagsStrategyBase {
 	 */
 	protected function getSecondTag() {
 		if( $this->isFounder() ) {
-			$tag = wfMsg('user-identity-box-group-founder');
+			$tag = wfMessage('user-identity-box-group-founder')->escaped();
 		} else {
 			$tag = $this->getTagFromGroups();
 		}

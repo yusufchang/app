@@ -19,7 +19,7 @@
 			this.deletedMessages = {};
 			this.isMonobook = window.skin && window.skin === 'monobook';
 			this.hasMiniEditor = typeof window.wgEnableMiniEditorExt !== 'undefined' && !this.isMonobook;
-			this.title = window.wgTitle.split('/')[0];
+			this.title = window.wgTitle;
 			this.page = {
 				title: this.title,
 				namespace: window.wgNamespaceNumber
@@ -301,14 +301,17 @@
 		vote: function (e) {
 			e.preventDefault();
 			if (!window.wgUserName) {
-				window.UserLoginModal.show({
-					origin: 'wall-and-forum',
-					callback: this.proxy(function () {
-						this.voteBase(e, function () {
-							window.location.reload();
-						});
-					})
-				});
+				require(['AuthModal'], function (authModal) {
+					authModal.load({
+						url: '/signin?redirect=' + encodeURIComponent(window.location.href),
+						origin: 'wall-and-forum',
+						onAuthSuccess: this.proxy(function () {
+							this.voteBase(e, function () {
+								window.location.reload();
+							});
+						})
+					});
+				}.bind(this));
 			} else {
 				this.voteBase(e, this.proxy(function (target, data, dir) {
 					var votes = target.closest('li.message').find('.votes:first'),
@@ -729,12 +732,15 @@
 			e.preventDefault();
 			var rootMessageId = $(e.target).closest('.message').data('id');
 			if (window.wgDisableAnonymousEditing && !window.wgUserName) {
-				window.UserLoginModal.show({
-					origin: 'wall-and-forum',
-					callback: this.proxy(function () {
-						this.editTopics(rootMessageId);
-					})
-				});
+				require(['AuthModal'], function (authModal) {
+					authModal.load({
+						url: '/signin?redirect=' + encodeURIComponent(window.location.href),
+						origin: 'wall-and-forum',
+						onAuthSuccess: this.proxy(function () {
+							this.editTopics(rootMessageId);
+						})
+					});
+				}.bind(this));
 			} else {
 				this.editTopics(rootMessageId);
 			}

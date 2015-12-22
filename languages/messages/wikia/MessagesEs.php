@@ -1,6 +1,15 @@
 <?php
 #Related to visitor skins: Slate.php and Smoke.php
 $messages = array_merge( $messages, array(
+# vertical names
+'vertical-tv' => 'TV',
+'vertical-games' => 'Juegos',
+'vertical-books' => 'Libros',
+'vertical-comics' => 'Cómics',
+'vertical-lifestyle' => 'Estilo de vida',
+'vertical-music' => 'Música',
+'vertical-movies' => 'Películas',
+
 'login_greeting' => "Bienvenido a Wikia, [[User:$1|$1]]!",
 'create_an_account' => "Crea una cuenta",
 'login_as_another' => "Ingresa como otro usuario",
@@ -128,4 +137,13 @@ $messages = array_merge( $messages, array(
 ***w:c:es.gorillaz|Gorillaz
 ***w:c:arte|Arte
 ",
+
+'tog-enableuserjs' => 'Habilitar JavaScript personal ([[Ayuda:CSS_y_JS_personal#JavaScript|Aprenda más]])',
+
+'recentchanges-on-wikia-title' => 'Cambios recientes en Wikia',
+'recentchanges-on-wikia-content' => "Introduciendo Tipos de Plantilla — Organiza tus plantillas por tipo para hacer [[Special:Templates|gestión de plantilla]] más simple y para mejorar la forma en que se muestran en los teléfonos móviles. [[Ayuda:Clasificación de Plantillas|Conoce más]] o '''[[Special:Insights/templateswithouttype|¡Comienza ahora!]]'''
+
+Imágenes con pestañas y grupos plegables están ahora disponibles para [[Ayuda:Infoboxes|Infoboxes Portátiles]].
+
+¿Tu contenido es portátil? Aprende más sobre contenido a prueba de futuro en [[w:c:portability|Portability.wikia.com]].",
 ) );

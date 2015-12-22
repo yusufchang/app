@@ -19,7 +19,9 @@ use Wikia\Tasks\Queues\ParsoidPurgePriorityQueue;
 use Wikia\Tasks\Queues\ParsoidPurgeQueue;
 use Wikia\Tasks\Queues\PriorityQueue;
 use Wikia\Tasks\Queues\NlpPipelineQueue;
+use Wikia\Tasks\Queues\PurgeQueue;
 use Wikia\Tasks\Queues\Queue;
+use Wikia\Tasks\Queues\SMWQueue;
 use Wikia\Tasks\Tasks\BaseTask;
 
 class AsyncTaskList {
@@ -91,6 +93,12 @@ class AsyncTaskList {
 				break;
 			case NlpPipelineQueue::NAME:
 				$queue = new NlpPipelineQueue();
+				break;
+			case SMWQueue::NAME:
+				$queue = new SMWQueue();
+				break;
+			case PurgeQueue::NAME:
+				$queue = new PurgeQueue();
 				break;
 			default:
 				$queue = new Queue();
@@ -234,10 +242,14 @@ class AsyncTaskList {
 
 		if ( $wgWikiaEnvironment != WIKIA_ENV_PROD ) {
 			$host = gethostname();
+			$executionMethod = 'http';
 
 			if ( $wgWikiaEnvironment == WIKIA_ENV_DEV && preg_match( '/^dev-(.*?)$/', $host, $matches ) ) {
-				$executionMethod = 'http';
 				$executionRunner = ["http://tasks.{$matches[1]}.wikia-dev.com/proxy.php"];
+			} elseif ($wgWikiaEnvironment == WIKIA_ENV_SANDBOX) {
+				$executionRunner = ["http://{$host}.community.wikia.com/extensions/wikia/Tasks/proxy/proxy.php"];
+			} elseif (in_array($wgWikiaEnvironment, [WIKIA_ENV_PREVIEW, WIKIA_ENV_VERIFY])) {
+				$executionRunner = ["http://{$wgWikiaEnvironment}.community.wikia.com/extensions/wikia/Tasks/proxy/proxy.php"];
 			} else { // in other environments or when apache isn't available, ssh into this exact node to execute
 				$executionMethod = 'remote_shell';
 				$executionRunner = [
@@ -299,10 +311,10 @@ class AsyncTaskList {
 		] );
 
 		if ( $channel === null ) {
-			$exception = null;
-			$connection = $this->connection();
-			$channel = $connection->channel();
+			$exception = $connection = null;
 			try {
+				$connection = $this->connection();
+				$channel = $connection->channel();
 				$channel->basic_publish( $message, '', $this->getQueue()->name() );
 			} catch ( AMQPRuntimeException $e ) {
 				$exception = $e;
@@ -310,11 +322,18 @@ class AsyncTaskList {
 				$exception = $e;
 			}
 
-			$channel->close();
-			$connection->close();
+			if ( $channel !== null ) {
+				$channel->close();
+			}
+
+			if ( $connection !== null ) {
+				$connection->close();
+			}
 
 			if ( $exception !== null ) {
-				WikiaLogger::instance()->critical( "Failed to queue task", [ 'error' => $exception->getMessage() ] );
+				WikiaLogger::instance()->critical( 'AsyncTaskList::queue', [
+					'exception' => $exception
+				] );
 				return null;
 			}
 		} else {
@@ -326,22 +345,53 @@ class AsyncTaskList {
 
 	/**
 	 * @return AMQPConnection connection to message broker
+	 * @throws AMQPRuntimeException
+	 * @throws AMQPTimeoutException
 	 */
 	protected function connection() {
-		global $wgTaskBroker;
-
 		if ( $this->connection == null ) {
-			$this->connection = new AMQPConnection( $wgTaskBroker['host'], $wgTaskBroker['port'], $wgTaskBroker['user'], $wgTaskBroker['pass'] );
+			$this->connection = self::getConnection();
 		}
 
 		return $this->connection;
 	}
 
 	/**
+	 * A helper for getting an AMQP connection
+	 *
+	 * Throws AMQPRuntimeException when task broker is disabled in a cureent environment (PLATFORM-1740)
+	 *
+	 * @return AMQPConnection connection to message broker
+	 * @throws AMQPRuntimeException
+	 * @throws AMQPTimeoutException
+	 */
+	protected static function getConnection() {
+		global $wgTaskBroker;
+
+		if ( empty( $wgTaskBroker ) ) {
+			throw new AMQPRuntimeException( 'Task broker is disabled' );
+		}
+
+		return new AMQPConnection( $wgTaskBroker['host'], $wgTaskBroker['port'], $wgTaskBroker['user'], $wgTaskBroker['pass'] );
+	}
+
+	/**
 	 * @return Queue queue this task list will go into
 	 */
 	protected function getQueue() {
-		return $this->queue == null ? new Queue() : $this->queue;
+		if ( $this->queue == null ) {
+			global $wgEnableSemanticMediaWikiExt;
+
+			if ( $wgEnableSemanticMediaWikiExt ) {
+				$queue = new SMWQueue();
+			} else {
+				$queue = new Queue();
+			}
+		} else {
+			$queue = $this->queue;
+		}
+
+		return $queue;
 	}
 
 	private function generateId() {
@@ -361,18 +411,17 @@ class AsyncTaskList {
 	 * @throws \PhpAmqpLib\Exception\AMQPTimeoutException
 	 */
 	public static function batch( $taskLists ) {
-		global $wgTaskBroker;
-
 		$logError = function( \Exception $e ) {
-			WikiaLogger::instance()->critical( 'Failed to queue task group', [
-				'error' => $e->getMessage(),
+			WikiaLogger::instance()->critical( 'AsyncTaskList::batch', [
+				'exception' => $e,
+				'caller' => wfGetCallerClassMethod( [ __CLASS__, 'Wikia\\Tasks\\Tasks\\BaseTask' ] ),
 			] );
 
 			return null;
 		};
 
 		try {
-			$connection = new AMQPConnection( $wgTaskBroker['host'], $wgTaskBroker['port'], $wgTaskBroker['user'], $wgTaskBroker['pass'] );
+			$connection = self::getConnection();
 		} catch ( AMQPRuntimeException $e ) {
 			return $logError( $e );
 		} catch ( AMQPTimeoutException $e ) {

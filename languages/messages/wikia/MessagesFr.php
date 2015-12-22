@@ -1,6 +1,14 @@
 <?php
 #Related to visitor skins: Slate.php and Smoke.php
 $messages = array_merge( $messages, array(
+
+# vertical names
+'vertical-tv' => 'Télévision',
+'vertical-games' => 'Jeux vidéo',
+'vertical-books' => 'Littérature',
+'vertical-lifestyle' => 'Mode de vie',
+'vertical-movies' => 'Films',
+
 'login_greeting' => "Bienvenue sur Wikia, [[User:$1|$1]]!",
 'create_an_account' => "Créer un compte",
 'login_as_another' => "Se connecter sous un autre compte",
@@ -125,4 +133,13 @@ $messages = array_merge( $messages, array(
 ***w:c:routes|Routes de France
 ***w:c:fr.encyclopedie|Encyclopédie
 ",
+
+'tog-enableuserjs' => 'Activer le code javascript personnel ([[Aide:CSS_et_JS_avancés|En savoir plus]])',
+
+'recentchanges-on-wikia-title' => "Modifications récentes sur l'ensemble de Wikia",
+'recentchanges-on-wikia-content' => "Les types de modèles sont arrivés : organisez vos modèles par type afin de faciliter leur [[Special:Templates|gestion]] et d'améliorer leur affichage sur les smartphones. [[Aide:Types_de_modèles|Cliquez ici]] pour en savoir plus ou '''[[Special:Insights/templateswithouttype|commencez dès maintenant !]]'''
+
+Les images en onglets et les groupes réductibles sont désormais disponibles pour les [[Aide:Infobox|infoboxes portables]].
+
+Votre contenu est-il adapté aux appareils mobiles ? Pour savoir comment vous en assurer à l'avenir, consultez le site [[w:c:portability|Portability.wikia.com]].",
 ) );

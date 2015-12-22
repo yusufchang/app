@@ -100,30 +100,6 @@ class TopListHelper {
 	/**
 	 * @author Federico "Lox" Lucignano
 	 *
-	 * Callback for the FBConnect::BeforePushEvent hook
-	 */
-	public static function onBeforePushEvent( $faceBookId, &$message, &$params, &$class ) {
-		if(
-			!empty( $params[ '$ARTICLE_OBJ' ] ) &&
-			$params[ '$ARTICLE_OBJ' ]->getTitle()->getNamespace() == NS_TOPLIST &&
-			$params[ '$ARTICLE_OBJ' ]->getTitle()->isSubpage()
-		) {
-			$message = 'toplists-msg-fb-OnRateArticle';
-			$parentTitleText = substr( $params[ '$ARTICLENAME' ], 0, strrpos( $params[ '$ARTICLENAME' ], '/' ) );
-			$parentTitle = Title::newFromText( $parentTitleText, NS_TOPLIST );
-
-			$params[ '$ARTICLE_OBJ' ] = new Article( $parentTitle );
-
-			$params[ '$ARTICLE_URL' ] = $parentTitle->getFullURL("ref=fbfeed&fbtype=ratearticle");
-			$params[ '$ARTICLENAME' ] = $parentTitle->getText();
-		}
-
-		return true;
-	}
-
-	/**
-	 * @author Federico "Lox" Lucignano
-	 *
 	 * Callback for the ArticleSaveComplete hook
 	 *
 	 * @param $article Article
@@ -638,10 +614,15 @@ class TopListHelper {
 	 *
 	 */
 	public static function voteItem() {
-		global $wgRequest;
+		global $wgRequest, $wgUser;
+
+		try {
+			$wgRequest->isValidWriteRequest( $wgUser );
+		} catch ( BadRequestException $exception ) {
+			return self::getJsonExceptionResponse( $exception );
+		}
 
 		$result = array( 'result' => false );
-
 		$titleText = $wgRequest->getVal( 'title' );
 
 		if( !empty( $titleText ) ) {
@@ -702,6 +683,12 @@ class TopListHelper {
 	 */
 	public static function addItem() {
 		global $wgRequest, $wgUser;
+
+		try {
+			$wgRequest->isValidWriteRequest( $wgUser );
+		} catch ( BadRequestException $exception ) {
+			return self::getJsonExceptionResponse( $exception );
+		}
 
 		$result = array( 'result' => false );
 		$errors = array();
@@ -792,5 +779,24 @@ class TopListHelper {
 				__METHOD__
 			);
 		}
+	}
+
+	/**
+	 * Generates a JSON response object containing the exception message
+	 * as the error
+	 *
+	 * @param $exception
+	 * @param $result
+	 * @return AjaxResponse
+	 */
+	private static function getJsonExceptionResponse( $exception ) {
+		$result = [
+			'result' => false,
+			'errors' => [ $exception->getMessage() ]
+		];
+		$json = json_encode( $result );
+		$response = new AjaxResponse( $json );
+		$response->setContentType( 'application/json; charset=utf-8' );
+		return $response;
 	}
 }

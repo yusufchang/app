@@ -37,7 +37,7 @@
 			vertical-align: middle;
 		}
 		.tools {
-			background-image: url(/skins/oasis/images/checkers.png); /* base64 */
+			background-image: url(/skins/oasis/images/checkers.png); /* inline */
 			display: block;
 			list-style: none;
 			padding: 0 10px;
@@ -115,7 +115,7 @@
 	}
 	.header-container {
 		@include clearfix;
-		h1 {
+		h2 {
 			font-size: 18px;
 			float: left;
 			margin:17px 0 17px 20px;
