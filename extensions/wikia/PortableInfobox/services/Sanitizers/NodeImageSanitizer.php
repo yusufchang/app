@@ -12,4 +12,17 @@ class NodeImageSanitizer extends NodeSanitizer implements NodeTypeSanitizerInter
 
 		return $data;
 	}
+
+	/**
+	 * process single title or label
+	 *
+	 * @param $elementText
+	 * @param string $allowedTags
+	 * @return string
+	 */
+	protected function sanitizeElementData( $elementText, $allowedTags = null ) {
+		$sanitizedElementText = parent::sanitizeElementData( $elementText, $allowedTags );
+
+		return $this->stripUnneededElements( $sanitizedElementText );
+	}
 }
