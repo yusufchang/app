@@ -6,7 +6,7 @@ class NodeHorizontalGroupSanitizerTest extends WikiaBaseTest {
 	protected function setUp() {
 		$this->setupFile = dirname( __FILE__ ) . '/../../PortableInfobox.setup.php';
 
-		$this->sanitizer = new NodeHorizontalGroupSanitizer();
+		$this->sanitizer = SanitizerBuilder::newFromType('horizontal-group-content');
 		parent::setUp();
 	}
 
